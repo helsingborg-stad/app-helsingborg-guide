@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F67a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Splashscreen-IOS-750x1334 2.png" translatesAutoresizingMaskIntoConstraints="NO" id="k7s-z8-1br">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="k7s-z8-1br" secondAttribute="trailing" id="7dn-vi-dYP"/>
+                <constraint firstItem="k7s-z8-1br" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KJl-4Q-GsC"/>
+                <constraint firstItem="k7s-z8-1br" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Rme-eh-g2q"/>
+                <constraint firstAttribute="bottom" secondItem="k7s-z8-1br" secondAttribute="bottom" id="fXB-63-DMm"/>
+                <constraint firstAttribute="trailing" secondItem="k7s-z8-1br" secondAttribute="trailing" id="jdr-CG-fZV"/>
+                <constraint firstItem="k7s-z8-1br" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tqf-7A-Tbi"/>
+                <constraint firstItem="k7s-z8-1br" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xyz-4G-0Rq"/>
+                <constraint firstAttribute="bottom" secondItem="k7s-z8-1br" secondAttribute="bottom" id="yMH-qA-LUA"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="509.5" y="549.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Splashscreen-IOS-750x1334 2.png" width="750" height="1334"/>
+    </resources>
+</document>
