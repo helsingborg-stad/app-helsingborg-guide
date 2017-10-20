@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { View, Text, Navigator ,StatusBar,BackAndroid} from 'react-native';
-import TestScene from "../../scenes/offline_test";
+//import TestScene from "../../scenes/offline_test";
 import SplashView from "../../scenes/SplashView";
 import ViewContainer from '../../shared/view_container';
 import MenuView from '../../shared/MenuView';
