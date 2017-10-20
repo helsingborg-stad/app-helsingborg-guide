@@ -3,7 +3,7 @@ import { View, Text, Button, Navigator,Image, TouchableOpacity,StyleSheet,Scroll
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from '../shared/view_container'
 import Navbar from '../shared/navbar'
-import PhotoView from 'react-native-photo-view';
+// import PhotoView from 'react-native-photo-view';
 import {FetchService} from "../../services/FetchService";
 
 
@@ -81,13 +81,13 @@ export default class ImageScene extends Component {
                       backgroundColor='rgba(0,0,0,0.4)'
 
               />
-              <PhotoView
+              {/* <PhotoView
                   source={this.state.source}
                   minimumZoomScale={MIN_SCALE}
                   maximumZoomScale={MAX_SCALE}
                   androidScaleType="centerInside"
                   onLoad={() => {}}
-                  style={{flex:1,width:width/scale,height:height/scale}} />
+                  style={{flex:1,width:width/scale,height:height/scale}} /> */}
 
           </ViewContainer>
       );

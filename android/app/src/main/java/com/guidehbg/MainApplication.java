@@ -8,7 +8,7 @@ import com.oblador.vectoricons.VectorIconsPackage;
 
 import com.airbnb.android.react.maps.MapsPackage;
 import com.brentvatne.react.ReactVideoPackage;
-import com.reactnative.photoview.PhotoViewPackage;
+// import com.reactnative.photoview.PhotoViewPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -39,7 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new MapsPackage(),
             new ReactVideoPackage(),
-            new PhotoViewPackage(),
+            // new PhotoViewPackage(),
             new RNFetchBlobPackage(),
             new NotificationPackage(),
               new SettingsPackage(),
