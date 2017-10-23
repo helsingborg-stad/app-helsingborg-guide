@@ -53,3 +53,6 @@ fastlane/Preview.html
 fastlane/screenshots
 !/android/app/build/outputs/apk/
 !/android/app/my-release-key.keystore
+
+# VS Code
+.vscode/
