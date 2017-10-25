@@ -18,6 +18,7 @@ import Opener from "./src/services/SettingsService";
 import { errorHappened } from "./src/actions/errorActions";
 import { DownloadTasksManager } from "./src/services/DownloadTasksManager";
 
+//TODO merge index.ios.js into this one
 export default class GuideHbg extends Component {
   constructor() {
     super();
