@@ -1,16 +1,22 @@
-import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { getStoredState } from 'redux-persist';
-import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage } from 'react-native';
-import Nav from './src/components/android/navigation/NavAndroid';
-import store from './src/store/configureStore';
-import { loadGuides } from './src/actions/guideActions';
-import { loadSubLocations } from './src/actions/subLoactionActions';
-import { internetChanged } from './src/actions/internetActions';
-import { LangService } from './src/services/langService';
-import Opener from './src/services/SettingsService';
-import { errorHappened } from './src/actions/errorActions';
-import { DownloadTasksManager } from './src/services/DownloadTasksManager';
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import { getStoredState } from "redux-persist";
+import {
+  AppRegistry,
+  Alert,
+  NetInfo,
+  UIManager,
+  AsyncStorage
+} from "react-native";
+import Nav from "./src/components/android/navigation/NavAndroid";
+import store from "./src/store/configureStore";
+import { loadGuides } from "./src/actions/guideActions";
+import { loadSubLocations } from "./src/actions/subLoactionActions";
+import { internetChanged } from "./src/actions/internetActions";
+import { LangService } from "./src/services/langService";
+import Opener from "./src/services/SettingsService";
+import { errorHappened } from "./src/actions/errorActions";
+import { DownloadTasksManager } from "./src/services/DownloadTasksManager";
 
 export default class GuideHbg extends Component {
   constructor() {
@@ -24,7 +30,7 @@ export default class GuideHbg extends Component {
 
     this.downloadManager = DownloadTasksManager.getInstance();
 
-    console.ignoredYellowBox = ['Remote debugger'];
+    console.ignoredYellowBox = ["Remote debugger"];
   }
 
   componentDidMount() {
@@ -62,10 +68,13 @@ export default class GuideHbg extends Component {
       LangService.strings.NO_INTERNET_CONNECTION,
       LangService.strings.NO_INTERNET_CONNECTION_MESSAGE,
       [
-        { text: LangService.strings.SETTINGS, onPress: this.openInternetSettings.bind(this) },
-        { text: LangService.strings.CLOSE, onPress: () => {}, style: 'cancel' },
+        {
+          text: LangService.strings.SETTINGS,
+          onPress: this.openInternetSettings.bind(this)
+        },
+        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" }
       ],
-      { cancelable: false },
+      { cancelable: false }
     );
   }
 
@@ -74,11 +83,17 @@ export default class GuideHbg extends Component {
   }
 
   startListeningToNetworkChanges() {
-    NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange);
+    NetInfo.isConnected.addEventListener(
+      "change",
+      this.handleConnectivityChange
+    );
   }
 
   stopListeningToNetworkChanges() {
-    NetInfo.isConnected.removeEventListener('change', this.handleConnectivityChange);
+    NetInfo.isConnected.removeEventListener(
+      "change",
+      this.handleConnectivityChange
+    );
   }
   handleConnectivityChange(isConnected) {
     if (!isConnected) {
@@ -98,11 +113,13 @@ export default class GuideHbg extends Component {
   }
 
   loadContents(langCode) {
-    NetInfo.isConnected.fetch().then((isConnected) => {
+    NetInfo.isConnected.fetch().then(isConnected => {
       if (isConnected) {
         store.dispatch(loadGuides(langCode));
         store.dispatch(loadSubLocations(langCode));
-        LangService.getLanguages().catch(error => console.log('error in getting lang'));
+        LangService.getLanguages().catch(error =>
+          console.log("error in getting lang")
+        );
       }
     });
   }
@@ -116,4 +133,4 @@ export default class GuideHbg extends Component {
   }
 }
 
-AppRegistry.registerComponent('GuideHbg', () => GuideHbg);
+AppRegistry.registerComponent("GuideHbg", () => GuideHbg);

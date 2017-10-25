@@ -1,39 +1,54 @@
 module.exports = {
   env: {
+    browser: true,
     commonjs: true,
     es6: true,
-    node: true,
+    "jest/globals": true
   },
-  extends: ['airbnb'],
-  parser: 'babel-eslint',
+  extends: ["airbnb", "plugin:jest/recommended", "plugin:flowtype/recommended"],
+  globals: {
+    __DEV__: [true, true]
+  },
+  parser: "babel-eslint",
   parserOptions: {
     ecmaVersion: 8,
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
+      jsx: true
     },
-    sourceType: 'module',
+    sourceType: "module"
   },
-  plugins: [],
+  plugins: ["flowtype", "jest", "react"],
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'no-unused-vars': [
-      'error',
+    "function-paren-newline": ["off"],
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "react/forbid-prop-types": [0],
+    "no-unused-vars": [
+      "error",
       {
-        vars: 'local',
-        args: 'after-used',
+        vars: "local",
+        args: "after-used",
         ignoreRestSiblings: true,
-        varsIgnorePattern: '^unused',
-        argsIgnorePattern: '^unused',
-      },
+        varsIgnorePattern: "^unused",
+        argsIgnorePattern: "^unused"
+      }
     ],
-    'max-len': [
-      'error',
+    "max-len": [
+      "error",
       140,
       {
         ignoreComments: true,
-        ignoreUrls: true,
-      },
+        ignoreUrls: true
+      }
     ],
-    'no-console': ['off'],
+    "object-curly-newline": ["error", { consistent: true }],
+    "react/jsx-closing-tag-location": ["off"]
   },
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".android.js", ".ios.js"]
+      }
+    }
+  }
 };
