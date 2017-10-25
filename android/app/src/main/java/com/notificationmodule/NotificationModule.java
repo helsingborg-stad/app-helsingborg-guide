@@ -40,11 +40,11 @@ public class NotificationModule extends ReactContextBaseJavaModule {
     NotificationManager mManager;
 
     private static final String N_ID = "id";
-    private static final String N_TITLE  = "title";
-    private static final String N_CONTENT  = "content";
-    private static final String N_BIG_TITLE  = "big_content_title";
-    private static final String N_EXT_CONTENT  = "ext_content";
-    private static final int BKG_COLOR = Color.rgb(211,80,152);
+    private static final String N_TITLE = "title";
+    private static final String N_CONTENT = "content";
+    private static final String N_BIG_TITLE = "big_content_title";
+    private static final String N_EXT_CONTENT = "ext_content";
+    private static final int BKG_COLOR = Color.rgb(211, 80, 152);
     private static final int SMALL_ICON = R.mipmap.ic_launcher;
 
 
@@ -69,7 +69,7 @@ public class NotificationModule extends ReactContextBaseJavaModule {
 
     //##############################################################
 
-    private NotificationCompat.Builder buildNotification(String title,String content){
+    private NotificationCompat.Builder buildNotification(String title, String content) {
         NotificationCompat.Builder mBuilder;
         Intent resultIntent = new Intent(context, MainActivity.class);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -89,63 +89,61 @@ public class NotificationModule extends ReactContextBaseJavaModule {
                 .setColor(BKG_COLOR)
                 .setContentText(content)
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
-                .setContentIntent(PendingIntent.getActivity(context,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT));
+                .setContentIntent(PendingIntent.getActivity(context, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT));
         return mBuilder;
     }
 
     @ReactMethod
-    public void closeNotification(int id){
+    public void closeNotification(int id) {
         mManager.cancel(id);
     }
 
     @ReactMethod
-    public void closeAll(){
+    public void closeAll() {
         mManager.cancelAll();
     }
 
 
-
-
     @ReactMethod
-    public void showSimple(String title, String content,int id){
-        NotificationCompat.Builder mBuilder = buildNotification(title,content);
+    public void showSimple(String title, String content, int id) {
+        NotificationCompat.Builder mBuilder = buildNotification(title, content);
         mBuilder.setSound(Uri.parse("android.resource://com.guidehbg/" + R.raw.notify01))
-        .setAutoCancel(true);
+                .setAutoCancel(true);
 
-        mManager.notify(id,mBuilder.build());
+        mManager.notify(id, mBuilder.build());
     }
 
     @ReactMethod
-    public void showMediaNotification(String title, String content, int id){
-        NotificationCompat.Builder mBuilder = buildNotification(title,content);
+    public void showMediaNotification(String title, String content, int id) {
+        NotificationCompat.Builder mBuilder = buildNotification(title, content);
         mBuilder.setOngoing(false);
-        mManager.notify(id,mBuilder.build());
+        mManager.notify(id, mBuilder.build());
     }
 
     @ReactMethod
-    public void showExtended(ReadableMap rm){
+    public void showExtended(ReadableMap rm) {
 
         NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
         style.setBigContentTitle(rm.getString(N_BIG_TITLE));
         ReadableArray events = rm.getArray(N_EXT_CONTENT);
-        for (int i=0; i < events.size(); i++) {
+        for (int i = 0; i < events.size(); i++) {
             style.addLine(events.getString(i));
         }
 
         final NotificationCompat.Builder mBuilder =
-                (NotificationCompat.Builder) buildNotification(rm.getString(N_TITLE),rm.getString(N_CONTENT))
-                //.setLargeIcon(resource)
-                .setStyle(style);
+                (NotificationCompat.Builder) buildNotification(rm.getString(N_TITLE), rm.getString(N_CONTENT))
+                        //.setLargeIcon(resource)
+                        .setStyle(style);
 
-        mManager.notify(12121,mBuilder.build());
+        mManager.notify(12121, mBuilder.build());
 
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @ReactMethod
-    public void showMediaControl(){
-        MediaSession mMediaSession = new MediaSession(context,"GooMedia");
+    public void showMediaControl() {
+        MediaSession mMediaSession = new MediaSession(context, "GooMedia");
 
         Notification notification = new NotificationCompat.Builder(context)
                 // Show controls on lock screen even when user hides sensitive content.
@@ -162,7 +160,7 @@ public class NotificationModule extends ReactContextBaseJavaModule {
                 .setContentText("My Awesome Band")
                 //.setLargeIcon(albumArtBitmap)
                 .build();
-        mManager.notify(2000,notification);
+        mManager.notify(2000, notification);
 
     }
 }

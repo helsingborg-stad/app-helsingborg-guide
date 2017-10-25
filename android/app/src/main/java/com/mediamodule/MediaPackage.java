@@ -2,9 +2,7 @@ package com.mediamodule;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-
 import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
@@ -18,15 +16,10 @@ public class MediaPackage implements ReactPackage {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-       List<NativeModule> modules = new ArrayList<>();
+        List<NativeModule> modules = new ArrayList<>();
         modules.add(new MediaModule(reactContext));
 
         return modules;
-    }
-
-    @Override
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
     }
 
     @Override

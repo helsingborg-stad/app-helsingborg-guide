@@ -37,14 +37,14 @@ public class MediaControlModule extends ReactContextBaseJavaModule {
                 .emit(eventName, params);
     }
 
-   //#######################################################################################
+    //#######################################################################################
 
     @ReactMethod
-    public void initMediaControlService(){
-        Log.i("HELLO","FROM INIT");
-        Intent intent = new Intent( context.getApplicationContext(), MediaControlService.class );
-        intent.setAction( MediaControlService.ACTION_PLAY );
-        context.startService( intent );
+    public void initMediaControlService() {
+        Log.i("HELLO", "FROM INIT");
+        Intent intent = new Intent(context.getApplicationContext(), MediaControlService.class);
+        intent.setAction(MediaControlService.ACTION_PLAY);
+        context.startService(intent);
     }
 
 
