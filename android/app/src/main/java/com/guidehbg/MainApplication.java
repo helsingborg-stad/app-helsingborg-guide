@@ -33,19 +33,16 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new BeaconPackage(),
-            new VectorIconsPackage(),
-            new MapsPackage(),
-            new ReactVideoPackage(),
-            // new PhotoViewPackage(),
-            new RNFetchBlobPackage(),
-            new NotificationPackage(),
-              new SettingsPackage(),
-              new MediaPackage(),
-              new MediaControlPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new BeaconPackage(), new VectorIconsPackage(),
+          new MapsPackage(), new ReactVideoPackage(),
+          // new PhotoViewPackage(),
+          new RNFetchBlobPackage(), new NotificationPackage(), new SettingsPackage(), new MediaPackage(),
+          new MediaControlPackage());
+    }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
     }
   };
 
