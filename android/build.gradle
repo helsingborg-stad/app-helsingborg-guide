@@ -5,7 +5,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -13,21 +14,35 @@ buildscript {
 }
 
 allprojects {
-    configurations.all {
-        resolutionStrategy {
-            eachDependency { DependencyResolveDetails details ->
-                if (details.requested.group == 'com.facebook.react' && details.requested.name == 'react-native') {
-                    details.useVersion "0.40.0" // Your real React Native version here
-                }
-            }
-        }
-    }
     repositories {
         mavenLocal()
         jcenter()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
+        }
+        maven {
+            url 'https://maven.google.com'
+        }
+    }
+}
+
+// Use: ./gradlew dependencyUpdates
+apply plugin: 'com.github.ben-manes.versions'
+
+dependencyUpdates.resolutionStrategy = {
+    componentSelection { rules ->
+        rules.all { ComponentSelection selection ->
+            if (selection.candidate.group == 'com.android.tools.build' && selection.candidate.version ==~ /2\.[345]\..*/) {
+                selection.reject('Minimum compile version API 15')
+                return
+            }
+            boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'SNAPSHOT'].any { qualifier ->
+                selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+            }
+            if (rejected) {
+                selection.reject('Release candidate')
+            }
         }
     }
 }
