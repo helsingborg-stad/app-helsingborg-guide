@@ -5,7 +5,7 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Button, Dimensions, Image, LayoutAnimation, AsyncStorage, NetInfo, Alert } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image, LayoutAnimation, AsyncStorage } from "react-native";
 import ViewContainer from "../shared/view_container";
 import GuideList from "./GuideList";
 import WelcomeView from "./WelcomeView";
@@ -20,10 +20,47 @@ const FULL_HEIGHT = Dimensions.get("window").height;
 
 const TIME_OUT = 2000;
 
-export default class SplashView extends Component {
-  timer;
-  colorsTimer;
+const styles = StyleSheet.create({
+  splash: {
+    backgroundColor: "#7B075E",
+  },
+  wrapper: {
+    flex: 1,
+    zIndex: 10,
+  },
+  mainContainer: {
+    flex: 10,
+    // backgroundColor:'#7B075E',
+    alignItems: "center",
+    // justifyContent:'center',
+  },
+  headerContainer: {
+    // flex:1,
+    height: Dimensions.get("window").height * 0.35,
+    // backgroundColor:'red',
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 20,
+  },
 
+  headerText: {
+    color: "#fff",
+    fontSize: 38,
+    fontWeight: "300",
+    lineHeight: 36,
+    minHeight: 50,
+  },
+  logoContainer: {
+    flex: 1,
+    // backgroundColor:'blue',
+    justifyContent: "flex-end",
+    paddingVertical: 22,
+    zIndex: 10,
+  },
+  logo: { width: 62, height: 66 },
+});
+
+export default class SplashView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,14 +73,13 @@ export default class SplashView extends Component {
     this.startPageTimeout();
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    console.log("splash will receive new props");
-  }
-
   componentWillUnmount() {
     if (this.timer) clearTimeout(this.timer);
     if (this.colorsTimer) clearInterval(this.colorsTimer);
   }
+
+  timer;
+  colorsTimer;
 
   startPageTimeout() {
     this.timer = setTimeout(() => {
@@ -104,43 +140,3 @@ export default class SplashView extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  splash: {
-    backgroundColor: "#7B075E",
-  },
-  wrapper: {
-    flex: 1,
-    zIndex: 10,
-  },
-  mainContainer: {
-    flex: 10,
-    // backgroundColor:'#7B075E',
-    alignItems: "center",
-    // justifyContent:'center',
-  },
-  headerContainer: {
-    // flex:1,
-    height: Dimensions.get("window").height * 0.35,
-    // backgroundColor:'red',
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 20,
-  },
-
-  headerText: {
-    color: "#fff",
-    fontSize: 38,
-    fontWeight: "300",
-    lineHeight: 36,
-    minHeight: 50,
-  },
-  logoContainer: {
-    flex: 1,
-    // backgroundColor:'blue',
-    justifyContent: "flex-end",
-    paddingVertical: 22,
-    zIndex: 10,
-  },
-  logo: { width: 62, height: 66 },
-});
