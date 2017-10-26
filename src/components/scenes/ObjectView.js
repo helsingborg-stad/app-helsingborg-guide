@@ -20,7 +20,7 @@ import ImageView from "../shared/image_view_content";
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
 import VideoView from "./VideoView";
-import Swiper from "../../lib/react-native-swiper";
+import Swiper from "react-native-swiper";
 import WebScene from "./WebScene";
 import RoundedBtn from "../shared/roundedBtn";
 import { LangService } from "../../services/langService";
