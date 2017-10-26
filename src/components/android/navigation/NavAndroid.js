@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Navigator, StatusBar, BackAndroid } from "react-native";
+import { StatusBar, BackHandler } from "react-native";
+import { StackNavigator } from "react-navigation";
 import SplashView from "../../scenes/SplashView";
 import ViewContainer from "../../shared/view_container";
 import MenuView from "../../shared/MenuView";
@@ -28,10 +29,10 @@ export default class Nav extends Component {
   }
 
   listenToBackBtn() {
-    BackAndroid.addEventListener("hardwareBackPress", this.onBackButtonPressed);
+    BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed);
   }
   stopListenToBackBtn() {
-    BackAndroid.removeEventListener("hardwareBackPress", this.onBackButtonPressed);
+    BackHandler.removeEventListener("hardwareBackPress", this.onBackButtonPressed);
   }
 
   onMainScreen() {
@@ -42,16 +43,12 @@ export default class Nav extends Component {
     this.refs.navigator.pop();
   }
 
-  exitApp() {
-    BackAndroid.exitApp();
-  }
-
   onBackButtonPressed() {
     if (!this.onMainScreen()) {
       this.goBack();
       return true;
     }
-    this.exitApp();
+    BackHandler.exitApp();
     return false;
   }
 
