@@ -5,7 +5,7 @@ module.exports = {
     es6: true,
     "jest/globals": true
   },
-  extends: ["airbnb", "plugin:jest/recommended", "plugin:flowtype/recommended"],
+  extends: ["airbnb"],
   globals: {
     __DEV__: [true, true]
   },
@@ -18,8 +18,9 @@ module.exports = {
     },
     sourceType: "module"
   },
-  plugins: ["flowtype", "jest", "react"],
+  plugins: ["jest", "react"],
   rules: {
+    "quotes": [1, "double"],
     "function-paren-newline": ["off"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "react/forbid-prop-types": [0],
