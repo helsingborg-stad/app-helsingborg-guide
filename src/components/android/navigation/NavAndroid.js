@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { View, Text, Navigator, StatusBar, BackAndroid } from "react-native";
+import { Navigator, StatusBar, BackAndroid } from "react-native";
 import SplashView from "../../scenes/SplashView";
 import ViewContainer from "../../shared/view_container";
 import MenuView from "../../shared/MenuView";
 import MenuContent from "../../scenes/MenuContent";
 import NotificationBar from "../../shared/NotificationBar";
-import GuideList from "../../scenes/GuideList";
 
 // No need for this, just pass the View object instead.
 const routes = [{ title: "Splash", component: SplashView }];
