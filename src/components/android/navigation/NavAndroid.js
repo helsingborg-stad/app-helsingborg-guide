@@ -18,29 +18,13 @@ export default class Nav extends Component {
     this.listenToBackBtn();
   }
 
-  getNavigator() {
-    return this.refs.navigator;
-  }
-
-  componentDidMount() {}
-
   componentWillUnmount() {
     this.stopListenToBackBtn();
-  }
-
-  listenToBackBtn() {
-    BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed);
-  }
-  stopListenToBackBtn() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackButtonPressed);
   }
 
   onMainScreen() {
     const stackLength = this.refs.navigator.getCurrentRoutes().length;
     return stackLength == 1;
-  }
-  goBack() {
-    this.refs.navigator.pop();
   }
 
   onBackButtonPressed() {
@@ -50,6 +34,18 @@ export default class Nav extends Component {
     }
     BackHandler.exitApp();
     return false;
+  }
+
+  listenToBackBtn() {
+    BackHandler.addEventListener("hardwareBackPress", this.onBackButtonPressed);
+  }
+
+  stopListenToBackBtn() {
+    BackHandler.removeEventListener("hardwareBackPress", this.onBackButtonPressed);
+  }
+
+  goBack() {
+    this.refs.navigator.pop();
   }
 
   _renderScene(route, navigator) {
