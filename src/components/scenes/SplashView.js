@@ -1,14 +1,7 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Dimensions, Image, LayoutAnimation, AsyncStorage } from "react-native";
+import { NavigationActions } from "react-navigation";
 import ViewContainer from "../shared/view_container";
-import GuideList from "./GuideList";
-import WelcomeView from "./WelcomeView";
 import { IS_WELCOMED } from "../../lib/my_consts";
 import ColoredBar from "../shared/ColoredBar";
 import BackgroundImage from "../shared/BackgroundImage";
@@ -61,6 +54,10 @@ const styles = StyleSheet.create({
 });
 
 export default class SplashView extends Component {
+  static navigationOptions = {
+    title: "Splash",
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -93,22 +90,16 @@ export default class SplashView extends Component {
   }
 
   skip() {
-    const welcomeRoute = {
-      title: "Welcome",
-      type: "fade",
-      component: WelcomeView,
-    };
-    const mainRoute = {
-      title: "GuidesList",
-      type: "fade",
-      component: GuideList,
-    };
     AsyncStorage.getItem(IS_WELCOMED).then((value) => {
       let welcomed = false;
       if (value) welcomed = JSON.parse(value);
 
-      const route = welcomed ? mainRoute : welcomeRoute;
-      this.props.navigator.resetTo(route);
+      const route = welcomed ? "GuideList" : "WelcomeView";
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: route })],
+      });
+      this.props.navigation.dispatch(resetAction);
     });
   }
 
