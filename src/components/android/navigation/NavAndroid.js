@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// TODO remove BackHandler functionality for now
 import { StatusBar, BackHandler } from "react-native";
 import { StackNavigator } from "react-navigation";
 import SplashView from "../../scenes/SplashView";
@@ -6,16 +7,34 @@ import ViewContainer from "../../shared/view_container";
 import MenuView from "../../shared/MenuView";
 import MenuContent from "../../scenes/MenuContent";
 import NotificationBar from "../../shared/NotificationBar";
+import GuideList from "./../../scenes/GuideList";
+import WelcomeView from "./../../scenes/WelcomeView";
 
-// No need for this, just pass the View object instead.
-const routes = [{ title: "Splash", component: SplashView }];
+const RootNavigator = StackNavigator(
+  {
+    Splash: { screen: SplashView },
+    WelcomeView: { screen: WelcomeView },
+    GuideList: { screen: GuideList },
+  },
+  {
+    headerMode: "none",
+  },
+);
 
 export default class Nav extends Component {
+  static onNavigationStateChange(prevState, newState) {
+    console.log("onNavigationStateChanged", prevState, newState);
+  }
+
+  static displayNotificationBar() {
+    return <NotificationBar style={{ bottom: 0 }} />;
+  }
+
   constructor(props) {
     super(props);
 
     this.onBackButtonPressed = this.onBackButtonPressed.bind(this);
-    this.listenToBackBtn();
+    // this.listenToBackBtn();
   }
 
   componentWillUnmount() {
@@ -66,20 +85,17 @@ export default class Nav extends Component {
   }
 
   displayMenu() {
-    return (
-      <MenuView>
+    return (<MenuView>{/*
         <MenuContent navigator={this.getNavigator.bind(this)} />
-      </MenuView>
-    );
-  }
-
-  displayNotificationBar() {
-    return <NotificationBar style={{ bottom: 0 }} />;
+      */}</MenuView>);
   }
 
   render() {
     return (
       <ViewContainer>
+        <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
+
+        {/*
         <Navigator
           ref="navigator"
           initialRoute={routes[0]}
@@ -87,8 +103,9 @@ export default class Nav extends Component {
           renderScene={this._renderScene}
           style={{ flex: 1, backgroundColor: "#f6f6f6" }}
         />
+      */}
         {this.displayMenu()}
-        {this.displayNotificationBar()}
+        {Nav.displayNotificationBar()}
       </ViewContainer>
     );
   }
