@@ -1,6 +1,3 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Animated } from "react-native";
 import ErrorText from "./ErrorText";
@@ -76,16 +73,12 @@ const styles = StyleSheet.create({
   },
   closeBtnContainer: {
     flex: 1,
-    // backgroundColor:'red',
     alignItems: "center",
     justifyContent: "center",
   },
 });
 
-// store config
-
-function mapStateToProps(state, ownProps) {
-  // console.log('state in notification bar',state.error);
+function mapStateToProps(state) {
   return {
     visible: !!state.error.msg,
   };
