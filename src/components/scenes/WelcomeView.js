@@ -1,16 +1,10 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView, Button, Dimensions, Image, TouchableOpacity, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, AsyncStorage } from "react-native";
+import Swiper from "react-native-swiper";
+import { NavigationActions } from "react-navigation";
 import ViewContainer from "../shared/view_container";
 import FirstInstructionSlide from "../shared/FirstInstructionSlide";
 import NormalInstructionSlide from "../shared/NormalInstructionSlide";
-import Swiper from "react-native-swiper";
-import GuideList from "./GuideList";
 import { IS_WELCOMED } from "../../lib/my_consts";
 import { LangService } from "../../services/langService";
 import ColoredBar from "../shared/ColoredBar";
@@ -42,13 +36,12 @@ export default class WelcomeView extends Component {
   }
 
   skipPress() {
-    const mainRoute = {
-      title: "GuidesList",
-      type: "fade",
-      component: GuideList,
-    };
     AsyncStorage.setItem(IS_WELCOMED, JSON.stringify(true));
-    this.props.navigator.resetTo(mainRoute);
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: "GuideList" })],
+    });
+    this.props.navigation.dispatch(resetAction);
   }
 
   displaySlides() {
