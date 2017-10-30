@@ -14,6 +14,10 @@ import { DownloadTasksManager } from "./src/services/DownloadTasksManager";
 
 // TODO merge index.ios.js into this one
 export default class GuideHbg extends Component {
+  static openInternetSettings() {
+    Opener.openWifiSetting();
+  }
+
   constructor() {
     super();
     if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -71,10 +75,6 @@ export default class GuideHbg extends Component {
       ],
       { cancelable: false },
     );
-  }
-
-  openInternetSettings() {
-    Opener.openWifiSetting();
   }
 
   startListeningToNetworkChanges() {
