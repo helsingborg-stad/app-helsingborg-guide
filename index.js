@@ -18,6 +18,15 @@ export default class GuideHbg extends Component {
     Opener.openWifiSetting();
   }
 
+  static init() {
+    LangService.loadStoredLanguage()
+      .then(() => {
+        // Check the network and load the content.
+        GuideHbg.loadContents(LangService.code);
+      })
+      .catch(error => store.dispatch(errorHappened(error)));
+  }
+
   static loadContents(langCode) {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
@@ -34,7 +43,6 @@ export default class GuideHbg extends Component {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
 
-    this.init = this.init.bind(this);
     this.handleConnectivityChange = this.handleConnectivityChange.bind(this);
 
     this.downloadManager = DownloadTasksManager.getInstance();
@@ -50,15 +58,6 @@ export default class GuideHbg extends Component {
 
   componentWillUnmount() {
     this.stopListeningToNetworkChanges();
-  }
-
-  init() {
-    LangService.loadStoredLanguage()
-      .then(() => {
-        // Check the network and load the content.
-        this.loadContents(LangService.code);
-      })
-      .catch(error => store.dispatch(errorHappened(error)));
   }
 
   // ####################################################
@@ -108,7 +107,7 @@ export default class GuideHbg extends Component {
       this.noNetworkTimer = null;
     }
 
-    this.init();
+    GuideHbg.init();
   }
 
   render() {
