@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, Text, ScrollView, StyleSheet, Image, Dimensions } from "react-native";
+import { PropTypes } from "prop-types";
 import BackgroundImage from "./BackgroundImage";
 
 const styles = StyleSheet.create({
@@ -32,22 +33,31 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class NormalInstructionSlide extends Component {
-  render() {
-    return (
-      <View style={[styles.slide]}>
-        <View style={[styles.mainContainer, this.props.style]}>
-          <View style={styles.logoContainer}>
-            <Image resizeMethod="scale" resizeMode="center" source={this.props.thumbnailSource} />
-          </View>
-          <View style={styles.contentContainer}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <Text style={styles.contentText}>{this.props.content}</Text>
-            </ScrollView>
-          </View>
-        </View>
-        <BackgroundImage source={this.props.backgroundImageSource} />
+const NormalInstructionSlide = ({ style, content, thumbnailSource, backgroundImageSource }) => (
+  <View style={[styles.slide]}>
+    <View style={[styles.mainContainer, style]}>
+      <View style={styles.logoContainer}>
+        <Image resizeMethod="scale" resizeMode="center" source={thumbnailSource} />
       </View>
-    );
-  }
-}
+      <View style={styles.contentContainer}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={styles.contentText}>{content}</Text>
+        </ScrollView>
+      </View>
+    </View>
+    <BackgroundImage source={backgroundImageSource} />
+  </View>
+);
+
+NormalInstructionSlide.defaultProps = {
+  style: null,
+};
+
+NormalInstructionSlide.propTypes = {
+  style: PropTypes.object,
+  content: PropTypes.string.isRequired,
+  backgroundImageSource: PropTypes.number.isRequired,
+  thumbnailSource: PropTypes.number.isRequired,
+};
+
+export default NormalInstructionSlide;

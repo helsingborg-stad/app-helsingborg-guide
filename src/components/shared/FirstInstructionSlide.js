@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import { PropTypes } from "prop-types";
 import { LangService } from "../../services/langService";
 import BackgroundImage from "./BackgroundImage";
 
@@ -50,25 +51,33 @@ const styles = StyleSheet.create({
   logo: { width: 62, height: 66 },
 });
 
-export default class FirstInstructionSlide extends Component {
-  render() {
-    return (
-      <View style={[styles.slide]}>
-        <View style={[styles.mainContainer, this.props.style]}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>{LangService.strings.GUIDE}</Text>
-            <Text style={styles.headerText}>{LangService.strings.HELSINGBORG}</Text>
-          </View>
-          <View style={styles.contentContainer}>
-            <Text style={styles.contentText}>{this.props.content}</Text>
-          </View>
-
-          <View style={styles.logoContainer}>
-            <Image resizeMethod="scale" resizeMode="center" source={HALS_LOGO} />
-          </View>
-        </View>
-        <BackgroundImage source={this.props.backgroundImageSource} />
+const FirstInstructionSlide = ({ style, content, backgroundImageSource }) => (
+  <View style={[styles.slide]}>
+    <View style={[styles.mainContainer, style]}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>{LangService.strings.GUIDE}</Text>
+        <Text style={styles.headerText}>{LangService.strings.HELSINGBORG}</Text>
       </View>
-    );
-  }
-}
+      <View style={styles.contentContainer}>
+        <Text style={styles.contentText}>{content}</Text>
+      </View>
+
+      <View style={styles.logoContainer}>
+        <Image resizeMethod="scale" resizeMode="center" source={HALS_LOGO} />
+      </View>
+    </View>
+    <BackgroundImage source={backgroundImageSource} />
+  </View>
+);
+
+FirstInstructionSlide.defaultProps = {
+  style: null,
+};
+
+FirstInstructionSlide.propTypes = {
+  style: PropTypes.object,
+  content: PropTypes.string.isRequired,
+  backgroundImageSource: PropTypes.number.isRequired,
+};
+
+export default FirstInstructionSlide;
