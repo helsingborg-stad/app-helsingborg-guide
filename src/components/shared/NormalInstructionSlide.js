@@ -1,9 +1,5 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
-import { View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native";
-import { LangService } from "../../services/langService";
+import { View, Text, ScrollView, StyleSheet, Image, Dimensions } from "react-native";
 import BackgroundImage from "./BackgroundImage";
 
 const styles = StyleSheet.create({
@@ -16,11 +12,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
-
   contentContainer: {
     flex: 3,
     width: Dimensions.get("window").width * 0.75,
-    // backgroundColor:'red',
   },
   contentText: {
     color: "#fff",
@@ -31,7 +25,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   logoContainer: {
-    // flex:2,
     minHeight: Dimensions.get("window").height * 0.35,
     alignItems: "center",
     justifyContent: "center",

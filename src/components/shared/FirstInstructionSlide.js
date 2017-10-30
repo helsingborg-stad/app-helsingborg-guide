@@ -8,7 +8,6 @@ const HALS_LOGO = require("../../images/HBG.png");
 const styles = StyleSheet.create({
   slide: {
     backgroundColor: "#7B075E",
-
     flex: 1,
   },
   mainContainer: {
@@ -20,7 +19,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     flex: 1,
     minHeight: Dimensions.get("window").height * 0.35,
-    // backgroundColor:'red',
     alignItems: "center",
     justifyContent: "center",
   },
