@@ -1,17 +1,14 @@
-import guide from './repo.guide'
-import language from './repo.language'
+import guide from "./repo.guide";
+import language from "./repo.language";
 
-const repos ={
-    guide,
-    language
+const repos = {
+  guide,
+  language,
 };
-const repo = (repoName)=>{
+const repo = (repoName) => {
+  const fullRepoName = repoName.toLowerCase();
 
-
-let fullRepoName = repoName.toLowerCase();
-
-            return repos[fullRepoName]();
-
+  return repos[fullRepoName]();
 };
 
 export default repo;
