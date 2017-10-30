@@ -24,14 +24,10 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 10,
-    // backgroundColor:'#7B075E',
     alignItems: "center",
-    // justifyContent:'center',
   },
   headerContainer: {
-    // flex:1,
     height: Dimensions.get("window").height * 0.35,
-    // backgroundColor:'red',
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 20,
@@ -46,7 +42,6 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     flex: 1,
-    // backgroundColor:'blue',
     justifyContent: "flex-end",
     paddingVertical: 22,
     zIndex: 10,
