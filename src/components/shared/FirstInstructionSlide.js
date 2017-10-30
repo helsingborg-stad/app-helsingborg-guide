@@ -1,35 +1,9 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
-import { View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import { LangService } from "../../services/langService";
 import BackgroundImage from "./BackgroundImage";
 
 const HALS_LOGO = require("../../images/HBG.png");
-
-export default class FirstInstructionSlide extends Component {
-  render() {
-    return (
-      <View style={[styles.slide]}>
-        <View style={[styles.mainContainer, this.props.style]}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>{LangService.strings.GUIDE}</Text>
-            <Text style={styles.headerText}>{LangService.strings.HELSINGBORG}</Text>
-          </View>
-          <View style={styles.contentContainer}>
-            <Text style={styles.contentText}>{this.props.content}</Text>
-          </View>
-
-          <View style={styles.logoContainer}>
-            <Image resizeMethod="scale" resizeMode="center" source={HALS_LOGO} />
-          </View>
-        </View>
-        <BackgroundImage source={this.props.backgroundImageSource} />
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   slide: {
@@ -59,13 +33,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    // paddingVertical:40,
-    // minHeight:Dimensions.get('window').height*(.2),
-    // maxHeight:Dimensions.get('window').height*(.3),
     width: Dimensions.get("window").width * 0.7,
-    // backgroundColor:'red',
-    // alignItems:'center',
-    // justifyContent:'flex-start',
   },
   contentText: {
     color: "#fff",
@@ -83,3 +51,26 @@ const styles = StyleSheet.create({
   },
   logo: { width: 62, height: 66 },
 });
+
+export default class FirstInstructionSlide extends Component {
+  render() {
+    return (
+      <View style={[styles.slide]}>
+        <View style={[styles.mainContainer, this.props.style]}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>{LangService.strings.GUIDE}</Text>
+            <Text style={styles.headerText}>{LangService.strings.HELSINGBORG}</Text>
+          </View>
+          <View style={styles.contentContainer}>
+            <Text style={styles.contentText}>{this.props.content}</Text>
+          </View>
+
+          <View style={styles.logoContainer}>
+            <Image resizeMethod="scale" resizeMode="center" source={HALS_LOGO} />
+          </View>
+        </View>
+        <BackgroundImage source={this.props.backgroundImageSource} />
+      </View>
+    );
+  }
+}

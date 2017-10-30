@@ -6,26 +6,6 @@ import { View, Text, ScrollView, StyleSheet, Image, Dimensions, TouchableOpacity
 import { LangService } from "../../services/langService";
 import BackgroundImage from "./BackgroundImage";
 
-export default class NormalInstructionSlide extends Component {
-  render() {
-    return (
-      <View style={[styles.slide]}>
-        <View style={[styles.mainContainer, this.props.style]}>
-          <View style={styles.logoContainer}>
-            <Image resizeMethod="scale" resizeMode="center" source={this.props.thumbnailSource} />
-          </View>
-          <View style={styles.contentContainer}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <Text style={styles.contentText}>{this.props.content}</Text>
-            </ScrollView>
-          </View>
-        </View>
-        <BackgroundImage source={this.props.backgroundImageSource} />
-      </View>
-    );
-  }
-}
-
 const styles = StyleSheet.create({
   slide: {
     flex: 1,
@@ -58,3 +38,23 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
   },
 });
+
+export default class NormalInstructionSlide extends Component {
+  render() {
+    return (
+      <View style={[styles.slide]}>
+        <View style={[styles.mainContainer, this.props.style]}>
+          <View style={styles.logoContainer}>
+            <Image resizeMethod="scale" resizeMode="center" source={this.props.thumbnailSource} />
+          </View>
+          <View style={styles.contentContainer}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Text style={styles.contentText}>{this.props.content}</Text>
+            </ScrollView>
+          </View>
+        </View>
+        <BackgroundImage source={this.props.backgroundImageSource} />
+      </View>
+    );
+  }
+}
