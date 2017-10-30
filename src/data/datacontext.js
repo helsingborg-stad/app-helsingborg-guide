@@ -1,15 +1,9 @@
-import repo from "./repo/repo.js";
+import repo from "./repo/repo";
 
 const datacontext = () => {
-  // const req = require.context("./repo", false, /^\.\/.*\.js$/);
-
   const repoNames = ["guide", "language"];
 
   const service = {};
-
-  defineLazyLoadedRepos();
-
-  return service;
 
   function defineLazyLoadedRepos() {
     repoNames.forEach((name) => {
@@ -27,6 +21,10 @@ const datacontext = () => {
       });
     });
   }
+
+  defineLazyLoadedRepos();
+
+  return service;
 };
 
 export default datacontext;
