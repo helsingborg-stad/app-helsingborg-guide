@@ -1,40 +1,32 @@
-import repo from './repo/repo.js';
+import repo from "./repo/repo.js";
 
 const datacontext = () => {
-    //const req = require.context("./repo", false, /^\.\/.*\.js$/);
+  // const req = require.context("./repo", false, /^\.\/.*\.js$/);
 
-     let repoNames = [
-        'guide',
-         'language'
-    ];
+  const repoNames = ["guide", "language"];
 
-    let service = {
-    };
+  const service = {};
 
-    defineLazyLoadedRepos();
+  defineLazyLoadedRepos();
 
-    return service;
+  return service;
 
-    function defineLazyLoadedRepos() {
-        repoNames.forEach(function (name) {
-            Object.defineProperty(service, name, {
-                configurable: true,
-                get: function () {
-
-                    let thisRepo = repo(name);
-                    Object.defineProperty(service, name, {
-                        value: thisRepo,
-                        configurable: false,
-                        enumerable: true
-                    });
-                    return thisRepo;
-                }
-            });
-        });
-    }
-
-
-
+  function defineLazyLoadedRepos() {
+    repoNames.forEach((name) => {
+      Object.defineProperty(service, name, {
+        configurable: true,
+        get() {
+          const thisRepo = repo(name);
+          Object.defineProperty(service, name, {
+            value: thisRepo,
+            configurable: false,
+            enumerable: true,
+          });
+          return thisRepo;
+        },
+      });
+    });
+  }
 };
 
 export default datacontext;

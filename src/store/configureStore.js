@@ -2,19 +2,13 @@ import { createStore, compose, applyMiddleware } from "redux";
 import rootReducer from "../reducers/index";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import thunk from "redux-thunk";
-import {
-  autoRehydrate,
-  persistStore,
-  persistReducer,
-  getStoredState,
-  createTransform
-} from "redux-persist";
+import { autoRehydrate, persistStore, persistReducer, getStoredState, createTransform } from "redux-persist";
 import { AsyncStorage } from "react-native";
 
 const config = {
   key: "root",
   storage: AsyncStorage,
-  blacklist: ["error", "menu", "internet", "audio"]
+  blacklist: ["error", "menu", "internet", "audio"],
 };
 
 const reducer = persistReducer(config, rootReducer);
@@ -25,14 +19,10 @@ function configureStoreProd(initialState) {
 
     // thunk middleware can also accept an extra argument to be passed to each thunk action
     // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
-    thunk
+    thunk,
   ];
 
-  return createStore(
-    reducer,
-    initialState,
-    compose(applyMiddleware(...middlewares))
-  );
+  return createStore(reducer, initialState, compose(applyMiddleware(...middlewares)));
 }
 
 function configureStoreDev(initialState) {
@@ -44,16 +34,11 @@ function configureStoreDev(initialState) {
 
     // thunk middleware can also accept an extra argument to be passed to each thunk action
     // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
-    thunk
+    thunk,
   ];
 
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
-  const store = createStore(
-    reducer,
-    initialState,
-    composeEnhancers(applyMiddleware(...middlewares))
-  );
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
+  const store = createStore(reducer, initialState, composeEnhancers(applyMiddleware(...middlewares)));
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
@@ -66,10 +51,7 @@ function configureStoreDev(initialState) {
   return store;
 }
 
-const configureStore =
-  process.env.NODE_ENV === "production"
-    ? configureStoreProd
-    : configureStoreDev;
+const configureStore = process.env.NODE_ENV === "production" ? configureStoreProd : configureStoreDev;
 
 const store = configureStore();
 
