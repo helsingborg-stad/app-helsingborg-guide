@@ -178,6 +178,7 @@ class GuideList extends Component {
   }
 
   render() {
+    console.log("guidelist.render()", this.state);
     const rightBtn = (
       <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.toggleMenu()}>
         <Icon name="menu" size={20} color="white" />
@@ -217,7 +218,7 @@ function makeMarkersFromLocations(guideGroups) {
 
 // store config
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     guides: state.guides || [],
     active: state.guides[0] || {},

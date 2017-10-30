@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import { StatusBar } from "react-native";
 import { StackNavigator } from "react-navigation";
 import SplashView from "../../scenes/SplashView";
 import ViewContainer from "../../shared/view_container";
-import MenuView from "../../shared/MenuView";
-import MenuContent from "../../scenes/MenuContent";
 import NotificationBar from "../../shared/NotificationBar";
 import GuideList from "./../../scenes/GuideList";
 import WelcomeView from "./../../scenes/WelcomeView";
@@ -30,18 +27,17 @@ export default class Nav extends Component {
     return <NotificationBar style={{ bottom: 0 }} />;
   }
 
+  // TODO Configure side menu in every screen that needs it, i.e. as navigationOptions
+  /*
   displayMenu() {
-    // TODO fix the menu ?
-    return (<MenuView>{/*
-        <MenuContent navigator={this.getNavigator.bind(this)} />
-      */}</MenuView>);
+    return <MenuView>{<MenuContent navigator={this.getNavigator.bind(this)} />}</MenuView>;
   }
+  */
 
   render() {
     return (
       <ViewContainer>
         <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
-        {this.displayMenu()}
         {Nav.displayNotificationBar()}
       </ViewContainer>
     );
