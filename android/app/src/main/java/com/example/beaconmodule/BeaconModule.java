@@ -79,7 +79,7 @@ public class BeaconModule extends ReactContextBaseJavaModule implements BeaconCo
 
     @ReactMethod
     public void isBluetoothEnabled(Promise promise) {
-        promise.resolve(mBluetoothAdapter.isEnabled());
+        promise.resolve(mBluetoothAdapter != null && mBluetoothAdapter.isEnabled());
     }
 
     @ReactMethod
