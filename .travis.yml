@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+- "6"
+matrix:
+  include:
+  - language: node_js
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-4.8
+    install:
+    - npm install
+    script:
+    - ./scripts/ci-build-node.sh
