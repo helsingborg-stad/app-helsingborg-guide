@@ -83,11 +83,8 @@ class GuideList extends Component {
   }
 
   guidePress(guide) {
-    this.props.navigator.push({
-      component: GuideView,
-      title: "Guide",
-      passProps: { guide },
-    });
+    const { navigate } = this.props.navigation;
+    navigate('GuideView', { guide });
   }
 
   // ##########################################

@@ -35,31 +35,19 @@ class GuideView extends Component {
     constructor(props) {
         super(props);
 
+        const { guide } = this.props.navigation.state.params;
+
         this.state = {
-            guide: {},
+            guide,
             sublocations:this.props.subLocations,
-            viewArticle:!this.props.guide.settings.active,
+            viewArticle:!guide.settings.active,
             menuVisible:false,
             internet:this.props.internet
-
-
         };
         this.currentYOffset = 0;
         this.timingService = TimingService.getInstance();
         this.toggleMenu = this.toggleMenu.bind(this);
 
-    }
-
-    componentDidMount(){
-      if(this.props.guide){
-          this.setState({
-              guide:this.props.guide,
-          });
-
-      }
-    }
-
-    componentWillUnmount(){
     }
     componentWillReceiveProps(nextProps) {
         //console.log('GuideView will receive new props');
@@ -316,7 +304,7 @@ class GuideView extends Component {
   render() {
       const leftBtn = (
           <TouchableOpacity style={{flex:1,alignItems:'center',justifyContent:'center'}}
-                            onPress={()=>this.props.navigator.pop()}>
+                            onPress={()=>this.props.navigation.goBack()}>
               <Icon2 name="chevron-left" size={32} color="white" />
           </TouchableOpacity>
       );
@@ -402,12 +390,11 @@ function getFilteredSubLocations(list,parentId){
 
 function mapStateToProps(state, ownProps) {
     //console.log('GUIDEVIEW:state:',state);
+    const { guide } = ownProps.navigation.state.params;
     return {
-        subLocations: getFilteredSubLocations(state.subLocations,ownProps.guide.id) || [] ,
+        subLocations: getFilteredSubLocations(state.subLocations, guide.id) || [] ,
         internet:state.internet.connected,
         geolocation:state.geolocation
-
-
     };
 }
 function mapDispatchToProps(dispatch) {
