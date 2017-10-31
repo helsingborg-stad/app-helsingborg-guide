@@ -614,7 +614,7 @@ class SubLocationView extends Component {
     display(){
       const leftBtn = (
           <TouchableOpacity style={{flex:1,alignItems:'center',justifyContent:'center'}}
-                            onPress={()=>this.props.navigator.pop()}>
+                            onPress={()=>this.props.navigation.goBack()}>
               <Icon2 name="chevron-left" size={32} color="white" />
           </TouchableOpacity>
       );
@@ -760,14 +760,13 @@ function getDownloadMeta(downloads, id){
 }
 
 function mapStateToProps(state, ownProps) {
+    const { subLocationId } = ownProps.navigation.state.params
     return {
-        subLocation:getSubLocation(state.subLocations,ownProps.subLocationId),
+        subLocation:getSubLocation(state.subLocations, subLocationId),
         metrics:state.metrics,
         internet:state.internet.connected,
-        downloadMeta: getDownloadMeta(state.downloads,ownProps.subLocationId),
+        downloadMeta: getDownloadMeta(state.downloads, subLocationId),
         downloads:state.downloads
-
-
     };
 }
 function mapDispatchToProps(dispatch) {
