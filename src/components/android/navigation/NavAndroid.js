@@ -4,6 +4,7 @@ import SplashView from "../../scenes/SplashView";
 import ViewContainer from "../../shared/view_container";
 import NotificationBar from "../../shared/NotificationBar";
 import GuideList from "./../../scenes/GuideList";
+import GuideView from "./../../scenes/GuideView";
 import WelcomeView from "./../../scenes/WelcomeView";
 
 const RootNavigator = StackNavigator(
@@ -11,6 +12,7 @@ const RootNavigator = StackNavigator(
     Splash: { screen: SplashView },
     WelcomeView: { screen: WelcomeView },
     GuideList: { screen: GuideList },
+    GuideView: { screen: GuideView }
   },
   {
     headerMode: "none",
