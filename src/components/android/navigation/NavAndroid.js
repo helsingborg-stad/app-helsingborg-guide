@@ -5,6 +5,7 @@ import ViewContainer from "../../shared/view_container";
 import NotificationBar from "../../shared/NotificationBar";
 import GuideList from "./../../scenes/GuideList";
 import GuideView from "./../../scenes/GuideView";
+import SubLocationView from "./../../scenes/SubLocationView";
 import WelcomeView from "./../../scenes/WelcomeView";
 
 const RootNavigator = StackNavigator(
@@ -12,7 +13,8 @@ const RootNavigator = StackNavigator(
     Splash: { screen: SplashView },
     WelcomeView: { screen: WelcomeView },
     GuideList: { screen: GuideList },
-    GuideView: { screen: GuideView }
+    GuideView: { screen: GuideView },
+    SubLocationView: { screen: SubLocationView },
   },
   {
     headerMode: "none",

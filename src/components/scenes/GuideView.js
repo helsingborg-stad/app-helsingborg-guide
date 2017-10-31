@@ -71,10 +71,9 @@ class GuideView extends Component {
     }
 
     _goToSubLocationScene(subLocation){
-        this.props.navigator.push({
-            component: SubLocationView,
-            title:'SubLocation',
-            passProps:{subLocationId:subLocation.id}
+        const { navigate } = this.props.navigation;
+        navigate('SubLocationView', {
+            subLocationId:subLocation.id
         });
     }
 
