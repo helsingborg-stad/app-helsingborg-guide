@@ -14,3 +14,29 @@ matrix:
     - npm install
     script:
     - ./scripts/ci-build-node.sh
+  - language: android
+    jdk: oraclejdk8
+    android:
+      components:
+        - tools
+        - tools # tools twice because of bug: https://github.com/travis-ci/travis-ci/issues/6040
+        - platform-tools # must come after the double tools to get the right version
+
+        - build-tools-25.0.3
+        - android-25
+    env:
+    - CXX=g++-4.8
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-4.8
+    before_install:
+    - nvm install 8
+    - node --version
+    - npm i -g npm@5.0.3
+    - npm --version
+    - npm install
+    script:
+    - travis_retry ./scripts/ci-build-android.sh
