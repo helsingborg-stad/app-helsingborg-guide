@@ -20,7 +20,7 @@ import ViewContainer from "./view_container";
 import NoInternetText from "./noInternetText";
 import MapView from "react-native-maps";
 import { LocationService } from "../../services/locationService";
-import { TimingService } from "../../services/timingService";
+import TimingService from "../../services/timingService";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 let markersTimeout;
@@ -33,7 +33,6 @@ const markerImageInActive = require("../../images/marker-inactive.png");
 
 export default class MapThumbnailsView extends Component {
   locationService;
-  timingService;
   markersTimeout;
   xCurrentOffset;
 
@@ -54,7 +53,6 @@ export default class MapThumbnailsView extends Component {
       connected: this.props.connected,
     };
     this.locationService = LocationService.getInstance();
-    this.timingService = TimingService.getInstance();
   }
 
   componentWillReceiveProps(nextProps) {

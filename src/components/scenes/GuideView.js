@@ -14,7 +14,7 @@ import OptionsFloatingBtn from "../shared/OptionsFloatingBtn";
 import OptionsView from "../shared/OptionsView";
 import OptionsContentView from "../shared/OptionsContentView";
 import LogoView from "../shared/LogoView";
-import { TimingService } from "../../services/timingService";
+import TimingService from "../../services/timingService";
 import { LangService } from "../../services/langService";
 import SubLocationsOnMapView from "./SubLocationsOnMapView";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
@@ -74,7 +74,6 @@ class GuideView extends Component {
       menuVisible: false,
       internet: this.props.internet,
     };
-    this.timingService = TimingService.getInstance();
     this.toggleMenu = this.toggleMenu.bind(this);
   }
   componentWillReceiveProps(nextProps) {
@@ -130,7 +129,7 @@ class GuideView extends Component {
     });
   }
 
-  displayComingSoon(guideGroup) {
+  static displayComingSoon(guideGroup) {
     if (!guideGroup.settings.active) {
       return (
         <View
@@ -149,12 +148,13 @@ class GuideView extends Component {
         </View>
       );
     }
+    return null;
   }
 
-  displayOpeningTime(guideGroup) {
+  static displayOpeningTime(guideGroup) {
     const openingList = guideGroup._embedded.location[0].open_hours;
     const expList = guideGroup._embedded.location[0].open_hour_exceptions;
-    const opening = this.timingService.getOpeningHours(openingList, expList);
+    const opening = TimingService.getOpeningHours(openingList, expList);
     const text = opening || "";
     return (
       <View style={styles.openTimeContainer}>
@@ -262,13 +262,13 @@ class GuideView extends Component {
           <ScrollView style={styles.scrollView}>
             <View style={styles.imageViewContainer}>
               <ImageView source={{ uri }} width={width} height={height}>
-                {this.displayComingSoon(this.state.guide)}
+                {GuideView.displayComingSoon(this.state.guide)}
               </ImageView>
             </View>
             <View style={styles.bodyContainer}>
               <View style={styles.titleContainer}>
                 {GuideView.displayLogo(this.state.guide)}
-                {this.displayOpeningTime(this.state.guide)}
+                {GuideView.displayOpeningTime(this.state.guide)}
               </View>
               {this.displayArticle()}
               <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>

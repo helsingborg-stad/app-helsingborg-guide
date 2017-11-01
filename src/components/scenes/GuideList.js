@@ -34,7 +34,7 @@ import NoInternetText from "../shared/noInternetText";
 import MapThumbnailsView from "../shared/MapThumbnailsView";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import RoundedBtn from "../shared/roundedBtn";
-import { TimingService } from "../../services/timingService";
+import TimingService from "../../services/timingService";
 import { LangService } from "../../services/langService";
 
 class GuideList extends Component {
@@ -43,8 +43,6 @@ class GuideList extends Component {
       title: LangService.strings.APP_NAME,
     };
   }
-
-  timingService;
 
   constructor(props) {
     super(props);
@@ -57,7 +55,6 @@ class GuideList extends Component {
       internet: this.props.internet,
     };
 
-    this.timingService = TimingService.getInstance();
     this.renderRow = this.renderRow.bind(this);
     this.guidePress = this.guidePress.bind(this);
   }
@@ -84,7 +81,7 @@ class GuideList extends Component {
 
   guidePress(guide) {
     const { navigate } = this.props.navigation;
-    navigate('GuideView', { guide });
+    navigate("GuideView", { guide });
   }
 
   // ##########################################
@@ -119,7 +116,7 @@ class GuideList extends Component {
     if (!guideGroup) return null;
     const openingList = guideGroup._embedded.location[0].open_hours;
     const expList = guideGroup._embedded.location[0].open_hour_exceptions;
-    const opening = this.timingService.getOpeningHours(openingList, expList);
+    const opening = TimingService.getOpeningHours(openingList, expList);
     const text = opening || "";
     return (
       <View style={styles.openTimeContainer}>
