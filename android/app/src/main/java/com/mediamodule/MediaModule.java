@@ -1,19 +1,9 @@
 package com.mediamodule;
 
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.session.MediaController;
-import android.media.session.MediaSession;
-import android.media.session.MediaSessionManager;
 import android.os.Build;
-import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
@@ -26,8 +16,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.guidehbg.MainActivity;
-import com.guidehbg.R;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,8 +24,8 @@ import java.util.Map;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MediaModule extends ReactContextBaseJavaModule implements
-        MediaPlayer.OnPreparedListener ,
-        MediaPlayer.OnCompletionListener ,
+        MediaPlayer.OnPreparedListener,
+        MediaPlayer.OnCompletionListener,
         MediaPlayer.OnErrorListener {
 
     private static final String MEDIA_PREPARED = "MEDIA_PREPARED";
@@ -47,7 +35,6 @@ public class MediaModule extends ReactContextBaseJavaModule implements
 
     MediaPlayer mediaPlayer;
     ReactApplicationContext context;
-
 
 
     public MediaModule(ReactApplicationContext reactContext) {
@@ -79,11 +66,11 @@ public class MediaModule extends ReactContextBaseJavaModule implements
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @ReactMethod
-    public void init(String url){
+    public void init(String url) {
 
         try {
             this.release();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -104,68 +91,73 @@ public class MediaModule extends ReactContextBaseJavaModule implements
 
 
     @ReactMethod
-    public void start(){
-        if(mediaPlayer !=null)
+    public void start() {
+        if (mediaPlayer != null)
             mediaPlayer.start();
     }
 
     @ReactMethod
-    public void pause(){
-        if(mediaPlayer !=null)
+    public void pause() {
+        if (mediaPlayer != null)
             mediaPlayer.pause();
     }
+
     @ReactMethod
-    public void stop(){
-        if(mediaPlayer !=null)
+    public void stop() {
+        if (mediaPlayer != null)
             mediaPlayer.stop();
     }
+
     @ReactMethod
-    public void release(){
-        if(mediaPlayer !=null) {
+    public void release() {
+        if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
         }
     }
+
     @ReactMethod
-    public void getCurrentPosition(Promise jsPromise){
-        if(mediaPlayer !=null){
+    public void getCurrentPosition(Promise jsPromise) {
+        if (mediaPlayer != null) {
             int position = mediaPlayer.getCurrentPosition();
             jsPromise.resolve(position);
         }
     }
+
     @ReactMethod
-    public void isPlaying(Promise jsPromise){
-        if(mediaPlayer !=null){
+    public void isPlaying(Promise jsPromise) {
+        if (mediaPlayer != null) {
             boolean isPlaying = mediaPlayer.isPlaying();
             jsPromise.resolve(isPlaying);
         }
     }
+
     @ReactMethod
-    public void getDuration(Promise jsPromise){
-        if(mediaPlayer !=null){
+    public void getDuration(Promise jsPromise) {
+        if (mediaPlayer != null) {
             int duration = mediaPlayer.getDuration();
             jsPromise.resolve(duration);
         }
     }
+
     @ReactMethod
-    public void seekTo(int newPosition){
-        if(mediaPlayer !=null){
+    public void seekTo(int newPosition) {
+        if (mediaPlayer != null) {
             mediaPlayer.seekTo(newPosition);
         }
     }
 
 
-
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
         mediaPlayer.start();
-        sendEvent(context,MEDIA_PREPARED,Arguments.createMap());
+        sendEvent(context, MEDIA_PREPARED, Arguments.createMap());
     }
 
     @Override
     public void onCompletion(MediaPlayer mp) {
         Log.i("Media_completed", "media comple");
-        sendEvent(context,MEDIA_COMPLETED,Arguments.createMap());
+        sendEvent(context, MEDIA_COMPLETED, Arguments.createMap());
 
     }
 
@@ -173,7 +165,7 @@ public class MediaModule extends ReactContextBaseJavaModule implements
     public boolean onError(MediaPlayer mp, int what, int extra) {
         WritableMap params = Arguments.createMap();
         //params.putBoolean();
-        sendEvent(context,MEDIA_ERROR,Arguments.createMap());
+        sendEvent(context, MEDIA_ERROR, Arguments.createMap());
         return false;
     }
 }
