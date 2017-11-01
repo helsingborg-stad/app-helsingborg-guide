@@ -1,50 +1,26 @@
 import React, { Component } from "react";
-import {
-  Platform,
-  View,
-  Text,
-  ListView,
-  StyleSheet,
-  Navigator,
-  TouchableHighlight,
-  TouchableOpacity,
-  Image,
-  StatusBar,
-  Button,
-  Linking,
-  AsyncStorage,
-} from "react-native";
-
-import { NativeModules } from "react-native";
+import { Platform, View, Text, StyleSheet, TouchableOpacity, Linking } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import ViewContainer from "../shared/view_container";
 import Navbar from "../shared/navbar";
 import Thumbnail from "../shared/thumbnail2";
 import MapThumbnailsView from "../shared/MapThumbnailsView";
-import { TimingService } from "../../services/timingService";
-import { LangService } from "../../services/langService";
 import SubLocationView from "./SubLocationView";
 import RoundedBtn from "../shared/roundedBtn";
-import Icon from "react-native-vector-icons/MaterialIcons";
 
 export default class SubLocationsOnMapView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = this.buildState(this.props.subLocations);
-    this.renderRow = this.renderRow.bind(this);
+    const { subLocations } = this.props.navigation.state.params;
+    this.state = this.buildState(subLocations);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("subloactionviewon map will receive next props");
-
-    if (this.props.subLocations.length != nextProps.subLocations.length) {
+    if (this.props.subLocations.length !== nextProps.subLocations.length) {
       this.setState(this.buildState(nextProps.subLocations));
     }
   }
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
 
   onItemPress(id) {
     this.props.navigator.push({
@@ -103,7 +79,7 @@ export default class SubLocationsOnMapView extends Component {
       .catch(err => console.error("An error occurred", err));
   }
 
-  renderRow(rowData, section) {
+  renderRow = (rowData) => {
     const location = rowData._embedded.location[0];
 
     return (
@@ -131,7 +107,7 @@ export default class SubLocationsOnMapView extends Component {
         </View>
       </Thumbnail>
     );
-  }
+  };
 
   render() {
     if (!this.state.subLocations || this.state.subLocations.length < 1) return null;

@@ -16,7 +16,6 @@ import OptionsContentView from "../shared/OptionsContentView";
 import LogoView from "../shared/LogoView";
 import TimingService from "../../services/timingService";
 import { LangService } from "../../services/langService";
-import SubLocationsOnMapView from "./SubLocationsOnMapView";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import * as internetActions from "../../actions/internetActions";
@@ -62,71 +61,16 @@ class GuideView extends Component {
     return <LogoView logoType={logoType} placeHolder={guideGroup.name} />;
   }
 
-  constructor(props) {
-    super(props);
-
-    const { guide } = this.props.navigation.state.params;
-
-    this.state = {
-      guide,
-      sublocations: this.props.subLocations,
-      viewArticle: !guide.settings.active,
-      menuVisible: false,
-      internet: this.props.internet,
-    };
-    this.toggleMenu = this.toggleMenu.bind(this);
-  }
-  componentWillReceiveProps(nextProps) {
-    if (this.props.subLocations.length !== nextProps.subLocations.length) {
-      this.setState({
-        sublocations: nextProps.subLocations,
-      });
+  static async openUrlIfValid(url) {
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        return Linking.openURL(url);
+      }
+    } catch (error) {
+      console.log("An error occured", error);
     }
-
-    if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
-  }
-
-  toggleMenu() {
-    this.setState({ menuVisible: !this.state.menuVisible });
-  }
-  closeMenu() {
-    if (this.state.menuVisible) this.setState({ menuVisible: false });
-  }
-
-  _goToSubLocationScene(subLocation) {
-    const { navigate } = this.props.navigation;
-    navigate("SubLocationView", {
-      subLocationId: subLocation.id,
-    });
-  }
-
-  _goToMapView() {
-    this.toggleMenu();
-
-    this.props.navigator.push({
-      component: SubLocationsOnMapView,
-      title: "Map",
-      passProps: { subLocations: this.state.sublocations },
-      type: "fade",
-    });
-  }
-
-  displaySubLocations() {
-    if (!this.state.sublocations.length) return null;
-    return this.state.sublocations.map((subLocation) => {
-      if (!subLocation.guide_images || !subLocation.guide_images.length) return null;
-      const forKids = subLocation.guide_kids;
-
-      return (
-        <TouchableOpacity key={subLocation.id} style={styles.subLocationContainer} onPress={() => this._goToSubLocationScene(subLocation)}>
-          <ListItem
-            imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
-            content={subLocation.title.plain_text}
-            checked={forKids}
-          />
-        </TouchableOpacity>
-      );
-    });
+    return null;
   }
 
   static displayComingSoon(guideGroup) {
@@ -162,6 +106,70 @@ class GuideView extends Component {
       </View>
     );
   }
+  constructor(props) {
+    super(props);
+
+    const { guide } = this.props.navigation.state.params;
+
+    this.state = {
+      guide,
+      sublocations: this.props.subLocations,
+      viewArticle: !guide.settings.active,
+      menuVisible: false,
+      internet: this.props.internet,
+    };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.subLocations.length !== nextProps.subLocations.length) {
+      this.setState({
+        sublocations: nextProps.subLocations,
+      });
+    }
+
+    if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
+  }
+
+  toggleMenu() {
+    this.setState({ menuVisible: !this.state.menuVisible });
+  }
+
+  closeMenu() {
+    if (this.state.menuVisible) this.setState({ menuVisible: false });
+  }
+
+  _goToSubLocationScene(subLocation) {
+    const { navigate } = this.props.navigation;
+    navigate("SubLocationView", {
+      subLocationId: subLocation.id,
+    });
+  }
+
+  _goToMapView() {
+    this.toggleMenu();
+
+    const { navigate } = this.props.navigation;
+    navigate("SubLocationsOnMapView", { subLocations: this.state.sublocations });
+  }
+
+  displaySubLocations() {
+    if (!this.state.sublocations.length) return null;
+    return this.state.sublocations.map((subLocation) => {
+      if (!subLocation.guide_images || !subLocation.guide_images.length) return null;
+      const forKids = subLocation.guide_kids;
+
+      return (
+        <TouchableOpacity key={subLocation.id} style={styles.subLocationContainer} onPress={() => this._goToSubLocationScene(subLocation)}>
+          <ListItem
+            imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
+            content={subLocation.title.plain_text}
+            checked={forKids}
+          />
+        </TouchableOpacity>
+      );
+    });
+  }
 
   toggleArticleView() {
     this.toggleMenu();
@@ -186,9 +194,9 @@ class GuideView extends Component {
   }
 
   displayFabs() {
-    if (!Object.keys(this.state.guide).length) return;
+    if (!Object.keys(this.state.guide).length) return null;
+
     const mapVisible = this.state.guide.settings.map && this.state.sublocations;
-    let mapFab;
     const directions = (
       <RoundedBtn
         style={styles.fabBtn}
@@ -210,30 +218,20 @@ class GuideView extends Component {
         onPress={() => this.toggleArticleView()}
       />
     );
-    const download = (
-      <RoundedBtn
-        style={styles.fabBtn}
-        label={LangService.strings.DOWNLOAD}
-        active={<Icon2 name="file-download" size={20} color="white" />}
-        idle={<Icon2 name="file-download" size={20} color="white" />}
-        onPress={() => {}}
-      />
-    );
-    mapFab = (
-      <RoundedBtn
-        style={styles.fabBtn}
-        label={LangService.strings.SHOW_MAP}
-        active={<Icon name="map-marker" size={20} color="white" />}
-        idle={<Icon name="map-marker" size={20} color="white" />}
-        onPress={this._goToMapView.bind(this)}
-      />
-    );
     if (mapVisible) {
+      const mapFab = (
+        <RoundedBtn
+          style={styles.fabBtn}
+          label={LangService.strings.SHOW_MAP}
+          active={<Icon name="map-marker" size={20} color="white" />}
+          idle={<Icon name="map-marker" size={20} color="white" />}
+          onPress={this._goToMapView.bind(this)}
+        />
+      );
       return (
         <OptionsContentView>
           {directions}
           {info}
-          {/* {download} */}
           {mapFab}
         </OptionsContentView>
       );
@@ -242,7 +240,6 @@ class GuideView extends Component {
       <OptionsContentView>
         {directions}
         {info}
-        {/* {download} */}
       </OptionsContentView>
     );
   }
@@ -291,14 +288,7 @@ class GuideView extends Component {
     let url = `google.navigation:q=${daddr}`;
     if (Platform.OS === "ios") url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${daddr}&saddr=${saddr}`;
 
-    Linking.canOpenURL(url)
-      .then((supported) => {
-        if (supported) {
-          return Linking.openURL(url);
-        }
-      })
-      .catch(err => console.error("An error occurred", err));
-
+    GuideView.openUrlIfValid(url);
     this.toggleMenu();
   }
 
