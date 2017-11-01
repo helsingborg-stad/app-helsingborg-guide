@@ -135,9 +135,9 @@ class GuideView extends Component {
     this.setState({ menuVisible: !this.state.menuVisible });
   }
 
-  closeMenu() {
+  closeMenu = () => {
     if (this.state.menuVisible) this.setState({ menuVisible: false });
-  }
+  };
 
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
@@ -146,12 +146,12 @@ class GuideView extends Component {
     });
   }
 
-  _goToMapView() {
+  _goToMapView = () => {
     this.toggleMenu();
 
     const { navigate } = this.props.navigation;
     navigate("SubLocationsOnMapView", { subLocations: this.state.sublocations });
-  }
+  };
 
   displaySubLocations() {
     if (!this.state.sublocations.length) return null;
@@ -177,9 +177,9 @@ class GuideView extends Component {
     this.setState({ viewArticle: !this.state.viewArticle });
   }
 
-  toggleMainMenu() {
+  toggleMainMenu = () => {
     this.props.menuActions.toggleMenu();
-  }
+  };
 
   displayArticle() {
     const article = (
@@ -225,7 +225,7 @@ class GuideView extends Component {
           label={LangService.strings.SHOW_MAP}
           active={<Icon name="map-marker" size={20} color="white" />}
           idle={<Icon name="map-marker" size={20} color="white" />}
-          onPress={this._goToMapView.bind(this)}
+          onPress={this._goToMapView}
         />
       );
       return (
@@ -246,7 +246,7 @@ class GuideView extends Component {
 
   display() {
     if (this.state.guide && Object.keys(this.state.guide).length) {
-      const image = this.state.guide.apperance.image;
+      const { image } = this.state.guide.apperance;
       const uri = image.sizes.medium_large;
       const width = image.sizes["medium-large-width"];
       const height = image.sizes["medium-large-height"];
@@ -299,7 +299,7 @@ class GuideView extends Component {
       </TouchableOpacity>
     );
     const rightBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={this.toggleMainMenu.bind(this)}>
+      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={this.toggleMainMenu}>
         <Icon2 name="menu" size={20} color="white" />
       </TouchableOpacity>
     );
@@ -310,7 +310,7 @@ class GuideView extends Component {
 
         <OptionsFloatingBtn onPress={this.toggleMenu} />
 
-        <OptionsView onPress={this.closeMenu.bind(this)} visible={this.state.menuVisible}>
+        <OptionsView onPress={this.closeMenu} visible={this.state.menuVisible}>
           {this.displayFabs()}
         </OptionsView>
         {this.display()}
