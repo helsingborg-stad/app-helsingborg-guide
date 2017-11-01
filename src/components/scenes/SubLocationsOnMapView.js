@@ -8,7 +8,52 @@ import MapThumbnailsView from "../shared/MapThumbnailsView";
 import SubLocationView from "./SubLocationView";
 import RoundedBtn from "../shared/roundedBtn";
 
+const styles = StyleSheet.create({
+  thumbnailExtraContainer: {
+    flex: 1,
+  },
+  titleContainer: {
+    flex: 3,
+    justifyContent: "center",
+    paddingHorizontal: 5,
+  },
+  titleText: {
+    fontSize: 13,
+    fontWeight: "300",
+  },
+  navigateBtnContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+  },
+  navigateBtn: {
+    width: 40,
+    height: 40,
+    backgroundColor: "#D35098",
+  },
+});
+
 export default class SubLocationsOnMapView extends Component {
+  static makeMarkersFromLocations(subLocations) {
+    if (!subLocations || !subLocations.length) return [];
+    return subLocations.map((item) => {
+      const marker = { location: { latitude: null, longitude: null }, itemId: item.id };
+
+      if (!item._embedded || !item._embedded.location.length) return marker;
+      const location = item._embedded.location[0];
+      marker.location.latitude = parseFloat(location.latitude);
+      marker.location.longitude = parseFloat(location.longitude);
+      return marker;
+    });
+  }
+
+  static filterSubLocationsWithoutLocationObject(subLocations) {
+    if (!subLocations || !subLocations.length) return [];
+    return subLocations.filter((item) => {
+      const location = item._embedded.location;
+      return !(!item._embedded || !location.length || !location[0].id);
+    });
+  }
+
   constructor(props) {
     super(props);
 
@@ -23,43 +68,17 @@ export default class SubLocationsOnMapView extends Component {
   }
 
   onItemPress(id) {
-    this.props.navigator.push({
-      component: SubLocationView,
-      title: "SubLocationView",
-      passProps: { subLocationId: id },
-    });
-  }
-
-  // ########################################3
-
-  makeMarkersFromLocations(subLocations) {
-    if (!subLocations || !subLocations.length) return [];
-    return subLocations.map((item) => {
-      const marker = { location: { latitude: null, longitude: null }, itemId: item.id };
-
-      if (!item._embedded || !item._embedded.location.length) return marker;
-      const location = item._embedded.location[0];
-      marker.location.latitude = parseFloat(location.latitude);
-      marker.location.longitude = parseFloat(location.longitude);
-      return marker;
-    });
-  }
-
-  filterSubLocationsWithoutLocationObject(subLocations) {
-    if (!subLocations || !subLocations.length) return [];
-    return subLocations.filter((item) => {
-      const location = item._embedded.location;
-      return !(!item._embedded || !location.length || !location[0].id);
-    });
+    const { navigate } = this.props.navigation;
+    navigate("SubLocationView", { subLocationId: id });
   }
 
   buildState(_subLocations) {
-    const subLocations = this.filterSubLocationsWithoutLocationObject(_subLocations);
+    const subLocations = SubLocationsOnMapView.filterSubLocationsWithoutLocationObject(_subLocations);
 
     return {
       subLocations,
       active: subLocations[0],
-      markers: this.makeMarkersFromLocations(subLocations) || [],
+      markers: SubLocationsOnMapView.makeMarkersFromLocations(subLocations) || [],
     };
   }
 
@@ -115,7 +134,7 @@ export default class SubLocationsOnMapView extends Component {
     const title = this.state.subLocations[0].guidegroup[0].name;
 
     const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigator.pop()}>
+      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
         <Icon name="chevron-left" size={32} color="white" />
       </TouchableOpacity>
     );
@@ -135,29 +154,3 @@ export default class SubLocationsOnMapView extends Component {
     );
   }
 }
-
-// ##########################################
-
-const styles = StyleSheet.create({
-  thumbnailExtraContainer: {
-    flex: 1,
-  },
-  titleContainer: {
-    flex: 3,
-    justifyContent: "center",
-    paddingHorizontal: 5,
-  },
-  titleText: {
-    fontSize: 13,
-    fontWeight: "300",
-  },
-  navigateBtnContainer: {
-    flex: 1,
-    alignItems: "flex-end",
-  },
-  navigateBtn: {
-    width: 40,
-    height: 40,
-    backgroundColor: "#D35098",
-  },
-});
