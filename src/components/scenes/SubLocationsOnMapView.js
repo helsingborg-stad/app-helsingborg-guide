@@ -5,7 +5,6 @@ import ViewContainer from "../shared/view_container";
 import Navbar from "../shared/navbar";
 import Thumbnail from "../shared/thumbnail2";
 import MapThumbnailsView from "../shared/MapThumbnailsView";
-import SubLocationView from "./SubLocationView";
 import RoundedBtn from "../shared/roundedBtn";
 
 const styles = StyleSheet.create({
@@ -49,30 +48,12 @@ export default class SubLocationsOnMapView extends Component {
   static filterSubLocationsWithoutLocationObject(subLocations) {
     if (!subLocations || !subLocations.length) return [];
     return subLocations.filter((item) => {
-      const location = item._embedded.location;
+      const { location } = item._embedded;
       return !(!item._embedded || !location.length || !location[0].id);
     });
   }
 
-  constructor(props) {
-    super(props);
-
-    const { subLocations } = this.props.navigation.state.params;
-    this.state = this.buildState(subLocations);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.subLocations.length !== nextProps.subLocations.length) {
-      this.setState(this.buildState(nextProps.subLocations));
-    }
-  }
-
-  onItemPress(id) {
-    const { navigate } = this.props.navigation;
-    navigate("SubLocationView", { subLocationId: id });
-  }
-
-  buildState(_subLocations) {
+  static buildState(_subLocations) {
     const subLocations = SubLocationsOnMapView.filterSubLocationsWithoutLocationObject(_subLocations);
 
     return {
@@ -82,20 +63,35 @@ export default class SubLocationsOnMapView extends Component {
     };
   }
 
-  openGoogleMapApp(lat, lng, slug) {
+  static openGoogleMapApp(lat, lng) {
     let url = `google.navigation:q=${lat},${lng}`;
     if (Platform.OS === "ios") url = `maps.apple.com/?ll=${lat},${lng}`;
 
-    // let url =  encodeURI('geo:'+lat+','+lng+'?saddr='+slug);
     Linking.canOpenURL(url)
       .then((supported) => {
-        if (!supported) {
-          // console.log('Can\'t handle url: ' + url);
-        } else {
+        if (supported) {
           return Linking.openURL(url);
         }
+        return null;
       })
       .catch(err => console.error("An error occurred", err));
+  }
+  constructor(props) {
+    super(props);
+
+    const { subLocations } = this.props.navigation.state.params;
+    this.state = SubLocationsOnMapView.buildState(subLocations);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.subLocations.length !== nextProps.subLocations.length) {
+      this.setState(SubLocationsOnMapView.buildState(nextProps.subLocations));
+    }
+  }
+
+  onItemPress(id) {
+    const { navigate } = this.props.navigation;
+    navigate("SubLocationView", { subLocationId: id });
   }
 
   renderRow = (rowData) => {
@@ -115,7 +111,7 @@ export default class SubLocationsOnMapView extends Component {
               active={<Icon name="directions" size={20} color="white" />}
               idle={<Icon name="directions" size={20} color="white" />}
               onPress={() => {
-                this.openGoogleMapApp(location.latitude, location.longitude, location.slug);
+                SubLocationsOnMapView.openGoogleMapApp(location.latitude, location.longitude, location.slug);
               }}
             />
           </View>
