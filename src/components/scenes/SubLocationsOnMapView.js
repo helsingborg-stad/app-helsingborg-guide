@@ -76,6 +76,7 @@ export default class SubLocationsOnMapView extends Component {
       })
       .catch(err => console.error("An error occurred", err));
   }
+
   constructor(props) {
     super(props);
 
