@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Button, Navigator, Image, TouchableOpacity, StyleSheet, ScrollView, Dimensions, Platform } from "react-native";
+import { TouchableOpacity, StyleSheet, Dimensions, Platform } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import PhotoView from "react-native-photo-view";
 import ViewContainer from "../shared/view_container";
@@ -10,9 +10,15 @@ const MAX_SCALE = 2.5;
 const MIN_SCALE = 0.95;
 const FULL_WIDTH = Dimensions.get("window").width;
 
-export default class ImageScene extends Component {
-  fetchService;
+const noFeaturedImage = require("../../images/no-image-featured-image.png");
 
+const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: "black",
+  },
+});
+
+export default class ImageScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,17 +30,6 @@ export default class ImageScene extends Component {
 
   componentDidMount() {
     this.setSource();
-  }
-
-  // not used
-  loadFile(fullPath) {
-    if (Platform.OS == "ios") {
-      this.fetchService.readFile(fullPath).then((data) => {
-        this.setState({ source: { uri: `data:image/png;base64,${data}` } });
-      });
-    } else if (Platform.OS == "android") {
-      this.setState({ source: { uri: `file://${fullPath}` } });
-    }
   }
 
   setSource() {
@@ -49,14 +44,26 @@ export default class ImageScene extends Component {
           this.setState({ source: { uri } });
         }
       });
-    } else this.setState({ source: require("../../images/no-image-featured-image.png") });
+    } else {
+      this.setState({ source: noFeaturedImage });
+    }
+  }
+
+  loadFile(fullPath) {
+    if (Platform.OS === "ios") {
+      this.fetchService.readFile(fullPath).then((data) => {
+        this.setState({ source: { uri: `data:image/png;base64,${data}` } });
+      });
+    } else if (Platform.OS === "android") {
+      this.setState({ source: { uri: `file://${fullPath}` } });
+    }
   }
 
   render() {
     const { image } = this.props.navigation.state.params;
     const { sizes } = image;
-    const width = parseInt(sizes["large-width"]);
-    const height = parseInt(sizes["large-height"]);
+    const width = parseInt(sizes["large-width"], 10);
+    const height = parseInt(sizes["large-height"], 10);
     const scale = width / FULL_WIDTH;
 
     const leftBtn = (
@@ -82,9 +89,3 @@ export default class ImageScene extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: "black",
-  },
-});
