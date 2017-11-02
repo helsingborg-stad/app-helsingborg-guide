@@ -17,6 +17,7 @@
     "react-native-fetch-blob": "^0.10.4",
     "react-native-maps": "^0.17.1",
     "react-native-maps-google": "^1.1.4",
+    "react-native-photo-view": "^1.5.2",
     "react-native-swiper": "^1.5.4",
     "react-native-vector-icons": "^4.0.1",
     "react-native-video": "^2.0.0",

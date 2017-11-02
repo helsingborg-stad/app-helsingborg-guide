@@ -4,11 +4,11 @@ import android.app.Application;
 
 import com.example.beaconmodule.BeaconPackage;
 import com.facebook.react.ReactApplication;
+import com.reactnative.photoview.PhotoViewPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 
 import com.brentvatne.react.ReactVideoPackage;
-// import com.reactnative.photoview.PhotoViewPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -33,10 +33,10 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(new MainReactPackage(), new BeaconPackage(), new VectorIconsPackage(),
+            return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new PhotoViewPackage(), new BeaconPackage(), new VectorIconsPackage(),
                     new MapsPackage(), 
                     new ReactVideoPackage(),
-                    // new PhotoViewPackage(),
                     new RNFetchBlobPackage(), new NotificationPackage(), new SettingsPackage(), new MediaPackage(),
                     new MediaControlPackage());
         }

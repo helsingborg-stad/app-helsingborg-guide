@@ -33,10 +33,6 @@ const RootNavigator = StackNavigator(
 
 // TODO this class should most likely be merged into App (index.js)
 export default class Nav extends Component {
-  static onNavigationStateChange(prevState, newState) {
-    console.log("onNavigationStateChanged", prevState, newState);
-  }
-
   static displayNotificationBar() {
     return <NotificationBar style={{ bottom: 0 }} />;
   }
