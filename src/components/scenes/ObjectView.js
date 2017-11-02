@@ -10,7 +10,6 @@ import ImageView from "../shared/image_view_content";
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
 import VideoView from "./VideoView";
-import WebScene from "./WebScene";
 import RoundedBtn from "../shared/roundedBtn";
 import { LangService } from "../../services/langService";
 import MediaPlayer from "../shared/MediaPlayer";
@@ -146,11 +145,8 @@ class ObjectView extends Component {
   }
 
   goToLink(url) {
-    this.props.navigator.push({
-      component: WebScene,
-      title: "WebView",
-      passProps: { url },
-    });
+    const { navigate } = this.props.navigation;
+    navigate("WebView", { url });
   }
 
   displayText() {

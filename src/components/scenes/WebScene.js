@@ -1,13 +1,7 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, WebView, TouchableOpacity } from "react-native";
-import ViewContainer from "../shared/view_container";
+import { WebView, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import ViewContainer from "../shared/view_container";
 import Navbar from "../shared/navbar";
 
 export default class TestScene extends Component {
@@ -16,8 +10,6 @@ export default class TestScene extends Component {
     this.state = {};
   }
 
-  componentDidMount() {}
-
   render() {
     const leftBtn = (
       <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigator.pop()}>
@@ -25,16 +17,13 @@ export default class TestScene extends Component {
       </TouchableOpacity>
     );
 
+    const { params } = this.props.navigation.state;
+
     return (
       <ViewContainer>
         <Navbar title={this.props.text} leftButton={leftBtn} backgroundColor="#D35098" />
-        <WebView
-          source={{ uri: this.props.url }}
-          // style={{marginTop: 20}}
-        />
+        <WebView source={{ uri: params.url }} />
       </ViewContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({});
