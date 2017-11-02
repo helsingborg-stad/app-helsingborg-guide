@@ -1,50 +1,62 @@
 import React, { Component } from "react";
-import {
-  Platform,
-  View,
-  Text,
-  Button,
-  Navigator,
-  Dimensions,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { View, Text, Dimensions, TouchableOpacity, StyleSheet, ScrollView, TouchableWithoutFeedback } from "react-native";
 
-import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
+import Swiper from "react-native-swiper";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view_content";
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
 import VideoView from "./VideoView";
-import Swiper from "react-native-swiper";
 import WebScene from "./WebScene";
 import RoundedBtn from "../shared/roundedBtn";
 import { LangService } from "../../services/langService";
 import MediaPlayer from "../shared/MediaPlayer";
-import MediaPlayeriOS from "../shared/MediaPlayeriOS";
 import Footer from "../shared/footer";
-import { bindActionCreators } from "redux";
 import * as audioActions from "../../actions/audioActions";
 import * as metricActions from "../../actions/metricActions";
-import { connect } from "react-redux";
 import { MediaService } from "../../services/mediaService";
 import ImageScene from "./ImageScene";
-import { MediaServiceiOS } from "../../services/mediaServiceiOS";
-import SlimNotificationBar from "../shared/SlimNotificationBar";
-import NoInternetText from "../shared/noInternetText";
 import * as internetActions from "../../actions/internetActions";
 import { FetchService } from "../../services/FetchService";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
 
-class ObjectView extends Component {
-  mediaService;
-  fetchService;
+const styles = StyleSheet.create({
+  imageViewContainer: { maxHeight: MAX_IMAGE_HEIGHT, flex: 1 },
+  scrollView: { paddingBottom: 70 },
 
+  bodyContainer: {
+    flex: 1,
+    alignItems: "stretch",
+    backgroundColor: "white",
+  },
+  titleContainer: { flex: 1, paddingHorizontal: 34, paddingVertical: 28 },
+  title: { fontSize: 22, fontWeight: "300", lineHeight: 26 },
+  articleContainer: { flex: 4, paddingHorizontal: 34, paddingVertical: 10 },
+  article: { fontSize: 14, lineHeight: 20 },
+  subLocationsContainer: {
+    flex: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+  },
+  imagesSlider: { maxHeight: MAX_IMAGE_HEIGHT, flex: 1 },
+  linkContainer: { paddingVertical: 6 },
+  linkText: { fontSize: 14, lineHeight: 20, fontWeight: "bold" },
+  closeBtn: {
+    position: "absolute",
+    top: 10,
+    left: 10,
+    zIndex: 100,
+    width: 40,
+    height: 40,
+    backgroundColor: "#D35098",
+  },
+});
+
+class ObjectView extends Component {
   constructor(props) {
     super(props);
 
@@ -70,26 +82,30 @@ class ObjectView extends Component {
     this.checkAudioVideoBtns(this.state.internet);
   }
 
-  componentWillUnmount() {
-    this.stopListenIngToAudioEvents();
-  }
-
   componentWillReceiveProps(nextProps) {
-    if (this.state.audio.hasAudio != nextProps.audio.hasAudio) {
+    if (this.state.audio.hasAudio !== nextProps.audio.hasAudio) {
       this.setState({
         audio: nextProps.audio,
       });
     }
 
-    if (nextProps.internet != this.state.internet) {
+    if (nextProps.internet !== this.state.internet) {
       this.setState({ internet: nextProps.internet });
       this.checkAudioVideoBtns(nextProps.internet);
     }
   }
 
+  componentWillUnmount() {
+    this.stopListenIngToAudioEvents();
+  }
+
+  onAudioFilePrepared() {
+    this.updateWithObjectVisited();
+  }
+
   checkAudioVideoBtns(internet) {
-    const audio = this.state.contentObject.audio;
-    const video = this.state.contentObject.video;
+    const { audio } = this.state.contentObject;
+    const { video } = this.state.contentObject;
     if (audio && audio.url) {
       this.isUrlLocallyExist(audio.url).then((exist) => {
         this.setState({ audioBtnDisabled: !(exist || internet) });
@@ -101,6 +117,7 @@ class ObjectView extends Component {
       });
     }
   }
+
   isUrlLocallyExist(url) {
     return this.fetchService.isExist(url);
   }
@@ -149,12 +166,6 @@ class ObjectView extends Component {
     );
   }
 
-  // ###########################################
-  // Audio
-  onAudioFilePrepared() {
-    this.updateWithObjectVisited();
-  }
-
   listenToAudioEvents() {
     this.mediaService.onPrepared(this.onAudioFilePrepared);
   }
@@ -166,7 +177,7 @@ class ObjectView extends Component {
     if (!this.state.contentObject.audio || !this.state.contentObject.audio.url) return;
     if (this.state.audio.hasAudio) this.mediaService.release();
 
-    const contentObject = this.state.contentObject;
+    const { contentObject } = this.state;
     const audio = {
       url: contentObject.audio.url,
       title: contentObject.title || LangService.strings.UNKNOWN_TITLE,
@@ -177,9 +188,7 @@ class ObjectView extends Component {
     };
     this.mediaService.init(audio);
   }
-  displayAudioPlayer() {
-    return <MediaPlayer />;
-  }
+
   pauseAudioFile() {
     this.mediaService.pause();
   }
@@ -187,8 +196,8 @@ class ObjectView extends Component {
   // ###############################################
 
   displayButtonsBar() {
-    const audio = this.state.contentObject.audio;
-    const video = this.state.contentObject.video;
+    const { audio } = this.state.contentObject;
+    const { video } = this.state.contentObject;
     const audioBtnVisible = !audio || !audio.url;
     const videoBtnVisible = !video || !video.url;
     const audioBarItem = audioBtnVisible ? null : (
@@ -232,6 +241,7 @@ class ObjectView extends Component {
       </ButtonsBar>
     );
   }
+
   displayImagesSlider() {
     if (!this.state.contentObject || !this.state.contentObject.image || !this.state.contentObject.image.length) {
       return (
@@ -242,7 +252,7 @@ class ObjectView extends Component {
     }
 
     const slides = this.state.contentObject.image.map((image, index) => (
-      <View style={styles.imageViewContainer} key={index}>
+      <View style={styles.imageViewContainer} key={image.ID || index}>
         <TouchableWithoutFeedback onPress={() => this.goToImageView(image)}>
           <View>
             <ImageView source={{ uri: image.sizes.large }} width={image.sizes["large-width"]} height={image.sizes["large-height"]} />
@@ -257,10 +267,11 @@ class ObjectView extends Component {
       </Swiper>
     );
   }
+
   displayLinks() {
     if (!this.state.contentObject.links) return null;
     return this.state.contentObject.links.map((item, index) => (
-      <TouchableOpacity style={styles.linkContainer} key={index} onPress={() => this.goToLink(item.link)}>
+      <TouchableOpacity style={styles.linkContainer} key={item.link || index} onPress={() => this.goToLink(item.link)}>
         <Text style={styles.linkText}>{item.title}</Text>
       </TouchableOpacity>
     ));
@@ -285,7 +296,9 @@ class ObjectView extends Component {
               <View style={styles.articleContainer}>{this.displayLinks()}</View>
             </View>
           </ScrollView>
-          <Footer>{this.displayAudioPlayer()}</Footer>
+          <Footer>
+            <MediaPlayer />
+          </Footer>
         </ViewContainer>
       );
     }
@@ -298,41 +311,9 @@ class ObjectView extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  imageViewContainer: { maxHeight: MAX_IMAGE_HEIGHT, flex: 1 },
-  scrollView: { paddingBottom: 70 },
-
-  bodyContainer: {
-    flex: 1,
-    alignItems: "stretch",
-    backgroundColor: "white",
-  },
-  titleContainer: { flex: 1, paddingHorizontal: 34, paddingVertical: 28 },
-  title: { fontSize: 22, fontWeight: "300", lineHeight: 26 },
-  articleContainer: { flex: 4, paddingHorizontal: 34, paddingVertical: 10 },
-  article: { fontSize: 14, lineHeight: 20 },
-  subLocationsContainer: {
-    flex: 1,
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-  },
-  imagesSlider: { maxHeight: MAX_IMAGE_HEIGHT, flex: 1 },
-  linkContainer: { paddingVertical: 6 },
-  linkText: { fontSize: 14, lineHeight: 20, fontWeight: "bold" },
-  closeBtn: {
-    position: "absolute",
-    top: 10,
-    left: 10,
-    zIndex: 100,
-    width: 40,
-    height: 40,
-    backgroundColor: "#D35098",
-  },
-});
-
 // store config
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     audio: state.audio,
     internet: state.internet.connected,
