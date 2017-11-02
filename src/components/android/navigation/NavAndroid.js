@@ -8,6 +8,7 @@ import GuideView from "./../../scenes/GuideView";
 import SubLocationView from "./../../scenes/SubLocationView";
 import WelcomeView from "./../../scenes/WelcomeView";
 import SubLocationsOnMapView from "./../../scenes/SubLocationsOnMapView";
+import ObjectView from "./../../scenes/ObjectView";
 
 const RootNavigator = StackNavigator(
   {
@@ -17,6 +18,7 @@ const RootNavigator = StackNavigator(
     GuideView: { screen: GuideView },
     SubLocationView: { screen: SubLocationView },
     SubLocationsOnMapView: { screen: SubLocationsOnMapView },
+    ObjectView: { screen: ObjectView },
   },
   {
     headerMode: "none",

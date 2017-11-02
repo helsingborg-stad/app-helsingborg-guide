@@ -10,7 +10,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableHighlight,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from "react-native";
 
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -48,13 +48,15 @@ class ObjectView extends Component {
   constructor(props) {
     super(props);
 
+    const { params } = this.props.navigation.state;
+
     this.state = {
-      contentObject: this.props.contentObject,
+      contentObject: params.contentObject,
       audio: this.props.audio,
       audioIsLoading: false,
       internet: this.props.internet,
       audioBtnDisabled: false,
-      videoBtnDisabled: false
+      videoBtnDisabled: false,
     };
 
     this.fetchService = FetchService.getInstance();
@@ -73,10 +75,11 @@ class ObjectView extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.audio.hasAudio != nextProps.audio.hasAudio)
+    if (this.state.audio.hasAudio != nextProps.audio.hasAudio) {
       this.setState({
-        audio: nextProps.audio
+        audio: nextProps.audio,
       });
+    }
 
     if (nextProps.internet != this.state.internet) {
       this.setState({ internet: nextProps.internet });
@@ -87,14 +90,16 @@ class ObjectView extends Component {
   checkAudioVideoBtns(internet) {
     const audio = this.state.contentObject.audio;
     const video = this.state.contentObject.video;
-    if (audio && audio.url)
-      this.isUrlLocallyExist(audio.url).then(exist => {
+    if (audio && audio.url) {
+      this.isUrlLocallyExist(audio.url).then((exist) => {
         this.setState({ audioBtnDisabled: !(exist || internet) });
       });
-    if (video && video.url)
-      this.isUrlLocallyExist(video.url).then(exist => {
+    }
+    if (video && video.url) {
+      this.isUrlLocallyExist(video.url).then((exist) => {
         this.setState({ videoBtnDisabled: !(exist || internet) });
       });
+    }
   }
   isUrlLocallyExist(url) {
     return this.fetchService.isExist(url);
@@ -106,12 +111,12 @@ class ObjectView extends Component {
   }
 
   _goToVideoView(videoUrl, title) {
-    //no need to release the audio just pause the sound.
+    // no need to release the audio just pause the sound.
     this.pauseAudioFile();
     this.props.navigator.push({
       component: VideoView,
       title: "VideoView",
-      passProps: { videoUrl, title }
+      passProps: { videoUrl, title },
     });
   }
 
@@ -119,7 +124,7 @@ class ObjectView extends Component {
     this.props.navigator.push({
       component: ImageScene,
       title: "Image",
-      passProps: { image }
+      passProps: { image },
     });
   }
 
@@ -127,7 +132,7 @@ class ObjectView extends Component {
     this.props.navigator.push({
       component: WebScene,
       title: "WebView",
-      passProps: { url }
+      passProps: { url },
     });
   }
 
@@ -138,16 +143,14 @@ class ObjectView extends Component {
           <Text style={styles.title}>{this.state.contentObject.title}</Text>
         </View>
         <View style={styles.articleContainer}>
-          <Text style={styles.article}>
-            {this.state.contentObject.description_plain}
-          </Text>
+          <Text style={styles.article}>{this.state.contentObject.description_plain}</Text>
         </View>
       </View>
     );
   }
 
-  //###########################################
-  //Audio
+  // ###########################################
+  // Audio
   onAudioFilePrepared() {
     this.updateWithObjectVisited();
   }
@@ -160,18 +163,17 @@ class ObjectView extends Component {
   }
 
   loadAudioFile() {
-    if (!this.state.contentObject.audio || !this.state.contentObject.audio.url)
-      return;
+    if (!this.state.contentObject.audio || !this.state.contentObject.audio.url) return;
     if (this.state.audio.hasAudio) this.mediaService.release();
 
-    let contentObject = this.state.contentObject;
-    let audio = {
+    const contentObject = this.state.contentObject;
+    const audio = {
       url: contentObject.audio.url,
       title: contentObject.title || LangService.strings.UNKNOWN_TITLE,
       avatar_url: contentObject.image[0].sizes.thumbnail || "",
       hasAudio: true,
       isPlaying: true,
-      description_plain: contentObject.description_plain
+      description_plain: contentObject.description_plain,
     };
     this.mediaService.init(audio);
   }
@@ -182,7 +184,7 @@ class ObjectView extends Component {
     this.mediaService.pause();
   }
 
-  //###############################################
+  // ###############################################
 
   displayButtonsBar() {
     const audio = this.state.contentObject.audio;
@@ -231,65 +233,41 @@ class ObjectView extends Component {
     );
   }
   displayImagesSlider() {
-    if (
-      !this.state.contentObject ||
-      !this.state.contentObject.image ||
-      !this.state.contentObject.image.length
-    )
+    if (!this.state.contentObject || !this.state.contentObject.image || !this.state.contentObject.image.length) {
       return (
         <View style={styles.imageViewContainer}>
           <ImageView source={{ uri: null }} width="600" height="400" />
         </View>
       );
+    }
 
-    let slides = this.state.contentObject.image.map((image, index) => {
-      return (
-        <View style={styles.imageViewContainer} key={index}>
-          <TouchableWithoutFeedback onPress={() => this.goToImageView(image)}>
-            <View>
-              <ImageView
-                source={{ uri: image.sizes.large }}
-                width={image.sizes["large-width"]}
-                height={image.sizes["large-height"]}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-      );
-    });
+    const slides = this.state.contentObject.image.map((image, index) => (
+      <View style={styles.imageViewContainer} key={index}>
+        <TouchableWithoutFeedback onPress={() => this.goToImageView(image)}>
+          <View>
+            <ImageView source={{ uri: image.sizes.large }} width={image.sizes["large-width"]} height={image.sizes["large-height"]} />
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
+    ));
 
     return (
-      <Swiper
-        style={styles.imagesSlider}
-        height={MAX_IMAGE_HEIGHT}
-        dotColor="white"
-        activeDotColor="#D35098"
-        showsButtons={false}
-      >
+      <Swiper style={styles.imagesSlider} height={MAX_IMAGE_HEIGHT} dotColor="white" activeDotColor="#D35098" showsButtons={false}>
         {slides}
       </Swiper>
     );
   }
   displayLinks() {
     if (!this.state.contentObject.links) return null;
-    return this.state.contentObject.links.map((item, index) => {
-      return (
-        <TouchableOpacity
-          style={styles.linkContainer}
-          key={index}
-          onPress={() => this.goToLink(item.link)}
-        >
-          <Text style={styles.linkText}>{item.title}</Text>
-        </TouchableOpacity>
-      );
-    });
+    return this.state.contentObject.links.map((item, index) => (
+      <TouchableOpacity style={styles.linkContainer} key={index} onPress={() => this.goToLink(item.link)}>
+        <Text style={styles.linkText}>{item.title}</Text>
+      </TouchableOpacity>
+    ));
   }
 
   display() {
-    if (
-      this.state.contentObject &&
-      Object.keys(this.state.contentObject).length
-    ) {
+    if (this.state.contentObject && Object.keys(this.state.contentObject).length) {
       return (
         <ViewContainer>
           <ScrollView contentContainerStyle={styles.scrollView}>
@@ -327,7 +305,7 @@ const styles = StyleSheet.create({
   bodyContainer: {
     flex: 1,
     alignItems: "stretch",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   titleContainer: { flex: 1, paddingHorizontal: 34, paddingVertical: 28 },
   title: { fontSize: 22, fontWeight: "300", lineHeight: 26 },
@@ -336,7 +314,7 @@ const styles = StyleSheet.create({
   subLocationsContainer: {
     flex: 1,
     paddingVertical: 20,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   imagesSlider: { maxHeight: MAX_IMAGE_HEIGHT, flex: 1 },
   linkContainer: { paddingVertical: 6 },
@@ -348,24 +326,23 @@ const styles = StyleSheet.create({
     zIndex: 100,
     width: 40,
     height: 40,
-    backgroundColor: "#D35098"
-  }
+    backgroundColor: "#D35098",
+  },
 });
 
-//store config
+// store config
 
 function mapStateToProps(state, ownProps) {
-  //console.log('Audio state', state.audio);
   return {
     audio: state.audio,
-    internet: state.internet.connected
+    internet: state.internet.connected,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     audioActions: bindActionCreators(audioActions, dispatch),
     metricActions: bindActionCreators(metricActions, dispatch),
-    internetActions: bindActionCreators(internetActions, dispatch)
+    internetActions: bindActionCreators(internetActions, dispatch),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ObjectView);

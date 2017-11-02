@@ -136,12 +136,8 @@ class SubLocationView extends Component {
   }
 
   _goToContentObjectScene(contentObject, objectKey) {
-    this.props.navigator.push({
-      component: ObjectView,
-      title: "ContentObject",
-      type: "modal",
-      passProps: { contentObject, objectKey, subLocationId: this.state.subLocation.id },
-    });
+    const { navigate } = this.props.navigation;
+    navigate("ObjectView", { contentObject, objectKey, subLocationId: this.state.subLocation.id });
   }
 
   changeView(view) {
