@@ -17,8 +17,9 @@ export default class VideoView extends Component {
 
   componentDidMount() {
     this.timer = setTimeout(() => {
-      this.fetchService.isExist(this.props.videoUrl).then((exist) => {
-        let url = this.props.videoUrl;
+      const { videoUrl } = this.props.navigation.state.params;
+      this.fetchService.isExist(videoUrl).then((exist) => {
+        let url = videoUrl;
 
         if (exist) {
           url = this.fetchService.getFullPath(url);
@@ -39,7 +40,7 @@ export default class VideoView extends Component {
 
   displayVideo() {
     const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigator.pop()}>
+      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
         <Icon name="chevron-left" size={20} color="white" />
       </TouchableOpacity>
     );

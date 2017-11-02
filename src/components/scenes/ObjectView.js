@@ -9,7 +9,6 @@ import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view_content";
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
-import VideoView from "./VideoView";
 import RoundedBtn from "../shared/roundedBtn";
 import { LangService } from "../../services/langService";
 import MediaPlayer from "../shared/MediaPlayer";
@@ -127,13 +126,10 @@ class ObjectView extends Component {
   }
 
   _goToVideoView(videoUrl, title) {
-    // no need to release the audio just pause the sound.
     this.pauseAudioFile();
-    this.props.navigator.push({
-      component: VideoView,
-      title: "VideoView",
-      passProps: { videoUrl, title },
-    });
+
+    const { navigate } = this.props.navigation;
+    navigate("VideoView", { videoUrl, title });
   }
 
   goToImageView(image) {
