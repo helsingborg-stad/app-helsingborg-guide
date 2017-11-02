@@ -279,6 +279,7 @@ class ObjectView extends Component {
 
   display() {
     if (this.state.contentObject && Object.keys(this.state.contentObject).length) {
+      const { goBack } = this.props.navigation;
       return (
         <ViewContainer>
           <ScrollView contentContainerStyle={styles.scrollView}>
@@ -287,7 +288,7 @@ class ObjectView extends Component {
               isActive={this.state.viewArticle}
               active={<Icon2 name="close" size={20} color="white" />}
               idle={<Icon2 name="close" size={20} color="white" />}
-              onPress={() => this.props.navigator.pop()}
+              onPress={goBack}
             />
             {this.displayImagesSlider()}
             <View style={styles.bodyContainer}>
