@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { View, Text, Button, Navigator, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ViewContainer from "../shared/view_container";
 import VideoPlayer from "../shared/VideoPlayer";
 import Navbar from "../shared/navbar";
 import { FetchService } from "../../services/FetchService";
 
+const styles = StyleSheet.create({
+  mainContainer: { backgroundColor: "black" },
+});
+
 export default class VideoView extends Component {
-  timer;
-  fetchService;
   constructor(props) {
     super(props);
     this.state = { url: null };
@@ -36,6 +38,7 @@ export default class VideoView extends Component {
 
   displayVideoPlayer() {
     if (this.state.url) return <VideoPlayer filePath={this.state.url} />;
+    return null;
   }
 
   displayVideo() {
@@ -58,7 +61,3 @@ export default class VideoView extends Component {
     return this.displayVideo();
   }
 }
-
-const styles = StyleSheet.create({
-  mainContainer: { backgroundColor: "black" },
-});
