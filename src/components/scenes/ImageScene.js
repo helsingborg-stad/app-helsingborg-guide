@@ -38,7 +38,8 @@ export default class ImageScene extends Component {
   }
 
   setSource() {
-    const uri = this.props.image.sizes.large;
+    const { image } = this.props.navigation.state.params;
+    const uri = image.sizes.large;
     if (typeof uri === "string") {
       this.fetchService.isExist(uri).then((exist) => {
         const fullPath = this.fetchService.getFullPath(uri);
@@ -52,20 +53,21 @@ export default class ImageScene extends Component {
   }
 
   render() {
-    const sizes = this.props.image.sizes;
+    const { image } = this.props.navigation.state.params;
+    const sizes = image.sizes;
     const width = parseInt(sizes["large-width"]);
     const height = parseInt(sizes["large-height"]);
     const scale = width / FULL_WIDTH;
 
     const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigator.pop()}>
+      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
         <Icon name="chevron-left" size={20} color="white" />
       </TouchableOpacity>
     );
 
     return (
       <ViewContainer style={styles.mainContainer}>
-        <Navbar title={this.props.image.caption} leftButton={leftBtn} backgroundColor="rgba(0,0,0,0.4)" />
+        <Navbar title={image.caption} leftButton={leftBtn} backgroundColor="rgba(0,0,0,0.4)" />
         {/* <PhotoView
                   source={this.state.source}
                   minimumZoomScale={MIN_SCALE}

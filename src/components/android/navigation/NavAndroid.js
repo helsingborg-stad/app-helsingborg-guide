@@ -11,6 +11,7 @@ import SubLocationsOnMapView from "./../../scenes/SubLocationsOnMapView";
 import ObjectView from "./../../scenes/ObjectView";
 import WebView from "./../../scenes/WebScene";
 import VideoView from "./../../scenes/VideoView";
+import ImageView from "./../../scenes/ImageScene";
 
 const RootNavigator = StackNavigator(
   {
@@ -23,6 +24,7 @@ const RootNavigator = StackNavigator(
     ObjectView: { screen: ObjectView },
     WebView: { screen: WebView },
     VideoView: { screen: VideoView },
+    ImageView: { screen: ImageView },
   },
   {
     headerMode: "none",

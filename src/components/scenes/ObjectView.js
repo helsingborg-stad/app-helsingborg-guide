@@ -16,7 +16,6 @@ import Footer from "../shared/footer";
 import * as audioActions from "../../actions/audioActions";
 import * as metricActions from "../../actions/metricActions";
 import { MediaService } from "../../services/mediaService";
-import ImageScene from "./ImageScene";
 import * as internetActions from "../../actions/internetActions";
 import { FetchService } from "../../services/FetchService";
 
@@ -133,11 +132,8 @@ class ObjectView extends Component {
   }
 
   goToImageView(image) {
-    this.props.navigator.push({
-      component: ImageScene,
-      title: "Image",
-      passProps: { image },
-    });
+    const { navigate } = this.props.navigation;
+    navigate("ImageView", { image });
   }
 
   goToLink(url) {
