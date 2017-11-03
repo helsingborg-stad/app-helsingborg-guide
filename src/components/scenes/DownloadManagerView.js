@@ -1,33 +1,31 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  Image,
-  ListView,
-  StyleSheet,
-  Button,
-  Dimensions,
-  TouchableOpacity,
-  ProgressBarAndroid,
-  LayoutAnimation,
-  ScrollView,
-  AsyncStorage,
-} from "react-native";
+import { View, ListView, StyleSheet, TouchableOpacity } from "react-native";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import ViewContainer from "../shared/view_container";
 import { DownloadTasksManager } from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import * as downloadActions from "../../actions/downloadActions";
 import { FetchService } from "../../services/FetchService";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import Navbar from "../shared/navbar";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
+const styles = StyleSheet.create({
+  fo: {
+    color: "#D35098",
+  },
+  mainContainer: {
+    backgroundColor: "#F2F2F2",
+  },
+  itemsScroll: {},
+});
+
 class DownloadManagerView extends Component {
-  downloadManager;
-  fetchService;
+  static renderFooter() {
+    return <View style={{ height: 60 }} />;
+  }
 
   constructor(props) {
     super(props);
@@ -73,9 +71,6 @@ class DownloadManagerView extends Component {
       />
     );
   }
-  renderFooter() {
-    return <View style={{ height: 60 }} />;
-  }
 
   render() {
     const leftBtn = (
@@ -87,33 +82,21 @@ class DownloadManagerView extends Component {
       <ViewContainer style={styles.mainContainer}>
         <Navbar title={this.props.title} leftButton={leftBtn} backgroundColor="#7B075E" />
         <ListView
-          // contentContainerStyle={styles.itemsScroll}
           ref={(ref) => {
             this.itemsListView = ref;
           }}
           enableEmptySections
           dataSource={ds.cloneWithRows(this.props.downloads)}
           renderRow={this.renderRow.bind(this)}
-          renderFooter={this.renderFooter.bind(this)}
+          renderFooter={DownloadManagerView.renderFooter}
         />
       </ViewContainer>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  fo: {
-    color: "#D35098",
-  },
-  mainContainer: {
-    backgroundColor: "#F2F2F2",
-  },
-  itemsScroll: {},
-});
-
 // store config
-
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     downloads: state.downloads,
   };
