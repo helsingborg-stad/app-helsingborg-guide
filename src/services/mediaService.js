@@ -1,5 +1,5 @@
 import { NativeModules, DeviceEventEmitter, NativeEventEmitter, Platform } from "react-native";
-import { NotificationService } from "./notificationService";
+import NotificationService from "./notificationService";
 import store from "../store/configureStore";
 import { errorHappened } from "../actions/errorActions";
 import { FetchService } from "./FetchService";
@@ -48,7 +48,6 @@ export class MediaService {
 
   constructor() {
     this.audio = RELEASED_AUDIO_OBJ;
-    this.notificationService = NotificationService.getInstance();
     this.fetchService = FetchService.getInstance();
     this.onErrorHandler = this.onErrorHandler.bind(this);
     this.onPreparedCallback = this.onPreparedCallback.bind(this);

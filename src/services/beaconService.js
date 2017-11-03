@@ -1,5 +1,5 @@
 import { NativeModules, DeviceEventEmitter, AppState, PermissionsAndroid, Alert } from "react-native";
-import { NotificationService } from "../services/notificationService";
+import NotificationService from "../services/notificationService";
 import { LangService } from "./langService";
 import Opener from "./SettingsService";
 
@@ -14,8 +14,8 @@ export class BeaconService {
 
   constructor() {
     this.closest = {};
-    this.notificationService = NotificationService.getInstance();
   }
+
   static getInstance() {
     if (!instance) instance = new BeaconService();
     return instance;
