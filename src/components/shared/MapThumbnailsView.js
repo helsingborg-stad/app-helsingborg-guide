@@ -1,29 +1,11 @@
 import React, { Component } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  ListView,
-  Navigator,
-  TouchableHighlight,
-  TouchableOpacity,
-  Image,
-  StatusBar,
-  Button,
-  Linking,
-  AsyncStorage,
-  Dimensions,
-} from "react-native";
-
-import { NativeModules } from "react-native";
+import { View, StyleSheet, ListView, Dimensions } from "react-native";
+import MapView from "react-native-maps";
 import ViewContainer from "./view_container";
 import NoInternetText from "./noInternetText";
-import MapView from "react-native-maps";
 import { LocationService } from "../../services/locationService";
-import TimingService from "../../services/timingService";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-let markersTimeout;
 const TIMEOUT = 3000;
 const FULL_WIDTH = Dimensions.get("window").width;
 const THUMBNAIL_WIDTH = FULL_WIDTH * 0.7;
@@ -31,11 +13,27 @@ const THUMBNAIL_WIDTH = FULL_WIDTH * 0.7;
 const markerImageActive = require("../../images/marker-active.png");
 const markerImageInActive = require("../../images/marker-inactive.png");
 
-export default class MapThumbnailsView extends Component {
-  locationService;
-  markersTimeout;
-  xCurrentOffset;
+const styles = StyleSheet.create({
+  mapViewContainer: {
+    flex: 4,
+    justifyContent: "flex-start",
+    alignItems: "stretch",
+  },
+  map: { flex: 1 },
 
+  listViewContainer: {
+    flex: 3,
+  },
+
+  itemsScroll: {
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingHorizontal: THUMBNAIL_WIDTH / 5,
+    backgroundColor: "#fefefe",
+  },
+});
+
+export default class MapThumbnailsView extends Component {
   constructor(props) {
     super(props);
 
@@ -227,24 +225,3 @@ export default class MapThumbnailsView extends Component {
     );
   }
 }
-
-// ##########################################
-const styles = StyleSheet.create({
-  mapViewContainer: {
-    flex: 4,
-    justifyContent: "flex-start",
-    alignItems: "stretch",
-  },
-  map: { flex: 1 },
-
-  listViewContainer: {
-    flex: 3,
-  },
-
-  itemsScroll: {
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingHorizontal: THUMBNAIL_WIDTH / 5,
-    backgroundColor: "#fefefe",
-  },
-});
