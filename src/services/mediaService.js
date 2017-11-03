@@ -40,7 +40,6 @@ config();
 
 export class MediaService {
   static url;
-  notificationService;
   fetchService;
   audio;
   updateInterval;
@@ -73,7 +72,7 @@ export class MediaService {
       .then((uri) => {
         console.log("Audio URI: ", uri);
         MediaService.url = uri;
-        this.notificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
+        NotificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
         this.onError(this.onErrorHandler);
         this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
         this.onCompleted(this.onCompletedCallback);
@@ -114,7 +113,7 @@ export class MediaService {
     MediaService.url = null;
     this.audio = null;
     store.dispatch(releaseAudioFile());
-    this.notificationService.closeNotification(MEDIA_NOTIFICATION_ID);
+    NotificationService.closeNotification(MEDIA_NOTIFICATION_ID);
     this.unSubscribeOnError(this.onErrorHandler);
     this.unSubscribeOnPrepared(this.onPreparedCallback);
     this.unSubscribeOnCompleted(this.onCompletedCallback);

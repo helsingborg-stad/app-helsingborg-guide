@@ -10,7 +10,6 @@ const BEACON_NOTIFICATION_ID = 201;
 export class BeaconService {
   static threshold = 3;
   closest;
-  notificationService;
 
   constructor() {
     this.closest = {};
@@ -124,7 +123,7 @@ export class BeaconService {
   notify() {
     if (AppState.currentState == "background") {
       const title = LangService.strings.SOMETHING_NEAR_BY;
-      this.notificationService.showSimple(title, "", BEACON_NOTIFICATION_ID);
+      NotificationService.showSimple(title, "", BEACON_NOTIFICATION_ID);
     }
   }
 }
