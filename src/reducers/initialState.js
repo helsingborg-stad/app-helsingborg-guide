@@ -16,6 +16,5 @@ export default {
   internet: { connected: false },
   error: {},
   downloads: [],
-  menu: { visible: false },
   position: null,
 };

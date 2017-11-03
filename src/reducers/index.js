@@ -6,7 +6,6 @@ import audio from "./audioReducer";
 import internet from "./internetReducer";
 import error from "./errorReducer";
 import downloads from "./downloadReducer";
-import menu from "./menuReducer";
 import geolocation from "./geolocationReducer";
 
 const rootReducer = combineReducers({
@@ -17,7 +16,6 @@ const rootReducer = combineReducers({
   internet,
   error,
   downloads,
-  menu,
   geolocation,
 });
 
