@@ -25,12 +25,22 @@ const GuideListNavigator = DrawerNavigator(
   },
 );
 
+const GuideViewNavigator = DrawerNavigator(
+  {
+    GuideView: { screen: GuideView },
+  },
+  {
+    drawerPosition: "right",
+    contentComponent: MenuContent,
+  },
+);
+
 const RootNavigator = StackNavigator(
   {
     Splash: { screen: SplashView },
     WelcomeView: { screen: WelcomeView },
     GuideList: { screen: GuideListNavigator },
-    GuideView: { screen: GuideView },
+    GuideView: { screen: GuideViewNavigator },
     SubLocationView: { screen: SubLocationView },
     SubLocationsOnMapView: { screen: SubLocationsOnMapView },
     ObjectView: { screen: ObjectView },

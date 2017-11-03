@@ -178,7 +178,7 @@ class GuideView extends Component {
   }
 
   toggleMainMenu = () => {
-    this.props.menuActions.toggleMenu();
+    this.props.navigation.navigate("DrawerToggle");
   };
 
   displayArticle() {
