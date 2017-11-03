@@ -131,7 +131,7 @@ class GuideList extends Component {
         }}
       />
     );
-    const label = this.displayComingSoon(rowData);
+    const label = GuideList.displayComingSoon(rowData);
 
     return (
       <Thumbnail
@@ -145,8 +145,8 @@ class GuideList extends Component {
         }}
       >
         <View style={styles.titleContainer}>
-          {this.displayLogo(rowData)}
-          {this.displayOpeningTime(rowData)}
+          {GuideList.displayLogo(rowData)}
+          {GuideList.displayOpeningTime(rowData)}
         </View>
       </Thumbnail>
     );
