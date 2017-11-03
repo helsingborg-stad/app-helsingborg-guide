@@ -38,8 +38,6 @@ class DownloadManagerView extends Component {
     this.fetchService = FetchService.getInstance();
   }
 
-  componentDidMount() {}
-
   // ########################################################
   // methods on the download page view
   toggleTask(id) {
@@ -56,21 +54,19 @@ class DownloadManagerView extends Component {
 
   // #################################################
 
-  renderRow(item) {
-    return (
-      <DownloadItemView
-        key={item.id}
-        imageSource={{ uri: item.avatar }}
-        title={item.title}
-        total={item.urls.length}
-        currentPos={item.currentPos}
-        isCanceled={item.isCanceled}
-        progress={item.currentPos / item.urls.length}
-        onClosePress={() => this.toggleTask(item.id)}
-        onClearPress={() => this.clearCache(item.id)}
-      />
-    );
-  }
+  renderRow = item => (
+    <DownloadItemView
+      key={item.id}
+      imageSource={{ uri: item.avatar }}
+      title={item.title}
+      total={item.urls.length}
+      currentPos={item.currentPos}
+      isCanceled={item.isCanceled}
+      progress={item.currentPos / item.urls.length}
+      onClosePress={() => this.toggleTask(item.id)}
+      onClearPress={() => this.clearCache(item.id)}
+    />
+  );
 
   render() {
     const leftBtn = (
@@ -87,7 +83,7 @@ class DownloadManagerView extends Component {
           }}
           enableEmptySections
           dataSource={ds.cloneWithRows(this.props.downloads)}
-          renderRow={this.renderRow.bind(this)}
+          renderRow={this.renderRow}
           renderFooter={DownloadManagerView.renderFooter}
         />
       </ViewContainer>
