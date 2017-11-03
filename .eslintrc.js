@@ -46,6 +46,35 @@ module.exports = {
     ],
     "object-curly-newline": ["error", { consistent: true }],
     "react/jsx-closing-tag-location": ["off"],
+    "react/sort-comp": [
+      "error",
+      {
+        order: ["static-methods", "lifecycle", "everything-else", "render"],
+        groups: {
+          lifecycle: [
+            "displayName",
+            "propTypes",
+            "contextTypes",
+            "childContextTypes",
+            "mixins",
+            "statics",
+            "defaultProps",
+            "constructor",
+            "getDefaultProps",
+            "getInitialState",
+            "state",
+            "getChildContext",
+            "componentWillMount",
+            "componentDidMount",
+            "componentWillReceiveProps",
+            "shouldComponentUpdate",
+            "componentWillUpdate",
+            "componentDidUpdate",
+            "componentWillUnmount",
+          ],
+        },
+      },
+    ],
   },
   settings: {
     "import/resolver": {
