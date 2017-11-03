@@ -1,30 +1,13 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import {
-  View,
-  Text,
-  ListView,
-  Navigator,
-  NetInfo,
-  TouchableHighlight,
-  TouchableOpacity,
-  Image,
-  StatusBar,
-  Button,
-  Linking,
-  AsyncStorage,
-  Platform,
-} from "react-native";
-
+import { View, Text, TouchableOpacity, Linking, Platform } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
 import * as menuActions from "../../actions/menuActions";
-
-import { NativeModules } from "react-native";
 import styles from "../../styles/styles";
-import GuideView from "./GuideView";
 import ViewContainer from "../shared/view_container";
 import LogoView from "../shared/LogoView";
 import Navbar from "../shared/navbar";
@@ -32,7 +15,6 @@ import Thumbnail from "../shared/thumbnail";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import MapThumbnailsView from "../shared/MapThumbnailsView";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import RoundedBtn from "../shared/roundedBtn";
 import TimingService from "../../services/timingService";
 import { LangService } from "../../services/langService";
@@ -42,6 +24,36 @@ class GuideList extends Component {
     return {
       title: LangService.strings.APP_NAME,
     };
+  }
+
+  static displayLogo(guideGroup) {
+    const logoType = guideGroup.apperance.logotype;
+    return <LogoView logoType={logoType} placeHolder={guideGroup.name} />;
+  }
+
+  static displayOpeningTime(guideGroup) {
+    if (!guideGroup) return null;
+    const openingList = guideGroup._embedded.location[0].open_hours;
+    const expList = guideGroup._embedded.location[0].open_hour_exceptions;
+    const opening = TimingService.getOpeningHours(openingList, expList);
+    const text = opening || "";
+    return (
+      <View style={styles.openTimeContainer}>
+        <Text style={styles.openTimeText}>{text}</Text>
+      </View>
+    );
+  }
+
+  static displayComingSoon(guideGroup) {
+    if (!guideGroup.settings.active) {
+      return (
+        <View style={{ position: "absolute", bottom: 0, left: 0, height: 27 }}>
+          <View style={{ flex: 1, paddingHorizontal: 7, justifyContent: "center", backgroundColor: "#A84C98" }}>
+            <Text style={{ fontWeight: "300", color: "white", textAlign: "center" }}>{LangService.strings.COMING_SOON}</Text>
+          </View>
+        </View>
+      );
+    }
   }
 
   constructor(props) {
@@ -60,7 +72,7 @@ class GuideList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.guides.length != nextProps.guides.length || this.state.langChanged) {
+    if (this.props.guides.length !== nextProps.guides.length || this.state.langChanged) {
       this.setState({
         guides: nextProps.guides,
         active: nextProps.active,
@@ -68,12 +80,8 @@ class GuideList extends Component {
         langChanged: false,
       });
     }
-    if (nextProps.internet != this.state.internet) this.setState({ internet: nextProps.internet });
+    if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
   }
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
 
   toggleMenu() {
     this.props.menuActions.toggleMenu();
@@ -86,7 +94,7 @@ class GuideList extends Component {
 
   // ##########################################
 
-  openGoogleMapApp(lat, lng, slug) {
+  openGoogleMapApp(lat, lng) {
     const daddr = `${lat},${lng}`;
 
     const myPosition = this.props.geolocation;
@@ -94,7 +102,7 @@ class GuideList extends Component {
     if (myPosition) saddr = `${myPosition.coords.latitude},${myPosition.coords.longitude}`;
 
     let url = `google.navigation:q=${daddr}`;
-    if (Platform.OS == "ios") url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${daddr}&saddr=${saddr}`;
+    if (Platform.OS === "ios") url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${daddr}&saddr=${saddr}`;
 
     console.log("geo url", url);
     Linking.canOpenURL(url)
@@ -107,37 +115,8 @@ class GuideList extends Component {
       .catch(err => console.error("An error occurred", err));
   }
 
-  // ########################################3
-  displayLogo(guideGroup) {
-    const logoType = guideGroup.apperance.logotype;
-    return <LogoView logoType={logoType} placeHolder={guideGroup.name} />;
-  }
-  displayOpeningTime(guideGroup) {
-    if (!guideGroup) return null;
-    const openingList = guideGroup._embedded.location[0].open_hours;
-    const expList = guideGroup._embedded.location[0].open_hour_exceptions;
-    const opening = TimingService.getOpeningHours(openingList, expList);
-    const text = opening || "";
-    return (
-      <View style={styles.openTimeContainer}>
-        <Text style={styles.openTimeText}>{text}</Text>
-      </View>
-    );
-  }
-  displayComingSoon(guideGroup) {
-    if (!guideGroup.settings.active) {
-      return (
-        <View style={{ position: "absolute", bottom: 0, left: 0, height: 27 }}>
-          <View style={{ flex: 1, paddingHorizontal: 7, justifyContent: "center", backgroundColor: "#A84C98" }}>
-            <Text style={{ fontWeight: "300", color: "white", textAlign: "center" }}>{LangService.strings.COMING_SOON}</Text>
-          </View>
-        </View>
-      );
-    }
-  }
-
   // ViewList render method.
-  renderRow(rowData, section) {
+  renderRow(rowData) {
     const location = rowData._embedded.location[0];
 
     const button = (

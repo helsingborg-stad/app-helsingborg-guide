@@ -61,6 +61,7 @@ class GuideView extends Component {
     return <LogoView logoType={logoType} placeHolder={guideGroup.name} />;
   }
 
+  // TODO extract to some service class
   static async openUrlIfValid(url) {
     try {
       const supported = await Linking.canOpenURL(url);
