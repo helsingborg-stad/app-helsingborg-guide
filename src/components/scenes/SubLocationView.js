@@ -1,28 +1,13 @@
 import React, { Component } from "react";
-import {
-  Platform,
-  View,
-  Modal,
-  Text,
-  Button,
-  Navigator,
-  AppState,
-  TouchableOpacity,
-  TouchableHighlight,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  LayoutAnimation,
-} from "react-native";
-
-import { NativeModules } from "react-native";
+import { Platform, View, Text, AppState, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import ViewContainer from "../shared/view_container";
 import Navbar from "../shared/navbar";
 import ImageView from "../shared/image_view";
 import ContentThumbnail from "../shared/contentThumbnail";
-import ObjectView from "./ObjectView";
 import Footer from "../shared/footer";
 import RoundedBtn from "../shared/roundedBtnWithText";
 import Keypad from "../shared/KeyPad";
@@ -33,17 +18,12 @@ import DownloadItemView2 from "../shared/DownloadItemView2";
 
 import { LangService } from "../../services/langService";
 import MediaPlayer from "../shared/MediaPlayer";
-import MediaPlayeriOS from "../shared/MediaPlayeriOS";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import * as audioActions from "../../actions/audioActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
 import * as downloadActions from "../../actions/downloadActions";
 import * as menuActions from "../../actions/menuActions";
 
 import { MediaService } from "../../services/mediaService";
-import { MediaServiceiOS } from "../../services/mediaServiceiOS";
 
 import { BeaconService } from "../../services/beaconService";
 import { BeaconServiceiOS } from "../../services/beaconServiceiOS";
@@ -56,12 +36,56 @@ import { DownloadTasksManager } from "../../services/DownloadTasksManager";
 import { FetchService } from "../../services/FetchService";
 
 const HALF_WIDTH = Dimensions.get("window").width / 2;
-const THIRD_WIDTH = Dimensions.get("window").width / 3;
-const LIST = 1;
-const GRID = 2;
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
 const RADAR_SCANNING_PERIOD = 1000; // ms
 const RADAR_SCANNING_DIE_PERIOD = 1000; // ms
+
+const styles = StyleSheet.create({
+  scrollView: { paddingBottom: 70 },
+  imageViewContainer: { flex: 1, backgroundColor: "white" },
+  bodyContainer: {
+    flex: 1,
+
+    alignItems: "stretch",
+    backgroundColor: "white",
+  },
+  titleContainer: {
+    flex: 1,
+    paddingHorizontal: 34,
+    paddingTop: 16,
+    paddingBottom: 15,
+  },
+  title: { fontSize: 22, fontWeight: "300", lineHeight: 26 },
+  articleContainer: { flex: 4, paddingHorizontal: 34, paddingVertical: 10 },
+  article: { fontSize: 14, lineHeight: 25 },
+  objectsContainer: {
+    flex: 1,
+    flexWrap: "wrap",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingBottom: 20,
+    marginBottom: 50,
+  },
+  ContentThumbnailContainer: {
+    width: HALF_WIDTH,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 10,
+  },
+  closeBtnContainer: {
+    flex: 1,
+    alignItems: "center",
+    paddingTop: 20,
+    paddingBottom: 40,
+    borderBottomWidth: 4,
+    borderBottomColor: "#ebebeb",
+  },
+  nearByTextContainer: { paddingHorizontal: 34, paddingVertical: 20, justifyContent: "center" },
+  nearByText: { fontSize: 18, lineHeight: 21 },
+  fabBtn: { width: 40, height: 40, backgroundColor: "#D35098" },
+});
 
 class SubLocationView extends Component {
   static get defaultProps() {
@@ -70,26 +94,13 @@ class SubLocationView extends Component {
     };
   }
 
-  currentYOffset;
-  mediaService;
-  beaconService;
-  downloadManager;
-  fetchService;
-  beaconSearchTimeout;
-  smallBtnTimer;
-
-  scrollView;
-  readyBeacon;
-
   constructor(props) {
     super(props);
 
     this.state = {
       subLocation: this.props.subLocation,
-      view: LIST,
       viewArticle: false,
       keypadVisible: false,
-      audio: this.props.audio,
       closestBeacon: {},
       searching: true,
       smallBtnVisible: false,
@@ -120,6 +131,14 @@ class SubLocationView extends Component {
   componentDidMount() {
     this.initBeaconService();
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
+    if (nextProps.downloadMeta || (this.state.downloadMeta && !nextProps.downloadMeta)) {
+      this.setState({ downloadMeta: nextProps.downloadMeta });
+    }
+  }
+
   componentWillUnmount() {
     this.mediaService.release();
     this.unbindBeaconService();
@@ -128,20 +147,9 @@ class SubLocationView extends Component {
     clearTimeout(this.beaconSearchStopTimeout);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.internet != this.state.internet) this.setState({ internet: nextProps.internet });
-    if (nextProps.downloadMeta || (this.state.downloadMeta && !nextProps.downloadMeta)) {
-      this.setState({ downloadMeta: nextProps.downloadMeta });
-    }
-  }
-
   _goToContentObjectScene(contentObject, objectKey) {
     const { navigate } = this.props.navigation;
     navigate("ObjectView", { contentObject, objectKey, subLocationId: this.state.subLocation.id });
-  }
-
-  changeView(view) {
-    this.setState({ view });
   }
 
   // ############################################
@@ -485,6 +493,7 @@ class SubLocationView extends Component {
       this.setKeypadSearchResultCode(404);
     }
   }
+
   getContentObjectById(id) {
     const contentObjects = this.state.subLocation.contentObjects;
     const keys = Object.keys(contentObjects);
@@ -492,6 +501,7 @@ class SubLocationView extends Component {
     if (!targetKey) return null;
     return { object: contentObjects[targetKey], objectKey: targetKey };
   }
+
   displayKeypad() {
     return (
       <Keypad
@@ -502,15 +512,12 @@ class SubLocationView extends Component {
       />
     );
   }
+
   toggleKeypadVisibility() {
     this.toggleMenu();
     this.setState({ keypadVisible: !this.state.keypadVisible });
   }
   // #############################################
-
-  displayAudioPlayer() {
-    return <MediaPlayer />;
-  }
 
   refreshSmallBtn() {
     if (!this.smallBtnTimer) {
@@ -640,7 +647,9 @@ class SubLocationView extends Component {
             </ScrollView>
           </View>
           {this.displayKeypad()}
-          <Footer>{this.displayAudioPlayer()}</Footer>
+          <Footer>
+            <MediaPlayer />
+          </Footer>
         </ViewContainer>
       );
     }
@@ -653,62 +662,11 @@ class SubLocationView extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  scrollView: { paddingBottom: 70 },
-  imageViewContainer: { flex: 1, backgroundColor: "white" },
-  bodyContainer: {
-    flex: 1,
-
-    alignItems: "stretch",
-    backgroundColor: "white",
-  },
-  titleContainer: {
-    flex: 1,
-    paddingHorizontal: 34,
-    paddingTop: 16,
-    paddingBottom: 15,
-  },
-  title: { fontSize: 22, fontWeight: "300", lineHeight: 26 },
-  articleContainer: { flex: 4, paddingHorizontal: 34, paddingVertical: 10 },
-  article: { fontSize: 14, lineHeight: 25 },
-  objectsContainer: {
-    flex: 1,
-    // backgroundColor:'red',
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingBottom: 20,
-    marginBottom: 50,
-  },
-  ContentThumbnailContainer: {
-    width: HALF_WIDTH,
-    // height:HALF_WIDTH,
-    flexDirection: "row",
-    // backgroundColor:'blue',
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 10,
-  },
-  closeBtnContainer: {
-    flex: 1,
-    alignItems: "center",
-    paddingTop: 20,
-    paddingBottom: 40,
-    borderBottomWidth: 4,
-    borderBottomColor: "#ebebeb",
-  },
-  nearByTextContainer: { paddingHorizontal: 34, paddingVertical: 20, justifyContent: "center" },
-  nearByText: { fontSize: 18, lineHeight: 21 },
-  fabBtn: { width: 40, height: 40, backgroundColor: "#D35098" },
-});
-
-// store config
 function getSubLocation(subLocations, id) {
-  return subLocations.find(item => item.id == id);
+  return subLocations.find(item => item.id === id);
 }
 function getDownloadMeta(downloads, id) {
-  return downloads.find(item => item.id == id);
+  return downloads.find(item => item.id === id);
 }
 
 function mapStateToProps(state, ownProps) {
@@ -721,6 +679,7 @@ function mapStateToProps(state, ownProps) {
     downloads: state.downloads,
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
@@ -729,4 +688,5 @@ function mapDispatchToProps(dispatch) {
     menuActions: bindActionCreators(menuActions, dispatch),
   };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(SubLocationView);
