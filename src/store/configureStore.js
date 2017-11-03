@@ -1,9 +1,9 @@
 import { createStore, compose, applyMiddleware } from "redux";
-import rootReducer from "../reducers/index";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import thunk from "redux-thunk";
-import { autoRehydrate, persistStore, persistReducer, getStoredState, createTransform } from "redux-persist";
+import { persistStore, persistReducer } from "redux-persist";
 import { AsyncStorage } from "react-native";
+import rootReducer from "../reducers/index";
 
 const config = {
   key: "root",
