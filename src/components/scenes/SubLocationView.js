@@ -94,6 +94,13 @@ class SubLocationView extends Component {
     };
   }
 
+  static getRemainingObjectKeys(allKeys, subKeys) {
+    if (allKeys.length === 0) return [];
+    if (subKeys.length === 0) return allKeys;
+
+    return allKeys.filter(key => !subKeys.includes(key));
+  }
+
   constructor(props) {
     super(props);
 
@@ -161,15 +168,18 @@ class SubLocationView extends Component {
     this.beaconService.onRangingResult(this.onBeaconRangingResult);
     this.beaconService.onServiceConnected(this.onBeaconServiceConnected);
   }
+
   unbindBeaconService() {
     this.stopListeningToBeacons();
     this.beaconService.unSubscribeOnRangingResult(this.onBeaconRangingResult);
     this.beaconService.unSubscribeOnServiceConnected(this.onBeaconServiceConnected);
     this.beaconService.unbind();
   }
+
   startListeningToBeacons() {
     this.beaconService.startRanging(BEACON_REGION_ID);
   }
+
   stopListeningToBeacons() {
     this.beaconService.stopRanging(BEACON_REGION_ID);
   }
@@ -178,13 +188,13 @@ class SubLocationView extends Component {
     // No beacon detected case
     if (!beacons || !beacons.length) return [];
     // The guide does not have subAttractions attached to beacons.
-    const subAttractions = this.state.subLocation.subAttractions;
+    const { subAttractions } = this.state.subLocation;
     if (!subAttractions || !subAttractions.length) return [];
 
     // check if the beacons belonge to one of the subAttractions and they are within distance.
     return beacons.filter((_beacon) => {
       const subAttraction = subAttractions.find((item) => {
-        const belongingConditions = `0x${item.nid}` == _beacon.nid && `0x${item.bid}` == _beacon.bid;
+        const belongingConditions = `0x${item.nid}` === _beacon.nid && `0x${item.bid}` === _beacon.bid;
         const distanceCondition = parseFloat(item.beacon_distance) > parseFloat(_beacon.distance);
         return belongingConditions && distanceCondition;
       });
@@ -197,7 +207,7 @@ class SubLocationView extends Component {
     beacons = this.filterBeacons(beacons);
     // console.log('filtered beacons',beacons);
     const closest = this.beaconService.getTheClosest(beacons);
-    const guideBeacon = this.state.subLocation.guideBeacon;
+    const { guideBeacon } = this.state.subLocation;
 
     const hideRadar = () => {
       clearInterval(this.beaconSearchTimeout);
@@ -227,8 +237,8 @@ class SubLocationView extends Component {
 
     const storedClosestBeaconIsInTheList = () => {
       if (!beacons.length) return false;
-      const index = beacons.findIndex(item => item.bid == this.state.closestBeacon.bid);
-      return index != -1;
+      const index = beacons.findIndex(item => item.bid === this.state.closestBeacon.bid);
+      return index !== -1;
     };
 
     // console.log('maybe is a closest beacons', closest);
@@ -238,13 +248,13 @@ class SubLocationView extends Component {
       return;
     }
 
-    if (!closest || !guideBeacon || closest.nid != `0x${guideBeacon.nid}`) {
+    if (!closest || !guideBeacon || closest.nid !== `0x${guideBeacon.nid}`) {
       hideRadar();
       // console.log('closest: is not matching nid or not available');
       return;
     }
 
-    if (closest.bid == this.state.closestBeacon.bid && closest.nid == this.state.closestBeacon.nid) {
+    if (closest.bid === this.state.closestBeacon.bid && closest.nid === this.state.closestBeacon.nid) {
       this.setState({ closestBeacon: closest });
       // console.log('closest: is the same one that is displayed now');
       return;
@@ -259,7 +269,7 @@ class SubLocationView extends Component {
 
     // Beacon detection logic ends here
     // #########################################
-    if (AppState.currentState == "background") {
+    if (AppState.currentState === "background") {
       this.setState({ closestBeacon: closest, searching: false });
       clearInterval(this.beaconSearchTimeout);
       this.beaconSearchTimeout = null;
@@ -285,17 +295,19 @@ class SubLocationView extends Component {
       showRadarForSecondsThenLoad();
     }
   }
+
   onBeaconServiceConnected() {
     this.startListeningToBeacons();
   }
-  displayContent() {
-    const contentObjects = this.state.subLocation.contentObjects;
 
-    if (!contentObjects || Object.keys(contentObjects).length == 0) return;
+  displayContent() {
+    const { contentObjects } = this.state.subLocation;
+
+    if (!contentObjects || Object.keys(contentObjects).length === 0) return null;
 
     const allKeys = Object.keys(contentObjects);
     const nearByKeys = this.getNearByObjectsKeys();
-    const remainingKeys = this.getRemainingObjectKeys(allKeys, nearByKeys);
+    const remainingKeys = SubLocationView.getRemainingObjectKeys(allKeys, nearByKeys);
 
     const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
     const contentObjectsViews = this.getObjectsViews(remainingKeys);
@@ -330,8 +342,8 @@ class SubLocationView extends Component {
   }
 
   getNearByObjectsKeys() {
-    const subAttractions = this.state.subLocation.subAttractions;
-    const contentObjects = this.state.subLocation.contentObjects;
+    const { subAttractions } = this.state.subLocation;
+    const { contentObjects } = this.state.subLocation;
 
     if (
       !contentObjects ||
@@ -343,21 +355,19 @@ class SubLocationView extends Component {
       return [];
     }
 
-    const nid = this.state.closestBeacon.nid;
     const nearByBID = this.state.closestBeacon.bid;
-    const subAttraction = subAttractions.find(item => `0x${item.bid}` == nearByBID);
+    const subAttraction = subAttractions.find(item => `0x${item.bid}` === nearByBID);
     if (!subAttraction) return [];
 
     return subAttraction.content[0].split(",");
   }
   getObjectsViews(keys) {
-    if (!keys.length) return;
+    if (!keys.length) return null;
 
-    const contentObjects = this.state.subLocation.contentObjects;
+    const { contentObjects } = this.state.subLocation;
 
     const getMetric = (objectKey) => {
-      let metric;
-      metric = this.props.metrics.find(item => item.objectKey == objectKey);
+      const metric = this.props.metrics.find(item => item.objectKey === objectKey);
       return metric || { isVisited: false };
     };
 
@@ -398,12 +408,6 @@ class SubLocationView extends Component {
     });
 
     return co;
-  }
-  getRemainingObjectKeys(allKeys, subKeys) {
-    if (allKeys.length == 0) return [];
-    if (subKeys.length == 0) return allKeys;
-
-    return allKeys.filter(key => !subKeys.includes(key));
   }
 
   // ###############################################################
@@ -495,9 +499,9 @@ class SubLocationView extends Component {
   }
 
   getContentObjectById(id) {
-    const contentObjects = this.state.subLocation.contentObjects;
+    const { contentObjects } = this.state.subLocation;
     const keys = Object.keys(contentObjects);
-    const targetKey = keys.find(key => contentObjects[key].id == id);
+    const targetKey = keys.find(key => contentObjects[key].id === id);
     if (!targetKey) return null;
     return { object: contentObjects[targetKey], objectKey: targetKey };
   }
