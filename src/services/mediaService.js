@@ -57,10 +57,8 @@ export default class MediaService {
     return instance;
   }
 
-  setUri(fullPath) {}
-
   init(audio) {
-    if (!audio || !audio.url) return Promise.reject("No url provided");
+    if (!audio || !audio.url) return Promise.reject(new Error("No url provided"));
 
     this.fetchService
       .isExist(audio.url)
@@ -83,6 +81,7 @@ export default class MediaService {
         if (Platform.OS === "ios") return MediaPlayer.init(MediaService.url, audio.title, audio.description_plain);
         return MediaPlayer.init(MediaService.url);
       });
+    return null;
   }
 
   onErrorHandler() {
@@ -109,7 +108,13 @@ export default class MediaService {
 
   release() {
     this.clearUpdateInterval();
-    Platform.OS == "ios" ? MediaPlayer.release1() : MediaPlayer.release();
+
+    if (Platform.OS === "ios") {
+      MediaPlayer.release1();
+    } else {
+      MediaPlayer.release();
+    }
+
     MediaService.url = null;
     this.audio = null;
     store.dispatch(releaseAudioFile());
@@ -120,7 +125,7 @@ export default class MediaService {
   }
 
   getMeta() {
-    if (!this.audio.hasAudio) return Promise.reject("Audio object is null");
+    if (!this.audio.hasAudio) return Promise.reject(new Error("Audio object is null"));
 
     const meta = {};
     return this.isPlaying()
@@ -178,6 +183,7 @@ export default class MediaService {
       if (!this.updatePaused) store.dispatch(updateAudio(meta));
     });
   }
+
   clearUpdateInterval() {
     console.log("interval from clear func:", this.updateInterval);
     clearInterval(this.updateInterval);
