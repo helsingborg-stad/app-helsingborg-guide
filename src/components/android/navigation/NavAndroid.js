@@ -13,6 +13,7 @@ import WebView from "./../../scenes/WebScene";
 import VideoView from "./../../scenes/VideoView";
 import ImageView from "./../../scenes/ImageScene";
 import MenuContent from "./../../scenes/MenuContent";
+import DownloadManagerView from "./../../scenes/DownloadManagerView";
 
 const GuideListNavigator = DrawerNavigator(
   {
@@ -36,6 +37,7 @@ const RootNavigator = StackNavigator(
     WebView: { screen: WebView },
     VideoView: { screen: VideoView },
     ImageView: { screen: ImageView },
+    DownloadManagerView: { screen: DownloadManagerView },
   },
   {
     headerMode: "none",

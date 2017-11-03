@@ -7,7 +7,6 @@ import connect from "react-redux/es/connect/connect";
 import ViewContainer from "../shared/view_container";
 import ColoredBar from "../shared/ColoredBar";
 import { LangService } from "../../services/langService";
-import DownloadManagerView from "./DownloadManagerView";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as menuActions from "../../actions/menuActions";
@@ -115,13 +114,7 @@ class MenuContent extends Component {
 
   goToDownloadManager() {
     this.closeMenu();
-    const route = {
-      title: "Download Manager",
-      type: "fade",
-      component: DownloadManagerView,
-      passProps: { title: LangService.strings.OFFLINE_CONTENT },
-    };
-    this.props.navigator().push(route);
+    this.props.navigation.navigate("DownloadManagerView", { title: LangService.strings.OFFLINE_CONTENT });
   }
 
   chooseLanguage(code) {
