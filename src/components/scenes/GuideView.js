@@ -20,7 +20,6 @@ import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
-import * as menuActions from "../../actions/menuActions";
 
 const styles = StyleSheet.create({
   scrollView: {},
@@ -339,7 +338,6 @@ function mapDispatchToProps(dispatch) {
   return {
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
     internetActions: bindActionCreators(internetActions, dispatch),
-    menuActions: bindActionCreators(menuActions, dispatch),
   };
 }
 

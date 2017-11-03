@@ -9,7 +9,6 @@ import ColoredBar from "../shared/ColoredBar";
 import { LangService } from "../../services/langService";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
-import * as menuActions from "../../actions/menuActions";
 
 const HALS_LOGO = require("../../images/HBG-horz.png");
 
@@ -216,7 +215,6 @@ function mapDispatchToProps(dispatch) {
   return {
     guideActions: bindActionCreators(guideActions, dispatch),
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
-    menuActions: bindActionCreators(menuActions, dispatch),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContent);

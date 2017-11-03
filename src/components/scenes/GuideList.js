@@ -6,7 +6,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
-import * as menuActions from "../../actions/menuActions";
 import styles from "../../styles/styles";
 import ViewContainer from "../shared/view_container";
 import LogoView from "../shared/LogoView";
@@ -207,7 +206,6 @@ function mapDispatchToProps(dispatch) {
     guideActions: bindActionCreators(guideActions, dispatch),
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
     internetActions: bindActionCreators(internetActions, dispatch),
-    menuActions: bindActionCreators(menuActions, dispatch),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(GuideList);

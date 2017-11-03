@@ -21,7 +21,6 @@ import MediaPlayer from "../shared/MediaPlayer";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
 import * as downloadActions from "../../actions/downloadActions";
-import * as menuActions from "../../actions/menuActions";
 
 import { MediaService } from "../../services/mediaService";
 
@@ -667,7 +666,6 @@ function mapDispatchToProps(dispatch) {
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
     internetActions: bindActionCreators(internetActions, dispatch),
     downloadActions: bindActionCreators(downloadActions, dispatch),
-    menuActions: bindActionCreators(menuActions, dispatch),
   };
 }
 
