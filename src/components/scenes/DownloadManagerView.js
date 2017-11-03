@@ -70,7 +70,7 @@ class DownloadManagerView extends Component {
 
   render() {
     const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigator.pop()}>
+      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
         <Icon name="chevron-left" size={32} color="white" />
       </TouchableOpacity>
     );

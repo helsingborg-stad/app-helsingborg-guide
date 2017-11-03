@@ -80,8 +80,6 @@ class MenuContent extends Component {
     };
   }
 
-  componentDidMount() {}
-
   componentWillReceiveProps() {
     if (!this.state.languages || !Object.keys(this.state.languages).length) {
       this.setState({

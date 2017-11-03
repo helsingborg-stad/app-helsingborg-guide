@@ -70,10 +70,6 @@ export default class Nav extends Component {
     return <NotificationBar style={{ bottom: 0 }} />;
   }
 
-  static displayMenu() {
-    return <MenuView>{<MenuContent />}</MenuView>;
-  }
-
   render() {
     return (
       <ViewContainer>
