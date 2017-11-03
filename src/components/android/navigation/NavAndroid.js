@@ -35,13 +35,23 @@ const GuideViewNavigator = DrawerNavigator(
   },
 );
 
+const SubLocationViewNavigator = DrawerNavigator(
+  {
+    SubLocationView: { screen: SubLocationView },
+  },
+  {
+    drawerPosition: "right",
+    contentComponent: MenuContent,
+  },
+);
+
 const RootNavigator = StackNavigator(
   {
     Splash: { screen: SplashView },
     WelcomeView: { screen: WelcomeView },
     GuideList: { screen: GuideListNavigator },
     GuideView: { screen: GuideViewNavigator },
-    SubLocationView: { screen: SubLocationView },
+    SubLocationView: { screen: SubLocationViewNavigator },
     SubLocationsOnMapView: { screen: SubLocationsOnMapView },
     ObjectView: { screen: ObjectView },
     WebView: { screen: WebView },

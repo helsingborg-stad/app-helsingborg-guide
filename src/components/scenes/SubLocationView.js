@@ -468,7 +468,7 @@ class SubLocationView extends Component {
   }
 
   toggleMainMenu = () => {
-    this.props.menuActions.toggleMenu();
+    this.props.navigation.navigate("DrawerToggle");
   };
 
   // Search feature segment
