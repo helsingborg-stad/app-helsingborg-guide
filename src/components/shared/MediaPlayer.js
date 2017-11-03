@@ -2,23 +2,21 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Slider, Image, LayoutAnimation, ActivityIndicator, Animated } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Slider, ActivityIndicator, Animated } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import RoundedBtn from "./roundedBtn";
 import OImage from "./image";
-import { MediaService } from "../../services/mediaService";
-import { connect } from "react-redux";
+import MediaService from "../../services/mediaService";
 import * as audioActions from "../../actions/audioActions";
-import { bindActionCreators } from "redux";
 
 const PLAYER_HEIGHT = 70;
 const BTN_DIM = 36;
 const BKD_COLOR = "#F2F2F2";
 
 class MediaPlayer extends Component {
-  mediaService;
-
   constructor(props) {
     super(props);
     this.state = {

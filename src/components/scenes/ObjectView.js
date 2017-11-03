@@ -15,7 +15,7 @@ import MediaPlayer from "../shared/MediaPlayer";
 import Footer from "../shared/footer";
 import * as audioActions from "../../actions/audioActions";
 import * as metricActions from "../../actions/metricActions";
-import { MediaService } from "../../services/mediaService";
+import MediaService from "../../services/mediaService";
 import * as internetActions from "../../actions/internetActions";
 import { FetchService } from "../../services/FetchService";
 

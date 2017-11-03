@@ -26,11 +26,11 @@ const RELEASED_AUDIO_OBJ = {
   currentPosition: 0,
 };
 
-config = () => {
-  if (Platform.OS == "android") {
+const config = () => {
+  if (Platform.OS === "android") {
     MediaPlayer = NativeModules.MediaAndroid;
     EventEmitter = DeviceEventEmitter;
-  } else if (Platform.OS == "ios") {
+  } else if (Platform.OS === "ios") {
     MediaPlayer = NativeModules.AudioManager;
     EventEmitter = new NativeEventEmitter(MediaPlayer);
   }
@@ -38,7 +38,7 @@ config = () => {
 
 config();
 
-export class MediaService {
+export default class MediaService {
   static url;
   fetchService;
   audio;

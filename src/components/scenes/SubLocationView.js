@@ -22,7 +22,7 @@ import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
 import * as downloadActions from "../../actions/downloadActions";
 
-import { MediaService } from "../../services/mediaService";
+import MediaService from "../../services/mediaService";
 
 import { BeaconService } from "../../services/beaconService";
 import { BeaconServiceiOS } from "../../services/beaconServiceiOS";
