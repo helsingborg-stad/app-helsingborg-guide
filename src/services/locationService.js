@@ -1,4 +1,4 @@
-import { NativeModules, DeviceEventEmitter, PermissionsAndroid, Alert, Platform, Linking } from "react-native";
+import { PermissionsAndroid, Alert, Platform, Linking } from "react-native";
 import { LangService } from "./langService";
 import Opener from "./SettingsService";
 import { geolocationUpdated } from "../actions/geolocationActions";
@@ -9,7 +9,6 @@ let instance = null;
 export class LocationService {
   watcher;
 
-  constructor() {}
   static getInstance() {
     if (!instance) instance = new LocationService();
     return instance;
@@ -48,38 +47,44 @@ export class LocationService {
   }
 
   getGeoLocation() {
-    return this.checkLocationPermission().then(granted => new Promise((resolve, reject) => {
-      if (granted) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            store.dispatch(geolocationUpdated(position));
-            resolve(position);
-          },
-          (error) => {
-            this.alert();
-            reject(error);
-          },
-        );
-      } else {
-        this.askForPermission();
-        reject("ss");
-      }
-    }));
+    return this.checkLocationPermission().then(
+      granted =>
+        new Promise((resolve, reject) => {
+          if (granted) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                store.dispatch(geolocationUpdated(position));
+                resolve(position);
+              },
+              (error) => {
+                this.alert();
+                reject(error);
+              },
+            );
+          } else {
+            this.askForPermission();
+            reject("ss");
+          }
+        }),
+    );
   }
 
   watchGeoLocation() {
-    return this.checkLocationPermission().then(granted => new Promise((resolve, reject) => {
-      if (granted) {
-        this.watcher = navigator.geolocation.watchPosition(
-          (position) => {
-            store.dispatch(geolocationUpdated(position));
-            resolve(position);
-          },
-          error => reject(error),
-          { distanceFilter: 200 },
-        );
-      } else reject("no access to fine location");
-    }));
+    return this.checkLocationPermission().then(
+      granted =>
+        new Promise((resolve, reject) => {
+          if (granted) {
+            this.watcher = navigator.geolocation.watchPosition(
+              (position) => {
+                store.dispatch(geolocationUpdated(position));
+                resolve(position);
+              },
+              error => reject(error),
+              { distanceFilter: 200 },
+            );
+          } else reject("no access to fine location");
+        }),
+    );
   }
 
   clearWatch() {
