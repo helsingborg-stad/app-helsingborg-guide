@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, NetInfo } from "react-native";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { bindActionCreators } from "redux";
+import { NavigationActions } from "react-navigation";
 import connect from "react-redux/es/connect/connect";
 import ViewContainer from "../shared/view_container";
 import ColoredBar from "../shared/ColoredBar";
 import { LangService } from "../../services/langService";
-import WelcomeView from "./WelcomeView";
 import DownloadManagerView from "./DownloadManagerView";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
@@ -106,13 +106,11 @@ class MenuContent extends Component {
   }
 
   resetToWelcome() {
-    this.closeMenu();
-    const route = {
-      title: "Welcome",
-      type: "fade",
-      component: WelcomeView,
-    };
-    this.props.navigator().resetTo(route);
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: "WelcomeView" })],
+    });
+    this.props.navigation.dispatch(resetAction);
   }
 
   goToDownloadManager() {
