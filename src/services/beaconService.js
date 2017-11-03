@@ -1,5 +1,5 @@
 import { NativeModules, DeviceEventEmitter, AppState, PermissionsAndroid, Alert } from "react-native";
-import { NotificationService } from "../services/notificationService";
+import NotificationService from "../services/notificationService";
 import { LangService } from "./langService";
 import Opener from "./SettingsService";
 
@@ -10,12 +10,11 @@ const BEACON_NOTIFICATION_ID = 201;
 export class BeaconService {
   static threshold = 3;
   closest;
-  notificationService;
 
   constructor() {
     this.closest = {};
-    this.notificationService = NotificationService.getInstance();
   }
+
   static getInstance() {
     if (!instance) instance = new BeaconService();
     return instance;
@@ -124,7 +123,7 @@ export class BeaconService {
   notify() {
     if (AppState.currentState == "background") {
       const title = LangService.strings.SOMETHING_NEAR_BY;
-      this.notificationService.showSimple(title, "", BEACON_NOTIFICATION_ID);
+      NotificationService.showSimple(title, "", BEACON_NOTIFICATION_ID);
     }
   }
 }

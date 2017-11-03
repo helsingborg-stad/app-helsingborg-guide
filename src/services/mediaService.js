@@ -1,5 +1,5 @@
 import { NativeModules, DeviceEventEmitter, NativeEventEmitter, Platform } from "react-native";
-import { NotificationService } from "./notificationService";
+import NotificationService from "./notificationService";
 import store from "../store/configureStore";
 import { errorHappened } from "../actions/errorActions";
 import { FetchService } from "./FetchService";
@@ -40,7 +40,6 @@ config();
 
 export class MediaService {
   static url;
-  notificationService;
   fetchService;
   audio;
   updateInterval;
@@ -48,7 +47,6 @@ export class MediaService {
 
   constructor() {
     this.audio = RELEASED_AUDIO_OBJ;
-    this.notificationService = NotificationService.getInstance();
     this.fetchService = FetchService.getInstance();
     this.onErrorHandler = this.onErrorHandler.bind(this);
     this.onPreparedCallback = this.onPreparedCallback.bind(this);
@@ -74,7 +72,7 @@ export class MediaService {
       .then((uri) => {
         console.log("Audio URI: ", uri);
         MediaService.url = uri;
-        this.notificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
+        NotificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
         this.onError(this.onErrorHandler);
         this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
         this.onCompleted(this.onCompletedCallback);
@@ -115,7 +113,7 @@ export class MediaService {
     MediaService.url = null;
     this.audio = null;
     store.dispatch(releaseAudioFile());
-    this.notificationService.closeNotification(MEDIA_NOTIFICATION_ID);
+    NotificationService.closeNotification(MEDIA_NOTIFICATION_ID);
     this.unSubscribeOnError(this.onErrorHandler);
     this.unSubscribeOnPrepared(this.onPreparedCallback);
     this.unSubscribeOnCompleted(this.onCompletedCallback);

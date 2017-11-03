@@ -1,6 +1,5 @@
-import { NativeModules, DeviceEventEmitter, Platform } from "react-native";
+import { NativeModules, Platform } from "react-native";
 
-let instance = null;
 const Notifier = NativeModules.NotificationAndroid;
 const _DefaultExtNotification = {
   id: 200,
@@ -10,35 +9,29 @@ const _DefaultExtNotification = {
   ext_content: ["line 1", "line 2", "line 3", "line 4"],
 };
 
-export class NotificationService {
-  constructor() {}
-  static getInstance() {
-    if (!instance) instance = new NotificationService();
-    return instance;
-  }
-
+export default {
   showSimple(title, content, id) {
     Notifier.showSimple(title, content, id);
-  }
+  },
 
   showMediaNotification(title, content, id) {
-    if (Platform.OS == "android") Notifier.showMediaNotification(title, content, id);
-  }
+    if (Platform.OS === "android") Notifier.showMediaNotification(title, content, id);
+  },
 
   closeNotification(id) {
-    if (Platform.OS == "android") Notifier.closeNotification(id);
-  }
+    if (Platform.OS === "android") Notifier.closeNotification(id);
+  },
 
   closeNotifications() {
     Notifier.closeAll();
-  }
+  },
 
   showExtended(_config) {
     const config = Object.assign({}, _DefaultExtNotification, _config);
     Notifier.showExtended(config);
-  }
+  },
 
   showMediaControl() {
     Notifier.showMediaControl();
-  }
-}
+  },
+};
