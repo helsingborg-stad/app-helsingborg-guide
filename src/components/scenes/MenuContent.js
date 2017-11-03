@@ -96,7 +96,6 @@ class MenuContent extends Component {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
         LangService.storeLangCode(langCode);
-        this.setState({ langChanged: true });
         this.props.guideActions.loadGuides(langCode);
         this.props.subLocationActions.loadSubLocations(langCode);
         LangService.getLanguages();
@@ -104,18 +103,18 @@ class MenuContent extends Component {
     });
   }
 
-  resetToWelcome() {
+  resetToWelcome = () => {
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: "WelcomeView" })],
     });
     this.props.navigation.dispatch(resetAction);
-  }
+  };
 
-  goToDownloadManager() {
+  goToDownloadManager = () => {
     this.closeMenu();
     this.props.navigation.navigate("DownloadManagerView", { title: LangService.strings.OFFLINE_CONTENT });
-  }
+  };
 
   chooseLanguage(code) {
     this.setLanguageAndReload(code);
@@ -129,15 +128,15 @@ class MenuContent extends Component {
   }
 
   displayLanguages() {
-    const languages = this.state.languages;
+    const { languages } = this.state;
     if (!languages || !Object.keys(languages).length) return null;
     const keys = Object.keys(languages);
 
     return keys.map((key) => {
       const style = { color: "#D35098" };
-      const selectedStyle = this.state.selectedLanguageCode == languages[key].code ? style : null;
-      const btnDisabled = this.state.selectedLanguageCode == languages[key].code;
-      const nativeName = languages[key].nativeName;
+      const selectedStyle = this.state.selectedLanguageCode === languages[key].code ? style : null;
+      const btnDisabled = this.state.selectedLanguageCode === languages[key].code;
+      const { nativeName } = languages[key];
 
       return (
         <TouchableOpacity
@@ -172,7 +171,7 @@ class MenuContent extends Component {
               </View>
             </View>
             <View style={styles.contentContainer}>
-              <TouchableOpacity style={styles.mainTitleContainer} onPress={this.resetToWelcome.bind(this)}>
+              <TouchableOpacity style={styles.mainTitleContainer} onPress={this.resetToWelcome}>
                 <Text style={styles.titleText}>{LangService.strings.ABOUT_GUIDE_HELS}</Text>
               </TouchableOpacity>
               <View style={styles.languageContainer}>
@@ -182,7 +181,7 @@ class MenuContent extends Component {
                 <View style={styles.languageChoicesContainer}>{this.displayLanguages()}</View>
               </View>
               <View style={styles.deleteLinkContainer}>
-                <TouchableOpacity activeOpacity={0.7} onPress={this.goToDownloadManager.bind(this)}>
+                <TouchableOpacity activeOpacity={0.7} onPress={this.goToDownloadManager}>
                   <Text style={styles.titleText}>{LangService.strings.OFFLINE_CONTENT}</Text>
                 </TouchableOpacity>
               </View>
