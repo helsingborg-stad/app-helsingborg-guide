@@ -1,31 +1,76 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Button,
-  Dimensions,
-  TouchableOpacity,
-  LayoutAnimation,
-  ScrollView,
-  Alert,
-  NetInfo,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, NetInfo } from "react-native";
+import Icon2 from "react-native-vector-icons/MaterialIcons";
+import { bindActionCreators } from "redux";
+import connect from "react-redux/es/connect/connect";
 import ViewContainer from "../shared/view_container";
 import ColoredBar from "../shared/ColoredBar";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
-
 import { LangService } from "../../services/langService";
 import WelcomeView from "./WelcomeView";
 import DownloadManagerView from "./DownloadManagerView";
-import { bindActionCreators } from "redux";
-import connect from "react-redux/es/connect/connect";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as menuActions from "../../actions/menuActions";
 
 const HALS_LOGO = require("../../images/HBG-horz.png");
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    backgroundColor: "#7B075E",
+  },
+  mainContainer: {
+    flex: 3,
+    flexDirection: "row",
+  },
+  headerContainer: {
+    height: 50,
+  },
+  closeBtnContainer: {
+    flex: 1,
+  },
+  closeBtn: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 50,
+  },
+  mainContentContainer: { flex: 1 },
+  contentContainer: {
+    flex: 1,
+    alignItems: "flex-start",
+    padding: 30,
+  },
+  mainTitleContainer: { flex: 1 },
+  titleContainer: {
+    flex: 1,
+  },
+  titleText: { fontSize: 18, lineHeight: 25, fontWeight: "500", color: "white" },
+
+  languageContainer: { flex: 1, alignItems: "flex-start" },
+  languageChoicesContainer: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  choiceContainer: { flex: 1, justifyContent: "center", alignItems: "center", height: 40 },
+  choiceText: { fontSize: 14, lineHeight: 40, color: "#ffe3fa" },
+  deleteLinkContainer: { flex: 1, justifyContent: "center", paddingVertical: 20 },
+  contactUsContainer: { flex: 2, justifyContent: "flex-end" },
+  bodyTextContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  bodyText: { fontSize: 18, lineHeight: 34, fontWeight: "300", color: "rgba(255,255,255,.9)" },
+  logoContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    borderTopWidth: 1,
+    borderTopColor: "rgba(244,244,244,0.3)",
+  },
+
+  voidView: { flex: 1 },
+});
 
 class MenuContent extends Component {
   constructor(props) {
@@ -39,8 +84,7 @@ class MenuContent extends Component {
 
   componentDidMount() {}
 
-  componentWillReceiveProps(nextProps) {
-    // console.log('menu content will receive new props');
+  componentWillReceiveProps() {
     if (!this.state.languages || !Object.keys(this.state.languages).length) {
       this.setState({
         selectedLanguageCode: LangService.code,
@@ -172,71 +216,9 @@ class MenuContent extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    backgroundColor: "#7B075E",
-  },
-  mainContainer: {
-    flex: 3,
-    flexDirection: "row",
-  },
-  headerContainer: {
-    height: 50,
-  },
-  closeBtnContainer: {
-    flex: 1,
-  },
-  closeBtn: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 50,
-  },
-  mainContentContainer: { flex: 1 },
-  contentContainer: {
-    flex: 1,
-    alignItems: "flex-start",
-    padding: 30,
-    // backgroundColor:'blue'
-  },
-  mainTitleContainer: { flex: 1 },
-  titleContainer: {
-    flex: 1,
-  },
-  titleText: { fontSize: 18, lineHeight: 25, fontWeight: "500", color: "white" },
-
-  languageContainer: { flex: 1, alignItems: "flex-start" },
-  languageChoicesContainer: {
-    flex: 1,
-    flexDirection: "row",
-    // justifyContent:'space-between',
-  },
-  choiceContainer: { flex: 1, justifyContent: "center", alignItems: "center", height: 40 },
-  choiceText: { fontSize: 14, lineHeight: 40, color: "#ffe3fa" },
-  deleteLinkContainer: { flex: 1, justifyContent: "center", paddingVertical: 20 },
-  contactUsContainer: { flex: 2, justifyContent: "flex-end" },
-  bodyTextContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    // backgroundColor:'blue'
-  },
-  bodyText: { fontSize: 18, lineHeight: 34, fontWeight: "300", color: "rgba(255,255,255,.9)" },
-  logoContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    borderTopWidth: 1,
-    borderTopColor: "rgba(244,244,244,0.3)",
-  },
-  // logo:{ width:200, height:40},
-
-  voidView: { flex: 1 },
-});
-
 // store config
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     menuVisible: state.menu.visible,
   };
