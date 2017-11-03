@@ -205,7 +205,6 @@ class SubLocationView extends Component {
   onBeaconRangingResult(data) {
     let beacons = this.beaconService.getOptimizedDistanceBeacons(data.beacons);
     beacons = this.filterBeacons(beacons);
-    // console.log('filtered beacons',beacons);
     const closest = this.beaconService.getTheClosest(beacons);
     const { guideBeacon } = this.state.subLocation;
 
@@ -241,29 +240,23 @@ class SubLocationView extends Component {
       return index !== -1;
     };
 
-    // console.log('maybe is a closest beacons', closest);
-
     if (!Object.keys(closest).length && Object.keys(this.state.closestBeacon).length) {
-      // console.log('closest: is not not there but We have a closest , so I will not remove it');
       return;
     }
 
     if (!closest || !guideBeacon || closest.nid !== `0x${guideBeacon.nid}`) {
       hideRadar();
-      // console.log('closest: is not matching nid or not available');
       return;
     }
 
     if (closest.bid === this.state.closestBeacon.bid && closest.nid === this.state.closestBeacon.nid) {
       this.setState({ closestBeacon: closest });
-      // console.log('closest: is the same one that is displayed now');
       return;
     }
 
     const closerDistanceCondition = parseFloat(this.state.closestBeacon.distance) - parseFloat(closest.distance) < -2;
 
     if ((true || storedClosestBeaconIsInTheList()) && closerDistanceCondition) {
-      // console.log('closest: distance is not the smallest');
       return;
     }
 
@@ -413,7 +406,7 @@ class SubLocationView extends Component {
   // ###############################################################
   // DOWNLOAD ##########################################
   // Method on the subloction download button
-  createAndStartTask() {
+  createAndStartTask = () => {
     this.toggleMenu();
     const item = this.state.subLocation;
     if (!this.downloadManager.isExist(item.id)) {
@@ -422,7 +415,7 @@ class SubLocationView extends Component {
       this.downloadManager.createTask(data);
       this.downloadManager.startTask(item.id);
     }
-  }
+  };
 
   // #################################################
 
@@ -430,9 +423,10 @@ class SubLocationView extends Component {
     this.setState({ menuVisible: !this.state.menuVisible });
   }
 
-  hideMenu() {
+  hideMenu = () => {
     if (this.state.menuVisible) this.setState({ menuVisible: false });
-  }
+  };
+
   displayDownloadIndicator() {
     return this.state.downloadMeta ? (
       <DownloadItemView2
@@ -474,9 +468,9 @@ class SubLocationView extends Component {
     this.setState({ viewArticle: !this.state.viewArticle });
   }
 
-  toggleMainMenu() {
+  toggleMainMenu = () => {
     this.props.menuActions.toggleMenu();
-  }
+  };
 
   // Search feature segment
   // ############################################
@@ -485,7 +479,7 @@ class SubLocationView extends Component {
     this.setState({ keypadSearchResultCode: value });
   }
 
-  onSearch(id) {
+  onSearch = (id) => {
     const contentObject = this.getContentObjectById(id);
     if (contentObject) {
       this.setKeypadSearchResultCode(200);
@@ -496,7 +490,7 @@ class SubLocationView extends Component {
       console.log("no result found");
       this.setKeypadSearchResultCode(404);
     }
-  }
+  };
 
   getContentObjectById(id) {
     const { contentObjects } = this.state.subLocation;
@@ -510,7 +504,7 @@ class SubLocationView extends Component {
     return (
       <Keypad
         visible={this.state.keypadVisible}
-        onSearch={this.onSearch.bind(this)}
+        onSearch={this.onSearch}
         resultCode={this.state.keypadSearchResultCode}
         onClose={() => this.toggleKeypadVisibility()}
       />
@@ -540,19 +534,6 @@ class SubLocationView extends Component {
   }
   onScroll(e) {
     this.watchTheScroll(e);
-    // const TOUCH_THRESHOLD = 10;
-    // const SCROLL_THRESHOLD = 250;
-    // let yOffset = e.nativeEvent.contentOffset.y;
-    // let visible= this.state.fabVisible;
-    // if(yOffset>SCROLL_THRESHOLD && yOffset > this.currentYOffset+TOUCH_THRESHOLD && this.state.fabVisible){
-    //     visible = false;
-    // }
-    // else if(yOffset < this.currentYOffset-TOUCH_THRESHOLD && !this.state.fabVisible){
-    //   visible = true;
-    // }
-    // LayoutAnimation.easeInEaseOut();
-    // this.setState({fabVisible:visible});
-    // this.currentYOffset = yOffset;
   }
 
   displayFabs() {
@@ -571,7 +552,7 @@ class SubLocationView extends Component {
           style={styles.fabBtn}
           label={this.state.viewArticle ? LangService.strings.CLOSE_MORE_INFO : LangService.strings.MORE_INFO}
           isActive={this.state.viewArticle}
-          disabled={!this.state.subLocation.content || this.state.subLocation.content.plain_text == ""}
+          disabled={!this.state.subLocation.content || this.state.subLocation.content.plain_text === ""}
           active={<Icon2 name="close" size={20} color="white" />}
           idle={<Icon name="info" size={20} color="white" />}
           onPress={() => this.toggleArticleView()}
@@ -581,17 +562,18 @@ class SubLocationView extends Component {
           label={LangService.strings.DOWNLOAD}
           active={<Icon2 name="file-download" size={20} color="white" />}
           idle={<Icon2 name="file-download" size={20} color="white" />}
-          onPress={this.createAndStartTask.bind(this)}
+          onPress={this.createAndStartTask}
         />
       </OptionsContentView>
     );
   }
 
-  onSmallBtnPressed() {
+  onSmallBtnPressed = () => {
     this.scrollView.scrollTo({ x: 0, y: 100, animated: true });
     this.updateClosestFromSmallBtn();
     this.closeSmallBtn();
-  }
+  };
+
   closeSmallBtn() {
     this.setState({ smallBtnVisible: false });
     clearInterval(this.smallBtnTimer);
@@ -604,7 +586,7 @@ class SubLocationView extends Component {
       </TouchableOpacity>
     );
     const rightBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={this.toggleMainMenu.bind(this)}>
+      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={this.toggleMainMenu}>
         <Icon2 name="menu" size={20} color="white" />
       </TouchableOpacity>
     );
@@ -617,15 +599,11 @@ class SubLocationView extends Component {
           </SlimNotificationBar>
 
           <Navbar title={this.state.subLocation.guidegroup[0].name} leftButton={leftBtn} rightButton={rightBtn} backgroundColor="#7B075E" />
-          <FloatingBtn
-            onPress={this.onSmallBtnPressed.bind(this)}
-            visible={this.state.smallBtnVisible}
-            content={LangService.strings.NEW_CONTENT}
-          />
+          <FloatingBtn onPress={this.onSmallBtnPressed} visible={this.state.smallBtnVisible} content={LangService.strings.NEW_CONTENT} />
 
           <OptionsFloatingBtn onPress={this.toggleMenu} />
 
-          <OptionsView onPress={this.hideMenu.bind(this)} visible={this.state.menuVisible}>
+          <OptionsView onPress={this.hideMenu} visible={this.state.menuVisible}>
             {this.displayFabs()}
           </OptionsView>
 
