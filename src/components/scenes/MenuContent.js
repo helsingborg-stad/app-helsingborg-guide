@@ -137,10 +137,6 @@ class MenuContent extends Component {
     this.closeMenu();
   }
 
-  closeMenu() {
-    this.props.menuActions.closeMenu();
-  }
-
   displayLanguages() {
     const languages = this.state.languages;
     if (!languages || !Object.keys(languages).length) return null;
@@ -166,6 +162,11 @@ class MenuContent extends Component {
     });
   }
 
+  closeMenu = () => {
+    const { navigate } = this.props.navigation;
+    navigate("DrawerClose");
+  };
+
   render() {
     return (
       <ViewContainer style={styles.wrapper}>
@@ -174,7 +175,7 @@ class MenuContent extends Component {
           <View style={styles.mainContentContainer}>
             <View style={styles.headerContainer}>
               <View style={styles.closeBtnContainer}>
-                <TouchableOpacity style={styles.closeBtn} onPress={this.closeMenu.bind(this)}>
+                <TouchableOpacity style={styles.closeBtn} onPress={this.closeMenu}>
                   <Icon2 name="close" size={30} color="white" />
                 </TouchableOpacity>
               </View>
@@ -217,12 +218,10 @@ class MenuContent extends Component {
 }
 
 // store config
-
-function mapStateToProps(state) {
-  return {
-    menuVisible: state.menu.visible,
-  };
+function mapStateToProps() {
+  return {};
 }
+
 function mapDispatchToProps(dispatch) {
   return {
     guideActions: bindActionCreators(guideActions, dispatch),

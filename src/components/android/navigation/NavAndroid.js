@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StackNavigator } from "react-navigation";
+import { StackNavigator, DrawerNavigator } from "react-navigation";
 import SplashView from "../../scenes/SplashView";
 import ViewContainer from "../../shared/view_container";
 import NotificationBar from "../../shared/NotificationBar";
@@ -12,12 +12,23 @@ import ObjectView from "./../../scenes/ObjectView";
 import WebView from "./../../scenes/WebScene";
 import VideoView from "./../../scenes/VideoView";
 import ImageView from "./../../scenes/ImageScene";
+import MenuContent from "./../../scenes/MenuContent";
+
+const GuideListNavigator = DrawerNavigator(
+  {
+    Home: { screen: GuideList },
+  },
+  {
+    drawerPosition: "right",
+    contentComponent: MenuContent,
+  },
+);
 
 const RootNavigator = StackNavigator(
   {
     Splash: { screen: SplashView },
     WelcomeView: { screen: WelcomeView },
-    GuideList: { screen: GuideList },
+    GuideList: { screen: GuideListNavigator },
     GuideView: { screen: GuideView },
     SubLocationView: { screen: SubLocationView },
     SubLocationsOnMapView: { screen: SubLocationsOnMapView },
@@ -37,12 +48,9 @@ export default class Nav extends Component {
     return <NotificationBar style={{ bottom: 0 }} />;
   }
 
-  // TODO Configure side menu in every screen that needs it, i.e. as navigationOptions
-  /*
-  displayMenu() {
-    return <MenuView>{<MenuContent navigator={this.getNavigator.bind(this)} />}</MenuView>;
+  static displayMenu() {
+    return <MenuView>{<MenuContent />}</MenuView>;
   }
-  */
 
   render() {
     return (

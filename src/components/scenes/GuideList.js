@@ -86,7 +86,7 @@ class GuideList extends Component {
   }
 
   toggleMenu() {
-    this.props.menuActions.toggleMenu();
+    this.props.navigation.navigate("DrawerToggle");
   }
 
   guidePress(guide) {
