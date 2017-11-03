@@ -54,6 +54,8 @@ class GuideList extends Component {
         </View>
       );
     }
+
+    return null;
   }
 
   constructor(props) {
@@ -107,10 +109,10 @@ class GuideList extends Component {
     console.log("geo url", url);
     Linking.canOpenURL(url)
       .then((supported) => {
-        if (!supported) {
-        } else {
+        if (supported) {
           return Linking.openURL(url);
         }
+        return null;
       })
       .catch(err => console.error("An error occurred", err));
   }
