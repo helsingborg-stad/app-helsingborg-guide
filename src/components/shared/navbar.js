@@ -1,8 +1,18 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  navBar: {
+    height: 50,
+    backgroundColor: "#7B075E",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "stretch",
+  },
+  btnContainer: { maxWidth: 50, flex: 1, justifyContent: "flex-start", alignItems: "stretch" },
+  titleContainer: { flex: 4, justifyContent: "center", flexDirection: "row", alignItems: "center" },
+  title: { fontSize: 19, fontWeight: "100", color: "white", textAlign: "center" },
+});
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -26,17 +36,3 @@ export default class Navbar extends Component {
 }
 
 Navbar.defaultProps = {};
-
-const styles = StyleSheet.create({
-  navBar: {
-    height: 50,
-    backgroundColor: "#7B075E",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "stretch",
-    // paddingHorizontal:15
-  },
-  btnContainer: { maxWidth: 50, flex: 1, justifyContent: "flex-start", alignItems: "stretch" },
-  titleContainer: { flex: 4, justifyContent: "center", flexDirection: "row", alignItems: "center" },
-  title: { fontSize: 19, fontWeight: "100", color: "white", textAlign: "center" },
-});
