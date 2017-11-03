@@ -25,6 +25,7 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-persist": "^5.0.1",
+    "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
@@ -39,8 +40,7 @@
     "eslint-plugin-react": "^7.4.0",
     "jest": "21.2.1",
     "prettier-eslint": "^8.2.1",
-    "react-test-renderer": "16.0.0-beta.5",
-    "redux-immutable-state-invariant": "^2.1.0"
+    "react-test-renderer": "16.0.0-beta.5"
   },
   "jest": {
     "preset": "react-native"
