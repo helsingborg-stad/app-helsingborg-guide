@@ -5,7 +5,7 @@ import * as dActions from "../actions/downloadActions";
 
 let instance = null;
 
-export class DownloadTasksManager {
+export default class DownloadTasksManager {
   tasks = [];
 
   constructor() {}

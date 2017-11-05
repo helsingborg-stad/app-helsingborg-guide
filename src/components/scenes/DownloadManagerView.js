@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import ViewContainer from "../shared/view_container";
-import { DownloadTasksManager } from "../../services/DownloadTasksManager";
+import DownloadTasksManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
 import { FetchService } from "../../services/FetchService";

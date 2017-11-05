@@ -31,7 +31,7 @@ import FloatingBtn from "../shared/FloatingBtn";
 
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
-import { DownloadTasksManager } from "../../services/DownloadTasksManager";
+import DownloadTasksManager from "../../services/DownloadTasksManager";
 import { FetchService } from "../../services/FetchService";
 
 const HALF_WIDTH = Dimensions.get("window").width / 2;
