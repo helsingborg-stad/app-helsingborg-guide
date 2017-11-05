@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from "react";
+import { AppRegistry, StyleSheet, AlertIOS, NetInfo, UIManager, AsyncStorage, Linking } from "react-native";
 import { Provider } from "react-redux";
 import { getStoredState } from "redux-persist";
 import Nav from "./src/components/android/navigation/NavAndroid";
@@ -15,19 +16,6 @@ import { LangService } from "./src/services/langService";
 import downloadManager from "./src/services/DownloadTasksManager";
 import { internetChanged } from "./src/actions/internetActions";
 import { errorHappened } from "./src/actions/errorActions";
-
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  PushNotificationIOS,
-  AlertIOS,
-  NetInfo,
-  UIManager,
-  AsyncStorage,
-  Linking,
-} from "react-native";
 
 export default class GuideHbg extends Component {
   noNetworkTimer;

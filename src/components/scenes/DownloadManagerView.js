@@ -27,19 +27,11 @@ class DownloadManagerView extends Component {
     return <View style={{ height: 60 }} />;
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      downloads: this.props.downloads,
-    };
-
-    this.fetchService = FetchService.getInstance();
+  static clearCache(id) {
+    downloadManager.clearCache(id);
   }
 
-  // ########################################################
-  // methods on the download page view
-  toggleTask(id) {
+  static toggleTask(id) {
     if (downloadManager.isExist(id)) {
       const task = downloadManager.getTaskById(id);
       if (task.isCanceled) downloadManager.resumeTask(task.id);
@@ -47,8 +39,10 @@ class DownloadManagerView extends Component {
     }
   }
 
-  clearCache(id) {
-    downloadManager.clearCache(id);
+  constructor(props) {
+    super(props);
+
+    this.fetchService = FetchService.getInstance();
   }
 
   // #################################################
@@ -62,8 +56,8 @@ class DownloadManagerView extends Component {
       currentPos={item.currentPos}
       isCanceled={item.isCanceled}
       progress={item.currentPos / item.urls.length}
-      onClosePress={() => this.toggleTask(item.id)}
-      onClearPress={() => this.clearCache(item.id)}
+      onClosePress={() => DownloadManagerView.toggleTask(item.id)}
+      onClearPress={() => DownloadManagerView.clearCache(item.id)}
     />
   );
 

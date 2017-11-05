@@ -52,6 +52,14 @@ export default class GuideHbg extends Component {
     );
   }
 
+  static loadExistingDownloads() {
+    getStoredState({ storage: AsyncStorage }, (err, state) => {
+      if (state && state.downloads && state.downloads.length) {
+        downloadManager.loadExistingTasks(state.downloads);
+      }
+    });
+  }
+
   constructor() {
     super();
     if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -66,21 +74,11 @@ export default class GuideHbg extends Component {
   componentDidMount() {
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
-    this.loadExistingDownloads();
+    GuideHbg.loadExistingDownloads();
   }
 
   componentWillUnmount() {
     this.stopListeningToNetworkChanges();
-  }
-
-  // ####################################################
-  // method on app load-
-  loadExistingDownloads() {
-    getStoredState({ storage: AsyncStorage }, (err, state) => {
-      if (state && state.downloads && state.downloads.length) {
-        downloadManager.loadExistingTasks(state.downloads);
-      }
-    });
   }
 
   startListeningToNetworkChanges() {
