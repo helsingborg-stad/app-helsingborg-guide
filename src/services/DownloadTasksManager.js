@@ -8,7 +8,6 @@ let instance = null;
 export default class DownloadTasksManager {
   tasks = [];
 
-  constructor() {}
   static getInstance() {
     if (!instance) instance = new DownloadTasksManager();
     return instance;
@@ -28,7 +27,7 @@ export default class DownloadTasksManager {
   }
 
   getTaskById(id) {
-    return this.tasks.find(item => item.id == id);
+    return this.tasks.find(item => item.id === id);
   }
   isExist(id) {
     return !!this.getTaskById(id);
@@ -68,6 +67,4 @@ export default class DownloadTasksManager {
     task.clearCache();
     this.tasks = _.reject(this.tasks, { id: task.id });
   }
-  storeTasksMeta() {}
-  getTasksMeta() {}
 }
