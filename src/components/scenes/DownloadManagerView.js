@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import ViewContainer from "../shared/view_container";
-import DownloadTasksManager from "../../services/DownloadTasksManager";
+import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
 import { FetchService } from "../../services/FetchService";
@@ -34,22 +34,21 @@ class DownloadManagerView extends Component {
       downloads: this.props.downloads,
     };
 
-    this.downloadManager = DownloadTasksManager.getInstance();
     this.fetchService = FetchService.getInstance();
   }
 
   // ########################################################
   // methods on the download page view
   toggleTask(id) {
-    if (this.downloadManager.isExist(id)) {
-      const task = this.downloadManager.getTaskById(id);
-      if (task.isCanceled) this.downloadManager.resumeTask(task.id);
-      else this.downloadManager.cancelTask(task.id);
+    if (downloadManager.isExist(id)) {
+      const task = downloadManager.getTaskById(id);
+      if (task.isCanceled) downloadManager.resumeTask(task.id);
+      else downloadManager.cancelTask(task.id);
     }
   }
 
   clearCache(id) {
-    this.downloadManager.clearCache(id);
+    downloadManager.clearCache(id);
   }
 
   // #################################################

@@ -12,7 +12,7 @@ import store from "./src/store/configureStore";
 import { loadGuides } from "./src/actions/guideActions";
 import { loadSubLocations } from "./src/actions/subLoactionActions";
 import { LangService } from "./src/services/langService";
-import DownloadTasksManager from "./src/services/DownloadTasksManager";
+import downloadManager from "./src/services/DownloadTasksManager";
 import { internetChanged } from "./src/actions/internetActions";
 import { errorHappened } from "./src/actions/errorActions";
 
@@ -31,7 +31,6 @@ import {
 
 export default class GuideHbg extends Component {
   noNetworkTimer;
-  downloadManager;
 
   constructor() {
     super();
@@ -39,8 +38,6 @@ export default class GuideHbg extends Component {
 
     this.init = this.init.bind(this);
     this.handleConnectivityChange = this.handleConnectivityChange.bind(this);
-
-    this.downloadManager = DownloadTasksManager.getInstance();
   }
 
   componentDidMount() {
@@ -63,7 +60,7 @@ export default class GuideHbg extends Component {
   }
   loadExistingDownloads() {
     getStoredState({ storage: AsyncStorage }, (err, state) => {
-      if (!err && state && state.downloads && state.downloads.length) this.downloadManager.loadExistingTasks(state.downloads);
+      if (!err && state && state.downloads && state.downloads.length) downloadManager.loadExistingTasks(state.downloads);
     });
   }
   alert() {

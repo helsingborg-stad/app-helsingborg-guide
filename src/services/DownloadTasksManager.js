@@ -3,15 +3,9 @@ import DownloadTask from "../lib/DownloadTask";
 import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 
-let instance = null;
-
-export default class DownloadTasksManager {
+class DownloadTasksManager {
   tasks = [];
 
-  static getInstance() {
-    if (!instance) instance = new DownloadTasksManager();
-    return instance;
-  }
   // ######################################
 
   loadExistingTasks(downloads) {
@@ -68,3 +62,6 @@ export default class DownloadTasksManager {
     this.tasks = _.reject(this.tasks, { id: task.id });
   }
 }
+
+const instance = new DownloadTasksManager();
+export default instance;

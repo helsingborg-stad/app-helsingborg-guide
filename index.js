@@ -10,7 +10,7 @@ import { internetChanged } from "./src/actions/internetActions";
 import { LangService } from "./src/services/langService";
 import Opener from "./src/services/SettingsService";
 import { errorHappened } from "./src/actions/errorActions";
-import DownloadTasksManager from "./src/services/DownloadTasksManager";
+import downloadManager from "./src/services/DownloadTasksManager";
 
 // TODO merge index.ios.js into this one
 export default class GuideHbg extends Component {
@@ -60,8 +60,6 @@ export default class GuideHbg extends Component {
 
     this.handleConnectivityChange = this.handleConnectivityChange.bind(this);
 
-    this.downloadManager = DownloadTasksManager.getInstance();
-
     console.ignoredYellowBox = ["Remote debugger"];
   }
 
@@ -80,7 +78,7 @@ export default class GuideHbg extends Component {
   loadExistingDownloads() {
     getStoredState({ storage: AsyncStorage }, (err, state) => {
       if (state && state.downloads && state.downloads.length) {
-        this.downloadManager.loadExistingTasks(state.downloads);
+        downloadManager.loadExistingTasks(state.downloads);
       }
     });
   }
