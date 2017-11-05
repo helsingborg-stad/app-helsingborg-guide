@@ -39,7 +39,7 @@ export default class DownloadTask {
 
   // sequence function. stops when the the list is completed or the task getting canceled.
   _fetchUrl(url) {
-    if (this.isCanceled || this.isCompleted()) return;
+    if (this.isCanceled || this.isCompleted()) return null;
     const mTask = this.fetchService.fetch(url);
     return mTask
       .then((res) => {
@@ -56,12 +56,12 @@ export default class DownloadTask {
             // debugger;
             store.dispatch(dActions.taskProgressed(this.getMeta()));
             // sequence call
-            this.i++;
+            this.i += 1;
             this._fetchUrl(this.urls[this.i]);
           }
         }
       })
-      .catch((error) => {
+      .catch(() => {
         this.setIsCanceled(true);
         store.dispatch(dActions.cancelTaskSuccess(this.getMeta()));
       });
