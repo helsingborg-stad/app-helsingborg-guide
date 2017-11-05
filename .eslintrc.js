@@ -46,6 +46,7 @@ module.exports = {
     ],
     "object-curly-newline": ["error", { consistent: true }],
     "react/jsx-closing-tag-location": ["off"],
+    radix: ["error", "as-needed"],
     "react/sort-comp": [
       "error",
       {

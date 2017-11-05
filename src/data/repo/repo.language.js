@@ -7,14 +7,13 @@ module.exports = () => {
     return fetch(_LANGUAGE_API_URL)
       .then(response => response.json())
       .then((language) => {
-        if (language && language.code != "rest_no_route") return language;
+        if (language && language.code !== "rest_no_route") return language;
 
         store.dispatch(errorHappened("error: no available langs"));
         return null;
       })
       .catch((error) => {
         store.dispatch(errorHappened(error));
-        // console.log(error, 'An error in fetching the languages', error);
       });
   }
 
