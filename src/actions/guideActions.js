@@ -18,7 +18,7 @@ export function loadGuides(langCode) {
     return instance.guide
       .getAllGroups(langCode)
       .then((guides) => {
-        if (guides && guides.length && guides.code != "rest_no_route") {
+        if (guides && guides.length && guides.code !== "rest_no_route") {
           dispatch(loadGuidesSuccess(guides));
         } else {
           dispatch(errorHappened("error: no guides"));

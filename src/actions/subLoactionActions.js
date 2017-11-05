@@ -17,7 +17,7 @@ export function loadSubLocations(langCode) {
     return instance.guide
       .getAllGuides(langCode)
       .then((subLocations) => {
-        if (subLocations && subLocations.length && subLocations.code != "rest_no_route") {
+        if (subLocations && subLocations.length && subLocations.code !== "rest_no_route") {
           dispatch(loadSubLocationsSuccess(subLocations));
         } else {
           dispatch(errorHappened("error: no subLocations"));
