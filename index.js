@@ -37,6 +37,21 @@ export default class GuideHbg extends Component {
     });
   }
 
+  static alert() {
+    Alert.alert(
+      LangService.strings.NO_INTERNET_CONNECTION,
+      LangService.strings.NO_INTERNET_CONNECTION_MESSAGE,
+      [
+        {
+          text: LangService.strings.SETTINGS,
+          onPress: GuideHbg.openInternetSettings,
+        },
+        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
+      ],
+      { cancelable: false },
+    );
+  }
+
   constructor() {
     super();
     if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -69,22 +84,6 @@ export default class GuideHbg extends Component {
       }
     });
   }
-  // ########################################################
-
-  alert() {
-    Alert.alert(
-      LangService.strings.NO_INTERNET_CONNECTION,
-      LangService.strings.NO_INTERNET_CONNECTION_MESSAGE,
-      [
-        {
-          text: LangService.strings.SETTINGS,
-          onPress: this.openInternetSettings.bind(this),
-        },
-        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
-      ],
-      { cancelable: false },
-    );
-  }
 
   startListeningToNetworkChanges() {
     NetInfo.isConnected.addEventListener("change", this.handleConnectivityChange);
@@ -96,7 +95,7 @@ export default class GuideHbg extends Component {
   handleConnectivityChange(isConnected) {
     if (!isConnected) {
       store.dispatch(internetChanged(false));
-      this.noNetworkTimer = setTimeout(() => this.alert(), 2500);
+      this.noNetworkTimer = setTimeout(() => GuideHbg.alert(), 2500);
       return;
     }
 
