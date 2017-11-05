@@ -86,12 +86,13 @@ export default class GuideHbg extends Component {
   }
 
   startListeningToNetworkChanges() {
-    NetInfo.isConnected.addEventListener("change", this.handleConnectivityChange);
+    NetInfo.isConnected.addEventListener("connectionChange", this.handleConnectivityChange);
   }
 
   stopListeningToNetworkChanges() {
-    NetInfo.isConnected.removeEventListener("change", this.handleConnectivityChange);
+    NetInfo.isConnected.removeEventListener("connectionChange", this.handleConnectivityChange);
   }
+
   handleConnectivityChange(isConnected) {
     if (!isConnected) {
       store.dispatch(internetChanged(false));
