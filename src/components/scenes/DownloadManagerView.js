@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import ViewContainer from "../shared/view_container";
-import { DownloadTasksManager } from "../../services/DownloadTasksManager";
+import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
 import { FetchService } from "../../services/FetchService";
@@ -27,29 +27,22 @@ class DownloadManagerView extends Component {
     return <View style={{ height: 60 }} />;
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      downloads: this.props.downloads,
-    };
-
-    this.downloadManager = DownloadTasksManager.getInstance();
-    this.fetchService = FetchService.getInstance();
+  static clearCache(id) {
+    downloadManager.clearCache(id);
   }
 
-  // ########################################################
-  // methods on the download page view
-  toggleTask(id) {
-    if (this.downloadManager.isExist(id)) {
-      const task = this.downloadManager.getTaskById(id);
-      if (task.isCanceled) this.downloadManager.resumeTask(task.id);
-      else this.downloadManager.cancelTask(task.id);
+  static toggleTask(id) {
+    if (downloadManager.isExist(id)) {
+      const task = downloadManager.getTaskById(id);
+      if (task.isCanceled) downloadManager.resumeTask(task.id);
+      else downloadManager.cancelTask(task.id);
     }
   }
 
-  clearCache(id) {
-    this.downloadManager.clearCache(id);
+  constructor(props) {
+    super(props);
+
+    this.fetchService = FetchService.getInstance();
   }
 
   // #################################################
@@ -63,8 +56,8 @@ class DownloadManagerView extends Component {
       currentPos={item.currentPos}
       isCanceled={item.isCanceled}
       progress={item.currentPos / item.urls.length}
-      onClosePress={() => this.toggleTask(item.id)}
-      onClearPress={() => this.clearCache(item.id)}
+      onClosePress={() => DownloadManagerView.toggleTask(item.id)}
+      onClearPress={() => DownloadManagerView.clearCache(item.id)}
     />
   );
 

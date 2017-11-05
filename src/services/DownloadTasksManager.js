@@ -1,18 +1,11 @@
 import * as _ from "lodash";
-import { DownloadTask } from "../lib/DownloadTask";
+import DownloadTask from "../lib/DownloadTask";
 import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 
-let instance = null;
-
-export class DownloadTasksManager {
+class DownloadTasksManager {
   tasks = [];
 
-  constructor() {}
-  static getInstance() {
-    if (!instance) instance = new DownloadTasksManager();
-    return instance;
-  }
   // ######################################
 
   loadExistingTasks(downloads) {
@@ -28,7 +21,7 @@ export class DownloadTasksManager {
   }
 
   getTaskById(id) {
-    return this.tasks.find(item => item.id == id);
+    return this.tasks.find(item => item.id === id);
   }
   isExist(id) {
     return !!this.getTaskById(id);
@@ -68,6 +61,7 @@ export class DownloadTasksManager {
     task.clearCache();
     this.tasks = _.reject(this.tasks, { id: task.id });
   }
-  storeTasksMeta() {}
-  getTasksMeta() {}
 }
+
+const instance = new DownloadTasksManager();
+export default instance;

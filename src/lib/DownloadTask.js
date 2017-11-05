@@ -1,18 +1,12 @@
-/**
- * Created by msaeed on 2017-04-10.
- */
-/**
- * Created by msaeed on 2017-03-29.
- */
-import { FetchService } from "../services/FetchService";
 import * as _ from "lodash";
+import { FetchService } from "../services/FetchService";
 import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 import { LangService } from "../services/langService";
 
 const DEFAULT_AVATAR = "http://i.imgur.com/XMKOH81.jpg";
 
-export class DownloadTask {
+export default class DownloadTask {
   id;
   urls;
   completedUrls;
@@ -39,33 +33,13 @@ export class DownloadTask {
     this.fetchService = FetchService.getInstance();
   }
 
-  // not used.
-  fetchUrls() {
-    _.forEach(this.urls, (url) => {
-      const mTask = this.fetchService.fetch(url);
-      mTask
-        .then((res) => {
-          if (res) {
-            this.completedUrls.push(url);
-            if (this.isCompleted()) store.dispatch(dActions.taskCompleted(this.getMeta()));
-            else store.dispatch(dActions.taskProgressed(this.getMeta()));
-          }
-        })
-        .catch((error) => {
-          console.log("error in fetching url.maybe canceled");
-        });
-      // Add the task to this array to cancel it if we need to.
-      this.fileDownloadTasks.push(mTask);
-    });
-  }
-
   fetchUrlsSeq() {
     return this._fetchUrl(this.urls[this.i]);
   }
 
   // sequence function. stops when the the list is completed or the task getting canceled.
   _fetchUrl(url) {
-    if (this.isCanceled || this.isCompleted()) return;
+    if (this.isCanceled || this.isCompleted()) return null;
     const mTask = this.fetchService.fetch(url);
     return mTask
       .then((res) => {
@@ -82,12 +56,12 @@ export class DownloadTask {
             // debugger;
             store.dispatch(dActions.taskProgressed(this.getMeta()));
             // sequence call
-            this.i++;
+            this.i += 1;
             this._fetchUrl(this.urls[this.i]);
           }
         }
       })
-      .catch((error) => {
+      .catch(() => {
         this.setIsCanceled(true);
         store.dispatch(dActions.cancelTaskSuccess(this.getMeta()));
       });
@@ -115,7 +89,7 @@ export class DownloadTask {
     this.completedUrls = [];
   }
   isCompleted() {
-    return this.i == this.urls.length;
+    return this.i === this.urls.length;
   }
 
   clearCache() {
@@ -125,10 +99,6 @@ export class DownloadTask {
       this.clearCompletedUrls();
       store.dispatch(dActions.clearCacheTaskSuccess(this.getMeta()));
     });
-    // _.forEach(this.completedUrls,url=>{
-    //     this.fetchService.clearCache(this.fetchService.getFullPath(url))
-    //         .then(()=> console.log(`Cache cleared ${url}`));
-    // });
   }
 
   cancelTask() {
@@ -137,8 +107,8 @@ export class DownloadTask {
     _.forEach(this.fileDownloadTasks, (mTask) => {
       //  debugger;
       if (mTask) {
-        mTask.catch((err) => {});
-        mTask.cancel((err) => {});
+        mTask.catch(() => {});
+        mTask.cancel(() => {});
       }
     });
     this.fileDownloadTasks = [];
