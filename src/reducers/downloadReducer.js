@@ -1,6 +1,6 @@
+import * as _ from "lodash";
 import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
-import * as _ from "lodash";
 
 export default function guideReducer(state = initialState.downloads, action) {
   const replace = () =>
