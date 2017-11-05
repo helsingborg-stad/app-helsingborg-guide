@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { DownloadTask } from "../lib/DownloadTask";
+import DownloadTask from "../lib/DownloadTask";
 import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 

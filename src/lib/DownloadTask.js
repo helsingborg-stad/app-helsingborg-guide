@@ -1,18 +1,12 @@
-/**
- * Created by msaeed on 2017-04-10.
- */
-/**
- * Created by msaeed on 2017-03-29.
- */
-import { FetchService } from "../services/FetchService";
 import * as _ from "lodash";
+import { FetchService } from "../services/FetchService";
 import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 import { LangService } from "../services/langService";
 
 const DEFAULT_AVATAR = "http://i.imgur.com/XMKOH81.jpg";
 
-export class DownloadTask {
+export default class DownloadTask {
   id;
   urls;
   completedUrls;
