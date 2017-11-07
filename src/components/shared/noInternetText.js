@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 
 const styles = StyleSheet.create({
   wrapper: {

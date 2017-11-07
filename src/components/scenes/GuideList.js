@@ -16,7 +16,7 @@ import NoInternetText from "../shared/noInternetText";
 import MapThumbnailsView from "../shared/MapThumbnailsView";
 import RoundedBtn from "../shared/roundedBtn";
 import TimingService from "../../services/timingService";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 
 class GuideList extends Component {
   static get defaultProps() {

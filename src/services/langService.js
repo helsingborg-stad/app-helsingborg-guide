@@ -1,13 +1,12 @@
-import { AsyncStorage, NativeModules } from "react-native";
+import { AsyncStorage } from "react-native";
 import { LANGUAGE } from "../lib/my_consts";
 import strings from "../languages/strings";
 import instructions from "../languages/instructions";
 import dc from "../data/datacontext";
 
 const DEFAULT_CODE = "sv_SE";
-const LANGUAGES = [{ code: "en_GB", long: "English" }, { code: "sv_SE", long: "Svenska" }];
 
-export class LangService {
+export default class LangService {
   static strings = [];
   static instructions = [];
   static code;
@@ -15,8 +14,6 @@ export class LangService {
 
   static setLanguage(lang) {
     let code = DEFAULT_CODE;
-    // let keys = Object.keys(LangService.languageObj);
-    // if(keys.length && keys.find(item=>item==lang))
     code = lang;
     LangService.strings = strings[code];
     LangService.instructions = instructions[code];
@@ -31,10 +28,8 @@ export class LangService {
     return AsyncStorage.getItem(LANGUAGE)
       .then((value) => {
         if (value) {
-          console.log("The stored language:", JSON.parse(value));
           LangService.setLanguage(JSON.parse(value));
         } else {
-          console.log("No stored language found, loading the default lang:", DEFAULT_CODE);
           LangService.setLanguage(DEFAULT_CODE);
         }
         return Promise.resolve(true);
@@ -52,16 +47,16 @@ export class LangService {
     const instance = dc();
     return instance.language.getAvailableLanguages().then((languageObj) => {
       if (languageObj) {
-        console.log("available languages", languageObj);
         LangService.languageObj = languageObj;
         return Promise.resolve(languageObj);
       }
+      return null;
     });
   }
 
   static getString(key, langCode) {
     const keys = Object.keys(LangService.languageObj);
-    if (keys.find(item => item == langCode)) return strings[langCode][key];
+    if (keys.find(item => item === langCode)) return strings[langCode][key];
     return null;
   }
 }

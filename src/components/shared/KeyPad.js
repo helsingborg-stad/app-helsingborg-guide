@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, Button, Dimensions, TouchableOpacity, Animated 
 import ViewContainer from "../shared/view_container";
 import Icon from "react-native-vector-icons/FontAwesome";
 import RoundedBtn from "../shared/roundedBtn";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 
 const NAVBAR_HEIGHT = 50;
 const FULL_HEIGHT = Dimensions.get("window").height;

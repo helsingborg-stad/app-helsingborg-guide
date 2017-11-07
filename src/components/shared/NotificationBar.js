@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Animated } from "react-native";
 import ErrorText from "./ErrorText";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { bindActionCreators } from "redux";

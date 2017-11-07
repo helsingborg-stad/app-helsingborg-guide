@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import { PropTypes } from "prop-types";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 import BackgroundImage from "./BackgroundImage";
 
 const HALS_LOGO = require("../../images/HBG.png");

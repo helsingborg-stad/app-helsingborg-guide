@@ -6,7 +6,7 @@ import { NavigationActions } from "react-navigation";
 import connect from "react-redux/es/connect/connect";
 import ViewContainer from "../shared/view_container";
 import ColoredBar from "../shared/ColoredBar";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 

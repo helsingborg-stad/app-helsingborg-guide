@@ -12,7 +12,7 @@ import Nav from "./src/components/android/navigation/NavAndroid";
 import store from "./src/store/configureStore";
 import { loadGuides } from "./src/actions/guideActions";
 import { loadSubLocations } from "./src/actions/subLoactionActions";
-import { LangService } from "./src/services/langService";
+import LangService from "./src/services/langService";
 import downloadManager from "./src/services/DownloadTasksManager";
 import { internetChanged } from "./src/actions/internetActions";
 import { errorHappened } from "./src/actions/errorActions";

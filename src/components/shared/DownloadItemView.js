@@ -3,10 +3,10 @@
  */
 import React, { Component } from "react";
 import { Platform, ProgressViewIOS, View, Text, StyleSheet, ProgressBarAndroid, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ViewContainer from "./view_container";
 import RoundedThumbnail from "../shared/thumbnail_rounded";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 
 export default class DownloadItemView extends Component {
   constructor(props) {
@@ -16,7 +16,9 @@ export default class DownloadItemView extends Component {
   }
 
   renderProgressBar(color) {
-    if (Platform.OS === "ios") { return <ProgressViewIOS progressTintColor={color} style={styles.progressView} progress={this.props.progress} />; }
+    if (Platform.OS === "ios") {
+      return <ProgressViewIOS progressTintColor={color} style={styles.progressView} progress={this.props.progress} />;
+    }
     return <ProgressBarAndroid color={color} indeterminate={false} styleAttr="Horizontal" progress={this.props.progress} />;
   }
 

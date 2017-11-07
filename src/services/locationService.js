@@ -1,5 +1,5 @@
 import { PermissionsAndroid, Alert, Platform, Linking } from "react-native";
-import { LangService } from "./langService";
+import LangService from "./langService";
 import Opener from "./SettingsService";
 import geolocationUpdated from "../actions/geolocationActions";
 import store from "../store/configureStore";

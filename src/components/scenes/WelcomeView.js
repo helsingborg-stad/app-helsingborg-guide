@@ -7,7 +7,7 @@ import ViewContainer from "../shared/view_container";
 import FirstInstructionSlide from "../shared/FirstInstructionSlide";
 import NormalInstructionSlide from "../shared/NormalInstructionSlide";
 import { IS_WELCOMED } from "../../lib/my_consts";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 import ColoredBar from "../shared/ColoredBar";
 
 const STYLES = [{ backgroundColor: "#7B075E" }, { backgroundColor: "#A61380" }, { backgroundColor: "#c44f8a" }];

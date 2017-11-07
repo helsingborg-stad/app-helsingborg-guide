@@ -7,7 +7,7 @@ import store from "./src/store/configureStore";
 import { loadGuides } from "./src/actions/guideActions";
 import { loadSubLocations } from "./src/actions/subLoactionActions";
 import { internetChanged } from "./src/actions/internetActions";
-import { LangService } from "./src/services/langService";
+import LangService from "./src/services/langService";
 import Opener from "./src/services/SettingsService";
 import { errorHappened } from "./src/actions/errorActions";
 import downloadManager from "./src/services/DownloadTasksManager";

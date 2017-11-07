@@ -10,7 +10,7 @@ import ImageView from "../shared/image_view_content";
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
 import RoundedBtn from "../shared/roundedBtn";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 import MediaPlayer from "../shared/MediaPlayer";
 import Footer from "../shared/footer";
 import * as audioActions from "../../actions/audioActions";

@@ -1,6 +1,6 @@
 import { NativeModules, DeviceEventEmitter, AppState, PermissionsAndroid, Alert } from "react-native";
 import NotificationService from "../services/notificationService";
-import { LangService } from "./langService";
+import LangService from "./langService";
 import Opener from "./SettingsService";
 
 let instance = null;

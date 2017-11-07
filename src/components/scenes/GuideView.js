@@ -15,7 +15,7 @@ import OptionsView from "../shared/OptionsView";
 import OptionsContentView from "../shared/OptionsContentView";
 import LogoView from "../shared/LogoView";
 import TimingService from "../../services/timingService";
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import * as internetActions from "../../actions/internetActions";

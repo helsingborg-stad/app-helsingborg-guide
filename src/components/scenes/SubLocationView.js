@@ -16,7 +16,7 @@ import OptionsView from "../shared/OptionsView";
 import OptionsContentView from "../shared/OptionsContentView";
 import DownloadItemView2 from "../shared/DownloadItemView2";
 
-import { LangService } from "../../services/langService";
+import LangService from "../../services/langService";
 import MediaPlayer from "../shared/MediaPlayer";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";

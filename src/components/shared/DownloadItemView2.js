@@ -3,9 +3,9 @@
  */
 import React, { Component } from "react";
 import { Platform, View, Text, StyleSheet, ProgressBarAndroid, TouchableOpacity, Dimensions, ProgressViewIOS } from "react-native";
-import ViewContainer from "./view_container";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { LangService } from "../../services/langService";
+import ViewContainer from "./view_container";
+import LangService from "../../services/langService";
 
 const FULL_WIDTH = Dimensions.get("window").width;
 export default class DownloadItemView2 extends Component {

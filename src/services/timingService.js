@@ -1,4 +1,4 @@
-import { LangService } from "./langService";
+import LangService from "./langService";
 
 export default {
   getOpeningHours(openingList, expList) {
