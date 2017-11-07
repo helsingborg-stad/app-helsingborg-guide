@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => (
-  <View onMagicTap={this.props.onMagicTap} accessible={this.props.accessible} style={[styles.viewContainer, this.props.style]}>
-    {this.props.children}
+export default props => (
+  <View onMagicTap={props.onMagicTap} accessible={props.accessible} style={[styles.viewContainer, props.style]}>
+    {props.children}
   </View>
 );
