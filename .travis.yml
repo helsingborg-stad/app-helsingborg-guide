@@ -29,6 +29,8 @@ matrix:
         - android-25
         - android-23 # used by react-native-fetch-blob
         - android-26 # used by react-native-vector-icons
+      licenses:
+        - android-sdk-license-.+
     env:
     - CXX=g++-4.8
     addons:
