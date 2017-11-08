@@ -4,13 +4,13 @@ import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { bindActionCreators } from "redux";
 import { NavigationActions } from "react-navigation";
 import connect from "react-redux/es/connect/connect";
-import ViewContainer from "../shared/view_container";
-import ColoredBar from "../shared/ColoredBar";
-import LangService from "../../services/langService";
-import * as guideActions from "../../actions/guideActions";
-import * as subLocationActions from "../../actions/subLoactionActions";
+import ViewContainer from "./shared/view_container";
+import ColoredBar from "./shared/ColoredBar";
+import LangService from "./../services/langService";
+import * as guideActions from "./../actions/guideActions";
+import * as subLocationActions from "./../actions/subLoactionActions";
 
-const HALS_LOGO = require("../../images/HBG-horz.png");
+const HALS_LOGO = require("./../images/HBG-horz.png");
 
 const styles = StyleSheet.create({
   wrapper: {

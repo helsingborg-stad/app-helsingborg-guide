@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 import ViewContainer from "../../shared/view_container";
-import MenuContent from "./../../scenes/MenuContent";
+import MenuContent from "./../../MenuContent";
 import NotificationBar from "../../shared/NotificationBar";
 import {
   SplashView,
