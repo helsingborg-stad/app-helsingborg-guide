@@ -10,8 +10,6 @@ import { IS_WELCOMED } from "../../lib/my_consts";
 import LangService from "../../services/langService";
 import ColoredBar from "../shared/ColoredBar";
 
-const STYLES = [{ backgroundColor: "#7B075E" }, { backgroundColor: "#A61380" }, { backgroundColor: "#c44f8a" }];
-
 const IMAGE1 = require("../../images/firstInstructionImage.png");
 
 const FULL_HEIGHT = Dimensions.get("window").height;
@@ -21,7 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   swiper: {
-    flex: 1,
     backgroundColor: "#7B075E",
   },
   dot: {
@@ -88,8 +85,6 @@ export default class WelcomeView extends Component {
     this.onMomentumScrollEnd = this.onMomentumScrollEnd.bind(this);
   }
 
-  componentDidMount() {}
-
   shouldComponentUpdate(nextProps, nextState) {
     if (
       nextState.index === 0 ||
@@ -115,7 +110,6 @@ export default class WelcomeView extends Component {
         return (
           <FirstInstructionSlide
             key={index} // eslint-disable-line react/no-array-index-key
-            styler={STYLES[index]}
             content={item.content}
             closeBtnText={btnText}
             backgroundImageSource={IMAGE1}
@@ -126,7 +120,6 @@ export default class WelcomeView extends Component {
       return (
         <NormalInstructionSlide
           key={index} // eslint-disable-line react/no-array-index-key
-          styler={STYLES[index]}
           content={item.content}
           thumbnailSource={item.thumbnail}
           closeBtnText={btnText}

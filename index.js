@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { getStoredState } from "redux-persist";
-import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage } from "react-native";
+import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage, Platform, Linking } from "react-native";
 import Nav from "./src/NavAndroid";
 import store from "./src/store/configureStore";
 import { loadGuides } from "./src/actions/guideActions";
@@ -15,7 +15,11 @@ import downloadManager from "./src/services/DownloadTasksManager";
 // TODO merge index.ios.js into this one
 export default class GuideHbg extends Component {
   static openInternetSettings() {
-    Opener.openWifiSetting();
+    if (Platform.OS === "android") {
+      Opener.openWifiSetting();
+    } else {
+      Linking.openURL("app-settings:");
+    }
   }
 
   static init() {
