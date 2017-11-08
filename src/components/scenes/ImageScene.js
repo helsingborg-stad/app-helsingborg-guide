@@ -62,8 +62,8 @@ export default class ImageScene extends Component {
   render() {
     const { image } = this.props.navigation.state.params;
     const { sizes } = image;
-    const width = parseInt(sizes["large-width"], 10);
-    const height = parseInt(sizes["large-height"], 10);
+    const width = parseInt(sizes["large-width"]);
+    const height = parseInt(sizes["large-height"]);
     const scale = width / FULL_WIDTH;
 
     const leftBtn = (
