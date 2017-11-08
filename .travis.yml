@@ -23,14 +23,13 @@ matrix:
         - platform-tools # must come after the double tools to get the right version
 
         - build-tools-25.0.3
+        - build-tools-25.0.0 # used by react-native-photo-view
         - build-tools-23.0.1 # used by react-native-fetch-blob
         - build-tools-25.0.2 # used by react-native-video
         - build-tools-26.0.1 # used by react-native-vector-icons
         - android-25
         - android-23 # used by react-native-fetch-blob
         - android-26 # used by react-native-vector-icons
-      licenses:
-        - android-sdk-license-.+
     env:
     - CXX=g++-4.8
     addons:
