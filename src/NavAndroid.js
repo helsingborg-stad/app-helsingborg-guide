@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
-import ViewContainer from "../../shared/view_container";
-import MenuContent from "./../../MenuContent";
-import NotificationBar from "../../shared/NotificationBar";
+import ViewContainer from "./components/shared/view_container";
+import MenuContent from "./components/MenuContent";
+import NotificationBar from "./components/shared/NotificationBar";
 import {
   SplashView,
   GuideList,
@@ -15,7 +15,7 @@ import {
   VideoView,
   ImageView,
   DownloadManagerView,
-} from "./../../scenes/";
+} from "./components/screens/";
 
 const GuideListNavigator = DrawerNavigator(
   {

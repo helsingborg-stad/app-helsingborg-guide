@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { getStoredState } from "redux-persist";
 import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage } from "react-native";
-import Nav from "./src/components/android/navigation/NavAndroid";
+import Nav from "./src/NavAndroid";
 import store from "./src/store/configureStore";
 import { loadGuides } from "./src/actions/guideActions";
 import { loadSubLocations } from "./src/actions/subLoactionActions";
