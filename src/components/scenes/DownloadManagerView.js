@@ -42,6 +42,7 @@ class DownloadManagerView extends Component {
   constructor(props) {
     super(props);
 
+    this.title = props.navigation.state.params.title;
     this.fetchService = FetchService.getInstance();
   }
 
@@ -69,7 +70,7 @@ class DownloadManagerView extends Component {
     );
     return (
       <ViewContainer style={styles.mainContainer}>
-        <Navbar title={this.props.title} leftButton={leftBtn} backgroundColor="#7B075E" />
+        <Navbar title={this.title} leftButton={leftBtn} backgroundColor="#7B075E" />
         <ListView
           ref={(ref) => {
             this.itemsListView = ref;
