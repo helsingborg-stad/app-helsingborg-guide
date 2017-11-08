@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
-import SplashView from "../../scenes/SplashView";
 import ViewContainer from "../../shared/view_container";
-import NotificationBar from "../../shared/NotificationBar";
-import GuideList from "./../../scenes/GuideList";
-import GuideView from "./../../scenes/GuideView";
-import SubLocationView from "./../../scenes/SubLocationView";
-import WelcomeView from "./../../scenes/WelcomeView";
-import SubLocationsOnMapView from "./../../scenes/SubLocationsOnMapView";
-import ObjectView from "./../../scenes/ObjectView";
-import WebView from "./../../scenes/WebScene";
-import VideoView from "./../../scenes/VideoView";
-import ImageView from "./../../scenes/ImageScene";
 import MenuContent from "./../../scenes/MenuContent";
-import DownloadManagerView from "./../../scenes/DownloadManagerView";
+import NotificationBar from "../../shared/NotificationBar";
+import {
+  SplashView,
+  GuideList,
+  GuideView,
+  SubLocationView,
+  WelcomeView,
+  SubLocationsOnMapView,
+  ObjectView,
+  WebView,
+  VideoView,
+  ImageView,
+  DownloadManagerView,
+} from "./../../scenes/";
 
 const GuideListNavigator = DrawerNavigator(
   {
