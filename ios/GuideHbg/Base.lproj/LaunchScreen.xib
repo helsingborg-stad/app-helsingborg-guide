@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F67a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,24 +15,19 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Splashscreen-IOS-750x1334 2.png" translatesAutoresizingMaskIntoConstraints="NO" id="k7s-z8-1br">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splashscreen-IOS-750x1334 2.png" translatesAutoresizingMaskIntoConstraints="NO" id="5lz-FX-3NV">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="k7s-z8-1br" secondAttribute="trailing" id="7dn-vi-dYP"/>
-                <constraint firstItem="k7s-z8-1br" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KJl-4Q-GsC"/>
-                <constraint firstItem="k7s-z8-1br" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Rme-eh-g2q"/>
-                <constraint firstAttribute="bottom" secondItem="k7s-z8-1br" secondAttribute="bottom" id="fXB-63-DMm"/>
-                <constraint firstAttribute="trailing" secondItem="k7s-z8-1br" secondAttribute="trailing" id="jdr-CG-fZV"/>
-                <constraint firstItem="k7s-z8-1br" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tqf-7A-Tbi"/>
-                <constraint firstItem="k7s-z8-1br" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xyz-4G-0Rq"/>
-                <constraint firstAttribute="bottom" secondItem="k7s-z8-1br" secondAttribute="bottom" id="yMH-qA-LUA"/>
+                <constraint firstAttribute="trailing" secondItem="5lz-FX-3NV" secondAttribute="trailing" id="KlR-ub-Zoj"/>
+                <constraint firstItem="5lz-FX-3NV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WK4-U3-JUL"/>
+                <constraint firstItem="5lz-FX-3NV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qVY-au-naD"/>
+                <constraint firstAttribute="bottom" secondItem="5lz-FX-3NV" secondAttribute="bottom" id="tiS-ms-g3e"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="509.5" y="549.5"/>
+            <point key="canvasLocation" x="817.5" y="520.5"/>
         </view>
     </objects>
     <resources>
