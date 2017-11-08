@@ -1,20 +1,5 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
-import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import ImageView from "./image_view";
-import Icon from "react-native-vector-icons/FontAwesome";
-
-export default class RoundedThumbnail extends Component {
-  render() {
-    return (
-      <View style={styles.thumbnailContainer}>
-        <Image source={this.props.imageSource} style={styles.image} />
-      </View>
-    );
-  }
-}
+import React from "react";
+import { View, StyleSheet, Image } from "react-native";
 
 const styles = StyleSheet.create({
   thumbnailContainer: {
@@ -31,3 +16,9 @@ const styles = StyleSheet.create({
   },
   iconContainer: { flex: 1, justifyContent: "center" },
 });
+
+export default props => (
+  <View style={styles.thumbnailContainer}>
+    <Image source={props.imageSource} style={styles.image} />
+  </View>
+);
