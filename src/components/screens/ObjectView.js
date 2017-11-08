@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 10,
   },
-  imagesSlider: { maxHeight: MAX_IMAGE_HEIGHT, flex: 1 },
+  imagesSlider: { maxHeight: MAX_IMAGE_HEIGHT },
   linkContainer: { paddingVertical: 6 },
   linkText: { fontSize: 14, lineHeight: 20, fontWeight: "bold" },
   closeBtn: {

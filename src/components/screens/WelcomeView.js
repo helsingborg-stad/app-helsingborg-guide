@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   swiper: {
-    flex: 1,
     backgroundColor: "#7B075E",
   },
   dot: {
