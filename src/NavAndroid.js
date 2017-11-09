@@ -62,7 +62,7 @@ const RootNavigator = StackNavigator(
     DownloadManagerView: { screen: DownloadManagerView },
   },
   {
-    headerMode: "none",
+    headerMode: "screen",
   },
 );
 

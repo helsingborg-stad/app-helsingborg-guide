@@ -64,9 +64,9 @@ const styles = StyleSheet.create({
 });
 
 export default class WelcomeView extends Component {
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-  };
+  static navigationOptions = {
+    header: null,
+  }
 
   static displayColorBar() {
     return (
