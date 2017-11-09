@@ -3,14 +3,14 @@ import { Provider } from "react-redux";
 import { getStoredState } from "redux-persist";
 import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage, Platform, Linking } from "react-native";
 import Nav from "guide-hbg/src/NavAndroid";
-import store from "./src/store/configureStore";
-import { loadGuides } from "./src/actions/guideActions";
-import { loadSubLocations } from "./src/actions/subLoactionActions";
-import { internetChanged } from "./src/actions/internetActions";
-import LangService from "./src/services/langService";
-import Opener from "./src/services/SettingsService";
-import { errorHappened } from "./src/actions/errorActions";
-import downloadManager from "./src/services/DownloadTasksManager";
+import store from "guide-hbg/src/store/configureStore";
+import { loadGuides } from "guide-hbg/src/actions/guideActions";
+import { loadSubLocations } from "guide-hbg/src/actions/subLoactionActions";
+import { internetChanged } from "guide-hbg/src/actions/internetActions";
+import LangService from "guide-hbg/src/services/langService";
+import Opener from "guide-hbg/src/services/SettingsService";
+import { errorHappened } from "guide-hbg/src/actions/errorActions";
+import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
 
 export default class GuideHbg extends Component {
   static openInternetSettings() {
