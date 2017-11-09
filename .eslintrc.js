@@ -78,10 +78,6 @@ module.exports = {
     ],
   },
   settings: {
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".android.js", ".ios.js"],
-      },
-    },
+    "import/resolver": "reactnative"
   },
 };

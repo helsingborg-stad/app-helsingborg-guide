@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { getStoredState } from "redux-persist";
 import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage, Platform, Linking } from "react-native";
-import Nav from "./src/NavAndroid";
+import Nav from "guide-hbg/src/NavAndroid";
 import store from "./src/store/configureStore";
 import { loadGuides } from "./src/actions/guideActions";
 import { loadSubLocations } from "./src/actions/subLoactionActions";
@@ -12,7 +12,6 @@ import Opener from "./src/services/SettingsService";
 import { errorHappened } from "./src/actions/errorActions";
 import downloadManager from "./src/services/DownloadTasksManager";
 
-// TODO merge index.ios.js into this one
 export default class GuideHbg extends Component {
   static openInternetSettings() {
     if (Platform.OS === "android") {
