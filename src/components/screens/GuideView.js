@@ -6,7 +6,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as _ from "lodash";
 import ViewContainer from "../shared/view_container";
-import Navbar from "../shared/navbar";
 import ImageView from "../shared/image_view";
 import ListItem from "../shared/list_item";
 import RoundedBtn from "../shared/roundedBtnWithText";
@@ -302,21 +301,8 @@ class GuideView extends Component {
   }
 
   render() {
-    const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
-        <Icon2 name="chevron-left" size={32} color="white" />
-      </TouchableOpacity>
-    );
-    const rightBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={this.toggleMainMenu}>
-        <Icon2 name="menu" size={20} color="white" />
-      </TouchableOpacity>
-    );
-
     return (
       <ViewContainer>
-        <Navbar title={this.state.guide.name} leftButton={leftBtn} rightButton={rightBtn} backgroundColor="#7B075E" />
-
         <OptionsFloatingBtn onPress={this.toggleMenu} />
 
         <OptionsView onPress={this.closeMenu} visible={this.state.menuVisible}>
