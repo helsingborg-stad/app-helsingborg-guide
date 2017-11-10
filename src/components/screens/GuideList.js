@@ -90,10 +90,6 @@ class GuideList extends Component {
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
   }
 
-  toggleMenu() {
-    this.props.navigation.navigate("DrawerToggle");
-  }
-
   guidePress(guide) {
     const { navigate } = this.props.navigation;
     navigate("GuideView", { guide });
