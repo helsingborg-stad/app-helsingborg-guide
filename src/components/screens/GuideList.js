@@ -1,7 +1,19 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { View, Text, TouchableOpacity, Linking, Platform } from "react-native";
+import React, {
+  Component,
+} from "react";
+import {
+  bindActionCreators,
+} from "redux";
+import {
+  connect,
+} from "react-redux";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Linking,
+  Platform,
+} from "react-native";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import * as guideActions from "../../actions/guideActions";
@@ -137,9 +149,7 @@ class GuideList extends Component {
         style={styles.navigateBtn}
         active={<Icon name="directions" size={20} color="white" />}
         idle={<Icon name="directions" size={20} color="white" />}
-        onPress={() => {
-          this.openGoogleMapApp(location.latitude, location.longitude, location.slug);
-        }}
+        onPress={() => { this.openGoogleMapApp(location.latitude, location.longitude, location.slug); }}
       />
     );
     const label = GuideList.displayComingSoon(rowData);
