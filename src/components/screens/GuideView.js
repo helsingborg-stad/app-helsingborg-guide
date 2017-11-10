@@ -55,6 +55,14 @@ const styles = StyleSheet.create({
 });
 
 class GuideView extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { guide } = navigation.state.params;
+    const name = guide ? guide.name : undefined;
+    return {
+      title: name,
+    };
+  };
+
   static displayLogo(guideGroup) {
     const logoType = guideGroup.apperance.logotype;
     return <LogoView logoType={logoType} placeHolder={guideGroup.name} />;
@@ -106,6 +114,7 @@ class GuideView extends Component {
       </View>
     );
   }
+
   constructor(props) {
     super(props);
 
