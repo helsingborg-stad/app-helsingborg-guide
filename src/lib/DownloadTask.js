@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { FetchService } from "../services/FetchService";
+import FetchService from "../services/FetchService";
 import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 import LangService from "../services/langService";
@@ -107,8 +107,8 @@ export default class DownloadTask {
     _.forEach(this.fileDownloadTasks, (mTask) => {
       //  debugger;
       if (mTask) {
-        mTask.catch(() => {});
-        mTask.cancel(() => {});
+        mTask.catch(() => { });
+        mTask.cancel(() => { });
       }
     });
     this.fileDownloadTasks = [];

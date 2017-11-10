@@ -7,7 +7,7 @@ import ViewContainer from "../shared/view_container";
 import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
-import { FetchService } from "../../services/FetchService";
+import FetchService from "../../services/FetchService";
 import Navbar from "../shared/navbar";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });

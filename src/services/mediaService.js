@@ -2,7 +2,7 @@ import { NativeModules, DeviceEventEmitter, NativeEventEmitter, Platform } from 
 import NotificationService from "./notificationService";
 import store from "../store/configureStore";
 import { errorHappened } from "../actions/errorActions";
-import { FetchService } from "./FetchService";
+import FetchService from "./FetchService";
 import LangService from "./langService";
 import { togglePlay, releaseAudioFile, loadAudioFile, loadAudioFileSuccess, updateAudio } from "../actions/audioActions";
 

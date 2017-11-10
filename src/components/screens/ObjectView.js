@@ -14,10 +14,10 @@ import LangService from "../../services/langService";
 import MediaPlayer from "../shared/MediaPlayer";
 import Footer from "../shared/footer";
 import * as audioActions from "../../actions/audioActions";
-import * as metricActions from "../../actions/metricActions";
+import metricActions from "../../actions/metricActions";
 import MediaService from "../../services/mediaService";
-import * as internetActions from "../../actions/internetActions";
-import { FetchService } from "../../services/FetchService";
+import internetActions from "../../actions/internetActions";
+import FetchService from "../../services/FetchService";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
 
