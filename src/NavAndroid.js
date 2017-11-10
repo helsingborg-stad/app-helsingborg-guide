@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { StyleSheet } from "react-native";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 import ViewContainer from "./components/shared/view_container";
 import MenuContent from "./components/MenuContent";
@@ -16,6 +17,12 @@ import {
   ImageView,
   DownloadManagerView,
 } from "./components/screens/";
+
+const styles = StyleSheet.create({
+  headerStyle: {
+    backgroundColor: "#7B075E",
+  },
+});
 
 const GuideListNavigator = DrawerNavigator(
   {
@@ -63,6 +70,10 @@ const RootNavigator = StackNavigator(
   },
   {
     headerMode: "screen",
+    navigationOptions: {
+      headerStyle: styles.headerStyle,
+      headerTintColor: "white",
+    },
   },
 );
 
