@@ -39,7 +39,7 @@ class GuideList extends Component {
     active: PropTypes.object.isRequired,
     markers: PropTypes.array.isRequired,
     internet: PropTypes.bool.isRequired,
-    geolocation: PropTypes.any.isRequired,
+    geolocation: PropTypes.any,
     title: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
   }
 

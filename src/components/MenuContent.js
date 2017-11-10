@@ -1,8 +1,22 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, NetInfo } from "react-native";
+import React, {
+  Component,
+} from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  NetInfo,
+} from "react-native";
+import PropTypes from "prop-types";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
-import { bindActionCreators } from "redux";
-import { NavigationActions } from "react-navigation";
+import {
+  bindActionCreators,
+} from "redux";
+import {
+  NavigationActions,
+} from "react-navigation";
 import connect from "react-redux/es/connect/connect";
 import ViewContainer from "./shared/view_container";
 import ColoredBar from "./shared/ColoredBar";
@@ -33,32 +47,64 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 50,
   },
-  mainContentContainer: { flex: 1 },
+  mainContentContainer: {
+    flex: 1,
+  },
   contentContainer: {
     flex: 1,
     alignItems: "flex-start",
     padding: 30,
   },
-  mainTitleContainer: { flex: 1 },
+  mainTitleContainer: {
+    flex: 1,
+  },
   titleContainer: {
     flex: 1,
   },
-  titleText: { fontSize: 18, lineHeight: 25, fontWeight: "500", color: "white" },
-
-  languageContainer: { flex: 1, alignItems: "flex-start" },
+  titleText: {
+    fontSize: 18,
+    lineHeight: 25,
+    fontWeight: "500",
+    color: "white",
+  },
+  languageContainer: {
+    flex: 1,
+    alignItems: "flex-start",
+  },
   languageChoicesContainer: {
     flex: 1,
     flexDirection: "row",
   },
-  choiceContainer: { flex: 1, justifyContent: "center", alignItems: "center", height: 40 },
-  choiceText: { fontSize: 14, lineHeight: 40, color: "#ffe3fa" },
-  deleteLinkContainer: { flex: 1, justifyContent: "center", paddingVertical: 20 },
-  contactUsContainer: { flex: 2, justifyContent: "flex-end" },
+  choiceContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 40,
+  },
+  choiceText: {
+    fontSize: 14,
+    lineHeight: 40,
+    color: "#ffe3fa",
+  },
+  deleteLinkContainer: {
+    flex: 1,
+    justifyContent: "center",
+    paddingVertical: 20,
+  },
+  contactUsContainer: {
+    flex: 2,
+    justifyContent: "flex-end",
+  },
   bodyTextContainer: {
     flex: 1,
     justifyContent: "flex-end",
   },
-  bodyText: { fontSize: 18, lineHeight: 34, fontWeight: "300", color: "rgba(255,255,255,.9)" },
+  bodyText: {
+    fontSize: 18,
+    lineHeight: 25,
+    fontWeight: "300",
+    color: "rgba(255,255,255,.9)",
+  },
   logoContainer: {
     flex: 1,
     alignItems: "center",
@@ -66,11 +112,18 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "rgba(244,244,244,0.3)",
   },
-
-  voidView: { flex: 1 },
+  voidView: {
+    flex: 1,
+  },
 });
 
 class MenuContent extends Component {
+  static propTypes = {
+    navigation: PropTypes.object, // eslint-disable-line react/require-default-props
+    guideActions: PropTypes.object.isRequired,
+    subLocationActions: PropTypes.object.isRequired,
+  }
+
   constructor(props) {
     super(props);
 
@@ -189,7 +242,6 @@ class MenuContent extends Component {
                 </View>
                 <View style={styles.bodyTextContainer}>
                   <Text style={styles.bodyText}>kontaktcenter@helsingborg.se</Text>
-
                   <Text style={styles.bodyText}>042-10 50 00</Text>
                 </View>
               </View>
