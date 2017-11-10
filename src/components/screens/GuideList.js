@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { View, Text, TouchableOpacity, Linking, Platform } from "react-native";
+import { View, Text, Linking, Platform } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
@@ -9,7 +9,6 @@ import * as internetActions from "../../actions/internetActions";
 import styles from "../../styles/styles";
 import ViewContainer from "../shared/view_container";
 import LogoView from "../shared/LogoView";
-import Navbar from "../shared/navbar";
 import Thumbnail from "../shared/thumbnail";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
@@ -159,19 +158,12 @@ class GuideList extends Component {
   }
 
   render() {
-    console.log("guidelist.render()", this.state);
-    const rightBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.toggleMenu()}>
-        <Icon name="menu" size={20} color="white" />
-      </TouchableOpacity>
-    );
     return (
       <ViewContainer>
         <SlimNotificationBar visible={!this.state.internet && this.state.guides.length} style={{ top: 50 }}>
           <NoInternetText />
         </SlimNotificationBar>
 
-        <Navbar title={GuideList.defaultProps.title} rightButton={rightBtn} backgroundColor="#7B075E" />
         <MapThumbnailsView
           items={this.state.guides}
           active={this.state.active}
