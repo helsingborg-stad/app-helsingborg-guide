@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { PropTypes } from "prop-types";
 import { StyleSheet } from "react-native";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -30,6 +31,10 @@ const MenuButton = ({ navigation }) => {
   return (
     <Icon name="Menu" size={20} color="white" onPress={() => navigate("DrawerToggle")} />
   );
+};
+
+MenuButton.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 const GuideListNavigator = DrawerNavigator(
