@@ -25,9 +25,12 @@ class GuideList extends Component {
     };
   }
 
-  static navigationOptions = {
-    title: LangService.strings.APP_NAME,
-  }
+  static navigationOptions = () => {
+    const title = LangService.strings.APP_NAME;
+    return {
+      title,
+    };
+  };
 
   static displayLogo(guideGroup) {
     const logoType = guideGroup.apperance.logotype;
