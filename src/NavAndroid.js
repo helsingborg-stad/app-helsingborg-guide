@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 const MenuButton = ({ navigation }) => {
   const { navigate } = navigation;
   return (
-    <Icon name="Menu" size={20} color="white" onPress={() => navigate("DrawerToggle")} />
+    <Icon name="menu" size={20} color="white" onPress={() => navigate("DrawerToggle")} />
   );
 };
 
