@@ -92,7 +92,12 @@ export default class SubLocationsOnMapView extends Component {
 
   onItemPress(id) {
     const { navigate } = this.props.navigation;
-    navigate("SubLocationView", { subLocationId: id });
+    const { subLocations } = this.props.navigation.state.params;
+    const { name } = subLocations[0].guidegroup[0];
+    navigate("SubLocationView", {
+      subLocationId: id,
+      title: name,
+    });
   }
 
   renderRow = (rowData) => {
