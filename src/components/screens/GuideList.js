@@ -10,7 +10,6 @@ import {
 import {
   View,
   Text,
-  TouchableOpacity,
   Linking,
   Platform,
 } from "react-native";
@@ -22,7 +21,6 @@ import * as internetActions from "../../actions/internetActions";
 import styles from "../../styles/styles";
 import ViewContainer from "../shared/view_container";
 import LogoView from "../shared/LogoView";
-import Navbar from "../shared/navbar";
 import Thumbnail from "../shared/thumbnail";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
@@ -48,6 +46,13 @@ class GuideList extends Component {
       title: LangService.strings.APP_NAME,
     };
   }
+
+  static navigationOptions = () => {
+    const title = LangService.strings.APP_NAME;
+    return {
+      title,
+    };
+  };
 
   static displayLogo(guideGroup) {
     const logoType = guideGroup.apperance.logotype;
@@ -106,10 +111,6 @@ class GuideList extends Component {
       });
     }
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
-  }
-
-  toggleMenu() {
-    this.props.navigation.navigate("DrawerToggle");
   }
 
   guidePress(guide) {
@@ -174,19 +175,12 @@ class GuideList extends Component {
   }
 
   render() {
-    console.log("guidelist.render()", this.state);
-    const rightBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.toggleMenu()}>
-        <Icon name="menu" size={20} color="white" />
-      </TouchableOpacity>
-    );
     return (
       <ViewContainer>
         <SlimNotificationBar visible={!this.state.internet && this.state.guides.length} style={{ top: 50 }}>
           <NoInternetText />
         </SlimNotificationBar>
 
-        <Navbar title={GuideList.defaultProps.title} rightButton={rightBtn} backgroundColor="#7B075E" />
         <MapThumbnailsView
           items={this.state.guides}
           active={this.state.active}

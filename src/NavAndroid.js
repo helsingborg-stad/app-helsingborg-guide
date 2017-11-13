@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { PropTypes } from "prop-types";
+import { StyleSheet } from "react-native";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import ViewContainer from "./components/shared/view_container";
 import MenuContent from "./components/MenuContent";
 import NotificationBar from "./components/shared/NotificationBar";
@@ -16,6 +19,23 @@ import {
   ImageView,
   DownloadManagerView,
 } from "./components/screens/";
+
+const styles = StyleSheet.create({
+  headerStyle: {
+    backgroundColor: "#7B075E",
+  },
+});
+
+const MenuButton = ({ navigation }) => {
+  const { navigate } = navigation;
+  return (
+    <Icon name="menu" size={20} color="white" onPress={() => navigate("DrawerToggle")} />
+  );
+};
+
+MenuButton.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 const GuideListNavigator = DrawerNavigator(
   {
@@ -62,9 +82,15 @@ const RootNavigator = StackNavigator(
     DownloadManagerView: { screen: DownloadManagerView },
   },
   {
-    headerMode: "none",
+    headerMode: "screen",
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: styles.headerStyle,
+      headerTintColor: "white",
+      headerRight: <MenuButton navigation={navigation} />,
+    }),
   },
 );
+
 
 // TODO this class should most likely be merged into App (index.js)
 export default class Nav extends Component {

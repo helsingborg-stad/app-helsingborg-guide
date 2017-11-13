@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Dimensions, TouchableOpacity, StyleSheet, ScrollView, TouchableWithoutFeedback } from "react-native";
 
-import Icon2 from "react-native-vector-icons/MaterialIcons";
 import Swiper from "react-native-swiper";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -9,7 +8,6 @@ import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view_content";
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
-import RoundedBtn from "../shared/roundedBtn";
 import LangService from "../../services/langService";
 import MediaPlayer from "../shared/MediaPlayer";
 import Footer from "../shared/footer";
@@ -54,6 +52,10 @@ const styles = StyleSheet.create({
 });
 
 class ObjectView extends Component {
+  static navigationOptions = {
+    headerRight: null,
+  }
+
   constructor(props) {
     super(props);
 
@@ -267,17 +269,9 @@ class ObjectView extends Component {
 
   display() {
     if (this.state.contentObject && Object.keys(this.state.contentObject).length) {
-      const { goBack } = this.props.navigation;
       return (
         <ViewContainer>
           <ScrollView contentContainerStyle={styles.scrollView}>
-            <RoundedBtn
-              style={styles.closeBtn}
-              isActive={this.state.viewArticle}
-              active={<Icon2 name="close" size={20} color="white" />}
-              idle={<Icon2 name="close" size={20} color="white" />}
-              onPress={goBack}
-            />
             {this.displayImagesSlider()}
             <View style={styles.bodyContainer}>
               {this.displayButtonsBar()}

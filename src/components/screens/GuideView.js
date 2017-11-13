@@ -22,7 +22,6 @@ import {
 } from "react-redux";
 import * as _ from "lodash";
 import ViewContainer from "../shared/view_container";
-import Navbar from "../shared/navbar";
 import ImageView from "../shared/image_view";
 import ListItem from "../shared/list_item";
 import RoundedBtn from "../shared/roundedBtnWithText";
@@ -137,6 +136,14 @@ class GuideView extends Component {
     geolocation: PropTypes.any.isRequired,
   }
 
+  static navigationOptions = ({ navigation }) => {
+    const { guide } = navigation.state.params;
+    const name = guide ? guide.name : undefined;
+    return {
+      title: name,
+    };
+  };
+
   static displayLogo(guideGroup) {
     const logoType = guideGroup.apperance.logotype;
     return <LogoView logoType={logoType} placeHolder={guideGroup.name} />;
@@ -177,6 +184,7 @@ class GuideView extends Component {
       </View>
     );
   }
+
   constructor(props) {
     super(props);
 
@@ -213,7 +221,9 @@ class GuideView extends Component {
 
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
+    const { name } = subLocation.guidegroup[0];
     navigate("SubLocationView", {
+      title: name,
       subLocationId: subLocation.id,
     });
   }
@@ -222,7 +232,8 @@ class GuideView extends Component {
     this.toggleMenu();
 
     const { navigate } = this.props.navigation;
-    navigate("SubLocationsOnMapView", { subLocations: this.state.sublocations });
+    const { name } = this.state.guide;
+    navigate("SubLocationsOnMapView", { subLocations: this.state.sublocations, name });
   };
 
   displaySubLocations() {
@@ -365,21 +376,8 @@ class GuideView extends Component {
   }
 
   render() {
-    const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
-        <Icon2 name="chevron-left" size={32} color="white" />
-      </TouchableOpacity>
-    );
-    const rightBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={this.toggleMainMenu}>
-        <Icon2 name="menu" size={20} color="white" />
-      </TouchableOpacity>
-    );
-
     return (
       <ViewContainer>
-        <Navbar title={this.state.guide.name} leftButton={leftBtn} rightButton={rightBtn} backgroundColor="#7B075E" />
-
         <OptionsFloatingBtn onPress={this.toggleMenu} />
 
         <OptionsView onPress={this.closeMenu} visible={this.state.menuVisible}>
