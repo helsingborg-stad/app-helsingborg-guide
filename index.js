@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { getStoredState } from "redux-persist";
 import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage, Platform, Linking } from "react-native";
-import Nav from "guide-hbg/src/NavAndroid";
+import Nav from "guide-hbg/src/Nav";
 import store from "guide-hbg/src/store/configureStore";
 import { loadGuides } from "guide-hbg/src/actions/guideActions";
 import { loadSubLocations } from "guide-hbg/src/actions/subLoactionActions";
@@ -37,7 +37,7 @@ export default class GuideHbg extends Component {
       if (isConnected) {
         store.dispatch(loadGuides(langCode));
         store.dispatch(loadSubLocations(langCode));
-        LangService.getLanguages().catch(() => console.log("error in getting lang"));
+        LangService.getLanguages().catch(() => console.log("error in getting lang")); // eslint-disable-line no-console
       }
     });
   }
@@ -73,7 +73,8 @@ export default class GuideHbg extends Component {
 
     this.handleConnectivityChange = this.handleConnectivityChange.bind(this);
 
-    console.ignoredYellowBox = ["Remote debugger"];
+    // Ignore RN debug warning for Remote debugger
+    console.ignoredYellowBox = ["Remote debugger"]; // eslint-disable-line no-console
   }
 
   componentDidMount() {
