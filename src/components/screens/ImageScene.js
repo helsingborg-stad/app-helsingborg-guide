@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { TouchableOpacity, StyleSheet, Dimensions, Platform } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { StyleSheet, Dimensions, Platform } from "react-native";
 import PhotoView from "react-native-photo-view";
 import ViewContainer from "../shared/view_container";
-import Navbar from "../shared/navbar";
 import FetchService from "../../services/FetchService";
 
 const MAX_SCALE = 2.5;
@@ -19,6 +17,11 @@ const styles = StyleSheet.create({
 });
 
 export default class ImageScene extends Component {
+  static navigationOptions = {
+    headerRight: null,
+    headerStyle: styles.mainContainer,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -66,15 +69,8 @@ export default class ImageScene extends Component {
     const height = parseInt(sizes["large-height"]);
     const scale = width / FULL_WIDTH;
 
-    const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
-        <Icon name="chevron-left" size={20} color="white" />
-      </TouchableOpacity>
-    );
-
     return (
       <ViewContainer style={styles.mainContainer}>
-        <Navbar title={image.caption} leftButton={leftBtn} backgroundColor="rgba(0,0,0,0.4)" />
         {
           <PhotoView
             source={this.state.source}
