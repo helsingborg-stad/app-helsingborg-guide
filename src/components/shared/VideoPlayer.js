@@ -12,6 +12,7 @@ import {
   Slider,
   ActivityIndicator,
 } from "react-native";
+import PropTypes from "prop-types";
 import Video from "react-native-video";
 import Icon from "react-native-vector-icons/FontAwesome";
 import TimeHelper from "../../lib/timeHelper";
@@ -20,7 +21,6 @@ import ViewContainer from "../shared/view_container";
 const BKGD_COLOR = "black";
 const FGD_COLOR = "#7B075E";
 const timeHelper = TimeHelper();
-
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -79,6 +79,10 @@ const styles = StyleSheet.create({
 });
 
 export default class AudioPlayer extends Component {
+  static propTypes = {
+    filePath: PropTypes.string.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -90,12 +94,12 @@ export default class AudioPlayer extends Component {
     };
   }
 
-  componentDidMount() { }
-
   player;
 
   displaySpinner() {
-    if (this.state.loading) return <ActivityIndicator style={[styles.spinner]} />;
+    if (this.state.loading) {
+      return <ActivityIndicator style={[styles.spinner]} />;
+    }
   }
 
   togglePlayView(isPlaying) {
@@ -113,9 +117,11 @@ export default class AudioPlayer extends Component {
       </TouchableOpacity>
     );
   }
+
   onPlayPressed() {
     this.setState({ isPlaying: true });
   }
+
   onPausePressed() {
     this.setState({ isPlaying: false });
   }
@@ -139,7 +145,7 @@ export default class AudioPlayer extends Component {
     this.setState({ currentTime: timeObj.currentTime });
   }
 
-  showFullScreen() {
+  showFullScreen = () => {
     if (this.player) this.player.presentFullscreenPlayer();
   }
 
@@ -148,9 +154,9 @@ export default class AudioPlayer extends Component {
   }
 
   onLoad = (data) => {
-    // console.log('onLoad fired',data);
     this.setState({ duration: data.duration, currentTime: data.currentTime, loading: false });
   }
+
   loadStart = () => {
     this.setState({ loading: true });
   }
