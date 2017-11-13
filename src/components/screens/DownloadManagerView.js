@@ -7,6 +7,7 @@ import ViewContainer from "../shared/view_container";
 import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
+import LangService from "../../services/langService";
 import FetchService from "../../services/FetchService";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -27,17 +28,17 @@ class DownloadManagerView extends Component {
     downloads: PropTypes.array.isRequired,
   }
 
-  static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params;
+  static navigationOptions = () => {
+    const title = LangService.strings.OFFLINE_CONTENT;
     return {
       title,
       headerRight: null,
     };
   };
 
-  static renderFooter() {
-    return <View style={{ height: 60 }} />;
-  }
+  static renderFooter = () => (
+    <View style={{ height: 60 }} />
+  );
 
   static clearCache(id) {
     downloadManager.clearCache(id);
@@ -53,8 +54,6 @@ class DownloadManagerView extends Component {
 
   constructor(props) {
     super(props);
-
-    this.title = props.navigation.state.params.title;
     this.fetchService = FetchService.getInstance();
   }
 

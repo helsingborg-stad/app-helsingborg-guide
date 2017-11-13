@@ -51,6 +51,7 @@ class GuideList extends Component {
     const title = LangService.strings.APP_NAME;
     return {
       title,
+      headerRight: null,
     };
   };
 
