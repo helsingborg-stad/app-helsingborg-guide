@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, ListView, StyleSheet } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
@@ -21,6 +22,11 @@ const styles = StyleSheet.create({
 });
 
 class DownloadManagerView extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+    downloads: PropTypes.array.isRequired,
+  }
+
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     return {
