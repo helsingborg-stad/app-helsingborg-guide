@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Platform, View, Text, StyleSheet, Linking } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import Thumbnail from "../shared/thumbnail2";
 import MapThumbnailsView from "../shared/MapThumbnailsView";
@@ -31,6 +32,10 @@ const styles = StyleSheet.create({
 });
 
 export default class SubLocationsOnMapView extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+  }
+
   static navigationOptions = ({ navigation }) => {
     const { name } = navigation.state.params;
     return {
@@ -89,12 +94,6 @@ export default class SubLocationsOnMapView extends Component {
 
     const { subLocations } = this.props.navigation.state.params;
     this.state = SubLocationsOnMapView.buildState(subLocations);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.subLocations.length !== nextProps.subLocations.length) {
-      this.setState(SubLocationsOnMapView.buildState(nextProps.subLocations));
-    }
   }
 
   onItemPress(id) {
