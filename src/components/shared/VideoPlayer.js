@@ -1,20 +1,84 @@
 /**
  * Created by msaeed on 2017-02-04.
  */
-import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Slider, ActivityIndicator } from "react-native";
+import React, {
+  Component,
+} from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Slider,
+  ActivityIndicator,
+} from "react-native";
+import Video from "react-native-video";
 import Icon from "react-native-vector-icons/FontAwesome";
 import TimeHelper from "../../lib/timeHelper";
-import Video from "react-native-video";
 import ViewContainer from "../shared/view_container";
 
 const BKGD_COLOR = "black";
 const FGD_COLOR = "#7B075E";
 const timeHelper = TimeHelper();
 
-export default class AudioPlayer extends Component {
-  player;
 
+const styles = StyleSheet.create({
+  wrapper: {
+    backgroundColor: BKGD_COLOR,
+  },
+  playerContainer: {
+    height: 50,
+    backgroundColor: BKGD_COLOR,
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "center",
+  },
+  sliderContainer: {
+    flex: 4,
+    // backgroundColor:'#f5f5f5',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+  },
+  trackSlider: {
+    flex: 8,
+  },
+  duration: {
+    flex: 2,
+    fontSize: 14,
+    color: "white",
+  },
+  controlsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  control: {
+    flex: 1,
+    alignItems: "center",
+  },
+  audioLevelContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  audioLevelIconContainer: {
+    flex: 1,
+    alignItems: "center",
+  },
+  backgroundVideo: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+});
+
+export default class AudioPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +90,9 @@ export default class AudioPlayer extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
+
+  player;
 
   displaySpinner() {
     if (this.state.loading) return <ActivityIndicator style={[styles.spinner]} />;
@@ -53,7 +119,6 @@ export default class AudioPlayer extends Component {
   onPausePressed() {
     this.setState({ isPlaying: false });
   }
-  onStopPressed() {}
 
   _changeVolume(value) {
     this.setState({
@@ -64,6 +129,7 @@ export default class AudioPlayer extends Component {
   _changeCurrentTimeCompleted(time) {
     this.setState({ currentTime: time });
   }
+
   _changeCurrentTime(time) {
     this.setState({ isPlaying: false });
     this.player.seek(time);
@@ -77,15 +143,15 @@ export default class AudioPlayer extends Component {
     if (this.player) this.player.presentFullscreenPlayer();
   }
 
-  onEnd() {
+  onEnd = () => {
     this.setState({ isPlaying: false, currentTime: 0 });
   }
 
-  onLoad(data) {
+  onLoad = (data) => {
     // console.log('onLoad fired',data);
     this.setState({ duration: data.duration, currentTime: data.currentTime, loading: false });
   }
-  loadStart() {
+  loadStart = () => {
     this.setState({ loading: true });
   }
 
@@ -108,10 +174,10 @@ export default class AudioPlayer extends Component {
             playInBackground={false} // Audio continues to play when app entering background.
             playWhenInactive={false} // [iOS] Video continues to play when control or notification center are shown.
             progressUpdateInterval={250.0} // [iOS] Interval to fire onProgress (default to ~250ms)
-            onLoadStart={this.loadStart.bind(this)} // Callback when video starts to load
-            onLoad={data => this.onLoad(data)} // Callback when video loads
+            onLoadStart={this.loadStart} // Callback when video starts to load
+            onLoad={this.onLoad} // Callback when video loads
             onProgress={timeObj => this._onProgress(timeObj)} // Callback every ~250ms with currentTime
-            onEnd={this.onEnd.bind(this)} // Callback when playback finishes
+            onEnd={this.onEnd} // Callback when playback finishes
             onError={this.videoError} // Callback when video cannot be loaded
             onBuffer={() => this.onBuffer} // Callback when remote video is buffering
             onTimedMetadata={this.onTimedMetadata} // Callback when the stream receive some metadata
@@ -155,41 +221,3 @@ export default class AudioPlayer extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  wrapper: {
-    backgroundColor: BKGD_COLOR,
-  },
-  playerContainer: {
-    height: 50,
-    backgroundColor: BKGD_COLOR,
-    flexDirection: "row",
-    flex: 1,
-    justifyContent: "center",
-  },
-  sliderContainer: {
-    flex: 4,
-    // backgroundColor:'#f5f5f5',
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 10,
-  },
-  trackSlider: { flex: 8 },
-  duration: { flex: 2, fontSize: 14, color: "white" },
-  controlsContainer: { flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
-  control: { flex: 1, alignItems: "center" },
-  audioLevelContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  audioLevelIconContainer: { flex: 1, alignItems: "center" },
-  backgroundVideo: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-  },
-});
