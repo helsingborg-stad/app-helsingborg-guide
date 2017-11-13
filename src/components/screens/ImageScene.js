@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Dimensions, Platform } from "react-native";
 import PhotoView from "react-native-photo-view";
+import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import FetchService from "../../services/FetchService";
 
@@ -17,6 +18,10 @@ const styles = StyleSheet.create({
 });
 
 export default class ImageScene extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+  }
+
   static navigationOptions = {
     headerRight: null,
     headerStyle: styles.mainContainer,
