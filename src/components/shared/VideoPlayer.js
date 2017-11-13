@@ -5,12 +5,13 @@ import React, {
   Component,
 } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Slider,
   ActivityIndicator,
+  Platform,
+  Slider,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import PropTypes from "prop-types";
 import Video from "react-native-video";
@@ -21,6 +22,8 @@ import ViewContainer from "../shared/view_container";
 const BKGD_COLOR = "black";
 const FGD_COLOR = "#7B075E";
 const timeHelper = TimeHelper();
+
+const ios = Platform.OS === "ios";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -146,7 +149,7 @@ export default class AudioPlayer extends Component {
   }
 
   showFullScreen = () => {
-    if (this.player) this.player.presentFullscreenPlayer();
+    if (ios && this.player) this.player.presentFullscreenPlayer();
   }
 
   onEnd = () => {
@@ -164,6 +167,9 @@ export default class AudioPlayer extends Component {
   render() {
     return (
       <ViewContainer style={styles.wrapper}>
+        <TouchableOpacity onPress={this.showFullScreen}>
+          <Text style={{ color: "white" }}>Go fullscreen</Text>
+        </TouchableOpacity>
         <View>{this.displaySpinner()}</View>
         <View style={{ flex: 4 }}>
           <Video
