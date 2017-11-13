@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { View, ListView, StyleSheet, TouchableOpacity } from "react-native";
+import { View, ListView, StyleSheet } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import ViewContainer from "../shared/view_container";
 import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
 import FetchService from "../../services/FetchService";
-import Navbar from "../shared/navbar";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
@@ -23,6 +21,14 @@ const styles = StyleSheet.create({
 });
 
 class DownloadManagerView extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params;
+    return {
+      title,
+      headerRight: null,
+    };
+  };
+
   static renderFooter() {
     return <View style={{ height: 60 }} />;
   }
@@ -63,14 +69,8 @@ class DownloadManagerView extends Component {
   );
 
   render() {
-    const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
-        <Icon name="chevron-left" size={32} color="white" />
-      </TouchableOpacity>
-    );
     return (
       <ViewContainer style={styles.mainContainer}>
-        <Navbar title={this.title} leftButton={leftBtn} backgroundColor="#7B075E" />
         <ListView
           ref={(ref) => {
             this.itemsListView = ref;
