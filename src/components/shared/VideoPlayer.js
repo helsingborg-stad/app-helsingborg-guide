@@ -12,12 +12,15 @@ import {
   Text,
   TouchableOpacity,
   View,
+  NativeModules,
 } from "react-native";
 import PropTypes from "prop-types";
 import Video from "react-native-video";
 import Icon from "react-native-vector-icons/FontAwesome";
 import TimeHelper from "../../lib/timeHelper";
 import ViewContainer from "../shared/view_container";
+
+const { FullScreenVideoModule } = NativeModules;
 
 const BKGD_COLOR = "black";
 const FGD_COLOR = "#7B075E";
@@ -38,7 +41,6 @@ const styles = StyleSheet.create({
   },
   sliderContainer: {
     flex: 4,
-    // backgroundColor:'#f5f5f5',
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -103,6 +105,7 @@ export default class AudioPlayer extends Component {
     if (this.state.loading) {
       return <ActivityIndicator style={[styles.spinner]} />;
     }
+    return null;
   }
 
   togglePlayView(isPlaying) {
@@ -149,7 +152,16 @@ export default class AudioPlayer extends Component {
   }
 
   showFullScreen = () => {
-    if (ios && this.player) this.player.presentFullscreenPlayer();
+    if (!this.player) return;
+
+    if (ios) {
+      this.player.presentFullscreenPlayer();
+    } else {
+      const url = this.props.filePath;
+      const paused = false;
+      const currentTime = 0;
+      FullScreenVideoModule.open(url, paused, currentTime);
+    }
   }
 
   onEnd = () => {

@@ -37,11 +37,17 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new PhotoViewPackage(), new BeaconPackage(), new VectorIconsPackage(),
+                    new PhotoViewPackage(),
+                    new BeaconPackage(),
+                    new VectorIconsPackage(),
                     new MapsPackage(),
                     new ReactVideoPackage(),
-                    new RNFetchBlobPackage(), new NotificationPackage(), new SettingsPackage(),
-                    new MediaPackage(), new MediaControlPackage(), new FullScreenVideoModule(getReactApplicationContext()));
+                    new RNFetchBlobPackage(),
+                    new NotificationPackage(),
+                    new SettingsPackage(),
+                    new MediaPackage(),
+                    new MediaControlPackage(),
+                    new AppPackages());
         }
 
         @Override
