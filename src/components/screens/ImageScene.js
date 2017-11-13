@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import PhotoView from "react-native-photo-view";
 import ViewContainer from "../shared/view_container";
 import Navbar from "../shared/navbar";
-import { FetchService } from "../../services/FetchService";
+import FetchService from "../../services/FetchService";
 
 const MAX_SCALE = 2.5;
 const MIN_SCALE = 0.95;
@@ -81,7 +81,7 @@ export default class ImageScene extends Component {
             minimumZoomScale={MIN_SCALE}
             maximumZoomScale={MAX_SCALE}
             androidScaleType="centerInside"
-            onLoad={() => {}}
+            onLoad={() => { }}
             style={{ flex: 1, width: width / scale, height: height / scale }}
           />
         }

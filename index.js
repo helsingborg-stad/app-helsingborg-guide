@@ -6,7 +6,7 @@ import Nav from "guide-hbg/src/NavAndroid";
 import store from "guide-hbg/src/store/configureStore";
 import { loadGuides } from "guide-hbg/src/actions/guideActions";
 import { loadSubLocations } from "guide-hbg/src/actions/subLoactionActions";
-import { internetChanged } from "guide-hbg/src/actions/internetActions";
+import internetChanged from "guide-hbg/src/actions/internetActions";
 import LangService from "guide-hbg/src/services/langService";
 import Opener from "guide-hbg/src/services/SettingsService";
 import { errorHappened } from "guide-hbg/src/actions/errorActions";
@@ -49,7 +49,7 @@ export default class GuideHbg extends Component {
           text: LangService.strings.SETTINGS,
           onPress: GuideHbg.openInternetSettings,
         },
-        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
+        { text: LangService.strings.CLOSE, onPress: () => { }, style: "cancel" },
       ],
       { cancelable: false },
     );

@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import ViewContainer from "../shared/view_container";
 import VideoPlayer from "../shared/VideoPlayer";
 import Navbar from "../shared/navbar";
-import { FetchService } from "../../services/FetchService";
+import FetchService from "../../services/FetchService";
 
 const styles = StyleSheet.create({
   mainContainer: { backgroundColor: "black" },
