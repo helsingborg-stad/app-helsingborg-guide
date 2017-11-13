@@ -1,5 +1,6 @@
 import React from "react";
 import { WebView, StyleSheet } from "react-native";
+import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 
 const styles = StyleSheet.create({
@@ -9,11 +10,11 @@ const styles = StyleSheet.create({
 });
 
 const WebScene = (props) => {
-  const { params } = props.navigation.state;
+  const { url } = props.navigation.state.params;
 
   return (
     <ViewContainer>
-      <WebView source={{ uri: params.url }} />
+      <WebView source={{ uri: url }} />
     </ViewContainer>
   );
 };
@@ -21,6 +22,10 @@ const WebScene = (props) => {
 WebScene.navigationOptions = {
   headerRight: null,
   headerStyle: styles.header,
+};
+
+WebScene.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 export default WebScene;
