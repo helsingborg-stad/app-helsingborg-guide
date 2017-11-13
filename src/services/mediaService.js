@@ -48,13 +48,17 @@ export default class MediaService {
   constructor() {
     this.audio = RELEASED_AUDIO_OBJ;
     this.fetchService = FetchService.getInstance();
-    this.onErrorHandler = this.onErrorHandler.bind(this);
     this.onPreparedCallback = this.onPreparedCallback.bind(this);
     this.onCompletedCallback = this.onCompletedCallback.bind(this);
   }
+
   static getInstance() {
     if (!instance) instance = new MediaService();
     return instance;
+  }
+
+  static onErrorHandler = () => {
+    store.dispatch(errorHappened("error: reading audio file"));
   }
 
   init(audio) {
@@ -71,7 +75,7 @@ export default class MediaService {
         console.log("Audio URI: ", uri);
         MediaService.url = uri;
         NotificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
-        this.onError(this.onErrorHandler);
+        this.onError(MediaService.onErrorHandler);
         this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
         this.onCompleted(this.onCompletedCallback);
 
@@ -82,10 +86,6 @@ export default class MediaService {
         return MediaPlayer.init(MediaService.url);
       });
     return null;
-  }
-
-  onErrorHandler() {
-    store.dispatch(errorHappened("error: reading audio file"));
   }
 
   start() {
@@ -119,7 +119,7 @@ export default class MediaService {
     this.audio = null;
     store.dispatch(releaseAudioFile());
     NotificationService.closeNotification(MEDIA_NOTIFICATION_ID);
-    this.unSubscribeOnError(this.onErrorHandler);
+    this.unSubscribeOnError(MediaService.onErrorHandler);
     this.unSubscribeOnPrepared(this.onPreparedCallback);
     this.unSubscribeOnCompleted(this.onCompletedCallback);
   }
