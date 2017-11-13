@@ -11,6 +11,8 @@ import LangService from "guide-hbg/src/services/langService";
 import Opener from "guide-hbg/src/services/SettingsService";
 import { errorHappened } from "guide-hbg/src/actions/errorActions";
 import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
+import FullScreenVideoScreen from "guide-hbg/src/components/screens/FullScreenVideoScreen";
+
 
 export default class GuideHbg extends Component {
   static openInternetSettings() {
@@ -119,3 +121,4 @@ export default class GuideHbg extends Component {
 }
 
 AppRegistry.registerComponent("GuideHbg", () => GuideHbg);
+AppRegistry.registerComponent("VideoApp", () => FullScreenVideoScreen);
