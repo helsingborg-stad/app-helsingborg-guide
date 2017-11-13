@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Platform, View, Text, StyleSheet, TouchableOpacity, Linking } from "react-native";
+import { Platform, View, Text, StyleSheet, Linking } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import ViewContainer from "../shared/view_container";
-import Navbar from "../shared/navbar";
 import Thumbnail from "../shared/thumbnail2";
 import MapThumbnailsView from "../shared/MapThumbnailsView";
 import RoundedBtn from "../shared/roundedBtn";
@@ -32,6 +31,14 @@ const styles = StyleSheet.create({
 });
 
 export default class SubLocationsOnMapView extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { name } = navigation.state.params;
+    return {
+      title: name,
+      headerRight: null,
+    };
+  };
+
   static makeMarkersFromLocations(subLocations) {
     if (!subLocations || !subLocations.length) return [];
     return subLocations.map((item) => {
@@ -133,18 +140,8 @@ export default class SubLocationsOnMapView extends Component {
   render() {
     if (!this.state.subLocations || this.state.subLocations.length < 1) return null;
 
-    const title = this.state.subLocations[0].guidegroup[0].name;
-
-    const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
-        <Icon name="chevron-left" size={32} color="white" />
-      </TouchableOpacity>
-    );
-
     return (
       <ViewContainer>
-        <Navbar title={title} leftButton={leftBtn} backgroundColor="#7B075E" />
-
         <MapThumbnailsView
           items={this.state.subLocations}
           mapFlex={9}

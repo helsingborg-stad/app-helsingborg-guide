@@ -232,7 +232,8 @@ class GuideView extends Component {
     this.toggleMenu();
 
     const { navigate } = this.props.navigation;
-    navigate("SubLocationsOnMapView", { subLocations: this.state.sublocations });
+    const { name } = this.state.guide;
+    navigate("SubLocationsOnMapView", { subLocations: this.state.sublocations, name });
   };
 
   displaySubLocations() {
