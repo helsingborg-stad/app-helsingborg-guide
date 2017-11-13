@@ -123,7 +123,7 @@ class ObjectView extends Component {
 
   updateWithObjectVisited() {
     const metric = { objectKey: this.props.objectKey, isVisited: true };
-    this.props.metricActions.updateMetric && this.props.metricActions.updateMetric(metric);
+    if (this.props.metricActions.updateMetric) { this.props.metricActions.updateMetric(metric); }
   }
 
   _goToVideoView(videoUrl, title) {
