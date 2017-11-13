@@ -54,6 +54,10 @@ const styles = StyleSheet.create({
 });
 
 class ObjectView extends Component {
+  static navigationOptions = {
+    headerRight: null,
+  }
+
   constructor(props) {
     super(props);
 
