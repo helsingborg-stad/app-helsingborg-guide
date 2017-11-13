@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Dimensions, Image, LayoutAnimation, AsyncStorage } from "react-native";
 import { NavigationActions } from "react-navigation";
-import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import { IS_WELCOMED } from "../../lib/my_consts";
 import ColoredBar from "../shared/ColoredBar";
@@ -50,13 +49,9 @@ const styles = StyleSheet.create({
 });
 
 export default class SplashView extends Component {
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-  };
-
   static navigationOptions = {
-    title: "Splash",
-  };
+    header: null,
+  }
 
   constructor(props) {
     super(props);

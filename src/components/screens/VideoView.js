@@ -1,16 +1,28 @@
 import React, { Component } from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { StyleSheet } from "react-native";
+import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import VideoPlayer from "../shared/VideoPlayer";
-import Navbar from "../shared/navbar";
-import { FetchService } from "../../services/FetchService";
+import FetchService from "../../services/FetchService";
 
 const styles = StyleSheet.create({
   mainContainer: { backgroundColor: "black" },
 });
 
 export default class VideoView extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+  }
+
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params;
+    return {
+      title,
+      headerRight: null,
+      headerStyle: styles.mainContainer,
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = { url: null };
@@ -42,16 +54,8 @@ export default class VideoView extends Component {
   }
 
   displayVideo() {
-    const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
-        <Icon name="chevron-left" size={20} color="white" />
-      </TouchableOpacity>
-    );
-
     return (
       <ViewContainer style={styles.mainContainer}>
-        <Navbar title={this.props.title} leftButton={leftBtn} backgroundColor="black" />
-
         {this.displayVideoPlayer()}
       </ViewContainer>
     );

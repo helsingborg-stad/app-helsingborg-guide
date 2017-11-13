@@ -1,6 +1,8 @@
 /**
  * Created by msaeed on 2017-03-08.
  */
+
+/* eslint-disable max-len */
 const BLUETOOTH_IMG = require("../images/bluetooth.png");
 const DOWNLOAD_IMG = require("../images/download.png");
 const MENU_IMG = require("../images/menu.png");

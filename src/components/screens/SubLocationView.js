@@ -5,7 +5,6 @@ import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import ViewContainer from "../shared/view_container";
-import Navbar from "../shared/navbar";
 import ImageView from "../shared/image_view";
 import ContentThumbnail from "../shared/contentThumbnail";
 import Footer from "../shared/footer";
@@ -32,7 +31,7 @@ import FloatingBtn from "../shared/FloatingBtn";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import downloadManager from "../../services/DownloadTasksManager";
-import { FetchService } from "../../services/FetchService";
+import FetchService from "../../services/FetchService";
 
 const HALF_WIDTH = Dimensions.get("window").width / 2;
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
@@ -87,6 +86,13 @@ const styles = StyleSheet.create({
 });
 
 class SubLocationView extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params;
+    return {
+      title,
+    };
+  }
+
   static get defaultProps() {
     return {
       title: "SubLocation",
@@ -578,17 +584,6 @@ class SubLocationView extends Component {
   }
 
   display() {
-    const leftBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.props.navigation.goBack()}>
-        <Icon2 name="chevron-left" size={32} color="white" />
-      </TouchableOpacity>
-    );
-    const rightBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={this.toggleMainMenu}>
-        <Icon2 name="menu" size={20} color="white" />
-      </TouchableOpacity>
-    );
-
     if (this.state.subLocation && Object.keys(this.state.subLocation).length) {
       return (
         <ViewContainer>
@@ -596,7 +591,6 @@ class SubLocationView extends Component {
             <NoInternetText />
           </SlimNotificationBar>
 
-          <Navbar title={this.state.subLocation.guidegroup[0].name} leftButton={leftBtn} rightButton={rightBtn} backgroundColor="#7B075E" />
           <FloatingBtn onPress={this.onSmallBtnPressed} visible={this.state.smallBtnVisible} content={LangService.strings.NEW_CONTENT} />
 
           <OptionsFloatingBtn onPress={this.toggleMenu} />

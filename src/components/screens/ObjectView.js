@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Dimensions, TouchableOpacity, StyleSheet, ScrollView, TouchableWithoutFeedback } from "react-native";
 
-import Icon2 from "react-native-vector-icons/MaterialIcons";
 import Swiper from "react-native-swiper";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -9,15 +8,14 @@ import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view_content";
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
-import RoundedBtn from "../shared/roundedBtn";
 import LangService from "../../services/langService";
 import MediaPlayer from "../shared/MediaPlayer";
 import Footer from "../shared/footer";
 import * as audioActions from "../../actions/audioActions";
-import * as metricActions from "../../actions/metricActions";
+import metricActions from "../../actions/metricActions";
 import MediaService from "../../services/mediaService";
-import * as internetActions from "../../actions/internetActions";
-import { FetchService } from "../../services/FetchService";
+import internetActions from "../../actions/internetActions";
+import FetchService from "../../services/FetchService";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
 
@@ -54,6 +52,10 @@ const styles = StyleSheet.create({
 });
 
 class ObjectView extends Component {
+  static navigationOptions = {
+    headerRight: null,
+  }
+
   constructor(props) {
     super(props);
 
@@ -121,7 +123,7 @@ class ObjectView extends Component {
 
   updateWithObjectVisited() {
     const metric = { objectKey: this.props.objectKey, isVisited: true };
-    this.props.metricActions.updateMetric(metric);
+    this.props.metricActions.updateMetric && this.props.metricActions.updateMetric(metric);
   }
 
   _goToVideoView(videoUrl, title) {
@@ -267,17 +269,9 @@ class ObjectView extends Component {
 
   display() {
     if (this.state.contentObject && Object.keys(this.state.contentObject).length) {
-      const { goBack } = this.props.navigation;
       return (
         <ViewContainer>
           <ScrollView contentContainerStyle={styles.scrollView}>
-            <RoundedBtn
-              style={styles.closeBtn}
-              isActive={this.state.viewArticle}
-              active={<Icon2 name="close" size={20} color="white" />}
-              idle={<Icon2 name="close" size={20} color="white" />}
-              onPress={goBack}
-            />
             {this.displayImagesSlider()}
             <View style={styles.bodyContainer}>
               {this.displayButtonsBar()}

@@ -1,7 +1,19 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { View, Text, TouchableOpacity, Linking, Platform } from "react-native";
+import React, {
+  Component,
+} from "react";
+import {
+  bindActionCreators,
+} from "redux";
+import {
+  connect,
+} from "react-redux";
+import {
+  View,
+  Text,
+  Linking,
+  Platform,
+} from "react-native";
+import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
@@ -9,7 +21,6 @@ import * as internetActions from "../../actions/internetActions";
 import styles from "../../styles/styles";
 import ViewContainer from "../shared/view_container";
 import LogoView from "../shared/LogoView";
-import Navbar from "../shared/navbar";
 import Thumbnail from "../shared/thumbnail";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
@@ -18,12 +29,30 @@ import RoundedBtn from "../shared/roundedBtn";
 import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
 
+
 class GuideList extends Component {
+  static propTypes = {
+    navigation: PropTypes.object, // eslint-disable-line react/require-default-props
+    guides: PropTypes.array.isRequired,
+    active: PropTypes.object.isRequired,
+    markers: PropTypes.array.isRequired,
+    internet: PropTypes.bool.isRequired,
+    geolocation: PropTypes.any,
+    title: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  }
+
   static get defaultProps() {
     return {
       title: LangService.strings.APP_NAME,
     };
   }
+
+  static navigationOptions = () => {
+    const title = LangService.strings.APP_NAME;
+    return {
+      title,
+    };
+  };
 
   static displayLogo(guideGroup) {
     const logoType = guideGroup.apperance.logotype;
@@ -84,10 +113,6 @@ class GuideList extends Component {
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
   }
 
-  toggleMenu() {
-    this.props.navigation.navigate("DrawerToggle");
-  }
-
   guidePress(guide) {
     const { navigate } = this.props.navigation;
     navigate("GuideView", { guide });
@@ -125,9 +150,7 @@ class GuideList extends Component {
         style={styles.navigateBtn}
         active={<Icon name="directions" size={20} color="white" />}
         idle={<Icon name="directions" size={20} color="white" />}
-        onPress={() => {
-          this.openGoogleMapApp(location.latitude, location.longitude, location.slug);
-        }}
+        onPress={() => { this.openGoogleMapApp(location.latitude, location.longitude, location.slug); }}
       />
     );
     const label = GuideList.displayComingSoon(rowData);
@@ -152,19 +175,12 @@ class GuideList extends Component {
   }
 
   render() {
-    console.log("guidelist.render()", this.state);
-    const rightBtn = (
-      <TouchableOpacity style={{ flex: 1, alignItems: "center", justifyContent: "center" }} onPress={() => this.toggleMenu()}>
-        <Icon name="menu" size={20} color="white" />
-      </TouchableOpacity>
-    );
     return (
       <ViewContainer>
         <SlimNotificationBar visible={!this.state.internet && this.state.guides.length} style={{ top: 50 }}>
           <NoInternetText />
         </SlimNotificationBar>
 
-        <Navbar title={GuideList.defaultProps.title} rightButton={rightBtn} backgroundColor="#7B075E" />
         <MapThumbnailsView
           items={this.state.guides}
           active={this.state.active}
