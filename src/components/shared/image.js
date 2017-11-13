@@ -3,7 +3,7 @@
  */
 import React, { Component } from "react";
 import { View, Image, Text, StyleSheet, Dimensions, ActivityIndicator, Platform } from "react-native";
-import { FetchService } from "../../services/FetchService";
+import FetchService from "../../services/FetchService";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as internetActions from "../../actions/internetActions";
@@ -34,7 +34,7 @@ class OImage extends Component {
     this.setSource();
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   componentWillReceiveProps(nextProps) {
     if (this.state.internet.connected != nextProps.internet.connected) {
@@ -57,11 +57,11 @@ class OImage extends Component {
   }
 
   loadFile(fullPath) {
-    if (Platform.OS == "ioa") {
+    if (Platform.OS === "ios") {
       this.fetchService.readFile(fullPath).then((data) => {
         this.setState({ source: { uri: `data:image/png;base64,${data}` } });
       });
-    } else if (Platform.OS == "ios") {
+    } else if (Platform.OS === "ios") {
       this.setState({ source: { uri: `file://${fullPath}` } });
     }
   }

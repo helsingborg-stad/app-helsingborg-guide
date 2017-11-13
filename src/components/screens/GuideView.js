@@ -1,9 +1,25 @@
-import React, { Component } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, LayoutAnimation, Linking, Platform } from "react-native";
+import React, {
+  Component,
+} from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  LayoutAnimation,
+  Linking,
+  Platform,
+} from "react-native";
+import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import {
+  bindActionCreators,
+} from "redux";
+import {
+  connect,
+} from "react-redux";
 import * as _ from "lodash";
 import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view";
@@ -22,7 +38,10 @@ import * as subLocationActions from "../../actions/subLoactionActions";
 
 const styles = StyleSheet.create({
   scrollView: {},
-  imageViewContainer: { flex: 1, backgroundColor: "white" },
+  imageViewContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   bodyContainer: {
     flex: 1,
     alignItems: "stretch",
@@ -35,25 +54,88 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginTop: 10,
   },
-  title: { fontSize: 23, fontWeight: "bold", textAlign: "center" },
-  logoContainer: { flex: 1, padding: 10 },
-  logo: { marginVertical: 10, width: 100, height: 50 },
-  articleContainer: { flex: 4, paddingHorizontal: 34, paddingVertical: 10 },
-  article: { fontSize: 14, lineHeight: 20 },
-  subLocationsContainer: { flex: 1, paddingVertical: 10, paddingHorizontal: 20 },
+  title: {
+    fontSize: 23,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  logoContainer: {
+    flex: 1,
+    padding: 10,
+  },
+  logo: {
+    marginVertical: 10,
+    width: 100,
+    height: 50,
+  },
+  articleContainer: {
+    flex: 4,
+    paddingHorizontal: 34,
+    paddingVertical: 10,
+  },
+  articleDescriptionText: {
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  articleHeaderText: {
+    fontSize: 19,
+    lineHeight: 21,
+    marginVertical: 10,
+  },
+  subLocationsContainer: {
+    flex: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
   subLocationContainer: {
     minHeight: 160,
     justifyContent: "center",
     borderTopWidth: 1,
     borderTopColor: "#ebebeb",
   },
-  openTimeContainer: { flex: 1, paddingVertical: 20 },
-  openTimeText: { fontSize: 16, fontWeight: "300", lineHeight: 19 },
-  closeBtnContainer: { flex: 1, alignItems: "center", paddingVertical: 15 },
-  fabBtn: { width: 40, height: 40, backgroundColor: "#D35098" },
+  openTimeContainer: {
+    flex: 1,
+    paddingVertical: 20,
+  },
+  openTimeText: {
+    fontSize: 16,
+    fontWeight: "300",
+    lineHeight: 19,
+  },
+  closeBtnContainer: {
+    flex: 1,
+    alignItems: "center",
+    paddingVertical: 15,
+  },
+  fabBtn: {
+    width: 40,
+    height: 40,
+    backgroundColor: "#D35098",
+  },
+  comingSoonView: {
+    flex: 1,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    position: "absolute",
+    bottom: 0,
+    zIndex: 100,
+    left: 0,
+    backgroundColor: "#A84C98",
+  },
+  comingSoonText: {
+    fontWeight: "bold",
+    color: "white",
+  },
 });
 
 class GuideView extends Component {
+  static propTypes = {
+    navigation: PropTypes.object, // eslint-disable-line react/require-default-props
+    subLocations: PropTypes.array.isRequired,
+    internet: PropTypes.bool.isRequired,
+    geolocation: PropTypes.any.isRequired,
+  }
+
   static navigationOptions = ({ navigation }) => {
     const { guide } = navigation.state.params;
     const name = guide ? guide.name : undefined;
@@ -83,19 +165,8 @@ class GuideView extends Component {
   static displayComingSoon(guideGroup) {
     if (!guideGroup.settings.active) {
       return (
-        <View
-          style={{
-            flex: 1,
-            paddingVertical: 5,
-            paddingHorizontal: 10,
-            position: "absolute",
-            bottom: 0,
-            zIndex: 100,
-            left: 0,
-            backgroundColor: "#A84C98",
-          }}
-        >
-          <Text style={{ fontWeight: "bold", color: "white" }}>{LangService.strings.COMING_SOON}</Text>
+        <View style={styles.comingSoonView}>
+          <Text style={styles.comingSoonText}>{LangService.strings.COMING_SOON}</Text>
         </View>
       );
     }
@@ -118,13 +189,14 @@ class GuideView extends Component {
     super(props);
 
     const { guide } = this.props.navigation.state.params;
+    const { subLocations, internet } = this.props;
 
     this.state = {
       guide,
-      sublocations: this.props.subLocations,
+      sublocations: subLocations,
       viewArticle: !guide.settings.active,
       menuVisible: false,
-      internet: this.props.internet,
+      internet,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
@@ -194,8 +266,8 @@ class GuideView extends Component {
   displayArticle() {
     const article = (
       <View style={styles.articleContainer}>
-        <Text style={{ fontSize: 19, lineHeight: 21, marginVertical: 10 }}>{`${LangService.strings.ABOUT} ${this.state.guide.name}`}</Text>
-        <Text style={styles.article}>{this.state.guide.description}</Text>
+        <Text style={styles.articleHeaderText}>{`${LangService.strings.ABOUT} ${this.state.guide.name}`}</Text>
+        <Text style={styles.articleDescriptionText}>{this.state.guide.description}</Text>
       </View>
     );
 

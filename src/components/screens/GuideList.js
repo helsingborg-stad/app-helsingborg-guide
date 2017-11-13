@@ -1,7 +1,19 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { View, Text, Linking, Platform } from "react-native";
+import React, {
+  Component,
+} from "react";
+import {
+  bindActionCreators,
+} from "redux";
+import {
+  connect,
+} from "react-redux";
+import {
+  View,
+  Text,
+  Linking,
+  Platform,
+} from "react-native";
+import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
@@ -17,7 +29,18 @@ import RoundedBtn from "../shared/roundedBtn";
 import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
 
+
 class GuideList extends Component {
+  static propTypes = {
+    navigation: PropTypes.object, // eslint-disable-line react/require-default-props
+    guides: PropTypes.array.isRequired,
+    active: PropTypes.object.isRequired,
+    markers: PropTypes.array.isRequired,
+    internet: PropTypes.bool.isRequired,
+    geolocation: PropTypes.any,
+    title: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  }
+
   static get defaultProps() {
     return {
       title: LangService.strings.APP_NAME,
@@ -127,9 +150,7 @@ class GuideList extends Component {
         style={styles.navigateBtn}
         active={<Icon name="directions" size={20} color="white" />}
         idle={<Icon name="directions" size={20} color="white" />}
-        onPress={() => {
-          this.openGoogleMapApp(location.latitude, location.longitude, location.slug);
-        }}
+        onPress={() => { this.openGoogleMapApp(location.latitude, location.longitude, location.slug); }}
       />
     );
     const label = GuideList.displayComingSoon(rowData);
