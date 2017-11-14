@@ -12,6 +12,10 @@ set -e -u
 HOCKEYAPP_TOKEN="$HOCKEYAPP_TOKEN_ANDROID"
 APK_FILE=android/app/build/outputs/apk/app-release-unsigned.apk
 
+echo "Hockeyapp token and apk file path:"
+echo $HOCKEYAPP_TOKEN
+echo $APK_FILE
+
 #TODO enable this once upload script has been verified
 #case "${TRAVIS_BRANCH}" in
   #develop)
