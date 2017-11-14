@@ -52,6 +52,6 @@ matrix:
       -F "notify=1"
       -F "notes=Some new features and fixed bugs."
       -F "notes_type=0"
-      -F "ipa=@app/build/outputs/apk/YOUR_SIGNED_BUILD.apk"
+      -F "ipa=@app/build/outputs/apk/app-release-unsigned.apk"
       -H "X-HockeyAppToken: $HOCKEYAPP_TOKEN_ANDROID"
       https://rink.hockeyapp.net/api/2/apps/upload
