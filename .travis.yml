@@ -46,6 +46,9 @@ matrix:
     - npm install
     script:
     - travis_retry ./scripts/ci-build-android.sh
+    - pwd
+    - ls
+    - ls app/build/outputs/apk
     - >
       curl
       -F "status=2"
