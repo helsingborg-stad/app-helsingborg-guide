@@ -86,6 +86,11 @@ const styles = StyleSheet.create({
 export default class VideoPlayer extends Component {
   static propTypes = {
     filePath: PropTypes.string.isRequired,
+    isAndroidFullscreen: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    isAndroidFullscreen: false,
   }
 
   constructor(props) {
