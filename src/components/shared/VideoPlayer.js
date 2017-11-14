@@ -157,6 +157,7 @@ export default class VideoPlayer extends Component {
     if (ios) {
       this.player.presentFullscreenPlayer();
     } else {
+      // TODO fix values from current state
       const url = this.props.filePath;
       const paused = false;
       const currentTime = 0;
@@ -177,6 +178,11 @@ export default class VideoPlayer extends Component {
   }
 
   render() {
+    const { isPlaying, currentTime } = this.state;
+    if (this.props.isAndroidFullscreen) {
+      FullScreenVideoModule.setFullscreenPlayState(!isPlaying, currentTime);
+    }
+
     return (
       <ViewContainer style={styles.wrapper}>
         <TouchableOpacity onPress={this.showFullScreen}>
@@ -193,7 +199,7 @@ export default class VideoPlayer extends Component {
             volume={this.state.volume} // 0 is muted, 1 is normal.
             muted={false} // Mutes the audio entirely.
             paused={!this.state.isPlaying} // Pauses playback entirely.
-            resizeMode="center" // Fill the whole screen at aspect ratio.*
+            resizeMode={this.props.isAndroidFullscreen ? "cover" : "center"} // Fill the whole screen at aspect ratio.*
             repeat={false} // Repeat forever.
             playInBackground={false} // Audio continues to play when app entering background.
             playWhenInactive={false} // [iOS] Video continues to play when control or notification center are shown.
