@@ -4,9 +4,7 @@ import React, {
 import {
   NativeModules,
 } from "react-native";
-import {
-  VideoPlayer,
-} from "guide-hbg/src/components/shared/VideoPlayer";
+import VideoPlayer from "guide-hbg/src/components/shared/VideoPlayer";
 
 const { FullScreenVideoModule } = NativeModules;
 
@@ -41,7 +39,7 @@ export default class FullScreenVideoScreen extends Component {
       isAndroidFullscreen
       playOnLoad={!paused}
       initialCurrentTime={currentTime}
-      url={url}
+      filePath={url}
     />);
   }
 }

@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class AudioPlayer extends Component {
+export default class VideoPlayer extends Component {
   static propTypes = {
     filePath: PropTypes.string.isRequired,
   }
