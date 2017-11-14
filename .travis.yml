@@ -46,15 +46,5 @@ matrix:
     - npm install
     script:
     - travis_retry ./scripts/ci-build-android.sh
-    - pwd
-    - ls
-    - ls app/build/outputs/apk
-    - >
-      curl
-      -F "status=2"
-      -F "notify=1"
-      -F "notes=Some new features and fixed bugs."
-      -F "notes_type=0"
-      -F "ipa=@app/build/outputs/apk/app-release-unsigned.apk"
-      -H "X-HockeyAppToken: $HOCKEYAPP_TOKEN_ANDROID"
-      https://rink.hockeyapp.net/api/2/apps/upload
+    after_success:
+    - ./scripts/ci-hockeyapp-upload-android.sh
