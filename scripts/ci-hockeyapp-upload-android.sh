@@ -10,7 +10,7 @@ set -e -u
 
 #TODO remove these default values once upload has been verified
 HOCKEYAPP_TOKEN="$HOCKEYAPP_TOKEN_ANDROID"
-APK_FILE=android/app/build/outputs/apk/app-release-unsigned.apk
+APK_FILE=android/app/build/outputs/apk/app-debug.apk
 
 echo "Hockeyapp token and apk file path:"
 echo $HOCKEYAPP_TOKEN
