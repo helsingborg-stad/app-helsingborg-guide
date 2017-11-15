@@ -16,7 +16,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import Video from "react-native-video";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import TimeHelper from "../../lib/timeHelper";
 import ViewContainer from "../shared/view_container";
 
@@ -138,7 +138,7 @@ export default class VideoPlayer extends Component {
     if (!isPlaying) {
       return (
         <TouchableOpacity style={styles.control} onPress={() => this.onPlayPressed()}>
-          <Icon name="play" size={20} color={FGD_COLOR} />
+          <Icon name="play-arrow" size={20} color={FGD_COLOR} />
         </TouchableOpacity>
       );
     }
@@ -247,7 +247,7 @@ export default class VideoPlayer extends Component {
         </View>
 
         <TouchableOpacity style={styles.expandButton} onPress={this.toggleFullscreen}>
-          <Icon name={isAndroidFullscreen ? "compress" : "expand"} size={32} style={styles.expandButtonIcon} />
+          <Icon name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"} size={32} style={styles.expandButtonIcon} />
         </TouchableOpacity>
 
         <View style={styles.playerContainer}>
