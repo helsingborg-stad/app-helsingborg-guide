@@ -239,6 +239,9 @@ export default class VideoPlayer extends Component {
               style={styles.trackSlider}
               maximumValue={this.state.duration}
               minimumValue={0}
+              minimumTrackTintColor="white"
+              maximumTrackTintColor="white"
+              thumbTintColor="white"
               value={currentTime}
               onValueChange={(value) => {
                 this._changeCurrentTime(value);
