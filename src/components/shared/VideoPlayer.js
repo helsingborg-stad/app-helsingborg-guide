@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
   },
   sliderContainer: {
     flex: 4,
@@ -82,9 +83,6 @@ const styles = StyleSheet.create({
     right: 0,
   },
   expandButton: {
-    position: "absolute",
-    top: 0,
-    right: 0,
     width: 40,
     height: 40,
     flex: 1,
@@ -246,10 +244,6 @@ export default class VideoPlayer extends Component {
           />
         </View>
 
-        <TouchableOpacity style={styles.expandButton} onPress={this.toggleFullscreen}>
-          <Icon name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"} size={32} style={styles.expandButtonIcon} />
-        </TouchableOpacity>
-
         <View style={styles.playerContainer}>
           <View style={styles.controlsContainer}>{this.togglePlayView(isPlaying)}</View>
 
@@ -280,6 +274,10 @@ export default class VideoPlayer extends Component {
               onValueChange={value => this._changeVolume(value)}
             />
           </View>
+
+          <TouchableOpacity style={styles.expandButton} onPress={this.toggleFullscreen}>
+            <Icon name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"} size={32} style={styles.expandButtonIcon} />
+          </TouchableOpacity>
         </View>
       </ViewContainer>
     );
