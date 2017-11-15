@@ -88,21 +88,23 @@ export default class VideoPlayer extends Component {
     filePath: PropTypes.string.isRequired,
     isAndroidFullscreen: PropTypes.bool,
     playOnLoad: PropTypes.bool,
+    initialCurrentTime: PropTypes.number,
   }
 
   static defaultProps = {
     isAndroidFullscreen: false,
     playOnLoad: true,
+    initialCurrentTime: 0,
   }
 
   constructor(props) {
     super(props);
 
-    const { playOnLoad } = this.props;
+    const { playOnLoad, initialCurrentTime } = this.props;
 
     this.state = {
       isPlaying: playOnLoad,
-      currentTime: 0,
+      currentTime: initialCurrentTime,
       volume: 0.7,
       duration: 100,
       loading: true,
@@ -161,7 +163,13 @@ export default class VideoPlayer extends Component {
     this.setState({ currentTime: timeObj.currentTime });
   }
 
-  showFullScreen = () => {
+  toggleFullscreen = () => {
+    const { isAndroidFullscreen } = this.props;
+    if (isAndroidFullscreen) {
+      FullScreenVideoModule.collapse();
+      return;
+    }
+
     if (!this.player) return;
 
     if (ios) {
@@ -169,6 +177,9 @@ export default class VideoPlayer extends Component {
     } else {
       const { filePath } = this.props;
       const { isPlaying, currentTime } = this.state;
+
+      if (isPlaying) this.setState({ isPlaying: false });
+
       FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
     }
   }
@@ -193,7 +204,7 @@ export default class VideoPlayer extends Component {
 
     return (
       <ViewContainer style={styles.wrapper}>
-        <TouchableOpacity onPress={this.showFullScreen}>
+        <TouchableOpacity onPress={this.toggleFullscreen}>
           <Text style={{ color: "white" }}>Go fullscreen</Text>
         </TouchableOpacity>
         <View>{this.displaySpinner()}</View>
