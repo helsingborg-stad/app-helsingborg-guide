@@ -22,8 +22,8 @@ import ViewContainer from "../shared/view_container";
 
 const { FullScreenVideoModule } = NativeModules;
 
+const ICON_SIZE = 32;
 const BKGD_COLOR = "black";
-const FGD_COLOR = "#7B075E";
 const timeHelper = TimeHelper();
 
 const ios = Platform.OS === "ios";
@@ -60,10 +60,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  control: {
-    flex: 1,
-    alignItems: "center",
-  },
   audioLevelContainer: {
     flex: 1,
     flexDirection: "row",
@@ -81,15 +77,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
-  expandButton: {
+  button: {
     width: 40,
     height: 40,
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
-  expandButtonIcon: {
+  buttonIcon: {
     color: "white",
   },
 });
@@ -116,7 +111,6 @@ export default class VideoPlayer extends Component {
     this.state = {
       isPlaying: playOnLoad,
       currentTime: initialCurrentTime,
-      volume: 0.7,
       duration: 100,
       loading: true,
     };
@@ -134,15 +128,15 @@ export default class VideoPlayer extends Component {
   togglePlayView(isPlaying) {
     if (!isPlaying) {
       return (
-        <TouchableOpacity style={styles.control} onPress={() => this.onPlayPressed()}>
-          <Icon name="play-arrow" size={20} color={FGD_COLOR} />
+        <TouchableOpacity style={styles.button} onPress={() => this.onPlayPressed()}>
+          <Icon name="play-arrow" size={ICON_SIZE} style={styles.buttonIcon} />
         </TouchableOpacity>
       );
     }
 
     return (
-      <TouchableOpacity style={styles.control} onPress={() => this.onPausePressed()}>
-        <Icon name="pause" size={20} color={FGD_COLOR} />
+      <TouchableOpacity style={styles.button} onPress={() => this.onPausePressed()}>
+        <Icon name="pause" size={ICON_SIZE} style={styles.buttonIcon} />
       </TouchableOpacity>
     );
   }
@@ -153,12 +147,6 @@ export default class VideoPlayer extends Component {
 
   onPausePressed() {
     this.setState({ isPlaying: false });
-  }
-
-  _changeVolume(value) {
-    this.setState({
-      volume: value,
-    });
   }
 
   _changeCurrentTimeCompleted(time) {
@@ -224,10 +212,9 @@ export default class VideoPlayer extends Component {
               this.player = ref;
             }} // Store reference
             rate={1.0} // 0 is paused, 1 is normal.
-            volume={this.state.volume} // 0 is muted, 1 is normal.
             muted={false} // Mutes the audio entirely.
             paused={!isPlaying} // Pauses playback entirely.
-            resizeMode={isAndroidFullscreen ? "cover" : "center"} // Fill the whole screen at aspect ratio.*
+            resizeMode="contain" // Fill the whole screen at aspect ratio.*
             repeat={false} // Repeat forever.
             playInBackground={false} // Audio continues to play when app entering background.
             playWhenInactive={false} // [iOS] Video continues to play when control or notification center are shown.
@@ -244,7 +231,7 @@ export default class VideoPlayer extends Component {
         </View>
 
         <View style={styles.playerContainer}>
-          <View style={styles.controlsContainer}>{this.togglePlayView(isPlaying)}</View>
+          {this.togglePlayView(isPlaying)}
 
           <View style={styles.sliderContainer}>
             <Text style={styles.duration}>{timeHelper.toTimeMarker(currentTime)}</Text>
@@ -261,21 +248,8 @@ export default class VideoPlayer extends Component {
             <Text style={styles.duration}>{timeHelper.toTimeMarker(this.state.duration)}</Text>
           </View>
 
-          <View style={styles.audioLevelContainer}>
-            <View style={styles.audioLevelIconContainer}>
-              <Icon name="volume-off" size={20} color={FGD_COLOR} />
-            </View>
-            <Slider
-              style={styles.trackSlider}
-              value={this.state.volume}
-              maximumValue={1}
-              minimumValue={0}
-              onValueChange={value => this._changeVolume(value)}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.expandButton} onPress={this.toggleFullscreen}>
-            <Icon name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"} size={32} style={styles.expandButtonIcon} />
+          <TouchableOpacity style={styles.button} onPress={this.toggleFullscreen}>
+            <Icon name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"} size={ICON_SIZE} style={styles.buttonIcon} />
           </TouchableOpacity>
         </View>
       </ViewContainer>
