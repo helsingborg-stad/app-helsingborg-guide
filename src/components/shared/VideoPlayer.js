@@ -87,7 +87,8 @@ export default class VideoPlayer extends Component {
     const { playOnLoad, initialCurrentTime } = this.props;
 
     this.state = {
-      isPlaying: playOnLoad,
+      playOnLoad,
+      isPlaying: false,
       currentTime: initialCurrentTime,
       duration: 100,
       loading: true,
@@ -132,8 +133,8 @@ export default class VideoPlayer extends Component {
   }
 
   _changeCurrentTime(time) {
-    this.setState({ isPlaying: false, currentTime: time });
     this.player.seek(time);
+    this.setState({ isPlaying: false, currentTime: time });
   }
 
   _onProgress(timeObj) {
@@ -166,7 +167,9 @@ export default class VideoPlayer extends Component {
   }
 
   onLoad = (data) => {
-    this.setState({ duration: data.duration, currentTime: data.currentTime, loading: false });
+    const { currentTime, playOnLoad } = this.state;
+    this.player.seek(currentTime);
+    this.setState({ duration: data.duration, currentTime, loading: false, isPlaying: playOnLoad });
   }
 
   loadStart = () => {
