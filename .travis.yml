@@ -46,5 +46,6 @@ matrix:
     - npm install
     script:
     - travis_retry ./scripts/ci-build-android.sh
-    after_success:
-    - ./scripts/ci-hockeyapp-upload-android.sh
+    #TODO enable once we have sorted out our release builds
+    #after_success:
+    #- ./scripts/ci-hockeyapp-upload-android.sh
