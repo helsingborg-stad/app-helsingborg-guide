@@ -87,16 +87,21 @@ export default class VideoPlayer extends Component {
   static propTypes = {
     filePath: PropTypes.string.isRequired,
     isAndroidFullscreen: PropTypes.bool,
+    playOnLoad: PropTypes.bool,
   }
 
   static defaultProps = {
     isAndroidFullscreen: false,
+    playOnLoad: true,
   }
 
   constructor(props) {
     super(props);
+
+    const { playOnLoad } = this.props;
+
     this.state = {
-      isPlaying: true,
+      isPlaying: playOnLoad,
       currentTime: 0,
       volume: 0.7,
       duration: 100,
@@ -162,11 +167,9 @@ export default class VideoPlayer extends Component {
     if (ios) {
       this.player.presentFullscreenPlayer();
     } else {
-      // TODO fix values from current state
-      const url = this.props.filePath;
-      const paused = false;
-      const currentTime = 0;
-      FullScreenVideoModule.open(url, paused, currentTime);
+      const { filePath } = this.props;
+      const { isPlaying, currentTime } = this.state;
+      FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
     }
   }
 
