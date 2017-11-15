@@ -198,14 +198,15 @@ export default class VideoPlayer extends Component {
 
   render() {
     const { isPlaying, currentTime } = this.state;
-    if (this.props.isAndroidFullscreen) {
+    const { isAndroidFullscreen } = this.props;
+    if (isAndroidFullscreen) {
       FullScreenVideoModule.setFullscreenPlayState(!isPlaying, currentTime);
     }
 
     return (
       <ViewContainer style={styles.wrapper}>
         <TouchableOpacity onPress={this.toggleFullscreen}>
-          <Text style={{ color: "white" }}>Go fullscreen</Text>
+          <Icon name={isAndroidFullscreen ? "compress" : "expand"} size={32} color="white" />
         </TouchableOpacity>
         <View>{this.displaySpinner()}</View>
         <View style={{ flex: 4 }}>
@@ -218,7 +219,7 @@ export default class VideoPlayer extends Component {
             volume={this.state.volume} // 0 is muted, 1 is normal.
             muted={false} // Mutes the audio entirely.
             paused={!isPlaying} // Pauses playback entirely.
-            resizeMode={this.props.isAndroidFullscreen ? "cover" : "center"} // Fill the whole screen at aspect ratio.*
+            resizeMode={isAndroidFullscreen ? "cover" : "center"} // Fill the whole screen at aspect ratio.*
             repeat={false} // Repeat forever.
             playInBackground={false} // Audio continues to play when app entering background.
             playWhenInactive={false} // [iOS] Video continues to play when control or notification center are shown.
