@@ -217,7 +217,7 @@ export default class VideoPlayer extends Component {
             rate={1.0} // 0 is paused, 1 is normal.
             volume={this.state.volume} // 0 is muted, 1 is normal.
             muted={false} // Mutes the audio entirely.
-            paused={!this.state.isPlaying} // Pauses playback entirely.
+            paused={!isPlaying} // Pauses playback entirely.
             resizeMode={this.props.isAndroidFullscreen ? "cover" : "center"} // Fill the whole screen at aspect ratio.*
             repeat={false} // Repeat forever.
             playInBackground={false} // Audio continues to play when app entering background.
@@ -235,15 +235,15 @@ export default class VideoPlayer extends Component {
         </View>
 
         <View style={styles.playerContainer}>
-          <View style={styles.controlsContainer}>{this.togglePlayView(this.state.isPlaying)}</View>
+          <View style={styles.controlsContainer}>{this.togglePlayView(isPlaying)}</View>
 
           <View style={styles.sliderContainer}>
-            <Text style={styles.duration}>{timeHelper.toTimeMarker(this.state.currentTime)}</Text>
+            <Text style={styles.duration}>{timeHelper.toTimeMarker(currentTime)}</Text>
             <Slider
               style={styles.trackSlider}
               maximumValue={this.state.duration}
               minimumValue={0}
-              value={this.state.currentTime}
+              value={currentTime}
               onValueChange={(value) => {
                 this._changeCurrentTime(value);
               }}
