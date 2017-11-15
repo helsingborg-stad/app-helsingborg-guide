@@ -45,27 +45,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   trackSlider: {
-    flex: 8,
+    flex: 1,
   },
   duration: {
     fontSize: 14,
     color: "white",
-  },
-  controlsContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  audioLevelContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  audioLevelIconContainer: {
-    flex: 1,
-    alignItems: "center",
   },
   backgroundVideo: {
     position: "absolute",
