@@ -159,6 +159,12 @@ export default class VideoPlayer extends Component {
       if (isPlaying) this.setState({ isPlaying: false });
 
       FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
+
+      FullScreenVideoModule.getPlayerStateOnCollapse().then((stateOnCollapse) => {
+        const time = stateOnCollapse.currentTime;
+        this.player.seek(time);
+        this.setState({ isPlaying: !stateOnCollapse.paused, currentTime: time });
+      });
     }
   }
 
