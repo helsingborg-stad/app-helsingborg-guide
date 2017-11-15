@@ -81,6 +81,22 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
+  expandButton: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: 40,
+    height: 40,
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  expandButtonIcon: {
+    color: "white",
+  },
 });
 
 export default class VideoPlayer extends Component {
@@ -205,9 +221,6 @@ export default class VideoPlayer extends Component {
 
     return (
       <ViewContainer style={styles.wrapper}>
-        <TouchableOpacity onPress={this.toggleFullscreen}>
-          <Icon name={isAndroidFullscreen ? "compress" : "expand"} size={32} color="white" />
-        </TouchableOpacity>
         <View>{this.displaySpinner()}</View>
         <View style={{ flex: 4 }}>
           <Video
@@ -234,6 +247,10 @@ export default class VideoPlayer extends Component {
             style={styles.backgroundVideo}
           />
         </View>
+
+        <TouchableOpacity style={styles.expandButton} onPress={this.toggleFullscreen}>
+          <Icon name={isAndroidFullscreen ? "compress" : "expand"} size={32} style={styles.expandButtonIcon} />
+        </TouchableOpacity>
 
         <View style={styles.playerContainer}>
           <View style={styles.controlsContainer}>{this.togglePlayView(isPlaying)}</View>
