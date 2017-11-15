@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   expandButton: {
     position: "absolute",
     top: 0,
-    right: 40,
+    right: 0,
     width: 40,
     height: 40,
     flex: 1,
