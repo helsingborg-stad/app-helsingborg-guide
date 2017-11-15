@@ -40,17 +40,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   sliderContainer: {
-    flex: 4,
+    flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 10,
   },
   trackSlider: {
     flex: 8,
   },
   duration: {
-    flex: 2,
     fontSize: 14,
     color: "white",
   },
