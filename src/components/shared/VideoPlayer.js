@@ -1,6 +1,3 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, {
   Component,
 } from "react";
@@ -135,7 +132,7 @@ export default class VideoPlayer extends Component {
   }
 
   _changeCurrentTime(time) {
-    this.setState({ isPlaying: false });
+    this.setState({ isPlaying: false, currentTime: time });
     this.player.seek(time);
   }
 
@@ -202,7 +199,7 @@ export default class VideoPlayer extends Component {
             progressUpdateInterval={250.0} // [iOS] Interval to fire onProgress (default to ~250ms)
             onLoadStart={this.loadStart} // Callback when video starts to load
             onLoad={this.onLoad} // Callback when video loads
-            onProgress={timeObj => this._onProgress(timeObj)} // Callback every ~250ms with currentTime
+            onProgress={data => this._onProgress(data)} // Callback every ~250ms with currentTime
             onEnd={this.onEnd} // Callback when playback finishes
             onError={this.videoError} // Callback when video cannot be loaded
             onBuffer={() => this.onBuffer} // Callback when remote video is buffering
@@ -211,7 +208,7 @@ export default class VideoPlayer extends Component {
           />
         </View>
 
-        <View style={styles.playerContainer}>
+        <View style={styles.playerContainer} >
           {this.togglePlayView(isPlaying)}
 
           <View style={styles.sliderContainer}>
@@ -224,10 +221,12 @@ export default class VideoPlayer extends Component {
               maximumTrackTintColor="white"
               thumbTintColor="white"
               value={currentTime}
-              onValueChange={(value) => {
-                this._changeCurrentTime(value);
-              }}
-              onSlidingComplete={value => this._changeCurrentTimeCompleted(value)}
+              onValueChange={data =>
+                this._changeCurrentTime(data)
+              }
+              onSlidingComplete={data =>
+                this._changeCurrentTimeCompleted(data)
+              }
             />
             <Text style={styles.duration}>{timeHelper.toTimeMarker(this.state.duration)}</Text>
           </View>
