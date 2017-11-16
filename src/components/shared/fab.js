@@ -1,11 +1,6 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component, Children } from "react";
-import { View, Text, StyleSheet, Button, Dimensions, TouchableOpacity, LayoutAnimation } from "react-native";
-import ViewContainer from "../shared/view_container";
+import { View, StyleSheet, Dimensions, TouchableOpacity, LayoutAnimation } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import RoundedBtn from "../shared/roundedBtn";
 
 const BOX_HEIGHT = Dimensions.get("window").height * 0.4;
 const BOX_WIDTH = Dimensions.get("window").width * 0.4;
@@ -15,63 +10,8 @@ const CHILD_FAB_WIDTH = 40;
 const PARENT_FAB_BTN_DIM = 30;
 
 const CENTER_HEIGHT = (BOX_HEIGHT - PARENT_FAB_HEIGHT) / 2;
-const xZERO = CENTER_HEIGHT + CHILD_FAB_WIDTH / 2;
+const xZERO = CENTER_HEIGHT + (CHILD_FAB_WIDTH / 2);
 const RADIUS = BOX_WIDTH - CHILD_FAB_WIDTH - 20;
-const TOTAL_CHILD = 3;
-
-export default class Fab extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
-
-  componentDidMount() { }
-
-  createPosition(index, count) {
-    let top,
-      right;
-    const angle = Math.PI / count / 2 + Math.PI / count * index;
-
-    right = RADIUS * Math.sin(angle);
-    top = xZERO + RADIUS * Math.cos(angle);
-
-    return { top, right };
-  }
-
-  displayFabChildrenBox() {
-    if (!this.state.open) return <View style={styles.childrenContainerClosed} />;
-
-    const childrenCount = Children.count(this.props.children);
-
-    const children = Children.map(this.props.children, (child, index) => {
-      const childPositionStyle = this.createPosition(index, childrenCount);
-      return <View style={[styles.child, childPositionStyle]}>{child}</View>;
-    });
-
-    return <View style={styles.fabChildrenContainer}>{children}</View>;
-  }
-
-  toggleOpen() {
-    LayoutAnimation.easeInEaseOut();
-    this.setState({ open: !this.state.open });
-  }
-
-  render() {
-    const fabBoxStyle = this.state.open ? { width: BOX_WIDTH, height: BOX_HEIGHT } : {};
-    return (
-      <View style={[styles.fabBoxContainer, fabBoxStyle]}>
-        <TouchableOpacity activeOpacity={0.88} onPress={() => this.toggleOpen()} style={styles.parentFabContainer}>
-          <View style={styles.ParentFabBtnContainer}>
-            <Icon style={styles.parentIcon} name="bars" size={PARENT_FAB_BTN_DIM} color="white" />
-          </View>
-        </TouchableOpacity>
-        {this.displayFabChildrenBox()}
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1, backgroundColor: "#cecece" },
@@ -132,3 +72,53 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
 });
+
+export default class Fab extends Component {
+  static createPosition(index, count) {
+    const angle = Math.PI / count / 2 + Math.PI / count * index;
+
+    const right = RADIUS * Math.sin(angle);
+    const top = xZERO + (RADIUS * Math.cos(angle));
+
+    return { top, right };
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+  }
+
+  displayFabChildrenBox() {
+    if (!this.state.open) return <View style={styles.childrenContainerClosed} />;
+
+    const childrenCount = Children.count(this.props.children);
+
+    const children = Children.map(this.props.children, (child, index) => {
+      const childPositionStyle = Fab.createPosition(index, childrenCount);
+      return <View style={[styles.child, childPositionStyle]}>{child}</View>;
+    });
+
+    return <View style={styles.fabChildrenContainer}>{children}</View>;
+  }
+
+  toggleOpen() {
+    LayoutAnimation.easeInEaseOut();
+    this.setState({ open: !this.state.open });
+  }
+
+  render() {
+    const fabBoxStyle = this.state.open ? { width: BOX_WIDTH, height: BOX_HEIGHT } : {};
+    return (
+      <View style={[styles.fabBoxContainer, fabBoxStyle]}>
+        <TouchableOpacity activeOpacity={0.88} onPress={() => this.toggleOpen()} style={styles.parentFabContainer}>
+          <View style={styles.ParentFabBtnContainer}>
+            <Icon style={styles.parentIcon} name="bars" size={PARENT_FAB_BTN_DIM} color="white" />
+          </View>
+        </TouchableOpacity>
+        {this.displayFabChildrenBox()}
+      </View>
+    );
+  }
+}
