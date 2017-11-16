@@ -39,6 +39,18 @@ const tabNavigatorParams = {
   animationEnabled: false,
   backBehavior: "none",
   lazy: true,
+  tabBarOptions: {
+    activeTintColor: "#a61380",
+    inactiveTintColor: "#7f7f7f",
+    activeBackgroundColor: "white",
+    inactiveBackgroundColor: "white",
+    labelStyle: {
+      fontSize: 10,
+      fontWeight: "bold",
+      letterSpacing: 0.4,
+      marginBottom: 5,
+    },
+  },
 };
 
 const headerStyle = {
