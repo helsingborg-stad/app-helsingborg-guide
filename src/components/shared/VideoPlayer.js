@@ -81,21 +81,14 @@ export default class VideoPlayer extends Component {
     initialCurrentTime: 0,
   }
 
-  constructor(props) {
-    super(props);
-
-    const { playOnLoad, initialCurrentTime } = this.props;
-
-    this.state = {
-      playOnLoad,
-      isPlaying: false,
-      currentTime: initialCurrentTime,
-      duration: 100,
-      loading: true,
-    };
+  state = {
+    currentTime: 0.0,
   }
 
-  player;
+  componentWillMount() {
+    const { playOnLoad } = this.props;
+    this.setState({ isPlaying: playOnLoad, loading: playOnLoad });
+  }
 
   displaySpinner() {
     if (this.state.loading) {
@@ -173,13 +166,12 @@ export default class VideoPlayer extends Component {
   }
 
   onLoad = (data) => {
-    const { currentTime, playOnLoad } = this.state;
-    this.player.seek(currentTime);
-    this.setState({ duration: data.duration, currentTime, loading: false, isPlaying: playOnLoad });
-  }
-
-  loadStart = () => {
-    this.setState({ loading: true });
+    const { initialCurrentTime } = this.props;
+    if (initialCurrentTime) {
+      this.player.seek(initialCurrentTime);
+      this.setState({ currentTime: initialCurrentTime });
+    }
+    this.setState({ duration: data.duration, loading: false });
   }
 
   render() {
@@ -206,7 +198,6 @@ export default class VideoPlayer extends Component {
             playInBackground={false} // Audio continues to play when app entering background.
             playWhenInactive={false} // [iOS] Video continues to play when control or notification center are shown.
             progressUpdateInterval={250.0} // [iOS] Interval to fire onProgress (default to ~250ms)
-            onLoadStart={this.loadStart} // Callback when video starts to load
             onLoad={this.onLoad} // Callback when video loads
             onProgress={data => this._onProgress(data)} // Callback every ~250ms with currentTime
             onEnd={this.onEnd} // Callback when playback finishes
@@ -248,4 +239,3 @@ export default class VideoPlayer extends Component {
     );
   }
 }
-
