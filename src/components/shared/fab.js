@@ -27,7 +27,7 @@ export default class Fab extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   createPosition(index, count) {
     let top,
