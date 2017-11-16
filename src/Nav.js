@@ -25,6 +25,7 @@ import {
   VideoView,
   ImageView,
   DownloadManagerView,
+  SettingsScreen,
 } from "./components/screens/";
 
 const styles = StyleSheet.create({
@@ -81,10 +82,18 @@ const DownloadNavigator = StackNavigator(
   headerStyle,
 );
 
+const SettingsNavigator = StackNavigator(
+  {
+    SettingsScreen: { screen: SettingsScreen },
+  },
+  headerStyle,
+);
+
 const TabBarNavigator = TabNavigator(
   {
     Home: { screen: GuideNavigator },
     DownloadManagerView: { screen: DownloadNavigator },
+    Settings: { screen: SettingsNavigator },
   },
   tabNavigatorParams,
 );
