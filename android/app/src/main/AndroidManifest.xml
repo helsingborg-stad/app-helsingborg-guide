@@ -37,6 +37,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".VideoActivity"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+                android:label="@string/app_name"
+                android:screenOrientation="sensorLandscape"
+                android:windowSoftInputMode="adjustResize" />
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
 
         <meta-data
