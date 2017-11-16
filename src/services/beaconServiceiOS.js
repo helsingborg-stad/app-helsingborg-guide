@@ -8,7 +8,7 @@ let rangedBeacons = [];
 
 let scannerIsRunning = false;
 
-let resultsCallback = () => {};
+let resultsCallback = () => { };
 
 export class BeaconServiceiOS {
   static threshold = 3;
@@ -87,11 +87,11 @@ export class BeaconServiceiOS {
     }, 2000);
     return BeaconManager.startScanning();
   }
-  checkBluetooth() {}
+  checkBluetooth() { }
 
-  unbind() {}
+  unbind() { }
 
-  startRanging(regionId) {}
+  startRanging(regionId) { }
 
   stopRanging(regionId) {
     this.hasRangedBeacons = false;
@@ -101,7 +101,7 @@ export class BeaconServiceiOS {
   onRangingResult(callback) {
     resultsCallback = callback;
   }
-  onServiceConnected(callback) {}
+  onServiceConnected(callback) { }
   unSubscribeOnRangingResult(callback) {
     this.eventEmitter.removeListener("BEACON_ENTERED_REGION_IOS", callback);
   }
@@ -113,12 +113,12 @@ export class BeaconServiceiOS {
 
     // return beacons.reduce((prev,curr)=> prev.distance<curr.distance?prev:curr);
   }
-  unSubscribeOnRangingResult(callback) {}
+  unSubscribeOnRangingResult(callback) { }
   getOptimizedDistanceBeacons(beacons) {
     if (!beacons || !beacons.length) return [];
     return beacons.map(_beacon => this.optimizeDistance(_beacon));
   }
-  unSubscribeOnServiceConnected(callback) {}
+  unSubscribeOnServiceConnected(callback) { }
 
   // for estimot
   // optimizeDistance(_beacon){

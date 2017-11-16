@@ -31,7 +31,7 @@ export default class Keypad extends Component {
     this.resultCode = this.props.resultCode;
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   componentWillReceiveProps(nextProps) {
     if (this.state.visible != nextProps.visible) {

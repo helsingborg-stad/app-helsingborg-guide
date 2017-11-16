@@ -98,7 +98,7 @@ export default class MapThumbnailsView extends Component {
   // Map Methods
   // ##########################
 
-  _onRegionChange(region) {}
+  _onRegionChange(region) { }
 
   _onMarkerPressed(marker) {
     if (this.state.items && this.state.items.length) {

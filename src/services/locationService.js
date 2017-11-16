@@ -35,7 +35,7 @@ export class LocationService {
       LangService.strings.MESSAGE_LOCATION_PERMISSION,
       [
         { text: LangService.strings.SETTINGS, onPress: () => this.openLocationSettings() },
-        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
+        { text: LangService.strings.CLOSE, onPress: () => { }, style: "cancel" },
       ],
       { cancelable: false },
     );
