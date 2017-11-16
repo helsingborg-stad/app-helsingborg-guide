@@ -32,6 +32,9 @@ import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import downloadManager from "../../services/DownloadTasksManager";
 import FetchService from "../../services/FetchService";
+import {
+  TabBarStyles,
+} from "../../styles/";
 
 const HALF_WIDTH = Dimensions.get("window").width / 2;
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
@@ -90,6 +93,7 @@ class SubLocationView extends Component {
     const { title } = navigation.state.params;
     return {
       title,
+      ...TabBarStyles.guide,
     };
   }
 
