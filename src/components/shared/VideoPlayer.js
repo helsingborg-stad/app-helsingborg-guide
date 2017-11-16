@@ -97,28 +97,17 @@ export default class VideoPlayer extends Component {
     return null;
   }
 
-  togglePlayView(isPlaying) {
-    if (!isPlaying) {
-      return (
-        <TouchableOpacity style={styles.button} onPress={() => this.onPlayPressed()}>
-          <Icon name="play-arrow" size={ICON_SIZE} style={styles.buttonIcon} />
-        </TouchableOpacity>
-      );
-    }
-
+  renderPlayPauseButton(isPlaying) {
     return (
-      <TouchableOpacity style={styles.button} onPress={() => this.onPausePressed()}>
-        <Icon name="pause" size={ICON_SIZE} style={styles.buttonIcon} />
+      <TouchableOpacity style={styles.button} onPress={() => this.togglePlayState()}>
+        <Icon name={isPlaying ? "pause" : "play-arrow"} size={ICON_SIZE} style={styles.buttonIcon} />
       </TouchableOpacity>
     );
   }
 
-  onPlayPressed() {
-    this.setState({ isPlaying: true });
-  }
-
-  onPausePressed() {
-    this.setState({ isPlaying: false });
+  togglePlayState() {
+    const { isPlaying } = this.state;
+    this.setState({ isPlaying: !isPlaying });
   }
 
   _changeCurrentTimeCompleted(time) {
@@ -209,7 +198,7 @@ export default class VideoPlayer extends Component {
         </View>
 
         <View style={styles.playerContainer} >
-          {this.togglePlayView(isPlaying)}
+          {this.renderPlayPauseButton(isPlaying)}
 
           <View style={styles.sliderContainer}>
             <Text style={styles.duration}>{timeHelper.toTimeMarker(currentTime)}</Text>
