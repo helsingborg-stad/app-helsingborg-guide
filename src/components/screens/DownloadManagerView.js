@@ -9,6 +9,9 @@ import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
 import LangService from "../../services/langService";
 import FetchService from "../../services/FetchService";
+import {
+  TabBarStyles,
+} from "../../styles/";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
@@ -33,6 +36,7 @@ class DownloadManagerView extends Component {
     return {
       title,
       headerRight: null,
+      ...TabBarStyles.downloaded,
     };
   };
 
