@@ -123,6 +123,7 @@ export default class Nav extends Component {
         <StatusBar
           translucent={ios}
           barStyle="light-content"
+          backgroundColor="#7B075E"
         />
         <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
         {Nav.displayNotificationBar()}
