@@ -20,6 +20,7 @@ export default class VideoView extends Component {
       title,
       headerRight: null,
       headerStyle: styles.mainContainer,
+      tabBarVisible: false,
     };
   }
 
