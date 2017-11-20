@@ -5,6 +5,7 @@ import {
 import {
   StyleSheet,
   StatusBar,
+  Platform,
 } from "react-native";
 import {
   StackNavigator,
@@ -108,6 +109,8 @@ const RootNavigator = StackNavigator(
   },
 );
 
+const ios = Platform.OS === "ios";
+
 // TODO this class should most likely be merged into App (index.js)
 export default class Nav extends Component {
   static displayNotificationBar() {
@@ -118,7 +121,7 @@ export default class Nav extends Component {
     return (
       <ViewContainer>
         <StatusBar
-          translucent
+          translucent={ios}
           barStyle="light-content"
         />
         <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
