@@ -39,6 +39,7 @@ const tabNavigatorParams = {
   animationEnabled: false,
   backBehavior: "none",
   lazy: true,
+  showIcon: true,
   tabBarOptions: {
     activeTintColor: "#a61380",
     inactiveTintColor: "#7f7f7f",
