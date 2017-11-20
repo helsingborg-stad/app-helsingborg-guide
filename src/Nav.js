@@ -51,6 +51,9 @@ const tabNavigatorParams = {
       letterSpacing: 0.4,
       marginBottom: 5,
     },
+    style: {
+      backgroundColor: "white",
+    },
   },
 };
 
