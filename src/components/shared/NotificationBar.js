@@ -19,7 +19,7 @@ class NotificationBar extends Component {
     };
   }
 
-  componentWillMount() {}
+  componentWillMount() { }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.visible != this.state.visible) {

@@ -36,7 +36,7 @@ export default class ContentThumbnailPin extends Component {
         resizeMethod="scale"
         resizeMode="center"
         source={uri}
-        // blurRadius={this.props.blur}
+      // blurRadius={this.props.blur}
       />
     );
   }

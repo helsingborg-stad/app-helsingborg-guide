@@ -40,7 +40,7 @@ export class BeaconService {
       LangService.strings.NO_BLE_CONNECTION_MESSAGE,
       [
         { text: LangService.strings.SETTINGS, onPress: this.openBLESettings.bind(this) },
-        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
+        { text: LangService.strings.CLOSE, onPress: () => { }, style: "cancel" },
       ],
       { cancelable: false },
     );

@@ -26,7 +26,7 @@ export default class OptionsContentView extends Component {
     super(props);
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   createPosition(index, count) {
     let top,
