@@ -4,14 +4,13 @@ import {
 } from "prop-types";
 import {
   StyleSheet,
+  StatusBar,
 } from "react-native";
 import {
   StackNavigator,
-  DrawerNavigator,
   TabNavigator,
 } from "react-navigation";
 import ViewContainer from "./components/shared/view_container";
-import MenuContent from "./components/MenuContent";
 import NotificationBar from "./components/shared/NotificationBar";
 import {
   SplashView,
@@ -63,7 +62,7 @@ const headerStyle = {
 
 const GuideNavigator = StackNavigator(
   {
-    GuideList: { screen: GuideList },
+    Home: { screen: GuideList },
     GuideView: { screen: GuideView },
     SubLocationView: { screen: SubLocationView },
     SubLocationsOnMapView: { screen: SubLocationsOnMapView },
@@ -118,6 +117,10 @@ export default class Nav extends Component {
   render() {
     return (
       <ViewContainer>
+        <StatusBar
+          translucent
+          barStyle="light-content"
+        />
         <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
         {Nav.displayNotificationBar()}
       </ViewContainer>
