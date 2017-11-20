@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "eslint": "eslint index.js src/**/*.js --report-unused-disable-directives",
+    "eslint": "eslint index.js src/** --ext .js --report-unused-disable-directives",
     "test": "jest"
   },
   "dependencies": {
