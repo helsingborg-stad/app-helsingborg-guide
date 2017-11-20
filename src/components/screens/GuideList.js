@@ -28,6 +28,9 @@ import MapThumbnailsView from "../shared/MapThumbnailsView";
 import RoundedBtn from "../shared/roundedBtn";
 import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
+import {
+  TabBarStyles,
+} from "../../styles/";
 
 
 class GuideList extends Component {
@@ -52,6 +55,7 @@ class GuideList extends Component {
     return {
       title,
       headerRight: null,
+      ...TabBarStyles.guide,
     };
   };
 
