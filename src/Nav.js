@@ -41,6 +41,7 @@ const tabNavigatorParams = {
   backBehavior: "none",
   lazy: true,
   tabBarOptions: {
+    pressColor: "#7B075E",
     showIcon: true,
     activeTintColor: "#a61380",
     inactiveTintColor: "#7f7f7f",
@@ -54,6 +55,9 @@ const tabNavigatorParams = {
     },
     style: {
       backgroundColor: "white",
+    },
+    indicatorStyle: {
+      backgroundColor: "#7B075E",
     },
   },
 };
