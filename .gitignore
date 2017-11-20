@@ -1,3 +1,5 @@
+android/release.properties
+
 # VS Code
 .vscode/
 android/.settings/

@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- "6"
+- '6'
 matrix:
   include:
   - language: node_js
@@ -18,18 +18,17 @@ matrix:
     jdk: oraclejdk8
     android:
       components:
-        - tools
-        - tools # tools twice because of bug: https://github.com/travis-ci/travis-ci/issues/6040
-        - platform-tools # must come after the double tools to get the right version
-
-        - build-tools-25.0.3
-        - build-tools-25.0.0 # used by react-native-photo-view
-        - build-tools-23.0.1 # used by react-native-fetch-blob
-        - build-tools-25.0.2 # used by react-native-video
-        - build-tools-26.0.1 # used by react-native-vector-icons
-        - android-25
-        - android-23 # used by react-native-fetch-blob
-        - android-26 # used by react-native-vector-icons
+      - tools
+      - tools
+      - platform-tools
+      - build-tools-25.0.3
+      - build-tools-25.0.0
+      - build-tools-23.0.1
+      - build-tools-25.0.2
+      - build-tools-26.0.1
+      - android-25
+      - android-23
+      - android-26
     env:
     - CXX=g++-4.8
     addons:
@@ -39,6 +38,7 @@ matrix:
         packages:
         - g++-4.8
     before_install:
+    - openssl aes-256-cbc -K $encrypted_a533b106a22c_key -iv $encrypted_a533b106a22c_iv -in android/release.properties.enc -out android/release.properties -d
     - nvm install 8
     - node --version
     - npm i -g npm@5.0.3
