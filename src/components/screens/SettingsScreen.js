@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: 17,
-    lineHeight: 23.0,
+    lineHeight: 23,
     color: "#a61380",
     marginHorizontal: defaultMargin,
   },
@@ -139,6 +139,11 @@ class SettingsScreen extends Component {
     });
   }
 
+  navigateToWelcomeView = () => {
+    const { navigate } = this.props.navigation;
+    navigate("WelcomeView");
+  };
+
   displayLanguages() {
     const { languages } = this.state;
     if (!languages || !Object.keys(languages).length) return null;
@@ -173,7 +178,9 @@ class SettingsScreen extends Component {
         </View>
         <View style={styles.divider} />
         <Text style={styles.titleText}>Om Guide Helsingborg</Text>
-        <Text style={styles.linkText}>Se tutorial</Text>
+        <TouchableOpacity onPress={this.navigateToWelcomeView}>
+          <Text style={styles.linkText}>Se tutorial</Text>
+        </TouchableOpacity>
         <View style={styles.divider} />
         <View style={styles.contactUsContainer}>
           <Image source={helsingborgIcon} style={styles.icon} />
