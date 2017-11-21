@@ -18,7 +18,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
-import styles from "../../styles/styles";
 import ViewContainer from "../shared/view_container";
 import LogoView from "../shared/LogoView";
 import Thumbnail from "../shared/thumbnail";
@@ -30,6 +29,7 @@ import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
 import {
   TabBarStyles,
+  GuideListStyles,
 } from "../../styles/";
 
 
@@ -71,8 +71,8 @@ class GuideList extends Component {
     const opening = TimingService.getOpeningHours(openingList, expList);
     const text = opening || "";
     return (
-      <View style={styles.openTimeContainer}>
-        <Text style={styles.openTimeText}>{text}</Text>
+      <View style={GuideListStyles.openTimeContainer}>
+        <Text style={GuideListStyles.openTimeText}>{text}</Text>
       </View>
     );
   }
@@ -152,7 +152,7 @@ class GuideList extends Component {
 
     const button = (
       <RoundedBtn
-        style={styles.navigateBtn}
+        style={GuideListStyles.navigateBtn}
         active={<Icon name="directions" size={20} color="white" />}
         idle={<Icon name="directions" size={20} color="white" />}
         onPress={() => { this.openGoogleMapApp(location.latitude, location.longitude, location.slug); }}
@@ -171,7 +171,7 @@ class GuideList extends Component {
           this.guidePress(rowData);
         }}
       >
-        <View style={styles.titleContainer}>
+        <View style={GuideListStyles.titleContainer}>
           {GuideList.displayLogo(rowData)}
           {GuideList.displayOpeningTime(rowData)}
         </View>

@@ -1,9 +1,5 @@
 import { StyleSheet } from "react-native";
 
-// ########### THIS STYLES SHEET IS NOT GLOBAL IS THE ONE USED IN THE GUIDELIST VIEW
-// ######################################################
-// ######################################################
-
 export default StyleSheet.create({
   mapViewContainer: { flex: 4, justifyContent: "flex-start", alignItems: "stretch" },
   map: { flex: 1 },
