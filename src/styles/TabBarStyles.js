@@ -3,6 +3,7 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
+import LangService from "../services/langService";
 
 const guideIcon = require("../images/tab-bar/iconStartpageUnselected.png");
 const downloadedIcon = require("../images/tab-bar/iconDownloads.png");
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
 
 export default {
   guide: {
-    tabBarLabel: "GUIDE",
+    tabBarLabel: () => LangService.strings.GUIDE.toUpperCase(),
     tabBarIcon: ({ focused }: { focused: boolean }) => (
       <Image
         source={guideIcon}
@@ -32,7 +33,7 @@ export default {
     ),
   },
   downloaded: {
-    tabBarLabel: "NEDLADDAT",
+    tabBarLabel: () => LangService.strings.OFFLINE_CONTENT_TITLE.toUpperCase(),
     tabBarIcon: ({ focused }: { focused: boolean }) => (
       <Image
         source={downloadedIcon}
@@ -41,7 +42,7 @@ export default {
     ),
   },
   settings: {
-    tabBarLabel: "INSTÄLLNINGAR",
+    tabBarLabel: () => LangService.strings.SETTINGS.toUpperCase(),
     tabBarIcon: ({ focused }: { focused: boolean }) => (
       <Image
         source={settingsIcon}
