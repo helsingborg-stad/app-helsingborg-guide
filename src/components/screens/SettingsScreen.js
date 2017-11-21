@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Image,
   View,
 } from "react-native";
 import PropTypes from "prop-types";
@@ -21,51 +22,86 @@ import {
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 
+const defaultMargin = 20;
+
+const helsingborgIcon = require("../../images/HBG.png");
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
   },
-  titleContainer: {
-    flex: 1,
-  },
   titleText: {
-    fontSize: 18,
-    lineHeight: 25,
+    fontSize: 20,
+    lineHeight: 23,
     fontWeight: "500",
     color: "black",
+    marginHorizontal: defaultMargin,
+    marginTop: defaultMargin,
+    marginBottom: 10,
+  },
+  linkText: {
+    fontSize: 17,
+    lineHeight: 23.0,
+    color: "#a61380",
+    marginHorizontal: defaultMargin,
   },
   languageContainer: {
-    flex: 1,
     alignItems: "flex-start",
   },
   languageChoicesContainer: {
-    flex: 1,
     flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: defaultMargin,
   },
   choiceContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: 40,
   },
   choiceText: {
-    fontSize: 14,
-    lineHeight: 40,
-    color: "#ffe3fa",
+    fontSize: 17,
+    color: "black",
+    lineHeight: 23,
+  },
+  icon: {
+    tintColor: "black",
+    margin: defaultMargin,
+  },
+  contactUsContainer: {
+    alignItems: "center",
+  },
+  contactEmailText: {
+    fontSize: 17,
+    lineHeight: 23,
+    color: "black",
+    textAlign: "center",
+  },
+  contactPhoneText: {
+    marginTop: 10,
+    fontSize: 20,
+    lineHeight: 23,
+    color: "black",
+    textAlign: "center",
+  },
+  divider: {
+    margin: defaultMargin,
+    height: 1,
+    backgroundColor: "#bcbcbc",
   },
 });
 
 class SettingsScreen extends Component {
   static propTypes = {
-    navigation: PropTypes.object, // eslint-disable-line react/require-default-props
+    navigation: PropTypes.object, // eslint-disable-line react/no-unused-prop-types react/require-default-props
     guideActions: PropTypes.object.isRequired,
-    subLocationActions: PropTypes.object.isRequired
+    subLocationActions: PropTypes.object.isRequired,
   }
 
-  static navigationOptions = {
-    title: "Inställningar",
-    ...TabBarStyles.settings,
+  static navigationOptions = () => {
+    const title = LangService.strings.SETTINGS;
+    return {
+      title,
+      ...TabBarStyles.settings,
+    };
   };
 
   constructor(props) {
@@ -109,7 +145,7 @@ class SettingsScreen extends Component {
     const keys = Object.keys(languages);
 
     return keys.map((key) => {
-      const style = { color: "#D35098" };
+      const style = { color: "#a61380" };
       const selectedStyle = this.state.selectedLanguageCode === languages[key].code ? style : null;
       const btnDisabled = this.state.selectedLanguageCode === languages[key].code;
       const { nativeName } = languages[key];
@@ -131,11 +167,20 @@ class SettingsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
         <View style={styles.languageContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
-          </View>
           <View style={styles.languageChoicesContainer}>{this.displayLanguages()}</View>
+        </View>
+        <View style={styles.divider} />
+        <Text style={styles.titleText}>Om Guide Helsingborg</Text>
+        <Text style={styles.linkText}>Se tutorial</Text>
+        <View style={styles.divider} />
+        <View style={styles.contactUsContainer}>
+          <Image source={helsingborgIcon} style={styles.icon} />
+          <View style={styles.contactTextContainer}>
+            <Text style={styles.contactEmailText}>kontaktcenter@helsingborg.se</Text>
+            <Text style={styles.contactPhoneText}>042-10 50 00</Text>
+          </View>
         </View>
       </View>
     );
