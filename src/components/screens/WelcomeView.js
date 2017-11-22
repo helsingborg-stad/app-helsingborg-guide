@@ -13,6 +13,7 @@ import ColoredBar from "../shared/ColoredBar";
 const IMAGE1 = require("../../images/firstInstructionImage.png");
 
 const FULL_HEIGHT = Dimensions.get("window").height;
+const FULL_WIDTH = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -23,54 +24,65 @@ const styles = StyleSheet.create({
   },
   dot: {
     backgroundColor: "white",
-    width: 12,
-    height: 12,
     borderRadius: 6,
+    height: 12,
+    marginBottom: 6,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 6,
-    marginBottom: 6,
+    width: 12,
   },
   activeDot: {
     backgroundColor: "#D35098",
-    width: 14,
-    height: 14,
     borderRadius: 7,
+    height: 14,
+    marginBottom: 7,
     marginLeft: 11,
     marginRight: 11,
     marginTop: 7,
-    marginBottom: 7,
+    width: 14,
   },
   pagination: {
     top: 300,
   },
   btnContainer: {
-    flex: 1,
-    position: "absolute",
-    bottom: Dimensions.get("window").width * 0.2,
-    width: Dimensions.get("window").width,
-    left: 0,
-    backgroundColor: "rgba(0,0,0,0)",
     alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0)",
+    bottom: FULL_WIDTH * 0.2,
+    flex: 1,
     justifyContent: "center",
+    left: 0,
+    position: "absolute",
+    width: FULL_WIDTH,
   },
   btnText: {
-    color: "#fff",
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
+    color: "white",
     fontSize: 14,
     lineHeight: 23,
-    borderBottomWidth: 1,
-    borderBottomColor: "white",
+  },
+  colorBar: {
+    height: FULL_HEIGHT,
+    left: 0,
+    position: "absolute",
+    top: 0,
+    width: 20,
   },
 });
 
 export default class WelcomeView extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+  }
+
   static navigationOptions = {
     header: null,
   }
 
   static displayColorBar() {
     return (
-      <View style={{ position: "absolute", height: FULL_HEIGHT, width: 20, top: 0, left: 0 }}>
+      <View style={styles.colorBar}>
         <ColoredBar visible />
       </View>
     );
