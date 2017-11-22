@@ -57,9 +57,11 @@ const styles = StyleSheet.create({
   btnText: {
     color: "#7b075e",
     fontWeight: "500",
-    fontSize: 17,
+    fontSize: 15,
     lineHeight: 23,
     textAlign: "center",
+    textAlignVertical: "center",
+    includeFontPadding: false,
   },
   colorBar: {
     height: FULL_HEIGHT,
