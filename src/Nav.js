@@ -29,12 +29,14 @@ import {
 } from "./components/screens/";
 import {
   Colors,
+  TextStyles,
 } from "./styles/";
 
 const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: Colors.darkPurple,
   },
+  titleStyle: TextStyles.headerTitleLabel,
 });
 
 const tabNavigatorParams = {
@@ -48,16 +50,11 @@ const tabNavigatorParams = {
     showIcon: true,
     activeTintColor: Colors.purple,
     inactiveTintColor: Colors.warmGrey,
-    activeBackgroundColor: "white",
-    inactiveBackgroundColor: "white",
-    labelStyle: {
-      fontSize: 10,
-      fontWeight: "bold",
-      letterSpacing: 0.4,
-      marginBottom: 5,
-    },
+    activeBackgroundColor: Colors.white,
+    inactiveBackgroundColor: Colors.white,
+    labelStyle: TextStyles.tabBarLabel,
     style: {
-      backgroundColor: "white",
+      backgroundColor: Colors.white,
     },
     indicatorStyle: {
       backgroundColor: Colors.darkPurple,
@@ -68,7 +65,8 @@ const tabNavigatorParams = {
 const headerStyle = {
   navigationOptions: {
     headerStyle: styles.headerStyle,
-    headerTintColor: "white",
+    headerTintColor: Colors.white,
+    headerTitleStyle: styles.titleStyle,
   },
 };
 

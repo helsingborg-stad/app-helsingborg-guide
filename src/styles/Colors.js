@@ -3,6 +3,8 @@ const colors = {
   purple: "#a61380",
   darkPurple: "#7B075E",
   pinkishGrey: "#bcbcbc",
+  black: "black",
+  white: "white",
 };
 
 export default {

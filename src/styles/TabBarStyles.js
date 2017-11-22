@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     height: 22,
   },
   iconInactive: {
-    tintColor: Colors.pinkishGrey,
+    tintColor: Colors.warmGrey,
     width: 22,
     height: 22,
   },

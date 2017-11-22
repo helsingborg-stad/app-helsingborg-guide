@@ -19,7 +19,11 @@ import LangService from "../../services/langService";
 import {
   Colors,
   TabBarStyles,
+  TextStyles,
 } from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 
@@ -41,12 +45,13 @@ const styles = StyleSheet.create({
     marginTop: defaultMargin,
     marginBottom: 10,
   },
-  linkText: {
-    fontSize: 17,
-    lineHeight: 23,
-    color: Colors.purple,
-    marginHorizontal: defaultMargin,
-  },
+  linkText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 17,
+      lineHeight: 23,
+      color: Colors.purple,
+      marginHorizontal: defaultMargin,
+    }]),
   languageContainer: {
     alignItems: "flex-start",
   },
@@ -59,6 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   choiceText: {
+    fontFamily: "Roboto",
     fontSize: 17,
     color: "black",
     lineHeight: 23,
@@ -175,7 +181,7 @@ class SettingsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
+        <Text style={[TextStyles.defaultFontFamily, styles.titleText]}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
         <View style={styles.languageContainer}>
           <View style={styles.languageChoicesContainer}>{this.displayLanguages()}</View>
         </View>
@@ -188,7 +194,7 @@ class SettingsScreen extends Component {
         <View style={styles.contactUsContainer}>
           <Image source={helsingborgIcon} style={styles.icon} />
           <View style={styles.contactTextContainer}>
-            <Text style={styles.contactEmailText}>kontaktcenter@helsingborg.se</Text>
+            <Text style={[TextStyles.defaultFontFamily, styles.contactEmailText]}>kontaktcenter@helsingborg.se</Text>
             <Text style={styles.contactPhoneText}>042-10 50 00</Text>
           </View>
         </View>
