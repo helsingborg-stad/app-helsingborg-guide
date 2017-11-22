@@ -3,12 +3,15 @@ import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import { PropTypes } from "prop-types";
 import LangService from "../../services/langService";
 import BackgroundImage from "./BackgroundImage";
+import {
+  Colors,
+} from "../../styles/";
 
 const HALS_LOGO = require("../../images/HBG.png");
 
 const styles = StyleSheet.create({
   slide: {
-    backgroundColor: "#7B075E",
+    backgroundColor: Colors.darkPurple,
     flex: 1,
   },
   mainContainer: {

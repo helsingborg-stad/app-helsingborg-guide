@@ -5,6 +5,9 @@ import ViewContainer from "../shared/view_container";
 import { IS_WELCOMED } from "../../lib/my_consts";
 import ColoredBar from "../shared/ColoredBar";
 import BackgroundImage from "../shared/BackgroundImage";
+import {
+  Colors,
+} from "../../styles/";
 
 const HALS_LOGO = require("../../images/HBG.png");
 const IMAGE = require("../../images/SplashscreenFinal.png");
@@ -15,7 +18,7 @@ const TIME_OUT = 2000;
 
 const styles = StyleSheet.create({
   splash: {
-    backgroundColor: "#7B075E",
+    backgroundColor: Colors.darkPurple,
   },
   wrapper: {
     flex: 1,
