@@ -1,5 +1,6 @@
 import React from "react";
 import { Platform, View, Text, StyleSheet, ProgressBarAndroid, ProgressViewIOS } from "react-native";
+import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import LangService from "../../services/langService";
 
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ total, currentPos, progress }) => {
+const DownloadItem2 = ({ total, currentPos, progress }) => {
   {
     const isCompleted = total <= currentPos && total > 0;
     let item;
@@ -35,3 +36,11 @@ export default ({ total, currentPos, progress }) => {
     return <View style={styles.wrapper}>{item}</View>;
   }
 };
+
+DownloadItem2.propTypes = {
+  total: PropTypes.number.isRequired,
+  currentPos: PropTypes.number.isRequired,
+  progress: PropTypes.number.isRequired,
+};
+
+export default DownloadItem2;
