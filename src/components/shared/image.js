@@ -1,19 +1,11 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
-import { View, Image, Text, StyleSheet, Dimensions, ActivityIndicator, Platform } from "react-native";
-import FetchService from "../../services/FetchService";
+import { ImageBackground, StyleSheet, ActivityIndicator, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import FetchService from "../../services/FetchService";
 import * as internetActions from "../../actions/internetActions";
 
 class OImage extends Component {
-  fetchService;
-
-  // component is mounted
-  mounted;
-
   constructor(props) {
     super(props);
 
@@ -34,10 +26,8 @@ class OImage extends Component {
     this.setSource();
   }
 
-  componentWillUnmount() { }
-
   componentWillReceiveProps(nextProps) {
-    if (this.state.internet.connected != nextProps.internet.connected) {
+    if (this.state.internet.connected !== nextProps.internet.connected) {
       this.setState({ internet: nextProps.internet });
       if (nextProps.internet.connected) this.setSource();
     }
@@ -93,7 +83,7 @@ class OImage extends Component {
 
   displayImage() {
     return (
-      <Image
+      <ImageBackground
         style={this.props.style}
         source={this.state.source}
         onLoadStart={this.onLoadStart}
@@ -103,7 +93,7 @@ class OImage extends Component {
       >
         {this.displaySpinner()}
         {this.props.children}
-      </Image>
+      </ImageBackground>
     );
   }
 
@@ -116,7 +106,7 @@ const styles = StyleSheet.create({
   spinner: { flex: 1, width: 100, height: 100 },
 });
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     internet: state.internet,
   };
