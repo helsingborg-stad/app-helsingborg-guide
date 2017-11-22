@@ -35,6 +35,9 @@ import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
+import {
+  TabBarStyles,
+} from "../../styles/";
 
 const styles = StyleSheet.create({
   scrollView: {},
@@ -141,6 +144,7 @@ class GuideView extends Component {
     const name = guide ? guide.name : undefined;
     return {
       title: name,
+      ...TabBarStyles.guide,
     };
   };
 

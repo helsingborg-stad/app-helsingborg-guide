@@ -16,6 +16,9 @@ import metricActions from "../../actions/metricActions";
 import MediaService from "../../services/mediaService";
 import internetActions from "../../actions/internetActions";
 import FetchService from "../../services/FetchService";
+import {
+  TabBarStyles,
+} from "../../styles/";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
 
@@ -57,9 +60,10 @@ class ObjectView extends Component {
     return {
       title,
       headerRight: null,
+      ...TabBarStyles.guide,
     };
   }
-
+  
   constructor(props) {
     super(props);
 
