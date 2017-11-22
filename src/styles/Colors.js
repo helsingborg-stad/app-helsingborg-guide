@@ -8,6 +8,7 @@ const colors = {
   black: "black",
   white: "white",
   offWhite: "#fefefe",
+  greyBorderColor: "#ebebeb",
 };
 
 export default {
