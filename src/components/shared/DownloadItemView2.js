@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default (props) => {
+export default ({ total, currentPos, progress }) => {
   {
-    const isCompleted = props.total <= props.currentPos && props.total > 0;
+    const isCompleted = total <= currentPos && total > 0;
     let item;
-    if (props.total === 0) item = null;
+    if (total === 0) item = null;
     else if (isCompleted) {
       item = (
         <View style={{ flex: 1, flexDirection: "row", paddingHorizontal: 15, alignItems: "center" }}>
@@ -26,9 +26,9 @@ export default (props) => {
     } else {
       item =
         Platform.OS === "ios" ? (
-          <ProgressViewIOS progressTintColor="#D35098" style={styles.progressView} progress={props.progress} />
+          <ProgressViewIOS progressTintColor="#D35098" style={styles.progressView} progress={progress} />
         ) : (
-          <ProgressBarAndroid color="#D35098" styleAttr="Horizontal" indeterminate={false} progress={props.progress} />
+          <ProgressBarAndroid color="#D35098" styleAttr="Horizontal" indeterminate={false} progress={progress} />
         );
     }
 
