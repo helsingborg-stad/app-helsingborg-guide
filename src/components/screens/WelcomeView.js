@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
 import Swiper from "react-native-swiper";
 import { NavigationActions } from "react-navigation";
 import { PropTypes } from "prop-types";
@@ -11,9 +11,6 @@ import LangService from "../../services/langService";
 import ColoredBar from "../shared/ColoredBar";
 
 const IMAGE1 = require("../../images/firstInstructionImage.png");
-
-const FULL_HEIGHT = Dimensions.get("window").height;
-const FULL_WIDTH = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -47,7 +44,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     backgroundColor: "white",
-    bottom: FULL_WIDTH * 0.2,
+    bottom: 80,
     paddingVertical: 4,
     paddingHorizontal: 12,
     borderRadius: 100,
@@ -64,10 +61,10 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
   colorBar: {
-    height: FULL_HEIGHT,
     left: 0,
     position: "absolute",
     top: 0,
+    bottom: 0,
     width: 20,
   },
 });
