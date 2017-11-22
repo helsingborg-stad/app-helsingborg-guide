@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
 import Swiper from "react-native-swiper";
 import { NavigationActions } from "react-navigation";
 import { PropTypes } from "prop-types";
@@ -12,8 +12,6 @@ import ColoredBar from "../shared/ColoredBar";
 
 const IMAGE1 = require("../../images/firstInstructionImage.png");
 
-const FULL_HEIGHT = Dimensions.get("window").height;
-
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
@@ -23,54 +21,66 @@ const styles = StyleSheet.create({
   },
   dot: {
     backgroundColor: "white",
-    width: 12,
-    height: 12,
     borderRadius: 6,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 6,
-    marginBottom: 6,
+    height: 9,
+    marginVertical: 6,
+    marginHorizontal: 10,
+    width: 9,
   },
   activeDot: {
-    backgroundColor: "#D35098",
-    width: 14,
-    height: 14,
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
     borderRadius: 7,
-    marginLeft: 11,
-    marginRight: 11,
-    marginTop: 7,
-    marginBottom: 7,
+    borderWidth: 3,
+    borderColor: "white",
+    height: 14,
+    marginVertical: 7,
+    marginHorizontal: 10,
+    width: 14,
   },
   pagination: {
     top: 300,
   },
   btnContainer: {
-    flex: 1,
-    position: "absolute",
-    bottom: Dimensions.get("window").width * 0.2,
-    width: Dimensions.get("window").width,
-    left: 0,
-    backgroundColor: "rgba(0,0,0,0)",
     alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: "white",
+    bottom: 80,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    borderRadius: 100,
     justifyContent: "center",
+    position: "absolute",
   },
   btnText: {
-    color: "#fff",
-    fontSize: 14,
+    color: "#7b075e",
+    fontWeight: "500",
+    fontSize: 15,
     lineHeight: 23,
-    borderBottomWidth: 1,
-    borderBottomColor: "white",
+    textAlign: "center",
+    textAlignVertical: "center",
+    includeFontPadding: false,
+  },
+  colorBar: {
+    left: 0,
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    width: 20,
   },
 });
 
 export default class WelcomeView extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+  }
+
   static navigationOptions = {
     header: null,
   }
 
   static displayColorBar() {
     return (
-      <View style={{ position: "absolute", height: FULL_HEIGHT, width: 20, top: 0, left: 0 }}>
+      <View style={styles.colorBar}>
         <ColoredBar visible />
       </View>
     );

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     minHeight: 50,
   },
   contentContainer: {
-    flex: 1,
+    flex: 3,
     width: Dimensions.get("window").width * 0.7,
   },
   contentText: {
@@ -66,7 +66,9 @@ const FirstInstructionSlide = ({ style, content, backgroundImageSource }) => (
         <Image resizeMethod="scale" resizeMode="center" source={HALS_LOGO} />
       </View>
     </View>
-    <BackgroundImage source={backgroundImageSource} />
+    <BackgroundImage
+      source={backgroundImageSource}
+    />
   </View>
 );
 
