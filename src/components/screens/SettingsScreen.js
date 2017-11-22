@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 
 class SettingsScreen extends Component {
   static propTypes = {
-    navigation: PropTypes.object, // eslint-disable-line react/no-unused-prop-types react/require-default-props
+    navigation: PropTypes.object, // eslint-disable-line react/require-default-props
     guideActions: PropTypes.object.isRequired,
     subLocationActions: PropTypes.object.isRequired,
   }
@@ -177,9 +177,9 @@ class SettingsScreen extends Component {
           <View style={styles.languageChoicesContainer}>{this.displayLanguages()}</View>
         </View>
         <View style={styles.divider} />
-        <Text style={styles.titleText}>Om Guide Helsingborg</Text>
+        <Text style={styles.titleText}>{LangService.strings.ABOUT} {LangService.strings.APP_NAME}</Text>
         <TouchableOpacity onPress={this.navigateToWelcomeView}>
-          <Text style={styles.linkText}>Se tutorial</Text>
+          <Text style={styles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
         <View style={styles.contactUsContainer}>
