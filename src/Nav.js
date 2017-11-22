@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: Colors.darkPurple,
   },
-  titleStyle: TextStyles.headerTitleLabel,
 });
 
 const tabNavigatorParams = {
@@ -66,7 +65,7 @@ const headerStyle = {
   navigationOptions: {
     headerStyle: styles.headerStyle,
     headerTintColor: Colors.white,
-    headerTitleStyle: styles.titleStyle,
+    headerTitleStyle: TextStyles.headerTitleLabel,
   },
 };
 

@@ -4,7 +4,11 @@ import { PropTypes } from "prop-types";
 import BackgroundImage from "./BackgroundImage";
 import {
   Colors,
+  TextStyles,
 } from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 
 const styles = StyleSheet.create({
   slide: {
@@ -20,14 +24,16 @@ const styles = StyleSheet.create({
     flex: 3,
     width: Dimensions.get("window").width * 0.75,
   },
-  contentText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "400",
-    lineHeight: 26,
-    minHeight: 50,
-    textAlign: "center",
-  },
+  contentText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: "400",
+      lineHeight: 26,
+      minHeight: 50,
+      textAlign: "center",
+    }],
+  ),
   logoContainer: {
     minHeight: Dimensions.get("window").height * 0.35,
     alignItems: "center",
