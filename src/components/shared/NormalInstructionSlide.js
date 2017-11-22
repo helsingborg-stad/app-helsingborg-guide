@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     minHeight: Dimensions.get("window").height * 0.35,
     alignItems: "center",
     justifyContent: "center",
-    borderTopWidth: 1,
   },
 });
 

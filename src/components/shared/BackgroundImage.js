@@ -70,17 +70,18 @@ export default class BackgroundImage extends Component {
       height: FULL_HEIGHT,
     };
     return (
-      <Image
-        style={[styles.image, imageSize]}
-        source={source}
-        blurRadius={this.props.blurRadius}
-        onLoadStart={this.onLoadStart}
-        onLoadEnd={this.onLoadEnd}
-        resizeMethod="scale"
-        resizeMode="cover"
-      >
+      <View>
+        <Image
+          style={[styles.image, imageSize]}
+          source={source}
+          blurRadius={this.props.blurRadius}
+          onLoadStart={this.onLoadStart}
+          onLoadEnd={this.onLoadEnd}
+          resizeMethod="scale"
+          resizeMode="cover"
+        />
         {this.displaySpinner()}
-      </Image>
+      </View>
     );
   }
 
