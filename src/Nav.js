@@ -27,10 +27,13 @@ import {
   DownloadManagerView,
   SettingsScreen,
 } from "./components/screens/";
+import {
+  Colors,
+} from "./styles/";
 
 const styles = StyleSheet.create({
   headerStyle: {
-    backgroundColor: "#7B075E",
+    backgroundColor: Colors.darkPurple,
   },
 });
 
@@ -41,10 +44,10 @@ const tabNavigatorParams = {
   backBehavior: "none",
   lazy: true,
   tabBarOptions: {
-    pressColor: "#7B075E",
+    pressColor: Colors.darkPurple,
     showIcon: true,
-    activeTintColor: "#a61380",
-    inactiveTintColor: "#7f7f7f",
+    activeTintColor: Colors.purple,
+    inactiveTintColor: Colors.warmGrey,
     activeBackgroundColor: "white",
     inactiveBackgroundColor: "white",
     labelStyle: {
@@ -57,7 +60,7 @@ const tabNavigatorParams = {
       backgroundColor: "white",
     },
     indicatorStyle: {
-      backgroundColor: "#7B075E",
+      backgroundColor: Colors.darkPurple,
     },
   },
 };
@@ -131,7 +134,7 @@ export default class Nav extends Component {
         <StatusBar
           translucent={ios}
           barStyle="light-content"
-          backgroundColor="#7B075E"
+          backgroundColor={Colors.darkPurple}
         />
         <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
         {Nav.displayNotificationBar()}

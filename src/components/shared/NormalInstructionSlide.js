@@ -2,6 +2,9 @@ import React from "react";
 import { View, Text, ScrollView, StyleSheet, Image, Dimensions } from "react-native";
 import { PropTypes } from "prop-types";
 import BackgroundImage from "./BackgroundImage";
+import {
+  Colors,
+} from "../../styles/";
 
 const styles = StyleSheet.create({
   slide: {
@@ -9,7 +12,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: "#7B075E",
+    backgroundColor: Colors.darkPurple,
     justifyContent: "flex-start",
     alignItems: "center",
   },

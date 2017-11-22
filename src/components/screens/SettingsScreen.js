@@ -17,6 +17,7 @@ import {
 import connect from "react-redux/es/connect/connect";
 import LangService from "../../services/langService";
 import {
+  Colors,
   TabBarStyles,
 } from "../../styles/";
 import * as guideActions from "../../actions/guideActions";
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   linkText: {
     fontSize: 17,
     lineHeight: 23,
-    color: "#a61380",
+    color: Colors.purple,
     marginHorizontal: defaultMargin,
   },
   languageContainer: {
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
   divider: {
     margin: defaultMargin,
     height: 1,
-    backgroundColor: "#bcbcbc",
+    backgroundColor: Colors.pinkishGrey,
   },
 });
 
@@ -152,7 +153,7 @@ class SettingsScreen extends Component {
     const keys = Object.keys(languages);
 
     return keys.map((key) => {
-      const style = { color: "#a61380" };
+      const style = { color: Colors.purple };
       const selectedStyle = this.state.selectedLanguageCode === languages[key].code ? style : null;
       const btnDisabled = this.state.selectedLanguageCode === languages[key].code;
       const { nativeName } = languages[key];

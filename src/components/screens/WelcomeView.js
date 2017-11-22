@@ -9,6 +9,9 @@ import NormalInstructionSlide from "../shared/NormalInstructionSlide";
 import { IS_WELCOMED } from "../../lib/my_consts";
 import LangService from "../../services/langService";
 import ColoredBar from "../shared/ColoredBar";
+import {
+  Colors,
+} from "../../styles/";
 
 const IMAGE1 = require("../../images/firstInstructionImage.png");
 
@@ -19,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   swiper: {
-    backgroundColor: "#7B075E",
+    backgroundColor: Colors.darkPurple,
   },
   dot: {
     backgroundColor: "white",

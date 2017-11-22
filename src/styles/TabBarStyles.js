@@ -4,6 +4,9 @@ import {
   StyleSheet,
 } from "react-native";
 import LangService from "../services/langService";
+import {
+  Colors,
+} from "./";
 
 const guideIcon = require("../images/tab-bar/iconStartpageUnselected.png");
 const downloadedIcon = require("../images/tab-bar/iconDownloads.png");
@@ -11,12 +14,12 @@ const settingsIcon = require("../images/tab-bar/iconSettings.png");
 
 const styles = StyleSheet.create({
   iconActive: {
-    tintColor: "#a61380",
+    tintColor: Colors.purple,
     width: 22,
     height: 22,
   },
   iconInactive: {
-    tintColor: "#7f7f7f",
+    tintColor: Colors.pinkishGrey,
     width: 22,
     height: 22,
   },

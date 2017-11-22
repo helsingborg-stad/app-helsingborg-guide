@@ -17,6 +17,7 @@ import MediaService from "../../services/mediaService";
 import internetActions from "../../actions/internetActions";
 import FetchService from "../../services/FetchService";
 import {
+  Colors,
   TabBarStyles,
 } from "../../styles/";
 
@@ -63,7 +64,7 @@ class ObjectView extends Component {
       ...TabBarStyles.guide,
     };
   }
-  
+
   constructor(props) {
     super(props);
 
@@ -205,7 +206,7 @@ class ObjectView extends Component {
           this.loadAudioFile();
         }}
         name="headphones"
-        color="#7B075E"
+        color={Colors.darkPurple}
         size={25}
         text={LangService.strings.LISTEN}
         view="row"
@@ -218,7 +219,7 @@ class ObjectView extends Component {
           this._goToVideoView(video.url, video.title);
         }}
         name="play-box-outline"
-        color="#7B075E"
+        color={Colors.darkPurple}
         size={25}
         text={LangService.strings.VIDEO}
         view="row"
