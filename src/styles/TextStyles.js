@@ -15,6 +15,8 @@ export default StyleSheet.create({
   },
   body: {
     ...defaultFont,
+    fontSize: 17,
+    lineHeight: 23,
   },
   headerTitleLabel: {
     ...defaultFont,

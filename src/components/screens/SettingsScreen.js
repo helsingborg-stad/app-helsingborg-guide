@@ -28,30 +28,13 @@ import * as guideActions from "../../actions/guideActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 
 const defaultMargin = 20;
-
 const helsingborgIcon = require("../../images/HBG.png");
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
   },
-  titleText: {
-    fontSize: 20,
-    lineHeight: 23,
-    fontWeight: "500",
-    color: "black",
-    marginHorizontal: defaultMargin,
-    marginTop: defaultMargin,
-    marginBottom: 10,
-  },
-  linkText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
-      fontSize: 17,
-      lineHeight: 23,
-      color: Colors.purple,
-      marginHorizontal: defaultMargin,
-    }]),
   languageContainer: {
     alignItems: "flex-start",
   },
@@ -63,37 +46,58 @@ const styles = StyleSheet.create({
   choiceContainer: {
     flex: 1,
   },
-  choiceText: {
-    fontFamily: "Roboto",
-    fontSize: 17,
-    color: "black",
-    lineHeight: 23,
-  },
   icon: {
-    tintColor: "black",
+    tintColor: Colors.black,
     margin: defaultMargin,
   },
   contactUsContainer: {
     alignItems: "center",
-  },
-  contactEmailText: {
-    fontSize: 17,
-    lineHeight: 23,
-    color: "black",
-    textAlign: "center",
-  },
-  contactPhoneText: {
-    marginTop: 10,
-    fontSize: 20,
-    lineHeight: 23,
-    color: "black",
-    textAlign: "center",
   },
   divider: {
     margin: defaultMargin,
     height: 1,
     backgroundColor: Colors.pinkishGrey,
   },
+});
+
+const textStyles = StyleSheet.create({
+  titleText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 20,
+      lineHeight: 23,
+      fontWeight: "500",
+      color: Colors.black,
+      marginHorizontal: defaultMargin,
+      marginTop: defaultMargin,
+      marginBottom: 10,
+    }],
+  ),
+  linkText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      color: Colors.purple,
+      marginHorizontal: defaultMargin,
+    }],
+  ),
+  contactEmailText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      color: Colors.black,
+      textAlign: "center",
+    }],
+  ),
+  contactPhoneText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      marginTop: 10,
+      fontSize: 20,
+      lineHeight: 23,
+      color: Colors.black,
+      textAlign: "center",
+    }],
+  ),
+  choiceText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      color: Colors.black,
+    }],
+  ),
 });
 
 class SettingsScreen extends Component {
@@ -172,7 +176,7 @@ class SettingsScreen extends Component {
           activeOpacity={0.7}
           style={styles.choiceContainer}
         >
-          <Text style={[styles.choiceText, selectedStyle]}>{nativeName.split(" ")[0]}</Text>
+          <Text style={[textStyles.choiceText, selectedStyle]}>{nativeName.split(" ")[0]}</Text>
         </TouchableOpacity>
       );
     });
@@ -181,21 +185,21 @@ class SettingsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={[TextStyles.defaultFontFamily, styles.titleText]}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
+        <Text style={textStyles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
         <View style={styles.languageContainer}>
           <View style={styles.languageChoicesContainer}>{this.displayLanguages()}</View>
         </View>
         <View style={styles.divider} />
-        <Text style={styles.titleText}>{LangService.strings.ABOUT} {LangService.strings.APP_NAME}</Text>
+        <Text style={textStyles.titleText}>{LangService.strings.ABOUT} {LangService.strings.APP_NAME}</Text>
         <TouchableOpacity onPress={this.navigateToWelcomeView}>
-          <Text style={styles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
+          <Text style={textStyles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
         <View style={styles.contactUsContainer}>
           <Image source={helsingborgIcon} style={styles.icon} />
           <View style={styles.contactTextContainer}>
-            <Text style={[TextStyles.defaultFontFamily, styles.contactEmailText]}>kontaktcenter@helsingborg.se</Text>
-            <Text style={styles.contactPhoneText}>042-10 50 00</Text>
+            <Text style={textStyles.contactEmailText}>kontaktcenter@helsingborg.se</Text>
+            <Text style={textStyles.contactPhoneText}>042-10 50 00</Text>
           </View>
         </View>
       </View>
