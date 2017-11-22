@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const DownloadItem2 = ({ total, currentPos, progress }) => {
+const DownloadItemView2 = ({ total, currentPos, progress }) => {
   {
     const isCompleted = total <= currentPos && total > 0;
     let item;
@@ -37,10 +37,10 @@ const DownloadItem2 = ({ total, currentPos, progress }) => {
   }
 };
 
-DownloadItem2.propTypes = {
+DownloadItemView2.propTypes = {
   total: PropTypes.number.isRequired,
   currentPos: PropTypes.number.isRequired,
   progress: PropTypes.number.isRequired,
 };
 
-export default DownloadItem2;
+export default DownloadItemView2;
