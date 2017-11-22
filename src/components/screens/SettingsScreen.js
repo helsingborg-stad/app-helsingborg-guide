@@ -125,6 +125,8 @@ class SettingsScreen extends Component {
   setLanguageAndReload = (code) => {
     this.setState({ selectedLanguageCode: code });
     LangService.setLanguage(code);
+    // Set navigation params to force an update
+    this.props.navigation.setParams();
     this.loadContents(code);
   }
 
