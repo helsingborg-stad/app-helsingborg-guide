@@ -17,12 +17,8 @@ RCT_EXPORT_MODULE()
   return @[@"MEDIA_PREPARED", @"MEDIA_COMPLETED", @"MEDIA_ERROR"];
 }
 
-
-
-
 RCT_EXPORT_METHOD(init:(NSString *)fileName title:(NSString*) title body:(NSString*) body )
 {
-  
   self.title = title;
   self.body = body;
   NSURL *urlStream = [NSURL URLWithString:fileName];
@@ -40,25 +36,14 @@ RCT_EXPORT_METHOD(init:(NSString *)fileName title:(NSString*) title body:(NSStri
 }
 
 -(void)handleAppEnteringBackground{
-  
- 
-  
-  
   if([[self isPlaying] isEqualToString:@"true"]){
-    
     NotificationManager *notifier = [NotificationManager alloc];
-    
     [notifier requestNotification:  self.title body:self.body identifier:@"hbgstad" ];
   }
-  
-  
-  
-  
 }
 
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-                        change:(NSDictionary *)change context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
   if (object == self.audioPlayer && [keyPath isEqualToString:@"status"]) {
     if (self.audioPlayer.status == AVPlayerItemStatusReadyToPlay) {
       [self sendEventWithName:@"MEDIA_PREPARED" body:@"SomeBody"];
@@ -92,8 +77,6 @@ RCT_EXPORT_METHOD(start)
     NSLog(@"Error activating audio session: %@", error);
   }
   [self.audioPlayer play];
-  
-
 }
 
 
