@@ -26,6 +26,7 @@ import {
   ImageView,
   DownloadManagerView,
   SettingsScreen,
+  TrailView,
 } from "./components/screens/";
 import {
   Colors,
@@ -74,6 +75,7 @@ const GuideNavigator = StackNavigator(
   {
     Home: { screen: GuideList },
     GuideView: { screen: GuideView },
+    TrailView: { screen: TrailView },
     SubLocationView: { screen: SubLocationView },
     SubLocationsOnMapView: { screen: SubLocationsOnMapView },
     ObjectView: { screen: ObjectView },

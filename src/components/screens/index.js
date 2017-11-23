@@ -10,3 +10,4 @@ export { default as SubLocationView } from "./SubLocationView";
 export { default as VideoView } from "./VideoView";
 export { default as WebView } from "./WebScene";
 export { default as WelcomeView } from "./WelcomeView";
+export { default as TrailView } from "./TrailView";
