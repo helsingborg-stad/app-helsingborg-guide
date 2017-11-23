@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import VideoPlayer from "../shared/VideoPlayer";
-import FetchService from "../../services/FetchService";
+import fetchService from "../../services/FetchService";
 
 const styles = StyleSheet.create({
   mainContainer: { backgroundColor: "black" },
@@ -27,17 +27,16 @@ export default class VideoView extends Component {
   constructor(props) {
     super(props);
     this.state = { url: null };
-    this.fetchService = FetchService.getInstance();
   }
 
   componentDidMount() {
     this.timer = setTimeout(() => {
       const { videoUrl } = this.props.navigation.state.params;
-      this.fetchService.isExist(videoUrl).then((exist) => {
+      fetchService.isExist(videoUrl).then((exist) => {
         let url = videoUrl;
 
         if (exist) {
-          url = this.fetchService.getFullPath(url);
+          url = fetchService.getFullPath(url);
         }
 
         this.setState({ url });

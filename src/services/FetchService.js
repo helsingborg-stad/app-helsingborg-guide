@@ -1,69 +1,47 @@
-/**
- * Created by msaeed on 2017-04-10.
- */
-
 import * as _ from "lodash";
 import RNFetchBlob from "react-native-fetch-blob";
 import {
-  PermissionsAndroid,
   Platform,
 } from "react-native";
 
-let instance = null;
 const Headers = ["http://", "https://", "ftp://"];
 const MIME = ["jpeg", "jpg", "png", "mp3", "mp4", "m4a"];
 
-export default class FetchService {
-  basePath;
+const basePath = RNFetchBlob.fs.dirs.CacheDir;
 
-  constructor() {
-    this.basePath = RNFetchBlob.fs.dirs.CacheDir;
-  }
-
-  static getInstance() {
-    if (!instance) instance = new FetchService();
-    return instance;
-  }
-
-  static isString(data) {
+const FetchService = {
+  isString(data) {
     return typeof data === "string";
-  }
+  },
 
-  static isObject(data) {
+  isObject(data) {
     if (!data) return false;
     return typeof data === "object";
-  }
+  },
 
-  static isUrl(str) {
+  isUrl(str) {
     if (!FetchService.isString(str)) return false;
     const index = _.findIndex(Headers, header => _.startsWith(_.toLower(str), header));
     return !(index === -1);
-  }
+  },
 
-  static isDownloadableUrl(str) {
+  isDownloadableUrl(str) {
     if (!FetchService.isUrl(str)) return false;
     const index = _.findIndex(MIME, ext => _.endsWith(_.toLower(str), `.${ext}`));
     return !(index === -1);
-  }
+  },
 
-  static clearCache(path) {
+  clearCache(path) {
     return RNFetchBlob.fs.unlink(path);
-  }
+  },
 
-  static clearSessionCache(sessionId) {
+  clearSessionCache(sessionId) {
     return RNFetchBlob.session(sessionId).dispose();
-  }
+  },
 
-  static readFile(path) {
+  readFile(path) {
     return RNFetchBlob.fs.readFile(path, "base64");
-  }
-
-  static getExt(url) {
-    const l = url.length;
-    if (!l) return "";
-    // what to do
-    return url[l - 3] + url[l - 2] + url[l - 1];
-  }
+  },
 
   // ######################################
   // The Json scanner
@@ -79,39 +57,31 @@ export default class FetchService {
         paths = paths.concat([item]);
       }
 
-      if (FetchService.isObject(item)) paths = paths.concat(this.scanJsonTree(item));
+      if (FetchService.isObject(item)) paths = paths.concat(FetchService.scanJsonTree(item));
     });
 
     return _.uniq(paths);
-  }
+  },
 
-  // ########################################
   fetch(url) {
     const config = {
       fileCache: true,
-      path: `${this.basePath}/${url}`,
+      path: `${basePath}/${url}`,
     };
 
-    const task = RNFetchBlob.config(config).fetch("GET", url);
-    console.log(url);
-    return task;
-    // ignore the permission  (cache store).
-    return PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE).then((granted) => {
-      if (granted) return task.fetch("GET", url);
-
-      console.log("permission Write to storage is not granted");
-      return Promise.reject();
-    });
-  }
+    return RNFetchBlob.config(config).fetch("GET", url);
+  },
 
   isExist(path) {
-    const fullPath = this.getFullPath(path);
+    const fullPath = FetchService.getFullPath(path);
     return RNFetchBlob.fs.exists(Platform.OS === "android" ? `file://${fullPath}` : fullPath);
-  }
+  },
 
   getFullPath(_path) {
     let path = _path;
     if (!path) path = "";
-    return `${this.basePath}/${path}`;
-  }
-}
+    return `${basePath}/${path}`;
+  },
+};
+
+export default FetchService;

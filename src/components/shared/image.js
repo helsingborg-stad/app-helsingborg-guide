@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ImageBackground, StyleSheet, ActivityIndicator, Platform } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import FetchService from "../../services/FetchService";
+import fetchService from "../../services/FetchService";
 import * as internetActions from "../../actions/internetActions";
 
 class OImage extends Component {
@@ -17,8 +17,6 @@ class OImage extends Component {
 
     this.onLoadStart = this.onLoadStart.bind(this);
     this.onLoadEnd = this.onLoadEnd.bind(this);
-
-    this.fetchService = FetchService.getInstance();
   }
 
   componentDidMount() {
@@ -48,7 +46,7 @@ class OImage extends Component {
 
   loadFile(fullPath) {
     if (Platform.OS === "ios") {
-      this.fetchService.readFile(fullPath).then((data) => {
+      fetchService.readFile(fullPath).then((data) => {
         this.setState({ source: { uri: `data:image/png;base64,${data}` } });
       });
     } else if (Platform.OS === "ios") {
@@ -66,9 +64,9 @@ class OImage extends Component {
     // Only load the offline image if no internet.
     if (source && source.uri && typeof source.uri === "string") {
       const path = source.uri;
-      const fullPath = this.fetchService.getFullPath(path);
+      const fullPath = fetchService.getFullPath(path);
 
-      this.fetchService
+      fetchService
         .isExist(path)
         .then((exist) => {
           if (exist) {

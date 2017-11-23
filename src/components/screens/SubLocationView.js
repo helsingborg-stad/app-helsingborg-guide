@@ -31,7 +31,7 @@ import FloatingBtn from "../shared/FloatingBtn";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import downloadManager from "../../services/DownloadTasksManager";
-import FetchService from "../../services/FetchService";
+import fetchService from "../../services/FetchService";
 import {
   TabBarStyles,
 } from "../../styles/";
@@ -133,7 +133,6 @@ class SubLocationView extends Component {
       this.beaconService = BeaconService.getInstance();
     }
 
-    this.fetchService = FetchService.getInstance();
     this.mediaService = MediaService.getInstance();
 
     this.onBeaconRangingResult = this.onBeaconRangingResult.bind(this);
@@ -419,7 +418,7 @@ class SubLocationView extends Component {
     this.toggleMenu();
     const item = this.state.subLocation;
     if (!downloadManager.isExist(item.id)) {
-      const downloadables = this.fetchService.scanJsonTree(item);
+      const downloadables = fetchService.scanJsonTree(item);
       const data = { id: item.id, title: item.title.plain_text, avatar: item.guide_images[0].sizes.thumbnail, urls: downloadables };
       downloadManager.createTask(data);
       downloadManager.startTask(item.id);

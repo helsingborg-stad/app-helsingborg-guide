@@ -15,7 +15,7 @@ import * as audioActions from "../../actions/audioActions";
 import metricActions from "../../actions/metricActions";
 import MediaService from "../../services/mediaService";
 import internetActions from "../../actions/internetActions";
-import FetchService from "../../services/FetchService";
+import fetchService from "../../services/FetchService";
 import {
   Colors,
   TabBarStyles,
@@ -79,7 +79,6 @@ class ObjectView extends Component {
       videoBtnDisabled: false,
     };
 
-    this.fetchService = FetchService.getInstance();
     this.mediaService = MediaService.getInstance();
 
     this.onAudioFilePrepared = this.onAudioFilePrepared.bind(this);
@@ -127,7 +126,7 @@ class ObjectView extends Component {
   }
 
   isUrlLocallyExist(url) {
-    return this.fetchService.isExist(url);
+    return fetchService.isExist(url);
   }
 
   updateWithObjectVisited() {
