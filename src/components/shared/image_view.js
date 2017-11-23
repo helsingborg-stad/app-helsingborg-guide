@@ -1,18 +1,20 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
-import { View, Image, Text, StyleSheet, Dimensions, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import OImage from "./image";
 
 const FULL_HEIGHT = Dimensions.get("window").height;
 const IMAGE_HEIGHT = FULL_HEIGHT / 2 - 70; // 70 is the navbar height
 
-export default class ImageView extends Component {
-  constructor(props) {
-    super(props);
-  }
+const styles = StyleSheet.create({
+  imageContainer: {},
+  image: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  spinner: { flex: 1, width: 100, height: 100 },
+});
 
+export default class ImageView extends Component {
   _getOptWidth(width) {
     return width * (Dimensions.get("window").width / width);
   }
@@ -40,12 +42,3 @@ export default class ImageView extends Component {
     return <View style={styles.imageContainer}>{this.displayImage()}</View>;
   }
 }
-
-const styles = StyleSheet.create({
-  imageContainer: {},
-  image: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  spinner: { flex: 1, width: 100, height: 100 },
-});

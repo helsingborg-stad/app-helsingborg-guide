@@ -11,8 +11,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.media.app.NotificationCompat.MediaStyle;
 import android.support.v4.media.session.MediaSessionCompat;
-import android.support.v7.app.NotificationCompat;
+
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -147,7 +149,7 @@ public class NotificationModule extends ReactContextBaseJavaModule {
                 //.addAction(R.drawable.common_google_signin_btn_icon_dark_normal, "Previous", ) // #0
 
                 // Apply the media style template
-                .setStyle(new NotificationCompat.MediaStyle()
+                .setStyle(new MediaStyle()
                         //.setShowActionsInCompactView(0 /* #1: pause button */)
                         .setMediaSession(MediaSessionCompat.Token.fromToken(mMediaSession.getSessionToken())))
                 .setContentTitle("Wonderful music")
