@@ -140,6 +140,10 @@ android {
             signingConfig (project.hasProperty("unsigned") ? null : signingConfigs.release)
         }
     }
+    lintOptions {
+        abortOnError false
+    }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
