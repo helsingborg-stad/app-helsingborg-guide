@@ -6,6 +6,13 @@ import ViewContainer from "../shared/view_container";
 import Thumbnail from "../shared/thumbnail2";
 import MapThumbnailsView from "../shared/MapThumbnailsView";
 import RoundedBtn from "../shared/roundedBtn";
+import {
+  Colors,
+  TextStyles,
+} from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 
 const styles = StyleSheet.create({
   thumbnailExtraContainer: {
@@ -16,10 +23,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 5,
   },
-  titleText: {
-    fontSize: 13,
-    fontWeight: "300",
-  },
+  titleText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 13,
+      fontWeight: "300",
+    }],
+  ),
   navigateBtnContainer: {
     flex: 1,
     alignItems: "flex-end",
@@ -27,7 +36,7 @@ const styles = StyleSheet.create({
   navigateBtn: {
     width: 40,
     height: 40,
-    backgroundColor: "#D35098",
+    backgroundColor: Colors.lightPink,
   },
 });
 

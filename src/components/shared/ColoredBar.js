@@ -12,14 +12,16 @@ import {
   Colors,
 } from "../../styles/";
 
-const COLORS = ["#D35098", "#712082", "#A84C98", "#7B075E", Colors.purple];
+const COLORS = [Colors.lightPink, "#712082", Colors.lightPurple, Colors.darkPurple, Colors.purple];
 
 const styles = StyleSheet.create({
   barsContainer: {
     flex: 1,
     maxWidth: 10,
   },
-  bar: { flex: 1 },
+  bar: {
+    flex: 1,
+  },
 });
 
 export default class ColoredBar extends Component {

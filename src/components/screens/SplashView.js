@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
-    color: "#fff",
+    color: Colors.white,
     fontSize: 38,
     fontWeight: "300",
     lineHeight: 36,
@@ -48,7 +48,10 @@ const styles = StyleSheet.create({
     paddingVertical: 22,
     zIndex: 10,
   },
-  logo: { width: 62, height: 66 },
+  logo: {
+    width: 62,
+    height: 66,
+  },
 });
 
 export default class SplashView extends Component {
