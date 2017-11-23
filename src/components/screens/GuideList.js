@@ -113,8 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightPurple,
   },
   comingSoonText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
-      fontWeight: "300",
+    TextStyles.comingSoonText, {
       color: Colors.white,
       textAlign: "center",
     }],

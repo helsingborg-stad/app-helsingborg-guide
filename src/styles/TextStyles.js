@@ -33,4 +33,14 @@ export default StyleSheet.create({
     letterSpacing: 0.4,
     marginBottom: 5,
   },
+  comingSoonText: {
+    ...defaultFont,
+    fontSize: 13,
+    fontWeight: "bold",
+  },
+  title: {
+    ...defaultFont,
+    fontSize: 23,
+    fontWeight: "bold",
+  },
 });
