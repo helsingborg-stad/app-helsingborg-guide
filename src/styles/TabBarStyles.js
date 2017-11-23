@@ -3,6 +3,7 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
+import PropTypes from "prop-types";
 import LangService from "../services/langService";
 import {
   Colors,
@@ -25,10 +26,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default {
+const TabBarStyles = {
   guide: {
     tabBarLabel: () => LangService.strings.GUIDE.toUpperCase(),
-    tabBarIcon: ({ focused }: { focused: boolean }) => (
+    tabBarIcon: ({ focused }) => (
       <Image
         source={guideIcon}
         style={focused ? styles.iconActive : styles.iconInactive}
@@ -37,7 +38,7 @@ export default {
   },
   downloaded: {
     tabBarLabel: () => LangService.strings.OFFLINE_CONTENT_TITLE.toUpperCase(),
-    tabBarIcon: ({ focused }: { focused: boolean }) => (
+    tabBarIcon: ({ focused }) => (
       <Image
         source={downloadedIcon}
         style={focused ? styles.iconActive : styles.iconInactive}
@@ -46,7 +47,7 @@ export default {
   },
   settings: {
     tabBarLabel: () => LangService.strings.SETTINGS.toUpperCase(),
-    tabBarIcon: ({ focused }: { focused: boolean }) => (
+    tabBarIcon: ({ focused }) => (
       <Image
         source={settingsIcon}
         style={focused ? styles.iconActive : styles.iconInactive}
@@ -54,3 +55,12 @@ export default {
     ),
   },
 };
+
+const propTypes = {
+  focused: PropTypes.bool.isRequired,
+};
+TabBarStyles.guide.tabBarIcon.propTypes = propTypes;
+TabBarStyles.downloaded.tabBarIcon.propTypes = propTypes;
+TabBarStyles.settings.tabBarIcon.propTypes = propTypes;
+
+export default TabBarStyles;
