@@ -19,31 +19,66 @@ import fetchService from "../../services/FetchService";
 import {
   Colors,
   TabBarStyles,
+  TextStyles,
 } from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
 
 const styles = StyleSheet.create({
-  imageViewContainer: { maxHeight: MAX_IMAGE_HEIGHT, flex: 1 },
-  scrollView: { paddingBottom: 70 },
-
+  imageViewContainer: {
+    maxHeight: MAX_IMAGE_HEIGHT,
+    flex: 1,
+  },
+  scrollView: {
+    paddingBottom: 70,
+  },
   bodyContainer: {
     flex: 1,
     alignItems: "stretch",
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
   },
-  titleContainer: { flex: 1, paddingHorizontal: 34, paddingVertical: 28 },
-  title: { fontSize: 22, fontWeight: "300", lineHeight: 26 },
-  articleContainer: { flex: 4, paddingHorizontal: 34, paddingVertical: 10 },
-  article: { fontSize: 14, lineHeight: 20 },
+  titleContainer: {
+    flex: 1,
+    paddingHorizontal: 34,
+    paddingVertical: 28,
+  },
+  title: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 22,
+      fontWeight: "300",
+      lineHeight: 26,
+    }],
+  ),
+  articleContainer: {
+    flex: 4,
+    paddingHorizontal: 34,
+    paddingVertical: 10,
+  },
+  article: {
+    fontSize: 14,
+    lineHeight: 20,
+  },
   subLocationsContainer: {
     flex: 1,
     paddingVertical: 20,
     paddingHorizontal: 10,
   },
-  imagesSlider: { maxHeight: MAX_IMAGE_HEIGHT },
-  linkContainer: { paddingVertical: 6 },
-  linkText: { fontSize: 14, lineHeight: 20, fontWeight: "bold" },
+  imagesSlider: {
+    maxHeight: MAX_IMAGE_HEIGHT,
+  },
+  linkContainer: {
+    paddingVertical: 6,
+  },
+  linkText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 14,
+      lineHeight: 20,
+      fontWeight: "bold",
+    }],
+  ),
   closeBtn: {
     position: "absolute",
     top: 10,
@@ -51,7 +86,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     width: 40,
     height: 40,
-    backgroundColor: "#D35098",
+    backgroundColor: Colors.lightPink,
   },
 });
 

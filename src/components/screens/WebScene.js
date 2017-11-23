@@ -2,10 +2,14 @@ import React from "react";
 import { WebView, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
+import {
+  Colors,
+  TabBarStyles,
+} from "../../styles/";
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#D35098",
+    backgroundColor: Colors.lightPink,
   },
 });
 
@@ -22,6 +26,7 @@ const WebScene = (props) => {
 WebScene.navigationOptions = {
   headerRight: null,
   headerStyle: styles.header,
+  ...TabBarStyles.guide,
 };
 
 WebScene.propTypes = {

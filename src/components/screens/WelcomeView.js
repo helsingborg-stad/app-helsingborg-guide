@@ -11,7 +11,11 @@ import LangService from "../../services/langService";
 import ColoredBar from "../shared/ColoredBar";
 import {
   Colors,
+  TextStyles,
 } from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 
 const IMAGE1 = require("../../images/firstInstructionImage.png");
 
@@ -23,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.darkPurple,
   },
   dot: {
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
     borderRadius: 6,
     height: 9,
     marginVertical: 6,
@@ -34,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.0)",
     borderRadius: 7,
     borderWidth: 3,
-    borderColor: "white",
+    borderColor: Colors.white,
     height: 14,
     marginVertical: 7,
     marginHorizontal: 10,
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
   btnContainer: {
     alignItems: "center",
     alignSelf: "center",
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
     bottom: 80,
     paddingVertical: 4,
     paddingHorizontal: 12,
@@ -54,15 +58,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "absolute",
   },
-  btnText: {
-    color: "#7b075e",
-    fontWeight: "500",
-    fontSize: 15,
-    lineHeight: 23,
-    textAlign: "center",
-    textAlignVertical: "center",
-    includeFontPadding: false,
-  },
+  btnText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      color: Colors.darkPurple,
+      fontWeight: "500",
+      fontSize: 15,
+      lineHeight: 23,
+      textAlign: "center",
+      textAlignVertical: "center",
+      includeFontPadding: false,
+    }],
+  ),
   colorBar: {
     left: 0,
     position: "absolute",

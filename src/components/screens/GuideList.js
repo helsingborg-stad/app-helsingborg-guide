@@ -12,6 +12,7 @@ import {
   Text,
   Linking,
   Platform,
+  StyleSheet,
 } from "react-native";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -28,10 +29,96 @@ import RoundedBtn from "../shared/roundedBtn";
 import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
 import {
+  Colors,
   TabBarStyles,
-  GuideListStyles,
+  TextStyles,
 } from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 
+const styles = StyleSheet.create({
+  mapViewContainer: {
+    flex: 4,
+    justifyContent: "flex-start",
+    alignItems: "stretch",
+  },
+  map: {
+    flex: 1,
+  },
+  openTimeContainer: {
+    paddingVertical: 20,
+  },
+  openTimeText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "300",
+      lineHeight: 19,
+    }],
+  ),
+  guideList: {
+    flex: 1,
+  },
+  listViewContainer: {
+    flex: 3,
+  },
+  guideScroll: {
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingHorizontal: 50,
+    backgroundColor: Colors.offWhite,
+  },
+  titleContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 1,
+  },
+  title: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 23,
+      fontWeight: "bold",
+      textAlign: "center",
+    }],
+  ),
+  navigateBtn: {
+    position: "absolute",
+    top: 6,
+    right: 6,
+    zIndex: 100,
+    width: 40,
+    height: 40,
+    backgroundColor: Colors.lightPink,
+  },
+  guideView: {
+    height: 400,
+    flex: 1,
+    flexDirection: "column",
+  },
+  guideViewImage: {
+    height: 350,
+    resizeMode: "cover",
+    overflow: "hidden",
+  },
+  comingSoonContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    height: 27,
+  },
+  comingSoonTextContainer: {
+    flex: 1,
+    paddingHorizontal: 7,
+    justifyContent: "center",
+    backgroundColor: Colors.lightPurple,
+  },
+  comingSoonText: StyleSheetUtils.flatten([
+    TextStyles.comingSoonText, {
+      color: Colors.white,
+      textAlign: "center",
+    }],
+  ),
+});
 
 class GuideList extends Component {
   static propTypes = {
@@ -71,8 +158,8 @@ class GuideList extends Component {
     const opening = TimingService.getOpeningHours(openingList, expList);
     const text = opening || "";
     return (
-      <View style={GuideListStyles.openTimeContainer}>
-        <Text style={GuideListStyles.openTimeText}>{text}</Text>
+      <View style={styles.openTimeContainer}>
+        <Text style={styles.openTimeText}>{text}</Text>
       </View>
     );
   }
@@ -80,9 +167,9 @@ class GuideList extends Component {
   static displayComingSoon(guideGroup) {
     if (!guideGroup.settings.active) {
       return (
-        <View style={{ position: "absolute", bottom: 0, left: 0, height: 27 }}>
-          <View style={{ flex: 1, paddingHorizontal: 7, justifyContent: "center", backgroundColor: "#A84C98" }}>
-            <Text style={{ fontWeight: "300", color: "white", textAlign: "center" }}>{LangService.strings.COMING_SOON}</Text>
+        <View style={styles.comingSoonContainer}>
+          <View style={styles.comingSoonTextContainer}>
+            <Text style={styles.comingSoonText}>{LangService.strings.COMING_SOON}</Text>
           </View>
         </View>
       );
@@ -152,9 +239,9 @@ class GuideList extends Component {
 
     const button = (
       <RoundedBtn
-        style={GuideListStyles.navigateBtn}
-        active={<Icon name="directions" size={20} color="white" />}
-        idle={<Icon name="directions" size={20} color="white" />}
+        style={styles.navigateBtn}
+        active={<Icon name="directions" size={20} color={Colors.white} />}
+        idle={<Icon name="directions" size={20} color={Colors.white} />}
         onPress={() => { this.openGoogleMapApp(location.latitude, location.longitude, location.slug); }}
       />
     );
@@ -171,7 +258,7 @@ class GuideList extends Component {
           this.guidePress(rowData);
         }}
       >
-        <View style={GuideListStyles.titleContainer}>
+        <View style={styles.titleContainer}>
           {GuideList.displayLogo(rowData)}
           {GuideList.displayOpeningTime(rowData)}
         </View>

@@ -9,6 +9,7 @@ import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
 import LangService from "../../services/langService";
 import {
+  Colors,
   TabBarStyles,
 } from "../../styles/";
 
@@ -16,10 +17,10 @@ const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 const styles = StyleSheet.create({
   fo: {
-    color: "#D35098",
+    color: Colors.lightPink,
   },
   mainContainer: {
-    backgroundColor: "#F2F2F2",
+    backgroundColor: Colors.white,
   },
   itemsScroll: {},
 });

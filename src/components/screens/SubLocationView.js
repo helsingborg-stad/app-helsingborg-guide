@@ -33,8 +33,13 @@ import NoInternetText from "../shared/noInternetText";
 import downloadManager from "../../services/DownloadTasksManager";
 import fetchService from "../../services/FetchService";
 import {
+  Colors,
   TabBarStyles,
+  TextStyles,
 } from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 
 const HALF_WIDTH = Dimensions.get("window").width / 2;
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
@@ -42,13 +47,17 @@ const RADAR_SCANNING_PERIOD = 1000; // ms
 const RADAR_SCANNING_DIE_PERIOD = 1000; // ms
 
 const styles = StyleSheet.create({
-  scrollView: { paddingBottom: 70 },
-  imageViewContainer: { flex: 1, backgroundColor: "white" },
+  scrollView: {
+    paddingBottom: 70,
+  },
+  imageViewContainer: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  },
   bodyContainer: {
     flex: 1,
-
     alignItems: "stretch",
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
   },
   titleContainer: {
     flex: 1,
@@ -56,9 +65,22 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 15,
   },
-  title: { fontSize: 22, fontWeight: "300", lineHeight: 26 },
-  articleContainer: { flex: 4, paddingHorizontal: 34, paddingVertical: 10 },
-  article: { fontSize: 14, lineHeight: 25 },
+  title: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 22,
+      fontWeight: "300",
+      lineHeight: 26,
+    }],
+  ),
+  articleContainer: {
+    flex: 4,
+    paddingHorizontal: 34,
+    paddingVertical: 10,
+  },
+  article: {
+    fontSize: 14,
+    lineHeight: 25,
+  },
   objectsContainer: {
     flex: 1,
     flexWrap: "wrap",
@@ -81,11 +103,24 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 40,
     borderBottomWidth: 4,
-    borderBottomColor: "#ebebeb",
+    borderBottomColor: Colors.greyBorderColor,
   },
-  nearByTextContainer: { paddingHorizontal: 34, paddingVertical: 20, justifyContent: "center" },
-  nearByText: { fontSize: 18, lineHeight: 21 },
-  fabBtn: { width: 40, height: 40, backgroundColor: "#D35098" },
+  nearByTextContainer: {
+    paddingHorizontal: 34,
+    paddingVertical: 20,
+    justifyContent: "center",
+  },
+  nearByText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 18,
+      lineHeight: 21,
+    }],
+  ),
+  fabBtn: {
+    width: 40,
+    height: 40,
+    backgroundColor: Colors.lightPink,
+  },
 });
 
 class SubLocationView extends Component {
@@ -322,7 +357,7 @@ class SubLocationView extends Component {
           <View style={styles.nearByTextContainer}>
             <Text style={styles.nearByText}>{LangService.strings.SOMETHING_NEAR_BY}</Text>
           </View>
-          <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: "#cecece" }]}>{nearByObjectsViews}</View>
+          <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>{nearByObjectsViews}</View>
         </View>
       );
     }
@@ -382,8 +417,8 @@ class SubLocationView extends Component {
 
       const text = (
         <View style={{ flex: 1, justifyContent: "flex-start" }}>
-          <Text style={{ fontSize: 16, fontWeight: "300", marginVertical: 3 }}>{`#${contentObjects[key].id}`}</Text>
-          <Text style={{ fontSize: 14, marginVertical: 3 }}>{contentObjects[key].title}</Text>
+          <Text style={[TextStyles.defaultFontFamily, { fontSize: 16, fontWeight: "300", marginVertical: 3 }]}>{`#${contentObjects[key].id}`}</Text>
+          <Text style={[TextStyles.defaultFontFamily, { fontSize: 14, marginVertical: 3 }]}>{contentObjects[key].title}</Text>
         </View>
       );
 
@@ -460,7 +495,7 @@ class SubLocationView extends Component {
   displayArticle() {
     const article = (
       <View style={styles.articleContainer}>
-        <Text style={{ fontSize: 19, lineHeight: 21, marginVertical: 10 }}>
+        <Text style={[TextStyles.defaultFontFamily, { fontSize: 19, lineHeight: 21, marginVertical: 10 }]}>
           {`${LangService.strings.ABOUT} ${this.state.subLocation.title.plain_text}`}
         </Text>
         <Text style={styles.article}>{this.state.subLocation.content.plain_text}</Text>

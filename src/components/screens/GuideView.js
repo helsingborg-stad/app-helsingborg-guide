@@ -36,19 +36,24 @@ import NoInternetText from "../shared/noInternetText";
 import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import {
+  Colors,
   TabBarStyles,
+  TextStyles,
 } from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 
 const styles = StyleSheet.create({
   scrollView: {},
   imageViewContainer: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
   },
   bodyContainer: {
     flex: 1,
     alignItems: "stretch",
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
   },
   titleContainer: {
     flex: 1,
@@ -57,11 +62,13 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginTop: 10,
   },
-  title: {
-    fontSize: 23,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
+  title: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 23,
+      fontWeight: "bold",
+      textAlign: "center",
+    }],
+  ),
   logoContainer: {
     flex: 1,
     padding: 10,
@@ -76,15 +83,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 34,
     paddingVertical: 10,
   },
-  articleDescriptionText: {
-    fontSize: 14,
-    lineHeight: 20,
-  },
-  articleHeaderText: {
-    fontSize: 19,
-    lineHeight: 21,
-    marginVertical: 10,
-  },
+  articleDescriptionText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 14,
+      lineHeight: 20,
+    }],
+  ),
+  articleHeaderText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 19,
+      lineHeight: 21,
+      marginVertical: 10,
+    }],
+  ),
   subLocationsContainer: {
     flex: 1,
     paddingVertical: 10,
@@ -94,17 +105,19 @@ const styles = StyleSheet.create({
     minHeight: 160,
     justifyContent: "center",
     borderTopWidth: 1,
-    borderTopColor: "#ebebeb",
+    borderTopColor: Colors.greyBorderColor,
   },
   openTimeContainer: {
     flex: 1,
     paddingVertical: 20,
   },
-  openTimeText: {
-    fontSize: 16,
-    fontWeight: "300",
-    lineHeight: 19,
-  },
+  openTimeText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "300",
+      lineHeight: 19,
+    }],
+  ),
   closeBtnContainer: {
     flex: 1,
     alignItems: "center",
@@ -113,7 +126,7 @@ const styles = StyleSheet.create({
   fabBtn: {
     width: 40,
     height: 40,
-    backgroundColor: "#D35098",
+    backgroundColor: Colors.lightPink,
   },
   comingSoonView: {
     flex: 1,
@@ -123,12 +136,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: 100,
     left: 0,
-    backgroundColor: "#A84C98",
+    backgroundColor: Colors.lightPurple,
   },
-  comingSoonText: {
-    fontWeight: "bold",
-    color: "white",
-  },
+  comingSoonText: StyleSheetUtils.flatten([
+    TextStyles.comingSoonText, {
+      color: Colors.white,
+    }],
+  ),
 });
 
 class GuideView extends Component {
