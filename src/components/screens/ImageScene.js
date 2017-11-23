@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, Platform } from "react-native";
 import PhotoView from "react-native-photo-view";
 import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
-import FetchService from "../../services/FetchService";
+import fetchService from "../../services/FetchService";
 
 const MAX_SCALE = 2.5;
 const MIN_SCALE = 0.95;
@@ -32,8 +32,6 @@ export default class ImageScene extends Component {
     this.state = {
       source: null,
     };
-
-    this.fetchService = FetchService.getInstance();
   }
 
   componentDidMount() {
@@ -44,8 +42,8 @@ export default class ImageScene extends Component {
     const { image } = this.props.navigation.state.params;
     const uri = image.sizes.large;
     if (typeof uri === "string") {
-      this.fetchService.isExist(uri).then((exist) => {
-        const fullPath = this.fetchService.getFullPath(uri);
+      fetchService.isExist(uri).then((exist) => {
+        const fullPath = fetchService.getFullPath(uri);
         if (exist) {
           this.setState({ source: { uri: `file://${fullPath}` } });
         } else {
@@ -59,7 +57,7 @@ export default class ImageScene extends Component {
 
   loadFile(fullPath) {
     if (Platform.OS === "ios") {
-      this.fetchService.readFile(fullPath).then((data) => {
+      fetchService.readFile(fullPath).then((data) => {
         this.setState({ source: { uri: `data:image/png;base64,${data}` } });
       });
     } else if (Platform.OS === "android") {

@@ -2,7 +2,7 @@ import { NativeModules, DeviceEventEmitter, NativeEventEmitter, Platform } from 
 import NotificationService from "./notificationService";
 import store from "../store/configureStore";
 import { errorHappened } from "../actions/errorActions";
-import FetchService from "./FetchService";
+import fetchService from "./FetchService";
 import LangService from "./langService";
 import { togglePlay, releaseAudioFile, loadAudioFile, loadAudioFileSuccess, updateAudio } from "../actions/audioActions";
 
@@ -40,14 +40,12 @@ config();
 
 export default class MediaService {
   static url;
-  fetchService;
   audio;
   updateInterval;
   updatePaused;
 
   constructor() {
     this.audio = RELEASED_AUDIO_OBJ;
-    this.fetchService = FetchService.getInstance();
     this.onPreparedCallback = this.onPreparedCallback.bind(this);
     this.onCompletedCallback = this.onCompletedCallback.bind(this);
   }
@@ -64,10 +62,10 @@ export default class MediaService {
   init(audio) {
     if (!audio || !audio.url) return Promise.reject(new Error("No url provided"));
 
-    this.fetchService
+    fetchService
       .isExist(audio.url)
       .then((exist) => {
-        const fullPath = this.fetchService.getFullPath(audio.url);
+        const fullPath = fetchService.getFullPath(audio.url);
         if (exist) return Promise.resolve(`file://${fullPath}`);
         return Promise.resolve(audio.url);
       })

@@ -8,7 +8,6 @@ import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
 import LangService from "../../services/langService";
-import FetchService from "../../services/FetchService";
 import {
   TabBarStyles,
 } from "../../styles/";
@@ -54,11 +53,6 @@ class DownloadManagerView extends Component {
       if (task.isCanceled) downloadManager.resumeTask(task.id);
       else downloadManager.cancelTask(task.id);
     }
-  }
-
-  constructor(props) {
-    super(props);
-    this.fetchService = FetchService.getInstance();
   }
 
   // #################################################
