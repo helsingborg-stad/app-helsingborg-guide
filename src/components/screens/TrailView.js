@@ -21,7 +21,6 @@ import {
 import {
   connect,
 } from "react-redux";
-import * as _ from "lodash";
 import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import {
@@ -165,7 +164,7 @@ class TrailView extends Component {
     const { _embedded } = this.state.subLocation;
 
     const contentObject = this.state.subLocation.contentObjects[objectId];
-    const locationItem = _.filter(_embedded.location, item => item.id === locationId);
+    const locationItem = _embedded.location.filter(item => item.id === locationId);
     const imageUrl = contentObject.image[0].sizes.thumbnail;
 
     const { longitude, latitude, street_address } = locationItem[0];
@@ -216,8 +215,8 @@ class TrailView extends Component {
 
 function getFilteredSubLocations(list, parentId) {
   if (!list || !list.length) return [];
-  const filtered = _.filter(list, item => item.guidegroup[0].id === parentId);
-  return _.sortBy(filtered, item => item.title.plain_text);
+  const filtered = list.filter(item => item.guidegroup[0].id === parentId);
+  return filtered.sort((a, b) => a.title.plain_text > b.title.plain_text);
 }
 
 function mapStateToProps(state, ownProps) {
