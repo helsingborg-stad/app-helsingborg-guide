@@ -255,7 +255,7 @@ class LocationDetailsScreen extends Component {
 
     const { navigate } = this.props.navigation;
     const { name } = this.state.guide;
-    navigate("SubLocationsOnMapView", { subLocations: this.state.sublocations, name });
+    navigate("LocationOnMapScreen", { subLocations: this.state.sublocations, name });
   };
 
   displaySubLocations() {
