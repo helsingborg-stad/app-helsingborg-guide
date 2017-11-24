@@ -183,7 +183,7 @@ class ObjectDetailsScreen extends Component {
 
   goToLink(url) {
     const { navigate } = this.props.navigation;
-    navigate("WebView", { url });
+    navigate("WebScreen", { url });
   }
 
   displayText() {

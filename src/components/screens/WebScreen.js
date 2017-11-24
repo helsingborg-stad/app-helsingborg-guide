@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const WebScene = (props) => {
+const WebScreen = (props) => {
   const { url } = props.navigation.state.params;
 
   return (
@@ -23,14 +23,14 @@ const WebScene = (props) => {
   );
 };
 
-WebScene.navigationOptions = {
+WebScreen.navigationOptions = {
   headerRight: null,
   headerStyle: styles.header,
   ...TabBarStyles.guide,
 };
 
-WebScene.propTypes = {
+WebScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default WebScene;
+export default WebScreen;
