@@ -110,7 +110,7 @@ export default class SubLocationsOnMapView extends Component {
     const { subLocations } = this.props.navigation.state.params;
     const { name } = subLocations[0].guidegroup[0];
     navigate("GuideDetailsScreen", {
-      subLocationId: id,
+      id,
       title: name,
     });
   }

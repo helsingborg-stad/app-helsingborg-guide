@@ -199,7 +199,7 @@ class GuideDetailsScreen extends Component {
   _goToContentObjectScene(contentObject, objectKey) {
     const { navigate, state } = this.props.navigation;
     const { title } = state.params;
-    navigate("ObjectDetailsScreen", { title, contentObject, objectKey, subLocationId: this.state.subLocation.id });
+    navigate("ObjectDetailsScreen", { title, contentObject, objectKey, id: this.state.subLocation.id });
   }
 
   // ############################################
@@ -683,12 +683,12 @@ function getDownloadMeta(downloads, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { subLocationId } = ownProps.navigation.state.params;
+  const { id } = ownProps.navigation.state.params;
   return {
-    subLocation: getSubLocation(state.subLocations, subLocationId),
+    subLocation: getSubLocation(state.subLocations, id),
     metrics: state.metrics,
     internet: state.internet.connected,
-    downloadMeta: getDownloadMeta(state.downloads, subLocationId),
+    downloadMeta: getDownloadMeta(state.downloads, id),
     downloads: state.downloads,
   };
 }

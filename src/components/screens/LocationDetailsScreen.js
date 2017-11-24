@@ -246,7 +246,7 @@ class LocationDetailsScreen extends Component {
     const { name } = subLocation.guidegroup[0];
     navigate("GuideDetailsScreen", {
       title: name,
-      subLocationId: subLocation.id,
+      id: subLocation.id,
     });
   }
 
