@@ -87,9 +87,6 @@ class TrailView extends Component {
   };
 
   static markersFromLocation(subLocation) {
-    // console.log(subLocation._embedded.location);
-    // console.log(subLocation);
-
     if (!subLocation._embedded.location) return [];
 
     return subLocation._embedded.location.map((item) => {
@@ -106,11 +103,22 @@ class TrailView extends Component {
     });
   }
 
+  static createTrailObjects(subAttractions) {
+    return subAttractions.map((item) => {
+      const trailObject = {
+        objectId: item.content[0],
+        locationId: item.location,
+      };
+      return trailObject;
+    });
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       subLocation: this.props.subLocations[0],
       markers: TrailView.markersFromLocation(this.props.subLocations[0]),
+      trailObjects: TrailView.createTrailObjects(this.props.subLocations[0].subAttractions),
     };
   }
 
@@ -152,18 +160,23 @@ class TrailView extends Component {
     });
   }
 
-  renderRow = (contentObject) => {
-    const { title, latitude, longitude, street_address } = contentObject.item;
-    const images = _.values(this.state.subLocation.contentObjects);
-    const imageUrl = images[contentObject.index - 1] && images[contentObject.index - 1].image[0].sizes.thumbnail;
-    console.log(imageUrl);
+  renderRow = (listItem) => {
+    const { objectId, locationId } = listItem.item;
+    const { _embedded } = this.state.subLocation;
+
+    const contentObject = this.state.subLocation.contentObjects[objectId];
+    const locationItem = _.filter(_embedded.location, item => item.id === locationId);
+    const imageUrl = contentObject.image[0].sizes.thumbnail;
+
+    const { longitude, latitude, street_address } = locationItem[0];
+    const { title } = contentObject;
 
     return (
       <View style={styles.listItem}>
         {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
         <View style={styles.listItemTextContainer}>
-          <Text style={styles.listItemTitle}>{title.plain_text}</Text>
-          <Text style={styles.listItemTitle}> {street_address} </Text>
+          <Text style={styles.listItemTitle}>{title}</Text>
+          <Text style={styles.listItemTitle}>{street_address}</Text>
           <Text style={styles.listItemTitle}>Lat: {latitude} · Long: {longitude} </Text>
         </View>
       </View>
@@ -171,7 +184,7 @@ class TrailView extends Component {
   }
 
   render() {
-    const { location } = this.state.subLocation._embedded;
+    const { trailObjects } = this.state;
     return (
       <View style={styles.container}>
         <MapView
@@ -191,9 +204,9 @@ class TrailView extends Component {
         </MapView>
         <FlatList
           style={styles.flatList}
-          data={location}
+          data={trailObjects}
           renderItem={this.renderRow}
-          keyExtractor={item => `i${item.id}`}
+          keyExtractor={item => `i${item.objectId}`}
         />
       </View>
     );
@@ -208,9 +221,7 @@ function getFilteredSubLocations(list, parentId) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const {
-    guide,
-  } = ownProps.navigation.state.params;
+  const { guide } = ownProps.navigation.state.params;
   return {
     subLocations: getFilteredSubLocations(state.subLocations, guide.id) || [],
     internet: state.internet.connected,
