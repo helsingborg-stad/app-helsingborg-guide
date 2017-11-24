@@ -23,7 +23,7 @@ import {
   ObjectDetailsScreen,
   WebView,
   VideoView,
-  ImageView,
+  ImageScreen,
   DownloadsScreen,
   SettingsScreen,
 } from "./components/screens/";
@@ -79,7 +79,7 @@ const GuideNavigator = StackNavigator(
     ObjectDetailsScreen: { screen: ObjectDetailsScreen },
     WebView: { screen: WebView },
     VideoView: { screen: VideoView },
-    ImageView: { screen: ImageView },
+    ImageScreen: { screen: ImageScreen },
   },
   headerStyle,
 );

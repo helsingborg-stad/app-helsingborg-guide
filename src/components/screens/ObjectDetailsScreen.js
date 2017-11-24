@@ -178,7 +178,7 @@ class ObjectDetailsScreen extends Component {
 
   goToImageView(image) {
     const { navigate } = this.props.navigation;
-    navigate("ImageView", { image });
+    navigate("ImageScreen", { image });
   }
 
   goToLink(url) {
