@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class ObjectView extends Component {
+class ObjectDetailsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     return {
@@ -352,4 +352,4 @@ function mapDispatchToProps(dispatch) {
     internetActions: bindActionCreators(internetActions, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ObjectView);
+export default connect(mapStateToProps, mapDispatchToProps)(ObjectDetailsScreen);

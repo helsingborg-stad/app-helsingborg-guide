@@ -2,7 +2,7 @@ export { default as DownloadsScreen } from "./DownloadsScreen";
 export { default as GuideList } from "./GuideList";
 export { default as LocationDetailsScreen } from "./LocationDetailsScreen";
 export { default as ImageView } from "./ImageScene";
-export { default as ObjectView } from "./ObjectView";
+export { default as ObjectDetailsScreen } from "./ObjectDetailsScreen";
 export { default as SettingsScreen } from "./SettingsScreen";
 export { default as SplashView } from "./SplashView";
 export { default as SubLocationsOnMapView } from "./SubLocationsOnMapView";

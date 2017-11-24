@@ -199,7 +199,7 @@ class SubLocationView extends Component {
   _goToContentObjectScene(contentObject, objectKey) {
     const { navigate, state } = this.props.navigation;
     const { title } = state.params;
-    navigate("ObjectView", { title, contentObject, objectKey, subLocationId: this.state.subLocation.id });
+    navigate("ObjectDetailsScreen", { title, contentObject, objectKey, subLocationId: this.state.subLocation.id });
   }
 
   // ############################################
