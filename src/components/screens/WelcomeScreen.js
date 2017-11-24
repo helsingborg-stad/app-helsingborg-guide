@@ -153,7 +153,7 @@ export default class WelcomeScreen extends Component {
     AsyncStorage.setItem(IS_WELCOMED, JSON.stringify(true));
     const resetAction = NavigationActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: "GuideList" })],
+      actions: [NavigationActions.navigate({ routeName: "MainScreen" })],
     });
     this.props.navigation.dispatch(resetAction);
   }

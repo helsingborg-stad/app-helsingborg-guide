@@ -95,7 +95,7 @@ export default class SplashScreen extends Component {
       let welcomed = false;
       if (value) welcomed = JSON.parse(value);
 
-      const route = welcomed ? "GuideList" : "WelcomeScreen";
+      const route = welcomed ? "MainScreen" : "WelcomeScreen";
       const resetAction = NavigationActions.reset({
         index: 0,
         actions: [NavigationActions.navigate({ routeName: route })],

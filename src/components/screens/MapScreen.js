@@ -56,9 +56,6 @@ const styles = StyleSheet.create({
       lineHeight: 19,
     }],
   ),
-  guideList: {
-    flex: 1,
-  },
   listViewContainer: {
     flex: 3,
   },
@@ -120,7 +117,7 @@ const styles = StyleSheet.create({
   ),
 });
 
-class GuideList extends Component {
+class MapScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
     guides: PropTypes.array.isRequired,
@@ -134,6 +131,7 @@ class GuideList extends Component {
   static get defaultProps() {
     return {
       title: LangService.strings.APP_NAME,
+      geolocation: null,
     };
   }
 
@@ -245,7 +243,7 @@ class GuideList extends Component {
         onPress={() => { this.openGoogleMapApp(location.latitude, location.longitude, location.slug); }}
       />
     );
-    const label = GuideList.displayComingSoon(rowData);
+    const label = MapScreen.displayComingSoon(rowData);
 
     return (
       <Thumbnail
@@ -259,8 +257,8 @@ class GuideList extends Component {
         }}
       >
         <View style={styles.titleContainer}>
-          {GuideList.displayLogo(rowData)}
-          {GuideList.displayOpeningTime(rowData)}
+          {MapScreen.displayLogo(rowData)}
+          {MapScreen.displayOpeningTime(rowData)}
         </View>
       </Thumbnail>
     );
@@ -316,4 +314,4 @@ function mapDispatchToProps(dispatch) {
     internetActions: bindActionCreators(internetActions, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(GuideList);
+export default connect(mapStateToProps, mapDispatchToProps)(MapScreen);

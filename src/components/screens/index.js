@@ -1,5 +1,5 @@
 export { default as DownloadsScreen } from "./DownloadsScreen";
-export { default as GuideList } from "./GuideList";
+export { default as MapScreen } from "./MapScreen";
 export { default as LocationDetailsScreen } from "./LocationDetailsScreen";
 export { default as ImageScreen } from "./ImageScreen";
 export { default as ObjectDetailsScreen } from "./ObjectDetailsScreen";

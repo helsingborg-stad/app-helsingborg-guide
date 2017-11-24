@@ -15,7 +15,7 @@ import ViewContainer from "./components/shared/view_container";
 import NotificationBar from "./components/shared/NotificationBar";
 import {
   SplashScreen,
-  GuideList,
+  MapScreen,
   LocationDetailsScreen,
   GuideDetailsScreen,
   WelcomeScreen,
@@ -72,7 +72,7 @@ const headerStyle = {
 
 const GuideNavigator = StackNavigator(
   {
-    Home: { screen: GuideList },
+    MapScreen: { screen: MapScreen },
     LocationDetailsScreen: { screen: LocationDetailsScreen },
     GuideDetailsScreen: { screen: GuideDetailsScreen },
     LocationOnMapScreen: { screen: LocationOnMapScreen },
@@ -111,7 +111,7 @@ const RootNavigator = StackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
     WelcomeScreen: { screen: WelcomeScreen },
-    GuideList: { screen: TabBarNavigator },
+    MainScreen: { screen: TabBarNavigator },
   },
   {
     headerMode: "none",
