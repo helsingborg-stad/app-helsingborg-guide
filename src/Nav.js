@@ -18,7 +18,7 @@ import {
   GuideList,
   LocationDetailsScreen,
   GuideDetailsScreen,
-  WelcomeView,
+  WelcomeScreen,
   SubLocationsOnMapView,
   ObjectDetailsScreen,
   WebView,
@@ -110,7 +110,7 @@ const TabBarNavigator = TabNavigator(
 const RootNavigator = StackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
-    WelcomeView: { screen: WelcomeView },
+    WelcomeScreen: { screen: WelcomeScreen },
     GuideList: { screen: TabBarNavigator },
   },
   {

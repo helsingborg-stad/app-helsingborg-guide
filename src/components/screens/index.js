@@ -9,4 +9,4 @@ export { default as SubLocationsOnMapView } from "./SubLocationsOnMapView";
 export { default as GuideDetailsScreen } from "./GuideDetailsScreen";
 export { default as VideoView } from "./VideoView";
 export { default as WebView } from "./WebScene";
-export { default as WelcomeView } from "./WelcomeView";
+export { default as WelcomeScreen } from "./WelcomeScreen";

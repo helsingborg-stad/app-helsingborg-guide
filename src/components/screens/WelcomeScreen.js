@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class WelcomeView extends Component {
+export default class WelcomeScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
   }
@@ -190,7 +190,7 @@ export default class WelcomeView extends Component {
           {this.displaySlides()}
         </Swiper>
         {this.displaySkipBtn()}
-        {WelcomeView.displayColorBar()}
+        {WelcomeScreen.displayColorBar()}
       </ViewContainer>
     );
   }

@@ -152,9 +152,9 @@ class SettingsScreen extends Component {
     });
   }
 
-  navigateToWelcomeView = () => {
+  navigateToWelcomeScreen = () => {
     const { navigate } = this.props.navigation;
-    navigate("WelcomeView");
+    navigate("WelcomeScreen");
   };
 
   displayLanguages() {
@@ -191,7 +191,7 @@ class SettingsScreen extends Component {
         </View>
         <View style={styles.divider} />
         <Text style={textStyles.titleText}>{LangService.strings.ABOUT} {LangService.strings.APP_NAME}</Text>
-        <TouchableOpacity onPress={this.navigateToWelcomeView}>
+        <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
