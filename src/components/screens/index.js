@@ -6,7 +6,7 @@ export { default as ObjectDetailsScreen } from "./ObjectDetailsScreen";
 export { default as SettingsScreen } from "./SettingsScreen";
 export { default as SplashView } from "./SplashView";
 export { default as SubLocationsOnMapView } from "./SubLocationsOnMapView";
-export { default as SubLocationView } from "./SubLocationView";
+export { default as GuideDetailsScreen } from "./GuideDetailsScreen";
 export { default as VideoView } from "./VideoView";
 export { default as WebView } from "./WebScene";
 export { default as WelcomeView } from "./WelcomeView";

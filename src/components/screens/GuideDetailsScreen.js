@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class SubLocationView extends Component {
+class GuideDetailsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     return {
@@ -134,7 +134,7 @@ class SubLocationView extends Component {
 
   static get defaultProps() {
     return {
-      title: "SubLocation",
+      title: "GuideDetailsScreen",
     };
   }
 
@@ -343,7 +343,7 @@ class SubLocationView extends Component {
 
     const allKeys = Object.keys(contentObjects);
     const nearByKeys = this.getNearByObjectsKeys();
-    const remainingKeys = SubLocationView.getRemainingObjectKeys(allKeys, nearByKeys);
+    const remainingKeys = GuideDetailsScreen.getRemainingObjectKeys(allKeys, nearByKeys);
 
     const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
     const contentObjectsViews = this.getObjectsViews(remainingKeys);
@@ -701,4 +701,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubLocationView);
+export default connect(mapStateToProps, mapDispatchToProps)(GuideDetailsScreen);

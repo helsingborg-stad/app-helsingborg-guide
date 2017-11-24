@@ -17,7 +17,7 @@ import {
   SplashView,
   GuideList,
   LocationDetailsScreen,
-  SubLocationView,
+  GuideDetailsScreen,
   WelcomeView,
   SubLocationsOnMapView,
   ObjectDetailsScreen,
@@ -74,7 +74,7 @@ const GuideNavigator = StackNavigator(
   {
     Home: { screen: GuideList },
     LocationDetailsScreen: { screen: LocationDetailsScreen },
-    SubLocationView: { screen: SubLocationView },
+    GuideDetailsScreen: { screen: GuideDetailsScreen },
     SubLocationsOnMapView: { screen: SubLocationsOnMapView },
     ObjectDetailsScreen: { screen: ObjectDetailsScreen },
     WebView: { screen: WebView },
