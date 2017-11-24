@@ -7,6 +7,6 @@ export { default as SettingsScreen } from "./SettingsScreen";
 export { default as SplashScreen } from "./SplashScreen";
 export { default as LocationOnMapScreen } from "./LocationOnMapScreen";
 export { default as GuideDetailsScreen } from "./GuideDetailsScreen";
-export { default as VideoView } from "./VideoView";
+export { default as VideoScreen } from "./VideoScreen";
 export { default as WebScreen } from "./WebScreen";
 export { default as WelcomeScreen } from "./WelcomeScreen";

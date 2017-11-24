@@ -173,7 +173,7 @@ class ObjectDetailsScreen extends Component {
     this.pauseAudioFile();
 
     const { navigate } = this.props.navigation;
-    navigate("VideoView", { videoUrl, title });
+    navigate("VideoScreen", { videoUrl, title });
   }
 
   goToImageView(image) {
