@@ -150,7 +150,11 @@ class LocationDetailsScreen extends Component {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
     subLocations: PropTypes.array.isRequired,
     internet: PropTypes.bool.isRequired,
-    geolocation: PropTypes.any.isRequired,
+    geolocation: PropTypes.any,
+  }
+
+  static defaultProps = {
+    geolocation: null,
   }
 
   static navigationOptions = ({ navigation }) => {
