@@ -14,7 +14,7 @@ import {
 import ViewContainer from "./components/shared/view_container";
 import NotificationBar from "./components/shared/NotificationBar";
 import {
-  SplashView,
+  SplashScreen,
   GuideList,
   LocationDetailsScreen,
   GuideDetailsScreen,
@@ -109,7 +109,7 @@ const TabBarNavigator = TabNavigator(
 
 const RootNavigator = StackNavigator(
   {
-    Splash: { screen: SplashView },
+    SplashScreen: { screen: SplashScreen },
     WelcomeView: { screen: WelcomeView },
     GuideList: { screen: TabBarNavigator },
   },

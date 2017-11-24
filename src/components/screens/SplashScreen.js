@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class SplashView extends Component {
+export default class SplashScreen extends Component {
   static navigationOptions = {
     header: null,
   }
