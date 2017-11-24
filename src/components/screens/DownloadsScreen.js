@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   itemsScroll: {},
 });
 
-class DownloadManagerView extends Component {
+class DownloadsScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     downloads: PropTypes.array.isRequired,
@@ -67,8 +67,8 @@ class DownloadManagerView extends Component {
       currentPos={item.currentPos}
       isCanceled={item.isCanceled}
       progress={item.currentPos / item.urls.length}
-      onClosePress={() => DownloadManagerView.toggleTask(item.id)}
-      onClearPress={() => DownloadManagerView.clearCache(item.id)}
+      onClosePress={() => DownloadsScreen.toggleTask(item.id)}
+      onClearPress={() => DownloadsScreen.clearCache(item.id)}
     />
   );
 
@@ -82,7 +82,7 @@ class DownloadManagerView extends Component {
           enableEmptySections
           dataSource={ds.cloneWithRows(this.props.downloads)}
           renderRow={this.renderRow}
-          renderFooter={DownloadManagerView.renderFooter}
+          renderFooter={DownloadsScreen.renderFooter}
         />
       </ViewContainer>
     );
@@ -100,4 +100,4 @@ function mapDispatchToProps(dispatch) {
     downloadActions: bindActionCreators(downloadActions, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DownloadManagerView);
+export default connect(mapStateToProps, mapDispatchToProps)(DownloadsScreen);

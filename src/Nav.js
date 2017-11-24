@@ -24,7 +24,7 @@ import {
   WebView,
   VideoView,
   ImageView,
-  DownloadManagerView,
+  DownloadsScreen,
   SettingsScreen,
 } from "./components/screens/";
 import {
@@ -86,7 +86,7 @@ const GuideNavigator = StackNavigator(
 
 const DownloadNavigator = StackNavigator(
   {
-    DownloadManagerView: { screen: DownloadManagerView },
+    DownloadsScreen: { screen: DownloadsScreen },
   },
   headerStyle,
 );
@@ -101,7 +101,7 @@ const SettingsNavigator = StackNavigator(
 const TabBarNavigator = TabNavigator(
   {
     Home: { screen: GuideNavigator },
-    DownloadManagerView: { screen: DownloadNavigator },
+    DownloadsScreen: { screen: DownloadNavigator },
     Settings: { screen: SettingsNavigator },
   },
   tabNavigatorParams,
