@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
   ]),
 });
 
-
 class TrailView extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
@@ -159,15 +158,20 @@ class TrailView extends Component {
     });
   }
 
+  locationItemFromId = (locationId) => {
+    const { _embedded } = this.state.subLocation;
+    const locationItem = _embedded.location.filter(item => item.id === locationId);
+    return locationItem[0];
+  }
+
   renderRow = (listItem) => {
     const { objectId, locationId } = listItem.item;
-    const { _embedded } = this.state.subLocation;
 
     const contentObject = this.state.subLocation.contentObjects[objectId];
-    const locationItem = _embedded.location.filter(item => item.id === locationId);
+    const locationItem = this.locationItemFromId(locationId);
     const imageUrl = contentObject.image[0].sizes.thumbnail;
 
-    const { longitude, latitude, street_address } = locationItem[0];
+    const { longitude, latitude, street_address } = locationItem;
     const { title } = contentObject;
 
     return (
@@ -184,6 +188,7 @@ class TrailView extends Component {
 
   render() {
     const { trailObjects } = this.state;
+    const locationItem = this.locationItemFromId(trailObjects[0].locationId);
     return (
       <View style={styles.container}>
         <MapView
@@ -192,8 +197,8 @@ class TrailView extends Component {
           showsUserLocation
           initialRegion={
             {
-              latitude: 56.04765769999999,
-              longitude: 12.6888389,
+              latitude: parseFloat(locationItem.latitude),
+              longitude: parseFloat(locationItem.longitude),
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }
