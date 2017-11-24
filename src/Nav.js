@@ -16,7 +16,7 @@ import NotificationBar from "./components/shared/NotificationBar";
 import {
   SplashView,
   GuideList,
-  GuideView,
+  LocationDetailsScreen,
   SubLocationView,
   WelcomeView,
   SubLocationsOnMapView,
@@ -73,7 +73,7 @@ const headerStyle = {
 const GuideNavigator = StackNavigator(
   {
     Home: { screen: GuideList },
-    GuideView: { screen: GuideView },
+    LocationDetailsScreen: { screen: LocationDetailsScreen },
     SubLocationView: { screen: SubLocationView },
     SubLocationsOnMapView: { screen: SubLocationsOnMapView },
     ObjectView: { screen: ObjectView },

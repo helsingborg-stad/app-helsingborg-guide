@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   ),
 });
 
-class GuideView extends Component {
+class LocationDetailsScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
     subLocations: PropTypes.array.isRequired,
@@ -360,13 +360,13 @@ class GuideView extends Component {
           <ScrollView style={styles.scrollView}>
             <View style={styles.imageViewContainer}>
               <ImageView source={{ uri }} width={width} height={height}>
-                {GuideView.displayComingSoon(this.state.guide)}
+                {LocationDetailsScreen.displayComingSoon(this.state.guide)}
               </ImageView>
             </View>
             <View style={styles.bodyContainer}>
               <View style={styles.titleContainer}>
-                {GuideView.displayLogo(this.state.guide)}
-                {GuideView.displayOpeningTime(this.state.guide)}
+                {LocationDetailsScreen.displayLogo(this.state.guide)}
+                {LocationDetailsScreen.displayOpeningTime(this.state.guide)}
               </View>
               {this.displayArticle()}
               <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>
@@ -389,7 +389,7 @@ class GuideView extends Component {
     let url = `google.navigation:q=${daddr}`;
     if (Platform.OS === "ios") url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${daddr}&saddr=${saddr}`;
 
-    GuideView.openUrlIfValid(url);
+    LocationDetailsScreen.openUrlIfValid(url);
     this.toggleMenu();
   }
 
@@ -429,4 +429,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GuideView);
+export default connect(mapStateToProps, mapDispatchToProps)(LocationDetailsScreen);

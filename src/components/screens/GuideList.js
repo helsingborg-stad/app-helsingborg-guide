@@ -207,7 +207,7 @@ class GuideList extends Component {
 
   guidePress(guide) {
     const { navigate } = this.props.navigation;
-    navigate("GuideView", { guide });
+    navigate("LocationDetailsScreen", { guide });
   }
 
   // ##########################################

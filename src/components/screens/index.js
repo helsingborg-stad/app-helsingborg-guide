@@ -1,6 +1,6 @@
 export { default as DownloadsScreen } from "./DownloadsScreen";
 export { default as GuideList } from "./GuideList";
-export { default as GuideView } from "./GuideView";
+export { default as LocationDetailsScreen } from "./LocationDetailsScreen";
 export { default as ImageView } from "./ImageScene";
 export { default as ObjectView } from "./ObjectView";
 export { default as SettingsScreen } from "./SettingsScreen";
