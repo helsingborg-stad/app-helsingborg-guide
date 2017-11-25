@@ -12,6 +12,7 @@ import Opener from "guide-hbg/src/services/SettingsService";
 import { errorHappened } from "guide-hbg/src/actions/errorActions";
 import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
 import FullScreenVideoScreen from "guide-hbg/src/components/screens/FullScreenVideoScreen";
+import { loadGuideTypes } from "./src/actions/guidetypeActions";
 
 
 export default class GuideHbg extends Component {
@@ -35,6 +36,7 @@ export default class GuideHbg extends Component {
   static loadContents(langCode) {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
+        store.dispatch(loadGuideTypes());
         store.dispatch(loadGuides(langCode));
         store.dispatch(loadSubLocations(langCode));
         LangService.getLanguages().catch(() => console.log("error in getting lang")); // eslint-disable-line no-console
