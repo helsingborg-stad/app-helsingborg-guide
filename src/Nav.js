@@ -17,6 +17,7 @@ import {
   SplashScreen,
   MapScreen,
   LocationDetailsScreen,
+  GuideListScreen,
   GuideDetailsScreen,
   WelcomeScreen,
   LocationOnMapScreen,
@@ -72,6 +73,7 @@ const headerStyle = {
 
 const GuideNavigator = StackNavigator(
   {
+    GuideListScreen: { screen: GuideListScreen },
     MapScreen: { screen: MapScreen },
     LocationDetailsScreen: { screen: LocationDetailsScreen },
     GuideDetailsScreen: { screen: GuideDetailsScreen },
