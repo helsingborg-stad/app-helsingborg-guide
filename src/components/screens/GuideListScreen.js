@@ -32,12 +32,16 @@ class GuideListScreen extends Component {
   constructor(props) {
     super(props);
 
+    const { items } = this.props;
+    const routes = [];
+
+    items.forEach((element) => {
+      routes.push({ key: `${element.id}`, title: element.name });
+    });
+
     this.state = {
       index: 0,
-      routes: [
-        { key: "first", title: "First" },
-        { key: "second", title: "Second" },
-      ],
+      routes,
     };
   }
 
@@ -45,10 +49,15 @@ class GuideListScreen extends Component {
 
   _renderHeader = props => <TabBar {...props} />;
 
+  /*
   _renderScene = SceneMap({
     first: FirstRoute,
     second: SecondRoute,
   });
+  */
+
+  // TODO fetch and render the content in every category
+  _renderScene = ({ route }) => FirstRoute()
 
   render() {
     const { isFetching } = this.props;
