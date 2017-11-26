@@ -13,12 +13,12 @@ export function fetchGuideTypesFailure(error) {
   return { type: FETCH_GUIDE_TYPES_FAILURE, error };
 }
 
-export function fetchGuideTypes() {
+export function fetchGuideTypes(langCode) {
   return function fetchGuideTypesDispatch(dispatch) {
     dispatch(fetchGuideTypesRequest());
 
     const instance = dc();
-    return instance.guidetype.getGuideTypes()
+    return instance.guidetype.getGuideTypes(langCode)
       .then((guideTypes) => {
         console.log(guideTypes);
         dispatch(fetchGuideTypesSuccess(guideTypes));

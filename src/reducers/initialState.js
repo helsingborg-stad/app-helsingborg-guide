@@ -1,5 +1,5 @@
 export default {
-  guideTypes: [],
+  guideTypes: { isFetching: false, items: [] },
   guides: [],
   subLocations: [],
   metrics: [],
