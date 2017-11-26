@@ -21,7 +21,11 @@ export function fetchGuideTypes(langCode) {
     return instance.guidetype.getGuideTypes(langCode)
       .then((guideTypes) => {
         console.log(guideTypes);
-        dispatch(fetchGuideTypesSuccess(guideTypes));
+        if (guideTypes.code) {
+          dispatch(fetchGuideTypesFailure({ error: guideTypes.message }));
+        } else {
+          dispatch(fetchGuideTypesSuccess(guideTypes));
+        }
       });
   };
 }
