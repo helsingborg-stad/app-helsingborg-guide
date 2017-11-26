@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
+import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { connect } from "react-redux";
 import { TabViewAnimated, SceneMap, TabBar } from "react-native-tab-view";
 import LangService from "../../services/langService";
 import TabBarStyles from "../../styles/TabBarStyles";
@@ -8,12 +9,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  loadingContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
 });
 
 const FirstRoute = () => <View style={[styles.container, { backgroundColor: "#ff4081" }]} />;
 const SecondRoute = () => <View style={[styles.container, { backgroundColor: "#673ab7" }]} />;
 
-export default class GuideListScreen extends Component {
+class GuideListScreen extends Component {
   static navigationOptions = () => {
     const title = LangService.strings.APP_NAME;
     return {
@@ -45,6 +51,16 @@ export default class GuideListScreen extends Component {
   });
 
   render() {
+    const { isFetching } = this.props;
+
+    if (isFetching) {
+      return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
     return (
       <TabViewAnimated
         style={styles.container}
@@ -56,3 +72,17 @@ export default class GuideListScreen extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { isFetching, items } = state.guideTypes;
+  return {
+    isFetching, items,
+  };
+}
+
+function mapDispatchToProps() {
+  return {
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GuideListScreen);
