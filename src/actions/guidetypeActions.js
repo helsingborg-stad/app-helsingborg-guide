@@ -20,7 +20,6 @@ export function fetchGuideTypes(langCode) {
     const instance = dc();
     return instance.guidetype.getGuideTypes(langCode)
       .then((guideTypes) => {
-        console.log(guideTypes);
         if (guideTypes.code) {
           dispatch(fetchGuideTypesFailure({ error: guideTypes.message }));
         } else {

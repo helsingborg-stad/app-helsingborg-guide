@@ -74,9 +74,6 @@ export default class GuideHbg extends Component {
     }
 
     this.handleConnectivityChange = this.handleConnectivityChange.bind(this);
-
-    // Ignore RN debug warning for Remote debugger
-    console.ignoredYellowBox = ["Remote debugger"]; // eslint-disable-line no-console
   }
 
   componentDidMount() {
