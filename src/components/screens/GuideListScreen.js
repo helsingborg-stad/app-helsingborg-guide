@@ -26,6 +26,15 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
   },
+  tabBar: {
+    backgroundColor: Colors.darkPurple,
+  },
+  tabBarLabel: {
+    color: Colors.white,
+  },
+  tabBarIndicator: {
+    backgroundColor: Colors.white,
+  },
 });
 
 const GuideList = ({ items }) => (
@@ -47,6 +56,7 @@ class GuideListScreen extends Component {
     const title = LangService.strings.APP_NAME;
     return {
       title,
+      header: null,
       headerRight: null,
       ...TabBarStyles.guide,
     };
@@ -70,7 +80,13 @@ class GuideListScreen extends Component {
 
   _handleIndexChange = index => this.setState({ index });
 
-  _renderHeader = props => <TabBar {...props} />;
+  _renderHeader = props => (
+    <TabBar
+      style={styles.tabBar}
+      labelStyle={styles.tabBarLabel}
+      indicatorStyle={styles.tabBarIndicator}
+      {...props}
+    />);
 
   _renderScene = ({ route }) => {
     console.log(route);
