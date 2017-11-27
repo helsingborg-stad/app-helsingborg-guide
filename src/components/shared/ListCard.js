@@ -12,10 +12,13 @@ import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 40,
+    marginBottom: 20,
+    backgroundColor: Colors.white,
   },
   image: {
     flex: 1,
-    height: 220,
+    height: 210,
   },
   infoContainer: {
     flex: 1,
@@ -31,7 +34,7 @@ const ListCard = ({ title, image }) => (
   <View style={styles.container}>
     <Image
       style={styles.image}
-      resizeMode="contain"
+      resizeMode="cover"
       source={{ uri: image }}
     />
     <View style={styles.infoContainer}>

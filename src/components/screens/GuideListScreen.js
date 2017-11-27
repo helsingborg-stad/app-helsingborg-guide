@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
 import LangService from "../../services/langService";
 import TabBarStyles from "../../styles/TabBarStyles";
+import Colors from "../../styles/Colors";
 import ListCard from "../shared/ListCard";
 
 const styles = StyleSheet.create({
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
+    backgroundColor: Colors.lightGrey,
   },
   loadingContainer: {
     flexDirection: "column",
