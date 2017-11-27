@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 20,
     backgroundColor: Colors.white,
+    elevation: 4,
   },
   image: {
     flex: 1,

@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     backgroundColor: Colors.darkPurple,
+    elevation: 8,
   },
   tabBarLabel: {
     color: Colors.white,
