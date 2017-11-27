@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   Text,
+  TouchableHighlight,
   Image,
 } from "react-native";
 import TextStyles from "guide-hbg/src/styles/TextStyles";
@@ -34,17 +35,19 @@ const styles = StyleSheet.create({
   ),
 });
 
-const ListCard = ({ title, image }) => (
-  <View style={styles.container}>
-    <Image
-      style={styles.image}
-      resizeMode="cover"
-      source={{ uri: image }}
-    />
-    <View style={styles.infoContainer}>
-      <Text style={styles.title}>{title}</Text>
+const ListCard = ({ title, image, onPress }) => (
+  <TouchableHighlight style={styles.container} onPress={onPress}>
+    <View>
+      <Image
+        style={styles.image}
+        resizeMode="cover"
+        source={{ uri: image }}
+      />
+      <View style={styles.infoContainer}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
     </View>
-  </View>
+  </TouchableHighlight>
 );
 
 export default ListCard;

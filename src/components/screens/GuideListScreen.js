@@ -38,14 +38,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const GuideList = ({ items }) => (
+const GuideList = ({ items, onPress }) => (
   <FlatList
     style={styles.listContainer}
     data={items}
     renderItem={({ item }) => {
       const image = item.apperance.image.sizes.medium;
       return (
-        <ListCard title={item.name} image={image} />
+        <ListCard
+          title={item.name}
+          image={image}
+          onPress={() => onPress(item)}
+        />
       );
     }}
     keyExtractor={item => item.id}
@@ -79,6 +83,11 @@ class GuideListScreen extends Component {
     };
   }
 
+  _navigateToGuide = (guide) => {
+    const { navigate } = this.props.navigation;
+    navigate("LocationDetailsScreen", { guide });
+  }
+
   _handleIndexChange = index => this.setState({ index });
 
   _renderHeader = props => (
@@ -93,7 +102,7 @@ class GuideListScreen extends Component {
     console.log(route);
     // TODO fetch items for the correct routes
     const { guides } = this.props;
-    return (<GuideList items={guides} />);
+    return (<GuideList items={guides} onPress={this._navigateToGuide} />);
   }
 
 
