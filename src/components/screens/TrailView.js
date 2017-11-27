@@ -45,8 +45,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     flexDirection: "row",
-    marginHorizontal: defaultMargin,
-    marginTop: 4,
+    margin: defaultMargin,
   },
   listImage: {
     height: 75,
@@ -97,6 +96,7 @@ class TrailView extends Component {
     });
   }
 
+
   static createTrailObjects(subAttractions) {
     return subAttractions.map((item) => {
       const trailObject = {
@@ -111,8 +111,8 @@ class TrailView extends Component {
     super(props);
     this.state = {
       subLocation: this.props.subLocations[0],
-      markers: TrailView.markersFromLocation(this.props.subLocations[0]),
       trailObjects: TrailView.createTrailObjects(this.props.subLocations[0].subAttractions),
+      markers: TrailView.markersFromLocation(this.props.subLocations[0]),
     };
   }
 
@@ -139,24 +139,14 @@ class TrailView extends Component {
     this.map.fitToCoordinates(markers.map(marker => marker.location), options);
   }
 
-  renderMapMarkers() {
-    return this.state.markers.map((marker) => {
-      if (!marker.location.latitude || !marker.location.latitude) return null;
-      const image = markerImage;
-      return (
-        <MapView.Marker
-          key={marker.itemId}
-          coordinate={marker.location}
-          image={image}
-          identifier={`${marker.itemId}`}
-          onPress={() => this.onMarkerPressed(marker)}
-        />
-      );
-    });
-  }
 
   onMarkerPressed = (marker) => {
-    console.log(marker);
+    this.scrollToListItemWithId(marker);
+  }
+
+  scrollToListItemWithId = (marker) => {
+    const index = this.state.trailObjects.findIndex(item => item.locationId === marker.itemId);
+    if (index >= 0) this.listRef.scrollToIndex({ animated: true, index });
   }
 
   onListItemPressed = (listItem) => {
@@ -176,6 +166,32 @@ class TrailView extends Component {
     const { contentObjects } = this.state.subLocation;
     const contentObject = contentObjects[objectId];
     return contentObject;
+  }
+
+  renderMapPolylines() {
+    const coordinates = this.state.markers.map(marker => marker.location);
+    return (
+      <MapView.Polyline
+        coordinates={coordinates}
+        strokeColor={Colors.lightPink}
+      />
+    );
+  }
+
+  renderMapMarkers() {
+    return this.state.markers.map((marker) => {
+      if (!marker.location.latitude || !marker.location.latitude) return null;
+      const image = markerImage;
+      return (
+        <MapView.Marker
+          key={marker.itemId}
+          coordinate={marker.location}
+          image={image}
+          identifier={`${marker.itemId}`}
+          onPress={() => this.onMarkerPressed(marker)}
+        />
+      );
+    });
   }
 
   renderRow = (listItem) => {
@@ -220,6 +236,7 @@ class TrailView extends Component {
           }
         >
           {this.renderMapMarkers()}
+          {this.renderMapPolylines()}
         </MapView>
         <FlatList
           ref={(ref) => { this.listRef = ref; }}
