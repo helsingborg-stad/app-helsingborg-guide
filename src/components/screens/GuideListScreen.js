@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { ActivityIndicator, View, StyleSheet, FlatList, Text } from "react-native";
 import { connect } from "react-redux";
-import { TabViewAnimated, SceneMap, TabBar } from "react-native-tab-view";
+import { TabViewAnimated, TabBar } from "react-native-tab-view";
 import LangService from "../../services/langService";
 import TabBarStyles from "../../styles/TabBarStyles";
 
@@ -16,8 +16,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const FirstRoute = () => <View style={[styles.container, { backgroundColor: "#ff4081" }]} />;
-const SecondRoute = () => <View style={[styles.container, { backgroundColor: "#673ab7" }]} />;
+const GuideList = ({ items }) => (
+  <FlatList
+    data={items}
+    renderItem={({ item }) => <Text>{item.name}</Text>}
+    keyExtractor={item => item.id}
+  />
+);
 
 class GuideListScreen extends Component {
   static navigationOptions = () => {
@@ -49,15 +54,13 @@ class GuideListScreen extends Component {
 
   _renderHeader = props => <TabBar {...props} />;
 
-  /*
-  _renderScene = SceneMap({
-    first: FirstRoute,
-    second: SecondRoute,
-  });
-  */
+  _renderScene = ({ route }) => {
+    console.log(route);
+    // TODO fetch items for the correct routes
+    const { guides } = this.props;
+    return (<GuideList items={guides} />);
+  }
 
-  // TODO fetch and render the content in every category
-  _renderScene = ({ route }) => FirstRoute()
 
   render() {
     const { isFetching } = this.props;
@@ -84,8 +87,11 @@ class GuideListScreen extends Component {
 
 function mapStateToProps(state) {
   const { isFetching, items } = state.guideTypes;
+  const { guides } = state;
   return {
-    isFetching, items,
+    isFetching,
+    items,
+    guides,
   };
 }
 
