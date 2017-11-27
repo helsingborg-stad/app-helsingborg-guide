@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class WelcomeView extends Component {
+export default class WelcomeScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
   }
@@ -153,7 +153,7 @@ export default class WelcomeView extends Component {
     AsyncStorage.setItem(IS_WELCOMED, JSON.stringify(true));
     const resetAction = NavigationActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: "GuideList" })],
+      actions: [NavigationActions.navigate({ routeName: "MainScreen" })],
     });
     this.props.navigation.dispatch(resetAction);
   }
@@ -190,7 +190,7 @@ export default class WelcomeView extends Component {
           {this.displaySlides()}
         </Swiper>
         {this.displaySkipBtn()}
-        {WelcomeView.displayColorBar()}
+        {WelcomeScreen.displayColorBar()}
       </ViewContainer>
     );
   }

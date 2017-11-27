@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class SubLocationView extends Component {
+class GuideDetailsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     return {
@@ -134,7 +134,7 @@ class SubLocationView extends Component {
 
   static get defaultProps() {
     return {
-      title: "SubLocation",
+      title: "GuideDetailsScreen",
     };
   }
 
@@ -199,7 +199,7 @@ class SubLocationView extends Component {
   _goToContentObjectScene(contentObject, objectKey) {
     const { navigate, state } = this.props.navigation;
     const { title } = state.params;
-    navigate("ObjectView", { title, contentObject, objectKey, subLocationId: this.state.subLocation.id });
+    navigate("ObjectDetailsScreen", { title, contentObject, objectKey, id: this.state.subLocation.id });
   }
 
   // ############################################
@@ -343,7 +343,7 @@ class SubLocationView extends Component {
 
     const allKeys = Object.keys(contentObjects);
     const nearByKeys = this.getNearByObjectsKeys();
-    const remainingKeys = SubLocationView.getRemainingObjectKeys(allKeys, nearByKeys);
+    const remainingKeys = GuideDetailsScreen.getRemainingObjectKeys(allKeys, nearByKeys);
 
     const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
     const contentObjectsViews = this.getObjectsViews(remainingKeys);
@@ -683,12 +683,12 @@ function getDownloadMeta(downloads, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { subLocationId } = ownProps.navigation.state.params;
+  const { id } = ownProps.navigation.state.params;
   return {
-    subLocation: getSubLocation(state.subLocations, subLocationId),
+    subLocation: getSubLocation(state.subLocations, id),
     metrics: state.metrics,
     internet: state.internet.connected,
-    downloadMeta: getDownloadMeta(state.downloads, subLocationId),
+    downloadMeta: getDownloadMeta(state.downloads, id),
     downloads: state.downloads,
   };
 }
@@ -701,4 +701,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubLocationView);
+export default connect(mapStateToProps, mapDispatchToProps)(GuideDetailsScreen);

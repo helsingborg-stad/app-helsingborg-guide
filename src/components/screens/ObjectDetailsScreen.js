@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class ObjectView extends Component {
+class ObjectDetailsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     return {
@@ -173,17 +173,17 @@ class ObjectView extends Component {
     this.pauseAudioFile();
 
     const { navigate } = this.props.navigation;
-    navigate("VideoView", { videoUrl, title });
+    navigate("VideoScreen", { videoUrl, title });
   }
 
   goToImageView(image) {
     const { navigate } = this.props.navigation;
-    navigate("ImageView", { image });
+    navigate("ImageScreen", { image });
   }
 
   goToLink(url) {
     const { navigate } = this.props.navigation;
-    navigate("WebView", { url });
+    navigate("WebScreen", { url });
   }
 
   displayText() {
@@ -352,4 +352,4 @@ function mapDispatchToProps(dispatch) {
     internetActions: bindActionCreators(internetActions, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ObjectView);
+export default connect(mapStateToProps, mapDispatchToProps)(ObjectDetailsScreen);

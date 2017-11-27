@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   mainContainer: { backgroundColor: "black" },
 });
 
-export default class VideoView extends Component {
+export default class VideoScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
   }

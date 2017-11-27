@@ -14,17 +14,17 @@ import {
 import ViewContainer from "./components/shared/view_container";
 import NotificationBar from "./components/shared/NotificationBar";
 import {
-  SplashView,
-  GuideList,
-  GuideView,
-  SubLocationView,
-  WelcomeView,
-  SubLocationsOnMapView,
-  ObjectView,
-  WebView,
-  VideoView,
-  ImageView,
-  DownloadManagerView,
+  SplashScreen,
+  MapScreen,
+  LocationDetailsScreen,
+  GuideDetailsScreen,
+  WelcomeScreen,
+  LocationOnMapScreen,
+  ObjectDetailsScreen,
+  WebScreen,
+  VideoScreen,
+  ImageScreen,
+  DownloadsScreen,
   SettingsScreen,
 } from "./components/screens/";
 import {
@@ -72,21 +72,21 @@ const headerStyle = {
 
 const GuideNavigator = StackNavigator(
   {
-    Home: { screen: GuideList },
-    GuideView: { screen: GuideView },
-    SubLocationView: { screen: SubLocationView },
-    SubLocationsOnMapView: { screen: SubLocationsOnMapView },
-    ObjectView: { screen: ObjectView },
-    WebView: { screen: WebView },
-    VideoView: { screen: VideoView },
-    ImageView: { screen: ImageView },
+    MapScreen: { screen: MapScreen },
+    LocationDetailsScreen: { screen: LocationDetailsScreen },
+    GuideDetailsScreen: { screen: GuideDetailsScreen },
+    LocationOnMapScreen: { screen: LocationOnMapScreen },
+    ObjectDetailsScreen: { screen: ObjectDetailsScreen },
+    WebScreen: { screen: WebScreen },
+    VideoScreen: { screen: VideoScreen },
+    ImageScreen: { screen: ImageScreen },
   },
   headerStyle,
 );
 
 const DownloadNavigator = StackNavigator(
   {
-    DownloadManagerView: { screen: DownloadManagerView },
+    DownloadsScreen: { screen: DownloadsScreen },
   },
   headerStyle,
 );
@@ -101,7 +101,7 @@ const SettingsNavigator = StackNavigator(
 const TabBarNavigator = TabNavigator(
   {
     Home: { screen: GuideNavigator },
-    DownloadManagerView: { screen: DownloadNavigator },
+    DownloadsScreen: { screen: DownloadNavigator },
     Settings: { screen: SettingsNavigator },
   },
   tabNavigatorParams,
@@ -109,9 +109,9 @@ const TabBarNavigator = TabNavigator(
 
 const RootNavigator = StackNavigator(
   {
-    Splash: { screen: SplashView },
-    WelcomeView: { screen: WelcomeView },
-    GuideList: { screen: TabBarNavigator },
+    SplashScreen: { screen: SplashScreen },
+    WelcomeScreen: { screen: WelcomeScreen },
+    MainScreen: { screen: TabBarNavigator },
   },
   {
     headerMode: "none",

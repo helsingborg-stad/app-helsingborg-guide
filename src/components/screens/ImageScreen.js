@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class ImageScene extends Component {
+export default class ImageScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
   }

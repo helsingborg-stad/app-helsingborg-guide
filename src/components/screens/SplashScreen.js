@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class SplashView extends Component {
+export default class SplashScreen extends Component {
   static navigationOptions = {
     header: null,
   }
@@ -95,7 +95,7 @@ export default class SplashView extends Component {
       let welcomed = false;
       if (value) welcomed = JSON.parse(value);
 
-      const route = welcomed ? "GuideList" : "WelcomeView";
+      const route = welcomed ? "MainScreen" : "WelcomeScreen";
       const resetAction = NavigationActions.reset({
         index: 0,
         actions: [NavigationActions.navigate({ routeName: route })],

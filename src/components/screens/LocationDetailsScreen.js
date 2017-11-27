@@ -145,12 +145,16 @@ const styles = StyleSheet.create({
   ),
 });
 
-class GuideView extends Component {
+class LocationDetailsScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
     subLocations: PropTypes.array.isRequired,
     internet: PropTypes.bool.isRequired,
-    geolocation: PropTypes.any.isRequired,
+    geolocation: PropTypes.any,
+  }
+
+  static defaultProps = {
+    geolocation: null,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -240,9 +244,9 @@ class GuideView extends Component {
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
     const { name } = subLocation.guidegroup[0];
-    navigate("SubLocationView", {
+    navigate("GuideDetailsScreen", {
       title: name,
-      subLocationId: subLocation.id,
+      id: subLocation.id,
     });
   }
 
@@ -251,7 +255,7 @@ class GuideView extends Component {
 
     const { navigate } = this.props.navigation;
     const { name } = this.state.guide;
-    navigate("SubLocationsOnMapView", { subLocations: this.state.sublocations, name });
+    navigate("LocationOnMapScreen", { subLocations: this.state.sublocations, name });
   };
 
   displaySubLocations() {
@@ -360,13 +364,13 @@ class GuideView extends Component {
           <ScrollView style={styles.scrollView}>
             <View style={styles.imageViewContainer}>
               <ImageView source={{ uri }} width={width} height={height}>
-                {GuideView.displayComingSoon(this.state.guide)}
+                {LocationDetailsScreen.displayComingSoon(this.state.guide)}
               </ImageView>
             </View>
             <View style={styles.bodyContainer}>
               <View style={styles.titleContainer}>
-                {GuideView.displayLogo(this.state.guide)}
-                {GuideView.displayOpeningTime(this.state.guide)}
+                {LocationDetailsScreen.displayLogo(this.state.guide)}
+                {LocationDetailsScreen.displayOpeningTime(this.state.guide)}
               </View>
               {this.displayArticle()}
               <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>
@@ -389,7 +393,7 @@ class GuideView extends Component {
     let url = `google.navigation:q=${daddr}`;
     if (Platform.OS === "ios") url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${daddr}&saddr=${saddr}`;
 
-    GuideView.openUrlIfValid(url);
+    LocationDetailsScreen.openUrlIfValid(url);
     this.toggleMenu();
   }
 
@@ -429,4 +433,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GuideView);
+export default connect(mapStateToProps, mapDispatchToProps)(LocationDetailsScreen);

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class SubLocationsOnMapView extends Component {
+export default class LocationOnMapScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
   }
@@ -75,12 +75,12 @@ export default class SubLocationsOnMapView extends Component {
   }
 
   static buildState(_subLocations) {
-    const subLocations = SubLocationsOnMapView.filterSubLocationsWithoutLocationObject(_subLocations);
+    const subLocations = LocationOnMapScreen.filterSubLocationsWithoutLocationObject(_subLocations);
 
     return {
       subLocations,
       active: subLocations[0],
-      markers: SubLocationsOnMapView.makeMarkersFromLocations(subLocations) || [],
+      markers: LocationOnMapScreen.makeMarkersFromLocations(subLocations) || [],
     };
   }
 
@@ -102,15 +102,15 @@ export default class SubLocationsOnMapView extends Component {
     super(props);
 
     const { subLocations } = this.props.navigation.state.params;
-    this.state = SubLocationsOnMapView.buildState(subLocations);
+    this.state = LocationOnMapScreen.buildState(subLocations);
   }
 
   onItemPress(id) {
     const { navigate } = this.props.navigation;
     const { subLocations } = this.props.navigation.state.params;
     const { name } = subLocations[0].guidegroup[0];
-    navigate("SubLocationView", {
-      subLocationId: id,
+    navigate("GuideDetailsScreen", {
+      id,
       title: name,
     });
   }
@@ -132,7 +132,7 @@ export default class SubLocationsOnMapView extends Component {
               active={<Icon name="directions" size={20} color="white" />}
               idle={<Icon name="directions" size={20} color="white" />}
               onPress={() => {
-                SubLocationsOnMapView.openGoogleMapApp(location.latitude, location.longitude, location.slug);
+                LocationOnMapScreen.openGoogleMapApp(location.latitude, location.longitude, location.slug);
               }}
             />
           </View>
