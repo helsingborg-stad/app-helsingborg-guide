@@ -6,10 +6,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
-  LayoutAnimation,
-  Linking,
-  Platform,
   Image,
   FlatList,
 } from "react-native";
@@ -32,7 +28,7 @@ import {
   StyleSheetUtils,
 } from "../../utils/";
 
-const markerImageActive = require("../../images/marker-active.png");
+const markerImage = require("../../images/marker-active.png");
 
 const defaultMargin = 20;
 
@@ -146,16 +142,28 @@ class TrailView extends Component {
   renderMapMarkers() {
     return this.state.markers.map((marker) => {
       if (!marker.location.latitude || !marker.location.latitude) return null;
-      const image = markerImageActive;
+      const image = markerImage;
       return (
         <MapView.Marker
           key={marker.itemId}
           coordinate={marker.location}
           image={image}
           identifier={`${marker.itemId}`}
+          onPress={() => this.onMarkerPressed(marker)}
         />
       );
     });
+  }
+
+  onMarkerPressed = (marker) => {
+    console.log(marker);
+  }
+
+  onListItemPressed = (listItem) => {
+    const { navigate } = this.props.navigation;
+    const contentObject = this.contentObjectFromId(listItem.item.objectId);
+    const { title } = contentObject;
+    navigate("ObjectView", { title, contentObject });
   }
 
   locationItemFromId = (locationId) => {
@@ -164,25 +172,32 @@ class TrailView extends Component {
     return locationItem[0];
   }
 
+  contentObjectFromId = (objectId) => {
+    const { contentObjects } = this.state.subLocation;
+    const contentObject = contentObjects[objectId];
+    return contentObject;
+  }
+
   renderRow = (listItem) => {
     const { objectId, locationId } = listItem.item;
-
-    const contentObject = this.state.subLocation.contentObjects[objectId];
+    const contentObject = this.contentObjectFromId(objectId);
     const locationItem = this.locationItemFromId(locationId);
-    const imageUrl = contentObject.image[0].sizes.thumbnail;
 
+    const imageUrl = contentObject.image[0].sizes.thumbnail;
     const { longitude, latitude, street_address } = locationItem;
     const { title } = contentObject;
 
     return (
-      <View style={styles.listItem}>
-        {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
-        <View style={styles.listItemTextContainer}>
-          <Text style={styles.listItemTitle}>{title}</Text>
-          <Text style={styles.listItemTitle}>{street_address}</Text>
-          <Text style={styles.listItemTitle}>Lat: {latitude} · Long: {longitude} </Text>
+      <TouchableOpacity onPress={() => this.onListItemPressed(listItem)}>
+        <View style={styles.listItem}>
+          {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
+          <View style={styles.listItemTextContainer}>
+            <Text style={styles.listItemTitle}>{title}</Text>
+            <Text style={styles.listItemTitle}>{street_address}</Text>
+            <Text style={styles.listItemTitle}>Lat: {latitude} · Long: {longitude} </Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 
@@ -199,14 +214,15 @@ class TrailView extends Component {
             {
               latitude: parseFloat(locationItem.latitude),
               longitude: parseFloat(locationItem.longitude),
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
+              latitudeDelta: 0.09,
+              longitudeDelta: 0.06,
             }
           }
         >
           {this.renderMapMarkers()}
         </MapView>
         <FlatList
+          ref={(ref) => { this.listRef = ref; }}
           style={styles.flatList}
           data={trailObjects}
           renderItem={this.renderRow}
@@ -216,7 +232,6 @@ class TrailView extends Component {
     );
   }
 }
-
 
 function getFilteredSubLocations(list, parentId) {
   if (!list || !list.length) return [];
