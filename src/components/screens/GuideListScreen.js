@@ -1,25 +1,41 @@
 import React, { Component } from "react";
-import { ActivityIndicator, View, StyleSheet, FlatList, Text } from "react-native";
+import {
+  ActivityIndicator,
+  View,
+  StyleSheet,
+  FlatList,
+} from "react-native";
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
 import LangService from "../../services/langService";
 import TabBarStyles from "../../styles/TabBarStyles";
+import ListCard from "../shared/ListCard";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
   },
   loadingContainer: {
-    flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
+  },
+  listContainer: {
+    flex: 1,
   },
 });
 
 const GuideList = ({ items }) => (
   <FlatList
+    style={styles.listContainer}
     data={items}
-    renderItem={({ item }) => <Text>{item.name}</Text>}
+    renderItem={({ item }) => {
+      const image = item.apperance.image.sizes.medium;
+      return (
+        <ListCard title={item.name} image={image} />
+      );
+    }}
     keyExtractor={item => item.id}
   />
 );
