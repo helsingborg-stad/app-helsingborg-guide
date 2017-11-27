@@ -5,6 +5,9 @@ import {
   Text,
   Image,
 } from "react-native";
+import TextStyles from "guide-hbg/src/styles/TextStyles";
+import Colors from "guide-hbg/src/styles/Colors";
+import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
 
 const styles = StyleSheet.create({
   container: {
@@ -17,9 +20,11 @@ const styles = StyleSheet.create({
   infoContainer: {
     flex: 1,
   },
-  title: {
-    flex: 1,
-  },
+  title: StyleSheetUtils.flatten([
+    TextStyles.title, {
+      color: Colors.black,
+    }],
+  ),
 });
 
 const ListCard = ({ title, image }) => (
@@ -30,7 +35,7 @@ const ListCard = ({ title, image }) => (
       source={{ uri: image }}
     />
     <View style={styles.infoContainer}>
-      <Text style={styles.cardTitle}>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   </View>
 );
