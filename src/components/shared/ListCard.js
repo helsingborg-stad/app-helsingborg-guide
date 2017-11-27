@@ -12,7 +12,6 @@ import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 40,
     marginBottom: 20,
     backgroundColor: Colors.white,
   },
@@ -22,6 +21,10 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
+    paddingTop: 10,
+    paddingBottom: 20,
+    flexDirection: "column",
+    alignItems: "center",
   },
   title: StyleSheetUtils.flatten([
     TextStyles.title, {
