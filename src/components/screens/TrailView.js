@@ -28,9 +28,11 @@ import {
   StyleSheetUtils,
 } from "../../utils/";
 
-const markerImage = require("../../images/marker-active.png");
+const markerImageActive = require("../../images/marker-active.png");
+const markerImageInactive = require("../../images/marker-inactive.png");
 
 const defaultMargin = 20;
+const listItemImageSize = 100;
 
 const styles = StyleSheet.create({
   container: {
@@ -38,26 +40,30 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   map: {
-    height: 350,
+    flex: 2,
   },
   flatList: {
     flex: 1,
   },
   listItem: {
     flexDirection: "row",
-    margin: defaultMargin,
+    marginTop: defaultMargin,
+    marginHorizontal: defaultMargin,
+    marginBottom: 0,
   },
   listImage: {
-    height: 75,
-    width: 75,
+    height: listItemImageSize,
+    width: listItemImageSize,
   },
   listItemTextContainer: {
     flexDirection: "column",
+    justifyContent: "center",
     marginLeft: defaultMargin,
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body, {
-      fontSize: 13,
+      fontSize: 15,
+      marginRight: defaultMargin,
     },
   ]),
 });
@@ -82,20 +88,28 @@ class TrailView extends Component {
   static markersFromLocation(subLocation) {
     if (!subLocation._embedded.location) return [];
 
-    return subLocation._embedded.location.map((item) => {
+    const subAttractions = subLocation.subAttractions.map(subAttractionItem => subAttractionItem.location);
+
+    const markers = subLocation._embedded.location.map((item) => {
+      if ((subAttractions.filter(sub => sub === item.id).length === 0)) { return null; }
+
       const marker = {
         location: {
           latitude: null,
           longitude: null,
         },
-        itemId: item.id,
+        locationId: item.id,
       };
       marker.location.latitude = parseFloat(item.latitude);
       marker.location.longitude = parseFloat(item.longitude);
+
       return marker;
     });
-  }
 
+    // Remove null objects from markers (ie, is not a subAttraction location)
+    const filteredMarkers = markers.filter(item => item !== null);
+    return filteredMarkers;
+  }
 
   static createTrailObjects(subAttractions) {
     return subAttractions.map((item) => {
@@ -113,6 +127,7 @@ class TrailView extends Component {
       subLocation: this.props.subLocations[0],
       trailObjects: TrailView.createTrailObjects(this.props.subLocations[0].subAttractions),
       markers: TrailView.markersFromLocation(this.props.subLocations[0]),
+      activeMarker: {},
     };
   }
 
@@ -125,6 +140,8 @@ class TrailView extends Component {
   }
 
   focusMarkers(markers) {
+    if (!markers) return;
+
     const padding = 50;
     const edgePadding = {
       top: padding,
@@ -139,14 +156,14 @@ class TrailView extends Component {
     this.map.fitToCoordinates(markers.map(marker => marker.location), options);
   }
 
-
   onMarkerPressed = (marker) => {
+    this.setState({ activeMarker: marker.locationId });
     this.scrollToListItemWithId(marker);
   }
 
   scrollToListItemWithId = (marker) => {
-    const index = this.state.trailObjects.findIndex(item => item.locationId === marker.itemId);
-    if (index >= 0) this.listRef.scrollToIndex({ animated: true, index });
+    const index = this.state.trailObjects.findIndex(item => item.locationId === marker.locationId);
+    this.listRef.scrollToIndex({ animated: true, index });
   }
 
   onListItemPressed = (listItem) => {
@@ -179,15 +196,16 @@ class TrailView extends Component {
   }
 
   renderMapMarkers() {
+    const { activeMarker } = this.state;
+
     return this.state.markers.map((marker) => {
-      if (!marker.location.latitude || !marker.location.latitude) return null;
-      const image = markerImage;
+      const image = marker.locationId === activeMarker ? markerImageActive : markerImageInactive;
       return (
         <MapView.Marker
-          key={marker.itemId}
+          key={marker.locationId}
           coordinate={marker.location}
           image={image}
-          identifier={`${marker.itemId}`}
+          identifier={`${marker.locationId}`}
           onPress={() => this.onMarkerPressed(marker)}
         />
       );
@@ -199,18 +217,18 @@ class TrailView extends Component {
     const contentObject = this.contentObjectFromId(objectId);
     const locationItem = this.locationItemFromId(locationId);
 
-    const imageUrl = contentObject.image[0].sizes.thumbnail;
-    const { longitude, latitude, street_address } = locationItem;
-    const { title } = contentObject;
+    const imageUrl = contentObject.image[0].sizes.medium;
+    const { street_address } = locationItem;
+    const { id, title } = contentObject;
 
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(listItem)}>
         <View style={styles.listItem}>
           {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
           <View style={styles.listItemTextContainer}>
+            <Text style={styles.listItemTitle}>{id}</Text>
             <Text style={styles.listItemTitle}>{title}</Text>
             <Text style={styles.listItemTitle}>{street_address}</Text>
-            <Text style={styles.listItemTitle}>Lat: {latitude} · Long: {longitude} </Text>
           </View>
         </View>
       </TouchableOpacity>
