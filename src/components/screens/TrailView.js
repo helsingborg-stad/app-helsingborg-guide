@@ -124,6 +124,7 @@ class TrailView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      geolocation: this.props.geolocation,
       subLocation: this.props.subLocations[0],
       trailObjects: TrailView.createTrailObjects(this.props.subLocations[0].subAttractions),
       markers: TrailView.markersFromLocation(this.props.subLocations[0]),
@@ -185,16 +186,6 @@ class TrailView extends Component {
     return contentObject;
   }
 
-  renderMapPolylines() {
-    const coordinates = this.state.markers.map(marker => marker.location);
-    return (
-      <MapView.Polyline
-        coordinates={coordinates}
-        strokeColor={Colors.lightPink}
-      />
-    );
-  }
-
   renderMapMarkers() {
     const { activeMarker } = this.state;
 
@@ -202,7 +193,7 @@ class TrailView extends Component {
       const image = marker.locationId === activeMarker ? markerImageActive : markerImageInactive;
       return (
         <MapView.Marker
-          key={marker.locationId}
+          key={`${marker.locationId}`}
           coordinate={marker.location}
           image={image}
           identifier={`${marker.locationId}`}
@@ -254,14 +245,13 @@ class TrailView extends Component {
           }
         >
           {this.renderMapMarkers()}
-          {this.renderMapPolylines()}
         </MapView>
         <FlatList
           ref={(ref) => { this.listRef = ref; }}
           style={styles.flatList}
           data={trailObjects}
           renderItem={this.renderRow}
-          keyExtractor={item => `i${item.objectId}`}
+          keyExtractor={item => `i${item.locationId}-${item.objectId}`}
         />
       </View>
     );
