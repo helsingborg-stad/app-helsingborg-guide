@@ -49,10 +49,10 @@ class GuideListScreen extends Component {
   constructor(props) {
     super(props);
 
-    const { items } = this.props;
+    const { categoryTypes } = this.props;
     const routes = [];
 
-    items.forEach((element) => {
+    categoryTypes.forEach((element) => {
       routes.push({ key: `${element.id}`, title: element.name });
     });
 
@@ -78,7 +78,6 @@ class GuideListScreen extends Component {
     />);
 
   _renderScene = ({ route }) => {
-    console.log(route);
     // TODO fetch items for the correct routes
     const { guides } = this.props;
     return (<GuideList items={guides} onPress={this._navigateToGuide} />);
@@ -113,7 +112,7 @@ function mapStateToProps(state) {
   const { guides } = state;
   return {
     isFetching,
-    items,
+    categoryTypes: items,
     guides,
   };
 }
