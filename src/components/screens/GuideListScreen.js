@@ -3,14 +3,13 @@ import {
   ActivityIndicator,
   View,
   StyleSheet,
-  FlatList,
 } from "react-native";
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
 import LangService from "../../services/langService";
 import TabBarStyles from "../../styles/TabBarStyles";
 import Colors from "../../styles/Colors";
-import ListCard from "../shared/ListCard";
+import GuideList from "../shared/GuideList";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,9 +21,6 @@ const styles = StyleSheet.create({
   loadingContainer: {
     flexDirection: "column",
     justifyContent: "center",
-  },
-  listContainer: {
-    flex: 1,
   },
   tabBar: {
     backgroundColor: Colors.darkPurple,
@@ -38,23 +34,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const GuideList = ({ items, onPress }) => (
-  <FlatList
-    style={styles.listContainer}
-    data={items}
-    renderItem={({ item }) => {
-      const image = item.apperance.image.sizes.medium;
-      return (
-        <ListCard
-          title={item.name}
-          image={image}
-          onPress={() => onPress(item)}
-        />
-      );
-    }}
-    keyExtractor={item => item.id}
-  />
-);
 
 class GuideListScreen extends Component {
   static navigationOptions = () => {
