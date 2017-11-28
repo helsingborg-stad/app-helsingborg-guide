@@ -84,8 +84,8 @@ class GuideListScreen extends Component {
     if (index < 2) {
       items = locations;
     } else {
-      // TODO filter on keys
-      items = guides;
+      const { key } = route;
+      items = guides.filter(element => element.guidetype.includes(Number(key)));
     }
     return (<GuideList items={items} onPress={this._navigateToGuide} />);
   }
