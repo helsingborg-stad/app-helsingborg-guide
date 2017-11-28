@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Image,
   FlatList,
+  Dimensions,
 } from "react-native";
 import PropTypes from "prop-types";
 import MapView from "react-native-maps";
@@ -25,14 +26,16 @@ import {
   TextStyles,
 } from "../../styles/";
 import {
+  LocationUtils,
   StyleSheetUtils,
 } from "../../utils/";
 
 const markerImageActive = require("../../images/marker-active.png");
 const markerImageInactive = require("../../images/marker-inactive.png");
 
+const screenWidth = Dimensions.get("window").width;
 const defaultMargin = 20;
-const listItemImageSize = 100;
+const listItemImageSize = 150;
 
 const styles = StyleSheet.create({
   container: {
@@ -40,16 +43,15 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   map: {
-    flex: 2,
+    flex: 3,
   },
   flatList: {
-    flex: 1,
+    height: listItemImageSize,
   },
   listItem: {
     flexDirection: "row",
-    marginTop: defaultMargin,
-    marginHorizontal: defaultMargin,
-    marginBottom: 0,
+    width: screenWidth,
+    height: listItemImageSize,
   },
   listImage: {
     height: listItemImageSize,
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
   listItemTextContainer: {
     flexDirection: "column",
     justifyContent: "center",
-    marginLeft: defaultMargin,
+    marginHorizontal: defaultMargin,
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body, {
@@ -203,6 +205,12 @@ class TrailView extends Component {
     });
   }
 
+  getDistancefromUserLocationToLocationItem(locationItem) {
+    const { coords } = this.state.geolocation;
+    const distance = LocationUtils.getDistanceBetweenCoordinates(locationItem, coords);
+    return distance;
+  }
+
   renderRow = (listItem) => {
     const { objectId, locationId } = listItem.item;
     const contentObject = this.contentObjectFromId(objectId);
@@ -212,14 +220,17 @@ class TrailView extends Component {
     const { street_address } = locationItem;
     const { id, title } = contentObject;
 
+    const distance = this.getDistancefromUserLocationToLocationItem(locationItem);
+
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(listItem)}>
         <View style={styles.listItem}>
           {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle}>{id}</Text>
-            <Text style={styles.listItemTitle}>{title}</Text>
+            <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
             <Text style={styles.listItemTitle}>{street_address}</Text>
+            <Text style={styles.listItemTitle}>{distance} m</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -247,11 +258,13 @@ class TrailView extends Component {
           {this.renderMapMarkers()}
         </MapView>
         <FlatList
-          ref={(ref) => { this.listRef = ref; }}
-          style={styles.flatList}
           data={trailObjects}
-          renderItem={this.renderRow}
+          horizontal
+          pagingEnabled
           keyExtractor={item => `i${item.locationId}-${item.objectId}`}
+          ref={(ref) => { this.listRef = ref; }}
+          renderItem={this.renderRow}
+          style={styles.flatList}
         />
       </View>
     );
