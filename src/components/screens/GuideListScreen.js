@@ -77,10 +77,17 @@ class GuideListScreen extends Component {
       {...props}
     />);
 
-  _renderScene = ({ route }) => {
-    // TODO fetch items for the correct routes
-    const { guides } = this.props;
-    return (<GuideList items={guides} onPress={this._navigateToGuide} />);
+  _renderScene = ({ index, route }) => {
+    // TODO replace this index hard coded crap with a link to the route key
+    const { guides, locations } = this.props;
+    let items;
+    if (index < 2) {
+      items = locations;
+    } else {
+      // TODO filter on keys
+      items = guides;
+    }
+    return (<GuideList items={items} onPress={this._navigateToGuide} />);
   }
 
 
@@ -109,11 +116,16 @@ class GuideListScreen extends Component {
 
 function mapStateToProps(state) {
   const { isFetching, items } = state.guideTypes;
-  const { guides } = state;
+  const { guides, subLocations } = state;
+
+  // TODO this data should already be in the redux state! NOT here!
+  guides.forEach((element) => { element.type = "location"; });
+  subLocations.forEach((element) => { element.type = "guide"; });
   return {
     isFetching,
     categoryTypes: items,
-    guides,
+    locations: guides,
+    guides: subLocations,
   };
 }
 

@@ -16,10 +16,21 @@ const GuideList = ({ items, onPress }) => (
     style={styles.listContainer}
     data={items}
     renderItem={({ item }) => {
-      const image = item.apperance.image.sizes.medium;
+      let image;
+      let title;
+      if (item.type === "location") {
+        image = item.apperance.image.sizes.medium;
+        title = item.name;
+      } else if (item.type === "guide") {
+        image = item.guide_images[0].sizes.large;
+        title = item.title.plain_text;
+      }
+
+      if (!image) return null;
+
       return (
         <ListCard
-          title={item.name}
+          title={title}
           image={image}
           onPress={() => onPress(item)}
         />
