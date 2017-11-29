@@ -3,6 +3,9 @@ import {
   FlatList,
   StyleSheet,
 } from "react-native";
+import {
+  connect,
+} from "react-redux";
 import ListCard from "./ListCard";
 
 const styles = StyleSheet.create({
@@ -20,7 +23,7 @@ const GuideList = ({ items, navigation }) => {
   const _navigateToGuide = (guide) => {
     const { navigate } = navigation;
     const title = guide.guidegroup[0].name;
-    navigate("GuideDetailsScreen", { id: guide.id, title });
+    navigate("TrailScreen", { guide, title });
   };
 
   return (
@@ -56,4 +59,10 @@ const GuideList = ({ items, navigation }) => {
   );
 };
 
-export default GuideList;
+function mapStateToProps(state) {
+  return {
+    subLocations: state.subLocations || [],
+  };
+}
+
+export default connect(mapStateToProps)(GuideList);

@@ -14,20 +14,20 @@ import {
 import ViewContainer from "./components/shared/view_container";
 import NotificationBar from "./components/shared/NotificationBar";
 import {
-  SplashScreen,
-  MapScreen,
-  LocationDetailsScreen,
-  GuideListScreen,
-  GuideDetailsScreen,
-  WelcomeScreen,
-  LocationOnMapScreen,
-  ObjectDetailsScreen,
-  WebScreen,
-  VideoScreen,
-  ImageScreen,
   DownloadsScreen,
+  GuideDetailsScreen,
+  GuideListScreen,
+  ImageScreen,
+  LocationDetailsScreen,
+  LocationOnMapScreen,
+  MapScreen,
+  ObjectDetailsScreen,
   SettingsScreen,
-  TrailView,
+  SplashScreen,
+  TrailScreen,
+  VideoScreen,
+  WebScreen,
+  WelcomeScreen,
 } from "./components/screens/";
 import {
   Colors,
@@ -77,6 +77,7 @@ const GuideNavigator = StackNavigator(
   {
     GuideListScreen: { screen: GuideListScreen },
     MapScreen: { screen: MapScreen },
+    TrailScreen: { screen: TrailScreen },
     LocationDetailsScreen: { screen: LocationDetailsScreen },
     GuideDetailsScreen: { screen: GuideDetailsScreen },
     LocationOnMapScreen: { screen: LocationOnMapScreen },

@@ -18,7 +18,6 @@ import {
 import {
   connect,
 } from "react-redux";
-import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import {
   Colors,
@@ -70,19 +69,17 @@ const styles = StyleSheet.create({
   ]),
 });
 
-class TrailView extends Component {
+class TrailScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
-    subLocations: PropTypes.array.isRequired,
-    internet: PropTypes.bool.isRequired,
+    subLocation: PropTypes.object.isRequired,
     geolocation: PropTypes.any.isRequired,
   }
 
   static navigationOptions = ({ navigation }) => {
-    const { guide } = navigation.state.params;
-    const name = guide ? guide.name : undefined;
+    const { title } = navigation.state.params;
     return {
-      title: name,
+      title,
       ...TabBarStyles.guide,
     };
   };
@@ -127,9 +124,9 @@ class TrailView extends Component {
     super(props);
     this.state = {
       geolocation: this.props.geolocation,
-      subLocation: this.props.subLocations[0],
-      trailObjects: TrailView.createTrailObjects(this.props.subLocations[0].subAttractions),
-      markers: TrailView.markersFromLocation(this.props.subLocations[0]),
+      subLocation: this.props.subLocation,
+      trailObjects: TrailScreen.createTrailObjects(this.props.subLocation.subAttractions),
+      markers: TrailScreen.markersFromLocation(this.props.subLocation),
       activeMarker: {},
     };
   }
@@ -271,17 +268,10 @@ class TrailView extends Component {
   }
 }
 
-function getFilteredSubLocations(list, parentId) {
-  if (!list || !list.length) return [];
-  const filtered = list.filter(item => item.guidegroup[0].id === parentId);
-  return filtered.sort((a, b) => a.title.plain_text > b.title.plain_text);
-}
-
 function mapStateToProps(state, ownProps) {
   const { guide } = ownProps.navigation.state.params;
   return {
-    subLocations: getFilteredSubLocations(state.subLocations, guide.id) || [],
-    internet: state.internet.connected,
+    subLocation: guide,
     geolocation: state.geolocation,
   };
 }
@@ -289,8 +279,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
-    internetActions: bindActionCreators(internetActions, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrailView);
+export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);
