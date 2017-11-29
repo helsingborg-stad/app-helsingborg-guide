@@ -18,7 +18,6 @@ import internetActions from "../../actions/internetActions";
 import fetchService from "../../services/FetchService";
 import {
   Colors,
-  TabBarStyles,
   TextStyles,
 } from "../../styles/";
 import {
@@ -96,7 +95,6 @@ class ObjectDetailsScreen extends Component {
     return {
       title,
       headerRight: null,
-      ...TabBarStyles.guide,
     };
   }
 
