@@ -27,6 +27,7 @@ import {
   ImageScreen,
   DownloadsScreen,
   SettingsScreen,
+  TrailView,
 } from "./components/screens/";
 import {
   Colors,

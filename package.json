@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.17.0",
+    "geolib": "^2.0.24",
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
