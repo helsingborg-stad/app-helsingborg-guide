@@ -158,8 +158,8 @@ class LocationDetailsScreen extends Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    const { guide } = navigation.state.params;
-    const name = guide ? guide.name : undefined;
+    const { location } = navigation.state.params;
+    const name = location ? location.name : undefined;
     return {
       title: name,
       ...TabBarStyles.guide,
@@ -210,13 +210,12 @@ class LocationDetailsScreen extends Component {
   constructor(props) {
     super(props);
 
-    const { guide } = this.props.navigation.state.params;
-    const { subLocations, internet } = this.props;
+    const { subLocations, internet, location } = this.props;
 
     this.state = {
-      guide,
+      location,
       sublocations: subLocations,
-      viewArticle: !guide.settings.active,
+      viewArticle: !location.settings.active,
       menuVisible: false,
       internet,
     };
@@ -254,7 +253,7 @@ class LocationDetailsScreen extends Component {
     this.toggleMenu();
 
     const { navigate } = this.props.navigation;
-    const { name } = this.state.guide;
+    const { name } = this.state.location;
     navigate("LocationOnMapScreen", { subLocations: this.state.sublocations, name });
   };
 
@@ -289,8 +288,8 @@ class LocationDetailsScreen extends Component {
   displayArticle() {
     const article = (
       <View style={styles.articleContainer}>
-        <Text style={styles.articleHeaderText}>{`${LangService.strings.ABOUT} ${this.state.guide.name}`}</Text>
-        <Text style={styles.articleDescriptionText}>{this.state.guide.description}</Text>
+        <Text style={styles.articleHeaderText}>{`${LangService.strings.ABOUT} ${this.state.location.name}`}</Text>
+        <Text style={styles.articleDescriptionText}>{this.state.location.description}</Text>
       </View>
     );
 
@@ -299,9 +298,9 @@ class LocationDetailsScreen extends Component {
   }
 
   displayFabs() {
-    if (!Object.keys(this.state.guide).length) return null;
+    if (!Object.keys(this.state.location).length) return null;
 
-    const mapVisible = this.state.guide.settings.map && this.state.sublocations;
+    const mapVisible = this.state.location.settings.map && this.state.sublocations;
     const directions = (
       <RoundedBtn
         style={styles.fabBtn}
@@ -309,7 +308,7 @@ class LocationDetailsScreen extends Component {
         active={<Icon2 name="directions" size={20} color="white" />}
         idle={<Icon2 name="directions" size={20} color="white" />}
         onPress={() => {
-          this.openGoogleMapApp(this.state.guide._embedded.location[0].latitude, this.state.guide._embedded.location[0].longitude);
+          this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
         }}
       />
     );
@@ -350,8 +349,8 @@ class LocationDetailsScreen extends Component {
   }
 
   display() {
-    if (this.state.guide && Object.keys(this.state.guide).length) {
-      const { image } = this.state.guide.apperance;
+    if (this.state.location && Object.keys(this.state.location).length) {
+      const { image } = this.state.location.apperance;
       const uri = image.sizes.medium_large;
       const width = image.sizes["medium-large-width"];
       const height = image.sizes["medium-large-height"];
@@ -364,13 +363,13 @@ class LocationDetailsScreen extends Component {
           <ScrollView style={styles.scrollView}>
             <View style={styles.imageViewContainer}>
               <ImageView source={{ uri }} width={width} height={height}>
-                {LocationDetailsScreen.displayComingSoon(this.state.guide)}
+                {LocationDetailsScreen.displayComingSoon(this.state.location)}
               </ImageView>
             </View>
             <View style={styles.bodyContainer}>
               <View style={styles.titleContainer}>
-                {LocationDetailsScreen.displayLogo(this.state.guide)}
-                {LocationDetailsScreen.displayOpeningTime(this.state.guide)}
+                {LocationDetailsScreen.displayLogo(this.state.location)}
+                {LocationDetailsScreen.displayOpeningTime(this.state.location)}
               </View>
               {this.displayArticle()}
               <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>
@@ -419,9 +418,10 @@ function getFilteredSubLocations(list, parentId) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { guide } = ownProps.navigation.state.params;
+  const { location } = ownProps.navigation.state.params;
   return {
-    subLocations: getFilteredSubLocations(state.subLocations, guide.id) || [],
+    location,
+    subLocations: getFilteredSubLocations(state.subLocations, location.id) || [],
     internet: state.internet.connected,
     geolocation: state.geolocation,
   };

@@ -40,7 +40,6 @@ class GuideListScreen extends Component {
     const title = LangService.strings.APP_NAME;
     return {
       title,
-      header: null,
       headerRight: null,
       ...TabBarStyles.guide,
     };
@@ -62,11 +61,6 @@ class GuideListScreen extends Component {
     };
   }
 
-  _navigateToGuide = (guide) => {
-    const { navigate } = this.props.navigation;
-    navigate("LocationDetailsScreen", { guide });
-  }
-
   _handleIndexChange = index => this.setState({ index });
 
   _renderHeader = props => (
@@ -80,14 +74,15 @@ class GuideListScreen extends Component {
   _renderScene = ({ index, route }) => {
     // TODO replace this index hard coded crap with a link to the route key
     const { guides, locations } = this.props;
+    const { key } = route;
     let items;
-    if (index < 2) {
+    const filteredGuides = guides.filter(element => element.guidetype.includes(Number(key)));
+    if (index === 0) {
       items = locations;
     } else {
-      const { key } = route;
-      items = guides.filter(element => element.guidetype.includes(Number(key)));
+      items = filteredGuides;
     }
-    return (<GuideList items={items} onPress={this._navigateToGuide} />);
+    return (<GuideList items={items} navigation={this.props.navigation} />);
   }
 
 
@@ -116,16 +111,18 @@ class GuideListScreen extends Component {
 
 function mapStateToProps(state) {
   const { isFetching, items } = state.guideTypes;
-  const { guides, subLocations } = state;
 
   // TODO this data should already be in the redux state! NOT here!
-  guides.forEach((element) => { element.type = "location"; });
-  subLocations.forEach((element) => { element.type = "guide"; });
+  const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
+  const locations = JSON.parse(JSON.stringify(state.guides.slice()));
+  locations.forEach((element) => { element.type = "location"; });
+  guides.forEach((element) => { element.type = "guide"; });
+
   return {
     isFetching,
     categoryTypes: items,
-    locations: guides,
-    guides: subLocations,
+    locations,
+    guides,
   };
 }
 

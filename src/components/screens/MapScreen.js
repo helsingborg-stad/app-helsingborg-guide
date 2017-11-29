@@ -205,7 +205,7 @@ class MapScreen extends Component {
 
   guidePress(guide) {
     const { navigate } = this.props.navigation;
-    navigate("LocationDetailsScreen", { guide });
+    navigate("LocationDetailsScreen", { location: guide });
   }
 
   // ##########################################
