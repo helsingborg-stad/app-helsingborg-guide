@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import {
   StackNavigator,
-  TabNavigator,
 } from "react-navigation";
 import ViewContainer from "./components/shared/view_container";
 import NotificationBar from "./components/shared/NotificationBar";
@@ -38,29 +37,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const tabNavigatorParams = {
-  tabBarPosition: "bottom",
-  swipeEnabled: false,
-  animationEnabled: false,
-  backBehavior: "none",
-  lazy: true,
-  tabBarOptions: {
-    pressColor: Colors.darkPurple,
-    showIcon: true,
-    activeTintColor: Colors.purple,
-    inactiveTintColor: Colors.warmGrey,
-    activeBackgroundColor: Colors.white,
-    inactiveBackgroundColor: Colors.white,
-    labelStyle: TextStyles.tabBarLabel,
-    style: {
-      backgroundColor: Colors.white,
-    },
-    indicatorStyle: {
-      backgroundColor: Colors.darkPurple,
-    },
-  },
-};
-
 const headerStyle = {
   navigationOptions: {
     headerStyle: styles.headerStyle,
@@ -69,20 +45,6 @@ const headerStyle = {
     headerBackTitleStyle: TextStyles.defaultFontFamily,
   },
 };
-
-const GuideNavigator = StackNavigator(
-  {
-    MapScreen: { screen: MapScreen },
-    LocationDetailsScreen: { screen: LocationDetailsScreen },
-    GuideDetailsScreen: { screen: GuideDetailsScreen },
-    LocationOnMapScreen: { screen: LocationOnMapScreen },
-    ObjectDetailsScreen: { screen: ObjectDetailsScreen },
-    WebScreen: { screen: WebScreen },
-    VideoScreen: { screen: VideoScreen },
-    ImageScreen: { screen: ImageScreen },
-  },
-  headerStyle,
-);
 
 const DownloadNavigator = StackNavigator(
   {
@@ -98,20 +60,27 @@ const SettingsNavigator = StackNavigator(
   headerStyle,
 );
 
-const TabBarNavigator = TabNavigator(
+const GuideNavigator = StackNavigator(
   {
-    Home: { screen: GuideNavigator },
+    MapScreen: { screen: MapScreen },
+    LocationDetailsScreen: { screen: LocationDetailsScreen },
+    GuideDetailsScreen: { screen: GuideDetailsScreen },
+    LocationOnMapScreen: { screen: LocationOnMapScreen },
+    ObjectDetailsScreen: { screen: ObjectDetailsScreen },
+    WebScreen: { screen: WebScreen },
+    VideoScreen: { screen: VideoScreen },
+    ImageScreen: { screen: ImageScreen },
     DownloadsScreen: { screen: DownloadNavigator },
     Settings: { screen: SettingsNavigator },
   },
-  tabNavigatorParams,
+  headerStyle,
 );
 
 const RootNavigator = StackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
     WelcomeScreen: { screen: WelcomeScreen },
-    MainScreen: { screen: TabBarNavigator },
+    MainScreen: { screen: GuideNavigator },
   },
   {
     headerMode: "none",
