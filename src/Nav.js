@@ -36,6 +36,7 @@ import {
 const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: Colors.darkPurple,
+    borderBottomWidth: 0,
   },
 });
 
