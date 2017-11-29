@@ -10,7 +10,6 @@ import * as downloadActions from "../../actions/downloadActions";
 import LangService from "../../services/langService";
 import {
   Colors,
-  TabBarStyles,
 } from "../../styles/";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -36,7 +35,6 @@ class DownloadsScreen extends Component {
     return {
       title,
       headerRight: null,
-      ...TabBarStyles.downloaded,
     };
   };
 

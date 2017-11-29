@@ -37,7 +37,6 @@ import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import {
   Colors,
-  TabBarStyles,
   TextStyles,
 } from "../../styles/";
 import {
@@ -162,7 +161,6 @@ class LocationDetailsScreen extends Component {
     const name = location ? location.name : undefined;
     return {
       title: name,
-      ...TabBarStyles.guide,
     };
   };
 

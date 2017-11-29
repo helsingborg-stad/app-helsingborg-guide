@@ -18,7 +18,6 @@ import connect from "react-redux/es/connect/connect";
 import LangService from "../../services/langService";
 import {
   Colors,
-  TabBarStyles,
   TextStyles,
 } from "../../styles/";
 import {
@@ -113,7 +112,6 @@ class SettingsScreen extends Component {
     const title = LangService.strings.SETTINGS;
     return {
       title,
-      ...TabBarStyles.settings,
     };
   };
 

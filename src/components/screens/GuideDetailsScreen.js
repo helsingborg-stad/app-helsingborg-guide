@@ -34,7 +34,6 @@ import downloadManager from "../../services/DownloadTasksManager";
 import fetchService from "../../services/FetchService";
 import {
   Colors,
-  TabBarStyles,
   TextStyles,
 } from "../../styles/";
 import {
@@ -128,7 +127,6 @@ class GuideDetailsScreen extends Component {
     const { title } = navigation.state.params;
     return {
       title,
-      ...TabBarStyles.guide,
     };
   }
 

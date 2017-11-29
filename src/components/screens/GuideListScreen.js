@@ -7,7 +7,6 @@ import {
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
 import LangService from "../../services/langService";
-import TabBarStyles from "../../styles/TabBarStyles";
 import Colors from "../../styles/Colors";
 import GuideList from "../shared/GuideList";
 
@@ -41,7 +40,6 @@ class GuideListScreen extends Component {
     return {
       title,
       headerRight: null,
-      ...TabBarStyles.guide,
     };
   }
 

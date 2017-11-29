@@ -21,7 +21,6 @@ import {
 import * as subLocationActions from "../../actions/subLoactionActions";
 import {
   Colors,
-  TabBarStyles,
   TextStyles,
 } from "../../styles/";
 import {
@@ -80,7 +79,6 @@ class TrailScreen extends Component {
     const { title } = navigation.state.params;
     return {
       title,
-      ...TabBarStyles.guide,
     };
   };
 
