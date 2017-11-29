@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import {
   Colors,
-  TabBarStyles,
 } from "../../styles/";
 
 const styles = StyleSheet.create({
@@ -26,7 +25,6 @@ const WebScreen = (props) => {
 WebScreen.navigationOptions = {
   headerRight: null,
   headerStyle: styles.header,
-  ...TabBarStyles.guide,
 };
 
 WebScreen.propTypes = {

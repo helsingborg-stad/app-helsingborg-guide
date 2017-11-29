@@ -30,7 +30,6 @@ import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
 import {
   Colors,
-  TabBarStyles,
   TextStyles,
 } from "../../styles/";
 import {
@@ -140,7 +139,6 @@ class MapScreen extends Component {
     return {
       title,
       headerRight: null,
-      ...TabBarStyles.guide,
     };
   };
 
