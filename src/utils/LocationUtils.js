@@ -12,6 +12,16 @@ function getDistanceBetweenCoordinates(firstLocation, secondLocation) {
   return 0;
 }
 
+function getShortestDistance(sourceLocation, targetLocations) {
+  const distances = [];
+  targetLocations.forEach((location) => {
+    const distance = getDistanceBetweenCoordinates(location, sourceLocation);
+    distances.push(distance);
+  });
+  return Math.min(...distances);
+}
+
 export default {
   getDistanceBetweenCoordinates,
+  getShortestDistance,
 };
