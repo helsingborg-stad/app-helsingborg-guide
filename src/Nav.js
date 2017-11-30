@@ -46,20 +46,6 @@ const headerStyle = {
   },
 };
 
-const DownloadNavigator = StackNavigator(
-  {
-    DownloadsScreen: { screen: DownloadsScreen },
-  },
-  headerStyle,
-);
-
-const SettingsNavigator = StackNavigator(
-  {
-    SettingsScreen: { screen: SettingsScreen },
-  },
-  headerStyle,
-);
-
 const GuideNavigator = StackNavigator(
   {
     MapScreen: { screen: MapScreen },
@@ -70,8 +56,8 @@ const GuideNavigator = StackNavigator(
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
     ImageScreen: { screen: ImageScreen },
-    DownloadsScreen: { screen: DownloadNavigator },
-    Settings: { screen: SettingsNavigator },
+    DownloadsScreen: { screen: DownloadsScreen },
+    SettingsScreen: { screen: SettingsScreen },
   },
   headerStyle,
 );
