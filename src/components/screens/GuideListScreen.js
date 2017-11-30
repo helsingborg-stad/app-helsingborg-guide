@@ -6,6 +6,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
+import { LocationUtils } from "guide-hbg/src/utils";
 import LangService from "../../services/langService";
 import Colors from "../../styles/Colors";
 import GuideList from "../shared/GuideList";
@@ -43,6 +44,19 @@ class GuideListScreen extends Component {
     };
   }
 
+  static getDistancefromUserLocationToLocationItem(currentLocation, locationItem) {
+    if (!currentLocation) return null;
+
+    const { coords } = currentLocation;
+    const distance = LocationUtils.getDistanceBetweenCoordinates(locationItem, coords);
+    return distance;
+  }
+
+  static getEmbeddedLocationFromLocation(locationItem) {
+    return locationItem._embedded.location[0];
+  }
+
+
   constructor(props) {
     super(props);
 
@@ -77,10 +91,15 @@ class GuideListScreen extends Component {
     const filteredGuides = guides.filter(element => element.guidetype.includes(Number(key)));
     if (index === 0) {
       items = locations;
+      items.forEach((element) => {
+        const embeddedLocation = GuideListScreen.getEmbeddedLocationFromLocation(element);
+        element.distance = GuideListScreen.getDistancefromUserLocationToLocationItem(currentLocation, embeddedLocation);
+      });
+      items.sort((a, b) => a.distance > b.distance);
     } else {
       items = filteredGuides;
     }
-    return (<GuideList items={items} navigation={navigation} currentLocation={currentLocation} />);
+    return (<GuideList items={items} navigation={navigation} />);
   }
 
 
