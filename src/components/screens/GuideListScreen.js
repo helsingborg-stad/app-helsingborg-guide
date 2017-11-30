@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   tabBar: {
-    backgroundColor: Colors.darkPurple,
+    backgroundColor: Colors.purple,
     elevation: 8,
   },
   tabBarLabel: {
