@@ -13,6 +13,7 @@ import {
   Linking,
   Platform,
   StyleSheet,
+  Button,
 } from "react-native";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -134,11 +135,11 @@ class MapScreen extends Component {
     };
   }
 
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.APP_NAME;
     return {
       title,
-      headerRight: null,
+      headerLeft: (<Button title="Settings" onPress={() => navigation.navigate("SettingsScreen")} />),
     };
   };
 

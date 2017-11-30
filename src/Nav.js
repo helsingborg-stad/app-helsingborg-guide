@@ -53,13 +53,6 @@ const DownloadNavigator = StackNavigator(
   headerStyle,
 );
 
-const SettingsNavigator = StackNavigator(
-  {
-    SettingsScreen: { screen: SettingsScreen },
-  },
-  headerStyle,
-);
-
 const GuideNavigator = StackNavigator(
   {
     MapScreen: { screen: MapScreen },
@@ -71,7 +64,7 @@ const GuideNavigator = StackNavigator(
     VideoScreen: { screen: VideoScreen },
     ImageScreen: { screen: ImageScreen },
     DownloadsScreen: { screen: DownloadNavigator },
-    Settings: { screen: SettingsNavigator },
+    SettingsScreen: { screen: SettingsScreen },
   },
   headerStyle,
 );
