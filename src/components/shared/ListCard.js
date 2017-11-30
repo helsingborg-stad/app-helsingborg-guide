@@ -33,9 +33,20 @@ const styles = StyleSheet.create({
       color: Colors.black,
     }],
   ),
+  openingHours: {
+    marginTop: 10,
+  },
 });
 
-const ListCard = ({ title, image, onPress }) => (
+function displayOpeningHours(openingHours) {
+  if (!openingHours) { return null; }
+
+  return (
+    <Text style={styles.openingHours}>{openingHours}</Text>
+  );
+}
+
+const ListCard = ({ title, image, onPress, openingHours }) => (
   <TouchableHighlight style={styles.container} onPress={onPress}>
     <View>
       <Image
@@ -45,6 +56,7 @@ const ListCard = ({ title, image, onPress }) => (
       />
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{title}</Text>
+        {displayOpeningHours(openingHours)}
       </View>
     </View>
   </TouchableHighlight>
