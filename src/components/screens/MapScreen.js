@@ -155,7 +155,7 @@ class MapScreen extends Component {
           style={styles.barButtonItem}
         >
           <Image source={settingsIcon} />
-        </TouchableOpacity >
+        </TouchableOpacity>
       ),
     };
   };

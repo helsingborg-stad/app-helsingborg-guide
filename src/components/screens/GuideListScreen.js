@@ -3,6 +3,8 @@ import {
   ActivityIndicator,
   View,
   StyleSheet,
+  TouchableOpacity,
+  Image,
 } from "react-native";
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
@@ -11,7 +13,15 @@ import LangService from "../../services/langService";
 import Colors from "../../styles/Colors";
 import GuideList from "../shared/GuideList";
 
+const settingsIcon = require("../../images/settings.png");
+
 const styles = StyleSheet.create({
+  barButtonItem: {
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   container: {
     flex: 1,
     flexDirection: "column",
@@ -36,11 +46,19 @@ const styles = StyleSheet.create({
 
 
 class GuideListScreen extends Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.APP_NAME;
     return {
       title,
       headerRight: null,
+      headerLeft: (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("SettingsScreen")}
+          style={styles.barButtonItem}
+        >
+          <Image source={settingsIcon} />
+        </TouchableOpacity>
+      ),
     };
   }
 
