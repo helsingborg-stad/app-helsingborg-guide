@@ -13,6 +13,7 @@ import { errorHappened } from "guide-hbg/src/actions/errorActions";
 import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
 import FullScreenVideoScreen from "guide-hbg/src/components/screens/FullScreenVideoScreen";
 import { fetchGuideTypes } from "./src/actions/guidetypeActions";
+import { LocationService } from "./src/services/locationService";
 
 
 export default class GuideHbg extends Component {
@@ -25,6 +26,8 @@ export default class GuideHbg extends Component {
   }
 
   static init() {
+    LocationService.getInstance().getGeoLocation();
+
     LangService.loadStoredLanguage()
       .then(() => {
         // Check the network and load the content.
