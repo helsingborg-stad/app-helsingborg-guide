@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: Colors.white,
     elevation: 4,
+    shadowRadius: 4,
+    // shadowColor: "black",
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 4 },
   },
   image: {
     flex: 1,
@@ -58,8 +62,8 @@ function displayDistance(distance) {
 }
 
 const ListCard = ({ title, image, onPress, openingHours, distance }) => (
-  <TouchableHighlight style={styles.container} onPress={onPress}>
-    <View>
+  <TouchableHighlight onPress={onPress}>
+    <View style={styles.container}>
       <Image
         style={styles.image}
         resizeMode="cover"
