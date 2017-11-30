@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  ImageBackground,
   Image,
 } from "react-native";
 import TextStyles from "guide-hbg/src/styles/TextStyles";
@@ -46,6 +47,11 @@ const styles = StyleSheet.create({
   distance: {
     marginTop: 4,
   },
+  icon: {
+    position: "absolute",
+    top: 11,
+    right: 10,
+  },
 });
 
 function displayOpeningHours(openingHours) {
@@ -64,14 +70,16 @@ function displayDistance(distance) {
   );
 }
 
-const ListCard = ({ title, image, onPress, openingHours, distance }) => (
+const ListCard = ({ title, image, onPress, openingHours, distance, icon }) => (
   <TouchableHighlight onPress={onPress}>
     <View style={styles.container}>
-      <Image
+      <ImageBackground
         style={styles.image}
         resizeMode="cover"
         source={{ uri: image }}
-      />
+      >
+        <Image source={icon} style={styles.icon} />
+      </ImageBackground >
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{title}</Text>
         {displayOpeningHours(openingHours)}

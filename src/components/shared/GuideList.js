@@ -6,6 +6,9 @@ import {
 import ListCard from "./ListCard";
 import TimingService from "../../services/timingService";
 
+const iconGuide = require("./../../images/iconRundtur.png");
+const iconLocation = require("./../../images/iconPlats.png");
+
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
@@ -38,15 +41,18 @@ export default ({ items, navigation }) => {
     let pressHandler;
     let openingHours;
     const { distance } = item;
+    let icon;
     if (item.type === "location") {
       image = item.apperance.image.sizes.medium;
       title = item.name;
       pressHandler = _navigateToLocation;
       openingHours = getOpeningHours(item);
+      icon = iconLocation;
     } else if (item.type === "guide") {
       image = item.guide_images[0].sizes.large;
       title = item.title.plain_text;
       pressHandler = _navigateToGuide;
+      icon = iconGuide;
     }
 
     if (!image) return null;
@@ -58,6 +64,7 @@ export default ({ items, navigation }) => {
         onPress={() => pressHandler(item)}
         openingHours={openingHours}
         distance={distance}
+        icon={icon}
       />
     );
   };
