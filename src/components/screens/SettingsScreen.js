@@ -155,6 +155,11 @@ class SettingsScreen extends Component {
     navigate("WelcomeScreen");
   };
 
+  navigateToDownloadsScreen = () => {
+    const { navigate } = this.props.navigation;
+    navigate("DownloadsScreen");
+  };
+
   displayLanguages() {
     const { languages } = this.state;
     if (!languages || !Object.keys(languages).length) return null;
@@ -191,6 +196,11 @@ class SettingsScreen extends Component {
         <Text style={textStyles.titleText}>{LangService.strings.ABOUT} {LangService.strings.APP_NAME}</Text>
         <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
+        </TouchableOpacity>
+        <View style={styles.divider} />
+        <Text style={textStyles.titleText}>{LangService.strings.OFFLINE_CONTENT_TITLE} </Text>
+        <TouchableOpacity onPress={this.navigateToDownloadsScreen}>
+          <Text style={textStyles.linkText}>{LangService.strings.OFFLINE_CONTENT}</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
         <View style={styles.contactUsContainer}>
