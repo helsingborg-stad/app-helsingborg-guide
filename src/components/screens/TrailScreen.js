@@ -234,6 +234,10 @@ class TrailScreen extends Component {
     );
   }
 
+  getItemLayout = (data, index) => (
+    { length: screenWidth, offset: screenWidth * index, index }
+  )
+
   render() {
     const { trailObjects } = this.state;
     const locationItem = this.locationItemFromId(trailObjects[0].locationId);
@@ -262,6 +266,7 @@ class TrailScreen extends Component {
           ref={(ref) => { this.listRef = ref; }}
           renderItem={this.renderRow}
           style={styles.flatList}
+          getItemLayout={this.getItemLayout}
         />
       </View>
     );
