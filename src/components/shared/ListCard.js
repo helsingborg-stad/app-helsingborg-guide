@@ -16,10 +16,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: Colors.white,
     elevation: 4,
-    shadowRadius: 4,
-    // shadowColor: "black",
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 0, height: 4 },
+    shadowColor: "rgba(0, 0, 0, 0.15)",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1,
   },
   image: {
     flex: 1,
