@@ -71,7 +71,7 @@ class GuideListScreen extends Component {
 
   _renderScene = ({ index, route }) => {
     // TODO replace this index hard coded crap with a link to the route key
-    const { guides, locations } = this.props;
+    const { guides, locations, navigation, currentLocation } = this.props;
     const { key } = route;
     let items;
     const filteredGuides = guides.filter(element => element.guidetype.includes(Number(key)));
@@ -80,7 +80,7 @@ class GuideListScreen extends Component {
     } else {
       items = filteredGuides;
     }
-    return (<GuideList items={items} navigation={this.props.navigation} />);
+    return (<GuideList items={items} navigation={navigation} currentLocation={currentLocation} />);
   }
 
 
@@ -121,6 +121,7 @@ function mapStateToProps(state) {
     categoryTypes: items,
     locations,
     guides,
+    currentLocation: state.geolocation,
   };
 }
 
