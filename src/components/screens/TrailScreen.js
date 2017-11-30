@@ -89,7 +89,6 @@ class TrailScreen extends Component {
 
     const markers = subLocation._embedded.location.map((item) => {
       if ((subAttractions.filter(sub => sub === item.id).length === 0)) { return null; }
-
       const marker = {
         location: {
           latitude: null,
@@ -168,7 +167,7 @@ class TrailScreen extends Component {
     const { navigate } = this.props.navigation;
     const contentObject = this.contentObjectFromId(listItem.item.objectId);
     const { title } = contentObject;
-    navigate("ObjectView", { title, contentObject });
+    navigate("ObjectDetailsScreen", { title, contentObject });
   }
 
   locationItemFromId = (locationId) => {
@@ -184,18 +183,21 @@ class TrailScreen extends Component {
   }
 
   renderMapMarkers() {
-    const { activeMarker } = this.state;
+    const { trailObjects } = this.state;
 
     return this.state.markers.map((marker) => {
-      const image = marker.locationId === activeMarker ? markerImageActive : markerImageInactive;
+      const trailObject = trailObjects.filter(item => item.locationId === marker.locationId);
+      const contentObject = this.contentObjectFromId(trailObject[0].objectId);
+      const imageUrl = contentObject.image[0].sizes.thumbnail;
       return (
         <MapView.Marker
           key={`${marker.locationId}`}
           coordinate={marker.location}
-          image={image}
           identifier={`${marker.locationId}`}
           onPress={() => this.onMarkerPressed(marker)}
-        />
+        >
+          <Image style={{ width: 50, height: 50, borderRadius: 25, borderWidth: 1, borderColor: Colors.white }} source={{ uri: imageUrl }} />
+        </MapView.Marker>
       );
     });
   }
