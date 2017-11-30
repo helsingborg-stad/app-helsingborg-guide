@@ -13,6 +13,8 @@ import {
   Linking,
   Platform,
   StyleSheet,
+  TouchableOpacity,
+  Image,
 } from "react-native";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -36,7 +38,15 @@ import {
   StyleSheetUtils,
 } from "../../utils/";
 
+const settingsIcon = require("../../images/settings.png");
+
 const styles = StyleSheet.create({
+  barButtonItem: {
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   mapViewContainer: {
     flex: 4,
     justifyContent: "flex-start",
@@ -134,11 +144,19 @@ class MapScreen extends Component {
     };
   }
 
-  static navigationOptions = () => {
+
+  static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.APP_NAME;
     return {
       title,
-      headerRight: null,
+      headerLeft: (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("SettingsScreen")}
+          style={styles.barButtonItem}
+        >
+          <Image source={settingsIcon} />
+        </TouchableOpacity >
+      ),
     };
   };
 
