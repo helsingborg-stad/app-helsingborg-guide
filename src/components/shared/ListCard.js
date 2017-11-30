@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: Colors.white,
     elevation: 4,
+    shadowRadius: 4,
+    // shadowColor: "black",
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 4 },
   },
   image: {
     flex: 1,
@@ -33,11 +37,33 @@ const styles = StyleSheet.create({
       color: Colors.black,
     }],
   ),
+  openingHours: {
+    marginTop: 10,
+  },
+  distance: {
+    marginTop: 4,
+  },
 });
 
-const ListCard = ({ title, image, onPress }) => (
-  <TouchableHighlight style={styles.container} onPress={onPress}>
-    <View>
+function displayOpeningHours(openingHours) {
+  if (!openingHours) return null;
+
+  return (
+    <Text style={styles.openingHours}>{openingHours}</Text>
+  );
+}
+
+function displayDistance(distance) {
+  if (!distance) return null;
+
+  return (
+    <Text style={styles.distance}>{distance} m</Text>
+  );
+}
+
+const ListCard = ({ title, image, onPress, openingHours, distance }) => (
+  <TouchableHighlight onPress={onPress}>
+    <View style={styles.container}>
       <Image
         style={styles.image}
         resizeMode="cover"
@@ -45,6 +71,8 @@ const ListCard = ({ title, image, onPress }) => (
       />
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{title}</Text>
+        {displayOpeningHours(openingHours)}
+        {displayDistance(distance)}
       </View>
     </View>
   </TouchableHighlight>
