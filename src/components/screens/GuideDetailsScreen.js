@@ -402,15 +402,9 @@ class GuideDetailsScreen extends Component {
 
     const { contentObjects } = this.state.subLocation;
 
-    const getMetric = (objectKey) => {
-      const metric = this.props.metrics.find(item => item.objectKey === objectKey);
-      return metric || { isVisited: false };
-    };
-
     const co = keys.map((key) => {
       let mImage = {};
 
-      const metric = getMetric(key);
       if (contentObjects[key].image && contentObjects[key].image.length) {
         mImage = contentObjects[key].image[0].sizes;
       }
@@ -427,7 +421,6 @@ class GuideDetailsScreen extends Component {
       return (
         <TouchableOpacity
           key={key}
-          // activeOpacity ={0.8}
           onPress={() => {
             this._goToContentObjectScene(contentObjects[key], key);
           }}
@@ -437,7 +430,6 @@ class GuideDetailsScreen extends Component {
             imageSource={{ uri: mImage.medium_large }}
             width={mImage["medium_large-width"]}
             height={mImage["medium_large-height"]}
-            checked={metric.isVisited || false}
           >
             {text}
           </ContentThumbnail>
@@ -486,7 +478,6 @@ class GuideDetailsScreen extends Component {
   displayMainImage() {
     const images = this.state.subLocation.guide_images;
 
-    // //console.log('images',images);
     if (images && images.length) {
       return (
         <ImageView source={{ uri: images[0].sizes.large }} width={images[0].sizes["large-width"]} height={images[0].sizes["large-width"]} />
@@ -532,7 +523,6 @@ class GuideDetailsScreen extends Component {
       this.hideMenu();
       this._goToContentObjectScene(contentObject.object, contentObject.objectKey);
     } else {
-      console.log("no result found");
       this.setKeypadSearchResultCode(404);
     }
   };
