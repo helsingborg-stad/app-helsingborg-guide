@@ -355,7 +355,9 @@ class GuideDetailsScreen extends Component {
           <View style={styles.nearByTextContainer}>
             <Text style={styles.nearByText}>{LangService.strings.SOMETHING_NEAR_BY}</Text>
           </View>
-          <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>{nearByObjectsViews}</View>
+          <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>
+            {nearByObjectsViews}
+          </View>
         </View>
       );
     }
@@ -415,7 +417,9 @@ class GuideDetailsScreen extends Component {
 
       const text = (
         <View style={{ flex: 1, justifyContent: "flex-start" }}>
-          <Text style={[TextStyles.defaultFontFamily, { fontSize: 16, fontWeight: "300", marginVertical: 3 }]}>{`#${contentObjects[key].id}`}</Text>
+          <Text style={[TextStyles.defaultFontFamily, { fontSize: 16, fontWeight: "300", marginVertical: 3 }]}>
+            {`#${contentObjects[key].id}`}
+          </Text>
           <Text style={[TextStyles.defaultFontFamily, { fontSize: 14, marginVertical: 3 }]}>{contentObjects[key].title}</Text>
         </View>
       );

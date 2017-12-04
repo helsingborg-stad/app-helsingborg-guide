@@ -147,19 +147,15 @@ class ObjectDetailsScreen extends Component {
     const { audio } = this.state.contentObject;
     const { video } = this.state.contentObject;
     if (audio && audio.url) {
-      this.isUrlLocallyExist(audio.url).then((exist) => {
+      fetchService.isExist(audio.url).then((exist) => {
         this.setState({ audioBtnDisabled: !(exist || internet) });
       });
     }
     if (video && video.url) {
-      this.isUrlLocallyExist(video.url).then((exist) => {
+      fetchService.isExist(video.url).then((exist) => {
         this.setState({ videoBtnDisabled: !(exist || internet) });
       });
     }
-  }
-
-  isUrlLocallyExist(url) {
-    return fetchService.isExist(url);
   }
 
   updateWithObjectVisited() {
