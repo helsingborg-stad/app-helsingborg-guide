@@ -28,12 +28,14 @@ import {
   StyleSheetUtils,
 } from "../../utils/";
 
-const markerImageActive = require("../../images/marker-active.png");
-const markerImageInactive = require("../../images/marker-inactive.png");
-
 const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+
 const defaultMargin = 20;
-const listItemImageSize = 150;
+const listItemImageSize = 120;
+const markerImageSize = 40;
+const headerHeight = 65;
+const mapHeight = screenHeight - listItemImageSize - headerHeight;
 
 const styles = StyleSheet.create({
   container: {
@@ -41,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   map: {
-    flex: 3,
+    height: mapHeight,
   },
   flatList: {
     height: listItemImageSize,
@@ -66,6 +68,13 @@ const styles = StyleSheet.create({
       marginRight: defaultMargin,
     },
   ]),
+  markerImage: {
+    width: markerImageSize,
+    height: markerImageSize,
+    borderRadius: markerImageSize / 2,
+    borderWidth: 2.5,
+    borderColor: Colors.white,
+  },
 });
 
 class TrailScreen extends Component {
@@ -196,7 +205,7 @@ class TrailScreen extends Component {
           identifier={`${marker.locationId}`}
           onPress={() => this.onMarkerPressed(marker)}
         >
-          <Image style={{ width: 50, height: 50, borderRadius: 25, borderWidth: 1, borderColor: Colors.white }} source={{ uri: imageUrl }} />
+          <Image style={styles.markerImage} source={{ uri: imageUrl }} />
         </MapView.Marker>
       );
     });
@@ -227,7 +236,7 @@ class TrailScreen extends Component {
             <Text style={styles.listItemTitle}>{id}</Text>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
             <Text style={styles.listItemTitle}>{street_address}</Text>
-            <Text style={styles.listItemTitle}>{distance} m</Text>
+            <Text style={styles.listItemTitle}>{distance} m härifrån</Text>
           </View>
         </View>
       </TouchableOpacity>
