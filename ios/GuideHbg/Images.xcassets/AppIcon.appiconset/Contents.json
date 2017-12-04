@@ -43,6 +43,12 @@
       "idiom" : "iphone",
       "size" : "60x60",
       "scale" : "3x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "1024x1024bb.jpg",
+      "scale" : "1x"
     }
   ],
   "info" : {
