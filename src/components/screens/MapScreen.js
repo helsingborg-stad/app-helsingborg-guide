@@ -30,6 +30,7 @@ import MapThumbnailsView from "../shared/MapThumbnailsView";
 import RoundedBtn from "../shared/roundedBtn";
 import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
+import AnalyticsUtils from "../../utils/AnalyticsUtils";
 import {
   Colors,
   TextStyles,
@@ -221,6 +222,7 @@ class MapScreen extends Component {
 
   guidePress(guide) {
     const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("open_location", { id: guide.id });
     navigate("LocationDetailsScreen", { guide });
   }
 
