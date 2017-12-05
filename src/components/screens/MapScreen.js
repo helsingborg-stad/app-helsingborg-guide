@@ -35,6 +35,7 @@ import {
   TextStyles,
 } from "../../styles/";
 import {
+  AnalyticsUtils,
   StyleSheetUtils,
 } from "../../utils/";
 
@@ -221,6 +222,7 @@ class MapScreen extends Component {
 
   guidePress(guide) {
     const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("view_location", { id: guide.id, name: guide.slug });
     navigate("LocationDetailsScreen", { location: guide });
   }
 

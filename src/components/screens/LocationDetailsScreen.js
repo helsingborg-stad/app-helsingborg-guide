@@ -41,6 +41,7 @@ import {
 } from "../../styles/";
 import {
   StyleSheetUtils,
+  AnalyticsUtils,
 } from "../../utils/";
 
 const styles = StyleSheet.create({
@@ -241,6 +242,7 @@ class LocationDetailsScreen extends Component {
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
     const { name } = subLocation.guidegroup[0];
+    AnalyticsUtils.logEvent("view_guide", { id: subLocation.id, name: subLocation.slug });
     navigate("GuideDetailsScreen", {
       title: name,
       id: subLocation.id,

@@ -41,6 +41,7 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* GuideHbgTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* GuideHbgTests.m */; };
+		389F94165447CB1CA3A16F65 /* libPods-GuideHbg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24552900C4BF2E606B73DAB0 /* libPods-GuideHbg.a */; };
 		488D8426526B4AD298EE861E /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0293AA8E6CA04D379D6E3895 /* Foundation.ttf */; };
 		50DC08124A86489BA02AE588 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B6D5C8D7D174B92B5B70BCD /* Roboto-Bold.ttf */; };
 		5562095756EE4CC79143D72E /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC06904830584594913D99D9 /* Roboto-ThinItalic.ttf */; };
@@ -65,6 +66,7 @@
 		818216F4FE684C3398FDCDC7 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD28C0BF3ADA4A66B21CB409 /* Entypo.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		83E2B4D4D82649EDBFD9715F /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66A209AEC5A5436EAC96DCD7 /* Roboto-BlackItalic.ttf */; };
+		AA5670571FD584FF00748ACC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA56702D1FD584FF00748ACC /* GoogleService-Info.plist */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B2339390B8C644E287B5451C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 859ECB1AFA024186ADFC646E /* SimpleLineIcons.ttf */; };
 		B9A845E2F39741439714ED4F /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C83EA02AE9344B3DB2F5FD52 /* Octicons.ttf */; };
@@ -410,6 +412,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GuideHbg/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GuideHbg/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		24552900C4BF2E606B73DAB0 /* libPods-GuideHbg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GuideHbg.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A4F075CC4A040F495590C1A /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../src/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		2B3EC723865D48278CE94D3A /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../src/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* GuideHbg-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GuideHbg-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -440,6 +443,8 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		859ECB1AFA024186ADFC646E /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		9F017C0A1F61A5F571A83188 /* Pods-GuideHbg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideHbg.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideHbg/Pods-GuideHbg.debug.xcconfig"; sourceTree = "<group>"; };
+		AA56702D1FD584FF00748ACC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "GuideHbg/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AE7A50413FF2434288EA4412 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		B053F00EF4964BAAA2224AD0 /* PPTMapView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = PPTMapView.xcodeproj; path = "../node_modules/react-native-maps-google/ios/PPTMapView.xcodeproj"; sourceTree = "<group>"; };
@@ -448,6 +453,7 @@
 		C6A69E016B684DA68E74BE3D /* RNPhotoView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNPhotoView.xcodeproj; path = "../node_modules/react-native-photo-view/ios/RNPhotoView.xcodeproj"; sourceTree = "<group>"; };
 		C7282286260340A58AAAAD5D /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		C83EA02AE9344B3DB2F5FD52 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		CC8DE5B8A2C0A3DD3331DD6D /* Pods-GuideHbg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideHbg.release.xcconfig"; path = "Pods/Target Support Files/Pods-GuideHbg/Pods-GuideHbg.release.xcconfig"; sourceTree = "<group>"; };
 		CE11FB3230DC4BB1A0E418EB /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BoldItalic.ttf"; path = "../src/fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
 		D0B6A40D42C1410793E45663 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		D114DC0FA9FE478382270870 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../src/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -493,6 +499,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				389F94165447CB1CA3A16F65 /* libPods-GuideHbg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +610,7 @@
 		13B07FAE1A68108700A75B9A /* GuideHbg */ = {
 			isa = PBXGroup;
 			children = (
+				AA56702D1FD584FF00748ACC /* GoogleService-Info.plist */,
 				776D771C1FB3502600B86970 /* NotificationManager.h */,
 				776D771D1FB3502600B86970 /* NotificationManager.m */,
 				776D770D1FB34F8800B86970 /* ESSTimer.h */,
@@ -712,6 +720,7 @@
 				776D76FA1FB34AC100B86970 /* EstimoteSDK.framework */,
 				776D76F71FB348DD00B86970 /* CoreBluetooth.framework */,
 				776D76F51FB348D400B86970 /* CoreLocation.framework */,
+				24552900C4BF2E606B73DAB0 /* libPods-GuideHbg.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -798,6 +807,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				7E05155D26EF4B40A24B7C4A /* Resources */,
 				776D76F41FB348D400B86970 /* Frameworks */,
+				A9C9A3CDF23526F9FE057A52 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -813,6 +823,15 @@
 				2D02E4901E0B4A5D006451C7 /* GuideHbg-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A9C9A3CDF23526F9FE057A52 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F017C0A1F61A5F571A83188 /* Pods-GuideHbg.debug.xcconfig */,
+				CC8DE5B8A2C0A3DD3331DD6D /* Pods-GuideHbg.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
@@ -849,10 +868,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "GuideHbg" */;
 			buildPhases = (
+				1484454640FDDCA92066005E /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				EFEDB663FBBC36E0FF4864B0 /* [CP] Embed Pods Frameworks */,
+				006608CEA99D2407C92A580A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1346,6 +1368,7 @@
 				6EE44A41E3044D22910CE300 /* MaterialCommunityIcons.ttf in Resources */,
 				776D77221FB359BC00B86970 /* Splashscreen-IOS-750x1334 2.png in Resources */,
 				C2E5ACF32C1940BB9B7ED65F /* MaterialIcons.ttf in Resources */,
+				AA5670571FD584FF00748ACC /* GoogleService-Info.plist in Resources */,
 				B9A845E2F39741439714ED4F /* Octicons.ttf in Resources */,
 				B2339390B8C644E287B5451C /* SimpleLineIcons.ttf in Resources */,
 				2283E136965B45AA9FD1DA66 /* Zocial.ttf in Resources */,
@@ -1382,6 +1405,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		006608CEA99D2407C92A580A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GuideHbg/Pods-GuideHbg-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1396,6 +1434,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		1484454640FDDCA92066005E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GuideHbg-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1409,6 +1465,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		EFEDB663FBBC36E0FF4864B0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GuideHbg/Pods-GuideHbg-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GuideHbg/Pods-GuideHbg-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1556,6 +1632,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F017C0A1F61A5F571A83188 /* Pods-GuideHbg.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1589,6 +1666,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC8DE5B8A2C0A3DD3331DD6D /* Pods-GuideHbg.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;

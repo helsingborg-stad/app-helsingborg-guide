@@ -38,6 +38,7 @@ import {
 } from "../../styles/";
 import {
   StyleSheetUtils,
+  AnalyticsUtils,
 } from "../../utils/";
 
 const HALF_WIDTH = Dimensions.get("window").width / 2;
@@ -197,6 +198,7 @@ class GuideDetailsScreen extends Component {
   _goToContentObjectScene(contentObject, objectKey) {
     const { navigate, state } = this.props.navigation;
     const { title } = state.params;
+    AnalyticsUtils.logEvent("view_object", { id: contentObject.id, name: contentObject.title });
     navigate("ObjectDetailsScreen", { title, contentObject, objectKey, id: this.state.subLocation.id });
   }
 
@@ -355,7 +357,9 @@ class GuideDetailsScreen extends Component {
           <View style={styles.nearByTextContainer}>
             <Text style={styles.nearByText}>{LangService.strings.SOMETHING_NEAR_BY}</Text>
           </View>
-          <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>{nearByObjectsViews}</View>
+          <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>
+            {nearByObjectsViews}
+          </View>
         </View>
       );
     }
@@ -400,22 +404,18 @@ class GuideDetailsScreen extends Component {
 
     const { contentObjects } = this.state.subLocation;
 
-    const getMetric = (objectKey) => {
-      const metric = this.props.metrics.find(item => item.objectKey === objectKey);
-      return metric || { isVisited: false };
-    };
-
     const co = keys.map((key) => {
       let mImage = {};
 
-      const metric = getMetric(key);
       if (contentObjects[key].image && contentObjects[key].image.length) {
         mImage = contentObjects[key].image[0].sizes;
       }
 
       const text = (
         <View style={{ flex: 1, justifyContent: "flex-start" }}>
-          <Text style={[TextStyles.defaultFontFamily, { fontSize: 16, fontWeight: "300", marginVertical: 3 }]}>{`#${contentObjects[key].id}`}</Text>
+          <Text style={[TextStyles.defaultFontFamily, { fontSize: 16, fontWeight: "300", marginVertical: 3 }]}>
+            {`#${contentObjects[key].id}`}
+          </Text>
           <Text style={[TextStyles.defaultFontFamily, { fontSize: 14, marginVertical: 3 }]}>{contentObjects[key].title}</Text>
         </View>
       );
@@ -423,7 +423,6 @@ class GuideDetailsScreen extends Component {
       return (
         <TouchableOpacity
           key={key}
-          // activeOpacity ={0.8}
           onPress={() => {
             this._goToContentObjectScene(contentObjects[key], key);
           }}
@@ -433,7 +432,6 @@ class GuideDetailsScreen extends Component {
             imageSource={{ uri: mImage.medium_large }}
             width={mImage["medium_large-width"]}
             height={mImage["medium_large-height"]}
-            checked={metric.isVisited || false}
           >
             {text}
           </ContentThumbnail>
@@ -482,7 +480,6 @@ class GuideDetailsScreen extends Component {
   displayMainImage() {
     const images = this.state.subLocation.guide_images;
 
-    // //console.log('images',images);
     if (images && images.length) {
       return (
         <ImageView source={{ uri: images[0].sizes.large }} width={images[0].sizes["large-width"]} height={images[0].sizes["large-width"]} />
@@ -528,7 +525,6 @@ class GuideDetailsScreen extends Component {
       this.hideMenu();
       this._goToContentObjectScene(contentObject.object, contentObject.objectKey);
     } else {
-      console.log("no result found");
       this.setKeypadSearchResultCode(404);
     }
   };
