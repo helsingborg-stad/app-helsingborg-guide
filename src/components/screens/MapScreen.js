@@ -30,7 +30,6 @@ import MapThumbnailsView from "../shared/MapThumbnailsView";
 import RoundedBtn from "../shared/roundedBtn";
 import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
-import AnalyticsUtils from "../../utils/AnalyticsUtils";
 import {
   Colors,
   TextStyles,
