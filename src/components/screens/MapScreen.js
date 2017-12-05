@@ -222,7 +222,7 @@ class MapScreen extends Component {
 
   guidePress(guide) {
     const { navigate } = this.props.navigation;
-    AnalyticsUtils.logEvent("open_location", { id: guide.id });
+    AnalyticsUtils.logEvent("view_location", { id: guide.id, name: guide.name });
     navigate("LocationDetailsScreen", { guide });
   }
 
