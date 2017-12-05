@@ -38,6 +38,7 @@ import {
 } from "../../styles/";
 import {
   StyleSheetUtils,
+  AnalyticsUtils,
 } from "../../utils/";
 
 const HALF_WIDTH = Dimensions.get("window").width / 2;
@@ -197,6 +198,7 @@ class GuideDetailsScreen extends Component {
   _goToContentObjectScene(contentObject, objectKey) {
     const { navigate, state } = this.props.navigation;
     const { title } = state.params;
+    AnalyticsUtils.logEvent("view_object", { id: contentObject.id, name: contentObject.title });
     navigate("ObjectDetailsScreen", { title, contentObject, objectKey, id: this.state.subLocation.id });
   }
 
