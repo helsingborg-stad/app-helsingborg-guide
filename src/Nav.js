@@ -30,6 +30,7 @@ import {
   Colors,
   TextStyles,
 } from "./styles/";
+import AnalyticsUtils from "./utils/AnalyticsUtils";
 
 const styles = StyleSheet.create({
   headerStyle: {
@@ -77,6 +78,27 @@ const ios = Platform.OS === "ios";
 
 // TODO this class should most likely be merged into App (index.js)
 export default class Nav extends Component {
+  static getCurrentRouteName(navigationState) {
+    if (!navigationState) {
+      return null;
+    }
+    const route = navigationState.routes[navigationState.index];
+    // dive into nested navigators
+    if (route.routes) {
+      return Nav.getCurrentRouteName(route);
+    }
+    return route.routeName;
+  }
+
+  static onNavigationStateChange(prevState, currentState) {
+    const currentScreen = Nav.getCurrentRouteName(currentState);
+    const prevScreen = Nav.getCurrentRouteName(prevState);
+
+    if (prevScreen !== currentScreen) {
+      AnalyticsUtils.setScreen(currentScreen);
+    }
+  }
+
   static displayNotificationBar() {
     return <NotificationBar style={{ bottom: 0 }} />;
   }
