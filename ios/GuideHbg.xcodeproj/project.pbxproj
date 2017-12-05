@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -41,13 +40,13 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* GuideHbgTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* GuideHbgTests.m */; };
+		389F94165447CB1CA3A16F65 /* libPods-GuideHbg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24552900C4BF2E606B73DAB0 /* libPods-GuideHbg.a */; };
 		488D8426526B4AD298EE861E /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0293AA8E6CA04D379D6E3895 /* Foundation.ttf */; };
 		50DC08124A86489BA02AE588 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B6D5C8D7D174B92B5B70BCD /* Roboto-Bold.ttf */; };
 		5562095756EE4CC79143D72E /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC06904830584594913D99D9 /* Roboto-ThinItalic.ttf */; };
 		57C573E2056B4DB3A535D841 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C884F906A44BA911296B5 /* Roboto-Regular.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6EE44A41E3044D22910CE300 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B4132F6B34EC4FD68A0B766A /* MaterialCommunityIcons.ttf */; };
-		763E670BE164E5E3E8D643AB /* Pods_GuideHbg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005E105ABA8014E199643811 /* Pods_GuideHbg.framework */; };
 		77330C4A9EE44876806268A5 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B3EC723865D48278CE94D3A /* Roboto-MediumItalic.ttf */; };
 		776D76C71FB33CA800B86970 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 776D76AD1FB3381600B86970 /* libRNFetchBlob.a */; };
 		776D76F11FB346AC00B86970 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 776D76781FB3381600B86970 /* libAirMaps.a */; };
@@ -390,7 +389,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		005E105ABA8014E199643811 /* Pods_GuideHbg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuideHbg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
@@ -413,6 +411,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GuideHbg/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GuideHbg/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		24552900C4BF2E606B73DAB0 /* libPods-GuideHbg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GuideHbg.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A4F075CC4A040F495590C1A /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../src/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		2B3EC723865D48278CE94D3A /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../src/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* GuideHbg-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GuideHbg-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -499,7 +498,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				763E670BE164E5E3E8D643AB /* Pods_GuideHbg.framework in Frameworks */,
+				389F94165447CB1CA3A16F65 /* libPods-GuideHbg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,7 +719,7 @@
 				776D76FA1FB34AC100B86970 /* EstimoteSDK.framework */,
 				776D76F71FB348DD00B86970 /* CoreBluetooth.framework */,
 				776D76F51FB348D400B86970 /* CoreLocation.framework */,
-				005E105ABA8014E199643811 /* Pods_GuideHbg.framework */,
+				24552900C4BF2E606B73DAB0 /* libPods-GuideHbg.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
