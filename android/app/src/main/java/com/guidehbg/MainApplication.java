@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.example.beaconmodule.BeaconPackage;
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.reactnative.photoview.PhotoViewPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -37,6 +39,8 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(new MainReactPackage(),
+                    new RNFirebasePackage(),
+                    new RNFirebaseAnalyticsPackage(),
                     new PhotoViewPackage(),
                     new BeaconPackage(),
                     new VectorIconsPackage(),
