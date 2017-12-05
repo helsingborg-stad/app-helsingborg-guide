@@ -36,6 +36,7 @@ import {
   TextStyles,
 } from "../../styles/";
 import {
+  AnalyticsUtils,
   StyleSheetUtils,
 } from "../../utils/";
 
