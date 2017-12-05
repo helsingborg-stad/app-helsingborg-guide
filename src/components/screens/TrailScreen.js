@@ -36,7 +36,7 @@ const defaultMargin = 20;
 const listItemImageSize = 120;
 const markerImageSize = 40;
 const headerHeight = 65;
-const mapHeight = screenHeight - listItemImageSize - headerHeight;
+const mapHeight = screenHeight - listItemImageSize - headerHeight - defaultMargin;
 
 const styles = StyleSheet.create({
   container: {
@@ -48,11 +48,14 @@ const styles = StyleSheet.create({
   },
   flatList: {
     height: listItemImageSize,
+    backgroundColor: Colors.lightGrey,
   },
   listItem: {
     flexDirection: "row",
-    width: screenWidth,
+    width: screenWidth - defaultMargin,
     height: listItemImageSize,
+    margin: 10,
+    backgroundColor: Colors.white,
   },
   listImage: {
     height: listItemImageSize,
