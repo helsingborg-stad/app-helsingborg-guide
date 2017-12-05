@@ -3,6 +3,7 @@ import {
   FlatList,
   StyleSheet,
 } from "react-native";
+import { AnalyticsUtils } from "../../utils";
 import ListCard from "./ListCard";
 import TimingService from "../../services/timingService";
 
@@ -26,12 +27,14 @@ export default ({ items, navigation }) => {
 
   const _navigateToLocation = (location) => {
     const { navigate } = navigation;
+    AnalyticsUtils.logEvent("view_location", { id: location.id, name: location.slug });
     navigate("LocationDetailsScreen", { location });
   };
 
   const _navigateToGuide = (guide) => {
     const { navigate } = navigation;
     const title = guide.guidegroup[0].name;
+    AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
     navigate("TrailScreen", { guide, title });
   };
 
