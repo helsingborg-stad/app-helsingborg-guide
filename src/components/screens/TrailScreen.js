@@ -48,13 +48,14 @@ const styles = StyleSheet.create({
   },
   flatList: {
     height: listItemImageSize,
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.warmGrey,
   },
   listItem: {
     flexDirection: "row",
     width: screenWidth - defaultMargin,
     height: listItemImageSize,
-    margin: 10,
+    marginHorizontal: 5,
+    marginVertical: 10,
     backgroundColor: Colors.white,
   },
   listImage: {
@@ -68,8 +69,15 @@ const styles = StyleSheet.create({
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body, {
-      fontSize: 15,
+      fontSize: 16,
       marginRight: defaultMargin,
+    },
+  ]),
+  listItemAddress: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      fontSize: 16,
+      marginRight: defaultMargin,
+      color: Colors.warmGrey,
     },
   ]),
   markerImage: {
@@ -78,6 +86,13 @@ const styles = StyleSheet.create({
     borderRadius: markerImageSize / 2,
     borderWidth: 2.5,
     borderColor: Colors.white,
+  },
+  markerImageActive: {
+    width: markerImageSize,
+    height: markerImageSize,
+    borderRadius: markerImageSize / 2,
+    borderWidth: 2.5,
+    borderColor: Colors.lightPink,
   },
 });
 
@@ -166,8 +181,22 @@ class TrailScreen extends Component {
     this.map.fitToCoordinates(markers.map(marker => marker.location), options);
   }
 
+  onListScroll = (e) => {
+    const xOffset = e.nativeEvent.contentOffset.x;
+    const itemLength = screenWidth - 10;
+    const index = Math.abs(parseInt(xOffset / itemLength));
+    const marker = this.state.markers[index];
+    const { activeMarker } = this.state;
+    console.log(e.nativeEvent);
+
+    if (marker.locationId !== activeMarker.locationId) {
+      this.setState({ activeMarker: marker });
+      this.map.animateToCoordinate(marker.location);
+    }
+  }
+
   onMarkerPressed = (marker) => {
-    this.setState({ activeMarker: marker.locationId });
+    // this.setState({ activeMarker: marker });
     this.scrollToListItemWithId(marker);
   }
 
@@ -197,12 +226,13 @@ class TrailScreen extends Component {
   }
 
   renderMapMarkers() {
-    const { trailObjects } = this.state;
+    const { trailObjects, activeMarker } = this.state;
 
     return this.state.markers.map((marker) => {
       const trailObject = trailObjects.filter(item => item.locationId === marker.locationId);
       const contentObject = this.contentObjectFromId(trailObject[0].objectId);
       const imageUrl = contentObject.image[0].sizes.thumbnail;
+      const active = activeMarker.locationId === marker.locationId;
       return (
         <MapView.Marker
           key={`${marker.locationId}`}
@@ -210,7 +240,7 @@ class TrailScreen extends Component {
           identifier={`${marker.locationId}`}
           onPress={() => this.onMarkerPressed(marker)}
         >
-          <Image style={styles.markerImage} source={{ uri: imageUrl }} />
+          <Image style={active ? styles.markerImageActive : styles.markerImage} source={{ uri: imageUrl }} />
         </MapView.Marker>
       );
     });
@@ -240,19 +270,20 @@ class TrailScreen extends Component {
         <View style={styles.listItem}>
           {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
           <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle}>{id}</Text>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
-            <Text style={styles.listItemTitle}>{street_address}</Text>
-            <Text style={styles.listItemTitle}>{distance} m härifrån</Text>
+            <Text style={styles.listItemAddress}>{street_address}</Text>
           </View>
         </View>
       </TouchableOpacity>
     );
   }
 
-  getItemLayout = (data, index) => (
-    { length: screenWidth, offset: screenWidth * index, index }
-  )
+  getItemLayout = (data, index) => {
+    const itemLength = screenWidth - 10;
+    return (
+      { length: itemLength, offset: itemLength * index, index }
+    );
+  }
 
   render() {
     const { trailObjects } = this.state;
@@ -283,6 +314,7 @@ class TrailScreen extends Component {
           renderItem={this.renderRow}
           style={styles.flatList}
           getItemLayout={this.getItemLayout}
+          onScroll={this.onListScroll}
         />
       </View>
     );
