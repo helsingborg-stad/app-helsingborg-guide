@@ -24,6 +24,7 @@ import {
   TextStyles,
 } from "../../styles/";
 import {
+  AnalyticsUtils,
   LocationUtils,
   StyleSheetUtils,
 } from "../../utils/";
@@ -176,6 +177,7 @@ class TrailScreen extends Component {
     const { navigate } = this.props.navigation;
     const contentObject = this.contentObjectFromId(listItem.item.objectId);
     const { title } = contentObject;
+    AnalyticsUtils.logEvent("view_object", { id: contentObject.id, name: contentObject.title });
     navigate("ObjectDetailsScreen", { title, contentObject });
   }
 
@@ -212,6 +214,8 @@ class TrailScreen extends Component {
   }
 
   getDistancefromUserLocationToLocationItem(locationItem) {
+    if (!this.state.geolocation) return 0;
+
     const { coords } = this.state.geolocation;
     const distance = LocationUtils.getDistanceBetweenCoordinates(locationItem, coords);
     return distance;
