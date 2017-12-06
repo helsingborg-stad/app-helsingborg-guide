@@ -147,7 +147,6 @@ class TrailScreen extends Component {
         return Linking.openURL(url);
       }
     } catch (error) {
-      console.log("An error occured", error);
     }
     return null;
   }
@@ -185,7 +184,6 @@ class TrailScreen extends Component {
       edgePadding,
       animated: true,
     };
-    console.log("Fit to corrdinates");
     this.map.fitToCoordinates(markers.map(marker => marker.location), options);
   }
 
@@ -197,7 +195,7 @@ class TrailScreen extends Component {
     const marker = this.state.trailObjects[index];
     const { activeMarker } = this.state;
 
-    if (marker.locationId !== activeMarker.locationId) {
+    if (marker !== activeMarker) {
       this.setState({ activeMarker: marker });
       this.map.animateToCoordinate(marker.location);
     }
@@ -249,7 +247,7 @@ class TrailScreen extends Component {
 
     return this.state.trailObjects.map((trailObject) => {
       const { id, location, thumbnailUrl } = trailObject;
-      const active = false;
+      const active = activeMarker === trailObject;
       return (
         <MapView.Marker
           key={id}
@@ -298,16 +296,17 @@ class TrailScreen extends Component {
   render() {
     const { trailObjects } = this.state;
     const trailItem = trailObjects[0];
+    const { longitude, latitude } = trailItem.location;
     return (
       <View style={styles.container}>
         <MapView
-          ref={(ref) => { console.log("Get map ref"); this.map = ref; }}
+          ref={(ref) => { this.map = ref; }}
           style={styles.map}
           showsUserLocation
           initialRegion={
             {
-              latitude: trailItem.latitude,
-              longitude: trailItem.longitude,
+              latitude,
+              longitude,
               latitudeDelta: 0.09,
               longitudeDelta: 0.06,
             }
