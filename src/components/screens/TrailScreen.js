@@ -179,6 +179,7 @@ class TrailScreen extends Component {
         this.focusMarkers(this.state.markers);
       }, 1000);
     }
+    this.scrollToIndex(0);
   }
 
   focusMarkers(markers) {
@@ -217,7 +218,11 @@ class TrailScreen extends Component {
 
   scrollToListItemWithId = (marker) => {
     const index = this.state.trailObjects.findIndex(item => item.locationId === marker.locationId);
-    const x = (listItemWidth + (defaultMargin / 2)) * index - 15;
+    this.scrollToIndex(index);
+  }
+
+  scrollToIndex = (index) => {
+    const x = ((listItemWidth + (defaultMargin / 2)) * index) - 15;
     this.listRef.scrollToOffset({ offset: x });
   }
 
