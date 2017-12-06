@@ -89,6 +89,7 @@ class GuideListScreen extends Component {
       style={styles.tabBar}
       labelStyle={styles.tabBarLabel}
       indicatorStyle={styles.tabBarIndicator}
+      scrollEnabled
       {...props}
     />);
 
