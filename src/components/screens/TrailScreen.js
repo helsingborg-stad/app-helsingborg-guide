@@ -201,7 +201,7 @@ class TrailScreen extends Component {
 
   onListScroll = (e) => {
     const xOffset = e.nativeEvent.contentOffset.x;
-    const fullItemWidth = listItemWidth + defaultMargin / 2;
+    const fullItemWidth = listItemWidth + (defaultMargin / 2);
 
     const index = Math.round(Math.abs(xOffset / fullItemWidth));
     const marker = this.state.markers[index];
