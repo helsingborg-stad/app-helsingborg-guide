@@ -204,12 +204,11 @@ class TrailScreen extends Component {
   }
 
   onMarkerPressed = (marker) => {
-    // this.setState({ activeMarker: marker });
     this.scrollToListItemWithId(marker);
   }
 
   scrollToListItemWithId = (marker) => {
-    const index = this.state.trailObjects.findIndex(item => item.locationId === marker.locationId);
+    const index = this.state.trailObjects.findIndex(item => item === marker);
     this.scrollToIndex(index);
   }
 
@@ -256,7 +255,7 @@ class TrailScreen extends Component {
           key={id}
           coordinate={location}
           identifier={id}
-          onPress={() => this.onMarkerPressed(marker)}
+          onPress={() => this.onMarkerPressed(trailObject)}
         >
           <Image style={active ? styles.markerImageActive : styles.markerImage} source={{ uri: thumbnailUrl }} />
         </MapView.Marker>
