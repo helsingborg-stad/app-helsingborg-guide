@@ -220,9 +220,9 @@ class TrailScreen extends Component {
 
   onListItemPressed = (listItem) => {
     const { navigate } = this.props.navigation;
-    const contentObject = this.contentObjectFromId(listItem.item.objectId);
-    const { title } = contentObject;
-    AnalyticsUtils.logEvent("view_object", { id: contentObject.id, name: contentObject.title });
+    const contentObject = this.contentObjectFromId(listItem.item.id);
+    const { title, id } = contentObject;
+    AnalyticsUtils.logEvent("view_object", { id, name: title });
     navigate("ObjectDetailsScreen", { title, contentObject });
   }
 
