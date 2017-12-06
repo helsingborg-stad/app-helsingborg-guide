@@ -10,6 +10,7 @@ import {
 import TextStyles from "guide-hbg/src/styles/TextStyles";
 import Colors from "guide-hbg/src/styles/Colors";
 import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
+import DistanceView from "./DistanceView";
 
 const styles = StyleSheet.create({
   container: {
@@ -66,7 +67,7 @@ function displayDistance(distance) {
   if (!distance) return null;
 
   return (
-    <Text style={styles.distance}>{distance} m</Text>
+    <DistanceView style={styles.distance} distance={distance} />
   );
 }
 
