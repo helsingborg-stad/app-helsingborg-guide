@@ -217,7 +217,8 @@ class TrailScreen extends Component {
 
   scrollToListItemWithId = (marker) => {
     const index = this.state.trailObjects.findIndex(item => item.locationId === marker.locationId);
-    this.listRef.scrollToIndex({ viewPosition: 0.5, animated: true, index });
+    const x = (listItemWidth + (defaultMargin / 2)) * index - 15;
+    this.listRef.scrollToOffset({ offset: x });
   }
 
   onListItemPressed = (listItem) => {
@@ -304,7 +305,7 @@ class TrailScreen extends Component {
   }
 
   getItemLayout = (data, index) => (
-    { length: listItemWidth, offset: (listItemWidth + 10) * index, index }
+    { length: listItemWidth, offset: (listItemWidth + (defaultMargin / 2)) * index, index }
   );
 
   render() {
@@ -328,9 +329,9 @@ class TrailScreen extends Component {
           {this.renderMapMarkers()}
         </MapView>
         <FlatList
+          contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
           data={trailObjects}
           horizontal
-          pagingEnabled
           keyExtractor={item => `i${item.locationId}-${item.objectId}`}
           ref={(ref) => { this.listRef = ref; }}
           renderItem={this.renderRow}
