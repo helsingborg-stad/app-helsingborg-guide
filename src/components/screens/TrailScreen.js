@@ -115,39 +115,29 @@ class TrailScreen extends Component {
     };
   };
 
-  static markersFromLocation(subLocation) {
-    if (!subLocation._embedded.location) return [];
+  static createTrailObjects(subLocation) {
+    const { subAttractions, contentObjects } = subLocation;
+    const embeddedLocations = subLocation._embedded.location;
+    const trailObjects = [];
 
-    const subAttractions = subLocation.subAttractions.map(subAttractionItem => subAttractionItem.location);
+    subAttractions.forEach((item) => {
+      const objectId = item.content[0];
+      const locationId = item.location;
 
-    const markers = subLocation._embedded.location.map((item) => {
-      if ((subAttractions.filter(sub => sub === item.id).length === 0)) { return null; }
-      const marker = {
-        location: {
-          latitude: null,
-          longitude: null,
-        },
-        locationId: item.id,
-      };
-      marker.location.latitude = parseFloat(item.latitude);
-      marker.location.longitude = parseFloat(item.longitude);
+      const contentObject = contentObjects[objectId];
+      const locationObject = embeddedLocations.find(location => location.id === locationId);
+      const { longitude, latitude } = locationObject;
 
-      return marker;
+      trailObjects.push({
+        id: objectId,
+        location: { longitude: parseFloat(longitude), latitude: parseFloat(latitude) },
+        title: contentObject.title,
+        imageUrl: contentObject.image[0].sizes.medium,
+        thumbnailUrl: contentObject.image[0].sizes.thumbnail,
+        streetAdress: locationObject.street_address,
+      });
     });
-
-    // Remove null objects from markers (ie, is not a subAttraction location)
-    const filteredMarkers = markers.filter(item => item !== null);
-    return filteredMarkers;
-  }
-
-  static createTrailObjects(subAttractions) {
-    return subAttractions.map((item) => {
-      const trailObject = {
-        objectId: item.content[0],
-        locationId: item.location,
-      };
-      return trailObject;
-    });
+    return trailObjects;
   }
 
   static async openUrlIfValid(url) {
@@ -167,16 +157,15 @@ class TrailScreen extends Component {
     this.state = {
       geolocation: this.props.geolocation,
       subLocation: this.props.subLocation,
-      trailObjects: TrailScreen.createTrailObjects(this.props.subLocation.subAttractions),
-      markers: TrailScreen.markersFromLocation(this.props.subLocation),
+      trailObjects: this.props.trailObjects,
       activeMarker: {},
     };
   }
 
   componentDidMount() {
-    if (this.state.markers.length) {
+    if (this.state.trailObjects.length) {
       setTimeout(() => {
-        this.focusMarkers(this.state.markers);
+        this.focusMarkers(this.state.trailObjects);
       }, 1000);
     }
     this.scrollToIndex(0);
@@ -196,6 +185,7 @@ class TrailScreen extends Component {
       edgePadding,
       animated: true,
     };
+    console.log("Fit to corrdinates");
     this.map.fitToCoordinates(markers.map(marker => marker.location), options);
   }
 
@@ -204,7 +194,7 @@ class TrailScreen extends Component {
     const fullItemWidth = listItemWidth + (defaultMargin / 2);
 
     const index = Math.round(Math.abs(xOffset / fullItemWidth));
-    const marker = this.state.markers[index];
+    const marker = this.state.trailObjects[index];
     const { activeMarker } = this.state;
 
     if (marker.locationId !== activeMarker.locationId) {
@@ -256,21 +246,19 @@ class TrailScreen extends Component {
   }
 
   renderMapMarkers() {
-    const { trailObjects, activeMarker } = this.state;
+    const { activeMarker } = this.state;
 
-    return this.state.markers.map((marker) => {
-      const trailObject = trailObjects.filter(item => item.locationId === marker.locationId);
-      const contentObject = this.contentObjectFromId(trailObject[0].objectId);
-      const imageUrl = contentObject.image[0].sizes.thumbnail;
-      const active = activeMarker.locationId === marker.locationId;
+    return this.state.trailObjects.map((trailObject) => {
+      const { id, location, thumbnailUrl } = trailObject;
+      const active = false;
       return (
         <MapView.Marker
-          key={`${marker.locationId}`}
-          coordinate={marker.location}
-          identifier={`${marker.locationId}`}
+          key={id}
+          coordinate={location}
+          identifier={id}
           onPress={() => this.onMarkerPressed(marker)}
         >
-          <Image style={active ? styles.markerImageActive : styles.markerImage} source={{ uri: imageUrl }} />
+          <Image style={active ? styles.markerImageActive : styles.markerImage} source={{ uri: thumbnailUrl }} />
         </MapView.Marker>
       );
     });
@@ -285,15 +273,8 @@ class TrailScreen extends Component {
   }
 
   renderRow = (listItem) => {
-    const { objectId, locationId } = listItem.item;
-    const contentObject = this.contentObjectFromId(objectId);
-    const locationItem = this.locationItemFromId(locationId);
-
-    const imageUrl = contentObject.image[0].sizes.medium;
-    const { street_address } = locationItem;
-    const { id, title } = contentObject;
-
-    const distance = this.getDistancefromUserLocationToLocationItem(locationItem);
+    const { imageUrl, streetAdress, title } = listItem.item;
+    // const distance = this.getDistancefromUserLocationToLocationItem(locationItem);
 
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(listItem)}>
@@ -301,7 +282,7 @@ class TrailScreen extends Component {
           {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
-            <Text style={styles.listItemAddress}>{street_address}</Text>
+            <Text style={styles.listItemAddress}>{streetAdress}</Text>
             <TouchableOpacity onPress={() => this.onListItemDirectionsButtonPressed(listItem)}>
               <Icon name="directions" size={20} color={Colors.lightGrey} />
             </TouchableOpacity>
@@ -317,17 +298,17 @@ class TrailScreen extends Component {
 
   render() {
     const { trailObjects } = this.state;
-    const locationItem = this.locationItemFromId(trailObjects[0].locationId);
+    const trailItem = trailObjects[0];
     return (
       <View style={styles.container}>
         <MapView
-          ref={(ref) => { this.map = ref; }}
+          ref={(ref) => { console.log("Get map ref"); this.map = ref; }}
           style={styles.map}
           showsUserLocation
           initialRegion={
             {
-              latitude: parseFloat(locationItem.latitude),
-              longitude: parseFloat(locationItem.longitude),
+              latitude: trailItem.latitude,
+              longitude: trailItem.longitude,
               latitudeDelta: 0.09,
               longitudeDelta: 0.06,
             }
@@ -339,7 +320,7 @@ class TrailScreen extends Component {
           contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
           data={trailObjects}
           horizontal
-          keyExtractor={item => `i${item.locationId}-${item.objectId}`}
+          keyExtractor={item => item.id}
           ref={(ref) => { this.listRef = ref; }}
           renderItem={this.renderRow}
           style={styles.flatList}
@@ -357,9 +338,13 @@ class TrailScreen extends Component {
 
 function mapStateToProps(state, ownProps) {
   const { guide } = ownProps.navigation.state.params;
+
+  const trailObjects = TrailScreen.createTrailObjects(guide);
+
   return {
     subLocation: guide,
     geolocation: state.geolocation,
+    trailObjects,
   };
 }
 
