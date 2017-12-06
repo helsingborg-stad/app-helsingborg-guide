@@ -201,7 +201,9 @@ class TrailScreen extends Component {
 
   onListScroll = (e) => {
     const xOffset = e.nativeEvent.contentOffset.x;
-    const index = Math.abs(parseInt(xOffset / listItemWidth));
+    const fullItemWidth = listItemWidth + defaultMargin / 2;
+
+    const index = Math.round(Math.abs(xOffset / fullItemWidth));
     const marker = this.state.markers[index];
     const { activeMarker } = this.state;
 
@@ -346,6 +348,7 @@ class TrailScreen extends Component {
           snapToAlignment="center"
           snapToInterval={listItemWidth + 10}
           decelerationRate="fast"
+          scrollEventThrottle={300}
         />
       </View>
     );
