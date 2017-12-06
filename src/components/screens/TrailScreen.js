@@ -2,13 +2,14 @@ import React, {
   Component,
 } from "react";
 import {
-  View,
+  Dimensions,
+  FlatList,
+  Image,
+  Linking,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  Image,
-  FlatList,
-  Dimensions,
+  View,
 } from "react-native";
 import PropTypes from "prop-types";
 import MapView from "react-native-maps";
@@ -18,6 +19,7 @@ import {
 import {
   connect,
 } from "react-redux";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import {
   Colors,
@@ -148,6 +150,18 @@ class TrailScreen extends Component {
     });
   }
 
+  static async openUrlIfValid(url) {
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        return Linking.openURL(url);
+      }
+    } catch (error) {
+      console.log("An error occured", error);
+    }
+    return null;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -214,6 +228,13 @@ class TrailScreen extends Component {
     navigate("ObjectDetailsScreen", { title, contentObject });
   }
 
+  onListItemDirectionsButtonPressed = (listItem) => {
+    const locationItem = this.locationItemFromId(listItem.item.locationId);
+    const { latitude, longitude } = locationItem;
+    const directionsUrl = LocationUtils.directionsUrl(latitude, longitude, this.state.geolocation);
+    TrailScreen.openUrlIfValid(directionsUrl);
+  }
+
   locationItemFromId = (locationId) => {
     const { _embedded } = this.state.subLocation;
     const locationItem = _embedded.location.filter(item => item.id === locationId);
@@ -273,6 +294,9 @@ class TrailScreen extends Component {
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
             <Text style={styles.listItemAddress}>{street_address}</Text>
+            <TouchableOpacity onPress={() => this.onListItemDirectionsButtonPressed(listItem)}>
+              <Icon name="directions" size={20} color={Colors.lightGrey} />
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>
@@ -306,6 +330,7 @@ class TrailScreen extends Component {
         <FlatList
           data={trailObjects}
           horizontal
+          pagingEnabled
           keyExtractor={item => `i${item.locationId}-${item.objectId}`}
           ref={(ref) => { this.listRef = ref; }}
           renderItem={this.renderRow}

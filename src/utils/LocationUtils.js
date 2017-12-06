@@ -1,3 +1,6 @@
+import {
+  Platform,
+} from "react-native";
 import geolib from "geolib";
 
 function getDistanceBetweenCoordinates(firstLocation, secondLocation) {
@@ -21,7 +24,23 @@ function getShortestDistance(sourceLocation, targetLocations) {
   return Math.min(...distances);
 }
 
+function directionsUrl(latitude, longitude, userLocation) {
+  const directionsCoordinate = `${latitude},${longitude}`;
+
+  let userCoordinate = "";
+  if (userLocation) {
+    userCoordinate = `${userLocation.coords.latitude},${userLocation.coords.longitude}`;
+  }
+  let url = `google.navigation:q=${directionsCoordinate}`;
+  if (Platform.OS === "ios") {
+    url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${directionsCoordinate}&saddr=${userCoordinate}`;
+  }
+
+  return url;
+}
+
 export default {
   getDistanceBetweenCoordinates,
   getShortestDistance,
+  directionsUrl,
 };
