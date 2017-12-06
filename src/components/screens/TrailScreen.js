@@ -37,6 +37,7 @@ const listItemImageSize = 120;
 const markerImageSize = 40;
 const headerHeight = 65;
 const mapHeight = screenHeight - listItemImageSize - headerHeight - defaultMargin;
+const listItemWidth = screenWidth - (defaultMargin * 2);
 
 const styles = StyleSheet.create({
   container: {
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     flexDirection: "row",
-    width: screenWidth - defaultMargin,
+    width: listItemWidth,
     height: listItemImageSize,
     marginHorizontal: 5,
     marginVertical: 10,
@@ -63,12 +64,14 @@ const styles = StyleSheet.create({
     width: listItemImageSize,
   },
   listItemTextContainer: {
+    flex: 1,
     flexDirection: "column",
     justifyContent: "center",
     marginHorizontal: defaultMargin,
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body, {
+      flexWrap: "wrap",
       fontSize: 16,
       marginRight: defaultMargin,
     },
@@ -183,11 +186,9 @@ class TrailScreen extends Component {
 
   onListScroll = (e) => {
     const xOffset = e.nativeEvent.contentOffset.x;
-    const itemLength = screenWidth - 10;
-    const index = Math.abs(parseInt(xOffset / itemLength));
+    const index = Math.abs(parseInt(xOffset / listItemWidth));
     const marker = this.state.markers[index];
     const { activeMarker } = this.state;
-    console.log(e.nativeEvent);
 
     if (marker.locationId !== activeMarker.locationId) {
       this.setState({ activeMarker: marker });
@@ -202,7 +203,7 @@ class TrailScreen extends Component {
 
   scrollToListItemWithId = (marker) => {
     const index = this.state.trailObjects.findIndex(item => item.locationId === marker.locationId);
-    this.listRef.scrollToIndex({ animated: true, index });
+    this.listRef.scrollToIndex({ viewPosition: 0.5, animated: true, index });
   }
 
   onListItemPressed = (listItem) => {
@@ -278,12 +279,9 @@ class TrailScreen extends Component {
     );
   }
 
-  getItemLayout = (data, index) => {
-    const itemLength = screenWidth - 10;
-    return (
-      { length: itemLength, offset: itemLength * index, index }
-    );
-  }
+  getItemLayout = (data, index) => (
+    { length: listItemWidth, offset: (listItemWidth + 10) * index, index }
+  );
 
   render() {
     const { trailObjects } = this.state;
@@ -308,13 +306,15 @@ class TrailScreen extends Component {
         <FlatList
           data={trailObjects}
           horizontal
-          pagingEnabled
           keyExtractor={item => `i${item.locationId}-${item.objectId}`}
           ref={(ref) => { this.listRef = ref; }}
           renderItem={this.renderRow}
           style={styles.flatList}
           getItemLayout={this.getItemLayout}
           onScroll={this.onListScroll}
+          snapToAlignment="center"
+          snapToInterval={listItemWidth + 10}
+          decelerationRate="fast"
         />
       </View>
     );
