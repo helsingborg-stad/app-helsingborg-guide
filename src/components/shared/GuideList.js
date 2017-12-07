@@ -31,11 +31,18 @@ export default ({ items, navigation }) => {
     navigate("LocationDetailsScreen", { location });
   };
 
+  const _navigateToTrail = (trail) => {
+    const { navigate } = navigation;
+    const title = trail.guidegroup[0].name;
+    AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
+    navigate("TrailScreen", { trail, title });
+  };
+
   const _navigateToGuide = (guide) => {
     const { navigate } = navigation;
     const title = guide.guidegroup[0].name;
     AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
-    navigate("TrailScreen", { guide, title });
+    navigate("GuideDetailsScreen", { id: guide.id, title });
   };
 
   const renderItem = ({ item }) => {
@@ -51,6 +58,11 @@ export default ({ items, navigation }) => {
       pressHandler = _navigateToLocation;
       openingHours = getOpeningHours(item);
       icon = iconLocation;
+    } else if (contentType === "trail") {
+      image = item.guide_images[0].sizes.large;
+      title = item.title.plain_text;
+      pressHandler = _navigateToTrail;
+      icon = iconGuide;
     } else if (contentType === "guide") {
       image = item.guide_images[0].sizes.large;
       title = item.title.plain_text;

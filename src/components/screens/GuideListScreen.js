@@ -93,18 +93,23 @@ class GuideListScreen extends Component {
       {...props}
     />);
 
-  _renderScene = ({ index, route }) => {
+  _renderScene = ({ route }) => {
     const { guides, locations, navigation, currentLocation } = this.props;
-    const { key, categoryType } = route;
+    const { categoryType } = route;
 
     const items = [];
 
+    // find locations
     categoryType.locations.forEach((element) => {
       const loc = locations.find(l => l.id === element.id);
       items.push(loc);
     });
 
-    const filteredGuides = guides.filter(element => element.guidetype.includes(Number(key)));
+    // find guides/trails
+    categoryType.guides.forEach((navElement) => {
+      const result = guides.find(guide => guide.id === navElement.id);
+      items.push(result);
+    });
 
     if (currentLocation) {
       // calculate distances from current location
