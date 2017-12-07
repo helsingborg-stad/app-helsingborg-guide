@@ -8,6 +8,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  Linking,
   View,
 } from "react-native";
 import MapView from "react-native-maps";
@@ -19,6 +20,7 @@ import {
 import {
   AnalyticsUtils,
   StyleSheetUtils,
+  LocationUtils,
 } from "../../utils/";
 
 const defaultMargin = 20;
@@ -96,6 +98,19 @@ const styles = StyleSheet.create({
 });
 
 export default class MapWithListView extends Component {
+  // TODO move to a UrlUtils class
+  static async openUrlIfValid(url) {
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        return Linking.openURL(url);
+      }
+    } catch (error) {
+      return null;
+    }
+    return null;
+  }
+
   constructor(props) {
     super(props);
 
@@ -176,6 +191,13 @@ export default class MapWithListView extends Component {
     this.scrollToListItemWithId(marker);
   }
 
+  onListItemDirectionsButtonPressed = (listItem) => {
+    const { location } = listItem.item;
+    const { latitude, longitude } = location;
+    const directionsUrl = LocationUtils.directionsUrl(latitude, longitude, this.state.geolocation);
+    MapWithListView.openUrlIfValid(directionsUrl);
+  }
+
   /**
    * RENDER FUNCTIONS
    */
@@ -200,7 +222,6 @@ export default class MapWithListView extends Component {
 
   renderItem = (listItem) => {
     const { imageUrl, streetAdress, title } = listItem.item;
-    // const distance = this.getDistancefromUserLocationToLocationItem(locationItem);
 
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(listItem)}>
