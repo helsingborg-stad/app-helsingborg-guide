@@ -8,7 +8,6 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Linking,
   View,
 } from "react-native";
 import MapView from "react-native-maps";
@@ -21,6 +20,7 @@ import {
   AnalyticsUtils,
   StyleSheetUtils,
   LocationUtils,
+  UrlUtils,
 } from "../../utils/";
 
 const defaultMargin = 20;
@@ -98,19 +98,6 @@ const styles = StyleSheet.create({
 });
 
 export default class MapWithListView extends Component {
-  // TODO move to a UrlUtils class
-  static async openUrlIfValid(url) {
-    try {
-      const supported = await Linking.canOpenURL(url);
-      if (supported) {
-        return Linking.openURL(url);
-      }
-    } catch (error) {
-      return null;
-    }
-    return null;
-  }
-
   constructor(props) {
     super(props);
 
@@ -195,7 +182,7 @@ export default class MapWithListView extends Component {
     const { location } = listItem.item;
     const { latitude, longitude } = location;
     const directionsUrl = LocationUtils.directionsUrl(latitude, longitude, this.state.geolocation);
-    MapWithListView.openUrlIfValid(directionsUrl);
+    UrlUtils.openUrlIfValid(directionsUrl);
   }
 
   /**
