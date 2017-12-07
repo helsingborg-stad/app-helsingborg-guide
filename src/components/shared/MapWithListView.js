@@ -148,8 +148,12 @@ export default class MapWithListView extends Component {
   scrollToIndex = (index) => {
     if (!this.listRef) return;
 
-    const x = ((listItemWidth + (defaultMargin / 2)) * index) - 15;
-    this.listRef.scrollToOffset({ offset: x });
+    if (ios) {
+      const x = ((listItemWidth + (defaultMargin / 2)) * index) - 15;
+      this.listRef.scrollToOffset({ offset: x });
+    } else {
+      this.listRef.setPage(index);
+    }
   }
 
   scrollToListItemWithId = (marker) => {
@@ -282,6 +286,7 @@ export default class MapWithListView extends Component {
     }
     return (
       <ViewPagerAndroid
+        ref={(ref) => { this.listRef = ref; }}
         onPageSelected={this.onPageSelected}
         peekEnabled
         pageMargin={20}
