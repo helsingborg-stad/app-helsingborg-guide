@@ -13,7 +13,6 @@ import {
 } from "react-redux";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import {
-  AnalyticsUtils,
   LocationUtils,
 } from "../../utils/";
 import MapWithListView from "../shared/MapWithListView";
@@ -52,6 +51,7 @@ class TrailScreen extends Component {
         imageUrl: contentObject.image[0].sizes.medium,
         thumbnailUrl: contentObject.image[0].sizes.thumbnail,
         streetAdress: locationObject.street_address,
+        contentObject,
       });
     });
     return trailObjects;
@@ -98,12 +98,6 @@ class TrailScreen extends Component {
     const { _embedded } = this.state.subLocation;
     const locationItem = _embedded.location.filter(item => item.id === locationId);
     return locationItem[0];
-  }
-
-  contentObjectFromId = (objectId) => {
-    const { contentObjects } = this.state.subLocation;
-    const contentObject = contentObjects[objectId];
-    return contentObject;
   }
 
   getDistancefromUserLocationToLocationItem(locationItem) {
