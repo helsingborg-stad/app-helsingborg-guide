@@ -4,7 +4,6 @@ import { getStoredState } from "redux-persist";
 import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage, Platform, Linking } from "react-native";
 import Nav from "guide-hbg/src/Nav";
 import store from "guide-hbg/src/store/configureStore";
-import { loadGuides } from "guide-hbg/src/actions/guideActions";
 import { loadSubLocations } from "guide-hbg/src/actions/subLoactionActions";
 import internetChanged from "guide-hbg/src/actions/internetActions";
 import LangService from "guide-hbg/src/services/langService";
@@ -12,9 +11,9 @@ import Opener from "guide-hbg/src/services/SettingsService";
 import { errorHappened } from "guide-hbg/src/actions/errorActions";
 import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
 import FullScreenVideoScreen from "guide-hbg/src/components/screens/FullScreenVideoScreen";
-import { fetchGuideTypes } from "./src/actions/guidetypeActions";
+import { loadGuides } from "./src/actions/guideActions";
+import { fetchNavigation } from "./src/actions/navigationActions";
 import { LocationService } from "./src/services/locationService";
-
 
 export default class GuideHbg extends Component {
   static openInternetSettings() {
@@ -39,7 +38,7 @@ export default class GuideHbg extends Component {
   static loadContents(langCode) {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
-        store.dispatch(fetchGuideTypes(langCode));
+        store.dispatch(fetchNavigation(langCode));
         store.dispatch(loadGuides(langCode));
         store.dispatch(loadSubLocations(langCode));
         LangService.getLanguages().catch(() => console.log("error in getting lang")); // eslint-disable-line no-console

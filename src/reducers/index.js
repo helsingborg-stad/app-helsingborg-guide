@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import guides from "./guideReducer";
-import guideTypes from "./guideTypesReducer";
+import navigation from "./navigationReducer";
 import subLocations from "./subLocationReducer";
 import metrics from "./metricReducer";
 import audio from "./audioReducer";
@@ -11,7 +11,7 @@ import geolocation from "./geolocationReducer";
 
 const rootReducer = combineReducers({
   guides,
-  guideTypes,
+  navigation,
   subLocations,
   audio,
   metrics,

@@ -142,7 +142,7 @@ class GuideListScreen extends Component {
 }
 
 function mapStateToProps(state) {
-  const { isFetching, items } = state.guideTypes;
+  const { isFetching, items } = state.navigation;
 
   // TODO this data should already be in the redux state! NOT here!
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
@@ -159,9 +159,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps() {
-  return {
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GuideListScreen);
+export default connect(mapStateToProps)(GuideListScreen);
