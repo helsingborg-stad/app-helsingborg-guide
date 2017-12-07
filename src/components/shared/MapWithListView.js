@@ -5,10 +5,12 @@ import {
   StyleSheet,
   Dimensions,
   FlatList,
+  ViewPagerAndroid,
   Text,
   Image,
   TouchableOpacity,
   View,
+  Platform,
 } from "react-native";
 import MapView from "react-native-maps";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -23,19 +25,40 @@ import {
   UrlUtils,
 } from "../../utils/";
 
+const ios = Platform.OS === "ios";
+
 const defaultMargin = 20;
 const listItemImageSize = 120;
-const headerHeight = 65;
 const markerImageSize = 40;
 
 const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-
 const listItemWidth = screenWidth - (defaultMargin * 2);
-const mapHeight = screenHeight - listItemImageSize - headerHeight - defaultMargin;
 
 const imageMarkerActive = require("../../images/marker-active.png");
 const imageMarkerInactive = require("../../images/marker-inactive.png");
+
+/*
+* Shared style constants
+*/
+
+const listItemShared = {
+  backgroundColor: Colors.white,
+  flexDirection: "row",
+  height: listItemImageSize,
+  width: listItemWidth,
+  marginVertical: defaultMargin / 2,
+};
+
+const markerImageShared = {
+  width: markerImageSize,
+  height: markerImageSize,
+  borderRadius: markerImageSize / 2,
+  borderWidth: 2.5,
+};
+
+/*
+* Stylesheet
+*/
 
 const styles = StyleSheet.create({
   container: {
@@ -43,19 +66,23 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   map: {
-    height: mapHeight,
+    flex: 100,
   },
-  flatList: {
-    height: listItemImageSize,
+  listStyle: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: listItemImageSize + defaultMargin,
     backgroundColor: Colors.warmGrey,
   },
   listItem: {
-    flexDirection: "row",
-    width: listItemWidth,
-    height: listItemImageSize,
+    ...listItemShared,
     marginHorizontal: 5,
-    marginVertical: 10,
-    backgroundColor: Colors.white,
+  },
+  androidListItem: {
+    ...listItemShared,
+    marginHorizontal: defaultMargin,
   },
   listImage: {
     height: listItemImageSize,
@@ -82,17 +109,11 @@ const styles = StyleSheet.create({
     },
   ]),
   markerImage: {
-    width: markerImageSize,
-    height: markerImageSize,
-    borderRadius: markerImageSize / 2,
-    borderWidth: 2.5,
+    ...markerImageShared,
     borderColor: Colors.white,
   },
   markerImageActive: {
-    width: markerImageSize,
-    height: markerImageSize,
-    borderRadius: markerImageSize / 2,
-    borderWidth: 2.5,
+    ...markerImageShared,
     borderColor: Colors.lightPink,
   },
 });
@@ -132,8 +153,14 @@ export default class MapWithListView extends Component {
   }
 
   scrollToIndex = (index) => {
-    const x = ((listItemWidth + (defaultMargin / 2)) * index) - 15;
-    this.listRef.scrollToOffset({ offset: x });
+    if (!this.listRef) return;
+
+    if (ios) {
+      const x = ((listItemWidth + (defaultMargin / 2)) * index) - 15;
+      this.listRef.scrollToOffset({ offset: x });
+    } else {
+      this.listRef.setPage(index);
+    }
   }
 
   scrollToListItemWithId = (marker) => {
@@ -142,17 +169,8 @@ export default class MapWithListView extends Component {
     this.scrollToIndex(index);
   }
 
-  /**
-   * CALLBACK FUNCTIONS
-   */
-
-  onListScroll = (e) => {
+  panMapToIndex = (index) => {
     const { items } = this.props;
-
-    const xOffset = e.nativeEvent.contentOffset.x;
-    const fullItemWidth = listItemWidth + (defaultMargin / 2);
-
-    const index = Math.round(Math.abs(xOffset / fullItemWidth));
     const marker = items[index];
     const { activeMarker } = this.state;
 
@@ -161,6 +179,22 @@ export default class MapWithListView extends Component {
       this.map.animateToCoordinate(marker.location);
     }
   }
+  /**
+   * CALLBACK FUNCTIONS
+   */
+
+  onListScroll = (e) => {
+    const xOffset = e.nativeEvent.contentOffset.x;
+    const fullItemWidth = listItemWidth + (defaultMargin / 2);
+
+    const index = Math.round(Math.abs(xOffset / fullItemWidth));
+    this.panMapToIndex(index);
+  }
+
+  onPageSelected = ({ nativeEvent }) => {
+    const { position } = nativeEvent;
+    this.panMapToIndex(position);
+  }
 
   getItemLayout = (data, index) => (
     { length: listItemWidth, offset: (listItemWidth + (defaultMargin / 2)) * index, index }
@@ -168,7 +202,7 @@ export default class MapWithListView extends Component {
 
   onListItemPressed = (listItem) => {
     const { navigate } = this.props.navigation;
-    const { contentObject } = listItem.item;
+    const { contentObject } = listItem;
     const { title, id } = contentObject;
     AnalyticsUtils.logEvent("view_object", { id, name: title });
     navigate("ObjectDetailsScreen", { title, contentObject });
@@ -179,7 +213,7 @@ export default class MapWithListView extends Component {
   }
 
   onListItemDirectionsButtonPressed = (listItem) => {
-    const { location } = listItem.item;
+    const { location } = listItem;
     const { latitude, longitude } = location;
     const directionsUrl = LocationUtils.directionsUrl(latitude, longitude, this.state.geolocation);
     UrlUtils.openUrlIfValid(directionsUrl);
@@ -207,22 +241,65 @@ export default class MapWithListView extends Component {
     });
   }
 
-  renderItem = (listItem) => {
-    const { imageUrl, streetAdress, title } = listItem.item;
-
+  renderListItem = (item, listItemStyle) => {
+    const { imageUrl, streetAdress, title } = item;
     return (
-      <TouchableOpacity onPress={() => this.onListItemPressed(listItem)}>
-        <View style={styles.listItem}>
+      <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
+        <View style={listItemStyle}>
           {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
             <Text style={styles.listItemAddress}>{streetAdress}</Text>
-            <TouchableOpacity onPress={() => this.onListItemDirectionsButtonPressed(listItem)}>
+            <TouchableOpacity onPress={() => this.onListItemDirectionsButtonPressed(item)}>
               <Icon name="directions" size={20} color={Colors.lightGrey} />
             </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>
+    );
+  }
+
+  renderItem = listItem => (
+    this.renderListItem(listItem.item, styles.listItem)
+  );
+
+  androidRenderItem = (item, index) => (
+    <View key={index}>
+      {this.renderListItem(item, styles.androidListItem)}
+    </View>
+  );
+
+  renderHorizontalList(items) {
+    if (ios) {
+      return (
+        <FlatList
+          contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
+          data={items}
+          horizontal
+          keyExtractor={item => item.id}
+          ref={(ref) => { this.listRef = ref; }}
+          renderItem={item => this.renderItem(item)}
+          style={styles.listStyle}
+          getItemLayout={this.getItemLayout}
+          onScroll={this.onListScroll}
+          snapToAlignment="center"
+          snapToInterval={listItemWidth + 10}
+          decelerationRate="fast"
+          scrollEventThrottle={300}
+        />
+      );
+    }
+    return (
+      <ViewPagerAndroid
+        ref={(ref) => { this.listRef = ref; }}
+        onPageSelected={this.onPageSelected}
+        peekEnabled
+        pageMargin={-30}
+        style={styles.listStyle}
+        initialPage={0}
+      >
+        {items.map((element, index) => this.androidRenderItem(element, index))}
+      </ViewPagerAndroid>
     );
   }
 
@@ -246,21 +323,7 @@ export default class MapWithListView extends Component {
         >
           {this.renderMapMarkers()}
         </MapView>
-        <FlatList
-          contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
-          data={items}
-          horizontal
-          keyExtractor={item => item.id}
-          ref={(ref) => { this.listRef = ref; }}
-          renderItem={this.renderItem}
-          style={styles.flatList}
-          getItemLayout={this.getItemLayout}
-          onScroll={this.onListScroll}
-          snapToAlignment="center"
-          snapToInterval={listItemWidth + 10}
-          decelerationRate="fast"
-          scrollEventThrottle={300}
-        />
+        {this.renderHorizontalList(items)}
       </View>
     );
   }
