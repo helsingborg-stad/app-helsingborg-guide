@@ -41,6 +41,9 @@ const headerHeight = 65;
 const mapHeight = screenHeight - listItemImageSize - headerHeight - defaultMargin;
 const listItemWidth = screenWidth - (defaultMargin * 2);
 
+const imageMarkerActive = require("../../images/marker-active.png");
+const imageMarkerInactive = require("../../images/marker-inactive.png");
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -247,16 +250,15 @@ class TrailScreen extends Component {
 
     return this.state.trailObjects.map((trailObject) => {
       const { id, location, thumbnailUrl } = trailObject;
-      const active = activeMarker === trailObject;
+      const image = activeMarker === trailObject ? imageMarkerActive : imageMarkerInactive;
       return (
         <MapView.Marker
           key={id}
           coordinate={location}
           identifier={id}
           onPress={() => this.onMarkerPressed(trailObject)}
-        >
-          <Image style={active ? styles.markerImageActive : styles.markerImage} source={{ uri: thumbnailUrl }} />
-        </MapView.Marker>
+          image={image}
+        />
       );
     });
   }
