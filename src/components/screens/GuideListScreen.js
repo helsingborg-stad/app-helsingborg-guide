@@ -120,7 +120,7 @@ class GuideListScreen extends Component {
       });
       items.sort((a, b) => a.distance > b.distance);
     }
-    return (<GuideList items={items} navigation={navigation} />);
+    return (<GuideList items={items} navigation={navigation} subLocations={subLocations} />);
   }
 
 
@@ -148,7 +148,12 @@ class GuideListScreen extends Component {
 }
 
 function mapStateToProps(state) {
+<<<<<<< HEAD
   const { isFetching, items } = state.navigation;
+=======
+  const { isFetching, items } = state.guideTypes;
+  const { subLocations } = state;
+>>>>>>> Get number of guides for List Card items
 
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
   const locations = JSON.parse(JSON.stringify(state.guides.slice()));
@@ -158,6 +163,7 @@ function mapStateToProps(state) {
     categoryTypes: items,
     locations,
     guides,
+    subLocations,
     currentLocation: state.geolocation,
   };
 }
