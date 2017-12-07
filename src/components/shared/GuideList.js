@@ -43,15 +43,15 @@ export default ({ items, navigation }) => {
     let title;
     let pressHandler;
     let openingHours;
-    const { distance } = item;
+    const { distance, contentType } = item;
     let icon;
-    if (item.type === "location") {
+    if (contentType === "location") {
       image = item.apperance.image.sizes.medium;
       title = item.name;
       pressHandler = _navigateToLocation;
       openingHours = getOpeningHours(item);
       icon = iconLocation;
-    } else if (item.type === "guide") {
+    } else if (contentType === "guide") {
       image = item.guide_images[0].sizes.large;
       title = item.title.plain_text;
       pressHandler = _navigateToGuide;

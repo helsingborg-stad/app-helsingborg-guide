@@ -73,7 +73,7 @@ class GuideListScreen extends Component {
     const routes = [];
 
     categoryTypes.forEach((element) => {
-      routes.push({ key: `${element.id}`, title: element.name });
+      routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
     });
 
     this.state = {
@@ -94,16 +94,17 @@ class GuideListScreen extends Component {
     />);
 
   _renderScene = ({ index, route }) => {
-    // TODO replace this index hard coded crap with a link to the route key
     const { guides, locations, navigation, currentLocation } = this.props;
-    const { key } = route;
-    let items;
+    const { key, categoryType } = route;
+
+    const items = [];
+
+    categoryType.locations.forEach((element) => {
+      const loc = locations.find(l => l.id === element.id);
+      items.push(loc);
+    });
+
     const filteredGuides = guides.filter(element => element.guidetype.includes(Number(key)));
-    if (index === 0) {
-      items = locations;
-    } else {
-      items = filteredGuides;
-    }
 
     if (currentLocation) {
       // calculate distances from current location
@@ -144,11 +145,8 @@ class GuideListScreen extends Component {
 function mapStateToProps(state) {
   const { isFetching, items } = state.navigation;
 
-  // TODO this data should already be in the redux state! NOT here!
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
   const locations = JSON.parse(JSON.stringify(state.guides.slice()));
-  locations.forEach((element) => { element.type = "location"; });
-  guides.forEach((element) => { element.type = "guide"; });
 
   return {
     isFetching,
