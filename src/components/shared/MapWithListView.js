@@ -134,10 +134,10 @@ export default class MapWithListView extends Component {
     this.listRef.scrollToOffset({ offset: x });
   }
 
-  contentObjectFromId = (objectId) => {
-    const { contentObjects } = this.state.subLocation;
-    const contentObject = contentObjects[objectId];
-    return contentObject;
+  scrollToListItemWithId = (marker) => {
+    const { items } = this.props;
+    const index = items.findIndex(item => item === marker);
+    this.scrollToIndex(index);
   }
 
   /**
@@ -170,6 +170,10 @@ export default class MapWithListView extends Component {
     const { title, id } = contentObject;
     AnalyticsUtils.logEvent("view_object", { id, name: title });
     navigate("ObjectDetailsScreen", { title, contentObject });
+  }
+
+  onMarkerPressed = (marker) => {
+    this.scrollToListItemWithId(marker);
   }
 
   /**
