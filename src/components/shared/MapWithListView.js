@@ -119,8 +119,6 @@ export default class MapWithListView extends Component {
   }
 
   componentDidMount() {
-    if (!ios) return;
-
     const { items } = this.props;
     if (items.length) {
       setTimeout(() => {
