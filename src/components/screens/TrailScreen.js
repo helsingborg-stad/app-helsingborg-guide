@@ -150,6 +150,7 @@ class TrailScreen extends Component {
         return Linking.openURL(url);
       }
     } catch (error) {
+      return null;
     }
     return null;
   }
@@ -249,7 +250,7 @@ class TrailScreen extends Component {
     const { activeMarker } = this.state;
 
     return this.state.trailObjects.map((trailObject) => {
-      const { id, location, thumbnailUrl } = trailObject;
+      const { id, location } = trailObject;
       const image = activeMarker === trailObject ? imageMarkerActive : imageMarkerInactive;
       return (
         <MapView.Marker
