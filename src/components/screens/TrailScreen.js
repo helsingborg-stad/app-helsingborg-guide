@@ -3,18 +3,13 @@ import React, {
 } from "react";
 import PropTypes from "prop-types";
 import {
-  bindActionCreators,
-} from "redux";
-import {
   connect,
 } from "react-redux";
-import * as subLocationActions from "../../actions/subLoactionActions";
 import MapWithListView from "../shared/MapWithListView";
 
 class TrailScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
-    subLocation: PropTypes.object.isRequired,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -50,23 +45,8 @@ class TrailScreen extends Component {
     return trailObjects;
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      subLocation: this.props.subLocation,
-      trailObjects: this.props.trailObjects,
-    };
-  }
-
-  locationItemFromId = (locationId) => {
-    const { _embedded } = this.state.subLocation;
-    const locationItem = _embedded.location.filter(item => item.id === locationId);
-    return locationItem[0];
-  }
-
   render() {
-    const { trailObjects } = this.state;
-    const { navigation } = this.props;
+    const { navigation, trailObjects } = this.props;
     const trailItem = trailObjects[0];
     return (
       <MapWithListView
@@ -84,16 +64,8 @@ function mapStateToProps(state, ownProps) {
   const trailObjects = TrailScreen.createTrailObjects(guide);
 
   return {
-    subLocation: guide,
-    geolocation: state.geolocation,
     trailObjects,
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    subLocationActions: bindActionCreators(subLocationActions, dispatch),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);
+export default connect(mapStateToProps)(TrailScreen);
