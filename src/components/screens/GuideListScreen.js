@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.listBackgroundColor,
   },
   loadingContainer: {
     flexDirection: "column",
