@@ -5,10 +5,12 @@ import {
   StyleSheet,
   Dimensions,
   FlatList,
+  ViewPagerAndroid,
   Text,
   Image,
   TouchableOpacity,
   View,
+  Platform,
 } from "react-native";
 import MapView from "react-native-maps";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -22,6 +24,8 @@ import {
   LocationUtils,
   UrlUtils,
 } from "../../utils/";
+
+const ios = Platform.OS === "ios";
 
 const defaultMargin = 20;
 const listItemImageSize = 120;
@@ -95,6 +99,16 @@ const styles = StyleSheet.create({
     borderWidth: 2.5,
     borderColor: Colors.lightPink,
   },
+  androidViewPager: {
+    flex: 1,
+    height: listItemImageSize,
+    backgroundColor: Colors.warmGrey,
+  },
+  androidListItem: {
+    backgroundColor: Colors.white,
+    alignItems: "center",
+    padding: 20,
+  },
 });
 
 export default class MapWithListView extends Component {
@@ -105,6 +119,8 @@ export default class MapWithListView extends Component {
   }
 
   componentDidMount() {
+    if (!ios) return;
+
     const { items } = this.props;
     if (items.length) {
       setTimeout(() => {
@@ -132,6 +148,8 @@ export default class MapWithListView extends Component {
   }
 
   scrollToIndex = (index) => {
+    if (!this.listRef) return;
+
     const x = ((listItemWidth + (defaultMargin / 2)) * index) - 15;
     this.listRef.scrollToOffset({ offset: x });
   }
@@ -142,17 +160,8 @@ export default class MapWithListView extends Component {
     this.scrollToIndex(index);
   }
 
-  /**
-   * CALLBACK FUNCTIONS
-   */
-
-  onListScroll = (e) => {
+  panMapToIndex = (index) => {
     const { items } = this.props;
-
-    const xOffset = e.nativeEvent.contentOffset.x;
-    const fullItemWidth = listItemWidth + (defaultMargin / 2);
-
-    const index = Math.round(Math.abs(xOffset / fullItemWidth));
     const marker = items[index];
     const { activeMarker } = this.state;
 
@@ -160,6 +169,22 @@ export default class MapWithListView extends Component {
       this.setState({ activeMarker: marker });
       this.map.animateToCoordinate(marker.location);
     }
+  }
+  /**
+   * CALLBACK FUNCTIONS
+   */
+
+  onListScroll = (e) => {
+    const xOffset = e.nativeEvent.contentOffset.x;
+    const fullItemWidth = listItemWidth + (defaultMargin / 2);
+
+    const index = Math.round(Math.abs(xOffset / fullItemWidth));
+    this.panMapToIndex(index);
+  }
+
+  onPageSelected = ({ nativeEvent }) => {
+    const { position } = nativeEvent;
+    this.panMapToIndex(position);
   }
 
   getItemLayout = (data, index) => (
@@ -226,6 +251,50 @@ export default class MapWithListView extends Component {
     );
   }
 
+  androidRenderItem = (item, index) => (
+    <View
+      style={styles.androidListItem}
+      key={index}
+    >
+      <TouchableOpacity >
+        <Text>{item.title}</Text>
+      </TouchableOpacity>
+    </View>
+  )
+
+  renderHorizontalList(items) {
+    if (ios) {
+      return (
+        <FlatList
+          contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
+          data={items}
+          horizontal
+          keyExtractor={item => item.id}
+          ref={(ref) => { this.listRef = ref; }}
+          renderItem={item => this.renderItem(item.item)}
+          style={styles.flatList}
+          getItemLayout={this.getItemLayout}
+          onScroll={this.onListScroll}
+          snapToAlignment="center"
+          snapToInterval={listItemWidth + 10}
+          decelerationRate="fast"
+          scrollEventThrottle={300}
+        />
+      );
+    }
+    return (
+      <ViewPagerAndroid
+        onPageSelected={this.onPageSelected}
+        peekEnabled
+        pageMargin={20}
+        style={styles.androidViewPager}
+        initialPage={0}
+      >
+        {items.map((element, index) => this.androidRenderItem(element, index))}
+      </ViewPagerAndroid>
+    );
+  }
+
   render() {
     const { items, initialLocation } = this.props;
     const { longitude, latitude } = initialLocation;
@@ -246,21 +315,7 @@ export default class MapWithListView extends Component {
         >
           {this.renderMapMarkers()}
         </MapView>
-        <FlatList
-          contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
-          data={items}
-          horizontal
-          keyExtractor={item => item.id}
-          ref={(ref) => { this.listRef = ref; }}
-          renderItem={this.renderItem}
-          style={styles.flatList}
-          getItemLayout={this.getItemLayout}
-          onScroll={this.onListScroll}
-          snapToAlignment="center"
-          snapToInterval={listItemWidth + 10}
-          decelerationRate="fast"
-          scrollEventThrottle={300}
-        />
+        {this.renderHorizontalList(items)}
       </View>
     );
   }
