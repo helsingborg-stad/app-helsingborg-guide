@@ -50,7 +50,7 @@ export default ({ items, navigation }) => {
     let title;
     let pressHandler;
     let openingHours;
-    const { distance, contentType } = item;
+    const { distance, contentType, description } = item;
     let icon;
     if (contentType === "location") {
       image = item.apperance.image.sizes.medium;
@@ -75,6 +75,7 @@ export default ({ items, navigation }) => {
     return (
       <ListCard
         title={title}
+        description={description}
         image={image}
         onPress={() => pressHandler(item)}
         openingHours={openingHours}
