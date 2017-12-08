@@ -120,7 +120,7 @@ class GuideListScreen extends Component {
       });
       items.sort((a, b) => a.distance > b.distance);
     }
-    return (<GuideList items={items} navigation={navigation} subLocations={subLocations} />);
+    return (<GuideList items={items} navigation={navigation} subLocations={subLocations} locations={locations} />);
   }
 
 

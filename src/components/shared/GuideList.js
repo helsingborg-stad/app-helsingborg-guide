@@ -16,13 +16,33 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ items, navigation, subLocations }) => {
+export default ({ items, navigation, locations, subLocations }) => {
   function getOpeningHours(location) {
     const openingList = location._embedded.location[0].open_hours;
     const expList = location._embedded.location[0].open_hour_exceptions;
     const opening = TimingService.getOpeningHours(openingList, expList);
     const text = opening || "";
     return text;
+  }
+
+  function numberOfGuidesForItem(item) {
+    const { contentType, id } = item;
+    let numberOfGuides = 0;
+
+    if (contentType === "location") {
+      numberOfGuides = subLocations.filter(subLocationItem => subLocationItem.guidegroup[0].id === id).length;
+    } else {
+      numberOfGuides = Object.keys(item.contentObjects).length;
+    }
+    return numberOfGuides;
+  }
+
+  function descriptionForItem(item) {
+    const { description, contentType } = item;
+    if (contentType === "trail") {
+      return locations.find(location => location.id === item.guidegroup[0].id).description;
+    }
+    return description;
   }
 
   const _navigateToLocation = (location) => {
@@ -46,17 +66,17 @@ export default ({ items, navigation, subLocations }) => {
   };
 
   const renderItem = ({ item }) => {
+    const { distance, contentType } = item;
+
     let image;
     let title;
     let pressHandler;
     let openingHours;
-    let numberOfGuides;
-    const { distance, contentType, description, id } = item;
     let icon;
+
     if (contentType === "location") {
       image = item.apperance.image.sizes.medium;
       title = item.name;
-      numberOfGuides = subLocations.filter(subLocationItem => subLocationItem.guidegroup[0].id === id).length;
       pressHandler = _navigateToLocation;
       openingHours = getOpeningHours(item);
       icon = iconLocation;
@@ -68,7 +88,6 @@ export default ({ items, navigation, subLocations }) => {
     } else if (contentType === "guide") {
       image = item.guide_images[0].sizes.large;
       title = item.title.plain_text;
-      numberOfGuides = Object.keys(item.contentObjects).length;
       pressHandler = _navigateToGuide;
       icon = iconGuide;
     }
@@ -78,9 +97,9 @@ export default ({ items, navigation, subLocations }) => {
     return (
       <ListCard
         title={title}
-        description={description}
+        description={descriptionForItem(item)}
         type={contentType}
-        numberOfGuides={numberOfGuides}
+        numberOfGuides={numberOfGuidesForItem(item)}
         image={image}
         onPress={() => pressHandler(item)}
         openingHours={openingHours}
