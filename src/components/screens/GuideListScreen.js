@@ -94,7 +94,7 @@ class GuideListScreen extends Component {
     />);
 
   _renderScene = ({ route }) => {
-    const { guides, locations, navigation, currentLocation } = this.props;
+    const { guides, locations, navigation, currentLocation, subLocations } = this.props;
     const { categoryType } = route;
 
     const items = [];
@@ -148,12 +148,8 @@ class GuideListScreen extends Component {
 }
 
 function mapStateToProps(state) {
-<<<<<<< HEAD
   const { isFetching, items } = state.navigation;
-=======
-  const { isFetching, items } = state.guideTypes;
   const { subLocations } = state;
->>>>>>> Get number of guides for List Card items
 
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
   const locations = JSON.parse(JSON.stringify(state.guides.slice()));
