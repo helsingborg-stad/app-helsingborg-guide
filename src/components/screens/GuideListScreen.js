@@ -129,16 +129,16 @@ class GuideListScreen extends Component {
       items.push(loc);
     });
 
-    if (showMap) {
-      const mapItems = MapWithListView.createItemsFromLocations(items);
-      return (<MapWithListView items={mapItems} />);
-    }
-
     // filter guides/trails
     categoryType.guides.forEach((navElement) => {
       const result = guides.find(guide => guide.id === navElement.id);
       items.push(result);
     });
+
+    if (showMap) {
+      const mapItems = MapWithListView.createMapItemsFromNavItems(items);
+      return (<MapWithListView items={mapItems} />);
+    }
 
     if (currentLocation) {
       // calculate distances from current location

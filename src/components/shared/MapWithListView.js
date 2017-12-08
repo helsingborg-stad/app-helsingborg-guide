@@ -124,16 +124,33 @@ export default class MapWithListView extends Component {
     items: PropTypes.array.isRequired,
   }
 
-  static createItemsFromLocations(guideGroups) {
+  static createMapItemsFromNavItems(navItems) {
     const items = [];
-    guideGroups.forEach((item) => {
+    navItems.forEach((item) => {
       const { longitude, latitude, street_address } = item._embedded.location[0];
+      let title;
+      let imageUrl;
+      let thumbnailUrl;
+      switch (item.contentType) {
+        case "location":
+          title = item.name;
+          imageUrl = item.apperance.image.sizes.large;
+          thumbnailUrl = item.apperance.image.sizes.thumbnail;
+          break;
+        case "trail":
+        case "guide":
+          title = item.title.plain_text;
+          imageUrl = item.guide_images[0].sizes.large;
+          thumbnailUrl = item.guide_images[0].sizes.thumbnail;
+          break;
+        default:
+      }
       const newItem = ({
         id: item.id.toString(),
         location: { longitude: Number(longitude), latitude: Number(latitude) },
-        title: item.name,
-        imageUrl: item.apperance.image.sizes.large,
-        thumbnailUrl: item.apperance.image.sizes.thumbnail,
+        title,
+        imageUrl,
+        thumbnailUrl,
         streetAdress: street_address,
         contentObject: item,
       });
