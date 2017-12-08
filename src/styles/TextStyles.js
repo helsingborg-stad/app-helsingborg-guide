@@ -47,6 +47,6 @@ export default StyleSheet.create({
   description: {
     ...defaultFont,
     fontSize: 16,
-    lineHeight: 21.0,
+    lineHeight: 22.0,
   },
 });

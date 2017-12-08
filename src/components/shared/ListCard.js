@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
       fontWeight: "400",
       fontStyle: "italic",
       margin: defaultMargin,
+      marginBottom: 20,
     }],
   ),
   openingHoursText: StyleSheetUtils.flatten([
@@ -130,7 +131,7 @@ const ListCard = ({ title, description, type, numberOfGuides, image, onPress, op
         <View style={styles.infoTextContainer}>
           <Text
             style={styles.title}
-            numberOfLines={3}
+            numberOfLines={2}
           >
             {title}
           </Text>
