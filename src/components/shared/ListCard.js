@@ -30,12 +30,13 @@ const styles = StyleSheet.create({
   },
   imageInfoContainer: {
     flexDirection: "row",
+    overflow: "hidden",
   },
   image: {
     height: imageSize,
     width: imageSize,
   },
-  infoContainer: {
+  infoTextContainer: {
     flex: 1,
     margin: defaultMargin,
     flexDirection: "column",
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
       color: Colors.black,
       textAlign: "left",
       marginBottom: 7,
+      marginRight: defaultMargin,
     }],
   ),
   descriptionText: StyleSheetUtils.flatten([
@@ -103,8 +105,10 @@ function displayGuideNumber(numberOfGuides, type) {
 
   if (type === "location") {
     textString = `${numberOfGuides} mediaguider`;
-  } else if (type === "guide") {
+  } else if (type === "trail") {
     textString = `Rundtur med ${numberOfGuides} platser`;
+  } else if (type === "guide") {
+    textString = `Guide med ${numberOfGuides} objekt`;
   }
 
   return (
@@ -121,15 +125,23 @@ const ListCard = ({ title, description, type, numberOfGuides, image, onPress, op
           resizeMode="cover"
           source={{ uri: image }}
         />
-        <View style={styles.infoContainer}>
-          <Text style={styles.title}>{title}</Text>
+        <View style={styles.infoTextContainer}>
+          <Text
+            style={styles.title}
+            numberOfLines={3}
+          >
+            {title}
+          </Text>
           {displayOpeningHours(openingHours)}
           {displayDistance(distance)}
           {displayGuideNumber(numberOfGuides, type)}
         </View>
       </View>
       <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionText} numberOfLines={3}>
+        <Text
+          style={styles.descriptionText}
+          numberOfLines={3}
+        >
           {description}
         </Text>
       </View>
