@@ -100,13 +100,13 @@ function displayDistance(distance) {
 
 function displayGuideNumber(numberOfGuides, type) {
   if (!numberOfGuides || !type) return null;
-
   let textString;
+  const plural = numberOfGuides > 1;
 
   if (type === "location") {
-    textString = `${numberOfGuides} mediaguider`;
+    textString = plural ? `${numberOfGuides} mediaguider` : `${numberOfGuides} mediaguide`;
   } else if (type === "trail") {
-    textString = `Rundtur med ${numberOfGuides} platser`;
+    textString = plural ? `Rundtur med ${numberOfGuides} platser` : `Rundtur med ${numberOfGuides} plats`;
   } else if (type === "guide") {
     textString = `Guide med ${numberOfGuides} objekt`;
   }
