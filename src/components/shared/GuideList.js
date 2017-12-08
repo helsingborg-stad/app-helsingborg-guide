@@ -41,6 +41,8 @@ export default ({ items, navigation, locations, subLocations }) => {
     const { description, contentType } = item;
     if (contentType === "trail") {
       return locations.find(location => location.id === item.guidegroup[0].id).description;
+    } else if (contentType === "guide") {
+      return item.content.plain_text;
     }
     return description;
   }
