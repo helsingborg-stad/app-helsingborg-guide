@@ -12,7 +12,7 @@ import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
 import DistanceView from "./DistanceView";
 
 const imageSize = 120;
-const defaultMargin = 14;
+const defaultMargin = 15;
 
 const styles = StyleSheet.create({
   container: {
@@ -38,7 +38,9 @@ const styles = StyleSheet.create({
   },
   infoTextContainer: {
     flex: 1,
-    margin: defaultMargin,
+    marginHorizontal: defaultMargin,
+    marginTop: defaultMargin,
+    marginBottom: 20,
     flexDirection: "column",
   },
   title: StyleSheetUtils.flatten([
