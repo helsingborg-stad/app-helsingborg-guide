@@ -137,7 +137,7 @@ class GuideListScreen extends Component {
 
     if (showMap) {
       const mapItems = MapWithListView.createMapItemsFromNavItems(items);
-      return (<MapWithListView items={mapItems} />);
+      return (<MapWithListView items={mapItems} navigation={navigation} />);
     }
 
     if (currentLocation) {

@@ -127,11 +127,12 @@ export default class MapWithListView extends Component {
   static createMapItemsFromNavItems(navItems) {
     const items = [];
     navItems.forEach((item) => {
+      const { contentType } = item;
       const { longitude, latitude, street_address } = item._embedded.location[0];
       let title;
       let imageUrl;
       let thumbnailUrl;
-      switch (item.contentType) {
+      switch (contentType) {
         case "location":
           title = item.name;
           imageUrl = item.apperance.image.sizes.large;
@@ -152,6 +153,7 @@ export default class MapWithListView extends Component {
         imageUrl,
         thumbnailUrl,
         streetAdress: street_address,
+        contentType,
         contentObject: item,
       });
       items.push(newItem);
@@ -268,10 +270,37 @@ export default class MapWithListView extends Component {
 
   onListItemPressed = (listItem) => {
     const { navigate } = this.props.navigation;
-    const { contentObject } = listItem;
-    const { title, id } = contentObject;
-    AnalyticsUtils.logEvent("view_object", { id, name: title });
-    navigate("ObjectDetailsScreen", { title, contentObject });
+    const { contentType, contentObject } = listItem;
+    switch (contentType) {
+      case "location":
+      {
+        AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
+        navigate("LocationDetailsScreen", { location: contentObject });
+        break;
+      }
+      case "trail":
+      {
+        const trail = contentObject;
+        const title = trail.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
+        navigate("TrailScreen", { trail, title });
+        return;
+      }
+      case "guide":
+      {
+        const guide = contentObject;
+        const title = guide.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
+        navigate("GuideDetailsScreen", { id: guide.id, title });
+        return;
+      }
+      default:
+      {
+        const { title, id } = contentObject;
+        AnalyticsUtils.logEvent("view_object", { id, name: title });
+        navigate("ObjectDetailsScreen", { title, contentObject });
+      }
+    }
   }
 
   onMarkerPressed = (marker) => {
