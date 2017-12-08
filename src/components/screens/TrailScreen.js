@@ -19,32 +19,6 @@ class TrailScreen extends Component {
     };
   };
 
-  static createTrailObjects(subLocation) {
-    const { subAttractions, contentObjects } = subLocation;
-    const embeddedLocations = subLocation._embedded.location;
-    const trailObjects = [];
-
-    subAttractions.forEach((item) => {
-      const objectId = item.content[0];
-      const locationId = item.location;
-
-      const contentObject = contentObjects[objectId];
-      const locationObject = embeddedLocations.find(location => location.id === locationId);
-      const { longitude, latitude } = locationObject;
-
-      trailObjects.push({
-        id: objectId,
-        location: { longitude: parseFloat(longitude), latitude: parseFloat(latitude) },
-        title: contentObject.title,
-        imageUrl: contentObject.image[0].sizes.medium,
-        thumbnailUrl: contentObject.image[0].sizes.thumbnail,
-        streetAdress: locationObject.street_address,
-        contentObject,
-      });
-    });
-    return trailObjects;
-  }
-
   render() {
     const { navigation, trailObjects } = this.props;
     const trailItem = trailObjects[0];
@@ -61,7 +35,7 @@ class TrailScreen extends Component {
 function mapStateToProps(state, ownProps) {
   const { trail } = ownProps.navigation.state.params;
 
-  const trailObjects = TrailScreen.createTrailObjects(trail);
+  const trailObjects = MapWithListView.createItemsFromTrail(trail);
 
   return {
     trailObjects,

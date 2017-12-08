@@ -12,6 +12,7 @@ import { LocationUtils } from "./../../utils";
 import LangService from "../../services/langService";
 import Colors from "../../styles/Colors";
 import GuideList from "../shared/GuideList";
+import MapWithListView from "../shared/MapWithListView";
 
 const settingsIcon = require("../../images/settings.png");
 const mapIcon = require("../../images/iconPlats.png");
@@ -116,18 +117,24 @@ class GuideListScreen extends Component {
     />);
 
   _renderScene = ({ route }) => {
+    const { showMap } = this.state;
     const { guides, locations, navigation, currentLocation } = this.props;
     const { categoryType } = route;
 
     const items = [];
 
-    // find locations
+    // filter locations
     categoryType.locations.forEach((element) => {
       const loc = locations.find(l => l.id === element.id);
       items.push(loc);
     });
 
-    // find guides/trails
+    if (showMap) {
+      const mapItems = MapWithListView.createItemsFromLocations(items);
+      return (<MapWithListView items={mapItems} />);
+    }
+
+    // filter guides/trails
     categoryType.guides.forEach((navElement) => {
       const result = guides.find(guide => guide.id === navElement.id);
       items.push(result);
