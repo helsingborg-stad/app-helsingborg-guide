@@ -14,6 +14,8 @@ import Colors from "../../styles/Colors";
 import GuideList from "../shared/GuideList";
 
 const settingsIcon = require("../../images/settings.png");
+const mapIcon = require("../../images/iconPlats.png");
+const listIcon = require("../../images/settings.png");
 
 const styles = StyleSheet.create({
   barButtonItem: {
@@ -48,9 +50,18 @@ const styles = StyleSheet.create({
 class GuideListScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.APP_NAME;
+    const { params = {} } = navigation.state;
+    const { toggleMap, showMap } = params;
     return {
       title,
-      headerRight: null,
+      headerRight: (
+        <TouchableOpacity
+          onPress={toggleMap}
+          style={styles.barButtonItem}
+        >
+          <Image source={showMap ? mapIcon : listIcon} />
+        </TouchableOpacity>
+      ),
       headerLeft: (
         <TouchableOpacity
           onPress={() => navigation.navigate("SettingsScreen")}
@@ -77,9 +88,20 @@ class GuideListScreen extends Component {
     });
 
     this.state = {
+      showMap: false,
       index: 0,
       routes,
     };
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
+  }
+
+  toggleMap = () => {
+    const showMap = !this.state.showMap;
+    this.props.navigation.setParams({ showMap });
+    this.setState({ showMap });
   }
 
   _handleIndexChange = index => this.setState({ index });
