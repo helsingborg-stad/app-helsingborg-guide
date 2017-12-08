@@ -31,11 +31,18 @@ export default ({ items, navigation }) => {
     navigate("LocationDetailsScreen", { location });
   };
 
+  const _navigateToTrail = (trail) => {
+    const { navigate } = navigation;
+    const title = trail.guidegroup[0].name;
+    AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
+    navigate("TrailScreen", { trail, title });
+  };
+
   const _navigateToGuide = (guide) => {
     const { navigate } = navigation;
     const title = guide.guidegroup[0].name;
     AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
-    navigate("TrailScreen", { guide, title });
+    navigate("GuideDetailsScreen", { id: guide.id, title });
   };
 
   const renderItem = ({ item }) => {
@@ -43,15 +50,20 @@ export default ({ items, navigation }) => {
     let title;
     let pressHandler;
     let openingHours;
-    const { distance } = item;
+    const { distance, contentType } = item;
     let icon;
-    if (item.type === "location") {
+    if (contentType === "location") {
       image = item.apperance.image.sizes.medium;
       title = item.name;
       pressHandler = _navigateToLocation;
       openingHours = getOpeningHours(item);
       icon = iconLocation;
-    } else if (item.type === "guide") {
+    } else if (contentType === "trail") {
+      image = item.guide_images[0].sizes.large;
+      title = item.title.plain_text;
+      pressHandler = _navigateToTrail;
+      icon = iconGuide;
+    } else if (contentType === "guide") {
       image = item.guide_images[0].sizes.large;
       title = item.title.plain_text;
       pressHandler = _navigateToGuide;

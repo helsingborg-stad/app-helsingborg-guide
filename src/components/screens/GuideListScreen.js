@@ -73,7 +73,7 @@ class GuideListScreen extends Component {
     const routes = [];
 
     categoryTypes.forEach((element) => {
-      routes.push({ key: `${element.id}`, title: element.name });
+      routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
     });
 
     this.state = {
@@ -93,17 +93,23 @@ class GuideListScreen extends Component {
       {...props}
     />);
 
-  _renderScene = ({ index, route }) => {
-    // TODO replace this index hard coded crap with a link to the route key
+  _renderScene = ({ route }) => {
     const { guides, locations, navigation, currentLocation } = this.props;
-    const { key } = route;
-    let items;
-    const filteredGuides = guides.filter(element => element.guidetype.includes(Number(key)));
-    if (index === 0) {
-      items = locations;
-    } else {
-      items = filteredGuides;
-    }
+    const { categoryType } = route;
+
+    const items = [];
+
+    // find locations
+    categoryType.locations.forEach((element) => {
+      const loc = locations.find(l => l.id === element.id);
+      items.push(loc);
+    });
+
+    // find guides/trails
+    categoryType.guides.forEach((navElement) => {
+      const result = guides.find(guide => guide.id === navElement.id);
+      items.push(result);
+    });
 
     if (currentLocation) {
       // calculate distances from current location
@@ -142,13 +148,10 @@ class GuideListScreen extends Component {
 }
 
 function mapStateToProps(state) {
-  const { isFetching, items } = state.guideTypes;
+  const { isFetching, items } = state.navigation;
 
-  // TODO this data should already be in the redux state! NOT here!
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
   const locations = JSON.parse(JSON.stringify(state.guides.slice()));
-  locations.forEach((element) => { element.type = "location"; });
-  guides.forEach((element) => { element.type = "guide"; });
 
   return {
     isFetching,
@@ -159,9 +162,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps() {
-  return {
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GuideListScreen);
+export default connect(mapStateToProps)(GuideListScreen);

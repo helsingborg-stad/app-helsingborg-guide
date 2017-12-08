@@ -1,10 +1,8 @@
 import guide from "./repo.guide";
 import language from "./repo.language";
-import guidetype from "./repo.guidetype";
 
 const repos = {
   guide,
-  guidetype,
   language,
 };
 

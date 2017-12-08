@@ -1,7 +1,7 @@
 import repo from "./repo/repo";
 
 const datacontext = () => {
-  const repoNames = ["guide", "language", "guidetype"];
+  const repoNames = ["guide", "language"];
 
   const service = {};
 

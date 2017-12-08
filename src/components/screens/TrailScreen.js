@@ -59,9 +59,9 @@ class TrailScreen extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { guide } = ownProps.navigation.state.params;
+  const { trail } = ownProps.navigation.state.params;
 
-  const trailObjects = TrailScreen.createTrailObjects(guide);
+  const trailObjects = TrailScreen.createTrailObjects(trail);
 
   return {
     trailObjects,
