@@ -12,8 +12,11 @@ import { LocationUtils } from "./../../utils";
 import LangService from "../../services/langService";
 import Colors from "../../styles/Colors";
 import GuideList from "../shared/GuideList";
+import MapWithListView from "../shared/MapWithListView";
 
 const settingsIcon = require("../../images/settings.png");
+const mapIcon = require("../../images/iconLocation.png");
+const listIcon = require("../../images/iconList.png");
 
 const styles = StyleSheet.create({
   barButtonItem: {
@@ -44,13 +47,21 @@ const styles = StyleSheet.create({
   },
 });
 
-
 class GuideListScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.APP_NAME;
+    const { params = {} } = navigation.state;
+    const { toggleMap, showMap } = params;
     return {
       title,
-      headerRight: null,
+      headerRight: (
+        <TouchableOpacity
+          onPress={toggleMap}
+          style={styles.barButtonItem}
+        >
+          <Image source={showMap ? listIcon : mapIcon} />
+        </TouchableOpacity>
+      ),
       headerLeft: (
         <TouchableOpacity
           onPress={() => navigation.navigate("SettingsScreen")}
@@ -64,22 +75,6 @@ class GuideListScreen extends Component {
 
   static getEmbeddedLocationsFromLocation(locationItem) {
     return locationItem._embedded.location;
-  }
-
-  constructor(props) {
-    super(props);
-
-    const { categoryTypes } = this.props;
-    const routes = [];
-
-    categoryTypes.forEach((element) => {
-      routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
-    });
-
-    this.state = {
-      index: 0,
-      routes,
-    };
   }
 
   static numberOfGuidesForItem(item, subLocations) {
@@ -104,6 +99,33 @@ class GuideListScreen extends Component {
     return description;
   }
 
+  constructor(props) {
+    super(props);
+
+    const { categoryTypes } = this.props;
+    const routes = [];
+
+    categoryTypes.forEach((element) => {
+      routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
+    });
+
+    this.state = {
+      showMap: false,
+      index: 0,
+      routes,
+    };
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
+  }
+
+  toggleMap = () => {
+    const showMap = !this.state.showMap;
+    this.props.navigation.setParams({ showMap });
+    this.setState({ showMap });
+  }
+
   _handleIndexChange = index => this.setState({ index });
 
   _renderHeader = props => (
@@ -116,22 +138,34 @@ class GuideListScreen extends Component {
     />);
 
   _renderScene = ({ route }) => {
+    const { showMap } = this.state;
     const { guides, locations, navigation, currentLocation, subLocations } = this.props;
     const { categoryType } = route;
 
     const items = [];
-
-    // find locations
-    categoryType.locations.forEach((element) => {
-      const loc = locations.find(l => l.id === element.id);
-      items.push(loc);
+    // filter guides and locations
+    categoryType.items.forEach((element) => {
+      switch (element.type) {
+        case "guide":
+        {
+          const result = guides.find(guide => guide.id === element.id);
+          items.push(result);
+          break;
+        }
+        case "guidegroup":
+        {
+          const loc = locations.find(l => l.id === element.id);
+          items.push(loc);
+          break;
+        }
+        default:
+      }
     });
 
-    // find guides/trails
-    categoryType.guides.forEach((navElement) => {
-      const result = guides.find(guide => guide.id === navElement.id);
-      items.push(result);
-    });
+    if (showMap) {
+      const mapItems = MapWithListView.createMapItemsFromNavItems(items);
+      return (<MapWithListView items={mapItems} navigation={navigation} />);
+    }
 
     // number of guides and descriptions
     items.forEach((item) => {

@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import MapView from "react-native-maps";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import PropTypes from "prop-types";
 import {
   Colors,
   TextStyles,
@@ -119,6 +120,73 @@ const styles = StyleSheet.create({
 });
 
 export default class MapWithListView extends Component {
+  static propTypes = {
+    items: PropTypes.array.isRequired,
+  }
+
+  static createMapItemsFromNavItems(navItems) {
+    const items = [];
+    navItems.forEach((item) => {
+      const { contentType } = item;
+      const { longitude, latitude, street_address } = item._embedded.location[0];
+      let title;
+      let imageUrl;
+      let thumbnailUrl;
+      switch (contentType) {
+        case "location":
+          title = item.name;
+          imageUrl = item.apperance.image.sizes.large;
+          thumbnailUrl = item.apperance.image.sizes.thumbnail;
+          break;
+        case "trail":
+        case "guide":
+          title = item.title.plain_text;
+          imageUrl = item.guide_images[0].sizes.large;
+          thumbnailUrl = item.guide_images[0].sizes.thumbnail;
+          break;
+        default:
+      }
+      const newItem = ({
+        id: item.id.toString(),
+        location: { longitude: Number(longitude), latitude: Number(latitude) },
+        title,
+        imageUrl,
+        thumbnailUrl,
+        streetAdress: street_address,
+        contentType,
+        contentObject: item,
+      });
+      items.push(newItem);
+    });
+    return items;
+  }
+
+  static createItemsFromTrail(trail) {
+    const { subAttractions, contentObjects } = trail;
+    const embeddedLocations = trail._embedded.location;
+    const trailObjects = [];
+
+    subAttractions.forEach((item) => {
+      const objectId = item.content[0];
+      const locationId = item.location;
+
+      const contentObject = contentObjects[objectId];
+      const locationObject = embeddedLocations.find(location => location.id === locationId);
+      const { longitude, latitude } = locationObject;
+
+      trailObjects.push({
+        id: objectId,
+        location: { longitude: parseFloat(longitude), latitude: parseFloat(latitude) },
+        title: contentObject.title,
+        imageUrl: contentObject.image[0].sizes.medium,
+        thumbnailUrl: contentObject.image[0].sizes.thumbnail,
+        streetAdress: locationObject.street_address,
+        contentObject,
+      });
+    });
+    return trailObjects;
+  }
+
   constructor(props) {
     super(props);
 
@@ -202,10 +270,37 @@ export default class MapWithListView extends Component {
 
   onListItemPressed = (listItem) => {
     const { navigate } = this.props.navigation;
-    const { contentObject } = listItem;
-    const { title, id } = contentObject;
-    AnalyticsUtils.logEvent("view_object", { id, name: title });
-    navigate("ObjectDetailsScreen", { title, contentObject });
+    const { contentType, contentObject } = listItem;
+    switch (contentType) {
+      case "location":
+      {
+        AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
+        navigate("LocationDetailsScreen", { location: contentObject });
+        break;
+      }
+      case "trail":
+      {
+        const trail = contentObject;
+        const title = trail.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
+        navigate("TrailScreen", { trail, title });
+        return;
+      }
+      case "guide":
+      {
+        const guide = contentObject;
+        const title = guide.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
+        navigate("GuideDetailsScreen", { id: guide.id, title });
+        return;
+      }
+      default:
+      {
+        const { title, id } = contentObject;
+        AnalyticsUtils.logEvent("view_object", { id, name: title });
+        navigate("ObjectDetailsScreen", { title, contentObject });
+      }
+    }
   }
 
   onMarkerPressed = (marker) => {
@@ -304,7 +399,7 @@ export default class MapWithListView extends Component {
   }
 
   render() {
-    const { items, initialLocation } = this.props;
+    const { items, initialLocation = { latitude: 56.0471881, longitude: 12.6963658 } } = this.props;
     const { longitude, latitude } = initialLocation;
     return (
       <View style={styles.container}>
