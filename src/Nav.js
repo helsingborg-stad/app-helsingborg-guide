@@ -47,6 +47,7 @@ const headerStyle = {
     headerTintColor: Colors.white,
     headerTitleStyle: TextStyles.headerTitleLabel,
     headerBackTitleStyle: TextStyles.defaultFontFamily,
+    headerBackTitle: " ",
   },
 };
 
