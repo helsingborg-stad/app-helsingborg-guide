@@ -144,17 +144,23 @@ class GuideListScreen extends Component {
     const { categoryType } = route;
 
     const items = [];
-
-    // filter locations
-    categoryType.locations.forEach((element) => {
-      const loc = locations.find(l => l.id === element.id);
-      items.push(loc);
-    });
-
-    // filter guides/trails
-    categoryType.guides.forEach((navElement) => {
-      const result = guides.find(guide => guide.id === navElement.id);
-      items.push(result);
+    // filter guides and locations
+    categoryType.items.forEach((element) => {
+      switch (element.type) {
+        case "guide":
+        {
+          const result = guides.find(guide => guide.id === element.id);
+          items.push(result);
+          break;
+        }
+        case "guidegroup":
+        {
+          const loc = locations.find(l => l.id === element.id);
+          items.push(loc);
+          break;
+        }
+        default:
+      }
     });
 
     if (showMap) {
