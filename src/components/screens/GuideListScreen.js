@@ -78,6 +78,28 @@ class GuideListScreen extends Component {
     return locationItem._embedded.location;
   }
 
+  static numberOfGuidesForItem(item, subLocations) {
+    const { contentType, id } = item;
+    let numberOfGuides = 0;
+
+    if (contentType === "location") {
+      numberOfGuides = subLocations.filter(subLocationItem => subLocationItem.guidegroup[0].id === id).length;
+    } else {
+      numberOfGuides = Object.keys(item.contentObjects).length;
+    }
+    return numberOfGuides;
+  }
+
+  static descriptionForItem(item, locations) {
+    const { description, contentType } = item;
+    if (contentType === "trail") {
+      return locations.find(location => location.id === item.guidegroup[0].id).description;
+    } else if (contentType === "guide") {
+      return item.content.plain_text;
+    }
+    return description;
+  }
+
   constructor(props) {
     super(props);
 
@@ -103,28 +125,6 @@ class GuideListScreen extends Component {
     const showMap = !this.state.showMap;
     this.props.navigation.setParams({ showMap });
     this.setState({ showMap });
-  }
-
-  static numberOfGuidesForItem(item, subLocations) {
-    const { contentType, id } = item;
-    let numberOfGuides = 0;
-
-    if (contentType === "location") {
-      numberOfGuides = subLocations.filter(subLocationItem => subLocationItem.guidegroup[0].id === id).length;
-    } else {
-      numberOfGuides = Object.keys(item.contentObjects).length;
-    }
-    return numberOfGuides;
-  }
-
-  static descriptionForItem(item, locations) {
-    const { description, contentType } = item;
-    if (contentType === "trail") {
-      return locations.find(location => location.id === item.guidegroup[0].id).description;
-    } else if (contentType === "guide") {
-      return item.content.plain_text;
-    }
-    return description;
   }
 
   _handleIndexChange = index => this.setState({ index });
