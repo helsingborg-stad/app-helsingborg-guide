@@ -15,8 +15,8 @@ import GuideList from "../shared/GuideList";
 import MapWithListView from "../shared/MapWithListView";
 
 const settingsIcon = require("../../images/settings.png");
-const mapIcon = require("../../images/iconPlats.png");
-const listIcon = require("../../images/settings.png");
+const mapIcon = require("../../images/iconLocation.png");
+const listIcon = require("../../images/iconList.png");
 
 const styles = StyleSheet.create({
   barButtonItem: {
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 class GuideListScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.APP_NAME;
@@ -60,7 +59,7 @@ class GuideListScreen extends Component {
           onPress={toggleMap}
           style={styles.barButtonItem}
         >
-          <Image source={showMap ? mapIcon : listIcon} />
+          <Image source={showMap ? listIcon : mapIcon} />
         </TouchableOpacity>
       ),
       headerLeft: (
