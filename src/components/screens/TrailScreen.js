@@ -6,6 +6,8 @@ import {
   Image,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
@@ -40,11 +42,20 @@ const styles = StyleSheet.create({
       color: Colors.white,
     },
   ]),
+  overlayStyle: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    backgroundColor: "transparent",
+  },
 });
 
 class TrailScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
+    trailInformation: PropTypes.object.isRequired,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -85,13 +96,37 @@ class TrailScreen extends Component {
 
   toggleInfoOverlay = () => {
     this.setState({ showInfoOverlay: !this.state.showInfoOverlay });
-    console.log(this.state.showInfoOverlay);
+  }
+
+  renderMapInformationOverlay = () => {
+    const { trailInformation } = this.props;
+    const { showInfoOverlay } = this.state;
+
+    if (!showInfoOverlay) {
+      return null;
+    }
+
+    return (
+      <TouchableWithoutFeedback
+        style={styles.overlayStyle}
+        key="TouchableWithoutFeedback"
+        onPress={() => this.toggleInfoOverlay()}
+      >
+        <View style={styles.overlayStyle}>
+          <MapInformationOverlay
+            key="MapInformationOverlay"
+            trailInformation={trailInformation}
+            onPressFunction={() => this.toggleInfoOverlay()}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+    );
   }
 
   render() {
-    const { navigation, trailObjects, trailInformation } = this.props;
-    const { showInfoOverlay } = this.state;
+    const { navigation, trailObjects } = this.props;
     const trailItem = trailObjects[0];
+
     return (
       [<MapWithListView
         key="MapWithListView"
@@ -99,12 +134,7 @@ class TrailScreen extends Component {
         initialLocation={trailItem.location}
         navigation={navigation}
       />,
-      showInfoOverlay &&
-      <MapInformationOverlay
-        key="MapInformationOverlay"
-        trailInformation={trailInformation}
-        onPressFunction={() => this.toggleInfoOverlay()}
-        />,
+      this.renderMapInformationOverlay(),
       ]
     );
   }

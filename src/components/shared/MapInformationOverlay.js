@@ -50,11 +50,12 @@ const styles = StyleSheet.create({
   closeButton: {
     width: closeButtonSize,
     height: closeButtonSize,
-    backgroundColor: Colors.purple,
+    backgroundColor: Colors.white,
     borderRadius: closeButtonSize / 2,
   },
   titleText: StyleSheetUtils.flatten([
     TextStyles.title, {
+      color: Colors.black,
       fontSize: 30,
       lineHeight: 36,
       marginTop: 22,
