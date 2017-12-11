@@ -82,6 +82,28 @@ class GuideListScreen extends Component {
     };
   }
 
+  static numberOfGuidesForItem(item, subLocations) {
+    const { contentType, id } = item;
+    let numberOfGuides = 0;
+
+    if (contentType === "location") {
+      numberOfGuides = subLocations.filter(subLocationItem => subLocationItem.guidegroup[0].id === id).length;
+    } else {
+      numberOfGuides = Object.keys(item.contentObjects).length;
+    }
+    return numberOfGuides;
+  }
+
+  static descriptionForItem(item, locations) {
+    const { description, contentType } = item;
+    if (contentType === "trail") {
+      return locations.find(location => location.id === item.guidegroup[0].id).description;
+    } else if (contentType === "guide") {
+      return item.content.plain_text;
+    }
+    return description;
+  }
+
   _handleIndexChange = index => this.setState({ index });
 
   _renderHeader = props => (
@@ -111,6 +133,12 @@ class GuideListScreen extends Component {
       items.push(result);
     });
 
+    // number of guides and descriptions
+    items.forEach((item) => {
+      item.description = GuideListScreen.descriptionForItem(item, locations);
+      item.numberOfGuides = GuideListScreen.numberOfGuidesForItem(item, subLocations);
+    });
+
     if (currentLocation) {
       // calculate distances from current location
       const { coords } = currentLocation;
@@ -120,7 +148,7 @@ class GuideListScreen extends Component {
       });
       items.sort((a, b) => a.distance > b.distance);
     }
-    return (<GuideList items={items} navigation={navigation} subLocations={subLocations} locations={locations} />);
+    return (<GuideList items={items} navigation={navigation} />);
   }
 
 

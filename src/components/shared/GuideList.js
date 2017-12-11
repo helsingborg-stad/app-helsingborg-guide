@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ items, navigation, locations, subLocations }) => {
+export default ({ items, navigation }) => {
   function getOpeningHours(location) {
     const openingList = location._embedded.location[0].open_hours;
     const expList = location._embedded.location[0].open_hour_exceptions;
@@ -25,27 +25,6 @@ export default ({ items, navigation, locations, subLocations }) => {
     return text;
   }
 
-  function numberOfGuidesForItem(item) {
-    const { contentType, id } = item;
-    let numberOfGuides = 0;
-
-    if (contentType === "location") {
-      numberOfGuides = subLocations.filter(subLocationItem => subLocationItem.guidegroup[0].id === id).length;
-    } else {
-      numberOfGuides = Object.keys(item.contentObjects).length;
-    }
-    return numberOfGuides;
-  }
-
-  function descriptionForItem(item) {
-    const { description, contentType } = item;
-    if (contentType === "trail") {
-      return locations.find(location => location.id === item.guidegroup[0].id).description;
-    } else if (contentType === "guide") {
-      return item.content.plain_text;
-    }
-    return description;
-  }
 
   const _navigateToLocation = (location) => {
     const { navigate } = navigation;
@@ -99,9 +78,9 @@ export default ({ items, navigation, locations, subLocations }) => {
     return (
       <ListCard
         title={title}
-        description={descriptionForItem(item)}
+        description={item.description}
         type={contentType}
-        numberOfGuides={numberOfGuidesForItem(item)}
+        numberOfGuides={item.numberOfGuides}
         image={image}
         onPress={() => pressHandler(item)}
         openingHours={openingHours}
