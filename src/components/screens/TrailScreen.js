@@ -1,11 +1,15 @@
 import React, {
   Component,
 } from "react";
+import {
+  View,
+} from "react-native";
 import PropTypes from "prop-types";
 import {
   connect,
 } from "react-redux";
 import MapWithListView from "../shared/MapWithListView";
+import MapInformationOverlay from "../shared/MapInformationOverlay";
 
 class TrailScreen extends Component {
   static propTypes = {
@@ -19,26 +23,38 @@ class TrailScreen extends Component {
     };
   };
 
+  static trailInformation(trail, guides) {
+    const { id } = trail.guidegroup[0];
+    const guideInfo = guides.find(guideItem => guideItem.id === id);
+    return { title: guideInfo.name, description: guideInfo.description };
+  }
+
   render() {
-    const { navigation, trailObjects } = this.props;
+    const { navigation, trailObjects, trailInformation } = this.props;
     const trailItem = trailObjects[0];
     return (
-      <MapWithListView
+      [<MapWithListView
+        key="MapWithListView"
         items={trailObjects}
         initialLocation={trailItem.location}
         navigation={navigation}
-      />
+      />,
+        <MapInformationOverlay key="MapInformationOverlay" trailInformation={trailInformation} />,
+      ]
     );
   }
 }
 
 function mapStateToProps(state, ownProps) {
   const { trail } = ownProps.navigation.state.params;
+  const { guides } = state;
 
   const trailObjects = MapWithListView.createItemsFromTrail(trail);
+  const trailInformation = TrailScreen.trailInformation(trail, guides);
 
   return {
     trailObjects,
+    trailInformation,
   };
 }
 
