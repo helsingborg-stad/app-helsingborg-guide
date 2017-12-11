@@ -107,21 +107,23 @@ class TrailScreen extends Component {
       return null;
     }
 
-    return (
+    return ([
       <TouchableWithoutFeedback
         style={styles.overlayStyle}
         key="TouchableWithoutFeedback"
         onPress={() => this.toggleInfoOverlay()}
       >
-        <View style={styles.overlayStyle}>
-          <MapInformationOverlay
-            key="MapInformationOverlay"
-            trailInformation={trailInformation}
-            onPressFunction={() => this.toggleInfoOverlay()}
-          />
-        </View>
-      </TouchableWithoutFeedback>
-    );
+        <View
+          style={styles.overlayStyle}
+          key="overlayView"
+        />
+      </TouchableWithoutFeedback>,
+      <MapInformationOverlay
+        key="MapInformationOverlay"
+        trailInformation={trailInformation}
+        onPressFunction={() => this.toggleInfoOverlay()}
+      />,
+    ]);
   }
 
   render() {
