@@ -24,6 +24,7 @@ import {
   StyleSheetUtils,
 } from "../../utils/";
 import * as guideActions from "../../actions/guideActions";
+import * as navigationActions from "../../actions/navigationActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 
 const defaultMargin = 20;
@@ -103,6 +104,7 @@ class SettingsScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
     guideActions: PropTypes.object.isRequired,
+    navigationActions: PropTypes.object.isRequired,
     subLocationActions: PropTypes.object.isRequired,
   }
 
@@ -144,6 +146,7 @@ class SettingsScreen extends Component {
       if (isConnected) {
         LangService.storeLangCode(langCode);
         this.props.guideActions.loadGuides(langCode);
+        this.props.navigationActions.fetchNavigation(langCode);
         this.props.subLocationActions.loadSubLocations(langCode);
         LangService.getLanguages();
       }
@@ -223,6 +226,7 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     guideActions: bindActionCreators(guideActions, dispatch),
+    navigationActions: bindActionCreators(navigationActions, dispatch),
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
   };
 }

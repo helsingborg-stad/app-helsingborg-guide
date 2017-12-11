@@ -28,7 +28,7 @@ PODS:
   - React/cxxreact_legacy (0.50.3):
     - React/jschelpers_legacy
   - React/jschelpers_legacy (0.50.3)
-  - RNFirebase (3.1.0):
+  - RNFirebase (3.1.1):
     - React
   - yoga (0.50.3.React)
 
@@ -55,7 +55,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   React: 0ba6cae888dc82dc47d6d5f3090615e1b5f6f3e7
-  RNFirebase: a76befd482c5e84df7f69893358abda498ee9f76
+  RNFirebase: 30522211772f22affff6f3a61981110852d2668b
   yoga: faecc6be81ca7823ccbb470b93a1b228499fa1c0
 
 PODFILE CHECKSUM: 10da0d077b48ee09b1dd6b4ee05039be8fa03f2e

@@ -13,7 +13,7 @@ export function loadGuidesSuccess(guides) {
 }
 
 export function loadGuides(langCode) {
-  return function (dispatch) {
+  return function loadGuidesDispatch(dispatch) {
     const instance = dc();
     return instance.guide
       .getAllGroups(langCode)

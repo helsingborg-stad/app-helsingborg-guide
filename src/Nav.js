@@ -13,18 +13,20 @@ import {
 import ViewContainer from "./components/shared/view_container";
 import NotificationBar from "./components/shared/NotificationBar";
 import {
-  SplashScreen,
-  MapScreen,
-  LocationDetailsScreen,
-  GuideDetailsScreen,
-  WelcomeScreen,
-  LocationOnMapScreen,
-  ObjectDetailsScreen,
-  WebScreen,
-  VideoScreen,
-  ImageScreen,
   DownloadsScreen,
+  GuideDetailsScreen,
+  GuideListScreen,
+  ImageScreen,
+  LocationDetailsScreen,
+  LocationOnMapScreen,
+  MapScreen,
+  ObjectDetailsScreen,
   SettingsScreen,
+  SplashScreen,
+  TrailScreen,
+  VideoScreen,
+  WebScreen,
+  WelcomeScreen,
 } from "./components/screens/";
 import {
   Colors,
@@ -35,6 +37,7 @@ import AnalyticsUtils from "./utils/AnalyticsUtils";
 const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: Colors.darkPurple,
+    borderBottomWidth: 0,
   },
 });
 
@@ -49,6 +52,8 @@ const headerStyle = {
 
 const GuideNavigator = StackNavigator(
   {
+    GuideListScreen: { screen: GuideListScreen },
+    TrailScreen: { screen: TrailScreen },
     MapScreen: { screen: MapScreen },
     LocationDetailsScreen: { screen: LocationDetailsScreen },
     GuideDetailsScreen: { screen: GuideDetailsScreen },

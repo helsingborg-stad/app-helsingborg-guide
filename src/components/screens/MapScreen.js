@@ -156,7 +156,7 @@ class MapScreen extends Component {
           style={styles.barButtonItem}
         >
           <Image source={settingsIcon} />
-        </TouchableOpacity >
+        </TouchableOpacity>
       ),
     };
   };
@@ -223,7 +223,7 @@ class MapScreen extends Component {
   guidePress(guide) {
     const { navigate } = this.props.navigation;
     AnalyticsUtils.logEvent("view_location", { id: guide.id, name: guide.slug });
-    navigate("LocationDetailsScreen", { guide });
+    navigate("LocationDetailsScreen", { location: guide });
   }
 
   // ##########################################

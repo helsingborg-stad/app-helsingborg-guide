@@ -1,14 +1,16 @@
 const colors = {
-  warmGrey: "#7f7f7f",
-  purple: "#a61380",
-  darkPurple: "#7B075E",
-  lightPurple: "#A84C98",
-  lightPink: "#D35098",
-  pinkishGrey: "#bcbcbc",
   black: "black",
-  white: "white",
-  offWhite: "#fefefe",
+  darkPurple: "#7B075E",
   greyBorderColor: "#ebebeb",
+  lightGrey: "#444444",
+  lightPink: "#D35098",
+  lightPurple: "#A84C98",
+  listBackgroundColor: "#D6D6D6",
+  offWhite: "#fefefe",
+  pinkishGrey: "#bcbcbc",
+  purple: "#a61380",
+  warmGrey: "#7f7f7f",
+  white: "white",
 };
 
 export default {
