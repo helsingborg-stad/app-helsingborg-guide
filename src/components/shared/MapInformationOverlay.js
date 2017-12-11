@@ -16,7 +16,7 @@ import {
 } from "../../utils/";
 
 const screenWidth = Dimensions.get("window").width;
-const defaultMargin = 18;
+const defaultMargin = 17;
 const closeButtonSize = 26;
 
 const styles = StyleSheet.create({
@@ -25,6 +25,16 @@ const styles = StyleSheet.create({
     width: screenWidth - (defaultMargin * 2),
     margin: defaultMargin,
     backgroundColor: Colors.white,
+    shadowColor: "rgba(0, 0, 0, 0.23)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1,
+  },
+  scrollView: {
+    maxHeight: 360,
   },
   closeButtonContainer: {
     position: "absolute",
@@ -41,13 +51,15 @@ const styles = StyleSheet.create({
     TextStyles.title, {
       fontSize: 30,
       lineHeight: 30,
-      margin: defaultMargin,
+      marginTop: 22,
+      marginHorizontal: defaultMargin,
     },
   ]),
   descriptionText: StyleSheetUtils.flatten([
     TextStyles.description, {
       margin: defaultMargin,
       color: Colors.greyBodyText,
+      lineHeight: 22,
     },
   ]),
 });
@@ -59,7 +71,7 @@ const MapInformationOverlay = ({ trailInformation, onPressFunction }) => (
     <TouchableOpacity onPress={onPressFunction} style={styles.closeButtonContainer}>
       <View style={styles.closeButton} key="closeButton" />
     </TouchableOpacity>
-    <ScrollView>
+    <ScrollView style={styles.scrollView}>
       <Text style={styles.descriptionText}>{trailInformation.description}</Text>
     </ScrollView>
   </View>

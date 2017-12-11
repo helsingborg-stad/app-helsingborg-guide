@@ -5,11 +5,19 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  Text,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
   connect,
 } from "react-redux";
+import {
+  Colors,
+  TextStyles,
+} from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 import MapWithListView from "../shared/MapWithListView";
 import MapInformationOverlay from "../shared/MapInformationOverlay";
 
@@ -17,11 +25,18 @@ const settingsIcon = require("../../images/settings.png");
 
 const styles = StyleSheet.create({
   barButtonItem: {
+    flexDirection: "row",
+    right: 20,
     width: 44,
     height: 44,
     alignItems: "center",
     justifyContent: "center",
   },
+  barButtonItemText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.white,
+    },
+  ]),
 });
 
 class TrailScreen extends Component {
@@ -40,6 +55,7 @@ class TrailScreen extends Component {
           onPress={toggleInfoOverlay}
           style={styles.barButtonItem}
         >
+          <Text style={styles.barButtonItemText}>About</Text>
           <Image source={settingsIcon} />
         </TouchableOpacity>
       ),
