@@ -1,9 +1,11 @@
 import React from "react";
 import {
-  Text,
+  Dimensions,
   ScrollView,
   StyleSheet,
-  Dimensions,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import {
   Colors,
@@ -24,6 +26,11 @@ const styles = StyleSheet.create({
     margin: defaultMargin,
     backgroundColor: Colors.white,
   },
+  closeButtonContainer: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+  },
   closeButton: {
     width: closeButtonSize,
     height: closeButtonSize,
@@ -40,16 +47,22 @@ const styles = StyleSheet.create({
   descriptionText: StyleSheetUtils.flatten([
     TextStyles.description, {
       margin: defaultMargin,
+      color: Colors.greyBodyText,
     },
   ]),
 });
 
 
-const MapInformationOverlay = ({ trailInformation }) => (
-  <ScrollView style={styles.container}>
+const MapInformationOverlay = ({ trailInformation, onPressFunction }) => (
+  <View style={styles.container}>
     <Text style={styles.titleText}>{trailInformation.title} </Text>
-    <Text style={styles.descriptionText}>{trailInformation.description}</Text>
-  </ScrollView>
+    <TouchableOpacity onPress={onPressFunction} style={styles.closeButtonContainer}>
+      <View style={styles.closeButton} key="closeButton" />
+    </TouchableOpacity>
+    <ScrollView>
+      <Text style={styles.descriptionText}>{trailInformation.description}</Text>
+    </ScrollView>
+  </View>
 );
 
 export default MapInformationOverlay;
