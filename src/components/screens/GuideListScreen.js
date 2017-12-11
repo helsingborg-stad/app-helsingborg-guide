@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.listBackgroundColor,
   },
   loadingContainer: {
     flexDirection: "column",
@@ -82,6 +82,28 @@ class GuideListScreen extends Component {
     };
   }
 
+  static numberOfGuidesForItem(item, subLocations) {
+    const { contentType, id } = item;
+    let numberOfGuides = 0;
+
+    if (contentType === "location") {
+      numberOfGuides = subLocations.filter(subLocationItem => subLocationItem.guidegroup[0].id === id).length;
+    } else {
+      numberOfGuides = Object.keys(item.contentObjects).length;
+    }
+    return numberOfGuides;
+  }
+
+  static descriptionForItem(item, locations) {
+    const { description, contentType } = item;
+    if (contentType === "trail") {
+      return locations.find(location => location.id === item.guidegroup[0].id).description;
+    } else if (contentType === "guide") {
+      return item.content.plain_text;
+    }
+    return description;
+  }
+
   _handleIndexChange = index => this.setState({ index });
 
   _renderHeader = props => (
@@ -94,7 +116,7 @@ class GuideListScreen extends Component {
     />);
 
   _renderScene = ({ route }) => {
-    const { guides, locations, navigation, currentLocation } = this.props;
+    const { guides, locations, navigation, currentLocation, subLocations } = this.props;
     const { categoryType } = route;
 
     const items = [];
@@ -109,6 +131,12 @@ class GuideListScreen extends Component {
     categoryType.guides.forEach((navElement) => {
       const result = guides.find(guide => guide.id === navElement.id);
       items.push(result);
+    });
+
+    // number of guides and descriptions
+    items.forEach((item) => {
+      item.description = GuideListScreen.descriptionForItem(item, locations);
+      item.numberOfGuides = GuideListScreen.numberOfGuidesForItem(item, subLocations);
     });
 
     if (currentLocation) {
@@ -149,6 +177,7 @@ class GuideListScreen extends Component {
 
 function mapStateToProps(state) {
   const { isFetching, items } = state.navigation;
+  const { subLocations } = state;
 
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
   const locations = JSON.parse(JSON.stringify(state.guides.slice()));
@@ -158,6 +187,7 @@ function mapStateToProps(state) {
     categoryTypes: items,
     locations,
     guides,
+    subLocations,
     currentLocation: state.geolocation,
   };
 }

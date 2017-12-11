@@ -40,7 +40,13 @@ export default StyleSheet.create({
   },
   title: {
     ...defaultFont,
-    fontSize: 23,
-    fontWeight: "bold",
+    fontSize: 22,
+    fontWeight: "500",
+    letterSpacing: 0.11,
+  },
+  description: {
+    ...defaultFont,
+    fontSize: 16,
+    lineHeight: 22.0,
   },
 });
