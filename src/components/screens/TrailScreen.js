@@ -26,11 +26,14 @@ const settingsIcon = require("../../images/settings.png");
 const styles = StyleSheet.create({
   barButtonItem: {
     flexDirection: "row",
-    right: 20,
-    width: 44,
+    right: 5,
+    width: 120,
     height: 44,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+  },
+  barButtonItemImage: {
+    margin: 5,
   },
   barButtonItemText: StyleSheetUtils.flatten([
     TextStyles.description, {
@@ -56,7 +59,7 @@ class TrailScreen extends Component {
           style={styles.barButtonItem}
         >
           <Text style={styles.barButtonItemText}>About</Text>
-          <Image source={settingsIcon} />
+          <Image style={styles.barButtonItemImage} source={settingsIcon} />
         </TouchableOpacity>
       ),
     };

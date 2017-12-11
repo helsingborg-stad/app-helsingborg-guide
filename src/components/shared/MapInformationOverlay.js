@@ -16,8 +16,11 @@ import {
 } from "../../utils/";
 
 const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+
 const defaultMargin = 17;
 const closeButtonSize = 26;
+const scrollViewMaxHeight = screenHeight - 300; // magic number here, but roughly (listitem + header + margins)
 
 const styles = StyleSheet.create({
   container: {
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
   },
   scrollView: {
-    maxHeight: 360,
+    maxHeight: scrollViewMaxHeight,
   },
   closeButtonContainer: {
     position: "absolute",
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
   titleText: StyleSheetUtils.flatten([
     TextStyles.title, {
       fontSize: 30,
-      lineHeight: 30,
+      lineHeight: 36,
       marginTop: 22,
       marginHorizontal: defaultMargin,
     },
