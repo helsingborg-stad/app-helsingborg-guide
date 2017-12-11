@@ -20,6 +20,7 @@ import {
 import {
   StyleSheetUtils,
 } from "../../utils/";
+import LangService from "../../services/langService";
 import MapWithListView from "../shared/MapWithListView";
 import MapInformationOverlay from "../shared/MapInformationOverlay";
 
@@ -69,7 +70,7 @@ class TrailScreen extends Component {
           onPress={toggleInfoOverlay}
           style={styles.barButtonItem}
         >
-          <Text style={styles.barButtonItemText}>About</Text>
+          <Text style={styles.barButtonItemText}>{LangService.strings.ABOUT}</Text>
           <Image style={styles.barButtonItemImage} source={infoBarButtonIcon} />
         </TouchableOpacity>
       ),
