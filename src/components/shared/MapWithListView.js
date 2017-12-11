@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: listItemImageSize + defaultMargin,
-    backgroundColor: Colors.warmGrey,
+    backgroundColor: Colors.listBackgroundColor,
   },
   listItem: {
     ...listItemShared,

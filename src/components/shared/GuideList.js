@@ -25,6 +25,7 @@ export default ({ items, navigation }) => {
     return text;
   }
 
+
   const _navigateToLocation = (location) => {
     const { navigate } = navigation;
     AnalyticsUtils.logEvent("view_location", { id: location.id, name: location.slug });
@@ -46,12 +47,14 @@ export default ({ items, navigation }) => {
   };
 
   const renderItem = ({ item }) => {
+    const { distance, contentType } = item;
+
     let image;
     let title;
     let pressHandler;
     let openingHours;
-    const { distance, contentType } = item;
     let icon;
+
     if (contentType === "location") {
       image = item.apperance.image.sizes.medium;
       title = item.name;
@@ -75,6 +78,9 @@ export default ({ items, navigation }) => {
     return (
       <ListCard
         title={title}
+        description={item.description}
+        type={contentType}
+        numberOfGuides={item.numberOfGuides}
         image={image}
         onPress={() => pressHandler(item)}
         openingHours={openingHours}
