@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  Image,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -14,6 +15,8 @@ import {
 import {
   StyleSheetUtils,
 } from "../../utils/";
+
+const closeIcon = require("../../images/ic_close.png");
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -72,7 +75,7 @@ const MapInformationOverlay = ({ trailInformation, onPressFunction }) => (
   <View style={styles.container}>
     <Text style={styles.titleText}>{trailInformation.title} </Text>
     <TouchableOpacity onPress={onPressFunction} style={styles.closeButtonContainer}>
-      <View style={styles.closeButton} key="closeButton" />
+      <Image style={styles.closeButton} source={closeIcon} />
     </TouchableOpacity>
     <ScrollView style={styles.scrollView}>
       <Text style={styles.descriptionText}>{trailInformation.description}</Text>

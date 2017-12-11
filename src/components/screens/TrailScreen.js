@@ -21,7 +21,7 @@ import {
 import MapWithListView from "../shared/MapWithListView";
 import MapInformationOverlay from "../shared/MapInformationOverlay";
 
-const settingsIcon = require("../../images/settings.png");
+const infoBarButtonIcon = require("../../images/ic_info.png");
 
 const styles = StyleSheet.create({
   barButtonItem: {
@@ -59,7 +59,7 @@ class TrailScreen extends Component {
           style={styles.barButtonItem}
         >
           <Text style={styles.barButtonItemText}>About</Text>
-          <Image style={styles.barButtonItemImage} source={settingsIcon} />
+          <Image style={styles.barButtonItemImage} source={infoBarButtonIcon} />
         </TouchableOpacity>
       ),
     };
