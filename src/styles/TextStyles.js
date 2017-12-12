@@ -20,8 +20,8 @@ export default StyleSheet.create({
   },
   headerTitleLabel: {
     ...defaultFont,
-    fontSize: 17,
-    fontWeight: "500",
+    fontSize: 18,
+    fontWeight: "300",
     lineHeight: 23.0,
     textAlign: "center",
     color: Colors.white,

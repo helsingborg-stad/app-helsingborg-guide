@@ -24,10 +24,11 @@ import LangService from "../../services/langService";
 import MapWithListView from "../shared/MapWithListView";
 import MapInformationOverlay from "../shared/MapInformationOverlay";
 
-const infoBarButtonIcon = require("../../images/ic_info.png");
+const infoBarButtonIcon = require("../../images/iconInfo.png");
 
 const styles = StyleSheet.create({
   barButtonItem: {
+    opacity: 0.7,
     flexDirection: "row",
     right: 5,
     width: 120,
