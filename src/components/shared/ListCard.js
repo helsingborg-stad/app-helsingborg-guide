@@ -10,6 +10,7 @@ import TextStyles from "guide-hbg/src/styles/TextStyles";
 import Colors from "guide-hbg/src/styles/Colors";
 import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
 import DistanceView from "./DistanceView";
+import LangService from "../../services/langService";
 
 const imageSize = 120;
 const defaultMargin = 15;
@@ -107,12 +108,15 @@ function displayGuideNumber(numberOfGuides, type) {
   let textString;
   const plural = numberOfGuides > 1;
 
+  const locationString = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
+  const mediaGuideString = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
+
   if (type === "location") {
-    textString = plural ? `${numberOfGuides} mediaguider` : `${numberOfGuides} mediaguide`;
+    textString = `${numberOfGuides} ${mediaGuideString.toLowerCase()}`;
   } else if (type === "trail") {
-    textString = plural ? `Rundtur med ${numberOfGuides} platser` : `Rundtur med ${numberOfGuides} plats`;
+    textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${numberOfGuides} ${locationString}`;
   } else if (type === "guide") {
-    textString = `Guide med ${numberOfGuides} objekt`;
+    textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${numberOfGuides} ${LangService.strings.OBJECT}`;
   }
 
   return (
