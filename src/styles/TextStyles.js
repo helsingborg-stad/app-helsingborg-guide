@@ -28,10 +28,11 @@ export default StyleSheet.create({
   },
   tabBarLabel: {
     ...defaultFont,
-    fontSize: 10,
-    fontWeight: "bold",
-    letterSpacing: 0.4,
-    marginBottom: 5,
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: 23.0,
+    textAlign: "center",
+    color: Colors.white,
   },
   comingSoonText: {
     ...defaultFont,

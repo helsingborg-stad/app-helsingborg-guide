@@ -5,12 +5,19 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  Text,
 } from "react-native";
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
-import { LocationUtils } from "./../../utils";
+import {
+  LocationUtils,
+  StyleSheetUtils,
+} from "./../../utils";
 import LangService from "../../services/langService";
-import Colors from "../../styles/Colors";
+import {
+  Colors,
+  TextStyles,
+} from "../../styles/";
 import GuideList from "../shared/GuideList";
 import MapWithListView from "../shared/MapWithListView";
 
@@ -39,9 +46,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.purple,
     elevation: 8,
   },
-  tabBarLabel: {
-    color: Colors.white,
-  },
+  tabBarLabel: StyleSheetUtils.flatten([
+    TextStyles.tabBarLabel, {
+      color: Colors.white,
+      marginVertical: 6,
+    },
+  ]),
   tabBarIndicator: {
     backgroundColor: Colors.white,
   },
@@ -128,10 +138,15 @@ class GuideListScreen extends Component {
 
   _handleIndexChange = index => this.setState({ index });
 
+  _renderTabBarLabel = ({ route }) => (
+    <Text style={styles.tabBarLabel}>{route.title}</Text>
+  )
+
   _renderHeader = props => (
     <TabBar
       style={styles.tabBar}
       labelStyle={styles.tabBarLabel}
+      renderLabel={this._renderTabBarLabel}
       indicatorStyle={styles.tabBarIndicator}
       scrollEnabled
       {...props}
