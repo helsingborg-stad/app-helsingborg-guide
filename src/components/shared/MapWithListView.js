@@ -67,7 +67,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   map: {
-    flex: 100,
+    position: "absolute",
+    bottom: listItemImageSize + defaultMargin,
+    left: 0,
+    right: 0,
+    top: 0,
   },
   listStyle: {
     position: "absolute",
