@@ -249,9 +249,9 @@ export default class MapWithListView extends Component {
   /**
    * CALLBACK FUNCTIONS
    */
-  onMapLayout = () => {
+  onMapReady = () => {
     const { items } = this.props;
-    if (items.length) {
+    if (items.length > 0) {
       this.focusMarkers(items);
     }
   }
@@ -419,7 +419,7 @@ export default class MapWithListView extends Component {
           ref={(ref) => { this.map = ref; }}
           style={styles.map}
           showsUserLocation
-          onLayout={this.onMapLayout}
+          onMapReady={this.onMapReady}
           initialRegion={
             {
               latitude,
