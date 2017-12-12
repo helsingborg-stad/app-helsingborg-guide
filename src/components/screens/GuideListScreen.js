@@ -1,18 +1,28 @@
 import React, { Component } from "react";
 import {
   ActivityIndicator,
-  View,
-  StyleSheet,
-  TouchableOpacity,
+  Dimensions,
   Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
-import { LocationUtils } from "./../../utils";
+import {
+  LocationUtils,
+  StyleSheetUtils,
+} from "./../../utils";
 import LangService from "../../services/langService";
-import Colors from "../../styles/Colors";
+import {
+  Colors,
+  TextStyles,
+} from "../../styles/";
 import GuideList from "../shared/GuideList";
 import MapWithListView from "../shared/MapWithListView";
+
+const screenWidth = Dimensions.get("window").width;
 
 const settingsIcon = require("../../images/settings.png");
 const mapIcon = require("../../images/iconLocation.png");
@@ -20,11 +30,19 @@ const listIcon = require("../../images/iconList.png");
 
 const styles = StyleSheet.create({
   barButtonItem: {
-    width: 44,
+    flexDirection: "row",
     height: 44,
     alignItems: "center",
     justifyContent: "center",
+    marginHorizontal: 14,
+    opacity: 0.75,
   },
+  barButtonItemText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.white,
+      marginRight: 8,
+    },
+  ]),
   container: {
     flex: 1,
     flexDirection: "column",
@@ -39,9 +57,15 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.purple,
     elevation: 8,
   },
-  tabBarLabel: {
-    color: Colors.white,
+  tabStyle: {
+    width: screenWidth / 3,
   },
+  tabBarLabel: StyleSheetUtils.flatten([
+    TextStyles.tabBarLabel, {
+      color: Colors.white,
+      marginVertical: 7,
+    },
+  ]),
   tabBarIndicator: {
     backgroundColor: Colors.white,
   },
@@ -52,6 +76,7 @@ class GuideListScreen extends Component {
     const title = LangService.strings.APP_NAME;
     const { params = {} } = navigation.state;
     const { toggleMap, showMap } = params;
+    const itemText = showMap ? LangService.strings.LIST : LangService.strings.MAP;
     return {
       title,
       headerRight: (
@@ -59,6 +84,7 @@ class GuideListScreen extends Component {
           onPress={toggleMap}
           style={styles.barButtonItem}
         >
+          <Text style={styles.barButtonItemText}>{itemText}</Text>
           <Image source={showMap ? listIcon : mapIcon} />
         </TouchableOpacity>
       ),
@@ -128,11 +154,17 @@ class GuideListScreen extends Component {
 
   _handleIndexChange = index => this.setState({ index });
 
+  _renderTabBarLabel = ({ route }) => (
+    <Text style={styles.tabBarLabel}>{route.title}</Text>
+  )
+
   _renderHeader = props => (
     <TabBar
       style={styles.tabBar}
       labelStyle={styles.tabBarLabel}
+      renderLabel={this._renderTabBarLabel}
       indicatorStyle={styles.tabBarIndicator}
+      tabStyle={styles.tabStyle}
       scrollEnabled
       {...props}
     />);

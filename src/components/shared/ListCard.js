@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: defaultMargin,
     marginTop: defaultMargin,
-    marginBottom: 20,
+    marginBottom: 0,
     flexDirection: "column",
   },
   title: StyleSheetUtils.flatten([
@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
       fontWeight: "400",
       fontStyle: "italic",
       margin: defaultMargin,
+      marginTop: 13,
       marginBottom: 20,
     }],
   ),
