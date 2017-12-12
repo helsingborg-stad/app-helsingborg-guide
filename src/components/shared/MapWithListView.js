@@ -205,17 +205,12 @@ export default class MapWithListView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { activeMarker: {} };
+    const { items } = this.props;
+    this.state = { activeMarker: items[0] };
   }
 
-  componentDidMount() {
-    const { items } = this.props;
-    if (items.length) {
-      setTimeout(() => {
-        this.focusMarkers(items);
-      }, 1000);
-    }
-    this.scrollToIndex(0);
+  componentWillReceiveProps({ items }) {
+    this.setState({ activeMarker: items[0] });
   }
 
   focusMarkers(markers) {
@@ -230,7 +225,7 @@ export default class MapWithListView extends Component {
     };
     const options = {
       edgePadding,
-      animated: true,
+      animated: false,
     };
     this.map.fitToCoordinates(markers.map(marker => marker.location), options);
   }
@@ -265,12 +260,24 @@ export default class MapWithListView extends Component {
   /**
    * CALLBACK FUNCTIONS
    */
+  onMapReady = () => {
+    const { items } = this.props;
+    if (items.length > 0) {
+      this.focusMarkers(items);
+    }
+  }
 
   onListScroll = (e) => {
     const xOffset = e.nativeEvent.contentOffset.x;
     const fullItemWidth = listItemWidth + (defaultMargin / 2);
 
     const index = Math.round(Math.abs(xOffset / fullItemWidth));
+    this.panMapToIndex(index);
+  }
+
+  onPageScroll = ({ nativeEvent }) => {
+    const { position, offset } = nativeEvent;
+    const index = offset < 0.5 ? position : position + 1;
     this.panMapToIndex(index);
   }
 
@@ -414,6 +421,7 @@ export default class MapWithListView extends Component {
       <ViewPagerAndroid
         ref={(ref) => { this.listRef = ref; }}
         onPageSelected={this.onPageSelected}
+        onPageScroll={this.onPageScroll}
         peekEnabled
         pageMargin={-30}
         style={styles.listStyle}
@@ -433,6 +441,7 @@ export default class MapWithListView extends Component {
           ref={(ref) => { this.map = ref; }}
           style={styles.map}
           showsUserLocation
+          onMapReady={this.onMapReady}
           initialRegion={
             {
               latitude,
