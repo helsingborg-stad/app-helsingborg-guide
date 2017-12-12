@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: Colors.white,
     elevation: 4,
-    shadowColor: "rgba(0, 0, 0, 0.15)",
+    shadowColor: "rgba(0, 0, 0, 0.23)",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
     shadowRadius: 5,
     shadowOpacity: 1,

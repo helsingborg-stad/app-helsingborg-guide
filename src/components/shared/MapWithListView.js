@@ -50,6 +50,14 @@ const listItemShared = {
   height: listItemImageSize,
   width: listItemWidth,
   marginVertical: defaultMargin / 2,
+  elevation: 4,
+  shadowColor: "rgba(0, 0, 0, 0.23)",
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowRadius: 5,
+  shadowOpacity: 1,
 };
 
 const markerImageShared = {
