@@ -196,7 +196,7 @@ export default class MapWithListView extends Component {
         thumbnailUrl: contentObject.image[0].sizes.thumbnail,
         streetAdress: locationObject.street_address,
         contentObject,
-        contentType,
+        imageType: contentType,
       });
     });
     return trailObjects;
@@ -338,9 +338,9 @@ export default class MapWithListView extends Component {
 
   markerImageForTrailObject(trailObject) {
     const { activeMarker } = this.state;
-    const { contentType } = trailObject;
+    const { imageType, contentType } = trailObject;
     let image;
-    if (contentType === "trail") {
+    if (imageType === "trail" || contentType === "trail") {
       image = (activeMarker === trailObject) ? trailMarkerActive : trailMarkerInactive;
     } else {
       image = (activeMarker === trailObject) ? locationMarkerActive : locationMarkerInactive;
