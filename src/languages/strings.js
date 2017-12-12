@@ -174,6 +174,6 @@ export default {
     TUTORIAL: "Tutorial",
     UNKNOWN_TITLE: "Unbekannter Titel",
     VIDEO: "Video spielen",
-    WITH: "with",
+    WITH: "mit",
   },
 };
