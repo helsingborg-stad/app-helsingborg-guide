@@ -35,8 +35,10 @@ const markerImageSize = 40;
 const screenWidth = Dimensions.get("window").width;
 const listItemWidth = screenWidth - (defaultMargin * 2);
 
-const imageMarkerActive = require("../../images/marker-active.png");
-const imageMarkerInactive = require("../../images/marker-inactive.png");
+const locationMarkerActive = require("../../images/map/marker-location-active.png");
+const locationMarkerInactive = require("../../images/map/marker-location.png");
+const trailMarkerActive = require("../../images/map/marker-trail-active.png");
+const trailMarkerInactive = require("../../images/map/marker-trail.png");
 
 /*
 * Shared style constants
@@ -166,7 +168,7 @@ export default class MapWithListView extends Component {
   }
 
   static createItemsFromTrail(trail) {
-    const { subAttractions, contentObjects } = trail;
+    const { subAttractions, contentObjects, contentType } = trail;
     const embeddedLocations = trail._embedded.location;
     const trailObjects = [];
 
@@ -186,6 +188,7 @@ export default class MapWithListView extends Component {
         thumbnailUrl: contentObject.image[0].sizes.thumbnail,
         streetAdress: locationObject.street_address,
         contentObject,
+        contentType,
       });
     });
     return trailObjects;
@@ -318,16 +321,27 @@ export default class MapWithListView extends Component {
     UrlUtils.openUrlIfValid(directionsUrl);
   }
 
+  markerImageForTrailObject(trailObject) {
+    const { activeMarker } = this.state;
+    const { contentType } = trailObject;
+    let image;
+    if (contentType === "trail") {
+      image = (activeMarker === trailObject) ? trailMarkerActive : trailMarkerInactive;
+    } else {
+      image = (activeMarker === trailObject) ? locationMarkerActive : locationMarkerInactive;
+    }
+    return image;
+  }
+
   /**
    * RENDER FUNCTIONS
    */
   renderMapMarkers() {
-    const { activeMarker } = this.state;
     const { items } = this.props;
 
     return items.map((trailObject) => {
       const { id, location } = trailObject;
-      const image = activeMarker === trailObject ? imageMarkerActive : imageMarkerInactive;
+      const image = this.markerImageForTrailObject(trailObject);
       return (
         <MapView.Marker
           key={id}
