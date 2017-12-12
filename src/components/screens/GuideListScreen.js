@@ -138,7 +138,12 @@ class GuideListScreen extends Component {
     />);
 
   _renderScene = ({ route }) => {
-    const { showMap } = this.state;
+    const { showMap, index, routes } = this.state;
+    if (Math.abs(index - routes.indexOf(route)) > 2) {
+      // Do not render pages that are to far away from the current page
+      return null;
+    }
+
     const { guides, locations, navigation, currentLocation, subLocations } = this.props;
     const { categoryType } = route;
 
