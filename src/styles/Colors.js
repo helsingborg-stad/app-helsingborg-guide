@@ -11,6 +11,7 @@ const colors = {
   purple: "#a61380",
   warmGrey: "#7f7f7f",
   white: "white",
+  greyBodyText: "#505050",
 };
 
 export default {
