@@ -194,17 +194,12 @@ export default class MapWithListView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { activeMarker: {} };
+    const { items } = this.props;
+    this.state = { activeMarker: items[0] };
   }
 
-  componentDidMount() {
-    const { items } = this.props;
-    if (items.length) {
-      setTimeout(() => {
-        this.focusMarkers(items);
-      }, 1000);
-    }
-    this.scrollToIndex(0);
+  componentWillReceiveProps({ items }) {
+    this.setState({ activeMarker: items[0] });
   }
 
   focusMarkers(markers) {
@@ -219,7 +214,7 @@ export default class MapWithListView extends Component {
     };
     const options = {
       edgePadding,
-      animated: true,
+      animated: false,
     };
     this.map.fitToCoordinates(markers.map(marker => marker.location), options);
   }
@@ -254,6 +249,12 @@ export default class MapWithListView extends Component {
   /**
    * CALLBACK FUNCTIONS
    */
+  onMapLayout = () => {
+    const { items } = this.props;
+    if (items.length) {
+      this.focusMarkers(items);
+    }
+  }
 
   onListScroll = (e) => {
     const xOffset = e.nativeEvent.contentOffset.x;
@@ -418,6 +419,7 @@ export default class MapWithListView extends Component {
           ref={(ref) => { this.map = ref; }}
           style={styles.map}
           showsUserLocation
+          onLayout={this.onMapLayout}
           initialRegion={
             {
               latitude,
