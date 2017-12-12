@@ -259,6 +259,12 @@ export default class MapWithListView extends Component {
     this.panMapToIndex(index);
   }
 
+  onPageScroll = ({ nativeEvent }) => {
+    const { position, offset } = nativeEvent;
+    const index = offset < 0.5 ? position : position + 1;
+    this.panMapToIndex(index);
+  }
+
   onPageSelected = ({ nativeEvent }) => {
     const { position } = nativeEvent;
     this.panMapToIndex(position);
@@ -388,6 +394,7 @@ export default class MapWithListView extends Component {
       <ViewPagerAndroid
         ref={(ref) => { this.listRef = ref; }}
         onPageSelected={this.onPageSelected}
+        onPageScroll={this.onPageScroll}
         peekEnabled
         pageMargin={-30}
         style={styles.listStyle}
