@@ -25,8 +25,6 @@ export default class GuideHbg extends Component {
   }
 
   static init() {
-    LocationService.getInstance().watchGeoLocation();
-
     LangService.loadStoredLanguage()
       .then(() => {
         // Check the network and load the content.
@@ -79,6 +77,13 @@ export default class GuideHbg extends Component {
   }
 
   componentDidMount() {
+    const locationService = LocationService.getInstance();
+    locationService.watchGeoLocation().catch(() => {
+      locationService.askForPermission().then((permission) => {
+        if (permission === "granted") locationService.watchGeoLocation();
+      });
+    });
+
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
     GuideHbg.loadExistingDownloads();

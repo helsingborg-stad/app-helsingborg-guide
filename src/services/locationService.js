@@ -82,7 +82,9 @@ export default class LocationService {
               error => reject(error),
               { distanceFilter: 10 },
             );
-          } else reject("no access to fine location");
+          } else {
+            reject("no access to fine location");
+          }
         }),
     );
   }
