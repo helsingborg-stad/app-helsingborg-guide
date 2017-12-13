@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   numberedMarkerText: StyleSheetUtils.flatten([
     TextStyles.body, {
       marginTop: 4,
-      marginLeft: 9,
+      width: 30,
       fontSize: 18,
       fontWeight: "500",
       lineHeight: 23.0,
@@ -148,6 +148,8 @@ const styles = StyleSheet.create({
   ]),
   numberedMarkerTextActive: StyleSheetUtils.flatten([
     TextStyles.body, {
+      marginTop: 8,
+      width: 40,
       fontSize: 18,
       fontWeight: "500",
       lineHeight: 23.0,
@@ -381,7 +383,11 @@ export default class MapWithListView extends Component {
 
   numberedMapViewMarker = (trailObject) => {
     const { id, location } = trailObject;
+    const { activeMarker } = this.state;
+
     const image = this.markerImageForTrailObject(trailObject);
+    const numberString = trailObject.contentObject.order + 1;
+    const active = activeMarker === trailObject;
 
     return (
       <MapView.Marker
@@ -391,7 +397,7 @@ export default class MapWithListView extends Component {
         onPress={() => this.onMarkerPressed(trailObject)}
         image={image}
       >
-        <Text style={styles.numberedMarkerText}>{trailObject.contentObject.order}</Text>
+        <Text style={active ? styles.numberedMarkerTextActive : styles.numberedMarkerText}>{numberString}</Text>
       </MapView.Marker>
     );
   }
