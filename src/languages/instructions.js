@@ -12,7 +12,7 @@ const SLIDE2_IMG = require("../images/skyline2.png");
 const SLIDE3_IMG = require("../images/skyline3.png");
 
 export default {
-  en_GB: {
+  en: {
     steps: [
       {
         content: "Enhance your experience of Helsingborg with sound, in-depth information and help getting around.",
@@ -33,7 +33,7 @@ export default {
       },
     ],
   },
-  sv_SE: {
+  sv: {
     steps: [
       {
         content: "Förstärk din upplevelse av Helsingborg med ljud, fördjupad information och hjälp att hitta. ",
@@ -54,7 +54,7 @@ export default {
       },
     ],
   },
-  de_DE: {
+  de: {
     steps: [
       {
         content: "Machen Sie mit Sound, zusätzlicher Information und Hilfesuche noch mehr aus Ihrem Helsingborg-Erlebnis. ",
