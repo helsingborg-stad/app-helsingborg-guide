@@ -116,8 +116,11 @@ const styles = StyleSheet.create({
   },
   listImageNumberText: StyleSheetUtils.flatten([
     TextStyles.body, {
+      color: Colors.black,
       marginTop: 1,
       fontSize: 18,
+      letterSpacing: -2.0,
+      left: ios ? -1 : 0,
       fontWeight: "500",
       textAlign: "center",
       backgroundColor: "transparent",
@@ -130,7 +133,8 @@ const styles = StyleSheet.create({
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body, {
-      marginTop: textMargin,
+      color: Colors.black,
+      marginTop: 8,
       flexWrap: "wrap",
       fontSize: 20,
       fontWeight: "500",
@@ -165,8 +169,9 @@ const styles = StyleSheet.create({
       position: "absolute",
       width: markerImageInactiveWidth,
       top: 6,
-      left: ios ? 0 : 2,
+      left: ios ? -1 : 2,
       fontSize: 18,
+      letterSpacing: -2.0,
       fontWeight: "500",
       lineHeight: 23.0,
       textAlign: "center",
@@ -178,8 +183,9 @@ const styles = StyleSheet.create({
       position: "absolute",
       width: markerImageActiveWidth,
       top: ios ? 9 : 12,
-      left: ios ? 0 : 3,
+      left: ios ? -1 : 3,
       fontSize: 18,
+      letterSpacing: -2.0,
       fontWeight: "500",
       lineHeight: 23.0,
       textAlign: "center",
