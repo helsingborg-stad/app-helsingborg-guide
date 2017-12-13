@@ -236,6 +236,7 @@ class GuideListScreen extends Component {
 
     return (
       <TabViewAnimated
+        swipeEnabled={false}
         style={styles.container}
         navigationState={this.state}
         renderScene={this._renderScene}
