@@ -148,7 +148,7 @@ function mapStateToProps(state, ownProps) {
   const { trail } = ownProps.navigation.state.params;
   const { guides } = state;
 
-  const trailObjects = MapWithListView.createItemsFromTrail(trail);
+  const trailObjects = MapWithListView.createItemsFromTrail(trail, "trailScreen");
   const trailInformation = TrailScreen.trailInformation(trail, guides);
 
   return {

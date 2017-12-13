@@ -37,8 +37,12 @@ const listItemWidth = screenWidth - (defaultMargin * 2);
 
 const locationMarkerActive = require("../../images/map/marker-location-active.png");
 const locationMarkerInactive = require("../../images/map/marker-location.png");
+
 const trailMarkerActive = require("../../images/map/marker-trail-active.png");
 const trailMarkerInactive = require("../../images/map/marker-trail.png");
+
+const numberedMarkerActive = require("../../images/map/marker-number-active.png");
+const numberedMarkerInactive = require("../../images/map/marker-number.png");
 
 /*
 * Shared style constants
@@ -131,6 +135,26 @@ const styles = StyleSheet.create({
     ...markerImageShared,
     borderColor: Colors.lightPink,
   },
+  numberedMarkerText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      marginTop: 4,
+      marginLeft: 9,
+      fontSize: 18,
+      fontWeight: "500",
+      lineHeight: 23.0,
+      textAlign: "center",
+      color: Colors.white,
+    },
+  ]),
+  numberedMarkerTextActive: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      fontSize: 18,
+      fontWeight: "500",
+      lineHeight: 23.0,
+      textAlign: "center",
+      color: Colors.black,
+    },
+  ]),
 });
 
 export default class MapWithListView extends Component {
@@ -175,7 +199,7 @@ export default class MapWithListView extends Component {
     return items;
   }
 
-  static createItemsFromTrail(trail) {
+  static createItemsFromTrail(trail, screen = "") {
     const { subAttractions, contentObjects, contentType } = trail;
     const embeddedLocations = trail._embedded.location;
     const trailObjects = [];
@@ -196,7 +220,7 @@ export default class MapWithListView extends Component {
         thumbnailUrl: contentObject.image[0].sizes.thumbnail,
         streetAdress: locationObject.street_address,
         contentObject,
-        imageType: contentType,
+        imageType: (screen === "trailScreen") ? "trailScreen" : contentType,
       });
     });
     return trailObjects;
@@ -340,8 +364,11 @@ export default class MapWithListView extends Component {
     const { activeMarker } = this.state;
     const { imageType, contentType } = trailObject;
     let image;
+
     if (imageType === "trail" || contentType === "trail") {
       image = (activeMarker === trailObject) ? trailMarkerActive : trailMarkerInactive;
+    } else if (imageType === "trailScreen") {
+      image = (activeMarker === trailObject) ? numberedMarkerActive : numberedMarkerInactive;
     } else {
       image = (activeMarker === trailObject) ? locationMarkerActive : locationMarkerInactive;
     }
@@ -351,21 +378,48 @@ export default class MapWithListView extends Component {
   /**
    * RENDER FUNCTIONS
    */
+
+  numberedMapViewMarker = (trailObject) => {
+    const { id, location } = trailObject;
+    const image = this.markerImageForTrailObject(trailObject);
+
+    return (
+      <MapView.Marker
+        key={id}
+        coordinate={location}
+        identifier={id}
+        onPress={() => this.onMarkerPressed(trailObject)}
+        image={image}
+      >
+        <Text style={styles.numberedMarkerText}>{trailObject.contentObject.order}</Text>
+      </MapView.Marker>
+    );
+  }
+
+  defaultMapViewMarker = (trailObject) => {
+    const { id, location } = trailObject;
+    const image = this.markerImageForTrailObject(trailObject);
+
+    return (
+      <MapView.Marker
+        key={id}
+        coordinate={location}
+        identifier={id}
+        onPress={() => this.onMarkerPressed(trailObject)}
+        image={image}
+      />
+    );
+  }
+
+
   renderMapMarkers() {
     const { items } = this.props;
 
     return items.map((trailObject) => {
-      const { id, location } = trailObject;
-      const image = this.markerImageForTrailObject(trailObject);
-      return (
-        <MapView.Marker
-          key={id}
-          coordinate={location}
-          identifier={id}
-          onPress={() => this.onMarkerPressed(trailObject)}
-          image={image}
-        />
-      );
+      if (trailObject.imageType === "trailScreen") {
+        return this.numberedMapViewMarker(trailObject);
+      }
+      return this.defaultMapViewMarker(trailObject);
     });
   }
 
