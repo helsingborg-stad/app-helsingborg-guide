@@ -4,7 +4,7 @@ import strings from "../languages/strings";
 import instructions from "../languages/instructions";
 import dc from "../data/datacontext";
 
-const DEFAULT_CODE = "sv_SE";
+const DEFAULT_CODE = "sv";
 
 export default class LangService {
   static strings = [];
@@ -12,9 +12,11 @@ export default class LangService {
   static code;
   static languageObj = {};
 
+  // TODO: All state from this class should be in the redux store
   static setLanguage(lang) {
     let code = DEFAULT_CODE;
     code = lang;
+
     LangService.strings = strings[code];
     LangService.instructions = instructions[code];
     LangService.code = code;

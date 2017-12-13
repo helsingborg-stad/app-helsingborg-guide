@@ -41,7 +41,7 @@ export default class GuideHbg extends Component {
         store.dispatch(fetchNavigation(langCode));
         store.dispatch(loadGuides(langCode));
         store.dispatch(loadSubLocations(langCode));
-        LangService.getLanguages().catch(() => console.log("error in getting lang")); // eslint-disable-line no-console
+        LangService.getLanguages();
       }
     });
   }

@@ -165,24 +165,23 @@ class SettingsScreen extends Component {
 
   displayLanguages() {
     const { languages } = this.state;
-    if (!languages || !Object.keys(languages).length) return null;
-    const keys = Object.keys(languages);
+    if (!languages) return null;
 
-    return keys.map((key) => {
+    return languages.map((language) => {
+      const { name, slug } = language;
       const style = { color: Colors.purple };
-      const selectedStyle = this.state.selectedLanguageCode === languages[key].code ? style : null;
-      const btnDisabled = this.state.selectedLanguageCode === languages[key].code;
-      const { nativeName } = languages[key];
+      const selectedStyle = this.state.selectedLanguageCode === slug ? style : null;
+      const btnDisabled = this.state.selectedLanguageCode === slug;
 
       return (
         <TouchableOpacity
-          key={key}
-          onPress={() => this.setLanguageAndReload(languages[key].code)}
+          key={name}
+          onPress={() => this.setLanguageAndReload(slug)}
           disabled={btnDisabled}
           activeOpacity={0.7}
           style={styles.choiceContainer}
         >
-          <Text style={[textStyles.choiceText, selectedStyle]}>{nativeName.split(" ")[0]}</Text>
+          <Text style={[textStyles.choiceText, selectedStyle]}>{name.split(" ")[0]}</Text>
         </TouchableOpacity>
       );
     });
