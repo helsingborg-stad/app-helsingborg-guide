@@ -6,7 +6,7 @@ import store from "../store/configureStore";
 
 let instance = null;
 
-export class LocationService {
+export default class LocationService {
   watcher;
 
   static getInstance() {
@@ -80,7 +80,7 @@ export class LocationService {
                 resolve(position);
               },
               error => reject(error),
-              { distanceFilter: 200 },
+              { distanceFilter: 10 },
             );
           } else reject("no access to fine location");
         }),
