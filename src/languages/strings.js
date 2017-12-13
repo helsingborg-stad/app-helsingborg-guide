@@ -2,7 +2,7 @@
  * Created by msaeed on 2017-03-08.
  */
 export default {
-  en_GB: {
+  en: {
     ABOUT_GUIDE_HELS: "About Helsingborg Guide",
     ABOUT: "About",
     ACCESS_TO_LOCATION: "Allow access to location",
@@ -60,7 +60,7 @@ export default {
     VIDEO: "Play video",
     WITH: "with",
   },
-  sv_SE: {
+  sv: {
     ABOUT_GUIDE_HELS: "Om Guide Helsingborg",
     ABOUT: "Om",
     ACCESS_TO_LOCATION: "Tillåt åtkomst till plats",
@@ -118,7 +118,7 @@ export default {
     VIDEO: "Spela film",
     WITH: "med",
   },
-  de_DE: {
+  de: {
     ABOUT_GUIDE_HELS: "Über Guide Helsingborg",
     ABOUT: "Über",
     ACCESS_TO_LOCATION: "Zugriff auf Location erlauben",

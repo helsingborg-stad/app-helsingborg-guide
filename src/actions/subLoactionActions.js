@@ -11,16 +11,15 @@ export function loadSubLocationsSuccess(subLocations) {
 }
 
 export function loadSubLocations(langCode) {
-  // //console.log('ACTION:LOAD_SUBLOCATIONS');
-  return function (dispatch) {
+  return function loadSubLocationsDispatch(dispatch) {
     const instance = dc();
     return instance.guide
       .getAllGuides(langCode)
       .then((subLocations) => {
-        if (subLocations && subLocations.length && subLocations.code !== "rest_no_route") {
+        if (subLocations && subLocations.code !== "rest_no_route") {
           dispatch(loadSubLocationsSuccess(subLocations));
         } else {
-          dispatch(errorHappened("error: no subLocations"));
+          dispatch(errorHappened("error: while fetching subLocations"));
         }
       })
       .catch((error) => {

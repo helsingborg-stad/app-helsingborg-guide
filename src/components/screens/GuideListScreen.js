@@ -118,7 +118,8 @@ class GuideListScreen extends Component {
   static descriptionForItem(item, locations) {
     const { description, contentType } = item;
     if (contentType === "trail") {
-      return locations.find(location => location.id === item.guidegroup[0].id).description;
+      const guidegroup = locations.find(location => location.id === item.guidegroup[0].id);
+      return guidegroup ? guidegroup.description : null;
     } else if (contentType === "guide") {
       return item.content.plain_text;
     }
@@ -186,13 +187,13 @@ class GuideListScreen extends Component {
         case "guide":
         {
           const result = guides.find(guide => guide.id === element.id);
-          items.push(result);
+          if (result) items.push(result);
           break;
         }
         case "guidegroup":
         {
           const loc = locations.find(l => l.id === element.id);
-          items.push(loc);
+          if (loc) items.push(loc);
           break;
         }
         default:
