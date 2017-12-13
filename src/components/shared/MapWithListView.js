@@ -25,11 +25,12 @@ import {
   LocationUtils,
   UrlUtils,
 } from "../../utils/";
+import LangService from "../../services/langService";
 
 const ios = Platform.OS === "ios";
 
 const defaultMargin = 20;
-const textHorizontalMargin = 13;
+const textMargin = 13;
 const listItemImageSize = 120;
 
 // Marker image
@@ -104,20 +105,38 @@ const styles = StyleSheet.create({
     height: listItemImageSize,
     width: listItemImageSize,
   },
+  listImageNumberView: {
+    position: "absolute",
+    top: 5,
+    left: 5,
+    height: 26,
+    width: 26,
+    backgroundColor: Colors.white,
+    borderRadius: 13,
+  },
+  listImageNumberText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      marginTop: 1,
+      fontSize: 18,
+      fontWeight: "500",
+      textAlign: "center",
+      backgroundColor: "transparent",
+    },
+  ]),
   listItemTextContainer: {
     flex: 1,
     flexDirection: "column",
-    marginHorizontal: textHorizontalMargin,
+    marginHorizontal: textMargin,
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body, {
-      marginTop: 8,
+      marginTop: textMargin,
       flexWrap: "wrap",
       fontSize: 20,
       fontWeight: "500",
       lineHeight: 23.0,
       letterSpacing: 0.1,
-      marginRight: textHorizontalMargin,
+      marginRight: textMargin,
     },
   ]),
   listItemAddress: StyleSheetUtils.flatten([
@@ -125,7 +144,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       marginTop: 4,
       lineHeight: 21,
-      marginRight: textHorizontalMargin,
+      marginRight: textMargin,
       color: Colors.warmGrey,
     },
   ]),
@@ -137,7 +156,7 @@ const styles = StyleSheet.create({
     TextStyles.body, {
       fontSize: 16,
       fontWeight: "500",
-      marginRight: textHorizontalMargin,
+      marginRight: textMargin,
       color: Colors.purple,
     },
   ]),
@@ -337,33 +356,33 @@ export default class MapWithListView extends Component {
     const { contentType, contentObject } = listItem;
     switch (contentType) {
       case "location":
-        {
-          AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
-          navigate("LocationDetailsScreen", { location: contentObject });
-          break;
-        }
+      {
+        AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
+        navigate("LocationDetailsScreen", { location: contentObject });
+        break;
+      }
       case "trail":
-        {
-          const trail = contentObject;
-          const title = trail.guidegroup[0].name;
-          AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
-          navigate("TrailScreen", { trail, title });
-          return;
-        }
+      {
+        const trail = contentObject;
+        const title = trail.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
+        navigate("TrailScreen", { trail, title });
+        return;
+      }
       case "guide":
-        {
-          const guide = contentObject;
-          const title = guide.guidegroup[0].name;
-          AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
-          navigate("GuideDetailsScreen", { id: guide.id, title });
-          return;
-        }
+      {
+        const guide = contentObject;
+        const title = guide.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
+        navigate("GuideDetailsScreen", { id: guide.id, title });
+        return;
+      }
       default:
-        {
-          const { title, id } = contentObject;
-          AnalyticsUtils.logEvent("view_object", { id, name: title });
-          navigate("ObjectDetailsScreen", { title, contentObject });
-        }
+      {
+        const { title, id } = contentObject;
+        AnalyticsUtils.logEvent("view_object", { id, name: title });
+        navigate("ObjectDetailsScreen", { title, contentObject });
+      }
     }
   }
 
@@ -435,7 +454,6 @@ export default class MapWithListView extends Component {
     );
   }
 
-
   renderMapMarkers() {
     const { items } = this.props;
 
@@ -447,19 +465,70 @@ export default class MapWithListView extends Component {
     });
   }
 
+  displayGuideNumber = (numberOfGuides, type) => {
+    if (!numberOfGuides || !type) return null;
+    let textString;
+    const plural = numberOfGuides > 1;
+
+    const locationString = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
+    const mediaGuideString = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
+
+    if (type === "location") {
+      textString = `${numberOfGuides} ${mediaGuideString.toLowerCase()}`;
+    } else if (type === "trail") {
+      textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${numberOfGuides} ${locationString}`;
+    } else if (type === "guide") {
+      textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${numberOfGuides} ${LangService.strings.OBJECT}`;
+    }
+
+    return (
+      <Text style={styles.listItemDirectionsText}>{textString}</Text>
+    );
+  }
+
+  displayDirections = (item) => {
+    const trailScreen = item.imageType === "trailScreen";
+    if (!trailScreen) return null;
+
+    const directions = (
+      <TouchableOpacity
+        style={styles.directionsContainer}
+        onPress={() => this.onListItemDirectionsButtonPressed(item)}
+      >
+        <Icon name="directions" size={24} color={Colors.purple} />
+        <Text style={styles.listItemDirectionsText}>{LangService.strings.DIRECTIONS}</Text>
+      </TouchableOpacity>
+    );
+
+    return directions;
+  }
+
+  displayNumberView = (item) => {
+    const trailScreen = item.imageType === "trailScreen";
+    if (!trailScreen) return null;
+
+    const numberString = item.contentObject.order + 1;
+    const numberView = (
+      <View style={styles.listImageNumberView}>
+        <Text style={styles.listImageNumberText}>{numberString}</Text>
+      </View>
+    );
+
+    return numberView;
+  }
+
   renderListItem = (item, listItemStyle) => {
     const { imageUrl, streetAdress, title } = item;
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
         <View style={listItemStyle}>
           {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
+          {this.displayNumberView(item)}
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
             <Text style={styles.listItemAddress}>{streetAdress}</Text>
-            <TouchableOpacity style={styles.directionsContainer} onPress={() => this.onListItemDirectionsButtonPressed(item)}>
-              <Icon name="directions" size={20} color={Colors.purple} />
-              <Text style={styles.listItemDirectionsText}>Vägbeskrivning</Text>
-            </TouchableOpacity>
+            {this.displayDirections(item)}
+            {this.displayGuideNumber(item.contentObject.numberOfGuides, item.contentType)}
           </View>
         </View>
       </TouchableOpacity>
