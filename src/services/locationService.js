@@ -22,6 +22,8 @@ export default class LocationService {
 
   // Ask for access location permission.
   askForPermission() {
+    if (Platform.OS === "ios") return Promise.resolve(true);
+
     const content = {
       title: LangService.strings.ACCESS_TO_LOCATION,
       message: LangService.strings.MESSAGE_LOCATION_PERMISSION,
