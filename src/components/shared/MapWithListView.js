@@ -25,20 +25,29 @@ import {
   LocationUtils,
   UrlUtils,
 } from "../../utils/";
+import LangService from "../../services/langService";
 
 const ios = Platform.OS === "ios";
 
 const defaultMargin = 20;
+const textMargin = 13;
 const listItemImageSize = 120;
-const markerImageSize = 40;
+
+// Marker image
+const markerImageActiveWidth = 42;
+const markerImageInactiveWidth = 32;
 
 const screenWidth = Dimensions.get("window").width;
 const listItemWidth = screenWidth - (defaultMargin * 2);
 
 const locationMarkerActive = require("../../images/map/marker-location-active.png");
 const locationMarkerInactive = require("../../images/map/marker-location.png");
+
 const trailMarkerActive = require("../../images/map/marker-trail-active.png");
 const trailMarkerInactive = require("../../images/map/marker-trail.png");
+
+const numberedMarkerActive = require("../../images/map/marker-number-active.png");
+const numberedMarkerInactive = require("../../images/map/marker-number.png");
 
 /*
 * Shared style constants
@@ -58,13 +67,6 @@ const listItemShared = {
   },
   shadowRadius: 5,
   shadowOpacity: 1,
-};
-
-const markerImageShared = {
-  width: markerImageSize,
-  height: markerImageSize,
-  borderRadius: markerImageSize / 2,
-  borderWidth: 2.5,
 };
 
 /*
@@ -103,34 +105,93 @@ const styles = StyleSheet.create({
     height: listItemImageSize,
     width: listItemImageSize,
   },
+  listImageNumberView: {
+    position: "absolute",
+    top: 5,
+    left: 5,
+    height: 26,
+    width: 26,
+    backgroundColor: Colors.white,
+    borderRadius: 13,
+  },
+  listImageNumberText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      color: Colors.black,
+      marginTop: 1,
+      fontSize: 18,
+      letterSpacing: -2.0,
+      left: ios ? -1 : 0,
+      fontWeight: "500",
+      textAlign: "center",
+      backgroundColor: "transparent",
+    },
+  ]),
   listItemTextContainer: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "center",
-    marginHorizontal: defaultMargin,
+    marginHorizontal: textMargin,
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body, {
+      color: Colors.black,
+      marginTop: 8,
       flexWrap: "wrap",
-      fontSize: 16,
-      marginRight: defaultMargin,
+      fontSize: 20,
+      fontWeight: "500",
+      lineHeight: 23.0,
+      letterSpacing: 0.1,
+      marginRight: textMargin,
     },
   ]),
   listItemAddress: StyleSheetUtils.flatten([
     TextStyles.body, {
       fontSize: 16,
-      marginRight: defaultMargin,
+      marginTop: 4,
+      lineHeight: 21,
+      marginRight: textMargin,
       color: Colors.warmGrey,
     },
   ]),
-  markerImage: {
-    ...markerImageShared,
-    borderColor: Colors.white,
+  directionsContainer: {
+    flexDirection: "row",
+    marginTop: 4,
   },
-  markerImageActive: {
-    ...markerImageShared,
-    borderColor: Colors.lightPink,
-  },
+  listItemDirectionsText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      fontSize: 16,
+      fontWeight: "500",
+      marginRight: textMargin,
+      color: Colors.purple,
+    },
+  ]),
+  numberedMarkerText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      position: "absolute",
+      width: markerImageInactiveWidth,
+      top: 6,
+      left: ios ? -1 : 2,
+      fontSize: 18,
+      letterSpacing: -2.0,
+      fontWeight: "500",
+      lineHeight: 23.0,
+      textAlign: "center",
+      color: Colors.white,
+    },
+  ]),
+  numberedMarkerTextActive: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      position: "absolute",
+      width: markerImageActiveWidth,
+      top: ios ? 9 : 12,
+      left: ios ? -1 : 3,
+      fontSize: 18,
+      letterSpacing: -2.0,
+      fontWeight: "500",
+      lineHeight: 23.0,
+      textAlign: "center",
+      color: Colors.black,
+    },
+  ]),
 });
 
 export default class MapWithListView extends Component {
@@ -175,7 +236,7 @@ export default class MapWithListView extends Component {
     return items;
   }
 
-  static createItemsFromTrail(trail) {
+  static createItemsFromTrail(trail, screen = "") {
     const { subAttractions, contentObjects, contentType } = trail;
     const embeddedLocations = trail._embedded.location;
     const trailObjects = [];
@@ -196,7 +257,7 @@ export default class MapWithListView extends Component {
         thumbnailUrl: contentObject.image[0].sizes.thumbnail,
         streetAdress: locationObject.street_address,
         contentObject,
-        imageType: contentType,
+        imageType: (screen === "trailScreen") ? "trailScreen" : contentType,
       });
     });
     return trailObjects;
@@ -206,7 +267,10 @@ export default class MapWithListView extends Component {
     super(props);
 
     const { items } = this.props;
-    this.state = { activeMarker: items[0] };
+    this.state = {
+      activeMarker: items[0],
+      markersFocused: false,
+    };
   }
 
   componentWillReceiveProps({ items }) {
@@ -262,8 +326,11 @@ export default class MapWithListView extends Component {
    */
   onMapReady = () => {
     const { items } = this.props;
-    if (items.length > 0) {
+    const { markersFocused } = this.state;
+
+    if (items.length > 0 && !markersFocused) {
       this.focusMarkers(items);
+      this.setState({ markersFocused: true });
     }
   }
 
@@ -340,8 +407,11 @@ export default class MapWithListView extends Component {
     const { activeMarker } = this.state;
     const { imageType, contentType } = trailObject;
     let image;
+
     if (imageType === "trail" || contentType === "trail") {
       image = (activeMarker === trailObject) ? trailMarkerActive : trailMarkerInactive;
+    } else if (imageType === "trailScreen") {
+      image = (activeMarker === trailObject) ? numberedMarkerActive : numberedMarkerInactive;
     } else {
       image = (activeMarker === trailObject) ? locationMarkerActive : locationMarkerInactive;
     }
@@ -351,22 +421,106 @@ export default class MapWithListView extends Component {
   /**
    * RENDER FUNCTIONS
    */
+
+  numberedMapViewMarker = (trailObject) => {
+    const { id, location } = trailObject;
+    const { activeMarker } = this.state;
+
+    const image = this.markerImageForTrailObject(trailObject);
+    const numberString = trailObject.contentObject.order + 1;
+    const active = activeMarker === trailObject;
+
+    return (
+      <MapView.Marker
+        key={id}
+        coordinate={location}
+        identifier={id}
+        onPress={() => this.onMarkerPressed(trailObject)}
+        anchor={{ x: 0.5, y: 1 }}
+        centerOffset={{ x: 0.5, y: 1 }}
+        image={image}
+      >
+        <Text style={active ? styles.numberedMarkerTextActive : styles.numberedMarkerText}>{numberString}</Text>
+      </MapView.Marker>
+    );
+  }
+
+  defaultMapViewMarker = (trailObject) => {
+    const { id, location } = trailObject;
+    const image = this.markerImageForTrailObject(trailObject);
+
+    return (
+      <MapView.Marker
+        key={id}
+        coordinate={location}
+        identifier={id}
+        onPress={() => this.onMarkerPressed(trailObject)}
+        image={image}
+      />
+    );
+  }
+
   renderMapMarkers() {
     const { items } = this.props;
 
     return items.map((trailObject) => {
-      const { id, location } = trailObject;
-      const image = this.markerImageForTrailObject(trailObject);
-      return (
-        <MapView.Marker
-          key={id}
-          coordinate={location}
-          identifier={id}
-          onPress={() => this.onMarkerPressed(trailObject)}
-          image={image}
-        />
-      );
+      if (trailObject.imageType === "trailScreen") {
+        return this.numberedMapViewMarker(trailObject);
+      }
+      return this.defaultMapViewMarker(trailObject);
     });
+  }
+
+  displayGuideNumber = (numberOfGuides, type) => {
+    if (!numberOfGuides || !type) return null;
+    let textString;
+    const plural = numberOfGuides > 1;
+
+    const locationString = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
+    const mediaGuideString = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
+
+    if (type === "location") {
+      textString = `${numberOfGuides} ${mediaGuideString.toLowerCase()}`;
+    } else if (type === "trail") {
+      textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${numberOfGuides} ${locationString}`;
+    } else if (type === "guide") {
+      textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${numberOfGuides} ${LangService.strings.OBJECT}`;
+    }
+
+    return (
+      <Text style={styles.listItemDirectionsText}>{textString}</Text>
+    );
+  }
+
+  displayDirections = (item) => {
+    const trailScreen = item.imageType === "trailScreen";
+    if (!trailScreen) return null;
+
+    const directions = (
+      <TouchableOpacity
+        style={styles.directionsContainer}
+        onPress={() => this.onListItemDirectionsButtonPressed(item)}
+      >
+        <Icon name="directions" size={24} color={Colors.purple} />
+        <Text style={styles.listItemDirectionsText}>{LangService.strings.DIRECTIONS}</Text>
+      </TouchableOpacity>
+    );
+
+    return directions;
+  }
+
+  displayNumberView = (item) => {
+    const trailScreen = item.imageType === "trailScreen";
+    if (!trailScreen) return null;
+
+    const numberString = item.contentObject.order + 1;
+    const numberView = (
+      <View style={styles.listImageNumberView}>
+        <Text style={styles.listImageNumberText}>{numberString}</Text>
+      </View>
+    );
+
+    return numberView;
   }
 
   renderListItem = (item, listItemStyle) => {
@@ -375,12 +529,12 @@ export default class MapWithListView extends Component {
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
         <View style={listItemStyle}>
           {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
+          {this.displayNumberView(item)}
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
             <Text style={styles.listItemAddress}>{streetAdress}</Text>
-            <TouchableOpacity onPress={() => this.onListItemDirectionsButtonPressed(item)}>
-              <Icon name="directions" size={20} color={Colors.lightGrey} />
-            </TouchableOpacity>
+            {this.displayDirections(item)}
+            {this.displayGuideNumber(item.contentObject.numberOfGuides, item.contentType)}
           </View>
         </View>
       </TouchableOpacity>
