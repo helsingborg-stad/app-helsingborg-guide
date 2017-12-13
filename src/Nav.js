@@ -105,10 +105,6 @@ export default class Nav extends Component {
     }
   }
 
-  static displayNotificationBar() {
-    return <NotificationBar style={{ bottom: 0 }} />;
-  }
-
   render() {
     return (
       <ViewContainer>
@@ -118,7 +114,6 @@ export default class Nav extends Component {
           backgroundColor={Colors.darkPurple}
         />
         <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
-        {Nav.displayNotificationBar()}
       </ViewContainer>
     );
   }
