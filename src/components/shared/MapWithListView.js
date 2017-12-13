@@ -232,7 +232,10 @@ export default class MapWithListView extends Component {
     super(props);
 
     const { items } = this.props;
-    this.state = { activeMarker: items[0] };
+    this.state = {
+      activeMarker: items[0],
+      markersFocused: false,
+    };
   }
 
   componentWillReceiveProps({ items }) {
@@ -288,8 +291,11 @@ export default class MapWithListView extends Component {
    */
   onMapReady = () => {
     const { items } = this.props;
-    if (items.length > 0) {
+    const { markersFocused } = this.state;
+
+    if (items.length > 0 && !markersFocused) {
       this.focusMarkers(items);
+      this.setState({ markersFocused: true });
     }
   }
 
