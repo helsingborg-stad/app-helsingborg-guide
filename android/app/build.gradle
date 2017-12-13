@@ -105,7 +105,7 @@ android {
         applicationId "com.guidehbg"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 3
+        versionCode 4
         versionName "1.2"
         ndk {
             abiFilters "armeabi-v7a", "x86"
