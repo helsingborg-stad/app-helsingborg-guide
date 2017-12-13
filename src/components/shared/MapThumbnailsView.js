@@ -3,7 +3,7 @@ import { View, StyleSheet, ListView, Dimensions } from "react-native";
 import MapView from "react-native-maps";
 import ViewContainer from "./view_container";
 import NoInternetText from "./noInternetText";
-import { LocationService } from "../../services/locationService";
+import LocationService from "../../services/locationService";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const TIMEOUT = 3000;

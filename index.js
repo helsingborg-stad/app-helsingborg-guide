@@ -13,7 +13,7 @@ import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
 import FullScreenVideoScreen from "guide-hbg/src/components/screens/FullScreenVideoScreen";
 import { loadGuides } from "./src/actions/guideActions";
 import { fetchNavigation } from "./src/actions/navigationActions";
-import { LocationService } from "./src/services/locationService";
+import LocationService from "./src/services/locationService";
 
 export default class GuideHbg extends Component {
   static openInternetSettings() {
@@ -25,7 +25,7 @@ export default class GuideHbg extends Component {
   }
 
   static init() {
-    LocationService.getInstance().getGeoLocation();
+    LocationService.getInstance().watchGeoLocation();
 
     LangService.loadStoredLanguage()
       .then(() => {
