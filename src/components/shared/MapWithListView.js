@@ -29,8 +29,12 @@ import {
 const ios = Platform.OS === "ios";
 
 const defaultMargin = 20;
+const textHorizontalMargin = 13;
 const listItemImageSize = 120;
-const markerImageSize = 40;
+
+// Marker image
+const markerImageActiveWidth = 42;
+const markerImageInactiveWidth = 32;
 
 const screenWidth = Dimensions.get("window").width;
 const listItemWidth = screenWidth - (defaultMargin * 2);
@@ -62,13 +66,6 @@ const listItemShared = {
   },
   shadowRadius: 5,
   shadowOpacity: 1,
-};
-
-const markerImageShared = {
-  width: markerImageSize,
-  height: markerImageSize,
-  borderRadius: markerImageSize / 2,
-  borderWidth: 2.5,
 };
 
 /*
@@ -110,35 +107,46 @@ const styles = StyleSheet.create({
   listItemTextContainer: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "center",
-    marginHorizontal: defaultMargin,
+    marginHorizontal: textHorizontalMargin,
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body, {
+      marginTop: 8,
       flexWrap: "wrap",
-      fontSize: 16,
-      marginRight: defaultMargin,
+      fontSize: 20,
+      fontWeight: "500",
+      lineHeight: 23.0,
+      letterSpacing: 0.1,
+      marginRight: textHorizontalMargin,
     },
   ]),
   listItemAddress: StyleSheetUtils.flatten([
     TextStyles.body, {
       fontSize: 16,
-      marginRight: defaultMargin,
+      marginTop: 4,
+      lineHeight: 21,
+      marginRight: textHorizontalMargin,
       color: Colors.warmGrey,
     },
   ]),
-  markerImage: {
-    ...markerImageShared,
-    borderColor: Colors.white,
+  directionsContainer: {
+    flexDirection: "row",
+    marginTop: 4,
   },
-  markerImageActive: {
-    ...markerImageShared,
-    borderColor: Colors.lightPink,
-  },
+  listItemDirectionsText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      fontSize: 16,
+      fontWeight: "500",
+      marginRight: textHorizontalMargin,
+      color: Colors.purple,
+    },
+  ]),
   numberedMarkerText: StyleSheetUtils.flatten([
     TextStyles.body, {
-      marginTop: 4,
-      width: 30,
+      position: "absolute",
+      width: markerImageInactiveWidth,
+      top: 6,
+      left: ios ? 0 : 2,
       fontSize: 18,
       fontWeight: "500",
       lineHeight: 23.0,
@@ -148,8 +156,10 @@ const styles = StyleSheet.create({
   ]),
   numberedMarkerTextActive: StyleSheetUtils.flatten([
     TextStyles.body, {
-      marginTop: 8,
-      width: 40,
+      position: "absolute",
+      width: markerImageActiveWidth,
+      top: ios ? 9 : 12,
+      left: ios ? 0 : 3,
       fontSize: 18,
       fontWeight: "500",
       lineHeight: 23.0,
@@ -327,33 +337,33 @@ export default class MapWithListView extends Component {
     const { contentType, contentObject } = listItem;
     switch (contentType) {
       case "location":
-      {
-        AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
-        navigate("LocationDetailsScreen", { location: contentObject });
-        break;
-      }
+        {
+          AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
+          navigate("LocationDetailsScreen", { location: contentObject });
+          break;
+        }
       case "trail":
-      {
-        const trail = contentObject;
-        const title = trail.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
-        navigate("TrailScreen", { trail, title });
-        return;
-      }
+        {
+          const trail = contentObject;
+          const title = trail.guidegroup[0].name;
+          AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
+          navigate("TrailScreen", { trail, title });
+          return;
+        }
       case "guide":
-      {
-        const guide = contentObject;
-        const title = guide.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
-        navigate("GuideDetailsScreen", { id: guide.id, title });
-        return;
-      }
+        {
+          const guide = contentObject;
+          const title = guide.guidegroup[0].name;
+          AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
+          navigate("GuideDetailsScreen", { id: guide.id, title });
+          return;
+        }
       default:
-      {
-        const { title, id } = contentObject;
-        AnalyticsUtils.logEvent("view_object", { id, name: title });
-        navigate("ObjectDetailsScreen", { title, contentObject });
-      }
+        {
+          const { title, id } = contentObject;
+          AnalyticsUtils.logEvent("view_object", { id, name: title });
+          navigate("ObjectDetailsScreen", { title, contentObject });
+        }
     }
   }
 
@@ -401,6 +411,8 @@ export default class MapWithListView extends Component {
         coordinate={location}
         identifier={id}
         onPress={() => this.onMarkerPressed(trailObject)}
+        anchor={{ x: 0.5, y: 1 }}
+        centerOffset={{ x: 0.5, y: 1 }}
         image={image}
       >
         <Text style={active ? styles.numberedMarkerTextActive : styles.numberedMarkerText}>{numberString}</Text>
@@ -444,8 +456,9 @@ export default class MapWithListView extends Component {
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
             <Text style={styles.listItemAddress}>{streetAdress}</Text>
-            <TouchableOpacity onPress={() => this.onListItemDirectionsButtonPressed(item)}>
-              <Icon name="directions" size={20} color={Colors.lightGrey} />
+            <TouchableOpacity style={styles.directionsContainer} onPress={() => this.onListItemDirectionsButtonPressed(item)}>
+              <Icon name="directions" size={20} color={Colors.purple} />
+              <Text style={styles.listItemDirectionsText}>Vägbeskrivning</Text>
             </TouchableOpacity>
           </View>
         </View>
