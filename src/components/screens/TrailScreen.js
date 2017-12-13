@@ -71,7 +71,7 @@ class TrailScreen extends Component {
           onPress={toggleInfoOverlay}
           style={styles.barButtonItem}
         >
-          <Text style={styles.barButtonItemText}>{LangService.strings.ABOUT}</Text>
+          <Text style={styles.barButtonItemText}>{LangService.strings.INFO}</Text>
           <Image style={styles.barButtonItemImage} source={infoBarButtonIcon} />
         </TouchableOpacity>
       ),
