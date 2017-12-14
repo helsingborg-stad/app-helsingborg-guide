@@ -67,6 +67,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  forChildrenIcon: {
+    width: 17,
+    height: 17,
+  },
   descriptionText: StyleSheetUtils.flatten([
     TextStyles.description, {
       color: "#505050",
@@ -142,7 +146,7 @@ function displayGuideNumber(numberOfGuides, type) {
 function displayForChildren() {
   return (
     <View style={styles.forChildrenContainer} >
-      <Image source={iconKids} style={{ width: 17, height: 17 }} />
+      <Image source={iconKids} resizeMode="contain" style={styles.forChildrenIcon} />
       <Text style={styles.forChildrenText}>{LangService.strings.FOR_CHILDREN}</Text>
     </View>
   );
