@@ -86,6 +86,7 @@ export default ({ items, navigation }) => {
         openingHours={openingHours}
         distance={distance}
         icon={icon}
+        forChildren={item.guide_kids}
       />
     );
   };
