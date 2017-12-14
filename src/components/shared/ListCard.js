@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Image,
   View,
   StyleSheet,
   Text,
@@ -11,6 +12,8 @@ import Colors from "guide-hbg/src/styles/Colors";
 import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
 import DistanceView from "./DistanceView";
 import LangService from "../../services/langService";
+
+const iconKids = require("../../images/kids.png");
 
 const imageSize = 120;
 const defaultMargin = 15;
@@ -52,6 +55,18 @@ const styles = StyleSheet.create({
       marginRight: defaultMargin,
     }],
   ),
+  forChildrenText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.darkGrey,
+      marginLeft: 6,
+      fontWeight: "500",
+      textAlign: "left",
+    }],
+  ),
+  forChildrenContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   descriptionText: StyleSheetUtils.flatten([
     TextStyles.description, {
       color: "#505050",
@@ -124,7 +139,16 @@ function displayGuideNumber(numberOfGuides, type) {
   );
 }
 
-const ListCard = ({ title, description, type, numberOfGuides, image, onPress, openingHours, distance, icon }) => (
+function displayForChildren() {
+  return (
+    <View style={styles.forChildrenContainer} >
+      <Image source={iconKids} style={{ width: 17, height: 17 }} />
+      <Text style={styles.forChildrenText}>{LangService.strings.FOR_CHILDREN}</Text>
+    </View>
+  );
+}
+
+const ListCard = ({ title, description, type, numberOfGuides, image, onPress, openingHours, distance, icon, forChildren }) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
     <View style={styles.container}>
       <View style={styles.imageInfoContainer}>
@@ -143,6 +167,7 @@ const ListCard = ({ title, description, type, numberOfGuides, image, onPress, op
           {displayOpeningHours(openingHours)}
           {displayDistance(distance)}
           {displayGuideNumber(numberOfGuides, type)}
+          {forChildren ? displayForChildren() : null}
         </View>
       </View>
       <View style={styles.descriptionContainer}>
