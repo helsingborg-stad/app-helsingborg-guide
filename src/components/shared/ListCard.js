@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
       color: Colors.black,
       textAlign: "left",
       marginBottom: 7,
-      marginRight: defaultMargin,
     }],
   ),
   forChildrenText: StyleSheetUtils.flatten([
@@ -161,6 +160,7 @@ const ListCard = ({ title, description, type, numberOfGuides, image, onPress, op
           resizeMode="cover"
           source={{ uri: image }}
         />
+
         <View style={styles.infoTextContainer}>
           <Text
             style={styles.title}

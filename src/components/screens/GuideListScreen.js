@@ -71,6 +71,12 @@ const styles = StyleSheet.create({
   },
 });
 
+// Needed to get the correct layout on the firts page in the animated tab view
+const initialLayout = {
+  height: 0,
+  width: Dimensions.get("window").width,
+};
+
 class GuideListScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.APP_NAME;
@@ -243,6 +249,7 @@ class GuideListScreen extends Component {
         renderScene={this._renderScene}
         renderHeader={this._renderHeader}
         onIndexChange={this._handleIndexChange}
+        initialLayout={initialLayout}
       />
     );
   }
