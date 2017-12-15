@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 import {
-  PropTypes,
-} from "prop-types";
-import {
-  StyleSheet,
   StatusBar,
   Platform,
 } from "react-native";
@@ -11,7 +7,6 @@ import {
   StackNavigator,
 } from "react-navigation";
 import ViewContainer from "./components/shared/view_container";
-import NotificationBar from "./components/shared/NotificationBar";
 import {
   DownloadsScreen,
   GuideDetailsScreen,
@@ -30,26 +25,9 @@ import {
 } from "./components/screens/";
 import {
   Colors,
-  TextStyles,
+  HeaderStyles,
 } from "./styles/";
 import AnalyticsUtils from "./utils/AnalyticsUtils";
-
-const styles = StyleSheet.create({
-  headerStyle: {
-    backgroundColor: Colors.darkPurple,
-    borderBottomWidth: 0,
-  },
-});
-
-const headerStyle = {
-  navigationOptions: {
-    headerStyle: styles.headerStyle,
-    headerTintColor: Colors.white,
-    headerTitleStyle: TextStyles.headerTitleLabel,
-    headerBackTitleStyle: TextStyles.defaultFontFamily,
-    headerBackTitle: " ",
-  },
-};
 
 const GuideNavigator = StackNavigator(
   {
@@ -66,7 +44,7 @@ const GuideNavigator = StackNavigator(
     DownloadsScreen: { screen: DownloadsScreen },
     SettingsScreen: { screen: SettingsScreen },
   },
-  headerStyle,
+  { navigationOptions: HeaderStyles.default },
 );
 
 const RootNavigator = StackNavigator(
