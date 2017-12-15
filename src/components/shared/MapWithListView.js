@@ -532,7 +532,7 @@ export default class MapWithListView extends Component {
           {this.displayNumberView(item)}
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
-            <Text style={styles.listItemAddress}>{streetAdress}</Text>
+            <Text style={styles.listItemAddress} numberOfLines={1}>{streetAdress}</Text>
             {this.displayDirections(item)}
             {this.displayGuideNumber(item.contentObject.numberOfGuides, item.contentType)}
           </View>
