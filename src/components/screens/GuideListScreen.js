@@ -18,6 +18,7 @@ import LangService from "../../services/langService";
 import {
   Colors,
   TextStyles,
+  HeaderStyles,
 } from "../../styles/";
 import GuideList from "../shared/GuideList";
 import MapWithListView from "../shared/MapWithListView";
@@ -83,7 +84,8 @@ class GuideListScreen extends Component {
     const { params = {} } = navigation.state;
     const { toggleMap, showMap } = params;
     const itemText = showMap ? LangService.strings.LIST : LangService.strings.MAP;
-    return {
+
+    return Object.assign(HeaderStyles.noElevation, {
       title,
       headerRight: (
         <TouchableOpacity
@@ -102,7 +104,7 @@ class GuideListScreen extends Component {
           <Image source={settingsIcon} />
         </TouchableOpacity>
       ),
-    };
+    });
   }
 
   static getEmbeddedLocationsFromLocation(locationItem) {

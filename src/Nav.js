@@ -44,7 +44,7 @@ const GuideNavigator = StackNavigator(
     DownloadsScreen: { screen: DownloadsScreen },
     SettingsScreen: { screen: SettingsScreen },
   },
-  HeaderStyles.default,
+  { navigationOptions: HeaderStyles.default },
 );
 
 const RootNavigator = StackNavigator(
