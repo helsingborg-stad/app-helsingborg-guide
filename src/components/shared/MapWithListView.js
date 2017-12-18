@@ -13,7 +13,6 @@ import {
   Platform,
 } from "react-native";
 import MapView from "react-native-maps";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import PropTypes from "prop-types";
 import {
   Colors,
@@ -26,6 +25,7 @@ import {
   UrlUtils,
 } from "../../utils/";
 import LangService from "../../services/langService";
+import DirectionsTouchable from "./DirectionsTouchable";
 
 const ios = Platform.OS === "ios";
 
@@ -131,6 +131,14 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginHorizontal: textMargin,
   },
+  guideNumberText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      fontSize: 16,
+      fontWeight: "500",
+      marginRight: textMargin,
+      color: Colors.purple,
+    },
+  ]),
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body, {
       color: Colors.black,
@@ -150,18 +158,6 @@ const styles = StyleSheet.create({
       lineHeight: 21,
       marginRight: textMargin,
       color: Colors.warmGrey,
-    },
-  ]),
-  directionsContainer: {
-    flexDirection: "row",
-    marginTop: 4,
-  },
-  listItemDirectionsText: StyleSheetUtils.flatten([
-    TextStyles.body, {
-      fontSize: 16,
-      fontWeight: "500",
-      marginRight: textMargin,
-      color: Colors.purple,
     },
   ]),
   numberedMarkerText: StyleSheetUtils.flatten([
@@ -488,25 +484,8 @@ export default class MapWithListView extends Component {
     }
 
     return (
-      <Text style={styles.listItemDirectionsText}>{textString}</Text>
+      <Text style={styles.guideNumberText}>{textString}</Text>
     );
-  }
-
-  displayDirections = (item) => {
-    const trailScreen = item.imageType === "trailScreen";
-    if (!trailScreen) return null;
-
-    const directions = (
-      <TouchableOpacity
-        style={styles.directionsContainer}
-        onPress={() => this.onListItemDirectionsButtonPressed(item)}
-      >
-        <Icon name="directions" size={24} color={Colors.purple} />
-        <Text style={styles.listItemDirectionsText}>{LangService.strings.DIRECTIONS}</Text>
-      </TouchableOpacity>
-    );
-
-    return directions;
   }
 
   displayNumberView = (item) => {
@@ -525,6 +504,7 @@ export default class MapWithListView extends Component {
 
   renderListItem = (item, listItemStyle) => {
     const { imageUrl, streetAdress, title } = item;
+    const trailScreen = item.imageType === "trailScreen";
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
         <View style={listItemStyle}>
@@ -533,7 +513,7 @@ export default class MapWithListView extends Component {
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
             <Text style={styles.listItemAddress} numberOfLines={1}>{streetAdress}</Text>
-            {this.displayDirections(item)}
+            {!trailScreen ? null : <DirectionsTouchable item={item} onPress={() => this.onListItemDirectionsButtonPressed(item)} />}
             {this.displayGuideNumber(item.contentObject.numberOfGuides, item.contentType)}
           </View>
         </View>

@@ -12,8 +12,6 @@ import {
   Platform,
 } from "react-native";
 import PropTypes from "prop-types";
-import Icon from "react-native-vector-icons/FontAwesome";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
 import {
   bindActionCreators,
 } from "redux";
@@ -24,10 +22,6 @@ import * as _ from "lodash";
 import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view";
 import ListItem from "../shared/list_item";
-import RoundedBtn from "../shared/roundedBtnWithText";
-import OptionsFloatingBtn from "../shared/OptionsFloatingBtn";
-import OptionsView from "../shared/OptionsView";
-import OptionsContentView from "../shared/OptionsContentView";
 import LogoView from "../shared/LogoView";
 import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
@@ -43,6 +37,7 @@ import {
   StyleSheetUtils,
   AnalyticsUtils,
 } from "../../utils/";
+import DirectionsTouchable from "./../shared/DirectionsTouchable";
 
 const styles = StyleSheet.create({
   scrollView: {},
@@ -122,11 +117,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingVertical: 15,
-  },
-  fabBtn: {
-    width: 40,
-    height: 40,
-    backgroundColor: Colors.lightPink,
   },
   comingSoonView: {
     flex: 1,
@@ -292,60 +282,7 @@ class LocationDetailsScreen extends Component {
         <Text style={styles.articleDescriptionText}>{this.state.location.description}</Text>
       </View>
     );
-
-    if (this.state.viewArticle) return article;
-    return null;
-  }
-
-  displayFabs() {
-    if (!Object.keys(this.state.location).length) return null;
-
-    const mapVisible = this.state.location.settings.map && this.state.sublocations;
-    const directions = (
-      <RoundedBtn
-        style={styles.fabBtn}
-        label={LangService.strings.TAKE_ME_THERE}
-        active={<Icon2 name="directions" size={20} color="white" />}
-        idle={<Icon2 name="directions" size={20} color="white" />}
-        onPress={() => {
-          this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
-        }}
-      />
-    );
-    const info = (
-      <RoundedBtn
-        style={styles.fabBtn}
-        label={this.state.viewArticle ? LangService.strings.CLOSE_MORE_INFO : LangService.strings.MORE_INFO}
-        isActive={this.state.viewArticle}
-        active={<Icon2 name="close" size={20} color="white" />}
-        idle={<Icon name="info" size={20} color="white" />}
-        onPress={() => this.toggleArticleView()}
-      />
-    );
-    if (mapVisible) {
-      const mapFab = (
-        <RoundedBtn
-          style={styles.fabBtn}
-          label={LangService.strings.SHOW_MAP}
-          active={<Icon name="map-marker" size={20} color="white" />}
-          idle={<Icon name="map-marker" size={20} color="white" />}
-          onPress={this._goToMapView}
-        />
-      );
-      return (
-        <OptionsContentView>
-          {directions}
-          {info}
-          {mapFab}
-        </OptionsContentView>
-      );
-    }
-    return (
-      <OptionsContentView>
-        {directions}
-        {info}
-      </OptionsContentView>
-    );
+    return article;
   }
 
   display() {
@@ -370,6 +307,7 @@ class LocationDetailsScreen extends Component {
               <View style={styles.titleContainer}>
                 {LocationDetailsScreen.displayLogo(this.state.location)}
                 {LocationDetailsScreen.displayOpeningTime(this.state.location)}
+                <DirectionsTouchable onPress={this._goToMapView} />
               </View>
               {this.displayArticle()}
               <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>
@@ -399,11 +337,6 @@ class LocationDetailsScreen extends Component {
   render() {
     return (
       <ViewContainer>
-        <OptionsFloatingBtn onPress={this.toggleMenu} />
-
-        <OptionsView onPress={this.closeMenu} visible={this.state.menuVisible}>
-          {this.displayFabs()}
-        </OptionsView>
         {this.display()}
       </ViewContainer>
     );
