@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   openTimeContainer: {
     flex: 1,
-    paddingVertical: 20,
+    paddingTop: 20,
   },
   openTimeText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
