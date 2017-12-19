@@ -307,7 +307,9 @@ class LocationDetailsScreen extends Component {
               <View style={styles.titleContainer}>
                 {LocationDetailsScreen.displayLogo(this.state.location)}
                 {LocationDetailsScreen.displayOpeningTime(this.state.location)}
-                <DirectionsTouchable onPress={this._goToMapView} />
+                <DirectionsTouchable onPress={() => {
+                  this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
+                }} />
               </View>
               {this.displayArticle()}
               <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>
