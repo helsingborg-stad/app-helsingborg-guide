@@ -240,12 +240,14 @@ class LocationDetailsScreen extends Component {
     return this.state.sublocations.map((subLocation) => {
       if (!subLocation.guide_images || !subLocation.guide_images.length) return null;
       const forKids = subLocation.guide_kids;
-
       return (
         <TouchableOpacity key={subLocation.id} style={styles.subLocationContainer} onPress={() => this._goToSubLocationScene(subLocation)}>
           <ListItem
             imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
-            content={subLocation.title.plain_text}
+            title={subLocation.title.plain_text}
+            description={subLocation.title.plain_text}
+            startDate={subLocation.title.plain_text}
+            endDate={subLocation.title.plain_text}
             forKids={forKids}
           />
         </TouchableOpacity>
