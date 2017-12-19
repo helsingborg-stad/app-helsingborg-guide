@@ -10,7 +10,6 @@ const textMargin = 13;
 const styles = StyleSheet.create({
   directionsContainer: {
     flexDirection: "row",
-    marginTop: 4,
   },
   listItemDirectionsText: StyleSheetUtils.flatten([
     TextStyles.body, {

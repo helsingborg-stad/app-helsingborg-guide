@@ -21,7 +21,7 @@ import * as _ from "lodash";
 import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view";
 import ListItem from "../shared/list_item";
-import LogoView from "../shared/LogoView";
+import DistanceView from "../shared/DistanceView";
 import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
@@ -35,6 +35,7 @@ import {
 import {
   StyleSheetUtils,
   AnalyticsUtils,
+  LocationUtils,
 } from "../../utils/";
 import DirectionsTouchable from "./../shared/DirectionsTouchable";
 
@@ -54,24 +55,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "flex-start",
-    paddingVertical: 15,
-    marginTop: 10,
+    paddingTop: 12,
+    paddingBottom: 4,
   },
   title: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 23,
-      fontWeight: "bold",
+      fontSize: 30,
       textAlign: "center",
     }],
   ),
   logoContainer: {
     flex: 1,
     padding: 10,
-  },
-  logo: {
-    marginVertical: 10,
-    width: 100,
-    height: 50,
   },
   articleContainer: {
     flex: 4,
@@ -107,13 +102,20 @@ const styles = StyleSheet.create({
   },
   openTimeContainer: {
     flex: 1,
-    paddingTop: 20,
+    paddingVertical: 4,
   },
   openTimeText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 16,
       fontWeight: "300",
       lineHeight: 19,
+    }],
+  ),
+  distanceText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      fontWeight: "400",
+      color: Colors.warmGrey,
+      textAlign: "left",
     }],
   ),
   closeBtnContainer: {
@@ -158,11 +160,6 @@ class LocationDetailsScreen extends Component {
     };
   };
 
-  static displayLogo(guideGroup) {
-    const logoType = guideGroup.apperance.logotype;
-    return <LogoView logoType={logoType} placeHolder={guideGroup.name} />;
-  }
-
   // TODO extract to some service class
   static async openUrlIfValid(url) {
     try {
@@ -193,9 +190,16 @@ class LocationDetailsScreen extends Component {
     const opening = TimingService.getOpeningHours(openingList, expList);
     const text = opening || "";
     return (
-      <View style={styles.openTimeContainer}>
-        <Text style={styles.openTimeText}>{text}</Text>
-      </View>
+      <Text style={styles.openTimeText}>{text}</Text>
+    );
+  }
+
+  static displayDistance(currentLocation, locations) {
+    const { coords } = currentLocation;
+    const distance = LocationUtils.getShortestDistance(coords, locations);
+    if (!distance) return null;
+    return (
+      <DistanceView style={styles.distanceText} distance={distance} useFromHereText />
     );
   }
 
@@ -279,8 +283,11 @@ class LocationDetailsScreen extends Component {
             </View>
             <View style={styles.bodyContainer}>
               <View style={styles.titleContainer}>
-                {LocationDetailsScreen.displayLogo(this.state.location)}
-                {LocationDetailsScreen.displayOpeningTime(this.state.location)}
+                <Text style={styles.title}>{this.state.location.name}</Text>
+                <View style={styles.openTimeContainer}>
+                  {LocationDetailsScreen.displayOpeningTime(this.state.location)}
+                  {LocationDetailsScreen.displayDistance(this.props.geolocation, this.state.location._embedded.location)}
+                </View>
                 <DirectionsTouchable onPress={() => {
                   this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
                 }}
