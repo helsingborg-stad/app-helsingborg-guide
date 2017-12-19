@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  LayoutAnimation,
   Linking,
   Platform,
 } from "react-native";
@@ -204,11 +203,8 @@ class LocationDetailsScreen extends Component {
     this.state = {
       location,
       sublocations: subLocations,
-      viewArticle: !location.settings.active,
-      menuVisible: false,
       internet,
     };
-    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -221,14 +217,6 @@ class LocationDetailsScreen extends Component {
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
   }
 
-  toggleMenu() {
-    this.setState({ menuVisible: !this.state.menuVisible });
-  }
-
-  closeMenu = () => {
-    if (this.state.menuVisible) this.setState({ menuVisible: false });
-  };
-
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
     const { name } = subLocation.guidegroup[0];
@@ -238,14 +226,6 @@ class LocationDetailsScreen extends Component {
       id: subLocation.id,
     });
   }
-
-  _goToMapView = () => {
-    this.toggleMenu();
-
-    const { navigate } = this.props.navigation;
-    const { name } = this.state.location;
-    navigate("LocationOnMapScreen", { subLocations: this.state.sublocations, name });
-  };
 
   displaySubLocations() {
     if (!this.state.sublocations.length) return null;
@@ -264,16 +244,6 @@ class LocationDetailsScreen extends Component {
       );
     });
   }
-
-  toggleArticleView() {
-    this.toggleMenu();
-    LayoutAnimation.easeInEaseOut();
-    this.setState({ viewArticle: !this.state.viewArticle });
-  }
-
-  toggleMainMenu = () => {
-    this.props.navigation.navigate("DrawerToggle");
-  };
 
   displayArticle() {
     const article = (
@@ -309,7 +279,8 @@ class LocationDetailsScreen extends Component {
                 {LocationDetailsScreen.displayOpeningTime(this.state.location)}
                 <DirectionsTouchable onPress={() => {
                   this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
-                }} />
+                }}
+                />
               </View>
               {this.displayArticle()}
               <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>
@@ -333,7 +304,6 @@ class LocationDetailsScreen extends Component {
     if (Platform.OS === "ios") url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${daddr}&saddr=${saddr}`;
 
     LocationDetailsScreen.openUrlIfValid(url);
-    this.toggleMenu();
   }
 
   render() {
