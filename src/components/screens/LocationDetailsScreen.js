@@ -48,11 +48,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     backgroundColor: Colors.white,
+    paddingHorizontal: 34,
   },
   titleContainer: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
     paddingVertical: 15,
     marginTop: 10,
   },
@@ -74,7 +75,6 @@ const styles = StyleSheet.create({
   },
   articleContainer: {
     flex: 4,
-    paddingHorizontal: 34,
     paddingVertical: 10,
   },
   articleDescriptionText: StyleSheetUtils.flatten([
@@ -93,13 +93,17 @@ const styles = StyleSheet.create({
   subLocationsContainer: {
     flex: 1,
     paddingVertical: 10,
-    paddingHorizontal: 20,
   },
   subLocationContainer: {
+    backgroundColor: Colors.white,
     minHeight: 160,
     justifyContent: "center",
-    borderTopWidth: 1,
-    borderTopColor: Colors.greyBorderColor,
+    elevation: 8,
+    marginVertical: 10,
+    shadowColor: "black",
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
   },
   openTimeContainer: {
     flex: 1,
@@ -238,7 +242,7 @@ class LocationDetailsScreen extends Component {
           <ListItem
             imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
             content={subLocation.title.plain_text}
-            checked={forKids}
+            forKids={forKids}
           />
         </TouchableOpacity>
       );
@@ -282,8 +286,8 @@ class LocationDetailsScreen extends Component {
                 }}
                 />
               </View>
-              {this.displayArticle()}
               <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>
+              {this.displayArticle()}
             </View>
           </ScrollView>
         </ViewContainer>
