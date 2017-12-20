@@ -643,12 +643,6 @@ class GuideDetailsScreen extends Component {
 
           <FloatingBtn onPress={this.onSmallBtnPressed} visible={this.state.smallBtnVisible} content={LangService.strings.NEW_CONTENT} />
 
-          <OptionsFloatingBtn onPress={this.toggleMenu} />
-
-          <OptionsView onPress={this.hideMenu} visible={this.state.menuVisible}>
-            {this.displayFabs()}
-          </OptionsView>
-
           <View style={{ flex: 1 }}>
             <ScrollView
               contentContainerStyle={styles.scrollView}
