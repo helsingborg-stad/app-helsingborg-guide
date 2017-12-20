@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, View, Text, AppState, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from "react-native";
+import { Platform, View, Text, AppState, TouchableOpacity, Image, StyleSheet, ScrollView, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { bindActionCreators } from "redux";
@@ -41,6 +41,8 @@ import {
   AnalyticsUtils,
 } from "../../utils/";
 
+const searchIcon = require("../../images/iconSettings.png");
+
 const HALF_WIDTH = Dimensions.get("window").width / 2;
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
 const RADAR_SCANNING_PERIOD = 1000; // ms
@@ -59,6 +61,20 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: Colors.white,
   },
+  barButtonItem: {
+    flexDirection: "row",
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 14,
+    opacity: 0.75,
+  },
+  barButtonItemText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.white,
+      marginRight: 8,
+    },
+  ]),
   titleContainer: {
     flex: 1,
     paddingHorizontal: 34,
@@ -126,10 +142,21 @@ const styles = StyleSheet.create({
 class GuideDetailsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
+    const { params = {} } = navigation.state;
+    const { toggleKeypad } = params;
     return {
       title,
+      headerRight: (
+        <TouchableOpacity
+          onPress={toggleKeypad}
+          style={styles.barButtonItem}
+        >
+          <Text style={styles.barButtonItemText}>{LangService.strings.SEARCH_BY_NUMBER}</Text>
+          <Image style={styles.barButtonItemImage} source={searchIcon} />
+        </TouchableOpacity>
+      ),
     };
-  }
+  };
 
   static get defaultProps() {
     return {
@@ -178,6 +205,7 @@ class GuideDetailsScreen extends Component {
 
   componentDidMount() {
     this.initBeaconService();
+    this.props.navigation.setParams({ toggleKeypad: this.toggleKeypadVisibility });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -497,18 +525,8 @@ class GuideDetailsScreen extends Component {
       </View>
     );
 
-    if (this.state.viewArticle) return article;
-    return null;
+    return article;
   }
-
-  toggleArticleView() {
-    this.hideMenu();
-    this.setState({ viewArticle: !this.state.viewArticle });
-  }
-
-  toggleMainMenu = () => {
-    this.props.navigation.navigate("DrawerToggle");
-  };
 
   // Search feature segment
   // ############################################
@@ -548,8 +566,7 @@ class GuideDetailsScreen extends Component {
     );
   }
 
-  toggleKeypadVisibility() {
-    this.toggleMenu();
+  toggleKeypadVisibility = () => {
     this.setState({ keypadVisible: !this.state.keypadVisible });
   }
   // #############################################
