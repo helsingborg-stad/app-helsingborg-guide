@@ -277,7 +277,6 @@ class LocationDetailsScreen extends Component {
       const uri = image.sizes.medium_large;
       const width = image.sizes["medium-large-width"];
       const height = image.sizes["medium-large-height"];
-      console.log(this.state.location);
       return (
         <ViewContainer>
           <SlimNotificationBar visible={!this.state.internet} style={{ top: 0 }}>
