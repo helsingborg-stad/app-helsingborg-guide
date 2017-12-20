@@ -73,21 +73,27 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   articleDescriptionText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
-      fontSize: 14,
-      lineHeight: 20,
+    TextStyles.description, {
+      color: Colors.warmGrey,
     }],
   ),
   articleHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 19,
+      fontSize: 20,
+      lineHeight: 21,
+      marginVertical: 10,
+    }],
+  ),
+  subLocationsHeaderText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 20,
       lineHeight: 21,
       marginVertical: 10,
     }],
   ),
   subLocationsContainer: {
     flex: 1,
-    paddingVertical: 10,
+    paddingVertical: 30,
   },
   subLocationContainer: {
     backgroundColor: Colors.white,
@@ -245,9 +251,9 @@ class LocationDetailsScreen extends Component {
           <ListItem
             imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
             title={subLocation.title.plain_text}
-            description={subLocation.title.plain_text}
-            startDate={subLocation.title.plain_text}
-            endDate={subLocation.title.plain_text}
+            description={subLocation.guide_tagline}
+            startDate={subLocation.guide_date_start}
+            endDate={subLocation.guide_date_end}
             forKids={forKids}
           />
         </TouchableOpacity>
@@ -271,6 +277,7 @@ class LocationDetailsScreen extends Component {
       const uri = image.sizes.medium_large;
       const width = image.sizes["medium-large-width"];
       const height = image.sizes["medium-large-height"];
+      console.log(this.state.location);
       return (
         <ViewContainer>
           <SlimNotificationBar visible={!this.state.internet} style={{ top: 0 }}>
@@ -295,7 +302,12 @@ class LocationDetailsScreen extends Component {
                 }}
                 />
               </View>
-              <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>
+              <View style={styles.subLocationsContainer}>
+                <Text style={styles.subLocationsHeaderText}>
+                  {LangService.strings.MEDIAGUIDES}
+                </Text>
+                {this.displaySubLocations()}
+              </View>
               {this.displayArticle()}
             </View>
           </ScrollView>

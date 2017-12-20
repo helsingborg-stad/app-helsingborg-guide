@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     TextStyles.title, {
     }],
   ),
-  subTitle: StyleSheetUtils.flatten([
+  description: StyleSheetUtils.flatten([
     TextStyles.description, {
     }],
   ),
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   ),
   forKidsText: StyleSheetUtils.flatten([
     TextStyles.description, {
+      paddingHorizontal: 5,
       color: Colors.darkGrey,
     }],
   ),
@@ -45,12 +46,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const forKidsView = (
-  <View style={styles.checkedContainer}>
-    <Icon name="face" size={20} color={Colors.darkGrey} />
-    <Text style={styles.forKidsText}>{LangService.getString("FOR_CHILDREN")}</Text>
-  </View>
-);
+function forKidsView() {
+  return (
+    <View style={styles.checkedContainer}>
+      <Icon name="face" size={20} color={Colors.darkGrey} />
+      <Text style={styles.forKidsText}>{LangService.strings.FOR_CHILDREN}</Text>
+    </View>
+  );
+}
 
 function displayImage(imageSource) {
   return (
@@ -58,16 +61,16 @@ function displayImage(imageSource) {
   );
 }
 
-export default function ListItem({ forKids, content, imageSource }) {
+export default function ListItem({ forKids, title, description, startDate, endDate, imageSource }) {
   return (
     <View>
       <View style={styles.thumbnailContainer}>{displayImage(imageSource)}</View>
       <View style={styles.listItem}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title} numberOfLines={1}>{content}</Text>
-          <Text style={styles.subTitle} numberOfLines={1}>{content}</Text>
-          <Text style={styles.date} numberOfLines={1}>{content}</Text>
-          {!forKids ? forKidsView : null}
+          <Text style={styles.title} numberOfLines={1}>{title}</Text>
+          <Text style={styles.description} numberOfLines={1}>{description}</Text>
+          <Text style={styles.date} numberOfLines={1}>{`${startDate} - ${endDate}`}</Text>
+          {forKids ? forKidsView() : null}
         </View>
       </View>
     </View>
