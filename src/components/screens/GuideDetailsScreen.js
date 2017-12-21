@@ -10,8 +10,6 @@ import ContentThumbnail from "../shared/contentThumbnail";
 import Footer from "../shared/footer";
 import RoundedBtn from "../shared/roundedBtnWithText";
 import Keypad from "../shared/KeyPad";
-import OptionsFloatingBtn from "../shared/OptionsFloatingBtn";
-import OptionsView from "../shared/OptionsView";
 import OptionsContentView from "../shared/OptionsContentView";
 import DownloadItemView2 from "../shared/DownloadItemView2";
 
@@ -32,6 +30,7 @@ import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import downloadManager from "../../services/DownloadTasksManager";
 import fetchService from "../../services/FetchService";
+import DownloadGuideView from '../shared/DownloadGuideView';
 import {
   Colors,
   TextStyles,
@@ -502,7 +501,7 @@ class GuideDetailsScreen extends Component {
         isCanceled={this.state.downloadMeta.isCanceled}
         progress={this.state.downloadMeta.currentPos / this.state.downloadMeta.urls.length}
       />
-    ) : null;
+    ) : <DownloadGuideView onPress={() => this.createAndStartTask()} />;
   }
 
   displayMainImage() {
@@ -654,13 +653,12 @@ class GuideDetailsScreen extends Component {
             >
               <View style={styles.imageViewContainer}>{this.displayMainImage()}</View>
               <ViewContainer style={{ height: 30 }}>{this.displayDownloadIndicator()}</ViewContainer>
-
               <View style={styles.bodyContainer}>
                 <View style={styles.titleContainer}>
                   <Text style={styles.title}>{this.state.subLocation.title.plain_text}</Text>
                 </View>
-                <View>{this.displayArticle()}</View>
                 <View>{this.displayContent()}</View>
+                <View>{this.displayArticle()}</View>
               </View>
             </ScrollView>
           </View>
