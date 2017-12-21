@@ -6,13 +6,16 @@ App for iphone/android displaying guides on specific locations in helsingborg. I
 ## Getting started
 
 1. Clone repo from [Repo](ssh://adchbgstad@adchbgstad.visualstudio.com:22/HybirdApp/_git/GuideHbg)
-2. Install node pakages 
-    *   npm install or yarn
+2. Install node packages 
+    *   npm install
 
 > To debug the Javascript packager will have to run in background. This will give the option for hotreloding and remote debugging Javascript from Chrome. When building for release this features is disabled.
 
 
 ### IOS
+Prerequisites:
+- [Cocoapods](https://cocoapods.org/)
+1. ```pod install```
 
 >If you want to build from command line:
     
@@ -27,6 +30,11 @@ App for iphone/android displaying guides on specific locations in helsingborg. I
     * Make sure your device is on the same network if you run on physical device.
 
 ### Android
+Prerequisites:
+- Create a file ```android/release.properties``` that contains
+```
+storeFile=../relative/path/to/release.keystore
+```
 
 >If you want to build from command line:
 1. Go to root folder of solution
@@ -42,23 +50,25 @@ App for iphone/android displaying guides on specific locations in helsingborg. I
 ### React native
 Most of the user interface(UI) is created in react native with JSX syntax. Some of the UI elements is also based on the native components which comes with react. 
 
-The basic architechture follow standard react flow with state and props. The data flow is handled with redux which is handling data in a single store across the entire application. The data is fetched with axios(simple ajax library). Data only flow in one direction having the store as single atomic state.
+The basic architechture follow standard react flow with state and props. The data flow is handled with redux which is handling data in a single store across the entire application. Data only flow in one direction having the store as single atomic state.
 
 The basic folder structure for the react part is as follows:
 
 ```
 root
-│   index.<platform>.js
+│   index.js
 └───src
 │   │
-    └───components
-    │   └─── <platform>         
-    │   └───  scenes
-    │   └───  shared   
-    │   
-    └───service 
+|   └───components
+|   │   └───  screens
+|   │   └───  shared   
+|   │   
+|   └───service 
+└───android
+└───ios
+|
 ```
-The views are gatherd in the scenes folder in which act as the house for different components ans modules. The shared folder holds componentes that can be used by different views.
+The views are gathered in the screens folder in which act as the house for different components ans modules. The shared folder holds components that can be used by different views.
 
 The services folder has most of the view logic of the application as well as communication between custom native components(ios and android) and react native. 
 
@@ -311,13 +321,13 @@ To build for  App Store  follow the steps on this [page](https://facebook.github
 
 Building for release in Android is pretty much covered [here](https://facebook.github.io/react-native/docs/signed-apk-android.html)
 
-making sure the setting in the global ```~/.gradle/gradle.propertie```
+make sure to create a file ```android/release.properties``` that contains
 
 ```
-MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
-MYAPP_RELEASE_KEY_ALIAS=my-key-alias
-MYAPP_RELEASE_STORE_PASSWORD=1234567
-MYAPP_RELEASE_KEY_PASSWORD=1234567
+storeFile=../relative/path/to/release.keystore
+keyAlias=key-alias
+keyPassword=key-password
+storePassword=store-password
 ```
 
 Then running ```cd android && ./gradlew assembleRelease```
