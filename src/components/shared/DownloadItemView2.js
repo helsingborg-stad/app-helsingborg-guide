@@ -1,14 +1,21 @@
 import React from "react";
-import { Platform, View, Text, StyleSheet, ProgressBarAndroid, ProgressViewIOS } from "react-native";
+import { Platform, View, Text, StyleSheet, ProgressBarAndroid, ProgressViewIOS, Dimensions } from "react-native";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import LangService from "../../services/langService";
 
+const SCREEN_WIDTH = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    maxHeight: 30,
-    justifyContent: "flex-start",
+    alignSelf: "stretch",
+    alignItems: "center",
+  },
+  progressView: {
+    position: "absolute",
+    width: SCREEN_WIDTH,
+    bottom: 0,
   },
 });
 
@@ -26,11 +33,13 @@ const DownloadItemView2 = ({ total, currentPos, progress }) => {
       );
     } else {
       item =
-        Platform.OS === "ios" ? (
-          <ProgressViewIOS progressTintColor="#D35098" style={styles.progressView} progress={progress} />
-        ) : (
-          <ProgressBarAndroid color="#D35098" styleAttr="Horizontal" indeterminate={false} progress={progress} />
-        );
+        Platform.OS === "ios"
+          ? (
+            <ProgressViewIOS progressTintColor="#D35098" style={styles.progressView} progress={progress} />
+          )
+          : (
+            <ProgressBarAndroid color="#D35098" styleAttr="Horizontal" indeterminate={false} progress={progress} />
+          );
     }
 
     return <View style={styles.wrapper}>{item}</View>;

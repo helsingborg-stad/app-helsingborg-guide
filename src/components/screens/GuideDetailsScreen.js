@@ -30,7 +30,7 @@ import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import downloadManager from "../../services/DownloadTasksManager";
 import fetchService from "../../services/FetchService";
-import IconTextTouchable from '../shared/IconTextTouchable';
+import IconTextTouchable from "../shared/IconTextTouchable";
 import {
   Colors,
   TextStyles,
@@ -40,7 +40,7 @@ import {
   AnalyticsUtils,
 } from "../../utils/";
 
-const searchIcon = require("../../images/iconSettings.png");
+const searchIcon = require("../../images/search-id.png");
 
 const HALF_WIDTH = Dimensions.get("window").width / 2;
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
@@ -74,6 +74,18 @@ const styles = StyleSheet.create({
       marginRight: 8,
     },
   ]),
+  barButtonItemImage: {
+    height: 20,
+    width: 20,
+  },
+  downloadContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderBottomColor: Colors.warmGrey,
+    borderBottomWidth: 0.25,
+    height: 40,
+  },
   titleContainer: {
     flex: 1,
     paddingHorizontal: 34,
@@ -494,20 +506,23 @@ class GuideDetailsScreen extends Component {
   };
 
   displayDownloadIndicator() {
-    return this.state.downloadMeta
-      ? (
-        <DownloadItemView2
-          total={this.state.downloadMeta.urls.length}
-          currentPos={this.state.downloadMeta.currentPos}
-          isCanceled={this.state.downloadMeta.isCanceled}
-          progress={this.state.downloadMeta.currentPos / this.state.downloadMeta.urls.length}
-        />
-      )
-      : <IconTextTouchable
-        text={LangService.strings.DOWNLOAD}
-        iconName="get-app"
-        onPress={() => this.createAndStartTask()}
-      />;
+    return (
+      <View style={styles.downloadContainer}>
+        {this.state.downloadMeta
+          ? (<DownloadItemView2
+            total={this.state.downloadMeta.urls.length}
+            currentPos={this.state.downloadMeta.currentPos}
+            isCanceled={this.state.downloadMeta.isCanceled}
+            progress={this.state.downloadMeta.currentPos / this.state.downloadMeta.urls.length}
+          />
+          )
+          : <IconTextTouchable
+            text={LangService.strings.DOWNLOAD}
+            iconName="get-app"
+            onPress={() => this.createAndStartTask()}
+          />}
+      </View>
+    );
   }
 
   displayMainImage() {
@@ -658,7 +673,7 @@ class GuideDetailsScreen extends Component {
               scrollEventThrottle={100}
             >
               <View style={styles.imageViewContainer}>{this.displayMainImage()}</View>
-              <ViewContainer style={{ height: 60 }}>{this.displayDownloadIndicator()}</ViewContainer>
+              {this.displayDownloadIndicator()}
               <View style={styles.bodyContainer}>
                 <View style={styles.titleContainer}>
                   <Text style={styles.title}>{this.state.subLocation.title.plain_text}</Text>
