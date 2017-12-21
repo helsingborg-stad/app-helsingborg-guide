@@ -25,7 +25,7 @@ import {
   UrlUtils,
 } from "../../utils/";
 import LangService from "../../services/langService";
-import DirectionsTouchable from "./DirectionsTouchable";
+import IconTextTouchable from "./IconTextTouchable";
 
 const ios = Platform.OS === "ios";
 
@@ -358,33 +358,33 @@ export default class MapWithListView extends Component {
     const { contentType, contentObject } = listItem;
     switch (contentType) {
       case "location":
-      {
-        AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
-        navigate("LocationDetailsScreen", { location: contentObject });
-        break;
-      }
+        {
+          AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
+          navigate("LocationDetailsScreen", { location: contentObject });
+          break;
+        }
       case "trail":
-      {
-        const trail = contentObject;
-        const title = trail.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
-        navigate("TrailScreen", { trail, title });
-        return;
-      }
+        {
+          const trail = contentObject;
+          const title = trail.guidegroup[0].name;
+          AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
+          navigate("TrailScreen", { trail, title });
+          return;
+        }
       case "guide":
-      {
-        const guide = contentObject;
-        const title = guide.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
-        navigate("GuideDetailsScreen", { id: guide.id, title });
-        return;
-      }
+        {
+          const guide = contentObject;
+          const title = guide.guidegroup[0].name;
+          AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
+          navigate("GuideDetailsScreen", { id: guide.id, title });
+          return;
+        }
       default:
-      {
-        const { title, id } = contentObject;
-        AnalyticsUtils.logEvent("view_object", { id, name: title });
-        navigate("ObjectDetailsScreen", { title, contentObject });
-      }
+        {
+          const { title, id } = contentObject;
+          AnalyticsUtils.logEvent("view_object", { id, name: title });
+          navigate("ObjectDetailsScreen", { title, contentObject });
+        }
     }
   }
 
@@ -513,7 +513,13 @@ export default class MapWithListView extends Component {
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
             <Text style={styles.listItemAddress} numberOfLines={1}>{streetAdress}</Text>
-            {!trailScreen ? null : <DirectionsTouchable item={item} onPress={() => this.onListItemDirectionsButtonPressed(item)} />}
+            {!trailScreen
+              ? null
+              : <IconTextTouchable
+                iconName="directions"
+                text={LangService.strings.DIRECTIONS}
+                onPress={() => this.onListItemDirectionsButtonPressed(item)}
+              />}
             {this.displayGuideNumber(item.contentObject.numberOfGuides, item.contentType)}
           </View>
         </View>

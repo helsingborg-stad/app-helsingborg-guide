@@ -37,7 +37,7 @@ import {
   AnalyticsUtils,
   LocationUtils,
 } from "../../utils/";
-import DirectionsTouchable from "./../shared/DirectionsTouchable";
+import IconTextTouchable from "./../shared/IconTextTouchable";
 
 const styles = StyleSheet.create({
   scrollView: {},
@@ -306,9 +306,12 @@ class LocationDetailsScreen extends Component {
                   {LocationDetailsScreen.displayOpeningTime(this.state.location)}
                   {LocationDetailsScreen.displayDistance(this.props.geolocation, this.state.location._embedded.location)}
                 </View>
-                <DirectionsTouchable onPress={() => {
-                  this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
-                }}
+                <IconTextTouchable
+                  iconName="directions"
+                  text={LangService.strings.DIRECTIONS}
+                  onPress={() => {
+                    this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
+                  }}
                 />
               </View>
               {this.displaySubLocations()}

@@ -30,7 +30,7 @@ import SlimNotificationBar from "../shared/SlimNotificationBar";
 import NoInternetText from "../shared/noInternetText";
 import downloadManager from "../../services/DownloadTasksManager";
 import fetchService from "../../services/FetchService";
-import DownloadGuideView from '../shared/DownloadGuideView';
+import IconTextTouchable from '../shared/IconTextTouchable';
 import {
   Colors,
   TextStyles,
@@ -494,14 +494,20 @@ class GuideDetailsScreen extends Component {
   };
 
   displayDownloadIndicator() {
-    return this.state.downloadMeta ? (
-      <DownloadItemView2
-        total={this.state.downloadMeta.urls.length}
-        currentPos={this.state.downloadMeta.currentPos}
-        isCanceled={this.state.downloadMeta.isCanceled}
-        progress={this.state.downloadMeta.currentPos / this.state.downloadMeta.urls.length}
-      />
-    ) : <DownloadGuideView onPress={() => this.createAndStartTask()} />;
+    return this.state.downloadMeta
+      ? (
+        <DownloadItemView2
+          total={this.state.downloadMeta.urls.length}
+          currentPos={this.state.downloadMeta.currentPos}
+          isCanceled={this.state.downloadMeta.isCanceled}
+          progress={this.state.downloadMeta.currentPos / this.state.downloadMeta.urls.length}
+        />
+      )
+      : <IconTextTouchable
+        text={LangService.strings.DOWNLOAD}
+        iconName="get-app"
+        onPress={() => this.createAndStartTask()}
+      />;
   }
 
   displayMainImage() {
@@ -652,7 +658,7 @@ class GuideDetailsScreen extends Component {
               scrollEventThrottle={100}
             >
               <View style={styles.imageViewContainer}>{this.displayMainImage()}</View>
-              <ViewContainer style={{ height: 30 }}>{this.displayDownloadIndicator()}</ViewContainer>
+              <ViewContainer style={{ height: 60 }}>{this.displayDownloadIndicator()}</ViewContainer>
               <View style={styles.bodyContainer}>
                 <View style={styles.titleContainer}>
                   <Text style={styles.title}>{this.state.subLocation.title.plain_text}</Text>
