@@ -22,10 +22,12 @@ const styles = StyleSheet.create({
   titleContainer: { flex: 1, padding: 15 },
   title: StyleSheetUtils.flatten([
     TextStyles.title, {
+      color: Colors.black,
     }],
   ),
   description: StyleSheetUtils.flatten([
     TextStyles.description, {
+      color: Colors.black,
     }],
   ),
   date: StyleSheetUtils.flatten([

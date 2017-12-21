@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     backgroundColor: Colors.white,
-    paddingHorizontal: 34,
+    paddingHorizontal: 20,
   },
   titleContainer: {
     flex: 1,
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     TextStyles.defaultFontFamily, {
       fontSize: 30,
       textAlign: "center",
+      color: Colors.black,
     }],
   ),
   logoContainer: {
@@ -82,18 +83,20 @@ const styles = StyleSheet.create({
       fontSize: 20,
       lineHeight: 21,
       marginVertical: 10,
+      color: Colors.black,
     }],
   ),
   subLocationsHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 20,
       lineHeight: 21,
-      marginVertical: 10,
+      paddingVertical: 10,
+      color: Colors.black,
     }],
   ),
   subLocationsContainer: {
     flex: 1,
-    paddingVertical: 30,
+    paddingVertical: 20,
   },
   subLocationContainer: {
     backgroundColor: Colors.white,
@@ -113,8 +116,9 @@ const styles = StyleSheet.create({
   openTimeText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 16,
-      fontWeight: "300",
+      fontWeight: "normal",
       lineHeight: 19,
+      color: Colors.black,
     }],
   ),
   distanceText: StyleSheetUtils.flatten([
@@ -243,22 +247,28 @@ class LocationDetailsScreen extends Component {
 
   displaySubLocations() {
     if (!this.state.sublocations.length) return null;
-    return this.state.sublocations.map((subLocation) => {
-      if (!subLocation.guide_images || !subLocation.guide_images.length) return null;
-      const forKids = subLocation.guide_kids;
-      return (
-        <TouchableOpacity key={subLocation.id} style={styles.subLocationContainer} onPress={() => this._goToSubLocationScene(subLocation)}>
-          <ListItem
-            imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
-            title={subLocation.title.plain_text}
-            description={subLocation.guide_tagline}
-            startDate={subLocation.guide_date_start}
-            endDate={subLocation.guide_date_end}
-            forKids={forKids}
-          />
-        </TouchableOpacity>
-      );
-    });
+    return (<View style={styles.subLocationsContainer}>
+      <Text style={styles.subLocationsHeaderText}>
+        {LangService.strings.MEDIAGUIDES}
+      </Text>
+      {this.state.sublocations.map((subLocation) => {
+        if (!subLocation.guide_images || !subLocation.guide_images.length) return null;
+        const forKids = subLocation.guide_kids;
+        return (
+          <TouchableOpacity key={subLocation.id} style={styles.subLocationContainer} onPress={() => this._goToSubLocationScene(subLocation)}>
+            <ListItem
+              imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
+              title={subLocation.title.plain_text}
+              description={subLocation.guide_tagline}
+              startDate={subLocation.guide_date_start}
+              endDate={subLocation.guide_date_end}
+              forKids={forKids}
+            />
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+    );
   }
 
   displayArticle() {
@@ -301,12 +311,7 @@ class LocationDetailsScreen extends Component {
                 }}
                 />
               </View>
-              <View style={styles.subLocationsContainer}>
-                <Text style={styles.subLocationsHeaderText}>
-                  {LangService.strings.MEDIAGUIDES}
-                </Text>
-                {this.displaySubLocations()}
-              </View>
+              {this.displaySubLocations()}
               {this.displayArticle()}
             </View>
           </ScrollView>
