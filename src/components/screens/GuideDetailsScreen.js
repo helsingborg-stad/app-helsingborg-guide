@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import { Platform, View, Text, AppState, TouchableOpacity, Image, StyleSheet, ScrollView, Dimensions } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view";
 import ContentThumbnail from "../shared/contentThumbnail";
 import Footer from "../shared/footer";
-import RoundedBtn from "../shared/roundedBtnWithText";
 import Keypad from "../shared/KeyPad";
-import OptionsContentView from "../shared/OptionsContentView";
 import DownloadItemView2 from "../shared/DownloadItemView2";
 
 import LangService from "../../services/langService";
@@ -42,7 +38,6 @@ import {
 
 const searchIcon = require("../../images/search-id.png");
 
-const HALF_WIDTH = Dimensions.get("window").width / 2;
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
 const RADAR_SCANNING_PERIOD = 1000; // ms
 const RADAR_SCANNING_DIE_PERIOD = 1000; // ms
@@ -59,6 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     backgroundColor: Colors.white,
+    paddingHorizontal: 20,
   },
   barButtonItem: {
     flexDirection: "row",
@@ -110,20 +106,41 @@ const styles = StyleSheet.create({
   },
   objectsContainer: {
     flex: 1,
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
     paddingBottom: 20,
     marginBottom: 50,
   },
   ContentThumbnailContainer: {
-    width: HALF_WIDTH,
     flexDirection: "row",
-    alignItems: "center",
+    backgroundColor: Colors.white,
     justifyContent: "center",
+    elevation: 8,
     marginVertical: 10,
+    shadowColor: "black",
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
   },
+  ContentThumbnail: {
+    flex: 1,
+  },
+  ContentTextContainer: {
+    flex: 2,
+    flexDirection: "column",
+    padding: 20,
+  },
+  idText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.black,
+    }],
+  ),
+  contentNameText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 20,
+      lineHeight: 21,
+      marginVertical: 10,
+      color: Colors.black,
+    }],
+  ),
   closeBtnContainer: {
     flex: 1,
     alignItems: "center",
@@ -187,7 +204,6 @@ class GuideDetailsScreen extends Component {
 
     this.state = {
       subLocation: this.props.subLocation,
-      viewArticle: false,
       keypadVisible: false,
       closestBeacon: {},
       searching: true,
@@ -452,10 +468,10 @@ class GuideDetailsScreen extends Component {
 
       const text = (
         <View style={{ flex: 1, justifyContent: "flex-start" }}>
-          <Text style={[TextStyles.defaultFontFamily, { fontSize: 16, fontWeight: "300", marginVertical: 3 }]}>
-            {`#${contentObjects[key].id}`}
+          <Text style={styles.contentNameText}>{contentObjects[key].title}</Text>
+          <Text style={styles.idText}>
+            {`ID #${contentObjects[key].id}`}
           </Text>
-          <Text style={[TextStyles.defaultFontFamily, { fontSize: 14, marginVertical: 3 }]}>{contentObjects[key].title}</Text>
         </View>
       );
 
@@ -465,15 +481,17 @@ class GuideDetailsScreen extends Component {
           onPress={() => {
             this._goToContentObjectScene(contentObjects[key], key);
           }}
-          style={[styles.ContentThumbnailContainer]}
+          style={styles.ContentThumbnailContainer}
         >
           <ContentThumbnail
+            style={styles.ContentThumbnail}
             imageSource={{ uri: mImage.medium_large }}
             width={mImage["medium_large-width"]}
             height={mImage["medium_large-height"]}
-          >
+          />
+          <View style={styles.ContentTextContainer}>
             {text}
-          </ContentThumbnail>
+          </View>
         </TouchableOpacity>
       );
     });
@@ -608,38 +626,6 @@ class GuideDetailsScreen extends Component {
   }
   onScroll(e) {
     this.watchTheScroll(e);
-  }
-
-  displayFabs() {
-    return (
-      <OptionsContentView>
-        <RoundedBtn
-          style={styles.fabBtn}
-          label={LangService.strings.SEARCH_BY_NUMBER}
-          active={<Icon2 name="search" size={20} color="white" />}
-          idle={<Icon2 name="search" size={20} color="white" />}
-          onPress={() => {
-            this.toggleKeypadVisibility();
-          }}
-        />
-        <RoundedBtn
-          style={styles.fabBtn}
-          label={this.state.viewArticle ? LangService.strings.CLOSE_MORE_INFO : LangService.strings.MORE_INFO}
-          isActive={this.state.viewArticle}
-          disabled={!this.state.subLocation.content || this.state.subLocation.content.plain_text === ""}
-          active={<Icon2 name="close" size={20} color="white" />}
-          idle={<Icon name="info" size={20} color="white" />}
-          onPress={() => this.toggleArticleView()}
-        />
-        <RoundedBtn
-          style={styles.fabBtn}
-          label={LangService.strings.DOWNLOAD}
-          active={<Icon2 name="file-download" size={20} color="white" />}
-          idle={<Icon2 name="file-download" size={20} color="white" />}
-          onPress={this.createAndStartTask}
-        />
-      </OptionsContentView>
-    );
   }
 
   onSmallBtnPressed = () => {

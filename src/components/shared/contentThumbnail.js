@@ -11,10 +11,8 @@ const styles = StyleSheet.create({
     flex: 1,
     borderColor: "#ebebeb",
     backgroundColor: "white",
-    padding: 5,
     justifyContent: "flex-start",
     alignItems: "center",
-    height: IMAGE_WIDTH + 100,
   },
   image: {
     width: IMAGE_WIDTH,
