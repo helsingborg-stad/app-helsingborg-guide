@@ -29,8 +29,15 @@ import * as subLocationActions from "../../actions/subLoactionActions";
 
 const defaultMargin = 20;
 const helsingborgIcon = require("../../images/HBG.png");
+const goBackIcon = require("../../images/iconBack.png");
 
 const styles = StyleSheet.create({
+  barButtonItem: {
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -108,12 +115,22 @@ class SettingsScreen extends Component {
     subLocationActions: PropTypes.object.isRequired,
   }
 
-  static navigationOptions = () => {
+
+  static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.SETTINGS;
     return {
       title,
+      headerLeft: (
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.barButtonItem}
+        >
+          <Image source={goBackIcon} />
+        </TouchableOpacity>
+      ),
     };
   };
+
 
   constructor(props) {
     super(props);
@@ -189,6 +206,7 @@ class SettingsScreen extends Component {
 
   render() {
     return (
+
       <View style={styles.container}>
         <Text style={textStyles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
         <View style={styles.languageContainer}>
