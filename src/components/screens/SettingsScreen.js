@@ -58,7 +58,9 @@ const styles = StyleSheet.create({
     margin: defaultMargin,
   },
   contactUsContainer: {
+    flex: 1,
     alignItems: "center",
+    justifyContent: "center"
   },
   divider: {
     margin: defaultMargin,
@@ -70,18 +72,26 @@ const styles = StyleSheet.create({
 const textStyles = StyleSheet.create({
   titleText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 20,
+      fontSize: 16,
       lineHeight: 23,
       fontWeight: "500",
       color: Colors.black,
+      fontWeight: 'bold',
       marginHorizontal: defaultMargin,
       marginTop: defaultMargin,
       marginBottom: 10,
     }],
   ),
+  languageText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      fontSize: 18,
+      color: Colors.black,
+    }],
+  ),
   linkText: StyleSheetUtils.flatten([
     TextStyles.body, {
-      color: Colors.purple,
+      fontSize: 18,
+      color: Colors.black,
       marginHorizontal: defaultMargin,
     }],
   ),
@@ -186,7 +196,7 @@ class SettingsScreen extends Component {
 
     return languages.map((language) => {
       const { name, slug } = language;
-      const style = { color: Colors.purple };
+      const style = { color: Colors.purple, fontWeight: 'bold', textDecorationLine: 'underline'};
       const selectedStyle = this.state.selectedLanguageCode === slug ? style : null;
       const btnDisabled = this.state.selectedLanguageCode === slug;
 
@@ -198,7 +208,7 @@ class SettingsScreen extends Component {
           activeOpacity={0.7}
           style={styles.choiceContainer}
         >
-          <Text style={[textStyles.choiceText, selectedStyle]}>{name.split(" ")[0]}</Text>
+          <Text style={[textStyles.languageText, selectedStyle]}>{name.split(" ")[0]}</Text>
         </TouchableOpacity>
       );
     });
@@ -213,12 +223,10 @@ class SettingsScreen extends Component {
           <View style={styles.languageChoicesContainer}>{this.displayLanguages()}</View>
         </View>
         <View style={styles.divider} />
-        <Text style={textStyles.titleText}>{LangService.strings.ABOUT} {LangService.strings.APP_NAME}</Text>
         <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
-        <Text style={textStyles.titleText}>{LangService.strings.OFFLINE_CONTENT_TITLE} </Text>
         <TouchableOpacity onPress={this.navigateToDownloadsScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.OFFLINE_CONTENT}</Text>
         </TouchableOpacity>
@@ -226,6 +234,7 @@ class SettingsScreen extends Component {
         <View style={styles.contactUsContainer}>
           <Image source={helsingborgIcon} style={styles.icon} />
           <View style={styles.contactTextContainer}>
+
             <Text style={textStyles.contactEmailText}>kontaktcenter@helsingborg.se</Text>
             <Text style={textStyles.contactPhoneText}>042-10 50 00</Text>
           </View>
