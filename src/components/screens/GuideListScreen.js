@@ -70,6 +70,12 @@ const styles = StyleSheet.create({
   tabBarIndicator: {
     backgroundColor: Colors.white,
   },
+  contentMissingText:{
+    fontSize: 20,
+    color: Colors.warmGrey,
+    textAlign: "center",
+    paddingTop: 20,
+  },
 });
 
 // Needed to get the correct layout on the firts page in the animated tab view
@@ -218,6 +224,14 @@ class GuideListScreen extends Component {
       item.description = GuideListScreen.descriptionForItem(item, locations);
       item.numberOfGuides = GuideListScreen.numberOfGuidesForItem(item, subLocations);
     });
+
+    if(items.length == 0) {
+      return (
+      <Text style={styles.contentMissingText}>
+        {LangService.strings.CONTENT_MISSING}
+      </Text>
+    );
+    }
 
     if (currentLocation) {
       // calculate distances from current location
