@@ -7,13 +7,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  LayoutAnimation,
   Linking,
   Platform,
 } from "react-native";
 import PropTypes from "prop-types";
-import Icon from "react-native-vector-icons/FontAwesome";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
 import {
   bindActionCreators,
 } from "redux";
@@ -24,11 +21,7 @@ import * as _ from "lodash";
 import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view";
 import ListItem from "../shared/list_item";
-import RoundedBtn from "../shared/roundedBtnWithText";
-import OptionsFloatingBtn from "../shared/OptionsFloatingBtn";
-import OptionsView from "../shared/OptionsView";
-import OptionsContentView from "../shared/OptionsContentView";
-import LogoView from "../shared/LogoView";
+import DistanceView from "../shared/DistanceView";
 import TimingService from "../../services/timingService";
 import LangService from "../../services/langService";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
@@ -42,7 +35,9 @@ import {
 import {
   StyleSheetUtils,
   AnalyticsUtils,
+  LocationUtils,
 } from "../../utils/";
+import DirectionsTouchable from "./../shared/DirectionsTouchable";
 
 const styles = StyleSheet.create({
   scrollView: {},
@@ -54,79 +49,89 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     backgroundColor: Colors.white,
+    paddingHorizontal: 20,
   },
   titleContainer: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 15,
-    marginTop: 10,
+    alignItems: "flex-start",
+    paddingTop: 12,
+    paddingBottom: 4,
   },
   title: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 23,
-      fontWeight: "bold",
+      fontSize: 30,
       textAlign: "center",
+      color: Colors.black,
     }],
   ),
   logoContainer: {
     flex: 1,
     padding: 10,
   },
-  logo: {
-    marginVertical: 10,
-    width: 100,
-    height: 50,
-  },
   articleContainer: {
     flex: 4,
-    paddingHorizontal: 34,
     paddingVertical: 10,
   },
   articleDescriptionText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
-      fontSize: 14,
-      lineHeight: 20,
+    TextStyles.description, {
+      color: Colors.warmGrey,
     }],
   ),
   articleHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 19,
+      fontSize: 20,
       lineHeight: 21,
       marginVertical: 10,
+      color: Colors.black,
+    }],
+  ),
+  subLocationsHeaderText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 20,
+      lineHeight: 21,
+      paddingVertical: 10,
+      color: Colors.black,
     }],
   ),
   subLocationsContainer: {
     flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
   subLocationContainer: {
+    backgroundColor: Colors.white,
     minHeight: 160,
     justifyContent: "center",
-    borderTopWidth: 1,
-    borderTopColor: Colors.greyBorderColor,
+    elevation: 8,
+    marginVertical: 10,
+    shadowColor: "black",
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
   },
   openTimeContainer: {
     flex: 1,
-    paddingVertical: 20,
+    paddingVertical: 4,
   },
   openTimeText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 16,
-      fontWeight: "300",
+      fontWeight: "normal",
       lineHeight: 19,
+      color: Colors.black,
+    }],
+  ),
+  distanceText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      fontWeight: "400",
+      color: Colors.warmGrey,
+      textAlign: "left",
     }],
   ),
   closeBtnContainer: {
     flex: 1,
     alignItems: "center",
     paddingVertical: 15,
-  },
-  fabBtn: {
-    width: 40,
-    height: 40,
-    backgroundColor: Colors.lightPink,
   },
   comingSoonView: {
     flex: 1,
@@ -165,11 +170,6 @@ class LocationDetailsScreen extends Component {
     };
   };
 
-  static displayLogo(guideGroup) {
-    const logoType = guideGroup.apperance.logotype;
-    return <LogoView logoType={logoType} placeHolder={guideGroup.name} />;
-  }
-
   // TODO extract to some service class
   static async openUrlIfValid(url) {
     try {
@@ -200,9 +200,16 @@ class LocationDetailsScreen extends Component {
     const opening = TimingService.getOpeningHours(openingList, expList);
     const text = opening || "";
     return (
-      <View style={styles.openTimeContainer}>
-        <Text style={styles.openTimeText}>{text}</Text>
-      </View>
+      <Text style={styles.openTimeText}>{text}</Text>
+    );
+  }
+
+  static displayDistance(currentLocation, locations) {
+    const { coords } = currentLocation;
+    const distance = LocationUtils.getShortestDistance(coords, locations);
+    if (!distance) return null;
+    return (
+      <DistanceView style={styles.distanceText} distance={distance} useFromHereText />
     );
   }
 
@@ -214,11 +221,8 @@ class LocationDetailsScreen extends Component {
     this.state = {
       location,
       sublocations: subLocations,
-      viewArticle: !location.settings.active,
-      menuVisible: false,
       internet,
     };
-    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -231,14 +235,6 @@ class LocationDetailsScreen extends Component {
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
   }
 
-  toggleMenu() {
-    this.setState({ menuVisible: !this.state.menuVisible });
-  }
-
-  closeMenu = () => {
-    if (this.state.menuVisible) this.setState({ menuVisible: false });
-  };
-
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
     const { name } = subLocation.guidegroup[0];
@@ -249,41 +245,31 @@ class LocationDetailsScreen extends Component {
     });
   }
 
-  _goToMapView = () => {
-    this.toggleMenu();
-
-    const { navigate } = this.props.navigation;
-    const { name } = this.state.location;
-    navigate("LocationOnMapScreen", { subLocations: this.state.sublocations, name });
-  };
-
   displaySubLocations() {
     if (!this.state.sublocations.length) return null;
-    return this.state.sublocations.map((subLocation) => {
-      if (!subLocation.guide_images || !subLocation.guide_images.length) return null;
-      const forKids = subLocation.guide_kids;
-
-      return (
-        <TouchableOpacity key={subLocation.id} style={styles.subLocationContainer} onPress={() => this._goToSubLocationScene(subLocation)}>
-          <ListItem
-            imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
-            content={subLocation.title.plain_text}
-            checked={forKids}
-          />
-        </TouchableOpacity>
-      );
-    });
+    return (<View style={styles.subLocationsContainer}>
+      <Text style={styles.subLocationsHeaderText}>
+        {LangService.strings.MEDIAGUIDES}
+      </Text>
+      {this.state.sublocations.map((subLocation) => {
+        if (!subLocation.guide_images || !subLocation.guide_images.length) return null;
+        const forKids = subLocation.guide_kids;
+        return (
+          <TouchableOpacity key={subLocation.id} style={styles.subLocationContainer} onPress={() => this._goToSubLocationScene(subLocation)}>
+            <ListItem
+              imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
+              title={subLocation.title.plain_text}
+              description={subLocation.guide_tagline}
+              startDate={subLocation.guide_date_start}
+              endDate={subLocation.guide_date_end}
+              forKids={forKids}
+            />
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+    );
   }
-
-  toggleArticleView() {
-    this.toggleMenu();
-    LayoutAnimation.easeInEaseOut();
-    this.setState({ viewArticle: !this.state.viewArticle });
-  }
-
-  toggleMainMenu = () => {
-    this.props.navigation.navigate("DrawerToggle");
-  };
 
   displayArticle() {
     const article = (
@@ -292,60 +278,7 @@ class LocationDetailsScreen extends Component {
         <Text style={styles.articleDescriptionText}>{this.state.location.description}</Text>
       </View>
     );
-
-    if (this.state.viewArticle) return article;
-    return null;
-  }
-
-  displayFabs() {
-    if (!Object.keys(this.state.location).length) return null;
-
-    const mapVisible = this.state.location.settings.map && this.state.sublocations;
-    const directions = (
-      <RoundedBtn
-        style={styles.fabBtn}
-        label={LangService.strings.TAKE_ME_THERE}
-        active={<Icon2 name="directions" size={20} color="white" />}
-        idle={<Icon2 name="directions" size={20} color="white" />}
-        onPress={() => {
-          this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
-        }}
-      />
-    );
-    const info = (
-      <RoundedBtn
-        style={styles.fabBtn}
-        label={this.state.viewArticle ? LangService.strings.CLOSE_MORE_INFO : LangService.strings.MORE_INFO}
-        isActive={this.state.viewArticle}
-        active={<Icon2 name="close" size={20} color="white" />}
-        idle={<Icon name="info" size={20} color="white" />}
-        onPress={() => this.toggleArticleView()}
-      />
-    );
-    if (mapVisible) {
-      const mapFab = (
-        <RoundedBtn
-          style={styles.fabBtn}
-          label={LangService.strings.SHOW_MAP}
-          active={<Icon name="map-marker" size={20} color="white" />}
-          idle={<Icon name="map-marker" size={20} color="white" />}
-          onPress={this._goToMapView}
-        />
-      );
-      return (
-        <OptionsContentView>
-          {directions}
-          {info}
-          {mapFab}
-        </OptionsContentView>
-      );
-    }
-    return (
-      <OptionsContentView>
-        {directions}
-        {info}
-      </OptionsContentView>
-    );
+    return article;
   }
 
   display() {
@@ -368,11 +301,18 @@ class LocationDetailsScreen extends Component {
             </View>
             <View style={styles.bodyContainer}>
               <View style={styles.titleContainer}>
-                {LocationDetailsScreen.displayLogo(this.state.location)}
-                {LocationDetailsScreen.displayOpeningTime(this.state.location)}
+                <Text style={styles.title}>{this.state.location.name}</Text>
+                <View style={styles.openTimeContainer}>
+                  {LocationDetailsScreen.displayOpeningTime(this.state.location)}
+                  {LocationDetailsScreen.displayDistance(this.props.geolocation, this.state.location._embedded.location)}
+                </View>
+                <DirectionsTouchable onPress={() => {
+                  this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
+                }}
+                />
               </View>
+              {this.displaySubLocations()}
               {this.displayArticle()}
-              <View style={styles.subLocationsContainer}>{this.displaySubLocations()}</View>
             </View>
           </ScrollView>
         </ViewContainer>
@@ -393,17 +333,11 @@ class LocationDetailsScreen extends Component {
     if (Platform.OS === "ios") url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${daddr}&saddr=${saddr}`;
 
     LocationDetailsScreen.openUrlIfValid(url);
-    this.toggleMenu();
   }
 
   render() {
     return (
       <ViewContainer>
-        <OptionsFloatingBtn onPress={this.toggleMenu} />
-
-        <OptionsView onPress={this.closeMenu} visible={this.state.menuVisible}>
-          {this.displayFabs()}
-        </OptionsView>
         {this.display()}
       </ViewContainer>
     );
