@@ -1,17 +1,10 @@
+import { AsyncStorage } from "react-native";
 import { createStore, compose, applyMiddleware } from "redux";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import thunk from "redux-thunk";
-import { persistStore, persistReducer } from "redux-persist";
-import { AsyncStorage } from "react-native";
+import { autoRehydrate, persistStore } from "redux-persist";
 import rootReducer from "../reducers/index";
 
-const config = {
-  key: "root",
-  storage: AsyncStorage,
-  blacklist: ["error", "menu", "internet", "audio"],
-};
-
-const reducer = persistReducer(config, rootReducer);
 
 function configureStoreProd(initialState) {
   const middlewares = [
@@ -22,7 +15,11 @@ function configureStoreProd(initialState) {
     thunk,
   ];
 
-  return createStore(reducer, initialState, compose(applyMiddleware(...middlewares)));
+  return createStore(rootReducer, initialState, compose(
+    applyMiddleware(...middlewares),
+    autoRehydrate(),
+  ),
+  );
 }
 
 function configureStoreDev(initialState) {
@@ -38,7 +35,11 @@ function configureStoreDev(initialState) {
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
-  const store = createStore(reducer, initialState, composeEnhancers(applyMiddleware(...middlewares)));
+  const store = createStore(rootReducer, initialState, composeEnhancers(
+    applyMiddleware(...middlewares),
+    autoRehydrate(),
+  ),
+  );
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
@@ -55,7 +56,13 @@ const configureStore = process.env.NODE_ENV === "production" ? configureStorePro
 
 const store = configureStore();
 
+
 // begin periodically persisting the store
-persistStore(store);
+persistStore(store,
+  {
+    storage: AsyncStorage,
+    blacklist: ["error", "menu", "internet", "audio"],
+  },
+);
 
 export default store;

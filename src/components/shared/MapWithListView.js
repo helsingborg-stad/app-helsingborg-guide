@@ -264,13 +264,16 @@ export default class MapWithListView extends Component {
 
     const { items } = this.props;
     this.state = {
+      isInitialized: false,
       activeMarker: items[0],
       markersFocused: false,
     };
   }
 
   componentWillReceiveProps({ items }) {
-    this.setState({ activeMarker: items[0] });
+    if (!this.state.isInitialized) {
+      this.setState({ isInitialized: true, activeMarker: items[0] });
+    }
   }
 
   focusMarkers(markers) {
