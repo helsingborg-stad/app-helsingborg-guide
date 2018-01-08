@@ -10,14 +10,6 @@ import { Colors, TextStyles } from "../../styles/";
 import { StyleSheetUtils } from "../../utils/";
 
 const styles = StyleSheet.create({
-  listItem: {
-    // height: 200,
-    // backgroundColor:'white',
-  },
-  thumbnailContainer: {
-    flex: 1,
-    // backgroundColor:'white'
-  },
   thumbnail: { height: 180 },
   titleContainer: { flex: 1, padding: 15 },
   title: StyleSheetUtils.flatten([
@@ -63,15 +55,21 @@ function displayImage(imageSource) {
   );
 }
 
+function renderDate(startDate, endDate) {
+  if (startDate === null || endDate === null) { return null; }
+
+  return <Text style={styles.date} numberOfLines={1}>{`${startDate} - ${endDate}`}</Text>;
+}
+
 export default function ListItem({ forKids, title, description, startDate, endDate, imageSource }) {
   return (
     <View>
-      <View style={styles.thumbnailContainer}>{displayImage(imageSource)}</View>
-      <View style={styles.listItem}>
+      <View>{displayImage(imageSource)}</View>
+      <View>
         <View style={styles.titleContainer}>
           <Text style={styles.title} numberOfLines={1}>{title}</Text>
           <Text style={styles.description} numberOfLines={1}>{description}</Text>
-          <Text style={styles.date} numberOfLines={1}>{`${startDate} - ${endDate}`}</Text>
+          {renderDate(startDate, endDate)}
           {forKids ? forKidsView() : null}
         </View>
       </View>
