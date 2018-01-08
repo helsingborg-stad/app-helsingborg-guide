@@ -137,6 +137,7 @@ class TrailScreen extends Component {
         items={trailObjects}
         initialLocation={trailItem.location}
         navigation={navigation}
+        isTrail
       />,
       this.renderMapInformationOverlay(),
       ]
