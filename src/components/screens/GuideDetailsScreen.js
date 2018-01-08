@@ -344,12 +344,15 @@ class GuideDetailsScreen extends Component {
     const allKeys = Object.keys(contentObjects);
     const nearByKeys = this.getNearByObjectsKeys();
     const remainingKeys = GuideDetailsScreen.getRemainingObjectKeys(allKeys, nearByKeys);
-
-    const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
     const contentObjectsViews = this.getObjectsViews(remainingKeys);
-    const nearByObjectsViews = this.getObjectsViews(nearByKeys);
 
     let cc;
+
+    // Removed to prevent the "radar" from being shown.
+/*
+    const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
+    const nearByObjectsViews = this.getObjectsViews(nearByKeys);
+
     if (this.state.searching) cc = <View>{radar}</View>;
     else if (Object.keys(this.state.closestBeacon).length) {
       cc = (
@@ -363,7 +366,7 @@ class GuideDetailsScreen extends Component {
         </View>
       );
     }
-
+*/
     return (
       <View>
         <View>{cc}</View>
