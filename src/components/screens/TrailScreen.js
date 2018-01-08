@@ -137,7 +137,7 @@ class TrailScreen extends Component {
         items={trailObjects}
         initialLocation={trailItem.location}
         navigation={navigation}
-        isTrail
+        stopAudioOnUnmount
       />,
       this.renderMapInformationOverlay(),
       ]

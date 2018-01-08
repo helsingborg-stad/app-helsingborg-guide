@@ -110,7 +110,7 @@ class ObjectDetailsScreen extends Component {
       internet: this.props.internet,
       audioBtnDisabled: false,
       videoBtnDisabled: false,
-      isTrail: params.isTrail,
+      stopAudioOnUnmount: params.stopAudioOnUnmount,
     };
 
     this.mediaService = MediaService.getInstance();
@@ -137,7 +137,7 @@ class ObjectDetailsScreen extends Component {
   }
 
   componentWillUnmount() {
-    if (this.state.isTrail === true) { this.mediaService.release(); }
+    if (this.state.stopAudioOnUnmount === true) { this.mediaService.release(); }
     this.stopListenIngToAudioEvents();
   }
 

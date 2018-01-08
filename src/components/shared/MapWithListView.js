@@ -386,9 +386,9 @@ export default class MapWithListView extends Component {
       default:
       {
         const { title, id } = contentObject;
-        const isTrail = this.props.isTrail === true;
+        const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
         AnalyticsUtils.logEvent("view_object", { id, name: title });
-        navigate("ObjectDetailsScreen", { title, contentObject, isTrail });
+        navigate("ObjectDetailsScreen", { title, contentObject, stopAudioOnUnmount });
       }
     }
   }
