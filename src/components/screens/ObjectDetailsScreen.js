@@ -166,11 +166,14 @@ class ObjectDetailsScreen extends Component {
     if (this.props.metricActions.updateMetric) { this.props.metricActions.updateMetric(metric); }
   }
 
-  _goToVideoView(videoUrl, title) {
+  _goToVideoView(video) {
     this.pauseAudioFile();
 
+    const { url, title, name } = video;
+    if (name) AnalyticsUtils.logEvent("play_video", { name });
+
     const { navigate } = this.props.navigation;
-    navigate("VideoScreen", { videoUrl, title });
+    navigate("VideoScreen", { videoUrl: url, title });
   }
 
   goToImageView(image) {
@@ -251,7 +254,7 @@ class ObjectDetailsScreen extends Component {
       <ButtonsBarItem
         disabled={this.state.videoBtnDisabled}
         onPress={() => {
-          this._goToVideoView(video.url, video.title);
+          this._goToVideoView(video);
         }}
         name="play-box-outline"
         color={Colors.darkPurple}
