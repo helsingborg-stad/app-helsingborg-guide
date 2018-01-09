@@ -22,6 +22,7 @@ import {
 } from "../../styles/";
 import {
   StyleSheetUtils,
+  AnalyticsUtils,
 } from "../../utils/";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
@@ -165,11 +166,14 @@ class ObjectDetailsScreen extends Component {
     if (this.props.metricActions.updateMetric) { this.props.metricActions.updateMetric(metric); }
   }
 
-  _goToVideoView(videoUrl, title) {
+  _goToVideoView(video) {
     this.pauseAudioFile();
 
+    const { url, title, name } = video;
+    if (name) AnalyticsUtils.logEvent("play_video", { name });
+
     const { navigate } = this.props.navigation;
-    navigate("VideoScreen", { videoUrl, title });
+    navigate("VideoScreen", { videoUrl: url, title });
   }
 
   goToImageView(image) {
@@ -207,6 +211,10 @@ class ObjectDetailsScreen extends Component {
     if (this.state.audio.hasAudio) this.mediaService.release();
 
     const { contentObject } = this.state;
+
+    const audioName = contentObject.audio.name;
+    if (audioName) AnalyticsUtils.logEvent("play_audio", { name: audioName });
+
     const audio = {
       url: contentObject.audio.url,
       title: contentObject.title || LangService.strings.UNKNOWN_TITLE,
@@ -246,7 +254,7 @@ class ObjectDetailsScreen extends Component {
       <ButtonsBarItem
         disabled={this.state.videoBtnDisabled}
         onPress={() => {
-          this._goToVideoView(video.url, video.title);
+          this._goToVideoView(video);
         }}
         name="play-box-outline"
         color={Colors.darkPurple}

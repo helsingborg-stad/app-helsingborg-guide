@@ -22,6 +22,7 @@ import {
 } from "../../styles/";
 import {
   StyleSheetUtils,
+  AnalyticsUtils,
 } from "../../utils/";
 import * as guideActions from "../../actions/guideActions";
 import * as navigationActions from "../../actions/navigationActions";
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   contactUsContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   divider: {
     margin: defaultMargin,
@@ -74,9 +75,8 @@ const textStyles = StyleSheet.create({
     TextStyles.defaultFontFamily, {
       fontSize: 16,
       lineHeight: 23,
-      fontWeight: "500",
       color: Colors.black,
-      fontWeight: 'bold',
+      fontWeight: "bold",
       marginHorizontal: defaultMargin,
       marginTop: defaultMargin,
       marginBottom: 10,
@@ -161,6 +161,7 @@ class SettingsScreen extends Component {
   }
 
   setLanguageAndReload = (code) => {
+    AnalyticsUtils.logEvent("change_language", { language_code: code });
     this.setState({ selectedLanguageCode: code });
     LangService.setLanguage(code);
     // Set navigation params to force an update
@@ -196,7 +197,7 @@ class SettingsScreen extends Component {
 
     return languages.map((language) => {
       const { name, slug } = language;
-      const style = { color: Colors.purple, fontWeight: 'bold', textDecorationLine: 'underline'};
+      const style = { color: Colors.purple, fontWeight: "bold", textDecorationLine: "underline" };
       const selectedStyle = this.state.selectedLanguageCode === slug ? style : null;
       const btnDisabled = this.state.selectedLanguageCode === slug;
 
