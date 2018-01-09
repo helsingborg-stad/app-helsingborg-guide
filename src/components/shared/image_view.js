@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import OImage from "./image";
 
-const FULL_HEIGHT = Dimensions.get("window").height;
-const IMAGE_HEIGHT = FULL_HEIGHT / 2 - 70; // 70 is the navbar height
-
 const styles = StyleSheet.create({
   imageContainer: {},
   image: {
@@ -15,17 +12,18 @@ const styles = StyleSheet.create({
 });
 
 export default class ImageView extends Component {
-  _getOptWidth(width) {
-    return width * (Dimensions.get("window").width / width);
-  }
 
   displayImage() {
+    //Using full screen width and a 16:9 aspect ratio
+    displayWidth = Dimensions.get("window").width;
+    displayHeight = (displayWidth/16)*9;
+
     return (
       <OImage
         style={[
           {
-            width: this._getOptWidth(this.props.width),
-            height: IMAGE_HEIGHT, // 25 is half navbar height
+            width: displayWidth,
+            height: displayHeight,
             zIndex: 1000,
           },
           styles.image,
