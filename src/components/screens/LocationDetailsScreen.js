@@ -205,6 +205,7 @@ class LocationDetailsScreen extends Component {
   }
 
   static displayDistance(currentLocation, locations) {
+    if(!currentLocation) return null;
     const { coords } = currentLocation;
     const distance = LocationUtils.getShortestDistance(coords, locations);
     if (!distance) return null;
