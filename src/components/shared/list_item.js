@@ -10,7 +10,7 @@ import { Colors, TextStyles } from "../../styles/";
 import { StyleSheetUtils } from "../../utils/";
 
 const styles = StyleSheet.create({
-  thumbnail: { height: 180 },
+  thumbnail: { width: 335, height: 188 },
   titleContainer: { flex: 1, padding: 15 },
   title: StyleSheetUtils.flatten([
     TextStyles.title, {
