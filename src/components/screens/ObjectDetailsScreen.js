@@ -22,6 +22,7 @@ import {
 } from "../../styles/";
 import {
   StyleSheetUtils,
+  AnalyticsUtils,
 } from "../../utils/";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
@@ -207,6 +208,10 @@ class ObjectDetailsScreen extends Component {
     if (this.state.audio.hasAudio) this.mediaService.release();
 
     const { contentObject } = this.state;
+
+    const audioName = contentObject.audio.name;
+    if (audioName) AnalyticsUtils.logEvent("play_audio", { name: audioName });
+
     const audio = {
       url: contentObject.audio.url,
       title: contentObject.title || LangService.strings.UNKNOWN_TITLE,
