@@ -486,7 +486,7 @@ class GuideDetailsScreen extends Component {
 
     if (images && images.length) {
       return (
-        <ImageView source={{ uri: images[0].sizes.large }} width={images[0].sizes["large-width"]} height={images[0].sizes["large-width"]} />
+        <ImageView source={{ uri: images[0].sizes.large }}/>
       );
     }
     return null;
