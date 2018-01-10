@@ -5,7 +5,7 @@ import Swiper from "react-native-swiper";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import ViewContainer from "../shared/view_container";
-import ImageView from "../shared/image_view_content";
+import ImageView from "../shared/image_view";
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
 import LangService from "../../services/langService";
