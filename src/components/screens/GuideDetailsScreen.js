@@ -452,6 +452,7 @@ class GuideDetailsScreen extends Component {
     this.toggleMenu();
     const item = this.state.subLocation;
     if (!downloadManager.isExist(item.id)) {
+      AnalyticsUtils.logEvent("download_guide", { name: item.slug });
       const downloadables = fetchService.scanJsonTree(item);
       const data = { id: item.id, title: item.title.plain_text, avatar: item.guide_images[0].sizes.thumbnail, urls: downloadables };
       downloadManager.createTask(data);

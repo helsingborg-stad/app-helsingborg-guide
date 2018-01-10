@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   tabBarIndicator: {
     backgroundColor: Colors.white,
   },
-  contentMissingText:{
+  contentMissingText: {
     fontSize: 20,
     color: Colors.warmGrey,
     textAlign: "center",
@@ -214,23 +214,23 @@ class GuideListScreen extends Component {
       }
     });
 
-    if (showMap) {
-      const mapItems = MapWithListView.createMapItemsFromNavItems(items);
-      return (<MapWithListView items={mapItems} navigation={navigation} />);
-    }
-
     // number of guides and descriptions
     items.forEach((item) => {
       item.description = GuideListScreen.descriptionForItem(item, locations);
       item.numberOfGuides = GuideListScreen.numberOfGuidesForItem(item, subLocations);
     });
 
-    if(items.length == 0) {
+    if (showMap) {
+      const mapItems = MapWithListView.createMapItemsFromNavItems(items);
+      return (<MapWithListView items={mapItems} navigation={navigation} />);
+    }
+
+    if (items.length === 0) {
       return (
-      <Text style={styles.contentMissingText}>
-        {LangService.strings.CONTENT_MISSING}
-      </Text>
-    );
+        <Text style={styles.contentMissingText}>
+          {LangService.strings.CONTENT_MISSING}
+        </Text>
+      );
     }
 
     if (currentLocation) {
