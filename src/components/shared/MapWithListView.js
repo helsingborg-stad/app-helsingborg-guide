@@ -409,11 +409,11 @@ export default class MapWithListView extends Component {
     let image;
 
     if (imageType === "trail" || contentType === "trail") {
-      image = (activeMarker === trailObject) ? trailMarkerActive : trailMarkerInactive;
+      image = (activeMarker.id === trailObject.id) ? trailMarkerActive : trailMarkerInactive;
     } else if (imageType === "trailScreen") {
-      image = (activeMarker === trailObject) ? numberedMarkerActive : numberedMarkerInactive;
+      image = (activeMarker.id === trailObject.id) ? numberedMarkerActive : numberedMarkerInactive;
     } else {
-      image = (activeMarker === trailObject) ? locationMarkerActive : locationMarkerInactive;
+      image = (activeMarker.id === trailObject.id) ? locationMarkerActive : locationMarkerInactive;
     }
     return image;
   }
@@ -428,7 +428,7 @@ export default class MapWithListView extends Component {
 
     const image = this.markerImageForTrailObject(trailObject);
     const numberString = trailObject.contentObject.order + 1;
-    const active = activeMarker === trailObject;
+    const active = activeMarker.id === trailObject.id;
 
     return (
       <MapView.Marker
