@@ -185,6 +185,15 @@ class GuideListScreen extends Component {
     />);
 
   _renderScene = ({ route }) => {
+
+    //If we're still fetching, show the activity indicator instead
+    const { isFetching } = this.props;
+    if(isFetching) return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator />
+      </View>
+    );
+
     const { showMap, index, routes } = this.state;
     if (Math.abs(index - routes.indexOf(route)) > 2) {
       // Do not render pages that are to far away from the current page
@@ -214,6 +223,14 @@ class GuideListScreen extends Component {
       }
     });
 
+    if (items.length === 0) {
+      return (
+        <Text style={styles.contentMissingText}>
+          {LangService.strings.CONTENT_MISSING}
+        </Text>
+      );
+    }
+
     // number of guides and descriptions
     items.forEach((item) => {
       item.description = GuideListScreen.descriptionForItem(item, locations);
@@ -225,13 +242,7 @@ class GuideListScreen extends Component {
       return (<MapWithListView items={mapItems} navigation={navigation} />);
     }
 
-    if (items.length === 0) {
-      return (
-        <Text style={styles.contentMissingText}>
-          {LangService.strings.CONTENT_MISSING}
-        </Text>
-      );
-    }
+
 
     if (currentLocation) {
       // calculate distances from current location
@@ -245,28 +256,15 @@ class GuideListScreen extends Component {
     return (<GuideList items={items} navigation={navigation} />);
   }
 
-
   render() {
-    const { isFetching } = this.props;
-
-    if (isFetching) {
-      return (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator />
-        </View>
-      );
-    }
-
-    return (
-      <TabViewAnimated
-        swipeEnabled={false}
-        style={styles.container}
-        navigationState={this.state}
-        renderScene={this._renderScene}
-        renderHeader={this._renderHeader}
-        onIndexChange={this._handleIndexChange}
-        initialLayout={initialLayout}
-      />
+    return(
+    <TabViewAnimated
+      style={styles.container}
+      navigationState={this.state}
+      renderScene={this._renderScene}
+      renderHeader={this._renderHeader}
+      onIndexChange={this._handleIndexChange}
+      initialLayout={initialLayout} />
     );
   }
 }

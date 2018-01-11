@@ -299,7 +299,7 @@ class ObjectDetailsScreen extends Component {
     ));
 
     return (
-      <Swiper style={styles.imagesSlider} height={MAX_IMAGE_HEIGHT} dotColor="white" activeDotColor="#D35098" showsButtons={false}>
+      <Swiper style={styles.imagesSlider} height={MAX_IMAGE_HEIGHT} dotColor="white" activeDotColor="#D35098" showsButtons={false} loop={false}>
         {slides}
       </Swiper>
     );
