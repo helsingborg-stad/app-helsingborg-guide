@@ -161,6 +161,18 @@ class GuideListScreen extends Component {
     this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
   }
 
+  componentWillReceiveProps(nextProps) {
+    var {categoryTypes} = nextProps;
+    var routes = [];
+
+    categoryTypes.forEach((element) => {
+      routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
+    });
+
+    this.setState({ routes });
+  }
+
+
   toggleMap = () => {
     const showMap = !this.state.showMap;
     this.props.navigation.setParams({ showMap });
@@ -173,7 +185,21 @@ class GuideListScreen extends Component {
     <Text style={styles.tabBarLabel}>{route.title}</Text>
   )
 
-  _renderHeader = props => (
+  _renderHeader = props => {
+
+    const { routes } = this.state;
+
+    if(routes.length < 2){
+      return (
+        <View>
+          <Text style={styles.contentMissingText}>
+            {LangService.strings.CONTENT_MISSING}
+          </Text>
+        </View>
+      );
+    }
+
+    return(
     <TabBar
       style={styles.tabBar}
       labelStyle={styles.tabBarLabel}
@@ -182,7 +208,7 @@ class GuideListScreen extends Component {
       tabStyle={styles.tabStyle}
       scrollEnabled
       {...props}
-    />);
+    />);}
 
   _renderScene = ({ route }) => {
 
@@ -258,7 +284,7 @@ class GuideListScreen extends Component {
 
   render() {
     return(
-    <TabViewAnimated
+      <TabViewAnimated
       style={styles.container}
       navigationState={this.state}
       renderScene={this._renderScene}
