@@ -161,10 +161,6 @@ class GuideListScreen extends Component {
     this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
   }
 
-  componentWillReceiveProps(nextProps){
-    console.log(nextProps);
-  }
-
   toggleMap = () => {
     const showMap = !this.state.showMap;
     this.props.navigation.setParams({ showMap });
