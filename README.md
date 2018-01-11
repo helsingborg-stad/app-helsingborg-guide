@@ -303,11 +303,18 @@ To build for  App Store  follow the steps on this [page](https://facebook.github
 #### Upload to app store
  The steps to upload to App Store are: 
 
- 1. Create archive 
+ In XCode:
+
+ 1. Set release build configuration
+ * Product > Scheme > Edit scheme
+
+ 2. Bump build number
+
+ 3. Create archive 
  * Choose generic device from device menu. 
  * Select menu Product->Archive
 
- 2. Upload package
+ 4. Upload package
  * Select Window->Organizer
  * Press upload to app store(This will only upload to itunes connect)
  * Follow the steps choosing the correct acconut. 
