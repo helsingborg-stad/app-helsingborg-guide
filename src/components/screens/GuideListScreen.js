@@ -168,14 +168,8 @@ class GuideListScreen extends Component {
     categoryTypes.forEach((element) => {
       routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
     });
-    
-    if(routes.length >= 2)
-    {
-      
-    }
 
     this.setState({ routes });
-
   }
 
 
