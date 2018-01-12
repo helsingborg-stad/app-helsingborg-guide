@@ -2,15 +2,21 @@
  * Created by msaeed on 2017-02-04.
  */
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import OImage from "./image";
 import LangService from "../../services/langService";
 import { Colors, TextStyles } from "../../styles/";
 import { StyleSheetUtils } from "../../utils/";
 
+//The style bodyContainer of LocationDetailScreen has a padding of 20 on each side, hence the "- 40" part.
+const MAX_IMAGE_WIDTH = Dimensions.get("window").width - 40;
+
 const styles = StyleSheet.create({
-  thumbnail: { width: 335, height: 188 },
+  thumbnail: { 
+    width: MAX_IMAGE_WIDTH, 
+    height: (MAX_IMAGE_WIDTH/16)*9
+  },
   titleContainer: { flex: 1, padding: 15 },
   title: StyleSheetUtils.flatten([
     TextStyles.title, {
