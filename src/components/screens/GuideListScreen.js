@@ -162,14 +162,17 @@ class GuideListScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    var {categoryTypes} = nextProps;
-    var routes = [];
+    const {categoryTypes} = nextProps;
+    const routes = [];
+    var {index} = this.state;
 
     categoryTypes.forEach((element) => {
       routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
     });
+    
+    if(index >= routes.length) {index = 0;}
 
-    this.setState({ routes });
+    this.setState({ routes, index });
   }
 
 
