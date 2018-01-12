@@ -157,6 +157,7 @@ class GuideListScreen extends Component {
     };
   }
 
+
   componentDidMount() {
     this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
   }
@@ -164,11 +165,19 @@ class GuideListScreen extends Component {
   componentWillReceiveProps(nextProps) {
     const { categoryTypes } = nextProps;
     const routes = [];
+    let { index } = this.state;
 
     categoryTypes.forEach((element) => {
       routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
     });
 
+    if (index >= routes.length) { index = 0; }
+
+    this.setState({ routes, index });
+  }
+
+  componentWillUnmount() {
+    const routes = [];
     this.setState({ routes });
   }
 
@@ -185,30 +194,16 @@ class GuideListScreen extends Component {
     <Text style={styles.tabBarLabel}>{route.title}</Text>
   )
 
-  _renderHeader = (props) => {
-    const { routes } = this.state;
-
-    if (routes.length < 2) {
-      return (
-        <View>
-          <Text style={styles.contentMissingText}>
-            {LangService.strings.CONTENT_MISSING}
-          </Text>
-        </View>
-      );
-    }
-
-    return (
-      <TabBar
-        style={styles.tabBar}
-        labelStyle={styles.tabBarLabel}
-        renderLabel={this._renderTabBarLabel}
-        indicatorStyle={styles.tabBarIndicator}
-        tabStyle={styles.tabStyle}
-        scrollEnabled
-        {...props}
-      />);
-  }
+  _renderHeader = props => (
+    <TabBar
+      style={styles.tabBar}
+      labelStyle={styles.tabBarLabel}
+      renderLabel={this._renderTabBarLabel}
+      indicatorStyle={styles.tabBarIndicator}
+      tabStyle={styles.tabStyle}
+      scrollEnabled
+      {...props}
+    />)
 
   _renderScene = ({ route }) => {
     // If we're still fetching, show the activity indicator instead
@@ -283,6 +278,17 @@ class GuideListScreen extends Component {
   }
 
   render() {
+    const { routes, index } = this.state;
+    if (routes.length < 2) {
+      return (
+        <View>
+          <Text style={styles.contentMissingText}>
+            {LangService.strings.CONTENT_MISSING}
+          </Text>
+        </View>
+      );
+    }
+
     return (
       <TabViewAnimated
         swipeEnabled={false}
