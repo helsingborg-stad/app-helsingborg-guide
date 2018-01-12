@@ -162,8 +162,8 @@ class GuideListScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    var {categoryTypes} = nextProps;
-    var routes = [];
+    const { categoryTypes } = nextProps;
+    const routes = [];
 
     categoryTypes.forEach((element) => {
       routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
@@ -185,11 +185,10 @@ class GuideListScreen extends Component {
     <Text style={styles.tabBarLabel}>{route.title}</Text>
   )
 
-  _renderHeader = props => {
-
+  _renderHeader = (props) => {
     const { routes } = this.state;
 
-    if(routes.length < 2){
+    if (routes.length < 2) {
       return (
         <View>
           <Text style={styles.contentMissingText}>
@@ -199,26 +198,28 @@ class GuideListScreen extends Component {
       );
     }
 
-    return(
-    <TabBar
-      style={styles.tabBar}
-      labelStyle={styles.tabBarLabel}
-      renderLabel={this._renderTabBarLabel}
-      indicatorStyle={styles.tabBarIndicator}
-      tabStyle={styles.tabStyle}
-      scrollEnabled
-      {...props}
-    />);}
+    return (
+      <TabBar
+        style={styles.tabBar}
+        labelStyle={styles.tabBarLabel}
+        renderLabel={this._renderTabBarLabel}
+        indicatorStyle={styles.tabBarIndicator}
+        tabStyle={styles.tabStyle}
+        scrollEnabled
+        {...props}
+      />);
+  }
 
   _renderScene = ({ route }) => {
-
-    //If we're still fetching, show the activity indicator instead
+    // If we're still fetching, show the activity indicator instead
     const { isFetching } = this.props;
-    if(isFetching) return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator />
-      </View>
-    );
+    if (isFetching) {
+      return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
 
     const { showMap, index, routes } = this.state;
     if (Math.abs(index - routes.indexOf(route)) > 2) {
@@ -234,17 +235,17 @@ class GuideListScreen extends Component {
     categoryType.items.forEach((element) => {
       switch (element.type) {
         case "guide":
-        {
-          const result = guides.find(guide => guide.id === element.id);
-          if (result) items.push(result);
-          break;
-        }
+          {
+            const result = guides.find(guide => guide.id === element.id);
+            if (result) items.push(result);
+            break;
+          }
         case "guidegroup":
-        {
-          const loc = locations.find(l => l.id === element.id);
-          if (loc) items.push(loc);
-          break;
-        }
+          {
+            const loc = locations.find(l => l.id === element.id);
+            if (loc) items.push(loc);
+            break;
+          }
         default:
       }
     });
@@ -269,7 +270,6 @@ class GuideListScreen extends Component {
     }
 
 
-
     if (currentLocation) {
       // calculate distances from current location
       const { coords } = currentLocation;
@@ -283,14 +283,16 @@ class GuideListScreen extends Component {
   }
 
   render() {
-    return(
+    return (
       <TabViewAnimated
-      style={styles.container}
-      navigationState={this.state}
-      renderScene={this._renderScene}
-      renderHeader={this._renderHeader}
-      onIndexChange={this._handleIndexChange}
-      initialLayout={initialLayout} />
+        swipeEnabled={false}
+        style={styles.container}
+        navigationState={this.state}
+        renderScene={this._renderScene}
+        renderHeader={this._renderHeader}
+        onIndexChange={this._handleIndexChange}
+        initialLayout={initialLayout}
+      />
     );
   }
 }
