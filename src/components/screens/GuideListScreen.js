@@ -157,6 +157,12 @@ class GuideListScreen extends Component {
     };
   }
 
+componentWillUnmount()
+  {
+    const routes = [];
+    this.setState({routes});
+  }
+
   componentDidMount() {
     this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
   }
@@ -169,7 +175,7 @@ class GuideListScreen extends Component {
     categoryTypes.forEach((element) => {
       routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
     });
-    
+
     if(index >= routes.length) {index = 0;}
 
     this.setState({ routes, index });
@@ -189,19 +195,6 @@ class GuideListScreen extends Component {
   )
 
   _renderHeader = props => {
-
-    const { routes } = this.state;
-
-    if(routes.length < 2){
-      return (
-        <View>
-          <Text style={styles.contentMissingText}>
-            {LangService.strings.CONTENT_MISSING}
-          </Text>
-        </View>
-      );
-    }
-
     return(
     <TabBar
       style={styles.tabBar}
@@ -286,6 +279,18 @@ class GuideListScreen extends Component {
   }
 
   render() {
+
+    var { routes, index } = this.state;
+    if(routes.length < 2){
+      return (
+        <View>
+          <Text style={styles.contentMissingText}>
+            {LangService.strings.CONTENT_MISSING}
+          </Text>
+        </View>
+      );
+    }
+    
     return(
       <TabViewAnimated
       style={styles.container}
