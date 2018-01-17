@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
   ActivityIndicator,
+  Platform,
   Dimensions,
   Image,
   StyleSheet,
@@ -24,6 +25,8 @@ import GuideList from "../shared/GuideList";
 import MapWithListView from "../shared/MapWithListView";
 
 const screenWidth = Dimensions.get("window").width;
+
+const ios = Platform.OS === "ios";
 
 const settingsIcon = require("../../images/settings.png");
 const mapIcon = require("../../images/iconLocation.png");
@@ -90,7 +93,7 @@ class GuideListScreen extends Component {
     const { params = {} } = navigation.state;
     const { toggleMap, showMap } = params;
     const itemText = showMap ? LangService.strings.LIST : LangService.strings.MAP;
-
+    
     return Object.assign(HeaderStyles.noElevation, {
       title,
       headerRight: (
@@ -157,30 +160,32 @@ class GuideListScreen extends Component {
     };
   }
 
+componentWillUnmount()
+  {
+    const index = 0;
+    const routes = [];
+    this.setState({index, routes});
+  }
 
   componentDidMount() {
     this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
   }
 
   componentWillReceiveProps(nextProps) {
-    const { categoryTypes } = nextProps;
+    console.log(nextProps);
+    
+    const {categoryTypes} = nextProps;
     const routes = [];
-    let { index } = this.state;
+    var {index} = this.state;
 
     categoryTypes.forEach((element) => {
       routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
     });
 
-    if (index >= routes.length) { index = 0; }
+    if(index >= routes.length) {index = 0;}
 
     this.setState({ routes, index });
   }
-
-  componentWillUnmount() {
-    const routes = [];
-    this.setState({ routes });
-  }
-
 
   toggleMap = () => {
     const showMap = !this.state.showMap;
@@ -194,7 +199,9 @@ class GuideListScreen extends Component {
     <Text style={styles.tabBarLabel}>{route.title}</Text>
   )
 
-  _renderHeader = props => (
+  _renderHeader = props => {
+
+    return(
     <TabBar
       style={styles.tabBar}
       labelStyle={styles.tabBarLabel}
@@ -203,13 +210,14 @@ class GuideListScreen extends Component {
       tabStyle={styles.tabStyle}
       scrollEnabled
       {...props}
-    />)
+    />);}
 
   _renderScene = ({ route }) => {
-    // If we're still fetching, show the activity indicator instead
-    const { isFetching } = this.props;
-    if (isFetching) {
-      return (
+    //If we're still fetching, show the activity indicator instead
+    if(ios)
+    {
+      const { isFetching } = this.props;
+      if(isFetching) return (
         <View style={styles.loadingContainer}>
           <ActivityIndicator />
         </View>
@@ -217,6 +225,7 @@ class GuideListScreen extends Component {
     }
 
     const { showMap, index, routes } = this.state;
+
     if (Math.abs(index - routes.indexOf(route)) > 2) {
       // Do not render pages that are to far away from the current page
       return null;
@@ -230,17 +239,17 @@ class GuideListScreen extends Component {
     categoryType.items.forEach((element) => {
       switch (element.type) {
         case "guide":
-          {
-            const result = guides.find(guide => guide.id === element.id);
-            if (result) items.push(result);
-            break;
-          }
+        {
+          const result = guides.find(guide => guide.id === element.id);
+          if (result) items.push(result);
+          break;
+        }
         case "guidegroup":
-          {
-            const loc = locations.find(l => l.id === element.id);
-            if (loc) items.push(loc);
-            break;
-          }
+        {
+          const loc = locations.find(l => l.id === element.id);
+          if (loc) items.push(loc);
+          break;
+        }
         default:
       }
     });
@@ -264,7 +273,6 @@ class GuideListScreen extends Component {
       return (<MapWithListView items={mapItems} navigation={navigation} />);
     }
 
-
     if (currentLocation) {
       // calculate distances from current location
       const { coords } = currentLocation;
@@ -278,8 +286,9 @@ class GuideListScreen extends Component {
   }
 
   render() {
-    const { routes, index } = this.state;
-    if (routes.length < 2) {
+    var { routes, index } = this.state;
+    
+    if(routes.length < 2){
       return (
         <View>
           <Text style={styles.contentMissingText}>
@@ -289,22 +298,29 @@ class GuideListScreen extends Component {
       );
     }
 
-    return (
+    if(!ios){
+      const { isFetching } = this.props;
+      if(isFetching) return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
+    return(
       <TabViewAnimated
-        swipeEnabled={false}
-        style={styles.container}
-        navigationState={this.state}
-        renderScene={this._renderScene}
-        renderHeader={this._renderHeader}
-        onIndexChange={this._handleIndexChange}
-        initialLayout={initialLayout}
-      />
+      style={styles.container}
+      navigationState={this.state}
+      renderHeader={this._renderHeader}
+      renderScene={this._renderScene}
+      onIndexChange={this._handleIndexChange}
+      initialLayout={initialLayout} />
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { isFetching, items } = state.navigation;
+  var { isFetching, items } = state.navigation;
   const { subLocations } = state;
 
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
