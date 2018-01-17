@@ -15,11 +15,16 @@ export default class LangService {
   // TODO: All state from this class should be in the redux store
   static setLanguage(lang) {
     let code = DEFAULT_CODE;
-    code = lang;
+
+    if(strings[lang])
+    {
+      code = lang;
+    }
 
     LangService.strings = strings[code];
     LangService.instructions = instructions[code];
     LangService.code = code;
+
   }
 
   static storeLangCode(code) {
