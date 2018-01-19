@@ -433,7 +433,7 @@ export default class MapWithListView extends Component {
    * RENDER FUNCTIONS
    */
 
-  numberedMapViewMarker = (trailObject, c) => {
+  numberedMapViewMarker = (trailObject) => {
     const { id, location } = trailObject;
     const { activeMarker } = this.state;
 
