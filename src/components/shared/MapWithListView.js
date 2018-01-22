@@ -259,13 +259,13 @@ export default class MapWithListView extends Component {
       });
     });
 
-    trailObjects.sort(function(a,b) { return parseFloat(a.order) - parseFloat(b.order) });
-    
-    var index = 1;
+    trailObjects.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
+
+    let index = 1;
     trailObjects.forEach((item) => {
       item.labelDisplayNumber = index;
       index++;
-   });
+    });
 
     return trailObjects;
   }
