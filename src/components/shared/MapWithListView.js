@@ -252,10 +252,21 @@ export default class MapWithListView extends Component {
         imageUrl: contentObject.image[0].sizes.medium,
         thumbnailUrl: contentObject.image[0].sizes.thumbnail,
         streetAdress: locationObject.street_address,
+        order: contentObject.order,
+        labelDisplayNumber: 0,
         contentObject,
         imageType: (screen === "trailScreen") ? "trailScreen" : contentType,
       });
     });
+
+    trailObjects.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
+
+    let index = 1;
+    trailObjects.forEach((item) => {
+      item.labelDisplayNumber = index;
+      index++;
+    });
+
     return trailObjects;
   }
 
@@ -427,7 +438,7 @@ export default class MapWithListView extends Component {
     const { activeMarker } = this.state;
 
     const image = this.markerImageForTrailObject(trailObject);
-    const numberString = trailObject.contentObject.order + 1;
+    const numberString = trailObject.labelDisplayNumber;
     const active = activeMarker.id === trailObject.id;
 
     return (
@@ -496,7 +507,7 @@ export default class MapWithListView extends Component {
     const trailScreen = item.imageType === "trailScreen";
     if (!trailScreen) return null;
 
-    const numberString = item.contentObject.order + 1;
+    const numberString = item.labelDisplayNumber;
     const numberView = (
       <View style={styles.listImageNumberView}>
         <Text style={styles.listImageNumberText}>{numberString}</Text>
