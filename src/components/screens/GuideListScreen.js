@@ -93,7 +93,7 @@ class GuideListScreen extends Component {
     const { params = {} } = navigation.state;
     const { toggleMap, showMap } = params;
     const itemText = showMap ? LangService.strings.LIST : LangService.strings.MAP;
-    
+
     return Object.assign(HeaderStyles.noElevation, {
       title,
       headerRight: (
@@ -160,31 +160,28 @@ class GuideListScreen extends Component {
     };
   }
 
-componentWillUnmount()
-  {
-    const index = 0;
-    const routes = [];
-    this.setState({index, routes});
-  }
-
   componentDidMount() {
     this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    
-    const {categoryTypes} = nextProps;
+    const { categoryTypes } = nextProps;
     const routes = [];
-    var {index} = this.state;
+    let { index } = this.state;
 
     categoryTypes.forEach((element) => {
       routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
     });
 
-    if(index >= routes.length) {index = 0;}
+    if (index >= routes.length) { index = 0; }
 
     this.setState({ routes, index });
+  }
+
+  componentWillUnmount() {
+    const index = 0;
+    const routes = [];
+    this.setState({ index, routes });
   }
 
   toggleMap = () => {
@@ -199,9 +196,7 @@ componentWillUnmount()
     <Text style={styles.tabBarLabel}>{route.title}</Text>
   )
 
-  _renderHeader = props => {
-
-    return(
+  _renderHeader = props => (
     <TabBar
       style={styles.tabBar}
       labelStyle={styles.tabBarLabel}
@@ -210,18 +205,19 @@ componentWillUnmount()
       tabStyle={styles.tabStyle}
       scrollEnabled
       {...props}
-    />);}
+    />)
 
   _renderScene = ({ route }) => {
-    //If we're still fetching, show the activity indicator instead
-    if(ios)
-    {
+    // If we're still fetching, show the activity indicator instead
+    if (ios) {
       const { isFetching } = this.props;
-      if(isFetching) return (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator />
-        </View>
-      );
+      if (isFetching) {
+        return (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator />
+          </View>
+        );
+      }
     }
 
     const { showMap, index, routes } = this.state;
@@ -286,9 +282,9 @@ componentWillUnmount()
   }
 
   render() {
-    var { routes, index } = this.state;
-    
-    if(routes.length < 2){
+    const { routes } = this.state;
+
+    if (routes.length < 2) {
       return (
         <View>
           <Text style={styles.contentMissingText}>
@@ -298,29 +294,32 @@ componentWillUnmount()
       );
     }
 
-    if(!ios){
+    if (!ios) {
       const { isFetching } = this.props;
-      if(isFetching) return (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator />
-        </View>
-      );
+      if (isFetching) {
+        return (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator />
+          </View>
+        );
+      }
     }
 
-    return(
+    return (
       <TabViewAnimated
-      style={styles.container}
-      navigationState={this.state}
-      renderHeader={this._renderHeader}
-      renderScene={this._renderScene}
-      onIndexChange={this._handleIndexChange}
-      initialLayout={initialLayout} />
+        style={styles.container}
+        navigationState={this.state}
+        renderHeader={this._renderHeader}
+        renderScene={this._renderScene}
+        onIndexChange={this._handleIndexChange}
+        initialLayout={initialLayout}
+      />
     );
   }
 }
 
 function mapStateToProps(state) {
-  var { isFetching, items } = state.navigation;
+  const { isFetching, items } = state.navigation;
   const { subLocations } = state;
 
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
