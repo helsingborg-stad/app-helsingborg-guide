@@ -174,8 +174,14 @@ class GuideListScreen extends Component {
     });
 
     if (index >= routes.length) { index = 0; }
-
     this.setState({ routes, index });
+
+    if (LangService.forceNavigationUpdate) {
+      this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
+      LangService.forceNavigationUpdate = false;
+    }
+
+    return null;
   }
 
   componentWillUnmount() {
@@ -235,17 +241,17 @@ class GuideListScreen extends Component {
     categoryType.items.forEach((element) => {
       switch (element.type) {
         case "guide":
-        {
-          const result = guides.find(guide => guide.id === element.id);
-          if (result) items.push(result);
-          break;
-        }
+          {
+            const result = guides.find(guide => guide.id === element.id);
+            if (result) items.push(result);
+            break;
+          }
         case "guidegroup":
-        {
-          const loc = locations.find(l => l.id === element.id);
-          if (loc) items.push(loc);
-          break;
-        }
+          {
+            const loc = locations.find(l => l.id === element.id);
+            if (loc) items.push(loc);
+            break;
+          }
         default:
       }
     });
