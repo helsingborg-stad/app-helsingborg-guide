@@ -174,8 +174,14 @@ class GuideListScreen extends Component {
     });
 
     if (index >= routes.length) { index = 0; }
-
     this.setState({ routes, index });
+
+    if (LangService.forceNavigationUpdate) {
+      this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
+      LangService.forceNavigationUpdate = false;
+    }
+
+    return null;
   }
 
   componentWillUnmount() {
@@ -276,7 +282,7 @@ class GuideListScreen extends Component {
         const embeddedLocations = GuideListScreen.getEmbeddedLocationsFromLocation(element);
         element.distance = LocationUtils.getShortestDistance(coords, embeddedLocations);
       });
-      items.sort((a, b) => a.distance > b.distance);
+      items.sort((a, b) => a.distance - b.distance);
     }
     return (<GuideList items={items} navigation={navigation} />);
   }
