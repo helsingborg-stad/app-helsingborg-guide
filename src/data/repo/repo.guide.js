@@ -36,10 +36,17 @@ module.exports = () => {
       .catch(error => error);
   }
 
+  function fetchNavigation(langCode) {
+    return fetch(`${_API_BASE}/navigation?lang=${langCode}`)
+      .then(response => response.json())
+      .then(navItems => navItems);
+  }
+
   return {
     getAllGroups,
     getGroupById,
     getGuidesByParent,
     getAllGuides,
+    fetchNavigation,
   };
 };

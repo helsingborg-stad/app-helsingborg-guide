@@ -13,15 +13,15 @@ export function loadGuidesSuccess(guides) {
 }
 
 export function loadGuides(langCode) {
-  return function (dispatch) {
+  return function loadGuidesDispatch(dispatch) {
     const instance = dc();
     return instance.guide
       .getAllGroups(langCode)
       .then((guides) => {
-        if (guides && guides.length && guides.code !== "rest_no_route") {
+        if (guides && guides.code !== "rest_no_route") {
           dispatch(loadGuidesSuccess(guides));
         } else {
-          dispatch(errorHappened("error: no guides"));
+          dispatch(errorHappened("error: when fetching guides"));
         }
       })
       .catch((error) => {

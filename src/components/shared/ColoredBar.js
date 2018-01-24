@@ -1,10 +1,28 @@
 /**
  * Created by msaeed on 2017-02-04.
  */
-import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, {
+  Component,
+} from "react";
+import {
+  View,
+  StyleSheet,
+} from "react-native";
+import {
+  Colors,
+} from "../../styles/";
 
-const COLORS = ["#D35098", "#712082", "#A84C98", "#7B075E", "#A61380"];
+const COLORS = [Colors.lightPink, "#712082", Colors.lightPurple, Colors.darkPurple, Colors.purple];
+
+const styles = StyleSheet.create({
+  barsContainer: {
+    flex: 1,
+    maxWidth: 10,
+  },
+  bar: {
+    flex: 1,
+  },
+});
 
 export default class ColoredBar extends Component {
   constructor(props) {
@@ -24,13 +42,3 @@ export default class ColoredBar extends Component {
     return <View style={styles.barsContainer}>{this.displayBars()}</View>;
   }
 }
-
-const styles = StyleSheet.create({
-  barsContainer: {
-    flex: 1,
-    maxWidth: 10,
-    // backgroundColor:'#7B075E',
-    // zIndex:500
-  },
-  bar: { flex: 1 },
-});

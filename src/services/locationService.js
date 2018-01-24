@@ -6,7 +6,7 @@ import store from "../store/configureStore";
 
 let instance = null;
 
-export class LocationService {
+export default class LocationService {
   watcher;
 
   static getInstance() {
@@ -22,6 +22,8 @@ export class LocationService {
 
   // Ask for access location permission.
   askForPermission() {
+    if (Platform.OS === "ios") return Promise.resolve(true);
+
     const content = {
       title: LangService.strings.ACCESS_TO_LOCATION,
       message: LangService.strings.MESSAGE_LOCATION_PERMISSION,
@@ -35,7 +37,7 @@ export class LocationService {
       LangService.strings.MESSAGE_LOCATION_PERMISSION,
       [
         { text: LangService.strings.SETTINGS, onPress: () => this.openLocationSettings() },
-        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
+        { text: LangService.strings.CLOSE, onPress: () => { }, style: "cancel" },
       ],
       { cancelable: false },
     );
@@ -80,9 +82,11 @@ export class LocationService {
                 resolve(position);
               },
               error => reject(error),
-              { distanceFilter: 200 },
+              { distanceFilter: 10 },
             );
-          } else reject("no access to fine location");
+          } else {
+            reject("no access to fine location");
+          }
         }),
     );
   }

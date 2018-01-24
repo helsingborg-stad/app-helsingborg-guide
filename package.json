@@ -1,31 +1,33 @@
 {
-  "name": "GuideHbg",
+  "name": "guide-hbg",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "eslint": "eslint index.js src/*.js src/**/*.js --report-unused-disable-directives",
+    "eslint": "eslint index.js src/** --ext .js --report-unused-disable-directives",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.17.0",
+    "geolib": "^2.0.24",
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
-    "react": "16.0.0-beta.5",
-    "react-native": "^0.49.3",
+    "react": "16.0.0",
+    "react-native": "0.50.3",
     "react-native-action-button": "^2.0.20",
     "react-native-fetch-blob": "^0.10.4",
-    "react-native-maps": "^0.17.1",
-    "react-native-maps-google": "^1.1.4",
+    "react-native-firebase": "^3.1.1",
+    "react-native-maps": "^0.18.3",
     "react-native-photo-view": "^1.5.2",
     "react-native-swiper": "^1.5.4",
+    "react-native-tab-view": "0.0.70",
     "react-native-vector-icons": "^4.0.1",
     "react-native-video": "^2.0.0",
     "react-navigation": "^1.0.0-beta.15",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "redux-persist": "^5.0.1",
     "redux-immutable-state-invariant": "^2.1.0",
+    "redux-persist": "^4.6.0",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
@@ -34,14 +36,20 @@
     "babel-preset-react-native": "4.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-import-resolver-reactnative": "^1.0.2",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jest": "^21.2.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
     "jest": "21.2.1",
-    "react-test-renderer": "16.0.0-beta.5"
+    "react-test-renderer": "16.0.0"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./src/fonts"
+    ]
   }
 }

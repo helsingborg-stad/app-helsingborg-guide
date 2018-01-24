@@ -4,6 +4,9 @@ import android.app.Application;
 
 import com.example.beaconmodule.BeaconPackage;
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.reactnative.photoview.PhotoViewPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -20,6 +23,8 @@ import com.mediamodule.MediaPackage;
 import com.notificationmodule.NotificationPackage;
 import com.settingsmodule.SettingsPackage;
 
+import com.fullscreenvideomodule.FullScreenVideoModule;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,11 +39,19 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new PhotoViewPackage(), new BeaconPackage(), new VectorIconsPackage(),
-                    new MapsPackage(), 
+                    new RNFirebasePackage(),
+                    new RNFirebaseAnalyticsPackage(),
+                    new PhotoViewPackage(),
+                    new BeaconPackage(),
+                    new VectorIconsPackage(),
+                    new MapsPackage(),
                     new ReactVideoPackage(),
-                    new RNFetchBlobPackage(), new NotificationPackage(), new SettingsPackage(), new MediaPackage(),
-                    new MediaControlPackage());
+                    new RNFetchBlobPackage(),
+                    new NotificationPackage(),
+                    new SettingsPackage(),
+                    new MediaPackage(),
+                    new MediaControlPackage(),
+                    new AppPackages());
         }
 
         @Override

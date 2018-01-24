@@ -26,7 +26,7 @@ export default class OptionsFloatingBtn extends Component {
     super(props);
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     return (

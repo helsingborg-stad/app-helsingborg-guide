@@ -10,7 +10,8 @@ export default {
       if (exp) return exp.exeption_information;
     }
 
-    const openingObj = openingList.find(item => item.day_number === now.getDay());
+    const nowDay = now.getDay().toString();
+    const openingObj = openingList.find(item => item.day_number === nowDay);
 
     if (!openingObj) return null;
 

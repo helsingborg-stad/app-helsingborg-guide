@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { FetchService } from "../services/FetchService";
+import fetchService from "../services/FetchService";
 import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 import LangService from "../services/langService";
@@ -10,7 +10,6 @@ export default class DownloadTask {
   id;
   urls;
   completedUrls;
-  fetchService;
   fileDownloadTasks;
   isCanceled;
   startedAt;
@@ -30,7 +29,6 @@ export default class DownloadTask {
     this.avatar = data.avatar || DEFAULT_AVATAR;
     this.completedUrls = data.currentPos ? _.slice(data.urls, 0, data.currentPos) : [];
     this.fileDownloadTasks = [];
-    this.fetchService = FetchService.getInstance();
   }
 
   fetchUrlsSeq() {
@@ -40,7 +38,7 @@ export default class DownloadTask {
   // sequence function. stops when the the list is completed or the task getting canceled.
   _fetchUrl(url) {
     if (this.isCanceled || this.isCompleted()) return null;
-    const mTask = this.fetchService.fetch(url);
+    const mTask = fetchService.fetch(url);
     return mTask
       .then((res) => {
         if (res && !this.isCanceled) {
@@ -95,7 +93,7 @@ export default class DownloadTask {
   clearCache() {
     // cancel the task first then clear the cache
     this.cancelTask();
-    this.fetchService.clearSessionCache(`${this.id}`).then(() => {
+    fetchService.clearSessionCache(`${this.id}`).then(() => {
       this.clearCompletedUrls();
       store.dispatch(dActions.clearCacheTaskSuccess(this.getMeta()));
     });
@@ -107,8 +105,8 @@ export default class DownloadTask {
     _.forEach(this.fileDownloadTasks, (mTask) => {
       //  debugger;
       if (mTask) {
-        mTask.catch(() => {});
-        mTask.cancel(() => {});
+        mTask.catch(() => { });
+        mTask.cancel(() => { });
       }
     });
     this.fileDownloadTasks = [];

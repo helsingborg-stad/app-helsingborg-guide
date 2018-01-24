@@ -1,6 +1,8 @@
 /**
  * Created by msaeed on 2017-03-08.
  */
+
+/* eslint-disable max-len */
 const BLUETOOTH_IMG = require("../images/bluetooth.png");
 const DOWNLOAD_IMG = require("../images/download.png");
 const MENU_IMG = require("../images/menu.png");
@@ -10,7 +12,7 @@ const SLIDE2_IMG = require("../images/skyline2.png");
 const SLIDE3_IMG = require("../images/skyline3.png");
 
 export default {
-  en_GB: {
+  en: {
     steps: [
       {
         content: "Enhance your experience of Helsingborg with sound, in-depth information and help getting around.",
@@ -29,15 +31,9 @@ export default {
         thumbnail: DOWNLOAD_IMG,
         background: SLIDE2_IMG,
       },
-      {
-        content:
-          "In the top menu you'll find settings for the app and our contact details for tips and help.\n\n We'd be happy to hear any feedback you have. ",
-        thumbnail: MENU_IMG,
-        background: SLIDE3_IMG,
-      },
     ],
   },
-  sv_SE: {
+  sv: {
     steps: [
       {
         content: "Förstärk din upplevelse av Helsingborg med ljud, fördjupad information och hjälp att hitta. ",
@@ -56,15 +52,9 @@ export default {
         thumbnail: DOWNLOAD_IMG,
         background: SLIDE2_IMG,
       },
-      {
-        content:
-          "I toppmenyn hittar du inställningar för appen och kontaktuppgifter till oss för tips och hjälp.\n\n Hör gärna av dig med dina synpunkter. ",
-        thumbnail: MENU_IMG,
-        background: SLIDE3_IMG,
-      },
     ],
   },
-  de_DE: {
+  de: {
     steps: [
       {
         content: "Machen Sie mit Sound, zusätzlicher Information und Hilfesuche noch mehr aus Ihrem Helsingborg-Erlebnis. ",
@@ -82,12 +72,6 @@ export default {
           "An manchen Stellen müssen Sie Inhalte herunterladen, um an der Ausstellung teilzunehmen. \n\n Dies gelingt am einfachsten mit dem Wifi der Stadt (Netzwerk Helsingborg)",
         thumbnail: DOWNLOAD_IMG,
         background: SLIDE2_IMG,
-      },
-      {
-        content:
-          "Im Hauptmenü finden Sie Einstellungen für die App, sowie unsere Kontaktangaben für Tipps und Hilfestellung. \n\n Teilen Sie uns gerne ihre Meinung mit.",
-        thumbnail: MENU_IMG,
-        background: SLIDE3_IMG,
       },
     ],
   },

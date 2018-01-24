@@ -1,45 +1,8 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
 import React, { Component } from "react";
-import { View, Image, Text, StyleSheet, Dimensions, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import OImage from "./image";
 
-const FULL_HEIGHT = Dimensions.get("window").height;
-const IMAGE_HEIGHT = FULL_HEIGHT / 2 - 70; // 70 is the navbar height
-
-export default class ImageView extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  _getOptWidth(width) {
-    return width * (Dimensions.get("window").width / width);
-  }
-
-  displayImage() {
-    return (
-      <OImage
-        style={[
-          {
-            width: this._getOptWidth(this.props.width),
-            height: IMAGE_HEIGHT, // 25 is half navbar height
-            zIndex: 1000,
-          },
-          styles.image,
-        ]}
-        source={this.props.source}
-        blurRadius={this.props.blur}
-      >
-        {this.props.children}
-      </OImage>
-    );
-  }
-
-  render() {
-    return <View style={styles.imageContainer}>{this.displayImage()}</View>;
-  }
-}
+const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
 
 const styles = StyleSheet.create({
   imageContainer: {},
@@ -49,3 +12,75 @@ const styles = StyleSheet.create({
   },
   spinner: { flex: 1, width: 100, height: 100 },
 });
+
+export default class ImageView extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false,
+    };
+
+    this.onLoadStart = this.onLoadStart.bind(this);
+    this.onLoadEnd = this.onLoadEnd.bind(this);
+  }
+
+  onLoadStart() {
+    this.setState({ loading: true });
+  }
+  onLoadEnd() {
+    this.setState({ loading: false });
+  }
+
+  _getOptWidth(width) {
+    return width * (Dimensions.get("window").width / width);
+  }
+
+  _getOptHeight(height) {
+    return height * (Dimensions.get("window").height / height);
+  }
+
+  displaySpinner() {
+    if (this.state.loading) return <ActivityIndicator style={[styles.spinner]} />;
+  }
+
+  displayImage() {
+    //If no source image is defined, use placeholder image
+    let uri = this.props.source;
+    if (!uri || !uri.uri) uri = require("../../images/no-image-featured-image.png");
+
+    //Using full screen width and a 16:9 aspect ratio
+    displayWidth = Dimensions.get("window").width;
+    displayHeight = (displayWidth/16)*9;
+
+    //If height and/or width is defined, use that instead
+    if(this.props.width) {displayWidth = this._getOptWidth(this.props.width)}
+    if(this.props.height) {displayHeight = this._getOptHeight(this.props.height)}
+
+    return (
+      <OImage
+        style={[
+          {
+            width: displayWidth,
+            height: displayHeight,
+            maxHeight: MAX_IMAGE_HEIGHT,
+            zIndex: 1000,
+          },
+          styles.image,
+        ]}
+        source={uri}
+        blurRadius={this.props.blur}
+        onLoadStart={this.onLoadStart}
+        onLoadEnd={this.onLoadEnd}
+      >
+        {this.displaySpinner()}
+        {this.props.children}
+      </OImage>
+    );
+  }
+
+  render() {
+    return <View style={styles.imageContainer}>{this.displayImage()}</View>;
+  }
+}

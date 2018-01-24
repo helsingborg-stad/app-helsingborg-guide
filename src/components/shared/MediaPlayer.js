@@ -35,7 +35,7 @@ class MediaPlayer extends Component {
     this.setState({ audio: nextProps.audio });
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   togglePlaying() {
     if (this.state.audio.isPlaying) this.pause();

@@ -24,7 +24,7 @@ module.exports = {
     "function-paren-newline": ["off"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "no-underscore-dangle": ["off"],
-    "react/forbid-prop-types": ["warn"],
+    "react/forbid-prop-types": [0],
     "react/prop-types": [1],
     "no-unused-vars": [
       "error",
@@ -78,10 +78,6 @@ module.exports = {
     ],
   },
   settings: {
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".android.js", ".ios.js"],
-      },
-    },
+    "import/resolver": "reactnative"
   },
 };

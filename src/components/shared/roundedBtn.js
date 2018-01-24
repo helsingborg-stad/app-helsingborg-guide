@@ -9,7 +9,7 @@ export default class RoundedBtn extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   displayBtn() {
     const close = this.props.idle || <Icon name="info" size={20} color="white" />;

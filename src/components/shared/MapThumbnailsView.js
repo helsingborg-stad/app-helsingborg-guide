@@ -3,7 +3,7 @@ import { View, StyleSheet, ListView, Dimensions } from "react-native";
 import MapView from "react-native-maps";
 import ViewContainer from "./view_container";
 import NoInternetText from "./noInternetText";
-import { LocationService } from "../../services/locationService";
+import LocationService from "../../services/locationService";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const TIMEOUT = 3000;
@@ -47,21 +47,9 @@ export default class MapThumbnailsView extends Component {
       items: this.props.items || [],
       markers: this.props.markers || [],
       active: this.props.active || {}, // item which is slided to.
-      position: {}, // geolocation
       connected: this.props.connected,
     };
     this.locationService = LocationService.getInstance();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.items.length != nextProps.items.length) {
-      this.setState({
-        items: nextProps.items,
-        active: nextProps.active,
-        markers: nextProps.markers,
-      });
-    }
-    if (nextProps.connected != this.state.connected) this.setState({ connected: nextProps.connected });
   }
 
   componentDidMount() {
@@ -72,6 +60,17 @@ export default class MapThumbnailsView extends Component {
         this.sortGuidegroups();
       }, TIMEOUT);
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.items.length !== nextProps.items.length) {
+      this.setState({
+        items: nextProps.items,
+        active: nextProps.active,
+        markers: nextProps.markers,
+      });
+    }
+    if (nextProps.connected !== this.state.connected) this.setState({ connected: nextProps.connected });
   }
 
   componentWillUnmount() {
@@ -85,7 +84,7 @@ export default class MapThumbnailsView extends Component {
     this.state.markers.forEach((marker) => {
       const mathDistance = this.locationService.getMathDistance(position.coords, marker.location);
       // make copy to not mutate the state by adding distance to the object.
-      const item = Object.assign({}, this.state.items.find(item => item.id == marker.itemId));
+      const item = Object.assign({}, this.state.items.find(item => item.id === marker.itemId));
       item.distance = mathDistance;
       items.push(item);
     });
@@ -98,11 +97,9 @@ export default class MapThumbnailsView extends Component {
   // Map Methods
   // ##########################
 
-  _onRegionChange(region) {}
-
   _onMarkerPressed(marker) {
     if (this.state.items && this.state.items.length) {
-      const itemIndex = this.state.items.findIndex(item => item.id == marker.itemId);
+      const itemIndex = this.state.items.findIndex(item => item.id === marker.itemId);
       this.scrollToItem(itemIndex, false);
     }
   }
@@ -115,9 +112,9 @@ export default class MapThumbnailsView extends Component {
   _showMarkers() {
     if (!this.state.markers.length || !Object.keys(this.state.active).length) return null;
     const activeItem = this.state.active.id;
-    return this.state.markers.map((marker, index) => {
+    return this.state.markers.map((marker) => {
       if (!marker.location.latitude || !marker.location.latitude) return null;
-      const image = marker.itemId == activeItem ? markerImageActive : markerImageInActive;
+      const image = marker.itemId === activeItem ? markerImageActive : markerImageInActive;
       return (
         <MapView.Marker
           key={marker.itemId}
@@ -138,8 +135,6 @@ export default class MapThumbnailsView extends Component {
       left: 50,
     };
     const options = { edgePadding, animated: true };
-    if (markers && markers.length) {
-    }
     this.map.fitToCoordinates(markers.map(marker => marker.location), options);
     this.forceUpdate();
   }
@@ -161,9 +156,9 @@ export default class MapThumbnailsView extends Component {
     const xOffset = e.nativeEvent.contentOffset.x;
     const index = Math.abs(parseInt(xOffset / (THUMBNAIL_WIDTH - 20)));
 
-    if (this.state.items[index].id != this.state.active.id) {
+    if (this.state.items[index].id !== this.state.active.id) {
       this.setState({ active: this.state.items[index] });
-      const correspondingMarker = this.state.markers.find(marker => marker.itemId == this.state.items[index].id);
+      const correspondingMarker = this.state.markers.find(marker => marker.itemId === this.state.items[index].id);
       this.map.animateToCoordinate(correspondingMarker.location);
     }
   }

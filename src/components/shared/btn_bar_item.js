@@ -7,32 +7,6 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const ICON_SIZE = 20;
 
-export default class ButtonsBarItem extends Component {
-  render() {
-    const _styles = [styles.item];
-    const _iconStyles = [styles.icon];
-    const _textStyles = [styles.title];
-    if (this.props.disabled) {
-      _styles.push(styles.disabledBkgd);
-      _iconStyles.push(styles.disabledText);
-      _textStyles.push(styles.disabledText);
-    }
-
-    return (
-      <TouchableOpacity disabled={this.props.disabled} style={_styles} onPress={event => this.props.onPress(event)}>
-        <View style={styles.mainContainer}>
-          <View style={styles.iconContainer}>
-            <Icon style={_iconStyles} name={this.props.name} size={this.props.size || ICON_SIZE} color={this.props.color} />
-          </View>
-          <View style={styles.titleContainer}>
-            <Text style={_textStyles}>{this.props.text}</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-}
-
 const styles = StyleSheet.create({
   item: {
     flex: 1,
@@ -60,3 +34,29 @@ const styles = StyleSheet.create({
     backgroundColor: "#f2f2f2",
   },
 });
+
+export default class ButtonsBarItem extends Component {
+  render() {
+    const _styles = [styles.item];
+    const _iconStyles = [styles.icon];
+    const _textStyles = [styles.title];
+    if (this.props.disabled) {
+      _styles.push(styles.disabledBkgd);
+      _iconStyles.push(styles.disabledText);
+      _textStyles.push(styles.disabledText);
+    }
+
+    return (
+      <TouchableOpacity disabled={this.props.disabled} style={_styles} onPress={event => this.props.onPress(event)}>
+        <View style={styles.mainContainer}>
+          <View style={styles.iconContainer}>
+            <Icon style={_iconStyles} name={this.props.name} size={this.props.size || ICON_SIZE} color={this.props.color} />
+          </View>
+          <View style={styles.titleContainer}>
+            <Text style={_textStyles}>{this.props.text}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+}

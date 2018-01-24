@@ -16,7 +16,7 @@ export default class OptionsView extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   componentWillReceiveProps(nextProps) {
     this.setState({

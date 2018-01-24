@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { getStoredState } from "redux-persist";
 import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage, Platform, Linking } from "react-native";
-import Nav from "./src/NavAndroid";
-import store from "./src/store/configureStore";
+import Nav from "guide-hbg/src/Nav";
+import store from "guide-hbg/src/store/configureStore";
+import { loadSubLocations } from "guide-hbg/src/actions/subLoactionActions";
+import internetChanged from "guide-hbg/src/actions/internetActions";
+import LangService from "guide-hbg/src/services/langService";
+import Opener from "guide-hbg/src/services/SettingsService";
+import { errorHappened } from "guide-hbg/src/actions/errorActions";
+import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
+import FullScreenVideoScreen from "guide-hbg/src/components/screens/FullScreenVideoScreen";
 import { loadGuides } from "./src/actions/guideActions";
-import { loadSubLocations } from "./src/actions/subLoactionActions";
-import { internetChanged } from "./src/actions/internetActions";
-import LangService from "./src/services/langService";
-import Opener from "./src/services/SettingsService";
-import { errorHappened } from "./src/actions/errorActions";
-import downloadManager from "./src/services/DownloadTasksManager";
+import { fetchNavigation } from "./src/actions/navigationActions";
+import LocationService from "./src/services/locationService";
 
-// TODO merge index.ios.js into this one
 export default class GuideHbg extends Component {
   static openInternetSettings() {
     if (Platform.OS === "android") {
@@ -34,9 +36,10 @@ export default class GuideHbg extends Component {
   static loadContents(langCode) {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
+        store.dispatch(fetchNavigation(langCode));
         store.dispatch(loadGuides(langCode));
         store.dispatch(loadSubLocations(langCode));
-        LangService.getLanguages().catch(() => console.log("error in getting lang"));
+        LangService.getLanguages();
       }
     });
   }
@@ -50,7 +53,7 @@ export default class GuideHbg extends Component {
           text: LangService.strings.SETTINGS,
           onPress: GuideHbg.openInternetSettings,
         },
-        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
+        { text: LangService.strings.CLOSE, onPress: () => { }, style: "cancel" },
       ],
       { cancelable: false },
     );
@@ -71,11 +74,16 @@ export default class GuideHbg extends Component {
     }
 
     this.handleConnectivityChange = this.handleConnectivityChange.bind(this);
-
-    console.ignoredYellowBox = ["Remote debugger"];
   }
 
   componentDidMount() {
+    const locationService = LocationService.getInstance();
+    locationService.watchGeoLocation().catch(() => {
+      locationService.askForPermission().then((permission) => {
+        if (permission === "granted") locationService.watchGeoLocation();
+      });
+    });
+
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
     GuideHbg.loadExistingDownloads();
@@ -120,3 +128,4 @@ export default class GuideHbg extends Component {
 }
 
 AppRegistry.registerComponent("GuideHbg", () => GuideHbg);
+AppRegistry.registerComponent("VideoApp", () => FullScreenVideoScreen);

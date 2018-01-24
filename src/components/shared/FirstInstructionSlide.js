@@ -3,12 +3,19 @@ import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import { PropTypes } from "prop-types";
 import LangService from "../../services/langService";
 import BackgroundImage from "./BackgroundImage";
+import {
+  Colors,
+  TextStyles,
+} from "../../styles/";
+import {
+  StyleSheetUtils,
+} from "../../utils/";
 
 const HALS_LOGO = require("../../images/HBG.png");
 
 const styles = StyleSheet.create({
   slide: {
-    backgroundColor: "#7B075E",
+    backgroundColor: Colors.darkPurple,
     flex: 1,
   },
   mainContainer: {
@@ -23,25 +30,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  headerText: {
-    color: "#fff",
-    fontSize: 38,
-    fontWeight: "300",
-    lineHeight: 36,
-    minHeight: 50,
-  },
+  headerText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      color: Colors.white,
+      fontSize: 38,
+      fontWeight: "300",
+      lineHeight: 36,
+      minHeight: 50,
+    }],
+  ),
   contentContainer: {
-    flex: 1,
+    flex: 3,
     width: Dimensions.get("window").width * 0.7,
   },
-  contentText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "400",
-    lineHeight: 26,
-    minHeight: 50,
-    textAlign: "center",
-  },
+  contentText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: "400",
+      lineHeight: 26,
+      minHeight: 50,
+      textAlign: "center",
+    }],
+  ),
   logoContainer: {
     flex: 1,
     alignItems: "center",
@@ -66,7 +77,9 @@ const FirstInstructionSlide = ({ style, content, backgroundImageSource }) => (
         <Image resizeMethod="scale" resizeMode="center" source={HALS_LOGO} />
       </View>
     </View>
-    <BackgroundImage source={backgroundImageSource} />
+    <BackgroundImage
+      source={backgroundImageSource}
+    />
   </View>
 );
 

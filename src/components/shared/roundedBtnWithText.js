@@ -14,7 +14,7 @@ export default class RoundedBtn extends Component {
     this.onPressIn = this.onPressIn.bind(this);
     this.onPressOut = this.onPressOut.bind(this);
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   displayBtn() {
     const close = this.props.idle || <Icon name="info" size={20} color="white" />;

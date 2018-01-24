@@ -1,5 +1,5 @@
 import * as types from "./actionTypes";
 
-export function updateMetric(metric) {
+export default function updateMetric(metric) {
   return { type: types.UPDATE_METRIC, metric };
 }
