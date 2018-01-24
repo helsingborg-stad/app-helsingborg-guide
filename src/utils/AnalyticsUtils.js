@@ -1,13 +1,15 @@
-import firebase from "react-native-firebase";
+import RNFirebase from "react-native-firebase";
 
-const analytics = firebase.analytics();
+const firebase = RNFirebase.initializeApp({
+  debug: true,
+});
 
 export default {
   setScreen: (screenName) => {
-    analytics.setCurrentScreen(screenName, null);
+    firebase.analytics().setCurrentScreen(screenName, null);
   },
 
   logEvent: (name, params) => {
-    analytics.logEvent(name, params);
+    if (!__DEV__) { firebase.analytics().logEvent(name, params); }
   },
 };
