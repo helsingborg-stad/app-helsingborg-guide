@@ -241,17 +241,17 @@ class GuideListScreen extends Component {
     categoryType.items.forEach((element) => {
       switch (element.type) {
         case "guide":
-          {
-            const result = guides.find(guide => guide.id === element.id);
-            if (result) items.push(result);
-            break;
-          }
+        {
+          const result = guides.find(guide => guide.id === element.id);
+          if (result) items.push(result);
+          break;
+        }
         case "guidegroup":
-          {
-            const loc = locations.find(l => l.id === element.id);
-            if (loc) items.push(loc);
-            break;
-          }
+        {
+          const loc = locations.find(l => l.id === element.id);
+          if (loc) items.push(loc);
+          break;
+        }
         default:
       }
     });
@@ -282,7 +282,7 @@ class GuideListScreen extends Component {
         const embeddedLocations = GuideListScreen.getEmbeddedLocationsFromLocation(element);
         element.distance = LocationUtils.getShortestDistance(coords, embeddedLocations);
       });
-      items.sort((a, b) => a.distance > b.distance);
+      items.sort((a, b) => a.distance - b.distance);
     }
     return (<GuideList items={items} navigation={navigation} />);
   }
