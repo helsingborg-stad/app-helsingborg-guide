@@ -181,8 +181,9 @@ class ObjectDetailsScreen extends Component {
     navigate("ImageScreen", { image });
   }
 
-  goToLink(url) {
+  goToLink(url, title) {
     const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("open_url", { title });
     navigate("WebScreen", { url });
   }
 
@@ -308,7 +309,7 @@ class ObjectDetailsScreen extends Component {
   displayLinks() {
     if (!this.state.contentObject.links) return null;
     return this.state.contentObject.links.map((item, index) => (
-      <TouchableOpacity style={styles.linkContainer} key={item.link || index} onPress={() => this.goToLink(item.link)}>
+      <TouchableOpacity style={styles.linkContainer} key={item.link || index} onPress={() => this.goToLink(item.link, item.title)}>
         <Text style={styles.linkText}>{item.title}</Text>
       </TouchableOpacity>
     ));
