@@ -198,7 +198,7 @@ class GuideDetailsScreen extends Component {
   _goToContentObjectScene(contentObject, objectKey) {
     const { navigate, state } = this.props.navigation;
     const { title } = state.params;
-    AnalyticsUtils.logEvent("view_object", { id: contentObject.id, name: contentObject.title });
+    AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
     navigate("ObjectDetailsScreen", { title, contentObject, objectKey, id: this.state.subLocation.id });
   }
 
@@ -349,24 +349,24 @@ class GuideDetailsScreen extends Component {
     let cc;
 
     // Removed to prevent the "radar" from being shown.
-/*
-    const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
-    const nearByObjectsViews = this.getObjectsViews(nearByKeys);
+    /*
+        const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
+        const nearByObjectsViews = this.getObjectsViews(nearByKeys);
 
-    if (this.state.searching) cc = <View>{radar}</View>;
-    else if (Object.keys(this.state.closestBeacon).length) {
-      cc = (
-        <View>
-          <View style={styles.nearByTextContainer}>
-            <Text style={styles.nearByText}>{LangService.strings.SOMETHING_NEAR_BY}</Text>
-          </View>
-          <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>
-            {nearByObjectsViews}
-          </View>
-        </View>
-      );
-    }
-*/
+        if (this.state.searching) cc = <View>{radar}</View>;
+        else if (Object.keys(this.state.closestBeacon).length) {
+          cc = (
+            <View>
+              <View style={styles.nearByTextContainer}>
+                <Text style={styles.nearByText}>{LangService.strings.SOMETHING_NEAR_BY}</Text>
+              </View>
+              <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>
+                {nearByObjectsViews}
+              </View>
+            </View>
+          );
+        }
+    */
     return (
       <View>
         <View>{cc}</View>
@@ -486,7 +486,7 @@ class GuideDetailsScreen extends Component {
 
     if (images && images.length) {
       return (
-        <ImageView source={{ uri: images[0].sizes.large }}/>
+        <ImageView source={{ uri: images[0].sizes.large }} />
       );
     }
     return null;

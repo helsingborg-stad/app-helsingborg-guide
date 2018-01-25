@@ -28,21 +28,21 @@ export default ({ items, navigation }) => {
 
   const _navigateToLocation = (location) => {
     const { navigate } = navigation;
-    AnalyticsUtils.logEvent("view_location", { id: location.id, name: location.slug });
+    AnalyticsUtils.logEvent("view_location", { name: location.slug });
     navigate("LocationDetailsScreen", { location });
   };
 
   const _navigateToTrail = (trail) => {
     const { navigate } = navigation;
     const title = trail.guidegroup[0].name;
-    AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
+    AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
     navigate("TrailScreen", { trail, title });
   };
 
   const _navigateToGuide = (guide) => {
     const { navigate } = navigation;
     const title = guide.guidegroup[0].name;
-    AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
+    AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
     navigate("GuideDetailsScreen", { id: guide.id, title });
   };
 
