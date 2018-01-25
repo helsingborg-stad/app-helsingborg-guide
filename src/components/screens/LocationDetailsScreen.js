@@ -205,7 +205,7 @@ class LocationDetailsScreen extends Component {
   }
 
   static displayDistance(currentLocation, locations) {
-    if(!currentLocation) return null;
+    if (!currentLocation) return null;
     const { coords } = currentLocation;
     const distance = LocationUtils.getShortestDistance(coords, locations);
     if (!distance) return null;
@@ -239,7 +239,7 @@ class LocationDetailsScreen extends Component {
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
     const { name } = subLocation.guidegroup[0];
-    AnalyticsUtils.logEvent("view_guide", { id: subLocation.id, name: subLocation.slug });
+    AnalyticsUtils.logEvent("view_guide", { name: subLocation.slug });
     navigate("GuideDetailsScreen", {
       title: name,
       id: subLocation.id,

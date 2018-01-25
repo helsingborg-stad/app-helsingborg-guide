@@ -373,7 +373,7 @@ export default class MapWithListView extends Component {
     switch (contentType) {
       case "location":
       {
-        AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
+        AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
         navigate("LocationDetailsScreen", { location: contentObject });
         break;
       }
@@ -381,7 +381,7 @@ export default class MapWithListView extends Component {
       {
         const trail = contentObject;
         const title = trail.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
+        AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
         navigate("TrailScreen", { trail, title });
         return;
       }
@@ -389,15 +389,15 @@ export default class MapWithListView extends Component {
       {
         const guide = contentObject;
         const title = guide.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
+        AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
         navigate("GuideDetailsScreen", { id: guide.id, title });
         return;
       }
       default:
       {
-        const { title, id } = contentObject;
+        const { title } = contentObject;
         const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
-        AnalyticsUtils.logEvent("view_object", { id, name: title });
+        AnalyticsUtils.logEvent("view_object", { name: title });
         navigate("ObjectDetailsScreen", { title, contentObject, stopAudioOnUnmount });
       }
     }
