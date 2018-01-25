@@ -192,7 +192,7 @@ class GuideListScreen extends Component {
 
   toggleMap = () => {
     const showMap = !this.state.showMap;
-    this.props.navigation.setParams({ showMap });
+    // this.props.navigation.setParams({ showMap });
     this.setState({ showMap });
   }
 
@@ -270,10 +270,11 @@ class GuideListScreen extends Component {
       item.numberOfGuides = GuideListScreen.numberOfGuidesForItem(item, subLocations);
     });
 
-    if (showMap) {
-      const mapItems = MapWithListView.createMapItemsFromNavItems(items);
-      return (<MapWithListView items={mapItems} navigation={navigation} />);
-    }
+    // if (showMap) {
+    //
+    const mapItems = MapWithListView.createMapItemsFromNavItems(items);
+    // return (<MapWithListView items={mapItems} navigation={navigation} />);
+    // }
 
     if (currentLocation) {
       // calculate distances from current location
@@ -284,7 +285,15 @@ class GuideListScreen extends Component {
       });
       items.sort((a, b) => a.distance - b.distance);
     }
-    return (<GuideList items={items} navigation={navigation} />);
+    return (
+      <View style={{
+        flex: 1,
+      }}
+      >
+        <MapWithListView items={mapItems} navigation={navigation} showMap={showMap} />
+        <GuideList items={items} navigation={navigation} showMap={showMap} />
+
+      </View >);
   }
 
   render() {

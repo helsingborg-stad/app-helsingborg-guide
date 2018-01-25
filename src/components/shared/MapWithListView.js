@@ -38,6 +38,7 @@ const markerImageActiveWidth = 42;
 const markerImageInactiveWidth = 32;
 
 const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 const listItemWidth = screenWidth - (defaultMargin * 2);
 
 const locationMarkerActive = require("../../images/map/marker-location-active.png");
@@ -78,12 +79,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
   },
+  hiddenContainer: {
+    flex: 0,
+    backgroundColor: Colors.white,
+  },
   map: {
     position: "absolute",
     bottom: listItemImageSize + defaultMargin,
     left: 0,
     right: 0,
     top: 0,
+  },
+  hiddenMap: {
+    position: "absolute",
+    bottom: listItemImageSize + defaultMargin,
+    flex: 1,
+    left: 0,
+    right: 150,
+    top: -150,
+    height: ios ? 0.1 : screenHeight,
+    width: screenWidth,
   },
   listStyle: {
     position: "absolute",
@@ -582,13 +597,13 @@ export default class MapWithListView extends Component {
   }
 
   render() {
-    const { items, initialLocation = { latitude: 56.0471881, longitude: 12.6963658 } } = this.props;
+    const { items, initialLocation = { latitude: 56.0471881, longitude: 12.6963658 }, showMap } = this.props;
     const { longitude, latitude } = initialLocation;
     return (
-      <View style={styles.container}>
+      <View style={showMap ? styles.container : styles.hiddenContainer}>
         <MapView
           ref={(ref) => { this.map = ref; }}
-          style={styles.map}
+          style={showMap ? styles.map : styles.hiddenMap}
           showsUserLocation
           onMapReady={this.onMapReady}
           initialRegion={
