@@ -6,7 +6,7 @@ const firebase = RNFirebase.initializeApp({
 
 export default {
   setScreen: (screenName) => {
-    firebase.analytics().setCurrentScreen(screenName, null);
+    if (!__DEV__) { firebase.analytics().setCurrentScreen(screenName, null); }
   },
 
   logEvent: (name, params) => {
