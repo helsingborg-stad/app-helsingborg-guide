@@ -1,22 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import SvgUri from "react-native-svg-uri";
-import {
-  Colors,
-} from "../../styles/";
-
-
-const styles = StyleSheet.create({
-
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: Colors.listBackgroundColor,
-  },
-
-});
-
 
 export default class SVGView extends Component {
   constructor(props) {
@@ -25,14 +9,14 @@ export default class SVGView extends Component {
   }
 
 
-  displaySVG(logoType, placeholder) {
-    if (!logoType) return <Text style={styles.title}>{placeholder}</Text>;
+  displaySVG(logoType, placeholder, customStyle) {
+    if (!logoType) return <Text>{placeholder}</Text>;
 
     return (
-      <View style={styles.container}>
+      <View style={customStyle}>
         <SvgUri
-          width="200"
-          height="200"
+          width="44"
+          height="36"
           source={{ uri: logoType }}
         />
       </View>
@@ -40,6 +24,6 @@ export default class SVGView extends Component {
   }
 
   render() {
-    return this.displaySVG(this.props.logoType, this.props.placeHolder);
+    return this.displaySVG(this.props.logoType, this.props.placeHolder, this.props.customStyle);
   }
 }

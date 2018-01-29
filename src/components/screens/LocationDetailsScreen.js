@@ -99,6 +99,15 @@ const styles = StyleSheet.create({
     height: 2,
     backgroundColor: Colors.listBackgroundColor,
   },
+  accessibilityIcon: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    backgroundColor: Colors.listBackgroundColor,
+    width: 44,
+    height: 44,
+    borderRadius: 44 / 2,
+  },
   subLocationsHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 20,
@@ -315,7 +324,7 @@ class LocationDetailsScreen extends Component {
         {this.state.pointProperties.items.map(element =>
           (<View key={element.id}>
             <Text style={TextStyles.pointProperty} >{element.name}</Text>
-            <SVGView logoType={element.icon} placeHolder="icon" />
+            <SVGView logoType={element.icon} placeHolder="icon" customStyle={styles.accessibilityIcon} />
           </View>),
         )}
       </View>
