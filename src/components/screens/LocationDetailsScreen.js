@@ -9,6 +9,7 @@ import {
   ScrollView,
   Linking,
   Platform,
+  NetInfo,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
@@ -18,16 +19,20 @@ import {
   connect,
 } from "react-redux";
 import * as _ from "lodash";
-import ViewContainer from "../shared/view_container";
-import ImageView from "../shared/image_view";
-import ListItem from "../shared/list_item";
+
 import DistanceView from "../shared/DistanceView";
-import TimingService from "../../services/timingService";
+import ImageView from "../shared/image_view";
 import LangService from "../../services/langService";
-import SlimNotificationBar from "../shared/SlimNotificationBar";
+import ListItem from "../shared/list_item";
 import NoInternetText from "../shared/noInternetText";
+import SlimNotificationBar from "../shared/SlimNotificationBar";
+import SVGView from "../shared/SVGView";
+import TimingService from "../../services/timingService";
+import ViewContainer from "../shared/view_container";
+
 import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
+import * as pointPropertiesActions from "../../actions/pointPropertiesActions";
 import {
   Colors,
   TextStyles,
@@ -86,6 +91,10 @@ const styles = StyleSheet.create({
       color: Colors.black,
     }],
   ),
+  accessibilityContainer: {
+    flex: 4,
+    paddingVertical: 10,
+  },
   subLocationsHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 20,
@@ -156,10 +165,12 @@ class LocationDetailsScreen extends Component {
     subLocations: PropTypes.array.isRequired,
     internet: PropTypes.bool.isRequired,
     geolocation: PropTypes.any,
+    pointProperties: PropTypes.object,
   }
 
   static defaultProps = {
     geolocation: null,
+    pointProperties: null,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -217,13 +228,22 @@ class LocationDetailsScreen extends Component {
   constructor(props) {
     super(props);
 
-    const { subLocations, internet, location } = this.props;
+    const { subLocations, internet, location, pointProperties } = this.props;
 
     this.state = {
       location,
       sublocations: subLocations,
       internet,
+      pointProperties,
     };
+  }
+
+  componentDidMount() {
+    NetInfo.isConnected.fetch().then((isConnected) => {
+      if (isConnected) {
+        this.props.pointPropertiesActions.fetchPointProperties(this.state.location._embedded.location[0].id);
+      }
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -232,7 +252,7 @@ class LocationDetailsScreen extends Component {
         sublocations: nextProps.subLocations,
       });
     }
-
+    if (nextProps.pointProperties !== this.state.pointProperties) { this.setState({ pointProperties: nextProps.pointProperties }); }
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
   }
 
@@ -282,6 +302,22 @@ class LocationDetailsScreen extends Component {
     return article;
   }
 
+  displayAccessibility() {
+    if (!this.state.pointProperties || this.state.pointProperties.items.length < 1) { return null; }
+
+    const accessibility = (
+      <View style={styles.accessibilityContainer}>
+        {this.state.pointProperties.items.map(element =>
+          (<View key={element.id}>
+            <Text style={styles.articleHeaderText} >{element.name}</Text>
+            <SVGView logoType={element.icon} placeHolder="icon" />
+          </View>),
+        )}
+      </View>
+    );
+    return accessibility;
+  }
+
   display() {
     if (this.state.location && Object.keys(this.state.location).length) {
       const { image } = this.state.location.apperance;
@@ -312,6 +348,7 @@ class LocationDetailsScreen extends Component {
               </View>
               {this.displaySubLocations()}
               {this.displayArticle()}
+              {this.displayAccessibility()}
             </View>
           </ScrollView>
         </ViewContainer>
@@ -357,12 +394,14 @@ function mapStateToProps(state, ownProps) {
     subLocations: getFilteredSubLocations(state.subLocations, location.id) || [],
     internet: state.internet.connected,
     geolocation: state.geolocation,
+    pointProperties: state.pointproperties,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
     internetActions: bindActionCreators(internetActions, dispatch),
+    pointPropertiesActions: bindActionCreators(pointPropertiesActions, dispatch),
   };
 }
 

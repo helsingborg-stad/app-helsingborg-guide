@@ -18,4 +18,5 @@ export default {
   error: {},
   downloads: [],
   position: null,
+  pointproperties: { name: "", icon: "", guideID: 0 },
 };
