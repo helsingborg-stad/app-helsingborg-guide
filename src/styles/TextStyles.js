@@ -50,4 +50,12 @@ export default StyleSheet.create({
     fontSize: 16,
     lineHeight: 22.0,
   },
+  pointProperty: {
+    ...defaultFont,
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: 19.0,
+    color: Colors.warmGrey,
+  },
+
 });

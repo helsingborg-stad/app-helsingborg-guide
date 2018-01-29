@@ -309,7 +309,7 @@ class LocationDetailsScreen extends Component {
       <View style={styles.accessibilityContainer}>
         {this.state.pointProperties.items.map(element =>
           (<View key={element.id}>
-            <Text style={styles.articleHeaderText} >{element.name}</Text>
+            <Text style={TextStyles.pointProperty} >{element.name}</Text>
             <SVGView logoType={element.icon} placeHolder="icon" />
           </View>),
         )}
