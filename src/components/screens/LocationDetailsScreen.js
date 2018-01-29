@@ -95,6 +95,10 @@ const styles = StyleSheet.create({
     flex: 4,
     paddingVertical: 10,
   },
+  divider: {
+    height: 2,
+    backgroundColor: Colors.listBackgroundColor,
+  },
   subLocationsHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 20,
@@ -307,6 +311,7 @@ class LocationDetailsScreen extends Component {
 
     const accessibility = (
       <View style={styles.accessibilityContainer}>
+        <View style={styles.divider} />
         {this.state.pointProperties.items.map(element =>
           (<View key={element.id}>
             <Text style={TextStyles.pointProperty} >{element.name}</Text>

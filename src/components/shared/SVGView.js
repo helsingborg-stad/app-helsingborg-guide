@@ -28,8 +28,6 @@ export default class SVGView extends Component {
   displaySVG(logoType, placeholder) {
     if (!logoType) return <Text style={styles.title}>{placeholder}</Text>;
 
-    console.log(logoType);
-
     return (
       <View style={styles.container}>
         <SvgUri
