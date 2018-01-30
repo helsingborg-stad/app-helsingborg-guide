@@ -38,7 +38,8 @@ export default class DownloadTask {
   // sequence function. stops when the the list is completed or the task getting canceled.
   _fetchUrl(url) {
     if (this.isCanceled || this.isCompleted()) return null;
-    const mTask = fetchService.fetch(url);
+    const encoded = encodeURI(url);
+    const mTask = fetchService.fetch(encoded);
     return mTask
       .then((res) => {
         if (res && !this.isCanceled) {
