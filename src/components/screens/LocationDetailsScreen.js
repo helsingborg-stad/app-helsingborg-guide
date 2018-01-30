@@ -43,6 +43,7 @@ import {
   LocationUtils,
 } from "../../utils/";
 import DirectionsTouchable from "./../shared/DirectionsTouchable";
+import LinkTouchable from "./../shared/LinkTouchable";
 
 const styles = StyleSheet.create({
   scrollView: {},
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
   articleContainer: {
     flex: 4,
     paddingTop: 10,
-    paddingBottom: 30,
+    paddingBottom: 5,
   },
   articleDescriptionText: StyleSheetUtils.flatten([
     TextStyles.description, {
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 2,
     backgroundColor: Colors.listBackgroundColor,
+    marginTop: 30,
   },
   accessibilityIcon: {
     // backgroundColor: Colors.warmGrey,
@@ -286,6 +288,16 @@ class LocationDetailsScreen extends Component {
     }
     if (nextProps.pointProperties !== this.state.pointProperties) { this.setState({ pointProperties: nextProps.pointProperties }); }
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
+
+    let webUrl = null;
+    if (this.state.location._embedded.location[0].links) {
+      this.state.location._embedded.location[0].links.forEach((element) => {
+        if (element.service === "webpage") {
+          webUrl = element.url;
+        }
+      });
+      this.setState({ webUrl });
+    }
   }
 
   _goToSubLocationScene(subLocation) {
@@ -334,18 +346,33 @@ class LocationDetailsScreen extends Component {
     return article;
   }
 
+  displayWebPage() {
+    if (!this.state.webUrl) { return null; }
+
+    const webLink = (<LinkTouchable
+      title={this.state.webUrl.replace(/^https?:\/\//, "")}
+      onPress={() => {
+        this.goToLink(this.state.webUrl, this.state.webUrl);
+      }}
+    />);
+
+    return webLink;
+  }
+
   displayAccessibility() {
     if (!this.state.pointProperties || !this.state.pointProperties.items || this.state.pointProperties.items.length < 1) { return null; }
 
     const accessibility = (
-
-      <View style={styles.accessibilityContainer}>
-        {this.state.pointProperties.items.map(element =>
-          (<View style={styles.pointPropertyContainer} key={element.id} >
-            <SVGView logoType={element.icon} placeHolder="" customStyle={styles.accessibilityIcon} />
-            <Text style={TextStyles.pointProperty} >{element.name}</Text>
-          </View>),
-        )}
+      <View>
+        <View style={styles.divider} />
+        <View style={styles.accessibilityContainer}>
+          {this.state.pointProperties.items.map(element =>
+            (<View style={styles.pointPropertyContainer} key={element.id} >
+              <SVGView logoType={element.icon} placeHolder="" customStyle={styles.accessibilityIcon} />
+              <Text style={TextStyles.pointProperty} >{element.name}</Text>
+            </View>),
+          )}
+        </View>
       </View>
     );
     return accessibility;
@@ -381,7 +408,8 @@ class LocationDetailsScreen extends Component {
               </View>
               {this.displaySubLocations()}
               {this.displayArticle()}
-              <View style={styles.divider} />
+              {this.displayWebPage()}
+
               {this.displayAccessibility()}
             </View>
           </ScrollView>
@@ -390,6 +418,12 @@ class LocationDetailsScreen extends Component {
     }
 
     return null;
+  }
+
+  goToLink(url, title) {
+    const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("open_url", { title });
+    navigate("WebScreen", { url });
   }
 
   openGoogleMapApp(lat, lng) {
