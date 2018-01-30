@@ -15,8 +15,8 @@ export default class SVGView extends Component {
     return (
       <View style={customStyle}>
         <SvgUri
-          width="44"
-          height="36"
+          width="30"
+          height="30"
           source={{ uri: logoType }}
         />
       </View>
