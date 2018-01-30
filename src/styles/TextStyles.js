@@ -54,7 +54,8 @@ export default StyleSheet.create({
     ...defaultFont,
     fontSize: 16,
     fontWeight: "500",
-    lineHeight: 19.0,
+    lineHeight: 24.0,
+    paddingLeft: 9,
     color: Colors.warmGrey,
   },
 

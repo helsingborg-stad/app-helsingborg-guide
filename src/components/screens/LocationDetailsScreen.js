@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
   },
   articleContainer: {
     flex: 4,
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 30,
   },
   articleDescriptionText: StyleSheetUtils.flatten([
     TextStyles.description, {
@@ -87,21 +88,34 @@ const styles = StyleSheet.create({
     TextStyles.defaultFontFamily, {
       fontSize: 20,
       lineHeight: 21,
-      marginVertical: 10,
+      paddingBottom: 10,
       color: Colors.black,
     }],
   ),
   accessibilityContainer: {
     flex: 1,
     flexDirection: "row",
-    paddingVertical: 10,
+    flexWrap: "wrap",
+    paddingTop: 10,
+    paddingBottom: 20,
   },
   pointPropertyContainer: {
-    flex: 1,
+    flex: 0,
     flexDirection: "row",
-    // justifyContent: "center",
-    // paddingVertical: 10,
+    flexGrow: 1,
+    width: "40%",
+    paddingTop: 8,
+    alignItems: "center",
   },
+  pointPropertyText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "500",
+      lineHeight: 24.0,
+      paddingLeft: 9,
+      color: Colors.warmGrey,
+    }],
+  ),
   divider: {
     height: 2,
     backgroundColor: Colors.listBackgroundColor,
@@ -326,7 +340,6 @@ class LocationDetailsScreen extends Component {
     const accessibility = (
 
       <View style={styles.accessibilityContainer}>
-
         {this.state.pointProperties.items.map(element =>
           (<View style={styles.pointPropertyContainer} key={element.id} >
             <SVGView logoType={element.icon} placeHolder="" customStyle={styles.accessibilityIcon} />
