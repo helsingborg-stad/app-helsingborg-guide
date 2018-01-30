@@ -92,21 +92,26 @@ const styles = StyleSheet.create({
     }],
   ),
   accessibilityContainer: {
-    flex: 4,
+    flex: 1,
+    flexDirection: "row",
     paddingVertical: 10,
+  },
+  pointPropertyContainer: {
+    flex: 1,
+    flexDirection: "row",
+    // justifyContent: "center",
+    // paddingVertical: 10,
   },
   divider: {
     height: 2,
     backgroundColor: Colors.listBackgroundColor,
   },
   accessibilityIcon: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: Colors.listBackgroundColor,
-    width: 44,
-    height: 44,
-    borderRadius: 44 / 2,
+    // backgroundColor: Colors.warmGrey,
+    width: 30,
+    height: 30,
+    // borderRadius: 44 / 2,
+
   },
   subLocationsHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
@@ -316,15 +321,16 @@ class LocationDetailsScreen extends Component {
   }
 
   displayAccessibility() {
-    if (!this.state.pointProperties || this.state.pointProperties.items.length < 1) { return null; }
+    if (!this.state.pointProperties || !this.state.pointProperties.items || this.state.pointProperties.items.length < 1) { return null; }
 
     const accessibility = (
+
       <View style={styles.accessibilityContainer}>
-        <View style={styles.divider} />
+
         {this.state.pointProperties.items.map(element =>
-          (<View key={element.id}>
+          (<View style={styles.pointPropertyContainer} key={element.id} >
+            <SVGView logoType={element.icon} placeHolder="" customStyle={styles.accessibilityIcon} />
             <Text style={TextStyles.pointProperty} >{element.name}</Text>
-            <SVGView logoType={element.icon} placeHolder="icon" customStyle={styles.accessibilityIcon} />
           </View>),
         )}
       </View>
@@ -362,6 +368,7 @@ class LocationDetailsScreen extends Component {
               </View>
               {this.displaySubLocations()}
               {this.displayArticle()}
+              <View style={styles.divider} />
               {this.displayAccessibility()}
             </View>
           </ScrollView>
