@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.beaconmodule.BeaconPackage;
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -39,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new SvgPackage(),
                     new RNFirebasePackage(),
                     new RNFirebaseAnalyticsPackage(),
                     new PhotoViewPackage(),

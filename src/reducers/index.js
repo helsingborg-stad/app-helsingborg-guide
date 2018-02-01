@@ -8,6 +8,7 @@ import internet from "./internetReducer";
 import error from "./errorReducer";
 import downloads from "./downloadReducer";
 import geolocation from "./geolocationReducer";
+import pointproperties from "./pointPropertiesReducer";
 
 const rootReducer = combineReducers({
   guides,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   error,
   downloads,
   geolocation,
+  pointproperties,
 });
 
 export default rootReducer;
