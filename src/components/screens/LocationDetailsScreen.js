@@ -9,6 +9,7 @@ import {
   ScrollView,
   Linking,
   Platform,
+  Share,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
@@ -38,6 +39,7 @@ import {
   LocationUtils,
 } from "../../utils/";
 import DirectionsTouchable from "./../shared/DirectionsTouchable";
+import ShareService from "../../services/SharingService";
 
 const styles = StyleSheet.create({
   scrollView: {},
@@ -149,6 +151,9 @@ const styles = StyleSheet.create({
     }],
   ),
 });
+
+
+const settingsIcon = require("../../images/settings.png");
 
 class LocationDetailsScreen extends Component {
   static propTypes = {
@@ -301,12 +306,22 @@ class LocationDetailsScreen extends Component {
             <View style={styles.bodyContainer}>
               <View style={styles.titleContainer}>
                 <Text style={styles.title}>{this.state.location.name}</Text>
+                <Text
+                  style={styles.title}
+                  onPress={() => {
+                    console.log(this.state.location);
+
+                    ShareService.shareImage(this.state.location.name, "#dunkers", image.sizes.medium_large, this.state.location.name);
+                  }}
+                >SHARE</Text>
+
                 <View style={styles.openTimeContainer}>
                   {LocationDetailsScreen.displayOpeningTime(this.state.location)}
                   {LocationDetailsScreen.displayDistance(this.props.geolocation, this.state.location._embedded.location)}
                 </View>
                 <DirectionsTouchable onPress={() => {
-                  this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
+                  this.openGoogleMapApp(this.state.location._embedded.location[0].latitude,
+                    this.state.location._embedded.location[0].longitude);
                 }}
                 />
               </View>
@@ -321,6 +336,7 @@ class LocationDetailsScreen extends Component {
     return null;
   }
 
+  // download:file downloaded and stored in path  /var/mobile/Containers/Data/Application/EDD5E3B4-DF89-4E6D-A4B2-2DD1AB551DB8/Library/Caches/https://api.helsingborg.se/wp-content/uploads/sites/2/2017/11/101-nordisk-salong-hans-christian_berg.jpg
   openGoogleMapApp(lat, lng) {
     const daddr = `${lat},${lng}`;
 
