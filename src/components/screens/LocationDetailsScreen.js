@@ -238,7 +238,7 @@ class LocationDetailsScreen extends Component {
 
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
-    const { name } = subLocation.guidegroup[0];
+    const name = subLocation.title.plain_text;
     AnalyticsUtils.logEvent("view_guide", { name: subLocation.slug });
     navigate("GuideDetailsScreen", {
       title: name,
