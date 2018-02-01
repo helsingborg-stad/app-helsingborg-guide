@@ -366,7 +366,7 @@ class LocationDetailsScreen extends Component {
           {this.state.pointProperties.items.map(element =>
             (<View style={styles.pointPropertyContainer} key={element.id} >
               <SVGView logoType={element.icon} placeHolder="" customStyle={styles.pointPropertyIcon} />
-              <Text style={TextStyles.pointProperty} >{element.name}</Text>
+              <Text style={styles.pointPropertyText} >{element.name}</Text>
             </View>),
           )}
         </View>
