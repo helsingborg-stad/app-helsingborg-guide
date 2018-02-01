@@ -205,6 +205,7 @@ class LocationDetailsScreen extends Component {
   }
 
   static displayDistance(currentLocation, locations) {
+    if (!currentLocation) return null;
     const { coords } = currentLocation;
     const distance = LocationUtils.getShortestDistance(coords, locations);
     if (!distance) return null;
@@ -238,7 +239,7 @@ class LocationDetailsScreen extends Component {
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
     const { name } = subLocation.guidegroup[0];
-    AnalyticsUtils.logEvent("view_guide", { id: subLocation.id, name: subLocation.slug });
+    AnalyticsUtils.logEvent("view_guide", { name: subLocation.slug });
     navigate("GuideDetailsScreen", {
       title: name,
       id: subLocation.id,
@@ -285,8 +286,6 @@ class LocationDetailsScreen extends Component {
     if (this.state.location && Object.keys(this.state.location).length) {
       const { image } = this.state.location.apperance;
       const uri = image.sizes.medium_large;
-      const width = image.sizes["medium-large-width"];
-      const height = image.sizes["medium-large-height"];
       return (
         <ViewContainer>
           <SlimNotificationBar visible={!this.state.internet} style={{ top: 0 }}>
@@ -295,7 +294,7 @@ class LocationDetailsScreen extends Component {
 
           <ScrollView style={styles.scrollView}>
             <View style={styles.imageViewContainer}>
-              <ImageView source={{ uri }} width={width} height={height}>
+              <ImageView source={{ uri }}>
                 {LocationDetailsScreen.displayComingSoon(this.state.location)}
               </ImageView>
             </View>

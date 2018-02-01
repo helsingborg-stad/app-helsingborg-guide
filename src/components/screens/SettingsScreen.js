@@ -22,6 +22,7 @@ import {
 } from "../../styles/";
 import {
   StyleSheetUtils,
+  AnalyticsUtils,
 } from "../../utils/";
 import * as guideActions from "../../actions/guideActions";
 import * as navigationActions from "../../actions/navigationActions";
@@ -29,8 +30,15 @@ import * as subLocationActions from "../../actions/subLoactionActions";
 
 const defaultMargin = 20;
 const helsingborgIcon = require("../../images/HBG.png");
+const goBackIcon = require("../../images/iconBack.png");
 
 const styles = StyleSheet.create({
+  barButtonItem: {
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -51,7 +59,9 @@ const styles = StyleSheet.create({
     margin: defaultMargin,
   },
   contactUsContainer: {
+    flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
   divider: {
     margin: defaultMargin,
@@ -63,18 +73,25 @@ const styles = StyleSheet.create({
 const textStyles = StyleSheet.create({
   titleText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 20,
+      fontSize: 16,
       lineHeight: 23,
-      fontWeight: "500",
       color: Colors.black,
+      fontWeight: "bold",
       marginHorizontal: defaultMargin,
       marginTop: defaultMargin,
       marginBottom: 10,
     }],
   ),
+  languageText: StyleSheetUtils.flatten([
+    TextStyles.body, {
+      fontSize: 18,
+      color: Colors.black,
+    }],
+  ),
   linkText: StyleSheetUtils.flatten([
     TextStyles.body, {
-      color: Colors.purple,
+      fontSize: 18,
+      color: Colors.black,
       marginHorizontal: defaultMargin,
     }],
   ),
@@ -108,12 +125,22 @@ class SettingsScreen extends Component {
     subLocationActions: PropTypes.object.isRequired,
   }
 
-  static navigationOptions = () => {
+
+  static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.SETTINGS;
     return {
       title,
+      headerLeft: (
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.barButtonItem}
+        >
+          <Image source={goBackIcon} />
+        </TouchableOpacity>
+      ),
     };
   };
+
 
   constructor(props) {
     super(props);
@@ -134,6 +161,7 @@ class SettingsScreen extends Component {
   }
 
   setLanguageAndReload = (code) => {
+    AnalyticsUtils.logEvent("change_language", { language_code: code });
     this.setState({ selectedLanguageCode: code });
     LangService.setLanguage(code);
     // Set navigation params to force an update
@@ -169,7 +197,7 @@ class SettingsScreen extends Component {
 
     return languages.map((language) => {
       const { name, slug } = language;
-      const style = { color: Colors.purple };
+      const style = { color: Colors.purple, fontWeight: "bold", textDecorationLine: "underline" };
       const selectedStyle = this.state.selectedLanguageCode === slug ? style : null;
       const btnDisabled = this.state.selectedLanguageCode === slug;
 
@@ -181,7 +209,7 @@ class SettingsScreen extends Component {
           activeOpacity={0.7}
           style={styles.choiceContainer}
         >
-          <Text style={[textStyles.choiceText, selectedStyle]}>{name.split(" ")[0]}</Text>
+          <Text style={[textStyles.languageText, selectedStyle]}>{name.split(" ")[0]}</Text>
         </TouchableOpacity>
       );
     });
@@ -189,18 +217,17 @@ class SettingsScreen extends Component {
 
   render() {
     return (
+
       <View style={styles.container}>
         <Text style={textStyles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
         <View style={styles.languageContainer}>
           <View style={styles.languageChoicesContainer}>{this.displayLanguages()}</View>
         </View>
         <View style={styles.divider} />
-        <Text style={textStyles.titleText}>{LangService.strings.ABOUT} {LangService.strings.APP_NAME}</Text>
         <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
         </TouchableOpacity>
         <View style={styles.divider} />
-        <Text style={textStyles.titleText}>{LangService.strings.OFFLINE_CONTENT_TITLE} </Text>
         <TouchableOpacity onPress={this.navigateToDownloadsScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.OFFLINE_CONTENT}</Text>
         </TouchableOpacity>
@@ -208,6 +235,7 @@ class SettingsScreen extends Component {
         <View style={styles.contactUsContainer}>
           <Image source={helsingborgIcon} style={styles.icon} />
           <View style={styles.contactTextContainer}>
+
             <Text style={textStyles.contactEmailText}>kontaktcenter@helsingborg.se</Text>
             <Text style={textStyles.contactPhoneText}>042-10 50 00</Text>
           </View>

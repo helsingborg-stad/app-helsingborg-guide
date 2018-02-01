@@ -5,7 +5,7 @@ import Swiper from "react-native-swiper";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import ViewContainer from "../shared/view_container";
-import ImageView from "../shared/image_view_content";
+import ImageView from "../shared/image_view";
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
 import LangService from "../../services/langService";
@@ -22,6 +22,7 @@ import {
 } from "../../styles/";
 import {
   StyleSheetUtils,
+  AnalyticsUtils,
 } from "../../utils/";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
@@ -110,6 +111,7 @@ class ObjectDetailsScreen extends Component {
       internet: this.props.internet,
       audioBtnDisabled: false,
       videoBtnDisabled: false,
+      stopAudioOnUnmount: params.stopAudioOnUnmount,
     };
 
     this.mediaService = MediaService.getInstance();
@@ -136,6 +138,7 @@ class ObjectDetailsScreen extends Component {
   }
 
   componentWillUnmount() {
+    if (this.state.stopAudioOnUnmount === true) { this.mediaService.release(); }
     this.stopListenIngToAudioEvents();
   }
 
@@ -163,11 +166,14 @@ class ObjectDetailsScreen extends Component {
     if (this.props.metricActions.updateMetric) { this.props.metricActions.updateMetric(metric); }
   }
 
-  _goToVideoView(videoUrl, title) {
+  _goToVideoView(video) {
     this.pauseAudioFile();
 
+    const { url, title, name } = video;
+    if (name) AnalyticsUtils.logEvent("play_video", { name });
+
     const { navigate } = this.props.navigation;
-    navigate("VideoScreen", { videoUrl, title });
+    navigate("VideoScreen", { videoUrl: url, title });
   }
 
   goToImageView(image) {
@@ -175,8 +181,9 @@ class ObjectDetailsScreen extends Component {
     navigate("ImageScreen", { image });
   }
 
-  goToLink(url) {
+  goToLink(url, title) {
     const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("open_url", { title });
     navigate("WebScreen", { url });
   }
 
@@ -205,6 +212,10 @@ class ObjectDetailsScreen extends Component {
     if (this.state.audio.hasAudio) this.mediaService.release();
 
     const { contentObject } = this.state;
+
+    const audioName = contentObject.audio.name;
+    if (audioName) AnalyticsUtils.logEvent("play_audio", { name: audioName });
+
     const audio = {
       url: contentObject.audio.url,
       title: contentObject.title || LangService.strings.UNKNOWN_TITLE,
@@ -244,7 +255,7 @@ class ObjectDetailsScreen extends Component {
       <ButtonsBarItem
         disabled={this.state.videoBtnDisabled}
         onPress={() => {
-          this._goToVideoView(video.url, video.title);
+          this._goToVideoView(video);
         }}
         name="play-box-outline"
         color={Colors.darkPurple}
@@ -289,7 +300,7 @@ class ObjectDetailsScreen extends Component {
     ));
 
     return (
-      <Swiper style={styles.imagesSlider} height={MAX_IMAGE_HEIGHT} dotColor="white" activeDotColor="#D35098" showsButtons={false}>
+      <Swiper style={styles.imagesSlider} height={MAX_IMAGE_HEIGHT} dotColor="white" activeDotColor="#D35098" showsButtons={false} loop={false}>
         {slides}
       </Swiper>
     );
@@ -298,7 +309,7 @@ class ObjectDetailsScreen extends Component {
   displayLinks() {
     if (!this.state.contentObject.links) return null;
     return this.state.contentObject.links.map((item, index) => (
-      <TouchableOpacity style={styles.linkContainer} key={item.link || index} onPress={() => this.goToLink(item.link)}>
+      <TouchableOpacity style={styles.linkContainer} key={item.link || index} onPress={() => this.goToLink(item.link, item.title)}>
         <Text style={styles.linkText}>{item.title}</Text>
       </TouchableOpacity>
     ));

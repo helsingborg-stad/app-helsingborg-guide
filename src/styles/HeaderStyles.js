@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
 const defaultHeader = {
   headerStyle: styles.headerStyle,
-  headerTintColor: Colors.white,
+  headerTintColor: Colors.menuButtonWhite,
   headerTitleStyle: TextStyles.headerTitleLabel,
   headerBackTitleStyle: TextStyles.defaultFontFamily,
   headerBackTitle: " ",

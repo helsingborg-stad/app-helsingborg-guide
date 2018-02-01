@@ -219,10 +219,6 @@ export default class VideoPlayer extends Component {
             />
             <Text style={styles.duration}>{timeHelper.toTimeMarker(this.state.duration)}</Text>
           </View>
-
-          <TouchableOpacity style={styles.button} onPress={this.toggleFullscreen}>
-            <Icon name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"} size={ICON_SIZE} style={styles.buttonIcon} />
-          </TouchableOpacity>
         </View>
       </ViewContainer>
     );

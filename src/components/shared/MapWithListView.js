@@ -252,10 +252,21 @@ export default class MapWithListView extends Component {
         imageUrl: contentObject.image[0].sizes.medium,
         thumbnailUrl: contentObject.image[0].sizes.thumbnail,
         streetAdress: locationObject.street_address,
+        order: contentObject.order,
+        labelDisplayNumber: 0,
         contentObject,
         imageType: (screen === "trailScreen") ? "trailScreen" : contentType,
       });
     });
+
+    trailObjects.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
+
+    let index = 1;
+    trailObjects.forEach((item) => {
+      item.labelDisplayNumber = index;
+      index++;
+    });
+
     return trailObjects;
   }
 
@@ -264,13 +275,16 @@ export default class MapWithListView extends Component {
 
     const { items } = this.props;
     this.state = {
+      isInitialized: false,
       activeMarker: items[0],
       markersFocused: false,
     };
   }
 
   componentWillReceiveProps({ items }) {
-    this.setState({ activeMarker: items[0] });
+    if (!this.state.isInitialized) {
+      this.setState({ isInitialized: true, activeMarker: items[0] });
+    }
   }
 
   focusMarkers(markers) {
@@ -358,33 +372,34 @@ export default class MapWithListView extends Component {
     const { contentType, contentObject } = listItem;
     switch (contentType) {
       case "location":
-        {
-          AnalyticsUtils.logEvent("view_location", { id: contentObject.id, name: contentObject.slug });
-          navigate("LocationDetailsScreen", { location: contentObject });
-          break;
-        }
+      {
+        AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
+        navigate("LocationDetailsScreen", { location: contentObject });
+        break;
+      }
       case "trail":
-        {
-          const trail = contentObject;
-          const title = trail.guidegroup[0].name;
-          AnalyticsUtils.logEvent("view_guide", { id: trail.id, name: trail.slug });
-          navigate("TrailScreen", { trail, title });
-          return;
-        }
+      {
+        const trail = contentObject;
+        const title = trail.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
+        navigate("TrailScreen", { trail, title });
+        return;
+      }
       case "guide":
-        {
-          const guide = contentObject;
-          const title = guide.guidegroup[0].name;
-          AnalyticsUtils.logEvent("view_guide", { id: guide.id, name: guide.slug });
-          navigate("GuideDetailsScreen", { id: guide.id, title });
-          return;
-        }
+      {
+        const guide = contentObject;
+        const title = guide.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+        navigate("GuideDetailsScreen", { id: guide.id, title });
+        return;
+      }
       default:
-        {
-          const { title, id } = contentObject;
-          AnalyticsUtils.logEvent("view_object", { id, name: title });
-          navigate("ObjectDetailsScreen", { title, contentObject });
-        }
+      {
+        const { title } = contentObject;
+        const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
+        AnalyticsUtils.logEvent("view_object", { name: title });
+        navigate("ObjectDetailsScreen", { title, contentObject, stopAudioOnUnmount });
+      }
     }
   }
 
@@ -405,11 +420,11 @@ export default class MapWithListView extends Component {
     let image;
 
     if (imageType === "trail" || contentType === "trail") {
-      image = (activeMarker === trailObject) ? trailMarkerActive : trailMarkerInactive;
+      image = (activeMarker.id === trailObject.id) ? trailMarkerActive : trailMarkerInactive;
     } else if (imageType === "trailScreen") {
-      image = (activeMarker === trailObject) ? numberedMarkerActive : numberedMarkerInactive;
+      image = (activeMarker.id === trailObject.id) ? numberedMarkerActive : numberedMarkerInactive;
     } else {
-      image = (activeMarker === trailObject) ? locationMarkerActive : locationMarkerInactive;
+      image = (activeMarker.id === trailObject.id) ? locationMarkerActive : locationMarkerInactive;
     }
     return image;
   }
@@ -423,8 +438,8 @@ export default class MapWithListView extends Component {
     const { activeMarker } = this.state;
 
     const image = this.markerImageForTrailObject(trailObject);
-    const numberString = trailObject.contentObject.order + 1;
-    const active = activeMarker === trailObject;
+    const numberString = trailObject.labelDisplayNumber;
+    const active = activeMarker.id === trailObject.id;
 
     return (
       <MapView.Marker
@@ -492,7 +507,7 @@ export default class MapWithListView extends Component {
     const trailScreen = item.imageType === "trailScreen";
     if (!trailScreen) return null;
 
-    const numberString = item.contentObject.order + 1;
+    const numberString = item.labelDisplayNumber;
     const numberView = (
       <View style={styles.listImageNumberView}>
         <Text style={styles.listImageNumberText}>{numberString}</Text>

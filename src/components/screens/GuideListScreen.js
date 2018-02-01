@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
   ActivityIndicator,
+  Platform,
   Dimensions,
   Image,
   StyleSheet,
@@ -24,6 +25,8 @@ import GuideList from "../shared/GuideList";
 import MapWithListView from "../shared/MapWithListView";
 
 const screenWidth = Dimensions.get("window").width;
+
+const ios = Platform.OS === "ios";
 
 const settingsIcon = require("../../images/settings.png");
 const mapIcon = require("../../images/iconLocation.png");
@@ -69,6 +72,12 @@ const styles = StyleSheet.create({
   ]),
   tabBarIndicator: {
     backgroundColor: Colors.white,
+  },
+  contentMissingText: {
+    fontSize: 20,
+    color: Colors.warmGrey,
+    textAlign: "center",
+    paddingTop: 20,
   },
 });
 
@@ -155,6 +164,32 @@ class GuideListScreen extends Component {
     this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { categoryTypes } = nextProps;
+    const routes = [];
+    let { index } = this.state;
+
+    categoryTypes.forEach((element) => {
+      routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
+    });
+
+    if (index >= routes.length) { index = 0; }
+    this.setState({ routes, index });
+
+    if (LangService.forceNavigationUpdate) {
+      this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
+      LangService.forceNavigationUpdate = false;
+    }
+
+    return null;
+  }
+
+  componentWillUnmount() {
+    const index = 0;
+    const routes = [];
+    this.setState({ index, routes });
+  }
+
   toggleMap = () => {
     const showMap = !this.state.showMap;
     this.props.navigation.setParams({ showMap });
@@ -176,10 +211,23 @@ class GuideListScreen extends Component {
       tabStyle={styles.tabStyle}
       scrollEnabled
       {...props}
-    />);
+    />)
 
   _renderScene = ({ route }) => {
+    // If we're still fetching, show the activity indicator instead
+    if (ios) {
+      const { isFetching } = this.props;
+      if (isFetching) {
+        return (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator />
+          </View>
+        );
+      }
+    }
+
     const { showMap, index, routes } = this.state;
+
     if (Math.abs(index - routes.indexOf(route)) > 2) {
       // Do not render pages that are to far away from the current page
       return null;
@@ -208,9 +256,12 @@ class GuideListScreen extends Component {
       }
     });
 
-    if (showMap) {
-      const mapItems = MapWithListView.createMapItemsFromNavItems(items);
-      return (<MapWithListView items={mapItems} navigation={navigation} />);
+    if (items.length === 0) {
+      return (
+        <Text style={styles.contentMissingText}>
+          {LangService.strings.CONTENT_MISSING}
+        </Text>
+      );
     }
 
     // number of guides and descriptions
@@ -219,6 +270,11 @@ class GuideListScreen extends Component {
       item.numberOfGuides = GuideListScreen.numberOfGuidesForItem(item, subLocations);
     });
 
+    if (showMap) {
+      const mapItems = MapWithListView.createMapItemsFromNavItems(items);
+      return (<MapWithListView items={mapItems} navigation={navigation} />);
+    }
+
     if (currentLocation) {
       // calculate distances from current location
       const { coords } = currentLocation;
@@ -226,30 +282,41 @@ class GuideListScreen extends Component {
         const embeddedLocations = GuideListScreen.getEmbeddedLocationsFromLocation(element);
         element.distance = LocationUtils.getShortestDistance(coords, embeddedLocations);
       });
-      items.sort((a, b) => a.distance > b.distance);
+      items.sort((a, b) => a.distance - b.distance);
     }
     return (<GuideList items={items} navigation={navigation} />);
   }
 
-
   render() {
-    const { isFetching } = this.props;
+    const { routes } = this.state;
 
-    if (isFetching) {
+    if (routes.length < 2) {
       return (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator />
+        <View>
+          <Text style={styles.contentMissingText}>
+            {LangService.strings.CONTENT_MISSING}
+          </Text>
         </View>
       );
     }
 
+    if (!ios) {
+      const { isFetching } = this.props;
+      if (isFetching) {
+        return (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator />
+          </View>
+        );
+      }
+    }
+
     return (
       <TabViewAnimated
-        swipeEnabled={false}
         style={styles.container}
         navigationState={this.state}
-        renderScene={this._renderScene}
         renderHeader={this._renderHeader}
+        renderScene={this._renderScene}
         onIndexChange={this._handleIndexChange}
         initialLayout={initialLayout}
       />
