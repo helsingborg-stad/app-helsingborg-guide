@@ -359,6 +359,8 @@ class LocationDetailsScreen extends Component {
   displayAccessibility() {
     if (!this.state.pointProperties || !this.state.pointProperties.items || this.state.pointProperties.items.length < 1) { return null; }
 
+    if (!this.state.location || this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
+
     const accessibility = (
       <View>
         <View style={styles.divider} />
