@@ -317,7 +317,7 @@ To build for  App Store  follow the steps on this [page](https://facebook.github
  4. Upload package
  * Select Window->Organizer
  * Press upload to app store(This will only upload to itunes connect)
- * Follow the steps choosing the correct acconut. 
+ * Follow the steps choosing the correct account. 
 
  ###### Tips: If it does not work to upload with Xcode use Application Loader Instead.
   
