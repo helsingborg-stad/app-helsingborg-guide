@@ -9,7 +9,6 @@ import {
   ScrollView,
   Linking,
   Platform,
-  Share,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
@@ -152,9 +151,6 @@ const styles = StyleSheet.create({
   ),
 });
 
-
-const settingsIcon = require("../../images/settings.png");
-
 class LocationDetailsScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
@@ -223,7 +219,6 @@ class LocationDetailsScreen extends Component {
     super(props);
 
     const { subLocations, internet, location } = this.props;
-
     this.state = {
       location,
       sublocations: subLocations,
@@ -309,9 +304,7 @@ class LocationDetailsScreen extends Component {
                 <Text
                   style={styles.title}
                   onPress={() => {
-                    console.log(this.state.location);
-
-                    ShareService.shareImage(this.state.location.name, "#dunkers", image.sizes.medium_large, this.state.location.name);
+                    ShareService.shareImage(this.state.location.name, "#hbg", image.sizes.large, this.state.location.name);
                   }}
                 >SHARE</Text>
 

@@ -160,6 +160,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-marker')
     compile(project(':react-native-firebase')) {
         transitive = false
     }
