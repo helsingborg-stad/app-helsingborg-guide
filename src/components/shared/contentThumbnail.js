@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import OImage from "./image";
 
 const FULL_WIDTH = Dimensions.get("window").width;
-const IMAGE_WIDTH = (FULL_WIDTH / 2) - (FULL_WIDTH / 5);
+const IMAGE_WIDTH = (FULL_WIDTH / 2) - (FULL_WIDTH / 10);
 
 const styles = StyleSheet.create({
   thumbnail: {

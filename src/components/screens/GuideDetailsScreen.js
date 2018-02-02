@@ -123,39 +123,38 @@ const styles = StyleSheet.create({
   },
   objectsContainer: {
     flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
     paddingTop: 20,
     paddingBottom: 20,
     marginBottom: 50,
   },
-  ContentThumbnailContainer: {
-    flexDirection: "row",
-    backgroundColor: Colors.white,
-    justifyContent: "center",
-    elevation: 8,
-    marginVertical: 10,
-    shadowColor: "black",
-    shadowOpacity: 0.4,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
+  contentContainer: {
+    flex: 0,
+    flexDirection: "column",
+    paddingTop: 10,
+    paddingBottom: 20,
   },
   ContentThumbnail: {
     flex: 1,
   },
   ContentTextContainer: {
-    flex: 2,
-    flexDirection: "column",
-    padding: 20,
+    flex: 1,
+    paddingBottom: 40,
   },
   idText: StyleSheetUtils.flatten([
-    TextStyles.description, {
-      color: Colors.black,
+    TextStyles.defaultFontFamily, {
+      fontSize: 14,
+      fontWeight: "500",
+      lineHeight: 20,
+      color: Colors.warmGrey,
     }],
   ),
   contentNameText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 20,
-      lineHeight: 21,
-      marginVertical: 10,
+      fontSize: 16,
+      lineHeight: 19,
       color: Colors.black,
     }],
   ),
@@ -503,12 +502,16 @@ class GuideDetailsScreen extends Component {
       }
 
       const text = (
-        <View style={{ flex: 1, justifyContent: "flex-start" }}>
-          <Text style={styles.contentNameText}>{contentObjects[key].title}</Text>
-          <Text style={styles.idText}>
-            {`ID #${contentObjects[key].id}`}
-          </Text>
-        </View>
+        <View style={{ position: "absolute" }}>
+          <View>
+            <Text style={styles.idText}>
+              {`ID #${contentObjects[key].id}`}
+            </Text>
+          </View>
+          <View style={{ width: 150 }}>
+            <Text style={styles.contentNameText}>{contentObjects[key].title}</Text>
+          </View>
+        </View >
       );
 
       return (
@@ -517,7 +520,8 @@ class GuideDetailsScreen extends Component {
           onPress={() => {
             this._goToContentObjectScene(contentObjects[key], key);
           }}
-          style={styles.ContentThumbnailContainer}
+          style={styles.contentContainer}
+
         >
           <ContentThumbnail
             style={styles.ContentThumbnail}
