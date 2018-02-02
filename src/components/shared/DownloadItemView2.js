@@ -7,9 +7,8 @@ import LangService from "../../services/langService";
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignSelf: "stretch",
+  container: {
+    flexDirection: "row",
     alignItems: "center",
   },
   progressView: {
@@ -26,10 +25,10 @@ const DownloadItemView2 = ({ total, currentPos, progress }) => {
     if (total === 0) item = null;
     else if (isCompleted) {
       item = (
-        <View style={{ flex: 1, flexDirection: "row", paddingHorizontal: 15, alignItems: "center" }}>
-          <Icon name="check" size={15} color="green" />
-          <Text style={{ fontSize: 14, color: "green", paddingHorizontal: 10 }}>{LangService.strings.DOWNLOADED}</Text>
-        </View>
+        <View style={styles.container}>
+          <Icon name="check" size={16} color="green" />
+          <Text style={{ fontSize: 16, color: "green", paddingHorizontal: 10 }}>{LangService.strings.DOWNLOADED}</Text>
+        </View >
       );
     } else {
       item =
@@ -42,7 +41,7 @@ const DownloadItemView2 = ({ total, currentPos, progress }) => {
           );
     }
 
-    return <View style={styles.wrapper}>{item}</View>;
+    return item;
   }
 };
 

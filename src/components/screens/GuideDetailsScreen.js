@@ -35,6 +35,7 @@ import {
   StyleSheetUtils,
   AnalyticsUtils,
 } from "../../utils/";
+import LocationService from "../../services/locationService";
 
 const searchIcon = require("../../images/search-id.png");
 
@@ -71,41 +72,58 @@ const styles = StyleSheet.create({
     },
   ]),
   barButtonItemImage: {
-    height: 20,
-    width: 20,
+    height: 16,
+    width: 16,
   },
   downloadContainer: {
     flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
-    borderBottomColor: Colors.warmGrey,
-    borderBottomWidth: 0.25,
+    alignItems: "stretch",
+    borderBottomColor: Colors.listBackgroundColor,
+    borderBottomWidth: 2,
     height: 40,
+    paddingHorizontal: 20,
   },
   titleContainer: {
     flex: 1,
-    paddingHorizontal: 34,
+    paddingHorizontal: 0,
     paddingTop: 16,
-    paddingBottom: 15,
+    paddingBottom: 10,
   },
   title: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 22,
+      fontSize: 30,
       fontWeight: "300",
-      lineHeight: 26,
+      lineHeight: 36,
+      color: Colors.black,
     }],
   ),
+  date: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.warmGrey,
+    }],
+  ),
+  readMoreText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "500",
+      color: Colors.purple,
+    },
+  ]),
   articleContainer: {
-    flex: 4,
-    paddingHorizontal: 34,
-    paddingVertical: 10,
+    flex: 1,
+    paddingVertical: 0,
   },
   article: {
-    fontSize: 14,
-    lineHeight: 25,
+    fontSize: 16,
+    lineHeight: 22,
+    paddingTop: 20,
+    color: Colors.darkGrey,
   },
   objectsContainer: {
     flex: 1,
+    paddingTop: 20,
     paddingBottom: 20,
     marginBottom: 50,
   },
@@ -167,6 +185,19 @@ const styles = StyleSheet.create({
   },
 });
 
+function getTruncatedTitle(longTitle) {
+  if (longTitle.length <= 16) {
+    return longTitle;
+  }
+  return `${longTitle.substring(0, 14)}...`;
+}
+
+function renderDate(startDate, endDate) {
+  if (startDate === null || endDate === null) { return null; }
+
+  return <Text style={styles.date} numberOfLines={1}>{`${startDate} - ${endDate}`}</Text>;
+}
+
 class GuideDetailsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
@@ -179,7 +210,7 @@ class GuideDetailsScreen extends Component {
           onPress={toggleKeypad}
           style={styles.barButtonItem}
         >
-          <Text style={styles.barButtonItemText}>{LangService.strings.SEARCH_BY_NUMBER}</Text>
+          <Text style={styles.barButtonItemText}>{LangService.strings.SEARCH_BY_NUMBER_SHORT}</Text>
           <Image style={styles.barButtonItemImage} source={searchIcon} />
         </TouchableOpacity>
       ),
@@ -213,6 +244,7 @@ class GuideDetailsScreen extends Component {
       internet: this.props.internet,
       keypadSearchResultCode: 0,
       downloadMeta: this.props.downloadMeta,
+      collapsed: true,
     };
     this.currentYOffset = 0;
     if (Platform.OS === "ios") {
@@ -248,6 +280,7 @@ class GuideDetailsScreen extends Component {
     clearTimeout(this.smallBtnTimer);
     clearTimeout(this.beaconSearchTimeout);
     clearTimeout(this.beaconSearchStopTimeout);
+    this.state.collapsed = true;
   }
 
   _goToContentObjectScene(contentObject, objectKey) {
@@ -557,18 +590,49 @@ class GuideDetailsScreen extends Component {
     }
     return null;
   }
+
   displayArticle() {
     const article = (
       <View style={styles.articleContainer}>
-        <Text style={[TextStyles.defaultFontFamily, { fontSize: 19, lineHeight: 21, marginVertical: 10 }]}>
-          {`${LangService.strings.ABOUT} ${this.state.subLocation.title.plain_text}`}
+        <Text style={[TextStyles.defaultFontFamily, { fontSize: 16, lineHeight: 21, marginVertical: 0 }]}>
+          {this.state.subLocation.guide_tagline}
         </Text>
-        <Text style={styles.article}>{this.state.subLocation.content.plain_text}</Text>
+        {renderDate(this.state.subLocation.guide_date_start, this.state.subLocation.guide_date_end)}
+        {this.renderContentText()}
       </View>
     );
 
     return article;
   }
+
+  renderContentText() {
+    if (!this.state.subLocation.content) { return null; }
+
+    let textChunk = this.state.subLocation.content.plain_text;
+    let content = null;
+
+    if (this.state.collapsed && textChunk) {
+      if (textChunk.length > 100) {
+        textChunk = `${textChunk.substring(0, 100)}...`;
+        content = (
+          <View>
+            <Text style={styles.article}>{textChunk}</Text>
+            <TouchableOpacity onPress={() => this.toggleCollapsedContent()}>
+              <Text style={styles.readMoreText}>{LangService.strings.READ_MORE}</Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    } else {
+      content = (<Text style={styles.article}>{textChunk}</Text>);
+    }
+    return content;
+  }
+
+  toggleCollapsedContent() {
+    this.setState({ collapsed: !this.state.collapsed });
+  }
+
 
   // Search feature segment
   // ############################################
@@ -666,10 +730,10 @@ class GuideDetailsScreen extends Component {
               {this.displayDownloadIndicator()}
               <View style={styles.bodyContainer}>
                 <View style={styles.titleContainer}>
-                  <Text style={styles.title}>{this.state.subLocation.title.plain_text}</Text>
+                  <Text style={styles.title}>{getTruncatedTitle(this.state.subLocation.title.plain_text)}</Text>
                 </View>
-                <View>{this.displayContent()}</View>
                 <View>{this.displayArticle()}</View>
+                <View>{this.displayContent()}</View>
               </View>
             </ScrollView>
           </View>

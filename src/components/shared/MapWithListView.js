@@ -372,34 +372,34 @@ export default class MapWithListView extends Component {
     const { contentType, contentObject } = listItem;
     switch (contentType) {
       case "location":
-      {
-        AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
-        navigate("LocationDetailsScreen", { location: contentObject });
-        break;
-      }
+        {
+          AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
+          navigate("LocationDetailsScreen", { location: contentObject });
+          break;
+        }
       case "trail":
-      {
-        const trail = contentObject;
-        const title = trail.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
-        navigate("TrailScreen", { trail, title });
-        return;
-      }
+        {
+          const trail = contentObject;
+          const title = trail.guidegroup[0].name;
+          AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
+          navigate("TrailScreen", { trail, title });
+          return;
+        }
       case "guide":
-      {
-        const guide = contentObject;
-        const title = guide.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-        navigate("GuideDetailsScreen", { id: guide.id, title });
-        return;
-      }
+        {
+          const guide = contentObject;
+          const title = guide.guidegroup[0].name;
+          AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+          navigate("GuideDetailsScreen", { id: guide.id, title });
+          return;
+        }
       default:
-      {
-        const { title } = contentObject;
-        const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
-        AnalyticsUtils.logEvent("view_object", { name: title });
-        navigate("ObjectDetailsScreen", { title, contentObject, stopAudioOnUnmount });
-      }
+        {
+          const { title } = contentObject;
+          const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
+          AnalyticsUtils.logEvent("view_object", { name: title });
+          navigate("ObjectDetailsScreen", { title, contentObject, stopAudioOnUnmount });
+        }
     }
   }
 
