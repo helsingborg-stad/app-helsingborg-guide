@@ -38,6 +38,7 @@ import {
 import LocationService from "../../services/locationService";
 
 const searchIcon = require("../../images/search-id.png");
+const iconKids = require("../../images/kids.png");
 
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
 const RADAR_SCANNING_PERIOD = 1000; // ms
@@ -104,6 +105,23 @@ const styles = StyleSheet.create({
       color: Colors.warmGrey,
     }],
   ),
+  forChildrenText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.darkGrey,
+      marginLeft: 6,
+      fontWeight: "500",
+      textAlign: "left",
+    }],
+  ),
+  forChildrenContainer: {
+    paddingTop: 7,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  forChildrenIcon: {
+    width: 17,
+    height: 17,
+  },
   readMoreText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 16,
@@ -141,7 +159,7 @@ const styles = StyleSheet.create({
   },
   ContentTextContainer: {
     flex: 1,
-    paddingBottom: 40,
+    paddingBottom: 50,
   },
   idText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
@@ -195,6 +213,15 @@ function renderDate(startDate, endDate) {
   if (startDate === null || endDate === null) { return null; }
 
   return <Text style={styles.date} numberOfLines={1}>{`${startDate} - ${endDate}`}</Text>;
+}
+
+function displayForChildren() {
+  return (
+    <View style={styles.forChildrenContainer} >
+      <Image source={iconKids} resizeMode="contain" style={styles.forChildrenIcon} />
+      <Text style={styles.forChildrenText}>{LangService.strings.FOR_CHILDREN}</Text>
+    </View>
+  );
 }
 
 class GuideDetailsScreen extends Component {
@@ -602,6 +629,7 @@ class GuideDetailsScreen extends Component {
           {this.state.subLocation.guide_tagline}
         </Text>
         {renderDate(this.state.subLocation.guide_date_start, this.state.subLocation.guide_date_end)}
+        {this.state.subLocation.guide_kids && displayForChildren()}
         {this.renderContentText()}
       </View>
     );
