@@ -2,31 +2,30 @@ import React, { Component } from "react";
 import { Platform, View, Text, AppState, TouchableOpacity, Image, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import ViewContainer from "../shared/view_container";
-import ImageView from "../shared/image_view";
-import ContentThumbnail from "../shared/contentThumbnail";
-import Footer from "../shared/footer";
-import Keypad from "../shared/KeyPad";
-import DownloadItemView2 from "../shared/DownloadItemView2";
 
-import LangService from "../../services/langService";
-import MediaPlayer from "../shared/MediaPlayer";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
 import * as downloadActions from "../../actions/downloadActions";
 
-import MediaService from "../../services/mediaService";
-
 import { BeaconService } from "../../services/beaconService";
 import { BeaconServiceiOS } from "../../services/beaconServiceiOS";
-import RadarView from "../shared/RadarView2";
-import FloatingBtn from "../shared/FloatingBtn";
-
-import SlimNotificationBar from "../shared/SlimNotificationBar";
-import NoInternetText from "../shared/noInternetText";
 import downloadManager from "../../services/DownloadTasksManager";
 import fetchService from "../../services/FetchService";
+import LangService from "../../services/langService";
+import MediaService from "../../services/mediaService";
+
+import ContentThumbnail from "../shared/contentThumbnail";
+import DownloadItemView2 from "../shared/DownloadItemView2";
+import FloatingBtn from "../shared/FloatingBtn";
+import Footer from "../shared/footer";
 import IconTextTouchable from "../shared/IconTextTouchable";
+import ImageView from "../shared/image_view";
+import Keypad from "../shared/KeyPad";
+import MediaPlayer from "../shared/MediaPlayer";
+import NoInternetText from "../shared/noInternetText";
+import SlimNotificationBar from "../shared/SlimNotificationBar";
+import ViewContainer from "../shared/view_container";
+
 import {
   Colors,
   TextStyles,
@@ -35,12 +34,10 @@ import {
   StyleSheetUtils,
   AnalyticsUtils,
 } from "../../utils/";
-import LocationService from "../../services/locationService";
 
 const searchIcon = require("../../images/search-id.png");
 const iconKids = require("../../images/kids.png");
 const alphaGradient = require("../../images/gradient.png");
-
 
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
 const RADAR_SCANNING_PERIOD = 1000; // ms
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.listBackgroundColor,
     borderBottomWidth: 2,
     height: 40,
-    paddingHorizontal: 20,
+    paddingHorizontal: 0,
   },
   titleContainer: {
     flex: 1,
@@ -588,6 +585,28 @@ class GuideDetailsScreen extends Component {
     }
   };
 
+  pauseTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.cancelTask(item.id);
+    }
+  };
+
+  resumeTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.resumeTask(item.id);
+    }
+  };
+
+  cancelTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.cancelTask(item.id);
+      downloadManager.clearCache(item.id);
+    }
+  };
+
   // #################################################
 
   toggleMenu() {
@@ -599,21 +618,30 @@ class GuideDetailsScreen extends Component {
   };
 
   displayDownloadIndicator() {
-    return (
-      <View style={styles.downloadContainer}>
-        {this.state.downloadMeta
-          ? (<DownloadItemView2
+    if (this.state.downloadMeta) {
+      return (
+        <View style={styles.downloadContainer}>
+          <DownloadItemView2
             total={this.state.downloadMeta.urls.length}
             currentPos={this.state.downloadMeta.currentPos}
             isCanceled={this.state.downloadMeta.isCanceled}
             progress={this.state.downloadMeta.currentPos / this.state.downloadMeta.urls.length}
+            pauseCallback={this.pauseTask}
+            resumeCallback={this.resumeTask}
+            cancelCallback={this.cancelTask}
           />
-          )
-          : <IconTextTouchable
+        </View>);
+    }
+
+    return (
+      <View style={styles.downloadContainer}>
+        <View style={{ paddingLeft: 16, paddingTop: 6 }}>
+          <IconTextTouchable
             text={LangService.strings.DOWNLOAD}
             iconName="get-app"
             onPress={() => this.createAndStartTask()}
-          />}
+          />
+        </View>
       </View>
     );
   }
