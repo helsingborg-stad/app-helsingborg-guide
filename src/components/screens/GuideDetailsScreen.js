@@ -39,6 +39,8 @@ import LocationService from "../../services/locationService";
 
 const searchIcon = require("../../images/search-id.png");
 const iconKids = require("../../images/kids.png");
+const alphaGradient = require("../../images/gradient.png");
+
 
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
 const RADAR_SCANNING_PERIOD = 1000; // ms
@@ -121,6 +123,11 @@ const styles = StyleSheet.create({
   forChildrenIcon: {
     width: 17,
     height: 17,
+  },
+  alphaGradient: {
+    marginTop: -30,
+    width: "100%",
+    height: 30,
   },
   readMoreText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
@@ -649,6 +656,7 @@ class GuideDetailsScreen extends Component {
         content = (
           <View>
             <Text style={styles.article}>{textChunk}</Text>
+            <Image source={alphaGradient} resizeMode="stretch" style={styles.alphaGradient} />
             <TouchableOpacity onPress={() => this.toggleCollapsedContent()}>
               <Text style={styles.readMoreText}>{LangService.strings.READ_MORE}</Text>
             </TouchableOpacity>
