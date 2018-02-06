@@ -18,6 +18,7 @@ import {
   connect,
 } from "react-redux";
 import * as _ from "lodash";
+import ActivityIndicatorExample from "../shared/ActivityIndicatorExample";
 import ViewContainer from "../shared/view_container";
 import ImageView from "../shared/image_view";
 import ListItem from "../shared/list_item";
@@ -217,6 +218,7 @@ class LocationDetailsScreen extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
 
     const { subLocations, internet, location } = this.props;
     this.state = {
@@ -286,12 +288,13 @@ class LocationDetailsScreen extends Component {
     if (this.state.location && Object.keys(this.state.location).length) {
       const { image } = this.state.location.apperance;
       const uri = image.sizes.medium_large;
+      console.log(image);
+
       return (
         <ViewContainer>
           <SlimNotificationBar visible={!this.state.internet} style={{ top: 0 }}>
             <NoInternetText />
           </SlimNotificationBar>
-
           <ScrollView style={styles.scrollView}>
             <View style={styles.imageViewContainer}>
               <ImageView source={{ uri }}>
@@ -301,10 +304,14 @@ class LocationDetailsScreen extends Component {
             <View style={styles.bodyContainer}>
               <View style={styles.titleContainer}>
                 <Text style={styles.title}>{this.state.location.name}</Text>
+
                 <Text
                   style={styles.title}
                   onPress={() => {
-                    ShareService.shareImage(this.state.location.name, "#hbg", image.sizes.large, this.state.location.name);
+                    if (image.width <= 1920) ShareService.shareImage(this.state.location.name, "#hbg", image.url, image.width, image.height, this.state.location.name);
+                    else ShareService.shareImage(this.state.location.name, "#hbg", image.sizes.large, image.sizes["large-width"], image.sizes["large-height"], this.state.location.name);
+                    // ShareService.shareImage(this.state.location.name, "#hbg", image.sizes.large, image.sizes["large-width"], image.sizes["large-height"], this.state.location.name);
+                    // ShareService.shareImage(this.state.location.name, "#hbg", image.url, 1920, 1080, this.state.location.name);
                   }}
                 >SHARE</Text>
 
@@ -322,6 +329,7 @@ class LocationDetailsScreen extends Component {
               {this.displayArticle()}
             </View>
           </ScrollView>
+
         </ViewContainer>
       );
     }
