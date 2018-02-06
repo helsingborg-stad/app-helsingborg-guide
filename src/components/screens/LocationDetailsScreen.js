@@ -42,7 +42,7 @@ import {
   AnalyticsUtils,
   LocationUtils,
 } from "../../utils/";
-import DirectionsTouchable from "./../shared/DirectionsTouchable";
+import IconTextTouchable from "./../shared/IconTextTouchable";
 import LinkTouchable from "./../shared/LinkTouchable";
 
 const styles = StyleSheet.create({
@@ -299,7 +299,7 @@ class LocationDetailsScreen extends Component {
 
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
-    const { name } = subLocation.guidegroup[0];
+    const name = subLocation.title.plain_text;
     AnalyticsUtils.logEvent("view_guide", { name: subLocation.slug });
     navigate("GuideDetailsScreen", {
       title: name,
@@ -400,9 +400,12 @@ class LocationDetailsScreen extends Component {
                   {LocationDetailsScreen.displayOpeningTime(this.state.location)}
                   {LocationDetailsScreen.displayDistance(this.props.geolocation, this.state.location._embedded.location)}
                 </View>
-                <DirectionsTouchable onPress={() => {
-                  this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
-                }}
+                <IconTextTouchable
+                  iconName="directions"
+                  text={LangService.strings.DIRECTIONS}
+                  onPress={() => {
+                    this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
+                  }}
                 />
               </View>
               {this.displaySubLocations()}

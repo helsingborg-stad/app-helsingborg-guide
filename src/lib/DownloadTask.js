@@ -29,6 +29,7 @@ export default class DownloadTask {
     this.avatar = data.avatar || DEFAULT_AVATAR;
     this.completedUrls = data.currentPos ? _.slice(data.urls, 0, data.currentPos) : [];
     this.fileDownloadTasks = [];
+    this.closedInfo = false;
   }
 
   fetchUrlsSeq() {
@@ -81,6 +82,7 @@ export default class DownloadTask {
       startedAt: this.startedAt,
       title: this.title,
       avatar: this.avatar,
+      closedInfo: this.closedInfo,
     };
   }
   clearCompletedUrls() {
@@ -110,6 +112,11 @@ export default class DownloadTask {
       }
     });
     this.fileDownloadTasks = [];
+  }
+
+  closeInfo() {
+    this.closedInfo = true;
+    store.dispatch(dActions.closedInfo(this.getMeta()));
   }
 
   resumeTask() {

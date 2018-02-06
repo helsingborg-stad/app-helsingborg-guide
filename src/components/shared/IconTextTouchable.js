@@ -3,15 +3,14 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { StyleSheetUtils } from "../../utils/";
 import { TextStyles, Colors } from "../../styles/";
-import LangService from "../../services/langService";
 
 const textMargin = 13;
 
 const styles = StyleSheet.create({
-  directionsContainer: {
+  container: {
     flexDirection: "row",
   },
-  listItemDirectionsText: StyleSheetUtils.flatten([
+  text: StyleSheetUtils.flatten([
     TextStyles.body, {
       fontSize: 16,
       fontWeight: "500",
@@ -21,14 +20,14 @@ const styles = StyleSheet.create({
   ]),
 });
 
-export default function DirectionsTouchable(props) {
+export default function IconTextTouchable(props) {
   const directions = (
     <TouchableOpacity
-      style={styles.directionsContainer}
+      style={styles.container}
       onPress={props.onPress}
     >
-      <Icon name="directions" size={24} color={Colors.purple} />
-      <Text style={styles.listItemDirectionsText}>{LangService.strings.DIRECTIONS}</Text>
+      <Icon name={props.iconName} size={24} color={Colors.purple} />
+      <Text style={styles.text}>{props.text}</Text>
     </TouchableOpacity>
   );
 
