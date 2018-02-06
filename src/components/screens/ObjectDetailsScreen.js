@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Dimensions, TouchableOpacity, StyleSheet, ScrollView, TouchableWithoutFeedback } from "react-native";
+import { View, Text, Dimensions, StyleSheet, ScrollView, TouchableWithoutFeedback } from "react-native";
 import PropTypes from "prop-types";
 
 import Swiper from "react-native-swiper";
@@ -18,6 +18,7 @@ import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
 import Footer from "../shared/footer";
 import ImageView from "../shared/image_view";
+import LinkTouchable from "./../shared/LinkTouchable";
 import MediaPlayer from "../shared/MediaPlayer";
 import ViewContainer from "../shared/view_container";
 
@@ -335,9 +336,13 @@ class ObjectDetailsScreen extends Component {
   displayLinks() {
     if (!this.state.contentObject.links) return null;
     return this.state.contentObject.links.map((item, index) => (
-      <TouchableOpacity style={styles.linkContainer} key={item.link || index} onPress={() => this.goToLink(item.link, item.title)}>
-        <Text style={styles.linkText}>{item.title}</Text>
-      </TouchableOpacity>
+      <LinkTouchable
+        key={item.link || index}
+        title={item.title}
+        onPress={() => {
+          this.goToLink(item.link, item.title);
+        }}
+      />
     ));
   }
 
