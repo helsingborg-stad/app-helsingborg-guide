@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, View, Text, AppState, TouchableOpacity, Image, StyleSheet, ScrollView, Dimensions } from "react-native";
+import { Platform, View, Text, AppState, TouchableOpacity, Image, StyleSheet, ScrollView, TouchableWithoutFeedback } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -25,6 +25,7 @@ import MediaPlayer from "../shared/MediaPlayer";
 import NoInternetText from "../shared/noInternetText";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import ViewContainer from "../shared/view_container";
+import MapInformationOverlay from "../shared/MapInformationOverlay";
 
 import {
   Colors,
@@ -263,6 +264,8 @@ class GuideDetailsScreen extends Component {
   constructor(props) {
     super(props);
 
+    const metadata = this.props.downloadMeta;
+
     this.state = {
       subLocation: this.props.subLocation,
       keypadVisible: false,
@@ -273,8 +276,10 @@ class GuideDetailsScreen extends Component {
       menuVisible: false,
       internet: this.props.internet,
       keypadSearchResultCode: 0,
-      downloadMeta: this.props.downloadMeta,
+      downloadMeta: metadata,
       collapsed: true,
+      closedInfoOverlay: metadata ? metadata.closedInfo : false,
+      isDownloadComplete: metadata ? metadata.urls.length <= metadata.currentPos && metadata.urls.length > 0 : false,
     };
     this.currentYOffset = 0;
     if (Platform.OS === "ios") {
@@ -290,6 +295,7 @@ class GuideDetailsScreen extends Component {
     this.onBeaconServiceConnected = this.onBeaconServiceConnected.bind(this);
 
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeInfoOverlay = this.closeInfoOverlay.bind(this);
   }
 
   componentDidMount() {
@@ -300,7 +306,13 @@ class GuideDetailsScreen extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
     if (nextProps.downloadMeta || (this.state.downloadMeta && !nextProps.downloadMeta)) {
-      this.setState({ downloadMeta: nextProps.downloadMeta });
+      const metadata = nextProps.downloadMeta;
+
+      this.setState({
+        downloadMeta: metadata,
+        closedInfoOverlay: metadata ? metadata.closedInfo : false,
+        isDownloadComplete: metadata ? metadata.urls.length <= metadata.currentPos && metadata.urls.length > 0 : false,
+      });
     }
   }
 
@@ -585,6 +597,13 @@ class GuideDetailsScreen extends Component {
     }
   };
 
+  closedInfoForTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.setClosedInfo(item.id);
+    }
+  };
+
   pauseTask = () => {
     const item = this.state.subLocation;
     if (downloadManager.isExist(item.id)) {
@@ -616,6 +635,11 @@ class GuideDetailsScreen extends Component {
   hideMenu = () => {
     if (this.state.menuVisible) this.setState({ menuVisible: false });
   };
+
+  closeInfoOverlay() {
+    this.setState({ closedInfoOverlay: this.state.closedInfoOverlay });
+    this.closedInfoForTask();
+  }
 
   displayDownloadIndicator() {
     if (this.state.downloadMeta) {
@@ -670,6 +694,32 @@ class GuideDetailsScreen extends Component {
     );
 
     return article;
+  }
+
+  renderInfoOverlay = () => {
+    const { closedInfoOverlay, isDownloadComplete } = this.state;
+
+    if (closedInfoOverlay || !isDownloadComplete) {
+      return null;
+    }
+
+    return ([
+      <TouchableWithoutFeedback
+        style={styles.overlayStyle}
+        key="TouchableWithoutFeedback"
+        onPress={() => this.closeInfoOverlay()}
+      >
+        <View
+          style={styles.overlayStyle}
+          key="overlayView"
+        />
+      </TouchableWithoutFeedback>,
+      <MapInformationOverlay
+        key="MapInformationOverlay"
+        trailInformation={{ description: LangService.strings.DOWNLOADED_INFO }}
+        onPressFunction={() => this.closeInfoOverlay()}
+      />,
+    ]);
   }
 
   renderContentText() {
@@ -806,6 +856,7 @@ class GuideDetailsScreen extends Component {
             </ScrollView>
           </View>
           {this.displayKeypad()}
+          {this.renderInfoOverlay()}
           <Footer>
             <MediaPlayer />
           </Footer>
