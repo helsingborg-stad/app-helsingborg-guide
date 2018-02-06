@@ -1,21 +1,26 @@
 import React, { Component } from "react";
 import { View, Text, Dimensions, TouchableOpacity, StyleSheet, ScrollView, TouchableWithoutFeedback } from "react-native";
+import PropTypes from "prop-types";
 
 import Swiper from "react-native-swiper";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import ViewContainer from "../shared/view_container";
-import ImageView from "../shared/image_view";
+
+import * as audioActions from "../../actions/audioActions";
+import internetActions from "../../actions/internetActions";
+import metricActions from "../../actions/metricActions";
+
+import fetchService from "../../services/FetchService";
+import LangService from "../../services/langService";
+import MediaService from "../../services/mediaService";
+
 import ButtonsBar from "../shared/btn_bar";
 import ButtonsBarItem from "../shared/btn_bar_item";
-import LangService from "../../services/langService";
-import MediaPlayer from "../shared/MediaPlayer";
 import Footer from "../shared/footer";
-import * as audioActions from "../../actions/audioActions";
-import metricActions from "../../actions/metricActions";
-import MediaService from "../../services/mediaService";
-import internetActions from "../../actions/internetActions";
-import fetchService from "../../services/FetchService";
+import ImageView from "../shared/image_view";
+import MediaPlayer from "../shared/MediaPlayer";
+import ViewContainer from "../shared/view_container";
+
 import {
   Colors,
   TextStyles,
@@ -91,6 +96,20 @@ const styles = StyleSheet.create({
 });
 
 class ObjectDetailsScreen extends Component {
+  static get defaultProps() {
+    return {
+      objectKey: "",
+    };
+  }
+
+  static propTypes = {
+    navigation: PropTypes.object, // eslint-disable-line react/require-default-props
+    internet: PropTypes.bool.isRequired,
+    metricActions: PropTypes.func.isRequired,
+    audio: PropTypes.object.isRequired,
+    objectKey: PropTypes.string,
+  }
+
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     return {
@@ -300,7 +319,14 @@ class ObjectDetailsScreen extends Component {
     ));
 
     return (
-      <Swiper style={styles.imagesSlider} height={MAX_IMAGE_HEIGHT} dotColor="white" activeDotColor="#D35098" showsButtons={false} loop={false}>
+      <Swiper
+        style={styles.imagesSlider}
+        height={MAX_IMAGE_HEIGHT}
+        dotColor="white"
+        activeDotColor="#D35098"
+        showsButtons={false}
+        loop={false}
+      >
         {slides}
       </Swiper>
     );
