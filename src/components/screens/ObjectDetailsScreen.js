@@ -49,13 +49,27 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     paddingHorizontal: 34,
-    paddingVertical: 28,
+    paddingTop: 12,
+    paddingBottom: 4,
   },
   title: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 22,
+      fontSize: 30,
       fontWeight: "300",
-      lineHeight: 26,
+      lineHeight: 36,
+    }],
+  ),
+  idContainer: {
+    flex: 1,
+    paddingHorizontal: 34,
+    paddingBottom: 4,
+  },
+  idText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "500",
+      lineHeight: 21,
+      color: Colors.warmGrey,
     }],
   ),
   articleContainer: {
@@ -132,6 +146,7 @@ class ObjectDetailsScreen extends Component {
       audioBtnDisabled: false,
       videoBtnDisabled: false,
       stopAudioOnUnmount: params.stopAudioOnUnmount,
+      contentType: params.contentType,
     };
 
     this.mediaService = MediaService.getInstance();
@@ -142,6 +157,8 @@ class ObjectDetailsScreen extends Component {
   componentDidMount() {
     this.listenToAudioEvents();
     this.checkAudioVideoBtns(this.state.internet);
+
+    console.log(this.state);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -213,11 +230,26 @@ class ObjectDetailsScreen extends Component {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{this.state.contentObject.title}</Text>
         </View>
+        {this.displayID()}
         <View style={styles.articleContainer}>
           <Text style={styles.article}>{this.state.contentObject.description_plain}</Text>
         </View>
       </View>
     );
+  }
+
+  displayID() {
+    let idText = null;
+    if (this.state.contentObject.id && this.state.contentType === "guide") {
+      idText = (
+        <View style={styles.idContainer}>
+          <Text style={styles.idText}>
+            {`ID #${this.state.contentObject.id}`}
+          </Text>
+        </View>
+      );
+    }
+    return idText;
   }
 
   listenToAudioEvents() {
