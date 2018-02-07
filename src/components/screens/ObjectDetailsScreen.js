@@ -157,8 +157,6 @@ class ObjectDetailsScreen extends Component {
   componentDidMount() {
     this.listenToAudioEvents();
     this.checkAudioVideoBtns(this.state.internet);
-
-    console.log(this.state);
   }
 
   componentWillReceiveProps(nextProps) {
