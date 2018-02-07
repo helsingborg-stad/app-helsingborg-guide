@@ -3,6 +3,7 @@ import fetchService from "../services/FetchService";
 import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 import LangService from "../services/langService";
+import { errorHappened } from "../actions/errorActions";
 
 const DEFAULT_AVATAR = "http://i.imgur.com/XMKOH81.jpg";
 
@@ -40,7 +41,7 @@ export default class DownloadTask {
   _fetchUrl(url) {
     if (this.isCanceled || this.isCompleted()) return null;
     const encoded = encodeURI(url);
-    const mTask = fetchService.fetch(encoded);
+    const mTask = fetchService.fetch(encoded, this.id);
     return mTask
       .then((res) => {
         if (res && !this.isCanceled) {
@@ -99,7 +100,7 @@ export default class DownloadTask {
     fetchService.clearSessionCache(`${this.id}`).then(() => {
       this.clearCompletedUrls();
       store.dispatch(dActions.clearCacheTaskSuccess(this.getMeta()));
-    });
+    }).catch(error => store.dispatch(errorHappened(error)));
   }
 
   cancelTask() {

@@ -63,10 +63,10 @@ const FetchService = {
     return _.uniq(paths);
   },
 
-  fetch(url) {
+  fetch(url, id) {
     const config = {
       fileCache: true,
-      path: `${basePath}/${url}`,
+      path: `${basePath}/${id}/${url}`,
     };
 
     return RNFetchBlob.config(config).fetch("GET", url);
