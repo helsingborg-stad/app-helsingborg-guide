@@ -5,6 +5,7 @@ import * as dActions from "../actions/downloadActions";
 
 class DownloadTasksManager {
   tasks = [];
+  currentDownloadedDataVersion = 2; // Bump if any changes to how we store downloaded data.
 
   // ######################################
 
@@ -18,6 +19,28 @@ class DownloadTasksManager {
       const task = this.createTask(item, true);
       if (task && !task.isCanceled) this.startTask(task.id);
     });
+  }
+
+  purgeExistingTasks(downloads) {
+    if (!downloads.length) return;
+
+    _.forEach(downloads, (item) => {
+      const task = this.getTaskById(item.id);
+      if (task) {
+        this.cancelTask(task.id);
+        this.clearCache(task.id);
+      }
+    });
+  }
+
+  checkForInvalidData(downloads, savedDownloadDataVersion) {
+    if (downloads && downloads.length) {
+      if (!savedDownloadDataVersion || savedDownloadDataVersion.version !== this.currentDownloadDataVersion) {
+        console.log(`New downloaded data version (was ${savedDownloadDataVersion.version} now ${this.currentDownloadedDataVersion}) Purging downloads!`);
+        this.purgeExistingTasks(downloads);
+      }
+    }
+    store.dispatch(dActions.setDownloadDataVersion(this.currentDownloadedDataVersion));
   }
 
   getTaskById(id) {

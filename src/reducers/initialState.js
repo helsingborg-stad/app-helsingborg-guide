@@ -17,6 +17,7 @@ export default {
   internet: { connected: false },
   error: {},
   downloads: [],
+  downloadDataVersion: 0,
   position: null,
   pointproperties: { name: "", icon: "", guideID: 0 },
 };
