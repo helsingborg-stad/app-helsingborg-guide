@@ -9,6 +9,8 @@ target 'GuideHbg' do
   ]
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
   pod 'Firebase/Core'
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 end
 
 

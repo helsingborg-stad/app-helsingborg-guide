@@ -55,6 +55,12 @@ class DownloadTasksManager {
     task.cancelTask();
   }
 
+  setClosedInfo(id) {
+    const task = this.getTaskById(id);
+    if (!task) return;
+    task.closeInfo();
+  }
+
   clearCache(id) {
     const task = this.getTaskById(id);
     if (!task) return;

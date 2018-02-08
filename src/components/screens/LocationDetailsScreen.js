@@ -9,6 +9,7 @@ import {
   ScrollView,
   Linking,
   Platform,
+  NetInfo,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
@@ -18,16 +19,20 @@ import {
   connect,
 } from "react-redux";
 import * as _ from "lodash";
-import ImageView from "../shared/image_view";
-import ViewContainer from "../shared/view_container";
-import ListItem from "../shared/list_item";
+
 import DistanceView from "../shared/DistanceView";
-import TimingService from "../../services/timingService";
+import ImageView from "../shared/image_view";
 import LangService from "../../services/langService";
-import SlimNotificationBar from "../shared/SlimNotificationBar";
+import ListItem from "../shared/list_item";
 import NoInternetText from "../shared/noInternetText";
+import SlimNotificationBar from "../shared/SlimNotificationBar";
+import SVGView from "../shared/SVGView";
+import TimingService from "../../services/timingService";
+import ViewContainer from "../shared/view_container";
+
 import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
+import * as pointPropertiesActions from "../../actions/pointPropertiesActions";
 import {
   Colors,
   TextStyles,
@@ -37,7 +42,8 @@ import {
   AnalyticsUtils,
   LocationUtils,
 } from "../../utils/";
-import DirectionsTouchable from "./../shared/DirectionsTouchable";
+import IconTextTouchable from "./../shared/IconTextTouchable";
+import LinkTouchable from "./../shared/LinkTouchable";
 
 const styles = StyleSheet.create({
   scrollView: {},
@@ -71,7 +77,8 @@ const styles = StyleSheet.create({
   },
   articleContainer: {
     flex: 4,
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
   },
   articleDescriptionText: StyleSheetUtils.flatten([
     TextStyles.description, {
@@ -82,10 +89,43 @@ const styles = StyleSheet.create({
     TextStyles.defaultFontFamily, {
       fontSize: 20,
       lineHeight: 21,
-      marginVertical: 10,
+      paddingBottom: 10,
       color: Colors.black,
     }],
   ),
+  pointPropertiesSectionContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    paddingTop: 10,
+    paddingBottom: 20,
+  },
+  pointPropertyContainer: {
+    flex: 0,
+    flexDirection: "row",
+    flexGrow: 1,
+    width: "40%",
+    paddingTop: 8,
+    alignItems: "center",
+  },
+  pointPropertyText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "500",
+      lineHeight: 24.0,
+      paddingLeft: 9,
+      color: Colors.warmGrey,
+    }],
+  ),
+  divider: {
+    height: 2,
+    backgroundColor: Colors.listBackgroundColor,
+    marginTop: 30,
+  },
+  pointPropertyIcon: {
+    width: 30,
+    height: 30,
+  },
   subLocationsHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 20,
@@ -156,10 +196,12 @@ class LocationDetailsScreen extends Component {
     subLocations: PropTypes.array.isRequired,
     internet: PropTypes.bool.isRequired,
     geolocation: PropTypes.any,
+    pointProperties: PropTypes.object,
   }
 
   static defaultProps = {
     geolocation: null,
+    pointProperties: null,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -217,12 +259,22 @@ class LocationDetailsScreen extends Component {
   constructor(props) {
     super(props);
 
-    const { subLocations, internet, location } = this.props;
+    const { subLocations, internet, location, pointProperties } = this.props;
+
     this.state = {
       location,
       sublocations: subLocations,
       internet,
+      pointProperties,
     };
+  }
+
+  componentDidMount() {
+    NetInfo.isConnected.fetch().then((isConnected) => {
+      if (isConnected) {
+        this.props.pointPropertiesActions.fetchPointProperties(this.state.location._embedded.location[0].id);
+      }
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -231,13 +283,23 @@ class LocationDetailsScreen extends Component {
         sublocations: nextProps.subLocations,
       });
     }
-
+    if (nextProps.pointProperties !== this.state.pointProperties) { this.setState({ pointProperties: nextProps.pointProperties }); }
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
+
+    let webUrl = null;
+    if (this.state.location._embedded.location[0].links) {
+      this.state.location._embedded.location[0].links.forEach((element) => {
+        if (element.service === "webpage") {
+          webUrl = element.url;
+        }
+      });
+      this.setState({ webUrl });
+    }
   }
 
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
-    const { name } = subLocation.guidegroup[0];
+    const name = subLocation.title.plain_text;
     AnalyticsUtils.logEvent("view_guide", { name: subLocation.slug });
     navigate("GuideDetailsScreen", {
       title: name,
@@ -281,6 +343,40 @@ class LocationDetailsScreen extends Component {
     return article;
   }
 
+  displayWebPage() {
+    if (!this.state.webUrl) { return null; }
+
+    const webLink = (<LinkTouchable
+      title={this.state.webUrl.replace(/^https?:\/\//, "")}
+      onPress={() => {
+        this.goToLink(this.state.webUrl, this.state.webUrl);
+      }}
+    />);
+
+    return webLink;
+  }
+
+  displayAccessibility() {
+    if (!this.state.pointProperties || !this.state.pointProperties.items || this.state.pointProperties.items.length < 1) { return null; }
+
+    if (!this.state.location || this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
+
+    const accessibility = (
+      <View>
+        <View style={styles.divider} />
+        <View style={styles.pointPropertiesSectionContainer}>
+          {this.state.pointProperties.items.map(element =>
+            (<View style={styles.pointPropertyContainer} key={element.id} >
+              <SVGView logoType={element.icon} placeHolder="" customStyle={styles.pointPropertyIcon} />
+              <Text style={styles.pointPropertyText} >{element.name}</Text>
+            </View>),
+          )}
+        </View>
+      </View>
+    );
+    return accessibility;
+  }
+
   display() {
     if (this.state.location && Object.keys(this.state.location).length) {
       const { image } = this.state.location.apperance;
@@ -290,6 +386,7 @@ class LocationDetailsScreen extends Component {
           <SlimNotificationBar visible={!this.state.internet} style={{ top: 0 }}>
             <NoInternetText />
           </SlimNotificationBar>
+
           <ScrollView style={styles.scrollView}>
             <View style={styles.imageViewContainer}>
               <ImageView source={{ uri }}>
@@ -303,24 +400,34 @@ class LocationDetailsScreen extends Component {
                   {LocationDetailsScreen.displayOpeningTime(this.state.location)}
                   {LocationDetailsScreen.displayDistance(this.props.geolocation, this.state.location._embedded.location)}
                 </View>
-                <DirectionsTouchable onPress={() => {
-                  this.openGoogleMapApp(this.state.location._embedded.location[0].latitude,
-                    this.state.location._embedded.location[0].longitude);
-                }}
+                <IconTextTouchable
+                  iconName="directions"
+                  text={LangService.strings.DIRECTIONS}
+                  onPress={() => {
+                    this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
+                  }}
                 />
               </View>
               {this.displaySubLocations()}
               {this.displayArticle()}
+              {this.displayWebPage()}
+
+              {this.displayAccessibility()}
             </View>
           </ScrollView>
-        </ViewContainer >
+        </ViewContainer>
       );
     }
 
     return null;
   }
 
-  // download:file downloaded and stored in path  /var/mobile/Containers/Data/Application/EDD5E3B4-DF89-4E6D-A4B2-2DD1AB551DB8/Library/Caches/https://api.helsingborg.se/wp-content/uploads/sites/2/2017/11/101-nordisk-salong-hans-christian_berg.jpg
+  goToLink(url, title) {
+    const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("open_url", { title });
+    navigate("WebScreen", { url });
+  }
+
   openGoogleMapApp(lat, lng) {
     const daddr = `${lat},${lng}`;
 
@@ -357,12 +464,14 @@ function mapStateToProps(state, ownProps) {
     subLocations: getFilteredSubLocations(state.subLocations, location.id) || [],
     internet: state.internet.connected,
     geolocation: state.geolocation,
+    pointProperties: state.pointproperties,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
     internetActions: bindActionCreators(internetActions, dispatch),
+    pointPropertiesActions: bindActionCreators(pointPropertiesActions, dispatch),
   };
 }
 

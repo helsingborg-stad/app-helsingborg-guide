@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
   scrollView: {
     maxHeight: scrollViewMaxHeight,
   },
+  scrollViewNoTitle: {
+    maxHeight: scrollViewMaxHeight,
+    width: "90%",
+  },
   closeButtonContainer: {
     position: "absolute",
     top: 10,
@@ -71,16 +75,31 @@ const styles = StyleSheet.create({
   ]),
 });
 
+function renderTitle(trailInformation) {
+  if (trailInformation.title) {
+    return (<Text style={styles.titleText}>{trailInformation.title} </Text>);
+  }
+  return null;
+}
+
+function renderDescription(trailInformation) {
+  if (trailInformation.title) {
+    return (<ScrollView style={styles.scrollView}>
+      <Text style={styles.descriptionText}>{trailInformation.description}</Text>
+    </ScrollView>);
+  }
+  return (<ScrollView style={styles.scrollViewNoTitle}>
+    <Text style={styles.descriptionText}>{trailInformation.description}</Text>
+  </ScrollView>);
+}
 
 const MapInformationOverlay = ({ trailInformation, onPressFunction }) => (
   <View style={styles.container}>
-    <Text style={styles.titleText}>{trailInformation.title} </Text>
+    {renderTitle(trailInformation)}
     <TouchableOpacity onPress={onPressFunction} style={styles.closeButtonContainer}>
       <Image style={styles.closeButton} source={closeIcon} />
     </TouchableOpacity>
-    <ScrollView style={styles.scrollView}>
-      <Text style={styles.descriptionText}>{trailInformation.description}</Text>
-    </ScrollView>
+    {renderDescription(trailInformation)}
   </View>
 );
 

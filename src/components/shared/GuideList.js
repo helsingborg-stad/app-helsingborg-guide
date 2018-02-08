@@ -41,7 +41,7 @@ export default ({ items, navigation }) => {
 
   const _navigateToGuide = (guide) => {
     const { navigate } = navigation;
-    const title = guide.guidegroup[0].name;
+    const title = guide.title.plain_text;
     AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
     navigate("GuideDetailsScreen", { id: guide.id, title });
   };
