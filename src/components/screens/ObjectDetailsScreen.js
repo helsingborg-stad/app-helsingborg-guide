@@ -16,6 +16,8 @@ import metricActions from "../../actions/metricActions";
 import MediaService from "../../services/mediaService";
 import internetActions from "../../actions/internetActions";
 import fetchService from "../../services/FetchService";
+import ShareService from "../../services/SharingService";
+
 import {
   Colors,
   TextStyles,
@@ -88,6 +90,13 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: Colors.lightPink,
   },
+  shareBtn: {
+    backgroundColor: "transparent",
+    position: "absolute",
+    top: MAX_IMAGE_HEIGHT - 70,
+    right: 25,
+    zIndex: 50,
+  },
 });
 
 class ObjectDetailsScreen extends Component {
@@ -112,11 +121,13 @@ class ObjectDetailsScreen extends Component {
       audioBtnDisabled: false,
       videoBtnDisabled: false,
       stopAudioOnUnmount: params.stopAudioOnUnmount,
+      swiperIndex: 0,
     };
 
     this.mediaService = MediaService.getInstance();
 
     this.onAudioFilePrepared = this.onAudioFilePrepared.bind(this);
+    this.swiperIndexChanged = this.swiperIndexChanged.bind(this);
   }
 
   componentDidMount() {
@@ -140,6 +151,10 @@ class ObjectDetailsScreen extends Component {
   componentWillUnmount() {
     if (this.state.stopAudioOnUnmount === true) { this.mediaService.release(); }
     this.stopListenIngToAudioEvents();
+  }
+
+  swiperIndexChanged(swiperIndex) {
+    this.setState({ swiperIndex });
   }
 
   onAudioFilePrepared() {
@@ -300,9 +315,9 @@ class ObjectDetailsScreen extends Component {
     ));
 
     return (
-      <Swiper style={styles.imagesSlider} height={MAX_IMAGE_HEIGHT} dotColor="white" activeDotColor="#D35098" showsButtons={false} loop={false}>
+      <Swiper style={styles.imagesSlider} height={MAX_IMAGE_HEIGHT} dotColor="white" activeDotColor="#D35098" showsButtons={false} loop={false} onIndexChanged={this.swiperIndexChanged}>
         {slides}
-      </Swiper>
+      </Swiper >
     );
   }
 
@@ -316,11 +331,17 @@ class ObjectDetailsScreen extends Component {
   }
 
   display() {
+    const { image, title } = this.state.contentObject;
+    const selectedImage = image[this.state.swiperIndex];
+
     if (this.state.contentObject && Object.keys(this.state.contentObject).length) {
       return (
         <ViewContainer>
           <ScrollView contentContainerStyle={styles.scrollView}>
             {this.displayImagesSlider()}
+            <View style={styles.shareBtn}>
+              {ShareService.showShareButton(title, selectedImage, this)}
+            </View>
             <View style={styles.bodyContainer}>
               {this.displayButtonsBar()}
               {this.displayText()}
@@ -333,7 +354,6 @@ class ObjectDetailsScreen extends Component {
         </ViewContainer>
       );
     }
-
     return null;
   }
 

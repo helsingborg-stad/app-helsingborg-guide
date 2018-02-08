@@ -11,7 +11,7 @@ const colors = {
   menuButtonWhite: "#B88CB1",
   purple: "#a61380",
   warmGrey: "#7f7f7f",
-  white: "white",
+  white: "#ffffff",
   greyBodyText: "#505050",
   darkGrey: "#505050",
 };
