@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
   },
   title: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 30,
+      fontSize: 24,
       fontWeight: "300",
-      lineHeight: 36,
+      lineHeight: 30,
     }],
   ),
   idContainer: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   idText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 16,
-      fontWeight: "500",
+      fontWeight: "400",
       lineHeight: 21,
       color: Colors.warmGrey,
     }],
@@ -222,16 +222,21 @@ class ObjectDetailsScreen extends Component {
     navigate("WebScreen", { url });
   }
 
-  displayText() {
+  displayTitle() {
     return (
       <View>
-        <View style={styles.titleContainer}>
+        <View style={styles.titleContainer} >
           <Text style={styles.title}>{this.state.contentObject.title}</Text>
-        </View>
+        </View >
         {this.displayID()}
-        <View style={styles.articleContainer}>
-          <Text style={styles.article}>{this.state.contentObject.description_plain}</Text>
-        </View>
+      </View >
+    );
+  }
+
+  displayText() {
+    return (
+      <View style={styles.articleContainer}>
+        <Text style={styles.article}>{this.state.contentObject.description_plain}</Text>
       </View>
     );
   }
@@ -296,7 +301,7 @@ class ObjectDetailsScreen extends Component {
         }}
         name="headphones"
         color={Colors.darkPurple}
-        size={25}
+        size={18}
         text={LangService.strings.LISTEN}
         view="row"
       />
@@ -309,7 +314,7 @@ class ObjectDetailsScreen extends Component {
         }}
         name="play-box-outline"
         color={Colors.darkPurple}
-        size={25}
+        size={18}
         text={LangService.strings.VIDEO}
         view="row"
       />
@@ -383,6 +388,7 @@ class ObjectDetailsScreen extends Component {
           <ScrollView contentContainerStyle={styles.scrollView}>
             {this.displayImagesSlider()}
             <View style={styles.bodyContainer}>
+              {this.displayTitle()}
               {this.displayButtonsBar()}
               {this.displayText()}
               <View style={styles.articleContainer}>{this.displayLinks()}</View>
