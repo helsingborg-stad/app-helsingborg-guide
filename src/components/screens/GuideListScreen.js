@@ -15,6 +15,7 @@ import {
   LocationUtils,
   StyleSheetUtils,
 } from "./../../utils";
+import downloadManager from "../../services/DownloadTasksManager";
 import LangService from "../../services/langService";
 import {
   Colors,
@@ -162,6 +163,7 @@ class GuideListScreen extends Component {
 
   componentDidMount() {
     this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
+    downloadManager.checkForInvalidData(this.props.downloads, this.props.downloadDataVersion);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -338,6 +340,8 @@ function mapStateToProps(state) {
     guides,
     subLocations,
     currentLocation: state.geolocation,
+    downloads: state.downloads,
+    downloadDataVersion: state.downloadDataVersion,
   };
 }
 
