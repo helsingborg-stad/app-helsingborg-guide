@@ -291,9 +291,12 @@ class ObjectDetailsScreen extends Component {
   displayButtonsBar() {
     const { audio } = this.state.contentObject;
     const { video } = this.state.contentObject;
-    const audioBtnVisible = !audio || !audio.url;
-    const videoBtnVisible = !video || !video.url;
-    const audioBarItem = audioBtnVisible ? null : (
+    const audioBtnInvisible = !audio || !audio.url;
+    const videoBtnInvisible = !video || !video.url;
+
+    if (videoBtnInvisible && audioBtnInvisible) { return null; }
+
+    const audioBarItem = audioBtnInvisible ? null : (
       <ButtonsBarItem
         disabled={this.state.audioIsLoading || this.state.audioBtnDisabled}
         onPress={() => {
@@ -306,7 +309,7 @@ class ObjectDetailsScreen extends Component {
         view="row"
       />
     );
-    const videoBarItem = videoBtnVisible ? null : (
+    const videoBarItem = videoBtnInvisible ? null : (
       <ButtonsBarItem
         disabled={this.state.videoBtnDisabled}
         onPress={() => {
