@@ -35,8 +35,7 @@ class DownloadTasksManager {
 
   checkForInvalidData(downloads, savedDownloadDataVersion) {
     if (downloads && downloads.length) {
-      if (!savedDownloadDataVersion || savedDownloadDataVersion.version !== this.currentDownloadDataVersion) {
-        console.log(`New downloaded data version (was ${savedDownloadDataVersion.version} now ${this.currentDownloadedDataVersion}) Purging downloads!`);
+      if (!savedDownloadDataVersion || Number(savedDownloadDataVersion.version) < Number(this.currentDownloadedDataVersion)) {
         this.purgeExistingTasks(downloads);
       }
     }
