@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
   ContentTextContainer: {
     flex: 1,
-    paddingBottom: 50,
+    paddingBottom: 44,
   },
   idText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
@@ -552,7 +552,7 @@ class GuideDetailsScreen extends Component {
             </Text>
           </View>
           <View style={{ width: 150 }}>
-            <Text style={styles.contentNameText}>{contentObjects[key].title}</Text>
+            <Text style={styles.contentNameText} numberOfLines={2}>{contentObjects[key].title}</Text>
           </View>
         </View >
       );
