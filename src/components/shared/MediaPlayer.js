@@ -13,7 +13,7 @@ import MediaService from "../../services/mediaService";
 import * as audioActions from "../../actions/audioActions";
 import { Colors } from "../../styles/";
 
-const PLAYER_HEIGHT = 70;
+const PLAYER_HEIGHT = 46;
 const BTN_DIM = 36;
 const BKD_COLOR = "#F2F2F2";
 
@@ -87,24 +87,17 @@ class MediaPlayer extends Component {
   }
 
   displayControlBtn() {
-    const btn = (
-      <RoundedBtn
-        style={styles.playBtn}
-        disabled={this.state.disabled}
-        outline
-        isActive={this.state.audio.isPlaying}
-        active={<Icon name="pause" size={BTN_DIM / 2} color="white" />}
-        idle={<Icon name="play" size={BTN_DIM / 2} color="white" />}
-        onPress={() => {
-          this.togglePlaying();
-        }}
-      />
-    );
+    const isActive = this.state.audio.isPlaying;
+    let btn = null;
 
-    const spinner = <ActivityIndicator style={[styles.spinner]} />;
-
-    const button = this.state.audio.isPrepared ? btn : spinner;
-    return <View style={styles.controlsContainer}>{button}</View>;
+    btn = isActive ? (
+      <TouchableOpacity style={styles.closeBtnContainer} onPress={this.togglePlaying.bind(this)}>
+        <Icon2 name="pause-circle-filled" color={Colors.warmGrey} size={26} />
+      </TouchableOpacity>) : (
+        <TouchableOpacity style={styles.closeBtnContainer} onPress={this.togglePlaying.bind(this)}>
+          <Icon2 name="play-circle-filled" color={Colors.warmGrey} size={26} />
+        </TouchableOpacity>);
+    return btn;
   }
 
   closePlayer() {
@@ -115,10 +108,7 @@ class MediaPlayer extends Component {
     if (this.state.audio.hasAudio && this.state.audio.isPrepared) {
       return (
         <Animated.View style={[styles.playerContainer, { opacity: this.state.animValue }]}>
-          <View style={styles.avatarContainer}>
-            <OImage spinner={false} source={{ uri: this.state.audio.avatar_url }} style={styles.avatar} />
-            {this.displayControlBtn()}
-          </View>
+
           <View style={styles.sliderAndTitleContainer}>
             <View style={styles.titleContainer}>
               <Text numberOfLines={1} style={[styles.titleText, !this.state.audio.isPrepared ? styles.disabledText : {}]}>
@@ -126,21 +116,26 @@ class MediaPlayer extends Component {
               </Text>
             </View>
             <View style={styles.sliderContainer}>
+              {this.displayControlBtn()}
               <Text style={styles.durationText}>{getDurationString(this.state.audio.currentPosition)}</Text>
-              <Slider
-                disabled={!this.state.audio.isPrepared}
-                style={styles.trackSlider}
-                maximumValue={this.state.audio.duration}
-                value={this.state.audio.currentPosition}
-                onValueChange={value => this.onSliding()}
-                onSlidingComplete={value => this.onSliderValueCompleted(value)}
-              />
+              <View style={styles.slider}>
+                <Slider
+                  disabled={!this.state.audio.isPrepared}
+                  style={styles.trackSlider}
+                  maximumValue={this.state.audio.duration}
+                  value={this.state.audio.currentPosition}
+                  onValueChange={value => this.onSliding()}
+                  onSlidingComplete={value => this.onSliderValueCompleted(value)}
+                />
+              </View>
               <Text style={styles.durationText}>{getDurationString(this.state.audio.duration)}</Text>
+              <TouchableOpacity style={styles.closeBtnContainer} onPress={this.closePlayer.bind(this)}>
+                <Icon2 name="cancel" color={Colors.warmGrey} size={26} />
+              </TouchableOpacity>
             </View>
+
           </View>
-          <TouchableOpacity style={styles.closeBtnContainer} onPress={this.closePlayer.bind(this)}>
-            <Icon2 name="cancel" color={Colors.warmGrey} size={26} />
-          </TouchableOpacity>
+
         </Animated.View>
       );
     }
@@ -174,6 +169,7 @@ const styles = StyleSheet.create({
   titleText: { fontSize: 12, lineHeight: 14, fontWeight: "bold" },
   disabledText: { color: "#cecece" },
   trackSlider: { flex: 1 },
+  slider: { flex: 0, flexGrow: 1 },
   durationText: { fontSize: 12, paddingHorizontal: 10 },
   controlsContainer: {
     width: PLAYER_HEIGHT,
@@ -198,7 +194,7 @@ const styles = StyleSheet.create({
   },
   spinner: {},
   closeBtnContainer: {
-    flex: 1,
+    flex: 0,
     width: PLAYER_HEIGHT,
     height: PLAYER_HEIGHT, // backgroundColor:'red',
     alignItems: "center",
