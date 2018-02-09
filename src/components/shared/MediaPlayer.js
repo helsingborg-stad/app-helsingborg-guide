@@ -11,10 +11,28 @@ import RoundedBtn from "./roundedBtn";
 import OImage from "./image";
 import MediaService from "../../services/mediaService";
 import * as audioActions from "../../actions/audioActions";
+import { Colors } from "../../styles/";
 
 const PLAYER_HEIGHT = 70;
 const BTN_DIM = 36;
 const BKD_COLOR = "#F2F2F2";
+
+function padWithZeros(time) {
+  return time > 9 ? `${time}` : `0${time}`;
+}
+function getDurationString(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const remainingSeconds = totalSeconds % 3600;
+  const minutes = Math.floor(remainingSeconds / 60);
+  const seconds = Math.floor(remainingSeconds % 60);
+
+  if (hours > 0) {
+    return `${hours}:${padWithZeros(minutes)}:${padWithZeros(seconds)}`;
+  }
+
+  return `${minutes}:${padWithZeros(seconds)}`;
+}
+
 
 class MediaPlayer extends Component {
   constructor(props) {
@@ -108,6 +126,7 @@ class MediaPlayer extends Component {
               </Text>
             </View>
             <View style={styles.sliderContainer}>
+              <Text style={styles.durationText}>{getDurationString(this.state.audio.currentPosition)}</Text>
               <Slider
                 disabled={!this.state.audio.isPrepared}
                 style={styles.trackSlider}
@@ -116,10 +135,11 @@ class MediaPlayer extends Component {
                 onValueChange={value => this.onSliding()}
                 onSlidingComplete={value => this.onSliderValueCompleted(value)}
               />
+              <Text style={styles.durationText}>{getDurationString(this.state.audio.duration)}</Text>
             </View>
           </View>
           <TouchableOpacity style={styles.closeBtnContainer} onPress={this.closePlayer.bind(this)}>
-            <Icon2 name="close" size={25} />
+            <Icon2 name="cancel" color={Colors.warmGrey} size={26} />
           </TouchableOpacity>
         </Animated.View>
       );
@@ -146,21 +166,21 @@ const styles = StyleSheet.create({
   },
   sliderContainer: {
     flex: 2,
-    alignItems: "stretch",
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 10,
   },
-  titleContainer: { flex: 1, alignItems: "stretch", paddingHorizontal: 15 },
+  titleContainer: { flex: 1, alignItems: "center", paddingHorizontal: 15 },
   titleText: { fontSize: 12, lineHeight: 14, fontWeight: "bold" },
   disabledText: { color: "#cecece" },
   trackSlider: { flex: 1 },
+  durationText: { fontSize: 12, paddingHorizontal: 10 },
   controlsContainer: {
     width: PLAYER_HEIGHT,
     height: PLAYER_HEIGHT,
-    // flexDirection:'row',
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-    // backgroundColor:'red',
     top: 0,
     left: 0,
   },
@@ -172,7 +192,6 @@ const styles = StyleSheet.create({
     width: PLAYER_HEIGHT,
     height: PLAYER_HEIGHT,
   },
-
   avatar: {
     width: PLAYER_HEIGHT,
     height: PLAYER_HEIGHT,
