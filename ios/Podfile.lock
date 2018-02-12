@@ -31,6 +31,8 @@ PODS:
   - React/jschelpers_legacy (0.50.3)
   - RNFirebase (3.2.2):
     - React
+  - RNShare (1.0.24):
+    - React
   - RNSVG (5.5.1):
     - React
   - yoga (0.50.3.React)
@@ -40,6 +42,7 @@ DEPENDENCIES:
   - React/BatchedBridge (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
   - RNFirebase (from `../node_modules/react-native-firebase`)
+  - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
@@ -48,6 +51,8 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native
   RNFirebase:
     :path: ../node_modules/react-native-firebase
+  RNShare:
+    :path: ../node_modules/react-native-share
   RNSVG:
     :path: ../node_modules/react-native-svg
   yoga:
@@ -62,9 +67,10 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   React: 0ba6cae888dc82dc47d6d5f3090615e1b5f6f3e7
   RNFirebase: 5cf5405d1b67c9720ce63a2da3d6d5346415d0f7
+  RNShare: 08b6c8359fef704d9d4491df8eb36305ee1a0555
   RNSVG: c850931093bcdd4fb13f95e58d989379fa2643ec
   yoga: faecc6be81ca7823ccbb470b93a1b228499fa1c0
 
-PODFILE CHECKSUM: da934466f7d85464d622b05bbef0825b0b451ce8
+PODFILE CHECKSUM: ad1996ffed880fa371ca48ec1180ac163e408fd6
 
 COCOAPODS: 1.3.1
