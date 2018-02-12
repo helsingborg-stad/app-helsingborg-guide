@@ -329,7 +329,7 @@ class GuideDetailsScreen extends Component {
     const { navigate } = this.props.navigation;
     const { title } = contentObject;
     AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
-    navigate("ObjectDetailsScreen", { title, contentObject, objectKey, id: this.state.subLocation.id });
+    navigate("ObjectDetailsScreen", { title, contentObject, objectKey, id: this.state.subLocation.id, contentType: this.state.subLocation.contentType });
   }
 
   // ############################################
