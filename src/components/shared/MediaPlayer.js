@@ -7,13 +7,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import RoundedBtn from "./roundedBtn";
-import OImage from "./image";
+
 import MediaService from "../../services/mediaService";
 import * as audioActions from "../../actions/audioActions";
 import { Colors } from "../../styles/";
 
-const PLAYER_HEIGHT = 46;
+const PLAYER_HEIGHT = 70;
 const BTN_DIM = 36;
 const BKD_COLOR = "#F2F2F2";
 
@@ -32,7 +31,6 @@ function getDurationString(totalSeconds) {
 
   return `${minutes}:${padWithZeros(seconds)}`;
 }
-
 
 class MediaPlayer extends Component {
   constructor(props) {
@@ -92,10 +90,10 @@ class MediaPlayer extends Component {
 
     btn = isActive ? (
       <TouchableOpacity style={styles.closeBtnContainer} onPress={this.togglePlaying.bind(this)}>
-        <Icon2 name="pause-circle-filled" color={Colors.warmGrey} size={26} />
+        <Icon name="pause" size={26} color="purple" />
       </TouchableOpacity>) : (
         <TouchableOpacity style={styles.closeBtnContainer} onPress={this.togglePlaying.bind(this)}>
-          <Icon2 name="play-circle-filled" color={Colors.warmGrey} size={26} />
+          <Icon name="play" size={26} color="purple" />
         </TouchableOpacity>);
     return btn;
   }
@@ -124,13 +122,14 @@ class MediaPlayer extends Component {
                   style={styles.trackSlider}
                   maximumValue={this.state.audio.duration}
                   value={this.state.audio.currentPosition}
+                  minimumTrackTintColor={Colors.purple}
                   onValueChange={value => this.onSliding()}
                   onSlidingComplete={value => this.onSliderValueCompleted(value)}
                 />
               </View>
               <Text style={styles.durationText}>{getDurationString(this.state.audio.duration)}</Text>
               <TouchableOpacity style={styles.closeBtnContainer} onPress={this.closePlayer.bind(this)}>
-                <Icon2 name="cancel" color={Colors.warmGrey} size={26} />
+                <Icon2 name="cancel" color={Colors.warmGrey} size={32} />
               </TouchableOpacity>
             </View>
 
@@ -165,6 +164,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 0,
     paddingTop: 16,
+    marginBottom: 10,
+    marginHorizontal: 6,
   },
   titleContainer: { flex: 1, alignItems: "center", paddingHorizontal: 15 },
   titleText: { fontSize: 12, lineHeight: 14, fontWeight: "bold" },
@@ -196,8 +197,8 @@ const styles = StyleSheet.create({
   spinner: {},
   closeBtnContainer: {
     flex: 0,
-    width: PLAYER_HEIGHT,
-    height: PLAYER_HEIGHT, // backgroundColor:'red',
+    width: 46,
+    height: 46,
     alignItems: "center",
     justifyContent: "center",
   },
