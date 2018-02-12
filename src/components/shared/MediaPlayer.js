@@ -7,14 +7,30 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import RoundedBtn from "./roundedBtn";
-import OImage from "./image";
+
 import MediaService from "../../services/mediaService";
 import * as audioActions from "../../actions/audioActions";
+import { Colors } from "../../styles/";
 
 const PLAYER_HEIGHT = 70;
 const BTN_DIM = 36;
 const BKD_COLOR = "#F2F2F2";
+
+function padWithZeros(time) {
+  return time > 9 ? `${time}` : `0${time}`;
+}
+function getDurationString(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const remainingSeconds = totalSeconds % 3600;
+  const minutes = Math.floor(remainingSeconds / 60);
+  const seconds = Math.floor(remainingSeconds % 60);
+
+  if (hours > 0) {
+    return `${hours}:${padWithZeros(minutes)}:${padWithZeros(seconds)}`;
+  }
+
+  return `${minutes}:${padWithZeros(seconds)}`;
+}
 
 class MediaPlayer extends Component {
   constructor(props) {
@@ -69,24 +85,17 @@ class MediaPlayer extends Component {
   }
 
   displayControlBtn() {
-    const btn = (
-      <RoundedBtn
-        style={styles.playBtn}
-        disabled={this.state.disabled}
-        outline
-        isActive={this.state.audio.isPlaying}
-        active={<Icon name="pause" size={BTN_DIM / 2} color="white" />}
-        idle={<Icon name="play" size={BTN_DIM / 2} color="white" />}
-        onPress={() => {
-          this.togglePlaying();
-        }}
-      />
-    );
+    const isActive = this.state.audio.isPlaying;
+    let btn = null;
 
-    const spinner = <ActivityIndicator style={[styles.spinner]} />;
-
-    const button = this.state.audio.isPrepared ? btn : spinner;
-    return <View style={styles.controlsContainer}>{button}</View>;
+    btn = isActive ? (
+      <TouchableOpacity style={styles.closeBtnContainer} onPress={this.togglePlaying.bind(this)}>
+        <Icon name="pause" size={26} color="purple" />
+      </TouchableOpacity>) : (
+        <TouchableOpacity style={styles.closeBtnContainer} onPress={this.togglePlaying.bind(this)}>
+          <Icon name="play" size={26} color="purple" />
+        </TouchableOpacity>);
+    return btn;
   }
 
   closePlayer() {
@@ -97,10 +106,7 @@ class MediaPlayer extends Component {
     if (this.state.audio.hasAudio && this.state.audio.isPrepared) {
       return (
         <Animated.View style={[styles.playerContainer, { opacity: this.state.animValue }]}>
-          <View style={styles.avatarContainer}>
-            <OImage spinner={false} source={{ uri: this.state.audio.avatar_url }} style={styles.avatar} />
-            {this.displayControlBtn()}
-          </View>
+
           <View style={styles.sliderAndTitleContainer}>
             <View style={styles.titleContainer}>
               <Text numberOfLines={1} style={[styles.titleText, !this.state.audio.isPrepared ? styles.disabledText : {}]}>
@@ -108,19 +114,27 @@ class MediaPlayer extends Component {
               </Text>
             </View>
             <View style={styles.sliderContainer}>
-              <Slider
-                disabled={!this.state.audio.isPrepared}
-                style={styles.trackSlider}
-                maximumValue={this.state.audio.duration}
-                value={this.state.audio.currentPosition}
-                onValueChange={value => this.onSliding()}
-                onSlidingComplete={value => this.onSliderValueCompleted(value)}
-              />
+              {this.displayControlBtn()}
+              <Text style={styles.durationText}>{getDurationString(this.state.audio.currentPosition)}</Text>
+              <View style={styles.slider}>
+                <Slider
+                  disabled={!this.state.audio.isPrepared}
+                  style={styles.trackSlider}
+                  maximumValue={this.state.audio.duration}
+                  value={this.state.audio.currentPosition}
+                  minimumTrackTintColor={Colors.purple}
+                  onValueChange={value => this.onSliding()}
+                  onSlidingComplete={value => this.onSliderValueCompleted(value)}
+                />
+              </View>
+              <Text style={styles.durationText}>{getDurationString(this.state.audio.duration)}</Text>
+              <TouchableOpacity style={styles.closeBtnContainer} onPress={this.closePlayer.bind(this)}>
+                <Icon2 name="cancel" color={Colors.warmGrey} size={32} />
+              </TouchableOpacity>
             </View>
+
           </View>
-          <TouchableOpacity style={styles.closeBtnContainer} onPress={this.closePlayer.bind(this)}>
-            <Icon2 name="close" size={25} />
-          </TouchableOpacity>
+
         </Animated.View>
       );
     }
@@ -146,21 +160,25 @@ const styles = StyleSheet.create({
   },
   sliderContainer: {
     flex: 2,
-    alignItems: "stretch",
-    paddingHorizontal: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 0,
+    paddingTop: 16,
+    marginBottom: 10,
+    marginHorizontal: 6,
   },
-  titleContainer: { flex: 1, alignItems: "stretch", paddingHorizontal: 15 },
+  titleContainer: { flex: 1, alignItems: "center", paddingHorizontal: 15 },
   titleText: { fontSize: 12, lineHeight: 14, fontWeight: "bold" },
   disabledText: { color: "#cecece" },
   trackSlider: { flex: 1 },
+  slider: { flex: 0, flexGrow: 1 },
+  durationText: { fontSize: 12, paddingHorizontal: 10 },
   controlsContainer: {
     width: PLAYER_HEIGHT,
     height: PLAYER_HEIGHT,
-    // flexDirection:'row',
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-    // backgroundColor:'red',
     top: 0,
     left: 0,
   },
@@ -172,16 +190,15 @@ const styles = StyleSheet.create({
     width: PLAYER_HEIGHT,
     height: PLAYER_HEIGHT,
   },
-
   avatar: {
     width: PLAYER_HEIGHT,
     height: PLAYER_HEIGHT,
   },
   spinner: {},
   closeBtnContainer: {
-    flex: 1,
-    width: PLAYER_HEIGHT,
-    height: PLAYER_HEIGHT, // backgroundColor:'red',
+    flex: 0,
+    width: 46,
+    height: 46,
     alignItems: "center",
     justifyContent: "center",
   },
