@@ -4,6 +4,9 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import {
+  Colors,
+} from "../../styles/";
 
 const ICON_SIZE = 20;
 
@@ -13,9 +16,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: 60,
-    borderWidth: 1,
-    borderColor: "#cecece",
+    minHeight: 46,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: Colors.listBackgroundColor,
   },
   mainContainer: {
     maxWidth: 120,
@@ -23,10 +29,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  iconContainer: { flex: 1, alignItems: "center" },
+  iconContainer: { flex: 0, alignItems: "center" },
   icon: {},
-  titleContainer: { flex: 2, alignItems: "center" },
-  title: {},
+  titleContainer: { flex: 0, alignItems: "center", paddingLeft: 8 },
+  title: {
+    color: "purple",
+    fontWeight: "500",
+    fontSize: 16,
+    lineHeight: 22.0,
+  },
   disabledText: {
     color: "#cecece",
   },
