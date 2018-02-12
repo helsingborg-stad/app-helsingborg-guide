@@ -21,6 +21,7 @@ import ImageView from "../shared/image_view";
 import LinkTouchable from "./../shared/LinkTouchable";
 import MediaPlayer from "../shared/MediaPlayer";
 import ViewContainer from "../shared/view_container";
+import SharingService from "../../services/SharingService";
 
 import {
   Colors,
@@ -108,6 +109,14 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: Colors.lightPink,
   },
+  shareBtn: {
+    backgroundColor: "transparent",
+    position: "absolute",
+    top: MAX_IMAGE_HEIGHT - 70,
+    right: 25,
+    zIndex: 50,
+  },
+
 });
 
 class ObjectDetailsScreen extends Component {
@@ -147,11 +156,13 @@ class ObjectDetailsScreen extends Component {
       videoBtnDisabled: false,
       stopAudioOnUnmount: params.stopAudioOnUnmount,
       contentType: params.contentType,
+      swiperIndex: 0,
     };
 
     this.mediaService = MediaService.getInstance();
 
     this.onAudioFilePrepared = this.onAudioFilePrepared.bind(this);
+    this.swiperIndexChanged = this.swiperIndexChanged.bind(this);
   }
 
   componentDidMount() {
@@ -365,10 +376,15 @@ class ObjectDetailsScreen extends Component {
         activeDotColor="#D35098"
         showsButtons={false}
         loop={false}
+        onIndexChanged={this.swiperIndexChanged}
       >
         {slides}
       </Swiper>
     );
+  }
+
+  swiperIndexChanged(swiperIndex) {
+    this.setState({ swiperIndex });
   }
 
   displayLinks() {
@@ -385,11 +401,17 @@ class ObjectDetailsScreen extends Component {
   }
 
   display() {
+    const { image, title } = this.state.contentObject;
+    const selectedImage = image[this.state.swiperIndex];
+
     if (this.state.contentObject && Object.keys(this.state.contentObject).length) {
       return (
         <ViewContainer>
           <ScrollView contentContainerStyle={styles.scrollView}>
             {this.displayImagesSlider()}
+            <View style={styles.shareBtn}>
+              {SharingService.showShareButton(title, selectedImage, this)}
+            </View>
             <View style={styles.bodyContainer}>
               {this.displayTitle()}
               {this.displayButtonsBar()}
