@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.example.beaconmodule.BeaconPackage;
 import com.facebook.react.ReactApplication;
+import cl.json.RNSharePackage;
+import com.jimmydaddy.imagemarker.ImageMarkerPackage;
 import com.horcrux.svg.SvgPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
@@ -29,7 +31,9 @@ import com.fullscreenvideomodule.FullScreenVideoModule;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+import cl.json.ShareApplication;
+
+public class MainApplication extends Application implements ShareApplication, ReactApplication {
 
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
         @Override
@@ -39,21 +43,11 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new SvgPackage(),
-                    new RNFirebasePackage(),
-                    new RNFirebaseAnalyticsPackage(),
-                    new PhotoViewPackage(),
-                    new BeaconPackage(),
-                    new VectorIconsPackage(),
-                    new MapsPackage(),
-                    new ReactVideoPackage(),
-                    new RNFetchBlobPackage(),
-                    new NotificationPackage(),
-                    new SettingsPackage(),
-                    new MediaPackage(),
-                    new MediaControlPackage(),
-                    new AppPackages());
+            return Arrays.<ReactPackage>asList(new MainReactPackage(), new RNSharePackage(), new ImageMarkerPackage(),
+                    new SvgPackage(), new RNFirebasePackage(), new RNFirebaseAnalyticsPackage(), new PhotoViewPackage(),
+                    new BeaconPackage(), new VectorIconsPackage(), new MapsPackage(), new ReactVideoPackage(),
+                    new RNFetchBlobPackage(), new NotificationPackage(), new SettingsPackage(), new MediaPackage(),
+                    new MediaControlPackage(), new AppPackages());
         }
 
         @Override
@@ -61,6 +55,11 @@ public class MainApplication extends Application implements ReactApplication {
             return "index";
         }
     };
+
+    @Override
+    public String getFileProviderAuthority() {
+        return "com.guidehbg.provider";
+    }
 
     @Override
     public ReactNativeHost getReactNativeHost() {
