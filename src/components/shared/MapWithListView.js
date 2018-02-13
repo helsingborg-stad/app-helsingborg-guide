@@ -206,13 +206,13 @@ export default class MapWithListView extends Component {
       switch (contentType) {
         case "location":
           title = item.name;
-          imageUrl = item.apperance.image.sizes.large;
+          imageUrl = item.apperance.image.sizes.medium;
           thumbnailUrl = item.apperance.image.sizes.thumbnail;
           break;
         case "trail":
         case "guide":
           title = item.title.plain_text;
-          imageUrl = item.guide_images[0].sizes.large;
+          imageUrl = item.guide_images[0].sizes.medium;
           thumbnailUrl = item.guide_images[0].sizes.thumbnail;
           break;
         default:
@@ -264,7 +264,7 @@ export default class MapWithListView extends Component {
     let index = 1;
     trailObjects.forEach((item) => {
       item.labelDisplayNumber = index;
-      index++;
+      index += 1;
     });
 
     return trailObjects;
@@ -337,7 +337,6 @@ export default class MapWithListView extends Component {
   onMapReady = () => {
     const { items } = this.props;
     const { markersFocused } = this.state;
-
     if (items.length > 0 && !markersFocused) {
       this.focusMarkers(items);
       this.setState({ markersFocused: true });
@@ -372,34 +371,34 @@ export default class MapWithListView extends Component {
     const { contentType, contentObject } = listItem;
     switch (contentType) {
       case "location":
-        {
-          AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
-          navigate("LocationDetailsScreen", { location: contentObject });
-          break;
-        }
+      {
+        AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
+        navigate("LocationDetailsScreen", { location: contentObject });
+        break;
+      }
       case "trail":
-        {
-          const trail = contentObject;
-          const title = trail.guidegroup[0].name;
-          AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
-          navigate("TrailScreen", { trail, title });
-          return;
-        }
+      {
+        const trail = contentObject;
+        const title = trail.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
+        navigate("TrailScreen", { trail, title });
+        return;
+      }
       case "guide":
-        {
-          const guide = contentObject;
-          const title = guide.guidegroup[0].name;
-          AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-          navigate("GuideDetailsScreen", { id: guide.id, title });
-          return;
-        }
+      {
+        const guide = contentObject;
+        const title = guide.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+        navigate("GuideDetailsScreen", { id: guide.id, title });
+        return;
+      }
       default:
-        {
-          const { title } = contentObject;
-          const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
-          AnalyticsUtils.logEvent("view_object", { name: title });
-          navigate("ObjectDetailsScreen", { title, contentObject, stopAudioOnUnmount });
-        }
+      {
+        const { title } = contentObject;
+        const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
+        AnalyticsUtils.logEvent("view_object", { name: title });
+        navigate("ObjectDetailsScreen", { title, contentObject, stopAudioOnUnmount });
+      }
     }
   }
 
@@ -518,12 +517,12 @@ export default class MapWithListView extends Component {
   }
 
   renderListItem = (item, listItemStyle) => {
-    const { imageUrl, streetAdress, title } = item;
+    const { thumbnailUrl, streetAdress, title } = item;
     const trailScreen = item.imageType === "trailScreen";
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
         <View style={listItemStyle}>
-          {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
+          {thumbnailUrl && <Image style={styles.listImage} source={{ uri: thumbnailUrl }} />}
           {this.displayNumberView(item)}
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
