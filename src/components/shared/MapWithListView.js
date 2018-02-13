@@ -448,7 +448,7 @@ export default class MapWithListView extends Component {
     const { id, location } = trailObject;
     const { activeMarker } = this.state;
 
-    const image = trailObject.markerIcon; // this.markerImageForTrailObject(trailObject);
+    const image = trailObject.markerIcon;
     const numberString = trailObject.labelDisplayNumber;
 
     return (
@@ -468,7 +468,7 @@ export default class MapWithListView extends Component {
 
   defaultMapViewMarker = (trailObject) => {
     const { id, location } = trailObject;
-    const image = trailObject.markerIcon; // = this.markerImageForTrailObject(trailObject);
+    const image = trailObject.markerIcon;
 
     return (
       <MapView.Marker
