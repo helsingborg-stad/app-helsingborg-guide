@@ -129,7 +129,9 @@ class GuideListScreen extends Component {
     let numberOfGuides = 0;
 
     if (contentType === "location") {
-      numberOfGuides = subLocations.filter(subLocationItem => subLocationItem.guidegroup[0].id === id).length;
+      for (let i = 0; i < subLocations.length; i += 1) {
+        if (subLocations[i].guidegroup === null) { console.log(`Guidegroup is undefined in ${subLocations[i].title.plain_text}`); } else if (subLocations[i].guidegroup[0] !== null && subLocations[i].guidegroup[0].id === id) { numberOfGuides += 1; }
+      }
     } else {
       numberOfGuides = Object.keys(item.contentObjects).length;
     }
@@ -255,12 +257,14 @@ class GuideListScreen extends Component {
 
     // Filter guides and locations
     categoryType.items.forEach((element) => {
-      if (element.type === "guide") {
-        const result = guides.find(guide => guide.id === element.id);
-        if (result) items.push(result);
-      } else if (element.type === "guidegroup") {
-        const loc = locations.find(l => l.id === element.id);
-        if (loc) items.push(loc);
+      if (element != null) {
+        if (element.type === "guide") {
+          const result = guides.find(guide => guide.id === element.id);
+          if (result) items.push(result);
+        } else if (element.type === "guidegroup") {
+          const loc = locations.find(l => l.id === element.id);
+          if (loc) items.push(loc);
+        }
       }
     });
 
