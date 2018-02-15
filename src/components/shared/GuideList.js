@@ -36,7 +36,7 @@ export default ({ items, navigation }) => {
     const { navigate } = navigation;
     const title = trail.guidegroup[0].name;
     AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
-    navigate("TrailScreen", { trail, id: trail.id, title });
+    navigate("TrailScreen", { trail, title });
   };
 
   const _navigateToGuide = (guide) => {

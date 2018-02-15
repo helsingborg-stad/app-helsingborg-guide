@@ -325,6 +325,7 @@ class LocationDetailsScreen extends Component {
               startDate={subLocation.guide_date_start}
               endDate={subLocation.guide_date_end}
               forKids={forKids}
+              id={subLocation.id}
             />
           </TouchableOpacity>
         );
