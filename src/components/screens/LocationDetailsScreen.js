@@ -362,6 +362,8 @@ class LocationDetailsScreen extends Component {
 
     if (!this.state.location || this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
 
+    if (!this.state.internet) { return null; }
+
     const accessibility = (
       <View>
         <View style={styles.divider} />
