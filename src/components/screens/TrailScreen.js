@@ -258,6 +258,7 @@ class TrailScreen extends Component {
         initialLocation={trailItem.location}
         navigation={navigation}
         stopAudioOnUnmount
+        id={this.state.subLocation.id}
       />,
       this.renderMapInformationOverlay(),
       ]

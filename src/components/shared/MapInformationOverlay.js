@@ -23,7 +23,7 @@ const screenHeight = Dimensions.get("window").height;
 
 const defaultMargin = 17;
 const closeButtonSize = 26;
-const scrollViewMaxHeight = screenHeight - 400; // magic number here, but roughly (listitem + header + margins)
+const scrollViewMaxHeight = screenHeight - 350; // magic number here, but roughly (listitem + header + margins)
 
 const styles = StyleSheet.create({
   container: {

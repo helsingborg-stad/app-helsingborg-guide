@@ -273,11 +273,12 @@ export default class MapWithListView extends Component {
   constructor(props) {
     super(props);
 
-    const { items } = this.props;
+    const { items, id } = this.props;
     this.state = {
       isInitialized: false,
       activeMarker: items[0],
       markersFocused: false,
+      guideID: id,
     };
   }
 
@@ -382,7 +383,7 @@ export default class MapWithListView extends Component {
           const trail = contentObject;
           const title = trail.guidegroup[0].name;
           AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
-          navigate("TrailScreen", { trail, title });
+          navigate("TrailScreen", { trail, id: trail.id, title });
           return;
         }
       case "guide":
@@ -398,7 +399,7 @@ export default class MapWithListView extends Component {
           const { title } = contentObject;
           const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
           AnalyticsUtils.logEvent("view_object", { name: title });
-          navigate("ObjectDetailsScreen", { title, contentObject, stopAudioOnUnmount });
+          navigate("ObjectDetailsScreen", { title, contentObject, id: this.state.guideID, stopAudioOnUnmount });
         }
     }
   }
