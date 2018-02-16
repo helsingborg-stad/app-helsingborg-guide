@@ -571,6 +571,7 @@ class GuideDetailsScreen extends Component {
             imageSource={{ uri: mImage.medium_large }}
             width={mImage["medium_large-width"]}
             height={mImage["medium_large-height"]}
+            guideID={this.state.subLocation.id}
           />
           <View style={styles.ContentTextContainer}>
             {text}
@@ -675,7 +676,7 @@ class GuideDetailsScreen extends Component {
 
     if (images && images.length) {
       return (
-        <ImageView source={{ uri: images[0].sizes.large }} />
+        <ImageView source={{ uri: images[0].sizes.large }} guideID={this.state.subLocation.id} />
       );
     }
     return null;

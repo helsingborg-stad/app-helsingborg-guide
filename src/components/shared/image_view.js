@@ -47,6 +47,7 @@ export default class ImageView extends Component {
   displayImage() {
     // If no source image is defined, use placeholder image
     let uri = this.props.source;
+    const { guideID } = this.props;
     if (!uri || !uri.uri) uri = require("../../images/no-image-featured-image.png");
 
     // Using full screen width and a 16:9 aspect ratio
@@ -72,6 +73,7 @@ export default class ImageView extends Component {
         blurRadius={this.props.blur}
         onLoadStart={this.onLoadStart}
         onLoadEnd={this.onLoadEnd}
+        guideID={guideID}
       >
         {this.displaySpinner()}
         {this.props.children}

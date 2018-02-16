@@ -31,12 +31,12 @@ export default class VideoScreen extends Component {
 
   componentDidMount() {
     this.timer = setTimeout(() => {
-      const { videoUrl } = this.props.navigation.state.params;
-      fetchService.isExist(videoUrl).then((exist) => {
+      const { videoUrl, guideID } = this.props.navigation.state.params;
+      fetchService.isExist(videoUrl, guideID).then((exist) => {
         let url = videoUrl;
 
         if (exist) {
-          url = fetchService.getFullPath(url);
+          url = fetchService.getFullPath(url, guideID);
         }
 
         this.setState({ url });

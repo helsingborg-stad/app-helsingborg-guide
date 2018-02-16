@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: Colors.pinkishGrey,
   },
+  emptySpace: {
+    margin: defaultMargin * 0.5,
+  },
 });
 
 const textStyles = StyleSheet.create({
@@ -191,10 +194,26 @@ class SettingsScreen extends Component {
     navigate("DownloadsScreen");
   };
 
-  displayLanguages() {
+  displayLanguageSegment() {
     const { languages } = this.state;
-    if (!languages) return null;
+    if (!languages || !Object.keys(languages).length) {
+      return (
+        <View style={styles.emptySpace} />
+      );
+    }
 
+    return (
+      <View>
+        <Text style={textStyles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
+        <View style={styles.languageContainer}>
+          <View style={styles.languageChoicesContainer}>{this.displayLanguages(languages)}</View>
+        </View>
+        <View style={styles.divider} />
+      </View>
+    );
+  }
+
+  displayLanguages(languages) {
     return languages.map((language) => {
       const { name, slug } = language;
       const style = { color: Colors.purple, fontWeight: "bold", textDecorationLine: "underline" };
@@ -218,11 +237,7 @@ class SettingsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={textStyles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
-        <View style={styles.languageContainer}>
-          <View style={styles.languageChoicesContainer}>{this.displayLanguages()}</View>
-        </View>
-        <View style={styles.divider} />
+        {this.displayLanguageSegment()}
         <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
         </TouchableOpacity>
