@@ -2,7 +2,7 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Slider, ActivityIndicator, Animated } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Slider, Platform, Animated } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
@@ -15,13 +15,17 @@ import { Colors } from "../../styles/";
 const PLAYER_HEIGHT = 70;
 const BTN_DIM = 36;
 const BKD_COLOR = "#F2F2F2";
+const ios = Platform.OS === "ios";
 
 function padWithZeros(time) {
   return time > 9 ? `${time}` : `0${time}`;
 }
 function getDurationString(totalSeconds) {
-  const hours = Math.floor(totalSeconds / 3600);
-  const remainingSeconds = totalSeconds % 3600;
+  let totalSecondsModified = totalSeconds;
+  if (!ios) { totalSecondsModified /= 1000; }
+
+  const hours = Math.floor(totalSecondsModified / 3600);
+  const remainingSeconds = totalSecondsModified % 3600;
   const minutes = Math.floor(remainingSeconds / 60);
   const seconds = Math.floor(remainingSeconds % 60);
 
