@@ -56,18 +56,18 @@ export default ({ items, navigation }) => {
     let icon;
 
     if (contentType === "location") {
-      image = item.apperance.image.sizes.medium;
+      image = item.apperance.image.sizes.thumbnail;
       title = item.name;
       pressHandler = _navigateToLocation;
       openingHours = getOpeningHours(item);
       icon = iconLocation;
     } else if (contentType === "trail") {
-      image = item.guide_images[0].sizes.large;
+      image = item.guide_images[0].sizes.thumbnail;
       title = item.title.plain_text;
       pressHandler = _navigateToTrail;
       icon = iconGuide;
     } else if (contentType === "guide") {
-      image = item.guide_images[0].sizes.large;
+      image = item.guide_images[0].sizes.thumbnail;
       title = item.title.plain_text;
       pressHandler = _navigateToGuide;
       icon = iconGuide;
