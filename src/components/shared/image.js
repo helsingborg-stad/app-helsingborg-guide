@@ -49,7 +49,7 @@ class OImage extends Component {
       fetchService.readFile(fullPath).then((data) => {
         this.setState({ source: { uri: `data:image/png;base64,${data}` } });
       });
-    } else if (Platform.OS === "ios") {
+    } else if (Platform.OS === "android") {
       this.setState({ source: { uri: `file://${fullPath}` } });
     }
   }
@@ -63,11 +63,11 @@ class OImage extends Component {
     }
     // Only load the offline image if no internet.
     if (source && source.uri && typeof source.uri === "string") {
+      const { guideID } = this.props;
       const path = source.uri;
-      const fullPath = fetchService.getFullPath(path);
-
+      const fullPath = fetchService.getFullPath(path, guideID);
       fetchService
-        .isExist(path)
+        .isExist(path, guideID)
         .then((exist) => {
           if (exist) {
             this.setState({ source: { uri: `file://${fullPath}` } });

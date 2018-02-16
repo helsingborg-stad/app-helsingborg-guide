@@ -46,8 +46,15 @@ const styles = StyleSheet.create({
   ]),
 });
 
-const DownloadItemView2 = ({ total, currentPos, isCanceled, progress, pauseCallback, resumeCallback, cancelCallback }) => {
+const DownloadItemView2 = ({ total, currentPos, isCanceled, progress, pauseCallback, resumeCallback,
+  cancelCallback, progressBarWidth }) => {
   {
+    const modifiedStyle = StyleSheetUtils.flatten([
+      styles.progressView, {
+        width: progressBarWidth,
+      },
+    ]);
+
     const isCompleted = total <= currentPos && total > 0;
     let item;
     if (total === 0) item = null;
@@ -69,7 +76,7 @@ const DownloadItemView2 = ({ total, currentPos, isCanceled, progress, pauseCallb
           <View style={{ paddingTop: platformSpecificProgressPadding }} >
             {Platform.OS === "ios"
               ? (
-                <ProgressViewIOS progressTintColor="#D35098" style={styles.progressView} progress={progress} />
+                <ProgressViewIOS progressTintColor="#D35098" style={progressBarWidth ? modifiedStyle : styles.progressView} progress={progress} />
               )
               : (
                 <ProgressBarAndroid color="#D35098" styleAttr="Horizontal" indeterminate={false} progress={progress} />
@@ -100,7 +107,7 @@ const DownloadItemView2 = ({ total, currentPos, isCanceled, progress, pauseCallb
           {Platform.OS === "ios"
             ? (
               <View style={{ paddingTop: 5 }} >
-                <ProgressViewIOS progressTintColor="#D35098" style={styles.progressView} progress={progress} />
+                <ProgressViewIOS progressTintColor="#D35098" style={progressBarWidth ? modifiedStyle : styles.progressView} progress={progress} />
               </View>
             )
             : (
