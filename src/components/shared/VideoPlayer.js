@@ -140,12 +140,19 @@ export default class VideoPlayer extends Component {
 
       if (isPlaying) this.setState({ isPlaying: false });
 
-      FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
+      // Apparently setState doesn't finish setting isPlaying if the FullScreenVideoModule is opened, which doesn't make any sense whatsoever...
+      setTimeout(() => {
+        FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
+      }, 10);
 
       FullScreenVideoModule.getPlayerStateOnCollapse().then((stateOnCollapse) => {
         const time = stateOnCollapse.currentTime;
         this.player.seek(time);
-        this.setState({ isPlaying: !stateOnCollapse.paused, currentTime: time });
+
+        // Also, seeking seems to pause the video when it's done, which makes even less sense.
+        setTimeout(() => {
+          this.setState({ isPlaying: !stateOnCollapse.paused, currentTime: time });
+        }, 10);
       });
     }
   }
@@ -169,7 +176,6 @@ export default class VideoPlayer extends Component {
     if (isAndroidFullscreen) {
       FullScreenVideoModule.setFullscreenPlayState(!isPlaying, currentTime);
     }
-
     return (
       <ViewContainer style={styles.wrapper}>
         <View>{this.displaySpinner()}</View>
@@ -219,6 +225,10 @@ export default class VideoPlayer extends Component {
             />
             <Text style={styles.duration}>{timeHelper.toTimeMarker(this.state.duration)}</Text>
           </View>
+          <TouchableOpacity style={styles.button} onPress={this.toggleFullscreen}>
+            <Icon name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"} size={ICON_SIZE} style={styles.buttonIcon} />
+          </TouchableOpacity>
+
         </View>
       </ViewContainer>
     );
