@@ -59,13 +59,13 @@ export default class MediaService {
     store.dispatch(errorHappened("error: reading audio file"));
   }
 
-  init(audio) {
+  init(audio, guideID) {
     if (!audio || !audio.url) return Promise.reject(new Error("No url provided"));
 
     fetchService
-      .isExist(audio.url)
+      .isExist(audio.url, guideID)
       .then((exist) => {
-        const fullPath = fetchService.getFullPath(audio.url);
+        const fullPath = fetchService.getFullPath(audio.url, guideID);
         if (exist) return Promise.resolve(`file://${fullPath}`);
         return Promise.resolve(audio.url);
       })
