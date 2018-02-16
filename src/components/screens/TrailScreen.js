@@ -2,6 +2,7 @@ import React, {
   Component,
 } from "react";
 import {
+  Dimensions,
   TouchableOpacity,
   Image,
   StyleSheet,
@@ -10,6 +11,7 @@ import {
   View,
 } from "react-native";
 import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 import {
   connect,
 } from "react-redux";
@@ -19,8 +21,19 @@ import {
 } from "../../styles/";
 import {
   StyleSheetUtils,
+  AnalyticsUtils,
 } from "../../utils/";
+
+import * as subLocationActions from "../../actions/subLoactionActions";
+import * as internetActions from "../../actions/internetActions";
+import * as downloadActions from "../../actions/downloadActions";
+
+import downloadManager from "../../services/DownloadTasksManager";
+import fetchService from "../../services/FetchService";
 import LangService from "../../services/langService";
+
+import DownloadItemView2 from "../shared/DownloadItemView2";
+import IconTextTouchable from "../shared/IconTextTouchable";
 import MapWithListView from "../shared/MapWithListView";
 import MapInformationOverlay from "../shared/MapInformationOverlay";
 
@@ -52,7 +65,21 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: "transparent",
   },
+  downloadContainer: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "stretch",
+    borderTopColor: Colors.listBackgroundColor,
+    borderTopWidth: 2,
+    height: 40,
+    // width: "100%",
+    paddingHorizontal: 0,
+  },
 });
+
+const screenWidth = Dimensions.get("window").width;
+const defaultMargin = 17;
 
 class TrailScreen extends Component {
   static propTypes = {
@@ -87,8 +114,13 @@ class TrailScreen extends Component {
   constructor(props) {
     super(props);
 
+    const metadata = this.props.downloadMeta;
+
     this.state = {
       showInfoOverlay: true,
+      subLocation: this.props.subLocation,
+      internet: this.props.internet,
+      downloadMeta: metadata,
     };
   }
 
@@ -96,8 +128,95 @@ class TrailScreen extends Component {
     this.props.navigation.setParams({ toggleInfoOverlay: this.toggleInfoOverlay });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
+    if (nextProps.downloadMeta || (this.state.downloadMeta && !nextProps.downloadMeta)) {
+      const metadata = nextProps.downloadMeta;
+
+      this.setState({
+        downloadMeta: metadata,
+      });
+    }
+  }
+
+
   toggleInfoOverlay = () => {
     this.setState({ showInfoOverlay: !this.state.showInfoOverlay });
+  }
+
+  // ###############################################################
+  // DOWNLOAD ##########################################
+  // Method on the subloction download button
+  createAndStartTask = () => {
+    const item = this.state.subLocation;
+    if (!downloadManager.isExist(item.id)) {
+      AnalyticsUtils.logEvent("download_guide", { name: item.slug });
+      const downloadables = fetchService.scanJsonTree(item);
+      const data = { id: item.id, title: item.title.plain_text, avatar: item.guide_images[0].sizes.thumbnail, urls: downloadables };
+      downloadManager.createTask(data);
+      downloadManager.startTask(item.id);
+    }
+  };
+
+  closedInfoForTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.setClosedInfo(item.id);
+    }
+  };
+
+  pauseTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.cancelTask(item.id);
+    }
+  };
+
+  resumeTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.resumeTask(item.id);
+    }
+  };
+
+  cancelTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.cancelTask(item.id);
+      downloadManager.clearCache(item.id);
+    }
+  };
+
+  displayDownloadIndicator() {
+    const progressBarWidth = screenWidth - (defaultMargin * 2);
+
+    if (this.state.downloadMeta) {
+      return (
+        <View style={styles.downloadContainer}>
+          <DownloadItemView2
+            total={this.state.downloadMeta.urls.length}
+            currentPos={this.state.downloadMeta.currentPos}
+            isCanceled={this.state.downloadMeta.isCanceled}
+            progress={this.state.downloadMeta.currentPos / this.state.downloadMeta.urls.length}
+            pauseCallback={this.pauseTask}
+            resumeCallback={this.resumeTask}
+            cancelCallback={this.cancelTask}
+            progressBarWidth={progressBarWidth}
+          />
+        </View>);
+    }
+
+    return (
+      <View style={styles.downloadContainer}>
+        <View style={{ paddingLeft: 16, paddingTop: 6 }}>
+          <IconTextTouchable
+            text={LangService.strings.DOWNLOAD}
+            iconName="get-app"
+            onPress={() => this.createAndStartTask()}
+          />
+        </View>
+      </View>
+    );
   }
 
   renderMapInformationOverlay = () => {
@@ -123,6 +242,7 @@ class TrailScreen extends Component {
         key="MapInformationOverlay"
         trailInformation={trailInformation}
         onPressFunction={() => this.toggleInfoOverlay()}
+        downloadComponent={() => this.displayDownloadIndicator()}
       />,
     ]);
   }
@@ -138,6 +258,7 @@ class TrailScreen extends Component {
         initialLocation={trailItem.location}
         navigation={navigation}
         stopAudioOnUnmount
+        id={this.state.subLocation.id}
       />,
       this.renderMapInformationOverlay(),
       ]
@@ -145,17 +266,38 @@ class TrailScreen extends Component {
   }
 }
 
+function getSubLocation(subLocations, id) {
+  return subLocations.find(item => item.id === id);
+}
+
+function getDownloadMeta(downloads, id) {
+  return downloads.find(item => item.id === id);
+}
+
 function mapStateToProps(state, ownProps) {
   const { trail } = ownProps.navigation.state.params;
+  const { id } = ownProps.navigation.state.params.trail;
   const { guides } = state;
 
   const trailObjects = MapWithListView.createItemsFromTrail(trail, "trailScreen");
   const trailInformation = TrailScreen.trailInformation(trail, guides);
 
   return {
+    subLocation: getSubLocation(state.subLocations, id),
+    downloadMeta: getDownloadMeta(state.downloads, id),
+    downloads: state.downloads,
+    internet: state.internet.connected,
     trailObjects,
     trailInformation,
   };
 }
 
-export default connect(mapStateToProps)(TrailScreen);
+function mapDispatchToProps(dispatch) {
+  return {
+    subLocationActions: bindActionCreators(subLocationActions, dispatch),
+    internetActions: bindActionCreators(internetActions, dispatch),
+    downloadActions: bindActionCreators(downloadActions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);

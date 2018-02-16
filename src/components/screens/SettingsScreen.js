@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
   View,
+  Linking,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
@@ -68,6 +69,9 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: Colors.pinkishGrey,
   },
+  emptySpace: {
+    margin: defaultMargin * 0.5,
+  },
 });
 
 const textStyles = StyleSheet.create({
@@ -102,9 +106,8 @@ const textStyles = StyleSheet.create({
     }],
   ),
   contactPhoneText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.body, {
       marginTop: 10,
-      fontSize: 20,
       lineHeight: 23,
       color: Colors.black,
       textAlign: "center",
@@ -191,10 +194,26 @@ class SettingsScreen extends Component {
     navigate("DownloadsScreen");
   };
 
-  displayLanguages() {
+  displayLanguageSegment() {
     const { languages } = this.state;
-    if (!languages) return null;
+    if (!languages || !Object.keys(languages).length) {
+      return (
+        <View style={styles.emptySpace} />
+      );
+    }
 
+    return (
+      <View>
+        <Text style={textStyles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
+        <View style={styles.languageContainer}>
+          <View style={styles.languageChoicesContainer}>{this.displayLanguages(languages)}</View>
+        </View>
+        <View style={styles.divider} />
+      </View>
+    );
+  }
+
+  displayLanguages(languages) {
     return languages.map((language) => {
       const { name, slug } = language;
       const style = { color: Colors.purple, fontWeight: "bold", textDecorationLine: "underline" };
@@ -217,13 +236,8 @@ class SettingsScreen extends Component {
 
   render() {
     return (
-
       <View style={styles.container}>
-        <Text style={textStyles.titleText}>{LangService.strings.CHOOSE_LANGUAGE}</Text>
-        <View style={styles.languageContainer}>
-          <View style={styles.languageChoicesContainer}>{this.displayLanguages()}</View>
-        </View>
-        <View style={styles.divider} />
+        {this.displayLanguageSegment()}
         <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
         </TouchableOpacity>
@@ -235,9 +249,8 @@ class SettingsScreen extends Component {
         <View style={styles.contactUsContainer}>
           <Image source={helsingborgIcon} style={styles.icon} />
           <View style={styles.contactTextContainer}>
-
-            <Text style={textStyles.contactEmailText}>kontaktcenter@helsingborg.se</Text>
-            <Text style={textStyles.contactPhoneText}>042-10 50 00</Text>
+            <Text onPress={() => Linking.openURL(`mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${LangService.strings.CONTACT_MAIL_SUBJECT}`)} style={textStyles.contactEmailText}>{LangService.strings.CONTACT_MAIL_ADRESS}</Text>
+            <Text onPress={() => Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)} style={textStyles.contactPhoneText}>{LangService.strings.CONTACT_PHONE_DISPLAY}</Text>
           </View>
         </View>
       </View>

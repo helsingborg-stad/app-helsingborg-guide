@@ -325,6 +325,7 @@ class LocationDetailsScreen extends Component {
               startDate={subLocation.guide_date_start}
               endDate={subLocation.guide_date_end}
               forKids={forKids}
+              id={subLocation.id}
             />
           </TouchableOpacity>
         );
@@ -360,6 +361,8 @@ class LocationDetailsScreen extends Component {
     if (!this.state.pointProperties || !this.state.pointProperties.items || this.state.pointProperties.items.length < 1) { return null; }
 
     if (!this.state.location || this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
+
+    if (!this.state.internet) { return null; }
 
     const accessibility = (
       <View>
