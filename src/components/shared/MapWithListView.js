@@ -12,7 +12,7 @@ import {
   View,
   Platform,
 } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import PropTypes from "prop-types";
 import {
   Colors,
@@ -164,9 +164,9 @@ const styles = StyleSheet.create({
     TextStyles.body, {
       position: "absolute",
       width: markerImageInactiveWidth,
-      top: 6,
-      left: ios ? -1 : 2,
-      fontSize: 18,
+      top: ios ? 6 : 3,
+      left: ios ? -1 : -2,
+      fontSize: ios ? 18 : 16,
       letterSpacing: -2.0,
       fontWeight: "500",
       lineHeight: 23.0,
@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
     TextStyles.body, {
       position: "absolute",
       width: markerImageActiveWidth,
-      top: ios ? 9 : 12,
-      left: ios ? -1 : 3,
+      top: ios ? 9 : 7,
+      left: ios ? -1 : -3,
       fontSize: 18,
       letterSpacing: -2.0,
       fontWeight: "500",
@@ -206,13 +206,13 @@ export default class MapWithListView extends Component {
       switch (contentType) {
         case "location":
           title = item.name;
-          imageUrl = item.apperance.image.sizes.large;
+          imageUrl = item.apperance.image.sizes.medium;
           thumbnailUrl = item.apperance.image.sizes.thumbnail;
           break;
         case "trail":
         case "guide":
           title = item.title.plain_text;
-          imageUrl = item.guide_images[0].sizes.large;
+          imageUrl = item.guide_images[0].sizes.medium;
           thumbnailUrl = item.guide_images[0].sizes.thumbnail;
           break;
         default:
@@ -226,9 +226,18 @@ export default class MapWithListView extends Component {
         streetAdress: street_address,
         contentType,
         contentObject: item,
+        labelDisplayNumber: 0,
       });
       items.push(newItem);
     });
+
+    // labelDisplayNumber is not displayed on this type of map, but is still added as the zIndex of the map markers are based on index. This is to counter "flickering" markers.
+    let index = 1;
+    items.forEach((item) => {
+      item.labelDisplayNumber = index;
+      index += 1;
+    });
+
     return items;
   }
 
@@ -261,10 +270,11 @@ export default class MapWithListView extends Component {
 
     trailObjects.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
 
+    // labelDisplayNumber is set to index value, as it's the easiest way to pass the information. This replaces using trailObject.order as label, as we can't trust the backend.
     let index = 1;
     trailObjects.forEach((item) => {
       item.labelDisplayNumber = index;
-      index++;
+      index += 1;
     });
 
     return trailObjects;
@@ -279,6 +289,7 @@ export default class MapWithListView extends Component {
       activeMarker: items[0],
       markersFocused: false,
       guideID: id,
+      recentlyTappedPin: false,
     };
   }
 
@@ -316,12 +327,6 @@ export default class MapWithListView extends Component {
     }
   }
 
-  scrollToListItemWithId = (marker) => {
-    const { items } = this.props;
-    const index = items.findIndex(item => item === marker);
-    this.scrollToIndex(index);
-  }
-
   panMapToIndex = (index) => {
     const { items } = this.props;
     const marker = items[index];
@@ -338,32 +343,33 @@ export default class MapWithListView extends Component {
   onMapReady = () => {
     const { items } = this.props;
     const { markersFocused } = this.state;
-
     if (items.length > 0 && !markersFocused) {
       this.focusMarkers(items);
       this.setState({ markersFocused: true });
     }
   }
 
+  // iOS callback event when the list is changed
   onListScroll = (e) => {
-    const xOffset = e.nativeEvent.contentOffset.x;
-    const fullItemWidth = listItemWidth + (defaultMargin / 2);
-
-    const index = Math.round(Math.abs(xOffset / fullItemWidth));
-    this.panMapToIndex(index);
+    const { recentlyTappedPin } = this.state;
+    if (!recentlyTappedPin) {
+      const xOffset = e.nativeEvent.contentOffset.x;
+      const fullItemWidth = listItemWidth + (defaultMargin / 2);
+      const index = Math.round(Math.abs(xOffset / fullItemWidth));
+      this.panMapToIndex(index);
+    }
   }
 
-  onPageScroll = ({ nativeEvent }) => {
-    const { position, offset } = nativeEvent;
-    const index = offset < 0.5 ? position : position + 1;
-    this.panMapToIndex(index);
-  }
-
+  // Android callback event when the list is changed
   onPageSelected = ({ nativeEvent }) => {
-    const { position } = nativeEvent;
-    this.panMapToIndex(position);
+    const { recentlyTappedPin } = this.state;
+    if (!recentlyTappedPin) {
+      const { position } = nativeEvent;
+      this.panMapToIndex(position);
+    }
   }
 
+  // Determine layout of list cards on Android
   getItemLayout = (data, index) => (
     { length: listItemWidth, offset: (listItemWidth + (defaultMargin / 2)) * index, index }
   );
@@ -373,39 +379,46 @@ export default class MapWithListView extends Component {
     const { contentType, contentObject } = listItem;
     switch (contentType) {
       case "location":
-        {
-          AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
-          navigate("LocationDetailsScreen", { location: contentObject });
-          break;
-        }
+      {
+        AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
+        navigate("LocationDetailsScreen", { location: contentObject });
+        break;
+      }
       case "trail":
-        {
-          const trail = contentObject;
-          const title = trail.guidegroup[0].name;
-          AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
-          navigate("TrailScreen", { trail, id: trail.id, title });
-          return;
-        }
+      {
+        const trail = contentObject;
+        const title = trail.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
+        navigate("TrailScreen", { trail, id: trail.id, title });
+        return;
+      }
       case "guide":
-        {
-          const guide = contentObject;
-          const title = guide.guidegroup[0].name;
-          AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-          navigate("GuideDetailsScreen", { id: guide.id, title });
-          return;
-        }
+      {
+        const guide = contentObject;
+        const title = guide.guidegroup[0].name;
+        AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+        navigate("GuideDetailsScreen", { id: guide.id, title });
+        return;
+      }
       default:
-        {
-          const { title } = contentObject;
-          const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
-          AnalyticsUtils.logEvent("view_object", { name: title });
-          navigate("ObjectDetailsScreen", { title, contentObject, id: this.state.guideID, stopAudioOnUnmount });
-        }
+      {
+        const { title } = contentObject;
+        const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
+        AnalyticsUtils.logEvent("view_object", { name: title });
+        navigate("ObjectDetailsScreen", { title, contentObject, id: this.state.guideID, stopAudioOnUnmount });
+      }
     }
   }
 
+  // When a map marker is pressed on either OS
   onMarkerPressed = (marker) => {
-    this.scrollToListItemWithId(marker);
+    const { items } = this.props;
+    const index = items.findIndex(item => item === marker);
+    this.setState({ recentlyTappedPin: true });
+    this.scrollToIndex(index);
+    this.panMapToIndex(index);
+    // Setting a timeout to prevent map from "jumping" while panning
+    setTimeout(() => { this.setState({ recentlyTappedPin: false }); }, 500);
   }
 
   onListItemDirectionsButtonPressed = (listItem) => {
@@ -437,44 +450,55 @@ export default class MapWithListView extends Component {
   numberedMapViewMarker = (trailObject) => {
     const { id, location } = trailObject;
     const { activeMarker } = this.state;
-
-    const image = this.markerImageForTrailObject(trailObject);
+    const markerImage = this.markerImageForTrailObject(trailObject);
     const numberString = trailObject.labelDisplayNumber;
     const active = activeMarker.id === trailObject.id;
+    // Warning: zIndex is bugged on iOS 11!
+    // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
+    // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 100 over any other marker.
+    // This is why the active marker ALWAYS should have a zIndex of 100 until this issue is fixed.
+    const zIndex = active ? 100 : trailObject.labelDisplayNumber;
 
     return (
-      <MapView.Marker
+      <Marker
         key={id}
         coordinate={location}
         identifier={id}
         onPress={() => this.onMarkerPressed(trailObject)}
         anchor={{ x: 0.5, y: 1 }}
+        image={markerImage}
         centerOffset={{ x: 0.5, y: 1 }}
-        image={image}
+        zIndex={zIndex}
       >
         <Text style={active ? styles.numberedMarkerTextActive : styles.numberedMarkerText}>{numberString}</Text>
-      </MapView.Marker>
+      </Marker>
     );
   }
 
   defaultMapViewMarker = (trailObject) => {
     const { id, location } = trailObject;
-    const image = this.markerImageForTrailObject(trailObject);
-
+    const { activeMarker } = this.state;
+    const markerImage = this.markerImageForTrailObject(trailObject);
+    const active = activeMarker.id === trailObject.id;
+    // Warning: zIndex is bugged on iOS 11!
+    // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
+    // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 100 over any other marker.
+    // This is why the active marker ALWAYS should have a zIndex of 100 until this issue is fixed.
+    const zIndex = active ? 100 : trailObject.labelDisplayNumber;
     return (
-      <MapView.Marker
+      <Marker
         key={id}
         coordinate={location}
         identifier={id}
+        image={markerImage}
         onPress={() => this.onMarkerPressed(trailObject)}
-        image={image}
+        zIndex={zIndex}
       />
     );
   }
 
   renderMapMarkers() {
     const { items } = this.props;
-
     return items.map((trailObject) => {
       if (trailObject.imageType === "trailScreen") {
         return this.numberedMapViewMarker(trailObject);
@@ -519,12 +543,12 @@ export default class MapWithListView extends Component {
   }
 
   renderListItem = (item, listItemStyle) => {
-    const { imageUrl, streetAdress, title } = item;
+    const { thumbnailUrl, streetAdress, title } = item;
     const trailScreen = item.imageType === "trailScreen";
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
         <View style={listItemStyle}>
-          {imageUrl && <Image style={styles.listImage} source={{ uri: imageUrl }} />}
+          {thumbnailUrl && <Image style={styles.listImage} source={{ uri: thumbnailUrl }} />}
           {this.displayNumberView(item)}
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
@@ -577,7 +601,6 @@ export default class MapWithListView extends Component {
       <ViewPagerAndroid
         ref={(ref) => { this.listRef = ref; }}
         onPageSelected={this.onPageSelected}
-        onPageScroll={this.onPageScroll}
         peekEnabled
         pageMargin={-30}
         style={styles.listStyle}
