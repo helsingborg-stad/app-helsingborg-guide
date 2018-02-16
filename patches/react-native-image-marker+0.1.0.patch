@@ -1,0 +1,25 @@
+patch-package
+--- a/node_modules/react-native-image-marker/android/src/main/java/com/jimmydaddy/imagemarker/ImageMarkerManager.java
++++ b/node_modules/react-native-image-marker/android/src/main/java/com/jimmydaddy/imagemarker/ImageMarkerManager.java
+@@ -131,11 +131,18 @@ public class ImageMarkerManager extends ReactContextBaseJavaModule {
+ //            textPaint.setTypeface(Typeface.DEFAULT);
+             //设置字体失败时使用默认字体
+             try {
+-                textPaint.setTypeface(Typeface.create(fontName, Typeface.NORMAL));
++                if (fontName.contains("BoldItalic"))
++                    textPaint.setTypeface(Typeface.create(fontName, Typeface.BOLD_ITALIC));
++                else if (fontName.contains("Italic"))
++                    textPaint.setTypeface(Typeface.create(fontName, Typeface.ITALIC));
++                else if (fontName.contains("Bold"))
++                    textPaint.setTypeface(Typeface.create(fontName, Typeface.BOLD));
++                else
++                    textPaint.setTypeface(Typeface.create(fontName, Typeface.NORMAL));
+             } catch (Exception e) {
+-
+-            } finally {
+                 textPaint.setTypeface(Typeface.DEFAULT);
++            } finally {
++
+             }
+             //采用的颜色
+             textPaint.setColor(Color.parseColor(color));
