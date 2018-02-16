@@ -138,23 +138,20 @@ export default class VideoPlayer extends Component {
       const { filePath } = this.props;
       const { isPlaying, currentTime } = this.state;
 
-      if (isPlaying) this.setState({ isPlaying: false });
-
-      // Apparently setState doesn't finish setting isPlaying if the FullScreenVideoModule is opened, which doesn't make any sense whatsoever...
-      setTimeout(() => {
-        FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
-      }, 10);
-
-      FullScreenVideoModule.getPlayerStateOnCollapse().then((stateOnCollapse) => {
-        const time = stateOnCollapse.currentTime;
-        this.player.seek(time);
-
-        // Also, seeking seems to pause the video when it's done, which makes even less sense.
-        setTimeout(() => {
-          this.setState({ isPlaying: !stateOnCollapse.paused, currentTime: time });
-        }, 10);
-      });
+      if (isPlaying) {
+        this.setState({ isPlaying: false }, () => this.OpenFullScreenVideo(filePath, isPlaying, currentTime));
+      }
     }
+  }
+
+  OpenFullScreenVideo(filePath, isPlaying, currentTime) {
+    FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
+
+    FullScreenVideoModule.getPlayerStateOnCollapse().then((stateOnCollapse) => {
+      const time = stateOnCollapse.currentTime;
+      this.player.seek(time);
+      this.setState({ isPlaying: !stateOnCollapse.paused, currentTime: time });
+    });
   }
 
   onEnd = () => {
