@@ -27,7 +27,7 @@ export default {
       },
       {
         content:
-          "In some places you'll need to download the content to view the guide.\n\n The easiest way to do this is through the city's own wifi.",
+          "In some places you'll need to download the content to view the guide.\n\nThe easiest way to do this is through the city's own wifi.\n(The network Helsingborg)",
         thumbnail: DOWNLOAD_IMG,
         background: SLIDE2_IMG,
       },
@@ -42,13 +42,13 @@ export default {
       },
       {
         content:
-          "För att få rätt information  på rätt plats behöver du aktivera bluetooth på telefonen. \n\n Var lugn, det kostar inget och drar inte så mycket batteri.",
+          "För att få rätt information  på rätt plats behöver du aktivera bluetooth på telefonen.\n\n Var lugn, det kostar inget och drar inte så mycket batteri.",
         thumbnail: BLUETOOTH_IMG,
         background: SLIDE1_IMG,
       },
       {
         content:
-          "På vissa platser behöver du ladda ner innehållet för att ta del av guiden.\n\n Det gör du lättast med stadens wifi.(nätverket Helsingborg)",
+          "På vissa platser behöver du ladda ner innehållet för att ta del av guiden.\n\nDet gör du lättast med stadens wifi.\n(nätverket Helsingborg)",
         thumbnail: DOWNLOAD_IMG,
         background: SLIDE2_IMG,
       },
@@ -63,13 +63,13 @@ export default {
       },
       {
         content:
-          "Um die richtige Information am richtigen Ort zu bekommen, sollten Sie Bluetooth auf Ihrem Telefon aktivieren. \n\n Keine Sorge, es ist kostenlos und verbraucht nur wenig Batterie.",
+          "Um die richtige Information am richtigen Ort zu bekommen, sollten Sie Bluetooth auf Ihrem Telefon aktivieren.\n\nKeine Sorge, es ist kostenlos und verbraucht nur wenig Batterie.",
         thumbnail: BLUETOOTH_IMG,
         background: SLIDE1_IMG,
       },
       {
         content:
-          "An manchen Stellen müssen Sie Inhalte herunterladen, um an der Ausstellung teilzunehmen. \n\n Dies gelingt am einfachsten mit dem Wifi der Stadt (Netzwerk Helsingborg)",
+          "An manchen Stellen müssen Sie Inhalte herunterladen, um an der Ausstellung teilzunehmen.\n\nDies gelingt am einfachsten mit dem Wifi der Stadt.\n(Netzwerk Helsingborg)",
         thumbnail: DOWNLOAD_IMG,
         background: SLIDE2_IMG,
       },

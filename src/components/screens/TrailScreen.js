@@ -9,6 +9,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  PixelRatio,
 } from "react-native";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     borderTopColor: Colors.listBackgroundColor,
     borderTopWidth: 2,
-    height: 40,
+    height: PixelRatio.getFontScale() > 1 ? 80 : 40,
     // width: "100%",
     paddingHorizontal: 0,
   },

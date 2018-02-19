@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
   Platform,
+  PixelRatio,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import PropTypes from "prop-types";
@@ -465,13 +466,13 @@ export default class MapWithListView extends Component {
         key={id}
         coordinate={location}
         identifier={id}
+        image={markerImage}
         onPress={() => this.onMarkerPressed(trailObject)}
         anchor={{ x: 0.5, y: 1 }}
-        image={markerImage}
         centerOffset={{ x: 0.5, y: 1 }}
         zIndex={zIndex}
       >
-        <Text style={active ? styles.numberedMarkerTextActive : styles.numberedMarkerText}>{numberString}</Text>
+        <Text allowFontScaling={false} style={active ? styles.numberedMarkerTextActive : styles.numberedMarkerText}>{numberString}</Text>
       </Marker>
     );
   }
@@ -515,13 +516,22 @@ export default class MapWithListView extends Component {
 
     const locationString = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
     const mediaGuideString = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
+    const isAccessibility = PixelRatio.getFontScale() > 1;
 
     if (type === "location") {
       textString = `${numberOfGuides} ${mediaGuideString.toLowerCase()}`;
     } else if (type === "trail") {
-      textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${numberOfGuides} ${locationString}`;
+      if (isAccessibility) {
+        textString = `${numberOfGuides} ${locationString}`;
+      } else {
+        textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${numberOfGuides} ${locationString}`;
+      }
     } else if (type === "guide") {
-      textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${numberOfGuides} ${LangService.strings.OBJECT}`;
+      if (isAccessibility) {
+        textString = `${numberOfGuides} ${LangService.strings.OBJECT}`;
+      } else {
+        textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${numberOfGuides} ${LangService.strings.OBJECT}`;
+      }
     }
 
     return (
@@ -546,14 +556,14 @@ export default class MapWithListView extends Component {
   renderListItem = (item, listItemStyle) => {
     const { thumbnailUrl, streetAdress, title } = item;
     const trailScreen = item.imageType === "trailScreen";
-
+    const titleLineCount = (screenHeight > 600 && PixelRatio.getFontScale() === 1 ? 2 : 1);
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
         <View style={listItemStyle}>
           {thumbnailUrl && <Image style={styles.listImage} source={{ uri: thumbnailUrl }} />}
           {this.displayNumberView(item)}
           <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle} numberOfLines={(screenHeight > 600 ? 2 : 1)}>{title}</Text>
+            <Text style={styles.listItemTitle} numberOfLines={titleLineCount}>{title}</Text>
             <Text style={styles.listItemAddress} numberOfLines={1}>{streetAdress}</Text>
             {!trailScreen
               ? null
