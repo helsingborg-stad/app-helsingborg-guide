@@ -1,15 +1,15 @@
 PODS:
-  - Firebase/Core (4.8.1):
-    - FirebaseAnalytics (= 4.0.7)
-    - FirebaseCore (= 4.0.14)
-  - FirebaseAnalytics (4.0.7):
+  - Firebase/Core (4.9.0):
+    - FirebaseAnalytics (= 4.0.9)
+    - FirebaseCore (= 4.0.15)
+  - FirebaseAnalytics (4.0.9):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.14):
+  - FirebaseCore (4.0.15):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseInstanceID (2.0.8):
+  - FirebaseInstanceID (2.0.9):
     - FirebaseCore (~> 4.0)
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
@@ -59,18 +59,18 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
-  Firebase: 2721056b8885eef90233b03f37be64358d35d262
-  FirebaseAnalytics: 617afa8c26b57a0c3f11361b248bc9e17bfd8dfd
-  FirebaseCore: 2e0b98fb2d64ca8140136beff15772bdd14d2dd7
-  FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
+  Firebase: 632216af3ed7f31e3be34776947fdc7546cfb572
+  FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
+  FirebaseCore: 3bd047463058fa6b5d312c97502c52e45401cdfb
+  FirebaseInstanceID: d2058a35e9bebda1b6dd42486b84917bde552a9d
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  React: 0ba6cae888dc82dc47d6d5f3090615e1b5f6f3e7
-  RNFirebase: 5cf5405d1b67c9720ce63a2da3d6d5346415d0f7
-  RNShare: 08b6c8359fef704d9d4491df8eb36305ee1a0555
-  RNSVG: c850931093bcdd4fb13f95e58d989379fa2643ec
-  yoga: faecc6be81ca7823ccbb470b93a1b228499fa1c0
+  React: 541ba768b9855e10cdc76f55427a5cd0653ca806
+  RNFirebase: 80482ff9a73779ce5d6e35c94eb487b06c292fc9
+  RNShare: 40c92dc26432c51019b94dee6e5eb5097d75c794
+  RNSVG: 6de4fb571bf91b9c67910a8d641532349bddf90a
+  yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
 
 PODFILE CHECKSUM: ad1996ffed880fa371ca48ec1180ac163e408fd6
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

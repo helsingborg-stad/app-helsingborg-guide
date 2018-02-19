@@ -11,7 +11,7 @@ import {
   PermissionsAndroid,
 } from "react-native";
 import React from "react";
-import Share, { ShareSheet, Button } from "react-native-share";
+import Share from "react-native-share";
 import RNFetchBlob from "react-native-fetch-blob";
 import ImageMarker from "react-native-image-marker";
 import LangService from "../services/langService";
@@ -120,8 +120,9 @@ export default {
                 Image.getSize(`file://${localFadeUrl}`, (fadeWidth, fadeHeight) => {
                   Image.getSize(`file://${localIconUrl}`, async (iconWidth, iconHeight) => {
                     // Constructing the sharing image by layering the various elements on top one after another.
+                    // Warnign: Font styles can behave weirdly on Android. If you make changes that don't look correctly, check out node_modules/react-native-image-marker/android/src/main/java/com/jimmydaddy/imagemarker/ImageMarkerManager.java: 130-143
                     const resultA = await ImageMarker.markWithImage(localMainUrl, localFadeUrl, 0, height - fadeHeight, 1);
-                    const resultB = await ImageMarker.addText(resultA, title, margin, parseInt(height) - (fontSize) - margin - lineDistance, Colors.white, "Roboto-bold", fontSize);
+                    const resultB = await ImageMarker.addText(resultA, title, margin, parseInt(height) - (fontSize) - margin - lineDistance, Colors.white, "Roboto-Bold", fontSize);
                     const resultC = await ImageMarker.addText(resultB, LangService.strings.SHARING_OVERLAY_TITLE, margin, parseInt(height) - margin, Colors.white, "Roboto", fontSize);
                     const resultD = await ImageMarker.markWithImage(resultC, localIconUrl, parseInt(width) - (iconWidth / 2) - margin, parseInt(height) - (iconHeight / 2) - margin, 0.5);
 
