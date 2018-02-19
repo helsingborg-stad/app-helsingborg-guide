@@ -229,7 +229,6 @@ class GuideListScreen extends Component {
       renderLabel={this._renderTabBarLabel}
       indicatorStyle={styles.tabBarIndicator}
       tabStyle={styles.tabStyle}
-      scrollEnabled
       {...props}
     />)
 
@@ -352,6 +351,7 @@ class GuideListScreen extends Component {
         renderScene={this._renderScene}
         onIndexChange={this._handleIndexChange}
         initialLayout={initialLayout}
+        swipeEnabled={!this.state.showMap}
       />
     );
   }
