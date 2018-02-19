@@ -30,7 +30,7 @@ import IconTextTouchable from "./IconTextTouchable";
 const ios = Platform.OS === "ios";
 
 const defaultMargin = 20;
-const textMargin = 13;
+const textMargin = 10;
 const listItemImageSize = 120;
 
 // Marker image
@@ -38,6 +38,7 @@ const markerImageActiveWidth = 42;
 const markerImageInactiveWidth = 32;
 
 const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 const listItemWidth = screenWidth - (defaultMargin * 2);
 
 const locationMarkerActive = require("../../images/map/marker-location-active.png");
@@ -545,13 +546,14 @@ export default class MapWithListView extends Component {
   renderListItem = (item, listItemStyle) => {
     const { thumbnailUrl, streetAdress, title } = item;
     const trailScreen = item.imageType === "trailScreen";
+
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
         <View style={listItemStyle}>
           {thumbnailUrl && <Image style={styles.listImage} source={{ uri: thumbnailUrl }} />}
           {this.displayNumberView(item)}
           <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle} numberOfLines={2}>{title}</Text>
+            <Text style={styles.listItemTitle} numberOfLines={(screenHeight > 600 ? 2 : 1)}>{title}</Text>
             <Text style={styles.listItemAddress} numberOfLines={1}>{streetAdress}</Text>
             {!trailScreen
               ? null
