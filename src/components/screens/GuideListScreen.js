@@ -35,15 +35,23 @@ const listIcon = require("../../images/iconList.png");
 
 const styles = StyleSheet.create({
   barButtonItem: {
+    flex: 1,
     flexDirection: "row",
-    height: 44,
     alignItems: "center",
     justifyContent: "center",
-    marginHorizontal: 14,
     opacity: 0.75,
+    paddingHorizontal: 14,
+
   },
+  barButtonImage:
+    {
+      flex: 2,
+      maxHeight: 44,
+      maxWidth: 44,
+    },
   barButtonItemText: StyleSheetUtils.flatten([
     TextStyles.description, {
+      flex: 1,
       color: Colors.white,
       marginRight: 8,
     },
@@ -106,7 +114,7 @@ class GuideListScreen extends Component {
           style={styles.barButtonItem}
         >
           <Text style={styles.barButtonItemText}>{itemText}</Text>
-          <Image source={showMap ? listIcon : mapIcon} />
+          <Image style={styles.barButtonImage} source={showMap ? listIcon : mapIcon} />
         </TouchableOpacity>
       ),
       headerLeft: (
@@ -114,7 +122,7 @@ class GuideListScreen extends Component {
           onPress={() => navigation.navigate("SettingsScreen")}
           style={styles.barButtonItem}
         >
-          <Image source={settingsIcon} />
+          <Image style={styles.barButtonImage} source={settingsIcon} />
         </TouchableOpacity>
       ),
     });
