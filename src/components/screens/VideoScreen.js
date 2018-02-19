@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import VideoPlayer from "../shared/VideoPlayer";
 import fetchService from "../../services/FetchService";
+import Colors from "../../styles/Colors";
 
 const styles = StyleSheet.create({
   mainContainer: { backgroundColor: "black" },
@@ -55,9 +56,11 @@ export default class VideoScreen extends Component {
 
   displayVideo() {
     return (
-      <ViewContainer style={styles.mainContainer}>
-        {this.displayVideoPlayer()}
-      </ViewContainer>
+      <SafeAreaView style={{ flex: 1, backgroundColor: Colors.black }}>
+        <ViewContainer style={styles.mainContainer}>
+          {this.displayVideoPlayer()}
+        </ViewContainer>
+      </SafeAreaView>
     );
   }
 

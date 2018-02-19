@@ -12,6 +12,7 @@ import {
   View,
   Platform,
   PixelRatio,
+  SafeAreaView,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import PropTypes from "prop-types";
@@ -627,25 +628,27 @@ export default class MapWithListView extends Component {
     const { items, initialLocation = { latitude: 56.0471881, longitude: 12.6963658 } } = this.props;
     const { longitude, latitude } = initialLocation;
     return (
-      <View style={styles.container}>
-        <MapView
-          ref={(ref) => { this.map = ref; }}
-          style={styles.map}
-          showsUserLocation
-          onMapReady={this.onMapReady}
-          initialRegion={
-            {
-              latitude,
-              longitude,
-              latitudeDelta: 0.09,
-              longitudeDelta: 0.06,
+      <SafeAreaView style={{ flex: 1, backgroundColor: Colors.listBackgroundColor }}>
+        <View style={styles.container}>
+          <MapView
+            ref={(ref) => { this.map = ref; }}
+            style={styles.map}
+            showsUserLocation
+            onMapReady={this.onMapReady}
+            initialRegion={
+              {
+                latitude,
+                longitude,
+                latitudeDelta: 0.09,
+                longitudeDelta: 0.06,
+              }
             }
-          }
-        >
-          {this.renderMapMarkers()}
-        </MapView>
-        {this.renderHorizontalList(items)}
-      </View>
+          >
+            {this.renderMapMarkers()}
+          </MapView>
+          {this.renderHorizontalList(items)}
+        </View>
+      </SafeAreaView>
     );
   }
 }

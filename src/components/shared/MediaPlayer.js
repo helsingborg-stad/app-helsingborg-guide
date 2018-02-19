@@ -2,7 +2,7 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Slider, Platform, Animated } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Slider, Platform, Animated, SafeAreaView } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
@@ -109,37 +109,39 @@ class MediaPlayer extends Component {
   render() {
     if (this.state.audio.hasAudio && this.state.audio.isPrepared) {
       return (
-        <Animated.View style={[styles.playerContainer, { opacity: this.state.animValue }]}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: BKD_COLOR }}>
+          <Animated.View style={[styles.playerContainer, { opacity: this.state.animValue }]}>
 
-          <View style={styles.sliderAndTitleContainer}>
-            <View style={styles.titleContainer}>
-              <Text numberOfLines={1} style={[styles.titleText, !this.state.audio.isPrepared ? styles.disabledText : {}]}>
-                {this.state.audio.title}
-              </Text>
-            </View>
-            <View style={styles.sliderContainer}>
-              {this.displayControlBtn()}
-              <Text style={styles.durationText}>{getDurationString(this.state.audio.currentPosition)}</Text>
-              <View style={styles.slider}>
-                <Slider
-                  disabled={!this.state.audio.isPrepared}
-                  style={styles.trackSlider}
-                  maximumValue={this.state.audio.duration}
-                  value={this.state.audio.currentPosition}
-                  minimumTrackTintColor={Colors.purple}
-                  onValueChange={value => this.onSliding()}
-                  onSlidingComplete={value => this.onSliderValueCompleted(value)}
-                />
+            <View style={styles.sliderAndTitleContainer}>
+              <View style={styles.titleContainer}>
+                <Text numberOfLines={1} style={[styles.titleText, !this.state.audio.isPrepared ? styles.disabledText : {}]}>
+                  {this.state.audio.title}
+                </Text>
               </View>
-              <Text style={styles.durationText}>{getDurationString(this.state.audio.duration)}</Text>
-              <TouchableOpacity style={styles.closeBtnContainer} onPress={this.closePlayer.bind(this)}>
-                <Icon2 name="cancel" color={Colors.warmGrey} size={32} />
-              </TouchableOpacity>
+              <View style={styles.sliderContainer}>
+                {this.displayControlBtn()}
+                <Text style={styles.durationText}>{getDurationString(this.state.audio.currentPosition)}</Text>
+                <View style={styles.slider}>
+                  <Slider
+                    disabled={!this.state.audio.isPrepared}
+                    style={styles.trackSlider}
+                    maximumValue={this.state.audio.duration}
+                    value={this.state.audio.currentPosition}
+                    minimumTrackTintColor={Colors.purple}
+                    onValueChange={value => this.onSliding()}
+                    onSlidingComplete={value => this.onSliderValueCompleted(value)}
+                  />
+                </View>
+                <Text style={styles.durationText}>{getDurationString(this.state.audio.duration)}</Text>
+                <TouchableOpacity style={styles.closeBtnContainer} onPress={this.closePlayer.bind(this)}>
+                  <Icon2 name="cancel" color={Colors.warmGrey} size={32} />
+                </TouchableOpacity>
+              </View>
+
             </View>
 
-          </View>
-
-        </Animated.View>
+          </Animated.View>
+        </SafeAreaView >
       );
     }
 
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
   },
   sliderAndTitleContainer: {
     flex: 3,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: BKD_COLOR,
     justifyContent: "space-between",
     alignItems: "stretch",
     paddingVertical: 10,
