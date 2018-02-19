@@ -54,23 +54,26 @@ export default ({ items, navigation }) => {
     let pressHandler;
     let openingHours;
     let icon;
+    let guideID;
 
     if (contentType === "location") {
-      image = item.apperance.image.sizes.medium;
+      image = item.apperance.image.sizes.thumbnail;
       title = item.name;
       pressHandler = _navigateToLocation;
       openingHours = getOpeningHours(item);
       icon = iconLocation;
     } else if (contentType === "trail") {
-      image = item.guide_images[0].sizes.large;
+      image = item.guide_images[0].sizes.thumbnail;
       title = item.title.plain_text;
       pressHandler = _navigateToTrail;
       icon = iconGuide;
+      guideID = item.id;
     } else if (contentType === "guide") {
-      image = item.guide_images[0].sizes.large;
+      image = item.guide_images[0].sizes.thumbnail;
       title = item.title.plain_text;
       pressHandler = _navigateToGuide;
       icon = iconGuide;
+      guideID = item.id;
     }
 
     if (!image) return null;
@@ -87,6 +90,7 @@ export default ({ items, navigation }) => {
         distance={distance}
         icon={icon}
         forChildren={item.guide_kids}
+        guideID={guideID}
       />
     );
   };

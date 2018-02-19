@@ -1,0 +1,23 @@
+patch-package
+new file mode 100644
+Binary files /dev/null and b/node_modules/react-native-maps/.DS_Store differ
+new file mode 100644
+Binary files /dev/null and b/node_modules/react-native-maps/lib/.DS_Store differ
+--- a/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapMarker.m
++++ b/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapMarker.m
+@@ -298,8 +298,13 @@ - (void)setPinColor:(UIColor *)pinColor
+ 
+ - (void)setZIndex:(NSInteger)zIndex
+ {
+-    _zIndex = zIndex;
+-    self.layer.zPosition = _zIndex;
++    if (zIndex == 100) {  // added line
++        [self setSelected:YES animated:NO]; // added line
++    } else { // added line
++        [self setSelected:NO animated:NO]; // added line
++    } // added line
++     _zIndex = zIndex;
++     self.layer.zPosition = _zIndex;
+ }
+ 
+ @end

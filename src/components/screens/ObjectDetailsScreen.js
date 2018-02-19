@@ -157,6 +157,7 @@ class ObjectDetailsScreen extends Component {
       stopAudioOnUnmount: params.stopAudioOnUnmount,
       contentType: params.contentType,
       swiperIndex: 0,
+      guideID: params.id,
     };
 
     this.mediaService = MediaService.getInstance();
@@ -196,12 +197,12 @@ class ObjectDetailsScreen extends Component {
     const { audio } = this.state.contentObject;
     const { video } = this.state.contentObject;
     if (audio && audio.url) {
-      fetchService.isExist(audio.url).then((exist) => {
+      fetchService.isExist(audio.url, this.state.guideID).then((exist) => {
         this.setState({ audioBtnDisabled: !(exist || internet) });
       });
     }
     if (video && video.url) {
-      fetchService.isExist(video.url).then((exist) => {
+      fetchService.isExist(video.url, this.state.guideID).then((exist) => {
         this.setState({ videoBtnDisabled: !(exist || internet) });
       });
     }
@@ -212,19 +213,19 @@ class ObjectDetailsScreen extends Component {
     if (this.props.metricActions.updateMetric) { this.props.metricActions.updateMetric(metric); }
   }
 
-  _goToVideoView(video) {
+  _goToVideoView(video, guideID) {
     this.pauseAudioFile();
 
     const { url, title, name } = video;
     if (name) AnalyticsUtils.logEvent("play_video", { name });
 
     const { navigate } = this.props.navigation;
-    navigate("VideoScreen", { videoUrl: url, title });
+    navigate("VideoScreen", { videoUrl: url, title, guideID });
   }
 
-  goToImageView(image) {
+  goToImageView(image, guideID) {
     const { navigate } = this.props.navigation;
-    navigate("ImageScreen", { image });
+    navigate("ImageScreen", { image, guideID });
   }
 
   goToLink(url, title) {
@@ -290,7 +291,7 @@ class ObjectDetailsScreen extends Component {
       isPlaying: true,
       description_plain: contentObject.description_plain,
     };
-    this.mediaService.init(audio);
+    this.mediaService.init(audio, this.state.guideID);
   }
 
   pauseAudioFile() {
@@ -324,7 +325,7 @@ class ObjectDetailsScreen extends Component {
       <ButtonsBarItem
         disabled={this.state.videoBtnDisabled}
         onPress={() => {
-          this._goToVideoView(video);
+          this._goToVideoView(video, this.state.guideID);
         }}
         name="play-box-outline"
         color={Colors.darkPurple}
@@ -353,16 +354,16 @@ class ObjectDetailsScreen extends Component {
     if (!this.state.contentObject || !this.state.contentObject.image || !this.state.contentObject.image.length) {
       return (
         <View style={styles.imageViewContainer}>
-          <ImageView source={{ uri: null }} width="600" height="400" />
+          <ImageView source={{ uri: null }} guideID={this.state.guideID} width="600" height="400" />
         </View>
       );
     }
 
     const slides = this.state.contentObject.image.map((image, index) => (
       <View style={styles.imageViewContainer} key={image.ID || index}>
-        <TouchableWithoutFeedback onPress={() => this.goToImageView(image)}>
+        <TouchableWithoutFeedback onPress={() => this.goToImageView(image, this.state.guideID)}>
           <View>
-            <ImageView source={{ uri: image.sizes.large }} width={image.sizes["large-width"]} height={image.sizes["large-height"]} />
+            <ImageView source={{ uri: image.sizes.large }} guideID={this.state.guideID} width={image.sizes["large-width"]} height={image.sizes["large-height"]} />
           </View>
         </TouchableWithoutFeedback>
       </View>

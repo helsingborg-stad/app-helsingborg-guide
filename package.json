@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "prepare": "patch-package",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "eslint": "eslint index.js src/** --ext .js --report-unused-disable-directives",
     "test": "jest"
@@ -15,6 +16,7 @@
     "react": "16.0.0",
     "react-native": "0.50.3",
     "react-native-action-button": "^2.8.4",
+    "react-native-clean-project": "^1.0.6",
     "react-native-fetch-blob": "^0.10.4",
     "react-native-firebase": "^3.2.2",
     "react-native-image-marker": "^0.1.0",
@@ -46,6 +48,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.6.1",
     "jest": "21.2.1",
+    "patch-package": "^5.1.1",
     "react-test-renderer": "16.0.0"
   },
   "jest": {

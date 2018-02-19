@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
   Text,
-  ImageBackground,
   TouchableOpacity,
 } from "react-native";
 import TextStyles from "guide-hbg/src/styles/TextStyles";
@@ -12,6 +11,7 @@ import Colors from "guide-hbg/src/styles/Colors";
 import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
 import DistanceView from "./DistanceView";
 import LangService from "../../services/langService";
+import OImage from "./image";
 
 const iconKids = require("../../images/kids.png");
 
@@ -151,14 +151,15 @@ function displayForChildren() {
   );
 }
 
-const ListCard = ({ title, description, type, numberOfGuides, image, onPress, openingHours, distance, icon, forChildren }) => (
+const ListCard = ({ title, description, type, numberOfGuides, image, onPress, openingHours, distance, icon, forChildren, guideID }) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
     <View style={styles.container}>
       <View style={styles.imageInfoContainer}>
-        <ImageBackground
+        <OImage
           style={styles.image}
           resizeMode="cover"
           source={{ uri: image }}
+          guideID={guideID}
         />
 
         <View style={styles.infoTextContainer}>

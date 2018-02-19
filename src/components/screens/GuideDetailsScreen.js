@@ -16,16 +16,15 @@ import MediaService from "../../services/mediaService";
 
 import ContentThumbnail from "../shared/contentThumbnail";
 import DownloadItemView2 from "../shared/DownloadItemView2";
-import FloatingBtn from "../shared/FloatingBtn";
 import Footer from "../shared/footer";
 import IconTextTouchable from "../shared/IconTextTouchable";
 import ImageView from "../shared/image_view";
 import Keypad from "../shared/KeyPad";
+import MapInformationOverlay from "../shared/MapInformationOverlay";
 import MediaPlayer from "../shared/MediaPlayer";
 import NoInternetText from "../shared/noInternetText";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import ViewContainer from "../shared/view_container";
-import MapInformationOverlay from "../shared/MapInformationOverlay";
 
 import {
   Colors,
@@ -270,8 +269,6 @@ class GuideDetailsScreen extends Component {
       subLocation: this.props.subLocation,
       keypadVisible: false,
       closestBeacon: {},
-      searching: true,
-      smallBtnVisible: false,
       radarInFocus: true,
       menuVisible: false,
       internet: this.props.internet,
@@ -329,7 +326,13 @@ class GuideDetailsScreen extends Component {
     const { navigate } = this.props.navigation;
     const { title } = contentObject;
     AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
-    navigate("ObjectDetailsScreen", { title, contentObject, objectKey, id: this.state.subLocation.id, contentType: this.state.subLocation.contentType });
+    navigate("ObjectDetailsScreen", {
+      title,
+      contentObject,
+      objectKey,
+      id: this.state.subLocation.id,
+      contentType: this.state.subLocation.contentType,
+    });
   }
 
   // ############################################
@@ -386,7 +389,7 @@ class GuideDetailsScreen extends Component {
       this.beaconSearchTimeout = null;
       if (!this.beaconSearchStopTimeout) {
         this.beaconSearchStopTimeout = setTimeout(() => {
-          this.setState({ closestBeacon: {}, searching: false });
+          this.setState({ closestBeacon: {} });
           clearInterval(this.beaconSearchStopTimeout);
           this.beaconSearchStopTimeout = null;
         }, RADAR_SCANNING_DIE_PERIOD);
@@ -396,10 +399,10 @@ class GuideDetailsScreen extends Component {
     const showRadarForSecondsThenLoad = () => {
       clearInterval(this.beaconSearchStopTimeout);
       this.beaconSearchStopTimeout = null;
-      this.setState({ closestBeacon: {}, searching: true });
+      this.setState({ closestBeacon: {} });
       if (!this.beaconSearchTimeout) {
         this.beaconSearchTimeout = setTimeout(() => {
-          this.setState({ closestBeacon: closest, searching: false });
+          this.setState({ closestBeacon: closest });
           clearInterval(this.beaconSearchTimeout);
           this.beaconSearchTimeout = null;
           this.smallBtnTimer = null;
@@ -436,7 +439,7 @@ class GuideDetailsScreen extends Component {
     // Beacon detection logic ends here
     // #########################################
     if (AppState.currentState === "background") {
-      this.setState({ closestBeacon: closest, searching: false });
+      this.setState({ closestBeacon: closest });
       clearInterval(this.beaconSearchTimeout);
       this.beaconSearchTimeout = null;
       this.smallBtnTimer = null;
@@ -507,7 +510,7 @@ class GuideDetailsScreen extends Component {
 
   updateClosestFromSmallBtn() {
     if (this.readyBeacon) {
-      this.setState({ closestBeacon: this.readyBeacon, searching: false });
+      this.setState({ closestBeacon: this.readyBeacon });
       this.readyBeacon = null;
     }
   }
@@ -571,6 +574,7 @@ class GuideDetailsScreen extends Component {
             imageSource={{ uri: mImage.medium_large }}
             width={mImage["medium_large-width"]}
             height={mImage["medium_large-height"]}
+            guideID={this.state.subLocation.id}
           />
           <View style={styles.ContentTextContainer}>
             {text}
@@ -675,7 +679,7 @@ class GuideDetailsScreen extends Component {
 
     if (images && images.length) {
       return (
-        <ImageView source={{ uri: images[0].sizes.large }} />
+        <ImageView source={{ uri: images[0].sizes.large }} guideID={this.state.subLocation.id} />
       );
     }
     return null;
@@ -795,14 +799,6 @@ class GuideDetailsScreen extends Component {
   }
   // #############################################
 
-  refreshSmallBtn() {
-    if (!this.smallBtnTimer) {
-      this.setState({ smallBtnVisible: true });
-      this.smallBtnTimer = setTimeout(() => {
-        this.closeSmallBtn();
-      }, 5000);
-    }
-  }
   watchTheScroll(e) {
     const SCROLL_THRESHOLD = 450;
     const yOffset = e.nativeEvent.contentOffset.y;
@@ -814,17 +810,6 @@ class GuideDetailsScreen extends Component {
     this.watchTheScroll(e);
   }
 
-  onSmallBtnPressed = () => {
-    this.scrollView.scrollTo({ x: 0, y: 100, animated: true });
-    this.updateClosestFromSmallBtn();
-    this.closeSmallBtn();
-  };
-
-  closeSmallBtn() {
-    this.setState({ smallBtnVisible: false });
-    clearInterval(this.smallBtnTimer);
-  }
-
   display() {
     if (this.state.subLocation && Object.keys(this.state.subLocation).length) {
       return (
@@ -832,9 +817,6 @@ class GuideDetailsScreen extends Component {
           <SlimNotificationBar visible={!this.state.internet} style={{ top: 50 }}>
             <NoInternetText />
           </SlimNotificationBar>
-
-          <FloatingBtn onPress={this.onSmallBtnPressed} visible={this.state.smallBtnVisible} content={LangService.strings.NEW_CONTENT} />
-
           <View style={{ flex: 1 }}>
             <ScrollView
               contentContainerStyle={styles.scrollView}

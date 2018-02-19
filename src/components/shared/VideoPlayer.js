@@ -138,16 +138,20 @@ export default class VideoPlayer extends Component {
       const { filePath } = this.props;
       const { isPlaying, currentTime } = this.state;
 
-      if (isPlaying) this.setState({ isPlaying: false });
-
-      FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
-
-      FullScreenVideoModule.getPlayerStateOnCollapse().then((stateOnCollapse) => {
-        const time = stateOnCollapse.currentTime;
-        this.player.seek(time);
-        this.setState({ isPlaying: !stateOnCollapse.paused, currentTime: time });
-      });
+      if (isPlaying) {
+        this.setState({ isPlaying: false }, () => this.OpenFullScreenVideo(filePath, isPlaying, currentTime));
+      }
     }
+  }
+
+  OpenFullScreenVideo(filePath, isPlaying, currentTime) {
+    FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
+
+    FullScreenVideoModule.getPlayerStateOnCollapse().then((stateOnCollapse) => {
+      const time = stateOnCollapse.currentTime;
+      this.player.seek(time);
+      this.setState({ isPlaying: !stateOnCollapse.paused, currentTime: time });
+    });
   }
 
   onEnd = () => {
@@ -169,7 +173,6 @@ export default class VideoPlayer extends Component {
     if (isAndroidFullscreen) {
       FullScreenVideoModule.setFullscreenPlayState(!isPlaying, currentTime);
     }
-
     return (
       <ViewContainer style={styles.wrapper}>
         <View>{this.displaySpinner()}</View>
@@ -219,6 +222,10 @@ export default class VideoPlayer extends Component {
             />
             <Text style={styles.duration}>{timeHelper.toTimeMarker(this.state.duration)}</Text>
           </View>
+          <TouchableOpacity style={styles.button} onPress={this.toggleFullscreen}>
+            <Icon name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"} size={ICON_SIZE} style={styles.buttonIcon} />
+          </TouchableOpacity>
+
         </View>
       </ViewContainer>
     );
