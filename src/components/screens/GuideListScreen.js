@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     backgroundColor: Colors.purple,
-    elevation: 8,
+    elevation: 0,
   },
   tabStyle: {
     width: screenWidth / 3,
