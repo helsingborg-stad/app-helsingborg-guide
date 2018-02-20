@@ -1,13 +1,21 @@
 import React, { Component } from "react";
-import { ImageBackground, StyleSheet, ActivityIndicator, Platform } from "react-native";
+import { ImageBackground, StyleSheet, ActivityIndicator, Platform, View, Image } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import fetchService from "../../services/FetchService";
 import * as internetActions from "../../actions/internetActions";
+import Colors from "../../styles/Colors";
+
+const placeholderImage = require("../../images/no-image-featured-image.png");
+
+const styles = StyleSheet.create({
+  spinner: { position: "absolute", flex: 1, width: 100, height: 100 },
+});
 
 class OImage extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
 
     this.state = {
       loading: false,
@@ -18,6 +26,7 @@ class OImage extends Component {
     this.onLoadStart = this.onLoadStart.bind(this);
     this.onLoadEnd = this.onLoadEnd.bind(this);
   }
+
 
   componentDidMount() {
     this.mounted = true;
@@ -38,10 +47,16 @@ class OImage extends Component {
     this.setState({ loading: false });
   }
 
-  displaySpinner() {
+  displaySpinner(width, height) {
     let hasSpinner = true;
     if (typeof this.props.spinner === "boolean") hasSpinner = this.props.spinner;
-    if (this.state.loading && hasSpinner) return <ActivityIndicator style={[styles.spinner]} />;
+    if (this.state.loading && hasSpinner) {
+      return (
+        <View style={{ width, height, backgroundColor: Colors.moreOffWhite }}>
+          <ActivityIndicator style={{ position: "absolute", left: (width / 2) - 10, top: (height / 2) - 10 }} />
+        </View >
+      );
+    }
   }
 
   loadFile(fullPath) {
@@ -76,20 +91,34 @@ class OImage extends Component {
           }
         })
         .catch(error => console.log("error in OImage:isExist"));
-    } else this.setState({ source: require("../../images/no-image-featured-image.png") });
+    } else this.setState({ source: placeholderImage });
   }
 
   displayImage() {
+    const { source, loading } = this.state;
+    const { style } = this.props;
+
+    let width = 0;
+    let height = 0;
+
+    if (style[0]) {
+      height = style[0].height;
+      width = style[0].width;
+    } else {
+      width = style.width;
+      height = style.height;
+    }
+
     return (
       <ImageBackground
-        style={this.props.style}
-        source={this.state.source}
+        style={style}
+        source={source}
         onLoadStart={this.onLoadStart}
         onLoadEnd={this.onLoadEnd}
         resizeMethod={this.props.resizeMethod}
         resizeMode={this.props.resizeMode}
       >
-        {this.displaySpinner()}
+        {this.displaySpinner(width, height)}
         {this.props.children}
       </ImageBackground>
     );
@@ -99,10 +128,6 @@ class OImage extends Component {
     return this.displayImage();
   }
 }
-
-const styles = StyleSheet.create({
-  spinner: { flex: 1, width: 100, height: 100 },
-});
 
 function mapStateToProps(state) {
   return {

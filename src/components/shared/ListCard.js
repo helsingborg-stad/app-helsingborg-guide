@@ -179,7 +179,7 @@ const ListCard = ({ title, description, type, numberOfGuides, image, onPress, op
       <View style={styles.container}>
         <View style={styles.imageInfoContainer}>
           <OImage
-            style={styles.image}
+            style={{ height: imageSize, width: imageSize }}
             resizeMode="cover"
             source={{ uri: image }}
             guideID={guideID}
