@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     backgroundColor: Colors.white,
-    bottom: 80,
+    bottom: 110,
     paddingVertical: 4,
     paddingHorizontal: 12,
     borderRadius: 100,
@@ -135,14 +135,12 @@ export default class WelcomeScreen extends Component {
           />
         );
       }
-
       return (
         <NormalInstructionSlide
           key={index} // eslint-disable-line react/no-array-index-key
           content={item.content}
           thumbnailSource={item.thumbnail}
           closeBtnText={btnText}
-          onBtnPress={() => this.skipPress()}
           backgroundImageSource={item.background}
         />
       );
@@ -159,8 +157,6 @@ export default class WelcomeScreen extends Component {
   }
 
   displaySkipBtn() {
-    if (this.state.index === 0) return <View />;
-
     return (
       <View style={styles.btnContainer}>
         <TouchableOpacity onPress={() => this.skipPress()}>
