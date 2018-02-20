@@ -54,6 +54,14 @@ const styles = StyleSheet.create({
       marginBottom: 7,
     }],
   ),
+  smallTitle: StyleSheetUtils.flatten([
+    TextStyles.title, {
+      color: Colors.black,
+      textAlign: "left",
+      marginBottom: 7,
+      fontSize: 18,
+    }],
+  ),
   forChildrenText: StyleSheetUtils.flatten([
     TextStyles.description, {
       color: Colors.darkGrey,
@@ -66,11 +74,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  forChildrenContainerSmallScreen: {
+    flexDirection: "row",
+    alignItems: "center",
+    margin: defaultMargin,
+    marginTop: 0,
+    marginBottom: 0,
+  },
   forChildrenIcon: {
     width: 17,
     height: 17,
   },
   descriptionText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: "#505050",
+      textAlign: "left",
+      fontWeight: "400",
+      fontStyle: "italic",
+      margin: defaultMargin,
+      marginTop: 13,
+      marginBottom: 20,
+    }],
+  ),
+  descriptionTextSmallScreen: StyleSheetUtils.flatten([
     TextStyles.description, {
       color: "#505050",
       textAlign: "left",
@@ -103,6 +129,16 @@ const styles = StyleSheet.create({
       textAlign: "left",
     }],
   ),
+  numberOfGuidesTextSmallScreen: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      margin: defaultMargin,
+      marginTop: 13,
+      marginBottom: 0,
+      color: Colors.purple,
+      fontWeight: "500",
+      textAlign: "left",
+    }],
+  ),
 });
 
 function displayOpeningHours(openingHours) {
@@ -121,7 +157,7 @@ function displayDistance(distance) {
   );
 }
 
-function displayGuideNumber(numberOfGuides, type) {
+function displayGuideNumber(numberOfGuides, type, smallScreen) {
   if (!numberOfGuides || !type) return null;
   let textString;
   const plural = numberOfGuides > 1;
@@ -138,53 +174,64 @@ function displayGuideNumber(numberOfGuides, type) {
   }
 
   return (
-    <Text style={styles.numberOfGuidesText}>{textString}</Text>
+    <Text style={smallScreen ? styles.numberOfGuidesTextSmallScreen : styles.numberOfGuidesText}>{textString}</Text>
   );
 }
 
-function displayForChildren() {
+function displayTitle(title, smallScreen) {
   return (
-    <View style={styles.forChildrenContainer} >
+    <View>
+      <Text
+        style={smallScreen ? styles.smallTitle : styles.title}
+        numberOfLines={2}
+      >
+        {title}
+      </Text>
+    </View>
+  );
+}
+
+function displayForChildren(smallScreen) {
+  return (
+    <View style={smallScreen ? styles.forChildrenContainerSmallScreen : styles.forChildrenContainer} >
       <Image source={iconKids} resizeMode="contain" style={styles.forChildrenIcon} />
       <Text style={styles.forChildrenText}>{LangService.strings.FOR_CHILDREN}</Text>
     </View>
   );
 }
 
-const ListCard = ({ title, description, type, numberOfGuides, image, onPress, openingHours, distance, icon, forChildren, guideID }) => (
-  <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
-    <View style={styles.container}>
-      <View style={styles.imageInfoContainer}>
-        <OImage
-          style={styles.image}
-          resizeMode="cover"
-          source={{ uri: image }}
-          guideID={guideID}
-        />
+const ListCard = ({ title, description, type, numberOfGuides, image, onPress, openingHours, distance,
+  forChildren, guideID, smallScreen }) => (
+    <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
+      <View style={styles.container}>
+        <View style={styles.imageInfoContainer}>
+          <OImage
+            style={styles.image}
+            resizeMode="cover"
+            source={{ uri: image }}
+            guideID={guideID}
+          />
 
-        <View style={styles.infoTextContainer}>
+          <View style={styles.infoTextContainer}>
+            {displayTitle(title, smallScreen)}
+            {displayOpeningHours(openingHours)}
+            {displayDistance(distance)}
+            {smallScreen ? null : displayGuideNumber(numberOfGuides, type, smallScreen)}
+            {forChildren && !smallScreen ? displayForChildren(smallScreen) : null}
+          </View>
+        </View>
+        <View style={styles.descriptionContainer}>
+          {smallScreen ? displayGuideNumber(numberOfGuides, type, smallScreen) : null}
+          {forChildren && smallScreen ? displayForChildren(smallScreen) : null}
           <Text
-            style={styles.title}
-            numberOfLines={2}
+            style={smallScreen ? styles.descriptionTextSmallScreen : styles.descriptionText}
+            numberOfLines={3}
           >
-            {title}
+            {description}
           </Text>
-          {displayOpeningHours(openingHours)}
-          {displayDistance(distance)}
-          {displayGuideNumber(numberOfGuides, type)}
-          {forChildren ? displayForChildren() : null}
         </View>
       </View>
-      <View style={styles.descriptionContainer}>
-        <Text
-          style={styles.descriptionText}
-          numberOfLines={3}
-        >
-          {description}
-        </Text>
-      </View>
-    </View>
-  </TouchableOpacity>
-);
+    </TouchableOpacity>
+  );
 
 export default ListCard;
