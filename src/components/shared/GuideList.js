@@ -8,9 +8,6 @@ import { AnalyticsUtils } from "../../utils";
 import ListCard from "./ListCard";
 import TimingService from "../../services/timingService";
 
-const iconGuide = require("./../../images/iconRundtur.png");
-const iconLocation = require("./../../images/iconPlats.png");
-
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,

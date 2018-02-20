@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Dimensions,
   Image,
   View,
   StyleSheet,
@@ -17,6 +18,8 @@ const iconKids = require("../../images/kids.png");
 
 const imageSize = 120;
 const defaultMargin = 15;
+const screenWidth = Dimensions.get("window").width;
+const smallScreenWidth = 350;
 
 const styles = StyleSheet.create({
   container: {
@@ -52,14 +55,7 @@ const styles = StyleSheet.create({
       color: Colors.black,
       textAlign: "left",
       marginBottom: 7,
-    }],
-  ),
-  smallTitle: StyleSheetUtils.flatten([
-    TextStyles.title, {
-      color: Colors.black,
-      textAlign: "left",
-      marginBottom: 7,
-      fontSize: 18,
+      fontSize: screenWidth < smallScreenWidth ? 18 : 22,
     }],
   ),
   forChildrenText: StyleSheetUtils.flatten([
@@ -73,11 +69,7 @@ const styles = StyleSheet.create({
   forChildrenContainer: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  forChildrenContainerSmallScreen: {
-    flexDirection: "row",
-    alignItems: "center",
-    margin: defaultMargin,
+    margin: screenWidth < smallScreenWidth ? defaultMargin : 0,
     marginTop: 0,
     marginBottom: 0,
   },
@@ -86,17 +78,6 @@ const styles = StyleSheet.create({
     height: 17,
   },
   descriptionText: StyleSheetUtils.flatten([
-    TextStyles.description, {
-      color: "#505050",
-      textAlign: "left",
-      fontWeight: "400",
-      fontStyle: "italic",
-      margin: defaultMargin,
-      marginTop: 13,
-      marginBottom: 20,
-    }],
-  ),
-  descriptionTextSmallScreen: StyleSheetUtils.flatten([
     TextStyles.description, {
       color: "#505050",
       textAlign: "left",
@@ -123,16 +104,8 @@ const styles = StyleSheet.create({
   ),
   numberOfGuidesText: StyleSheetUtils.flatten([
     TextStyles.description, {
-      marginTop: 6,
-      color: Colors.purple,
-      fontWeight: "500",
-      textAlign: "left",
-    }],
-  ),
-  numberOfGuidesTextSmallScreen: StyleSheetUtils.flatten([
-    TextStyles.description, {
-      margin: defaultMargin,
-      marginTop: 13,
+      margin: screenWidth < smallScreenWidth ? defaultMargin : 0,
+      marginTop: screenWidth < smallScreenWidth ? 13 : 6,
       marginBottom: 0,
       color: Colors.purple,
       fontWeight: "500",
@@ -157,7 +130,7 @@ function displayDistance(distance) {
   );
 }
 
-function displayGuideNumber(numberOfGuides, type, smallScreen) {
+function displayGuideNumber(numberOfGuides, type) {
   if (!numberOfGuides || !type) return null;
   let textString;
   const plural = numberOfGuides > 1;
@@ -174,15 +147,15 @@ function displayGuideNumber(numberOfGuides, type, smallScreen) {
   }
 
   return (
-    <Text style={smallScreen ? styles.numberOfGuidesTextSmallScreen : styles.numberOfGuidesText}>{textString}</Text>
+    <Text style={styles.numberOfGuidesText}>{textString}</Text>
   );
 }
 
-function displayTitle(title, smallScreen) {
+function displayTitle(title) {
   return (
     <View>
       <Text
-        style={smallScreen ? styles.smallTitle : styles.title}
+        style={styles.title}
         numberOfLines={2}
       >
         {title}
@@ -213,18 +186,18 @@ const ListCard = ({ title, description, type, numberOfGuides, image, onPress, op
           />
 
           <View style={styles.infoTextContainer}>
-            {displayTitle(title, smallScreen)}
+            {displayTitle(title)}
             {displayOpeningHours(openingHours)}
             {displayDistance(distance)}
-            {smallScreen ? null : displayGuideNumber(numberOfGuides, type, smallScreen)}
-            {forChildren && !smallScreen ? displayForChildren(smallScreen) : null}
+            {smallScreen ? null : displayGuideNumber(numberOfGuides, type)}
+            {forChildren && !smallScreen ? displayForChildren() : null}
           </View>
         </View>
         <View style={styles.descriptionContainer}>
-          {smallScreen ? displayGuideNumber(numberOfGuides, type, smallScreen) : null}
-          {forChildren && smallScreen ? displayForChildren(smallScreen) : null}
+          {smallScreen ? displayGuideNumber(numberOfGuides, type) : null}
+          {forChildren && smallScreen ? displayForChildren() : null}
           <Text
-            style={smallScreen ? styles.descriptionTextSmallScreen : styles.descriptionText}
+            style={styles.descriptionText}
             numberOfLines={3}
           >
             {description}
@@ -232,6 +205,6 @@ const ListCard = ({ title, description, type, numberOfGuides, image, onPress, op
         </View>
       </View>
     </TouchableOpacity>
-  );
+);
 
 export default ListCard;
