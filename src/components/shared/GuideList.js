@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Dimensions,
   FlatList,
   StyleSheet,
 } from "react-native";
@@ -7,14 +8,13 @@ import { AnalyticsUtils } from "../../utils";
 import ListCard from "./ListCard";
 import TimingService from "../../services/timingService";
 
-const iconGuide = require("./../../images/iconRundtur.png");
-const iconLocation = require("./../../images/iconPlats.png");
-
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
   },
 });
+
+const screenWidth = Dimensions.get("window").width;
 
 export default ({ items, navigation }) => {
   function getOpeningHours(location) {
@@ -53,7 +53,6 @@ export default ({ items, navigation }) => {
     let title;
     let pressHandler;
     let openingHours;
-    let icon;
     let guideID;
 
     if (contentType === "location") {
@@ -61,18 +60,15 @@ export default ({ items, navigation }) => {
       title = item.name;
       pressHandler = _navigateToLocation;
       openingHours = getOpeningHours(item);
-      icon = iconLocation;
     } else if (contentType === "trail") {
       image = item.guide_images[0].sizes.thumbnail;
       title = item.title.plain_text;
       pressHandler = _navigateToTrail;
-      icon = iconGuide;
       guideID = item.id;
     } else if (contentType === "guide") {
       image = item.guide_images[0].sizes.thumbnail;
       title = item.title.plain_text;
       pressHandler = _navigateToGuide;
-      icon = iconGuide;
       guideID = item.id;
     }
 
@@ -88,9 +84,9 @@ export default ({ items, navigation }) => {
         onPress={() => pressHandler(item)}
         openingHours={openingHours}
         distance={distance}
-        icon={icon}
         forChildren={item.guide_kids}
         guideID={guideID}
+        smallScreen={screenWidth < 350}
       />
     );
   };
