@@ -1,0 +1,31 @@
+patch-package
+--- a/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapMarker.m
++++ b/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapMarker.m
+@@ -307,8 +307,26 @@ - (void)setPinColor:(UIColor *)pinColor
+ - (void)setZIndex:(NSInteger)zIndex
+ {
+     _zIndexBeforeOpen = zIndex;
+-    _zIndex = _calloutIsOpen ? zIndex + CALLOUT_OPEN_ZINDEX_BASELINE : zIndex;
+     self.layer.zPosition = zIndex;
++    self.layer.name = [@(zIndex) stringValue];
++
++    [self.layer addObserver:self forKeyPath:@"zPosition" options:0 context:NULL];
++}
++
++- (void)observeValueForKeyPath:(NSString *)keyPath
++                         ofObject:(id)object
++                           change:(NSDictionary *)change
++                          context:(void *)context {
++
++           if ([keyPath isEqualToString:@"zPosition"]) {
++               CALayer *layer = object;
++               int zPosition = FLT_MIN;
++               if (layer.name) {
++                   zPosition = layer.name.intValue; 
++               }
++               layer.zPosition = zPosition;
++           }
++
+ }
+ 
+ @end

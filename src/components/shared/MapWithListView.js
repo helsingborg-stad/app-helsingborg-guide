@@ -458,9 +458,9 @@ export default class MapWithListView extends Component {
     const active = activeMarker.id === trailObject.id;
     // Warning: zIndex is bugged on iOS 11!
     // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
-    // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 100 over any other marker.
-    // This is why the active marker ALWAYS should have a zIndex of 100 until this issue is fixed.
-    const zIndex = active ? 100 : trailObject.labelDisplayNumber;
+    // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 999 over any other marker.
+    // This is why the active marker ALWAYS should have a zIndex of 999 until this issue is fixed.
+    const zIndex = active ? 999 : trailObject.labelDisplayNumber;
 
     return (
       <Marker
@@ -468,7 +468,7 @@ export default class MapWithListView extends Component {
         coordinate={location}
         identifier={id}
         image={markerImage}
-        onPress={() => this.onMarkerPressed(trailObject)}
+        onPress={!active ? () => this.onMarkerPressed(trailObject) : null}
         anchor={{ x: 0.5, y: 1 }}
         centerOffset={{ x: 0.5, y: 1 }}
         zIndex={zIndex}
@@ -485,16 +485,16 @@ export default class MapWithListView extends Component {
     const active = activeMarker.id === trailObject.id;
     // Warning: zIndex is bugged on iOS 11!
     // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
-    // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 100 over any other marker.
-    // This is why the active marker ALWAYS should have a zIndex of 100 until this issue is fixed.
-    const zIndex = active ? 100 : trailObject.labelDisplayNumber;
+    // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 999 over any other marker.
+    // This is why the active marker ALWAYS should have a zIndex of 999 until this issue is fixed.
+    const zIndex = active ? 999 : trailObject.labelDisplayNumber;
     return (
       <Marker
         key={id}
         coordinate={location}
         identifier={id}
         image={markerImage}
-        onPress={() => this.onMarkerPressed(trailObject)}
+        onPress={!active ? () => this.onMarkerPressed(trailObject) : null}
         zIndex={zIndex}
       />
     );
