@@ -7,8 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  Linking,
-  Platform,
   NetInfo,
 } from "react-native";
 import PropTypes from "prop-types";
@@ -37,11 +35,7 @@ import {
   Colors,
   TextStyles,
 } from "../../styles/";
-import {
-  StyleSheetUtils,
-  AnalyticsUtils,
-  LocationUtils,
-} from "../../utils/";
+import { UrlUtils, StyleSheetUtils, AnalyticsUtils, LocationUtils } from "../../utils/";
 import IconTextTouchable from "./../shared/IconTextTouchable";
 import LinkTouchable from "./../shared/LinkTouchable";
 
@@ -211,19 +205,6 @@ class LocationDetailsScreen extends Component {
       title: name,
     };
   };
-
-  // TODO extract to some service class
-  static async openUrlIfValid(url) {
-    try {
-      const supported = await Linking.canOpenURL(url);
-      if (supported) {
-        return Linking.openURL(url);
-      }
-    } catch (error) {
-      console.log("An error occured", error);
-    }
-    return null;
-  }
 
   static displayComingSoon(guideGroup) {
     if (!guideGroup.settings.active) {
@@ -432,16 +413,9 @@ class LocationDetailsScreen extends Component {
   }
 
   openGoogleMapApp(lat, lng) {
-    const daddr = `${lat},${lng}`;
-
-    const myPosition = this.props.geolocation;
-    let saddr = "";
-    if (myPosition) saddr = `${myPosition.coords.latitude},${myPosition.coords.longitude}`;
-
-    let url = `google.navigation:q=${daddr}`;
-    if (Platform.OS === "ios") url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${daddr}&saddr=${saddr}`;
-
-    LocationDetailsScreen.openUrlIfValid(url);
+    const directionsUrl = LocationUtils.directionsUrl(lat, lng, this.props.geolocation);
+    console.log(directionsUrl);
+    UrlUtils.openUrlIfValid(directionsUrl, LangService.strings.OPEN_IN_MAPS, "", LangService.strings.CANCEL, LangService.strings.OPEN);
   }
 
   render() {

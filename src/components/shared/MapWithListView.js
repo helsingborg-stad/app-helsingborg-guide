@@ -428,7 +428,7 @@ export default class MapWithListView extends Component {
     const { location } = listItem;
     const { latitude, longitude } = location;
     const directionsUrl = LocationUtils.directionsUrl(latitude, longitude, this.state.geolocation);
-    UrlUtils.openUrlIfValid(directionsUrl);
+    UrlUtils.openUrlIfValid(directionsUrl, LangService.strings.OPEN_IN_MAPS, "", LangService.strings.CANCEL, LangService.strings.OPEN);
   }
 
   markerImageForTrailObject(trailObject) {
