@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ImageBackground, StyleSheet, ActivityIndicator, Platform, View, Image } from "react-native";
+import { ImageBackground, ActivityIndicator, Platform, View } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import fetchService from "../../services/FetchService";
@@ -8,14 +8,9 @@ import Colors from "../../styles/Colors";
 
 const placeholderImage = require("../../images/no-image-featured-image.png");
 
-const styles = StyleSheet.create({
-  spinner: { position: "absolute", flex: 1, width: 100, height: 100 },
-});
-
 class OImage extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
 
     this.state = {
       loading: false,
@@ -57,6 +52,7 @@ class OImage extends Component {
         </View >
       );
     }
+    return null;
   }
 
   loadFile(fullPath) {
@@ -71,7 +67,7 @@ class OImage extends Component {
 
   // not used
   setSource() {
-    const source = this.props.source;
+    const { source } = this.props;
     if (this.state.internet.connected) {
       this.setState({ source });
       return;
@@ -95,11 +91,15 @@ class OImage extends Component {
   }
 
   displayImage() {
-    const { source, loading } = this.state;
+    const { source } = this.state;
     const { style } = this.props;
 
     let width = 0;
     let height = 0;
+
+    // TODO: Make all the images follow the same style structure.
+    // TODO: Merge this script with image_view.js.
+    // TODO: Update Slynga thumbnails to be loaded through this script.
 
     if (style[0]) {
       height = style[0].height;
