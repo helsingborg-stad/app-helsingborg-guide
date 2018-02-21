@@ -57,7 +57,15 @@ function forKidsView() {
 
 function displayImage(imageSource, id) {
   return (
-    <OImage style={styles.thumbnail} source={imageSource} resizeMode="cover" guideID={id} />
+    <OImage
+      style={{
+        width: MAX_IMAGE_WIDTH,
+        height: (MAX_IMAGE_WIDTH / 16) * 9,
+      }}
+      source={imageSource}
+      resizeMode="cover"
+      guideID={id}
+    />
   );
 }
 

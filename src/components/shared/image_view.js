@@ -51,8 +51,8 @@ export default class ImageView extends Component {
     if (!uri || !uri.uri) uri = require("../../images/no-image-featured-image.png");
 
     // Using full screen width and a 16:9 aspect ratio
-    displayWidth = Dimensions.get("window").width;
-    displayHeight = (displayWidth / 16) * 9;
+    let displayWidth = Dimensions.get("window").width;
+    let displayHeight = (displayWidth / 16) * 9;
 
     // If height and/or width is defined, use that instead
     if (this.props.width) { displayWidth = this._getOptWidth(this.props.width); }
