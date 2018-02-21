@@ -97,7 +97,7 @@ const initialLayout = {
 };
 
 // The lists seem to be generated 2-4 times every time component is mounted. Keeping them around should reduce load times.
-const availableLists = [];
+// const availableLists = [];
 
 class GuideListScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -138,7 +138,8 @@ class GuideListScreen extends Component {
 
     if (contentType === "location") {
       for (let i = 0; i < subLocations.length; i += 1) {
-        if (subLocations[i].guidegroup === null) { console.log(`Guidegroup is undefined in ${subLocations[i].title.plain_text}`); } else if (subLocations[i].guidegroup[0] !== null && subLocations[i].guidegroup[0].id === id) { numberOfGuides += 1; }
+        if (subLocations[i].guidegroup === null) { console.log(`Guidegroup is undefined in ${subLocations[i].title.plain_text}`); } else if
+        (subLocations[i].guidegroup[0] !== null && subLocations[i].guidegroup[0].id === id) { numberOfGuides += 1; }
       }
     } else {
       numberOfGuides = Object.keys(item.contentObjects).length;
@@ -185,7 +186,7 @@ class GuideListScreen extends Component {
       const routes = [];
       let { index } = this.state;
 
-      this.availableLists = [];
+      // this.availableLists = [];
 
       categoryTypes.forEach((element) => {
         routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
@@ -196,7 +197,7 @@ class GuideListScreen extends Component {
     }
 
     if (LangService.forceNavigationUpdate) {
-      this.availableLists = [];
+      // this.availableLists = [];
       this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
       LangService.forceNavigationUpdate = false;
     }
@@ -255,12 +256,14 @@ class GuideListScreen extends Component {
       return null;
     }
 
+    // BP: Temporarily removing available lists until we figure out how to design this part of the code.
+
     // Check if we've already created the list, and return it if we have.
-    for (let i = 0; i < availableLists.length; i += 1) {
+    /* for (let i = 0; i < availableLists.length; i += 1) {
       if (availableLists[i].title === route.title) {
         return this._getList(availableLists[i]);
       }
-    }
+    } */
 
     // Filter guides and locations
     categoryType.items.forEach((element) => {
@@ -306,7 +309,7 @@ class GuideListScreen extends Component {
       items,
       mapItems: MapWithListView.createMapItemsFromNavItems(items),
     };
-    availableLists.push(newList);
+    // availableLists.push(newList);
     return this._getList(newList);
   }
 
