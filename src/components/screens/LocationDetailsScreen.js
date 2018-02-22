@@ -45,6 +45,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
   },
+  barButtonItem: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    opacity: 0.75,
+    paddingHorizontal: 58,
+
+  },
   bodyContainer: {
     flex: 1,
     alignItems: "stretch",
@@ -203,9 +212,11 @@ class LocationDetailsScreen extends Component {
     const name = location ? location.name : undefined;
     return {
       title: name,
+      headerRight: (
+        <View style={styles.barButtonItem} />
+      ),
     };
-  };
-
+  }
   static displayComingSoon(guideGroup) {
     if (!guideGroup.settings.active) {
       return (
