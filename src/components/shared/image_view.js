@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
 });
 
 export default class ImageView extends Component {
-
   constructor(props) {
     super(props);
 
@@ -46,17 +45,18 @@ export default class ImageView extends Component {
   }
 
   displayImage() {
-    //If no source image is defined, use placeholder image
+    // If no source image is defined, use placeholder image
     let uri = this.props.source;
+    const { guideID } = this.props;
     if (!uri || !uri.uri) uri = require("../../images/no-image-featured-image.png");
 
-    //Using full screen width and a 16:9 aspect ratio
-    displayWidth = Dimensions.get("window").width;
-    displayHeight = (displayWidth/16)*9;
+    // Using full screen width and a 16:9 aspect ratio
+    let displayWidth = Dimensions.get("window").width;
+    let displayHeight = (displayWidth / 16) * 9;
 
-    //If height and/or width is defined, use that instead
-    if(this.props.width) {displayWidth = this._getOptWidth(this.props.width)}
-    if(this.props.height) {displayHeight = this._getOptHeight(this.props.height)}
+    // If height and/or width is defined, use that instead
+    if (this.props.width) { displayWidth = this._getOptWidth(this.props.width); }
+    if (this.props.height) { displayHeight = this._getOptHeight(this.props.height); }
 
     return (
       <OImage
@@ -73,6 +73,7 @@ export default class ImageView extends Component {
         blurRadius={this.props.blur}
         onLoadStart={this.onLoadStart}
         onLoadEnd={this.onLoadEnd}
+        guideID={guideID}
       >
         {this.displaySpinner()}
         {this.props.children}

@@ -24,6 +24,7 @@ export default StyleSheet.create({
     fontWeight: "300",
     lineHeight: 23.0,
     textAlign: "center",
+    alignSelf: "center",
     color: Colors.white,
   },
   tabBarLabel: {

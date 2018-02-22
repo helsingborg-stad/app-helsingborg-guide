@@ -9,6 +9,13 @@ const MIME = ["jpeg", "jpg", "png", "mp3", "mp4", "m4a"];
 
 const basePath = RNFetchBlob.fs.dirs.CacheDir;
 
+function stripTrailingSlash(str) {
+  if (str.substr(-1) === "/") {
+    return str.substr(0, str.length - 1);
+  }
+  return str;
+}
+
 const FetchService = {
   isString(data) {
     return typeof data === "string";
@@ -63,23 +70,28 @@ const FetchService = {
     return _.uniq(paths);
   },
 
-  fetch(url) {
+  fetch(url, id) {
     const config = {
       fileCache: true,
-      path: `${basePath}/${url}`,
+      path: `${basePath}/${id}/${url}`,
     };
 
     return RNFetchBlob.config(config).fetch("GET", url);
   },
 
-  isExist(path) {
-    const fullPath = FetchService.getFullPath(path);
-    return RNFetchBlob.fs.exists(Platform.OS === "android" ? `file://${fullPath}` : fullPath);
+  isExist(path, guideID) {
+    let fullPath = FetchService.getFullPath(`${path}`);
+    if (guideID) { fullPath = FetchService.getFullPath(`${guideID}/${path}`); }
+
+    fullPath = stripTrailingSlash(fullPath);
+    const exists = RNFetchBlob.fs.exists(Platform.OS === "android" ? `file://${fullPath}` : fullPath);
+    return exists;
   },
 
-  getFullPath(_path) {
+  getFullPath(_path, guideID) {
     let path = _path;
     if (!path) path = "";
+    if (guideID) { return `${basePath}/${guideID}/${path}`; }
     return `${basePath}/${path}`;
   },
 };

@@ -42,11 +42,19 @@ module.exports = () => {
       .then(navItems => navItems);
   }
 
+  function getPointPropertiesByGuide(id) {
+    return fetch(`${_API_BASE}/property?post=${id}`)
+      .then(response => response.json())
+      .then(guide => guide)
+      .catch(error => error);
+  }
+
   return {
     getAllGroups,
     getGroupById,
     getGuidesByParent,
     getAllGuides,
     fetchNavigation,
+    getPointPropertiesByGuide,
   };
 };

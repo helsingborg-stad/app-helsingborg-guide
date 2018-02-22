@@ -24,3 +24,11 @@ export function taskProgressed(taskMeta) {
 export function taskCompleted(taskMeta) {
   return { type: types.DOWNLOAD_TASK_COMPLETED, taskMeta };
 }
+
+export function closedInfo(taskMeta) {
+  return { type: types.DOWNLOAD_INFO_CLOSED, taskMeta };
+}
+
+export function setDownloadDataVersion(version) {
+  return { type: types.SET_DOWNLOAD_DATA_VERSION, version: { version } };
+}

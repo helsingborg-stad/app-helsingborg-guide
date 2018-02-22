@@ -4,17 +4,15 @@ import Icon from "react-native-vector-icons/Ionicons";
 import OImage from "./image";
 
 const FULL_WIDTH = Dimensions.get("window").width;
-const IMAGE_WIDTH = (FULL_WIDTH / 2) - (FULL_WIDTH / 5);
+const IMAGE_WIDTH = (FULL_WIDTH / 2) - (FULL_WIDTH / 10);
 
 const styles = StyleSheet.create({
   thumbnail: {
     flex: 1,
     borderColor: "#ebebeb",
     backgroundColor: "white",
-    padding: 5,
     justifyContent: "flex-start",
     alignItems: "center",
-    height: IMAGE_WIDTH + 100,
   },
   image: {
     width: IMAGE_WIDTH,
@@ -44,7 +42,7 @@ export default class ContentThumbnail extends Component {
     const checkMark = this.props.checked ? checkMarkIcon : null;
 
     return (
-      <OImage style={[styles.image, {}]} source={this.props.imageSource}>
+      <OImage style={[{ width: IMAGE_WIDTH, height: IMAGE_WIDTH }, styles.image]} source={this.props.imageSource} guideID={this.props.guideID}>
         {checkMark}
       </OImage>
     );

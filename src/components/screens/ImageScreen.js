@@ -39,11 +39,11 @@ export default class ImageScreen extends Component {
   }
 
   setSource() {
-    const { image } = this.props.navigation.state.params;
-    const uri = image.sizes.large;
+    const { image, guideID } = this.props.navigation.state.params;
+    const uri = encodeURI(image.sizes.large);
     if (typeof uri === "string") {
-      fetchService.isExist(uri).then((exist) => {
-        const fullPath = fetchService.getFullPath(uri);
+      fetchService.isExist(uri, guideID).then((exist) => {
+        const fullPath = fetchService.getFullPath(uri, guideID);
         if (exist) {
           this.setState({ source: { uri: `file://${fullPath}` } });
         } else {
@@ -80,7 +80,6 @@ export default class ImageScreen extends Component {
             minimumZoomScale={MIN_SCALE}
             maximumZoomScale={MAX_SCALE}
             androidScaleType="centerInside"
-            onLoad={() => { }}
             style={{ flex: 1, width: width / scale, height: height / scale }}
           />
         }

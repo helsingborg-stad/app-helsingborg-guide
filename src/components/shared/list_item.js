@@ -9,13 +9,13 @@ import LangService from "../../services/langService";
 import { Colors, TextStyles } from "../../styles/";
 import { StyleSheetUtils } from "../../utils/";
 
-//The style bodyContainer of LocationDetailScreen has a padding of 20 on each side, hence the "- 40" part.
+// The style bodyContainer of LocationDetailScreen has a padding of 20 on each side, hence the "- 40" part.
 const MAX_IMAGE_WIDTH = Dimensions.get("window").width - 40;
 
 const styles = StyleSheet.create({
-  thumbnail: { 
-    width: MAX_IMAGE_WIDTH, 
-    height: (MAX_IMAGE_WIDTH/16)*9
+  thumbnail: {
+    width: MAX_IMAGE_WIDTH,
+    height: (MAX_IMAGE_WIDTH / 16) * 9,
   },
   titleContainer: { flex: 1, padding: 15 },
   title: StyleSheetUtils.flatten([
@@ -55,9 +55,17 @@ function forKidsView() {
   );
 }
 
-function displayImage(imageSource) {
+function displayImage(imageSource, id) {
   return (
-    <OImage style={styles.thumbnail} source={imageSource} resizeMode="cover" />
+    <OImage
+      style={{
+        width: MAX_IMAGE_WIDTH,
+        height: (MAX_IMAGE_WIDTH / 16) * 9,
+      }}
+      source={imageSource}
+      resizeMode="cover"
+      guideID={id}
+    />
   );
 }
 
@@ -67,10 +75,10 @@ function renderDate(startDate, endDate) {
   return <Text style={styles.date} numberOfLines={1}>{`${startDate} - ${endDate}`}</Text>;
 }
 
-export default function ListItem({ forKids, title, description, startDate, endDate, imageSource }) {
+export default function ListItem({ forKids, title, description, startDate, endDate, imageSource, id }) {
   return (
     <View>
-      <View>{displayImage(imageSource)}</View>
+      <View>{displayImage(imageSource, id)}</View>
       <View>
         <View style={styles.titleContainer}>
           <Text style={styles.title} numberOfLines={1}>{title}</Text>

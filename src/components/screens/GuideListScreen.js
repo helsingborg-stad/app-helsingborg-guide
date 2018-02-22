@@ -15,6 +15,7 @@ import {
   LocationUtils,
   StyleSheetUtils,
 } from "./../../utils";
+import downloadManager from "../../services/DownloadTasksManager";
 import LangService from "../../services/langService";
 import {
   Colors,
@@ -34,15 +35,23 @@ const listIcon = require("../../images/iconList.png");
 
 const styles = StyleSheet.create({
   barButtonItem: {
+    flex: 1,
     flexDirection: "row",
-    height: 44,
     alignItems: "center",
     justifyContent: "center",
-    marginHorizontal: 14,
     opacity: 0.75,
+    paddingHorizontal: 14,
+
   },
+  barButtonImage:
+    {
+      flex: 2,
+      maxHeight: 44,
+      maxWidth: 44,
+    },
   barButtonItemText: StyleSheetUtils.flatten([
     TextStyles.description, {
+      flex: 1,
       color: Colors.white,
       marginRight: 8,
     },
@@ -59,7 +68,7 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     backgroundColor: Colors.purple,
-    elevation: 8,
+    elevation: 0,
   },
   tabStyle: {
     width: screenWidth / 3,
@@ -87,6 +96,9 @@ const initialLayout = {
   width: Dimensions.get("window").width,
 };
 
+// The lists seem to be generated 2-4 times every time component is mounted. Keeping them around should reduce load times.
+// const availableLists = [];
+
 class GuideListScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.APP_NAME;
@@ -102,7 +114,7 @@ class GuideListScreen extends Component {
           style={styles.barButtonItem}
         >
           <Text style={styles.barButtonItemText}>{itemText}</Text>
-          <Image source={showMap ? listIcon : mapIcon} />
+          <Image style={styles.barButtonImage} source={showMap ? listIcon : mapIcon} />
         </TouchableOpacity>
       ),
       headerLeft: (
@@ -110,7 +122,7 @@ class GuideListScreen extends Component {
           onPress={() => navigation.navigate("SettingsScreen")}
           style={styles.barButtonItem}
         >
-          <Image source={settingsIcon} />
+          <Image style={styles.barButtonImage} source={settingsIcon} />
         </TouchableOpacity>
       ),
     });
@@ -125,7 +137,10 @@ class GuideListScreen extends Component {
     let numberOfGuides = 0;
 
     if (contentType === "location") {
-      numberOfGuides = subLocations.filter(subLocationItem => subLocationItem.guidegroup[0].id === id).length;
+      for (let i = 0; i < subLocations.length; i += 1) {
+        if (subLocations[i].guidegroup === null) { console.log(`Guidegroup is undefined in ${subLocations[i].title.plain_text}`); } else if
+        (subLocations[i].guidegroup[0] !== null && subLocations[i].guidegroup[0].id === id) { numberOfGuides += 1; }
+      }
     } else {
       numberOfGuides = Object.keys(item.contentObjects).length;
     }
@@ -162,21 +177,27 @@ class GuideListScreen extends Component {
 
   componentDidMount() {
     this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
+    downloadManager.checkForInvalidData(this.props.downloads, this.props.downloadDataVersion);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { categoryTypes } = nextProps;
-    const routes = [];
-    let { index } = this.state;
+    if (this.props.categoryTypes !== nextProps.categoryTypes) {
+      const { categoryTypes } = nextProps;
+      const routes = [];
+      let { index } = this.state;
 
-    categoryTypes.forEach((element) => {
-      routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
-    });
+      // this.availableLists = [];
 
-    if (index >= routes.length) { index = 0; }
-    this.setState({ routes, index });
+      categoryTypes.forEach((element) => {
+        routes.push({ key: `${element.id}`, title: element.name, categoryType: element });
+      });
+
+      if (index >= routes.length) { index = 0; }
+      this.setState({ routes, index });
+    }
 
     if (LangService.forceNavigationUpdate) {
+      // this.availableLists = [];
       this.props.navigation.setParams({ toggleMap: this.toggleMap, showMap: this.state.showMap });
       LangService.forceNavigationUpdate = false;
     }
@@ -209,12 +230,11 @@ class GuideListScreen extends Component {
       renderLabel={this._renderTabBarLabel}
       indicatorStyle={styles.tabBarIndicator}
       tabStyle={styles.tabStyle}
-      scrollEnabled
       {...props}
     />)
 
   _renderScene = ({ route }) => {
-    // If we're still fetching, show the activity indicator instead
+    // Activity indicator appears to have different behavior on ios and android based on when it's rendered in relation to TabViewAnimated. Android version in render()
     if (ios) {
       const { isFetching } = this.props;
       if (isFetching) {
@@ -226,36 +246,39 @@ class GuideListScreen extends Component {
       }
     }
 
-    const { showMap, index, routes } = this.state;
+    const { index, routes } = this.state;
+    const { guides, locations, currentLocation, subLocations } = this.props;
+    const { categoryType } = route;
+    const items = [];
 
+    // Do not render pages that are to far away from the current page
     if (Math.abs(index - routes.indexOf(route)) > 2) {
-      // Do not render pages that are to far away from the current page
       return null;
     }
 
-    const { guides, locations, navigation, currentLocation, subLocations } = this.props;
-    const { categoryType } = route;
+    // BP: Temporarily removing available lists until we figure out how to design this part of the code.
 
-    const items = [];
-    // filter guides and locations
+    // Check if we've already created the list, and return it if we have.
+    /* for (let i = 0; i < availableLists.length; i += 1) {
+      if (availableLists[i].title === route.title) {
+        return this._getList(availableLists[i]);
+      }
+    } */
+
+    // Filter guides and locations
     categoryType.items.forEach((element) => {
-      switch (element.type) {
-        case "guide":
-        {
+      if (element != null) {
+        if (element.type === "guide") {
           const result = guides.find(guide => guide.id === element.id);
           if (result) items.push(result);
-          break;
-        }
-        case "guidegroup":
-        {
+        } else if (element.type === "guidegroup") {
           const loc = locations.find(l => l.id === element.id);
           if (loc) items.push(loc);
-          break;
         }
-        default:
       }
     });
 
+    // If there aren't any items in the array, then that means that there isn't any available object of the selected type in the selected language.
     if (items.length === 0) {
       return (
         <Text style={styles.contentMissingText}>
@@ -264,19 +287,8 @@ class GuideListScreen extends Component {
       );
     }
 
-    // number of guides and descriptions
-    items.forEach((item) => {
-      item.description = GuideListScreen.descriptionForItem(item, locations);
-      item.numberOfGuides = GuideListScreen.numberOfGuidesForItem(item, subLocations);
-    });
-
-    if (showMap) {
-      const mapItems = MapWithListView.createMapItemsFromNavItems(items);
-      return (<MapWithListView items={mapItems} navigation={navigation} />);
-    }
-
+    // If, and only if, we know the location of the user, sort the list of items based on distance from the user. TODO: Allow re-sorting the list if user position changes.
     if (currentLocation) {
-      // calculate distances from current location
       const { coords } = currentLocation;
       items.forEach((element) => {
         const embeddedLocations = GuideListScreen.getEmbeddedLocationsFromLocation(element);
@@ -284,12 +296,34 @@ class GuideListScreen extends Component {
       });
       items.sort((a, b) => a.distance - b.distance);
     }
-    return (<GuideList items={items} navigation={navigation} />);
+
+    // Set the description and information about sub-guides for each object.
+    items.forEach((item) => {
+      item.description = GuideListScreen.descriptionForItem(item, locations);
+      item.numberOfGuides = GuideListScreen.numberOfGuidesForItem(item, subLocations);
+    });
+
+    // Combine all the information into a new object, and save it for next time this screen is rendered.
+    const newList = {
+      title: route.title,
+      items,
+      mapItems: MapWithListView.createMapItemsFromNavItems(items),
+    };
+    // availableLists.push(newList);
+    return this._getList(newList);
+  }
+
+  _getList(listItem) {
+    const { showMap } = this.state;
+    const { navigation } = this.props;
+    if (showMap) { return (<MapWithListView items={listItem.mapItems} navigation={navigation} />); }
+    return (<GuideList items={listItem.items} navigation={navigation} />);
   }
 
   render() {
     const { routes } = this.state;
 
+    // TabViewAnimated bugs out if there's only 1 tab
     if (routes.length < 2) {
       return (
         <View>
@@ -300,6 +334,7 @@ class GuideListScreen extends Component {
       );
     }
 
+    // Activity indicator appears to have different behavior on ios and android based on when it's rendered in relation to TabViewAnimated. Ios version in _renderScene()
     if (!ios) {
       const { isFetching } = this.props;
       if (isFetching) {
@@ -319,6 +354,7 @@ class GuideListScreen extends Component {
         renderScene={this._renderScene}
         onIndexChange={this._handleIndexChange}
         initialLayout={initialLayout}
+        swipeEnabled={!this.state.showMap}
       />
     );
   }
@@ -338,6 +374,8 @@ function mapStateToProps(state) {
     guides,
     subLocations,
     currentLocation: state.geolocation,
+    downloads: state.downloads,
+    downloadDataVersion: state.downloadDataVersion,
   };
 }
 

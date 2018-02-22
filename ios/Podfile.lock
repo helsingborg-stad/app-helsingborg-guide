@@ -1,15 +1,16 @@
 PODS:
-  - Firebase/Core (4.7.0):
-    - FirebaseAnalytics (= 4.0.5)
-    - FirebaseCore (= 4.0.12)
-  - FirebaseAnalytics (4.0.5):
+  - Firebase/Core (4.9.0):
+    - FirebaseAnalytics (= 4.0.9)
+    - FirebaseCore (= 4.0.15)
+  - FirebaseAnalytics (4.0.9):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.12):
+  - FirebaseCore (4.0.15):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseInstanceID (2.0.7)
+  - FirebaseInstanceID (2.0.9):
+    - FirebaseCore (~> 4.0)
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
@@ -28,7 +29,11 @@ PODS:
   - React/cxxreact_legacy (0.50.3):
     - React/jschelpers_legacy
   - React/jschelpers_legacy (0.50.3)
-  - RNFirebase (3.1.1):
+  - RNFirebase (3.2.2):
+    - React
+  - RNShare (1.0.24):
+    - React
+  - RNSVG (5.5.1):
     - React
   - yoga (0.50.3.React)
 
@@ -37,6 +42,8 @@ DEPENDENCIES:
   - React/BatchedBridge (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
   - RNFirebase (from `../node_modules/react-native-firebase`)
+  - RNShare (from `../node_modules/react-native-share`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
@@ -44,20 +51,26 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native
   RNFirebase:
     :path: ../node_modules/react-native-firebase
+  RNShare:
+    :path: ../node_modules/react-native-share
+  RNSVG:
+    :path: ../node_modules/react-native-svg
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
-  Firebase: dbfb98ccec2dcfcd21ab9cc1b4981a3f3c8c5e26
-  FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
-  FirebaseCore: 6cf108b63997bc08c04a1ffa55a3ac0d71a59ffc
-  FirebaseInstanceID: 148c25c986c8699e67304b114e365713dce467f2
+  Firebase: 632216af3ed7f31e3be34776947fdc7546cfb572
+  FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
+  FirebaseCore: 3bd047463058fa6b5d312c97502c52e45401cdfb
+  FirebaseInstanceID: d2058a35e9bebda1b6dd42486b84917bde552a9d
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  React: 0ba6cae888dc82dc47d6d5f3090615e1b5f6f3e7
-  RNFirebase: 30522211772f22affff6f3a61981110852d2668b
-  yoga: faecc6be81ca7823ccbb470b93a1b228499fa1c0
+  React: 541ba768b9855e10cdc76f55427a5cd0653ca806
+  RNFirebase: 80482ff9a73779ce5d6e35c94eb487b06c292fc9
+  RNShare: 40c92dc26432c51019b94dee6e5eb5097d75c794
+  RNSVG: 6de4fb571bf91b9c67910a8d641532349bddf90a
+  yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
 
-PODFILE CHECKSUM: 10da0d077b48ee09b1dd6b4ee05039be8fa03f2e
+PODFILE CHECKSUM: ad1996ffed880fa371ca48ec1180ac163e408fd6
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

@@ -23,7 +23,7 @@ const screenHeight = Dimensions.get("window").height;
 
 const defaultMargin = 17;
 const closeButtonSize = 26;
-const scrollViewMaxHeight = screenHeight - 300; // magic number here, but roughly (listitem + header + margins)
+const scrollViewMaxHeight = screenHeight - 350; // magic number here, but roughly (listitem + header + margins)
 
 const styles = StyleSheet.create({
   container: {
@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     maxHeight: scrollViewMaxHeight,
+  },
+  scrollViewNoTitle: {
+    maxHeight: scrollViewMaxHeight,
+    width: "90%",
   },
   closeButtonContainer: {
     position: "absolute",
@@ -71,16 +75,37 @@ const styles = StyleSheet.create({
   ]),
 });
 
+function renderTitle(trailInformation) {
+  if (trailInformation.title) {
+    return (<Text style={styles.titleText}>{trailInformation.title} </Text>);
+  }
+  return null;
+}
 
-const MapInformationOverlay = ({ trailInformation, onPressFunction }) => (
-  <View style={styles.container}>
-    <Text style={styles.titleText}>{trailInformation.title} </Text>
-    <TouchableOpacity onPress={onPressFunction} style={styles.closeButtonContainer}>
-      <Image style={styles.closeButton} source={closeIcon} />
-    </TouchableOpacity>
-    <ScrollView style={styles.scrollView}>
+function renderDescription(trailInformation) {
+  if (trailInformation.title) {
+    return (<ScrollView style={styles.scrollView}>
       <Text style={styles.descriptionText}>{trailInformation.description}</Text>
-    </ScrollView>
+    </ScrollView>);
+  }
+  return (<ScrollView style={styles.scrollViewNoTitle}>
+    <Text style={styles.descriptionText}>{trailInformation.description}</Text>
+  </ScrollView>);
+}
+
+const MapInformationOverlay = ({ trailInformation, onPressFunction, downloadComponent }) => (
+  <View style={styles.container}>
+    <View style={styles.flexing}>
+      {renderTitle(trailInformation)}
+      <TouchableOpacity onPress={onPressFunction} style={styles.closeButtonContainer}>
+        <Image style={styles.closeButton} source={closeIcon} />
+      </TouchableOpacity>
+      {renderDescription(trailInformation)}
+
+    </View>
+    <View style={styles.downloadContainer}>
+      {downloadComponent ? downloadComponent() : null}
+    </View>
   </View>
 );
 

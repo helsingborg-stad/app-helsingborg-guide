@@ -7,8 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  Linking,
-  Platform,
+  NetInfo,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
@@ -18,32 +17,42 @@ import {
   connect,
 } from "react-redux";
 import * as _ from "lodash";
-import ViewContainer from "../shared/view_container";
-import ImageView from "../shared/image_view";
-import ListItem from "../shared/list_item";
+
 import DistanceView from "../shared/DistanceView";
-import TimingService from "../../services/timingService";
+import ImageView from "../shared/image_view";
 import LangService from "../../services/langService";
-import SlimNotificationBar from "../shared/SlimNotificationBar";
+import ListItem from "../shared/list_item";
 import NoInternetText from "../shared/noInternetText";
+import SlimNotificationBar from "../shared/SlimNotificationBar";
+import SVGView from "../shared/SVGView";
+import TimingService from "../../services/timingService";
+import ViewContainer from "../shared/view_container";
+
 import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
+import * as pointPropertiesActions from "../../actions/pointPropertiesActions";
 import {
   Colors,
   TextStyles,
 } from "../../styles/";
-import {
-  StyleSheetUtils,
-  AnalyticsUtils,
-  LocationUtils,
-} from "../../utils/";
-import DirectionsTouchable from "./../shared/DirectionsTouchable";
+import { UrlUtils, StyleSheetUtils, AnalyticsUtils, LocationUtils } from "../../utils/";
+import IconTextTouchable from "./../shared/IconTextTouchable";
+import LinkTouchable from "./../shared/LinkTouchable";
 
 const styles = StyleSheet.create({
   scrollView: {},
   imageViewContainer: {
     flex: 1,
     backgroundColor: Colors.white,
+  },
+  barButtonItem: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    opacity: 0.75,
+    paddingHorizontal: 58,
+
   },
   bodyContainer: {
     flex: 1,
@@ -71,7 +80,8 @@ const styles = StyleSheet.create({
   },
   articleContainer: {
     flex: 4,
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
   },
   articleDescriptionText: StyleSheetUtils.flatten([
     TextStyles.description, {
@@ -82,10 +92,43 @@ const styles = StyleSheet.create({
     TextStyles.defaultFontFamily, {
       fontSize: 20,
       lineHeight: 21,
-      marginVertical: 10,
+      paddingBottom: 10,
       color: Colors.black,
     }],
   ),
+  pointPropertiesSectionContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    paddingTop: 10,
+    paddingBottom: 20,
+  },
+  pointPropertyContainer: {
+    flex: 0,
+    flexDirection: "row",
+    flexGrow: 1,
+    width: "40%",
+    paddingTop: 8,
+    alignItems: "center",
+  },
+  pointPropertyText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "500",
+      lineHeight: 24.0,
+      paddingLeft: 9,
+      color: Colors.warmGrey,
+    }],
+  ),
+  divider: {
+    height: 2,
+    backgroundColor: Colors.listBackgroundColor,
+    marginTop: 30,
+  },
+  pointPropertyIcon: {
+    width: 30,
+    height: 30,
+  },
   subLocationsHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 20,
@@ -156,10 +199,12 @@ class LocationDetailsScreen extends Component {
     subLocations: PropTypes.array.isRequired,
     internet: PropTypes.bool.isRequired,
     geolocation: PropTypes.any,
+    pointProperties: PropTypes.object,
   }
 
   static defaultProps = {
     geolocation: null,
+    pointProperties: null,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -167,22 +212,11 @@ class LocationDetailsScreen extends Component {
     const name = location ? location.name : undefined;
     return {
       title: name,
+      headerRight: (
+        <View style={styles.barButtonItem} />
+      ),
     };
-  };
-
-  // TODO extract to some service class
-  static async openUrlIfValid(url) {
-    try {
-      const supported = await Linking.canOpenURL(url);
-      if (supported) {
-        return Linking.openURL(url);
-      }
-    } catch (error) {
-      console.log("An error occured", error);
-    }
-    return null;
   }
-
   static displayComingSoon(guideGroup) {
     if (!guideGroup.settings.active) {
       return (
@@ -205,7 +239,7 @@ class LocationDetailsScreen extends Component {
   }
 
   static displayDistance(currentLocation, locations) {
-    if(!currentLocation) return null;
+    if (!currentLocation) return null;
     const { coords } = currentLocation;
     const distance = LocationUtils.getShortestDistance(coords, locations);
     if (!distance) return null;
@@ -217,13 +251,22 @@ class LocationDetailsScreen extends Component {
   constructor(props) {
     super(props);
 
-    const { subLocations, internet, location } = this.props;
+    const { subLocations, internet, location, pointProperties } = this.props;
 
     this.state = {
       location,
       sublocations: subLocations,
       internet,
+      pointProperties,
     };
+  }
+
+  componentDidMount() {
+    NetInfo.isConnected.fetch().then((isConnected) => {
+      if (isConnected) {
+        this.props.pointPropertiesActions.fetchPointProperties(this.state.location._embedded.location[0].id);
+      }
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -232,14 +275,24 @@ class LocationDetailsScreen extends Component {
         sublocations: nextProps.subLocations,
       });
     }
-
+    if (nextProps.pointProperties !== this.state.pointProperties) { this.setState({ pointProperties: nextProps.pointProperties }); }
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
+
+    let webUrl = null;
+    if (this.state.location._embedded.location[0].links) {
+      this.state.location._embedded.location[0].links.forEach((element) => {
+        if (element.service === "webpage") {
+          webUrl = element.url;
+        }
+      });
+      this.setState({ webUrl });
+    }
   }
 
   _goToSubLocationScene(subLocation) {
     const { navigate } = this.props.navigation;
-    const { name } = subLocation.guidegroup[0];
-    AnalyticsUtils.logEvent("view_guide", { id: subLocation.id, name: subLocation.slug });
+    const name = subLocation.title.plain_text;
+    AnalyticsUtils.logEvent("view_guide", { name: subLocation.slug });
     navigate("GuideDetailsScreen", {
       title: name,
       id: subLocation.id,
@@ -264,6 +317,7 @@ class LocationDetailsScreen extends Component {
               startDate={subLocation.guide_date_start}
               endDate={subLocation.guide_date_end}
               forKids={forKids}
+              id={subLocation.id}
             />
           </TouchableOpacity>
         );
@@ -280,6 +334,42 @@ class LocationDetailsScreen extends Component {
       </View>
     );
     return article;
+  }
+
+  displayWebPage() {
+    if (!this.state.webUrl) { return null; }
+
+    const webLink = (<LinkTouchable
+      title={this.state.webUrl.replace(/^https?:\/\//, "")}
+      onPress={() => {
+        this.goToLink(this.state.webUrl, this.state.webUrl);
+      }}
+    />);
+
+    return webLink;
+  }
+
+  displayAccessibility() {
+    if (!this.state.pointProperties || !this.state.pointProperties.items || this.state.pointProperties.items.length < 1) { return null; }
+
+    if (!this.state.location || this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
+
+    if (!this.state.internet) { return null; }
+
+    const accessibility = (
+      <View>
+        <View style={styles.divider} />
+        <View style={styles.pointPropertiesSectionContainer}>
+          {this.state.pointProperties.items.map(element =>
+            (<View style={styles.pointPropertyContainer} key={element.id} >
+              <SVGView logoType={element.icon} placeHolder="" customStyle={styles.pointPropertyIcon} />
+              <Text style={styles.pointPropertyText} >{element.name}</Text>
+            </View>),
+          )}
+        </View>
+      </View>
+    );
+    return accessibility;
   }
 
   display() {
@@ -305,13 +395,19 @@ class LocationDetailsScreen extends Component {
                   {LocationDetailsScreen.displayOpeningTime(this.state.location)}
                   {LocationDetailsScreen.displayDistance(this.props.geolocation, this.state.location._embedded.location)}
                 </View>
-                <DirectionsTouchable onPress={() => {
-                  this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
-                }}
+                <IconTextTouchable
+                  iconName="directions"
+                  text={LangService.strings.DIRECTIONS}
+                  onPress={() => {
+                    this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
+                  }}
                 />
               </View>
               {this.displaySubLocations()}
               {this.displayArticle()}
+              {this.displayWebPage()}
+
+              {this.displayAccessibility()}
             </View>
           </ScrollView>
         </ViewContainer>
@@ -321,17 +417,16 @@ class LocationDetailsScreen extends Component {
     return null;
   }
 
+  goToLink(url, title) {
+    const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("open_url", { title });
+    navigate("WebScreen", { url });
+  }
+
   openGoogleMapApp(lat, lng) {
-    const daddr = `${lat},${lng}`;
-
-    const myPosition = this.props.geolocation;
-    let saddr = "";
-    if (myPosition) saddr = `${myPosition.coords.latitude},${myPosition.coords.longitude}`;
-
-    let url = `google.navigation:q=${daddr}`;
-    if (Platform.OS === "ios") url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${daddr}&saddr=${saddr}`;
-
-    LocationDetailsScreen.openUrlIfValid(url);
+    const directionsUrl = LocationUtils.directionsUrl(lat, lng, this.props.geolocation);
+    console.log(directionsUrl);
+    UrlUtils.openUrlIfValid(directionsUrl, LangService.strings.OPEN_IN_MAPS, "", LangService.strings.CANCEL, LangService.strings.OPEN);
   }
 
   render() {
@@ -357,12 +452,14 @@ function mapStateToProps(state, ownProps) {
     subLocations: getFilteredSubLocations(state.subLocations, location.id) || [],
     internet: state.internet.connected,
     geolocation: state.geolocation,
+    pointProperties: state.pointproperties,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
     internetActions: bindActionCreators(internetActions, dispatch),
+    pointPropertiesActions: bindActionCreators(pointPropertiesActions, dispatch),
   };
 }
 

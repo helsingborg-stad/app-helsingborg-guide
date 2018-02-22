@@ -1,10 +1,10 @@
 import React from "react";
 import {
+  Dimensions,
   Image,
   View,
   StyleSheet,
   Text,
-  ImageBackground,
   TouchableOpacity,
 } from "react-native";
 import TextStyles from "guide-hbg/src/styles/TextStyles";
@@ -12,11 +12,14 @@ import Colors from "guide-hbg/src/styles/Colors";
 import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
 import DistanceView from "./DistanceView";
 import LangService from "../../services/langService";
+import OImage from "./image";
 
 const iconKids = require("../../images/kids.png");
 
 const imageSize = 120;
 const defaultMargin = 15;
+const screenWidth = Dimensions.get("window").width;
+const smallScreenWidth = 350;
 
 const styles = StyleSheet.create({
   container: {
@@ -52,6 +55,7 @@ const styles = StyleSheet.create({
       color: Colors.black,
       textAlign: "left",
       marginBottom: 7,
+      fontSize: screenWidth < smallScreenWidth ? 18 : 22,
     }],
   ),
   forChildrenText: StyleSheetUtils.flatten([
@@ -65,6 +69,9 @@ const styles = StyleSheet.create({
   forChildrenContainer: {
     flexDirection: "row",
     alignItems: "center",
+    margin: screenWidth < smallScreenWidth ? defaultMargin : 0,
+    marginTop: 0,
+    marginBottom: 0,
   },
   forChildrenIcon: {
     width: 17,
@@ -97,7 +104,9 @@ const styles = StyleSheet.create({
   ),
   numberOfGuidesText: StyleSheetUtils.flatten([
     TextStyles.description, {
-      marginTop: 6,
+      margin: screenWidth < smallScreenWidth ? defaultMargin : 0,
+      marginTop: screenWidth < smallScreenWidth ? 13 : 6,
+      marginBottom: 0,
       color: Colors.purple,
       fontWeight: "500",
       textAlign: "left",
@@ -142,48 +151,60 @@ function displayGuideNumber(numberOfGuides, type) {
   );
 }
 
-function displayForChildren() {
+function displayTitle(title) {
   return (
-    <View style={styles.forChildrenContainer} >
+    <View>
+      <Text
+        style={styles.title}
+        numberOfLines={2}
+      >
+        {title}
+      </Text>
+    </View>
+  );
+}
+
+function displayForChildren(smallScreen) {
+  return (
+    <View style={smallScreen ? styles.forChildrenContainerSmallScreen : styles.forChildrenContainer} >
       <Image source={iconKids} resizeMode="contain" style={styles.forChildrenIcon} />
       <Text style={styles.forChildrenText}>{LangService.strings.FOR_CHILDREN}</Text>
     </View>
   );
 }
 
-const ListCard = ({ title, description, type, numberOfGuides, image, onPress, openingHours, distance, icon, forChildren }) => (
-  <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
-    <View style={styles.container}>
-      <View style={styles.imageInfoContainer}>
-        <ImageBackground
-          style={styles.image}
-          resizeMode="cover"
-          source={{ uri: image }}
-        />
+const ListCard = ({ title, description, type, numberOfGuides, image, onPress, openingHours, distance,
+  forChildren, guideID, smallScreen }) => (
+    <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
+      <View style={styles.container}>
+        <View style={styles.imageInfoContainer}>
+          <OImage
+            style={{ height: imageSize, width: imageSize }}
+            resizeMode="cover"
+            source={{ uri: image }}
+            guideID={guideID}
+          />
 
-        <View style={styles.infoTextContainer}>
+          <View style={styles.infoTextContainer}>
+            {displayTitle(title)}
+            {displayOpeningHours(openingHours)}
+            {displayDistance(distance)}
+            {smallScreen ? null : displayGuideNumber(numberOfGuides, type)}
+            {forChildren && !smallScreen ? displayForChildren() : null}
+          </View>
+        </View>
+        <View style={styles.descriptionContainer}>
+          {smallScreen ? displayGuideNumber(numberOfGuides, type) : null}
+          {forChildren && smallScreen ? displayForChildren() : null}
           <Text
-            style={styles.title}
-            numberOfLines={2}
+            style={styles.descriptionText}
+            numberOfLines={3}
           >
-            {title}
+            {description}
           </Text>
-          {displayOpeningHours(openingHours)}
-          {displayDistance(distance)}
-          {displayGuideNumber(numberOfGuides, type)}
-          {forChildren ? displayForChildren() : null}
         </View>
       </View>
-      <View style={styles.descriptionContainer}>
-        <Text
-          style={styles.descriptionText}
-          numberOfLines={3}
-        >
-          {description}
-        </Text>
-      </View>
-    </View>
-  </TouchableOpacity>
+    </TouchableOpacity>
 );
 
 export default ListCard;

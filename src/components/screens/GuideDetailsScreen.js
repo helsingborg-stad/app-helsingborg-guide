@@ -1,37 +1,31 @@
 import React, { Component } from "react";
-import { Platform, View, Text, AppState, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
+import { Platform, View, Text, AppState, TouchableOpacity, Image, StyleSheet, ScrollView, TouchableWithoutFeedback } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import ViewContainer from "../shared/view_container";
-import ImageView from "../shared/image_view";
-import ContentThumbnail from "../shared/contentThumbnail";
-import Footer from "../shared/footer";
-import RoundedBtn from "../shared/roundedBtnWithText";
-import Keypad from "../shared/KeyPad";
-import OptionsFloatingBtn from "../shared/OptionsFloatingBtn";
-import OptionsView from "../shared/OptionsView";
-import OptionsContentView from "../shared/OptionsContentView";
-import DownloadItemView2 from "../shared/DownloadItemView2";
 
-import LangService from "../../services/langService";
-import MediaPlayer from "../shared/MediaPlayer";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
 import * as downloadActions from "../../actions/downloadActions";
 
-import MediaService from "../../services/mediaService";
-
 import { BeaconService } from "../../services/beaconService";
 import { BeaconServiceiOS } from "../../services/beaconServiceiOS";
-import RadarView from "../shared/RadarView2";
-import FloatingBtn from "../shared/FloatingBtn";
-
-import SlimNotificationBar from "../shared/SlimNotificationBar";
-import NoInternetText from "../shared/noInternetText";
 import downloadManager from "../../services/DownloadTasksManager";
 import fetchService from "../../services/FetchService";
+import LangService from "../../services/langService";
+import MediaService from "../../services/mediaService";
+
+import ContentThumbnail from "../shared/contentThumbnail";
+import DownloadItemView2 from "../shared/DownloadItemView2";
+import Footer from "../shared/footer";
+import IconTextTouchable from "../shared/IconTextTouchable";
+import ImageView from "../shared/image_view";
+import Keypad from "../shared/KeyPad";
+import MapInformationOverlay from "../shared/MapInformationOverlay";
+import MediaPlayer from "../shared/MediaPlayer";
+import NoInternetText from "../shared/noInternetText";
+import SlimNotificationBar from "../shared/SlimNotificationBar";
+import ViewContainer from "../shared/view_container";
+
 import {
   Colors,
   TextStyles,
@@ -41,7 +35,10 @@ import {
   AnalyticsUtils,
 } from "../../utils/";
 
-const HALF_WIDTH = Dimensions.get("window").width / 2;
+const searchIcon = require("../../images/search-id.png");
+const iconKids = require("../../images/kids.png");
+const alphaGradient = require("../../images/gradient.png");
+
 const BEACON_REGION_ID = "edd1ebeac04e5defa017";
 const RADAR_SCANNING_PERIOD = 1000; // ms
 const RADAR_SCANNING_DIE_PERIOD = 1000; // ms
@@ -58,45 +55,131 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     backgroundColor: Colors.white,
+    paddingHorizontal: 20,
+  },
+  barButtonItem: {
+    flexDirection: "row",
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 14,
+    opacity: 0.75,
+  },
+  barButtonItemText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.white,
+      marginRight: 8,
+    },
+  ]),
+  barButtonItemImage: {
+    height: 16,
+    width: 16,
+  },
+  downloadContainer: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "stretch",
+    borderBottomColor: Colors.listBackgroundColor,
+    borderBottomWidth: 2,
+    height: 40,
+    paddingHorizontal: 0,
   },
   titleContainer: {
     flex: 1,
-    paddingHorizontal: 34,
+    paddingHorizontal: 0,
     paddingTop: 16,
-    paddingBottom: 15,
+    paddingBottom: 10,
   },
   title: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 22,
+      fontSize: 30,
       fontWeight: "300",
-      lineHeight: 26,
+      lineHeight: 36,
+      color: Colors.black,
     }],
   ),
+  date: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.warmGrey,
+    }],
+  ),
+  forChildrenText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.darkGrey,
+      marginLeft: 6,
+      fontWeight: "500",
+      textAlign: "left",
+    }],
+  ),
+  forChildrenContainer: {
+    paddingTop: 7,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  forChildrenIcon: {
+    width: 17,
+    height: 17,
+  },
+  alphaGradient: {
+    marginTop: -30,
+    width: "100%",
+    height: 30,
+  },
+  readMoreText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "500",
+      color: Colors.purple,
+    },
+  ]),
   articleContainer: {
-    flex: 4,
-    paddingHorizontal: 34,
-    paddingVertical: 10,
+    flex: 1,
+    paddingVertical: 0,
   },
   article: {
-    fontSize: 14,
-    lineHeight: 25,
+    fontSize: 16,
+    lineHeight: 22,
+    paddingTop: 20,
+    color: Colors.darkGrey,
   },
   objectsContainer: {
     flex: 1,
-    flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    paddingTop: 20,
     paddingBottom: 20,
     marginBottom: 50,
   },
-  ContentThumbnailContainer: {
-    width: HALF_WIDTH,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 10,
+  contentContainer: {
+    flex: 0,
+    flexDirection: "column",
+    paddingTop: 10,
+    paddingBottom: 20,
   },
+  ContentThumbnail: {
+    flex: 1,
+  },
+  ContentTextContainer: {
+    flex: 1,
+    paddingBottom: 44,
+  },
+  idText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 14,
+      fontWeight: "500",
+      lineHeight: 20,
+      color: Colors.warmGrey,
+    }],
+  ),
+  contentNameText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      lineHeight: 19,
+      color: Colors.black,
+    }],
+  ),
   closeBtnContainer: {
     flex: 1,
     alignItems: "center",
@@ -123,13 +206,46 @@ const styles = StyleSheet.create({
   },
 });
 
+function getTruncatedTitle(longTitle) {
+  if (longTitle.length <= 16) {
+    return longTitle;
+  }
+  return `${longTitle.substring(0, 14)}...`;
+}
+
+function renderDate(startDate, endDate) {
+  if (startDate === null || endDate === null) { return null; }
+
+  return <Text style={styles.date} numberOfLines={1}>{`${startDate} - ${endDate}`}</Text>;
+}
+
+function displayForChildren() {
+  return (
+    <View style={styles.forChildrenContainer} >
+      <Image source={iconKids} resizeMode="contain" style={styles.forChildrenIcon} />
+      <Text style={styles.forChildrenText}>{LangService.strings.FOR_CHILDREN}</Text>
+    </View>
+  );
+}
+
 class GuideDetailsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
+    const { params = {} } = navigation.state;
+    const { toggleKeypad } = params;
     return {
       title,
+      headerRight: (
+        <TouchableOpacity
+          onPress={toggleKeypad}
+          style={styles.barButtonItem}
+        >
+          <Text style={styles.barButtonItemText}>{LangService.strings.SEARCH_BY_NUMBER_SHORT}</Text>
+          <Image style={styles.barButtonItemImage} source={searchIcon} />
+        </TouchableOpacity>
+      ),
     };
-  }
+  };
 
   static get defaultProps() {
     return {
@@ -147,18 +263,20 @@ class GuideDetailsScreen extends Component {
   constructor(props) {
     super(props);
 
+    const metadata = this.props.downloadMeta;
+
     this.state = {
       subLocation: this.props.subLocation,
-      viewArticle: false,
       keypadVisible: false,
       closestBeacon: {},
-      searching: true,
-      smallBtnVisible: false,
       radarInFocus: true,
       menuVisible: false,
       internet: this.props.internet,
       keypadSearchResultCode: 0,
-      downloadMeta: this.props.downloadMeta,
+      downloadMeta: metadata,
+      collapsed: true,
+      closedInfoOverlay: metadata ? metadata.closedInfo : false,
+      isDownloadComplete: metadata ? metadata.urls.length <= metadata.currentPos && metadata.urls.length > 0 : false,
     };
     this.currentYOffset = 0;
     if (Platform.OS === "ios") {
@@ -174,16 +292,24 @@ class GuideDetailsScreen extends Component {
     this.onBeaconServiceConnected = this.onBeaconServiceConnected.bind(this);
 
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeInfoOverlay = this.closeInfoOverlay.bind(this);
   }
 
   componentDidMount() {
     this.initBeaconService();
+    this.props.navigation.setParams({ toggleKeypad: this.toggleKeypadVisibility });
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
     if (nextProps.downloadMeta || (this.state.downloadMeta && !nextProps.downloadMeta)) {
-      this.setState({ downloadMeta: nextProps.downloadMeta });
+      const metadata = nextProps.downloadMeta;
+
+      this.setState({
+        downloadMeta: metadata,
+        closedInfoOverlay: metadata ? metadata.closedInfo : false,
+        isDownloadComplete: metadata ? metadata.urls.length <= metadata.currentPos && metadata.urls.length > 0 : false,
+      });
     }
   }
 
@@ -193,13 +319,20 @@ class GuideDetailsScreen extends Component {
     clearTimeout(this.smallBtnTimer);
     clearTimeout(this.beaconSearchTimeout);
     clearTimeout(this.beaconSearchStopTimeout);
+    this.state.collapsed = true;
   }
 
   _goToContentObjectScene(contentObject, objectKey) {
-    const { navigate, state } = this.props.navigation;
-    const { title } = state.params;
-    AnalyticsUtils.logEvent("view_object", { id: contentObject.id, name: contentObject.title });
-    navigate("ObjectDetailsScreen", { title, contentObject, objectKey, id: this.state.subLocation.id });
+    const { navigate } = this.props.navigation;
+    const { title } = contentObject;
+    AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
+    navigate("ObjectDetailsScreen", {
+      title,
+      contentObject,
+      objectKey,
+      id: this.state.subLocation.id,
+      contentType: this.state.subLocation.contentType,
+    });
   }
 
   // ############################################
@@ -256,7 +389,7 @@ class GuideDetailsScreen extends Component {
       this.beaconSearchTimeout = null;
       if (!this.beaconSearchStopTimeout) {
         this.beaconSearchStopTimeout = setTimeout(() => {
-          this.setState({ closestBeacon: {}, searching: false });
+          this.setState({ closestBeacon: {} });
           clearInterval(this.beaconSearchStopTimeout);
           this.beaconSearchStopTimeout = null;
         }, RADAR_SCANNING_DIE_PERIOD);
@@ -266,10 +399,10 @@ class GuideDetailsScreen extends Component {
     const showRadarForSecondsThenLoad = () => {
       clearInterval(this.beaconSearchStopTimeout);
       this.beaconSearchStopTimeout = null;
-      this.setState({ closestBeacon: {}, searching: true });
+      this.setState({ closestBeacon: {} });
       if (!this.beaconSearchTimeout) {
         this.beaconSearchTimeout = setTimeout(() => {
-          this.setState({ closestBeacon: closest, searching: false });
+          this.setState({ closestBeacon: closest });
           clearInterval(this.beaconSearchTimeout);
           this.beaconSearchTimeout = null;
           this.smallBtnTimer = null;
@@ -306,7 +439,7 @@ class GuideDetailsScreen extends Component {
     // Beacon detection logic ends here
     // #########################################
     if (AppState.currentState === "background") {
-      this.setState({ closestBeacon: closest, searching: false });
+      this.setState({ closestBeacon: closest });
       clearInterval(this.beaconSearchTimeout);
       this.beaconSearchTimeout = null;
       this.smallBtnTimer = null;
@@ -349,24 +482,24 @@ class GuideDetailsScreen extends Component {
     let cc;
 
     // Removed to prevent the "radar" from being shown.
-/*
-    const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
-    const nearByObjectsViews = this.getObjectsViews(nearByKeys);
+    /*
+        const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
+        const nearByObjectsViews = this.getObjectsViews(nearByKeys);
 
-    if (this.state.searching) cc = <View>{radar}</View>;
-    else if (Object.keys(this.state.closestBeacon).length) {
-      cc = (
-        <View>
-          <View style={styles.nearByTextContainer}>
-            <Text style={styles.nearByText}>{LangService.strings.SOMETHING_NEAR_BY}</Text>
-          </View>
-          <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>
-            {nearByObjectsViews}
-          </View>
-        </View>
-      );
-    }
-*/
+        if (this.state.searching) cc = <View>{radar}</View>;
+        else if (Object.keys(this.state.closestBeacon).length) {
+          cc = (
+            <View>
+              <View style={styles.nearByTextContainer}>
+                <Text style={styles.nearByText}>{LangService.strings.SOMETHING_NEAR_BY}</Text>
+              </View>
+              <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>
+                {nearByObjectsViews}
+              </View>
+            </View>
+          );
+        }
+    */
     return (
       <View>
         <View>{cc}</View>
@@ -377,7 +510,7 @@ class GuideDetailsScreen extends Component {
 
   updateClosestFromSmallBtn() {
     if (this.readyBeacon) {
-      this.setState({ closestBeacon: this.readyBeacon, searching: false });
+      this.setState({ closestBeacon: this.readyBeacon });
       this.readyBeacon = null;
     }
   }
@@ -415,12 +548,16 @@ class GuideDetailsScreen extends Component {
       }
 
       const text = (
-        <View style={{ flex: 1, justifyContent: "flex-start" }}>
-          <Text style={[TextStyles.defaultFontFamily, { fontSize: 16, fontWeight: "300", marginVertical: 3 }]}>
-            {`#${contentObjects[key].id}`}
-          </Text>
-          <Text style={[TextStyles.defaultFontFamily, { fontSize: 14, marginVertical: 3 }]}>{contentObjects[key].title}</Text>
-        </View>
+        <View style={{ position: "absolute" }}>
+          <View>
+            <Text style={styles.idText}>
+              {`ID #${contentObjects[key].id}`}
+            </Text>
+          </View>
+          <View style={{ width: 150 }}>
+            <Text style={styles.contentNameText} numberOfLines={2}>{contentObjects[key].title}</Text>
+          </View>
+        </View >
       );
 
       return (
@@ -429,15 +566,19 @@ class GuideDetailsScreen extends Component {
           onPress={() => {
             this._goToContentObjectScene(contentObjects[key], key);
           }}
-          style={[styles.ContentThumbnailContainer]}
+          style={styles.contentContainer}
+
         >
           <ContentThumbnail
+            style={styles.ContentThumbnail}
             imageSource={{ uri: mImage.medium_large }}
             width={mImage["medium_large-width"]}
             height={mImage["medium_large-height"]}
-          >
+            guideID={this.state.subLocation.id}
+          />
+          <View style={styles.ContentTextContainer}>
             {text}
-          </ContentThumbnail>
+          </View>
         </TouchableOpacity>
       );
     });
@@ -460,6 +601,35 @@ class GuideDetailsScreen extends Component {
     }
   };
 
+  closedInfoForTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.setClosedInfo(item.id);
+    }
+  };
+
+  pauseTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.cancelTask(item.id);
+    }
+  };
+
+  resumeTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.resumeTask(item.id);
+    }
+  };
+
+  cancelTask = () => {
+    const item = this.state.subLocation;
+    if (downloadManager.isExist(item.id)) {
+      downloadManager.cancelTask(item.id);
+      downloadManager.clearCache(item.id);
+    }
+  };
+
   // #################################################
 
   toggleMenu() {
@@ -470,15 +640,38 @@ class GuideDetailsScreen extends Component {
     if (this.state.menuVisible) this.setState({ menuVisible: false });
   };
 
+  closeInfoOverlay() {
+    this.setState({ closedInfoOverlay: this.state.closedInfoOverlay });
+    this.closedInfoForTask();
+  }
+
   displayDownloadIndicator() {
-    return this.state.downloadMeta ? (
-      <DownloadItemView2
-        total={this.state.downloadMeta.urls.length}
-        currentPos={this.state.downloadMeta.currentPos}
-        isCanceled={this.state.downloadMeta.isCanceled}
-        progress={this.state.downloadMeta.currentPos / this.state.downloadMeta.urls.length}
-      />
-    ) : null;
+    if (this.state.downloadMeta) {
+      return (
+        <View style={styles.downloadContainer}>
+          <DownloadItemView2
+            total={this.state.downloadMeta.urls.length}
+            currentPos={this.state.downloadMeta.currentPos}
+            isCanceled={this.state.downloadMeta.isCanceled}
+            progress={this.state.downloadMeta.currentPos / this.state.downloadMeta.urls.length}
+            pauseCallback={this.pauseTask}
+            resumeCallback={this.resumeTask}
+            cancelCallback={this.cancelTask}
+          />
+        </View>);
+    }
+
+    return (
+      <View style={styles.downloadContainer}>
+        <View style={{ paddingLeft: 16, paddingTop: 6 }}>
+          <IconTextTouchable
+            text={LangService.strings.DOWNLOAD}
+            iconName="get-app"
+            onPress={() => this.createAndStartTask()}
+          />
+        </View>
+      </View>
+    );
   }
 
   displayMainImage() {
@@ -486,33 +679,82 @@ class GuideDetailsScreen extends Component {
 
     if (images && images.length) {
       return (
-        <ImageView source={{ uri: images[0].sizes.large }}/>
+        <ImageView source={{ uri: images[0].sizes.large }} guideID={this.state.subLocation.id} />
       );
     }
     return null;
   }
+
   displayArticle() {
     const article = (
       <View style={styles.articleContainer}>
-        <Text style={[TextStyles.defaultFontFamily, { fontSize: 19, lineHeight: 21, marginVertical: 10 }]}>
-          {`${LangService.strings.ABOUT} ${this.state.subLocation.title.plain_text}`}
+        <Text style={[TextStyles.defaultFontFamily, { fontSize: 16, lineHeight: 21, marginVertical: 0 }]}>
+          {this.state.subLocation.guide_tagline}
         </Text>
-        <Text style={styles.article}>{this.state.subLocation.content.plain_text}</Text>
+        {renderDate(this.state.subLocation.guide_date_start, this.state.subLocation.guide_date_end)}
+        {this.state.subLocation.guide_kids && displayForChildren()}
+        {this.renderContentText()}
       </View>
     );
 
-    if (this.state.viewArticle) return article;
-    return null;
+    return article;
   }
 
-  toggleArticleView() {
-    this.hideMenu();
-    this.setState({ viewArticle: !this.state.viewArticle });
+  renderInfoOverlay = () => {
+    const { closedInfoOverlay, isDownloadComplete } = this.state;
+
+    if (closedInfoOverlay || !isDownloadComplete) {
+      return null;
+    }
+
+    return ([
+      <TouchableWithoutFeedback
+        style={styles.overlayStyle}
+        key="TouchableWithoutFeedback"
+        onPress={() => this.closeInfoOverlay()}
+      >
+        <View
+          style={styles.overlayStyle}
+          key="overlayView"
+        />
+      </TouchableWithoutFeedback>,
+      <MapInformationOverlay
+        key="MapInformationOverlay"
+        trailInformation={{ description: LangService.strings.DOWNLOADED_INFO }}
+        onPressFunction={() => this.closeInfoOverlay()}
+      />,
+    ]);
   }
 
-  toggleMainMenu = () => {
-    this.props.navigation.navigate("DrawerToggle");
-  };
+  renderContentText() {
+    if (!this.state.subLocation.content) { return null; }
+
+    let textChunk = this.state.subLocation.content.plain_text;
+    let content = null;
+
+    if (this.state.collapsed && textChunk) {
+      if (textChunk.length > 100) {
+        textChunk = `${textChunk.substring(0, 100)}...`;
+        content = (
+          <View>
+            <Text style={styles.article}>{textChunk}</Text>
+            <Image source={alphaGradient} resizeMode="stretch" style={styles.alphaGradient} />
+            <TouchableOpacity onPress={() => this.toggleCollapsedContent()}>
+              <Text style={styles.readMoreText}>{LangService.strings.READ_MORE}</Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    } else {
+      content = (<Text style={styles.article}>{textChunk}</Text>);
+    }
+    return content;
+  }
+
+  toggleCollapsedContent() {
+    this.setState({ collapsed: !this.state.collapsed });
+  }
+
 
   // Search feature segment
   // ############################################
@@ -552,20 +794,11 @@ class GuideDetailsScreen extends Component {
     );
   }
 
-  toggleKeypadVisibility() {
-    this.toggleMenu();
+  toggleKeypadVisibility = () => {
     this.setState({ keypadVisible: !this.state.keypadVisible });
   }
   // #############################################
 
-  refreshSmallBtn() {
-    if (!this.smallBtnTimer) {
-      this.setState({ smallBtnVisible: true });
-      this.smallBtnTimer = setTimeout(() => {
-        this.closeSmallBtn();
-      }, 5000);
-    }
-  }
   watchTheScroll(e) {
     const SCROLL_THRESHOLD = 450;
     const yOffset = e.nativeEvent.contentOffset.y;
@@ -577,49 +810,6 @@ class GuideDetailsScreen extends Component {
     this.watchTheScroll(e);
   }
 
-  displayFabs() {
-    return (
-      <OptionsContentView>
-        <RoundedBtn
-          style={styles.fabBtn}
-          label={LangService.strings.SEARCH_BY_NUMBER}
-          active={<Icon2 name="search" size={20} color="white" />}
-          idle={<Icon2 name="search" size={20} color="white" />}
-          onPress={() => {
-            this.toggleKeypadVisibility();
-          }}
-        />
-        <RoundedBtn
-          style={styles.fabBtn}
-          label={this.state.viewArticle ? LangService.strings.CLOSE_MORE_INFO : LangService.strings.MORE_INFO}
-          isActive={this.state.viewArticle}
-          disabled={!this.state.subLocation.content || this.state.subLocation.content.plain_text === ""}
-          active={<Icon2 name="close" size={20} color="white" />}
-          idle={<Icon name="info" size={20} color="white" />}
-          onPress={() => this.toggleArticleView()}
-        />
-        <RoundedBtn
-          style={styles.fabBtn}
-          label={LangService.strings.DOWNLOAD}
-          active={<Icon2 name="file-download" size={20} color="white" />}
-          idle={<Icon2 name="file-download" size={20} color="white" />}
-          onPress={this.createAndStartTask}
-        />
-      </OptionsContentView>
-    );
-  }
-
-  onSmallBtnPressed = () => {
-    this.scrollView.scrollTo({ x: 0, y: 100, animated: true });
-    this.updateClosestFromSmallBtn();
-    this.closeSmallBtn();
-  };
-
-  closeSmallBtn() {
-    this.setState({ smallBtnVisible: false });
-    clearInterval(this.smallBtnTimer);
-  }
-
   display() {
     if (this.state.subLocation && Object.keys(this.state.subLocation).length) {
       return (
@@ -627,15 +817,6 @@ class GuideDetailsScreen extends Component {
           <SlimNotificationBar visible={!this.state.internet} style={{ top: 50 }}>
             <NoInternetText />
           </SlimNotificationBar>
-
-          <FloatingBtn onPress={this.onSmallBtnPressed} visible={this.state.smallBtnVisible} content={LangService.strings.NEW_CONTENT} />
-
-          <OptionsFloatingBtn onPress={this.toggleMenu} />
-
-          <OptionsView onPress={this.hideMenu} visible={this.state.menuVisible}>
-            {this.displayFabs()}
-          </OptionsView>
-
           <View style={{ flex: 1 }}>
             <ScrollView
               contentContainerStyle={styles.scrollView}
@@ -646,11 +827,10 @@ class GuideDetailsScreen extends Component {
               scrollEventThrottle={100}
             >
               <View style={styles.imageViewContainer}>{this.displayMainImage()}</View>
-              <ViewContainer style={{ height: 30 }}>{this.displayDownloadIndicator()}</ViewContainer>
-
+              {this.displayDownloadIndicator()}
               <View style={styles.bodyContainer}>
                 <View style={styles.titleContainer}>
-                  <Text style={styles.title}>{this.state.subLocation.title.plain_text}</Text>
+                  <Text style={styles.title}>{getTruncatedTitle(this.state.subLocation.title.plain_text)}</Text>
                 </View>
                 <View>{this.displayArticle()}</View>
                 <View>{this.displayContent()}</View>
@@ -658,6 +838,7 @@ class GuideDetailsScreen extends Component {
             </ScrollView>
           </View>
           {this.displayKeypad()}
+          {this.renderInfoOverlay()}
           <Footer>
             <MediaPlayer />
           </Footer>

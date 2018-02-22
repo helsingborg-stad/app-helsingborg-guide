@@ -17,6 +17,8 @@ export default function guideReducer(state = initialState.downloads, action) {
       return replace();
     case types.DOWNLOAD_TASK_COMPLETED:
       return replace();
+    case types.DOWNLOAD_INFO_CLOSED:
+      return replace();
     case types.CLEAR_CACHE_DOWNLOAD_TASK_SUCCESS:
       return [...state.filter(item => item.id !== action.taskMeta.id)];
     default:

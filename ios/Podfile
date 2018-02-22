@@ -1,6 +1,6 @@
 target 'GuideHbg' do
   #use_frameworks!
-  platform :ios, '8.0'
+  platform :ios, '9.0'
 
   pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga/yoga.podspec'
   pod 'React', path: '../node_modules/react-native', :subspecs => [
@@ -9,6 +9,10 @@ target 'GuideHbg' do
   ]
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
   pod 'Firebase/Core'
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
+  pod 'RNShare', :path => '../node_modules/react-native-share'
+
 end
 
 
