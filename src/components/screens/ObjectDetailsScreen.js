@@ -32,12 +32,14 @@ import {
   AnalyticsUtils,
 } from "../../utils/";
 
-const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
+const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.32;
 
 const styles = StyleSheet.create({
   imageViewContainer: {
     maxHeight: MAX_IMAGE_HEIGHT,
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   scrollView: {
     paddingBottom: 70,
@@ -354,7 +356,7 @@ class ObjectDetailsScreen extends Component {
     if (!this.state.contentObject || !this.state.contentObject.image || !this.state.contentObject.image.length) {
       return (
         <View style={styles.imageViewContainer}>
-          <ImageView source={{ uri: null }} guideID={this.state.guideID} width="600" height="400" />
+          <ImageView source={{ uri: null }} guideID={this.state.guideID} />
         </View>
       );
     }
