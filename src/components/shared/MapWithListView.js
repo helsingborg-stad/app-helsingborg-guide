@@ -34,6 +34,8 @@ const ios = Platform.OS === "ios";
 const defaultMargin = 20;
 const textMargin = 10;
 const listItemImageSize = 120;
+let androidFakeMargin = 1;
+
 
 // Marker image
 const markerImageActiveWidth = 42;
@@ -589,8 +591,8 @@ export default class MapWithListView extends Component {
       {this.renderListItem(item, styles.androidListItem)}
     </View>
   );
-
   renderHorizontalList(items) {
+    androidFakeMargin = androidFakeMargin === 1 ? 2 : 1;
     if (ios) {
       return (
         <FlatList
@@ -616,11 +618,11 @@ export default class MapWithListView extends Component {
         onPageSelected={this.onPageSelected}
         peekEnabled
         pageMargin={-30}
-        style={styles.listStyle}
+        style={[styles.listStyle, { marginBottom: androidFakeMargin }]}
         initialPage={0}
       >
         {items.map((element, index) => this.androidRenderItem(element, index))}
-      </ViewPagerAndroid>
+      </ViewPagerAndroid >
     );
   }
 
