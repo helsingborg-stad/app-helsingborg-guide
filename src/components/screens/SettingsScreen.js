@@ -40,6 +40,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  barButtonFiller: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 58,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -140,6 +147,9 @@ class SettingsScreen extends Component {
         >
           <Image source={goBackIcon} />
         </TouchableOpacity>
+      ),
+      headerRight: (
+        <View style={styles.barButtonFiller} />
       ),
     };
   };

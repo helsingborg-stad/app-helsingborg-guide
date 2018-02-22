@@ -41,6 +41,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  barButtonFiller: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 58,
+  },
   scrollView: {
     paddingBottom: 70,
   },
@@ -140,7 +147,9 @@ class ObjectDetailsScreen extends Component {
     const { title } = navigation.state.params;
     return {
       title,
-      headerRight: null,
+      headerRight: (
+        <View style={styles.barButtonFiller} />
+      ),
     };
   }
 
