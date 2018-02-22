@@ -28,6 +28,7 @@ import {
 } from "../../utils/";
 import LangService from "../../services/langService";
 import IconTextTouchable from "./IconTextTouchable";
+import ViewPagerAndroidContainer from "../shared/ViewPagerAndroidContainer";
 
 const ios = Platform.OS === "ios";
 
@@ -589,8 +590,8 @@ export default class MapWithListView extends Component {
       {this.renderListItem(item, styles.androidListItem)}
     </View>
   );
-
   renderHorizontalList(items) {
+    // androidFakeMargin = androidFakeMargin === 1 ? 2 : 1;
     if (ios) {
       return (
         <FlatList
@@ -607,20 +608,23 @@ export default class MapWithListView extends Component {
           snapToInterval={listItemWidth + 10}
           decelerationRate="fast"
           scrollEventThrottle={300}
+          swipeEnabled
         />
       );
     }
     return (
-      <ViewPagerAndroid
-        ref={(ref) => { this.listRef = ref; }}
-        onPageSelected={this.onPageSelected}
-        peekEnabled
-        pageMargin={-30}
-        style={styles.listStyle}
-        initialPage={0}
-      >
-        {items.map((element, index) => this.androidRenderItem(element, index))}
-      </ViewPagerAndroid>
+      <ViewPagerAndroidContainer style={styles.listStyle}>
+        <ViewPagerAndroid
+          ref={(ref) => { this.listRef = ref; }}
+          onPageSelected={this.onPageSelected}
+          peekEnabled
+          pageMargin={-30}
+          style={styles.listStyle}
+          initialPage={0}
+        >
+          {items.map((element, index) => this.androidRenderItem(element, index))}
+        </ViewPagerAndroid >
+      </ViewPagerAndroidContainer >
     );
   }
 
