@@ -500,6 +500,22 @@ class GuideDetailsScreen extends Component {
           );
         }
     */
+
+    const nearByObjectsViews = this.getObjectsViews(nearByKeys);
+
+    if (Object.keys(this.state.closestBeacon).length) {
+      cc = (
+        <View>
+          <View style={styles.nearByTextContainer}>
+            <Text style={styles.nearByText}>{LangService.strings.SOMETHING_NEAR_BY}</Text>
+          </View>
+          <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>
+            {nearByObjectsViews}
+          </View>
+        </View>
+      );
+    }
+
     return (
       <View>
         <View>{cc}</View>
