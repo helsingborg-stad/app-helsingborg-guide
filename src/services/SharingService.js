@@ -91,7 +91,7 @@ export default {
 
   beginShare(title, message, url, width, height, subject) {
     // The sharing process is different on ios and android.
-    if (Platform.OS === "android") { this.shareAndroid(title, message, url, width, height, subject); } else { this.shareIOs(title, message, url, width, height, subject); }
+    if (Platform.OS === "android") { this.shareAndroid(title, message, encodeURI(url), width, height, subject); } else { this.shareIOs(title, message, encodeURI(url), width, height, subject); }
   },
 
   shareAndroid(title, message, url, width, height, subject) {
