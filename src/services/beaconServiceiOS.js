@@ -53,7 +53,7 @@ export class BeaconServiceiOS {
         resultsCallback({ beacons: rangedBeacons });
         rangedBeacons = [];
         scannerIsRunning = false;
-      }, 1000);
+      }, 3000);
     }
     scannerIsRunning = true;
   }
@@ -116,7 +116,33 @@ export class BeaconServiceiOS {
   unSubscribeOnRangingResult(callback) { }
   getOptimizedDistanceBeacons(beacons) {
     if (!beacons || !beacons.length) return [];
-    return beacons.map(_beacon => this.optimizeDistance(_beacon));
+
+    const optimizedBeacons = beacons.map(_beacon => this.optimizeDistance(_beacon));
+
+    const beaconGroups = [];
+    for (let i = 0; i < optimizedBeacons.length; i += 1) {
+      const currentGroup = beaconGroups.find(item => item[0].bid === optimizedBeacons[i].bid);
+      if (currentGroup) {
+        currentGroup.push(optimizedBeacons[i]);
+      } else {
+        const newBeaconGroup = [];
+        newBeaconGroup.push(optimizedBeacons[i]);
+        beaconGroups.push(newBeaconGroup);
+      }
+    }
+    const newBeacons = [];
+    for (let i = 0; i < beaconGroups.length; i += 1) {
+      let totalDist = 0;
+      let count = 0;
+      for (let j = 0; j < beaconGroups[i].length; j += 1) {
+        totalDist += beaconGroups[i][j].distance;
+        count += 1;
+      }
+      beaconGroups[i][0].distance = totalDist / count;
+      newBeacons.push(beaconGroups[i][0]);
+    }
+
+    return newBeacons;
   }
   unSubscribeOnServiceConnected(callback) { }
 

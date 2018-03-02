@@ -399,7 +399,7 @@ class GuideDetailsScreen extends Component {
     const showRadarForSecondsThenLoad = () => {
       clearInterval(this.beaconSearchStopTimeout);
       this.beaconSearchStopTimeout = null;
-      this.setState({ closestBeacon: {} });
+      // this.setState({ closestBeacon: {} });
       if (!this.beaconSearchTimeout) {
         this.beaconSearchTimeout = setTimeout(() => {
           this.setState({ closestBeacon: closest });
@@ -427,6 +427,7 @@ class GuideDetailsScreen extends Component {
 
     if (closest.bid === this.state.closestBeacon.bid && closest.nid === this.state.closestBeacon.nid) {
       this.setState({ closestBeacon: closest });
+
       return;
     }
 
@@ -448,7 +449,7 @@ class GuideDetailsScreen extends Component {
       // check if the user at the top of the page, if not show the small button and return nothing.
       if (!this.state.radarInFocus) {
         // show the small button on screen
-        this.refreshSmallBtn();
+        // this.refreshSmallBtn();
         // -stop any timeout to prevent showing the list.
         if (this.beaconSearchTimeout) {
           clearInterval(this.beaconSearchTimeout);
@@ -456,7 +457,6 @@ class GuideDetailsScreen extends Component {
         }
         // Put the closest beacon in ready Beacon, to use it when the small btn is clicked.
         this.readyBeacon = closest;
-        return;
       }
 
       // If everything is ok, start search animation for couple of seconds and update the lists.
@@ -502,8 +502,11 @@ class GuideDetailsScreen extends Component {
     */
 
     const nearByObjectsViews = this.getObjectsViews(nearByKeys);
+    if (this.state.closestBeacon)
+      {console.log(this.state.closestBeacon.distance);}
 
-    if (Object.keys(this.state.closestBeacon).length) {
+
+    if (Object.keys(this.state.closestBeacon).length && this.state.closestBeacon.distance < 5) {
       cc = (
         <View>
           <View style={styles.nearByTextContainer}>
