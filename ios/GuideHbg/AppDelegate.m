@@ -11,6 +11,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <React/RCTLog.h>
 #import <Firebase.h>
 
 @implementation AppDelegate
@@ -20,6 +21,8 @@
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+
+  RCTSetLogThreshold(RCTLogLevelInfo - 1);
   
   // Firebase config
   [FIRApp configure];
