@@ -374,7 +374,12 @@ class ObjectDetailsScreen extends Component {
       <View style={styles.imageViewContainer} key={image.ID || index}>
         <TouchableWithoutFeedback onPress={() => this.goToImageView(image, this.state.guideID)}>
           <View>
-            <ImageView source={{ uri: image.sizes.large }} guideID={this.state.guideID} width={image.sizes["large-width"]} height={image.sizes["large-height"]} />
+            <ImageView
+              source={{ uri: image.sizes.large }}
+              guideID={this.state.guideID}
+              width={image.sizes["large-width"]}
+              height={image.sizes["large-height"]}
+            />
           </View>
         </TouchableWithoutFeedback>
       </View>

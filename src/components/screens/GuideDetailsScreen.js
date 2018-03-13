@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Platform, View, Text, AppState, TouchableOpacity, Image, StyleSheet, ScrollView, TouchableWithoutFeedback } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
@@ -229,6 +230,13 @@ function displayForChildren() {
 }
 
 class GuideDetailsScreen extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+    internet: PropTypes.bool.isRequired,
+    subLocation: PropTypes.object.isRequired,
+    downloadMeta: PropTypes.object,
+  }
+
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     const { params = {} } = navigation.state;
@@ -250,6 +258,7 @@ class GuideDetailsScreen extends Component {
   static get defaultProps() {
     return {
       title: "GuideDetailsScreen",
+      downloadMeta: null,
     };
   }
 
@@ -410,11 +419,13 @@ class GuideDetailsScreen extends Component {
       }
     };
 
-    const storedClosestBeaconIsInTheList = () => {
-      if (!beacons.length) return false;
-      const index = beacons.findIndex(item => item.bid === this.state.closestBeacon.bid);
-      return index !== -1;
-    };
+    /*
+        const storedClosestBeaconIsInTheList = () => {
+          if (!beacons.length) return false;
+          const index = beacons.findIndex(item => item.bid === this.state.closestBeacon.bid);
+          return index !== -1;
+        };
+    */
 
     if (!Object.keys(closest).length && Object.keys(this.state.closestBeacon).length) {
       return;
@@ -432,7 +443,7 @@ class GuideDetailsScreen extends Component {
 
     const closerDistanceCondition = parseFloat(this.state.closestBeacon.distance) - parseFloat(closest.distance) < -2;
 
-    if ((true || storedClosestBeaconIsInTheList()) && closerDistanceCondition) {
+    if (/* (true || storedClosestBeaconIsInTheList()) && */ closerDistanceCondition) {
       return;
     }
 

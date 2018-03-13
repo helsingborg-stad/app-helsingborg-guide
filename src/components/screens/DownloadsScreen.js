@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
 
 class DownloadsScreen extends Component {
   static propTypes = {
-    navigation: PropTypes.object.isRequired,
     downloads: PropTypes.array.isRequired,
   }
 
