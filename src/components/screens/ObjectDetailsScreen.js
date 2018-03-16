@@ -14,8 +14,8 @@ import fetchService from "../../services/FetchService";
 import LangService from "../../services/langService";
 import MediaService from "../../services/mediaService";
 
-import ButtonsBar from "../shared/btn_bar";
-import ButtonsBarItem from "../shared/btn_bar_item";
+import ButtonsBar from "../shared/ButtonsBar";
+import ButtonsBarItem from "../shared/ButtonsBarItem";
 import Footer from "../shared/footer";
 import ImageView from "../shared/image_view";
 import LinkTouchable from "./../shared/LinkTouchable";
