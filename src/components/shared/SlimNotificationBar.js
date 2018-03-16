@@ -2,11 +2,23 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Animated } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import ButtonsBarItem from "./btn_bar_item";
+import { StyleSheet, Dimensions, Animated } from "react-native";
 
 const FULL_WIDTH = Dimensions.get("window").width;
+
+const styles = StyleSheet.create({
+  bar: {
+    minHeight: 30,
+    width: FULL_WIDTH,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: -200000,
+    backgroundColor: "#ed57ac",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default class SlimNotificationBar extends Component {
   constructor(props) {
@@ -42,17 +54,3 @@ export default class SlimNotificationBar extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  bar: {
-    minHeight: 30,
-    width: FULL_WIDTH,
-    position: "absolute",
-    top: 0,
-    left: 0,
-    zIndex: -200000,
-    backgroundColor: "#ed57ac",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});

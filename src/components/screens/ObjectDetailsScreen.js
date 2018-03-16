@@ -329,7 +329,6 @@ class ObjectDetailsScreen extends Component {
         color={Colors.darkPurple}
         size={18}
         text={LangService.strings.LISTEN}
-        view="row"
       />
     );
     const videoBarItem = videoBtnInvisible ? null : (
@@ -342,7 +341,6 @@ class ObjectDetailsScreen extends Component {
         color={Colors.darkPurple}
         size={18}
         text={LangService.strings.VIDEO}
-        view="row"
       />
     );
 

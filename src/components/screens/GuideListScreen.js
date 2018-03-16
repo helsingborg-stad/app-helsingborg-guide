@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
 import {
   LocationUtils,
@@ -100,6 +101,11 @@ const initialLayout = {
 // const availableLists = [];
 
 class GuideListScreen extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+    categoryTypes: PropTypes.array.isRequired,
+  }
+
   static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.APP_NAME;
     const { params = {} } = navigation.state;

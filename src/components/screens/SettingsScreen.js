@@ -259,8 +259,16 @@ class SettingsScreen extends Component {
         <View style={styles.contactUsContainer}>
           <Image source={helsingborgIcon} style={styles.icon} />
           <View style={styles.contactTextContainer}>
-            <Text onPress={() => Linking.openURL(`mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${LangService.strings.CONTACT_MAIL_SUBJECT}`)} style={textStyles.contactEmailText}>{LangService.strings.CONTACT_MAIL_ADRESS}</Text>
-            <Text onPress={() => Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)} style={textStyles.contactPhoneText}>{LangService.strings.CONTACT_PHONE_DISPLAY}</Text>
+            <Text
+              onPress={() =>
+                Linking.openURL(`mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${LangService.strings.CONTACT_MAIL_SUBJECT}`)}
+              style={textStyles.contactEmailText}
+            >{LangService.strings.CONTACT_MAIL_ADRESS}</Text>
+            <Text
+              onPress={() =>
+                Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)}
+              style={textStyles.contactPhoneText}
+            >{LangService.strings.CONTACT_PHONE_DISPLAY}</Text>
           </View>
         </View>
       </View>

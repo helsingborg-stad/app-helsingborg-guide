@@ -1,7 +1,5 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {
@@ -46,28 +44,40 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class ButtonsBarItem extends Component {
-  render() {
-    const _styles = [styles.item];
-    const _iconStyles = [styles.icon];
-    const _textStyles = [styles.title];
-    if (this.props.disabled) {
-      _styles.push(styles.disabledBkgd);
-      _iconStyles.push(styles.disabledText);
-      _textStyles.push(styles.disabledText);
-    }
 
-    return (
-      <TouchableOpacity disabled={this.props.disabled} style={_styles} onPress={event => this.props.onPress(event)}>
-        <View style={styles.mainContainer}>
-          <View style={styles.iconContainer}>
-            <Icon style={_iconStyles} name={this.props.name} size={this.props.size || ICON_SIZE} color={this.props.color} />
-          </View>
-          <View style={styles.titleContainer}>
-            <Text style={_textStyles}>{this.props.text}</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
+function ButtonsBarItem(props) {
+  const _styles = [styles.item];
+  const _iconStyles = [styles.icon];
+  const _textStyles = [styles.title];
+
+  if (props.disabled) {
+    _styles.push(styles.disabledBkgd);
+    _iconStyles.push(styles.disabledText);
+    _textStyles.push(styles.disabledText);
   }
+
+  return (
+    <TouchableOpacity disabled={props.disabled} style={_styles} onPress={event => props.onPress(event)}>
+      <View style={styles.mainContainer}>
+        <View style={styles.iconContainer}>
+          <Icon style={_iconStyles} name={props.name} size={props.size || ICON_SIZE} color={props.color} />
+        </View>
+        <View style={styles.titleContainer}>
+          <Text style={_textStyles}>{props.text}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
 }
+
+ButtonsBarItem.propTypes = {
+  disabled: PropTypes.bool.isRequired,
+  onPress: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+};
+
+
+export default ButtonsBarItem;

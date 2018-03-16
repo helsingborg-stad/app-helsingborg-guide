@@ -309,7 +309,11 @@ class LocationDetailsScreen extends Component {
         if (!subLocation.guide_images || !subLocation.guide_images.length) return null;
         const forKids = subLocation.guide_kids;
         return (
-          <TouchableOpacity key={subLocation.id} style={styles.subLocationContainer} onPress={() => this._goToSubLocationScene(subLocation)}>
+          <TouchableOpacity
+            key={subLocation.id}
+            style={styles.subLocationContainer}
+            onPress={() => this._goToSubLocationScene(subLocation)}
+          >
             <ListItem
               imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
               title={subLocation.title.plain_text}
@@ -352,7 +356,8 @@ class LocationDetailsScreen extends Component {
   displayAccessibility() {
     if (!this.state.pointProperties || !this.state.pointProperties.items || this.state.pointProperties.items.length < 1) { return null; }
 
-    if (!this.state.location || this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
+    if (!this.state.location ||
+      this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
 
     if (!this.state.internet) { return null; }
 
@@ -399,7 +404,8 @@ class LocationDetailsScreen extends Component {
                   iconName="directions"
                   text={LangService.strings.DIRECTIONS}
                   onPress={() => {
-                    this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
+                    this.openGoogleMapApp(this.state.location._embedded.location[0].latitude,
+                      this.state.location._embedded.location[0].longitude);
                   }}
                 />
               </View>
