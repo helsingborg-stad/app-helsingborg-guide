@@ -42,7 +42,11 @@ export default class ContentThumbnail extends Component {
     const checkMark = this.props.checked ? checkMarkIcon : null;
 
     return (
-      <OImage style={[{ width: IMAGE_WIDTH, height: IMAGE_WIDTH }, styles.image]} source={this.props.imageSource} guideID={this.props.guideID}>
+      <OImage
+        style={[{ width: IMAGE_WIDTH, height: IMAGE_WIDTH }, styles.image]}
+        source={this.props.imageSource}
+        guideID={this.props.guideID}
+      >
         {checkMark}
       </OImage>
     );

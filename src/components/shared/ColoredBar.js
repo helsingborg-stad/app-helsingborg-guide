@@ -37,6 +37,7 @@ export default class ColoredBar extends Component {
         return <View key={index} style={[styles.bar, style]} />;
       });
     }
+    return null;
   }
   render() {
     return <View style={styles.barsContainer}>{this.displayBars()}</View>;
