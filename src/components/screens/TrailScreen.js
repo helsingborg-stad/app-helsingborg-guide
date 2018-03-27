@@ -106,10 +106,8 @@ class TrailScreen extends Component {
     };
   };
 
-  static trailInformation(trail, guides) {
-    const { id } = trail.guidegroup[0];
-    const guideInfo = guides.find(guideItem => guideItem.id === id);
-    return { title: guideInfo.name, description: guideInfo.description };
+  static trailInformation(trail) {
+    return { title: trail.title.plain_text, description: trail.content.plain_text };
   }
 
   constructor(props) {
