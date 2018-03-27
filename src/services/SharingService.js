@@ -61,20 +61,21 @@ const styles = StyleSheet.create({
   shareBoxOuter: {
     flexDirection: "row",
     borderWidth: 1,
-    borderColor: "white",
-    backgroundColor: "#ffffff66",
+    borderColor: Colors.darkPurple,
+    backgroundColor: "#ffffffff",
     borderRadius: 1,
     padding: 10,
   },
   shareIcon: {
     marginRight: 10,
     marginLeft: 5,
+    tintColor: Colors.darkPurple,
   },
   shareText: {
     fontSize: 16,
     marginRight: 5,
-    fontWeight: "bold",
-    color: "white",
+    fontWeight: "500",
+    color: Colors.darkPurple,
   },
 });
 

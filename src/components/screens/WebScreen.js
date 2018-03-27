@@ -8,7 +8,7 @@ import {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: Colors.lightPink,
+    backgroundColor: Colors.darkPurple,
   },
 });
 
