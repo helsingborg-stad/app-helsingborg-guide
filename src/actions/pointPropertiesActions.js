@@ -1,5 +1,10 @@
-import dc from "../data/datacontext";
-import { FETCH_POINTPROPERTIES_SUCCESS, FETCH_POINTPROPERTIES_REQUEST, FETCH_POINTPROPERTIES_FAILURE } from "./actionTypes";
+import getPointPropertiesByGuide from "../utils/fetchUtils";
+
+import {
+  FETCH_POINTPROPERTIES_SUCCESS,
+  FETCH_POINTPROPERTIES_REQUEST,
+  FETCH_POINTPROPERTIES_FAILURE,
+} from "./actionTypes";
 
 export function fetchPointPropertiesRequest(pointproperties) {
   return { type: FETCH_POINTPROPERTIES_REQUEST, pointproperties };
@@ -17,15 +22,12 @@ export function fetchPointProperties(guideID) {
   return function fetchPointPropertiesDispatch(dispatch) {
     dispatch(fetchPointPropertiesRequest());
 
-    const instance = dc();
-    return instance.guide.getPointPropertiesByGuide(guideID)
-      .then((pointproperties) => {
-        if (pointproperties.code) {
-          dispatch(fetchPointPropertiesFailure({ error: pointproperties.message }));
-        } else {
-          dispatch(fetchPointPropertiesSuccess(pointproperties, guideID));
-        }
+    return getPointPropertiesByGuide(guideID)
+      .then(pointproperties =>
+        dispatch(fetchPointPropertiesSuccess(pointproperties, guideID)),
+      )
+      .catch((error) => {
+        dispatch(fetchPointPropertiesFailure(error.message));
       });
   };
 }
-
