@@ -12,4 +12,4 @@ async function getPointPropertiesByGuide(guideId) {
   return json;
 }
 
-export default getPointPropertiesByGuide;
+export default { getPointPropertiesByGuide };

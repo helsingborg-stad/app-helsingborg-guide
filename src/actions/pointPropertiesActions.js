@@ -1,4 +1,4 @@
-import getPointPropertiesByGuide from "../utils/fetchUtils";
+import fetchUtils from "../utils/fetchUtils";
 
 import {
   FETCH_POINTPROPERTIES_SUCCESS,
@@ -22,7 +22,8 @@ export function fetchPointProperties(guideID) {
   return function fetchPointPropertiesDispatch(dispatch) {
     dispatch(fetchPointPropertiesRequest());
 
-    return getPointPropertiesByGuide(guideID)
+    return fetchUtils
+      .getPointPropertiesByGuide(guideID)
       .then(pointproperties =>
         dispatch(fetchPointPropertiesSuccess(pointproperties, guideID)),
       )
