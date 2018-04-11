@@ -18,12 +18,12 @@ export function fetchGuideGroupsFailure(error) {
   return { type: FETCH_GUIDEGROUPS_FAILURE, error };
 }
 
-export function fetchGuideGroups() {
+export function fetchGuideGroups(langCode) {
   return function fetchGuideGroupsDispatch(dispatch) {
     dispatch(fetchGuideGroupsRequest());
 
     return fetchUtils
-      .getGuideGroups()
+      .getGuideGroups(langCode)
       .then(guideGroups =>
         dispatch(fetchGuideGroupsSuccess(guideGroups)),
       )
