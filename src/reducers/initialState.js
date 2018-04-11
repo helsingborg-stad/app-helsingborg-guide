@@ -1,7 +1,7 @@
 export default {
   navigation: { isFetching: false, items: [] },
   guides: [],
-  guideGroups: {},
+  guideGroups: [],
   subLocations: [],
   metrics: [],
   audio: {

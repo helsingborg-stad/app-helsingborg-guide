@@ -1,4 +1,4 @@
-import { FETCH_GUIDEGROUPS_SUCCESS, FETCH_GUIDEGROUPS_REQUEST, FETCH_GUIDEGROUPS_FAILURE } from "../actions/actionTypes";
+import { FETCH_GUIDEGROUPS_FAILURE, FETCH_GUIDEGROUPS_REQUEST, FETCH_GUIDEGROUPS_SUCCESS } from "../actions/actionTypes";
 import initialState from "./initialState";
 
 export default function guideGroupsReducer(state = initialState.guideGroups, action) {
@@ -6,7 +6,7 @@ export default function guideGroupsReducer(state = initialState.guideGroups, act
     case FETCH_GUIDEGROUPS_REQUEST:
       return { ...state, isFetching: true };
     case FETCH_GUIDEGROUPS_SUCCESS: {
-      const items = action.guidegroups;
+      const items = action.guideGroups;
       return { ...state, items, isFetching: false };
     }
     case FETCH_GUIDEGROUPS_FAILURE:
