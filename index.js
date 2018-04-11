@@ -12,6 +12,7 @@ import { errorHappened } from "guide-hbg/src/actions/errorActions";
 import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
 import FullScreenVideoScreen from "guide-hbg/src/components/screens/FullScreenVideoScreen";
 import { loadGuides } from "./src/actions/guideActions";
+import { fetchGuideGroups } from "./src/actions/guideGroupActions";
 import { fetchNavigation } from "./src/actions/navigationActions";
 import LocationService from "./src/services/locationService";
 
@@ -37,7 +38,8 @@ export default class GuideHbg extends Component {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
         store.dispatch(fetchNavigation(langCode));
-        store.dispatch(loadGuides(langCode));
+        store.dispatch(loadGuides(langCode)); // old guide groups
+        store.dispatch(fetchGuideGroups(langCode)); // new guide groups
         store.dispatch(loadSubLocations(langCode));
         LangService.getLanguages();
       }
