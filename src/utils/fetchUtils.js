@@ -12,4 +12,17 @@ async function getPointPropertiesByGuide(guideId) {
   return json;
 }
 
-export default { getPointPropertiesByGuide };
+async function getGuideGroups() {
+  const url = `${API_BASE_URL}/guidegroup/`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Failed to fetch guide groups");
+  }
+
+  const json = await response.json();
+
+  return json;
+}
+
+
+export default { getPointPropertiesByGuide, getGuideGroups };
