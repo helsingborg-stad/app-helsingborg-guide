@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import guides from "./guideReducer";
-import guideGroups from "./guideGroupsReducer";
+import guideGroups from "./guideGroupReducer";
 import navigation from "./navigationReducer";
 import subLocations from "./subLocationReducer";
 import metrics from "./metricReducer";
