@@ -463,7 +463,7 @@ function mapStateToProps(state, ownProps) {
     subLocations: getFilteredSubLocations(state.subLocations, location.id) || [],
     internet: state.internet.connected,
     geolocation: state.geolocation,
-    pointProperties: state.pointproperties,
+    pointProperties: state.pointProperties,
   };
 }
 function mapDispatchToProps(dispatch) {

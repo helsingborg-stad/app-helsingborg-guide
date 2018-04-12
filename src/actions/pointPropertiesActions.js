@@ -10,8 +10,8 @@ export function fetchPointPropertiesRequest(): Action {
   return { type: "FETCH_POINTPROPERTIES_REQUEST" };
 }
 
-export function fetchPointPropertiesSuccess(pointproperties: PointProperty[], guideID: number): Action {
-  return { type: "FETCH_POINTPROPERTIES_SUCCESS", pointproperties, guideID };
+export function fetchPointPropertiesSuccess(pointProperties: PointProperty[], guideID: number): Action {
+  return { type: "FETCH_POINTPROPERTIES_SUCCESS", pointProperties, guideID };
 }
 
 export function fetchPointPropertiesFailure(error: Error): Action {
@@ -24,8 +24,8 @@ export function fetchPointProperties(guideID: number): ThunkAction {
 
     return fetchUtils
       .getPointPropertiesByGuide(guideID)
-      .then(pointproperties =>
-        dispatch(fetchPointPropertiesSuccess(pointproperties, guideID)),
+      .then(pointProperties =>
+        dispatch(fetchPointPropertiesSuccess(pointProperties, guideID)),
       )
       .catch((error) => {
         dispatch(fetchPointPropertiesFailure(error.message));

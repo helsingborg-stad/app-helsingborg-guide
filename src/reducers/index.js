@@ -9,7 +9,7 @@ import internet from "./internetReducer";
 import error from "./errorReducer";
 import downloads from "./downloadReducer";
 import geolocation from "./geolocationReducer";
-import pointproperties from "./pointPropertiesReducer";
+import pointProperties from "./pointPropertiesReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
 
 const rootReducer = combineReducers({
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   error,
   downloads,
   geolocation,
-  pointproperties,
+  pointProperties,
   downloadDataVersion,
 });
 

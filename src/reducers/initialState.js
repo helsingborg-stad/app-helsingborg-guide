@@ -20,5 +20,5 @@ export default {
   downloads: [],
   downloadDataVersion: 0,
   position: null,
-  pointproperties: { name: "", icon: "", guideID: 0 },
+  pointProperties: { name: "", icon: "", guideID: 0 },
 };
