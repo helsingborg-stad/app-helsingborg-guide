@@ -1,3 +1,5 @@
+// @flow
+
 export const CREATE_GUIDE = "CREATE_GUIDE";
 export const UPDATE_GUIDE = "UPDATE_GUIDE";
 export const LOAD_GUIDES_SUCCESS = "LOAD_GUIDES_SUCCESS";
@@ -45,3 +47,11 @@ export const CLOSE_MENU = "CLOSE_MENU";
 export const TOGGLE_MENU = "TOGGLE_MENU";
 
 export const GEOLOCATION_UPDATE_SUCCESS = "GEOLOCATION_UPDATE_SUCCESS";
+
+export type Error = {message: string}
+export type GuideGroup = {};
+export type Action =
+  | { type: "FETCH_GUIDEGROUPS_REQUEST" }
+  | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
+  | {type: "FETCH_GUIDEGROUPS_FAILURE", error: Error};
+
