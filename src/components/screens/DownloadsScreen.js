@@ -15,18 +15,16 @@ import {
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 const styles = StyleSheet.create({
-  fo: {
-    color: Colors.lightPink,
-  },
   mainContainer: {
     backgroundColor: Colors.white,
   },
-  itemsScroll: {},
+  footer: {
+    height: 60,
+  },
 });
 
 class DownloadsScreen extends Component {
   static propTypes = {
-    navigation: PropTypes.object.isRequired,
     downloads: PropTypes.array.isRequired,
   }
 
@@ -39,7 +37,7 @@ class DownloadsScreen extends Component {
   };
 
   static renderFooter = () => (
-    <View style={{ height: 60 }} />
+    <View style={styles.footer} />
   );
 
   static clearCache(id) {
