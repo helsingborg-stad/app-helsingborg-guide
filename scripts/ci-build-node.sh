@@ -13,6 +13,8 @@ fi
 {
 set -x
 
+npm run-script flow
+
 echo "TODO: enable eslint"
 # npm run-script eslint
 
