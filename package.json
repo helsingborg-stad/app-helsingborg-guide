@@ -5,8 +5,7 @@
   "scripts": {
     "prepare": "patch-package",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "eslint":
-      "eslint index.js src/** --ext .js --report-unused-disable-directives",
+    "eslint": "eslint index.js src/** --ext .js --report-unused-disable-directives",
     "test": "jest",
     "flow": "flow --show-all-errors",
     "clean": "react-native-clean-project"
@@ -62,6 +61,8 @@
     "preset": "react-native"
   },
   "rnpm": {
-    "assets": ["./src/fonts"]
+    "assets": [
+      "./src/fonts"
+    ]
   }
 }
