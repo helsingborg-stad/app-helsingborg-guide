@@ -180,30 +180,6 @@ const styles = StyleSheet.create({
       color: Colors.black,
     }],
   ),
-  closeBtnContainer: {
-    flex: 1,
-    alignItems: "center",
-    paddingTop: 20,
-    paddingBottom: 40,
-    borderBottomWidth: 4,
-    borderBottomColor: Colors.greyBorderColor,
-  },
-  nearByTextContainer: {
-    paddingHorizontal: 34,
-    paddingVertical: 20,
-    justifyContent: "center",
-  },
-  nearByText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
-      fontSize: 18,
-      lineHeight: 21,
-    }],
-  ),
-  fabBtn: {
-    width: 40,
-    height: 40,
-    backgroundColor: Colors.lightPink,
-  },
 });
 
 function getTruncatedTitle(longTitle) {
@@ -480,26 +456,6 @@ class GuideDetailsScreen extends Component {
     const contentObjectsViews = this.getObjectsViews(remainingKeys);
 
     let cc;
-
-    // Removed to prevent the "radar" from being shown.
-    /*
-        const radar = <RadarView title={LangService.strings.SEARCH_AROUND} visible={this.state.searching} />;
-        const nearByObjectsViews = this.getObjectsViews(nearByKeys);
-
-        if (this.state.searching) cc = <View>{radar}</View>;
-        else if (Object.keys(this.state.closestBeacon).length) {
-          cc = (
-            <View>
-              <View style={styles.nearByTextContainer}>
-                <Text style={styles.nearByText}>{LangService.strings.SOMETHING_NEAR_BY}</Text>
-              </View>
-              <View style={[styles.objectsContainer, { borderBottomWidth: 2, borderBottomColor: Colors.greyBorderColor }]}>
-                {nearByObjectsViews}
-              </View>
-            </View>
-          );
-        }
-    */
     return (
       <View>
         <View>{cc}</View>
