@@ -48,7 +48,7 @@ export type OpenHour = {
   closed: boolean,
   opening: string,
   closing: string,
-  dayNumber: string
+  dayNumber: number
 };
 export type OpenHourException = {
   exception_date: string,
@@ -58,8 +58,8 @@ export type Link = { service: string, url: string };
 export type Location = {
   id: number,
   streetAddress: string,
-  latitude: string,
-  longitude: "string",
+  latitude: number,
+  longitude: number,
   openHours: OpenHour[],
   openHoursException: OpenHourException[],
   links: Link[]
@@ -80,6 +80,7 @@ export type PointProperty = {
   icon: string
 };
 export type Action =
+  | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup}
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
@@ -91,10 +92,16 @@ export type Action =
     }
   | { type: "FETCH_POINTPROPERTIES_FAILURE", error: Error };
 
+export type GuideGroupState = {
+  isFetching: boolean,
+  items: GuideGroup[],
+}
+
 export type UIState = {
-  currentGuideGroup: GuideGroup,
+  currentGuideGroup: ?GuideGroup,
 }
 
 export type RootState = {
   uiState: UIState,
+  guideGroups: GuideGroupState,
 }

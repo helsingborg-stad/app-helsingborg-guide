@@ -315,9 +315,9 @@ class GuideListScreen extends Component {
 
   _getList(listItem) {
     const { showMap } = this.state;
-    const { navigation } = this.props;
+    const { navigation, dispatchSelectGuideGroup } = this.props;
     if (showMap) { return (<MapWithListView items={listItem.mapItems} navigation={navigation} />); }
-    return (<GuideList items={listItem.items} navigation={navigation} />);
+    return (<GuideList items={listItem.items} navigation={navigation} dispatchSelectGuideGroup={dispatchSelectGuideGroup} />);
   }
 
   render() {
@@ -379,4 +379,15 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(GuideListScreen);
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchSelectGuideGroup: (guideGroup) => {
+      console.log("DISPATCHING ACTION: ", guideGroup);
+      // TODO move to uiStateActions.js
+      const action = { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup };
+      dispatch(action);
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GuideListScreen);
