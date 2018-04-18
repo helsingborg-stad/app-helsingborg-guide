@@ -1,3 +1,5 @@
+// @flow
+
 export const CREATE_GUIDE = "CREATE_GUIDE";
 export const UPDATE_GUIDE = "UPDATE_GUIDE";
 export const LOAD_GUIDES_SUCCESS = "LOAD_GUIDES_SUCCESS";
@@ -5,10 +7,6 @@ export const LOAD_GUIDES_SUCCESS = "LOAD_GUIDES_SUCCESS";
 export const FETCH_NAVIGATION_REQUEST = "FETCH_NAVIGATION_REQUEST";
 export const FETCH_NAVIGATION_FAILURE = "FETCH_NAVIGATION_FAILURE";
 export const FETCH_NAVIGATION_SUCCESS = "FETCH_NAVIGATION_SUCCESS";
-
-export const FETCH_POINTPROPERTIES_REQUEST = "FETCH_POINTPROPERTIES_REQUEST";
-export const FETCH_POINTPROPERTIES_FAILURE = "FETCH_POINTPROPERTIES_FAILURE";
-export const FETCH_POINTPROPERTIES_SUCCESS = "FETCH_POINTPROPERTIES_SUCCESS";
 
 export const UPDATE_SUBLOCATION = "UPDATE_SUBLOCATION";
 export const LOAD_SUBLOCATIONS_SUCCESS = "LOAD_SUBLOCATIONS_SUCCESS";
@@ -29,7 +27,8 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 export const CREATE_DOWNLOAD_TASK_SUCCESS = "CREATE_DOWNLOAD_TASK_SUCCESS";
 export const CANCEL_DOWNLOAD_TASK_SUCCESS = "CANCEL_DOWNLOAD_TASK_SUCCESS";
 export const RESUME_DOWNLOAD_TASK_SUCCESS = "RESUME_DOWNLOAD_TASK_SUCCESS";
-export const CLEAR_CACHE_DOWNLOAD_TASK_SUCCESS = "CLEAR_CACHE_DOWNLOAD_TASK_SUCCESS";
+export const CLEAR_CACHE_DOWNLOAD_TASK_SUCCESS =
+  "CLEAR_CACHE_DOWNLOAD_TASK_SUCCESS";
 export const DOWNLOAD_TASK_PROGRESSED = "DOWNLOAD_TASK_PROGRESSED";
 export const DOWNLOAD_TASK_COMPLETED = "DOWNLOAD_TASK_COMPLETED";
 export const DOWNLOAD_INFO_CLOSED = "DOWNLOAD_INFO_CLOSED";
@@ -41,3 +40,53 @@ export const CLOSE_MENU = "CLOSE_MENU";
 export const TOGGLE_MENU = "TOGGLE_MENU";
 
 export const GEOLOCATION_UPDATE_SUCCESS = "GEOLOCATION_UPDATE_SUCCESS";
+
+export type Error = { message: string };
+export type Images = { thumbnail: string, medium: string, large: string };
+export type OpenHour = {
+  weekday: string,
+  closed: boolean,
+  opening: string,
+  closing: string,
+  dayNumber: string
+};
+export type OpenHourException = {
+  exception_date: string,
+  exception_information: string
+};
+export type Link = { service: string, url: string };
+export type Location = {
+  id: number,
+  streetAddress: string,
+  latitude: string,
+  longitude: "string",
+  openHours: OpenHour[],
+  openHoursException: OpenHourException[],
+  links: Link[]
+};
+export type GuideGroup = {
+  id: number,
+  description: string,
+  name: string,
+  slug: string,
+  images: Images[],
+  active: boolean,
+  location: Location[]
+};
+export type PointProperty = {
+  id: number,
+  guideID: number,
+  name: string,
+  icon: string
+};
+export type Action =
+  | { type: "FETCH_GUIDEGROUPS_REQUEST" }
+  | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
+  | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
+  | { type: "FETCH_POINTPROPERTIES_REQUEST" }
+  | {
+      type: "FETCH_POINTPROPERTIES_SUCCESS",
+      pointProperties: PointProperty[],
+      guideID: number
+    }
+  | { type: "FETCH_POINTPROPERTIES_FAILURE", error: Error };

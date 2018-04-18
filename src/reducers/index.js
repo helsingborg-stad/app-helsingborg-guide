@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import guides from "./guideReducer";
+import guideGroups from "./guideGroupReducer";
 import navigation from "./navigationReducer";
 import subLocations from "./subLocationReducer";
 import metrics from "./metricReducer";
@@ -8,11 +9,12 @@ import internet from "./internetReducer";
 import error from "./errorReducer";
 import downloads from "./downloadReducer";
 import geolocation from "./geolocationReducer";
-import pointproperties from "./pointPropertiesReducer";
+import pointProperties from "./pointPropertiesReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
 
 const rootReducer = combineReducers({
   guides,
+  guideGroups,
   navigation,
   subLocations,
   audio,
@@ -21,7 +23,7 @@ const rootReducer = combineReducers({
   error,
   downloads,
   geolocation,
-  pointproperties,
+  pointProperties,
   downloadDataVersion,
 });
 

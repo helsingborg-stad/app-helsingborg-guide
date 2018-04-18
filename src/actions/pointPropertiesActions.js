@@ -1,31 +1,34 @@
-import dc from "../data/datacontext";
-import { FETCH_POINTPROPERTIES_SUCCESS, FETCH_POINTPROPERTIES_REQUEST, FETCH_POINTPROPERTIES_FAILURE } from "./actionTypes";
+// @flow
 
-export function fetchPointPropertiesRequest(pointproperties) {
-  return { type: FETCH_POINTPROPERTIES_REQUEST, pointproperties };
+import type { ThunkAction } from "redux-thunk";
+import type { Dispatch } from "redux";
+import type { Error, PointProperty, Action } from "./actionTypes";
+
+import fetchUtils from "../utils/fetchUtils";
+
+export function fetchPointPropertiesRequest(): Action {
+  return { type: "FETCH_POINTPROPERTIES_REQUEST" };
 }
 
-export function fetchPointPropertiesSuccess(pointproperties, guideID) {
-  return { type: FETCH_POINTPROPERTIES_SUCCESS, pointproperties, guideID };
+export function fetchPointPropertiesSuccess(pointProperties: PointProperty[], guideID: number): Action {
+  return { type: "FETCH_POINTPROPERTIES_SUCCESS", pointProperties, guideID };
 }
 
-export function fetchPointPropertiesFailure(error) {
-  return { type: FETCH_POINTPROPERTIES_FAILURE, error };
+export function fetchPointPropertiesFailure(error: Error): Action {
+  return { type: "FETCH_POINTPROPERTIES_FAILURE", error };
 }
 
-export function fetchPointProperties(guideID) {
-  return function fetchPointPropertiesDispatch(dispatch) {
+export function fetchPointProperties(guideID: number): ThunkAction {
+  return function fetchPointPropertiesDispatch(dispatch: Dispatch) {
     dispatch(fetchPointPropertiesRequest());
 
-    const instance = dc();
-    return instance.guide.getPointPropertiesByGuide(guideID)
-      .then((pointproperties) => {
-        if (pointproperties.code) {
-          dispatch(fetchPointPropertiesFailure({ error: pointproperties.message }));
-        } else {
-          dispatch(fetchPointPropertiesSuccess(pointproperties, guideID));
-        }
+    return fetchUtils
+      .getPointPropertiesByGuide(guideID)
+      .then(pointProperties =>
+        dispatch(fetchPointPropertiesSuccess(pointProperties, guideID)),
+      )
+      .catch((error) => {
+        dispatch(fetchPointPropertiesFailure(error.message));
       });
   };
 }
-

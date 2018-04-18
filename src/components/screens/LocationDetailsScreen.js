@@ -74,10 +74,6 @@ const styles = StyleSheet.create({
       color: Colors.black,
     }],
   ),
-  logoContainer: {
-    flex: 1,
-    padding: 10,
-  },
   articleContainer: {
     flex: 4,
     paddingTop: 10,
@@ -147,7 +143,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     elevation: 8,
     marginVertical: 10,
-    shadowColor: "black",
+    shadowColor: Colors.black,
     shadowOpacity: 0.4,
     shadowRadius: 5,
     shadowOffset: { width: 0, height: 2 },
@@ -171,10 +167,8 @@ const styles = StyleSheet.create({
       textAlign: "left",
     }],
   ),
-  closeBtnContainer: {
-    flex: 1,
-    alignItems: "center",
-    paddingVertical: 15,
+  slimNotificationBar: {
+    top: 0,
   },
   comingSoonView: {
     flex: 1,
@@ -363,7 +357,8 @@ class LocationDetailsScreen extends Component {
   displayAccessibility() {
     if (!this.state.pointProperties || !this.state.pointProperties.items || this.state.pointProperties.items.length < 1) { return null; }
 
-    if (!this.state.location || this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
+    if (!this.state.location ||
+        this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
 
     if (!this.state.internet) { return null; }
 
@@ -389,7 +384,7 @@ class LocationDetailsScreen extends Component {
       const uri = image.sizes.medium_large;
       return (
         <ViewContainer>
-          <SlimNotificationBar visible={!this.state.internet} style={{ top: 0 }}>
+          <SlimNotificationBar visible={!this.state.internet} style={styles.slimNotificationBar}>
             <NoInternetText />
           </SlimNotificationBar>
 
@@ -410,7 +405,8 @@ class LocationDetailsScreen extends Component {
                   iconName="directions"
                   text={LangService.strings.DIRECTIONS}
                   onPress={() => {
-                    this.openGoogleMapApp(this.state.location._embedded.location[0].latitude, this.state.location._embedded.location[0].longitude);
+                    this.openGoogleMapApp(this.state.location._embedded.location[0].latitude,
+                                          this.state.location._embedded.location[0].longitude);
                   }}
                 />
               </View>
@@ -463,7 +459,7 @@ function mapStateToProps(state, ownProps) {
     subLocations: getFilteredSubLocations(state.subLocations, location.id) || [],
     internet: state.internet.connected,
     geolocation: state.geolocation,
-    pointProperties: state.pointproperties,
+    pointProperties: state.pointProperties,
   };
 }
 function mapDispatchToProps(dispatch) {

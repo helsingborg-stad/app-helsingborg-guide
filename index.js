@@ -2,18 +2,19 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { getStoredState } from "redux-persist";
 import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage, Platform, Linking } from "react-native";
-import Nav from "guide-hbg/src/Nav";
-import store from "guide-hbg/src/store/configureStore";
-import { loadSubLocations } from "guide-hbg/src/actions/subLoactionActions";
-import internetChanged from "guide-hbg/src/actions/internetActions";
-import LangService from "guide-hbg/src/services/langService";
-import Opener from "guide-hbg/src/services/SettingsService";
-import { errorHappened } from "guide-hbg/src/actions/errorActions";
-import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
-import FullScreenVideoScreen from "guide-hbg/src/components/screens/FullScreenVideoScreen";
-import { loadGuides } from "./src/actions/guideActions";
-import { fetchNavigation } from "./src/actions/navigationActions";
-import LocationService from "./src/services/locationService";
+import Nav from "src/Nav";
+import store from "src/store/configureStore";
+import { loadSubLocations } from "src/actions/subLoactionActions";
+import internetChanged from "src/actions/internetActions";
+import LangService from "src/services/langService";
+import Opener from "src/services/SettingsService";
+import { errorHappened } from "src/actions/errorActions";
+import downloadManager from "src/services/DownloadTasksManager";
+import FullScreenVideoScreen from "src/components/screens/FullScreenVideoScreen";
+import { loadGuides } from "src/actions/guideActions";
+import { fetchGuideGroups } from "src/actions/guideGroupActions";
+import { fetchNavigation } from "src/actions/navigationActions";
+import LocationService from "src/services/locationService";
 
 export default class GuideHbg extends Component {
   static openInternetSettings() {
@@ -37,7 +38,8 @@ export default class GuideHbg extends Component {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
         store.dispatch(fetchNavigation(langCode));
-        store.dispatch(loadGuides(langCode));
+        store.dispatch(loadGuides(langCode)); // old guide groups
+        store.dispatch(fetchGuideGroups(langCode)); // new guide groups
         store.dispatch(loadSubLocations(langCode));
         LangService.getLanguages();
       }

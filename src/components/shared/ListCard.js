@@ -7,9 +7,9 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import TextStyles from "guide-hbg/src/styles/TextStyles";
-import Colors from "guide-hbg/src/styles/Colors";
-import StyleSheetUtils from "guide-hbg/src/utils/StyleSheetUtils";
+import TextStyles from "src/styles/TextStyles";
+import Colors from "src/styles/Colors";
+import StyleSheetUtils from "src/utils/StyleSheetUtils";
 import DistanceView from "./DistanceView";
 import LangService from "../../services/langService";
 import OImage from "./image";

@@ -1,8 +1,16 @@
+// @flow
+
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { StyleSheetUtils } from "../../utils/";
 import { TextStyles, Colors } from "../../styles/";
+
+type Props = {
+  onPress: Function,
+  iconName: string,
+  text: string,
+}
 
 const textMargin = 13;
 
@@ -20,7 +28,7 @@ const styles = StyleSheet.create({
   ]),
 });
 
-export default function IconTextTouchable(props) {
+export default function IconTextTouchable(props: Props) {
   const directions = (
     <TouchableOpacity
       style={styles.container}
