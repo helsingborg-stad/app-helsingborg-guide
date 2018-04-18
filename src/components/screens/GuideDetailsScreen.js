@@ -296,7 +296,7 @@ class GuideDetailsScreen extends Component {
   }
 
   componentDidMount() {
-    this.initBeaconService();
+    // this.initBeaconService();
     this.props.navigation.setParams({ toggleKeypad: this.toggleKeypadVisibility });
   }
 
@@ -315,7 +315,7 @@ class GuideDetailsScreen extends Component {
 
   componentWillUnmount() {
     this.mediaService.release();
-    this.unbindBeaconService();
+    // this.unbindBeaconService();
     clearTimeout(this.smallBtnTimer);
     clearTimeout(this.beaconSearchTimeout);
     clearTimeout(this.beaconSearchStopTimeout);
@@ -448,7 +448,7 @@ class GuideDetailsScreen extends Component {
       // check if the user at the top of the page, if not show the small button and return nothing.
       if (!this.state.radarInFocus) {
         // show the small button on screen
-        this.refreshSmallBtn();
+        // this.refreshSmallBtn(); // What small button...? This function doesn't even exist....
         // -stop any timeout to prevent showing the list.
         if (this.beaconSearchTimeout) {
           clearInterval(this.beaconSearchTimeout);

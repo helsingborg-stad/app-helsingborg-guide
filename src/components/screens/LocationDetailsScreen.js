@@ -289,14 +289,20 @@ class LocationDetailsScreen extends Component {
     }
   }
 
-  _goToSubLocationScene(subLocation) {
+  _goToSubLocation(subLocation) {
     const { navigate } = this.props.navigation;
-    const name = subLocation.title.plain_text;
     AnalyticsUtils.logEvent("view_guide", { name: subLocation.slug });
-    navigate("GuideDetailsScreen", {
-      title: name,
-      id: subLocation.id,
-    });
+    if (subLocation.content_type === "trail") {
+      navigate("TrailScreen", {
+        title: subLocation.title.plain_text,
+        trail: subLocation,
+      });
+    } else if (subLocation.content_type === "guide") {
+      navigate("GuideDetailsScreen", {
+        title: subLocation.title.plain_text,
+        id: subLocation.id,
+      });
+    }
   }
 
   displaySubLocations() {
@@ -308,8 +314,13 @@ class LocationDetailsScreen extends Component {
       {this.state.sublocations.map((subLocation) => {
         if (!subLocation.guide_images || !subLocation.guide_images.length) return null;
         const forKids = subLocation.guide_kids;
+
         return (
-          <TouchableOpacity key={subLocation.id} style={styles.subLocationContainer} onPress={() => this._goToSubLocationScene(subLocation)}>
+          <TouchableOpacity
+            key={subLocation.id}
+            style={styles.subLocationContainer}
+            onPress={() => this._goToSubLocation(subLocation)}
+          >
             <ListItem
               imageSource={{ uri: subLocation.guide_images[0].sizes.medium_large }}
               title={subLocation.title.plain_text}
