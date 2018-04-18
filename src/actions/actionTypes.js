@@ -90,3 +90,11 @@ export type Action =
       guideID: number
     }
   | { type: "FETCH_POINTPROPERTIES_FAILURE", error: Error };
+
+export type UIState = {
+  currentGuideGroup: GuideGroup,
+}
+
+export type RootState = {
+  uiState: UIState,
+}
