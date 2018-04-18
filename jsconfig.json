@@ -1,5 +1,17 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "*",
+            ],
+            "src": [
+                "src"
+            ],
+            "screens": [
+                "src/components/screens"
+            ]
+        },
         "allowJs": true,
         "allowSyntheticDefaultImports": true
     },
