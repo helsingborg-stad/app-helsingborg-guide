@@ -6,7 +6,6 @@ import {
 import {
   StackNavigator,
 } from "react-navigation";
-import ViewContainer from "./components/shared/view_container";
 import {
   DownloadsScreen,
   GuideDetailsScreen,
@@ -20,7 +19,8 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
-} from "./components/screens/";
+} from "screens";
+import ViewContainer from "./components/shared/view_container";
 import {
   Colors,
   HeaderStyles,

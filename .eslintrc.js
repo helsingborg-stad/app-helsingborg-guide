@@ -78,6 +78,9 @@ module.exports = {
     ]
   },
   settings: {
-    "import/resolver": "reactnative"
+    "import/resolver": {
+      "babel-module": {},
+      "reactnative": {}
+    }
   }
 };

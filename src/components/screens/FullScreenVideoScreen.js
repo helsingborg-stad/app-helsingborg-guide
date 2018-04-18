@@ -4,7 +4,7 @@ import React, {
 import {
   NativeModules,
 } from "react-native";
-import VideoPlayer from "guide-hbg/src/components/shared/VideoPlayer";
+import VideoPlayer from "src/components/shared/VideoPlayer";
 
 const { FullScreenVideoModule } = NativeModules;
 
