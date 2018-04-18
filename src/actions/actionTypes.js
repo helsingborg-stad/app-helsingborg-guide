@@ -105,3 +105,5 @@ export type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
 }
+
+export type GetState = () => RootState;
