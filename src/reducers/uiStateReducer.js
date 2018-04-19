@@ -1,7 +1,5 @@
 // @flow
 
-import type { Action, UIState } from "../actions/actionTypes";
-
 const defaultState: UIState = { currentGuideGroup: null };
 
 export default function uiStateReducer(state: UIState = defaultState, action: Action): UIState {

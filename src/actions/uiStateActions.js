@@ -1,7 +1,5 @@
 // @flow
 
-import type { Action, Dispatch, GetState, GuideGroup, ThunkAction } from "./actionTypes";
-
 export default {
   selectCurrentGuideGroup: (id: number): ThunkAction =>
     (dispatch: Dispatch, getState: GetState) => {

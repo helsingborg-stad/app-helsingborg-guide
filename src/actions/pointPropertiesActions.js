@@ -1,7 +1,5 @@
 // @flow
 
-import type { Dispatch, ThunkAction, Error, PointProperty, Action } from "./actionTypes";
-
 import fetchUtils from "../utils/fetchUtils";
 
 export function fetchPointPropertiesRequest(): Action {

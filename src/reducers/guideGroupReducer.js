@@ -1,6 +1,5 @@
 // @flow
 
-import type { Action, GuideGroupState } from "../actions/actionTypes";
 import initialState from "./initialState";
 
 export default function guideGroupReducer(state: GuideGroupState = initialState.guideGroups, action: Action): GuideGroupState {

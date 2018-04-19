@@ -15,8 +15,6 @@ import pointProperties from "./pointPropertiesReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
 import uiState from "./uiStateReducer";
 
-import type { RootState } from "../actions/actionTypes";
-
 const rootReducer: RootState = combineReducers({
   guides,
   guideGroups,

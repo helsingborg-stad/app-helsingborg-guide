@@ -4,8 +4,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationView from "../shared/LocationView";
 
-import type { GuideGroup, RootState } from "../../actions/actionTypes";
-
 type Props = {
   currentGuideGroup: GuideGroup,
 }

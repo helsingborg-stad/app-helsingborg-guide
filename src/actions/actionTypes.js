@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable no-use-before-define */
 
 export const CREATE_GUIDE = "CREATE_GUIDE";
 export const UPDATE_GUIDE = "UPDATE_GUIDE";
@@ -41,72 +40,3 @@ export const CLOSE_MENU = "CLOSE_MENU";
 export const TOGGLE_MENU = "TOGGLE_MENU";
 
 export const GEOLOCATION_UPDATE_SUCCESS = "GEOLOCATION_UPDATE_SUCCESS";
-
-export type Error = { message: string };
-export type Images = { thumbnail: string, medium: string, large: string };
-export type OpenHour = {
-  weekday: string,
-  closed: boolean,
-  opening: string,
-  closing: string,
-  dayNumber: number
-};
-export type OpenHourException = {
-  exception_date: string,
-  exception_information: string
-};
-export type Link = { service: string, url: string };
-export type Location = {
-  id: number,
-  streetAddress: string,
-  latitude: number,
-  longitude: number,
-  openHours: OpenHour[],
-  openHoursException: OpenHourException[],
-  links: Link[]
-};
-export type GuideGroup = {
-  id: number,
-  description: string,
-  name: string,
-  slug: string,
-  images: Images[],
-  active: boolean,
-  location: Location[]
-};
-export type PointProperty = {
-  id: number,
-  guideID: number,
-  name: string,
-  icon: string
-};
-export type Action =
-  | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup }
-  | { type: "FETCH_GUIDEGROUPS_REQUEST" }
-  | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
-  | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
-  | { type: "FETCH_POINTPROPERTIES_REQUEST" }
-  | {
-    type: "FETCH_POINTPROPERTIES_SUCCESS",
-    pointProperties: PointProperty[],
-    guideID: number
-  }
-  | { type: "FETCH_POINTPROPERTIES_FAILURE", error: Error };
-
-export type GuideGroupState = {
-  isFetching: boolean,
-  items: GuideGroup[],
-}
-
-export type UIState = {
-  currentGuideGroup: ?GuideGroup,
-}
-
-export type RootState = {
-  uiState: UIState,
-  guideGroups: GuideGroupState,
-}
-
-export type Dispatch = (action: Action | ThunkAction) => any;
-export type GetState = () => RootState;
-export type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
