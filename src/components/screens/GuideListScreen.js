@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
-import uiStateActions from "../../actions/uiStateActions";
+import { selectCurrentGuideGroup } from "../../actions/uiStateActions";
 import {
   LocationUtils,
   StyleSheetUtils,
@@ -383,7 +383,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatchSelectGuideGroup: (location) => {
-      dispatch(uiStateActions.selectCurrentGuideGroup(location.id));
+      dispatch(selectCurrentGuideGroup(location.id));
     },
   };
 }
