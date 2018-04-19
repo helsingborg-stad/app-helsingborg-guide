@@ -1,6 +1,9 @@
 import { StyleSheet, Dimensions } from "react-native";
-import Colors from "../../../styles/Colors";
-
+import {
+  Colors,
+  TextStyles,
+} from "../../../styles/";
+import { StyleSheetUtils } from "../../../utils/";
 
 const displayWidth = Dimensions.get("window").width;
 const displayHeight = (displayWidth / 16) * 9;
@@ -18,6 +21,20 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
   },
+  comingSoonView: {
+    flex: 1,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    position: "absolute",
+    bottom: 0,
+    zIndex: 100,
+    left: 0,
+    backgroundColor: Colors.lightPurple,
+  },
+  comingSoonText: StyleSheetUtils.flatten([
+    TextStyles.comingSoonText, {
+      color: Colors.white,
+    }]),
   imageBackground: {
     width: displayWidth,
     height: displayHeight,
