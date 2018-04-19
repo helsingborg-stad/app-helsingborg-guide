@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable no-use-before-define */
 
 export const CREATE_GUIDE = "CREATE_GUIDE";
 export const UPDATE_GUIDE = "UPDATE_GUIDE";
@@ -80,16 +81,16 @@ export type PointProperty = {
   icon: string
 };
 export type Action =
-  | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup}
+  | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup }
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
   | { type: "FETCH_POINTPROPERTIES_REQUEST" }
   | {
-      type: "FETCH_POINTPROPERTIES_SUCCESS",
-      pointProperties: PointProperty[],
-      guideID: number
-    }
+    type: "FETCH_POINTPROPERTIES_SUCCESS",
+    pointProperties: PointProperty[],
+    guideID: number
+  }
   | { type: "FETCH_POINTPROPERTIES_FAILURE", error: Error };
 
 export type GuideGroupState = {
@@ -106,4 +107,6 @@ export type RootState = {
   guideGroups: GuideGroupState,
 }
 
+export type Dispatch = (action: Action | ThunkAction) => any;
 export type GetState = () => RootState;
+export type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;

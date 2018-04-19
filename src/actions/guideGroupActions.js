@@ -1,8 +1,6 @@
 // @flow
 
-import type { ThunkAction } from "redux-thunk";
-import type { Dispatch } from "redux";
-import type { Error, GuideGroup, Action } from "./actionTypes";
+import type { Dispatch, ThunkAction, Error, GuideGroup, Action } from "./actionTypes";
 
 import fetchUtils from "../utils/fetchUtils";
 
