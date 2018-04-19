@@ -27,7 +27,7 @@ declare type GuideGroup = {
   description: string,
   name: string,
   slug: string,
-  images: Images[],
+  images: Images,
   active: boolean,
   location: Location[]
 };
