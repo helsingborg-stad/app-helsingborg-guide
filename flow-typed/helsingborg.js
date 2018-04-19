@@ -29,7 +29,7 @@ declare type GuideGroup = {
   slug: string,
   images: Images,
   active: boolean,
-  location: Location[]
+  location: Location
 };
 declare type PointProperty = {
   id: number,
