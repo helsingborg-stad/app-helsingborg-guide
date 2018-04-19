@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
+import uiStateActions from "../../actions/uiStateActions";
 import {
   LocationUtils,
   StyleSheetUtils,
@@ -315,9 +316,9 @@ class GuideListScreen extends Component {
 
   _getList(listItem) {
     const { showMap } = this.state;
-    const { navigation } = this.props;
+    const { navigation, dispatchSelectGuideGroup } = this.props;
     if (showMap) { return (<MapWithListView items={listItem.mapItems} navigation={navigation} />); }
-    return (<GuideList items={listItem.items} navigation={navigation} />);
+    return (<GuideList items={listItem.items} navigation={navigation} dispatchSelectGuideGroup={dispatchSelectGuideGroup} />);
   }
 
   render() {
@@ -379,4 +380,12 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(GuideListScreen);
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchSelectGuideGroup: (location) => {
+      dispatch(uiStateActions.selectCurrentGuideGroup(location.id));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GuideListScreen);

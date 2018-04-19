@@ -1,9 +1,8 @@
 // @flow
 
-import type { Action, GuideGroup } from "../actions/actionTypes";
 import initialState from "./initialState";
 
-export default function guideGroupReducer(state: GuideGroup = initialState.guideGroups, action: Action): GuideGroup {
+export default function guideGroupReducer(state: GuideGroupState = initialState.guideGroups, action: Action): GuideGroupState {
   switch (action.type) {
     case "FETCH_GUIDEGROUPS_REQUEST":
       return { ...state, isFetching: true };

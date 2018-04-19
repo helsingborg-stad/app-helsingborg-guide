@@ -1,3 +1,5 @@
+// @flow
+
 import { combineReducers } from "redux";
 import guides from "./guideReducer";
 import guideGroups from "./guideGroupReducer";
@@ -11,8 +13,9 @@ import downloads from "./downloadReducer";
 import geolocation from "./geolocationReducer";
 import pointProperties from "./pointPropertiesReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
+import uiState from "./uiStateReducer";
 
-const rootReducer = combineReducers({
+const rootReducer: RootState = combineReducers({
   guides,
   guideGroups,
   navigation,
@@ -25,6 +28,7 @@ const rootReducer = combineReducers({
   geolocation,
   pointProperties,
   downloadDataVersion,
+  uiState,
 });
 
 export default rootReducer;

@@ -1,9 +1,5 @@
 // @flow
 
-import type { ThunkAction } from "redux-thunk";
-import type { Dispatch } from "redux";
-import type { Error, PointProperty, Action } from "./actionTypes";
-
 import fetchUtils from "../utils/fetchUtils";
 
 export function fetchPointPropertiesRequest(): Action {
