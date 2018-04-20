@@ -80,4 +80,22 @@ export default StyleSheet.create({
       textAlign: "left",
     }],
   ),
+  articleContainer: {
+    flex: 4,
+    paddingTop: 10,
+    paddingBottom: 5,
+  },
+  articleDescriptionText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      color: Colors.warmGrey,
+    }],
+  ),
+  articleHeaderText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 20,
+      lineHeight: 21,
+      paddingBottom: 10,
+      color: Colors.black,
+    }],
+  ),
 });

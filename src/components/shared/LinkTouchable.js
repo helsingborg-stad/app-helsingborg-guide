@@ -3,7 +3,6 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { StyleSheetUtils } from "../../utils/";
 import { TextStyles, Colors } from "../../styles/";
-import LangService from "../../services/langService";
 
 const textMargin = 13;
 
