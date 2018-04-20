@@ -3,12 +3,14 @@
 import React from "react";
 import { View, Text, ScrollView, ImageBackground } from "react-native";
 import styles from "./style";
+import DistanceView from "../DistanceViewNew";
 import OpeningHoursView from "../OpeningHoursView";
 import LangService from "../../../services/langService";
 
 type Props = {
   guideGroup: GuideGroup,
   now: Date,
+  geolocation: GeolocationType
 }
 
 function displayComingSoon(comingSoonText: string) {
@@ -18,6 +20,7 @@ function displayComingSoon(comingSoonText: string) {
     </View>
   );
 }
+
 const LocationView = (props: Props) => (
   <View style={styles.viewContainer} >
     <ScrollView style={styles.scrollView}>
@@ -39,7 +42,12 @@ const LocationView = (props: Props) => (
               now={props.now}
               textStyle={styles.openTimeText}
             />
-            {/* displayDistance(this.props.geolocation, this.state.location._embedded.location) */}
+            <DistanceView
+              textStyle={styles.distanceText}
+              currentLocation={props.geolocation}
+              location={props.guideGroup.location}
+              useFromHereText
+            />
           </View>
         </View>
       </View>

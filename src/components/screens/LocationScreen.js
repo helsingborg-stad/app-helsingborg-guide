@@ -6,6 +6,7 @@ import LocationView from "../shared/LocationView";
 
 type Props = {
   currentGuideGroup: GuideGroup,
+  geolocation: Geolocation
 }
 
 class LocationScreen extends Component<Props> {
@@ -15,17 +16,19 @@ class LocationScreen extends Component<Props> {
   }
 
   render() {
-    const { currentGuideGroup } = this.props;
+    const { currentGuideGroup, geolocation } = this.props;
     const now = new Date();
-    return <LocationView guideGroup={currentGuideGroup} now={now} />;
+    return <LocationView guideGroup={currentGuideGroup} now={now} geolocation={geolocation} />;
   }
 }
 
 function mapStateToProps(state: RootState) {
   const { currentGuideGroup } = state.uiState;
+  const { geolocation } = state;
 
   return {
     currentGuideGroup,
+    geolocation,
   };
 }
 

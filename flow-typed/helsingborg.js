@@ -63,8 +63,25 @@ declare type UIState = {
 declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
+  geolocation: GeolocationType
 }
 
 declare type Dispatch = (action: Action | ThunkAction) => any;
 declare type GetState = () => RootState;
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
+
+declare type Coords = {
+  speed: number,
+  longitude: number,
+  latitude: number,
+  accuracy: number,
+  heading: number,
+  altitude: number,
+  altitudeAccuracy: number
+}
+
+/* in lack of a better name. Geolocation was taken */
+declare type GeolocationType = {
+  timestamp: number,
+  coords: Coords
+}

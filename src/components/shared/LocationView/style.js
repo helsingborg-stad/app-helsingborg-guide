@@ -73,4 +73,11 @@ export default StyleSheet.create({
       color: Colors.black,
     }],
   ),
+  distanceText: StyleSheetUtils.flatten([
+    TextStyles.description, {
+      fontWeight: "400",
+      color: Colors.warmGrey,
+      textAlign: "left",
+    }],
+  ),
 });
