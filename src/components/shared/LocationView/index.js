@@ -4,8 +4,10 @@ import React from "react";
 import { View, Text, ScrollView, ImageBackground } from "react-native";
 import styles from "./style";
 import DistanceView from "../DistanceViewNew";
+import IconTextTouchable from "../IconTextTouchable";
 import OpeningHoursView from "../OpeningHoursView";
 import LangService from "../../../services/langService";
+import { UrlUtils, LocationUtils } from "../../../utils/";
 
 type Props = {
   guideGroup: GuideGroup,
@@ -19,6 +21,12 @@ function displayComingSoon(comingSoonText: string) {
       <Text style={styles.comingSoonText}>{comingSoonText}</Text>
     </View>
   );
+}
+
+function openGoogleMapApp(geolocation: GeolocationType, lat: number, lng: number) {
+  const directionsUrl = LocationUtils.directionsUrl(lat, lng, geolocation);
+  console.log(directionsUrl);
+  UrlUtils.openUrlIfValid(directionsUrl, LangService.strings.OPEN_IN_MAPS, "", LangService.strings.CANCEL, LangService.strings.OPEN);
 }
 
 const LocationView = (props: Props) => (
@@ -49,6 +57,15 @@ const LocationView = (props: Props) => (
               useFromHereText
             />
           </View>
+          <IconTextTouchable
+            iconName="directions"
+            text={LangService.strings.DIRECTIONS}
+            onPress={() => {
+              openGoogleMapApp(props.geolocation,
+                props.guideGroup.location.latitude,
+                props.guideGroup.location.longitude);
+            }}
+          />
         </View>
       </View>
     </ScrollView>
