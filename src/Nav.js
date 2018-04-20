@@ -8,7 +8,7 @@ import {
 } from "react-navigation";
 import {
   DownloadsScreen,
-  GuideDetailsScreen,
+  GuideScreen,
   GuideListScreen,
   ImageScreen,
   LocationScreen,
@@ -32,7 +32,7 @@ const GuideNavigator = StackNavigator(
     GuideListScreen: { screen: GuideListScreen },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
-    GuideDetailsScreen: { screen: GuideDetailsScreen },
+    GuideDetailsScreen: { screen: GuideScreen },
     ObjectDetailsScreen: { screen: ObjectDetailsScreen },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
