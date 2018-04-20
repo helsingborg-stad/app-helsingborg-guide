@@ -8,6 +8,7 @@ declare type OpenHour = {
   closing: string,
   dayNumber: number
 };
+/* TODO: camelCase */
 declare type OpenHourException = {
   exception_date: string,
   exception_information: string

@@ -41,4 +41,36 @@ export default StyleSheet.create({
     maxHeight: MAX_IMAGE_HEIGHT,
     zIndex: 1000,
   },
+  bodyContainer: {
+    flex: 1,
+    alignItems: "stretch",
+    backgroundColor: Colors.white,
+    paddingHorizontal: 20,
+  },
+  titleContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingTop: 12,
+    paddingBottom: 4,
+  },
+  title: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 30,
+      textAlign: "center",
+      color: Colors.black,
+    }],
+  ),
+  openTimeContainer: {
+    flex: 1,
+    paddingVertical: 4,
+  },
+  openTimeText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "normal",
+      lineHeight: 19,
+      color: Colors.black,
+    }],
+  ),
 });

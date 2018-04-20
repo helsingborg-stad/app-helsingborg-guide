@@ -3,7 +3,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationView from "../shared/LocationView";
-import LangService from "../../services/langService";
 
 type Props = {
   currentGuideGroup: GuideGroup,
@@ -17,7 +16,8 @@ class LocationScreen extends Component<Props> {
 
   render() {
     const { currentGuideGroup } = this.props;
-    return <LocationView guideGroup={currentGuideGroup} comingSoonText={LangService.strings.COMING_SOON} />;
+    const now = new Date();
+    return <LocationView guideGroup={currentGuideGroup} now={now} />;
   }
 }
 
