@@ -18,6 +18,8 @@ npm run-script flow
 echo "TODO: enable eslint"
 # npm run-script eslint
 
+npm run-script test
+
 mkdir -p build/
 
 # Imitating node_modules/react-native/packager/react-native-xcode.sh

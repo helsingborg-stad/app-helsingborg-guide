@@ -13,9 +13,10 @@ import { UrlUtils, LocationUtils } from "../../../utils/";
 type Props = {
   guideGroup: GuideGroup,
   now: Date,
-  geolocation: GeolocationType,
-  navigation: Object
+  geolocation?: ?GeolocationType,
+  navigation: any
 }
+
 
 function getWebUrl(links: Link[]): ?string {
   let webUrl = null;
@@ -37,9 +38,34 @@ function displayComingSoon(comingSoonText: string) {
   );
 }
 
+function displayDistance(currentLocation: GeolocationType, location: Location) {
+  return (
+    <DistanceView
+      textStyle={styles.distanceText}
+      currentLocation={currentLocation}
+      location={location}
+      useFromHereText
+    />
+  );
+}
+
 function openGoogleMapApp(geolocation: GeolocationType, lat: number, lng: number) {
   const directionsUrl = LocationUtils.directionsUrl(lat, lng, geolocation);
   UrlUtils.openUrlIfValid(directionsUrl, LangService.strings.OPEN_IN_MAPS, "", LangService.strings.CANCEL, LangService.strings.OPEN);
+}
+
+function displayDirections(geolocation: GeolocationType, location: Location) {
+  return (
+    <IconTextTouchable
+      iconName="directions"
+      text={LangService.strings.DIRECTIONS}
+      onPress={() => {
+        openGoogleMapApp(geolocation,
+          location.latitude,
+          location.longitude);
+      }}
+    />
+  );
 }
 
 const LocationView = (props: Props) => {
@@ -65,22 +91,9 @@ const LocationView = (props: Props) => {
                 now={props.now}
                 textStyle={styles.openTimeText}
               />
-              <DistanceView
-                textStyle={styles.distanceText}
-                currentLocation={props.geolocation}
-                location={props.guideGroup.location}
-                useFromHereText
-              />
+              {props.geolocation ? displayDistance(props.geolocation, props.guideGroup.location) : null}
             </View>
-            <IconTextTouchable
-              iconName="directions"
-              text={LangService.strings.DIRECTIONS}
-              onPress={() => {
-                openGoogleMapApp(props.geolocation,
-                  props.guideGroup.location.latitude,
-                  props.guideGroup.location.longitude);
-              }}
-            />
+            {props.geolocation ? displayDirections(props.geolocation, props.guideGroup.location) : null}
           </View>
           {/* TODO: list of guides! with the new guide data */}
           <View style={styles.articleContainer}>
@@ -93,6 +106,10 @@ const LocationView = (props: Props) => {
       </ScrollView>
     </View>
   );
+};
+
+LocationView.defaultProps = {
+  geolocation: null,
 };
 
 export default LocationView;

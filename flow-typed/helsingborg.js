@@ -11,7 +11,7 @@ declare type OpenHour = {
 /* TODO: camelCase */
 declare type OpenHourException = {
   exception_date: string,
-  exception_information: string
+  exeption_information: string
 };
 declare type Link = { service: string, url: string };
 declare type Location = {

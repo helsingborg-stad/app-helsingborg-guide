@@ -8,7 +8,7 @@ function getOpeningHours(openingList: OpenHour[], expList: OpenHourException[], 
   if (!openingList || !openingList.length) return null;
   if (expList && expList.length) {
     const exp = expList.find(item => now.toDateString() === new Date(item.exception_date).toDateString());
-    if (exp) return exp.exception_information;
+    if (exp) return exp.exeption_information;
   }
 
   const nowDay = now.getDay();
