@@ -8,10 +8,6 @@ import LocationView from "../index";
 
 import renderer from "react-test-renderer";
 
-jest.mock("../../../../utils/AnalyticsUtils", () => ({ default: jest.fn() }));
-
-jest.mock("../../../../services/langService");
-
 const guideGroup: GuideGroup =
   {
     id: 222,
