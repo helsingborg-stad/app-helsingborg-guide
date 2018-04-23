@@ -120,16 +120,11 @@ const guideGroup: GuideGroup =
 
   };
 
-
-test("no geolocation", () => {
-  const now: Date = new Date("June 11, 2018 12:00:00");
-  const tree = renderer.create(<LocationView guideGroup={guideGroup} now={now} navigation={{}} />).toJSON();
-  expect(tree).toMatchSnapshot();
-});
+// TODO: tell HBG that their exception opening hours are for 2017
 
 test("weekdays", () => {
   let i = 0;
-  const now: Date = new Date("June 11, 2018 12:00:00");
+  const now: Date = new Date("June 12, 2017 12:00:00");
   for (i = 0; i < 7; i += 1) {
     const tree = renderer.create(<LocationView guideGroup={guideGroup} now={now} navigation={{}} />).toJSON();
     expect(tree).toMatchSnapshot();
@@ -137,3 +132,11 @@ test("weekdays", () => {
     now.setDate(now.getDate() + 1);
   }
 });
+
+
+test("no geolocation", () => {
+  const now: Date = new Date("June 12, 2017 12:00:00");
+  const tree = renderer.create(<LocationView guideGroup={guideGroup} now={now} navigation={{}} />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+

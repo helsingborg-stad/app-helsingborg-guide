@@ -582,7 +582,7 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              Open today 10:00-12:00
+              Parken stänger kl 15 med sista insläpp kl 14.
             </Text>
           </View>
         </View>
@@ -1747,7 +1747,7 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              
+              Sofiero Classic. Parken har öppet kl 10-16.
             </Text>
           </View>
         </View>
