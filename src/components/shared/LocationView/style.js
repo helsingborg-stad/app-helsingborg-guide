@@ -1,13 +1,9 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   Colors,
   TextStyles,
 } from "../../../styles/";
 import { StyleSheetUtils } from "../../../utils/";
-
-const displayWidth = Dimensions.get("window").width;
-const displayHeight = (displayWidth / 16) * 9;
-const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
 
 export default StyleSheet.create({
   viewContainer: {
@@ -36,9 +32,9 @@ export default StyleSheet.create({
       color: Colors.white,
     }]),
   imageBackground: {
-    width: displayWidth,
-    height: displayHeight,
-    maxHeight: MAX_IMAGE_HEIGHT,
+    width: "100%",
+    height: "auto",
+    aspectRatio: 16 / 9,
     zIndex: 1000,
   },
   bodyContainer: {
