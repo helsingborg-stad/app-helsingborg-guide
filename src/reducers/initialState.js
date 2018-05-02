@@ -20,5 +20,5 @@ export default {
   downloads: [],
   downloadDataVersion: 0,
   position: null,
-  pointProperties: { name: "", icon: "", guideID: 0 },
+  uiState: { currentGuideGroup: null, currentPointProperties: null },
 };

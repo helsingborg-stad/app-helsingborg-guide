@@ -11,7 +11,7 @@ import renderer from "react-test-renderer";
 const guideGroup: GuideGroup =
   {
     id: 222,
-    description: "Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.",
+    description: "Sofiero slottspark är en blomstrande oas",
     name: "Sofiero",
     slug: "sofiero",
     images: {

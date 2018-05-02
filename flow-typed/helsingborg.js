@@ -58,6 +58,7 @@ declare type GuideGroupState = {
 
 declare type UIState = {
   currentGuideGroup: ?GuideGroup,
+  currentPointProperties: ?{ isFetching: boolean, items: PointProperty[] }
 }
 
 declare type RootState = {

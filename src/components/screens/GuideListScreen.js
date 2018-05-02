@@ -12,6 +12,7 @@ import {
 import { connect } from "react-redux";
 import { TabViewAnimated, TabBar } from "react-native-tab-view";
 import uiStateActions from "../../actions/uiStateActions";
+import { fetchPointProperties } from "../../actions/pointPropertiesActions";
 import {
   LocationUtils,
   StyleSheetUtils,
@@ -384,6 +385,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatchSelectGuideGroup: (location) => {
       dispatch(uiStateActions.selectCurrentGuideGroup(location.id));
+      dispatch(fetchPointProperties(location._embedded.location[0].id)); // TODO: change to the new data format.
     },
   };
 }

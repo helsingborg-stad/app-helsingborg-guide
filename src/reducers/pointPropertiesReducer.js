@@ -3,7 +3,7 @@
 import initialState from "./initialState";
 
 export default function pointpropertiesReducer(
-  state: PointProperty = initialState.pointProperties,
+  state: PointProperty = initialState.uiState.currentPointProperties,
   action: Action,
 ): PointProperty {
   switch (action.type) {

@@ -3,15 +3,18 @@
 import React from "react";
 import { View, Text, ScrollView, ImageBackground } from "react-native";
 import styles from "./style";
+
 import DistanceView from "../DistanceViewNew";
 import IconTextTouchable from "../IconTextTouchable";
-import OpeningHoursView from "../OpeningHoursView";
-import WebLinkView from "../WebLinkView";
 import LangService from "../../../services/langService";
+import OpeningHoursView from "../OpeningHoursView";
+import SVGView from "../../shared/SVGView";
 import { UrlUtils, LocationUtils } from "../../../utils/";
+import WebLinkView from "../WebLinkView";
 
 type Props = {
   guideGroup: GuideGroup,
+  pointProperties: ?PointProperty[],
   now: Date,
   geolocation?: ?GeolocationType,
   navigation: any
@@ -68,6 +71,25 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
   );
 }
 
+function displayPointProperties(pointProperties: PointProperty[], locationID: number) {
+  if (pointProperties[0].guideID !== locationID) { return null; }
+
+  const pointPropertyView = (
+    <View>
+      <View style={styles.divider} />
+      <View style={styles.pointPropertiesSectionContainer}>
+        {pointProperties.map(element =>
+          (<View style={styles.pointPropertyContainer} key={element.id} >
+            <SVGView logoType={element.icon} placeHolder="" customStyle={styles.pointPropertyIcon} />
+            <Text style={styles.pointPropertyText} >{element.name}</Text>
+          </View>),
+        )}
+      </View>
+    </View>
+  );
+  return pointPropertyView;
+}
+
 const LocationView = (props: Props) => {
   const webUrl = getWebUrl(props.guideGroup.location.links);
   return (
@@ -101,7 +123,7 @@ const LocationView = (props: Props) => {
             <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
           </View>
           {webUrl ? <WebLinkView url={webUrl} navigation={props.navigation} /> : null}
-          {/* this.displayAccessibility() with the new pointproperties data */}
+          {props.pointProperties ? displayPointProperties(props.pointProperties, props.guideGroup.location.id) : null}
         </View>
       </ScrollView>
     </View>

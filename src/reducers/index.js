@@ -11,9 +11,9 @@ import internet from "./internetReducer";
 import error from "./errorReducer";
 import downloads from "./downloadReducer";
 import geolocation from "./geolocationReducer";
-import pointProperties from "./pointPropertiesReducer";
+import currentPointProperties from "./pointPropertiesReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
-import uiState from "./uiStateReducer";
+import currentGuideGroup from "./uiStateReducer";
 
 const rootReducer: RootState = combineReducers({
   guides,
@@ -26,9 +26,12 @@ const rootReducer: RootState = combineReducers({
   error,
   downloads,
   geolocation,
-  pointProperties,
   downloadDataVersion,
-  uiState,
+  uiState: combineReducers({
+    currentPointProperties,
+    currentGuideGroup,
+  }),
+
 });
 
 export default rootReducer;
