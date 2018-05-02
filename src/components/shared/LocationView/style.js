@@ -18,12 +18,10 @@ export default StyleSheet.create({
     backgroundColor: Colors.white,
   },
   comingSoonView: {
-    flex: 1,
     paddingVertical: 5,
     paddingHorizontal: 10,
     position: "absolute",
     bottom: 0,
-    zIndex: 100,
     left: 0,
     backgroundColor: Colors.lightPurple,
   },
@@ -35,7 +33,6 @@ export default StyleSheet.create({
     width: "100%",
     height: "auto",
     aspectRatio: 16 / 9,
-    zIndex: 1000,
   },
   bodyContainer: {
     flex: 1,
