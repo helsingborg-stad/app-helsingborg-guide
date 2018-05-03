@@ -31,7 +31,7 @@ export default ({ items, navigation, dispatchSelectGuideGroup }) => {
     dispatchSelectGuideGroup(location);
     const { navigate } = navigation;
     AnalyticsUtils.logEvent("view_location", { name: location.slug });
-    navigate("LocationDetailsScreen", { location });
+    navigate("LocationScreen", { location });
   };
 
   const _navigateToTrail = (trail) => {
