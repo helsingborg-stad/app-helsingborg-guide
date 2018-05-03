@@ -1,237 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`no geolocation 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
-      "flex": 1,
-      "justifyContent": "flex-start",
-    }
-  }
->
-  <RCTScrollView
-    style={Object {}}
-  >
-    <View>
-      <View
-        style={
-          Object {
-            "backgroundColor": "#ffffff",
-            "flex": 1,
-          }
-        }
-      >
-        <View
-          style={
-            Object {
-              "aspectRatio": 1.7777777777777777,
-              "height": "auto",
-              "width": "100%",
-            }
-          }
-        >
-          <Image
-            source={
-              Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
-              }
-            }
-            style={
-              Array [
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                Object {
-                  "height": "auto",
-                  "width": "100%",
-                },
-                undefined,
-              ]
-            }
-          />
-        </View>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
-            "flex": 1,
-            "paddingHorizontal": 20,
-          }
-        }
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "flex": 1,
-              "justifyContent": "center",
-              "paddingBottom": 4,
-              "paddingTop": 12,
-            }
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "color": "black",
-                "fontFamily": "Roboto",
-                "fontSize": 30,
-                "textAlign": "center",
-              }
-            }
-          >
-            Sofiero
-          </Text>
-          <View
-            style={
-              Object {
-                "flex": 1,
-                "paddingVertical": 4,
-              }
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "black",
-                  "fontFamily": "Roboto",
-                  "fontSize": 16,
-                  "fontWeight": "normal",
-                  "lineHeight": 19,
-                }
-              }
-            >
-              Open today 10:00-11:00
-            </Text>
-          </View>
-        </View>
-        <View
-          style={
-            Object {
-              "flex": 4,
-              "paddingBottom": 5,
-              "paddingTop": 10,
-            }
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "color": "black",
-                "fontFamily": "Roboto",
-                "fontSize": 20,
-                "lineHeight": 21,
-                "paddingBottom": 10,
-              }
-            }
-          >
-            About Sofiero
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "color": "#7f7f7f",
-                "fontFamily": "Roboto",
-                "fontSize": 16,
-                "lineHeight": 22,
-              }
-            }
-          >
-            Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.
-          </Text>
-        </View>
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
-          accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
-          isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "opacity": 1,
-            }
-          }
-          testID={undefined}
-          tvParallaxProperties={undefined}
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={false}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                Object {
-                  "color": "#a61380",
-                  "fontSize": 24,
-                },
-                undefined,
-                Object {
-                  "fontFamily": "Material Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-              ]
-            }
-          >
-            
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "color": "#a61380",
-                "fontFamily": "Roboto",
-                "fontSize": 16,
-                "fontWeight": "500",
-                "lineHeight": 23,
-                "marginLeft": 7,
-                "marginRight": 13,
-              }
-            }
-          >
-            sofiero.se
-          </Text>
-        </View>
-      </View>
-    </View>
-  </RCTScrollView>
-</View>
-`;
-
 exports[`weekdays 1`] = `
 <View
   style={
@@ -389,7 +157,7 @@ exports[`weekdays 1`] = `
               }
             }
           >
-            Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.
+            Sofiero slottspark är en blomstrande oas
           </Text>
         </View>
         <View
@@ -457,6 +225,247 @@ exports[`weekdays 1`] = `
           >
             sofiero.se
           </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#D6D6D6",
+                "height": 2,
+                "marginTop": 30,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingBottom": 20,
+                "paddingTop": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Café
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Gratis wifi
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Skötrum
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Tillgängligt
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Toalett
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -621,7 +630,7 @@ exports[`weekdays 2`] = `
               }
             }
           >
-            Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.
+            Sofiero slottspark är en blomstrande oas
           </Text>
         </View>
         <View
@@ -689,6 +698,247 @@ exports[`weekdays 2`] = `
           >
             sofiero.se
           </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#D6D6D6",
+                "height": 2,
+                "marginTop": 30,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingBottom": 20,
+                "paddingTop": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Café
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Gratis wifi
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Skötrum
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Tillgängligt
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Toalett
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -853,7 +1103,7 @@ exports[`weekdays 3`] = `
               }
             }
           >
-            Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.
+            Sofiero slottspark är en blomstrande oas
           </Text>
         </View>
         <View
@@ -921,6 +1171,247 @@ exports[`weekdays 3`] = `
           >
             sofiero.se
           </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#D6D6D6",
+                "height": 2,
+                "marginTop": 30,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingBottom": 20,
+                "paddingTop": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Café
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Gratis wifi
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Skötrum
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Tillgängligt
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Toalett
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -1085,7 +1576,7 @@ exports[`weekdays 4`] = `
               }
             }
           >
-            Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.
+            Sofiero slottspark är en blomstrande oas
           </Text>
         </View>
         <View
@@ -1153,6 +1644,247 @@ exports[`weekdays 4`] = `
           >
             sofiero.se
           </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#D6D6D6",
+                "height": 2,
+                "marginTop": 30,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingBottom": 20,
+                "paddingTop": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Café
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Gratis wifi
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Skötrum
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Tillgängligt
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Toalett
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -1317,7 +2049,7 @@ exports[`weekdays 5`] = `
               }
             }
           >
-            Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.
+            Sofiero slottspark är en blomstrande oas
           </Text>
         </View>
         <View
@@ -1385,6 +2117,247 @@ exports[`weekdays 5`] = `
           >
             sofiero.se
           </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#D6D6D6",
+                "height": 2,
+                "marginTop": 30,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingBottom": 20,
+                "paddingTop": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Café
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Gratis wifi
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Skötrum
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Tillgängligt
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Toalett
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -1549,7 +2522,7 @@ exports[`weekdays 6`] = `
               }
             }
           >
-            Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.
+            Sofiero slottspark är en blomstrande oas
           </Text>
         </View>
         <View
@@ -1617,6 +2590,247 @@ exports[`weekdays 6`] = `
           >
             sofiero.se
           </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#D6D6D6",
+                "height": 2,
+                "marginTop": 30,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingBottom": 20,
+                "paddingTop": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Café
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Gratis wifi
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Skötrum
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Tillgängligt
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Toalett
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -1781,7 +2995,7 @@ exports[`weekdays 7`] = `
               }
             }
           >
-            Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.
+            Sofiero slottspark är en blomstrande oas
           </Text>
         </View>
         <View
@@ -1849,6 +3063,1278 @@ exports[`weekdays 7`] = `
           >
             sofiero.se
           </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#D6D6D6",
+                "height": 2,
+                "marginTop": 30,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingBottom": 20,
+                "paddingTop": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Café
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Gratis wifi
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Skötrum
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Tillgängligt
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Toalett
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`with geolocation 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#ffffff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <RCTScrollView
+    style={Object {}}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#ffffff",
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        >
+          <Image
+            source={
+              Object {
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+              }
+            }
+            style={
+              Array [
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                Object {
+                  "height": "auto",
+                  "width": "100%",
+                },
+                undefined,
+              ]
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "stretch",
+            "backgroundColor": "#ffffff",
+            "flex": 1,
+            "paddingHorizontal": 20,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "flex": 1,
+              "justifyContent": "center",
+              "paddingBottom": 4,
+              "paddingTop": 12,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "black",
+                "fontFamily": "Roboto",
+                "fontSize": 30,
+                "textAlign": "center",
+              }
+            }
+          >
+            Sofiero
+          </Text>
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "paddingVertical": 4,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "black",
+                  "fontFamily": "Roboto",
+                  "fontSize": 16,
+                  "fontWeight": "normal",
+                  "lineHeight": 19,
+                }
+              }
+            >
+              Open today 10:00-11:00
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#7f7f7f",
+                  "fontFamily": "Roboto",
+                  "fontSize": 16,
+                  "fontWeight": "400",
+                  "lineHeight": 22,
+                  "textAlign": "left",
+                }
+              }
+            >
+              4
+               
+              km
+               
+              from here
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "flexDirection": "row",
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#a61380",
+                    "fontSize": 24,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#a61380",
+                  "fontFamily": "Roboto",
+                  "fontSize": 16,
+                  "fontWeight": "500",
+                  "lineHeight": 23,
+                  "marginRight": 13,
+                }
+              }
+            >
+              Directions
+            </Text>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "flex": 4,
+              "paddingBottom": 5,
+              "paddingTop": 10,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "black",
+                "fontFamily": "Roboto",
+                "fontSize": 20,
+                "lineHeight": 21,
+                "paddingBottom": 10,
+              }
+            }
+          >
+            About Sofiero
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#7f7f7f",
+                "fontFamily": "Roboto",
+                "fontSize": 16,
+                "lineHeight": 22,
+              }
+            }
+          >
+            Sofiero slottspark är en blomstrande oas
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#a61380",
+                  "fontSize": 24,
+                },
+                undefined,
+                Object {
+                  "fontFamily": "Material Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#a61380",
+                "fontFamily": "Roboto",
+                "fontSize": 16,
+                "fontWeight": "500",
+                "lineHeight": 23,
+                "marginLeft": 7,
+                "marginRight": 13,
+              }
+            }
+          >
+            sofiero.se
+          </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#D6D6D6",
+                "height": 2,
+                "marginTop": 30,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingBottom": 20,
+                "paddingTop": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Café
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Gratis wifi
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Skötrum
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Tillgängligt
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Toalett
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`with point properties 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#ffffff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <RCTScrollView
+    style={Object {}}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#ffffff",
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        >
+          <Image
+            source={
+              Object {
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+              }
+            }
+            style={
+              Array [
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                Object {
+                  "height": "auto",
+                  "width": "100%",
+                },
+                undefined,
+              ]
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "stretch",
+            "backgroundColor": "#ffffff",
+            "flex": 1,
+            "paddingHorizontal": 20,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "flex": 1,
+              "justifyContent": "center",
+              "paddingBottom": 4,
+              "paddingTop": 12,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "black",
+                "fontFamily": "Roboto",
+                "fontSize": 30,
+                "textAlign": "center",
+              }
+            }
+          >
+            Sofiero
+          </Text>
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "paddingVertical": 4,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "black",
+                  "fontFamily": "Roboto",
+                  "fontSize": 16,
+                  "fontWeight": "normal",
+                  "lineHeight": 19,
+                }
+              }
+            >
+              Open today 10:00-11:00
+            </Text>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "flex": 4,
+              "paddingBottom": 5,
+              "paddingTop": 10,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "black",
+                "fontFamily": "Roboto",
+                "fontSize": 20,
+                "lineHeight": 21,
+                "paddingBottom": 10,
+              }
+            }
+          >
+            About Sofiero
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#7f7f7f",
+                "fontFamily": "Roboto",
+                "fontSize": 16,
+                "lineHeight": 22,
+              }
+            }
+          >
+            Sofiero slottspark är en blomstrande oas
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#a61380",
+                  "fontSize": 24,
+                },
+                undefined,
+                Object {
+                  "fontFamily": "Material Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#a61380",
+                "fontFamily": "Roboto",
+                "fontSize": 16,
+                "fontWeight": "500",
+                "lineHeight": 23,
+                "marginLeft": 7,
+                "marginRight": 13,
+              }
+            }
+          >
+            sofiero.se
+          </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#D6D6D6",
+                "height": 2,
+                "marginTop": 30,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingBottom": 20,
+                "paddingTop": 10,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Café
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Gratis wifi
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Skötrum
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Tillgängligt
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Toalett
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>

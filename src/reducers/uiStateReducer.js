@@ -1,6 +1,8 @@
 // @flow
 
-const defaultState: UIState = { currentGuideGroup: null };
+const defaultState: UIState = {
+  currentGuideGroup: null,
+};
 
 export default function uiStateReducer(state: UIState = defaultState, action: Action): UIState {
   switch (action.type) {

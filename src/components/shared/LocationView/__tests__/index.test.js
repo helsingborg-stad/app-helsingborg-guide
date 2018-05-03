@@ -8,10 +8,25 @@ import LocationView from "../index";
 
 import renderer from "react-test-renderer";
 
+
+const geolocation: GeolocationType =
+  {
+    coords: {
+      speed: -1,
+      longitude: 12.68871,
+      latitude: 56.049228,
+      accuracy: 5,
+      heading: -1,
+      altitude: 0,
+      altitudeAccuracy: -1,
+    },
+    timestamp: 1525253893426.6992,
+  };
+
 const guideGroup: GuideGroup =
   {
     id: 222,
-    description: "Sofiero slottspark är en blomstrande oas och visar varje vår och sommar upp 10 000 blommande rhododendronbuskar i en kaskad av olika färger och sorter. Parken och slottet har tidigare varit ett kungligt sommarresidens. Oscar II lät uppföra Sofiero och tillägnade slottet till sin kära Sofia. Parken skänktes av Gustaf VI Adolf till Helsingborgs stad 1959 och har sedan 1974 stått öppen för allmänheten. Mitt bland rhododendronblommorna kan du besöka ravinens porlande bäck, konstutställningar och slottsrestaurangen med utsikt över Öresund som finns med i White Guide för sin gourmetmat. Eller ta med egen filt och picknickkorg och njut i slottsparken.",
+    description: "Sofiero slottspark är en blomstrande oas",
     name: "Sofiero",
     slug: "sofiero",
     images: {
@@ -117,10 +132,39 @@ const guideGroup: GuideGroup =
         },
       ],
     },
-
+    pointProperties:
+      [
+        {
+          id: 3806,
+          slug: "cafe",
+          name: "Café",
+          icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+        },
+        {
+          id: 3804,
+          slug: "wifi",
+          name: "Gratis wifi",
+          icon: "",
+        },
+        {
+          id: 3607,
+          slug: "nursingroom",
+          name: "Skötrum",
+        },
+        {
+          id: 3606,
+          slug: "tillgangligt",
+          name: "Tillgängligt",
+          icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+        },
+        {
+          id: 3800,
+          slug: "toalett",
+          name: "Toalett",
+          icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+        },
+      ],
   };
-
-// TODO: tell HBG that their exception opening hours are for 2017
 
 test("weekdays", () => {
   let i = 0;
@@ -134,9 +178,25 @@ test("weekdays", () => {
 });
 
 
-test("no geolocation", () => {
+test("with geolocation", () => {
   const now: Date = new Date("June 12, 2017 12:00:00");
-  const tree = renderer.create(<LocationView guideGroup={guideGroup} now={now} navigation={{}} />).toJSON();
+  const tree = renderer.create(<LocationView
+    guideGroup={guideGroup}
+    now={now}
+    navigation={{}}
+    geolocation={geolocation}
+  />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
+
+// with point properties
+test("with point properties", () => {
+  const now: Date = new Date("June 12, 2017 12:00:00");
+  const tree = renderer.create(<LocationView
+    guideGroup={guideGroup}
+    now={now}
+    navigation={{}}
+  />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
