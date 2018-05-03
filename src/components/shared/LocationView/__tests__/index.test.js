@@ -8,40 +8,6 @@ import LocationView from "../index";
 
 import renderer from "react-test-renderer";
 
-const pointProperties: PointProperty[] =
-  [
-    {
-      id: 3806,
-      guideID: 6856,
-      name: "Café",
-      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-    },
-    {
-      id: 3804,
-      guideID: 6856,
-      name: "Gratis wifi",
-      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-    },
-    {
-      id: 3607,
-      guideID: 6856,
-      name: "Skötrum",
-      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-    },
-    {
-      id: 3606,
-      guideID: 6856,
-      name: "Tillgängligt",
-      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-    },
-    {
-      id: 3800,
-      guideID: 6856,
-      name: "Toalett",
-      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-    },
-  ];
-
 
 const geolocation: GeolocationType =
   {
@@ -166,7 +132,38 @@ const guideGroup: GuideGroup =
         },
       ],
     },
-
+    pointProperties:
+      [
+        {
+          id: 3806,
+          slug: "cafe",
+          name: "Café",
+          icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+        },
+        {
+          id: 3804,
+          slug: "wifi",
+          name: "Gratis wifi",
+          icon: "",
+        },
+        {
+          id: 3607,
+          slug: "nursingroom",
+          name: "Skötrum",
+        },
+        {
+          id: 3606,
+          slug: "tillgangligt",
+          name: "Tillgängligt",
+          icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+        },
+        {
+          id: 3800,
+          slug: "toalett",
+          name: "Toalett",
+          icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+        },
+      ],
   };
 
 test("weekdays", () => {
@@ -200,7 +197,6 @@ test("with point properties", () => {
     guideGroup={guideGroup}
     now={now}
     navigation={{}}
-    pointProperties={pointProperties}
   />).toJSON();
   expect(tree).toMatchSnapshot();
 });

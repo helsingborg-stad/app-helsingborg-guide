@@ -14,7 +14,6 @@ import WebLinkView from "../WebLinkView";
 
 type Props = {
   guideGroup: GuideGroup,
-  pointProperties?: ?PointProperty[],
   now: Date,
   geolocation?: ?GeolocationType,
   navigation: any
@@ -71,9 +70,7 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
   );
 }
 
-function displayPointProperties(pointProperties: PointProperty[], locationID: number) {
-  if (pointProperties[0].guideID !== locationID) { return null; }
-
+function displayPointProperties(pointProperties: PointProperty[]) {
   const pointPropertyView = (
     <View>
       <View style={styles.divider} />
@@ -123,7 +120,7 @@ const LocationView = (props: Props) => {
             <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
           </View>
           {webUrl ? <WebLinkView url={webUrl} navigation={props.navigation} /> : null}
-          {props.pointProperties ? displayPointProperties(props.pointProperties, props.guideGroup.location.id) : null}
+          {displayPointProperties(props.guideGroup.pointProperties)}
         </View>
       </ScrollView>
     </View>
@@ -132,7 +129,6 @@ const LocationView = (props: Props) => {
 
 LocationView.defaultProps = {
   geolocation: null,
-  pointProperties: null,
 };
 
 export default LocationView;

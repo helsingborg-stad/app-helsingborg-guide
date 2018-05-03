@@ -25,7 +25,6 @@ export default ({ items, navigation, dispatchSelectGuideGroup }) => {
     return text;
   }
 
-
   const _navigateToLocation = (location) => {
     // TODO fetch from the the new GuideGroup state
     dispatchSelectGuideGroup(location);

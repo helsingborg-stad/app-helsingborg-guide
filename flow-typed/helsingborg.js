@@ -30,26 +30,20 @@ declare type GuideGroup = {
   slug: string,
   images: Images,
   active: boolean,
-  location: Location
+  location: Location,
+  pointProperties: PointProperty[],
 };
 declare type PointProperty = {
   id: number,
-  guideID: number,
+  slug: string,
   name: string,
-  icon: string
+  icon?: string
 };
 declare type Action =
   | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup }
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
-  | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
-  | { type: "FETCH_POINTPROPERTIES_REQUEST" }
-  | {
-    type: "FETCH_POINTPROPERTIES_SUCCESS",
-    pointProperties: PointProperty[],
-    guideID: number
-  }
-  | { type: "FETCH_POINTPROPERTIES_FAILURE", error: Error };
+  | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error };
 
 declare type GuideGroupState = {
   isFetching: boolean,
@@ -57,8 +51,7 @@ declare type GuideGroupState = {
 }
 
 declare type UIState = {
-  currentGuideGroup: ?GuideGroup,
-  currentPointProperties: ?{ isFetching: boolean, items: PointProperty[] }
+  currentGuideGroup: ?GuideGroup
 }
 
 declare type RootState = {
