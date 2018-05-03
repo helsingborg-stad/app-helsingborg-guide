@@ -8,6 +8,55 @@ import LocationView from "../index";
 
 import renderer from "react-test-renderer";
 
+const pointProperties: PointProperty[] =
+  [
+    {
+      id: 3806,
+      guideID: 6856,
+      name: "Café",
+      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+    },
+    {
+      id: 3804,
+      guideID: 6856,
+      name: "Gratis wifi",
+      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+    },
+    {
+      id: 3607,
+      guideID: 6856,
+      name: "Skötrum",
+      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+    },
+    {
+      id: 3606,
+      guideID: 6856,
+      name: "Tillgängligt",
+      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+    },
+    {
+      id: 3800,
+      guideID: 6856,
+      name: "Toalett",
+      icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+    },
+  ];
+
+
+const geolocation: GeolocationType =
+  {
+    coords: {
+      speed: -1,
+      longitude: 12.68871,
+      latitude: 56.049228,
+      accuracy: 5,
+      heading: -1,
+      altitude: 0,
+      altitudeAccuracy: -1,
+    },
+    timestamp: 1525253893426.6992,
+  };
+
 const guideGroup: GuideGroup =
   {
     id: 222,
@@ -120,8 +169,6 @@ const guideGroup: GuideGroup =
 
   };
 
-// TODO: tell HBG that their exception opening hours are for 2017
-
 test("weekdays", () => {
   let i = 0;
   const now: Date = new Date("June 12, 2017 12:00:00");
@@ -134,9 +181,26 @@ test("weekdays", () => {
 });
 
 
-test("no geolocation", () => {
+test("with geolocation", () => {
   const now: Date = new Date("June 12, 2017 12:00:00");
-  const tree = renderer.create(<LocationView guideGroup={guideGroup} now={now} navigation={{}} />).toJSON();
+  const tree = renderer.create(<LocationView
+    guideGroup={guideGroup}
+    now={now}
+    navigation={{}}
+    geolocation={geolocation}
+  />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
+
+// with point properties
+test("with point properties", () => {
+  const now: Date = new Date("June 12, 2017 12:00:00");
+  const tree = renderer.create(<LocationView
+    guideGroup={guideGroup}
+    now={now}
+    navigation={{}}
+    pointProperties={pointProperties}
+  />).toJSON();
+  expect(tree).toMatchSnapshot();
+});

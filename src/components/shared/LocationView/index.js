@@ -14,7 +14,7 @@ import WebLinkView from "../WebLinkView";
 
 type Props = {
   guideGroup: GuideGroup,
-  pointProperties: ?PointProperty[],
+  pointProperties?: ?PointProperty[],
   now: Date,
   geolocation?: ?GeolocationType,
   navigation: any
@@ -132,6 +132,7 @@ const LocationView = (props: Props) => {
 
 LocationView.defaultProps = {
   geolocation: null,
+  pointProperties: null,
 };
 
 export default LocationView;
