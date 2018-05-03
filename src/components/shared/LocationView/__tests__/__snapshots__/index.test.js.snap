@@ -26,10 +26,9 @@ exports[`weekdays 1`] = `
         <View
           style={
             Object {
-              "height": 421.875,
-              "maxHeight": 867.1,
-              "width": 750,
-              "zIndex": 1000,
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
             }
           }
         >
@@ -49,8 +48,8 @@ exports[`weekdays 1`] = `
                   "top": 0,
                 },
                 Object {
-                  "height": 421.875,
-                  "width": 750,
+                  "height": "auto",
+                  "width": "100%",
                 },
                 undefined,
               ]
@@ -500,10 +499,9 @@ exports[`weekdays 2`] = `
         <View
           style={
             Object {
-              "height": 421.875,
-              "maxHeight": 867.1,
-              "width": 750,
-              "zIndex": 1000,
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
             }
           }
         >
@@ -523,8 +521,8 @@ exports[`weekdays 2`] = `
                   "top": 0,
                 },
                 Object {
-                  "height": 421.875,
-                  "width": 750,
+                  "height": "auto",
+                  "width": "100%",
                 },
                 undefined,
               ]
@@ -974,10 +972,9 @@ exports[`weekdays 3`] = `
         <View
           style={
             Object {
-              "height": 421.875,
-              "maxHeight": 867.1,
-              "width": 750,
-              "zIndex": 1000,
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
             }
           }
         >
@@ -997,8 +994,8 @@ exports[`weekdays 3`] = `
                   "top": 0,
                 },
                 Object {
-                  "height": 421.875,
-                  "width": 750,
+                  "height": "auto",
+                  "width": "100%",
                 },
                 undefined,
               ]
@@ -1448,10 +1445,9 @@ exports[`weekdays 4`] = `
         <View
           style={
             Object {
-              "height": 421.875,
-              "maxHeight": 867.1,
-              "width": 750,
-              "zIndex": 1000,
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
             }
           }
         >
@@ -1471,8 +1467,8 @@ exports[`weekdays 4`] = `
                   "top": 0,
                 },
                 Object {
-                  "height": 421.875,
-                  "width": 750,
+                  "height": "auto",
+                  "width": "100%",
                 },
                 undefined,
               ]
@@ -1922,10 +1918,9 @@ exports[`weekdays 5`] = `
         <View
           style={
             Object {
-              "height": 421.875,
-              "maxHeight": 867.1,
-              "width": 750,
-              "zIndex": 1000,
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
             }
           }
         >
@@ -1945,8 +1940,8 @@ exports[`weekdays 5`] = `
                   "top": 0,
                 },
                 Object {
-                  "height": 421.875,
-                  "width": 750,
+                  "height": "auto",
+                  "width": "100%",
                 },
                 undefined,
               ]
@@ -2396,10 +2391,9 @@ exports[`weekdays 6`] = `
         <View
           style={
             Object {
-              "height": 421.875,
-              "maxHeight": 867.1,
-              "width": 750,
-              "zIndex": 1000,
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
             }
           }
         >
@@ -2419,8 +2413,8 @@ exports[`weekdays 6`] = `
                   "top": 0,
                 },
                 Object {
-                  "height": 421.875,
-                  "width": 750,
+                  "height": "auto",
+                  "width": "100%",
                 },
                 undefined,
               ]
@@ -2870,10 +2864,9 @@ exports[`weekdays 7`] = `
         <View
           style={
             Object {
-              "height": 421.875,
-              "maxHeight": 867.1,
-              "width": 750,
-              "zIndex": 1000,
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
             }
           }
         >
@@ -2893,8 +2886,8 @@ exports[`weekdays 7`] = `
                   "top": 0,
                 },
                 Object {
-                  "height": 421.875,
-                  "width": 750,
+                  "height": "auto",
+                  "width": "100%",
                 },
                 undefined,
               ]
@@ -3344,10 +3337,9 @@ exports[`with geolocation 1`] = `
         <View
           style={
             Object {
-              "height": 421.875,
-              "maxHeight": 867.1,
-              "width": 750,
-              "zIndex": 1000,
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
             }
           }
         >
@@ -3367,8 +3359,8 @@ exports[`with geolocation 1`] = `
                   "top": 0,
                 },
                 Object {
-                  "height": 421.875,
-                  "width": 750,
+                  "height": "auto",
+                  "width": "100%",
                 },
                 undefined,
               ]
@@ -3903,10 +3895,9 @@ exports[`with point properties 1`] = `
         <View
           style={
             Object {
-              "height": 421.875,
-              "maxHeight": 867.1,
-              "width": 750,
-              "zIndex": 1000,
+              "aspectRatio": 1.7777777777777777,
+              "height": "auto",
+              "width": "100%",
             }
           }
         >
@@ -3926,8 +3917,8 @@ exports[`with point properties 1`] = `
                   "top": 0,
                 },
                 Object {
-                  "height": 421.875,
-                  "width": 750,
+                  "height": "auto",
+                  "width": "100%",
                 },
                 undefined,
               ]
