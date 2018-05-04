@@ -1,21 +1,24 @@
 // @flow
 
 import React from "react";
-import { View, Text, ScrollView, ImageBackground } from "react-native";
+import { View, Text, ScrollView, ImageBackground, TouchableOpacity } from "react-native";
 import styles from "./style";
 
 import DistanceView from "../DistanceViewNew";
 import IconTextTouchable from "../IconTextTouchable";
 import LangService from "../../../services/langService";
+import ListItem from "../../shared/list_item";
 import OpeningHoursView from "../OpeningHoursView";
 import SVGView from "../../shared/SVGView";
-import { UrlUtils, LocationUtils } from "../../../utils/";
+
+import { AnalyticsUtils, UrlUtils, LocationUtils } from "../../../utils/";
 import WebLinkView from "../WebLinkView";
 
 const pointPropertyPlaceholderImage = require("../../../images/iconPointPropertyPlaceholder.svg");
 
 type Props = {
   guideGroup: GuideGroup,
+  guides: Guide[],
   now: Date,
   geolocation?: ?GeolocationType,
   navigation: any
@@ -89,6 +92,53 @@ function displayPointProperties(pointProperties: PointProperty[]) {
   return pointPropertyView;
 }
 
+function goToGuide(guide: Guide, navigation: Object) {
+  const { navigate } = navigation;
+  AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+  if (guide.guideType === "trail") {
+    navigate("TrailScreen", {
+      title: guide.name,
+      trail: guide,
+    });
+  } else if (guide.guideType === "guide") {
+    navigate("GuideDetailsScreen", {
+      title: guide.name,
+      id: guide.id,
+    });
+  }
+}
+
+function displayGuides(guides: Guide[], navigation: Object) {
+  return (<View style={styles.guideListContainer}>
+    <Text style={styles.guideListHeaderText}>
+      {LangService.strings.MEDIAGUIDES}
+    </Text>
+    {guides.map((guide) => {
+      if (!guide.images || !guide.images.length) return null;
+      const forKids = guide.childFriendly;
+
+      return (
+        <TouchableOpacity
+          key={guide.id}
+          style={styles.guideContainer}
+          onPress={() => goToGuide(guide, navigation)}
+        >
+          <ListItem /** TODO: CREATE NEW VERSION OF ListItem */
+            imageSource={{ uri: guide.images.medium }}
+            title={guide.name}
+            description={guide.tagline}
+            startDate={guide.dateStart}
+            endDate={guide.dateEnd}
+            forKids={forKids}
+            id={guide.id}
+          />
+        </TouchableOpacity>
+      );
+    })}
+  </View>
+  );
+}
+
 const LocationView = (props: Props) => {
   const webUrl = getWebUrl(props.guideGroup.location.links);
   return (
@@ -116,7 +166,7 @@ const LocationView = (props: Props) => {
             </View>
             {props.geolocation ? displayDirections(props.geolocation, props.guideGroup.location) : null}
           </View>
-          {/* TODO: list of guides! with the new guide data */}
+          {displayGuides(props.guides, props.navigation)}
           <View style={styles.articleContainer}>
             <Text style={styles.articleHeaderText}>{`${LangService.strings.ABOUT} ${props.guideGroup.name}`}</Text>
             <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
