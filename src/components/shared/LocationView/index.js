@@ -86,8 +86,8 @@ const LocationView = (props: Props) => {
             <Text style={styles.title}>{props.guideGroup.name}</Text>
             <View style={styles.openTimeContainer}>
               <OpeningHoursView
-                openHours={props.guideGroup.location.openHours}
-                openHoursException={props.guideGroup.location.openHoursException}
+                openHours={props.guideGroup.location.openingHours}
+                openHoursException={props.guideGroup.location.openingHourExceptions}
                 now={props.now}
                 textStyle={styles.openTimeText}
               />
