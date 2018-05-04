@@ -14,9 +14,7 @@ export default function SVGView(props: Props) {
   const styleObj = StyleSheet.flatten(props.customStyle);
 
   if ((!props.logoType && !props.placeholderImage) || !styleObj) {
-    return (
-      <Text>SVG missing</Text>
-    );
+    return null;
   }
 
   const sourceImg = props.logoType ? { uri: props.logoType } : props.placeholderImage;
