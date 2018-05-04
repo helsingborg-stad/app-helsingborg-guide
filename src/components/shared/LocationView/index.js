@@ -3,12 +3,16 @@
 import React from "react";
 import { View, Text, ScrollView, ImageBackground } from "react-native";
 import styles from "./style";
+
 import DistanceView from "../DistanceViewNew";
 import IconTextTouchable from "../IconTextTouchable";
-import OpeningHoursView from "../OpeningHoursView";
-import WebLinkView from "../WebLinkView";
 import LangService from "../../../services/langService";
+import OpeningHoursView from "../OpeningHoursView";
+import SVGView from "../../shared/SVGView";
 import { UrlUtils, LocationUtils } from "../../../utils/";
+import WebLinkView from "../WebLinkView";
+
+const pointPropertyPlaceholderImage = require("../../../images/iconPointPropertyPlaceholder.svg");
 
 type Props = {
   guideGroup: GuideGroup,
@@ -68,6 +72,23 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
   );
 }
 
+function displayPointProperties(pointProperties: PointProperty[]) {
+  const pointPropertyView = (
+    <View>
+      <View style={styles.divider} />
+      <View style={styles.pointPropertiesSectionContainer}>
+        {pointProperties.map(element =>
+          (<View style={styles.pointPropertyContainer} key={element.id} >
+            <SVGView logoType={element.icon} placeholderImage={pointPropertyPlaceholderImage} customStyle={styles.pointPropertyIcon} />
+            <Text style={styles.pointPropertyText} >{element.name}</Text>
+          </View>),
+        )}
+      </View>
+    </View>
+  );
+  return pointPropertyView;
+}
+
 const LocationView = (props: Props) => {
   const webUrl = getWebUrl(props.guideGroup.location.links);
   return (
@@ -101,7 +122,7 @@ const LocationView = (props: Props) => {
             <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
           </View>
           {webUrl ? <WebLinkView url={webUrl} navigation={props.navigation} /> : null}
-          {/* this.displayAccessibility() with the new pointproperties data */}
+          {displayPointProperties(props.guideGroup.pointProperties)}
         </View>
       </ScrollView>
     </View>

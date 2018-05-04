@@ -1,31 +1,31 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+// @flow
+
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import SvgUri from "react-native-svg-uri";
 
+type Props = {
+  logoType: ?string,
+  placeholderImage: ?number,
+  customStyle: any
+}
 
-export default class SVGView extends Component {
-  static displaySVG(logoType, placeholder, customStyle) {
-    if (!logoType) return <Text>{placeholder}</Text>;
+export default function SVGView(props: Props) {
+  const styleObj = StyleSheet.flatten(props.customStyle);
 
-    const styleObj = StyleSheet.flatten(customStyle);
-
-    return (
-      <View style={customStyle}>
-        <SvgUri
-          width={styleObj.width}
-          height={styleObj.height}
-          source={{ uri: logoType }}
-        />
-      </View>
-    );
+  if ((!props.logoType && !props.placeholderImage) || !styleObj) {
+    return null;
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  const sourceImg = props.logoType ? { uri: props.logoType } : props.placeholderImage;
 
-  render() {
-    return SVGView.displaySVG(this.props.logoType, this.props.placeHolder, this.props.customStyle);
-  }
+  return (
+    <View style={styleObj}>
+      <SvgUri
+        width={styleObj.width}
+        height={styleObj.height}
+        source={sourceImg}
+      />
+    </View>
+  );
 }

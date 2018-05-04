@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  NetInfo,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
@@ -24,13 +23,12 @@ import LangService from "../../services/langService";
 import ListItem from "../shared/list_item";
 import NoInternetText from "../shared/noInternetText";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
-import SVGView from "../shared/SVGView";
 import TimingService from "../../services/timingService";
 import ViewContainer from "../shared/view_container";
 
 import * as internetActions from "../../actions/internetActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
-import * as pointPropertiesActions from "../../actions/pointPropertiesActions";
+
 import {
   Colors,
   TextStyles,
@@ -92,39 +90,6 @@ const styles = StyleSheet.create({
       color: Colors.black,
     }],
   ),
-  pointPropertiesSectionContainer: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    paddingTop: 10,
-    paddingBottom: 20,
-  },
-  pointPropertyContainer: {
-    flex: 0,
-    flexDirection: "row",
-    flexGrow: 1,
-    width: "40%",
-    paddingTop: 8,
-    alignItems: "center",
-  },
-  pointPropertyText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
-      fontSize: 16,
-      fontWeight: "500",
-      lineHeight: 24.0,
-      paddingLeft: 9,
-      color: Colors.warmGrey,
-    }],
-  ),
-  divider: {
-    height: 2,
-    backgroundColor: Colors.listBackgroundColor,
-    marginTop: 30,
-  },
-  pointPropertyIcon: {
-    width: 30,
-    height: 30,
-  },
   subLocationsHeaderText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 20,
@@ -193,12 +158,10 @@ class LocationDetailsScreen extends Component {
     subLocations: PropTypes.array.isRequired,
     internet: PropTypes.bool.isRequired,
     geolocation: PropTypes.any,
-    pointProperties: PropTypes.object,
   }
 
   static defaultProps = {
     geolocation: null,
-    pointProperties: null,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -245,22 +208,16 @@ class LocationDetailsScreen extends Component {
   constructor(props) {
     super(props);
 
-    const { subLocations, internet, location, pointProperties } = this.props;
+    const { subLocations, internet, location } = this.props;
 
     this.state = {
       location,
       sublocations: subLocations,
       internet,
-      pointProperties,
     };
   }
 
   componentDidMount() {
-    NetInfo.isConnected.fetch().then((isConnected) => {
-      if (isConnected) {
-        this.props.pointPropertiesActions.fetchPointProperties(this.state.location._embedded.location[0].id);
-      }
-    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -269,7 +226,6 @@ class LocationDetailsScreen extends Component {
         sublocations: nextProps.subLocations,
       });
     }
-    if (nextProps.pointProperties !== this.state.pointProperties) { this.setState({ pointProperties: nextProps.pointProperties }); }
     if (nextProps.internet !== this.state.internet) this.setState({ internet: nextProps.internet });
 
     let webUrl = null;
@@ -354,30 +310,6 @@ class LocationDetailsScreen extends Component {
     return webLink;
   }
 
-  displayAccessibility() {
-    if (!this.state.pointProperties || !this.state.pointProperties.items || this.state.pointProperties.items.length < 1) { return null; }
-
-    if (!this.state.location ||
-        this.state.pointProperties.items[0].guideID !== this.state.location._embedded.location[0].id) { return null; }
-
-    if (!this.state.internet) { return null; }
-
-    const accessibility = (
-      <View>
-        <View style={styles.divider} />
-        <View style={styles.pointPropertiesSectionContainer}>
-          {this.state.pointProperties.items.map(element =>
-            (<View style={styles.pointPropertyContainer} key={element.id} >
-              <SVGView logoType={element.icon} placeHolder="" customStyle={styles.pointPropertyIcon} />
-              <Text style={styles.pointPropertyText} >{element.name}</Text>
-            </View>),
-          )}
-        </View>
-      </View>
-    );
-    return accessibility;
-  }
-
   display() {
     if (this.state.location && Object.keys(this.state.location).length) {
       const { image } = this.state.location.apperance;
@@ -406,7 +338,7 @@ class LocationDetailsScreen extends Component {
                   text={LangService.strings.DIRECTIONS}
                   onPress={() => {
                     this.openGoogleMapApp(this.state.location._embedded.location[0].latitude,
-                                          this.state.location._embedded.location[0].longitude);
+                      this.state.location._embedded.location[0].longitude);
                   }}
                 />
               </View>
@@ -414,7 +346,6 @@ class LocationDetailsScreen extends Component {
               {this.displayArticle()}
               {this.displayWebPage()}
 
-              {this.displayAccessibility()}
             </View>
           </ScrollView>
         </ViewContainer>
@@ -459,14 +390,12 @@ function mapStateToProps(state, ownProps) {
     subLocations: getFilteredSubLocations(state.subLocations, location.id) || [],
     internet: state.internet.connected,
     geolocation: state.geolocation,
-    pointProperties: state.pointProperties,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
     internetActions: bindActionCreators(internetActions, dispatch),
-    pointPropertiesActions: bindActionCreators(pointPropertiesActions, dispatch),
   };
 }
 
