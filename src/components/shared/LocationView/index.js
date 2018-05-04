@@ -12,6 +12,8 @@ import SVGView from "../../shared/SVGView";
 import { UrlUtils, LocationUtils } from "../../../utils/";
 import WebLinkView from "../WebLinkView";
 
+const pointPropertyPlaceholderImage = require("../../../images/iconPointPropertyPlaceholder.svg");
+
 type Props = {
   guideGroup: GuideGroup,
   now: Date,
@@ -77,7 +79,7 @@ function displayPointProperties(pointProperties: PointProperty[]) {
       <View style={styles.pointPropertiesSectionContainer}>
         {pointProperties.map(element =>
           (<View style={styles.pointPropertyContainer} key={element.id} >
-            <SVGView logoType={element.icon} placeHolder="" customStyle={styles.pointPropertyIcon} />
+            <SVGView logoType={element.icon} placeholderImage={pointPropertyPlaceholderImage} customStyle={styles.pointPropertyIcon} />
             <Text style={styles.pointPropertyText} >{element.name}</Text>
           </View>),
         )}
