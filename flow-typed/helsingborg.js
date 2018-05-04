@@ -10,8 +10,8 @@ declare type OpenHour = {
 };
 /* TODO: camelCase */
 declare type OpenHourException = {
-  exception_date: string,
-  exeption_information: string
+  date: string,
+  description: string
 };
 declare type Link = { service: string, url: string };
 declare type Location = {
@@ -19,8 +19,8 @@ declare type Location = {
   streetAddress: string,
   latitude: number,
   longitude: number,
-  openHours: OpenHour[],
-  openHoursException: OpenHourException[],
+  openingHours: OpenHour[],
+  openingHourExceptions: OpenHourException[],
   links: Link[]
 };
 declare type GuideGroup = {

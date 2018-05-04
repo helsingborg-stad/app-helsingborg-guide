@@ -35,7 +35,7 @@ exports[`weekdays 1`] = `
           <Image
             source={
               Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
               }
             }
             style={
@@ -115,7 +115,7 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              Open today 10:00-11:00
+              Konsert Thåström & First Aid Kit – Entrén stänger 14.00. Besökare måste lämna parken kl 15.00.
             </Text>
           </View>
         </View>
@@ -319,7 +319,7 @@ exports[`weekdays 1`] = `
                   height={30}
                   source={
                     Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
                     }
                   }
                   width={30}
@@ -368,6 +368,102 @@ exports[`weekdays 1`] = `
                   source={
                     Object {
                       "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Parkering
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Restaurang
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
                     }
                   }
                   width={30}
@@ -530,7 +626,7 @@ exports[`weekdays 2`] = `
           <Image
             source={
               Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
               }
             }
             style={
@@ -610,7 +706,7 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              Parken stänger kl 15 med sista insläpp kl 14.
+              Open today 10:00-18:00
             </Text>
           </View>
         </View>
@@ -814,7 +910,7 @@ exports[`weekdays 2`] = `
                   height={30}
                   source={
                     Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
                     }
                   }
                   width={30}
@@ -863,6 +959,102 @@ exports[`weekdays 2`] = `
                   source={
                     Object {
                       "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Parkering
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Restaurang
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
                     }
                   }
                   width={30}
@@ -1025,7 +1217,7 @@ exports[`weekdays 3`] = `
           <Image
             source={
               Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
               }
             }
             style={
@@ -1105,7 +1297,7 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              Open today 10:00-13:00
+              Open today 10:00-18:00
             </Text>
           </View>
         </View>
@@ -1309,7 +1501,7 @@ exports[`weekdays 3`] = `
                   height={30}
                   source={
                     Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
                     }
                   }
                   width={30}
@@ -1358,6 +1550,102 @@ exports[`weekdays 3`] = `
                   source={
                     Object {
                       "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Parkering
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Restaurang
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
                     }
                   }
                   width={30}
@@ -1520,7 +1808,7 @@ exports[`weekdays 4`] = `
           <Image
             source={
               Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
               }
             }
             style={
@@ -1600,7 +1888,7 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              Open today 9:00-14:00
+              
             </Text>
           </View>
         </View>
@@ -1804,7 +2092,7 @@ exports[`weekdays 4`] = `
                   height={30}
                   source={
                     Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
                     }
                   }
                   width={30}
@@ -1853,6 +2141,102 @@ exports[`weekdays 4`] = `
                   source={
                     Object {
                       "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Parkering
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Restaurang
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
                     }
                   }
                   width={30}
@@ -2015,7 +2399,7 @@ exports[`weekdays 5`] = `
           <Image
             source={
               Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
               }
             }
             style={
@@ -2095,7 +2479,7 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              Open today 10:00-15:00
+              Open today 10:00-18:00
             </Text>
           </View>
         </View>
@@ -2299,7 +2683,7 @@ exports[`weekdays 5`] = `
                   height={30}
                   source={
                     Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
                     }
                   }
                   width={30}
@@ -2348,6 +2732,102 @@ exports[`weekdays 5`] = `
                   source={
                     Object {
                       "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Parkering
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Restaurang
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
                     }
                   }
                   width={30}
@@ -2510,7 +2990,7 @@ exports[`weekdays 6`] = `
           <Image
             source={
               Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
               }
             }
             style={
@@ -2590,7 +3070,7 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              Closed today
+              Open today 10:00-18:00
             </Text>
           </View>
         </View>
@@ -2794,7 +3274,7 @@ exports[`weekdays 6`] = `
                   height={30}
                   source={
                     Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
                     }
                   }
                   width={30}
@@ -2843,6 +3323,102 @@ exports[`weekdays 6`] = `
                   source={
                     Object {
                       "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Parkering
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Restaurang
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
                     }
                   }
                   width={30}
@@ -3005,7 +3581,7 @@ exports[`weekdays 7`] = `
           <Image
             source={
               Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
               }
             }
             style={
@@ -3085,7 +3661,7 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              Sofiero Classic. Parken har öppet kl 10-16.
+              Open today 10:00-18:00
             </Text>
           </View>
         </View>
@@ -3289,7 +3865,7 @@ exports[`weekdays 7`] = `
                   height={30}
                   source={
                     Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
                     }
                   }
                   width={30}
@@ -3338,6 +3914,102 @@ exports[`weekdays 7`] = `
                   source={
                     Object {
                       "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Parkering
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Restaurang
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
                     }
                   }
                   width={30}
@@ -3500,7 +4172,7 @@ exports[`with geolocation 1`] = `
           <Image
             source={
               Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
               }
             }
             style={
@@ -3580,7 +4252,7 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              Open today 10:00-11:00
+              Open today 10:00-18:00
             </Text>
             <Text
               accessible={true}
@@ -3869,7 +4541,7 @@ exports[`with geolocation 1`] = `
                   height={30}
                   source={
                     Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
                     }
                   }
                   width={30}
@@ -3918,6 +4590,102 @@ exports[`with geolocation 1`] = `
                   source={
                     Object {
                       "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Parkering
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Restaurang
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
                     }
                   }
                   width={30}
@@ -4080,7 +4848,7 @@ exports[`with point properties 1`] = `
           <Image
             source={
               Object {
-                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
+                "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
               }
             }
             style={
@@ -4160,7 +4928,7 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              Open today 10:00-11:00
+              Open today 10:00-18:00
             </Text>
           </View>
         </View>
@@ -4364,7 +5132,7 @@ exports[`with point properties 1`] = `
                   height={30}
                   source={
                     Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
                     }
                   }
                   width={30}
@@ -4413,6 +5181,102 @@ exports[`with point properties 1`] = `
                   source={
                     Object {
                       "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Parkering
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#7f7f7f",
+                    "fontFamily": "Roboto",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "lineHeight": 24,
+                    "paddingLeft": 9,
+                  }
+                }
+              >
+                Restaurang
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 0,
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "paddingTop": 8,
+                  "width": "40%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
+              >
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
                     }
                   }
                   width={30}

@@ -7,8 +7,8 @@ import LangService from "../../services/langService";
 function getOpeningHours(openingList: OpenHour[], expList: OpenHourException[], now: Date) {
   if (!openingList || !openingList.length) return null;
   if (expList && expList.length) {
-    const exp = expList.find(item => now.toDateString() === new Date(item.exception_date).toDateString());
-    if (exp) return exp.exeption_information;
+    const exp = expList.find(item => now.toDateString() === new Date(item.date).toDateString());
+    if (exp) return exp.description;
   }
 
   const nowDay = now.getDay();
