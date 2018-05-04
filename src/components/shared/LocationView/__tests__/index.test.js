@@ -25,150 +25,164 @@ const geolocation: GeolocationType =
 
 const guideGroup: GuideGroup =
   {
-    id: 222,
-    description: "Sofiero slottspark är en blomstrande oas",
-    name: "Sofiero",
-    slug: "sofiero",
-    images: {
-      thumbnail: "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-150x150.jpg",
-      medium: "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6.jpg",
-      large: "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-768x432.jpg",
-    },
     active: true,
+    description: "Sofiero slottspark är en blomstrande oas",
+    id: 222,
+    images: {
+      large: "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-1024x575.jpg",
+      medium: "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6.jpg",
+      thumbnail: "https://api.helsingborg.se/wp-content/uploads/sites/2/events/14841adf8354a927c645089c69ca1bf6-150x150.jpg",
+    },
     location: {
       id: 6856,
-      streetAddress: "Sofierovägen 131",
       latitude: 56.0839149,
-      longitude: 12.6596795,
       links: [
         {
           service: "webpage",
           url: "https://sofiero.se",
         },
       ],
-      openHours: [
+      longitude: 12.6596795,
+      streetAddress: "Sofierovägen 131",
+      openingHours: [
         {
-          weekday: "Monday",
           closed: false,
-          opening: "10:00",
-          closing: "11:00",
+          closing: "18:00",
           dayNumber: 1,
+          opening: "10:00",
+          weekday: "Monday",
         },
         {
-          weekday: "Tuesday",
           closed: false,
-          opening: "10:00",
-          closing: "12:00",
+          closing: "18:00",
           dayNumber: 2,
+          opening: "10:00",
+          weekday: "Tuesday",
         },
         {
-          weekday: "Wednesday",
           closed: false,
-          opening: "10:00",
-          closing: "13:00",
+          closing: "18:00",
           dayNumber: 3,
+          opening: "10:00",
+          weekday: "Wednesday",
         },
         {
-          weekday: "Thursday",
           closed: false,
-          opening: "9:00",
-          closing: "14:00",
+          closing: "18:00",
           dayNumber: 4,
+          opening: "10:00",
+          weekday: "Thursday",
         },
         {
-          weekday: "Friday",
           closed: false,
-          opening: "10:00",
-          closing: "15:00",
+          closing: "18:00",
           dayNumber: 5,
+          opening: "10:00",
+          weekday: "Friday",
         },
         {
-          weekday: "Saturday",
-          closed: true,
-          opening: "10:00",
-          closing: "16:00",
+          closed: false,
+          closing: "18:00",
           dayNumber: 6,
+          opening: "10:00",
+          weekday: "Saturday",
         },
         {
-          weekday: "Sunday",
-          closed: true,
-          opening: "10:00",
-          closing: "17:00",
+          closed: false,
+          closing: "18:00",
           dayNumber: 7,
+          opening: "10:00",
+          weekday: "Sunday",
         },
       ],
-      openHoursException: [
+      openingHourExceptions: [
         {
-          exception_date: "2017-06-13",
-          exeption_information: "Parken stänger kl 15 med sista insläpp kl 14.",
+          date: "2018-06-22T00:00:00.000Z",
+          description: "Midsommarafton. Utställningar är stängda.",
         },
         {
-          exception_date: "2017-06-18",
-          exeption_information: "Sofiero Classic. Parken har öppet kl 10-16.",
+          date: "2018-07-12T00:00:00.000Z",
+          description: "Konsert Thåström & First Aid Kit – Entrén stänger 14.00. Besökare måste lämna parken kl 15.00.",
         },
         {
-          exception_date: "2017-06-23",
-          exeption_information: "Midsommarafton. Parken har öppet kl 12-16.",
+          date: "2018-07-20T00:00:00.000Z",
+          description: "Konsert Lars Winnerbäck – Entrén stänger 14.00. Besökare måste lämna parken kl 15.00.",
         },
         {
-          exception_date: "2017-07-06",
-          exeption_information: "Parken stänger kl 15 med sista insläpp kl 14.",
+          date: "2018-07-27T00:00:00.000Z",
+          description: "Konsert Queens of Pop – Entrén stänger 13.00. Besökare måste lämna parken kl 14.00.",
         },
         {
-          exception_date: "2017-07-16",
-          exeption_information: "Parken stänger kl 15 med sista insläpp kl 14.",
+          date: "2018-08-23T00:00:00.000Z",
+          description: "Dagen före Den stora Trädgårdsfesten. Park och slott är helt stängt.",
         },
         {
-          exception_date: "2017-08-02",
-          exeption_information: "Parken stänger kl 15 med sista insläpp kl 14.",
+          date: "2018-11-01T00:00:00.000Z",
+          description: "Ljusstämning. Parken har öppet kl 17-21.",
         },
         {
-          exception_date: "2017-08-03",
-          exeption_information: "Parken stänger kl 15 med sista insläpp kl 14.",
+          date: "2018-11-02T00:00:00.000Z",
+          description: "Ljusstämning. Parken har öppet kl 17-21.",
         },
         {
-          exception_date: "2017-08-24",
-          exeption_information: "Dagen före Den stora Trädgårdsfesten. Helt stängt.",
+          date: "2018-11-03T00:00:00.000Z",
+          description: "Ljusstämning. Parken har öppet kl 17-21.",
+        },
+        {
+          date: "2018-11-04T00:00:00.000Z",
+          description: "Ljusstämning. Parken har öppet kl 17-21.",
         },
       ],
     },
-    pointProperties:
-      [
-        {
-          id: 3806,
-          slug: "cafe",
-          name: "Café",
-          icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-        },
-        {
-          id: 3804,
-          slug: "wifi",
-          name: "Gratis wifi",
-          icon: "",
-        },
-        {
-          id: 3607,
-          slug: "nursingroom",
-          name: "Skötrum",
-        },
-        {
-          id: 3606,
-          slug: "tillgangligt",
-          name: "Tillgängligt",
-          icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-        },
-        {
-          id: 3800,
-          slug: "toalett",
-          name: "Toalett",
-          icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-        },
-      ],
+    name: "Sofiero",
+    slug: "sofiero",
+    pointProperties: [
+      {
+        id: 3806,
+        name: "Café",
+        slug: "caferestaurang",
+        icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+      },
+      {
+        id: 3804,
+        name: "Gratis wifi",
+        slug: "gratis-wifi",
+        icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+      },
+      {
+        id: 4087,
+        name: "Parkering",
+        slug: "parkering",
+      },
+      {
+        id: 4085,
+        name: "Restaurang",
+        slug: "restaurang",
+      },
+      {
+        id: 3607,
+        name: "Skötrum",
+        slug: "skotrum-2",
+        icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+      },
+      {
+        id: 3606,
+        name: "Tillgängligt",
+        slug: "rullstolsanpassad-2",
+        icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+      },
+      {
+        id: 3800,
+        name: "Toalett",
+        slug: "toalett",
+        icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+      },
+    ],
   };
 
 test("weekdays", () => {
   let i = 0;
-  const now: Date = new Date("June 12, 2017 12:00:00");
+  const now: Date = new Date("July 12, 2018 12:00:00");
   for (i = 0; i < 7; i += 1) {
     const tree = renderer.create(<LocationView guideGroup={guideGroup} now={now} navigation={{}} />).toJSON();
     expect(tree).toMatchSnapshot();
