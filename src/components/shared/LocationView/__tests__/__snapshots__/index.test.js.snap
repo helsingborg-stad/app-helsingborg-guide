@@ -307,13 +307,24 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -344,13 +355,24 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -780,13 +802,24 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -817,13 +850,24 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1253,13 +1297,24 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1290,13 +1345,24 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1726,13 +1792,24 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1763,13 +1840,24 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2199,13 +2287,24 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2236,13 +2335,24 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2672,13 +2782,24 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2709,13 +2830,24 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3145,13 +3277,24 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3182,13 +3325,24 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3703,13 +3857,24 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3740,13 +3905,24 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4176,13 +4352,24 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4213,13 +4400,24 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
+              <View
+                style={
+                  Object {
+                    "height": 30,
+                    "width": 30,
+                  }
+                }
               >
-                
-              </Text>
+                <SvgUri
+                  height={30}
+                  source={
+                    Object {
+                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    }
+                  }
+                  width={30}
+                />
+              </View>
               <Text
                 accessible={true}
                 allowFontScaling={true}
