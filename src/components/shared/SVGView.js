@@ -14,8 +14,6 @@ export default class SVGView extends Component {
         <SvgUri
           width={styleObj.width}
           height={styleObj.height}
-          // source={{ uri: logoType }}
-          // source={placeholderImage}
           source={sourceImg}
         />
       </View>
