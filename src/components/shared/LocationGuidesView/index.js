@@ -2,7 +2,7 @@
 
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import ListItem from "../../shared/list_item";
+import ListItem from "../../shared/ListItem";
 import styles from "./style";
 import LangService from "../../../services/langService";
 import { AnalyticsUtils } from "../../../utils/";

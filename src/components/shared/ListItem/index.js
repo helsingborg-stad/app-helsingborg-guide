@@ -1,0 +1,65 @@
+// @flow
+
+import React from "react";
+import { View, Text, Image } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import LangService from "../../../services/langService";
+import styles from "./style";
+import { Colors } from "../../../styles/";
+
+function forKidsView() {
+  return (
+    <View style={styles.checkedContainer}>
+      <Icon name="face" size={20} color={Colors.darkGrey} />
+      <Text style={styles.forKidsText}>{LangService.strings.FOR_CHILDREN}</Text>
+    </View>
+  );
+}
+
+function displayImage(imageSource: string) {
+  return (
+    <Image
+      style={styles.imageContainer}
+      source={imageSource}
+      resizeMode="cover"
+    /* guideID={id} */ // TODO: offline support
+    />
+  );
+}
+
+function renderDate(startDate: string, endDate: string) {
+  if (!startDate || !endDate) { return null; }
+
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  return (<Text style={styles.date} numberOfLines={1}>
+    {`${start.toISOString().substring(0, 10)} - ${end.toISOString().substring(0, 10)}`}
+  </Text>);
+}
+
+type Props = {
+  forKids: boolean,
+  title: string,
+  description: string,
+  startDate: string,
+  endDate: string,
+  imageSource: string,
+  id: number // TODO: we will need id later for offline lookup
+}
+
+export default function ListItem(props: Props) {
+  return (
+    <View>
+      <View>{displayImage(props.imageSource)}</View>
+      <View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
+          <Text style={styles.description} numberOfLines={1}>{props.description}</Text>
+          {renderDate(props.startDate, props.endDate)}
+          {props.forKids ? forKidsView() : null}
+        </View>
+      </View>
+    </View>
+  );
+}

@@ -27,7 +27,7 @@ function getOpeningHours(openingList: OpenHour[], expList: OpenHourException[], 
 }
 
 const styles = StyleSheet.create({
-  textStyle: StyleSheetUtils.flatten([
+  hoursText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 16,
       fontWeight: "normal",
@@ -48,6 +48,6 @@ export default function OpeningHoursView(props: Props) {
   const text = opening || "";
 
   return (
-    <Text style={styles.textStyle}>{text}</Text>
+    <Text style={styles.hoursText}>{text}</Text>
   );
 }

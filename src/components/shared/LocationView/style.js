@@ -54,7 +54,7 @@ export default StyleSheet.create({
       color: Colors.black,
     }],
   ),
-  openTimeContainer: {
+  openingHoursAndDistanceContainer: {
     flex: 1,
     paddingVertical: 4,
   },
