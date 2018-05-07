@@ -236,7 +236,9 @@ exports[`weekdays 1`] = `
                         "lineHeight": 22,
                       }
                     }
-                  />
+                  >
+                    
+                  </Text>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -966,7 +968,9 @@ exports[`weekdays 2`] = `
                         "lineHeight": 22,
                       }
                     }
-                  />
+                  >
+                    
+                  </Text>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -1696,7 +1700,9 @@ exports[`weekdays 3`] = `
                         "lineHeight": 22,
                       }
                     }
-                  />
+                  >
+                    
+                  </Text>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -2426,7 +2432,9 @@ exports[`weekdays 4`] = `
                         "lineHeight": 22,
                       }
                     }
-                  />
+                  >
+                    
+                  </Text>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -3156,7 +3164,9 @@ exports[`weekdays 5`] = `
                         "lineHeight": 22,
                       }
                     }
-                  />
+                  >
+                    
+                  </Text>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -3886,7 +3896,9 @@ exports[`weekdays 6`] = `
                         "lineHeight": 22,
                       }
                     }
-                  />
+                  >
+                    
+                  </Text>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -4616,7 +4628,9 @@ exports[`weekdays 7`] = `
                         "lineHeight": 22,
                       }
                     }
-                  />
+                  >
+                    
+                  </Text>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -5431,7 +5445,9 @@ exports[`with geolocation 1`] = `
                         "lineHeight": 22,
                       }
                     }
-                  />
+                  >
+                    
+                  </Text>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -6161,7 +6177,9 @@ exports[`with point properties 1`] = `
                         "lineHeight": 22,
                       }
                     }
-                  />
+                  >
+                    
+                  </Text>
                   <Text
                     accessible={true}
                     allowFontScaling={true}

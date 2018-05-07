@@ -16,7 +16,7 @@ function forKidsView() {
   );
 }
 
-function displayImage(imageSource: string) {
+function displayImage(imageSource: Object) {
   return (
     <Image
       style={styles.imageContainer}
@@ -27,7 +27,7 @@ function displayImage(imageSource: string) {
   );
 }
 
-function renderDate(startDate: string, endDate: string) {
+function renderDate(startDate?: string, endDate?: string) {
   if (!startDate || !endDate) { return null; }
 
   const start = new Date(startDate);
@@ -41,25 +41,32 @@ function renderDate(startDate: string, endDate: string) {
 type Props = {
   forKids: boolean,
   title: string,
-  description: string,
-  startDate: string,
-  endDate: string,
-  imageSource: string,
-  id: number // TODO: we will need id later for offline lookup
+  description?: ?string,
+  startDate?: string,
+  endDate?: string,
+  imageSource: Object,
+  // id: number // TODO: we will need id later for offline lookup
 }
 
-export default function ListItem(props: Props) {
-  return (
+const ListItem = (props: Props) => (
+  <View>
+    <View>{displayImage(props.imageSource)}</View>
     <View>
-      <View>{displayImage(props.imageSource)}</View>
-      <View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
-          <Text style={styles.description} numberOfLines={1}>{props.description}</Text>
-          {renderDate(props.startDate, props.endDate)}
-          {props.forKids ? forKidsView() : null}
-        </View>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
+        <Text style={styles.description} numberOfLines={1}>{props.description}</Text>
+        {renderDate(props.startDate, props.endDate)}
+        {props.forKids ? forKidsView() : null}
       </View>
     </View>
-  );
-}
+  </View>
+);
+
+ListItem.defaultProps =
+  {
+    startDate: "",
+    endDate: "",
+    description: "",
+  };
+
+export default ListItem;

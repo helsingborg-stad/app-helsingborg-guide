@@ -45,7 +45,7 @@ function getGuidesList(guides: Guide[], navigation: Object) {
             startDate={guide.dateStart}
             endDate={guide.dateEnd}
             forKids={forKids}
-            id={guide.id}
+          // id={guide.id}
           />
         </TouchableOpacity>
       );
