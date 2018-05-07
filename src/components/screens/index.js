@@ -2,7 +2,6 @@ export { default as DownloadsScreen } from "./DownloadsScreen";
 export { default as GuideDetailsScreen } from "./GuideDetailsScreen";
 export { default as GuideListScreen } from "./GuideListScreen";
 export { default as ImageScreen } from "./ImageScreen";
-export { default as LocationDetailsScreen } from "./LocationDetailsScreen";
 export { default as LocationScreen } from "./LocationScreen";
 export { default as ObjectDetailsScreen } from "./ObjectDetailsScreen";
 export { default as SettingsScreen } from "./SettingsScreen";
