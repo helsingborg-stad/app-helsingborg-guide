@@ -9,12 +9,11 @@ import IconTextTouchable from "../IconTextTouchable";
 import LangService from "../../../services/langService";
 import ListItem from "../../shared/list_item";
 import OpeningHoursView from "../OpeningHoursView";
-import SVGView from "../../shared/SVGView";
+import PointPropertiesView from "../PointPropertiesView";
 
 import { AnalyticsUtils, UrlUtils, LocationUtils } from "../../../utils/";
 import WebLinkView from "../WebLinkView";
 
-const pointPropertyPlaceholderImage = require("../../../images/iconPointPropertyPlaceholder.svg");
 
 type Props = {
   guideGroup: GuideGroup,
@@ -73,23 +72,6 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
       }}
     />
   );
-}
-
-function displayPointProperties(pointProperties: PointProperty[]) {
-  const pointPropertyView = (
-    <View>
-      <View style={styles.divider} />
-      <View style={styles.pointPropertiesSectionContainer}>
-        {pointProperties.map(element =>
-          (<View style={styles.pointPropertyContainer} key={element.id} >
-            <SVGView logoType={element.icon} placeholderImage={pointPropertyPlaceholderImage} customStyle={styles.pointPropertyIcon} />
-            <Text style={styles.pointPropertyText} >{element.name}</Text>
-          </View>),
-        )}
-      </View>
-    </View>
-  );
-  return pointPropertyView;
 }
 
 function goToGuide(guide: Guide, navigation: Object) {
@@ -172,7 +154,7 @@ const LocationView = (props: Props) => {
             <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
           </View>
           {webUrl ? <WebLinkView url={webUrl} navigation={props.navigation} /> : null}
-          {displayPointProperties(props.guideGroup.pointProperties)}
+          <PointPropertiesView pointProperties={props.guideGroup.pointProperties} />
         </View>
       </ScrollView>
     </View>
