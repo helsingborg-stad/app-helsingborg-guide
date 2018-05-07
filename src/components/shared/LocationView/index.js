@@ -89,12 +89,11 @@ const LocationView = (props: Props) => {
         <View style={styles.bodyContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{props.guideGroup.name}</Text>
-            <View style={styles.openTimeContainer}>
+            <View style={styles.openingHoursAndDistanceContainer}>
               <OpeningHoursView
                 openHours={props.guideGroup.location.openingHours}
                 openHoursException={props.guideGroup.location.openingHourExceptions}
                 now={props.now}
-                textStyle={styles.openTimeText}
               />
               {props.geolocation ? displayDistance(props.geolocation, props.guideGroup.location) : null}
             </View>

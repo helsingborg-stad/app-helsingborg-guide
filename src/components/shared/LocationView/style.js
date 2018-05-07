@@ -58,14 +58,6 @@ export default StyleSheet.create({
     flex: 1,
     paddingVertical: 4,
   },
-  openTimeText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
-      fontSize: 16,
-      fontWeight: "normal",
-      lineHeight: 19,
-      color: Colors.black,
-    }],
-  ),
   distanceText: StyleSheetUtils.flatten([
     TextStyles.description, {
       fontWeight: "400",
@@ -90,5 +82,5 @@ export default StyleSheet.create({
       paddingBottom: 10,
       color: Colors.black,
     }],
-  )
+  ),
 });
