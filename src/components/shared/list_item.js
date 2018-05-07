@@ -70,9 +70,14 @@ function displayImage(imageSource, id) {
 }
 
 function renderDate(startDate, endDate) {
-  if (startDate === null || endDate === null) { return null; }
+  if (!startDate || !endDate) { return null; }
 
-  return <Text style={styles.date} numberOfLines={1}>{`${startDate} - ${endDate}`}</Text>;
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  return (<Text style={styles.date} numberOfLines={1}>
+    {`${start.toISOString().substring(0, 10)} - ${end.toISOString().substring(0, 10)}`}
+  </Text>);
 }
 
 export default function ListItem({ forKids, title, description, startDate, endDate, imageSource, id }) {

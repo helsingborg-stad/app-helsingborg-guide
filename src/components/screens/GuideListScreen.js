@@ -366,7 +366,7 @@ function mapStateToProps(state) {
   const { subLocations } = state;
 
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
-  const locations = JSON.parse(JSON.stringify(state.guides.slice()));
+  const locations = JSON.parse(JSON.stringify(state.oldGuideGroups.slice()));
 
   return {
     isFetching,

@@ -114,7 +114,7 @@ function displayGuides(guides: Guide[], navigation: Object) {
       {LangService.strings.MEDIAGUIDES}
     </Text>
     {guides.map((guide) => {
-      if (!guide.images || !guide.images.length) return null;
+      if (!guide.images) return null;
       const forKids = guide.childFriendly;
 
       return (

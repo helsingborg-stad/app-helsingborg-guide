@@ -1,15 +1,17 @@
-import * as types from "../actions/actionTypes";
+// @flow
 
 import initialState from "./initialState";
 
-export default function guideReducer(state = initialState.guides, action) {
+export default function guideReducer(state: GuideState = initialState.guides, action: Action): GuideState {
   switch (action.type) {
-    case types.CREATE_GUIDE:
-      return [...state, Object.assign({}, action.guide, { contentType: "location" })];
-    case types.UPDATE_GUIDE:
-      return [...state.filter(guide => guide.id !== action.guide.id), Object.assign({}, action.guide)];
-    case types.LOAD_GUIDES_SUCCESS:
-      return action.guides.map(element => Object.assign(element, { contentType: "location" }));
+    case "FETCH_GUIDES_REQUEST":
+      return { ...state, isFetching: true };
+    case "FETCH_GUIDES_SUCCESS": {
+      const items = action.guides;
+      return { ...state, items, isFetching: false };
+    }
+    case "FETCH_GUIDES_FAILURE":
+      return { ...state, isFetching: false };
     default:
       return state;
   }

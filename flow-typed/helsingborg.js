@@ -1,10 +1,13 @@
 // @flow
 
 declare type Action =
-  | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup }
+  | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup, guides: Guide[] }
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
-  | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error };
+  | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
+  | { type: "FETCH_GUIDES_REQUEST" }
+  | { type: "FETCH_GUIDES_SUCCESS", guides: Guide[] }
+  | { type: "FETCH_GUIDES_FAILURE", error: Error };
 
 /*
  //TODO To be done
@@ -70,6 +73,11 @@ declare type GuideGroupState = {
   items: GuideGroup[],
 }
 
+declare type GuideState = {
+  isFetching: boolean,
+  items: Guide[],
+}
+
 declare type Images = { thumbnail: string, medium: string, large: string };
 
 declare type Link = { service: string, url: string };
@@ -109,11 +117,13 @@ declare type PostStatus = 'publish' | 'draft';
 declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
+  guides: GuideState,
   geolocation: GeolocationType
 }
 
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 
 declare type UIState = {
-  currentGuideGroup: ?GuideGroup
+  currentGuideGroup: ?GuideGroup,
+  currentGuides: ?Guide[]
 }
