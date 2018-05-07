@@ -40,7 +40,7 @@ declare type Guide = {
   slug: string;
   name: string;
   /** @nullable */
-  tagline?: string;
+  tagline?: ?string;
   /** @nullable */
   description?: string;
   postStatus: PostStatus;
