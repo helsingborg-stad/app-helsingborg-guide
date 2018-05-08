@@ -61,7 +61,7 @@ const store = configureStore();
 persistStore(store,
   {
     storage: AsyncStorage,
-    blacklist: ["error", "menu", "internet", "audio"],
+    blacklist: ["error", "menu", "internet", "audio", "uiState"],
   },
 );
 

@@ -205,7 +205,13 @@ test("weekdays", () => {
   let i = 0;
   const now: Date = new Date("July 12, 2018 12:00:00");
   for (i = 0; i < 7; i += 1) {
-    const tree = renderer.create(<LocationView guideGroup={guideGroup} guides={guides} now={now} navigation={{}} />).toJSON();
+    const tree = renderer.create(<LocationView
+      guideGroup={guideGroup}
+      guides={guides}
+      now={now}
+      navigation={{}}
+      onPressGuide={() => { }}
+    />).toJSON();
     expect(tree).toMatchSnapshot();
 
     now.setDate(now.getDate() + 1);
@@ -221,6 +227,7 @@ test("with geolocation", () => {
     now={now}
     navigation={{}}
     geolocation={geolocation}
+    onPressGuide={() => { }}
   />).toJSON();
   expect(tree).toMatchSnapshot();
 });
@@ -234,6 +241,7 @@ test("with point properties", () => {
     guides={guides}
     now={now}
     navigation={{}}
+    onPressGuide={() => { }}
   />).toJSON();
   expect(tree).toMatchSnapshot();
 });

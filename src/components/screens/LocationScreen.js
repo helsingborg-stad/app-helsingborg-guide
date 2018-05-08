@@ -3,18 +3,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationView from "../shared/LocationView";
+import { AnalyticsUtils } from "../../utils/";
+import { selectCurrentGuide } from "../../actions/uiStateActions";
 
 type Props = {
   currentGuideGroup: GuideGroup,
   currentGuides: Guide[],
   geolocation: GeolocationType,
-  navigation: Object
+  navigation: Object,
+  selectCurrentGuide(guide: Guide): void
 }
 
 class LocationScreen extends Component<Props> {
   constructor() {
     super();
     console.log("constructor");
+  }
+
+  onPressGuide = (guide: Guide) => {
+    const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+    if (guide.guideType === "trail") {
+      navigate("TrailScreen", {
+        title: guide.name,
+        trail: guide,
+      });
+    } else if (guide.guideType === "guide") {
+      this.props.selectCurrentGuide(guide);
+      navigate("GuideDetailsScreen");
+    }
   }
 
   render() {
@@ -26,6 +43,7 @@ class LocationScreen extends Component<Props> {
       now={now}
       geolocation={geolocation}
       navigation={this.props.navigation}
+      onPressGuide={this.onPressGuide}
     />);
   }
 }
@@ -43,8 +61,9 @@ function mapStateToProps(state: RootState) {
   };
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch: Dispatch) {
   return {
+    selectCurrentGuide: (guide: Guide) => dispatch(selectCurrentGuide(guide)),
   };
 }
 
