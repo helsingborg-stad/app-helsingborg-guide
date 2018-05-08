@@ -19,7 +19,7 @@ function mapStateToProps(state: RootState) {
 }
 
 
-function mapDispatchToProps(dispatch: Dispatch) {
+function mapDispatchToProps() {
   return {};
 }
 

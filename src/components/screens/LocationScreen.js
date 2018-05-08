@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationView from "../shared/LocationView";
+import { AnalyticsUtils } from "../../utils/";
 
 type Props = {
   currentGuideGroup: GuideGroup,
@@ -17,6 +18,21 @@ class LocationScreen extends Component<Props> {
     console.log("constructor");
   }
 
+  onPressGuide = (guide: Guide) => {
+    console.log("onPressGuide: ", guide);
+    const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+    if (guide.guideType === "trail") {
+      navigate("TrailScreen", {
+        title: guide.name,
+        trail: guide,
+      });
+    } else if (guide.guideType === "guide") {
+      // TODO dispatch select_guide_action
+      navigate("GuideDetailsScreen");
+    }
+  }
+
   render() {
     const { currentGuideGroup, currentGuides, geolocation } = this.props;
     const now = new Date();
@@ -26,6 +42,7 @@ class LocationScreen extends Component<Props> {
       now={now}
       geolocation={geolocation}
       navigation={this.props.navigation}
+      onPressGuide={this.onPressGuide}
     />);
   }
 }

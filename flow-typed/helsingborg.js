@@ -176,5 +176,6 @@ declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 declare type UIState = {
   currentGuideGroup: ?GuideGroup,
   currentGuides: ?Guide[],
-  currentContentObject: ?ContentObject
+  currentContentObject: ?ContentObject,
+  currentGuide: ?Guide
 }
