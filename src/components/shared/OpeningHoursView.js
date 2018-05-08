@@ -1,8 +1,13 @@
 // @flow
 
 import React from "react";
-import { Text } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import LangService from "../../services/langService";
+import { StyleSheetUtils } from "../../utils/";
+import {
+  Colors,
+  TextStyles,
+} from "../../styles/";
 
 function getOpeningHours(openingList: OpenHour[], expList: OpenHourException[], now: Date) {
   if (!openingList || !openingList.length) return null;
@@ -21,11 +26,21 @@ function getOpeningHours(openingList: OpenHour[], expList: OpenHourException[], 
   return `${LangService.strings.OPEN_TODAY} ${openingObj.opening}-${openingObj.closing}`;
 }
 
+const styles = StyleSheet.create({
+  hoursText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "normal",
+      lineHeight: 19,
+      color: Colors.black,
+    }],
+  ),
+});
+
 type Props = {
   openHours: OpenHour[],
   openHoursException: OpenHourException[],
   now: Date,
-  textStyle: StyleSheet
 }
 
 export default function OpeningHoursView(props: Props) {
@@ -33,6 +48,6 @@ export default function OpeningHoursView(props: Props) {
   const text = opening || "";
 
   return (
-    <Text style={props.textStyle}>{text}</Text>
+    <Text style={styles.hoursText}>{text}</Text>
   );
 }

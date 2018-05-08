@@ -12,5 +12,16 @@ async function getGuideGroups(langCode) {
   return json;
 }
 
+async function getGuides(langCode) {
+  const url = `${API_BASE_URL}/guide/?lang=${langCode}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Failed to fetch guides");
+  }
 
-export default { getGuideGroups };
+  const json = await response.json();
+
+  return json;
+}
+
+export default { getGuideGroups, getGuides };

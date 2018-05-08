@@ -23,6 +23,27 @@ const geolocation: GeolocationType =
     timestamp: 1525253893426.6992,
   };
 
+const testGuide: Guide = {
+  childFriendly: false,
+  contentObjects: [],
+  description: "betraktelser av vår omvärld.",
+  guideGroupId: 221,
+  guideType: "guide",
+  id: 178771,
+  images: {
+    large: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-819x1024.jpg",
+    medium: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
+    thumbnail: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-150x150.jpg",
+  },
+  name: "Shaun Tan  14.4-12.8.2018",
+  postStatus: "publish",
+  slug: "shaun-tan-14-4-12-8-2018",
+  dateStart: "2018-04-14T00:00:00.000Z",
+  dateEnd: "2018-08-12T00:00:00.000Z",
+};
+
+const guides: Guide[] = [testGuide];
+
 const guideGroup: GuideGroup =
   {
     active: true,
@@ -184,7 +205,7 @@ test("weekdays", () => {
   let i = 0;
   const now: Date = new Date("July 12, 2018 12:00:00");
   for (i = 0; i < 7; i += 1) {
-    const tree = renderer.create(<LocationView guideGroup={guideGroup} now={now} navigation={{}} />).toJSON();
+    const tree = renderer.create(<LocationView guideGroup={guideGroup} guides={guides} now={now} navigation={{}} />).toJSON();
     expect(tree).toMatchSnapshot();
 
     now.setDate(now.getDate() + 1);
@@ -196,6 +217,7 @@ test("with geolocation", () => {
   const now: Date = new Date("June 12, 2017 12:00:00");
   const tree = renderer.create(<LocationView
     guideGroup={guideGroup}
+    guides={guides}
     now={now}
     navigation={{}}
     geolocation={geolocation}
@@ -209,6 +231,7 @@ test("with point properties", () => {
   const now: Date = new Date("June 12, 2017 12:00:00");
   const tree = renderer.create(<LocationView
     guideGroup={guideGroup}
+    guides={guides}
     now={now}
     navigation={{}}
   />).toJSON();

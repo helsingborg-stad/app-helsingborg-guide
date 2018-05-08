@@ -385,7 +385,7 @@ export default class MapWithListView extends Component {
       case "location":
       {
         AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
-        navigate("LocationDetailsScreen", { location: contentObject });
+        navigate("LocationScreen", { location: contentObject });
         break;
       }
       case "trail":

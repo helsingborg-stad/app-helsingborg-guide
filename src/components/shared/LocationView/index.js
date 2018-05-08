@@ -8,19 +8,20 @@ import DistanceView from "../DistanceViewNew";
 import IconTextTouchable from "../IconTextTouchable";
 import LangService from "../../../services/langService";
 import OpeningHoursView from "../OpeningHoursView";
-import SVGView from "../../shared/SVGView";
+import PointPropertiesView from "../PointPropertiesView";
+import LocationGuidesView from "../LocationGuidesView";
+
 import { UrlUtils, LocationUtils } from "../../../utils/";
 import WebLinkView from "../WebLinkView";
 
-const pointPropertyPlaceholderImage = require("../../../images/iconPointPropertyPlaceholder.svg");
 
 type Props = {
   guideGroup: GuideGroup,
+  guides: Guide[],
   now: Date,
   geolocation?: ?GeolocationType,
   navigation: any
 }
-
 
 function getWebUrl(links: Link[]): ?string {
   let webUrl = null;
@@ -72,23 +73,6 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
   );
 }
 
-function displayPointProperties(pointProperties: PointProperty[]) {
-  const pointPropertyView = (
-    <View>
-      <View style={styles.divider} />
-      <View style={styles.pointPropertiesSectionContainer}>
-        {pointProperties.map(element =>
-          (<View style={styles.pointPropertyContainer} key={element.id} >
-            <SVGView logoType={element.icon} placeholderImage={pointPropertyPlaceholderImage} customStyle={styles.pointPropertyIcon} />
-            <Text style={styles.pointPropertyText} >{element.name}</Text>
-          </View>),
-        )}
-      </View>
-    </View>
-  );
-  return pointPropertyView;
-}
-
 const LocationView = (props: Props) => {
   const webUrl = getWebUrl(props.guideGroup.location.links);
   return (
@@ -105,24 +89,23 @@ const LocationView = (props: Props) => {
         <View style={styles.bodyContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{props.guideGroup.name}</Text>
-            <View style={styles.openTimeContainer}>
+            <View style={styles.openingHoursAndDistanceContainer}>
               <OpeningHoursView
                 openHours={props.guideGroup.location.openingHours}
                 openHoursException={props.guideGroup.location.openingHourExceptions}
                 now={props.now}
-                textStyle={styles.openTimeText}
               />
               {props.geolocation ? displayDistance(props.geolocation, props.guideGroup.location) : null}
             </View>
             {props.geolocation ? displayDirections(props.geolocation, props.guideGroup.location) : null}
           </View>
-          {/* TODO: list of guides! with the new guide data */}
+          <LocationGuidesView guides={props.guides} navigation={props.navigation} />
           <View style={styles.articleContainer}>
             <Text style={styles.articleHeaderText}>{`${LangService.strings.ABOUT} ${props.guideGroup.name}`}</Text>
             <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
           </View>
           {webUrl ? <WebLinkView url={webUrl} navigation={props.navigation} /> : null}
-          {displayPointProperties(props.guideGroup.pointProperties)}
+          <PointPropertiesView pointProperties={props.guideGroup.pointProperties} />
         </View>
       </ScrollView>
     </View>

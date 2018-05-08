@@ -25,7 +25,7 @@ import {
   StyleSheetUtils,
   AnalyticsUtils,
 } from "../../utils/";
-import * as guideActions from "../../actions/guideActions";
+import * as oldGuideGroupActions from "../../actions/oldGuideGroupActions";
 import * as navigationActions from "../../actions/navigationActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 
@@ -130,7 +130,7 @@ const textStyles = StyleSheet.create({
 class SettingsScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
-    guideActions: PropTypes.object.isRequired,
+    oldGuideGroupActions: PropTypes.object.isRequired,
     navigationActions: PropTypes.object.isRequired,
     subLocationActions: PropTypes.object.isRequired,
   }
@@ -186,7 +186,7 @@ class SettingsScreen extends Component {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
         LangService.storeLangCode(langCode);
-        this.props.guideActions.loadGuides(langCode);
+        this.props.oldGuideGroupActions.loadOldGuideGroups(langCode);
         this.props.navigationActions.fetchNavigation(langCode);
         this.props.subLocationActions.loadSubLocations(langCode);
         LangService.getLanguages();
@@ -275,7 +275,7 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    guideActions: bindActionCreators(guideActions, dispatch),
+    oldGuideGroupActions: bindActionCreators(oldGuideGroupActions, dispatch),
     navigationActions: bindActionCreators(navigationActions, dispatch),
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
   };

@@ -1,8 +1,9 @@
 // @flow
 
 import { combineReducers } from "redux";
-import guides from "./guideReducer";
+import oldGuideGroups from "./oldGuideGroupReducer";
 import guideGroups from "./guideGroupReducer";
+import guides from "./guideReducer";
 import navigation from "./navigationReducer";
 import subLocations from "./subLocationReducer";
 import metrics from "./metricReducer";
@@ -15,8 +16,9 @@ import downloadDataVersion from "./downloadDataVersionReducer";
 import uiState from "./uiStateReducer";
 
 const rootReducer: RootState = combineReducers({
-  guides,
+  oldGuideGroups,
   guideGroups,
+  guides,
   navigation,
   subLocations,
   audio,
