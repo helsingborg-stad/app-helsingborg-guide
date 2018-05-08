@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import ExpandableText from "../ExpandableText";
 import styles from "./styles";
 import ImageView from "../ImageView";
 
@@ -45,6 +46,9 @@ class GuideView extends Component<Props> {
     return (<ScrollView style={styles.container}>
       <ImageView source={{ uri: guide.images.large }} style={styles.image} />
       <Text>{guide.name}</Text>
+      <Text style={styles.title}>{guide.name}</Text>
+      {guide.tagline ? <Text >{guide.tagline}</Text> : null}
+      {guide.description ? <ExpandableText style={styles.descriptionContainer} text={guide.description} /> : null}
       {this.renderContentObjects(guide.contentObjects)}
     </ScrollView>);
   }

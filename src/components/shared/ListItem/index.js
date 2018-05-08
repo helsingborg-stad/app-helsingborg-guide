@@ -28,6 +28,7 @@ function displayImage(imageSource: Object) {
   );
 }
 
+// TODO extract DateText component
 function renderDate(startDate?: string, endDate?: string) {
   if (!startDate || !endDate) { return null; }
 

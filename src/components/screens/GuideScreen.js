@@ -40,10 +40,13 @@ class GuideScreen extends Component<Props> {
 
   render() {
     const { currentGuide } = this.props;
-    return currentGuide ? (<GuideView
-      guide={currentGuide}
-      onPressContentObject={this.onPressContentObject}
-    />) : <View />;
+    return currentGuide ?
+      (
+        <GuideView
+          guide={currentGuide}
+          onPressContentObject={this.onPressContentObject}
+        />
+      ) : <View />;
   }
 }
 
@@ -55,7 +58,8 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    selectCurrentContentObject: contentObject => dispatch(selectCurrentContentObject(contentObject)),
+    selectCurrentContentObject:
+      contentObject => dispatch(selectCurrentContentObject(contentObject)),
   };
 }
 
