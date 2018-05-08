@@ -8,9 +8,8 @@ declare type Props = {
   guide: Guide
 }
 
-function renderContentObject(obj: any) {
-  // TODO use ContentObject type
-  const images: Images[] = obj.images;
+function renderContentObject(obj: ContentObject) {
+  const { images } = obj;
   // TODO return placeholder image
   const uri = images.length > 0 ? images[0].medium : null;
   return (
@@ -24,8 +23,7 @@ function renderContentObject(obj: any) {
   );
 }
 
-function renderContentObjects(contentObjects: any[]) {
-  // TODO use ContentObject type
+function renderContentObjects(contentObjects: ContentObject[]) {
   return (<View style={styles.objectsContainer} >
     {contentObjects.map(item => renderContentObject(item))}
   </View>
