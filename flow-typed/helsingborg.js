@@ -3,6 +3,7 @@
 declare type Action =
   | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup, guides: Guide[] }
   | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
+  | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
@@ -175,5 +176,6 @@ declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 declare type UIState = {
   currentGuideGroup: ?GuideGroup,
   currentGuides: ?Guide[],
-  currentContentObject: ?ContentObject
+  currentContentObject: ?ContentObject,
+  currentGuide: ?Guide
 }

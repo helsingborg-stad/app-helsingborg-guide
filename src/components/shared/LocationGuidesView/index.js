@@ -5,25 +5,14 @@ import { View, Text, TouchableOpacity } from "react-native";
 import ListItem from "../../shared/ListItem";
 import styles from "./style";
 import LangService from "../../../services/langService";
-import { AnalyticsUtils } from "../../../utils/";
 
-function goToGuide(guide: Guide, navigation: Object) {
-  const { navigate } = navigation;
-  AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-  if (guide.guideType === "trail") {
-    navigate("TrailScreen", {
-      title: guide.name,
-      trail: guide,
-    });
-  } else if (guide.guideType === "guide") {
-    navigate("GuideDetailsScreen", {
-      title: guide.name,
-      id: guide.id,
-    });
-  }
+type Props = {
+  guides: Guide[],
+  onPressGuide(guide: Guide): void
 }
 
-function getGuidesList(guides: Guide[], navigation: Object) {
+const LocationGuidesView = (props: Props) => {
+  const { guides, onPressGuide } = props;
   return (<View style={styles.guideListContainer}>
     <Text style={styles.guideListHeaderText}>
       {LangService.strings.MEDIAGUIDES}
@@ -36,7 +25,7 @@ function getGuidesList(guides: Guide[], navigation: Object) {
         <TouchableOpacity
           key={guide.id}
           style={styles.guideContainer}
-          onPress={() => goToGuide(guide, navigation)}
+          onPress={() => onPressGuide(guide)}
         >
           <ListItem /** TODO: CREATE NEW VERSION OF ListItem */
             imageSource={{ uri: guide.images.medium }}
@@ -52,13 +41,6 @@ function getGuidesList(guides: Guide[], navigation: Object) {
     })}
   </View>
   );
-}
+};
 
-type Props = {
-  guides: Guide[],
-  navigation: Object,
-}
-
-export default function LocationGuidesView(props: Props) {
-  return getGuidesList(props.guides, props.navigation);
-}
+export default LocationGuidesView;

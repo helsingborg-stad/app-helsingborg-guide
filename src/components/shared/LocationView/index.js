@@ -20,7 +20,8 @@ type Props = {
   guides: Guide[],
   now: Date,
   geolocation?: ?GeolocationType,
-  navigation: any
+  navigation: any,
+  onPressGuide(guide: Guide): void
 }
 
 function getWebUrl(links: LinkAndService[]): ?string {
@@ -99,7 +100,7 @@ const LocationView = (props: Props) => {
             </View>
             {props.geolocation ? displayDirections(props.geolocation, props.guideGroup.location) : null}
           </View>
-          <LocationGuidesView guides={props.guides} navigation={props.navigation} />
+          <LocationGuidesView guides={props.guides} onPressGuide={props.onPressGuide} />
           <View style={styles.articleContainer}>
             <Text style={styles.articleHeaderText}>{`${LangService.strings.ABOUT} ${props.guideGroup.name}`}</Text>
             <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
@@ -114,6 +115,7 @@ const LocationView = (props: Props) => {
 
 LocationView.defaultProps = {
   geolocation: null,
+  onPressGuide: null,
 };
 
 export default LocationView;
