@@ -21,7 +21,6 @@ class LocationScreen extends Component<Props> {
   }
 
   onPressGuide = (guide: Guide) => {
-    console.log("onPressGuide: ", guide);
     const { navigate } = this.props.navigation;
     AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
     if (guide.guideType === "trail") {

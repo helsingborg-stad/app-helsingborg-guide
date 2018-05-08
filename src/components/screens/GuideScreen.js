@@ -1,17 +1,38 @@
 // @flow
 
-import React from "react";
+import React, { Component } from "react";
 import { View } from "react-native";
 import { connect } from "react-redux";
 
 import GuideView from "../shared/GuideView";
 
-declare type Props = { currentGuide: ?Guide }
+declare type Props = { currentGuide: ?Guide, navigation: any }
 
-const GuideScreen = (props: Props) => {
-  console.log("GuideScreen: ", props);
-  return props.currentGuide ? (<GuideView guide={props.currentGuide} />) : <View />;
-};
+class GuideScreen extends Component<Props> {
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+    if (params) {
+      const { title } = params;
+      if (title) {
+        return { title };
+      }
+    }
+    return {};
+  };
+
+  constructor(props: Props) {
+    super(props);
+
+    const { currentGuide } = props;
+    const title = currentGuide ? currentGuide.name : null;
+    props.navigation.setParams({ title });
+  }
+
+  render() {
+    const { currentGuide } = this.props;
+    return currentGuide ? (<GuideView guide={currentGuide} />) : <View />;
+  }
+}
 
 function mapStateToProps(state: RootState) {
   const { currentGuide } = state.uiState;
