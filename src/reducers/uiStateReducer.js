@@ -3,6 +3,7 @@
 const defaultState: UIState = {
   currentGuideGroup: null,
   currentGuides: [],
+  currentContentObject: null,
 };
 
 export default function uiStateReducer(state: UIState = defaultState, action: Action): UIState {

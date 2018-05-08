@@ -2,6 +2,7 @@
 
 declare type Action =
   | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup, guides: Guide[] }
+  | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
@@ -35,24 +36,72 @@ declare type GeolocationType = {
 
 declare type GetState = () => RootState;
 
+declare type ContentType = 'audio' | 'video';
+
+declare type MediaContent = {
+  contentType: ContentType,
+  description: string,
+  id: number,
+  title: string,
+  /** @format date-time */
+  created: string,
+  /** @format date-time */
+  modified: string,
+  url: string
+}
+
+declare type PositionLongLat = {
+  longitude: number,
+  latitude: number
+}
+
+declare type Beacon = {
+  id: string,
+  nid: string,
+  position?: PositionLongLat,
+  distance?: number
+}
+
+declare type LinkType = 'web' | 'instagram' | 'facebook' | 'twitter' | 'spotify' | 'youtube' | 'vimeo';
+
+declare type Link = {
+  url: string,
+  title?: string,
+  type?: LinkType
+}
+
+declare type ContentObject = {
+  id: string,
+  order: number,
+  postStatus: PostStatus,
+  searchableId: string,
+  title: string,
+  description?: string,
+  images: Images[],
+  audio?: MediaContent,
+  video?: MediaContent,
+  links?: Link[],
+  beacon?: Beacon;
+}
+
 declare type Guide = {
-  id: number;
-  slug: string;
-  name: string;
+  id: number,
+  slug: string,
+  name: string,
   /** @nullable */
-  tagline?: ?string;
+  tagline?: ?string,
   /** @nullable */
-  description?: string;
-  postStatus: PostStatus;
-  guideGroupId: number;
+  description?: string,
+  postStatus: PostStatus,
+  guideGroupId: number,
   /** @format date-time */
-  dateStart?: string;
+  dateStart?: string,
   /** @format date-time */
-  dateEnd?: string;
-  guideType: GuideType;
-  childFriendly: boolean;
-  images: Images;
-  contentObjects: any[];
+  dateEnd?: string,
+  guideType: GuideType,
+  childFriendly: boolean,
+  images: Images,
+  contentObjects: ContentObject[]
 }
 
 declare type GuideType = 'guide' | 'trail';
@@ -80,7 +129,7 @@ declare type GuideState = {
 
 declare type Images = { thumbnail: string, medium: string, large: string };
 
-declare type Link = { service: string, url: string };
+declare type LinkAndService = { service: string, url: string };
 
 declare type Location = {
   id: number,
@@ -89,7 +138,7 @@ declare type Location = {
   longitude: number,
   openingHours: OpenHour[],
   openingHourExceptions: OpenHourException[],
-  links: Link[]
+  links: LinkAndService[]
 };
 
 declare type OpenHour = {
@@ -125,5 +174,6 @@ declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 
 declare type UIState = {
   currentGuideGroup: ?GuideGroup,
-  currentGuides: ?Guide[]
+  currentGuides: ?Guide[],
+  currentContentObject: ?ContentObject
 }
