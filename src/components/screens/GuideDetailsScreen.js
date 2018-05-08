@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import * as internetActions from "../../actions/internetActions";
 import * as downloadActions from "../../actions/downloadActions";
+import uiStateActions from "../../actions/uiStateActions";
 
 import { BeaconService } from "../../services/beaconService";
 import { BeaconServiceiOS } from "../../services/beaconServiceiOS";
@@ -322,17 +323,22 @@ class GuideDetailsScreen extends Component {
     this.state.collapsed = true;
   }
 
-  _goToContentObjectScene(contentObject, objectKey) {
+  _goToContentObjectScene(contentObject/* , objectKey */) {
     const { navigate } = this.props.navigation;
     const { title } = contentObject;
+
+    this.props.dispatchSelectContentObject(this.state.subLocation.id, contentObject.id);
+
     AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
-    navigate("ObjectDetailsScreen", {
-      title,
-      contentObject,
-      objectKey,
-      id: this.state.subLocation.id,
-      contentType: this.state.subLocation.contentType,
-    });
+
+    navigate("ObjectScreen", { title });
+    /*  navigate("ObjectDetailsScreen", {
+        title,
+        contentObject,
+        objectKey,
+        id: this.state.subLocation.id,
+        contentType: this.state.subLocation.contentType,
+      }); */
   }
 
   // ############################################
@@ -877,7 +883,12 @@ function mapDispatchToProps(dispatch) {
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
     internetActions: bindActionCreators(internetActions, dispatch),
     downloadActions: bindActionCreators(downloadActions, dispatch),
+
+    dispatchSelectContentObject: (guideID, contentObjectID) => {
+      dispatch(uiStateActions.selectCurrentObject(guideID, contentObjectID));
+    },
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GuideDetailsScreen);
+
