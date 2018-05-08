@@ -1,12 +1,48 @@
 // @flow
 
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, Image, Dimensions, ScrollView, TouchableWithoutFeedback } from "react-native";
+import Swiper from "react-native-swiper";
 import styles from "./style";
+
+const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.32;
 
 type Props = {
   contentObject: ContentObject,
-  guideType: GuideType
+  guideType: GuideType,
+  navigation: any
+}
+
+function goToImageView(image, /* guideID, */ navigation: any) {
+  const { navigate } = navigation;
+  navigate("ImageScreen", { image/* , guideID */ });
+}
+
+function displayImagesSlider(images: Images[], navigation: any) {
+  const slides = images.map((image, index) => (
+    <View key={image.thumbnail || index}>
+      <TouchableWithoutFeedback onPress={() => goToImageView(image/* , this.state.guideID offline stuff */, navigation)}>
+        <View>
+          <Image source={{ uri: image.large }} style={styles.image} resizeMode="cover" />
+          {/* guideID={this.state.guideID} */}
+        </View>
+      </TouchableWithoutFeedback>
+    </View>
+  ));
+
+  return (
+    <Swiper
+      style={styles.imagesSlider}
+      height={MAX_IMAGE_HEIGHT}
+      dotColor="white"
+      activeDotColor="#D35098"
+      showsButtons={false}
+      loop={false}
+    /* onIndexChanged={this.swiperIndexChanged} */ /* MOVE TO REDUX */
+    >
+      {slides}
+    </Swiper>
+  );
 }
 
 function displayID(searchableID: string) {
@@ -42,6 +78,7 @@ function displayText(description?: string) {
 const ObjectView = (props: Props) => (
   <View style={styles.viewContainer}>
     <ScrollView contentContainerStyle={styles.scrollView}>
+      {displayImagesSlider(props.contentObject.images, props.navigation)}
       <View style={styles.bodyContainer}>
         {displayTitle(props.contentObject.title, props.contentObject.searchableId, props.guideType)}
         {/* this.displayButtonsBar() */}

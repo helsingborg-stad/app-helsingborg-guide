@@ -12,6 +12,18 @@ export default StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: Colors.white,
   },
+  imageViewContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  imagesSlider: {
+  },
+  image: {
+    width: "100%",
+    height: "auto",
+    aspectRatio: 16 / 9,
+  },
   bodyContainer: {
     flex: 1,
     alignItems: "stretch",

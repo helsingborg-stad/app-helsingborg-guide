@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Dimensions, Platform } from "react-native";
+import { StyleSheet, Dimensions, Platform, Image } from "react-native";
 import PhotoView from "react-native-photo-view";
 import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
@@ -40,7 +40,8 @@ export default class ImageScreen extends Component {
 
   setSource() {
     const { image, guideID } = this.props.navigation.state.params;
-    const uri = encodeURI(image.sizes.large);
+    Image.getSize(image.large, (width, height) => { this.setState({ width, height }); });
+    const uri = encodeURI(image.large);
     if (typeof uri === "string") {
       fetchService.isExist(uri, guideID).then((exist) => {
         const fullPath = fetchService.getFullPath(uri, guideID);
@@ -66,11 +67,7 @@ export default class ImageScreen extends Component {
   }
 
   render() {
-    const { image } = this.props.navigation.state.params;
-    const { sizes } = image;
-    const width = parseInt(sizes["large-width"]);
-    const height = parseInt(sizes["large-height"]);
-    const scale = width / FULL_WIDTH;
+    const scale = this.state.width / FULL_WIDTH;
 
     return (
       <ViewContainer style={styles.mainContainer}>
@@ -80,7 +77,7 @@ export default class ImageScreen extends Component {
             minimumZoomScale={MIN_SCALE}
             maximumZoomScale={MAX_SCALE}
             androidScaleType="centerInside"
-            style={{ flex: 1, width: width / scale, height: height / scale }}
+            style={{ flex: 1, width: this.state.width / scale, height: this.state.height / scale }}
           />
         }
       </ViewContainer>

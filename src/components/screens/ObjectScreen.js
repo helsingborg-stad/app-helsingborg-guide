@@ -19,7 +19,7 @@ class ObjectScreen extends Component<Props> {
     const { currentContentObject } = this.props;
     const { params } = this.props.navigation.state;
     const { currentGuideType } = params;
-    return (<ObjectView contentObject={currentContentObject} guideType={currentGuideType} />);
+    return (<ObjectView contentObject={currentContentObject} guideType={currentGuideType} navigation={this.props.navigation} />);
   }
 }
 
