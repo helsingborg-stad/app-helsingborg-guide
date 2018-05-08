@@ -20,6 +20,32 @@ export default StyleSheet.create({
   scrollView: {
     paddingBottom: 70,
   },
+  titleContainer: {
+    flex: 1,
+    paddingHorizontal: 34,
+    paddingTop: 12,
+    paddingBottom: 4,
+  },
+  title: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 24,
+      fontWeight: "300",
+      lineHeight: 30,
+    }],
+  ),
+  idContainer: {
+    flex: 1,
+    paddingHorizontal: 34,
+    paddingBottom: 4,
+  },
+  idText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "400",
+      lineHeight: 21,
+      color: Colors.warmGrey,
+    }],
+  ),
   articleContainer: {
     flex: 4,
     paddingHorizontal: 34,

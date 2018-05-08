@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import ObjectView from "../shared/ObjectView";
 
 type Props = {
-  currentContentObject: ContentObject
+  currentContentObject: ContentObject,
+  navigation: Object
 }
 
 class ObjectScreen extends Component<Props> {
@@ -16,7 +17,9 @@ class ObjectScreen extends Component<Props> {
 
   render() {
     const { currentContentObject } = this.props;
-    return (<ObjectView contentObject={currentContentObject} />);
+    const { params } = this.props.navigation.state;
+    const { currentGuideType } = params;
+    return (<ObjectView contentObject={currentContentObject} guideType={currentGuideType} />);
   }
 }
 

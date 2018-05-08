@@ -331,7 +331,7 @@ class GuideDetailsScreen extends Component {
 
     AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
 
-    navigate("ObjectScreen", { title });
+    navigate("ObjectScreen", { title, currentGuideType: this.state.subLocation.contentType }); // TODO: use contenttype from new data type.
     /*  navigate("ObjectDetailsScreen", {
         title,
         contentObject,
