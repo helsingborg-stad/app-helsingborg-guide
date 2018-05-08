@@ -16,7 +16,7 @@ class ObjectScreen extends Component<Props> {
 
   render() {
     const { currentContentObject } = this.props;
-    return (<ObjectView ContentObject={currentContentObject} />);
+    return (<ObjectView contentObject={currentContentObject} />);
   }
 }
 

@@ -12,5 +12,22 @@ export default StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: Colors.white,
   },
+  bodyContainer: {
+    flex: 1,
+    alignItems: "stretch",
+    backgroundColor: Colors.white,
+  },
+  scrollView: {
+    paddingBottom: 70,
+  },
+  articleContainer: {
+    flex: 4,
+    paddingHorizontal: 34,
+    paddingVertical: 10,
+  },
+  article: {
+    fontSize: 14,
+    lineHeight: 20,
+  },
 
 });
