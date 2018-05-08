@@ -1,43 +1,54 @@
 // @flow
 
-import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import React, { Component } from "react";
+import {
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import styles from "./styles";
 
 declare type Props = {
-  guide: Guide
+  guide: Guide,
+  onPressContentObject(obj: ContentObject): void
 }
 
-function renderContentObject(obj: ContentObject) {
-  const { images } = obj;
-  // TODO return placeholder image
-  const uri = images.length > 0 ? images[0].medium : null;
-  return (
-    <View key={obj.id} style={styles.objectContainer}>
-      <Image
-        source={{ uri }}
-        style={styles.objectImage}
-        resizeMode="cover"
-      />
-    </View>
-  );
-}
+class GuideView extends Component<Props> {
+  renderContentObject = (obj: ContentObject) => {
+    const { images } = obj;
+    // TODO return placeholder image
+    const uri = images.length > 0 ? images[0].medium : null;
+    return (
+      <TouchableOpacity
+        key={obj.id}
+        style={styles.objectContainer}
+        onPress={() => this.props.onPressContentObject(obj)}
+      >
+        <Image
+          source={{ uri }}
+          style={styles.objectImage}
+          resizeMode="cover"
+        />
+      </TouchableOpacity>
+    );
+  }
 
-function renderContentObjects(contentObjects: ContentObject[]) {
-  return (<View style={styles.objectsContainer} >
-    {contentObjects.map(item => renderContentObject(item))}
+  renderContentObjects = (contentObjects: ContentObject[]) => (<View style={styles.objectsContainer} >
+    {contentObjects.map(item => this.renderContentObject(item))}
   </View>
-  );
-}
+  )
 
-const GuideView = (props: Props) => {
-  const { guide } = props;
-  return (<ScrollView style={styles.container}>
-    <Image source={{ uri: guide.images.large }} style={styles.image} />
-    <Text>{guide.name}</Text>
-    {renderContentObjects(guide.contentObjects)}
-  </ScrollView>);
-};
+  render() {
+    const { guide } = this.props;
+    return (<ScrollView style={styles.container}>
+      <Image source={{ uri: guide.images.large }} style={styles.image} />
+      <Text>{guide.name}</Text>
+      {this.renderContentObjects(guide.contentObjects)}
+    </ScrollView>);
+  }
+}
 
 
 export default GuideView;

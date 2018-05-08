@@ -12,3 +12,7 @@ export function selectCurrentGuideGroup(id: number): ThunkAction {
 export function selectCurrentGuide(guide: Guide): Action {
   return { type: "SELECT_CURRENT_GUIDE", guide };
 }
+
+export function selectCurrentContentObject(contentObject: ContentObject): Action {
+  return { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject };
+}
