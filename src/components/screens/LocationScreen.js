@@ -4,12 +4,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationView from "../shared/LocationView";
 import { AnalyticsUtils } from "../../utils/";
+import { selectCurrentGuide } from "../../actions/uiStateActions";
 
 type Props = {
   currentGuideGroup: GuideGroup,
   currentGuides: Guide[],
   geolocation: GeolocationType,
-  navigation: Object
+  navigation: Object,
+  selectCurrentGuide(guide: Guide): void
 }
 
 class LocationScreen extends Component<Props> {
@@ -28,7 +30,7 @@ class LocationScreen extends Component<Props> {
         trail: guide,
       });
     } else if (guide.guideType === "guide") {
-      // TODO dispatch select_guide_action
+      this.props.selectCurrentGuide(guide);
       navigate("GuideDetailsScreen");
     }
   }
@@ -60,8 +62,9 @@ function mapStateToProps(state: RootState) {
   };
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch: Dispatch) {
   return {
+    selectCurrentGuide: (guide: Guide) => dispatch(selectCurrentGuide(guide)),
   };
 }
 
