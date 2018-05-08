@@ -23,7 +23,7 @@ type Props = {
   navigation: any
 }
 
-function getWebUrl(links: Link[]): ?string {
+function getWebUrl(links: LinkAndService[]): ?string {
   let webUrl = null;
   if (links) {
     links.forEach((element) => {
