@@ -48,7 +48,6 @@ class GuideView extends Component<Props> {
     const { guide } = this.props;
     return (<ScrollView style={styles.container}>
       <ImageView source={{ uri: guide.images.large }} style={styles.image} />
-      <Text>{guide.name}</Text>
       <Text style={styles.title}>{guide.name}</Text>
       {guide.tagline ? <Text >{guide.tagline}</Text> : null}
       {guide.description ?
