@@ -1,10 +1,15 @@
 // @flow
 import React, { type Node, Component } from "react";
 import {
+  Image,
+  Text,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
 import styles from "./styles";
+import LangService from "../../../services/langService";
+
+const alphaGradient = require("../../../images/gradient.png");
 
 type Props = {
   style?: any,
@@ -34,10 +39,12 @@ class ExpandableView extends Component<Props, State> {
     });
   }
 
+
   render() {
     const { expanded, overflow } = this.state;
     const { maxHeight } = this.props;
-    const extraStyles = (overflow && !expanded) ? [styles.collapsed, { maxHeight }] : [];
+    const showCollapsed = (overflow && !expanded);
+    const extraStyles = showCollapsed ? [styles.collapsed, { maxHeight }] : [];
     return (
       <TouchableWithoutFeedback
         onPress={this.onPress}
@@ -52,6 +59,12 @@ class ExpandableView extends Component<Props, State> {
           style={[this.props.style, ...extraStyles]}
         >
           {this.props.children}
+          {showCollapsed ?
+            <Image source={alphaGradient} resizeMode="stretch" style={styles.alphaGradient} />
+            : null}
+          {showCollapsed ?
+            <Text style={styles.readMoreText}>{LangService.strings.READ_MORE}</Text>
+            : null}
         </View>
       </TouchableWithoutFeedback >
     );
