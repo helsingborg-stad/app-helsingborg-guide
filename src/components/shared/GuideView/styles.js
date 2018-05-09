@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
-import { TextStyles } from "../../../styles";
+import { TextStyles, Colors } from "../../../styles";
 
 
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
+    backgroundColor: Colors.white,
   },
   image: {
     aspectRatio: 18 / 9,

@@ -51,9 +51,10 @@ class GuideView extends Component<Props> {
       <Text>{guide.name}</Text>
       <Text style={styles.title}>{guide.name}</Text>
       {guide.tagline ? <Text >{guide.tagline}</Text> : null}
-      {guide.description ? <ExpandableView style={styles.descriptionContainer} maxHeight={textMaxHeight}>
-        <Text ellipsizeMode="clip" style={TextStyles.body}>{guide.description}</Text>
-      </ExpandableView> : null}
+      {guide.description ?
+        <ExpandableView style={styles.descriptionContainer} maxHeight={textMaxHeight}>
+          <Text style={TextStyles.body}>{guide.description}</Text>
+        </ExpandableView> : null}
       {this.renderContentObjects(guide.contentObjects)}
     </ScrollView>);
   }

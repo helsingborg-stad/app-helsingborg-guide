@@ -17,9 +17,8 @@ export default StyleSheet.create({
   ]),
   alphaGradient: {
     position: "absolute",
-    top: 30,
     width: "100%",
-    height: "100%",
+    height: 30,
     bottom: 0,
   },
 });
