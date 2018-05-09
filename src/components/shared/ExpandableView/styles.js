@@ -4,6 +4,4 @@ export default StyleSheet.create({
   collapsed: {
     overflow: "hidden",
   },
-  expanded: {
-  },
 });

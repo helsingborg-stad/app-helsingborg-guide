@@ -13,10 +13,11 @@ type Props = {
 };
 
 type State = {
-  expanded: boolean
+  expanded: boolean,
+  overflow: boolean,
 }
 
-class ExpandableText extends Component<Props, State> {
+class ExpandableView extends Component<Props, State> {
   static defaultProps = {
     style: null,
     children: null,
@@ -24,6 +25,7 @@ class ExpandableText extends Component<Props, State> {
 
   state = {
     expanded: false,
+    overflow: false,
   };
 
   onPress = () => {
@@ -33,11 +35,18 @@ class ExpandableText extends Component<Props, State> {
   }
 
   render() {
-    const { expanded } = this.state;
-    const extraStyles = !expanded ? [styles.collapsed, { maxHeight: this.props.maxHeight }] : [];
+    const { expanded, overflow } = this.state;
+    const { maxHeight } = this.props;
+    const extraStyles = (overflow && !expanded) ? [styles.collapsed, { maxHeight }] : [];
     return (
       <TouchableWithoutFeedback
         onPress={this.onPress}
+        onLayout={({ nativeEvent }) => {
+          const { height } = nativeEvent.layout;
+          if (height > maxHeight) {
+            this.setState({ overflow: true });
+          }
+        }}
       >
         <View
           style={[this.props.style, ...extraStyles]}
@@ -49,4 +58,4 @@ class ExpandableText extends Component<Props, State> {
   }
 }
 
-export default ExpandableText;
+export default ExpandableView;
