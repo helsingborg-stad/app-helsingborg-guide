@@ -6,8 +6,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Dimensions,
 } from "react-native";
-import ExpandableText from "../ExpandableText";
+import ExpandableView from "../ExpandableView";
+import { TextStyles } from "../../../styles";
 import styles from "./styles";
 import ImageView from "../ImageView";
 
@@ -15,6 +17,7 @@ declare type Props = {
   guide: Guide,
   onPressContentObject(obj: ContentObject): void
 }
+const textMaxHeight = Dimensions.get("window").height * 0.2;
 
 class GuideView extends Component<Props> {
   renderContentObject = (obj: ContentObject) => {
@@ -48,7 +51,9 @@ class GuideView extends Component<Props> {
       <Text>{guide.name}</Text>
       <Text style={styles.title}>{guide.name}</Text>
       {guide.tagline ? <Text >{guide.tagline}</Text> : null}
-      {guide.description ? <ExpandableText style={styles.descriptionContainer} text={guide.description} /> : null}
+      {guide.description ? <ExpandableView style={styles.descriptionContainer} maxHeight={textMaxHeight}>
+        <Text ellipsizeMode="clip" style={TextStyles.body}>{guide.description}</Text>
+      </ExpandableView> : null}
       {this.renderContentObjects(guide.contentObjects)}
     </ScrollView>);
   }

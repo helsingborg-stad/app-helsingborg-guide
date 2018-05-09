@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { TextStyles } from "../../../styles";
 
+
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     marginHorizontal: "4%",
+    width: "100%",
   },
   title: {
     ...StyleSheet.flatten(TextStyles.title),
