@@ -9,7 +9,6 @@ function getImage(uri: ?string, style?: Object, resizeMode?: ResizeMode) {
   let imageSource;
   if (!uri) { imageSource = placeholderImage; } else { imageSource = { uri }; }
 
-
   return (
     <View>
       <Image source={imageSource} style={style} resizeMode={resizeMode} />
