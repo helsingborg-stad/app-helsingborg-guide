@@ -1,8 +1,9 @@
 // @flow
 
 import React from "react";
-import { View, Text, Image, Dimensions, ScrollView, TouchableWithoutFeedback } from "react-native";
+import { View, Text, Dimensions, ScrollView, TouchableWithoutFeedback } from "react-native";
 import Swiper from "react-native-swiper";
+import ImageView from "../ImageView";
 import styles from "./style";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.32;
@@ -23,7 +24,7 @@ function displayImagesSlider(images: Images[], navigation: any) {
     <View key={image.thumbnail || index}>
       <TouchableWithoutFeedback onPress={() => goToImageView(image/* , this.state.guideID offline stuff */, navigation)}>
         <View>
-          <Image source={{ uri: image.large }} style={styles.image} resizeMode="cover" />
+          <ImageView source={{ uri: image.large }} style={styles.image} resizeMode="cover" />
           {/* guideID={this.state.guideID} */}
         </View>
       </TouchableWithoutFeedback>
