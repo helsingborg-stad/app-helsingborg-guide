@@ -181,23 +181,21 @@ exports[`weekdays 1`] = `
           >
             <View>
               <View>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={
-                      Object {
-                        "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
-                      }
+                <Image
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
                     }
-                    style={
-                      Object {
-                        "aspectRatio": 1.7777777777777777,
-                        "height": "auto",
-                        "width": "100%",
-                      }
+                  }
+                  style={
+                    Object {
+                      "aspectRatio": 1.7777777777777777,
+                      "height": "auto",
+                      "width": "100%",
                     }
-                  />
-                </View>
+                  }
+                />
               </View>
               <View>
                 <View
@@ -915,23 +913,21 @@ exports[`weekdays 2`] = `
           >
             <View>
               <View>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={
-                      Object {
-                        "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
-                      }
+                <Image
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
                     }
-                    style={
-                      Object {
-                        "aspectRatio": 1.7777777777777777,
-                        "height": "auto",
-                        "width": "100%",
-                      }
+                  }
+                  style={
+                    Object {
+                      "aspectRatio": 1.7777777777777777,
+                      "height": "auto",
+                      "width": "100%",
                     }
-                  />
-                </View>
+                  }
+                />
               </View>
               <View>
                 <View
@@ -1649,23 +1645,21 @@ exports[`weekdays 3`] = `
           >
             <View>
               <View>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={
-                      Object {
-                        "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
-                      }
+                <Image
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
                     }
-                    style={
-                      Object {
-                        "aspectRatio": 1.7777777777777777,
-                        "height": "auto",
-                        "width": "100%",
-                      }
+                  }
+                  style={
+                    Object {
+                      "aspectRatio": 1.7777777777777777,
+                      "height": "auto",
+                      "width": "100%",
                     }
-                  />
-                </View>
+                  }
+                />
               </View>
               <View>
                 <View
@@ -2383,23 +2377,21 @@ exports[`weekdays 4`] = `
           >
             <View>
               <View>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={
-                      Object {
-                        "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
-                      }
+                <Image
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
                     }
-                    style={
-                      Object {
-                        "aspectRatio": 1.7777777777777777,
-                        "height": "auto",
-                        "width": "100%",
-                      }
+                  }
+                  style={
+                    Object {
+                      "aspectRatio": 1.7777777777777777,
+                      "height": "auto",
+                      "width": "100%",
                     }
-                  />
-                </View>
+                  }
+                />
               </View>
               <View>
                 <View
@@ -3117,23 +3109,21 @@ exports[`weekdays 5`] = `
           >
             <View>
               <View>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={
-                      Object {
-                        "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
-                      }
+                <Image
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
                     }
-                    style={
-                      Object {
-                        "aspectRatio": 1.7777777777777777,
-                        "height": "auto",
-                        "width": "100%",
-                      }
+                  }
+                  style={
+                    Object {
+                      "aspectRatio": 1.7777777777777777,
+                      "height": "auto",
+                      "width": "100%",
                     }
-                  />
-                </View>
+                  }
+                />
               </View>
               <View>
                 <View
@@ -3851,23 +3841,21 @@ exports[`weekdays 6`] = `
           >
             <View>
               <View>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={
-                      Object {
-                        "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
-                      }
+                <Image
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
                     }
-                    style={
-                      Object {
-                        "aspectRatio": 1.7777777777777777,
-                        "height": "auto",
-                        "width": "100%",
-                      }
+                  }
+                  style={
+                    Object {
+                      "aspectRatio": 1.7777777777777777,
+                      "height": "auto",
+                      "width": "100%",
                     }
-                  />
-                </View>
+                  }
+                />
               </View>
               <View>
                 <View
@@ -4585,23 +4573,21 @@ exports[`weekdays 7`] = `
           >
             <View>
               <View>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={
-                      Object {
-                        "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
-                      }
+                <Image
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
                     }
-                    style={
-                      Object {
-                        "aspectRatio": 1.7777777777777777,
-                        "height": "auto",
-                        "width": "100%",
-                      }
+                  }
+                  style={
+                    Object {
+                      "aspectRatio": 1.7777777777777777,
+                      "height": "auto",
+                      "width": "100%",
                     }
-                  />
-                </View>
+                  }
+                />
               </View>
               <View>
                 <View
@@ -5404,23 +5390,21 @@ exports[`with geolocation 1`] = `
           >
             <View>
               <View>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={
-                      Object {
-                        "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
-                      }
+                <Image
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
                     }
-                    style={
-                      Object {
-                        "aspectRatio": 1.7777777777777777,
-                        "height": "auto",
-                        "width": "100%",
-                      }
+                  }
+                  style={
+                    Object {
+                      "aspectRatio": 1.7777777777777777,
+                      "height": "auto",
+                      "width": "100%",
                     }
-                  />
-                </View>
+                  }
+                />
               </View>
               <View>
                 <View
@@ -6138,23 +6122,21 @@ exports[`with point properties 1`] = `
           >
             <View>
               <View>
-                <View>
-                  <Image
-                    resizeMode="cover"
-                    source={
-                      Object {
-                        "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
-                      }
+                <Image
+                  resizeMode="cover"
+                  source={
+                    Object {
+                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/04/ingangsbild-st-e1523531848685-240x300.jpg",
                     }
-                    style={
-                      Object {
-                        "aspectRatio": 1.7777777777777777,
-                        "height": "auto",
-                        "width": "100%",
-                      }
+                  }
+                  style={
+                    Object {
+                      "aspectRatio": 1.7777777777777777,
+                      "height": "auto",
+                      "width": "100%",
                     }
-                  />
-                </View>
+                  }
+                />
               </View>
               <View>
                 <View
