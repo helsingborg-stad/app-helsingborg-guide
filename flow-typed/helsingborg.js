@@ -130,6 +130,8 @@ declare type GuideState = {
 
 declare type Images = { thumbnail: string, medium: string, large: string };
 
+declare type ResizeMode = 'cover' | 'contain' | 'stretch' | 'repeat' | 'center';
+
 declare type LinkAndService = { service: string, url: string };
 
 declare type Location = {
