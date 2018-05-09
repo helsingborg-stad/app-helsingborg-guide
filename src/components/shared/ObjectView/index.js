@@ -11,15 +11,16 @@ const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.32;
 type Props = {
   contentObject: ContentObject,
   guideType: GuideType,
-  navigation: any
+  navigation: any,
+  onSwiperIndexChanged: (newIndex: number) => (void)
 }
 
 function goToImageView(image, /* guideID, */ navigation: any) {
   const { navigate } = navigation;
-  navigate("ImageScreen", { image/* , guideID */ });
+  navigate("ImageScreen", { image/* , guideID */ }); // TODO: Redesign ImageScreen.
 }
 
-function displayImagesSlider(images: Images[], navigation: any) {
+function displayImagesSlider(images: Images[], navigation: any, onSwiperIndexChanged: (newIndex: number) => (void)) {
   const slides = images.map((image, index) => (
     <View key={image.thumbnail || index}>
       <TouchableWithoutFeedback onPress={() => goToImageView(image/* , this.state.guideID offline stuff */, navigation)}>
@@ -39,7 +40,7 @@ function displayImagesSlider(images: Images[], navigation: any) {
       activeDotColor="#D35098"
       showsButtons={false}
       loop={false}
-    /* onIndexChanged={this.swiperIndexChanged} */ /* MOVE TO REDUX */
+      onIndexChanged={onSwiperIndexChanged} /* TODO: MOVE TO REDUX */
     >
       {slides}
     </Swiper>
@@ -79,7 +80,7 @@ function displayText(description?: string) {
 const ObjectView = (props: Props) => (
   <View style={styles.viewContainer}>
     <ScrollView contentContainerStyle={styles.scrollView}>
-      {displayImagesSlider(props.contentObject.images, props.navigation)}
+      {displayImagesSlider(props.contentObject.images, props.navigation, props.onSwiperIndexChanged)}
       <View style={styles.bodyContainer}>
         {displayTitle(props.contentObject.title, props.contentObject.searchableId, props.guideType)}
         {/* this.displayButtonsBar() */}

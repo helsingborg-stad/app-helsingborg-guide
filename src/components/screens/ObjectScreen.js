@@ -9,19 +9,31 @@ type Props = {
   navigation: Object
 }
 
+function onSwiperIndexChanged(newIndex: number) {
+  console.log(newIndex);
+}
+
+
 class ObjectScreen extends Component<Props> {
   constructor() {
     super();
     console.log("constructor");
   }
 
+
   render() {
     const { currentContentObject } = this.props;
     const { params } = this.props.navigation.state;
     const { currentGuide } = params;
-    return (<ObjectView contentObject={currentContentObject} guideType={currentGuide.guideType} navigation={this.props.navigation} />);
+    return (<ObjectView
+      contentObject={currentContentObject}
+      guideType={currentGuide.guideType}
+      navigation={this.props.navigation}
+      onSwiperIndexChanged={onSwiperIndexChanged}
+    />);
   }
 }
+
 
 function mapStateToProps(state: RootState) {
   const { currentContentObject } = state.uiState;

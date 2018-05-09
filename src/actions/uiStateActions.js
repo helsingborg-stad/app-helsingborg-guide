@@ -16,3 +16,7 @@ export function selectCurrentGuide(guide: Guide): Action {
 export function selectCurrentContentObject(contentObject: ContentObject): Action {
   return { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject };
 }
+
+export function selectCurrentContentObjectImage(swiperIndex: number): Action {
+  return { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex };
+}
