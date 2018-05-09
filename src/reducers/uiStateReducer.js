@@ -13,7 +13,7 @@ export default function uiStateReducer(state: UIState = defaultState, action: Ac
     case "SELECT_CURRENT_GUIDEGROUP":
       return { ...state, currentGuideGroup: action.guideGroup, currentGuides: action.guides };
     case "SELECT_CURRENT_CONTENTOBJECT":
-      return { ...state, currentContentObject: action.contentObject };
+      return { ...state, currentContentObject: action.contentObject, currentContentObjectImageIndex: 0 };
     case "SELECT_CURRENT_CONTENTOBJECT_IMAGE":
       return { ...state, currentContentObjectImageIndex: action.swiperIndex };
     case "SELECT_CURRENT_GUIDE":

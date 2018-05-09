@@ -5,11 +5,13 @@ import { View, Text, Dimensions, ScrollView, TouchableWithoutFeedback } from "re
 import Swiper from "react-native-swiper";
 import ImageView from "../ImageView";
 import styles from "./style";
+import SharingService from "../../../services/SharingService";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.32;
 
 type Props = {
   contentObject: ContentObject,
+  imageIndex: number,
   guideType: GuideType,
   navigation: any,
   onSwiperIndexChanged: (newIndex: number) => (void)
@@ -40,7 +42,7 @@ function displayImagesSlider(images: Images[], navigation: any, onSwiperIndexCha
       activeDotColor="#D35098"
       showsButtons={false}
       loop={false}
-      onIndexChanged={onSwiperIndexChanged} /* TODO: MOVE TO REDUX */
+      onIndexChanged={onSwiperIndexChanged}
     >
       {slides}
     </Swiper>
@@ -80,7 +82,12 @@ function displayText(description?: string) {
 const ObjectView = (props: Props) => (
   <View style={styles.viewContainer}>
     <ScrollView contentContainerStyle={styles.scrollView}>
-      {displayImagesSlider(props.contentObject.images, props.navigation, props.onSwiperIndexChanged)}
+      <View>
+        {displayImagesSlider(props.contentObject.images, props.navigation, props.onSwiperIndexChanged)}
+        <View style={styles.shareBtn}>
+          {SharingService.showShareButton(props.contentObject.title, props.imageIndex, this)}
+        </View>
+      </View>
       <View style={styles.bodyContainer}>
         {displayTitle(props.contentObject.title, props.contentObject.searchableId, props.guideType)}
         {/* this.displayButtonsBar() */}

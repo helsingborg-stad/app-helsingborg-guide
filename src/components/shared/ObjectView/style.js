@@ -67,5 +67,10 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
   },
-
+  shareBtn: {
+    position: "absolute",
+    bottom: 25,
+    right: 25,
+    zIndex: 50,
+  },
 });
