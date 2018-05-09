@@ -2,13 +2,13 @@
 
 import React, { Component } from "react";
 import {
-  Image,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
 import styles from "./styles";
+import ImageView from "../ImageView";
 
 declare type Props = {
   guide: Guide,
@@ -26,7 +26,7 @@ class GuideView extends Component<Props> {
         style={styles.objectContainer}
         onPress={() => this.props.onPressContentObject(obj)}
       >
-        <Image
+        <ImageView
           source={{ uri }}
           style={styles.objectImage}
           resizeMode="cover"
@@ -43,7 +43,7 @@ class GuideView extends Component<Props> {
   render() {
     const { guide } = this.props;
     return (<ScrollView style={styles.container}>
-      <Image source={{ uri: guide.images.large }} style={styles.image} />
+      <ImageView source={{ uri: guide.images.large }} style={styles.image} />
       <Text>{guide.name}</Text>
       {this.renderContentObjects(guide.contentObjects)}
     </ScrollView>);
