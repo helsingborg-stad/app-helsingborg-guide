@@ -12,20 +12,19 @@ import styles from "./styles";
 
 declare type Props = {
   guide: Guide,
-  onPressContentObject(guide: Guide, obj: ContentObject): void
+  onPressContentObject(obj: ContentObject): void
 }
 
 class GuideView extends Component<Props> {
   renderContentObject = (obj: ContentObject) => {
     const { images } = obj;
-    const { guide } = this.props;
     // TODO return placeholder image
     const uri = images.length > 0 ? images[0].medium : null;
     return (
       <TouchableOpacity
         key={obj.id}
         style={styles.objectContainer}
-        onPress={() => this.props.onPressContentObject(guide, obj)}
+        onPress={() => this.props.onPressContentObject(obj)}
       >
         <Image
           source={{ uri }}

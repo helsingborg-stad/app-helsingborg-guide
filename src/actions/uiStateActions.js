@@ -13,10 +13,6 @@ export function selectCurrentGuide(guide: Guide): Action {
   return { type: "SELECT_CURRENT_GUIDE", guide };
 }
 
-export function selectCurrentContentObject(guide: Guide, id: string): ThunkAction {
-  return (dispatch: Dispatch) => {
-    const contentObject: ContentObject = Object.assign({}, guide.contentObjects.find(item => item.id === id));
-    const action: Action = { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject };
-    dispatch(action);
-  };
+export function selectCurrentContentObject(contentObject: ContentObject): Action {
+  return { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject };
 }

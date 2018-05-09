@@ -6,10 +6,11 @@ import { connect } from "react-redux";
 
 import GuideView from "../shared/GuideView";
 import { selectCurrentContentObject } from "../../actions/uiStateActions";
+import { AnalyticsUtils } from "../../utils/";
 
 declare type Props = {
   currentGuide: ?Guide,
-  dispatchSelectContentObject(guide: Guide, id: string): void,
+  dispatchSelectContentObject(contentObject: ContentObject): void,
   navigation: any
 }
 
@@ -33,9 +34,9 @@ class GuideScreen extends Component<Props> {
     props.navigation.setParams({ title });
   }
 
-  onPressContentObject = (guide: Guide, obj: ContentObject) => {
-    this.props.dispatchSelectContentObject(guide, obj.id);
-    // AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
+  onPressContentObject = (obj: ContentObject) => {
+    this.props.dispatchSelectContentObject(obj);
+    AnalyticsUtils.logEvent("view_object", { name: obj.title });
     this.props.navigation.navigate("ObjectScreen", { title: obj.title, currentGuide: this.props.currentGuide });
   }
 
@@ -56,8 +57,7 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    dispatchSelectContentObject: (guide, id) => dispatch(selectCurrentContentObject(guide, id)),
-
+    dispatchSelectContentObject: (contentObject: ContentObject) => dispatch(selectCurrentContentObject(contentObject)),
   };
 }
 
