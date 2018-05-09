@@ -10,9 +10,6 @@ export default StyleSheet.create({
       fontSize: 16,
       fontWeight: "500",
       color: Colors.purple,
-      position: "absolute",
-      bottom: 0,
-      left: 0,
     },
   ]),
   alphaGradient: {

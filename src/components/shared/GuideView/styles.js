@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     height: "auto",
   },
   descriptionContainer: {
-    marginHorizontal: "4%",
+    paddingHorizontal: "4%",
     width: "100%",
   },
   title: {

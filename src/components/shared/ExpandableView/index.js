@@ -46,27 +46,31 @@ class ExpandableView extends Component<Props, State> {
     const showCollapsed = (overflow && !expanded);
     const extraStyles = showCollapsed ? [styles.collapsed, { maxHeight }] : [];
     return (
-      <TouchableWithoutFeedback
-        onPress={this.onPress}
-        onLayout={({ nativeEvent }) => {
-          const { height } = nativeEvent.layout;
-          if (height > maxHeight) {
-            this.setState({ overflow: true });
-          }
-        }}
+      <View
+        style={this.props.style}
       >
-        <View
-          style={[this.props.style, ...extraStyles]}
+        <TouchableWithoutFeedback
+          onPress={this.onPress}
+          onLayout={({ nativeEvent }) => {
+            const { height } = nativeEvent.layout;
+            if (height > maxHeight) {
+              this.setState({ overflow: true });
+            }
+          }}
         >
-          {this.props.children}
-          {showCollapsed ?
-            <Image source={alphaGradient} resizeMode="stretch" style={styles.alphaGradient} />
-            : null}
-          {showCollapsed ?
-            <Text style={styles.readMoreText}>{LangService.strings.READ_MORE}</Text>
-            : null}
-        </View>
-      </TouchableWithoutFeedback >
+          <View
+            style={[...extraStyles]}
+          >
+            {this.props.children}
+            {showCollapsed ?
+              <Image source={alphaGradient} resizeMode="stretch" style={styles.alphaGradient} />
+              : null}
+          </View>
+        </TouchableWithoutFeedback >
+        {showCollapsed ?
+          <Text style={styles.readMoreText}>{LangService.strings.READ_MORE}</Text>
+          : null}
+      </View>
     );
   }
 }
