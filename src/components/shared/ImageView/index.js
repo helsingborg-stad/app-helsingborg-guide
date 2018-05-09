@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { View, Image } from "react-native";
+import { Image } from "react-native";
 
 const placeholderImage = require("../../../images/no-image-featured-image.png");
 
@@ -10,9 +10,7 @@ function getImage(uri: ?string, style?: Object, resizeMode?: ResizeMode) {
   if (!uri) { imageSource = placeholderImage; } else { imageSource = { uri }; }
 
   return (
-    <View>
-      <Image source={imageSource} style={style} resizeMode={resizeMode} />
-    </View>
+    <Image source={imageSource} style={style} resizeMode={resizeMode} />
   );
 }
 
