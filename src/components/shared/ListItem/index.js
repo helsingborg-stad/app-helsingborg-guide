@@ -1,9 +1,10 @@
 // @flow
 
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import LangService from "../../../services/langService";
+import ImageView from "../ImageView";
 import styles from "./style";
 import { Colors } from "../../../styles/";
 
@@ -18,7 +19,7 @@ function forKidsView() {
 
 function displayImage(imageSource: Object) {
   return (
-    <Image
+    <ImageView
       style={styles.imageContainer}
       source={imageSource}
       resizeMode="cover"
