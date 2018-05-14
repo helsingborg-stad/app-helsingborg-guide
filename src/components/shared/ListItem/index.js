@@ -29,18 +29,6 @@ function displayImage(imageSource: Object) {
   );
 }
 
-// TODO extract DateText component
-function renderDate(startDate?: string, endDate?: string) {
-  if (!startDate || !endDate) { return null; }
-
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-
-  return (<Text style={styles.date} numberOfLines={1}>
-    {`${start.toISOString().substring(0, 10)} - ${end.toISOString().substring(0, 10)}`}
-  </Text>);
-}
-
 type Props = {
   forKids: boolean,
   title: string,
