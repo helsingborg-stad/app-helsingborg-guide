@@ -8,9 +8,9 @@ import GuideView from "../index";
 
 import renderer from "react-test-renderer";
 
-const guide: Guide = require("./testdata/guide.json");
+const guide: Guide = require("./testdata/guide_no_tagline.json");
 
-test("Render normally", () => {
+test("Guide without tagline", () => {
   let i = 0;
   const now: Date = new Date("July 12, 2018 12:00:00");
   for (i = 0; i < 7; i += 1) {

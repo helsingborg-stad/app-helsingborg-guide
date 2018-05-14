@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render normally 1`] = `
+exports[`Guide without tagline 1`] = `
 <RCTScrollView
   style={
     Object {
@@ -915,7 +915,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
 </RCTScrollView>
 `;
 
-exports[`Render normally 2`] = `
+exports[`Guide without tagline 2`] = `
 <RCTScrollView
   style={
     Object {
@@ -1830,7 +1830,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
 </RCTScrollView>
 `;
 
-exports[`Render normally 3`] = `
+exports[`Guide without tagline 3`] = `
 <RCTScrollView
   style={
     Object {
@@ -2745,7 +2745,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
 </RCTScrollView>
 `;
 
-exports[`Render normally 4`] = `
+exports[`Guide without tagline 4`] = `
 <RCTScrollView
   style={
     Object {
@@ -3660,7 +3660,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
 </RCTScrollView>
 `;
 
-exports[`Render normally 5`] = `
+exports[`Guide without tagline 5`] = `
 <RCTScrollView
   style={
     Object {
@@ -4575,7 +4575,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
 </RCTScrollView>
 `;
 
-exports[`Render normally 6`] = `
+exports[`Guide without tagline 6`] = `
 <RCTScrollView
   style={
     Object {
@@ -5490,7 +5490,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
 </RCTScrollView>
 `;
 
-exports[`Render normally 7`] = `
+exports[`Guide without tagline 7`] = `
 <RCTScrollView
   style={
     Object {
