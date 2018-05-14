@@ -35,7 +35,9 @@ class GuideView extends Component<Props> {
           style={styles.objectImage}
           resizeMode="cover"
         />
-      </TouchableOpacity>
+        <Text style={styles.contentIdText} numberOfLines={1}>#{obj.searchableId}</Text>
+        <Text style={styles.contentTitleText} numberOfLines={2}>{obj.title}</Text>
+      </TouchableOpacity >
     );
   }
 
@@ -48,12 +50,14 @@ class GuideView extends Component<Props> {
     const { guide } = this.props;
     return (<ScrollView style={styles.container}>
       <ImageView source={{ uri: guide.images.large }} style={styles.image} />
-      <Text style={styles.title}>{guide.name}</Text>
-      {guide.tagline ? <Text >{guide.tagline}</Text> : null}
-      {guide.description ?
-        <ExpandableView style={styles.descriptionContainer} maxHeight={textMaxHeight}>
-          <Text style={TextStyles.body}>{guide.description}</Text>
-        </ExpandableView> : null}
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>{guide.name}</Text>
+        {guide.tagline ? <Text style={styles.guideTaglineText}>{guide.tagline}</Text> : null}
+        {guide.description ?
+          <ExpandableView maxHeight={textMaxHeight}>
+            <Text style={TextStyles.body}>{guide.description}</Text>
+          </ExpandableView> : null}
+      </View>
       {this.renderContentObjects(guide.contentObjects)}
     </ScrollView>);
   }

@@ -26,13 +26,23 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "auto",
   },
-  descriptionContainer: {
-    paddingHorizontal: "4%",
-    width: "100%",
+  textContainer: {
+    marginHorizontal: "4%",
+  },
+  guideTaglineText: {
+    ...StyleSheet.flatten(TextStyles.medium),
   },
   title: {
     ...StyleSheet.flatten(TextStyles.title),
-    marginHorizontal: "4%",
+    marginVertical: "4%",
+  },
+  contentIdText: {
+    ...StyleSheet.flatten(TextStyles.small),
+    color: Colors.warmGrey,
+    marginTop: 2,
+  },
+  contentTitleText: {
+    ...StyleSheet.flatten(TextStyles.medium),
   },
 });
 
