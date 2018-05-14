@@ -6,8 +6,8 @@ import { Text } from "react-native";
 import styles from "./styles";
 
 type Props = {
-  startDate?: string,
-  endDate?: string
+  startDate?: ?string,
+  endDate?: ?string
 }
 
 const DateView = (props: Props) => {
