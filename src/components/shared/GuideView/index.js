@@ -12,6 +12,7 @@ import ExpandableView from "../ExpandableView";
 import { TextStyles } from "../../../styles";
 import styles from "./styles";
 import ImageView from "../ImageView";
+import DateView from "../DateView";
 
 declare type Props = {
   guide: Guide,
@@ -53,6 +54,7 @@ class GuideView extends Component<Props> {
       <View style={styles.textContainer}>
         <Text style={styles.title}>{guide.name}</Text>
         {guide.tagline ? <Text style={styles.guideTaglineText}>{guide.tagline}</Text> : null}
+        <DateView startDate={guide.dateStart} endDate={guide.dateEnd} />
         {guide.description ?
           <ExpandableView maxHeight={textMaxHeight}>
             <Text style={TextStyles.body}>{guide.description}</Text>
