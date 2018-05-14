@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   contentIdText: {
     ...StyleSheet.flatten(TextStyles.small),
     color: Colors.warmGrey,
+    marginTop: 2,
   },
   contentTitleText: {
     ...StyleSheet.flatten(TextStyles.medium),
