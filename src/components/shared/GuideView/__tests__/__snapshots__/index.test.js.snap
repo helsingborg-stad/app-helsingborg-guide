@@ -1,0 +1,3746 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render normally 1`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "#ffffff",
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View>
+    <Image
+      resizeMode={undefined}
+      source={
+        Object {
+          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+        }
+      }
+      style={
+        Object {
+          "aspectRatio": 2,
+          "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Roboto",
+          "fontSize": 22,
+          "fontWeight": "500",
+          "letterSpacing": 0.11,
+          "marginHorizontal": "4%",
+        }
+      }
+    >
+      The Climate Experiment
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingHorizontal": "4%",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={Array []}
+        testID={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "Roboto",
+              "fontSize": 17,
+              "lineHeight": 23,
+            }
+          }
+        >
+          I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+
+The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
+
+Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
+
+Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Render normally 2`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "#ffffff",
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View>
+    <Image
+      resizeMode={undefined}
+      source={
+        Object {
+          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+        }
+      }
+      style={
+        Object {
+          "aspectRatio": 2,
+          "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Roboto",
+          "fontSize": 22,
+          "fontWeight": "500",
+          "letterSpacing": 0.11,
+          "marginHorizontal": "4%",
+        }
+      }
+    >
+      The Climate Experiment
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingHorizontal": "4%",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={Array []}
+        testID={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "Roboto",
+              "fontSize": 17,
+              "lineHeight": 23,
+            }
+          }
+        >
+          I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+
+The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
+
+Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
+
+Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Render normally 3`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "#ffffff",
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View>
+    <Image
+      resizeMode={undefined}
+      source={
+        Object {
+          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+        }
+      }
+      style={
+        Object {
+          "aspectRatio": 2,
+          "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Roboto",
+          "fontSize": 22,
+          "fontWeight": "500",
+          "letterSpacing": 0.11,
+          "marginHorizontal": "4%",
+        }
+      }
+    >
+      The Climate Experiment
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingHorizontal": "4%",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={Array []}
+        testID={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "Roboto",
+              "fontSize": 17,
+              "lineHeight": 23,
+            }
+          }
+        >
+          I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+
+The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
+
+Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
+
+Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Render normally 4`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "#ffffff",
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View>
+    <Image
+      resizeMode={undefined}
+      source={
+        Object {
+          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+        }
+      }
+      style={
+        Object {
+          "aspectRatio": 2,
+          "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Roboto",
+          "fontSize": 22,
+          "fontWeight": "500",
+          "letterSpacing": 0.11,
+          "marginHorizontal": "4%",
+        }
+      }
+    >
+      The Climate Experiment
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingHorizontal": "4%",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={Array []}
+        testID={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "Roboto",
+              "fontSize": 17,
+              "lineHeight": 23,
+            }
+          }
+        >
+          I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+
+The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
+
+Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
+
+Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Render normally 5`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "#ffffff",
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View>
+    <Image
+      resizeMode={undefined}
+      source={
+        Object {
+          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+        }
+      }
+      style={
+        Object {
+          "aspectRatio": 2,
+          "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Roboto",
+          "fontSize": 22,
+          "fontWeight": "500",
+          "letterSpacing": 0.11,
+          "marginHorizontal": "4%",
+        }
+      }
+    >
+      The Climate Experiment
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingHorizontal": "4%",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={Array []}
+        testID={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "Roboto",
+              "fontSize": 17,
+              "lineHeight": 23,
+            }
+          }
+        >
+          I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+
+The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
+
+Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
+
+Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Render normally 6`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "#ffffff",
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View>
+    <Image
+      resizeMode={undefined}
+      source={
+        Object {
+          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+        }
+      }
+      style={
+        Object {
+          "aspectRatio": 2,
+          "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Roboto",
+          "fontSize": 22,
+          "fontWeight": "500",
+          "letterSpacing": 0.11,
+          "marginHorizontal": "4%",
+        }
+      }
+    >
+      The Climate Experiment
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingHorizontal": "4%",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={Array []}
+        testID={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "Roboto",
+              "fontSize": 17,
+              "lineHeight": 23,
+            }
+          }
+        >
+          I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+
+The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
+
+Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
+
+Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Render normally 7`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "#ffffff",
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View>
+    <Image
+      resizeMode={undefined}
+      source={
+        Object {
+          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+        }
+      }
+      style={
+        Object {
+          "aspectRatio": 2,
+          "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Roboto",
+          "fontSize": 22,
+          "fontWeight": "500",
+          "letterSpacing": 0.11,
+          "marginHorizontal": "4%",
+        }
+      }
+    >
+      The Climate Experiment
+    </Text>
+    <View
+      style={
+        Object {
+          "paddingHorizontal": "4%",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        nativeID={undefined}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={Array []}
+        testID={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontFamily": "Roboto",
+              "fontSize": 17,
+              "lineHeight": 23,
+            }
+          }
+        >
+          I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+
+The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
+
+Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
+
+Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": "auto",
+            "opacity": 1,
+            "padding": "4%",
+            "width": "50%",
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
+            }
+          }
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": "auto",
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
