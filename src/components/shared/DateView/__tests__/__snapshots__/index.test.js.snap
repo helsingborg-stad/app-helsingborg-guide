@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Correct input 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  numberOfLines={1}
+  style={
+    Object {
+      "color": "#7f7f7f",
+      "fontFamily": "Roboto",
+      "fontSize": 16,
+      "lineHeight": 22,
+    }
+  }
+>
+  2018-05-14 - 2018-08-31
+</Text>
+`;
+
+exports[`No props 1`] = `null`;
+
+exports[`Only end date 1`] = `null`;
+
+exports[`Only start date 1`] = `null`;
