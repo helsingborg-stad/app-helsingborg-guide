@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   title: {
     ...StyleSheet.flatten(TextStyles.title),
     marginHorizontal: "4%",
+    marginVertical: "4%",
   },
   contentIdText: {
     ...StyleSheet.flatten(TextStyles.small),

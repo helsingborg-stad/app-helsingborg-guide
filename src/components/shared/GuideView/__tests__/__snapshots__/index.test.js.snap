@@ -40,6 +40,7 @@ exports[`Guide with tagline 1`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -973,6 +974,7 @@ exports[`Guide with tagline 2`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -1906,6 +1908,7 @@ exports[`Guide with tagline 3`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -2839,6 +2842,7 @@ exports[`Guide with tagline 4`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -3772,6 +3776,7 @@ exports[`Guide with tagline 5`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -4705,6 +4710,7 @@ exports[`Guide with tagline 6`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -5638,6 +5644,7 @@ exports[`Guide with tagline 7`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -6571,6 +6578,7 @@ exports[`Guide without tagline 1`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -7486,6 +7494,7 @@ exports[`Guide without tagline 2`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -8401,6 +8410,7 @@ exports[`Guide without tagline 3`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -9316,6 +9326,7 @@ exports[`Guide without tagline 4`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -10231,6 +10242,7 @@ exports[`Guide without tagline 5`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -11146,6 +11158,7 @@ exports[`Guide without tagline 6`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
@@ -12061,6 +12074,7 @@ exports[`Guide without tagline 7`] = `
           "fontWeight": "500",
           "letterSpacing": 0.11,
           "marginHorizontal": "4%",
+          "marginVertical": "4%",
         }
       }
     >
