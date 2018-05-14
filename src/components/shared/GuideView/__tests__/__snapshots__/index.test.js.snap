@@ -49,6 +49,17 @@ exports[`Guide with tagline 1`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "black",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+          "marginHorizontal": "4%",
+          "textAlign": "left",
+        }
+      }
     >
       This is a fairly standard tagline length, I'd say.
     </Text>
@@ -971,6 +982,17 @@ exports[`Guide with tagline 2`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "black",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+          "marginHorizontal": "4%",
+          "textAlign": "left",
+        }
+      }
     >
       This is a fairly standard tagline length, I'd say.
     </Text>
@@ -1893,6 +1915,17 @@ exports[`Guide with tagline 3`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "black",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+          "marginHorizontal": "4%",
+          "textAlign": "left",
+        }
+      }
     >
       This is a fairly standard tagline length, I'd say.
     </Text>
@@ -2815,6 +2848,17 @@ exports[`Guide with tagline 4`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "black",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+          "marginHorizontal": "4%",
+          "textAlign": "left",
+        }
+      }
     >
       This is a fairly standard tagline length, I'd say.
     </Text>
@@ -3737,6 +3781,17 @@ exports[`Guide with tagline 5`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "black",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+          "marginHorizontal": "4%",
+          "textAlign": "left",
+        }
+      }
     >
       This is a fairly standard tagline length, I'd say.
     </Text>
@@ -4659,6 +4714,17 @@ exports[`Guide with tagline 6`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "black",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+          "marginHorizontal": "4%",
+          "textAlign": "left",
+        }
+      }
     >
       This is a fairly standard tagline length, I'd say.
     </Text>
@@ -5581,6 +5647,17 @@ exports[`Guide with tagline 7`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "black",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+          "marginHorizontal": "4%",
+          "textAlign": "left",
+        }
+      }
     >
       This is a fairly standard tagline length, I'd say.
     </Text>

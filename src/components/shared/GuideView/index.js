@@ -51,7 +51,7 @@ class GuideView extends Component<Props> {
     return (<ScrollView style={styles.container}>
       <ImageView source={{ uri: guide.images.large }} style={styles.image} />
       <Text style={styles.title}>{guide.name}</Text>
-      {guide.tagline ? <Text >{guide.tagline}</Text> : null}
+      {guide.tagline ? <Text style={styles.guideTaglineText}>{guide.tagline}</Text> : null}
       {guide.description ?
         <ExpandableView style={styles.descriptionContainer} maxHeight={textMaxHeight}>
           <Text style={TextStyles.body}>{guide.description}</Text>

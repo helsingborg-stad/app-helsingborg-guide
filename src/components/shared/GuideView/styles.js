@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: "4%",
     width: "100%",
   },
+  guideTaglineText: {
+    ...StyleSheet.flatten(TextStyles.medium),
+    marginHorizontal: "4%",
+  },
   title: {
     ...StyleSheet.flatten(TextStyles.title),
     marginHorizontal: "4%",
