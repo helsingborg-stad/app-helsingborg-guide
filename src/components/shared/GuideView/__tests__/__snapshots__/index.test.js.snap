@@ -142,6 +142,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          100
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Introduktion Kristina Möster Nilsson
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -185,6 +220,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          101
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Incubator for Earthquake
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -228,6 +298,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          102
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Meteorologi, historiska händelser och konst
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -271,6 +376,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          103
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Storm Chamber, Steam Chamber, 1994
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -314,6 +454,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          104
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          If You Don’t Like the Weather, Change It, 2007
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -357,6 +532,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          105
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Adrenaline Dream, 1993/2018
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -400,6 +610,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          106
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Expedition, 2006
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -443,6 +688,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          107
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Winter Storage, 2017
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -486,6 +766,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          108
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Backstage Diorama, 2008
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -529,6 +844,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          109
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Stationary, Established but Incomplete och The Party is Over, 2017.
+        </Text>
       </View>
     </View>
   </View>
@@ -677,6 +1027,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          100
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Introduktion Kristina Möster Nilsson
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -720,6 +1105,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          101
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Incubator for Earthquake
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -763,6 +1183,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          102
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Meteorologi, historiska händelser och konst
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -806,6 +1261,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          103
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Storm Chamber, Steam Chamber, 1994
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -849,6 +1339,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          104
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          If You Don’t Like the Weather, Change It, 2007
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -892,6 +1417,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          105
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Adrenaline Dream, 1993/2018
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -935,6 +1495,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          106
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Expedition, 2006
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -978,6 +1573,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          107
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Winter Storage, 2017
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1021,6 +1651,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          108
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Backstage Diorama, 2008
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1064,6 +1729,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          109
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Stationary, Established but Incomplete och The Party is Over, 2017.
+        </Text>
       </View>
     </View>
   </View>
@@ -1212,6 +1912,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          100
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Introduktion Kristina Möster Nilsson
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1255,6 +1990,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          101
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Incubator for Earthquake
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1298,6 +2068,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          102
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Meteorologi, historiska händelser och konst
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1341,6 +2146,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          103
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Storm Chamber, Steam Chamber, 1994
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1384,6 +2224,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          104
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          If You Don’t Like the Weather, Change It, 2007
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1427,6 +2302,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          105
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Adrenaline Dream, 1993/2018
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1470,6 +2380,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          106
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Expedition, 2006
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1513,6 +2458,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          107
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Winter Storage, 2017
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1556,6 +2536,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          108
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Backstage Diorama, 2008
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1599,6 +2614,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          109
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Stationary, Established but Incomplete och The Party is Over, 2017.
+        </Text>
       </View>
     </View>
   </View>
@@ -1747,6 +2797,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          100
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Introduktion Kristina Möster Nilsson
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1790,6 +2875,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          101
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Incubator for Earthquake
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1833,6 +2953,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          102
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Meteorologi, historiska händelser och konst
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1876,6 +3031,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          103
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Storm Chamber, Steam Chamber, 1994
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1919,6 +3109,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          104
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          If You Don’t Like the Weather, Change It, 2007
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -1962,6 +3187,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          105
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Adrenaline Dream, 1993/2018
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2005,6 +3265,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          106
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Expedition, 2006
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2048,6 +3343,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          107
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Winter Storage, 2017
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2091,6 +3421,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          108
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Backstage Diorama, 2008
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2134,6 +3499,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          109
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Stationary, Established but Incomplete och The Party is Over, 2017.
+        </Text>
       </View>
     </View>
   </View>
@@ -2282,6 +3682,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          100
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Introduktion Kristina Möster Nilsson
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2325,6 +3760,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          101
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Incubator for Earthquake
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2368,6 +3838,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          102
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Meteorologi, historiska händelser och konst
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2411,6 +3916,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          103
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Storm Chamber, Steam Chamber, 1994
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2454,6 +3994,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          104
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          If You Don’t Like the Weather, Change It, 2007
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2497,6 +4072,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          105
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Adrenaline Dream, 1993/2018
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2540,6 +4150,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          106
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Expedition, 2006
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2583,6 +4228,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          107
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Winter Storage, 2017
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2626,6 +4306,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          108
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Backstage Diorama, 2008
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2669,6 +4384,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          109
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Stationary, Established but Incomplete och The Party is Over, 2017.
+        </Text>
       </View>
     </View>
   </View>
@@ -2817,6 +4567,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          100
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Introduktion Kristina Möster Nilsson
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2860,6 +4645,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          101
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Incubator for Earthquake
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2903,6 +4723,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          102
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Meteorologi, historiska händelser och konst
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2946,6 +4801,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          103
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Storm Chamber, Steam Chamber, 1994
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -2989,6 +4879,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          104
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          If You Don’t Like the Weather, Change It, 2007
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3032,6 +4957,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          105
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Adrenaline Dream, 1993/2018
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3075,6 +5035,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          106
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Expedition, 2006
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3118,6 +5113,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          107
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Winter Storage, 2017
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3161,6 +5191,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          108
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Backstage Diorama, 2008
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3204,6 +5269,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          109
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Stationary, Established but Incomplete och The Party is Over, 2017.
+        </Text>
       </View>
     </View>
   </View>
@@ -3352,6 +5452,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          100
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Introduktion Kristina Möster Nilsson
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3395,6 +5530,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          101
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Incubator for Earthquake
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3438,6 +5608,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          102
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Meteorologi, historiska händelser och konst
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3481,6 +5686,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          103
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Storm Chamber, Steam Chamber, 1994
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3524,6 +5764,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          104
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          If You Don’t Like the Weather, Change It, 2007
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3567,6 +5842,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          105
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Adrenaline Dream, 1993/2018
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3610,6 +5920,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          106
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Expedition, 2006
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3653,6 +5998,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          107
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Winter Storage, 2017
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3696,6 +6076,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          108
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Backstage Diorama, 2008
+        </Text>
       </View>
       <View
         accessibilityComponentType={undefined}
@@ -3739,6 +6154,41 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             }
           }
         />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 14,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          #
+          109
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
+          }
+        >
+          Stationary, Established but Incomplete och The Party is Over, 2017.
+        </Text>
       </View>
     </View>
   </View>

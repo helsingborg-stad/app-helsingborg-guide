@@ -35,6 +35,8 @@ class GuideView extends Component<Props> {
           style={styles.objectImage}
           resizeMode="cover"
         />
+        <Text style={styles.contentIdText}>#{obj.searchableId}</Text>
+        <Text style={styles.contentTitleText}>{obj.title}</Text>
       </TouchableOpacity>
     );
   }

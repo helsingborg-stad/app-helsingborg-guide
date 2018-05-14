@@ -34,6 +34,13 @@ const styles = StyleSheet.create({
     ...StyleSheet.flatten(TextStyles.title),
     marginHorizontal: "4%",
   },
+  contentIdText: {
+    ...StyleSheet.flatten(TextStyles.small),
+    color: Colors.warmGrey,
+  },
+  contentTitleText: {
+    ...StyleSheet.flatten(TextStyles.medium),
+  },
 });
 
 export default styles;
