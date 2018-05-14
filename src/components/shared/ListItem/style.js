@@ -34,7 +34,6 @@ export default StyleSheet.create({
       color: Colors.darkGrey,
     }],
   ),
-
   checkedContainer: {
     flex: 1,
     flexDirection: "row",

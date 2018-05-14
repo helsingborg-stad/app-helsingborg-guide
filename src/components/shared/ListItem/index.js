@@ -5,6 +5,7 @@ import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import LangService from "../../../services/langService";
 import ImageView from "../ImageView";
+import DateView from "../DateView";
 import styles from "./style";
 import { Colors } from "../../../styles/";
 
@@ -57,7 +58,7 @@ const ListItem = (props: Props) => (
       <View style={styles.titleContainer}>
         <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
         <Text style={styles.description} numberOfLines={1}>{props.description}</Text>
-        {renderDate(props.startDate, props.endDate)}
+        <DateView startDate={props.startDate} endDate={props.endDate} />
         {props.forKids ? forKidsView() : null}
       </View>
     </View>
