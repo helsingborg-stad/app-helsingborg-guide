@@ -8,7 +8,7 @@ import GuideView from "../index";
 
 import renderer from "react-test-renderer";
 
-const guide: Guide = require("./guide.json");
+const guide: Guide = require("./testdata/guide.json");
 
 test("Render normally", () => {
   let i = 0;
