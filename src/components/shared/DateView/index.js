@@ -5,7 +5,13 @@ import { Text } from "react-native";
 
 import styles from "./styles";
 
-function renderDate(startDate?: string, endDate?: string) {
+type Props = {
+  startDate?: string,
+  endDate?: string
+}
+
+const DateView = (props: Props) => {
+  const { startDate, endDate } = props;
   if (!startDate || !endDate) { return null; }
 
   const start = new Date(startDate);
@@ -19,11 +25,11 @@ function renderDate(startDate?: string, endDate?: string) {
     // failed to convert date to ISO string
   }
   return null;
-}
+};
 
-type Props = {
-  startDate?: string,
-  endDate?: string
-}
+DateView.defaultProps = {
+  startDate: null,
+  endDate: null,
+};
 
-export default (props: Props) => renderDate(props.startDate, props.endDate);
+export default DateView;
