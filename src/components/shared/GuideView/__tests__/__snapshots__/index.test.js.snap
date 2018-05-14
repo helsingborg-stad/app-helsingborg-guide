@@ -40,6 +40,7 @@ exports[`Guide with tagline 1`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -52,39 +53,43 @@ exports[`Guide with tagline 1`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "black",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-            "textAlign": "left",
-          }
-        }
+      <View
+        style={Object {}}
       >
-        This is a fairly standard tagline length, I'd say.
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
           }
-        }
-      >
-        2018-05-05 - 2018-10-21
-      </Text>
+        >
+          This is a fairly standard tagline length, I'd say.
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -991,6 +996,7 @@ exports[`Guide with tagline 2`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -1003,39 +1009,43 @@ exports[`Guide with tagline 2`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "black",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-            "textAlign": "left",
-          }
-        }
+      <View
+        style={Object {}}
       >
-        This is a fairly standard tagline length, I'd say.
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
           }
-        }
-      >
-        2018-05-05 - 2018-10-21
-      </Text>
+        >
+          This is a fairly standard tagline length, I'd say.
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -1942,6 +1952,7 @@ exports[`Guide with tagline 3`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -1954,39 +1965,43 @@ exports[`Guide with tagline 3`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "black",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-            "textAlign": "left",
-          }
-        }
+      <View
+        style={Object {}}
       >
-        This is a fairly standard tagline length, I'd say.
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
           }
-        }
-      >
-        2018-05-05 - 2018-10-21
-      </Text>
+        >
+          This is a fairly standard tagline length, I'd say.
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -2893,6 +2908,7 @@ exports[`Guide with tagline 4`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -2905,39 +2921,43 @@ exports[`Guide with tagline 4`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "black",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-            "textAlign": "left",
-          }
-        }
+      <View
+        style={Object {}}
       >
-        This is a fairly standard tagline length, I'd say.
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
           }
-        }
-      >
-        2018-05-05 - 2018-10-21
-      </Text>
+        >
+          This is a fairly standard tagline length, I'd say.
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -3844,6 +3864,7 @@ exports[`Guide with tagline 5`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -3856,39 +3877,43 @@ exports[`Guide with tagline 5`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "black",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-            "textAlign": "left",
-          }
-        }
+      <View
+        style={Object {}}
       >
-        This is a fairly standard tagline length, I'd say.
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
           }
-        }
-      >
-        2018-05-05 - 2018-10-21
-      </Text>
+        >
+          This is a fairly standard tagline length, I'd say.
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -4795,6 +4820,7 @@ exports[`Guide with tagline 6`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -4807,39 +4833,43 @@ exports[`Guide with tagline 6`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "black",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-            "textAlign": "left",
-          }
-        }
+      <View
+        style={Object {}}
       >
-        This is a fairly standard tagline length, I'd say.
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
           }
-        }
-      >
-        2018-05-05 - 2018-10-21
-      </Text>
+        >
+          This is a fairly standard tagline length, I'd say.
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -5746,6 +5776,7 @@ exports[`Guide with tagline 7`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -5758,39 +5789,43 @@ exports[`Guide with tagline 7`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "black",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-            "textAlign": "left",
-          }
-        }
+      <View
+        style={Object {}}
       >
-        This is a fairly standard tagline length, I'd say.
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            }
           }
-        }
-      >
-        2018-05-05 - 2018-10-21
-      </Text>
+        >
+          This is a fairly standard tagline length, I'd say.
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -6697,6 +6732,7 @@ exports[`Guide without tagline 1`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -6709,22 +6745,26 @@ exports[`Guide without tagline 1`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
-          }
-        }
+      <View
+        style={Object {}}
       >
-        2018-05-05 - 2018-10-21
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -7631,6 +7671,7 @@ exports[`Guide without tagline 2`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -7643,22 +7684,26 @@ exports[`Guide without tagline 2`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
-          }
-        }
+      <View
+        style={Object {}}
       >
-        2018-05-05 - 2018-10-21
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -8565,6 +8610,7 @@ exports[`Guide without tagline 3`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -8577,22 +8623,26 @@ exports[`Guide without tagline 3`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
-          }
-        }
+      <View
+        style={Object {}}
       >
-        2018-05-05 - 2018-10-21
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -9499,6 +9549,7 @@ exports[`Guide without tagline 4`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -9511,22 +9562,26 @@ exports[`Guide without tagline 4`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
-          }
-        }
+      <View
+        style={Object {}}
       >
-        2018-05-05 - 2018-10-21
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -10433,6 +10488,7 @@ exports[`Guide without tagline 5`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -10445,22 +10501,26 @@ exports[`Guide without tagline 5`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
-          }
-        }
+      <View
+        style={Object {}}
       >
-        2018-05-05 - 2018-10-21
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -11367,6 +11427,7 @@ exports[`Guide without tagline 6`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -11379,22 +11440,26 @@ exports[`Guide without tagline 6`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
-          }
-        }
+      <View
+        style={Object {}}
       >
-        2018-05-05 - 2018-10-21
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
@@ -12301,6 +12366,7 @@ exports[`Guide without tagline 7`] = `
         accessible={true}
         allowFontScaling={true}
         ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Object {
             "fontFamily": "Roboto",
@@ -12313,22 +12379,26 @@ exports[`Guide without tagline 7`] = `
       >
         The Climate Experiment
       </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Object {
-            "color": "#7f7f7f",
-            "fontFamily": "Roboto",
-            "fontSize": 16,
-            "lineHeight": 22,
-          }
-        }
+      <View
+        style={Object {}}
       >
-        2018-05-05 - 2018-10-21
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "color": "#7f7f7f",
+              "fontFamily": "Roboto",
+              "fontSize": 16,
+              "lineHeight": 22,
+            }
+          }
+        >
+          2018-05-05 - 2018-10-21
+        </Text>
+      </View>
       <View
         style={null}
       >
