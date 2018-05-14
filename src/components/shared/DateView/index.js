@@ -11,9 +11,14 @@ function renderDate(startDate?: string, endDate?: string) {
   const start = new Date(startDate);
   const end = new Date(endDate);
 
-  return (<Text style={styles.text} numberOfLines={1}>
-    {`${start.toISOString().substring(0, 10)} - ${end.toISOString().substring(0, 10)}`}
-  </Text>);
+  try {
+    return (<Text style={styles.text} numberOfLines={1}>
+      {`${start.toISOString().substring(0, 10)} - ${end.toISOString().substring(0, 10)}`}
+    </Text>);
+  } catch (error) {
+    // failed to convert date to ISO string
+  }
+  return null;
 }
 
 type Props = {

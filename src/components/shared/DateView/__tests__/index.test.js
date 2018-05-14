@@ -35,3 +35,13 @@ test("Correct input", () => {
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+test("Invalid input", () => {
+  const tree = renderer.create(
+    <DateView
+      startDate={startDate}
+      endDate="this is not a date string"
+    />,
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});

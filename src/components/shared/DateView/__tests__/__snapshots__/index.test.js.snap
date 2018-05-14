@@ -19,6 +19,8 @@ exports[`Correct input 1`] = `
 </Text>
 `;
 
+exports[`Invalid input 1`] = `null`;
+
 exports[`No props 1`] = `null`;
 
 exports[`Only end date 1`] = `null`;
