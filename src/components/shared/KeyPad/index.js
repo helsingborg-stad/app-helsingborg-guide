@@ -6,9 +6,9 @@ import RoundedBtn from "../../shared/roundedBtn";
 import LangService from "../../../services/langService";
 import styles from "./styles";
 
-const MAX_DIGITS = 3;
-const DEFAULT_CHAR = "_";
-const DEFAULT_ARR = [DEFAULT_CHAR, DEFAULT_CHAR, DEFAULT_CHAR];
+const MAX_DIGITS: number = 3;
+const DEFAULT_CHAR: string = "_";
+const DEFAULT_ARR: string[] = [DEFAULT_CHAR, DEFAULT_CHAR, DEFAULT_CHAR];
 
 function strToArray(str, max) {
   const arr = [];
@@ -25,6 +25,9 @@ type Props = {
 };
 
 type State = {
+  number: string,
+  displayedNumber: string[],
+  shakeValue: Animated.Value
 };
 
 export default class KeyPad extends Component<Props, State> {
@@ -35,13 +38,11 @@ export default class KeyPad extends Component<Props, State> {
       displayedNumber: DEFAULT_ARR,
       shakeValue: new Animated.Value(0),
     };
-    this.resultCode = props.resultCode;
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.resultCode !== this.resultCode) {
       this.clearAll();
-      this.resultCode = nextProps.resultCode;
 
       if (nextProps.resultCode === 404) {
         this.shake();
@@ -71,7 +72,7 @@ export default class KeyPad extends Component<Props, State> {
     this.setState({ number: "" });
   }
 
-  clearAll() {
+  clearAll = () => {
     this.setState({ number: "", displayedNumber: DEFAULT_ARR });
   }
 
@@ -157,7 +158,7 @@ export default class KeyPad extends Component<Props, State> {
               <Text style={styles.digitText}>0</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={this.clearAll.bind(this)}
+              onPress={this.clearAll}
               style={[styles.rowItem, styles.digitContainer, noNumber ? styles.disabled : null]}
             >
               <Text style={[styles.digitText, noNumber ? styles.disabledText : null]}>x</Text>
