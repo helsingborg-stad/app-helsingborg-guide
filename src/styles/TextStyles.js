@@ -51,4 +51,19 @@ export default StyleSheet.create({
     fontSize: 16,
     lineHeight: 22.0,
   },
+  medium: {
+    ...defaultFont,
+    fontSize: 16,
+    fontWeight: "normal",
+    fontStyle: "normal",
+    textAlign: "left",
+    color: Colors.black,
+  },
+  small: {
+    ...defaultFont,
+    fontSize: 14,
+    fontWeight: "normal",
+    fontStyle: "normal",
+    textAlign: "left",
+  },
 });

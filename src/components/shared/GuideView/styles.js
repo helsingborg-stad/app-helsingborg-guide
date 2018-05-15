@@ -1,8 +1,11 @@
 import { StyleSheet } from "react-native";
+import { TextStyles, Colors } from "../../../styles";
+
 
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
+    backgroundColor: Colors.white,
   },
   image: {
     aspectRatio: 18 / 9,
@@ -22,6 +25,27 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     width: "100%",
     height: "auto",
+  },
+  textContainer: {
+    marginHorizontal: "4%",
+  },
+  optionalTexts: {
+    marginBottom: "4%",
+  },
+  guideTaglineText: {
+    ...StyleSheet.flatten(TextStyles.medium),
+  },
+  title: {
+    ...StyleSheet.flatten(TextStyles.title),
+    marginVertical: "4%",
+  },
+  contentIdText: {
+    ...StyleSheet.flatten(TextStyles.small),
+    color: Colors.warmGrey,
+    marginTop: 2,
+  },
+  contentTitleText: {
+    ...StyleSheet.flatten(TextStyles.medium),
   },
 });
 

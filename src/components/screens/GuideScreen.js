@@ -42,10 +42,13 @@ class GuideScreen extends Component<Props> {
 
   render() {
     const { currentGuide } = this.props;
-    return currentGuide ? (<GuideView
-      guide={currentGuide}
-      onPressContentObject={this.onPressContentObject}
-    />) : <View />;
+    return currentGuide ?
+      (
+        <GuideView
+          guide={currentGuide}
+          onPressContentObject={this.onPressContentObject}
+        />
+      ) : <View />;
   }
 }
 
