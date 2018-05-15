@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ObjectView from "../shared/ObjectView";
+import { AnalyticsUtils } from "../../utils/";
 import { selectCurrentContentObjectImage } from "../../actions/uiStateActions";
 
 type Props = {
@@ -27,6 +28,12 @@ class ObjectScreen extends Component<Props> {
     navigate("ImageScreen", { image });
   };
 
+  onGoToLink = (url: string, title?: string) => {
+    const { navigate } = this.props.navigation;
+    AnalyticsUtils.logEvent("open_url", { title });
+    navigate("WebScreen", { url });
+  };
+
   render() {
     const { currentContentObject, currentContentObjectImageIndex } = this.props;
     const { params } = this.props.navigation.state;
@@ -37,6 +44,7 @@ class ObjectScreen extends Component<Props> {
       onSwiperIndexChanged={this.onSwiperIndexChanged}
       imageIndex={currentContentObjectImageIndex}
       onGoToImage={this.onGoToImage}
+      onGoToLink={this.onGoToLink}
     />);
   }
 }

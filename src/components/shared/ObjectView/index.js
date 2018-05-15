@@ -6,6 +6,7 @@ import Swiper from "react-native-swiper";
 import ImageView from "../ImageView";
 import styles from "./style";
 import SharingService from "../../../services/SharingService";
+import LinkTouchable from "../LinkTouchable";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.32;
 
@@ -14,7 +15,8 @@ type Props = {
   imageIndex: number,
   guideType: GuideType,
   onSwiperIndexChanged: (newIndex: number) => (void),
-  onGoToImage: (image: Images) => (void)
+  onGoToImage: (image: Images) => (void),
+  onGoToLink: (url: string, title?: string) => (void)
 }
 
 function displayImagesSlider(
@@ -70,11 +72,22 @@ function displayTitle(title: string, searchableID: string, guideType: GuideType)
 
 function displayText(description?: string) {
   return (
-    <View style={styles.articleContainer}>
-      <Text style={styles.article}>{description}</Text>
-    </View>
+    <Text style={styles.article}>{description}</Text>
   );
 }
+
+function displayLinks(links: Link[], onGoToLink: (url: string, title?: string) => (void)) {
+  return links.map((item, index) => (
+    <LinkTouchable
+      key={item.url || index}
+      title={item.title}
+      onPress={() => {
+        onGoToLink(item.url, item.title);
+      }}
+    />
+  ));
+}
+
 
 class ObjectView extends Component<Props> {
   constructor() {
@@ -95,9 +108,11 @@ class ObjectView extends Component<Props> {
           </View>
           <View style={styles.bodyContainer}>
             {displayTitle(this.props.contentObject.title, this.props.contentObject.searchableId, this.props.guideType)}
-            {/* this.displayButtonsBar() */}
-            {this.props.contentObject.description ? displayText(this.props.contentObject.description) : null}
-            {/* <View style={styles.articleContainer}>{this.displayLinks()}</View> */}
+            {/* this.displayButtonsBar() audio/video */}
+            <View style={styles.articleContainer}>
+              {this.props.contentObject.description ? displayText(this.props.contentObject.description) : null}
+              {this.props.contentObject.links ? displayLinks(this.props.contentObject.links, this.props.onGoToLink) : null}
+            </View>
           </View>
         </ScrollView>
       </View>
