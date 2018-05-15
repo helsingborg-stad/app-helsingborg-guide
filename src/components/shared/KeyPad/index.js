@@ -40,35 +40,29 @@ export default class KeyPad extends Component<Props, State> {
     };
   }
 
-  componentDidUpdate() {
-    if (this.state.number.length === MAX_DIGITS) {
-      this.clearNumber();
-      this.search();
-    }
-  }
-
   shake = () => {
     Animated.sequence([
       Animated.spring(this.state.shakeValue, { toValue: 1, velocity: 30 }),
     ]).start();
   }
 
-  onDigitPressed(digit: number) {
-    if (this.state.number.length === MAX_DIGITS) return;
-
+  onDigitPressed = (digit: number) => {
     const number = this.state.number + digit;
-    this.setState({ number, displayedNumber: strToArray(number, 3) });
-  }
-  clearNumber() {
-    this.setState({ number: "" });
+
+    if (number.length === MAX_DIGITS) {
+      this.clearAll();
+      this.search(number);
+    } else {
+      this.setState({ number, displayedNumber: strToArray(number, 3) });
+    }
   }
 
   clearAll = () => {
     this.setState({ number: "", displayedNumber: DEFAULT_ARR });
   }
 
-  search = () => {
-    this.props.onSearch(this.state.number);
+  search = (number: string) => {
+    this.props.onSearch(number);
   }
 
   displayDigits() {

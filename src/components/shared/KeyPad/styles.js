@@ -5,6 +5,7 @@ export default StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     padding: 10,
+    backgroundColor: Colors.white,
   },
   headerContainer: {
     height: 60,
