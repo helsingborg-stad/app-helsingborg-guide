@@ -4,10 +4,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import KeyPad from "../shared/KeyPad";
 import { selectCurrentContentObject } from "../../actions/uiStateActions";
+import { AnalyticsUtils } from "../../utils/";
 
 type Props = {
   navigation: any,
   contentObjects: ContentObject[],
+  currentGuide: Guide,
   selectCurrentContentObject(contentObject: ContentObject): void
 }
 
@@ -24,7 +26,8 @@ class SearchObjectScreen extends Component<Props> {
     if (found) {
       this.props.selectCurrentContentObject(found);
       const { navigate } = this.props.navigation;
-      navigate("ObjectDetailsScreen");
+      AnalyticsUtils.logEvent("view_object", { name: found.title });
+      navigate("ObjectScreen", { title: found.title, currentGuide: this.props.currentGuide });
     } else {
       const { keyPad } = this;
       if (keyPad) {
@@ -53,7 +56,7 @@ function mapStateToProps(state: RootState) {
     ({ contentObjects } = currentGuide);
   }
   return {
-    contentObjects,
+    contentObjects, currentGuide,
   };
 }
 
