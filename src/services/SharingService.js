@@ -1,3 +1,5 @@
+// @flow
+
 import {
   Image,
   Text,
@@ -90,9 +92,13 @@ export default {
     return RNFetchBlob.config(config).fetch("GET", url);
   },
 
-  beginShare(title, message, url, width, height, subject) {
+  beginShare(title: string, message: string, url: string, width: number, height: number, subject: string) {
     // The sharing process is different on ios and android.
-    if (Platform.OS === "android") { this.shareAndroid(title, message, encodeURI(url), width, height, subject); } else { this.shareIOs(title, message, encodeURI(url), width, height, subject); }
+    if (Platform.OS === "android") {
+      this.shareAndroid(title, message, url, width, height, subject);
+    } else {
+      this.shareIOs(title, message, url, width, height, subject);
+    }
   },
 
   shareAndroid(title, message, url, width, height, subject) {
@@ -123,9 +129,14 @@ export default {
                     // Constructing the sharing image by layering the various elements on top one after another.
                     // Warnign: Font styles can behave weirdly on Android. If you make changes that don't look correctly, check out node_modules/react-native-image-marker/android/src/main/java/com/jimmydaddy/imagemarker/ImageMarkerManager.java: 130-143
                     const resultA = await ImageMarker.markWithImage(localMainUrl, localFadeUrl, 0, height - fadeHeight, 1);
-                    const resultB = await ImageMarker.addText(resultA, title, margin, parseInt(height) - (fontSize) - margin - lineDistance, Colors.white, "Roboto-Bold", fontSize);
-                    const resultC = await ImageMarker.addText(resultB, LangService.strings.SHARING_OVERLAY_TITLE, margin, parseInt(height) - margin, Colors.white, "Roboto", fontSize);
-                    const resultD = await ImageMarker.markWithImage(resultC, localIconUrl, parseInt(width) - (iconWidth / 2) - margin, parseInt(height) - (iconHeight / 2) - margin, 0.5);
+                    const resultB = await ImageMarker.addText(
+                      resultA, title, margin, parseInt(height) - (fontSize) - margin - lineDistance,
+                      Colors.white, "Roboto-Bold", fontSize);
+                    const resultC = await ImageMarker.addText(
+                      resultB, LangService.strings.SHARING_OVERLAY_TITLE, margin, parseInt(height) - margin,
+                      Colors.white, "Roboto", fontSize);
+                    const resultD = await ImageMarker.markWithImage(
+                      resultC, localIconUrl, parseInt(width) - (iconWidth / 2) - margin, parseInt(height) - (iconHeight / 2) - margin, 0.5);
 
                     // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
                     const granted = await PermissionsAndroid.check(
@@ -186,9 +197,14 @@ export default {
             // Constructing the sharing image by layering the various elements on top one after another.
             // iOS does weird stuff with the size of the image, meaning that all positioning needs to be multiplied by 2.
             const resultA = await ImageMarker.markWithImage(url, fadeUrl, 0, parseInt(height) - fadeHeight, 1);
-            const resultB = await ImageMarker.addText(resultA, title, (margin * 2), (parseInt(height) * 2) - (fontSize * 4) - (margin * 2) - lineDistance, Colors.white, "Roboto-bold", fontSize * 2);
-            const resultC = await ImageMarker.addText(resultB, LangService.strings.SHARING_OVERLAY_TITLE, margin * 2, (parseInt(height) * 2) - (fontSize * 2) - (margin * 2), Colors.white, "Roboto", fontSize * 2);
-            const resultD = await ImageMarker.markWithImage(resultC, iconUrl, (parseInt(width) * 2) - iconWidth - (margin * 2), (parseInt(height) * 2) - iconHeight - (margin * 2), 1);
+            const resultB = await ImageMarker.addText(
+              resultA, title, (margin * 2), (parseInt(height) * 2) - (fontSize * 4) - (margin * 2) - lineDistance,
+              Colors.white, "Roboto-bold", fontSize * 2);
+            const resultC = await ImageMarker.addText(
+              resultB, LangService.strings.SHARING_OVERLAY_TITLE, margin * 2, (parseInt(height) * 2) - (fontSize * 2) - (margin * 2),
+              Colors.white, "Roboto", fontSize * 2);
+            const resultD = await ImageMarker.markWithImage(
+              resultC, iconUrl, (parseInt(width) * 2) - iconWidth - (margin * 2), (parseInt(height) * 2) - iconHeight - (margin * 2), 1);
 
             // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
             iosShare.message = message;
@@ -211,18 +227,19 @@ export default {
     }
   },
 
-  showShareButton(title, image, sender) {
+  showShareButton(title: string, image: Images, sender: Object) {
     origin = sender;
-    let imageUrl = image.url;
-    let imageWidth = image.width;
-    let imageHeight = image.height;
+    let imageUrl = image.large;
+    let imageWidth = 0;
+    let imageHeight = 0;
 
+    Image.getSize(imageUrl, (width, height) => { imageWidth = width; imageHeight = height; });
     // If the main image is wider than 1900, we need to use a smaller one. The largest one generated by Wordpress is unfortunately only 1000 wide, but it's better than potentially crashing the app.
-    if (parseInt(imageWidth) > 1900) {
-      imageUrl = image.sizes.large;
-      imageWidth = image.sizes["large-width"];
-      imageHeight = image.sizes["large-height"];
+    if (imageWidth > 1900) {
+      imageUrl = image.medium;
+      Image.getSize(imageUrl, (width, height) => { imageWidth = width; imageHeight = height; });
     }
+
 
     return (
       <View>
