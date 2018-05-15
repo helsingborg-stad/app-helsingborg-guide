@@ -12,7 +12,7 @@ const DEFAULT_ARR: string[] = [DEFAULT_CHAR, DEFAULT_CHAR, DEFAULT_CHAR];
 
 function strToArray(str, max) {
   const arr = [];
-  for (let i = 0; i < max; i++) {
+  for (let i = 0; i < max; i += 1) {
     if (i >= str.length) arr.push(DEFAULT_CHAR);
     else arr.push(str[i]);
   }
@@ -40,16 +40,6 @@ export default class KeyPad extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.resultCode !== this.resultCode) {
-      this.clearAll();
-
-      if (nextProps.resultCode === 404) {
-        this.shake();
-      }
-    }
-  }
-
   componentDidUpdate() {
     if (this.state.number.length === MAX_DIGITS) {
       this.clearNumber();
@@ -57,14 +47,15 @@ export default class KeyPad extends Component<Props, State> {
     }
   }
 
-  shake() {
+  shake = () => {
     Animated.sequence([
       Animated.spring(this.state.shakeValue, { toValue: 1, velocity: 30 }),
     ]).start();
   }
 
-  onDigitPressed(digit) {
+  onDigitPressed(digit: number) {
     if (this.state.number.length === MAX_DIGITS) return;
+
     const number = this.state.number + digit;
     this.setState({ number, displayedNumber: strToArray(number, 3) });
   }
@@ -77,12 +68,12 @@ export default class KeyPad extends Component<Props, State> {
   }
 
   search = () => {
-    this.resultCode = 10;
     this.props.onSearch(this.state.number);
   }
 
   displayDigits() {
     return this.state.displayedNumber.map((digit, index) => (
+      // eslint-disable-next-line react/no-array-index-key
       <View key={index} style={[styles.rowItem, styles.upperDigitContainer]}>
         <Text style={[styles.digitText, styles.darkText]}>{digit}</Text>
       </View>

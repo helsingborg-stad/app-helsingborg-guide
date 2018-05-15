@@ -15,6 +15,8 @@ class SearchObjectScreen extends Component<Props> {
 
   onSearch = (id: string) => {
     console.log(`onSearch: ${id}`);
+    // TODO if succesful: navigate and close modal
+    // TODO if unsuccesful: shake and clear text
   }
 
   render() {
