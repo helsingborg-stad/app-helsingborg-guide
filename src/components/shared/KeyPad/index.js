@@ -84,7 +84,7 @@ export default class KeyPad extends Component<Props, State> {
   displayDigits() {
     return this.state.displayedNumber.map((digit, index) => (
       <View key={index} style={[styles.rowItem, styles.upperDigitContainer]}>
-        <Text style={[styles.digitText, { color: "black" }]}>{digit}</Text>
+        <Text style={[styles.digitText, styles.darkText]}>{digit}</Text>
       </View>
     ));
   }
@@ -99,11 +99,11 @@ export default class KeyPad extends Component<Props, State> {
     const shakeAnimatedStyle = { transform: [{ scale }] };
 
     return (
-      <Animated.View style={[styles.wrapper]}>
+      <Animated.View style={styles.container}>
         <View style={styles.headerContainer}>
           <View style={styles.btnContainer}>
             <RoundedBtn
-              style={{ backgroundColor: "#7B075E" }}
+              style={styles.closeButton}
               active={<Icon name="times" size={20} color="white" />}
               idle={<Icon name="times" size={20} color="white" />}
               onPress={this.props.onPressClose}
@@ -116,7 +116,7 @@ export default class KeyPad extends Component<Props, State> {
         <View style={styles.padContainer}>
           <Animated.View style={[styles.rowContainer, shakeAnimatedStyle]}>
             <View style={[styles.rowItem, styles.upperDigitContainer]}>
-              <Text style={[styles.digitText, { color: "black" }]}>#</Text>
+              <Text style={[styles.digitText, styles.darkText]}>#</Text>
             </View>
             {this.displayDigits()}
           </Animated.View>
