@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { Component } from "react";
 import { View, Text, Dimensions, ScrollView, TouchableWithoutFeedback } from "react-native";
 import Swiper from "react-native-swiper";
 import ImageView from "../ImageView";
@@ -17,7 +17,7 @@ type Props = {
   onSwiperIndexChanged: (newIndex: number) => (void)
 }
 
-function goToImageView(image, /* guideID, */ navigation: any) {
+function goToImageView(image: Images, /* guideID, */ navigation: any) {
   const { navigate } = navigation;
   navigate("ImageScreen", { image/* , guideID */ }); // TODO: Redesign ImageScreen.
 }
@@ -79,27 +79,33 @@ function displayText(description?: string) {
   );
 }
 
-const ObjectView = (props: Props) => (
-  <View style={styles.viewContainer}>
-    <ScrollView contentContainerStyle={styles.scrollView}>
-      <View>
-        {displayImagesSlider(props.contentObject.images, props.navigation, props.onSwiperIndexChanged)}
-        <View style={styles.shareBtn}>
-          {SharingService.showShareButton(props.contentObject.title, props.imageIndex, this)}
-        </View>
-      </View>
-      <View style={styles.bodyContainer}>
-        {displayTitle(props.contentObject.title, props.contentObject.searchableId, props.guideType)}
-        {/* this.displayButtonsBar() */}
-        {props.contentObject.description ? displayText(props.contentObject.description) : null}
-        {/* <View style={styles.articleContainer}>{this.displayLinks()}</View> */}
-      </View>
-    </ScrollView>
-  </View>
+class ObjectView extends Component<Props> {
+  constructor() {
+    super();
+    console.log("constructor");
+  }
 
-);
+  render() {
+    return (
 
-ObjectView.defaultProps = {
-};
+      <View style={styles.viewContainer}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <View>
+            {displayImagesSlider(this.props.contentObject.images, this.props.navigation, this.props.onSwiperIndexChanged)}
+            <View style={styles.shareBtn}>
+              {SharingService.showShareButton(this.props.contentObject.title, this.props.contentObject.images[this.props.imageIndex], this)}
+            </View>
+          </View>
+          <View style={styles.bodyContainer}>
+            {displayTitle(this.props.contentObject.title, this.props.contentObject.searchableId, this.props.guideType)}
+            {/* this.displayButtonsBar() */}
+            {this.props.contentObject.description ? displayText(this.props.contentObject.description) : null}
+            {/* <View style={styles.articleContainer}>{this.displayLinks()}</View> */}
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+}
 
 export default ObjectView;
