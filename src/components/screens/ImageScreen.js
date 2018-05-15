@@ -41,7 +41,7 @@ export default class ImageScreen extends Component {
   setSource() {
     const { image, guideID } = this.props.navigation.state.params;
     Image.getSize(image.large, (width, height) => { this.setState({ width, height }); });
-    const uri = encodeURI(image.large);
+    const uri = image.large;
     if (typeof uri === "string") {
       fetchService.isExist(uri, guideID).then((exist) => {
         const fullPath = fetchService.getFullPath(uri, guideID);
