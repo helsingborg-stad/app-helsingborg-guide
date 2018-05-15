@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 import GuideView from "../shared/GuideView";
 import { selectCurrentContentObject } from "../../actions/uiStateActions";
+import SearchButton from "../header/SearchButton";
 
 declare type Props = {
   currentGuide: ?Guide,
@@ -18,9 +19,10 @@ class GuideScreen extends Component<Props> {
     const { params } = navigation.state;
     if (params) {
       const { title } = params;
-      if (title) {
-        return { title };
-      }
+      return {
+        title,
+        headerRight: (<SearchButton navigation={navigation} />),
+      };
     }
     return {};
   };
