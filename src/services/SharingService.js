@@ -1,5 +1,3 @@
-// @flow
-
 import {
   Image,
   Text,
@@ -92,7 +90,7 @@ export default {
     return RNFetchBlob.config(config).fetch("GET", url);
   },
 
-  beginShare(title: string, message: string, url: string, width: number, height: number, subject: string) {
+  beginShare(title, message, url, width, height, subject) {
     // The sharing process is different on ios and android.
     if (Platform.OS === "android") {
       this.shareAndroid(title, message, url, width, height, subject);
@@ -227,7 +225,7 @@ export default {
     }
   },
 
-  showShareButton(title: string, image: Images, sender: Object) {
+  showShareButton(title, image, sender) {
     origin = sender;
     let imageUrl = image.large;
     let imageWidth = 0;
