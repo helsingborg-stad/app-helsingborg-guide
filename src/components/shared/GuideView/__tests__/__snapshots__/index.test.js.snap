@@ -54,7 +54,11 @@ exports[`Guide with tagline 1`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -1010,7 +1014,11 @@ exports[`Guide with tagline 2`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -1966,7 +1974,11 @@ exports[`Guide with tagline 3`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -2922,7 +2934,11 @@ exports[`Guide with tagline 4`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -3878,7 +3894,11 @@ exports[`Guide with tagline 5`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -4834,7 +4854,11 @@ exports[`Guide with tagline 6`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -5790,7 +5814,11 @@ exports[`Guide with tagline 7`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -6746,7 +6774,11 @@ exports[`Guide without tagline 1`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -7685,7 +7717,11 @@ exports[`Guide without tagline 2`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -8624,7 +8660,11 @@ exports[`Guide without tagline 3`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -9563,7 +9603,11 @@ exports[`Guide without tagline 4`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -10502,7 +10546,11 @@ exports[`Guide without tagline 5`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -11441,7 +11489,11 @@ exports[`Guide without tagline 6`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
@@ -12380,7 +12432,11 @@ exports[`Guide without tagline 7`] = `
         The Climate Experiment
       </Text>
       <View
-        style={Object {}}
+        style={
+          Object {
+            "marginBottom": "4%",
+          }
+        }
       >
         <Text
           accessible={true}
