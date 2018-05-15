@@ -33,7 +33,6 @@ export default class KeyPad extends Component<Props, State> {
     this.state = {
       number: "",
       displayedNumber: DEFAULT_ARR,
-      animValue: new Animated.Value(0),
       shakeValue: new Animated.Value(0),
     };
     this.resultCode = props.resultCode;
@@ -91,14 +90,6 @@ export default class KeyPad extends Component<Props, State> {
 
   render() {
     const noNumber = this.state.displayedNumber === "";
-
-    /*
-    const translateY = this.state.animValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [FULL_HEIGHT, 0],
-    });
-    const animatedStyle = { transform: [{ translateY }] };
-   */
 
     const scale = this.state.shakeValue.interpolate({
       inputRange: [0, 0.5, 1],
