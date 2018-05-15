@@ -1,0 +1,466 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic GuideObject 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#ffffff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <RCTScrollView
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 70,
+      }
+    }
+  >
+    <View>
+      <View>
+        <View
+          onLayout={[Function]}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "flex": 1,
+                "position": "relative",
+              },
+              undefined,
+            ]
+          }
+        >
+          <RCTScrollView
+            activeDotColor="#D35098"
+            automaticallyAdjustContentInsets={false}
+            autoplay={false}
+            autoplayDirection={true}
+            autoplayTimeout={2.5}
+            bounces={false}
+            contentContainerStyle={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {},
+              ]
+            }
+            contentOffset={
+              Object {
+                "x": 0,
+              }
+            }
+            disableNextButton={false}
+            dotColor="white"
+            height={426.88}
+            horizontal={true}
+            index={0}
+            loadMinimal={false}
+            loadMinimalSize={1}
+            loop={false}
+            onIndexChanged={[Function]}
+            onMomentumScrollEnd={[Function]}
+            onScrollBeginDrag={[Function]}
+            onScrollEndDrag={[Function]}
+            pagingEnabled={true}
+            removeClippedSubviews={true}
+            scrollsToTop={false}
+            showsButtons={false}
+            showsHorizontalScrollIndicator={false}
+            showsPagination={true}
+            showsVerticalScrollIndicator={false}
+            style={undefined}
+          >
+            <View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 426.88,
+                      "width": 750,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              >
+                <View>
+                  <View
+                    accessibilityComponentType={undefined}
+                    accessibilityLabel={undefined}
+                    accessibilityTraits={undefined}
+                    accessible={true}
+                    hitSlop={undefined}
+                    nativeID={undefined}
+                    onLayout={undefined}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={undefined}
+                    testID={undefined}
+                  >
+                    <Image
+                      resizeMode="cover"
+                      source={
+                        Object {
+                          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/06/1920x1080-01_bottenv%C3%A5ning-1024x576.jpg",
+                        }
+                      }
+                      style={
+                        Object {
+                          "aspectRatio": 1.7777777777777777,
+                          "height": "auto",
+                          "width": "100%",
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 426.88,
+                      "width": 750,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              >
+                <View>
+                  <View
+                    accessibilityComponentType={undefined}
+                    accessibilityLabel={undefined}
+                    accessibilityTraits={undefined}
+                    accessible={true}
+                    hitSlop={undefined}
+                    nativeID={undefined}
+                    onLayout={undefined}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={undefined}
+                    testID={undefined}
+                  >
+                    <Image
+                      resizeMode="cover"
+                      source={
+                        Object {
+                          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/06/1920x1080-02_bottenv%C3%A5ning-1024x576.jpg",
+                        }
+                      }
+                      style={
+                        Object {
+                          "aspectRatio": 1.7777777777777777,
+                          "height": "auto",
+                          "width": "100%",
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 426.88,
+                      "width": 750,
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              >
+                <View>
+                  <View
+                    accessibilityComponentType={undefined}
+                    accessibilityLabel={undefined}
+                    accessibilityTraits={undefined}
+                    accessible={true}
+                    hitSlop={undefined}
+                    nativeID={undefined}
+                    onLayout={undefined}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={undefined}
+                    testID={undefined}
+                  >
+                    <Image
+                      resizeMode="cover"
+                      source={
+                        Object {
+                          "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/06/1920x1080-03_bottenv%C3%A5ning-1024x576.jpg",
+                        }
+                      }
+                      style={
+                        Object {
+                          "aspectRatio": 1.7777777777777777,
+                          "height": "auto",
+                          "width": "100%",
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </RCTScrollView>
+          <View
+            pointerEvents="none"
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "bottom": 25,
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#D35098",
+                    "borderRadius": 4,
+                    "height": 8,
+                    "marginBottom": 3,
+                    "marginLeft": 3,
+                    "marginRight": 3,
+                    "marginTop": 3,
+                    "width": 8,
+                  },
+                  undefined,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "white",
+                    "borderRadius": 4,
+                    "height": 8,
+                    "marginBottom": 3,
+                    "marginLeft": 3,
+                    "marginRight": 3,
+                    "marginTop": 3,
+                    "width": 8,
+                  },
+                  undefined,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "white",
+                    "borderRadius": 4,
+                    "height": 8,
+                    "marginBottom": 3,
+                    "marginLeft": 3,
+                    "marginRight": 3,
+                    "marginTop": 3,
+                    "width": 8,
+                  },
+                  undefined,
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "stretch",
+            "backgroundColor": "#ffffff",
+            "flex": 1,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "paddingBottom": 4,
+                "paddingHorizontal": 34,
+                "paddingTop": 12,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "fontFamily": "Roboto",
+                  "fontSize": 24,
+                  "fontWeight": "300",
+                  "lineHeight": 30,
+                }
+              }
+            >
+              Vaktvåningen
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "paddingBottom": 4,
+                "paddingHorizontal": 34,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#7f7f7f",
+                  "fontFamily": "Roboto",
+                  "fontSize": 16,
+                  "fontWeight": "400",
+                  "lineHeight": 21,
+                }
+              }
+            >
+              ID #001
+            </Text>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "flex": 4,
+              "paddingHorizontal": 34,
+              "paddingVertical": 10,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 14,
+                "lineHeight": 20,
+              }
+            }
+          >
+            Välkommen in! Trappan upp till vaktvåningen säger något om svårigheten att inta borgen.
+          </Text>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#a61380",
+                    "fontSize": 24,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#a61380",
+                  "fontFamily": "Roboto",
+                  "fontSize": 16,
+                  "fontWeight": "500",
+                  "lineHeight": 23,
+                  "marginLeft": 7,
+                  "marginRight": 13,
+                }
+              }
+            >
+              test
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
