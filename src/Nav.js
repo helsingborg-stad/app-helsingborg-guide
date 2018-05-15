@@ -13,6 +13,7 @@ import {
   ImageScreen,
   LocationScreen,
   ObjectDetailsScreen,
+  SearchObjectScreen,
   SettingsScreen,
   SplashScreen,
   TrailScreen,
@@ -48,9 +49,11 @@ const RootNavigator = StackNavigator(
     SplashScreen: { screen: SplashScreen },
     WelcomeScreen: { screen: WelcomeScreen },
     MainScreen: { screen: GuideNavigator },
+    SearchObjectScreen: { screen: SearchObjectScreen },
   },
   {
     headerMode: "none",
+    mode: "modal",
   },
 );
 

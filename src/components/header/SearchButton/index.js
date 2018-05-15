@@ -12,7 +12,7 @@ type Props = {
 
 function onPress(navigation: any) {
   const { navigate } = navigation;
-  navigate("SearchIdScreen");
+  navigate("SearchObjectScreen");
 }
 
 const SearchButton = (props: Props) =>
