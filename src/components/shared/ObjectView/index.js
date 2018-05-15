@@ -13,22 +13,19 @@ type Props = {
   contentObject: ContentObject,
   imageIndex: number,
   guideType: GuideType,
-  navigation: any,
-  onSwiperIndexChanged: (newIndex: number) => (void)
+  onSwiperIndexChanged: (newIndex: number) => (void),
+  onGoToImage: (image: Images) => (void)
 }
 
-function goToImageView(image: Images, /* guideID, */ navigation: any) {
-  const { navigate } = navigation;
-  navigate("ImageScreen", { image/* , guideID */ }); // TODO: Redesign ImageScreen.
-}
-
-function displayImagesSlider(images: Images[], navigation: any, onSwiperIndexChanged: (newIndex: number) => (void)) {
+function displayImagesSlider(
+  images: Images[],
+  onSwiperIndexChanged: (newIndex: number) => (void),
+  onGoToImage: (image: Images) => (void)) {
   const slides = images.map((image, index) => (
     <View key={image.thumbnail || index}>
-      <TouchableWithoutFeedback onPress={() => goToImageView(image/* , this.state.guideID offline stuff */, navigation)}>
+      <TouchableWithoutFeedback onPress={() => onGoToImage(image)}>
         <View>
           <ImageView source={{ uri: image.large }} style={styles.image} resizeMode="cover" />
-          {/* guideID={this.state.guideID} */}
         </View>
       </TouchableWithoutFeedback>
     </View>
@@ -91,7 +88,7 @@ class ObjectView extends Component<Props> {
       <View style={styles.viewContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View>
-            {displayImagesSlider(this.props.contentObject.images, this.props.navigation, this.props.onSwiperIndexChanged)}
+            {displayImagesSlider(this.props.contentObject.images, this.props.onSwiperIndexChanged, this.props.onGoToImage)}
             <View style={styles.shareBtn}>
               {SharingService.showShareButton(this.props.contentObject.title, this.props.contentObject.images[this.props.imageIndex], this)}
             </View>

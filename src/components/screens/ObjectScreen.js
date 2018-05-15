@@ -22,6 +22,11 @@ class ObjectScreen extends Component<Props> {
     this.props.selectCurrentContentObjectImage(newIndex);
   };
 
+  onGoToImage = (image: Images) => {
+    const { navigate } = this.props.navigation;
+    navigate("ImageScreen", { image });
+  };
+
   render() {
     const { currentContentObject, currentContentObjectImageIndex } = this.props;
     const { params } = this.props.navigation.state;
@@ -29,9 +34,9 @@ class ObjectScreen extends Component<Props> {
     return (<ObjectView
       contentObject={currentContentObject}
       guideType={currentGuide.guideType}
-      navigation={this.props.navigation}
       onSwiperIndexChanged={this.onSwiperIndexChanged}
       imageIndex={currentContentObjectImageIndex}
+      onGoToImage={this.onGoToImage}
     />);
   }
 }
