@@ -1,12 +1,11 @@
 // @flow
 
 import React from "react";
-import { View, TouchableWithoutFeedback, Dimensions } from "react-native";
+import { View, TouchableWithoutFeedback } from "react-native";
 import Swiper from "react-native-swiper";
 import ImageView from "../ImageView";
 import styles from "./style";
-
-const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.32; // och vad med denna.
+import Colors from "../../../styles/Colors";
 
 function getImageSwiper(
   images: Images[],
@@ -25,9 +24,9 @@ function getImageSwiper(
   return (
     <Swiper
       style={styles.imagesSlider}
-      height={MAX_IMAGE_HEIGHT}
-      dotColor="white"
-      activeDotColor="#D35098"
+      height="32%"
+      dotColor={Colors.white}
+      activeDotColor={Colors.lightPink}
       showsButtons={false}
       loop={false}
       onIndexChanged={onSwiperIndexChanged}
