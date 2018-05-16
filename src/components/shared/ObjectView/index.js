@@ -1,14 +1,12 @@
 // @flow
 
 import React, { Component } from "react";
-import { View, Text, Dimensions, ScrollView, TouchableWithoutFeedback } from "react-native";
-import Swiper from "react-native-swiper";
-import ImageView from "../ImageView";
+import { View, Text, ScrollView } from "react-native";
+
 import styles from "./style";
 import SharingService from "../../../services/SharingService";
+import ImageSwiper from "../ImageSwiper";
 import LinkTouchable from "../LinkTouchable";
-
-const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.32;
 
 type Props = {
   contentObject: ContentObject,
@@ -17,35 +15,6 @@ type Props = {
   onSwiperIndexChanged: (newIndex: number) => (void),
   onGoToImage: (image: Images) => (void),
   onGoToLink: (url: string, title?: string) => (void)
-}
-
-function displayImagesSlider(
-  images: Images[],
-  onSwiperIndexChanged: (newIndex: number) => (void),
-  onGoToImage: (image: Images) => (void)) {
-  const slides = images.map((image, index) => (
-    <View key={image.thumbnail || index}>
-      <TouchableWithoutFeedback onPress={() => onGoToImage(image)}>
-        <View>
-          <ImageView source={{ uri: image.large }} style={styles.image} resizeMode="cover" />
-        </View>
-      </TouchableWithoutFeedback>
-    </View>
-  ));
-
-  return (
-    <Swiper
-      style={styles.imagesSlider}
-      height={MAX_IMAGE_HEIGHT}
-      dotColor="white"
-      activeDotColor="#D35098"
-      showsButtons={false}
-      loop={false}
-      onIndexChanged={onSwiperIndexChanged}
-    >
-      {slides}
-    </Swiper>
-  );
 }
 
 function displayID(searchableID: string) {
@@ -101,7 +70,7 @@ class ObjectView extends Component<Props> {
       <View style={styles.viewContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View>
-            {displayImagesSlider(this.props.contentObject.images, this.props.onSwiperIndexChanged, this.props.onGoToImage)}
+            <ImageSwiper images={this.props.contentObject.images} onSwiperIndexChanged={this.props.onSwiperIndexChanged} onGoToImage={this.props.onGoToImage} />
             <View style={styles.shareBtn}>
               {SharingService.showShareButton(this.props.contentObject.title, this.props.contentObject.images[this.props.imageIndex], this)}
             </View>
