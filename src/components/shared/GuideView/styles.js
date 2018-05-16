@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: Colors.white,
   },
+  downloadButton: {
+    width: "100%",
+  },
   image: {
     aspectRatio: 18 / 9,
     width: "100%",

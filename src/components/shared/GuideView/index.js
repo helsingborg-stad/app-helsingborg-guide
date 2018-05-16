@@ -13,17 +13,19 @@ import { TextStyles } from "../../../styles";
 import styles from "./styles";
 import ImageView from "../ImageView";
 import DateView from "../DateView";
+import DownloadButton from "../DownloadButton";
 
 declare type Props = {
   guide: Guide,
-  onPressContentObject(obj: ContentObject): void
+  onPressContentObject(obj: ContentObject): void,
+  onStartDownload(): void,
 }
+
 const textMaxHeight = Dimensions.get("window").height * 0.2;
 
 class GuideView extends Component<Props> {
   renderContentObject = (obj: ContentObject) => {
     const { images } = obj;
-    // TODO return placeholder image
     const uri = images.length > 0 ? images[0].medium : null;
     return (
       <TouchableOpacity
@@ -51,6 +53,11 @@ class GuideView extends Component<Props> {
     const { guide } = this.props;
     return (<ScrollView style={styles.container}>
       <ImageView source={{ uri: guide.images.large }} style={styles.image} />
+      <DownloadButton
+        status="idle"
+        style={styles.downloadButton}
+        onStartDownload={this.props.onStartDownload}
+      />
       <View style={styles.textContainer}>
         <Text style={styles.title} numberOfLines={1}>{guide.name}</Text>
         <View style={styles.optionalTexts}>
@@ -66,6 +73,5 @@ class GuideView extends Component<Props> {
     </ScrollView>);
   }
 }
-
 
 export default GuideView;
