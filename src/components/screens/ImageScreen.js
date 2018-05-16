@@ -1,19 +1,21 @@
 import React, { Component } from "react";
-import { StyleSheet, Dimensions, Platform, Image } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import PhotoView from "react-native-photo-view";
 import PropTypes from "prop-types";
-import ViewContainer from "../shared/view_container";
 import fetchService from "../../services/FetchService";
 
 const MAX_SCALE = 2.5;
 const MIN_SCALE = 0.95;
-const FULL_WIDTH = Dimensions.get("window").width;
-
 const noFeaturedImage = require("../../images/no-image-featured-image.png");
 
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: "black",
+  },
+  container: {
+    backgroundColor: "black",
+    width: "100%",
+    height: "100%",
   },
 });
 
@@ -40,7 +42,6 @@ export default class ImageScreen extends Component {
 
   setSource() {
     const { image, guideID } = this.props.navigation.state.params;
-    Image.getSize(image.large, (width, height) => { this.setState({ width, height }); });
     const uri = image.large;
     if (typeof uri === "string") {
       fetchService.isExist(uri, guideID).then((exist) => {
@@ -67,20 +68,14 @@ export default class ImageScreen extends Component {
   }
 
   render() {
-    const scale = this.state.width / FULL_WIDTH;
-
     return (
-      <ViewContainer style={styles.mainContainer}>
-        {
-          <PhotoView
-            source={this.state.source}
-            minimumZoomScale={MIN_SCALE}
-            maximumZoomScale={MAX_SCALE}
-            androidScaleType="centerInside"
-            style={{ flex: 1, width: this.state.width / scale, height: this.state.height / scale }}
-          />
-        }
-      </ViewContainer>
+      <PhotoView
+        source={this.state.source}
+        minimumZoomScale={MIN_SCALE}
+        maximumZoomScale={MAX_SCALE}
+        androidScaleType="centerInside"
+        style={styles.container}
+      />
     );
   }
 }
