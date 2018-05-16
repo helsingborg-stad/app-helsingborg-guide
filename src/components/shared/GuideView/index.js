@@ -54,9 +54,9 @@ class GuideView extends Component<Props> {
     return (<ScrollView style={styles.container}>
       <ImageView source={{ uri: guide.images.large }} style={styles.image} />
       <DownloadButton
-        status="idle"
         style={styles.downloadButton}
         onStartDownload={this.props.onStartDownload}
+        progress={0.75}
       />
       <View style={styles.textContainer}>
         <Text style={styles.title} numberOfLines={1}>{guide.name}</Text>

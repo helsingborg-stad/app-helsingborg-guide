@@ -1,42 +1,53 @@
 // @flow
-
 import React from "react";
 import {
-  Text,
+  Platform,
+  ProgressViewIOS,
+  ProgressBarAndroid,
   View,
 } from "react-native";
 import LangService from "../../../services/langService";
 import IconTextTouchable from "../IconTextTouchable";
+import { Colors } from "../../../styles";
 import styles from "./styles";
 
 type Props = {
   style?: any,
-  status: "idle" | "pending" | "paused" | "done",
   onStartDownload(): void,
+  progress: number,
 }
 
-const DownloadButton = (props: Props) => {
-  switch (props.status) {
-    case "done":
-      return (
-        <View style={props.style}>
-          <Text style={{ fontSize: 16, color: "green", paddingHorizontal: 10 }}>{LangService.strings.DOWNLOADED}</Text>
-        </View>
-      );
-    case "paused":
-    case "pending":
-    case "idle":
-    default:
-      return (
-        <View style={[styles.container, props.style]}>
-          <IconTextTouchable
-            text={LangService.strings.DOWNLOAD}
-            iconName="get-app"
-            onPress={props.onStartDownload}
-          />
-        </View>
-      );
-  }
+function renderProgressbar(progress: number) {
+  return (
+    <View>
+      {Platform.OS === "ios"
+        ? (
+          <ProgressViewIOS progressTintColor={Colors.lightPink} style={styles.progressView} progress={progress} />
+        )
+        : (
+          <ProgressBarAndroid color={Colors.lightPink} styleAttr="Horizontal" indeterminate={false} progress={progress} />
+        )}
+    </View >
+  );
+}
+
+const DownloadButton = (props: Props) => (
+  <View style={[styles.container, props.style]}>
+    <View
+      style={styles.textContainer}
+    >
+      <IconTextTouchable
+        text={LangService.strings.DOWNLOAD}
+        iconName="get-app"
+        onPress={props.onStartDownload}
+      />
+    </View>
+    {renderProgressbar(props.progress)}
+  </View>
+);
+
+DownloadButton.defaultProps = {
+  style: {},
 };
 
 export default DownloadButton;
