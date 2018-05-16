@@ -12,6 +12,7 @@ import {
   GuideListScreen,
   ImageScreen,
   LocationScreen,
+  ObjectScreen,
   ObjectDetailsScreen,
   SearchObjectScreen,
   SettingsScreen,
@@ -33,8 +34,9 @@ const GuideNavigator = StackNavigator(
     GuideListScreen: { screen: GuideListScreen },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
+    ObjectDetailsScreen: { screen: ObjectDetailsScreen }, /* old */
+    ObjectScreen: { screen: ObjectScreen }, /* new */
     GuideDetailsScreen: { screen: GuideScreen },
-    ObjectDetailsScreen: { screen: ObjectDetailsScreen },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
     ImageScreen: { screen: ImageScreen },

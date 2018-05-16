@@ -3,6 +3,7 @@ export { default as GuideScreen } from "./GuideScreen";
 export { default as GuideListScreen } from "./GuideListScreen";
 export { default as ImageScreen } from "./ImageScreen";
 export { default as LocationScreen } from "./LocationScreen";
+export { default as ObjectScreen } from "./ObjectScreen";
 export { default as ObjectDetailsScreen } from "./ObjectDetailsScreen";
 export { default as SearchObjectScreen } from "./SearchObjectScreen";
 export { default as SettingsScreen } from "./SettingsScreen";
