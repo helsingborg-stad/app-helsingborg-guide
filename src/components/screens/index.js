@@ -9,6 +9,7 @@ export { default as SearchObjectScreen } from "./SearchObjectScreen";
 export { default as SettingsScreen } from "./SettingsScreen";
 export { default as SplashScreen } from "./SplashScreen";
 export { default as OldTrailScreen } from "./OldTrailScreen";
+export { default as TrailScreen } from "./TrailScreen";
 export { default as VideoScreen } from "./VideoScreen";
 export { default as WebScreen } from "./WebScreen";
 export { default as WelcomeScreen } from "./WelcomeScreen";
