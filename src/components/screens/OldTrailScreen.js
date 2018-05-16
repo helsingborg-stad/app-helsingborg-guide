@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 const screenWidth = Dimensions.get("window").width;
 const defaultMargin = 17;
 
-class TrailScreen extends Component {
+class OldTrailScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
     trailInformation: PropTypes.object.isRequired,
@@ -278,8 +278,8 @@ function mapStateToProps(state, ownProps) {
   const { id } = ownProps.navigation.state.params.trail;
   const { guides } = state;
 
-  const trailObjects = MapWithListView.createItemsFromTrail(trail, "trailScreen");
-  const trailInformation = TrailScreen.trailInformation(trail, guides);
+  const trailObjects = MapWithListView.createItemsFromTrail(trail, "OldTrailScreen");
+  const trailInformation = OldTrailScreen.trailInformation(trail, guides);
 
   return {
     subLocation: getSubLocation(state.subLocations, id),
@@ -299,4 +299,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(OldTrailScreen);

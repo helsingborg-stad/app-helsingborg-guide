@@ -268,7 +268,7 @@ export default class MapWithListView extends Component {
         order: contentObject.order,
         labelDisplayNumber: 0,
         contentObject,
-        imageType: (screen === "trailScreen") ? "trailScreen" : contentType,
+        imageType: (screen === "OldTrailScreen") ? "OldTrailScreen" : contentType,
       });
     });
 
@@ -393,7 +393,7 @@ export default class MapWithListView extends Component {
         const trail = contentObject;
         const title = trail.guidegroup[0].name;
         AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
-        navigate("TrailScreen", { trail, id: trail.id, title });
+        navigate("OldTrailScreen", { trail, id: trail.id, title });
         return;
       }
       case "guide":
@@ -439,7 +439,7 @@ export default class MapWithListView extends Component {
 
     if (imageType === "trail" || contentType === "trail") {
       image = (activeMarker.id === trailObject.id) ? trailMarkerActive : trailMarkerInactive;
-    } else if (imageType === "trailScreen") {
+    } else if (imageType === "OldTrailScreen") {
       image = (activeMarker.id === trailObject.id) ? numberedMarkerActive : numberedMarkerInactive;
     } else {
       image = (activeMarker.id === trailObject.id) ? locationMarkerActive : locationMarkerInactive;
@@ -504,7 +504,7 @@ export default class MapWithListView extends Component {
   renderMapMarkers() {
     const { items } = this.props;
     return items.map((trailObject) => {
-      if (trailObject.imageType === "trailScreen") {
+      if (trailObject.imageType === "OldTrailScreen") {
         return this.numberedMapViewMarker(trailObject);
       }
       return this.defaultMapViewMarker(trailObject);
@@ -542,8 +542,8 @@ export default class MapWithListView extends Component {
   }
 
   displayNumberView = (item) => {
-    const trailScreen = item.imageType === "trailScreen";
-    if (!trailScreen) return null;
+    const OldTrailScreen = item.imageType === "OldTrailScreen";
+    if (!OldTrailScreen) return null;
 
     const numberString = item.labelDisplayNumber;
     const numberView = (
@@ -557,7 +557,7 @@ export default class MapWithListView extends Component {
 
   renderListItem = (item, listItemStyle) => {
     const { thumbnailUrl, streetAdress, title } = item;
-    const trailScreen = item.imageType === "trailScreen";
+    const OldTrailScreen = item.imageType === "OldTrailScreen";
     const titleLineCount = (screenHeight > 600 && PixelRatio.getFontScale() === 1 ? 2 : 1);
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
@@ -567,7 +567,7 @@ export default class MapWithListView extends Component {
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={titleLineCount}>{title}</Text>
             <Text style={styles.listItemAddress} numberOfLines={1}>{streetAdress}</Text>
-            {!trailScreen
+            {!OldTrailScreen
               ? null
               : <IconTextTouchable
                 iconName="directions"
