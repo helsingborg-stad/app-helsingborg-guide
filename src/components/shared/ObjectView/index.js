@@ -58,12 +58,11 @@ function displayLinks(links: Link[], onGoToLink: (url: string, title?: string) =
 }
 
 
+/*
+* Underlying sharingservice needs a reference to a Component instance
+*/
+// eslint-disable-next-line react/prefer-stateless-function
 class ObjectView extends Component<Props> {
-  constructor() {
-    super();
-    console.log("constructor");
-  }
-
   render() {
     return (
 

@@ -14,11 +14,6 @@ type Props = {
 }
 
 class ObjectScreen extends Component<Props> {
-  constructor() {
-    super();
-    console.log("constructor");
-  }
-
   onSwiperIndexChanged = (newIndex: number) => {
     this.props.selectCurrentContentObjectImage(newIndex);
   };
