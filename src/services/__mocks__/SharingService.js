@@ -2,7 +2,7 @@
 
 export default {
   showShareButton: (title: string, image: Images) => {
-    console.log(`${title} ${image.large} `);
+    console.log(`${title} ${image.large ? image.large : ""} `);
   },
 
 };
