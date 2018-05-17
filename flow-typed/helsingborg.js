@@ -172,9 +172,10 @@ declare type PointProperty = {
 
 declare type PostStatus = 'publish' | 'draft';
 
+declare type DownloadStatus = "stopped" | "pending" | "paused";
 declare type DownloadedGuide = {
   guide: Guide,
-  isDownloading: boolean,
+  status: DownloadStatus,
   progress: number
 }
 

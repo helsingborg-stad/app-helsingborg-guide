@@ -9,14 +9,14 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
     case "RESUME_DOWNLOAD_GUIDE":
     {
       const { guide } = action;
-      let download = state.downloads[guide.id];
+      let download: DownloadedGuide = state.downloads[guide.id];
       if (!download) {
         // starting from scratch
-        download = { guide, progress: 0 };
+        download = { guide, progress: 0, status: "pending" };
       }
 
       // resuming
-      download = { ...download, isDownloading: true };
+      download = { ...download, status: "pending" };
       const downloads = { ...state.downloads };
       downloads[guide.id] = download;
       return { ...state, downloads };

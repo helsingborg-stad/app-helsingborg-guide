@@ -1,6 +1,6 @@
 // @flow
 
-export function startDownload(guide: Guide): Action {
+export function startDownloadGuide(guide: Guide): Action {
   return { type: "START_DOWNLOAD_GUIDE", guide };
 }
 

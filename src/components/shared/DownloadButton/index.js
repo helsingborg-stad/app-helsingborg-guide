@@ -11,13 +11,18 @@ import LangService from "../../../services/langService";
 import IconTextTouchable from "../IconTextTouchable";
 import { Colors } from "../../../styles";
 import styles from "./styles";
-import { startDownload } from "../../../actions/downloadGuidesActions";
+import {
+  startDownloadGuide,
+  pauseDownloadGuide,
+} from "../../../actions/downloadGuidesActions";
 
 type Props = {
   style?: any,
   progress: number,
   currentGuide: ?Guide,
+  status: DownloadStatus,
   startDownload(guide: Guide): void,
+  pauseDownload(guide: Guide): void,
 }
 
 function renderProgressbar(progress: number) {
@@ -50,48 +55,63 @@ class DownloadButton extends Component<Props> {
     // TODO dispatch action
   };
 
-  onPauseDownload = () => {
-    console.log("PAUSE download");
-    // TODO dispatch action
-  };
-
   onResumeDownload = () => {
     console.log("RESUME download");
     // TODO dispatch action
   };
 
   render() {
-    const { style, progress, currentGuide } = this.props;
+    const { style, progress, currentGuide, status } = this.props;
+    const percentage = parseInt(progress * 100);
+    const buttonText = status === "stopped" ? LangService.strings.DOWNLOAD :
+      `${LangService.strings.DOWNLOADING} ${percentage}% ${LangService.strings.DOWNLOADING_PAUSE}`;
     return (
-      <View style={[styles.container, style]}>
+      <View style={[styles.container, style]} >
         <View
           style={styles.textContainer}
         >
           <IconTextTouchable
-            text={LangService.strings.DOWNLOAD}
+            text={buttonText}
             iconName="get-app"
             onPress={() => {
-              if (currentGuide) { this.props.startDownload(currentGuide); }
+              if (currentGuide) {
+                if (status === "stopped") {
+                  this.props.startDownload(currentGuide);
+                } else if (status === "pending") {
+                  this.props.pauseDownload(currentGuide);
+                }
+              }
             }
             }
           />
         </View>
         {renderProgressbar(progress)}
-      </View>
+      </View >
     );
   }
 }
 
 function mapStateToProps(state: RootState) {
   const { currentGuide } = state.uiState;
+
+  let progress = 0;
+  let status: DownloadStatus = "pending";
+  if (currentGuide) {
+    const { downloads } = state.downloadedGuides;
+    const downloadedGuide = downloads[currentGuide.id];
+    ({ progress, status } = downloadedGuide);
+  }
   return {
     currentGuide,
+    progress,
+    status,
   };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    startDownload: (guide: Guide) => dispatch(startDownload(guide)),
+    startDownload: (guide: Guide) => dispatch(startDownloadGuide(guide)),
+    pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
   };
 }
 
