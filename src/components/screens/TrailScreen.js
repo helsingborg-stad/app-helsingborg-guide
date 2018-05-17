@@ -28,8 +28,6 @@ import LangService from "../../services/langService";
 import MapWithListView from "../shared/MapWithListView";
 import MapInformationOverlay from "../shared/MapInformationOverlay";
 
-import { selectCurrentContentObject } from "../../actions/uiStateActions";
-
 const infoBarButtonIcon = require("../../images/iconInfo.png");
 
 const styles = StyleSheet.create({
@@ -64,7 +62,6 @@ type Props = {
   currentGuide: Guide,
   trailObjects: Object[],
   trailInformation: Object,
-  // dispatchSelectContentObject(contentObject: ContentObject): void,
   navigation: Object,
 }
 
@@ -171,11 +168,4 @@ function mapStateToProps(state: RootState) {
   return { currentGuide, trailObjects, trailInformation };
 }
 
-/*
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    dispatchSelectContentObject: (contentObject: ContentObject) => dispatch(selectCurrentContentObject(contentObject)),
-  };
-}
-*/
-export default connect(mapStateToProps/* , mapDispatchToProps */)(TrailScreen);
+export default connect(mapStateToProps)(TrailScreen);
