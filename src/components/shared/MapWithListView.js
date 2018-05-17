@@ -251,24 +251,17 @@ class MapWithListView extends Component {
     return items;
   }
 
-  static createItemsFromTrail(trail: Guide, screen = "") {
+  static createItemsFromTrail(trail, screen = "") {
     const { contentObjects, guideType } = trail;
     // const embeddedLocations = trail._embedded.location;
     const trailObjects = [];
 
     contentObjects.forEach((item) => {
       const objectId = item.id;
-      let long;
-      let lat;
-      if (item.location) {
-        const { longitude, latitude } = item.location;
-        long = longitude;
-        lat = latitude;
-      }
 
       trailObjects.push({
         id: objectId,
-        location: { longitude: parseFloat(long), latitude: parseFloat(lat) },
+        location: item.location ? { longitude: parseFloat(item.location.longitude), latitude: parseFloat(item.location.latitude) } : null,
         title: item.title,
         imageUrl: item.images[0].medium,
         thumbnailUrl: item.images[0].thumbnail,
