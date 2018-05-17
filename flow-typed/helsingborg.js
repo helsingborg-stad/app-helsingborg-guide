@@ -131,7 +131,7 @@ declare type LinkAndService = { service: string, url: string };
 
 declare type Location = {
   id: number,
-  streetAddress: string,
+  streetAddress: ?string,
   latitude: number,
   longitude: number,
   openingHours: OpenHour[],

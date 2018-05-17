@@ -265,7 +265,7 @@ class MapWithListView extends Component {
         title: item.title,
         imageUrl: item.images[0].medium,
         thumbnailUrl: item.images[0].thumbnail,
-        streetAdress: item.location ? item.location.streetAddress : "",
+        streetAdress: item.location ? item.location.streetAddress : null,
         order: item.order,
         labelDisplayNumber: 0,
         item,
