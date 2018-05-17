@@ -14,7 +14,6 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
       let download: DownloadedGuide = state.downloads[guide.id];
       if (!download) {
         // starting from scratch
-        // TODO zero progress as default
         download = { guide, progress: 0, status: "pending", mediaUrls: getUrlsFromGuide(guide) };
       }
 
