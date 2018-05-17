@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../../styles";
+import { StyleSheetUtils } from "../../../utils";
+import { Colors, TextStyles } from "../../../styles";
 
 export default StyleSheet.create({
   container: {
@@ -11,4 +12,18 @@ export default StyleSheet.create({
     paddingHorizontal: "4%",
     paddingBottom: "1%",
   },
+  cancelResumeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingTop: "4%",
+    paddingBottom: "2%",
+  },
+  buttonText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "500",
+      color: Colors.purple,
+    },
+  ]),
 });
