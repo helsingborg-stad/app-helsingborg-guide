@@ -134,7 +134,11 @@ declare type GuideState = {
   items: Guide[],
 }
 
-declare type Images = { thumbnail: string, medium: string, large: string };
+declare type Images = {
+  thumbnail?: ?string,
+  medium?: ?string,
+  large?: ?string
+};
 
 declare type ResizeMode = 'cover' | 'contain' | 'stretch' | 'repeat' | 'center';
 
@@ -176,7 +180,8 @@ declare type DownloadStatus = "stopped" | "pending" | "paused" | "done";
 declare type DownloadedGuide = {
   guide: Guide,
   status: DownloadStatus,
-  progress: number
+  progress: number,
+  mediaUrls: string[],
 }
 
 declare type DownloadedGuidesState = {

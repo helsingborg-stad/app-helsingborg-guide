@@ -1,3 +1,5 @@
+import { getUrlsFromGuide } from "../utils/UrlUtils";
+
 // @flow
 const defaultState: DownloadedGuidesState = {
   downloads: {},
@@ -13,7 +15,7 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
       if (!download) {
         // starting from scratch
         // TODO zero progress as default
-        download = { guide, progress: 0, status: "pending" };
+        download = { guide, progress: 0, status: "pending", mediaUrls: getUrlsFromGuide(guide) };
       }
 
       // resuming
