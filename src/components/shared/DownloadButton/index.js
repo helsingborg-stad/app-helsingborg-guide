@@ -11,10 +11,13 @@ import LangService from "../../../services/langService";
 import IconTextTouchable from "../IconTextTouchable";
 import { Colors } from "../../../styles";
 import styles from "./styles";
+import { startDownload } from "../../../actions/downloadGuidesActions";
 
 type Props = {
   style?: any,
   progress: number,
+  currentGuide: ?Guide,
+  startDownload(guide: Guide): void,
 }
 
 function renderProgressbar(progress: number) {
@@ -42,11 +45,6 @@ class DownloadButton extends Component<Props> {
     style: {},
   };
 
-  onStartDownload = () => {
-    console.log("START downlaod");
-    // TODO dispatch action
-  };
-
   onCancelDownload = () => {
     console.log("CANCEL dowload");
     // TODO dispatch action
@@ -63,7 +61,7 @@ class DownloadButton extends Component<Props> {
   };
 
   render() {
-    const { style, progress } = this.props;
+    const { style, progress, currentGuide } = this.props;
     return (
       <View style={[styles.container, style]}>
         <View
@@ -72,7 +70,10 @@ class DownloadButton extends Component<Props> {
           <IconTextTouchable
             text={LangService.strings.DOWNLOAD}
             iconName="get-app"
-            onPress={this.onStartDownload}
+            onPress={() => {
+              if (currentGuide) { this.props.startDownload(currentGuide); }
+            }
+            }
           />
         </View>
         {renderProgressbar(progress)}
@@ -81,12 +82,17 @@ class DownloadButton extends Component<Props> {
   }
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state: RootState) {
+  const { currentGuide } = state.uiState;
+  return {
+    currentGuide,
+  };
 }
 
-function mapDispatchToProps() {
-  return {};
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    startDownload: (guide: Guide) => dispatch(startDownload(guide)),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DownloadButton);

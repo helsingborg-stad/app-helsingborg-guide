@@ -11,7 +11,12 @@ declare type Action =
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
   | { type: "FETCH_GUIDES_REQUEST" }
   | { type: "FETCH_GUIDES_SUCCESS", guides: Guide[] }
-  | { type: "FETCH_GUIDES_FAILURE", error: Error };
+  | { type: "FETCH_GUIDES_FAILURE", error: Error }
+  | { type: "START_DOWNLOAD_GUIDE", guide: Guide }
+  | { type: "PAUSE_DOWNLOAD_GUIDE", guide: Guide }
+  | { type: "RESUME_DOWNLOAD_GUIDE", guide: Guide }
+  | { type: "CANCEL_DOWNLOAD_GUIDE", guide: Guide }
+  ;
 
 declare type Coords = {
   speed: number,
@@ -167,6 +172,16 @@ declare type PointProperty = {
 
 declare type PostStatus = 'publish' | 'draft';
 
+declare type DownloadedGuide = {
+  guide: Guide,
+  isDownloading: boolean,
+  progress: number
+}
+
+declare type DownloadedGuidesState = {
+  downloads: { [number]: DownloadedGuide }
+}
+
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 
 declare type UIState = {
@@ -182,5 +197,6 @@ declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
   guides: GuideState,
-  geolocation: GeolocationType
+  geolocation: GeolocationType,
+  downloadedGuides: DownloadedGuidesState,
 }
