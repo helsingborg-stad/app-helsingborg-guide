@@ -29,6 +29,13 @@ exports[`Guide with tagline 1`] = `
         }
       }
     />
+    <DownloadButton
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
     <View
       style={
         Object {
@@ -985,6 +992,13 @@ exports[`Guide with tagline 2`] = `
         Object {
           "aspectRatio": 2,
           "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <DownloadButton
+      style={
+        Object {
           "width": "100%",
         }
       }
@@ -1949,6 +1963,13 @@ exports[`Guide with tagline 3`] = `
         }
       }
     />
+    <DownloadButton
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
     <View
       style={
         Object {
@@ -2905,6 +2926,13 @@ exports[`Guide with tagline 4`] = `
         Object {
           "aspectRatio": 2,
           "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <DownloadButton
+      style={
+        Object {
           "width": "100%",
         }
       }
@@ -3869,6 +3897,13 @@ exports[`Guide with tagline 5`] = `
         }
       }
     />
+    <DownloadButton
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
     <View
       style={
         Object {
@@ -4825,6 +4860,13 @@ exports[`Guide with tagline 6`] = `
         Object {
           "aspectRatio": 2,
           "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <DownloadButton
+      style={
+        Object {
           "width": "100%",
         }
       }
@@ -5789,6 +5831,13 @@ exports[`Guide with tagline 7`] = `
         }
       }
     />
+    <DownloadButton
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
     <View
       style={
         Object {
@@ -6749,6 +6798,13 @@ exports[`Guide without tagline 1`] = `
         }
       }
     />
+    <DownloadButton
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
     <View
       style={
         Object {
@@ -7688,6 +7744,13 @@ exports[`Guide without tagline 2`] = `
         Object {
           "aspectRatio": 2,
           "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <DownloadButton
+      style={
+        Object {
           "width": "100%",
         }
       }
@@ -8635,6 +8698,13 @@ exports[`Guide without tagline 3`] = `
         }
       }
     />
+    <DownloadButton
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
     <View
       style={
         Object {
@@ -9574,6 +9644,13 @@ exports[`Guide without tagline 4`] = `
         Object {
           "aspectRatio": 2,
           "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <DownloadButton
+      style={
+        Object {
           "width": "100%",
         }
       }
@@ -10521,6 +10598,13 @@ exports[`Guide without tagline 5`] = `
         }
       }
     />
+    <DownloadButton
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
     <View
       style={
         Object {
@@ -11464,6 +11548,13 @@ exports[`Guide without tagline 6`] = `
         }
       }
     />
+    <DownloadButton
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
     <View
       style={
         Object {
@@ -12403,6 +12494,13 @@ exports[`Guide without tagline 7`] = `
         Object {
           "aspectRatio": 2,
           "height": "auto",
+          "width": "100%",
+        }
+      }
+    />
+    <DownloadButton
+      style={
+        Object {
           "width": "100%",
         }
       }

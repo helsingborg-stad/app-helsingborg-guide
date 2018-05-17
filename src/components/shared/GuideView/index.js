@@ -18,7 +18,6 @@ import DownloadButton from "../DownloadButton";
 declare type Props = {
   guide: Guide,
   onPressContentObject(obj: ContentObject): void,
-  onStartDownload(): void,
 }
 
 const textMaxHeight = Dimensions.get("window").height * 0.2;
@@ -55,8 +54,6 @@ class GuideView extends Component<Props> {
       <ImageView source={{ uri: guide.images.large }} style={styles.image} />
       <DownloadButton
         style={styles.downloadButton}
-        onStartDownload={this.props.onStartDownload}
-        progress={0.75}
       />
       <View style={styles.textContainer}>
         <Text style={styles.title} numberOfLines={1}>{guide.name}</Text>

@@ -1,11 +1,12 @@
 // @flow
-import React from "react";
+import React, { Component } from "react";
 import {
   Platform,
   ProgressViewIOS,
   ProgressBarAndroid,
   View,
 } from "react-native";
+import { connect } from "react-redux";
 import LangService from "../../../services/langService";
 import IconTextTouchable from "../IconTextTouchable";
 import { Colors } from "../../../styles";
@@ -13,41 +14,79 @@ import styles from "./styles";
 
 type Props = {
   style?: any,
-  onStartDownload(): void,
   progress: number,
 }
 
 function renderProgressbar(progress: number) {
   return (
     <View>
-      {Platform.OS === "ios"
-        ? (
-          <ProgressViewIOS progressTintColor={Colors.lightPink} style={styles.progressView} progress={progress} />
-        )
+      {Platform.OS === "ios" ? (
+        <ProgressViewIOS
+          progressTintColor={Colors.lightPink}
+          style={styles.progressView}
+          progress={progress}
+        />)
         : (
-          <ProgressBarAndroid color={Colors.lightPink} styleAttr="Horizontal" indeterminate={false} progress={progress} />
-        )}
+          <ProgressBarAndroid
+            color={Colors.lightPink}
+            styleAttr="Horizontal"
+            indeterminate={false}
+            progress={progress}
+          />)}
     </View >
   );
 }
 
-const DownloadButton = (props: Props) => (
-  <View style={[styles.container, props.style]}>
-    <View
-      style={styles.textContainer}
-    >
-      <IconTextTouchable
-        text={LangService.strings.DOWNLOAD}
-        iconName="get-app"
-        onPress={props.onStartDownload}
-      />
-    </View>
-    {renderProgressbar(props.progress)}
-  </View>
-);
+class DownloadButton extends Component<Props> {
+  static defaultProps = {
+    style: {},
+  };
 
-DownloadButton.defaultProps = {
-  style: {},
-};
+  onStartDownload = () => {
+    console.log("START downlaod");
+    // TODO dispatch action
+  };
 
-export default DownloadButton;
+  onCancelDownload = () => {
+    console.log("CANCEL dowload");
+    // TODO dispatch action
+  };
+
+  onPauseDownload = () => {
+    console.log("PAUSE download");
+    // TODO dispatch action
+  };
+
+  onResumeDownload = () => {
+    console.log("RESUME download");
+    // TODO dispatch action
+  };
+
+  render() {
+    const { style, progress } = this.props;
+    return (
+      <View style={[styles.container, style]}>
+        <View
+          style={styles.textContainer}
+        >
+          <IconTextTouchable
+            text={LangService.strings.DOWNLOAD}
+            iconName="get-app"
+            onPress={this.onStartDownload}
+          />
+        </View>
+        {renderProgressbar(progress)}
+      </View>
+    );
+  }
+}
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DownloadButton);
