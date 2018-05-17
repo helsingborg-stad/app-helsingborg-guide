@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import { connect } from "react-redux";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import LangService from "../../../services/langService";
 import IconTextTouchable from "../IconTextTouchable";
 import { Colors } from "../../../styles";
@@ -32,6 +33,8 @@ type Props = {
 }
 
 function renderProgressbar(progress: number) {
+  if (progress >= 1) return null;
+
   return (
     <View>
       {Platform.OS === "ios" ? (
@@ -103,12 +106,24 @@ class DownloadButton extends Component<Props> {
     );
   }
 
+  renderDone = () => {
+    console.log("done");
+
+    return (
+      <View style={styles.doneContainer}>
+        <Icon name="check" size={16} color="green" />
+        <Text style={styles.doneText}>{LangService.strings.DOWNLOADED}</Text>
+      </View >
+    );
+  }
 
   render() {
     const { style, status, progress } = this.props;
     return (
       <View style={[styles.container, style]} >
-        {status === "paused" ? this.renderPaused() : this.renderDefault()}
+        {status === "paused" ? this.renderPaused() : null}
+        {status === "pending" || status === "stopped" ? this.renderDefault() : null}
+        {status === "done" ? this.renderDone() : null}
         {renderProgressbar(progress)}
       </View >
     );
