@@ -1,6 +1,6 @@
+// @flow
 import { getUrlsFromGuide } from "../utils/UrlUtils";
 
-// @flow
 const defaultState: DownloadedGuidesState = {
   downloads: {},
 };
@@ -14,7 +14,13 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
       let download: DownloadedGuide = state.downloads[guide.id];
       if (!download) {
         // starting from scratch
-        download = { guide, progress: 0, status: "pending", mediaUrls: getUrlsFromGuide(guide) };
+        download = {
+          downloadIndex: 0,
+          guide,
+          progress: 0,
+          status: "pending",
+          mediaUrls: getUrlsFromGuide(guide),
+        };
       }
 
       // resuming
