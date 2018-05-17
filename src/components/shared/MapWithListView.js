@@ -2,6 +2,9 @@ import React, {
   Component,
 } from "react";
 import {
+  connect,
+} from "react-redux";
+import {
   StyleSheet,
   Dimensions,
   FlatList,
@@ -29,6 +32,9 @@ import {
 import LangService from "../../services/langService";
 import IconTextTouchable from "./IconTextTouchable";
 import ViewPagerAndroidContainer from "../shared/ViewPagerAndroidContainer";
+
+
+import { selectCurrentContentObject } from "../../actions/uiStateActions";
 
 const ios = Platform.OS === "ios";
 
@@ -194,7 +200,7 @@ const styles = StyleSheet.create({
   ]),
 });
 
-export default class MapWithListView extends Component {
+class MapWithListView extends Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
   }
@@ -245,30 +251,32 @@ export default class MapWithListView extends Component {
     return items;
   }
 
-  static createItemsFromTrail(trail, screen = "") {
-    const { subAttractions, contentObjects, contentType } = trail;
-    const embeddedLocations = trail._embedded.location;
+  static createItemsFromTrail(trail: Guide, screen = "") {
+    const { contentObjects, guideType } = trail;
+    // const embeddedLocations = trail._embedded.location;
     const trailObjects = [];
 
-    subAttractions.forEach((item) => {
-      const objectId = item.content[0];
-      const locationId = item.location;
-
-      const contentObject = contentObjects[objectId];
-      const locationObject = embeddedLocations.find(location => location.id === locationId);
-      const { longitude, latitude } = locationObject;
+    contentObjects.forEach((item) => {
+      const objectId = item.id;
+      let long;
+      let lat;
+      if (item.location) {
+        const { longitude, latitude } = item.location;
+        long = longitude;
+        lat = latitude;
+      }
 
       trailObjects.push({
         id: objectId,
-        location: { longitude: parseFloat(longitude), latitude: parseFloat(latitude) },
-        title: contentObject.title,
-        imageUrl: contentObject.image[0].sizes.medium,
-        thumbnailUrl: contentObject.image[0].sizes.thumbnail,
-        streetAdress: locationObject.street_address,
-        order: contentObject.order,
+        location: { longitude: parseFloat(long), latitude: parseFloat(lat) },
+        title: item.title,
+        imageUrl: item.images[0].medium,
+        thumbnailUrl: item.images[0].thumbnail,
+        streetAdress: item.location ? item.location.streetAddress : "",
+        order: item.order,
         labelDisplayNumber: 0,
-        contentObject,
-        imageType: (screen === "OldTrailScreen") ? "OldTrailScreen" : contentType,
+        item,
+        imageType: (screen === "TrailScreen") ? "TrailScreen" : guideType,
       });
     });
 
@@ -406,10 +414,12 @@ export default class MapWithListView extends Component {
       }
       default:
       {
-        const { title } = contentObject;
-        const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
-        AnalyticsUtils.logEvent("view_object", { name: title });
-        navigate("ObjectDetailsScreen", { title, contentObject, id: this.state.guideID, stopAudioOnUnmount });
+        const { item } = listItem;
+        // const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
+        this.props.dispatchSelectContentObject(item);
+
+        AnalyticsUtils.logEvent("view_object", { name: item.title });
+        navigate("ObjectScreen", { title: item.title, currentGuide: this.props.currentGuide });
       }
     }
   }
@@ -439,7 +449,7 @@ export default class MapWithListView extends Component {
 
     if (imageType === "trail" || contentType === "trail") {
       image = (activeMarker.id === trailObject.id) ? trailMarkerActive : trailMarkerInactive;
-    } else if (imageType === "OldTrailScreen") {
+    } else if (imageType === "TrailScreen") {
       image = (activeMarker.id === trailObject.id) ? numberedMarkerActive : numberedMarkerInactive;
     } else {
       image = (activeMarker.id === trailObject.id) ? locationMarkerActive : locationMarkerInactive;
@@ -504,7 +514,7 @@ export default class MapWithListView extends Component {
   renderMapMarkers() {
     const { items } = this.props;
     return items.map((trailObject) => {
-      if (trailObject.imageType === "OldTrailScreen") {
+      if (trailObject.imageType === "TrailScreen") {
         return this.numberedMapViewMarker(trailObject);
       }
       return this.defaultMapViewMarker(trailObject);
@@ -542,8 +552,8 @@ export default class MapWithListView extends Component {
   }
 
   displayNumberView = (item) => {
-    const OldTrailScreen = item.imageType === "OldTrailScreen";
-    if (!OldTrailScreen) return null;
+    const TrailScreen = item.imageType === "TrailScreen";
+    if (!TrailScreen) return null;
 
     const numberString = item.labelDisplayNumber;
     const numberView = (
@@ -557,7 +567,7 @@ export default class MapWithListView extends Component {
 
   renderListItem = (item, listItemStyle) => {
     const { thumbnailUrl, streetAdress, title } = item;
-    const OldTrailScreen = item.imageType === "OldTrailScreen";
+    const TrailScreen = item.imageType === "TrailScreen";
     const titleLineCount = (screenHeight > 600 && PixelRatio.getFontScale() === 1 ? 2 : 1);
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
@@ -567,14 +577,14 @@ export default class MapWithListView extends Component {
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={titleLineCount}>{title}</Text>
             <Text style={styles.listItemAddress} numberOfLines={1}>{streetAdress}</Text>
-            {!OldTrailScreen
+            {!TrailScreen
               ? null
               : <IconTextTouchable
                 iconName="directions"
                 text={LangService.strings.DIRECTIONS}
                 onPress={() => this.onListItemDirectionsButtonPressed(item)}
               />}
-            {this.displayGuideNumber(item.contentObject.numberOfGuides, item.contentType)}
+            {/* this.displayGuideNumber(item.contentObject.numberOfGuides, item.contentType) */}
           </View>
         </View>
       </TouchableOpacity>
@@ -656,3 +666,19 @@ export default class MapWithListView extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { currentGuide } = state.uiState;
+
+  return {
+    currentGuide,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchSelectContentObject: contentObject => dispatch(selectCurrentContentObject(contentObject)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapWithListView);

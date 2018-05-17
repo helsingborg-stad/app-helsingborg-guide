@@ -24,10 +24,8 @@ class LocationScreen extends Component<Props> {
     const { navigate } = this.props.navigation;
     AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
     if (guide.guideType === "trail") {
-      navigate("TrailScreen", {
-        title: guide.name,
-        trail: guide,
-      });
+      this.props.selectCurrentGuide(guide);
+      navigate("TrailScreen");
     } else if (guide.guideType === "guide") {
       this.props.selectCurrentGuide(guide);
       navigate("GuideDetailsScreen");

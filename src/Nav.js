@@ -13,7 +13,6 @@ import {
   ImageScreen,
   LocationScreen,
   ObjectScreen,
-  ObjectDetailsScreen,
   SearchObjectScreen,
   SettingsScreen,
   SplashScreen,
@@ -36,8 +35,7 @@ const GuideNavigator = StackNavigator(
     OldTrailScreen: { screen: OldTrailScreen },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
-    ObjectDetailsScreen: { screen: ObjectDetailsScreen }, /* old */
-    ObjectScreen: { screen: ObjectScreen }, /* new */
+    ObjectScreen: { screen: ObjectScreen },
     GuideDetailsScreen: { screen: GuideScreen },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },

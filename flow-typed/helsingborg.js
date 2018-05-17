@@ -54,7 +54,6 @@ declare type PositionLongLat = {
 declare type Beacon = {
   id: string,
   nid: string,
-  position?: PositionLongLat,
   distance?: number
 }
 
@@ -77,7 +76,8 @@ declare type ContentObject = {
   audio?: MediaContent,
   video?: MediaContent,
   links?: Link[],
-  beacon?: Beacon;
+  beacon?: Beacon,
+  location?: Location
 }
 
 declare type Guide = {

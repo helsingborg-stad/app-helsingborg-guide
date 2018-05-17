@@ -13,6 +13,14 @@ export function selectCurrentGuide(guide: Guide): Action {
   return { type: "SELECT_CURRENT_GUIDE", guide };
 }
 
+export function selectCurrentGuideByID(guideID: number): ThunkAction {
+  return (dispatch: Dispatch, getState: GetState) => {
+    const guide: Guide = Object.assign({}, getState().guides.items.find(item => item.id === guideID));
+    const action: Action = { type: "SELECT_CURRENT_GUIDE", guide };
+    dispatch(action);
+  };
+}
+
 export function selectCurrentContentObject(contentObject: ContentObject): Action {
   return { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject };
 }
