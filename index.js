@@ -71,9 +71,6 @@ export default class GuideHbg extends Component {
 
   static loadExistingDownloads() {
     // TODO implement
-    const state = persistor.getState();
-    console.log("loadExistingDownloads: ", state);
-
     /*
     getStoredState({ storage: AsyncStorage }, (err, state) => {
       if (state && state.downloads && state.downloads.length) {
