@@ -13,10 +13,10 @@ import {
   ImageScreen,
   LocationScreen,
   ObjectScreen,
-  ObjectDetailsScreen,
   SearchObjectScreen,
   SettingsScreen,
   SplashScreen,
+  OldTrailScreen,
   TrailScreen,
   VideoScreen,
   WebScreen,
@@ -32,10 +32,10 @@ import AnalyticsUtils from "./utils/AnalyticsUtils";
 const GuideNavigator = StackNavigator(
   {
     GuideListScreen: { screen: GuideListScreen },
+    OldTrailScreen: { screen: OldTrailScreen },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
-    ObjectDetailsScreen: { screen: ObjectDetailsScreen }, /* old */
-    ObjectScreen: { screen: ObjectScreen }, /* new */
+    ObjectScreen: { screen: ObjectScreen },
     GuideDetailsScreen: { screen: GuideScreen },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
