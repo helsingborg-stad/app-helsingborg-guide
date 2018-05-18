@@ -1,4 +1,3 @@
-// @flow
 import oldGuideGroups from "./oldGuideGroupReducer";
 import guideGroups from "./guideGroupReducer";
 import guides from "./guideReducer";
@@ -13,7 +12,7 @@ import geolocation from "./geolocationReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
 import uiState from "./uiStateReducer";
 
-const rootReducer: RootState = {
+const rootReducer = {
   oldGuideGroups,
   guideGroups,
   guides,

@@ -166,13 +166,6 @@ declare type PointProperty = {
 
 declare type PostStatus = 'publish' | 'draft';
 
-declare type RootState = {
-  uiState: UIState,
-  guideGroups: GuideGroupState,
-  guides: GuideState,
-  geolocation: GeolocationType
-}
-
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 
 declare type UIState = {
@@ -181,4 +174,11 @@ declare type UIState = {
   currentContentObject: ?ContentObject,
   currentContentObjectImageIndex: number,
   currentGuide: ?Guide
+}
+
+declare type RootState = {
+  uiState: UIState,
+  guideGroups: GuideGroupState,
+  guides: GuideState,
+  geolocation: GeolocationType
 }

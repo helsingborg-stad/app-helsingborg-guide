@@ -1,13 +1,11 @@
-// @flow
 import { AsyncStorage } from "react-native";
 import { createStore, applyMiddleware, compose } from "redux";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import thunk from "redux-thunk";
 import { persistStore, persistCombineReducers } from "redux-persist";
-import type { PersistConfig } from "redux-persist/lib/types";
 import reducers from "../reducers";
 
-const config: PersistConfig = {
+const config = {
   key: "hbgRoot",
   storage: AsyncStorage,
   blacklist: ["error", "menu", "internet", "audio", "uiState"],
