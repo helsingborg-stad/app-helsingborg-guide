@@ -43,5 +43,4 @@ const TrailView = (props: Props) => (
   </View>
 );
 
-
 export default TrailView;

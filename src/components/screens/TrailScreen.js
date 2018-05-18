@@ -23,15 +23,15 @@ type State = {
 /** Temporary until landing page is fixed and we don't use MapWithListView with old data anymore */
 function createItemsFromCurrentTrail(currentTrail: Guide) {
   const { contentObjects } = currentTrail;
-
   const trailObjects = [];
 
   contentObjects.forEach((item) => {
+    const { location } = item;
     const objectId = item.id;
 
     trailObjects.push({
       id: objectId,
-      location: item.location ? { longitude: parseFloat(item.location.longitude), latitude: parseFloat(item.location.latitude) } : null,
+      location: location ? { longitude: parseFloat(location.longitude), latitude: parseFloat(location.latitude) } : null,
       title: item.title,
       imageUrl: item.images[0].medium,
       thumbnailUrl: item.images[0].thumbnail,
@@ -39,7 +39,7 @@ function createItemsFromCurrentTrail(currentTrail: Guide) {
       order: item.order,
       labelDisplayNumber: 0,
       item,
-      imageType: "TrailScreen", // TODO: WTF is this?
+      imageType: "TrailScreen", // TODO: What is this nonsense?
     });
   });
 
