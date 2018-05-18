@@ -18,9 +18,15 @@ const config: PersistConfig = {
 const reducer = persistCombineReducers(config, reducers);
 
 const middlewares = [
-  reduxImmutableStateInvariant(), // TODO only in DEBUG
   thunk,
 ];
+
+if (__DEV__) {
+  // Middlewares used only in debug
+  middlewares.push(
+    reduxImmutableStateInvariant(),
+  );
+}
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
