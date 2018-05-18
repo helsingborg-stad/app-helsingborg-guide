@@ -24,6 +24,11 @@ declare type Coords = {
 
 declare type Dispatch = (action: Action | ThunkAction) => any;
 
+declare type Store = {
+  dispatch: Store,
+  getState: GetState
+}
+
 /* in lack of a better name. Geolocation was taken */
 declare type GeolocationType = {
   timestamp: number,

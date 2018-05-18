@@ -15,10 +15,13 @@ import { fetchGuideGroups } from "src/actions/guideGroupActions";
 import { fetchGuides } from "src/actions/guideActions";
 import { fetchNavigation } from "src/actions/navigationActions";
 import LocationService from "src/services/locationService";
-
-console.log("index START");
+import DownloadTasksManager from "src/services/DownloadTasksManager";
 
 const { store, persistor } = configureStore();
+
+// TODO decouple these store reference hacks
+LocationService.getInstance().store = store;
+DownloadTasksManager.store = store;
 
 export default class GuideHbg extends Component {
   static openInternetSettings() {

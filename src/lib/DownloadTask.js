@@ -1,6 +1,5 @@
 import * as _ from "lodash";
 import fetchService from "../services/FetchService";
-import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 import LangService from "../services/langService";
 import { errorHappened } from "../actions/errorActions";
@@ -16,11 +15,12 @@ export default class DownloadTask {
   startedAt;
   title;
   avatar;
+  store;
 
   // reference to be used in sequence fetch and resume fetch.
   i;
 
-  constructor(data) {
+  constructor(data, store) {
     this.id = data.id;
     this.i = data.currentPos || 0;
     this.isCanceled = data.isCanceled || false;
@@ -31,6 +31,7 @@ export default class DownloadTask {
     this.completedUrls = data.currentPos ? _.slice(data.urls, 0, data.currentPos) : [];
     this.fileDownloadTasks = [];
     this.closedInfo = false;
+    this.store = store;
   }
 
   fetchUrlsSeq() {
@@ -52,10 +53,10 @@ export default class DownloadTask {
           this.fileDownloadTasks.push(mTask);
 
           if (this.isCompleted()) {
-            store.dispatch(dActions.taskCompleted(this.getMeta()));
+            this.store.dispatch(dActions.taskCompleted(this.getMeta()));
           } else {
             // debugger;
-            store.dispatch(dActions.taskProgressed(this.getMeta()));
+            this.store.dispatch(dActions.taskProgressed(this.getMeta()));
             // sequence call
             this.i += 1;
             this._fetchUrl(this.urls[this.i]);
@@ -64,7 +65,7 @@ export default class DownloadTask {
       })
       .catch(() => {
         this.setIsCanceled(true);
-        store.dispatch(dActions.cancelTaskSuccess(this.getMeta()));
+        this.store.dispatch(dActions.cancelTaskSuccess(this.getMeta()));
       });
   }
 
@@ -99,13 +100,13 @@ export default class DownloadTask {
     this.cancelTask();
     fetchService.clearSessionCache(`${this.id}`).then(() => {
       this.clearCompletedUrls();
-      store.dispatch(dActions.clearCacheTaskSuccess(this.getMeta()));
-    }).catch(error => store.dispatch(errorHappened(error)));
+      this.store.dispatch(dActions.clearCacheTaskSuccess(this.getMeta()));
+    }).catch(error => this.store.dispatch(errorHappened(error)));
   }
 
   cancelTask() {
     this.isCanceled = true;
-    store.dispatch(dActions.cancelTaskSuccess(this.getMeta()));
+    this.store.dispatch(dActions.cancelTaskSuccess(this.getMeta()));
     _.forEach(this.fileDownloadTasks, (mTask) => {
       //  debugger;
       if (mTask) {
@@ -118,13 +119,13 @@ export default class DownloadTask {
 
   closeInfo() {
     this.closedInfo = true;
-    store.dispatch(dActions.closedInfo(this.getMeta()));
+    this.store.dispatch(dActions.closedInfo(this.getMeta()));
   }
 
   resumeTask() {
     if (this.isCanceled) {
       this.setIsCanceled(false);
-      store.dispatch(dActions.resumeTaskSuccess(this.getMeta()));
+      this.store.dispatch(dActions.resumeTaskSuccess(this.getMeta()));
       this._fetchUrl(this.urls[this.i]);
     }
   }
