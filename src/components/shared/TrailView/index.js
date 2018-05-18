@@ -1,16 +1,18 @@
 // @flow
 
 import React from "react";
-import { TouchableWithoutFeedback } from "react-native";
+import { TouchableWithoutFeedback, View } from "react-native";
+
 import styles from "./style";
-
+import MapWithListView from "../../shared/MapWithListView";
 import MapInformationOverlay from "../../shared/MapInformationOverlay";
-
 
 type Props = {
   trail: Guide,
   showInfoOverlay: boolean,
+  trailItems: Object[],
   onToggleInfoOverlay: () => (void),
+  navigation: Object,
 }
 
 function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => (void)) {
@@ -28,9 +30,17 @@ function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => (v
   );
 }
 
-
 const TrailView = (props: Props) => (
-  props.showInfoOverlay ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay) : null
+  <View style={styles.container}>
+    <MapWithListView
+      items={props.trailItems}
+      initialLocation={props.trailItems[0].location}
+      navigation={props.navigation}
+      stopAudioOnUnmount
+      id={props.trail.id}
+    />
+    {props.showInfoOverlay ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay) : null}
+  </View>
 );
 
 
