@@ -26,14 +26,6 @@ const closeButtonSize = 26;
 const scrollViewMaxHeight = screenHeight - 350; // magic number here, but roughly (listitem + header + margins)
 
 const styles = StyleSheet.create({
-  overlayStyle: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    left: 0,
-    bottom: 0,
-    backgroundColor: Colors.transparent,
-  },
   container: {
     position: "absolute",
     width: screenWidth - (defaultMargin * 2),

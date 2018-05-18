@@ -1,25 +1,27 @@
 // @flow
 
 import React from "react";
-import { TouchableWithoutFeedback, View } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 import styles from "./style";
 
 import MapInformationOverlay from "../../shared/MapInformationOverlay";
 
 
 type Props = {
-  trailInformation: Object,
+  trail: Guide,
   showInfoOverlay: boolean,
   onToggleInfoOverlay: () => (void),
 }
 
-function renderMapInformationOverlay(trailInformation: Object, onToggleInfoOverlay: () => (void)) {
+function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => (void)) {
+  if (!trail) { return null; }
+
   return (
     <TouchableWithoutFeedback
       onPress={onToggleInfoOverlay}
     >
       <MapInformationOverlay
-        trailInformation={trailInformation}
+        trailInformation={{ title: trail.name, description: trail.description }}
         onPressFunction={onToggleInfoOverlay}
       />
     </TouchableWithoutFeedback>
@@ -28,7 +30,7 @@ function renderMapInformationOverlay(trailInformation: Object, onToggleInfoOverl
 
 
 const TrailView = (props: Props) => (
-  props.showInfoOverlay ? renderMapInformationOverlay(props.trailInformation, props.onToggleInfoOverlay) : null
+  props.showInfoOverlay ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay) : null
 );
 
 

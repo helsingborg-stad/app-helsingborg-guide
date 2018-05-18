@@ -19,7 +19,6 @@ import styles from "../shared/TrailView/style";
 type Props = {
   currentGuide: Guide,
   trailObjects: Object[],
-  trailInformation: Object,
   navigation: Object,
 }
 
@@ -40,11 +39,6 @@ class TrailScreen extends Component<Props, State> {
     };
   };
 
-  static trailInformation(trail: ?Guide) {
-    if (trail) { return { title: trail.name, description: trail.description }; }
-    return {};
-  }
-
   constructor(props) {
     super(props);
 
@@ -59,7 +53,6 @@ class TrailScreen extends Component<Props, State> {
 
 
   toggleInfoOverlay = () => {
-    console.log("TOGGLE IT BABY!");
     this.setState({ showInfoOverlay: !this.state.showInfoOverlay });
   }
 
@@ -80,7 +73,7 @@ class TrailScreen extends Component<Props, State> {
           id={this.props.currentGuide.id}
         />
         <TrailView
-          trailInformation={this.props.trailInformation}
+          trail={this.props.currentGuide}
           showInfoOverlay={this.state.showInfoOverlay}
           onToggleInfoOverlay={this.toggleInfoOverlay}
         />
@@ -94,9 +87,7 @@ class TrailScreen extends Component<Props, State> {
 function mapStateToProps(state: RootState) {
   const { currentGuide } = state.uiState;
   const trailObjects = currentGuide ? MapWithListView.createItemsFromTrail(currentGuide, "TrailScreen") : [];
-  const trailInformation = TrailScreen.trailInformation(currentGuide);
-
-  return { currentGuide, trailObjects, trailInformation };
+  return { currentGuide, trailObjects };
 }
 
 export default connect(mapStateToProps)(TrailScreen);
