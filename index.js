@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import { getStoredState } from "redux-persist";
-import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage, Platform, Linking } from "react-native";
+import { PersistGate } from "redux-persist/integration/react";
+import { AppRegistry, Alert, NetInfo, UIManager, Platform, Linking } from "react-native";
 import Nav from "src/Nav";
-import store from "src/store/configureStore";
+import configureStore from "src/store/configureStore";
 import { loadSubLocations } from "src/actions/subLoactionActions";
 import internetChanged from "src/actions/internetActions";
 import LangService from "src/services/langService";
 import Opener from "src/services/SettingsService";
 import { errorHappened } from "src/actions/errorActions";
-import downloadManager from "src/services/DownloadTasksManager";
 import FullScreenVideoScreen from "src/components/screens/FullScreenVideoScreen";
 import { loadOldGuideGroups } from "src/actions/oldGuideGroupActions";
 import { fetchGuideGroups } from "src/actions/guideGroupActions";
 import { fetchGuides } from "src/actions/guideActions";
 import { fetchNavigation } from "src/actions/navigationActions";
 import LocationService from "src/services/locationService";
+
+console.log("index START");
+
+const { store, persistor } = configureStore();
 
 export default class GuideHbg extends Component {
   static openInternetSettings() {
@@ -64,11 +67,17 @@ export default class GuideHbg extends Component {
   }
 
   static loadExistingDownloads() {
+    // TODO implement
+    const state = persistor.getState();
+    console.log("loadExistingDownloads: ", state);
+
+    /*
     getStoredState({ storage: AsyncStorage }, (err, state) => {
       if (state && state.downloads && state.downloads.length) {
         downloadManager.loadExistingTasks(state.downloads);
       }
     });
+    */
   }
 
   constructor() {
@@ -125,7 +134,9 @@ export default class GuideHbg extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Nav />
+        <PersistGate persistor={persistor}>
+          <Nav />
+        </PersistGate>
       </Provider>
     );
   }

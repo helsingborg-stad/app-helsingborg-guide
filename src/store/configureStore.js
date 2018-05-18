@@ -1,68 +1,43 @@
+// @flow
 import { AsyncStorage } from "react-native";
-import { createStore, compose, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import thunk from "redux-thunk";
-import { autoRehydrate, persistStore } from "redux-persist";
-import rootReducer from "../reducers/index";
+import { persistStore, persistCombineReducers } from "redux-persist";
+import type { PersistConfig } from "redux-persist/lib/types";
+import reducers from "../reducers";
 
+const config: PersistConfig = {
+  key: "hbgRoot",
+  storage: AsyncStorage,
+  blacklist: ["error", "menu", "internet", "audio", "uiState"],
+  version: 1,
+  debug: __DEV__,
+};
 
-function configureStoreProd(initialState) {
-  const middlewares = [
-    // Add other middleware on this line...
+const reducer = persistCombineReducers(config, reducers);
 
-    // thunk middleware can also accept an extra argument to be passed to each thunk action
-    // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
-    thunk,
-  ];
+const middlewares = [
+  reduxImmutableStateInvariant(), // TODO only in DEBUG
+  thunk,
+];
 
-  return createStore(rootReducer, initialState, compose(
-    applyMiddleware(...middlewares),
-    autoRehydrate(),
-  ),
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
+const composeEnhancers = compose;
+
+export default function configureStore() {
+  const store = createStore(
+    reducer,
+    composeEnhancers(
+      applyMiddleware(
+        ...middlewares,
+      ),
+    ),
   );
+  const persistor = persistStore(store);
+
+  return {
+    store,
+    persistor,
+  };
 }
-
-function configureStoreDev(initialState) {
-  const middlewares = [
-    // Add other middleware on this line...
-
-    // Redux middleware that spits an error on you when you try to mutate your state either inside a dispatch or between dispatches.
-    reduxImmutableStateInvariant(),
-
-    // thunk middleware can also accept an extra argument to be passed to each thunk action
-    // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
-    thunk,
-  ];
-
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
-  const store = createStore(rootReducer, initialState, composeEnhancers(
-    applyMiddleware(...middlewares),
-    autoRehydrate(),
-  ),
-  );
-
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept("../reducers", () => {
-      const nextReducer = require("../reducers").default; // eslint-disable-line global-require
-      store.replaceReducer(nextReducer);
-    });
-  }
-
-  return store;
-}
-
-const configureStore = process.env.NODE_ENV === "production" ? configureStoreProd : configureStoreDev;
-
-const store = configureStore();
-
-
-// begin periodically persisting the store
-persistStore(store,
-  {
-    storage: AsyncStorage,
-    blacklist: ["error", "menu", "internet", "audio", "uiState"],
-  },
-);
-
-export default store;
