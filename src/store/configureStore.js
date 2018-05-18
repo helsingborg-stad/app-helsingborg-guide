@@ -22,8 +22,7 @@ const middlewares = [
   thunk,
 ];
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
-const composeEnhancers = compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default function configureStore() {
   const store = createStore(
