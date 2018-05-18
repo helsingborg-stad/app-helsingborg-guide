@@ -32,9 +32,9 @@
     "react-native-video": "2.0.0",
     "react-navigation": "1.5.8",
     "react-redux": "5.0.7",
-    "redux": "3.6.0",
+    "redux": "4.0.0",
     "redux-immutable-state-invariant": "2.1.0",
-    "redux-persist": "4.6.0",
+    "redux-persist": "5.9.1",
     "redux-thunk": "2.2.0"
   },
   "devDependencies": {
