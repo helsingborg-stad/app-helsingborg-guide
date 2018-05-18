@@ -24,6 +24,11 @@ declare type Coords = {
 
 declare type Dispatch = (action: Action | ThunkAction) => any;
 
+declare type Store = {
+  dispatch: Store,
+  getState: GetState
+}
+
 /* in lack of a better name. Geolocation was taken */
 declare type GeolocationType = {
   timestamp: number,
@@ -161,13 +166,6 @@ declare type PointProperty = {
 
 declare type PostStatus = 'publish' | 'draft';
 
-declare type RootState = {
-  uiState: UIState,
-  guideGroups: GuideGroupState,
-  guides: GuideState,
-  geolocation: GeolocationType
-}
-
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 
 declare type UIState = {
@@ -176,4 +174,11 @@ declare type UIState = {
   currentContentObject: ?ContentObject,
   currentContentObjectImageIndex: number,
   currentGuide: ?Guide
+}
+
+declare type RootState = {
+  uiState: UIState,
+  guideGroups: GuideGroupState,
+  guides: GuideState,
+  geolocation: GeolocationType
 }
