@@ -1,3 +1,5 @@
+// @flow
+
 import React, {
   Component,
 } from "react";
@@ -200,6 +202,7 @@ const styles = StyleSheet.create({
   ]),
 });
 
+
 class MapWithListView extends Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
@@ -250,7 +253,7 @@ class MapWithListView extends Component {
 
     return items;
   }
-
+  /** Phase out */
   static createItemsFromTrail(trail, screen = "") {
     const { contentObjects, guideType } = trail;
     // const embeddedLocations = trail._embedded.location;

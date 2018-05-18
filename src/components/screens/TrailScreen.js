@@ -18,12 +18,47 @@ import styles from "../shared/TrailView/style";
 
 type Props = {
   currentGuide: Guide,
-  trailObjects: Object[],
   navigation: Object,
 }
 
 type State = {
   showInfoOverlay: boolean,
+}
+
+
+function createItemsFromCurrentTrail(currentTrail: Guide) {
+  const { contentObjects } = currentTrail;
+  // const embeddedLocations = trail._embedded.location;
+  const trailObjects = [];
+
+  contentObjects.forEach((item) => {
+    const objectId = item.id;
+
+    trailObjects.push({
+      id: objectId,
+      location: item.location ? { longitude: parseFloat(item.location.longitude), latitude: parseFloat(item.location.latitude) } : null,
+      title: item.title,
+      imageUrl: item.images[0].medium,
+      thumbnailUrl: item.images[0].thumbnail,
+      streetAdress: item.location ? item.location.streetAddress : null,
+      order: item.order,
+      labelDisplayNumber: 0,
+      item,
+      imageType: "TrailScreen", // TODO: WTF is this?
+    });
+  });
+
+  trailObjects.sort((a, b) => parseFloat(a.order) - parseFloat(b.order));
+
+  // ALB: labelDisplayNumber is set to index value, as it's the easiest way to pass the information. This replaces using trailObject.order as label, as we can't trust the backend.
+  // BP: Can we now?
+  let index = 1;
+  trailObjects.forEach((item) => {
+    item.labelDisplayNumber = index;
+    index += 1;
+  });
+
+  return trailObjects;
 }
 
 class TrailScreen extends Component<Props, State> {
@@ -57,17 +92,16 @@ class TrailScreen extends Component<Props, State> {
   }
 
   render() {
-    const { navigation, trailObjects } = this.props;
-    const trailItem = trailObjects[0];
+    const { navigation } = this.props;
+    const trailItems = createItemsFromCurrentTrail(this.props.currentGuide);
 
-    if (!trailItem) { return null; }
+    if (trailItems.length <= 0) { return null; }
 
     return (
       <View style={styles.container}>
         <MapWithListView
-
-          items={trailObjects}
-          initialLocation={trailItem.location}
+          items={trailItems}
+          initialLocation={trailItems[0].location}
           navigation={navigation}
           stopAudioOnUnmount
           id={this.props.currentGuide.id}
@@ -86,8 +120,7 @@ class TrailScreen extends Component<Props, State> {
 
 function mapStateToProps(state: RootState) {
   const { currentGuide } = state.uiState;
-  const trailObjects = currentGuide ? MapWithListView.createItemsFromTrail(currentGuide, "TrailScreen") : [];
-  return { currentGuide, trailObjects };
+  return { currentGuide };
 }
 
 export default connect(mapStateToProps)(TrailScreen);
