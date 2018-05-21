@@ -5,16 +5,15 @@ import { View, ScrollView, Text } from "react-native";
 import styles from "./style";
 
 type Props = {
-
+  version: string
 }
 
 const DebugView = (props: Props) => (
   <View style={styles.viewContainer} >
-    <ScrollView style={styles.scrollView}>
-      <Text>DebugView</Text>
+    <ScrollView>
+      <Text>{props.version}</Text>
     </ScrollView>
   </View>
 );
-
 
 export default DebugView;

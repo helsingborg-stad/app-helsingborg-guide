@@ -3,10 +3,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import DebugView from "../shared/DebugView";
-// import { AnalyticsUtils } from "../../utils/";
 
 type Props = {
-  whatevs: Object,
+  version: string,
 }
 
 class DebugScreen extends Component<Props> {
@@ -17,17 +16,17 @@ class DebugScreen extends Component<Props> {
 
 
   render() {
-    const { whatevs } = this.props;
-    return (<DebugView />);
+    const { version } = this.props;
+    return (<DebugView version={version} />);
   }
 }
 
 
 function mapStateToProps(state: RootState) {
-  const { whatevs } = state;
+  const { version } = state.uiState;
 
   return {
-    whatevs,
+    version,
   };
 }
 

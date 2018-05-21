@@ -10,6 +10,4 @@ export default StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: Colors.white,
   },
-  scrollView: {},
-
 });
