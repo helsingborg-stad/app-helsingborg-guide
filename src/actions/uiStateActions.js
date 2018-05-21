@@ -28,3 +28,7 @@ export function selectCurrentContentObject(contentObject: ContentObject): Action
 export function selectCurrentContentObjectImage(swiperIndex: number): Action {
   return { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex };
 }
+
+export function setDeveloperMode(enabled: boolean): Action {
+  return { type: "SET_DEVELOPER_MODE", enabled };
+}

@@ -10,6 +10,7 @@ import {
   Image,
   View,
   Linking,
+  TouchableWithoutFeedback,
 } from "react-native";
 import PropTypes from "prop-types";
 import {
@@ -28,6 +29,7 @@ import {
 import * as oldGuideGroupActions from "../../actions/oldGuideGroupActions";
 import * as navigationActions from "../../actions/navigationActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
+import { setDeveloperMode } from "../../actions/uiStateActions";
 
 const defaultMargin = 20;
 const helsingborgIcon = require("../../images/HBG.png");
@@ -64,6 +66,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     tintColor: Colors.black,
+    margin: defaultMargin,
+  },
+  debugIcon: {
+    tintColor: Colors.purple,
     margin: defaultMargin,
   },
   contactUsContainer: {
@@ -133,6 +139,7 @@ class SettingsScreen extends Component {
     oldGuideGroupActions: PropTypes.object.isRequired,
     navigationActions: PropTypes.object.isRequired,
     subLocationActions: PropTypes.object.isRequired,
+    dispatchSetDeveloperMode: PropTypes.func.isRequired,
   }
 
 
@@ -158,9 +165,12 @@ class SettingsScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.updateDeveloperMode = this.updateDeveloperMode.bind(this);
+
     this.state = {
       selectedLanguageCode: LangService.code,
       languages: LangService.languageObj,
+      debugStatus: 0,
     };
   }
 
@@ -204,6 +214,12 @@ class SettingsScreen extends Component {
     navigate("DownloadsScreen");
   };
 
+  navigateToDebugScreen = () => {
+    const { navigate } = this.props.navigation;
+    navigate("DebugScreen");
+  };
+
+
   displayLanguageSegment() {
     const { languages } = this.state;
     if (!languages || !Object.keys(languages).length) {
@@ -244,6 +260,24 @@ class SettingsScreen extends Component {
     });
   }
 
+  displayDeveloperMenuButton() {
+    return (
+      <View>
+        <View style={styles.divider} />
+        <TouchableOpacity onPress={this.navigateToDebugScreen}>
+          <Text style={textStyles.linkText}>Developer Info</Text>
+        </TouchableOpacity>
+      </View>);
+  }
+
+  updateDeveloperMode() {
+    this.setState({ debugStatus: this.state.debugStatus + 1 });
+    if (this.state.debugStatus >= 10) {
+      this.setState({ debugStatus: 0 });
+      this.props.dispatchSetDeveloperMode(!this.props.developerMode);
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -255,12 +289,24 @@ class SettingsScreen extends Component {
         <TouchableOpacity onPress={this.navigateToDownloadsScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.OFFLINE_CONTENT}</Text>
         </TouchableOpacity>
+
+        {this.props.developerMode ? this.displayDeveloperMenuButton() : null}
         <View style={styles.divider} />
         <View style={styles.contactUsContainer}>
-          <Image source={helsingborgIcon} style={styles.icon} />
+          <TouchableWithoutFeedback onPress={this.updateDeveloperMode}>
+            <Image source={helsingborgIcon} style={this.props.developerMode ? styles.debugIcon : styles.icon} />
+          </TouchableWithoutFeedback>
           <View style={styles.contactTextContainer}>
-            <Text onPress={() => Linking.openURL(`mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${LangService.strings.CONTACT_MAIL_SUBJECT}`)} style={textStyles.contactEmailText}>{LangService.strings.CONTACT_MAIL_ADRESS}</Text>
-            <Text onPress={() => Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)} style={textStyles.contactPhoneText}>{LangService.strings.CONTACT_PHONE_DISPLAY}</Text>
+            <Text
+              onPress={() =>
+                Linking.openURL(`mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${LangService.strings.CONTACT_MAIL_SUBJECT}`)}
+              style={textStyles.contactEmailText}
+            >{LangService.strings.CONTACT_MAIL_ADRESS}</Text>
+            <Text
+              onPress={() =>
+                Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)}
+              style={textStyles.contactPhoneText}
+            >{LangService.strings.CONTACT_PHONE_DISPLAY}</Text>
           </View>
         </View>
       </View>
@@ -269,8 +315,11 @@ class SettingsScreen extends Component {
 }
 
 // store config
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const { developerMode } = state.uiState;
+  return {
+    developerMode,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -278,6 +327,7 @@ function mapDispatchToProps(dispatch) {
     oldGuideGroupActions: bindActionCreators(oldGuideGroupActions, dispatch),
     navigationActions: bindActionCreators(navigationActions, dispatch),
     subLocationActions: bindActionCreators(subLocationActions, dispatch),
+    dispatchSetDeveloperMode: enabled => dispatch(setDeveloperMode(enabled)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);
