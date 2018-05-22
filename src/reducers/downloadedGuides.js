@@ -56,7 +56,6 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
           progress: 0,
           status: "pending",
           downloadTasks,
-          nextIndex: 0,
         };
       }
 
