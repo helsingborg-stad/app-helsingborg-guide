@@ -5,18 +5,41 @@ const defaultState: DownloadedGuidesState = {
   offlineGuides: {},
 };
 
+function getProgress(tasks: { [string]: DownloadTask }): number {
+  // $FlowFixMe flow doesn't understand Object.values()
+  const values: DownloadTask[] = Object.values(tasks);
+  const totalCount = values.length;
+
+  if (totalCount === 0) return 1;
+
+  const totalDone: number = values.reduce((count, task) => {
+    if (task.status === "done") {
+      return count + 1;
+    }
+    return count;
+  }, 0);
+
+  return totalDone / totalCount;
+}
+
 function updateDownloadTaskStatus(offlineGuide: OfflineGuide, url: string, status: TaskStatus): OfflineGuide {
   const nextGuide = { ...offlineGuide };
 
   const nextTasks = { ...offlineGuide.downloadTasks };
   nextTasks[url] = { ...nextTasks[url], status };
 
+  const progress = getProgress(nextTasks);
+  nextGuide.progress = progress;
+  if (progress === 1) {
+    nextGuide.status = "done";
+  }
+
   nextGuide.downloadTasks = nextTasks;
 
   return nextGuide;
 }
 
-function updateTaskStatus(state: DownloadedGuidesState, task: DownloadTask, status: TaskStatus): DownloadedGuidesState {
+function updateTaskStatusAndProgress(state: DownloadedGuidesState, task: DownloadTask, status: TaskStatus): DownloadedGuidesState {
   const { guideId } = task;
   const offlineGuide: OfflineGuide = state.offlineGuides[guideId];
   if (offlineGuide) {
@@ -89,11 +112,11 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
       return state;
     }
     case "DOWNLOAD_TASK_START":
-      return updateTaskStatus(state, action.task, "pending");
+      return updateTaskStatusAndProgress(state, action.task, "pending");
     case "DOWNLOAD_TASK_FAILURE":
-      return updateTaskStatus(state, action.task, "failed");
+      return updateTaskStatusAndProgress(state, action.task, "failed");
     case "DOWNLOAD_TASK_SUCCESS":
-      return updateTaskStatus(state, action.task, "done");
+      return updateTaskStatusAndProgress(state, action.task, "done");
     default:
       return state;
   }
