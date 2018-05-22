@@ -7,6 +7,7 @@ const defaultState: UIState = {
   currentContentObjectImageIndex: 0,
   currentGuide: null,
   developerMode: false,
+  draftsEnabled: false,
 };
 
 export default function uiStateReducer(state: UIState = defaultState, action: Action): UIState {
@@ -21,6 +22,8 @@ export default function uiStateReducer(state: UIState = defaultState, action: Ac
       return { ...state, currentGuide: action.guide };
     case "SET_DEVELOPER_MODE":
       return { ...state, developerMode: action.enabled };
+    case "DEBUG_ENABLE_DRAFTS":
+      return { ...state, draftsEnabled: action.enable };
     default:
       return state;
   }

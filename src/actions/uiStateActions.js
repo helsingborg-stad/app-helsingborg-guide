@@ -32,3 +32,7 @@ export function selectCurrentContentObjectImage(swiperIndex: number): Action {
 export function setDeveloperMode(enabled: boolean): Action {
   return { type: "SET_DEVELOPER_MODE", enabled };
 }
+
+export function debugEnableDrafts(enable: boolean): Action {
+  return { type: "DEBUG_ENABLE_DRAFTS", enable };
+}
