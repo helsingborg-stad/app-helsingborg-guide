@@ -89,7 +89,7 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
       }
       return state;
     }
-    case "DOWNLOAD_TASK_STARTED":
+    case "DOWNLOAD_TASK_START":
       return updateTaskStatus(state, action.task, "pending");
     case "DOWNLOAD_TASK_FAILURE":
       return updateTaskStatus(state, action.task, "failed");
