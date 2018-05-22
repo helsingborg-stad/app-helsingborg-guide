@@ -5,6 +5,7 @@ declare type Action =
   | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
+  | { type: "SET_DEVELOPER_MODE", enabled: boolean }
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
@@ -173,7 +174,8 @@ declare type UIState = {
   currentGuides: ?Guide[],
   currentContentObject: ?ContentObject,
   currentContentObjectImageIndex: number,
-  currentGuide: ?Guide
+  currentGuide: ?Guide,
+  developerMode: boolean,
 }
 
 declare type RootState = {

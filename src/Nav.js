@@ -7,6 +7,7 @@ import {
   StackNavigator,
 } from "react-navigation";
 import {
+  DebugScreen,
   DownloadsScreen,
   GuideScreen,
   GuideListScreen,
@@ -42,6 +43,7 @@ const GuideNavigator = StackNavigator(
     ImageScreen: { screen: ImageScreen },
     DownloadsScreen: { screen: DownloadsScreen },
     SettingsScreen: { screen: SettingsScreen },
+    DebugScreen: { screen: DebugScreen },
   },
   { navigationOptions: HeaderStyles.default },
 );

@@ -12,3 +12,4 @@ export { default as TrailScreen } from "./TrailScreen";
 export { default as VideoScreen } from "./VideoScreen";
 export { default as WebScreen } from "./WebScreen";
 export { default as WelcomeScreen } from "./WelcomeScreen";
+export { default as DebugScreen } from "./DebugScreen";
