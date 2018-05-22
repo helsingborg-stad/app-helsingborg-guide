@@ -7,7 +7,6 @@ const defaultState: UIState = {
   currentContentObjectImageIndex: 0,
   currentGuide: null,
   developerMode: false,
-  version: "version 0.xx",
 };
 
 export default function uiStateReducer(state: UIState = defaultState, action: Action): UIState {
@@ -22,8 +21,6 @@ export default function uiStateReducer(state: UIState = defaultState, action: Ac
       return { ...state, currentGuide: action.guide };
     case "SET_DEVELOPER_MODE":
       return { ...state, developerMode: action.enabled };
-    case "SET_VERSION":
-      return { ...state, version: action.version };
     default:
       return state;
   }
