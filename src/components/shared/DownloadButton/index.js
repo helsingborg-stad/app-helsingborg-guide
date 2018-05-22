@@ -136,10 +136,10 @@ function mapStateToProps(state: RootState) {
   let progress = 0;
   let status: DownloadStatus = "stopped";
   if (currentGuide) {
-    const { downloads } = state.downloadedGuides;
-    const downloadedGuide = downloads[currentGuide.id];
-    if (downloadedGuide) {
-      ({ progress, status } = downloadedGuide);
+    const { offlineGuides } = state.downloadedGuides;
+    const offlineGuide = offlineGuides[currentGuide.id];
+    if (offlineGuide) {
+      ({ progress, status } = offlineGuide);
     }
   }
   return {

@@ -16,6 +16,9 @@ declare type Action =
   | { type: "PAUSE_DOWNLOAD_GUIDE", guide: Guide }
   | { type: "RESUME_DOWNLOAD_GUIDE", guide: Guide }
   | { type: "CANCEL_DOWNLOAD_GUIDE", guide: Guide }
+  | { type: "DOWNLOAD_TASK_START", task: DownloadTask }
+  | { type: "DOWNLOAD_TASK_SUCCESS", task: DownloadTask }
+  | { type: "DOWNLOAD_TASK_FAILURE", task: DownloadTask, error: Error }
   ;
 
 declare type Coords = {
@@ -31,7 +34,7 @@ declare type Coords = {
 declare type Dispatch = (action: Action | ThunkAction) => any;
 
 declare type Store = {
-  dispatch: Store,
+  dispatch: Dispatch,
   getState: GetState
 }
 
@@ -176,17 +179,23 @@ declare type PointProperty = {
 
 declare type PostStatus = 'publish' | 'draft';
 
+declare type TaskStatus = "not_started" | "failed" | "pending" | "done";
+declare type DownloadTask = {
+  guideId: number,
+  url: string,
+  status: TaskStatus,
+}
+
 declare type DownloadStatus = "stopped" | "pending" | "paused" | "done";
-declare type DownloadedGuide = {
+declare type OfflineGuide = {
   status: DownloadStatus,
-  progress: number,
-  mediaUrls: string[],
-  downloadIndex: number,
+  progress: number, // between 0 and 1
+  downloadTasks: { [string]: DownloadTask },
   guide: Guide,
 }
 
 declare type DownloadedGuidesState = {
-  downloads: { [number]: DownloadedGuide }
+  offlineGuides: { [number]: OfflineGuide }
 }
 
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
