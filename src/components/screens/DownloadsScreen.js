@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from "react";
 import { View, ListView, StyleSheet } from "react-native";
 import { bindActionCreators } from "redux";
@@ -8,9 +9,7 @@ import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
 import * as downloadActions from "../../actions/downloadActions";
 import LangService from "../../services/langService";
-import {
-  Colors,
-} from "../../styles/";
+import { Colors } from "../../styles/";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
 class DownloadsScreen extends Component {
   static propTypes = {
     downloads: PropTypes.array.isRequired,
-  }
+  };
 
   static navigationOptions = () => {
     const title = LangService.strings.OFFLINE_CONTENT;
@@ -36,9 +35,7 @@ class DownloadsScreen extends Component {
     };
   };
 
-  static renderFooter = () => (
-    <View style={styles.footer} />
-  );
+  static renderFooter = () => <View style={styles.footer} />;
 
   static clearCache(id) {
     downloadManager.clearCache(id);
@@ -57,14 +54,10 @@ class DownloadsScreen extends Component {
   renderRow = item => (
     <DownloadItemView
       key={item.id}
-      imageSource={{ uri: item.avatar }}
-      title={item.title}
-      total={item.urls.length}
-      currentPos={item.currentPos}
-      isCanceled={item.isCanceled}
-      progress={item.currentPos / item.urls.length}
-      onClosePress={() => DownloadsScreen.toggleTask(item.id)}
-      onClearPress={() => DownloadsScreen.clearCache(item.id)}
+      imageSource={{ uri: item.avatar }} // TODO: ?
+      title={item.guide.name}
+      progress={item.progress}
+      isPaused={item.status === "paused"}
     />
   );
 
@@ -86,14 +79,16 @@ class DownloadsScreen extends Component {
 }
 
 // store config
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return {
-    downloads: state.downloads,
+    downloads: state.downloadedGuides.offlineGuides,
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
     downloadActions: bindActionCreators(downloadActions, dispatch),
   };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(DownloadsScreen);
