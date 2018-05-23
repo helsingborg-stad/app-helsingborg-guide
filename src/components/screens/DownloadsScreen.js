@@ -1,15 +1,13 @@
 // @flow
 import React, { Component } from "react";
 import { View, ListView, StyleSheet } from "react-native";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
-import * as downloadActions from "../../actions/downloadActions";
 import LangService from "../../services/langService";
 import { Colors } from "../../styles/";
+import { cancelDownloadGuide } from "../../actions/downloadGuidesActions";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
@@ -22,11 +20,12 @@ const styles = StyleSheet.create({
   },
 });
 
-class DownloadsScreen extends Component {
-  static propTypes = {
-    downloads: PropTypes.array.isRequired,
-  };
+type Props = {
+  downloads: DownloadedGuidesState,
+  cancelDownload(guide: Guide): void
+};
 
+class DownloadsScreen extends Component<Props> {
   static navigationOptions = () => {
     const title = LangService.strings.OFFLINE_CONTENT;
     return {
@@ -37,10 +36,6 @@ class DownloadsScreen extends Component {
 
   static renderFooter = () => <View style={styles.footer} />;
 
-  static clearCache(id) {
-    downloadManager.clearCache(id);
-  }
-
   static toggleTask(id) {
     if (downloadManager.isExist(id)) {
       const task = downloadManager.getTaskById(id);
@@ -49,8 +44,6 @@ class DownloadsScreen extends Component {
     }
   }
 
-  // #################################################
-
   renderRow = item => (
     <DownloadItemView
       key={item.id}
@@ -58,6 +51,7 @@ class DownloadsScreen extends Component {
       title={item.guide.name}
       progress={item.progress}
       isPaused={item.status === "paused"}
+      onClearPress={() => this.props.cancelDownload(item.guide)}
     />
   );
 
@@ -78,7 +72,6 @@ class DownloadsScreen extends Component {
   }
 }
 
-// store config
 function mapStateToProps(state: RootState) {
   return {
     downloads: state.downloadedGuides.offlineGuides,
@@ -87,7 +80,7 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    downloadActions: bindActionCreators(downloadActions, dispatch),
+    cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
   };
 }
 
