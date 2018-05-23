@@ -61,7 +61,10 @@ export async function startDownload(sessionId: string, url: string): Promise<boo
 
   const fetchPromise = RNFetchBlob.config(config).fetch("GET", url);
   fetchPromise
-    .then(() => removePendingTask(sessionId, url))
+    .then((res) => {
+      console.log("Successfully downloaded to: ", res.path());
+      removePendingTask(sessionId, url);
+    })
     .catch(() => removePendingTask(sessionId, url));
   addPendingTask(sessionId, url, fetchPromise);
   return fetchPromise;

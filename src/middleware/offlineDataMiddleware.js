@@ -23,16 +23,13 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
 
   switch (action.type) {
     case "START_DOWNLOAD_GUIDE":
+    case "RESUME_DOWNLOAD_GUIDE":
       {
         const { guide } = action;
-        const downloadData: OfflineGuide = nextState.downloadedGuides.offlineGuides[guide.id];
-        const { downloadTasks } = downloadData;
-
-        // $FlowFixMe flow doesn't understand Object.values()
-        const tasks: DownloadTask[] = Object.values(downloadTasks);
-        if (tasks.length > 0) {
-          const task: DownloadTask = tasks[0];
-          dispatch({ type: "DOWNLOAD_TASK_START", task });
+        const offlineGuide: OfflineGuide = nextState.downloadedGuides.offlineGuides[guide.id];
+        const nextTask: ?DownloadTask = getNextDownloadTask(offlineGuide);
+        if (nextTask) {
+          dispatch({ type: "DOWNLOAD_TASK_START", task: nextTask });
         }
       }
       break;
