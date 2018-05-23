@@ -1,23 +1,80 @@
 // @flow
-import RNFetchBlob from "react-native-fetch-blob";
+import RNFetchBlob, { type FetchBlobResponse, StatefulPromise } from "react-native-fetch-blob";
+import { cancelTaskSuccess } from "../actions/downloadActions";
 
 const basePath = RNFetchBlob.fs.dirs.CacheDir;
 
-export async function startDownload(sessionId: number, url: string): Promise<boolean> {
-  try {
-    const config = {
-      fileCache: true,
-      path: `${basePath}/${sessionId}/${url}`,
-      session: sessionId,
-    };
+type PendingTask = StatefulPromise<FetchBlobResponse>;
 
-    const res = await RNFetchBlob.config(config).fetch("GET", url);
-    console.log(res);
-    return true;
-  } catch (error) {
-    console.log(error);
-    throw error;
+/*
+* Map with key "sessionId", containing maps with key "url".
+*/
+const pendingTasks: { [string]: { [string]: PendingTask } } = {};
+
+function addPendingTask(sessionId: string, url: string, fetchPromise: PendingTask): void {
+  let sessionTasks = pendingTasks[sessionId];
+  if (!sessionTasks) {
+    sessionTasks = {};
+    pendingTasks[sessionId] = sessionTasks;
   }
+
+  // cancel if already existing
+  const existingTask: PendingTask = sessionTasks[url];
+  if (existingTask) {
+    existingTask.cancel((err, taskId) => console.log(`Successfully canceled taskId: ${taskId}`));
+  }
+
+  sessionTasks[url] = fetchPromise;
+}
+
+function removePendingTask(sessionId: string, url: string): void {
+  const sessionTasks = pendingTasks[sessionId];
+  if (sessionTasks) {
+    const result = delete sessionTasks[url];
+    console.log(`Removed ${sessionId}, ${url} succeeded: `, result);
+  }
+}
+
+function cancelPendingTask(sessionId: string, url: string): void {
+  const key = `${sessionId}${url}`;
+  const pendingTask: ?StatefulPromise<FetchBlobResponse> = pendingTasks[key];
+  if (pendingTask) {
+    pendingTask.cancel((err, taskId) => console.log(`Successfully canceled taskId: ${taskId}`));
+    delete pendingTasks[key];
+  }
+}
+
+function removePendingTasks(sessionId: string): void {
+  delete pendingTasks[sessionId];
+}
+
+async function cancelPendingTasks(sessionId: string): Promise<any> {
+  const sessionTasks = pendingTasks[sessionId];
+  if (!sessionTasks) { return true; }
+
+  // $FlowFixMe flow doesn't understand Object.values()
+  const tasks: PendingTask[] = Object.values(sessionTasks);
+
+  // collect all the cancel promises
+  const promises = tasks.map(t => t.cancel());
+
+  // waiting for all promises to resolve
+  return Promise.all(promises);
+}
+
+export async function startDownload(sessionId: string, url: string): Promise<boolean> {
+  const config = {
+    fileCache: true,
+    path: `${basePath}/${sessionId}/${url}`,
+    session: sessionId,
+  };
+
+  const fetchPromise = RNFetchBlob.config(config).fetch("GET", url);
+  fetchPromise
+    .then(() => removePendingTask(sessionId, url))
+    .catch(() => removePendingTask(sessionId, url));
+  addPendingTask(sessionId, url, fetchPromise);
+  return fetchPromise;
 }
 
 export async function remove(id: number, url: string): Promise<any> {
@@ -34,23 +91,17 @@ export async function remove(id: number, url: string): Promise<any> {
   }
 }
 
-function listFilesFromSession(sessionId: string): void {
-  // TODO just for debugging
-  const fsList: string[] = RNFetchBlob.session(sessionId).list();
-  fsList.forEach(path => console.log(path));
-  console.log();
-}
+export async function removeMultiple(sessionId: string): Promise<any> {
+  try {
+    await cancelPendingTasks(sessionId);
+  } catch (error) {
+    console.log(error);
+  }
 
-export async function removeMultiple(sessionId: number): Promise<number> {
-  console.log("BEFORE REMOVAL");
-
-  listFilesFromSession(`${sessionId}`);
+  removePendingTasks(sessionId);
 
   try {
     await RNFetchBlob.session(sessionId).dispose();
-
-    console.log("AFTER DELETION");
-    listFilesFromSession(`${sessionId}`);
 
     return sessionId;
   } catch (error) {

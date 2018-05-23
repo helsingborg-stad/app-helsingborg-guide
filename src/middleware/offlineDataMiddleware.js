@@ -44,7 +44,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     }
     case "DOWNLOAD_TASK_START": {
       const { task } = action;
-      startDownload(task.guideId, task.url)
+      startDownload(`${task.guideId}`, task.url)
         .then(() => {
           dispatch({ type: "DOWNLOAD_TASK_SUCCESS", task });
         }).catch((error) => {
@@ -62,6 +62,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
       if (nextTask) {
         dispatch({ type: "DOWNLOAD_TASK_START", task: nextTask });
       }
+      // TODO: else verify downloads and retry failed tasks
       break;
     }
     default:
