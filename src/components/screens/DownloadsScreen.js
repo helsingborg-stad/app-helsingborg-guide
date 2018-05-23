@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  downloads: DownloadedGuidesState,
+  downloads: { [number]: OfflineGuide },
   cancelDownload(guide: Guide): void,
   pauseDownload(guide: Guide): void,
   resumeDownload(guide: Guide): void
@@ -41,11 +41,11 @@ class DownloadsScreen extends Component<Props> {
 
   static renderFooter = () => <View style={styles.footer} />;
 
-  renderRow = item => (
+  renderRow = (item: OfflineGuide) => (
     <DownloadItemView
       key={item.id}
-      imageSource={{ uri: item.avatar }} // TODO: ?
       title={item.guide.name}
+      thumbnail={item.guide.images.thumbnail}
       progress={item.progress}
       isPaused={item.status === "paused"}
       onPausePress={() => this.props.pauseDownload(item.guide)}

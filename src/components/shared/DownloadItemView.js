@@ -103,7 +103,7 @@ export default class DownloadItemView extends Component {
         </View>
         <View style={styles.mainContainer}>
           <View style={styles.avatarContainer}>
-            <RoundedThumbnail imageSource={this.props.imageSource} />
+            <RoundedThumbnail imageSource={{ uri: this.props.thumbnail }} />
           </View>
           <View style={styles.progressBarContainer}>
             <View style={styles.progressTextContainer}>
