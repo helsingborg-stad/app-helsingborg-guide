@@ -37,7 +37,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     case "CANCEL_DOWNLOAD_GUIDE": {
       const { guide } = action;
       // TODO abort pending download tasks!
-      removeMultiple(guide.id)
+      removeMultiple(`${guide.id}`)
         .then(id => console.log(`Successfully removed cached files for ${id}`))
         .catch(error => console.log(error));
       break;
