@@ -30,7 +30,7 @@ function removePendingTask(sessionId: string, url: string): void {
   const sessionTasks = pendingTasks[sessionId];
   if (sessionTasks) {
     const result = delete sessionTasks[url];
-    console.log(`Removed ${sessionId}, ${url} succeeded: `, result);
+    if (result) console.log(`Removed pending task for ${sessionId}`);
   }
 }
 
@@ -38,7 +38,7 @@ function removePendingTasks(sessionId: string): void {
   delete pendingTasks[sessionId];
 }
 
-async function cancelPendingTasks(sessionId: string): Promise<any> {
+export async function cancelPendingTasks(sessionId: string): Promise<any> {
   const sessionTasks = pendingTasks[sessionId];
   if (!sessionTasks) { return true; }
 

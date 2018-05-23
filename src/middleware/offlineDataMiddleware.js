@@ -1,5 +1,9 @@
 // @flow
-import { removeMultiple, startDownload } from "../utils/DownloadMediaUtils";
+/**
+ * This middleware is responsible of maintaining pending download tasks.
+ */
+
+import { removeMultiple, startDownload, cancelPendingTasks } from "../utils/DownloadMediaUtils";
 
 function getNextDownloadTask(offlineGuide: ?OfflineGuide): ?DownloadTask {
   if (!offlineGuide) {
@@ -10,9 +14,7 @@ function getNextDownloadTask(offlineGuide: ?OfflineGuide): ?DownloadTask {
   if (downloadTasks.length === 0) { return null; }
 
   // $FlowFixMe flow doesn't understand Object.values()
-  const next: ?DownloadTask = Object.values(downloadTasks).find((task: DownloadTask) => task.status === "not_started");
-  console.log("NextTask: ", next);
-  return next;
+  return Object.values(downloadTasks).find((task: DownloadTask) => task.status === "not_started");
 }
 
 export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: Action) => {
@@ -34,6 +36,11 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
         }
       }
       break;
+    case "PAUSE_DOWNLOAD_GUIDE": {
+      const { guide } = action;
+      cancelPendingTasks(`${guide.id}`);
+      break;
+    }
     case "CANCEL_DOWNLOAD_GUIDE": {
       const { guide } = action;
       // TODO abort pending download tasks!
@@ -57,12 +64,14 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     {
       const { task } = action;
       const { guideId } = task;
-      const guide = nextState.downloadedGuides.offlineGuides[guideId];
-      const nextTask: ?DownloadTask = getNextDownloadTask(guide);
-      if (nextTask) {
-        dispatch({ type: "DOWNLOAD_TASK_START", task: nextTask });
+      const guide: ?OfflineGuide = nextState.downloadedGuides.offlineGuides[guideId];
+      if (guide && guide.status === "pending") {
+        const nextTask: ?DownloadTask = getNextDownloadTask(guide);
+        if (nextTask) {
+          dispatch({ type: "DOWNLOAD_TASK_START", task: nextTask });
+        }
+        // TODO: else verify downloads and retry failed tasks
       }
-      // TODO: else verify downloads and retry failed tasks
       break;
     }
     default:
