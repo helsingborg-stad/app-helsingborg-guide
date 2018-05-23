@@ -3,11 +3,14 @@ import React, { Component } from "react";
 import { View, ListView, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import ViewContainer from "../shared/view_container";
-import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
 import LangService from "../../services/langService";
 import { Colors } from "../../styles/";
-import { cancelDownloadGuide } from "../../actions/downloadGuidesActions";
+import {
+  cancelDownloadGuide,
+  pauseDownloadGuide,
+  resumeDownloadGuide,
+} from "../../actions/downloadGuidesActions";
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
@@ -22,7 +25,9 @@ const styles = StyleSheet.create({
 
 type Props = {
   downloads: DownloadedGuidesState,
-  cancelDownload(guide: Guide): void
+  cancelDownload(guide: Guide): void,
+  pauseDownload(guide: Guide): void,
+  resumeDownload(guide: Guide): void
 };
 
 class DownloadsScreen extends Component<Props> {
@@ -36,14 +41,6 @@ class DownloadsScreen extends Component<Props> {
 
   static renderFooter = () => <View style={styles.footer} />;
 
-  static toggleTask(id) {
-    if (downloadManager.isExist(id)) {
-      const task = downloadManager.getTaskById(id);
-      if (task.isCanceled) downloadManager.resumeTask(task.id);
-      else downloadManager.cancelTask(task.id);
-    }
-  }
-
   renderRow = item => (
     <DownloadItemView
       key={item.id}
@@ -51,6 +48,8 @@ class DownloadsScreen extends Component<Props> {
       title={item.guide.name}
       progress={item.progress}
       isPaused={item.status === "paused"}
+      onPausePress={() => this.props.pauseDownload(item.guide)}
+      onResumePress={() => this.props.resumeDownload(item.guide)}
       onClearPress={() => this.props.cancelDownload(item.guide)}
     />
   );
@@ -81,6 +80,8 @@ function mapStateToProps(state: RootState) {
 function mapDispatchToProps(dispatch) {
   return {
     cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
+    pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
+    resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
   };
 }
 

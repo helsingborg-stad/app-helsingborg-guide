@@ -118,7 +118,11 @@ export default class DownloadItemView extends Component {
           <View style={styles.btnContainer}>
             <TouchableOpacity
               style={styles.touchContainer}
-              onPress={this.props.onClosePress}
+              onPress={
+                this.props.isPaused
+                  ? this.props.onResumePress
+                  : this.props.onPausePress
+              }
             >
               {icon}
             </TouchableOpacity>
