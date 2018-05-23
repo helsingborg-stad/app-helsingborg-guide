@@ -237,8 +237,8 @@ class GuideListScreen extends Component {
   _renderScene = ({ route }) => {
     // Activity indicator appears to have different behavior on ios and android based on when it's rendered in relation to TabViewAnimated. Android version in render()
     if (ios) {
-      const { isFetching } = this.props;
-      if (isFetching) {
+      const { isFetching, isFetchingFromMiddleware } = this.props;
+      if (isFetching || isFetchingFromMiddleware) {
         return (
           <View style={styles.loadingContainer}>
             <ActivityIndicator />
@@ -342,8 +342,8 @@ class GuideListScreen extends Component {
 
     // Activity indicator appears to have different behavior on ios and android based on when it's rendered in relation to TabViewAnimated. Ios version in _renderScene()
     if (!ios) {
-      const { isFetching } = this.props;
-      if (isFetching) {
+      const { isFetching, isFetchingFromMiddleware } = this.props;
+      if (isFetching || isFetchingFromMiddleware) {
         return (
           <View style={styles.loadingContainer}>
             <ActivityIndicator />
@@ -368,6 +368,7 @@ class GuideListScreen extends Component {
 
 function mapStateToProps(state) {
   const { isFetching, items } = state.navigation;
+  const isFetchingFromMiddleware = state.guideGroups.isFetching || state.guides.isFetching;
   const { subLocations } = state;
 
   const guides = JSON.parse(JSON.stringify(state.subLocations.slice()));
@@ -375,6 +376,7 @@ function mapStateToProps(state) {
 
   return {
     isFetching,
+    isFetchingFromMiddleware,
     categoryTypes: items,
     locations,
     guides,
