@@ -1,6 +1,5 @@
 // @flow
 import RNFetchBlob, { type FetchBlobResponse, StatefulPromise } from "react-native-fetch-blob";
-import { cancelTaskSuccess } from "../actions/downloadActions";
 
 const basePath = RNFetchBlob.fs.dirs.CacheDir;
 
@@ -32,15 +31,6 @@ function removePendingTask(sessionId: string, url: string): void {
   if (sessionTasks) {
     const result = delete sessionTasks[url];
     console.log(`Removed ${sessionId}, ${url} succeeded: `, result);
-  }
-}
-
-function cancelPendingTask(sessionId: string, url: string): void {
-  const key = `${sessionId}${url}`;
-  const pendingTask: ?StatefulPromise<FetchBlobResponse> = pendingTasks[key];
-  if (pendingTask) {
-    pendingTask.cancel((err, taskId) => console.log(`Successfully canceled taskId: ${taskId}`));
-    delete pendingTasks[key];
   }
 }
 
