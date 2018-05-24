@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  downloads: { [number]: OfflineGuide },
+  downloads: OfflineGuide[],
   cancelDownload(guide: Guide): void,
   pauseDownload(guide: Guide): void,
   resumeDownload(guide: Guide): void
@@ -43,7 +43,7 @@ class DownloadsScreen extends Component<Props> {
 
   renderRow = (item: OfflineGuide) => (
     <DownloadItemView
-      key={item.id}
+      key={item.guide.id}
       title={item.guide.name}
       thumbnail={item.guide.images.thumbnail}
       progress={item.progress}
@@ -58,9 +58,6 @@ class DownloadsScreen extends Component<Props> {
     return (
       <ViewContainer style={styles.mainContainer}>
         <ListView
-          ref={(ref) => {
-            this.itemsListView = ref;
-          }}
           enableEmptySections
           dataSource={ds.cloneWithRows(this.props.downloads)}
           renderRow={this.renderRow}
@@ -72,8 +69,9 @@ class DownloadsScreen extends Component<Props> {
 }
 
 function mapStateToProps(state: RootState) {
+  const { offlineGuides } = state.downloadedGuides;
   return {
-    downloads: state.downloadedGuides.offlineGuides,
+    downloads: Object.values(offlineGuides),
   };
 }
 
