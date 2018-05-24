@@ -20,7 +20,7 @@ function addPendingTask(sessionId: string, url: string, fetchPromise: PendingTas
   // cancel if already existing
   const existingTask: PendingTask = sessionTasks[url];
   if (existingTask) {
-    existingTask.cancel((err, taskId) => console.log(`Successfully canceled taskId: ${taskId}`));
+    existingTask.cancel();
   }
 
   sessionTasks[url] = fetchPromise;
@@ -29,8 +29,7 @@ function addPendingTask(sessionId: string, url: string, fetchPromise: PendingTas
 function removePendingTask(sessionId: string, url: string): void {
   const sessionTasks = pendingTasks[sessionId];
   if (sessionTasks) {
-    const result = delete sessionTasks[url];
-    if (result) console.log(`Removed pending task for ${sessionId}`);
+    delete sessionTasks[url];
   }
 }
 
@@ -88,7 +87,7 @@ export async function removeMultiple(sessionId: string): Promise<any> {
   try {
     await cancelPendingTasks(sessionId);
   } catch (error) {
-    console.log(error);
+    // don't care
   }
 
   removePendingTasks(sessionId);
