@@ -1,33 +1,30 @@
+// @flow
 import React, { Component } from "react";
-import { View, ListView, StyleSheet } from "react-native";
-import { bindActionCreators } from "redux";
+import { FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import ViewContainer from "../shared/view_container";
-import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
-import * as downloadActions from "../../actions/downloadActions";
 import LangService from "../../services/langService";
+import { Colors } from "../../styles/";
 import {
-  Colors,
-} from "../../styles/";
-
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+  cancelDownloadGuide,
+  pauseDownloadGuide,
+  resumeDownloadGuide,
+} from "../../actions/downloadGuidesActions";
 
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: Colors.white,
   },
-  footer: {
-    height: 60,
-  },
 });
 
-class DownloadsScreen extends Component {
-  static propTypes = {
-    downloads: PropTypes.array.isRequired,
-  }
+type Props = {
+  downloads: OfflineGuide[],
+  cancelDownload(guide: Guide): void,
+  pauseDownload(guide: Guide): void,
+  resumeDownload(guide: Guide): void
+};
 
+class DownloadsScreen extends Component<Props> {
   static navigationOptions = () => {
     const title = LangService.strings.OFFLINE_CONTENT;
     return {
@@ -36,64 +33,43 @@ class DownloadsScreen extends Component {
     };
   };
 
-  static renderFooter = () => (
-    <View style={styles.footer} />
-  );
-
-  static clearCache(id) {
-    downloadManager.clearCache(id);
-  }
-
-  static toggleTask(id) {
-    if (downloadManager.isExist(id)) {
-      const task = downloadManager.getTaskById(id);
-      if (task.isCanceled) downloadManager.resumeTask(task.id);
-      else downloadManager.cancelTask(task.id);
-    }
-  }
-
-  // #################################################
-
-  renderRow = item => (
+  renderItem = ({ item }) => (
     <DownloadItemView
-      key={item.id}
-      imageSource={{ uri: item.avatar }}
-      title={item.title}
-      total={item.urls.length}
-      currentPos={item.currentPos}
-      isCanceled={item.isCanceled}
-      progress={item.currentPos / item.urls.length}
-      onClosePress={() => DownloadsScreen.toggleTask(item.id)}
-      onClearPress={() => DownloadsScreen.clearCache(item.id)}
+      title={item.guide.name}
+      thumbnail={item.guide.images.thumbnail}
+      progress={item.progress}
+      isPaused={item.status === "paused"}
+      onPausePress={() => this.props.pauseDownload(item.guide)}
+      onResumePress={() => this.props.resumeDownload(item.guide)}
+      onClearPress={() => this.props.cancelDownload(item.guide)}
     />
   );
 
   render() {
     return (
-      <ViewContainer style={styles.mainContainer}>
-        <ListView
-          ref={(ref) => {
-            this.itemsListView = ref;
-          }}
-          enableEmptySections
-          dataSource={ds.cloneWithRows(this.props.downloads)}
-          renderRow={this.renderRow}
-          renderFooter={DownloadsScreen.renderFooter}
-        />
-      </ViewContainer>
+      <FlatList
+        style={styles.mainContainer}
+        keyExtractor={item => `${item.guide.id}`}
+        data={this.props.downloads}
+        renderItem={this.renderItem}
+      />
     );
   }
 }
 
-// store config
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
+  const { offlineGuides } = state.downloadedGuides;
   return {
-    downloads: state.downloads,
+    downloads: Object.values(offlineGuides),
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
-    downloadActions: bindActionCreators(downloadActions, dispatch),
+    cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
+    pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
+    resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
   };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(DownloadsScreen);
