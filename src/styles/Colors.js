@@ -16,6 +16,7 @@ const colors = {
   greyBodyText: "#505050",
   darkGrey: "#505050",
   transparent: "#00000000",
+  green: "green",
 };
 
 export default {

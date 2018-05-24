@@ -11,7 +11,15 @@ declare type Action =
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
   | { type: "FETCH_GUIDES_REQUEST" }
   | { type: "FETCH_GUIDES_SUCCESS", guides: Guide[] }
-  | { type: "FETCH_GUIDES_FAILURE", error: Error };
+  | { type: "FETCH_GUIDES_FAILURE", error: Error }
+  | { type: "START_DOWNLOAD_GUIDE", guide: Guide }
+  | { type: "PAUSE_DOWNLOAD_GUIDE", guide: Guide }
+  | { type: "RESUME_DOWNLOAD_GUIDE", guide: Guide }
+  | { type: "CANCEL_DOWNLOAD_GUIDE", guide: Guide }
+  | { type: "DOWNLOAD_TASK_START", task: DownloadTask }
+  | { type: "DOWNLOAD_TASK_SUCCESS", task: DownloadTask }
+  | { type: "DOWNLOAD_TASK_FAILURE", task: DownloadTask, error: Error }
+  ;
 
 declare type Coords = {
   speed: number,
@@ -26,7 +34,7 @@ declare type Coords = {
 declare type Dispatch = (action: Action | ThunkAction) => any;
 
 declare type Store = {
-  dispatch: Store,
+  dispatch: Dispatch,
   getState: GetState
 }
 
@@ -129,7 +137,11 @@ declare type GuideState = {
   items: Guide[],
 }
 
-declare type Images = { thumbnail: string, medium: string, large: string };
+declare type Images = {
+  thumbnail?: ?string,
+  medium?: ?string,
+  large?: ?string
+};
 
 declare type ResizeMode = 'cover' | 'contain' | 'stretch' | 'repeat' | 'center';
 
@@ -167,6 +179,25 @@ declare type PointProperty = {
 
 declare type PostStatus = 'publish' | 'draft';
 
+declare type TaskStatus = "not_started" | "failed" | "pending" | "done";
+declare type DownloadTask = {
+  guideId: number,
+  url: string,
+  status: TaskStatus,
+}
+
+declare type DownloadStatus = "stopped" | "pending" | "paused" | "done";
+declare type OfflineGuide = {
+  status: DownloadStatus,
+  progress: number, // between 0 and 1
+  downloadTasks: { [string]: DownloadTask },
+  guide: Guide,
+}
+
+declare type DownloadedGuidesState = {
+  offlineGuides: { [number]: OfflineGuide }
+}
+
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 
 declare type UIState = {
@@ -182,5 +213,6 @@ declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
   guides: GuideState,
-  geolocation: GeolocationType
+  geolocation: GeolocationType,
+  downloadedGuides: DownloadedGuidesState,
 }
