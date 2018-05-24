@@ -24,7 +24,7 @@ import {
 type Props = {
   style?: any,
   progress: number,
-  currentGuide: ?Guide,
+  currentGuide?: ?Guide,
   status: DownloadStatus,
   startDownload(guide: Guide): void,
   pauseDownload(guide: Guide): void,
@@ -33,8 +33,6 @@ type Props = {
 }
 
 function renderProgressbar(progress: number) {
-  if (progress >= 1) return null;
-
   return (
     <View>
       {Platform.OS === "ios" ? (
@@ -54,7 +52,7 @@ function renderProgressbar(progress: number) {
   );
 }
 
-class DownloadButton extends Component<Props> {
+export class DownloadButton extends Component<Props> {
   static defaultProps = {
     style: {},
   };
@@ -83,7 +81,7 @@ class DownloadButton extends Component<Props> {
 
   renderDefault = () => {
     const { progress, currentGuide, status } = this.props;
-    const percentage = parseInt(progress * 100);
+    const percentage = Math.min(parseInt(progress * 100), 100);
     const buttonText = status === "stopped" ? LangService.strings.DOWNLOAD :
       `${LangService.strings.DOWNLOADING} ${percentage}% ${LangService.strings.DOWNLOADING_PAUSE}`;
     return (<View
@@ -106,16 +104,12 @@ class DownloadButton extends Component<Props> {
     );
   }
 
-  renderDone = () => {
-    console.log("done");
-
-    return (
-      <View style={styles.doneContainer}>
-        <Icon name="check" size={16} color="green" />
-        <Text style={styles.doneText}>{LangService.strings.DOWNLOADED}</Text>
-      </View >
-    );
-  }
+  renderDone = () => (
+    <View style={styles.doneContainer}>
+      <Icon name="check" size={16} color="green" />
+      <Text style={styles.doneText}>{LangService.strings.DOWNLOADED}</Text>
+    </View >
+  )
 
   render() {
     const { style, status, progress } = this.props;
@@ -124,7 +118,7 @@ class DownloadButton extends Component<Props> {
         {status === "paused" ? this.renderPaused() : null}
         {status === "pending" || status === "stopped" ? this.renderDefault() : null}
         {status === "done" ? this.renderDone() : null}
-        {renderProgressbar(progress)}
+        {status !== "done" ? renderProgressbar(progress) : null}
       </View >
     );
   }
