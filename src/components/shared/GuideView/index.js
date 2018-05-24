@@ -13,7 +13,7 @@ import { TextStyles } from "../../../styles";
 import styles from "./styles";
 import ImageView from "../ImageView";
 import DateView from "../DateView";
-import DownloadButton from "../DownloadButton";
+import DownloadButtonContainer from "../DownloadButton";
 
 declare type Props = {
   guide: Guide,
@@ -52,7 +52,7 @@ class GuideView extends Component<Props> {
     const { guide } = this.props;
     return (<ScrollView style={styles.container}>
       <ImageView source={{ uri: guide.images.large }} style={styles.image} />
-      <DownloadButton
+      <DownloadButtonContainer
         style={styles.downloadButton}
       />
       <View style={styles.textContainer}>

@@ -55,6 +55,20 @@ function updateTaskStatusAndProgress(state: DownloadedGuidesState, task: Downloa
 
 export default function reducer(state: DownloadedGuidesState = defaultState, action: Action): DownloadedGuidesState {
   switch (action.type) {
+    case "APP_STARTED":
+    {
+      // reset the offline guides status
+      const offlineGuides = { ...state.offlineGuides };
+      const keys = Object.keys(offlineGuides);
+      keys.forEach((key) => {
+        const oGuide: OfflineGuide = offlineGuides[key];
+        if (oGuide.status === "pending") {
+          offlineGuides[key] = { ...oGuide, status: "paused" };
+        }
+      });
+
+      return { ...state, offlineGuides };
+    }
     case "START_DOWNLOAD_GUIDE":
     case "RESUME_DOWNLOAD_GUIDE":
     {
