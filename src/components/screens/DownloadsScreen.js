@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import ViewContainer from "../shared/view_container";
 import DownloadItemView from "../shared/DownloadItemView";
 import LangService from "../../services/langService";
 import { Colors } from "../../styles/";
@@ -48,13 +47,12 @@ class DownloadsScreen extends Component<Props> {
 
   render() {
     return (
-      <ViewContainer style={styles.mainContainer}>
-        <FlatList
-          keyExtractor={item => `${item.guide.id}`}
-          data={this.props.downloads}
-          renderItem={this.renderItem}
-        />
-      </ViewContainer>
+      <FlatList
+        style={styles.mainContainer}
+        keyExtractor={item => `${item.guide.id}`}
+        data={this.props.downloads}
+        renderItem={this.renderItem}
+      />
     );
   }
 }
