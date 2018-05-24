@@ -1,6 +1,9 @@
 // @flow
 
 declare type Action =
+  | { type: "APP_STARTED" }
+  | { type: "APP_BECAME_INACTIVE" }
+  | { type: "APP_BECAME_ACTIVE" }
   | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup, guides: Guide[] }
   | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }

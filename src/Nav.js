@@ -1,5 +1,7 @@
+// @flow
 import React, { Component } from "react";
 import {
+  AppState,
   StatusBar,
   Platform,
 } from "react-native";
@@ -22,7 +24,7 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
-} from "screens";
+} from "./components/screens";
 import ViewContainer from "./components/shared/view_container";
 import {
   Colors,
@@ -63,8 +65,15 @@ const RootNavigator = StackNavigator(
 
 const ios = Platform.OS === "ios";
 
-// TODO this class should most likely be merged into App (index.js)
-export default class Nav extends Component {
+type AppStateStatus = "inactive" | "active" | "background";
+
+type Props = {
+  onAppStarted(): void,
+  onAppBecameActive(): void,
+  onAppBecameInactive(): void,
+}
+
+export default class Nav extends Component<Props> {
   static getCurrentRouteName(navigationState) {
     if (!navigationState) {
       return null;
@@ -86,6 +95,19 @@ export default class Nav extends Component {
     }
   }
 
+  componentDidMount = () => {
+    this.props.onAppStarted();
+    AppState.addEventListener("change", this.onAppStateChange);
+  }
+
+  onAppStateChange = (nextAppState: AppStateStatus) => {
+    if (nextAppState === "active") {
+      this.props.onAppBecameActive();
+    } else if (nextAppState === "inactive") {
+      this.props.onAppBecameInactive();
+    }
+  }
+
   render() {
     return (
       <ViewContainer>
@@ -94,6 +116,7 @@ export default class Nav extends Component {
           barStyle="light-content"
           backgroundColor={Colors.darkPurple}
         />
+        {/* $FlowFixMe should be fixed in later flow versions */}
         <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
       </ViewContainer>
     );

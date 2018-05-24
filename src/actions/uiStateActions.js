@@ -1,4 +1,15 @@
 // @flow
+export function appStarted(): Action {
+  return { type: "APP_STARTED" };
+}
+
+export function appBecameActive(): Action {
+  return { type: "APP_BECAME_ACTIVE" };
+}
+
+export function appBecameInactive(): Action {
+  return { type: "APP_BECAME_INACTIVE" };
+}
 
 export function selectCurrentGuideGroup(id: number): ThunkAction {
   return (dispatch: Dispatch, getState: GetState) => {
