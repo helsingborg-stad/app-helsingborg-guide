@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { View, ListView, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import ViewContainer from "../shared/view_container";
 import DownloadItemView from "../shared/DownloadItemView";
@@ -12,14 +12,9 @@ import {
   resumeDownloadGuide,
 } from "../../actions/downloadGuidesActions";
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: Colors.white,
-  },
-  footer: {
-    height: 60,
   },
 });
 
@@ -39,11 +34,8 @@ class DownloadsScreen extends Component<Props> {
     };
   };
 
-  static renderFooter = () => <View style={styles.footer} />;
-
-  renderRow = (item: OfflineGuide) => (
+  renderItem = ({ item }) => (
     <DownloadItemView
-      key={item.guide.id}
       title={item.guide.name}
       thumbnail={item.guide.images.thumbnail}
       progress={item.progress}
@@ -57,11 +49,10 @@ class DownloadsScreen extends Component<Props> {
   render() {
     return (
       <ViewContainer style={styles.mainContainer}>
-        <ListView
-          enableEmptySections
-          dataSource={ds.cloneWithRows(this.props.downloads)}
-          renderRow={this.renderRow}
-          renderFooter={DownloadsScreen.renderFooter}
+        <FlatList
+          keyExtractor={item => `${item.guide.id}`}
+          data={this.props.downloads}
+          renderItem={this.renderItem}
         />
       </ViewContainer>
     );
