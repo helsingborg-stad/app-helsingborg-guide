@@ -24,18 +24,21 @@ export default class ImageView extends Component<Props, State> {
     const { source } = props;
     const { uri, sessionId } = source;
 
-    let imageSource;
-    if (!uri) {
-      imageSource = placeholderImage;
-    } else {
-      imageSource = { uri };
+    let imageSource = placeholderImage;
+    if (uri) {
       if (sessionId) {
         loadFromCache(`${sessionId}`, uri)
           .then((data) => {
             console.log("CACHE hit. great success!!");
             this.setState({ imageSource: { uri: `data:image/png;base64,${data}` } });
           })
-          .catch(error => console.log("CACHE miss. DISSAPOINTED: ", error));
+          .catch((error) => {
+            // cache miss download image
+            console.log("CACHE miss. DISSAPOINTED: ", error);
+            this.setState({ imageSource: { uri } });
+          });
+      } else {
+        imageSource = { uri };
       }
     }
 
