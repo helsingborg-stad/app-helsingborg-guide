@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { Image, Platform } from "react-native";
+import { Image } from "react-native";
 import { loadFromCache } from "../../../utils/DownloadMediaUtils";
 
 const placeholderImage = require("../../../images/no-image-featured-image.png");

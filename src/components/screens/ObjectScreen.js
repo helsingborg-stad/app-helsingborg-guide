@@ -35,6 +35,7 @@ class ObjectScreen extends Component<Props> {
     const { currentGuide } = params;
     return (<ObjectView
       contentObject={currentContentObject}
+      guideId={currentGuide.id}
       guideType={currentGuide.guideType}
       onSwiperIndexChanged={this.onSwiperIndexChanged}
       imageIndex={currentContentObjectImageIndex}

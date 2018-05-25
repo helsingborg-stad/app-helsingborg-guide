@@ -10,6 +10,7 @@ import LinkTouchable from "../LinkTouchable";
 
 type Props = {
   contentObject: ContentObject,
+  guideId?: number,
   imageIndex: number,
   guideType: GuideType,
   onSwiperIndexChanged: (newIndex: number) => (void),
@@ -64,12 +65,17 @@ function displayLinks(links: Link[], onGoToLink: (url: string, title?: string) =
 // eslint-disable-next-line react/prefer-stateless-function
 class ObjectView extends Component<Props> {
   render() {
+    const { guideId } = this.props;
     return (
-
       <View style={styles.viewContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.imageContainer}>
-            <ImageSwiper images={this.props.contentObject.images} onSwiperIndexChanged={this.props.onSwiperIndexChanged} onGoToImage={this.props.onGoToImage} />
+            <ImageSwiper
+              sessionId={guideId}
+              images={this.props.contentObject.images}
+              onSwiperIndexChanged={this.props.onSwiperIndexChanged}
+              onGoToImage={this.props.onGoToImage}
+            />
             <View style={styles.shareBtn}>
               {SharingService.showShareButton(this.props.contentObject.title, this.props.contentObject.images[this.props.imageIndex], this)}
             </View>
