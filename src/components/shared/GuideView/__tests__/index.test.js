@@ -9,6 +9,7 @@ import GuideView from "../index";
 import renderer from "react-test-renderer";
 
 jest.mock("../../DownloadButton", () => "DownloadButton");
+jest.mock("../../ImageView", () => "ImageView");
 
 const guideWithoutTagline: Guide = require("./testdata/guide_no_tagline.json");
 const guideWithTagline: Guide = require("./testdata/guide_tagline.json");
