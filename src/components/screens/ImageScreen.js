@@ -1,14 +1,17 @@
 // @flow
 
 import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import {
+  ActivityIndicator,
+  View,
+  StyleSheet,
+} from "react-native";
 import PhotoView from "react-native-photo-view";
 import { connect } from "react-redux";
 import { loadFromCache } from "../../utils/DownloadMediaUtils";
 
 const MAX_SCALE = 2.5;
 const MIN_SCALE = 0.95;
-const noFeaturedImage = require("../../images/no-image-featured-image.png");
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -19,6 +22,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  loadingContainer: {
+    backgroundColor: "black",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 
 type Props = {
@@ -27,7 +37,7 @@ type Props = {
 };
 
 type State = {
-  imageSource: any,
+  imageSource?: ?any,
 };
 
 class ImageScreen extends Component<Props, State> {
@@ -39,19 +49,13 @@ class ImageScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    console.log("ImageScreen.constructor(): ", props);
-
-    this.state = {
-      imageSource: noFeaturedImage,
-    };
+    this.state = {};
 
     const { guideId, url } = props;
     this.tryLoadFromCache(guideId, url);
   }
 
   tryLoadFromCache = async (guideId: ?number, uri: ?string): Promise<any> => {
-    console.log("tryLoadFromCache() ", guideId, uri);
-
     if (!guideId || !uri) throw new Error("Null params passed");
 
     try {
@@ -65,8 +69,16 @@ class ImageScreen extends Component<Props, State> {
   }
 
   render() {
+    /* TODO render an Image with the placeholder, while loading
+    * THEN, switch to the photoview
+    */
     const { imageSource } = this.state;
     console.log("render() imageSource: ", imageSource);
+    if (!imageSource) {
+      return (<View style={styles.loadingContainer}>
+        <ActivityIndicator />
+      </View>);
+    }
 
     return (
       <PhotoView
@@ -75,8 +87,6 @@ class ImageScreen extends Component<Props, State> {
         maximumZoomScale={MAX_SCALE}
         androidScaleType="centerInside"
         style={styles.container}
-
-        onLoadEnd={() => console.log("onLoadEnd")}
       />
     );
   }
