@@ -8,6 +8,7 @@ declare type Action =
   | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
+  | { type: "SELECT_CURRENT_IMAGE", url: ?string }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
@@ -209,6 +210,7 @@ declare type UIState = {
   currentContentObject: ?ContentObject,
   currentContentObjectImageIndex: number,
   currentGuide: ?Guide,
+  currentImage: ?string,
   developerMode: boolean,
 }
 

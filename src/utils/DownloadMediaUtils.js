@@ -102,9 +102,15 @@ export async function removeMultiple(sessionId: string): Promise<any> {
 }
 
 export async function loadFromCache(sessionId: string, url: string): Promise<any> {
-  console.log("loadFromCache");
+  console.log(`loadFromCache: ${sessionId}`);
   const path = `${basePath}/${sessionId}/${url}`;
-  return RNFetchBlob.fs.readFile(path, "base64");
+  const fetchPromise = RNFetchBlob.fs.readFile(path, "base64");
+
+  fetchPromise
+    .then(() => console.log("cache HIT"))
+    .catch(() => console.log("cache MISS"));
+
+  return fetchPromise;
 }
 
 export default {
