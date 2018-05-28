@@ -68,7 +68,7 @@ class ObjectView extends Component<Props> {
 
       <View style={styles.viewContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <View>
+          <View style={styles.imageContainer}>
             <ImageSwiper images={this.props.contentObject.images} onSwiperIndexChanged={this.props.onSwiperIndexChanged} onGoToImage={this.props.onGoToImage} />
             <View style={styles.shareBtn}>
               {SharingService.showShareButton(this.props.contentObject.title, this.props.contentObject.images[this.props.imageIndex], this)}

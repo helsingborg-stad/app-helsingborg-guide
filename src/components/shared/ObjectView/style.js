@@ -12,8 +12,12 @@ export default StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: Colors.white,
   },
+  imageContainer: {
+    width: "100%",
+    height: "auto",
+    aspectRatio: 16 / 9,
+  },
   bodyContainer: {
-    flex: 1,
     alignItems: "stretch",
     backgroundColor: Colors.white,
   },
