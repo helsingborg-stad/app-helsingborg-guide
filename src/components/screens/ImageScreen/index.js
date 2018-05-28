@@ -4,32 +4,15 @@ import React, { Component } from "react";
 import {
   ActivityIndicator,
   View,
-  StyleSheet,
 } from "react-native";
 import PhotoView from "react-native-photo-view";
 import { connect } from "react-redux";
-import { loadFromCache } from "../../utils/DownloadMediaUtils";
+import { loadFromCache } from "../../../utils/DownloadMediaUtils";
+import styles from "./styles";
 
 const MAX_SCALE = 2.5;
 const MIN_SCALE = 0.95;
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: "black",
-  },
-  container: {
-    backgroundColor: "black",
-    width: "100%",
-    height: "100%",
-  },
-  loadingContainer: {
-    backgroundColor: "black",
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 type Props = {
   guideId: ?number,
