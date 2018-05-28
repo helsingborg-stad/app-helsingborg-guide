@@ -67,12 +67,15 @@ class ImageScreen extends Component<Props, State> {
     }
   }
 
+  renderLoadingScreen = () => (
+    <View style={styles.loadingContainer}>
+      <ActivityIndicator />
+    </View>)
+
   render() {
     const { imageSource } = this.state;
     if (!imageSource) {
-      return (<View style={styles.loadingContainer}>
-        <ActivityIndicator />
-      </View>);
+      return this.renderLoadingScreen();
     }
 
     return (
