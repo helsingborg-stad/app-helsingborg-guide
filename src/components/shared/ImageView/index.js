@@ -19,7 +19,6 @@ type State = {
 export default class ImageView extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    console.log("ImageView.constructor()", props);
 
     const { source } = props;
     const { uri, sessionId } = source;
@@ -29,12 +28,11 @@ export default class ImageView extends Component<Props, State> {
       if (sessionId) {
         loadFromCache(`${sessionId}`, uri)
           .then((data) => {
-            console.log("CACHE hit. great success!!");
+            // cache hit, download image
             this.setState({ imageSource: { uri: `data:image/png;base64,${data}` } });
           })
-          .catch((error) => {
-            // cache miss download image
-            console.log("CACHE miss. DISSAPOINTED: ", error);
+          .catch(() => {
+            // cache miss, download image
             this.setState({ imageSource: { uri } });
           });
       } else {
