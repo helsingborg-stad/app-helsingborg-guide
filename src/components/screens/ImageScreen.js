@@ -63,17 +63,12 @@ class ImageScreen extends Component<Props, State> {
       this.setState({ imageSource: { uri: `data:image/png;base64,${data}` } });
     } catch (err) {
       // do not care
-      console.log(uri);
       this.setState({ imageSource: { uri } });
     }
   }
 
   render() {
-    /* TODO render an Image with the placeholder, while loading
-    * THEN, switch to the photoview
-    */
     const { imageSource } = this.state;
-    console.log("render() imageSource: ", imageSource);
     if (!imageSource) {
       return (<View style={styles.loadingContainer}>
         <ActivityIndicator />
