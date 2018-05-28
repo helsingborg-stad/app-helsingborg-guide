@@ -1,0 +1,286 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "definitions": {
+        "IImageUrls": {
+            "properties": {
+                "large": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Url"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "medium": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Url"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "thumbnail": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Url"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "ILocation": {
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "latitude": {
+                    "type": "number"
+                },
+                "links": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "$ref": "#/definitions/Url"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "openingHourExceptions": {
+                    "items": {
+                        "$ref": "#/definitions/IOpeningHourException"
+                    },
+                    "type": "array"
+                },
+                "openingHours": {
+                    "items": {
+                        "$ref": "#/definitions/IOpeningHours"
+                    },
+                    "type": "array"
+                },
+                "streetAddress": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "latitude",
+                "links",
+                "longitude",
+                "streetAddress"
+            ],
+            "type": "object"
+        },
+        "IOpeningHourException": {
+            "properties": {
+                "date": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "date",
+                "description"
+            ],
+            "type": "object"
+        },
+        "IOpeningHours": {
+            "properties": {
+                "closed": {
+                    "type": "boolean"
+                },
+                "closing": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "dayNumber": {
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7
+                    ],
+                    "type": "number"
+                },
+                "opening": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "weekday": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "closed",
+                "dayNumber",
+                "opening",
+                "weekday"
+            ],
+            "type": "object"
+        },
+        "IPointProperty": {
+            "properties": {
+                "icon": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Url"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "slug"
+            ],
+            "type": "object"
+        },
+        "ParsedUrlQuery": {
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
+            },
+            "type": "object"
+        },
+        "Url": {
+            "properties": {
+                "auth": {
+                    "type": "string"
+                },
+                "hash": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "pathname": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "string"
+                },
+                "query": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ParsedUrlQuery"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ]
+                },
+                "search": {
+                    "type": "string"
+                },
+                "slashes": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "active": {
+            "type": "boolean"
+        },
+        "description": {
+            "type": "string"
+        },
+        "id": {
+            "type": "number"
+        },
+        "images": {
+            "$ref": "#/definitions/IImageUrls"
+        },
+        "location": {
+            "$ref": "#/definitions/ILocation"
+        },
+        "name": {
+            "type": "string"
+        },
+        "pointProperties": {
+            "items": {
+                "$ref": "#/definitions/IPointProperty"
+            },
+            "type": "array"
+        },
+        "slug": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "active",
+        "description",
+        "id",
+        "images",
+        "location",
+        "name",
+        "pointProperties",
+        "slug"
+    ],
+    "type": "object"
+}
+

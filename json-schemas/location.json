@@ -1,0 +1,180 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "definitions": {
+        "IOpeningHourException": {
+            "properties": {
+                "date": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "date",
+                "description"
+            ],
+            "type": "object"
+        },
+        "IOpeningHours": {
+            "properties": {
+                "closed": {
+                    "type": "boolean"
+                },
+                "closing": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "dayNumber": {
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7
+                    ],
+                    "type": "number"
+                },
+                "opening": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "weekday": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "closed",
+                "dayNumber",
+                "opening",
+                "weekday"
+            ],
+            "type": "object"
+        },
+        "ParsedUrlQuery": {
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
+            },
+            "type": "object"
+        },
+        "Url": {
+            "properties": {
+                "auth": {
+                    "type": "string"
+                },
+                "hash": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "pathname": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "string"
+                },
+                "query": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ParsedUrlQuery"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ]
+                },
+                "search": {
+                    "type": "string"
+                },
+                "slashes": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "id": {
+            "type": "number"
+        },
+        "latitude": {
+            "type": "number"
+        },
+        "links": {
+            "anyOf": [
+                {
+                    "items": {
+                        "$ref": "#/definitions/Url"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "longitude": {
+            "type": "number"
+        },
+        "openingHourExceptions": {
+            "items": {
+                "$ref": "#/definitions/IOpeningHourException"
+            },
+            "type": "array"
+        },
+        "openingHours": {
+            "items": {
+                "$ref": "#/definitions/IOpeningHours"
+            },
+            "type": "array"
+        },
+        "streetAddress": {
+            "type": [
+                "null",
+                "string"
+            ]
+        }
+    },
+    "required": [
+        "id",
+        "latitude",
+        "links",
+        "longitude",
+        "streetAddress"
+    ],
+    "type": "object"
+}
+

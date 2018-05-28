@@ -1,0 +1,115 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "definitions": {
+        "ContentType": {
+            "enum": [
+                "audio",
+                "video"
+            ],
+            "type": "string"
+        },
+        "ParsedUrlQuery": {
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
+            },
+            "type": "object"
+        },
+        "Url": {
+            "properties": {
+                "auth": {
+                    "type": "string"
+                },
+                "hash": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "pathname": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "string"
+                },
+                "query": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ParsedUrlQuery"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ]
+                },
+                "search": {
+                    "type": "string"
+                },
+                "slashes": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "contentType": {
+            "$ref": "#/definitions/ContentType"
+        },
+        "created": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "id": {
+            "type": "number"
+        },
+        "modified": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "url": {
+            "$ref": "#/definitions/Url"
+        }
+    },
+    "required": [
+        "contentType",
+        "created",
+        "description",
+        "id",
+        "modified",
+        "title",
+        "url"
+    ],
+    "type": "object"
+}
+
