@@ -1,30 +1,27 @@
-import dc from "../data/datacontext";
-import { FETCH_NAVIGATION_SUCCESS, FETCH_NAVIGATION_REQUEST, FETCH_NAVIGATION_FAILURE } from "./actionTypes";
+// @flow
 
-export function fetchNavigationRequest(navigation) {
-  return { type: FETCH_NAVIGATION_REQUEST, navigation };
+import { getNavigation } from "../utils/fetchUtils";
+
+export function fetchNavigationRequest(): Action {
+  return { type: "FETCH_NAVIGATION_REQUEST" };
 }
 
-export function fetchNavigationSuccess(navigation) {
-  return { type: FETCH_NAVIGATION_SUCCESS, navigation };
+export function fetchNavigationSuccess(categories: NavigationCategory[]): Action {
+  return { type: "FETCH_NAVIGATION_SUCCESS", categories };
 }
 
-export function fetchNavigationFailure(error) {
-  return { type: FETCH_NAVIGATION_FAILURE, error };
+export function fetchNavigationFailure(error: Error): Action {
+  return { type: "FETCH_NAVIGATION_FAILURE", error };
 }
 
-export function fetchNavigation(langCode) {
-  return function fetchNavigationDispatch(dispatch) {
+export function fetchNavigation(langCode: string): ThunkAction {
+  return function fetchNavigationDispatch(dispatch: Dispatch) {
     dispatch(fetchNavigationRequest());
 
-    const instance = dc();
-    return instance.guide.fetchNavigation(langCode)
-      .then((navigation) => {
-        if (navigation.code) {
-          dispatch(fetchNavigationFailure({ error: navigation.message }));
-        } else {
-          dispatch(fetchNavigationSuccess(navigation));
-        }
+    return getNavigation(langCode)
+      .then(guides => dispatch(fetchNavigationSuccess(guides)))
+      .catch((error) => {
+        dispatch(fetchNavigationFailure(error.message));
       });
   };
 }

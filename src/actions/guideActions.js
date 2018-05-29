@@ -1,6 +1,6 @@
 // @flow
 
-import fetchUtils from "../utils/fetchUtils";
+import { getGuides } from "../utils/fetchUtils";
 
 export function fetchGuidesRequest(): Action {
   return { type: "FETCH_GUIDES_REQUEST" };
@@ -18,8 +18,7 @@ export function fetchGuides(langCode: string): ThunkAction {
   return function fetchGuidesDispatch(dispatch: Dispatch) {
     dispatch(fetchGuidesRequest());
 
-    return fetchUtils
-      .getGuides(langCode)
+    return getGuides(langCode)
       .then(guides => dispatch(fetchGuidesSuccess(guides)))
       .catch((error) => {
         dispatch(fetchGuidesFailure(error.message));

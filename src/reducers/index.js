@@ -2,7 +2,6 @@ import oldGuideGroups from "./oldGuideGroupReducer";
 import guideGroups from "./guideGroupReducer";
 import guides from "./guideReducer";
 import navigation from "./navigationReducer";
-import newNavigation from "./newNavigationReducer";
 import subLocations from "./subLocationReducer";
 import metrics from "./metricReducer";
 import audio from "./audioReducer";
@@ -19,7 +18,6 @@ const rootReducer = {
   guideGroups,
   guides,
   navigation,
-  newNavigation,
   subLocations,
   audio,
   metrics,
