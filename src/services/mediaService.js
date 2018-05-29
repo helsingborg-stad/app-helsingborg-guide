@@ -1,9 +1,7 @@
 import { NativeModules, DeviceEventEmitter, NativeEventEmitter, Platform } from "react-native";
 import NotificationService from "./notificationService";
-import { errorHappened } from "../actions/errorActions";
 import fetchService from "./FetchService";
 import LangService from "./langService";
-import { togglePlay, releaseAudioFile, loadAudioFile, loadAudioFileSuccess, updateAudio } from "../actions/audioActions";
 
 let instance = null;
 let MediaPlayer;
@@ -42,6 +40,8 @@ export default class MediaService {
   audio;
   updateInterval;
   updatePaused;
+  onPreparedDispatch;
+  onUpdateAudioStateDispatch;
 
   constructor() {
     this.audio = RELEASED_AUDIO_OBJ;
@@ -54,9 +54,11 @@ export default class MediaService {
     return instance;
   }
 
-  init(audio, guideID) {
+  init(audio, guideID, onAudioInited, onAudioLoadSuccess, onUpdateAudioState) {
     if (!audio || !audio.url) return Promise.reject(new Error("No url provided"));
 
+    this.onPreparedDispatch = onAudioLoadSuccess;
+    this.onUpdateAudioStateDispatch = onUpdateAudioState;
     fetchService
       .isExist(audio.url, guideID)
       .then((exist) => {
@@ -72,9 +74,9 @@ export default class MediaService {
         this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
         this.onCompleted(this.onCompletedCallback);
 
-        // TODO dispatch action or callback
-        // store.dispatch(loadAudioFile(this.audio));
+        onAudioInited(this.audio);
         this.onPrepared(this.onPreparedCallback);
+        this.resumeUpdatingState();
 
         if (Platform.OS === "ios") return MediaPlayer.init(MediaService.url, audio.title, audio.description_plain);
         return MediaPlayer.init(MediaService.url);
@@ -84,23 +86,17 @@ export default class MediaService {
 
   start() {
     MediaPlayer.start();
-    // TODO dispatch action or callback
-    // store.dispatch(togglePlay(true));
     this.resumeUpdatingState();
   }
 
   pause() {
     this.pauseUpdatingState();
     MediaPlayer.pause();
-    // TODO dispatch action or callback
-    // store.dispatch(togglePlay(false));
   }
 
   stop() {
     this.pauseUpdatingState();
     MediaPlayer.stop();
-    // TODO dispatch action or callback
-    // store.dispatch(togglePlay(false));
   }
 
   release() {
@@ -114,8 +110,7 @@ export default class MediaService {
 
     MediaService.url = null;
     this.audio = null;
-    // TODO dispatch action or callback
-    // store.dispatch(releaseAudioFile());
+
     NotificationService.closeNotification(MEDIA_NOTIFICATION_ID);
     this.unSubscribeOnError(MediaService.onErrorHandler);
     this.unSubscribeOnPrepared(this.onPreparedCallback);
@@ -162,8 +157,9 @@ export default class MediaService {
   }
 
   onPreparedCallback() {
-    // TODO dispatch action or callback
-    // store.dispatch(loadAudioFileSuccess());
+    this.onPreparedDispatch();
+    this.audio.isPrepared = true;
+
     if (this.updateInterval) return;
     this.updateInterval = setInterval(() => {
       if (!this.updatePaused) this.updateAudioState();
@@ -180,14 +176,15 @@ export default class MediaService {
   updateAudioState() {
     this.getMeta().then((meta) => {
       if (!this.updatePaused) {
-        // TODO dispatch action or callback
-        // store.dispatch(updateAudio(meta));
+        this.audio.currentPosition = meta.currentPosition;
+        this.audio.duration = meta.duration;
+        this.audio.isPlaying = meta.isPlaying;
+        this.onUpdateAudioStateDispatch(this.audio);
       }
     });
   }
 
   clearUpdateInterval() {
-    console.log("interval from clear func:", this.updateInterval);
     clearInterval(this.updateInterval);
     this.updateInterval = null;
   }

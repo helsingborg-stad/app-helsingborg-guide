@@ -165,6 +165,17 @@ declare type PointProperty = {
   icon?: string
 };
 
+declare type AudioState = {
+  url: string,
+  title: string,
+  avatar_url: string,
+  hasAudio: boolean,
+  isPrepared: boolean,
+  isPlaying: boolean,
+  duration: number,
+  currentPosition: number
+}
+
 declare type PostStatus = 'publish' | 'draft';
 
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
@@ -182,5 +193,6 @@ declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
   guides: GuideState,
-  geolocation: GeolocationType
+  geolocation: GeolocationType,
+  audio: AudioState
 }
