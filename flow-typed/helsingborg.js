@@ -10,6 +10,9 @@ declare type Action =
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
   | { type: "SELECT_CURRENT_IMAGE", url: ?string }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
+  | { type: "FETCH_NAVIGATION_REQUEST" }
+  | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
+  | { type: "FETCH_NAVIGATION_FAILURE", error: Error }
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
@@ -250,6 +253,11 @@ declare type UIState = {
   developerMode: boolean,
 }
 
+declare type NavigationState = {
+  isFetching: boolean,
+  categories: NavigationCategory[]
+}
+
 declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
@@ -257,4 +265,6 @@ declare type RootState = {
   geolocation: GeolocationType,
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
+  // TODO to be renamed once the old one is removed
+  newNavigation: NavigationState,
 }
