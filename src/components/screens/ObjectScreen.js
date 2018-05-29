@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import ObjectView from "../shared/ObjectView";
 import LangService from "../../services/langService";
 import { AnalyticsUtils } from "../../utils/";
-import { selectCurrentContentObjectImage } from "../../actions/uiStateActions";
+
 import fetchService from "../../services/FetchService";
 import MediaService from "../../services/mediaService";
 import { loadAudioFile, loadAudioFileSuccess, updateAudio } from "../../actions/audioActions";
+import { selectCurrentContentObjectImage, selectCurrentImage } from "../../actions/uiStateActions";
 
 type Props = {
   audioState: AudioState,
@@ -16,6 +17,7 @@ type Props = {
   currentContentObjectImageIndex: number,
   navigation: Object,
   selectCurrentContentObjectImage(newIndex: number): void,
+  selectCurrentImage(url: ?string): void,
   dispatchLoadAudioFile(audio: Object): void,
   dispatchLoadAudioFileSuccess(): void,
   dispatchUpdateAudioState(audio: Object): void,
@@ -44,6 +46,7 @@ class ObjectScreen extends Component<Props> {
   };
 
   onGoToImage = (image: Images) => {
+    this.props.selectCurrentImage(image.large);
     const { navigate } = this.props.navigation;
     navigate("ImageScreen", { image });
   };
@@ -100,6 +103,7 @@ class ObjectScreen extends Component<Props> {
 
     return (<ObjectView
       contentObject={currentContentObject}
+      guideId={currentGuide.id}
       guideType={currentGuide.guideType}
       onSwiperIndexChanged={this.onSwiperIndexChanged}
       imageIndex={currentContentObjectImageIndex}
@@ -129,6 +133,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     dispatchLoadAudioFile: (audio: any) => dispatch(loadAudioFile(audio)),
     dispatchLoadAudioFileSuccess: () => dispatch(loadAudioFileSuccess()),
     dispatchUpdateAudioState: (audio: any) => dispatch(updateAudio(audio)),
+    selectCurrentImage: (url: ?string) => dispatch(selectCurrentImage(url)),
   };
 }
 

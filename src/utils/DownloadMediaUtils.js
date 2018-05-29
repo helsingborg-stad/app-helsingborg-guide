@@ -69,10 +69,10 @@ export async function startDownload(sessionId: string, url: string): Promise<boo
   return fetchPromise;
 }
 
-export async function remove(id: number, url: string): Promise<any> {
+export async function remove(sessionId: number, url: string): Promise<any> {
   const config = {
     fileCache: true,
-    path: `${basePath}/${id}/${url}`,
+    path: `${basePath}/${sessionId}/${url}`,
   };
 
   try {
@@ -100,3 +100,23 @@ export async function removeMultiple(sessionId: string): Promise<any> {
     throw new Error(`Failed to remove files for session ${sessionId}`);
   }
 }
+
+export async function loadFromCache(sessionId: string, url: string): Promise<any> {
+  console.log(`loadFromCache: ${sessionId}`);
+  const path = `${basePath}/${sessionId}/${url}`;
+  const fetchPromise = RNFetchBlob.fs.readFile(path, "base64");
+
+  fetchPromise
+    .then(() => console.log("cache HIT"))
+    .catch(() => console.log("cache MISS"));
+
+  return fetchPromise;
+}
+
+export default {
+  cancelPendingTasks,
+  startDownload,
+  remove,
+  removeMultiple,
+};
+

@@ -15,6 +15,7 @@ import AudioPlayerView from "../AudioPlayerView";
 
 type Props = {
   contentObject: ContentObject,
+  guideId?: number,
   imageIndex: number,
   guideType: GuideType,
   onSwiperIndexChanged: (newIndex: number) => (void),
@@ -121,12 +122,13 @@ function displayButtonsBar(audio?: MediaContent,
 // eslint-disable-next-line react/prefer-stateless-function
 class ObjectView extends Component<Props> {
   render() {
+    const { guideId } = this.props;
     return (
-
       <View style={styles.viewContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.imageContainer}>
             <ImageSwiper
+              sessionId={guideId}
               images={this.props.contentObject.images}
               onSwiperIndexChanged={this.props.onSwiperIndexChanged}
               onGoToImage={this.props.onGoToImage}

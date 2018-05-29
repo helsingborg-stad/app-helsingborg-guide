@@ -1,8 +1,8 @@
 // @flow
 
 export default {
+  // eslint-disable-next-line
   showShareButton: (title: string, image: Images) => {
-    console.log(`${title} ${image.large ? image.large : ""} `);
   },
 
 };

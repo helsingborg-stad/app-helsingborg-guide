@@ -40,4 +40,8 @@ export default StyleSheet.create({
       color: Colors.purple,
     },
   ]),
+  progressBarAndroid: {
+    marginTop: -4,
+    marginBottom: -8,
+  },
 });
