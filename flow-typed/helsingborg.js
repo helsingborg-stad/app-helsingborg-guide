@@ -34,6 +34,21 @@ declare type Action =
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   ;
 
+declare type NavigationItemType = 'guide' | 'guideGroup';
+
+declare type NavigationItem = {
+  id: number,
+  type: NavigationItemType
+}
+
+declare type NavigationCategory = {
+  id: number,
+  name: string,
+  slug: string,
+  items: NavigationItem[]
+}
+
+
 declare type Coords = {
   speed: number,
   longitude: number,
