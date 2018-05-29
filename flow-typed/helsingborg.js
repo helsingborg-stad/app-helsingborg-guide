@@ -188,8 +188,9 @@ declare type AudioState = {
   isPrepared: boolean,
   isPlaying: boolean,
   duration: number,
-  currentPosition: number
-}
+  currentPosition: number,
+  isMovingSlider: boolean
+};
 
 declare type PostStatus = 'publish' | 'draft';
 

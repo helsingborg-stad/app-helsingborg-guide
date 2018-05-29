@@ -23,10 +23,6 @@ type Props = {
   onGoToImage: (image: Images) => (void),
   onGoToLink: (url: string, title?: string) => (void),
   loadAudioFile: () => (void),
-  onClosePlayer: () => (void),
-  onTogglePlaying: () => (void),
-  onSliding: (value: number) => (void),
-  onSliderValueCompleted: (value: number) => (void),
 }
 
 function displayID(searchableID: string) {
@@ -130,7 +126,11 @@ class ObjectView extends Component<Props> {
       <View style={styles.viewContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.imageContainer}>
-            <ImageSwiper images={this.props.contentObject.images} onSwiperIndexChanged={this.props.onSwiperIndexChanged} onGoToImage={this.props.onGoToImage} />
+            <ImageSwiper
+              images={this.props.contentObject.images}
+              onSwiperIndexChanged={this.props.onSwiperIndexChanged}
+              onGoToImage={this.props.onGoToImage}
+            />
             <View style={styles.shareBtn}>
               {SharingService.showShareButton(this.props.contentObject.title, this.props.contentObject.images[this.props.imageIndex], this)}
             </View>
@@ -150,12 +150,7 @@ class ObjectView extends Component<Props> {
             </View>
           </View>
         </ScrollView>
-        <AudioPlayerView
-          onClosePlayer={this.props.onClosePlayer}
-          onTogglePlaying={this.props.onTogglePlaying}
-          onSlidingCallback={this.props.onSliding}
-          onSliderValueCompletedCallback={this.props.onSliderValueCompleted}
-        />
+        <AudioPlayerView />
 
       </View>
 

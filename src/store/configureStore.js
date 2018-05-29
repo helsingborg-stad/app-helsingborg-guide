@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import { persistStore, persistCombineReducers } from "redux-persist";
 import reducers from "../reducers";
 import offlineDataMiddleware from "../middleware/offlineDataMiddleware";
+import audioMiddleware from "../middleware/audioMiddleware";
 
 const config = {
   key: "hbgRoot",
@@ -18,6 +19,7 @@ const reducer = persistCombineReducers(config, reducers);
 
 const middlewares = [
   offlineDataMiddleware,
+  audioMiddleware,
   thunk,
 ];
 

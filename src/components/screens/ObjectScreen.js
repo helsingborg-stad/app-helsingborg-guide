@@ -8,7 +8,7 @@ import { AnalyticsUtils } from "../../utils/";
 import { selectCurrentContentObjectImage } from "../../actions/uiStateActions";
 import fetchService from "../../services/FetchService";
 import MediaService from "../../services/mediaService";
-import { togglePlay, releaseAudioFile, loadAudioFile, loadAudioFileSuccess, updateAudio } from "../../actions/audioActions";
+import { loadAudioFile, loadAudioFileSuccess, updateAudio } from "../../actions/audioActions";
 
 type Props = {
   audioState: AudioState,
@@ -18,9 +18,7 @@ type Props = {
   selectCurrentContentObjectImage(newIndex: number): void,
   dispatchLoadAudioFile(audio: Object): void,
   dispatchLoadAudioFileSuccess(): void,
-  dispatchReleaseAudioFile(): void,
   dispatchUpdateAudioState(audio: Object): void,
-  dispatchTogglePlaying(play: boolean): void,
 }
 
 function isMediaAvailable(media?: MediaContent): boolean {
@@ -93,29 +91,6 @@ class ObjectScreen extends Component<Props> {
       this.onUpdateAudioState); // TODO: offline
   };
 
-  onClosePlayer = () => {
-    this.mediaService.release();
-    this.props.dispatchReleaseAudioFile();
-  };
-
-  onTogglePlaying = () => {
-    if (this.props.audioState.isPlaying) {
-      this.mediaService.pause();
-      this.props.dispatchTogglePlaying(false);
-    } else {
-      this.mediaService.start();
-      this.props.dispatchTogglePlaying(true);
-    }
-  }
-  onSliding = (value: number) => {
-    console.log(`obj screen slide ${value}`);
-    this.mediaService.pauseUpdatingState();
-  }
-
-  onSliderValueCompleted = (value) => {
-    this.mediaService.seekTo(value);
-    this.mediaService.resumeUpdatingState();
-  }
 
   render() {
     const { currentContentObject, currentContentObjectImageIndex } = this.props;
@@ -133,11 +108,6 @@ class ObjectScreen extends Component<Props> {
       onGoToImage={this.onGoToImage}
       onGoToLink={this.onGoToLink}
       loadAudioFile={this.loadAudioFile}
-      onClosePlayer={this.onClosePlayer}
-      onTogglePlaying={this.onTogglePlaying}
-      onSliding={this.onSliding}
-      onSliderValueCompleted={this.onSliderValueCompleted}
-
     />);
   }
 }
@@ -158,10 +128,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectCurrentContentObjectImage: (newIndex: number) => dispatch(selectCurrentContentObjectImage(newIndex)),
     dispatchLoadAudioFile: (audio: any) => dispatch(loadAudioFile(audio)),
     dispatchLoadAudioFileSuccess: () => dispatch(loadAudioFileSuccess()),
-    dispatchReleaseAudioFile: () => dispatch(releaseAudioFile()),
     dispatchUpdateAudioState: (audio: any) => dispatch(updateAudio(audio)),
-    dispatchTogglePlaying: (play: boolean) => dispatch(togglePlay(play)),
-
   };
 }
 

@@ -6,6 +6,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 import { Colors } from "../../../styles/";
+import {
+  togglePlay,
+  releaseAudioFile,
+  moveAudioSlider,
+  moveAudioSliderComplete,
+} from "../../../actions/audioActions";
 
 import styles from "./style";
 
@@ -13,23 +19,23 @@ const ios = Platform.OS === "ios";
 
 type Props = {
   audio: AudioState,
-  onClosePlayer: () => (void),
-  onTogglePlaying: () => (void),
-  onSlidingCallback: (value: number) => (void),
-  onSliderValueCompletedCallback: (newPosition: number) => (void),
+  dispatchTogglePlaying(): void,
+  dispatchReleaseAudioFile(): void,
+  dispatchMoveAudioSlider(position: number): void,
+  dispatchMoveAudioSliderComplete(position: number): void,
 }
 
 type State = {
   animValue: number
 }
 
-function displayControlButton(isPlaying: boolean, onTogglePlaying: () => (void)): any {
+function displayControlButton(isPlaying: boolean, dispatchToggle: any): any {
   let btn = null;
   btn = isPlaying ? (
-    <TouchableOpacity style={styles.closeBtnContainer} onPress={onTogglePlaying}>
+    <TouchableOpacity style={styles.closeBtnContainer} onPress={dispatchToggle}>
       <Icon name="pause" size={26} color="purple" />
     </TouchableOpacity>) : (
-      <TouchableOpacity style={styles.closeBtnContainer} onPress={onTogglePlaying}>
+      <TouchableOpacity style={styles.closeBtnContainer} onPress={dispatchToggle}>
         <Icon name="play" size={26} color="purple" />
       </TouchableOpacity >);
   return btn;
@@ -55,19 +61,18 @@ function getDurationString(currentPosition: number): string {
   return `${minutes}:${padWithZeros(seconds)}`;
 }
 
-function onSliding(value: number, onSlidingCallback: (value: number) => (void)): void {
-  onSlidingCallback(value);
+function onSliderValueCompleted(value: number, dispatchSliderMoveComplete: any): void {
+  dispatchSliderMoveComplete(value);
 }
 
-function onSliderValueCompleted(value: number, onSliderValueCompletedCallback: (newPosition: number) => (void)): void {
-  onSliderValueCompletedCallback(value);
+function onSliderValueChanged(value: number, dispatchMoveAudioSlider: any, isMovingSlider: boolean) {
+  if (!isMovingSlider) dispatchMoveAudioSlider(value);
 }
 
 const AudioPlayerView = (props: Props, state: State) => {
   if (!props.audio.hasAudio || !props.audio.isPrepared) {
     return null;
   }
-
 
   return (
     <SafeAreaView style={styles.audioPlayer}>
@@ -79,7 +84,7 @@ const AudioPlayerView = (props: Props, state: State) => {
             </Text>
           </View>
           <View style={styles.sliderContainer}>
-            {displayControlButton(props.audio.isPlaying, props.onTogglePlaying)}
+            {displayControlButton(props.audio.isPlaying, props.dispatchTogglePlaying)}
             <Text style={styles.durationText}>{getDurationString(props.audio.currentPosition)}</Text>
             <View style={styles.slider}>
               <Slider
@@ -88,12 +93,12 @@ const AudioPlayerView = (props: Props, state: State) => {
                 maximumValue={props.audio.duration}
                 value={props.audio.currentPosition}
                 minimumTrackTintColor={Colors.purple}
-                onValueChange={value => onSliding(value, props.onSlidingCallback)}
-                onSlidingComplete={value => onSliderValueCompleted(value, props.onSliderValueCompletedCallback)}
+                onValueChange={value => onSliderValueChanged(value, props.dispatchMoveAudioSlider, props.audio.isMovingSlider)}
+                onSlidingComplete={value => onSliderValueCompleted(value, props.dispatchMoveAudioSliderComplete)}
               />
             </View>
             <Text style={styles.durationText}>{getDurationString(props.audio.duration)}</Text>
-            <TouchableOpacity style={styles.closeBtnContainer} onPress={props.onClosePlayer}>
+            <TouchableOpacity style={styles.closeBtnContainer} onPress={props.dispatchReleaseAudioFile}>
               <Icon2 name="cancel" color={Colors.warmGrey} size={32} />
             </TouchableOpacity>
           </View>
@@ -109,4 +114,13 @@ function mapStateToProps(state: RootState) {
   };
 }
 
-export default connect(mapStateToProps)(AudioPlayerView);
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    dispatchTogglePlaying: () => dispatch(togglePlay()),
+    dispatchReleaseAudioFile: () => dispatch(releaseAudioFile()),
+    dispatchMoveAudioSlider: position => dispatch(moveAudioSlider(position)),
+    dispatchMoveAudioSliderComplete: position => dispatch(moveAudioSliderComplete(position)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AudioPlayerView);
