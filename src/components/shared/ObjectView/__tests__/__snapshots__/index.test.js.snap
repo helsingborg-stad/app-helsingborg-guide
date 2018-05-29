@@ -19,7 +19,15 @@ exports[`Basic GuideObject 1`] = `
     }
   >
     <View>
-      <View>
+      <View
+        style={
+          Object {
+            "aspectRatio": 1.7777777777777777,
+            "height": "auto",
+            "width": "100%",
+          }
+        }
+      >
         <View
           onLayout={[Function]}
           style={
@@ -55,7 +63,6 @@ exports[`Basic GuideObject 1`] = `
             }
             disableNextButton={false}
             dotColor="#ffffff"
-            height="32%"
             horizontal={true}
             index={0}
             loadMinimal={false}
@@ -79,7 +86,7 @@ exports[`Basic GuideObject 1`] = `
                 style={
                   Array [
                     Object {
-                      "height": "32%",
+                      "height": 1334,
                       "width": 750,
                     },
                     Object {
@@ -115,8 +122,7 @@ exports[`Basic GuideObject 1`] = `
                       }
                       style={
                         Object {
-                          "aspectRatio": 1.7777777777777777,
-                          "height": "auto",
+                          "height": "100%",
                           "width": "100%",
                         }
                       }
@@ -128,7 +134,7 @@ exports[`Basic GuideObject 1`] = `
                 style={
                   Array [
                     Object {
-                      "height": "32%",
+                      "height": 1334,
                       "width": 750,
                     },
                     Object {
@@ -164,8 +170,7 @@ exports[`Basic GuideObject 1`] = `
                       }
                       style={
                         Object {
-                          "aspectRatio": 1.7777777777777777,
-                          "height": "auto",
+                          "height": "100%",
                           "width": "100%",
                         }
                       }
@@ -177,7 +182,7 @@ exports[`Basic GuideObject 1`] = `
                 style={
                   Array [
                     Object {
-                      "height": "32%",
+                      "height": 1334,
                       "width": 750,
                     },
                     Object {
@@ -213,8 +218,7 @@ exports[`Basic GuideObject 1`] = `
                       }
                       style={
                         Object {
-                          "aspectRatio": 1.7777777777777777,
-                          "height": "auto",
+                          "height": "100%",
                           "width": "100%",
                         }
                       }
@@ -312,7 +316,6 @@ exports[`Basic GuideObject 1`] = `
           Object {
             "alignItems": "stretch",
             "backgroundColor": "#ffffff",
-            "flex": 1,
           }
         }
       >

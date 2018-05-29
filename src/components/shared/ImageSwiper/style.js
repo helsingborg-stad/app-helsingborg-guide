@@ -5,7 +5,6 @@ export default StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: "auto",
-    aspectRatio: 16 / 9,
+    height: "100%",
   },
 });

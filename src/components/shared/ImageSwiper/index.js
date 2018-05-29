@@ -24,7 +24,6 @@ function getImageSwiper(
   return (
     <Swiper
       style={styles.imagesSlider}
-      height="32%"
       dotColor={Colors.white}
       activeDotColor={Colors.lightPink}
       showsButtons={false}

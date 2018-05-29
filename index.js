@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { AppRegistry, Alert, NetInfo, UIManager, Platform, Linking } from "react-native";
+import {
+  AppRegistry,
+  Alert,
+  NetInfo,
+  UIManager,
+  Platform,
+  Linking,
+} from "react-native";
 import Nav from "src/Nav";
 import configureStore from "src/store/configureStore";
 import { loadSubLocations } from "src/actions/subLoactionActions";
@@ -16,6 +23,7 @@ import { fetchGuides } from "src/actions/guideActions";
 import { fetchNavigation } from "src/actions/navigationActions";
 import LocationService from "src/services/locationService";
 import DownloadTasksManager from "src/services/DownloadTasksManager";
+import { appStarted, appBecameActive, appBecameInactive } from "src/actions/uiStateActions";
 
 const { store, persistor } = configureStore();
 
@@ -135,7 +143,11 @@ export default class GuideHbg extends Component {
     return (
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <Nav />
+          <Nav
+            onAppStarted={() => store.dispatch(appStarted())}
+            onAppBecameActive={() => store.dispatch(appBecameActive())}
+            onAppBecameInactive={() => store.dispatch(appBecameInactive())}
+          />
         </PersistGate>
       </Provider>
     );

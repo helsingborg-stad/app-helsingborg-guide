@@ -11,6 +11,7 @@ import downloads from "./downloadReducer";
 import geolocation from "./geolocationReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
 import uiState from "./uiStateReducer";
+import downloadedGuides from "./downloadedGuides";
 
 const rootReducer = {
   oldGuideGroups,
@@ -25,6 +26,7 @@ const rootReducer = {
   downloads,
   geolocation,
   downloadDataVersion,
+  downloadedGuides,
   uiState,
 };
 

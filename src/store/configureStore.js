@@ -4,6 +4,7 @@ import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import thunk from "redux-thunk";
 import { persistStore, persistCombineReducers } from "redux-persist";
 import reducers from "../reducers";
+import offlineDataMiddleware from "../middleware/offlineDataMiddleware";
 
 const config = {
   key: "hbgRoot",
@@ -16,6 +17,7 @@ const config = {
 const reducer = persistCombineReducers(config, reducers);
 
 const middlewares = [
+  offlineDataMiddleware,
   thunk,
 ];
 
