@@ -12,4 +12,8 @@ export default StyleSheet.create({
     maxHeight: 44,
     maxWidth: 44,
   },
+  loadingSpinner: {
+    height: "100%",
+    width: "100%",
+  },
 });

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import {
-  Text,
+  ActivityIndicator,
   Image,
   View,
   TouchableOpacity,
@@ -14,6 +14,7 @@ import styles from "./styles";
 const settingsIcon = require("../../../images/settings.png");
 
 type Props = {
+  showLoadingSpinner: boolean
 }
 
 class HomeScreen extends Component<Props> {
@@ -32,7 +33,12 @@ class HomeScreen extends Component<Props> {
     });
   }
 
+
   render() {
+    if (this.props.showLoadingSpinner) {
+      return (<ActivityIndicator style={styles.loadingSpinner} />);
+    }
+
     return (<View />);
   }
 }
@@ -40,8 +46,9 @@ class HomeScreen extends Component<Props> {
 function mapStateToProps(state: RootState) {
   const { navigation } = state;
   const { isFetching, categories } = navigation;
+
   return {
-    isFetching,
+    showLoadingSpinner: isFetching,
     categories,
   };
 }
