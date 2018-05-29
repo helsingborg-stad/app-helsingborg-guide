@@ -6,6 +6,7 @@ import { TouchableWithoutFeedback, View } from "react-native";
 import styles from "./style";
 import MapWithListView from "../../shared/MapWithListView";
 import MapInformationOverlay from "../../shared/MapInformationOverlay";
+import AudioPlayerView from "../AudioPlayerView";
 
 type Props = {
   trail: Guide,
@@ -40,6 +41,7 @@ const TrailView = (props: Props) => (
       id={props.trail.id}
     />
     {props.showInfoOverlay ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay) : null}
+    <AudioPlayerView />
   </View>
 );
 

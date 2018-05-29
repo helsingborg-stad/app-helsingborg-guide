@@ -5,14 +5,16 @@ import { View } from "react-native";
 import { connect } from "react-redux";
 
 import GuideView from "../shared/GuideView";
-import { selectCurrentContentObject } from "../../actions/uiStateActions";
 import { AnalyticsUtils } from "../../utils/";
 import SearchButton from "../header/SearchButton";
+import { selectCurrentContentObject } from "../../actions/uiStateActions";
+import { releaseAudioFile } from "../../actions/audioActions";
 
 declare type Props = {
   currentGuide: ?Guide,
+  navigation: any,
   dispatchSelectContentObject(contentObject: ContentObject): void,
-  navigation: any
+  dispatchReleaseAudio(): void
 }
 
 class GuideScreen extends Component<Props> {
@@ -34,6 +36,10 @@ class GuideScreen extends Component<Props> {
     const { currentGuide } = props;
     const title = currentGuide ? currentGuide.name : null;
     props.navigation.setParams({ title });
+  }
+
+  componentWillUnmount() {
+    this.props.dispatchReleaseAudio();
   }
 
   onPressContentObject = (obj: ContentObject) => {
@@ -63,6 +69,7 @@ function mapStateToProps(state: RootState) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     dispatchSelectContentObject: (contentObject: ContentObject) => dispatch(selectCurrentContentObject(contentObject)),
+    dispatchReleaseAudio: () => dispatch(releaseAudioFile()),
   };
 }
 
