@@ -265,6 +265,5 @@ declare type RootState = {
   geolocation: GeolocationType,
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
-  // TODO to be renamed once the old one is removed
-  newNavigation: NavigationState,
+  navigation: NavigationState,
 }
