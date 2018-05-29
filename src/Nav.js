@@ -12,7 +12,7 @@ import {
   DebugScreen,
   DownloadsScreen,
   GuideScreen,
-  GuideListScreen,
+  HomeScreen,
   ImageScreen,
   LocationScreen,
   ObjectScreen,
@@ -34,7 +34,7 @@ import AnalyticsUtils from "./utils/AnalyticsUtils";
 
 const GuideNavigator = StackNavigator(
   {
-    GuideListScreen: { screen: GuideListScreen },
+    HomeScreen: { screen: HomeScreen },
     OldTrailScreen: { screen: OldTrailScreen },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
