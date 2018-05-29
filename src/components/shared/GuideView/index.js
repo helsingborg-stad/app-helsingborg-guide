@@ -23,7 +23,7 @@ declare type Props = {
 const textMaxHeight = Dimensions.get("window").height * 0.2;
 
 class GuideView extends Component<Props> {
-  renderContentObject = (obj: ContentObject) => {
+  renderContentObject = (sessionId: number, obj: ContentObject) => {
     const { images } = obj;
     const uri = images.length > 0 ? images[0].medium : null;
     return (
@@ -33,7 +33,7 @@ class GuideView extends Component<Props> {
         onPress={() => this.props.onPressContentObject(obj)}
       >
         <ImageView
-          source={{ uri }}
+          source={{ uri, sessionId }}
           style={styles.objectImage}
           resizeMode="cover"
         />
@@ -43,15 +43,16 @@ class GuideView extends Component<Props> {
     );
   }
 
-  renderContentObjects = (contentObjects: ContentObject[]) => (<View style={styles.objectsContainer} >
-    {contentObjects.map(item => this.renderContentObject(item))}
+  renderContentObjects = (sessionId: number, contentObjects: ContentObject[]) => (<View style={styles.objectsContainer} >
+    {contentObjects.map(item => this.renderContentObject(sessionId, item))}
   </View>
   )
 
   render() {
     const { guide } = this.props;
+    const { id } = guide;
     return (<ScrollView style={styles.container}>
-      <ImageView source={{ uri: guide.images.large }} style={styles.image} />
+      <ImageView source={{ uri: guide.images.large, sessionId: id }} style={styles.image} />
       <DownloadButtonContainer
         style={styles.downloadButton}
       />
@@ -66,7 +67,7 @@ class GuideView extends Component<Props> {
             <Text style={TextStyles.body}>{guide.description}</Text>
           </ExpandableView> : null}
       </View>
-      {this.renderContentObjects(guide.contentObjects)}
+      {this.renderContentObjects(id, guide.contentObjects)}
     </ScrollView>);
   }
 }

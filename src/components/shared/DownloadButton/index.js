@@ -38,7 +38,6 @@ function renderProgressbar(progress: number) {
       {Platform.OS === "ios" ? (
         <ProgressViewIOS
           progressTintColor={Colors.lightPink}
-          style={styles.progressView}
           progress={progress}
         />)
         : (
@@ -47,6 +46,7 @@ function renderProgressbar(progress: number) {
             styleAttr="Horizontal"
             indeterminate={false}
             progress={progress}
+            style={styles.progressBarAndroid}
           />)}
     </View >
   );

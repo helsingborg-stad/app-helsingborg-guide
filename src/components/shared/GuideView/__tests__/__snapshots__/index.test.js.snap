@@ -14,10 +14,10 @@ exports[`Guide with tagline 1`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -179,10 +179,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -260,10 +261,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -341,10 +343,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -422,10 +425,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -503,10 +507,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -584,10 +589,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -665,10 +671,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -746,10 +753,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -827,10 +835,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -908,10 +917,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -981,10 +991,10 @@ exports[`Guide with tagline 2`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -1146,10 +1156,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -1227,10 +1238,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -1308,10 +1320,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -1389,10 +1402,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -1470,10 +1484,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -1551,10 +1566,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -1632,10 +1648,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -1713,10 +1730,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -1794,10 +1812,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -1875,10 +1894,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -1948,10 +1968,10 @@ exports[`Guide with tagline 3`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -2113,10 +2133,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -2194,10 +2215,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -2275,10 +2297,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -2356,10 +2379,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -2437,10 +2461,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -2518,10 +2543,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -2599,10 +2625,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -2680,10 +2707,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -2761,10 +2789,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -2842,10 +2871,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -2915,10 +2945,10 @@ exports[`Guide with tagline 4`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -3080,10 +3110,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -3161,10 +3192,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -3242,10 +3274,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -3323,10 +3356,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -3404,10 +3438,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -3485,10 +3520,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -3566,10 +3602,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -3647,10 +3684,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -3728,10 +3766,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -3809,10 +3848,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -3882,10 +3922,10 @@ exports[`Guide with tagline 5`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -4047,10 +4087,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -4128,10 +4169,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -4209,10 +4251,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -4290,10 +4333,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -4371,10 +4415,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -4452,10 +4497,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -4533,10 +4579,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -4614,10 +4661,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -4695,10 +4743,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -4776,10 +4825,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -4849,10 +4899,10 @@ exports[`Guide with tagline 6`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -5014,10 +5064,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -5095,10 +5146,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -5176,10 +5228,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -5257,10 +5310,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -5338,10 +5392,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -5419,10 +5474,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -5500,10 +5556,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -5581,10 +5638,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -5662,10 +5720,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -5743,10 +5802,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -5816,10 +5876,10 @@ exports[`Guide with tagline 7`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -5981,10 +6041,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -6062,10 +6123,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -6143,10 +6205,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -6224,10 +6287,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -6305,10 +6369,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -6386,10 +6451,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -6467,10 +6533,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -6548,10 +6615,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -6629,10 +6697,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -6710,10 +6779,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -6783,10 +6853,10 @@ exports[`Guide without tagline 1`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -6931,10 +7001,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -7012,10 +7083,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -7093,10 +7165,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -7174,10 +7247,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -7255,10 +7329,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -7336,10 +7411,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -7417,10 +7493,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -7498,10 +7575,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -7579,10 +7657,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -7660,10 +7739,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -7733,10 +7813,10 @@ exports[`Guide without tagline 2`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -7881,10 +7961,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -7962,10 +8043,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -8043,10 +8125,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -8124,10 +8207,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -8205,10 +8289,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -8286,10 +8371,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -8367,10 +8453,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -8448,10 +8535,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -8529,10 +8617,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -8610,10 +8699,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -8683,10 +8773,10 @@ exports[`Guide without tagline 3`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -8831,10 +8921,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -8912,10 +9003,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -8993,10 +9085,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -9074,10 +9167,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -9155,10 +9249,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -9236,10 +9331,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -9317,10 +9413,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -9398,10 +9495,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -9479,10 +9577,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -9560,10 +9659,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -9633,10 +9733,10 @@ exports[`Guide without tagline 4`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -9781,10 +9881,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -9862,10 +9963,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -9943,10 +10045,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -10024,10 +10127,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -10105,10 +10209,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -10186,10 +10291,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -10267,10 +10373,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -10348,10 +10455,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -10429,10 +10537,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -10510,10 +10619,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -10583,10 +10693,10 @@ exports[`Guide without tagline 5`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -10731,10 +10841,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -10812,10 +10923,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -10893,10 +11005,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -10974,10 +11087,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -11055,10 +11169,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -11136,10 +11251,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -11217,10 +11333,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -11298,10 +11415,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -11379,10 +11497,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -11460,10 +11579,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -11533,10 +11653,10 @@ exports[`Guide without tagline 6`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -11681,10 +11801,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -11762,10 +11883,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -11843,10 +11965,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -11924,10 +12047,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -12005,10 +12129,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -12086,10 +12211,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -12167,10 +12293,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -12248,10 +12375,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -12329,10 +12457,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -12410,10 +12539,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }
@@ -12483,10 +12613,10 @@ exports[`Guide without tagline 7`] = `
   }
 >
   <View>
-    <Image
-      resizeMode={undefined}
+    <ImageView
       source={
         Object {
+          "sessionId": 200468,
           "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
         }
       }
@@ -12631,10 +12761,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
             }
           }
@@ -12712,10 +12843,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
             }
           }
@@ -12793,10 +12925,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
             }
           }
@@ -12874,10 +13007,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
             }
           }
@@ -12955,10 +13089,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
             }
           }
@@ -13036,10 +13171,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
             }
           }
@@ -13117,10 +13253,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
             }
           }
@@ -13198,10 +13335,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
             }
           }
@@ -13279,10 +13417,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
             }
           }
@@ -13360,10 +13499,11 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <Image
+        <ImageView
           resizeMode="cover"
           source={
             Object {
+              "sessionId": 200468,
               "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
             }
           }

@@ -4,13 +4,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ObjectView from "../shared/ObjectView";
 import { AnalyticsUtils } from "../../utils/";
-import { selectCurrentContentObjectImage } from "../../actions/uiStateActions";
+import { selectCurrentContentObjectImage, selectCurrentImage } from "../../actions/uiStateActions";
 
 type Props = {
   currentContentObject: ContentObject,
   currentContentObjectImageIndex: number,
   navigation: Object,
   selectCurrentContentObjectImage(newIndex: number): void,
+  selectCurrentImage(url: ?string): void,
 }
 
 class ObjectScreen extends Component<Props> {
@@ -19,6 +20,7 @@ class ObjectScreen extends Component<Props> {
   };
 
   onGoToImage = (image: Images) => {
+    this.props.selectCurrentImage(image.large);
     const { navigate } = this.props.navigation;
     navigate("ImageScreen", { image });
   };
@@ -35,6 +37,7 @@ class ObjectScreen extends Component<Props> {
     const { currentGuide } = params;
     return (<ObjectView
       contentObject={currentContentObject}
+      guideId={currentGuide.id}
       guideType={currentGuide.guideType}
       onSwiperIndexChanged={this.onSwiperIndexChanged}
       imageIndex={currentContentObjectImageIndex}
@@ -56,6 +59,7 @@ function mapStateToProps(state: RootState) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectCurrentContentObjectImage: (newIndex: number) => dispatch(selectCurrentContentObjectImage(newIndex)),
+    selectCurrentImage: (url: ?string) => dispatch(selectCurrentImage(url)),
   };
 }
 
