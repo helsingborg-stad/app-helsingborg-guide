@@ -23,7 +23,7 @@ type State = {
   animValue: number
 }
 
-function displayControlButton(isPlaying: boolean, onTogglePlaying: () => (void)): void {
+function displayControlButton(isPlaying: boolean, onTogglePlaying: () => (void)): any {
   let btn = null;
   btn = isPlaying ? (
     <TouchableOpacity style={styles.closeBtnContainer} onPress={onTogglePlaying}>
