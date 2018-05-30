@@ -13,6 +13,7 @@ import { selectCurrentContentObjectImage, selectCurrentImage } from "../../actio
 
 type Props = {
   audioState: AudioState,
+  currentGuide: Guide,
   currentContentObject: ContentObject,
   currentContentObjectImageIndex: number,
   navigation: Object,
@@ -88,7 +89,7 @@ class ObjectScreen extends Component<Props> {
       description_plain: this.props.currentContentObject.description,
     };
     this.mediaService.init(audioObject,
-      0/* offline guide id */,
+      this.props.currentGuide.id,
       this.onAudioInited,
       this.onAudioPrepared,
       this.onUpdateAudioState); // TODO: offline
@@ -117,11 +118,12 @@ class ObjectScreen extends Component<Props> {
 }
 
 function mapStateToProps(state: RootState) {
-  const { currentContentObject, currentContentObjectImageIndex } = state.uiState;
+  const { currentGuide, currentContentObject, currentContentObjectImageIndex } = state.uiState;
   const audioState = state.audio;
 
   return {
     audioState,
+    currentGuide,
     currentContentObject,
     currentContentObjectImageIndex,
   };

@@ -3,6 +3,8 @@ import NotificationService from "./notificationService";
 import fetchService from "./FetchService";
 import LangService from "./langService";
 
+import { loadFromCache } from "../utils/DownloadMediaUtils";
+
 let instance = null;
 let MediaPlayer;
 let EventEmitter;
@@ -54,11 +56,27 @@ export default class MediaService {
     return instance;
   }
 
+  tryLoadFromCache = async (guideId, uri) => {
+    if (!guideId || !uri) throw new Error("Null params passed");
+
+    try {
+      const data = await loadFromCache(`${guideId}`, uri);
+      this.setState({ imageSource: { uri: `data:image/png;base64,${data}` } });
+    } catch (err) {
+      // do not care
+      this.setState({ imageSource: { uri } });
+    }
+  }
+
   init(audio, guideID, onAudioInited, onAudioLoadSuccess, onUpdateAudioState) {
     if (!audio || !audio.url) return Promise.reject(new Error("No url provided"));
 
     this.onPreparedDispatch = onAudioLoadSuccess;
     this.onUpdateAudioStateDispatch = onUpdateAudioState;
+
+    // TODO: plug in new way of loading offline.
+    // this.tryLoadFromCache(guideID, audio.url);
+
     fetchService
       .isExist(audio.url, guideID)
       .then((exist) => {
