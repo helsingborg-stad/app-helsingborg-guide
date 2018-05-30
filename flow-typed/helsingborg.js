@@ -23,6 +23,14 @@ declare type Action =
   | { type: "DOWNLOAD_TASK_START", task: DownloadTask }
   | { type: "DOWNLOAD_TASK_SUCCESS", task: DownloadTask }
   | { type: "DOWNLOAD_TASK_FAILURE", task: DownloadTask, error: Error }
+  | { type: "AUDIO_INIT_FILE", audio: AudioState }
+  | { type: "AUDIO_LOAD_FILE", audio: AudioState }
+  | { type: "AUDIO_LOAD_FILE_SUCCESS", prepared: boolean }
+  | { type: "AUDIO_RELEASE_FILE", }
+  | { type: "AUDIO_TOGGLE_PLAY", }
+  | { type: "AUDIO_UPDATE", audio: AudioState }
+  | { type: "AUDIO_MOVE_SLIDER", position: number }
+  | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   ;
 
 declare type Coords = {
@@ -181,6 +189,18 @@ declare type PointProperty = {
   icon?: string
 };
 
+declare type AudioState = {
+  url: string,
+  title: string,
+  avatar_url: string,
+  hasAudio: boolean,
+  isPrepared: boolean,
+  isPlaying: boolean,
+  duration: number,
+  currentPosition: number,
+  isMovingSlider: boolean
+};
+
 declare type PostStatus = 'publish' | 'draft';
 
 declare type TaskStatus = "not_started" | "failed" | "pending" | "done";
@@ -219,5 +239,6 @@ declare type RootState = {
   guideGroups: GuideGroupState,
   guides: GuideState,
   geolocation: GeolocationType,
+  audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
 }

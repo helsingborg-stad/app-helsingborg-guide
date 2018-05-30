@@ -60,11 +60,19 @@ const currentContentObject: ContentObject = {
 
 function onSwiperIndexChanged() {
 }
-
 function onGoToImage() {
 }
-
 function onGoToLink() {
+}
+function loadAudioFile() {
+}
+function onClosePlayer() {
+}
+function onTogglePlaying() {
+}
+function onSliding() {
+}
+function onSliderValueCompleted() {
 }
 
 test("Basic GuideObject", () => {
@@ -72,9 +80,16 @@ test("Basic GuideObject", () => {
     contentObject={currentContentObject}
     guideType="guide"
     onSwiperIndexChanged={onSwiperIndexChanged}
+    audioButtonDisabled
+    videoButtonDisabled
     imageIndex={0}
     onGoToImage={onGoToImage}
     onGoToLink={onGoToLink}
+    loadAudioFile={loadAudioFile}
+    onClosePlayer={onClosePlayer}
+    onTogglePlaying={onTogglePlaying}
+    onSliding={onSliding}
+    onSliderValueCompleted={onSliderValueCompleted}
   />).toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -22,7 +22,6 @@ import IconTextTouchable from "../shared/IconTextTouchable";
 import ImageView from "../shared/image_view";
 import Keypad from "../shared/KeyPad";
 import MapInformationOverlay from "../shared/MapInformationOverlay";
-import MediaPlayer from "../shared/MediaPlayer";
 import NoInternetText from "../shared/noInternetText";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import ViewContainer from "../shared/view_container";
@@ -794,9 +793,6 @@ class GuideDetailsScreen extends Component {
           </View>
           {this.displayKeypad()}
           {this.renderInfoOverlay()}
-          <Footer>
-            <MediaPlayer />
-          </Footer>
         </ViewContainer>
       );
     }

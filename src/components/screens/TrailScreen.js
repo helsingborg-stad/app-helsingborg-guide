@@ -10,10 +10,12 @@ import {
 
 import InfoOverlayToggleView from "../shared/InfoOverlayToggleView";
 import TrailView from "../shared/TrailView";
+import { releaseAudioFile } from "../../actions/audioActions";
 
 type Props = {
   currentGuide: Guide,
   navigation: Object,
+  dispatchReleaseAudio(): void
 }
 
 type State = {
@@ -81,6 +83,10 @@ class TrailScreen extends Component<Props, State> {
     this.props.navigation.setParams({ toggleInfoOverlay: this.toggleInfoOverlay });
   }
 
+  componentWillUnmount() {
+    this.props.dispatchReleaseAudio();
+  }
+
   toggleInfoOverlay = () => {
     this.setState({ showInfoOverlay: !this.state.showInfoOverlay });
   }
@@ -106,4 +112,11 @@ function mapStateToProps(state: RootState) {
   return { currentGuide };
 }
 
-export default connect(mapStateToProps)(TrailScreen);
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    dispatchReleaseAudio: () => dispatch(releaseAudioFile()),
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);

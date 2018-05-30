@@ -376,6 +376,130 @@ exports[`Basic GuideObject 1`] = `
         <View
           style={
             Object {
+              "alignItems": "center",
+              "backgroundColor": "white",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "minHeight": 60,
+            }
+          }
+        >
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#f2f2f2",
+                "borderBottomWidth": 2,
+                "borderColor": "#D6D6D6",
+                "borderLeftWidth": 1,
+                "borderRightWidth": 1,
+                "borderTopWidth": 2,
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "minHeight": 46,
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "maxWidth": 120,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flex": 0,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#7B075E",
+                        "fontSize": 18,
+                      },
+                      Array [
+                        Object {},
+                        Object {
+                          "color": "#cecece",
+                        },
+                      ],
+                      Object {
+                        "fontFamily": "Material Design Icons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flex": 0,
+                    "paddingLeft": 8,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "purple",
+                        "fontSize": 16,
+                        "fontWeight": "500",
+                        "lineHeight": 22,
+                      },
+                      Object {
+                        "color": "#cecece",
+                      },
+                    ]
+                  }
+                >
+                  Play sound
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
               "flex": 4,
               "paddingHorizontal": 34,
               "paddingVertical": 10,
@@ -465,5 +589,12 @@ exports[`Basic GuideObject 1`] = `
       </View>
     </View>
   </RCTScrollView>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Audio Player
+  </Text>
 </View>
 `;

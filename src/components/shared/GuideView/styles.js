@@ -7,6 +7,12 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: Colors.white,
   },
+  viewContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "stretch",
+    backgroundColor: Colors.white,
+  },
   downloadButton: {
     width: "100%",
   },
