@@ -72,7 +72,6 @@ class ObjectScreen extends Component<Props> {
 
     if (audioState.title) AnalyticsUtils.logEvent("play_audio", { name: audioState.title });
 
-
     this.props.dispatchInitAudioFile(audioState);
   };
 
@@ -81,7 +80,6 @@ class ObjectScreen extends Component<Props> {
     const { currentContentObject, currentContentObjectImageIndex } = this.props;
     const { params } = this.props.navigation.state;
     const { currentGuide } = params;
-
 
     return (<ObjectView
       contentObject={currentContentObject}
