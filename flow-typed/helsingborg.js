@@ -23,6 +23,13 @@ declare type Action =
   | { type: "DOWNLOAD_TASK_START", task: DownloadTask }
   | { type: "DOWNLOAD_TASK_SUCCESS", task: DownloadTask }
   | { type: "DOWNLOAD_TASK_FAILURE", task: DownloadTask, error: Error }
+  | { type: "LOAD_FILE", audio: AudioState }
+  | { type: "LOAD_FILE_SUCCESS", prepared: boolean }
+  | { type: "RELEASE_FILE", }
+  | { type: "TOGGLE_PLAY", }
+  | { type: "UPDATE_AUDIO", audio: AudioState }
+  | { type: "MOVE_AUDIO_SLIDER", position: number }
+  | { type: "MOVE_AUDIO_SLIDER_COMPLETE", position: number }
   ;
 
 declare type Coords = {
