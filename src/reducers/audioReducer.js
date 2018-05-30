@@ -14,19 +14,19 @@ const defaultState: AudioState = {
 
 export default function audioReducer(state: AudioState = defaultState, action: Action): AudioState {
   switch (action.type) {
-    case "LOAD_FILE_SUCCESS":
+    case "AUDIO_LOAD_FILE_SUCCESS":
       return { ...state, isPrepared: true };
-    case "LOAD_FILE":
+    case "AUDIO_LOAD_FILE":
       return action.audio;
-    case "UPDATE_AUDIO":
+    case "AUDIO_UPDATE":
       return Object.assign({}, state, action.audio);
-    case "RELEASE_FILE":
+    case "AUDIO_RELEASE_FILE":
       return Object.assign({}, defaultState);
-    case "TOGGLE_PLAY":
+    case "AUDIO_TOGGLE_PLAY":
       return { ...state, isPlaying: !state.isPlaying };
-    case "MOVE_AUDIO_SLIDER":
+    case "AUDIO_MOVE_SLIDER":
       return { ...state, currentSliderPosition: action.position, isMovingSlider: true };
-    case "MOVE_AUDIO_SLIDER_COMPLETE":
+    case "AUDIO_MOVE_SLIDER_COMPLETE":
       return { ...state, currentSliderPosition: action.position, isMovingSlider: false };
     default:
       return state;

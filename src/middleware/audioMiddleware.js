@@ -15,16 +15,16 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
 
 
   switch (action.type) {
-    case "TOGGLE_PLAY":
+    case "AUDIO_TOGGLE_PLAY":
       if (nextState.audio.isPlaying) { mediaService.start(); } else { mediaService.pause(); }
       break;
-    case "RELEASE_FILE":
+    case "AUDIO_RELEASE_FILE":
       mediaService.release();
       break;
-    case "MOVE_AUDIO_SLIDER":
+    case "AUDIO_MOVE_SLIDER":
       if (!previousState.audio.isMovingSlider) { mediaService.pauseUpdatingState(); }
       break;
-    case "MOVE_AUDIO_SLIDER_COMPLETE":
+    case "AUDIO_MOVE_SLIDER_COMPLETE":
       mediaService.seekTo(action.position);
       mediaService.resumeUpdatingState();
       break;
