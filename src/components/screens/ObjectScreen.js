@@ -3,26 +3,32 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ObjectView from "../shared/ObjectView";
-import LangService from "../../services/langService";
 import { AnalyticsUtils } from "../../utils/";
-
+import LangService from "../../services/langService";
 import fetchService from "../../services/FetchService";
-import MediaService from "../../services/mediaService";
-import { loadAudioFile, loadAudioFileSuccess, updateAudio } from "../../actions/audioActions";
+import { initAudioFile } from "../../actions/audioActions";
 import { selectCurrentContentObjectImage, selectCurrentImage } from "../../actions/uiStateActions";
 
 type Props = {
-  audioState: AudioState,
-  currentGuide: Guide,
   currentContentObject: ContentObject,
   currentContentObjectImageIndex: number,
   navigation: Object,
   selectCurrentContentObjectImage(newIndex: number): void,
   selectCurrentImage(url: ?string): void,
-  dispatchLoadAudioFile(audio: Object): void,
-  dispatchLoadAudioFileSuccess(): void,
-  dispatchUpdateAudioState(audio: Object): void,
+  dispatchInitAudioFile(audio: AudioState): void,
 }
+
+const defaultState: AudioState = {
+  url: "",
+  title: "",
+  avatar_url: "",
+  hasAudio: false,
+  isPrepared: false,
+  isPlaying: true,
+  duration: 0,
+  currentPosition: 0,
+  isMovingSlider: false,
+};
 
 function isMediaAvailable(media?: MediaContent): boolean {
   const internet = true; // TODO: how will this work?
@@ -36,12 +42,6 @@ function isMediaAvailable(media?: MediaContent): boolean {
 }
 
 class ObjectScreen extends Component<Props> {
-  constructor(props) {
-    super(props);
-    this.mediaService = MediaService.getInstance();
-  }
-  mediaService: any;
-
   onSwiperIndexChanged = (newIndex: number) => {
     this.props.selectCurrentContentObjectImage(newIndex);
   };
@@ -58,41 +58,22 @@ class ObjectScreen extends Component<Props> {
     navigate("WebScreen", { url });
   };
 
-  onAudioInited = (audio: Object) => {
-    this.props.dispatchLoadAudioFile(audio);
-  };
-
-  onAudioPrepared = () => {
-    this.props.dispatchLoadAudioFileSuccess();
-  };
-
-  onUpdateAudioState = (audio: Object) => {
-    this.props.dispatchUpdateAudioState(audio);
-  };
 
   loadAudioFile = () => {
-    const { audio } = this.props.currentContentObject;
+    const { audio, title } = this.props.currentContentObject;
 
     if (!audio || !audio.url) return;
 
-    if (this.props.audioState.hasAudio) this.mediaService.release();
-    const audioName = audio.title;
-    console.log(`load ${audioName}`);
-    if (audioName) AnalyticsUtils.logEvent("play_audio", { name: audioName });
+    const audioState: AudioState = defaultState;
 
-    const audioObject = {
-      url: audio.url,
-      title: this.props.currentContentObject.title || LangService.strings.UNKNOWN_TITLE,
-      avatar_url: this.props.currentContentObject.images[0].thumbnail || "",
-      hasAudio: true,
-      isPlaying: true,
-      description_plain: this.props.currentContentObject.description,
-    };
-    this.mediaService.init(audioObject,
-      this.props.currentGuide.id,
-      this.onAudioInited,
-      this.onAudioPrepared,
-      this.onUpdateAudioState); // TODO: offline
+    audioState.title = title || LangService.strings.UNKNOWN_TITLE;
+    audioState.avatar_url = this.props.currentContentObject.images[0].thumbnail || "";
+    audioState.url = audio.url;
+
+    if (audioState.title) AnalyticsUtils.logEvent("play_audio", { name: audioState.title });
+
+
+    this.props.dispatchInitAudioFile(audioState);
   };
 
 
@@ -119,10 +100,8 @@ class ObjectScreen extends Component<Props> {
 
 function mapStateToProps(state: RootState) {
   const { currentGuide, currentContentObject, currentContentObjectImageIndex } = state.uiState;
-  const audioState = state.audio;
 
   return {
-    audioState,
     currentGuide,
     currentContentObject,
     currentContentObjectImageIndex,
@@ -132,9 +111,7 @@ function mapStateToProps(state: RootState) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectCurrentContentObjectImage: (newIndex: number) => dispatch(selectCurrentContentObjectImage(newIndex)),
-    dispatchLoadAudioFile: (audio: any) => dispatch(loadAudioFile(audio)),
-    dispatchLoadAudioFileSuccess: () => dispatch(loadAudioFileSuccess()),
-    dispatchUpdateAudioState: (audio: any) => dispatch(updateAudio(audio)),
+    dispatchInitAudioFile: (audio: AudioState) => dispatch(initAudioFile(audio)),
     selectCurrentImage: (url: ?string) => dispatch(selectCurrentImage(url)),
   };
 }

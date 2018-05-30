@@ -18,6 +18,8 @@ export default function audioReducer(state: AudioState = defaultState, action: A
       return { ...state, isPrepared: true };
     case "AUDIO_LOAD_FILE":
       return action.audio;
+    case "AUDIO_INIT_FILE":
+      return action.audio;
     case "AUDIO_UPDATE":
       return Object.assign({}, state, action.audio);
     case "AUDIO_RELEASE_FILE":

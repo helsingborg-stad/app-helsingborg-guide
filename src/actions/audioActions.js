@@ -1,5 +1,9 @@
 // @flow
 
+export function initAudioFile(audio: AudioState): Action {
+  return { type: "AUDIO_INIT_FILE", audio };
+}
+
 export function loadAudioFile(audio: AudioState): Action {
   return { type: "AUDIO_LOAD_FILE", audio };
 }

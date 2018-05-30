@@ -23,6 +23,7 @@ declare type Action =
   | { type: "DOWNLOAD_TASK_START", task: DownloadTask }
   | { type: "DOWNLOAD_TASK_SUCCESS", task: DownloadTask }
   | { type: "DOWNLOAD_TASK_FAILURE", task: DownloadTask, error: Error }
+  | { type: "AUDIO_INIT_FILE", audio: AudioState }
   | { type: "AUDIO_LOAD_FILE", audio: AudioState }
   | { type: "AUDIO_LOAD_FILE_SUCCESS", prepared: boolean }
   | { type: "AUDIO_RELEASE_FILE", }
