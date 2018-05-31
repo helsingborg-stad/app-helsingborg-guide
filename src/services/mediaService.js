@@ -1,9 +1,8 @@
 import { NativeModules, DeviceEventEmitter, NativeEventEmitter, Platform } from "react-native";
 import NotificationService from "./notificationService";
-import fetchService from "./FetchService";
 import LangService from "./langService";
 
-import { loadFromCache } from "../utils/DownloadMediaUtils";
+import { getFilePathInCache, isFilePathInCache } from "../utils/DownloadMediaUtils";
 
 let instance = null;
 let MediaPlayer;
@@ -61,45 +60,32 @@ export default class MediaService {
     if (!guideId || !uri) throw new Error("Null params passed");
 
     try {
-      const data = await loadFromCache(`${guideId}`, uri);
-      this.setState({ imageSource: { uri: `data:image/png;base64,${data}` } });
+      const path = getFilePathInCache(`${guideId}`, uri);
+      const isInCache = await isFilePathInCache(path);
+      if (isInCache) { MediaService.url = `file://${path}`; } else { MediaService.url = uri; }
     } catch (err) {
       // do not care
-      this.setState({ imageSource: { uri } });
+      MediaService.url = uri;
     }
   }
 
-  init(audio, guideID) {
+  async init(audio, guideID) {
     if (!audio || !audio.url) return Promise.reject(new Error("No url provided"));
 
+    await this.tryLoadFromCache(guideID, audio.url);
 
-    // TODO: plug in new way of loading offline.
-    // this.tryLoadFromCache(guideID, audio.url);
+    console.log("Audio URI: ", MediaService.url);
+    NotificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
+    this.onError(MediaService.onErrorHandler);
+    this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
+    this.onCompleted(this.onCompletedCallback);
 
+    this.onAudioInited(this.audio);
+    this.onPrepared(this.onPreparedCallback);
+    this.resumeUpdatingState();
 
-    fetchService
-      .isExist(audio.url, guideID)
-      .then((exist) => {
-        const fullPath = fetchService.getFullPath(audio.url, guideID);
-        if (exist) return Promise.resolve(`file://${fullPath}`);
-        return Promise.resolve(audio.url);
-      })
-      .then((uri) => {
-        console.log("Audio URI: ", uri);
-        MediaService.url = uri;
-        NotificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
-        this.onError(MediaService.onErrorHandler);
-        this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
-        this.onCompleted(this.onCompletedCallback);
-
-        this.onAudioInited(this.audio);
-        this.onPrepared(this.onPreparedCallback);
-        this.resumeUpdatingState();
-
-        if (Platform.OS === "ios") return MediaPlayer.init(MediaService.url, audio.title, audio.description_plain);
-        return MediaPlayer.init(MediaService.url);
-      });
-    return null;
+    if (Platform.OS === "ios") return MediaPlayer.init(MediaService.url, audio.title, audio.description_plain);
+    return MediaPlayer.init(MediaService.url);
   }
 
   start() {
@@ -255,6 +241,7 @@ export default class MediaService {
       avatar_url: audioState.avatar_url,
       hasAudio: true,
       isPlaying: true,
+      description_plain: "",
     };
     this.init(audioObject, guideID);
   };

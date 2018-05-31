@@ -113,6 +113,21 @@ export async function loadFromCache(sessionId: string, url: string): Promise<any
   return fetchPromise;
 }
 
+export function getFilePathInCache(sessionId: string, url: string) {
+  const fullPath = `${basePath}/${sessionId}/${url}`;
+  return fullPath;
+}
+
+export async function isFilePathInCache(path: string): Promise<boolean> {
+  const pathPromise = RNFetchBlob.fs.exists(path);
+
+  pathPromise
+    .then(() => console.log("cache HIT"))
+    .catch(() => console.log("cache MISS"));
+
+  return pathPromise;
+}
+
 export default {
   cancelPendingTasks,
   startDownload,
