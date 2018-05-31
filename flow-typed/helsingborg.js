@@ -37,13 +37,14 @@ declare type Action =
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   ;
 
-declare type NavigationItemType = 'guide' | 'guideGroup';
+declare type NavigationItemType = 'guide' | 'guidegroup' | 'trail';
 
 declare type NavigationItem = {
   id: number,
   type: NavigationItemType
 }
 
+// This type is fetched from http and stored in our store
 declare type NavigationCategory = {
   id: number,
   name: string,
@@ -51,6 +52,21 @@ declare type NavigationCategory = {
   items: NavigationItem[]
 }
 
+// This type is suited for rendering
+declare type NavigationSectionItem = {
+  id: number,
+  type: NavigationItemType,
+  image?: ?string,
+  title: string,
+  guidesCount?: number
+}
+
+declare type NavigationSection = {
+  id: number,
+  name: string,
+  slug: string,
+  items: NavigationSectionItem[]
+}
 
 declare type Coords = {
   speed: number,
