@@ -24,6 +24,7 @@ type Props = {
   onGoToImage: (image: Images) => (void),
   onGoToLink: (url: string, title?: string) => (void),
   loadAudioFile: () => (void),
+  onGoToVideo: (video?: MediaContent) => (void),
 }
 
 function displayID(searchableID: string) {
@@ -71,7 +72,8 @@ function displayButtonsBar(audio?: MediaContent,
   video?: MediaContent,
   audioButtonDisabled: boolean,
   videoButtonDisabled: boolean,
-  loadAudioFile: () => (void)) {
+  loadAudioFile: () => (void),
+  onGoToVideo: (video?: MediaContent) => (void)) {
   const audioBtnInvisible = !audio || !audio.url;
   const videoBtnInvisible = !video || !video.url;
 
@@ -89,14 +91,11 @@ function displayButtonsBar(audio?: MediaContent,
     />
   );
 
-  const videoBarItem = null;
-  //  console.log(videoButtonDisabled);
-
-  /* const videoBarItem = videoBtnInvisible ? null : (
+  const videoBarItem = videoBtnInvisible ? null : (
     <ButtonsBarItem
       disabled={videoButtonDisabled}
       onPress={() => {
-        this._goToVideoView(video, this.state.guideID);
+        onGoToVideo(video);
       }}
       name="play-box-outline"
       color={Colors.darkPurple}
@@ -105,7 +104,7 @@ function displayButtonsBar(audio?: MediaContent,
       view="row"
     />
   );
-  */
+
 
   return (
     <ButtonsBar>
@@ -145,7 +144,8 @@ class ObjectView extends Component<Props> {
               this.props.contentObject.video,
               this.props.audioButtonDisabled,
               this.props.videoButtonDisabled,
-              this.props.loadAudioFile)}
+              this.props.loadAudioFile,
+              this.props.onGoToVideo)}
             <View style={styles.articleContainer}>
               {this.props.contentObject.description ? displayText(this.props.contentObject.description) : null}
               {this.props.contentObject.links ? displayLinks(this.props.contentObject.links, this.props.onGoToLink) : null}

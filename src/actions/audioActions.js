@@ -24,6 +24,10 @@ export function togglePlay(): Action {
   return { type: "AUDIO_TOGGLE_PLAY" };
 }
 
+export function pauseAudio(): Action {
+  return { type: "AUDIO_PAUSE" };
+}
+
 export function moveAudioSlider(position: number): Action {
   return { type: "AUDIO_MOVE_SLIDER", position };
 }

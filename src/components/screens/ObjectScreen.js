@@ -6,16 +6,18 @@ import ObjectView from "../shared/ObjectView";
 import { AnalyticsUtils } from "../../utils/";
 import LangService from "../../services/langService";
 import fetchService from "../../services/FetchService";
-import { initAudioFile } from "../../actions/audioActions";
+import { initAudioFile, pauseAudio } from "../../actions/audioActions";
 import { selectCurrentContentObjectImage, selectCurrentImage } from "../../actions/uiStateActions";
 
 type Props = {
+  currentGuide: Guide,
   currentContentObject: ContentObject,
   currentContentObjectImageIndex: number,
   navigation: Object,
   selectCurrentContentObjectImage(newIndex: number): void,
   selectCurrentImage(url: ?string): void,
   dispatchInitAudioFile(audio: AudioState): void,
+  dispatchPauseAudio(): void
 }
 
 const defaultState: AudioState = {
@@ -58,6 +60,17 @@ class ObjectScreen extends Component<Props> {
     navigate("WebScreen", { url });
   };
 
+  onGoToVideo = (video?: MediaContent) => {
+    if (!video) { return; }
+
+    this.props.dispatchPauseAudio();
+
+    const { url, title } = video;
+    if (title) AnalyticsUtils.logEvent("play_video", { title });
+
+    const { navigate } = this.props.navigation;
+    navigate("VideoScreen", { videoUrl: url, title, guideID: this.props.currentGuide.id });
+  }
 
   loadAudioFile = () => {
     const { audio, title } = this.props.currentContentObject;
@@ -92,6 +105,7 @@ class ObjectScreen extends Component<Props> {
       onGoToImage={this.onGoToImage}
       onGoToLink={this.onGoToLink}
       loadAudioFile={this.loadAudioFile}
+      onGoToVideo={this.onGoToVideo}
     />);
   }
 }
@@ -110,6 +124,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectCurrentContentObjectImage: (newIndex: number) => dispatch(selectCurrentContentObjectImage(newIndex)),
     dispatchInitAudioFile: (audio: AudioState) => dispatch(initAudioFile(audio)),
+    dispatchPauseAudio: () => dispatch(pauseAudio()),
     selectCurrentImage: (url: ?string) => dispatch(selectCurrentImage(url)),
   };
 }

@@ -38,6 +38,9 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     case "AUDIO_MOVE_SLIDER":
       if (!previousState.audio.isMovingSlider) { mediaService.pauseUpdatingState(); }
       break;
+    case "AUDIO_PAUSE":
+      mediaService.pause();
+      break;
     case "AUDIO_MOVE_SLIDER_COMPLETE":
       mediaService.seekTo(action.position);
       mediaService.resumeUpdatingState();
