@@ -2,7 +2,7 @@ import { NativeModules, DeviceEventEmitter, NativeEventEmitter, Platform } from 
 import NotificationService from "./notificationService";
 import LangService from "./langService";
 
-import { getFilePathInCache, isFilePathInCache } from "../utils/DownloadMediaUtils";
+import { isFileInCache, getFilePathInCache } from "../utils/DownloadMediaUtils";
 
 let instance = null;
 let MediaPlayer;
@@ -60,9 +60,8 @@ export default class MediaService {
     if (!guideId || !uri) throw new Error("Null params passed");
 
     try {
-      const path = getFilePathInCache(`${guideId}`, uri);
-      const isInCache = await isFilePathInCache(path);
-      if (isInCache) { MediaService.url = `file://${path}`; } else { MediaService.url = uri; }
+      const isInCache = await isFileInCache(`${guideId}`, uri);
+      if (isInCache) { MediaService.url = `file://${getFilePathInCache(`${guideId}`, uri)}`; } else { MediaService.url = uri; }
     } catch (err) {
       // do not care
       MediaService.url = uri;

@@ -1,4 +1,5 @@
 // @flow
+import { Platform } from "react-native";
 import RNFetchBlob, { type FetchBlobResponse, StatefulPromise } from "react-native-fetch-blob";
 
 const basePath = RNFetchBlob.fs.dirs.CacheDir;
@@ -101,9 +102,14 @@ export async function removeMultiple(sessionId: string): Promise<any> {
   }
 }
 
+export function getFilePathInCache(sessionId: string, url: string) {
+  const path = `${basePath}/${sessionId}/${url}`;
+  return Platform.OS === "android" ? `file://${path}` : path;
+}
+
 export async function loadFromCache(sessionId: string, url: string): Promise<any> {
   console.log(`loadFromCache: ${sessionId}`);
-  const path = `${basePath}/${sessionId}/${url}`;
+  const path = getFilePathInCache(sessionId, url);
   const fetchPromise = RNFetchBlob.fs.readFile(path, "base64");
 
   fetchPromise
@@ -113,12 +119,8 @@ export async function loadFromCache(sessionId: string, url: string): Promise<any
   return fetchPromise;
 }
 
-export function getFilePathInCache(sessionId: string, url: string) {
-  const fullPath = `${basePath}/${sessionId}/${url}`;
-  return fullPath;
-}
-
-export async function isFilePathInCache(path: string): Promise<boolean> {
+export async function isFileInCache(sessionId: string, url: string): Promise<boolean> {
+  const path = getFilePathInCache(sessionId, url);
   const pathPromise = RNFetchBlob.fs.exists(path);
 
   pathPromise

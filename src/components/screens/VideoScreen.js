@@ -3,8 +3,9 @@ import { StyleSheet, SafeAreaView } from "react-native";
 import PropTypes from "prop-types";
 import ViewContainer from "../shared/view_container";
 import VideoPlayer from "../shared/VideoPlayer";
-import fetchService from "../../services/FetchService";
 import Colors from "../../styles/Colors";
+
+import { isFileInCache, getFilePathInCache } from "../../utils/DownloadMediaUtils";
 
 const styles = StyleSheet.create({
   mainContainer: { backgroundColor: "black" },
@@ -30,23 +31,29 @@ export default class VideoScreen extends Component {
     this.state = { url: null };
   }
 
-  componentDidMount() {
-    this.timer = setTimeout(() => {
-      const { videoUrl, guideID } = this.props.navigation.state.params;
-      fetchService.isExist(videoUrl, guideID).then((exist) => {
-        let url = videoUrl;
+  async componentDidMount() {
+    const { videoUrl, guideID } = this.props.navigation.state.params;
+    const uri = await this.tryLoadFromCache(guideID, videoUrl);
 
-        if (exist) {
-          url = fetchService.getFullPath(url, guideID);
-        }
+    console.log(`video URL: ${uri}`);
 
-        this.setState({ url });
-      });
-    }, 2000);
+    this.setState({ url: uri });
   }
 
   componentWillUnmount() {
     clearTimeout(this.timer);
+  }
+
+  tryLoadFromCache = async (guideId, uri) => {
+    if (!guideId || !uri) throw new Error("Null params passed");
+
+    try {
+      const isInCache = await isFileInCache(`${guideId}`, uri);
+      if (isInCache) { return `file://${getFilePathInCache(`${guideId}`, uri)}`; } return uri;
+    } catch (err) {
+      // do not care
+      return uri;
+    }
   }
 
   displayVideoPlayer() {
