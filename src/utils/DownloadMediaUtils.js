@@ -104,7 +104,7 @@ export async function removeMultiple(sessionId: string): Promise<any> {
 
 export function getFilePathInCache(sessionId: string, url: string) {
   const path = `${basePath}/${sessionId}/${url}`;
-  return Platform.OS === "android" ? `file://${path}` : path;
+  return path;
 }
 
 export async function loadFromCache(sessionId: string, url: string): Promise<any> {
@@ -120,7 +120,8 @@ export async function loadFromCache(sessionId: string, url: string): Promise<any
 }
 
 export async function isFileInCache(sessionId: string, url: string): Promise<boolean> {
-  const path = getFilePathInCache(sessionId, url);
+  let path = getFilePathInCache(sessionId, url);
+  path = Platform.OS === "android" ? `file://${path}` : path;
   const pathPromise = RNFetchBlob.fs.exists(path);
 
   pathPromise
