@@ -5,6 +5,7 @@ import { StyleSheetUtils } from "../../../utils";
 export default StyleSheet.create({
   container: {
     paddingHorizontal: "4%",
+    backgroundColor: Colors.white,
   },
   barButtonItem: {
     flexDirection: "row",
@@ -29,10 +30,12 @@ export default StyleSheet.create({
       fontSize: 32,
       fontWeight: "bold",
       fontStyle: "normal",
+      color: Colors.black,
     },
   ]),
   listItemContainer: {
-    elevation: 8,
+    elevation: 3,
+    backgroundColor: Colors.white,
     shadowColor: Colors.black,
     shadowOpacity: 0.4,
     shadowRadius: 5,
@@ -52,6 +55,7 @@ export default StyleSheet.create({
       fontSize: 18,
       fontWeight: "bold",
       fontStyle: "normal",
+      color: Colors.black,
     },
   ]),
   listItemGuideCount: StyleSheetUtils.flatten([
