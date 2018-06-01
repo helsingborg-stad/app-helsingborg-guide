@@ -66,6 +66,8 @@ function onGoToLink() {
 }
 function loadAudioFile() {
 }
+function onGoToVideo() {
+}
 function onClosePlayer() {
 }
 function onTogglePlaying() {
@@ -86,6 +88,7 @@ test("Basic GuideObject", () => {
     onGoToImage={onGoToImage}
     onGoToLink={onGoToLink}
     loadAudioFile={loadAudioFile}
+    onGoToVideo={onGoToVideo}
     onClosePlayer={onClosePlayer}
     onTogglePlaying={onTogglePlaying}
     onSliding={onSliding}

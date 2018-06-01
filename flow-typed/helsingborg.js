@@ -28,6 +28,7 @@ declare type Action =
   | { type: "AUDIO_LOAD_FILE_SUCCESS", prepared: boolean }
   | { type: "AUDIO_RELEASE_FILE", }
   | { type: "AUDIO_TOGGLE_PLAY", }
+  | { type: "AUDIO_PAUSE", }
   | { type: "AUDIO_UPDATE", audio: AudioState }
   | { type: "AUDIO_MOVE_SLIDER", position: number }
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }

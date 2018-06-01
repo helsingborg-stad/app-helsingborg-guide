@@ -26,6 +26,8 @@ export default function audioReducer(state: AudioState = defaultState, action: A
       return Object.assign({}, defaultState);
     case "AUDIO_TOGGLE_PLAY":
       return { ...state, isPlaying: !state.isPlaying };
+    case "AUDIO_PAUSE":
+      return { ...state, isPlaying: false };
     case "AUDIO_MOVE_SLIDER":
       return { ...state, currentSliderPosition: action.position, isMovingSlider: true };
     case "AUDIO_MOVE_SLIDER_COMPLETE":
