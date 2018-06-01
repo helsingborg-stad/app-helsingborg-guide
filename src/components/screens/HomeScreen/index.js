@@ -82,6 +82,7 @@ class HomeScreen extends Component<Props> {
     const categories = navigationSections.map(cat => ({ title: cat.name, data: cat.items }));
     return (
       <SectionList
+        stickySectionHeadersEnabled={false}
         renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
         renderItem={({ item }) => this.renderNavigationItem(item)}
         keyExtractor={item => item.id}
