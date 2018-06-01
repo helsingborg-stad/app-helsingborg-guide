@@ -124,7 +124,7 @@ class ObjectView extends Component<Props> {
     const { guideId } = this.props;
     return (
       <View style={styles.viewContainer}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+        <ScrollView style={styles.container}>
           <View style={styles.imageContainer}>
             <ImageSwiper
               sessionId={guideId}

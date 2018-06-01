@@ -29,8 +29,8 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 0,
-    paddingTop: 16,
-    marginBottom: 10,
+    paddingTop: 0,
+    marginBottom: 0,
     marginHorizontal: 6,
   },
   titleContainer: { flex: 1, alignItems: "center", paddingHorizontal: 15 },
@@ -70,7 +70,7 @@ export default StyleSheet.create({
   },
   closeBtn: {},
   audioPlayer: {
-    height: 70,
+    flex: 0.12,
     backgroundColor: Colors.moreOffWhite,
   },
 });
