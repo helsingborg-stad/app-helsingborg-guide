@@ -44,25 +44,29 @@ class HomeScreen extends Component<Props> {
 
     let textString = null;
     if (type === "guidegroup") {
-      const mediaGuideString = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
-      textString = `${guidesCount} ${mediaGuideString.toLowerCase()}`;
+      const mediaGuideString: string = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
+      textString = `${guidesCount} ${mediaGuideString.toUpperCase()}`;
     } else if (type === "trail") {
-      const locationString = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
+      const locationString: string = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
       textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${guidesCount} ${locationString}`;
+      textString = textString.toUpperCase();
     } else if (type === "guide") {
       textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${guidesCount} ${LangService.strings.OBJECT}`;
     }
 
     if (!textString) return null;
 
-    return (<Text>{textString}</Text>);
+    return (<Text style={styles.listItemGuideCount}>{textString}</Text>);
   }
 
+  // TODO extract component
   renderNavigationItem = (item: NavigationSectionItem) => (
-    <View>
-      <Image source={{ uri: item.image }} />
-      <Text>{item.title}</Text>
-      {this.renderGuideCount(item)}
+    <View style={styles.listItemContainer}>
+      <Image style={styles.listItemImage} source={{ uri: item.image }} />
+      <View style={styles.listItemTextContainer}>
+        <Text style={styles.listItemTitle}>{item.title}</Text>
+        {this.renderGuideCount(item)}
+      </View>
     </View>
   )
 
@@ -82,6 +86,7 @@ class HomeScreen extends Component<Props> {
     const categories = navigationSections.map(cat => ({ title: cat.name, data: cat.items }));
     return (
       <SectionList
+        style={styles.container}
         stickySectionHeadersEnabled={false}
         renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
         renderItem={({ item }) => this.renderNavigationItem(item)}
