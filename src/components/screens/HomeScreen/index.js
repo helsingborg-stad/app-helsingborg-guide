@@ -83,8 +83,14 @@ class HomeScreen extends Component<Props> {
 
   // TODO extract component
   renderNavigationItem = (item: NavigationSectionItem) => (
-    <TouchableOpacity style={styles.listItemContainer} onPress={() => this.onPressItem(item)}>
-      <Image style={styles.listItemImage} source={{ uri: item.image }} />
+    <TouchableOpacity
+      onPress={() => this.onPressItem(item)}
+      style={styles.listItemContainer}
+    >
+      <Image
+        style={styles.listItemImage}
+        source={{ uri: item.image }}
+      />
       <View style={styles.listItemTextContainer}>
         <Text style={styles.listItemTitle}>{item.title}</Text>
         {this.renderGuideCount(item)}
@@ -94,7 +100,7 @@ class HomeScreen extends Component<Props> {
 
   renderSectionHeader = (section: { title: string }) =>
     (
-      <View style={styles.sectionContainer}>
+      <View style={styles.sectionContainer} >
         <Text style={styles.sectionTitle}>{section.title}</Text>
       </View>
     )

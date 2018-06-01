@@ -34,12 +34,14 @@ export default StyleSheet.create({
     },
   ]),
   listItemContainer: {
+    overflow: "hidden",
+    borderRadius: 6,
     elevation: 3,
     backgroundColor: Colors.white,
     shadowColor: Colors.black,
-    shadowOpacity: 0.4,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 15,
+    shadowOffset: { width: 5, height: 0 },
     marginBottom: 20,
   },
   listItemTextContainer: {
