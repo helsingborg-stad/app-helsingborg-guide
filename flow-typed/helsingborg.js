@@ -37,7 +37,7 @@ declare type Action =
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   ;
 
-declare type NavigationItemType = 'guide' | 'guidegroup' | 'trail';
+declare type NavigationItemType = 'guide' | 'guidegroup';
 
 declare type NavigationItem = {
   id: number,
@@ -52,13 +52,16 @@ declare type NavigationCategory = {
   items: NavigationItem[]
 }
 
+declare type NavigationSectionItemType = 'guide' | 'trail' | 'guidegroup';
+
 // This type is suited for rendering
 declare type NavigationSectionItem = {
   id: number,
-  type: NavigationItemType,
+  type: NavigationSectionItemType,
   image?: ?string,
   title: string,
-  guidesCount?: number
+  guidesCount?: number,
+  childFriendly?: boolean
 }
 
 declare type NavigationSection = {
