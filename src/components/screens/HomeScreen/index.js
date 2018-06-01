@@ -87,10 +87,12 @@ class HomeScreen extends Component<Props> {
       onPress={() => this.onPressItem(item)}
       style={styles.listItemContainer}
     >
-      <Image
-        style={styles.listItemImage}
-        source={{ uri: item.image }}
-      />
+      <View style={styles.imageWrapper}>
+        <Image
+          style={styles.listItemImage}
+          source={{ uri: item.image }}
+        />
+      </View>
       <View style={styles.listItemTextContainer}>
         <Text style={styles.listItemTitle}>{item.title}</Text>
         {this.renderGuideCount(item)}

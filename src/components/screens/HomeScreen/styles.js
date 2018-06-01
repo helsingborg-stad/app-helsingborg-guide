@@ -34,8 +34,7 @@ export default StyleSheet.create({
     },
   ]),
   listItemContainer: {
-    overflow: "hidden",
-    borderRadius: 6,
+    borderRadius: 2,
     elevation: 3,
     backgroundColor: Colors.white,
     shadowColor: Colors.black,
@@ -46,6 +45,11 @@ export default StyleSheet.create({
   },
   listItemTextContainer: {
     padding: "4%",
+  },
+  imageWrapper: {
+    overflow: "hidden",
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
   },
   listItemImage: {
     height: "auto",
