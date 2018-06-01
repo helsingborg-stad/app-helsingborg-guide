@@ -12,12 +12,16 @@ import { connect } from "react-redux";
 import LangService from "../../../services/langService";
 import { HeaderStyles } from "../../../styles";
 import styles from "./styles";
+import { selectCurrentGuideByID, selectCurrentGuideGroup } from "../../../actions/uiStateActions";
 
 const settingsIcon = require("../../../images/settings.png");
 
 type Props = {
+  navigation: any,
   showLoadingSpinner: boolean,
-  navigationSections: NavigationSection[]
+  navigationSections: NavigationSection[],
+  selectGuide(id: number): void,
+  selectGuideGroup(id: number): void
 }
 
 class HomeScreen extends Component<Props> {
@@ -34,6 +38,24 @@ class HomeScreen extends Component<Props> {
         </TouchableOpacity>
       ),
     });
+  }
+
+  onPressItem = (item: NavigationSectionItem): void => {
+    switch (item.type) {
+      case "guide":
+        this.props.selectGuide(item.id);
+        this.props.navigation.navigate("GuideDetailsScreen");
+        break;
+      case "trail":
+        this.props.selectGuide(item.id);
+        this.props.navigation.navigate("TrailScreen");
+        break;
+      case "guidegroup":
+        this.props.selectGuideGroup(item.id);
+        this.props.navigation.navigate("LocationScreen");
+        break;
+      default:
+    }
   }
 
   renderGuideCount = (item: NavigationSectionItem) => {
@@ -61,13 +83,13 @@ class HomeScreen extends Component<Props> {
 
   // TODO extract component
   renderNavigationItem = (item: NavigationSectionItem) => (
-    <View style={styles.listItemContainer}>
+    <TouchableOpacity style={styles.listItemContainer} onPress={() => this.onPressItem(item)}>
       <Image style={styles.listItemImage} source={{ uri: item.image }} />
       <View style={styles.listItemTextContainer}>
         <Text style={styles.listItemTitle}>{item.title}</Text>
         {this.renderGuideCount(item)}
       </View>
-    </View>
+    </TouchableOpacity>
   )
 
   renderSectionHeader = (section: { title: string }) =>
@@ -165,8 +187,11 @@ function mapStateToProps(state: RootState) {
   };
 }
 
-function mapDispatchToProps() {
-  return {};
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
+    selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
