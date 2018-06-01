@@ -7,6 +7,7 @@ import styles from "./style";
 import MapWithListView from "../../shared/MapWithListView";
 import MapInformationOverlay from "../../shared/MapInformationOverlay";
 import AudioPlayerView from "../AudioPlayerView";
+import DownloadButtonContainer from "../DownloadButton";
 
 type Props = {
   trail: Guide,
@@ -14,6 +15,14 @@ type Props = {
   trailItems: Object[],
   onToggleInfoOverlay: () => (void),
   navigation: Object,
+}
+
+function renderDownloadButton() {
+  return (
+    <DownloadButtonContainer
+      style={styles.downloadButton}
+    />
+  );
 }
 
 function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => (void)) {
@@ -26,6 +35,7 @@ function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => (v
       <MapInformationOverlay
         trailInformation={{ title: trail.name, description: trail.description }}
         onPressFunction={onToggleInfoOverlay}
+        downloadComponent={renderDownloadButton}
       />
     </TouchableWithoutFeedback>
   );

@@ -6,6 +6,9 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: Colors.white,
   },
+  downloadButton: {
+    width: "100%",
+  },
   overlayStyle: {
     position: "absolute",
     top: 0,
