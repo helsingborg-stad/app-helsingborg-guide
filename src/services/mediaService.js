@@ -230,7 +230,7 @@ export default class MediaService {
     this.onAudioLoadSuccessCallback = onAudioLoadSuccess;
     this.onAudioUpdateCallback = onAudioUpdate;
 
-    if (hasAudio) this.mediaService.release();
+    if (hasAudio) this.release();
     const audioName = audioState.title;
     console.log(`load ${audioName}`);
 
