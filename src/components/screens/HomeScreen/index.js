@@ -6,6 +6,7 @@ import {
   SectionList,
   Text,
   TouchableOpacity,
+  View,
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "../../../services/langService";
@@ -35,6 +36,40 @@ class HomeScreen extends Component<Props> {
     });
   }
 
+  renderGuideCount = (item: NavigationSectionItem) => {
+    const { guidesCount, type } = item;
+    if (!guidesCount) return null;
+
+    const plural = guidesCount > 1;
+
+    let textString = null;
+    if (type === "guidegroup") {
+      const mediaGuideString = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
+      textString = `${guidesCount} ${mediaGuideString.toLowerCase()}`;
+    } else if (type === "trail") {
+      const locationString = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
+      textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${guidesCount} ${locationString}`;
+    } else if (type === "guide") {
+      textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${guidesCount} ${LangService.strings.OBJECT}`;
+    }
+
+    if (!textString) return null;
+
+    return (<Text>{textString}</Text>);
+  }
+
+  renderNavigationItem = (item: NavigationSectionItem) => {
+    console.log("renderNavigationItem");
+
+    return (
+      <View>
+        <Image source={{ uri: item.image }} />
+        <Text>{item.title}</Text>
+        {this.renderGuideCount(item)}
+      </View>
+    );
+  }
+
   render() {
     console.log("render");
 
@@ -47,8 +82,7 @@ class HomeScreen extends Component<Props> {
     return (
       <SectionList
         renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
-        renderItem={({ item }) => (<Text>{item.id}</Text>)
-        }
+        renderItem={({ item }) => this.renderNavigationItem(item)}
         keyExtractor={item => item.id}
         sections={categories}
       />);
@@ -57,6 +91,9 @@ class HomeScreen extends Component<Props> {
 }
 
 function parseNavigationSection(categories: NavigationCategory[], guideGroups: GuideGroup[], guides: Guide[]): NavigationSection[] {
+  // TODO move this to a redux store and reducer...
+  console.log("parseNavigationSection");
+
   console.log("guide id's");
   guides.forEach(i => console.log(i.id));
   console.log();
@@ -75,16 +112,19 @@ function parseNavigationSection(categories: NavigationCategory[], guideGroups: G
             image: g.images.medium,
             title: g.name,
             type: g.guideType,
+            guidesCount: g.contentObjects.length,
           };
         }
       } else if (type === "guidegroup") {
-        const g = guideGroups.find(i => i.id === id);
-        if (g) {
+        const gg = guideGroups.find(i => i.id === id);
+        if (gg) {
+          const guidesCount = guides.filter(g => g.guideGroupId === gg.id).length;
           result = {
             id,
-            image: g.images.medium,
-            title: g.name,
+            image: gg.images.medium,
+            title: gg.name,
             type,
+            guidesCount,
           };
         }
       }
@@ -110,8 +150,6 @@ function parseNavigationSection(categories: NavigationCategory[], guideGroups: G
 }
 
 function mapStateToProps(state: RootState) {
-  console.log("mapStateToProps");
-
   const { navigation, guideGroups, guides } = state;
   const { isFetching, categories } = navigation;
 
