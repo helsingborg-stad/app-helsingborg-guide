@@ -109,12 +109,13 @@ export function getFilePathInCache(sessionId: string, url: string) {
 
 export async function loadFromCache(sessionId: string, url: string): Promise<any> {
   console.log(`loadFromCache: ${sessionId}`);
-  const path = getFilePathInCache(sessionId, url);
+  let path = getFilePathInCache(sessionId, url);
+  path = Platform.OS === "android" ? `file://${path}` : path;
   const fetchPromise = RNFetchBlob.fs.readFile(path, "base64");
 
   fetchPromise
-    .then(() => console.log("cache HIT"))
-    .catch(() => console.log("cache MISS"));
+    .then(() => console.log(`read cache HIT (${path})`))
+    .catch(() => console.log(`read cache MISS(${path})`));
 
   return fetchPromise;
 }
@@ -122,13 +123,15 @@ export async function loadFromCache(sessionId: string, url: string): Promise<any
 export async function isFileInCache(sessionId: string, url: string): Promise<boolean> {
   let path = getFilePathInCache(sessionId, url);
   path = Platform.OS === "android" ? `file://${path}` : path;
-  const pathPromise = RNFetchBlob.fs.exists(path);
+  try {
+    const exists = await RNFetchBlob.fs.exists(path);
+    console.log(`cache exist ${exists} (${path})`);
+    return exists;
+  } catch (error) {
+    console.log(`cache exist error  ${error}`);
 
-  pathPromise
-    .then(() => console.log("cache HIT"))
-    .catch(() => console.log("cache MISS"));
-
-  return pathPromise;
+    throw error;
+  }
 }
 
 export default {
