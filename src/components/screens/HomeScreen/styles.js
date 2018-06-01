@@ -1,4 +1,6 @@
 import { StyleSheet } from "react-native";
+import { Colors, TextStyles } from "../../../styles";
+import { StyleSheetUtils } from "../../../utils";
 
 export default StyleSheet.create({
   barButtonItem: {
@@ -16,4 +18,14 @@ export default StyleSheet.create({
     height: "100%",
     width: "100%",
   },
+  sectionContainer: {
+    paddingVertical: 20,
+  },
+  sectionTitle: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 32,
+      fontWeight: "bold",
+      fontStyle: "normal",
+    },
+  ]),
 });
