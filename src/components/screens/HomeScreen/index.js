@@ -58,21 +58,22 @@ class HomeScreen extends Component<Props> {
     return (<Text>{textString}</Text>);
   }
 
-  renderNavigationItem = (item: NavigationSectionItem) => {
-    console.log("renderNavigationItem");
+  renderNavigationItem = (item: NavigationSectionItem) => (
+    <View>
+      <Image source={{ uri: item.image }} />
+      <Text>{item.title}</Text>
+      {this.renderGuideCount(item)}
+    </View>
+  )
 
-    return (
-      <View>
-        <Image source={{ uri: item.image }} />
-        <Text>{item.title}</Text>
-        {this.renderGuideCount(item)}
+  renderSectionHeader = (section: { title: string }) =>
+    (
+      <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>{section.title}</Text>
       </View>
-    );
-  }
+    )
 
   render() {
-    console.log("render");
-
     if (this.props.showLoadingSpinner) {
       return (<ActivityIndicator style={styles.loadingSpinner} />);
     }
@@ -81,7 +82,7 @@ class HomeScreen extends Component<Props> {
     const categories = navigationSections.map(cat => ({ title: cat.name, data: cat.items }));
     return (
       <SectionList
-        renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
+        renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
         renderItem={({ item }) => this.renderNavigationItem(item)}
         keyExtractor={item => item.id}
         sections={categories}
@@ -93,10 +94,6 @@ class HomeScreen extends Component<Props> {
 function parseNavigationSection(categories: NavigationCategory[], guideGroups: GuideGroup[], guides: Guide[]): NavigationSection[] {
   // TODO move this to a redux store and reducer...
   console.log("parseNavigationSection");
-
-  console.log("guide id's");
-  guides.forEach(i => console.log(i.id));
-  console.log();
 
   const sections: NavigationSection[] = categories.map((cat) => {
     const items: NavigationSectionItem[] = [];
