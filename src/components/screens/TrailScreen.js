@@ -60,9 +60,13 @@ function createItemsFromCurrentTrail(currentTrail: Guide) {
 
 class TrailScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params;
+    let title = null;
+    let toggleInfoOverlay = () => { };
     const { params = {} } = navigation.state;
-    const { toggleInfoOverlay } = params;
+    if (params) {
+      ({ title } = params);
+      ({ toggleInfoOverlay } = params);
+    }
     return {
       title,
       headerRight: (
