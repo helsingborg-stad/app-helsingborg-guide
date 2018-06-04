@@ -13,6 +13,7 @@ import LangService from "../../../services/langService";
 import { HeaderStyles } from "../../../styles";
 import styles from "./styles";
 import { selectCurrentGuideByID, selectCurrentGuideGroup } from "../../../actions/uiStateActions";
+import BottomBarView from "../../shared/BottomBarView";
 
 const settingsIcon = require("../../../images/settings.png");
 
@@ -115,14 +116,18 @@ class HomeScreen extends Component<Props> {
     const { navigationSections } = this.props;
     const categories = navigationSections.map(cat => ({ title: cat.name, data: cat.items }));
     return (
-      <SectionList
-        style={styles.container}
-        stickySectionHeadersEnabled={false}
-        renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
-        renderItem={({ item }) => this.renderNavigationItem(item)}
-        keyExtractor={item => item.id}
-        sections={categories}
-      />);
+      <View style={styles.viewContainer}>
+        <SectionList
+          style={styles.container}
+          stickySectionHeadersEnabled={false}
+          renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
+          renderItem={({ item }) => this.renderNavigationItem(item)}
+          keyExtractor={item => item.id}
+          sections={categories}
+        />
+        <BottomBarView />
+      </View>
+    );
     /* TODO render section list footer, "VIEW ALL" */
   }
 }
