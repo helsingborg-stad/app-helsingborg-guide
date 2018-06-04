@@ -15,7 +15,7 @@ import styles from "./styles";
 import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
-  selectCurrentItemList,
+  selectCurrentCategory,
 } from "../../../actions/uiStateActions";
 
 const settingsIcon = require("../../../images/settings.png");
@@ -26,7 +26,7 @@ type Props = {
   navigationSections: RenderableNavigationCategory[],
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
-  selectCurrentItemList(items: RenderableNavigationItem[]): void
+  selectCurrentCategory(section: RenderableNavigationCategory): void
 }
 
 class HomeScreen extends Component<Props> {
@@ -64,8 +64,8 @@ class HomeScreen extends Component<Props> {
   }
 
   onPressViewAll = (data: RenderableNavigationItem[]) => {
-    this.props.selectCurrentItemList(data);
-    this.props.navigation.navigate("ListScreen");
+    this.props.selectCurrentCategory(data);
+    this.props.navigation.navigate("CategoryListScreen");
   }
 
   renderGuideCount = (item: RenderableNavigationItem) => {
@@ -131,7 +131,7 @@ class HomeScreen extends Component<Props> {
     }
 
     const { navigationSections } = this.props;
-    const categories = navigationSections.map(cat => ({ title: cat.name, data: cat.items }));
+    const sections = navigationSections.map(cat => ({ title: cat.name, data: cat.items, category: cat }));
     return (
       <SectionList
         style={styles.container}
@@ -143,7 +143,7 @@ class HomeScreen extends Component<Props> {
           this.renderSectionFooter(section)
         }
         keyExtractor={item => item.id}
-        sections={categories}
+        sections={sections}
       />);
   }
 }
@@ -163,7 +163,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
-    selectCurrentItemList: (items: RenderableNavigationItem[]) => dispatch(selectCurrentItemList(items)),
+    selectCurrentCategory: (items: RenderableNavigationItem[]) => dispatch(selectCurrentCategory(items)),
   };
 }
 

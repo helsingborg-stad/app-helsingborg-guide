@@ -14,6 +14,7 @@ import {
   GuideScreen,
   HomeScreen,
   ImageScreen,
+  CategoryListScreen,
   LocationScreen,
   ObjectScreen,
   SearchObjectScreen,
@@ -46,6 +47,7 @@ const GuideNavigator = StackNavigator(
     DownloadsScreen: { screen: DownloadsScreen },
     SettingsScreen: { screen: SettingsScreen },
     DebugScreen: { screen: DebugScreen },
+    CategoryListScreen: { screen: CategoryListScreen },
   },
   { navigationOptions: HeaderStyles.default },
 );
