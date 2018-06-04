@@ -1,20 +1,16 @@
 // @flow
 import React, { Component } from "react";
 import {
-  Image,
   FlatList,
-  Text,
-  TouchableOpacity,
-  View,
 } from "react-native";
 import { connect } from "react-redux";
-import LangService from "../../../services/langService";
 import styles from "./styles";
 import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   selectCurrentCategory,
 } from "../../../actions/uiStateActions";
+import NavigationListItem from "../../shared/NavigationListItem";
 
 type Props = {
   navigation: any,
@@ -63,48 +59,6 @@ class HomeScreen extends Component<Props> {
     }
   }
 
-  renderGuideCount = (item: RenderableNavigationItem) => {
-    const { guidesCount, type } = item;
-    if (!guidesCount) return null;
-
-    const plural = guidesCount > 1;
-
-    let textString = null;
-    if (type === "guidegroup") {
-      const mediaGuideString: string = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
-      textString = `${guidesCount} ${mediaGuideString.toUpperCase()}`;
-    } else if (type === "trail") {
-      const locationString: string = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
-      textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${guidesCount} ${locationString}`;
-      textString = textString.toUpperCase();
-    } else if (type === "guide") {
-      textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${guidesCount} ${LangService.strings.OBJECT}`;
-    }
-
-    if (!textString) return null;
-
-    return (<Text style={styles.listItemGuideCount}>{textString}</Text>);
-  }
-
-  // TODO extract component
-  renderNavigationItem = (item: RenderableNavigationItem) => (
-    <TouchableOpacity
-      onPress={() => this.onPressItem(item)}
-      style={styles.listItemContainer}
-    >
-      <View style={styles.imageWrapper}>
-        <Image
-          style={styles.listItemImage}
-          source={{ uri: item.image }}
-        />
-      </View>
-      <View style={styles.listItemTextContainer}>
-        <Text style={styles.listItemTitle}>{item.title}</Text>
-        {this.renderGuideCount(item)}
-      </View>
-    </TouchableOpacity>
-  )
-
   render() {
     const { currentCategory } = this.props;
     if (!currentCategory) return null;
@@ -112,7 +66,10 @@ class HomeScreen extends Component<Props> {
     return (
       <FlatList
         style={styles.container}
-        renderItem={({ item }) => this.renderNavigationItem(item)}
+        renderItem={({ item }) => (<NavigationListItem
+          item={item}
+          onPressItem={this.onPressItem}
+        />)}
         keyExtractor={item => String(item.id)}
         data={currentCategory.items}
       />);
