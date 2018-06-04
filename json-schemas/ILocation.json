@@ -1,6 +1,32 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
     "definitions": {
+        "ILink": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "facebook",
+                        "instagram",
+                        "spotify",
+                        "twitter",
+                        "vimeo",
+                        "web",
+                        "youtube"
+                    ],
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "url"
+            ],
+            "type": "object"
+        },
         "IOpeningHourException": {
             "properties": {
                 "date": {
@@ -57,73 +83,6 @@
                 "weekday"
             ],
             "type": "object"
-        },
-        "ParsedUrlQuery": {
-            "additionalProperties": {
-                "anyOf": [
-                    {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    {
-                        "type": "string"
-                    }
-                ]
-            },
-            "type": "object"
-        },
-        "Url": {
-            "properties": {
-                "auth": {
-                    "type": "string"
-                },
-                "hash": {
-                    "type": "string"
-                },
-                "host": {
-                    "type": "string"
-                },
-                "hostname": {
-                    "type": "string"
-                },
-                "href": {
-                    "type": "string"
-                },
-                "path": {
-                    "type": "string"
-                },
-                "pathname": {
-                    "type": "string"
-                },
-                "port": {
-                    "type": "string"
-                },
-                "protocol": {
-                    "type": "string"
-                },
-                "query": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/ParsedUrlQuery"
-                        },
-                        {
-                            "type": [
-                                "null",
-                                "string"
-                            ]
-                        }
-                    ]
-                },
-                "search": {
-                    "type": "string"
-                },
-                "slashes": {
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
         }
     },
     "properties": {
@@ -137,7 +96,7 @@
             "anyOf": [
                 {
                     "items": {
-                        "$ref": "#/definitions/Url"
+                        "$ref": "#/definitions/ILink"
                     },
                     "type": "array"
                 },

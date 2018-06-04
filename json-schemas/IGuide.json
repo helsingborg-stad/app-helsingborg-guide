@@ -91,33 +91,21 @@
         "IImageUrls": {
             "properties": {
                 "large": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/Url"
-                        },
-                        {
-                            "type": "null"
-                        }
+                    "type": [
+                        "null",
+                        "string"
                     ]
                 },
                 "medium": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/Url"
-                        },
-                        {
-                            "type": "null"
-                        }
+                    "type": [
+                        "null",
+                        "string"
                     ]
                 },
                 "thumbnail": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/Url"
-                        },
-                        {
-                            "type": "null"
-                        }
+                    "type": [
+                        "null",
+                        "string"
                     ]
                 }
             },
@@ -141,7 +129,7 @@
                     "type": "string"
                 },
                 "url": {
-                    "$ref": "#/definitions/Url"
+                    "type": "string"
                 }
             },
             "required": [
@@ -161,7 +149,7 @@
                     "anyOf": [
                         {
                             "items": {
-                                "$ref": "#/definitions/Url"
+                                "$ref": "#/definitions/ILink"
                             },
                             "type": "array"
                         },
@@ -224,7 +212,7 @@
                     "type": "string"
                 },
                 "url": {
-                    "$ref": "#/definitions/Url"
+                    "type": "string"
                 }
             },
             "required": [
@@ -295,79 +283,12 @@
             ],
             "type": "object"
         },
-        "ParsedUrlQuery": {
-            "additionalProperties": {
-                "anyOf": [
-                    {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    {
-                        "type": "string"
-                    }
-                ]
-            },
-            "type": "object"
-        },
         "PostStatus": {
             "enum": [
                 "draft",
                 "publish"
             ],
             "type": "string"
-        },
-        "Url": {
-            "properties": {
-                "auth": {
-                    "type": "string"
-                },
-                "hash": {
-                    "type": "string"
-                },
-                "host": {
-                    "type": "string"
-                },
-                "hostname": {
-                    "type": "string"
-                },
-                "href": {
-                    "type": "string"
-                },
-                "path": {
-                    "type": "string"
-                },
-                "pathname": {
-                    "type": "string"
-                },
-                "port": {
-                    "type": "string"
-                },
-                "protocol": {
-                    "type": "string"
-                },
-                "query": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/ParsedUrlQuery"
-                        },
-                        {
-                            "type": [
-                                "null",
-                                "string"
-                            ]
-                        }
-                    ]
-                },
-                "search": {
-                    "type": "string"
-                },
-                "slashes": {
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
         }
     },
     "properties": {

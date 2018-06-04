@@ -4,36 +4,50 @@
         "IImageUrls": {
             "properties": {
                 "large": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/Url"
-                        },
-                        {
-                            "type": "null"
-                        }
+                    "type": [
+                        "null",
+                        "string"
                     ]
                 },
                 "medium": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/Url"
-                        },
-                        {
-                            "type": "null"
-                        }
+                    "type": [
+                        "null",
+                        "string"
                     ]
                 },
                 "thumbnail": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/Url"
-                        },
-                        {
-                            "type": "null"
-                        }
+                    "type": [
+                        "null",
+                        "string"
                     ]
                 }
             },
+            "type": "object"
+        },
+        "ILink": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "facebook",
+                        "instagram",
+                        "spotify",
+                        "twitter",
+                        "vimeo",
+                        "web",
+                        "youtube"
+                    ],
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "url"
+            ],
             "type": "object"
         },
         "ILocation": {
@@ -48,7 +62,7 @@
                     "anyOf": [
                         {
                             "items": {
-                                "$ref": "#/definitions/Url"
+                                "$ref": "#/definitions/ILink"
                             },
                             "type": "array"
                         },
@@ -148,13 +162,9 @@
         "IPointProperty": {
             "properties": {
                 "icon": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/Url"
-                        },
-                        {
-                            "type": "null"
-                        }
+                    "type": [
+                        "null",
+                        "string"
                     ]
                 },
                 "id": {
@@ -172,73 +182,6 @@
                 "name",
                 "slug"
             ],
-            "type": "object"
-        },
-        "ParsedUrlQuery": {
-            "additionalProperties": {
-                "anyOf": [
-                    {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    {
-                        "type": "string"
-                    }
-                ]
-            },
-            "type": "object"
-        },
-        "Url": {
-            "properties": {
-                "auth": {
-                    "type": "string"
-                },
-                "hash": {
-                    "type": "string"
-                },
-                "host": {
-                    "type": "string"
-                },
-                "hostname": {
-                    "type": "string"
-                },
-                "href": {
-                    "type": "string"
-                },
-                "path": {
-                    "type": "string"
-                },
-                "pathname": {
-                    "type": "string"
-                },
-                "port": {
-                    "type": "string"
-                },
-                "protocol": {
-                    "type": "string"
-                },
-                "query": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/ParsedUrlQuery"
-                        },
-                        {
-                            "type": [
-                                "null",
-                                "string"
-                            ]
-                        }
-                    ]
-                },
-                "search": {
-                    "type": "string"
-                },
-                "slashes": {
-                    "type": "boolean"
-                }
-            },
             "type": "object"
         }
     },
