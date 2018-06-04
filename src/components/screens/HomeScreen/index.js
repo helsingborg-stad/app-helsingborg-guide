@@ -12,7 +12,11 @@ import { connect } from "react-redux";
 import LangService from "../../../services/langService";
 import { HeaderStyles } from "../../../styles";
 import styles from "./styles";
-import { selectCurrentGuideByID, selectCurrentGuideGroup } from "../../../actions/uiStateActions";
+import {
+  selectCurrentGuideByID,
+  selectCurrentGuideGroup,
+  selectCurrentItemList,
+} from "../../../actions/uiStateActions";
 
 const settingsIcon = require("../../../images/settings.png");
 
@@ -21,7 +25,8 @@ type Props = {
   showLoadingSpinner: boolean,
   navigationSections: RenderableNavigationCategory[],
   selectGuide(id: number): void,
-  selectGuideGroup(id: number): void
+  selectGuideGroup(id: number): void,
+  selectCurrentItemList(items: RenderableNavigationItem[]): void
 }
 
 class HomeScreen extends Component<Props> {
@@ -56,6 +61,11 @@ class HomeScreen extends Component<Props> {
         break;
       default:
     }
+  }
+
+  onPressViewAll = (data: RenderableNavigationItem[]) => {
+    this.props.selectCurrentItemList(data);
+    this.props.navigation.navigate("ListScreen");
   }
 
   renderGuideCount = (item: RenderableNavigationItem) => {
@@ -107,19 +117,13 @@ class HomeScreen extends Component<Props> {
       </View>
     )
 
-  renderSectionFooter = (section: { title: string, data: RenderableNavigationItem[] }) => {
-    if (section.data.length < 3) { return null; }
-
-    console.log("RENDER FOOTER: ", section);
-
-    return (
-      <View style={styles.sectionFooterContainer}>
-        <TouchableOpacity style={styles.sectionFooterButton}>
-          <Text style={styles.sectionFooterText}>{LangService.strings.VIEW_ALL.toUpperCase()}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  renderSectionFooter = (section: { title: string, data: RenderableNavigationItem[] }) => (
+    <View style={styles.sectionFooterContainer}>
+      <TouchableOpacity style={styles.sectionFooterButton} onPress={() => this.onPressViewAll(section.data)}>
+        <Text style={styles.sectionFooterText}>{LangService.strings.VIEW_ALL.toUpperCase()}</Text>
+      </TouchableOpacity>
+    </View>
+  )
 
   render() {
     if (this.props.showLoadingSpinner) {
@@ -134,11 +138,13 @@ class HomeScreen extends Component<Props> {
         stickySectionHeadersEnabled={false}
         renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
         renderItem={({ item }) => this.renderNavigationItem(item)}
-        renderSectionFooter={({ section }) => this.renderSectionFooter(section)}
+        renderSectionFooter={({ section }) =>
+          // $FlowFixMe flow doesn't understand me
+          this.renderSectionFooter(section)
+        }
         keyExtractor={item => item.id}
         sections={categories}
       />);
-    /* TODO render section list footer, "VIEW ALL" */
   }
 }
 
@@ -157,6 +163,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
+    selectCurrentItemList: (items: RenderableNavigationItem[]) => dispatch(selectCurrentItemList(items)),
   };
 }
 

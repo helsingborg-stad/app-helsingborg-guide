@@ -14,7 +14,6 @@ function getRenderableNavigationCategories(
   guides: Guide[]): RenderableNavigationCategory[] {
   if (categories.length === 0) return [];
   if (guideGroups.length === 0 && guides.length === 0) return [];
-  console.time("getRenderableNavigationCategories");
 
   const sections: RenderableNavigationCategory[] = categories.map((cat) => {
     const items: RenderableNavigationItem[] = [];
@@ -64,7 +63,6 @@ function getRenderableNavigationCategories(
     return section;
   });
 
-  console.timeEnd("getRenderableNavigationCategories");
   return sections;
 }
 

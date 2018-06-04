@@ -7,6 +7,7 @@ const defaultState: UIState = {
   currentContentObjectImageIndex: 0,
   currentGuide: null,
   currentImage: null,
+  currentItemList: [],
   developerMode: false,
 };
 
@@ -24,6 +25,8 @@ export default function uiStateReducer(state: UIState = defaultState, action: Ac
       return { ...state, developerMode: action.enabled };
     case "SELECT_CURRENT_IMAGE":
       return { ...state, currentImage: action.url };
+    case "SELECT_CURRENT_ITEM_LIST":
+      return { ...state, currentItemList: action.items };
     default:
       return state;
   }
