@@ -24,6 +24,27 @@ type Props = {
 }
 
 class HomeScreen extends Component<Props> {
+  static navigationOptions = ({ navigation }) => {
+    let title = null;
+    const { params } = navigation.state;
+    if (params) {
+      ({ title } = params);
+    }
+    return {
+      title,
+    };
+  }
+
+  constructor(props: Props) {
+    super(props);
+
+    const { currentCategory } = props;
+    if (currentCategory) {
+      const { name: title } = currentCategory;
+      props.navigation.setParams({ title });
+    }
+  }
+
   onPressItem = (item: RenderableNavigationItem): void => {
     switch (item.type) {
       case "guide":
