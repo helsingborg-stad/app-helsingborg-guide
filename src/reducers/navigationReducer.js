@@ -1,7 +1,8 @@
 // @flow
 const initialState: NavigationState = {
   isFetching: false,
-  categories: [],
+  navigationCategories: [],
+  renderableNavigationCategories: [],
 };
 
 export default function navigationReducer(state: NavigationState = initialState, action: Action): NavigationState {

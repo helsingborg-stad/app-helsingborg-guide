@@ -19,7 +19,7 @@ const settingsIcon = require("../../../images/settings.png");
 type Props = {
   navigation: any,
   showLoadingSpinner: boolean,
-  navigationSections: NavigationSection[],
+  navigationSections: RenderableNavigationCategory[],
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void
 }
@@ -40,7 +40,7 @@ class HomeScreen extends Component<Props> {
     });
   }
 
-  onPressItem = (item: NavigationSectionItem): void => {
+  onPressItem = (item: RenderableNavigationItem): void => {
     switch (item.type) {
       case "guide":
         this.props.selectGuide(item.id);
@@ -58,7 +58,7 @@ class HomeScreen extends Component<Props> {
     }
   }
 
-  renderGuideCount = (item: NavigationSectionItem) => {
+  renderGuideCount = (item: RenderableNavigationItem) => {
     const { guidesCount, type } = item;
     if (!guidesCount) return null;
 
@@ -82,7 +82,7 @@ class HomeScreen extends Component<Props> {
   }
 
   // TODO extract component
-  renderNavigationItem = (item: NavigationSectionItem) => (
+  renderNavigationItem = (item: RenderableNavigationItem) => (
     <TouchableOpacity
       onPress={() => this.onPressItem(item)}
       style={styles.listItemContainer}
@@ -127,16 +127,19 @@ class HomeScreen extends Component<Props> {
   }
 }
 
-function parseNavigationSection(categories: NavigationCategory[], guideGroups: GuideGroup[], guides: Guide[]): NavigationSection[] {
+function parseNavigationSection(
+  categories: NavigationCategory[],
+  guideGroups: GuideGroup[],
+  guides: Guide[]): RenderableNavigationCategory[] {
   // TODO move this to a redux store and reducer...
   console.log("parseNavigationSection");
 
-  const sections: NavigationSection[] = categories.map((cat) => {
-    const items: NavigationSectionItem[] = [];
+  const sections: RenderableNavigationCategory[] = categories.map((cat) => {
+    const items: RenderableNavigationItem[] = [];
     cat.items.forEach((item) => {
       const { id, type } = item;
 
-      let result: ?NavigationSectionItem;
+      let result: ?RenderableNavigationItem;
       if (type === "guide") {
         const g = guides.find(i => i.id === id);
         if (g) {
@@ -169,7 +172,7 @@ function parseNavigationSection(categories: NavigationCategory[], guideGroups: G
       }
     });
 
-    const section: NavigationSection =
+    const section: RenderableNavigationCategory =
       {
         id: cat.id,
         name: cat.name,
@@ -184,10 +187,10 @@ function parseNavigationSection(categories: NavigationCategory[], guideGroups: G
 
 function mapStateToProps(state: RootState) {
   const { navigation, guideGroups, guides } = state;
-  const { isFetching, categories } = navigation;
+  const { isFetching, navigationCategories } = navigation;
 
   // repackaging data , i.e. embed the guides into the navigation tree
-  const sections: NavigationSection[] = parseNavigationSection(categories, guideGroups.items, guides.items);
+  const sections: RenderableNavigationCategory[] = parseNavigationSection(navigationCategories, guideGroups.items, guides.items);
 
   return {
     showLoadingSpinner: isFetching,

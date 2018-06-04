@@ -52,23 +52,23 @@ declare type NavigationCategory = {
   items: NavigationItem[]
 }
 
-declare type NavigationSectionItemType = 'guide' | 'trail' | 'guidegroup';
+declare type RenderableNavigationItemType = 'guide' | 'trail' | 'guidegroup';
 
 // This type is suited for rendering
-declare type NavigationSectionItem = {
+declare type RenderableNavigationItem = {
   id: number,
-  type: NavigationSectionItemType,
+  type: RenderableNavigationItemType,
   image?: ?string,
   title: string,
   guidesCount?: number,
   childFriendly?: boolean
 }
 
-declare type NavigationSection = {
+declare type RenderableNavigationCategory = {
   id: number,
   name: string,
   slug: string,
-  items: NavigationSectionItem[]
+  items: RenderableNavigationItem[]
 }
 
 declare type Coords = {
@@ -274,7 +274,8 @@ declare type UIState = {
 
 declare type NavigationState = {
   isFetching: boolean,
-  categories: NavigationCategory[]
+  navigationCategories: NavigationCategory[],
+  renderableNavigationCategories: RenderableNavigationCategory[],
 }
 
 declare type RootState = {
