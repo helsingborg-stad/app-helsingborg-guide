@@ -25,8 +25,8 @@ export default function uiStateReducer(state: UIState = defaultState, action: Ac
       return { ...state, developerMode: action.enabled };
     case "SELECT_CURRENT_IMAGE":
       return { ...state, currentImage: action.url };
-    case "SELECT_CURRENT_ITEM_LIST":
-      return { ...state, currentCategory: action.items };
+    case "SELECT_CURRENT_CATEGORY":
+      return { ...state, currentCategory: action.category };
     default:
       return state;
   }
