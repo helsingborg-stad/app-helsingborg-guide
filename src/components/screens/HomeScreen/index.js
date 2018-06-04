@@ -93,7 +93,11 @@ class HomeScreen extends Component<Props> {
     }
 
     const { navigationSections } = this.props;
-    const sections = navigationSections.map(cat => ({ title: cat.name, data: cat.items, category: cat }));
+    const sections = navigationSections.map((cat) => {
+      const data = cat.items.slice(0, 2);
+      // TODO sort cat.items by distance
+      return { title: cat.name, data, category: cat };
+    });
     return (
       <SectionList
         style={styles.container}
