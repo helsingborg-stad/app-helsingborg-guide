@@ -6,9 +6,13 @@ import {
 import { StyleSheetUtils } from "../../../utils/";
 
 export default StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: Colors.white,
+  },
   viewContainer: {
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "flex-end",
     alignItems: "stretch",
     backgroundColor: Colors.white,
   },

@@ -178,7 +178,7 @@ export default class MediaService {
 
   updateAudioState() {
     this.getMeta().then((meta) => {
-      if (!this.updatePaused) {
+      if (!this.updatePaused && this.audio) {
         this.audio.currentPosition = meta.currentPosition;
         this.audio.duration = meta.duration;
         this.audio.isPlaying = meta.isPlaying;
