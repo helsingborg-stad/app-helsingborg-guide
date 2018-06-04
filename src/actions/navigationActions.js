@@ -2,6 +2,13 @@
 
 import { getNavigation } from "../utils/fetchUtils";
 
+export function setRenderableNavigationCategories(categories: RenderableNavigationCategory[]): Action {
+  return {
+    type: "SET_RENDERABLE_NAVIGATION_CATEGORIES",
+    categories,
+  };
+}
+
 export function fetchNavigationRequest(): Action {
   return { type: "FETCH_NAVIGATION_REQUEST" };
 }

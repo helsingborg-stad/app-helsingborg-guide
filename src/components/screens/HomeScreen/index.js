@@ -127,74 +127,14 @@ class HomeScreen extends Component<Props> {
   }
 }
 
-function parseNavigationSection(
-  categories: NavigationCategory[],
-  guideGroups: GuideGroup[],
-  guides: Guide[]): RenderableNavigationCategory[] {
-  // TODO move this to a redux store and reducer...
-  console.log("parseNavigationSection");
-
-  const sections: RenderableNavigationCategory[] = categories.map((cat) => {
-    const items: RenderableNavigationItem[] = [];
-    cat.items.forEach((item) => {
-      const { id, type } = item;
-
-      let result: ?RenderableNavigationItem;
-      if (type === "guide") {
-        const g = guides.find(i => i.id === id);
-        if (g) {
-          result = {
-            id,
-            image: g.images.medium,
-            title: g.name,
-            type: g.guideType,
-            guidesCount: g.contentObjects.length,
-          };
-        }
-      } else if (type === "guidegroup") {
-        const gg = guideGroups.find(i => i.id === id);
-        if (gg) {
-          const guidesCount = guides.filter(g => g.guideGroupId === gg.id).length;
-          result = {
-            id,
-            image: gg.images.medium,
-            title: gg.name,
-            type,
-            guidesCount,
-          };
-        }
-      }
-
-      if (result) {
-        items.push(result);
-      } else {
-        console.log("Did not find: ", item);
-      }
-    });
-
-    const section: RenderableNavigationCategory =
-      {
-        id: cat.id,
-        name: cat.name,
-        slug: cat.slug,
-        items,
-      };
-    return section;
-  });
-
-  return sections;
-}
 
 function mapStateToProps(state: RootState) {
-  const { navigation, guideGroups, guides } = state;
-  const { isFetching, navigationCategories } = navigation;
-
-  // repackaging data , i.e. embed the guides into the navigation tree
-  const sections: RenderableNavigationCategory[] = parseNavigationSection(navigationCategories, guideGroups.items, guides.items);
+  const { navigation } = state;
+  const { isFetching, renderableNavigationCategories } = navigation;
 
   return {
     showLoadingSpinner: isFetching,
-    navigationSections: sections,
+    navigationSections: renderableNavigationCategories,
   };
 }
 

@@ -10,6 +10,7 @@ declare type Action =
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
   | { type: "SELECT_CURRENT_IMAGE", url: ?string }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
+  | { type: "SET_RENDERABLE_NAVIGATION_CATEGORIES", categories: RenderableNavigationCategory[] }
   | { type: "FETCH_NAVIGATION_REQUEST" }
   | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
   | { type: "FETCH_NAVIGATION_FAILURE", error: Error }
