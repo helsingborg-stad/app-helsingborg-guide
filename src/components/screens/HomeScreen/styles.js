@@ -25,6 +25,25 @@ export default StyleSheet.create({
   sectionContainer: {
     paddingVertical: 20,
   },
+  sectionFooterContainer: {
+    width: "100%",
+  },
+  sectionFooterButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: 45,
+    backgroundColor: Colors.lightPink,
+  },
+  sectionFooterText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 15,
+      fontWeight: "bold",
+      fontStyle: "normal",
+      letterSpacing: 1,
+      color: Colors.white,
+    },
+  ]),
   sectionTitle: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
       fontSize: 32,

@@ -76,6 +76,7 @@ export default {
     TUTORIAL: "Tutorial",
     UNKNOWN_TITLE: "Unknown title.",
     VIDEO: "Play video",
+    VIEW_ALL: "View all",
     WITH: "with",
   },
   sv: {
@@ -153,6 +154,7 @@ export default {
     UNKNOWN_TITLE: "Okänd titel",
     VIDEO: "Spela film",
     WITH: "med",
+    VIEW_ALL: "Se alla",
   },
   de: {
     ABOUT_GUIDE_HELS: "Über Guide Helsingborg",
@@ -228,6 +230,7 @@ export default {
     TUTORIAL: "Tutorial",
     UNKNOWN_TITLE: "Unbekannter Titel",
     VIDEO: "Video spielen",
+    VIEW_ALL: "Alle ansehen",
     WITH: "mit",
   },
 };

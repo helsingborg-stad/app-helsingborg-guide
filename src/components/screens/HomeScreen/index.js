@@ -107,6 +107,20 @@ class HomeScreen extends Component<Props> {
       </View>
     )
 
+  renderSectionFooter = (section: { title: string, data: RenderableNavigationItem[] }) => {
+    if (section.data.length < 3) { return null; }
+
+    console.log("RENDER FOOTER: ", section);
+
+    return (
+      <View style={styles.sectionFooterContainer}>
+        <TouchableOpacity style={styles.sectionFooterButton}>
+          <Text style={styles.sectionFooterText}>{LangService.strings.VIEW_ALL.toUpperCase()}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
     if (this.props.showLoadingSpinner) {
       return (<ActivityIndicator style={styles.loadingSpinner} />);
@@ -120,6 +134,7 @@ class HomeScreen extends Component<Props> {
         stickySectionHeadersEnabled={false}
         renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
         renderItem={({ item }) => this.renderNavigationItem(item)}
+        renderSectionFooter={({ section }) => this.renderSectionFooter(section)}
         keyExtractor={item => item.id}
         sections={categories}
       />);
