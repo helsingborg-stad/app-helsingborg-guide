@@ -18,6 +18,7 @@ import {
   selectCurrentCategory,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
+import BottomBarView from "../../shared/BottomBarView";
 
 const settingsIcon = require("../../../images/settings.png");
 
@@ -108,22 +109,24 @@ class HomeScreen extends Component<Props> {
       return { title: cat.name, data, category: cat };
     });
     return (
-      <SectionList
-        style={styles.container}
-        stickySectionHeadersEnabled={false}
-        renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
-        renderItem={({ item }) => (<NavigationListItem
-          item={item}
-          onPressItem={this.onPressItem}
-        />)
-        }
-        renderSectionFooter={({ section }) =>
-          // $FlowFixMe flow doesn't understand me
-          this.renderSectionFooter(section)
-        }
-        keyExtractor={item => item.id}
-        sections={sections}
-      />);
+      <View style={styles.viewContainer}>
+        <SectionList
+          style={styles.container}
+          stickySectionHeadersEnabled={false}
+          renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
+          renderItem={({ item }) => (<NavigationListItem
+            item={item}
+            onPressItem={this.onPressItem}
+          />)
+          }
+          renderSectionFooter={({ section }) =>
+            // $FlowFixMe flow doesn't understand me
+            this.renderSectionFooter(section)
+          }
+          keyExtractor={item => item.id}
+          sections={sections}
+        /> <BottomBarView />
+      </View>);
   }
 }
 
