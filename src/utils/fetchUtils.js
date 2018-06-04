@@ -11,9 +11,19 @@ async function getGuideGroups(langCode: string): Promise<GuideGroup[]> {
   }
 
   const json = await response.json();
-  // TODO validate data
+  const fetchedGuideGroups: GuideGroup[] = [];
 
-  return json;
+  json.forEach((element: any) => {
+    try {
+      if (validate(element, "guideGroup")) {
+        fetchedGuideGroups.push(element);
+      }
+    } catch (err) {
+      console.warn("Validation failed for fetched guide group.", err);
+    }
+  });
+
+  return fetchedGuideGroups;
 }
 
 async function getGuides(langCode: string): Promise<Guide[]> {
