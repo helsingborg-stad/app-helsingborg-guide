@@ -16,7 +16,7 @@ export default function navigationReducer(state: NavigationState = initialState,
       const { categories } = action;
       return {
         ...state,
-        categories,
+        navigationCategories: categories,
         isFetching: false,
       };
     }
