@@ -1,16 +1,14 @@
 // @flow
 import React, { Component } from "react";
 import {
-  ActivityIndicator,
   Image,
-  SectionList,
+  FlatList,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "../../../services/langService";
-import { HeaderStyles } from "../../../styles";
 import styles from "./styles";
 import {
   selectCurrentGuideByID,
@@ -18,33 +16,14 @@ import {
   selectCurrentCategory,
 } from "../../../actions/uiStateActions";
 
-const settingsIcon = require("../../../images/settings.png");
-
 type Props = {
   navigation: any,
-  showLoadingSpinner: boolean,
-  navigationSections: RenderableNavigationCategory[],
+  currentCategory: ?RenderableNavigationCategory,
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
-  selectCurrentCategory(section: RenderableNavigationCategory): void
 }
 
 class HomeScreen extends Component<Props> {
-  static navigationOptions = ({ navigation }) => {
-    const title = LangService.strings.APP_NAME;
-    return Object.assign(HeaderStyles.noElevation, {
-      title,
-      headerLeft: (
-        <TouchableOpacity
-          onPress={() => navigation.navigate("SettingsScreen")}
-          style={styles.barButtonItem}
-        >
-          <Image style={styles.barButtonImage} source={settingsIcon} />
-        </TouchableOpacity>
-      ),
-    });
-  }
-
   onPressItem = (item: RenderableNavigationItem): void => {
     switch (item.type) {
       case "guide":
@@ -61,11 +40,6 @@ class HomeScreen extends Component<Props> {
         break;
       default:
     }
-  }
-
-  onPressViewAll = (category: RenderableNavigationCategory) => {
-    this.props.selectCurrentCategory(category);
-    this.props.navigation.navigate("CategoryListScreen");
   }
 
   renderGuideCount = (item: RenderableNavigationItem) => {
@@ -110,55 +84,27 @@ class HomeScreen extends Component<Props> {
     </TouchableOpacity>
   )
 
-  renderSectionHeader = (section: { title: string }) =>
-    (
-      <View style={styles.sectionContainer} >
-        <Text style={styles.sectionTitle}>{section.title}</Text>
-      </View>
-    )
-
-  renderSectionFooter = (section: { title: string, data: RenderableNavigationItem[], category: RenderableNavigationCategory }) => (
-    <View style={styles.sectionFooterContainer}>
-      <TouchableOpacity
-        style={styles.sectionFooterButton}
-        onPress={() => this.onPressViewAll(section.category)}
-      >
-        <Text style={styles.sectionFooterText}>{LangService.strings.VIEW_ALL.toUpperCase()}</Text>
-      </TouchableOpacity>
-    </View>
-  )
-
   render() {
-    if (this.props.showLoadingSpinner) {
-      return (<ActivityIndicator style={styles.loadingSpinner} />);
-    }
+    const { currentCategory } = this.props;
+    if (!currentCategory) return null;
 
-    const { navigationSections } = this.props;
-    const sections = navigationSections.map(cat => ({ title: cat.name, data: cat.items, category: cat }));
     return (
-      <SectionList
+      <FlatList
         style={styles.container}
-        stickySectionHeadersEnabled={false}
-        renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
         renderItem={({ item }) => this.renderNavigationItem(item)}
-        renderSectionFooter={({ section }) =>
-          // $FlowFixMe flow doesn't understand me
-          this.renderSectionFooter(section)
-        }
-        keyExtractor={item => item.id}
-        sections={sections}
+        keyExtractor={item => String(item.id)}
+        data={currentCategory.items}
       />);
   }
 }
 
 
 function mapStateToProps(state: RootState) {
-  const { navigation } = state;
-  const { isFetching, renderableNavigationCategories } = navigation;
+  const { uiState } = state;
+  const { currentCategory } = uiState;
 
   return {
-    showLoadingSpinner: isFetching,
-    navigationSections: renderableNavigationCategories,
+    currentCategory,
   };
 }
 
