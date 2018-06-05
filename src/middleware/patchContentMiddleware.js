@@ -81,7 +81,6 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
       const { coords } = geolocation;
       const updatedGG: GuideGroup[] = updateDistance(guideGroups.items, coords);
       const updatedGuides: Guide[] = updateDistanceForGuides(guides.items, coords);
-      // TODO also update guides that are trails
       dispatch(setGuidesAndGuideGroups(updatedGG, updatedGuides));
       break;
     }

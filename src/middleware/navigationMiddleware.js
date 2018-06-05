@@ -12,15 +12,12 @@ function linkNavigationWithContent(
   categories: NavigationCategory[],
   guideGroups: GuideGroup[],
   guides: Guide[]): NavigationCategory[] {
-  if (categories.length === 0) return [];
-  if (guideGroups.length === 0 && guides.length === 0) return [];
-
   const sections: NavigationCategory[] = categories.map((cat) => {
     const items: NavigationItem[] = [];
     cat.items.forEach((item) => {
       const { id, type } = item;
 
-      let result: ?NavigationItem;
+      let result: NavigationItem = { ...item };
       if (type === "guide") {
         const guide = guides.find(i => i.id === id);
         if (guide) {
@@ -39,21 +36,10 @@ function linkNavigationWithContent(
         }
       }
 
-      if (result) {
-        items.push(result);
-      } else {
-        console.log("Did not find: ", item);
-      }
+      items.push(result);
     });
 
-    const section: NavigationCategory =
-      {
-        id: cat.id,
-        name: cat.name,
-        slug: cat.slug,
-        items,
-      };
-    return section;
+    return { ...cat, items };
   });
 
   return sections;
