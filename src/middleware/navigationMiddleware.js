@@ -65,7 +65,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
 
   switch (action.type) {
     case "FETCH_NAVIGATION_SUCCESS":
-    case "SET_GUIDEGROUPS":
+    case "SET_GUIDES_AND_GUIDEGROUPS":
       {
         const { items: guideGroups } = nextState.guideGroups;
         const { items: guides } = nextState.guides;
