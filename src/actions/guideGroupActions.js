@@ -2,8 +2,8 @@
 
 import fetchUtils from "../utils/fetchUtils";
 
-export function setGuideGroups(guideGroups: GuideGroup[]): Action {
-  return { type: "SET_GUIDEGROUPS", guideGroups };
+export function setGuidesAndGuideGroups(guideGroups: GuideGroup[], guides: Guide[]): Action {
+  return { type: "SET_GUIDES_AND_GUIDEGROUPS", guideGroups, guides };
 }
 
 export function fetchGuideGroupsRequest(): Action {

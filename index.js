@@ -54,9 +54,9 @@ export default class GuideHbg extends Component {
       if (isConnected) {
         // TODO move this block redux middleware
         store.dispatch(fetchNavigation(langCode));
-        store.dispatch(loadOldGuideGroups(langCode)); // old guide groups
+        // store.dispatch(loadOldGuideGroups(langCode)); // old guide groups
         store.dispatch(fetchGuideGroups(langCode)); // new guide groups
-        store.dispatch(loadSubLocations(langCode)); // old guides
+        // store.dispatch(loadSubLocations(langCode)); // old guides
         store.dispatch(fetchGuides(langCode)); // new guides
         LangService.getLanguages();
       }

@@ -84,11 +84,12 @@ class HomeScreen extends Component<Props> {
 
 
 function mapStateToProps(state: RootState) {
-  const { uiState } = state;
+  const { uiState, navigation } = state;
   const { currentCategory } = uiState;
+  const category = navigation.navigationCategories.find(cat => cat.id === currentCategory);
 
   return {
-    currentCategory,
+    currentCategory: category,
   };
 }
 
@@ -96,7 +97,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
-    selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category)),
+    selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
   };
 }
 

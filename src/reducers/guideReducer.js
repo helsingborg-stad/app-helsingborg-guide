@@ -15,6 +15,8 @@ export default function guideReducer(state: GuideState = initialState, action: A
     }
     case "FETCH_GUIDES_FAILURE":
       return { ...state, isFetching: false };
+    case "SET_GUIDES_AND_GUIDEGROUPS":
+      return { ...state, items: action.guides };
     default:
       return state;
   }

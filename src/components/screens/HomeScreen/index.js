@@ -23,13 +23,18 @@ import BottomBarView from "../../shared/BottomBarView";
 const settingsIcon = require("../../../images/settings.png");
 
 function getDistance(item: NavigationItem): number {
-  const { guideGroup } = item;
+  const { guideGroup, guide } = item;
   if (guideGroup) {
     const { distance } = guideGroup;
     if (distance) {
       return distance;
     }
-    return Number.MAX_VALUE;
+  }
+  if (guide) {
+    const { distance } = guide;
+    if (distance) {
+      return distance;
+    }
   }
   return Number.MAX_VALUE;
 }
@@ -161,7 +166,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
-    selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category)),
+    selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
   };
 }
 

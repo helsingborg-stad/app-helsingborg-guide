@@ -9,11 +9,11 @@ declare type Action =
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
   | { type: "SELECT_CURRENT_IMAGE", url: ?string }
-  | { type: "SELECT_CURRENT_CATEGORY", category: NavigationCategory }
   | { type: "SELECT_CURRENT_BOTTOM_BAR_TAB", tabIndex: number }
+  | { type: "SELECT_CURRENT_CATEGORY", id: number }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
   | { type: "SET_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
-  | { type: "SET_GUIDEGROUPS", guideGroups: GuideGroup[] }
+  | { type: "SET_GUIDES_AND_GUIDEGROUPS", guideGroups: GuideGroup[], guides: Guide[] }
   | { type: "FETCH_NAVIGATION_REQUEST" }
   | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
   | { type: "FETCH_NAVIGATION_FAILURE", error: Error }
@@ -148,7 +148,8 @@ declare type Guide = {
   guideType: GuideType,
   childFriendly: boolean,
   images: Images,
-  contentObjects: ContentObject[]
+  contentObjects: ContentObject[],
+  distance?: number,
 }
 
 declare type GuideType = 'guide' | 'trail';
@@ -258,7 +259,7 @@ declare type UIState = {
   currentContentObjectImageIndex: number,
   currentGuide: ?Guide,
   currentImage: ?string,
-  currentCategory: ?NavigationCategory,
+  currentCategory: ?number,
   developerMode: boolean,
   currentBottomBarTab: number,
 }
