@@ -313,7 +313,7 @@ class SettingsScreen extends Component {
           </View>
 
         </View>
-        <BottomBarView navigation={this.props.navigation} />
+
       </View>
     );
   }

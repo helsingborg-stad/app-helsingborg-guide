@@ -11,13 +11,11 @@ import {
 } from "react-native";
 import Nav from "src/Nav";
 import configureStore from "src/store/configureStore";
-import { loadSubLocations } from "src/actions/subLoactionActions";
 import internetChanged from "src/actions/internetActions";
 import LangService from "src/services/langService";
 import Opener from "src/services/SettingsService";
 import { errorHappened } from "src/actions/errorActions";
 import FullScreenVideoScreen from "src/components/screens/FullScreenVideoScreen";
-import { loadOldGuideGroups } from "src/actions/oldGuideGroupActions";
 import { fetchGuideGroups } from "src/actions/guideGroupActions";
 import { fetchGuides } from "src/actions/guideActions";
 import { fetchNavigation } from "src/actions/navigationActions";

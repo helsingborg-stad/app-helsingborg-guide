@@ -18,7 +18,6 @@ import {
   selectCurrentCategory,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
-import BottomBarView from "../../shared/BottomBarView";
 
 const settingsIcon = require("../../../images/settings.png");
 
@@ -146,7 +145,6 @@ class HomeScreen extends Component<Props> {
           keyExtractor={item => item.id}
           sections={sections}
         />
-        <BottomBarView navigation={this.props.navigation} />
       </View>);
   }
 }
