@@ -148,7 +148,8 @@ class HomeScreen extends Component<Props> {
           }
           keyExtractor={item => item.id}
           sections={sections}
-        /> <BottomBarView currentBottomBarTab={this.props.currentBottomBarTab} onSelectTab={this.props.selectBottomBarTab} />
+        />
+        <BottomBarView currentBottomBarTab={this.props.currentBottomBarTab} onSelectTab={this.props.selectBottomBarTab} />
       </View>);
   }
 }
