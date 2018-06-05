@@ -157,10 +157,12 @@ class HomeScreen extends Component<Props> {
 function mapStateToProps(state: RootState) {
   const { navigation } = state;
   const { isFetching, navigationCategories } = navigation;
+  const { currentBottomBarTab } = state.uiState;
 
   return {
     showLoadingSpinner: isFetching,
     navigationSections: navigationCategories,
+    currentBottomBarTab,
   };
 }
 
