@@ -11,7 +11,8 @@ declare type Action =
   | { type: "SELECT_CURRENT_IMAGE", url: ?string }
   | { type: "SELECT_CURRENT_CATEGORY", category: NavigationCategory }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
-  | { type: "SET_RENDERABLE_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
+  | { type: "SET_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
+  | { type: "SET_GUIDEGROUPS", guideGroups: GuideGroup[] }
   | { type: "FETCH_NAVIGATION_REQUEST" }
   | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
   | { type: "FETCH_NAVIGATION_FAILURE", error: Error }

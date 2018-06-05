@@ -24,7 +24,7 @@ export default function navigationReducer(state: NavigationState = initialState,
         ...state,
         isFetching: false,
       };
-    case "SET_RENDERABLE_NAVIGATION_CATEGORIES":
+    case "SET_NAVIGATION_CATEGORIES":
       return {
         ...state,
         navigationCategories: action.categories,

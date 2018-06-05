@@ -1,5 +1,5 @@
 // @flow
-import { setRenderableNavigationCategories } from "../actions/navigationActions";
+import { setNavigationCategories } from "../actions/navigationActions";
 import { LocationUtils } from "../utils";
 
 /**
@@ -66,21 +66,17 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
 
   switch (action.type) {
     case "FETCH_NAVIGATION_SUCCESS":
-    case "FETCH_GUIDEGROUPS_SUCCESS":
-    case "FETCH_GUIDES_SUCCESS":
+    case "SET_GUIDEGROUPS":
       {
         const { items: guideGroups } = nextState.guideGroups;
         const { items: guides } = nextState.guides;
         const { navigationCategories: categories } = nextState.navigation;
         const renderableCategories = linkNavigationWithContent(categories, guideGroups, guides);
-        // TODO update distance as well
-        dispatch(setRenderableNavigationCategories(renderableCategories));
+        dispatch(setNavigationCategories(renderableCategories));
       }
       break;
-    case "GEOLOCATION_UPDATE_SUCCESS":
-    {
-      // TODO fix
-      /*
+    // TODO fix
+    /*
                         const { geolocation, navigation } = nextState;
                         if (!geolocation) break;
 
@@ -100,8 +96,6 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
                         });
                         dispatch(setRenderableNavigationCategories(categories));
                         */
-      break;
-    }
     default:
       break;
   }

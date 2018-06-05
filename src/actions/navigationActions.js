@@ -2,9 +2,9 @@
 
 import { getNavigation } from "../utils/fetchUtils";
 
-export function setRenderableNavigationCategories(categories: NavigationCategory[]): Action {
+export function setNavigationCategories(categories: NavigationCategory[]): Action {
   return {
-    type: "SET_RENDERABLE_NAVIGATION_CATEGORIES",
+    type: "SET_NAVIGATION_CATEGORIES",
     categories,
   };
 }
