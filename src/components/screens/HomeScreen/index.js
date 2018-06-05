@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import LangService from "../../../services/langService";
 import { HeaderStyles } from "../../../styles";
 import styles from "./styles";
-import { selectCurrentGuideByID, selectCurrentGuideGroup } from "../../../actions/uiStateActions";
+import { selectCurrentGuideByID, selectCurrentGuideGroup, selectCurrentBottomBarTab } from "../../../actions/uiStateActions";
 import BottomBarView from "../../shared/BottomBarView";
 
 const settingsIcon = require("../../../images/settings.png");
@@ -24,6 +24,7 @@ type Props = {
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
   currentBottomBarTab: number,
+  selectBottomBarTab(id: number): void,
 }
 
 class HomeScreen extends Component<Props> {
@@ -58,6 +59,10 @@ class HomeScreen extends Component<Props> {
         break;
       default:
     }
+  }
+
+  onSelectBottomBarTab = (index: number): void => {
+    this.props.selectBottomBarTab(index);
   }
 
   renderGuideCount = (item: NavigationSectionItem) => {
@@ -126,7 +131,7 @@ class HomeScreen extends Component<Props> {
           keyExtractor={item => item.id}
           sections={categories}
         />
-        <BottomBarView currentBottomBarTab={this.props.currentBottomBarTab} />
+        <BottomBarView currentBottomBarTab={this.props.currentBottomBarTab} onSelectTab={this.props.selectBottomBarTab} />
       </View>
     );
     /* TODO render section list footer, "VIEW ALL" */
@@ -207,6 +212,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
+    selectBottomBarTab: (index: number) => dispatch(selectCurrentBottomBarTab(index)),
   };
 }
 
