@@ -1,6 +1,6 @@
 // @flow
 import { LocationUtils } from "../utils";
-import { setGuideGroups } from "../actions/guideGroupActions";
+import { setGuidesAndGuideGroups } from "../actions/guideGroupActions";
 
 /**
  * Responsible for patching local content.
@@ -30,6 +30,30 @@ function updateDistance(guideGroups: GuideGroup[], currentPosition: PositionLong
   return updated;
 }
 
+function updateDistanceForGuides(guides: Guide[], currentPosition: PositionLongLat): Guide[] {
+  const updated = guides.map((g) => {
+    const distances: number[] = [];
+    // calculting diatnces to all objects
+    g.contentObjects.forEach(
+      (obj) => {
+        const { location } = obj;
+        if (location) {
+          const d = LocationUtils.getDistanceBetweenCoordinates(currentPosition, obj.location);
+          distances.push(d);
+        }
+        return obj;
+      });
+    // finding the shortest
+    if (distances.length > 0) {
+      const shortest = Math.min(...distances);
+      return { ...g, distance: shortest };
+    }
+    return { ...g };
+  });
+
+  return updated;
+}
+
 export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: Action) => {
   const result = next(action);
   const nextState = getState();
@@ -45,19 +69,20 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
         const { coords } = geolocation;
         updatedGG = updateDistance(updatedGG, coords);
       }
-      dispatch(setGuideGroups(updatedGG));
+      dispatch(setGuidesAndGuideGroups(updatedGG, guides.items));
       break;
     }
     case "GEOLOCATION_UPDATE_SUCCESS":
     {
       // updating guide groups distances
-      const { geolocation, guideGroups } = nextState;
+      const { geolocation, guideGroups, guides } = nextState;
       if (!geolocation) break;
 
       const { coords } = geolocation;
       const updatedGG: GuideGroup[] = updateDistance(guideGroups.items, coords);
+      const updatedGuides: Guide[] = updateDistanceForGuides(guides.items, coords);
       // TODO also update guides that are trails
-      dispatch(setGuideGroups(updatedGG));
+      dispatch(setGuidesAndGuideGroups(updatedGG, updatedGuides));
       break;
     }
     default:

@@ -22,13 +22,18 @@ import NavigationListItem from "../../shared/NavigationListItem";
 const settingsIcon = require("../../../images/settings.png");
 
 function getDistance(item: NavigationItem): number {
-  const { guideGroup } = item;
+  const { guideGroup, guide } = item;
   if (guideGroup) {
     const { distance } = guideGroup;
     if (distance) {
       return distance;
     }
-    return Number.MAX_VALUE;
+  }
+  if (guide) {
+    const { distance } = guide;
+    if (distance) {
+      return distance;
+    }
   }
   return Number.MAX_VALUE;
 }
