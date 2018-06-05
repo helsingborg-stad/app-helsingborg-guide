@@ -5,8 +5,7 @@
   "scripts": {
     "prepare": "patch-package",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "eslint":
-      "eslint flow-typed/** index.js src/** --ext .js --report-unused-disable-directives",
+    "eslint": "eslint flow-typed/** index.js src/** --ext .js --report-unused-disable-directives",
     "test": "jest",
     "flow": "flow --show-all-errors",
     "clean": "react-native-clean-project"
@@ -64,9 +63,13 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": ["./jest/mocks.js"]
+    "setupFiles": [
+      "./jest/mocks.js"
+    ]
   },
   "rnpm": {
-    "assets": ["./src/fonts"]
+    "assets": [
+      "./src/fonts"
+    ]
   }
 }
