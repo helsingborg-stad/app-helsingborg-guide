@@ -1,6 +1,6 @@
 // @flow
 
-import { getGuideGroups } from "../utils/fetchUtils";
+import fetchUtils from "../utils/fetchUtils";
 
 export function setGuideGroups(guideGroups: GuideGroup[]): Action {
   return { type: "SET_GUIDEGROUPS", guideGroups };
@@ -22,7 +22,7 @@ export function fetchGuideGroups(langCode: string): ThunkAction {
   return function fetchGuideGroupsDispatch(dispatch: Dispatch) {
     dispatch(fetchGuideGroupsRequest());
 
-    return getGuideGroups(langCode)
+    return fetchUtils.getGuideGroups(langCode)
       .then(guideGroups => dispatch(fetchGuideGroupsSuccess(guideGroups)))
       .catch((error) => {
         dispatch(fetchGuideGroupsFailure(error.message));
