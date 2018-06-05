@@ -16,7 +16,6 @@ import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   selectCurrentCategory,
-  selectCurrentBottomBarTab,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
 import BottomBarView from "../../shared/BottomBarView";
@@ -51,8 +50,6 @@ type Props = {
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
   selectCurrentCategory(section: NavigationCategory): void,
-  currentBottomBarTab: number,
-  selectBottomBarTab(id: number): void,
 }
 
 class HomeScreen extends Component<Props> {
@@ -149,21 +146,19 @@ class HomeScreen extends Component<Props> {
           keyExtractor={item => item.id}
           sections={sections}
         />
-        <BottomBarView currentBottomBarTab={this.props.currentBottomBarTab} onSelectTab={this.props.selectBottomBarTab} />
+        <BottomBarView navigation={this.props.navigation} />
       </View>);
   }
 }
 
-
 function mapStateToProps(state: RootState) {
   const { navigation } = state;
   const { isFetching, navigationCategories } = navigation;
-  const { currentBottomBarTab } = state.uiState;
+
 
   return {
     showLoadingSpinner: isFetching,
     navigationSections: navigationCategories,
-    currentBottomBarTab,
   };
 }
 
@@ -172,7 +167,6 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
     selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
-    selectBottomBarTab: (index: number) => dispatch(selectCurrentBottomBarTab(index)),
   };
 }
 
