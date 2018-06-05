@@ -15,7 +15,10 @@ type Props = {
   onSelectTab: any,
 }
 
-function displayButtonTabs() {
+const selectedColor:string = "#ffffffff";
+const inactiveColor:string = "#ffffffaa";
+
+function displayButtonTabs(currentBottomBarTab: number) {
   return (
     <View style={styles.buttonTabContainer}>
       <Image style={styles.imageTab} source={currentBottomBarTab === 0 ? barTabLeft : null} />
