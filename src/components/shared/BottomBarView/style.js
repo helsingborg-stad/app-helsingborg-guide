@@ -36,12 +36,12 @@ export default StyleSheet.create({
     justifyContent: "center",
     zIndex: 2,
   },
-  icon: {
+  touchableIcon: {
     flex: 1,
+  },
+  icon: {
     alignSelf: "center",
     height: 30,
     width: 30,
-
   },
-
 });
