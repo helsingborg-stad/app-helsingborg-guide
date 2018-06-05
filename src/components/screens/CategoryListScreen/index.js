@@ -44,14 +44,19 @@ class HomeScreen extends Component<Props> {
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
       case "guide":
+      {
         this.props.selectGuide(item.id);
-        this.props.navigation.navigate("GuideDetailsScreen");
+        const { guide } = item;
+        if (guide) {
+          const { guideType } = guide;
+          if (guideType === "guide") {
+            this.props.navigation.navigate("GuideDetailsScreen");
+          } else if (guideType === "trail") {
+            this.props.navigation.navigate("TrailScreen");
+          }
+        }
         break;
-      case "trail":
-        // TODO fix navigation
-        this.props.selectGuide(item.id);
-        this.props.navigation.navigate("TrailScreen");
-        break;
+      }
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
         this.props.navigation.navigate("LocationScreen");
