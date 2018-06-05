@@ -27,6 +27,7 @@ import {
   WelcomeScreen,
 } from "./components/screens";
 import ViewContainer from "./components/shared/view_container";
+import BottomBarView from "./components/shared/BottomBarView";
 import {
   Colors,
   HeaderStyles,
@@ -91,6 +92,8 @@ export default class Nav extends Component<Props> {
   static onNavigationStateChange(prevState, currentState) {
     const currentScreen = Nav.getCurrentRouteName(currentState);
     const prevScreen = Nav.getCurrentRouteName(prevState);
+    console.log(`going from ${prevScreen} to ${currentScreen}`);
+
 
     if (prevScreen !== currentScreen) {
       AnalyticsUtils.setScreen(currentScreen);
@@ -120,6 +123,7 @@ export default class Nav extends Component<Props> {
         />
         {/* $FlowFixMe should be fixed in later flow versions */}
         <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
+        {true ? <BottomBarView /> : null}
       </ViewContainer>
     );
   }

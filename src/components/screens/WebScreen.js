@@ -25,7 +25,6 @@ const WebScreen = (props) => {
       <View style={styles.container}>
         <WebView source={{ uri: url }} />
       </View>
-      <BottomBarView navigation={props.navigation} />
     </View >
   );
 };
