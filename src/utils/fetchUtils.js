@@ -44,16 +44,10 @@ async function getGuides(langCode: string): Promise<Guide[]> {
 }
 
 export async function getNavigation(langCode: string): Promise<NavigationCategory[]> {
-  const url = `${API_BASE_URL}/navigation/?lang=${langCode}`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error("Failed to fetch navigation");
-  }
+  const json = await fetchJSON("navigation", langCode);
+  const fetchedNavigation: NavigationCategory[] = validateData(json, "navigationCategory");
 
-  const json = await response.json();
-  // TODO validate data
-
-  return json;
+  return fetchedNavigation;
 }
 
 export default {
