@@ -1,21 +1,18 @@
+// @flow
 import {
   Platform,
 } from "react-native";
 import geolib from "geolib";
 
-function getDistanceBetweenCoordinates(firstLocation, secondLocation) {
+function getDistanceBetweenCoordinates(firstLocation: PositionLongLat, secondLocation: PositionLongLat): number {
   if (firstLocation.latitude && firstLocation.longitude &&
     secondLocation.latitude && secondLocation.longitude) {
-    const distance = geolib.getDistanceSimple(
-      { latitude: firstLocation.latitude, longitude: firstLocation.longitude },
-      { latitude: secondLocation.latitude, longitude: secondLocation.longitude },
-    );
-    return distance;
+    return geolib.getDistanceSimple(firstLocation, secondLocation);
   }
   return 0;
 }
 
-function getShortestDistance(sourceLocation, targetLocations) {
+function getShortestDistance(sourceLocation: PositionLongLat, targetLocations: PositionLongLat[]): number {
   const distances = [];
   targetLocations.forEach((location) => {
     const distance = getDistanceBetweenCoordinates(location, sourceLocation);
@@ -24,7 +21,7 @@ function getShortestDistance(sourceLocation, targetLocations) {
   return Math.min(...distances);
 }
 
-function directionsUrl(latitude, longitude, userLocation) {
+function directionsUrl(latitude: number, longitude: number, userLocation: GeolocationType): string {
   const directionsCoordinate = `${latitude},${longitude}`;
 
   let userCoordinate = "";
