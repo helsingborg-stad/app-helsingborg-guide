@@ -17,6 +17,7 @@ type Props = {
 
 function getGuidesCount(guideGroup: ?GuideGroup): number {
   if (!guideGroup) return 0;
+  if (!guideGroup.guidesCount) return 0;
   return guideGroup.guidesCount;
 }
 

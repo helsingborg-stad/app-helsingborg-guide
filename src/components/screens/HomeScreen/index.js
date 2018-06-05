@@ -21,6 +21,22 @@ import NavigationListItem from "../../shared/NavigationListItem";
 
 const settingsIcon = require("../../../images/settings.png");
 
+function getDistance(item: NavigationItem): number {
+  const { guideGroup } = item;
+  if (guideGroup) {
+    const { distance } = guideGroup;
+    if (distance) {
+      return distance;
+    }
+    return Number.MAX_VALUE;
+  }
+  return Number.MAX_VALUE;
+}
+
+function compareDistance(a: NavigationItem, b: NavigationItem): number {
+  return getDistance(a) - getDistance(b);
+}
+
 type Props = {
   navigation: any,
   showLoadingSpinner: boolean,
@@ -102,8 +118,7 @@ class HomeScreen extends Component<Props> {
     const { navigationSections } = this.props;
     const sections = navigationSections.map((cat) => {
       const data = cat.items
-        // TODO sort by distance
-        // .sort(item => item.distance)
+        .sort(compareDistance)
         .slice(0, 2);
       return { title: cat.name, data, category: cat };
     });
