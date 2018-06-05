@@ -1,6 +1,7 @@
-import { setRenderableNavigationCategories } from "../actions/navigationActions";
-
 // @flow
+import { setRenderableNavigationCategories } from "../actions/navigationActions";
+import { LocationUtils } from "../utils";
+
 /**
  * Responsible for updating the renderable navigation categories.
  *
@@ -30,6 +31,7 @@ function getRenderableNavigationCategories(
             title: g.name,
             type: g.guideType,
             guidesCount: g.contentObjects.length,
+            distance: -1,
           };
         }
       } else if (type === "guidegroup") {
@@ -42,6 +44,8 @@ function getRenderableNavigationCategories(
             title: gg.name,
             type,
             guidesCount,
+            lonlat: gg.location,
+            distance: 0,
           };
         }
       }
@@ -79,9 +83,32 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
         const { items: guides } = nextState.guides;
         const { navigationCategories: categories } = nextState.navigation;
         const renderableCategories = getRenderableNavigationCategories(categories, guideGroups, guides);
+        // TODO update distance as well
         dispatch(setRenderableNavigationCategories(renderableCategories));
       }
       break;
+    case "GEOLOCATION_UPDATE_SUCCESS":
+    {
+      const { geolocation, navigation } = nextState;
+      if (!geolocation) break;
+
+      const { renderableNavigationCategories } = navigation;
+      const { coords } = geolocation;
+
+      const categories = renderableNavigationCategories.map((cat) => {
+        const items = cat.items.map((item) => {
+          const { lonlat } = item;
+          let distance = 0;
+          if (lonlat) {
+            distance = LocationUtils.getDistanceBetweenCoordinates(coords, lonlat);
+          }
+          return { ...item, distance };
+        });
+        return { ...cat, items };
+      });
+      dispatch(setRenderableNavigationCategories(categories));
+      break;
+    }
     default:
       break;
   }

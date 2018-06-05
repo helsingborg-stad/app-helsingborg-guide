@@ -37,6 +37,7 @@ declare type Action =
   | { type: "AUDIO_UPDATE", audio: AudioState }
   | { type: "AUDIO_MOVE_SLIDER", position: number }
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
+  | { type: "GEOLOCATION_UPDATE_SUCCESS", position: GeolocationType }
   ;
 
 declare type NavigationItemType = 'guide' | 'guidegroup';
@@ -63,14 +64,16 @@ declare type RenderableNavigationItem = {
   image?: ?string,
   title: string,
   guidesCount?: number,
-  childFriendly?: boolean
+  childFriendly?: boolean,
+  lonlat?: PositionLongLat,
+  distance: number,
 }
 
 declare type RenderableNavigationCategory = {
   id: number,
   name: string,
   slug: string,
-  items: RenderableNavigationItem[]
+  items: RenderableNavigationItem[],
 }
 
 declare type Coords = {

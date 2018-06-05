@@ -94,8 +94,7 @@ class HomeScreen extends Component<Props> {
 
     const { navigationSections } = this.props;
     const sections = navigationSections.map((cat) => {
-      const data = cat.items.slice(0, 2);
-      // TODO sort cat.items by distance
+      const data = cat.items.sort(item => item.distance).slice(0, 2);
       return { title: cat.name, data, category: cat };
     });
     return (
