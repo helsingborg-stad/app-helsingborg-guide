@@ -12,26 +12,24 @@ import DownloadButtonContainer from "../DownloadButton";
 type Props = {
   trail: Guide,
   showInfoOverlay: boolean,
-  trailItems: Object[],
-  onToggleInfoOverlay: () => (void),
-  navigation: Object,
-}
+  onToggleInfoOverlay: () => void,
+  navigation: Object
+};
 
 function renderDownloadButton() {
-  return (
-    <DownloadButtonContainer
-      style={styles.downloadButton}
-    />
-  );
+  return <DownloadButtonContainer style={styles.downloadButton} />;
 }
 
-function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => (void)) {
-  if (!trail) { return null; }
+function renderMapInformationOverlay(
+  trail: Guide,
+  onToggleInfoOverlay: () => void,
+) {
+  if (!trail) {
+    return null;
+  }
 
   return (
-    <TouchableWithoutFeedback
-      onPress={onToggleInfoOverlay}
-    >
+    <TouchableWithoutFeedback onPress={onToggleInfoOverlay}>
       <MapInformationOverlay
         trailInformation={{ title: trail.name, description: trail.description }}
         onPressFunction={onToggleInfoOverlay}
@@ -44,13 +42,15 @@ function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => (v
 const TrailView = (props: Props) => (
   <View style={styles.container}>
     <MapWithListView
-      items={props.trailItems}
-      initialLocation={props.trailItems[0].location}
+      items={props.trail.contentObjects}
+      initialLocation={props.trail.contentObjects[0].location}
       navigation={props.navigation}
       stopAudioOnUnmount
       id={props.trail.id}
     />
-    {props.showInfoOverlay ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay) : null}
+    {props.showInfoOverlay
+      ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay)
+      : null}
     <AudioPlayerView />
   </View>
 );
