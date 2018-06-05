@@ -1,0 +1,229 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "definitions": {
+        "IImageUrls": {
+            "properties": {
+                "large": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "medium": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "thumbnail": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "ILink": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "facebook",
+                        "instagram",
+                        "spotify",
+                        "twitter",
+                        "vimeo",
+                        "web",
+                        "youtube"
+                    ],
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "url"
+            ],
+            "type": "object"
+        },
+        "ILocation": {
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "latitude": {
+                    "type": "number"
+                },
+                "links": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "$ref": "#/definitions/ILink"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "openingHourExceptions": {
+                    "items": {
+                        "$ref": "#/definitions/IOpeningHourException"
+                    },
+                    "type": "array"
+                },
+                "openingHours": {
+                    "items": {
+                        "$ref": "#/definitions/IOpeningHours"
+                    },
+                    "type": "array"
+                },
+                "streetAddress": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "latitude",
+                "links",
+                "longitude",
+                "streetAddress"
+            ],
+            "type": "object"
+        },
+        "IOpeningHourException": {
+            "properties": {
+                "date": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "date",
+                "description"
+            ],
+            "type": "object"
+        },
+        "IOpeningHours": {
+            "properties": {
+                "closed": {
+                    "type": "boolean"
+                },
+                "closing": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "dayNumber": {
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7
+                    ],
+                    "type": "number"
+                },
+                "opening": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "weekday": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "closed",
+                "dayNumber",
+                "opening",
+                "weekday"
+            ],
+            "type": "object"
+        },
+        "IPointProperty": {
+            "properties": {
+                "icon": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "id": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "slug"
+            ],
+            "type": "object"
+        }
+    },
+    "properties": {
+        "active": {
+            "type": "boolean"
+        },
+        "description": {
+            "type": "string"
+        },
+        "id": {
+            "type": "number"
+        },
+        "images": {
+            "$ref": "#/definitions/IImageUrls"
+        },
+        "location": {
+            "$ref": "#/definitions/ILocation"
+        },
+        "name": {
+            "type": "string"
+        },
+        "pointProperties": {
+            "items": {
+                "$ref": "#/definitions/IPointProperty"
+            },
+            "type": "array"
+        },
+        "slug": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "active",
+        "description",
+        "id",
+        "images",
+        "location",
+        "name",
+        "pointProperties",
+        "slug"
+    ],
+    "type": "object"
+}
+

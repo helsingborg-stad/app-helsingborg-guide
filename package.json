@@ -5,12 +5,14 @@
   "scripts": {
     "prepare": "patch-package",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "eslint": "eslint flow-typed/** index.js src/** --ext .js --report-unused-disable-directives",
+    "eslint":
+      "eslint flow-typed/** index.js src/** --ext .js --report-unused-disable-directives",
     "test": "jest",
     "flow": "flow --show-all-errors",
     "clean": "react-native-clean-project"
   },
   "dependencies": {
+    "ajv": "6.5.0",
     "axios": "0.17.0",
     "geolib": "2.0.24",
     "lodash": "4.17.5",
@@ -62,13 +64,9 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": [
-      "./jest/mocks.js"
-    ]
+    "setupFiles": ["./jest/mocks.js"]
   },
   "rnpm": {
-    "assets": [
-      "./src/fonts"
-    ]
+    "assets": ["./src/fonts"]
   }
 }

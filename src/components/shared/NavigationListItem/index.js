@@ -10,6 +10,8 @@ import {
 import LangService from "../../../services/langService";
 import styles from "./styles";
 
+const defaultImage = require("../../../images/no-image-featured-image.png");
+
 type Props = {
   item: NavigationItem,
   onPressItem(item: NavigationItem): void
@@ -17,6 +19,7 @@ type Props = {
 
 function getGuidesCount(guideGroup: ?GuideGroup): number {
   if (!guideGroup) return 0;
+  if (!guideGroup.guidesCount) return 0;
   return guideGroup.guidesCount;
 }
 
@@ -51,27 +54,26 @@ function renderGuideCount(item: NavigationItem) {
   return (<Text style={styles.listItemGuideCount}>{textString}</Text>);
 }
 
-function getNameAndImage(item: NavigationItem): { image: ?string, name: ?string } {
+function getNameAndImage(item: NavigationItem): { imageUrl: ?string, name: ?string } {
   const { guide, guideGroup } = item;
   if (guide) {
     const { name, images } = guide;
-    const image = images.medium;
-    return { image, name };
+    return { imageUrl: images.medium, name };
   }
   if (guideGroup) {
     const { name, images } = guideGroup;
-    const image = images.medium;
-    return { name, image };
+    return { name, imageUrl: images.medium };
   }
   return {
-    image: null,
+    imageUrl: null,
     name: null,
   };
 }
 
 const NavigationListItem = (props: Props) => {
   const { item } = props;
-  const { image, name } = getNameAndImage(item);
+  const { imageUrl, name } = getNameAndImage(item);
+  const image = imageUrl ? { uri: imageUrl } : defaultImage;
   return (<TouchableOpacity
     onPress={() => props.onPressItem(item)}
     style={styles.listItemContainer}
@@ -79,7 +81,7 @@ const NavigationListItem = (props: Props) => {
     <View style={styles.imageWrapper}>
       <Image
         style={styles.listItemImage}
-        source={{ uri: image }}
+        source={image}
       />
     </View>
     <View style={styles.listItemTextContainer}>

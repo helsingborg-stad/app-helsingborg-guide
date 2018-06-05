@@ -1,6 +1,5 @@
 // @flow
 import { setNavigationCategories } from "../actions/navigationActions";
-import { LocationUtils } from "../utils";
 
 /**
  * Responsible for updating the renderable navigation categories.
@@ -75,27 +74,6 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
         dispatch(setNavigationCategories(renderableCategories));
       }
       break;
-    // TODO fix
-    /*
-                        const { geolocation, navigation } = nextState;
-                        if (!geolocation) break;
-
-                        const { navigationCategories } = navigation;
-                        const { coords } = geolocation;
-
-                        const categories = navigationCategories.map((cat) => {
-                          const items = cat.items.map((item) => {
-                            const { lonlat } = item;
-                            let distance = 0;
-                            if (lonlat) {
-                              distance = LocationUtils.getDistanceBetweenCoordinates(coords, lonlat);
-                            }
-                            return { ...item, distance };
-                          });
-                          return { ...cat, items };
-                        });
-                        dispatch(setRenderableNavigationCategories(categories));
-                        */
     default:
       break;
   }

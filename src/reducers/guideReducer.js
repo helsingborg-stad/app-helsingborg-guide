@@ -1,8 +1,11 @@
 // @flow
 
-import initialState from "./initialState";
+const initialState: GuideState = {
+  isFetching: false,
+  items: [],
+};
 
-export default function guideReducer(state: GuideState = initialState.guides, action: Action): GuideState {
+export default function guideReducer(state: GuideState = initialState, action: Action): GuideState {
   switch (action.type) {
     case "FETCH_GUIDES_REQUEST":
       return { ...state, isFetching: true };

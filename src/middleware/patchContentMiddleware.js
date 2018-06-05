@@ -21,6 +21,15 @@ function updateGuidesCount(guideGroups: GuideGroup[], guides: Guide[]): GuideGro
   return updated;
 }
 
+function updateDistance(guideGroups: GuideGroup[], currentPosition: PositionLongLat): GuideGroup[] {
+  const updated = guideGroups.map((gg) => {
+    const distance = LocationUtils.getDistanceBetweenCoordinates(currentPosition, gg.location);
+    return { ...gg, distance };
+  });
+
+  return updated;
+}
+
 export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: Action) => {
   const result = next(action);
   const nextState = getState();
@@ -28,35 +37,29 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
   switch (action.type) {
     case "FETCH_GUIDEGROUPS_SUCCESS":
     case "FETCH_GUIDES_SUCCESS":
-    // case "GEOLOCATION_UPDATE_SUCCESS":
     {
       // calculate new guidesCount
-      const { guideGroups, guides } = nextState;
-      const updatedGG: GuideGroup[] = updateGuidesCount(guideGroups.items, guides.items);
+      const { guideGroups, guides, geolocation } = nextState;
+      let updatedGG: GuideGroup[] = updateGuidesCount(guideGroups.items, guides.items);
+      if (geolocation) {
+        const { coords } = geolocation;
+        updatedGG = updateDistance(updatedGG, coords);
+      }
       dispatch(setGuideGroups(updatedGG));
       break;
     }
-    // TODO fix
-    /*
-                        const { geolocation, navigation } = nextState;
-                        if (!geolocation) break;
+    case "GEOLOCATION_UPDATE_SUCCESS":
+    {
+      // updating guide groups distances
+      const { geolocation, guideGroups } = nextState;
+      if (!geolocation) break;
 
-                        const { navigationCategories } = navigation;
-                        const { coords } = geolocation;
-
-                        const categories = navigationCategories.map((cat) => {
-                          const items = cat.items.map((item) => {
-                            const { lonlat } = item;
-                            let distance = 0;
-                            if (lonlat) {
-                              distance = LocationUtils.getDistanceBetweenCoordinates(coords, lonlat);
-                            }
-                            return { ...item, distance };
-                          });
-                          return { ...cat, items };
-                        });
-                        dispatch(setRenderableNavigationCategories(categories));
-                        */
+      const { coords } = geolocation;
+      const updatedGG: GuideGroup[] = updateDistance(guideGroups.items, coords);
+      // TODO also update guides that are trails
+      dispatch(setGuideGroups(updatedGG));
+      break;
+    }
     default:
       break;
   }
