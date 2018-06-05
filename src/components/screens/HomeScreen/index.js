@@ -22,7 +22,8 @@ type Props = {
   showLoadingSpinner: boolean,
   navigationSections: NavigationSection[],
   selectGuide(id: number): void,
-  selectGuideGroup(id: number): void
+  selectGuideGroup(id: number): void,
+  currentBottomBarTab: number,
 }
 
 class HomeScreen extends Component<Props> {
@@ -125,7 +126,7 @@ class HomeScreen extends Component<Props> {
           keyExtractor={item => item.id}
           sections={categories}
         />
-        <BottomBarView />
+        <BottomBarView currentBottomBarTab={this.props.currentBottomBarTab} />
       </View>
     );
     /* TODO render section list footer, "VIEW ALL" */
@@ -190,6 +191,7 @@ function parseNavigationSection(categories: NavigationCategory[], guideGroups: G
 function mapStateToProps(state: RootState) {
   const { navigation, guideGroups, guides } = state;
   const { isFetching, categories } = navigation;
+  const { currentBottomBarTab } = state.uiState;
 
   // repackaging data , i.e. embed the guides into the navigation tree
   const sections: NavigationSection[] = parseNavigationSection(categories, guideGroups.items, guides.items);
@@ -197,6 +199,7 @@ function mapStateToProps(state: RootState) {
   return {
     showLoadingSpinner: isFetching,
     navigationSections: sections,
+    currentBottomBarTab,
   };
 }
 

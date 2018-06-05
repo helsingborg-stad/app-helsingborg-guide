@@ -1,3 +1,5 @@
+import { selectCurrentBottomBarTab } from "src/actions/uiStateActions";
+
 // @flow
 
 declare type Action =
@@ -10,6 +12,7 @@ declare type Action =
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
   | { type: "SELECT_CURRENT_IMAGE", url: ?string }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
+  | { type: "SELECT_CURRENT_BOTTOM_BAR_TAB", tabIndex: number }
   | { type: "FETCH_NAVIGATION_REQUEST" }
   | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
   | { type: "FETCH_NAVIGATION_FAILURE", error: Error }
@@ -270,6 +273,7 @@ declare type UIState = {
   currentGuide: ?Guide,
   currentImage: ?string,
   developerMode: boolean,
+  currentBottomBarTab: number
 }
 
 declare type NavigationState = {

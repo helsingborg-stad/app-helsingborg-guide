@@ -8,6 +8,7 @@ const defaultState: UIState = {
   currentGuide: null,
   currentImage: null,
   developerMode: false,
+  currentBottomBarTab: 0,
 };
 
 export default function uiStateReducer(state: UIState = defaultState, action: Action): UIState {
@@ -24,6 +25,8 @@ export default function uiStateReducer(state: UIState = defaultState, action: Ac
       return { ...state, developerMode: action.enabled };
     case "SELECT_CURRENT_IMAGE":
       return { ...state, currentImage: action.url };
+    case "SELECT_CURRENT_BOTTOM_BAR_TAB":
+      return { ...state, currentBottomBarTab: action.tabIndex };
     default:
       return state;
   }

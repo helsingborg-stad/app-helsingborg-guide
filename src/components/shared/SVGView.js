@@ -2,7 +2,7 @@
 
 import React from "react";
 import { StyleSheet } from "react-native";
-import SVGImage from "react-native-remote-svg";
+import SVGImg from "react-native-remote-svg";
 
 type Props = {
   logoType: ?string,
@@ -20,7 +20,7 @@ export default function SVGView(props: Props) {
   const sourceImg = props.logoType ? { uri: props.logoType } : props.placeholderImage;
 
   return (
-    <SVGImage
+    <SVGImg
       source={sourceImg}
       style={styleObj}
     />

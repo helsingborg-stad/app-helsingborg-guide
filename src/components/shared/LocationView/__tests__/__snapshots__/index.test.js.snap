@@ -400,24 +400,19 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -448,24 +443,19 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -496,24 +486,19 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -544,24 +529,19 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -592,24 +572,19 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -640,24 +615,19 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -688,24 +658,19 @@ exports[`weekdays 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1132,24 +1097,19 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1180,24 +1140,19 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1228,24 +1183,19 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1276,24 +1226,19 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1324,24 +1269,19 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1372,24 +1312,19 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1420,24 +1355,19 @@ exports[`weekdays 2`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1864,24 +1794,19 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1912,24 +1837,19 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -1960,24 +1880,19 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2008,24 +1923,19 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2056,24 +1966,19 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2104,24 +2009,19 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2152,24 +2052,19 @@ exports[`weekdays 3`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2596,24 +2491,19 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2644,24 +2534,19 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2692,24 +2577,19 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2740,24 +2620,19 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2788,24 +2663,19 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2836,24 +2706,19 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -2884,24 +2749,19 @@ exports[`weekdays 4`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3328,24 +3188,19 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3376,24 +3231,19 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3424,24 +3274,19 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3472,24 +3317,19 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3520,24 +3360,19 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3568,24 +3403,19 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -3616,24 +3446,19 @@ exports[`weekdays 5`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4060,24 +3885,19 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4108,24 +3928,19 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4156,24 +3971,19 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4204,24 +4014,19 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4252,24 +4057,19 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4300,24 +4100,19 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4348,24 +4143,19 @@ exports[`weekdays 6`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4792,24 +4582,19 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4840,24 +4625,19 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4888,24 +4668,19 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4936,24 +4711,19 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -4984,24 +4754,19 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -5032,24 +4797,19 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -5080,24 +4840,19 @@ exports[`weekdays 7`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -5609,24 +5364,19 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -5657,24 +5407,19 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -5705,24 +5450,19 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -5753,24 +5493,19 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -5801,24 +5536,19 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -5849,24 +5579,19 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -5897,24 +5622,19 @@ exports[`with geolocation 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -6341,24 +6061,19 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_cafe.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -6389,24 +6104,19 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_wifi.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -6437,24 +6147,19 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -6485,24 +6190,19 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -6533,24 +6233,19 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_baby.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -6581,24 +6276,19 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_handicapable.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -6629,24 +6319,19 @@ exports[`with point properties 1`] = `
                 }
               }
             >
-              <View
+              <SVGImg
+                source={
+                  Object {
+                    "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
+                  }
+                }
                 style={
                   Object {
                     "height": 30,
                     "width": 30,
                   }
                 }
-              >
-                <SvgUri
-                  height={30}
-                  source={
-                    Object {
-                      "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
-                    }
-                  }
-                  width={30}
-                />
-              </View>
+              />
               <Text
                 accessible={true}
                 allowFontScaling={true}

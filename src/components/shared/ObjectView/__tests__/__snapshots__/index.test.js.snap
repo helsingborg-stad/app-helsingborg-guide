@@ -7,14 +7,19 @@ exports[`Basic GuideObject 1`] = `
       "alignItems": "stretch",
       "backgroundColor": "#ffffff",
       "flex": 1,
-      "justifyContent": "flex-start",
+      "justifyContent": "flex-end",
     }
   }
 >
   <RCTScrollView
-    contentContainerStyle={
+    style={
       Object {
-        "paddingBottom": 70,
+        "backgroundColor": "#ffffff",
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
       }
     }
   >

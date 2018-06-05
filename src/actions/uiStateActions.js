@@ -47,3 +47,7 @@ export function selectCurrentImage(url: ?string): Action {
 export function setDeveloperMode(enabled: boolean): Action {
   return { type: "SET_DEVELOPER_MODE", enabled };
 }
+
+export function selectCurrentBottomBarTab(tabIndex: number): Action {
+  return { type: "SELECT_CURRENT_BOTTOM_BAR_TAB", tabIndex };
+}
