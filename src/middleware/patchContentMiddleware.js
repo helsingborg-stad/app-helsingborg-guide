@@ -41,7 +41,6 @@ function updateDistanceForGuides(guides: Guide[], currentPosition: PositionLongL
           const d = LocationUtils.getDistanceBetweenCoordinates(currentPosition, obj.location);
           distances.push(d);
         }
-        return obj;
       });
     // finding the shortest
     if (distances.length > 0) {
