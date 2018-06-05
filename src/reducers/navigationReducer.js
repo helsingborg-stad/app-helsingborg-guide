@@ -2,7 +2,6 @@
 const initialState: NavigationState = {
   isFetching: false,
   navigationCategories: [],
-  renderableNavigationCategories: [],
 };
 
 export default function navigationReducer(state: NavigationState = initialState, action: Action): NavigationState {
@@ -28,7 +27,7 @@ export default function navigationReducer(state: NavigationState = initialState,
     case "SET_RENDERABLE_NAVIGATION_CATEGORIES":
       return {
         ...state,
-        renderableNavigationCategories: action.categories,
+        navigationCategories: action.categories,
       };
     default:
       return state;

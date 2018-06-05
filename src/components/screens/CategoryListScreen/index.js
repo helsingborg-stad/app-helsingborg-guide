@@ -14,7 +14,7 @@ import NavigationListItem from "../../shared/NavigationListItem";
 
 type Props = {
   navigation: any,
-  currentCategory: ?RenderableNavigationCategory,
+  currentCategory: ?NavigationCategory,
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
 }
@@ -41,13 +41,14 @@ class HomeScreen extends Component<Props> {
     }
   }
 
-  onPressItem = (item: RenderableNavigationItem): void => {
+  onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
       case "guide":
         this.props.selectGuide(item.id);
         this.props.navigation.navigate("GuideDetailsScreen");
         break;
       case "trail":
+        // TODO fix navigation
         this.props.selectGuide(item.id);
         this.props.navigation.navigate("TrailScreen");
         break;
@@ -90,7 +91,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
-    selectCurrentCategory: (category: RenderableNavigationCategory) => dispatch(selectCurrentCategory(category)),
+    selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category)),
   };
 }
 

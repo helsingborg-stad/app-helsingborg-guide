@@ -24,10 +24,10 @@ const settingsIcon = require("../../../images/settings.png");
 type Props = {
   navigation: any,
   showLoadingSpinner: boolean,
-  navigationSections: RenderableNavigationCategory[],
+  navigationSections: NavigationCategory[],
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
-  selectCurrentCategory(section: RenderableNavigationCategory): void
+  selectCurrentCategory(section: NavigationCategory): void
 }
 
 class HomeScreen extends Component<Props> {
@@ -46,25 +46,32 @@ class HomeScreen extends Component<Props> {
     });
   }
 
-  onPressItem = (item: RenderableNavigationItem): void => {
+  onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
       case "guide":
-        this.props.selectGuide(item.id);
-        this.props.navigation.navigate("GuideDetailsScreen");
+      {
+        const { guide } = item;
+        if (guide) {
+          this.props.selectGuide(guide.id);
+          const type = guide.guideType;
+          if (type === "guide") {
+            this.props.navigation.navigate("GuideDetailsScreen");
+          } else if (type === "trail") {
+            this.props.navigation.navigate("TrailScreen");
+          }
+        }
         break;
-      case "trail":
-        this.props.selectGuide(item.id);
-        this.props.navigation.navigate("TrailScreen");
-        break;
+      }
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
         this.props.navigation.navigate("LocationScreen");
         break;
       default:
+        break;
     }
   }
 
-  onPressViewAll = (category: RenderableNavigationCategory) => {
+  onPressViewAll = (category: NavigationCategory) => {
     this.props.selectCurrentCategory(category);
     this.props.navigation.navigate("CategoryListScreen");
   }
@@ -76,7 +83,7 @@ class HomeScreen extends Component<Props> {
       </View>
     )
 
-  renderSectionFooter = (section: { title: string, data: RenderableNavigationItem[], category: RenderableNavigationCategory }) => (
+  renderSectionFooter = (section: { title: string, data: NavigationItem[], category: NavigationCategory }) => (
     <View style={styles.sectionFooterContainer}>
       <TouchableOpacity
         style={styles.sectionFooterButton}
@@ -94,7 +101,10 @@ class HomeScreen extends Component<Props> {
 
     const { navigationSections } = this.props;
     const sections = navigationSections.map((cat) => {
-      const data = cat.items.sort(item => item.distance).slice(0, 2);
+      const data = cat.items
+        // TODO sort by distance
+        // .sort(item => item.distance)
+        .slice(0, 2);
       return { title: cat.name, data, category: cat };
     });
     return (
@@ -120,11 +130,11 @@ class HomeScreen extends Component<Props> {
 
 function mapStateToProps(state: RootState) {
   const { navigation } = state;
-  const { isFetching, renderableNavigationCategories } = navigation;
+  const { isFetching, navigationCategories } = navigation;
 
   return {
     showLoadingSpinner: isFetching,
-    navigationSections: renderableNavigationCategories,
+    navigationSections: navigationCategories,
   };
 }
 
@@ -132,7 +142,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
-    selectCurrentCategory: (category: RenderableNavigationCategory) => dispatch(selectCurrentCategory(category)),
+    selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category)),
   };
 }
 

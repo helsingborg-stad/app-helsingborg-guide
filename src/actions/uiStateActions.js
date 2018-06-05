@@ -44,7 +44,7 @@ export function selectCurrentImage(url: ?string): Action {
   return { type: "SELECT_CURRENT_IMAGE", url };
 }
 
-export function selectCurrentCategory(category: RenderableNavigationCategory): Action {
+export function selectCurrentCategory(category: NavigationCategory): Action {
   return { type: "SELECT_CURRENT_CATEGORY", category };
 }
 

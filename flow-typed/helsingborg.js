@@ -9,9 +9,9 @@ declare type Action =
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
   | { type: "SELECT_CURRENT_IMAGE", url: ?string }
-  | { type: "SELECT_CURRENT_CATEGORY", category: RenderableNavigationCategory }
+  | { type: "SELECT_CURRENT_CATEGORY", category: NavigationCategory }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
-  | { type: "SET_RENDERABLE_NAVIGATION_CATEGORIES", categories: RenderableNavigationCategory[] }
+  | { type: "SET_RENDERABLE_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
   | { type: "FETCH_NAVIGATION_REQUEST" }
   | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
   | { type: "FETCH_NAVIGATION_FAILURE", error: Error }
@@ -44,36 +44,16 @@ declare type NavigationItemType = 'guide' | 'guidegroup';
 
 declare type NavigationItem = {
   id: number,
-  type: NavigationItemType
+  type: NavigationItemType,
+  guide?: Guide,
+  guideGroup?: GuideGroup,
 }
 
-// This type is fetched from http and stored in our store
 declare type NavigationCategory = {
   id: number,
   name: string,
   slug: string,
   items: NavigationItem[]
-}
-
-declare type RenderableNavigationItemType = 'guide' | 'trail' | 'guidegroup';
-
-// This type is suited for rendering
-declare type RenderableNavigationItem = {
-  id: number,
-  type: RenderableNavigationItemType,
-  image?: ?string,
-  title: string,
-  guidesCount?: number,
-  childFriendly?: boolean,
-  lonlat?: PositionLongLat,
-  distance: number,
-}
-
-declare type RenderableNavigationCategory = {
-  id: number,
-  name: string,
-  slug: string,
-  items: RenderableNavigationItem[],
 }
 
 declare type Coords = {
@@ -180,6 +160,7 @@ declare type GuideGroup = {
   active: boolean,
   location: Location,
   pointProperties: PointProperty[],
+  guidesCount: number,
 };
 
 declare type GuideGroupState = {
@@ -274,14 +255,13 @@ declare type UIState = {
   currentContentObjectImageIndex: number,
   currentGuide: ?Guide,
   currentImage: ?string,
-  currentCategory: ?RenderableNavigationCategory,
+  currentCategory: ?NavigationCategory,
   developerMode: boolean,
 }
 
 declare type NavigationState = {
   isFetching: boolean,
   navigationCategories: NavigationCategory[],
-  renderableNavigationCategories: RenderableNavigationCategory[],
 }
 
 declare type RootState = {
