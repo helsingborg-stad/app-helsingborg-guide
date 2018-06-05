@@ -30,7 +30,7 @@ export default StyleSheet.create({
   },
   iconContainer: {
     position: "absolute",
-    top: 20,
+    top: 16,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
