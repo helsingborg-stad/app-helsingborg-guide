@@ -33,6 +33,7 @@ import {
   HeaderStyles,
 } from "./styles/";
 import AnalyticsUtils from "./utils/AnalyticsUtils";
+import NavigatorService from "./services/navigationService";
 
 const GuideNavigator = StackNavigator(
   {
@@ -122,7 +123,12 @@ export default class Nav extends Component<Props> {
           backgroundColor={Colors.darkPurple}
         />
         {/* $FlowFixMe should be fixed in later flow versions */}
-        <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
+        <RootNavigator
+          onNavigationStateChange={Nav.onNavigationStateChange}
+          ref={(navigatorRef) => {
+            NavigatorService.setContainer(navigatorRef);
+          }}
+        />
         {true ? <BottomBarView /> : null}
       </ViewContainer>
     );
