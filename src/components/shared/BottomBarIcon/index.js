@@ -5,6 +5,7 @@ import { TouchableOpacity } from "react-native";
 import SVGImage from "react-native-remote-svg";
 import styles from "./style";
 import { AnalyticsUtils } from "../../../utils/";
+import NavigatorService from "../../../services/navigationService";
 
 const selectedColor: string = "#ffffffff";
 const inactiveColor: string = "#ffffffaa";
@@ -96,14 +97,14 @@ class BottomBarIcon extends Component<Props> {
     // if (!selected) {
     switch (index) {
       case 0:
-        this.props.navigator.navigate("HomeScreen");
+        NavigatorService.navigate("HomeScreen");
         break;
       case 1:
-        this.props.navigator.navigate("WebScreen", { url: eventCalendarURL });
+        NavigatorService.navigate("WebScreen", { url: eventCalendarURL });
         AnalyticsUtils.logEvent("open_url", { eventCalendarURL });
         break;
       case 2:
-        this.props.navigator.navigate("SettingsScreen");
+        NavigatorService.navigate("SettingsScreen");
         break;
       default: break;
     }
