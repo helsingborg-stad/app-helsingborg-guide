@@ -97,10 +97,11 @@ class HomeScreen extends Component<Props> {
     this.props.navigation.navigate("CategoryListScreen");
   }
 
-  renderSectionHeader = (section: { title: string }) =>
+  renderSectionHeader = (section: { title: string, category: NavigationCategory }) =>
     (
       <View style={styles.sectionContainer} >
         <Text style={styles.sectionTitle}>{section.title}</Text>
+        <Text style={styles.sectionDescription}>{section.category.description}</Text>
       </View>
     )
 
