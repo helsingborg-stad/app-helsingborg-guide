@@ -33,7 +33,7 @@ function updateDistance(guideGroups: GuideGroup[], currentPosition: PositionLong
 function updateDistanceForGuides(guides: Guide[], currentPosition: PositionLongLat): Guide[] {
   const updated = guides.map((g) => {
     const distances: number[] = [];
-    // calculting diatnces to all objects
+    // calculting distances to all objects
     g.contentObjects.forEach(
       (obj) => {
         const { location } = obj;
@@ -62,12 +62,8 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     case "FETCH_GUIDES_SUCCESS":
     {
       // calculate new guidesCount
-      const { guideGroups, guides, geolocation } = nextState;
-      let updatedGG: GuideGroup[] = updateGuidesCount(guideGroups.items, guides.items);
-      if (geolocation) {
-        const { coords } = geolocation;
-        updatedGG = updateDistance(updatedGG, coords);
-      }
+      const { guideGroups, guides } = nextState;
+      const updatedGG: GuideGroup[] = updateGuidesCount(guideGroups.items, guides.items);
       dispatch(setGuidesAndGuideGroups(updatedGG, guides.items));
       break;
     }
