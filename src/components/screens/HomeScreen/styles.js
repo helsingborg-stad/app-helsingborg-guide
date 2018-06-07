@@ -36,6 +36,7 @@ export default StyleSheet.create({
   },
   sectionFooterContainer: {
     width: "100%",
+    paddingBottom: "6%",
   },
   sectionFooterButton: {
     justifyContent: "center",
