@@ -34,21 +34,6 @@ function navigate(routeName: string, params?: NavigationParams) {
   );
 }
 
-function navigateDeep(actions: { routeName: string, params?: NavigationParams }[]) {
-  _container.dispatch(
-    actions.reduceRight(
-      (prevAction, action): any =>
-        NavigationActions.navigate({
-          type: "Navigation/NAVIGATE",
-          routeName: action.routeName,
-          params: action.params,
-          action: prevAction,
-        }),
-      undefined,
-    ),
-  );
-}
-
 function getCurrentRoute(): NavigationRoute | null {
   if (!_container || !_container.state.nav) {
     return null;
@@ -59,7 +44,6 @@ function getCurrentRoute(): NavigationRoute | null {
 
 export default {
   setContainer,
-  navigateDeep,
   navigate,
   reset,
   getCurrentRoute,
