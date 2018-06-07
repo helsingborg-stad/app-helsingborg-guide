@@ -10,9 +10,12 @@ import BottomBarIcon from "../../../components/shared/BottomBarIcon";
 
 
 const barBackground = require("../../../images/background-navigation.png");
-const barTabLeft = require("../../../images/bottom-left2.png");
-const barTabCenter = require("../../../images/bottom-center2.png");
-const barTabRight = require("../../../images/bottom-right2.png");
+const barTabLeft = require("../../../images/bottom-left.png");
+const barTabCenter = require("../../../images/bottom-center.png");
+const barTabRight = require("../../../images/bottom-right.png");
+const barTabRightDisabled = require("../../../images/bottom-right-disabled.png");
+const barTabCenterDisabled = require("../../../images/bottom-center-disabled.png");
+const barTabLeftDisabled = require("../../../images/bottom-left-disabled.png");
 
 type Props = {
   currentBottomBarTab: number,
@@ -23,9 +26,9 @@ type Props = {
 function displayButtonTabs(currentBottomBarTab: number) {
   return (
     <View style={styles.buttonTabContainer}>
-      <Image style={styles.imageTab} source={currentBottomBarTab === 0 ? barTabLeft : null} />
-      <Image style={styles.imageTab} source={currentBottomBarTab === 1 ? barTabCenter : null} />
-      <Image style={styles.imageTab} source={currentBottomBarTab === 2 ? barTabRight : null} />
+      <Image style={styles.imageTab} resizeMode="contain" source={currentBottomBarTab === 0 ? barTabLeft : barTabLeftDisabled} />
+      <Image style={styles.imageTab} resizeMode="contain" source={currentBottomBarTab === 1 ? barTabCenter : barTabCenterDisabled} />
+      <Image style={styles.imageTab} resizeMode="contain" source={currentBottomBarTab === 2 ? barTabRight : barTabRightDisabled} />
     </View>
   );
 }
