@@ -4,13 +4,9 @@ import React, { Component } from "react";
 import { TouchableOpacity } from "react-native";
 import SVGImage from "react-native-remote-svg";
 import styles from "./style";
-import { AnalyticsUtils } from "../../../utils/";
-import NavigatorService from "../../../services/navigationService";
 
 const selectedColor: string = "#ffffffff";
 const inactiveColor: string = "#ffffffaa";
-
-const eventCalendarURL = "https://kalender.helsingborg.se/event/page/2/?simpleAppView";
 
 function getSettingsIcon(color: string) {
   return ({
@@ -75,7 +71,7 @@ function getIcon(index: number, color: string) {
 type Props = {
   index: number,
   selected: boolean,
-  selectBottomBarTab: any,
+  onTouchIcon: (index: number) => (void),
 }
 
 class BottomBarIcon extends Component<Props> {
@@ -83,7 +79,7 @@ class BottomBarIcon extends Component<Props> {
     const color = this.props.selected ? selectedColor : inactiveColor;
 
     const bottomBarIcon = (
-      <TouchableOpacity style={styles.touchableIcon} onPress={() => this.onTouchIcon(this.props.index, this.props.selected)}>
+      <TouchableOpacity style={styles.touchableIcon} onPress={() => this.props.onTouchIcon(this.props.index)}>
         <SVGImage
           source={getIcon(this.props.index, color)}
           style={styles.icon}
@@ -91,26 +87,6 @@ class BottomBarIcon extends Component<Props> {
       </TouchableOpacity>
     );
     return bottomBarIcon;
-  }
-
-  onTouchIcon(index: number, selected: boolean) {
-    // if (!selected) {
-    switch (index) {
-      case 0:
-        NavigatorService.navigate("HomeScreen");
-        break;
-      case 1:
-        NavigatorService.navigate("WebScreen", { url: eventCalendarURL });
-        AnalyticsUtils.logEvent("open_url", { eventCalendarURL });
-        break;
-      case 2:
-        NavigatorService.navigate("SettingsScreen");
-        break;
-      default: break;
-    }
-    // }
-
-    this.props.selectBottomBarTab(index); // dispatch
   }
 
   render() {

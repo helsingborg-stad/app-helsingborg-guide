@@ -7,6 +7,7 @@ import { View, Image, SafeAreaView } from "react-native";
 import styles from "./style";
 import { selectCurrentBottomBarTab } from "../../../actions/uiStateActions";
 import BottomBarIcon from "../../../components/shared/BottomBarIcon";
+import { AnalyticsUtils } from "../../../utils/";
 
 
 const barBackground = require("../../../images/background-navigation.png");
@@ -14,9 +15,12 @@ const barTabLeft = require("../../../images/bottom-left2.png");
 const barTabCenter = require("../../../images/bottom-center2.png");
 const barTabRight = require("../../../images/bottom-right2.png");
 
+const eventCalendarURL = "https://kalender.helsingborg.se/event/page/2/?simpleAppView";
+
 type Props = {
   currentBottomBarTab: number,
   selectBottomBarTab(id: number): void,
+  nav: any
 }
 
 function displayButtonTabs(currentBottomBarTab: number) {
@@ -31,14 +35,29 @@ function displayButtonTabs(currentBottomBarTab: number) {
 
 
 class BottomBarView extends Component<Props> {
-  displayIcons(currentBottomBarTab: number) {
-    return (
-      <View style={styles.iconContainer}>
-        <BottomBarIcon index={0} selected={currentBottomBarTab === 0} selectBottomBarTab={this.props.selectBottomBarTab} />
-        <BottomBarIcon index={1} selected={currentBottomBarTab === 1} selectBottomBarTab={this.props.selectBottomBarTab} />
-        <BottomBarIcon index={2} selected={currentBottomBarTab === 2} selectBottomBarTab={this.props.selectBottomBarTab} />
-      </View >
-    );
+  displayIcons = (currentBottomBarTab: number) => (
+    <View style={styles.iconContainer}>
+      <BottomBarIcon index={0} selected={currentBottomBarTab === 0} onTouchIcon={this.onTouchIcon} />
+      <BottomBarIcon index={1} selected={currentBottomBarTab === 1} onTouchIcon={this.onTouchIcon} />
+      <BottomBarIcon index={2} selected={currentBottomBarTab === 2} onTouchIcon={this.onTouchIcon} />
+    </View >
+  )
+
+  onTouchIcon = (index: number) => {
+    switch (index) {
+      case 0:
+        this.props.nav.navigate("HomeScreen");
+        break;
+      case 1:
+        this.props.nav.navigate("WebScreen", { url: eventCalendarURL });
+        AnalyticsUtils.logEvent("open_url", { eventCalendarURL });
+        break;
+      case 2:
+        this.props.nav.navigate("SettingsScreen");
+        break;
+      default: break;
+    }
+    this.props.selectBottomBarTab(index);
   }
 
   render() {

@@ -18,6 +18,7 @@ import {
   selectCurrentCategory,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
+import BottomBarView from "../../shared/BottomBarView";
 
 const settingsIcon = require("../../../images/settings.png");
 
@@ -70,19 +71,19 @@ class HomeScreen extends Component<Props> {
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
       case "guide":
-      {
-        const { guide } = item;
-        if (guide) {
-          this.props.selectGuide(guide.id);
-          const type = guide.guideType;
-          if (type === "guide") {
-            this.props.navigation.navigate("GuideDetailsScreen");
-          } else if (type === "trail") {
-            this.props.navigation.navigate("TrailScreen");
+        {
+          const { guide } = item;
+          if (guide) {
+            this.props.selectGuide(guide.id);
+            const type = guide.guideType;
+            if (type === "guide") {
+              this.props.navigation.navigate("GuideDetailsScreen");
+            } else if (type === "trail") {
+              this.props.navigation.navigate("TrailScreen");
+            }
           }
+          break;
         }
-        break;
-      }
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
         this.props.navigation.navigate("LocationScreen");
@@ -145,6 +146,7 @@ class HomeScreen extends Component<Props> {
           keyExtractor={item => item.id}
           sections={sections}
         />
+        <BottomBarView nav={this.props.navigation} />
       </View>);
   }
 }
