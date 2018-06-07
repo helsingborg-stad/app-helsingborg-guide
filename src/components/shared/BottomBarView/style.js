@@ -3,9 +3,8 @@ import { Colors } from "../../../styles";
 
 export default StyleSheet.create({
   viewContainer: {
-    flex: 0.11,
+    height: 80,
     justifyContent: "center",
-    // alignItems: "stretch",
     backgroundColor: Colors.darkPurple,
   },
   imageBackground: {
@@ -22,7 +21,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    top: -40,
+    top: -38,
     zIndex: -2,
 
   },
