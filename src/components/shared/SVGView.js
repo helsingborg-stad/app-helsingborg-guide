@@ -1,8 +1,8 @@
 // @flow
 
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import SvgUri from "react-native-svg-uri";
+import { StyleSheet } from "react-native";
+import SVGImg from "react-native-remote-svg";
 
 type Props = {
   logoType: ?string,
@@ -20,12 +20,9 @@ export default function SVGView(props: Props) {
   const sourceImg = props.logoType ? { uri: props.logoType } : props.placeholderImage;
 
   return (
-    <View style={styleObj}>
-      <SvgUri
-        width={styleObj.width}
-        height={styleObj.height}
-        source={sourceImg}
-      />
-    </View>
+    <SVGImg
+      source={sourceImg}
+      style={styleObj}
+    />
   );
 }
