@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import {
   ActivityIndicator,
-  Image,
   SectionList,
   Text,
   TouchableOpacity,
@@ -16,11 +15,10 @@ import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   selectCurrentCategory,
-  // appReachedHomeScreen,
+  showBottomBar,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
 
-const settingsIcon = require("../../../images/settings.png");
 
 function getDistance(item: NavigationItem): number {
   const { guideGroup, guide } = item;
@@ -50,28 +48,24 @@ type Props = {
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
   selectCurrentCategory(section: NavigationCategory): void,
-  // dispatchReachedHomeScreen(): void,
+  dispatchShowBottomBar(visible: boolean): void,
 }
 
 class HomeScreen extends Component<Props> {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     const title = LangService.strings.APP_NAME;
     return Object.assign(HeaderStyles.noElevation, {
       title,
-      headerLeft: (
-        <TouchableOpacity
-          onPress={() => navigation.navigate("SettingsScreen")}
-          style={styles.barButtonItem}
-        >
-          <Image style={styles.barButtonImage} source={settingsIcon} />
-        </TouchableOpacity>
-      ),
     });
   }
 
-  //  componentDidMount() {
-  // this.props.dispatchReachedHomeScreen();
-  // }
+  componentDidMount() {
+    this.props.dispatchShowBottomBar(true);
+  }
+
+  componentWillReceiveProps() {
+    console.log("receive props");
+  }
 
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
@@ -83,8 +77,10 @@ class HomeScreen extends Component<Props> {
           const type = guide.guideType;
           if (type === "guide") {
             this.props.navigation.navigate("GuideDetailsScreen");
+            this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
             this.props.navigation.navigate("TrailScreen");
+            this.props.dispatchShowBottomBar(false);
           }
         }
         break;
@@ -92,6 +88,7 @@ class HomeScreen extends Component<Props> {
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
         this.props.navigation.navigate("LocationScreen");
+        this.props.dispatchShowBottomBar(false);
         break;
       default:
         break;
@@ -101,6 +98,7 @@ class HomeScreen extends Component<Props> {
   onPressViewAll = (category: NavigationCategory) => {
     this.props.selectCurrentCategory(category);
     this.props.navigation.navigate("CategoryListScreen");
+    this.props.dispatchShowBottomBar(false);
   }
 
   renderSectionHeader = (section: { title: string }) =>
@@ -171,7 +169,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
     selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
-    // dispatchReachedHomeScreen: () => dispatch(appReachedHomeScreen()),
+    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
   };
 }
 

@@ -4,20 +4,25 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationView from "../shared/LocationView";
 import { AnalyticsUtils } from "../../utils/";
-import { selectCurrentGuide } from "../../actions/uiStateActions";
+import { selectCurrentGuide, showBottomBar } from "../../actions/uiStateActions";
 
 type Props = {
   currentGuideGroup: GuideGroup,
   currentGuides: Guide[],
   geolocation: GeolocationType,
   navigation: Object,
-  selectCurrentGuide(guide: Guide): void
+  selectCurrentGuide(guide: Guide): void,
+  dispatchShowBottomBar(visible: boolean): void,
 }
 
 class LocationScreen extends Component<Props> {
   constructor() {
     super();
     console.log("constructor");
+  }
+
+  componentWillUnmount() {
+    this.props.dispatchShowBottomBar(true);
   }
 
   onPressGuide = (guide: Guide) => {
@@ -62,6 +67,7 @@ function mapStateToProps(state: RootState) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectCurrentGuide: (guide: Guide) => dispatch(selectCurrentGuide(guide)),
+    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
   };
 }
 

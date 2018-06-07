@@ -10,7 +10,7 @@ const defaultState: UIState = {
   currentCategory: null,
   currentBottomBarTab: 0,
   developerMode: false,
-  reachedHomeScreen: false,
+  showBottomBar: false,
 };
 
 export default function uiStateReducer(state: UIState = defaultState, action: Action): UIState {
@@ -31,8 +31,8 @@ export default function uiStateReducer(state: UIState = defaultState, action: Ac
       return { ...state, currentCategory: action.id };
     case "SELECT_CURRENT_BOTTOM_BAR_TAB":
       return { ...state, currentBottomBarTab: action.tabIndex };
-    case "APP_REACHED_HOMESCREEN":
-      return { ...state, reachedHomeScreen: true };
+    case "SHOW_BOTTOM_BAR":
+      return { ...state, showBottomBar: action.visible };
     default:
       return state;
   }

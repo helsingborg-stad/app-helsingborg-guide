@@ -7,14 +7,15 @@ import { connect } from "react-redux";
 import GuideView from "../shared/GuideView";
 import { AnalyticsUtils } from "../../utils/";
 import SearchButton from "../header/SearchButton";
-import { selectCurrentContentObject } from "../../actions/uiStateActions";
+import { selectCurrentContentObject, showBottomBar } from "../../actions/uiStateActions";
 import { releaseAudioFile } from "../../actions/audioActions";
 
 declare type Props = {
   currentGuide: ?Guide,
   navigation: any,
   dispatchSelectContentObject(contentObject: ContentObject): void,
-  dispatchReleaseAudio(): void
+  dispatchReleaseAudio(): void,
+  dispatchShowBottomBar(visible: boolean): void,
 }
 
 class GuideScreen extends Component<Props> {
@@ -40,6 +41,7 @@ class GuideScreen extends Component<Props> {
 
   componentWillUnmount() {
     this.props.dispatchReleaseAudio();
+    this.props.dispatchShowBottomBar(true);
   }
 
   onPressContentObject = (obj: ContentObject) => {
@@ -70,6 +72,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     dispatchSelectContentObject: (contentObject: ContentObject) => dispatch(selectCurrentContentObject(contentObject)),
     dispatchReleaseAudio: () => dispatch(releaseAudioFile()),
+    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
   };
 }
 

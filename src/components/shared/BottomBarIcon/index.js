@@ -97,14 +97,14 @@ class BottomBarIcon extends Component<Props> {
     // if (!selected) {
     switch (index) {
       case 0:
-        NavigatorService.navigate("HomeScreen");
+        if (!selected) { NavigatorService.reset("HomeScreen"); }
         break;
       case 1:
-        NavigatorService.navigate("WebScreen", { url: eventCalendarURL });
+        NavigatorService.reset("WebScreen", { url: eventCalendarURL });
         AnalyticsUtils.logEvent("open_url", { eventCalendarURL });
         break;
       case 2:
-        NavigatorService.navigate("SettingsScreen");
+        NavigatorService.reset("SettingsScreen");
         break;
       default: break;
     }

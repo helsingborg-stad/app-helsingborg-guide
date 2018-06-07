@@ -19,7 +19,7 @@ const barTabLeftDisabled = require("../../../images/bottom-left-disabled.png");
 
 type Props = {
   currentBottomBarTab: number,
-  reachedHomeScreen: boolean,
+  showBottomBar: boolean,
   selectBottomBarTab(id: number): void,
 }
 
@@ -46,7 +46,7 @@ class BottomBarView extends Component<Props> {
   }
 
   render() {
-    if (!this.props.reachedHomeScreen) { return null; }
+    if (!this.props.showBottomBar) { return null; }
 
     return (
       <SafeAreaView style={styles.viewContainer}>
@@ -65,10 +65,10 @@ class BottomBarView extends Component<Props> {
 
 
 function mapStateToProps(state: RootState) {
-  const { currentBottomBarTab, reachedHomeScreen } = state.uiState;
+  const { currentBottomBarTab, showBottomBar } = state.uiState;
   return {
     currentBottomBarTab,
-    reachedHomeScreen,
+    showBottomBar,
   };
 }
 

@@ -144,21 +144,11 @@ class SettingsScreen extends Component {
   }
 
 
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     const title = LangService.strings.SETTINGS;
     return {
       title,
-      headerLeft: (
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.barButtonItem}
-        >
-          <Image source={goBackIcon} />
-        </TouchableOpacity>
-      ),
-      headerRight: (
-        <View style={styles.barButtonFiller} />
-      ),
+      headerLeft: null,
     };
   };
 

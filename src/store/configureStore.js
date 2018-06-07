@@ -5,7 +5,6 @@ import thunk from "redux-thunk";
 import { persistStore, persistCombineReducers } from "redux-persist";
 import reducers from "../reducers";
 import offlineDataMiddleware from "../middleware/offlineDataMiddleware";
-import navigatorMiddleware from "../middleware/navigatorMiddleware";
 import audioMiddleware from "../middleware/audioMiddleware";
 import navigationMiddleware from "../middleware/navigationMiddleware";
 import patchContentMiddleware from "../middleware/patchContentMiddleware";
@@ -25,7 +24,6 @@ const middlewares = [
   offlineDataMiddleware,
   audioMiddleware,
   navigationMiddleware,
-  navigatorMiddleware,
   thunk,
 ];
 

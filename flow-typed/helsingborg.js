@@ -1,12 +1,10 @@
-import { appReachedHomeScreen } from "src/actions/uiStateActions";
-
 // @flow
 
 declare type Action =
   | { type: "APP_STARTED" }
   | { type: "APP_BECAME_INACTIVE" }
   | { type: "APP_BECAME_ACTIVE" }
-  | { type: "APP_REACHED_HOMESCREEN" }
+  | { type: "SHOW_BOTTOM_BAR", visible: boolean }
   | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup, guides: Guide[] }
   | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
@@ -265,7 +263,7 @@ declare type UIState = {
   currentCategory: ?number,
   developerMode: boolean,
   currentBottomBarTab: number,
-  reachedHomeScreen: boolean,
+  showBottomBar: boolean,
 }
 
 declare type NavigationState = {

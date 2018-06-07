@@ -7,8 +7,8 @@ export function appBecameActive(): Action {
   return { type: "APP_BECAME_ACTIVE" };
 }
 
-export function appReachedHomeScreen(): Action {
-  return { type: "APP_REACHED_HOMESCREEN" };
+export function showBottomBar(visible: boolean): Action {
+  return { type: "SHOW_BOTTOM_BAR", visible };
 }
 
 export function appBecameInactive(): Action {
