@@ -62,4 +62,12 @@ export default StyleSheet.create({
       color: Colors.black,
     },
   ]),
+  sectionDescription: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 16,
+      fontWeight: "normal",
+      fontStyle: "normal",
+      color: Colors.lightGrey,
+    },
+  ]),
 });
