@@ -44,6 +44,10 @@ export function selectCurrentImage(url: ?string): Action {
   return { type: "SELECT_CURRENT_IMAGE", url };
 }
 
+export function selectCurrentCategory(id: number): Action {
+  return { type: "SELECT_CURRENT_CATEGORY", id };
+}
+
 export function setDeveloperMode(enabled: boolean): Action {
   return { type: "SET_DEVELOPER_MODE", enabled };
 }

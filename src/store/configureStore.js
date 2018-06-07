@@ -6,6 +6,8 @@ import { persistStore, persistCombineReducers } from "redux-persist";
 import reducers from "../reducers";
 import offlineDataMiddleware from "../middleware/offlineDataMiddleware";
 import audioMiddleware from "../middleware/audioMiddleware";
+import navigationMiddleware from "../middleware/navigationMiddleware";
+import patchContentMiddleware from "../middleware/patchContentMiddleware";
 
 const config = {
   key: "hbgRoot",
@@ -18,8 +20,10 @@ const config = {
 const reducer = persistCombineReducers(config, reducers);
 
 const middlewares = [
+  patchContentMiddleware,
   offlineDataMiddleware,
   audioMiddleware,
+  navigationMiddleware,
   thunk,
 ];
 

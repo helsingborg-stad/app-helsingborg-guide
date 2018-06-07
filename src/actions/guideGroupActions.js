@@ -2,6 +2,10 @@
 
 import fetchUtils from "../utils/fetchUtils";
 
+export function setGuidesAndGuideGroups(guideGroups: GuideGroup[], guides: Guide[]): Action {
+  return { type: "SET_GUIDES_AND_GUIDEGROUPS", guideGroups, guides };
+}
+
 export function fetchGuideGroupsRequest(): Action {
   return { type: "FETCH_GUIDEGROUPS_REQUEST" };
 }
@@ -18,8 +22,7 @@ export function fetchGuideGroups(langCode: string): ThunkAction {
   return function fetchGuideGroupsDispatch(dispatch: Dispatch) {
     dispatch(fetchGuideGroupsRequest());
 
-    return fetchUtils
-      .getGuideGroups(langCode)
+    return fetchUtils.getGuideGroups(langCode)
       .then(guideGroups => dispatch(fetchGuideGroupsSuccess(guideGroups)))
       .catch((error) => {
         dispatch(fetchGuideGroupsFailure(error.message));

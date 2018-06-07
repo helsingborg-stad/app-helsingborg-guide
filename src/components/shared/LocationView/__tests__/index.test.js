@@ -199,6 +199,7 @@ const guideGroup: GuideGroup =
         icon: "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/01/icon_toilet.svg",
       },
     ],
+    guidesCount: 1,
   };
 
 test("weekdays", () => {

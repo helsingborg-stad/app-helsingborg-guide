@@ -43,4 +43,15 @@ async function getGuides(langCode: string): Promise<Guide[]> {
   return fetchedGuides;
 }
 
-export default { getGuideGroups, getGuides };
+export async function getNavigation(langCode: string): Promise<NavigationCategory[]> {
+  const json = await fetchJSON("navigation", langCode);
+  const fetchedNavigation: NavigationCategory[] = validateData(json, "navigationCategory");
+
+  return fetchedNavigation;
+}
+
+export default {
+  getGuideGroups,
+  getGuides,
+  getNavigation,
+};

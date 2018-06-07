@@ -12,8 +12,9 @@ import {
   DebugScreen,
   DownloadsScreen,
   GuideScreen,
-  GuideListScreen,
+  HomeScreen,
   ImageScreen,
+  CategoryListScreen,
   LocationScreen,
   ObjectScreen,
   SearchObjectScreen,
@@ -34,7 +35,7 @@ import AnalyticsUtils from "./utils/AnalyticsUtils";
 
 const GuideNavigator = StackNavigator(
   {
-    GuideListScreen: { screen: GuideListScreen },
+    HomeScreen: { screen: HomeScreen },
     OldTrailScreen: { screen: OldTrailScreen },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
@@ -46,6 +47,7 @@ const GuideNavigator = StackNavigator(
     DownloadsScreen: { screen: DownloadsScreen },
     SettingsScreen: { screen: SettingsScreen },
     DebugScreen: { screen: DebugScreen },
+    CategoryListScreen: { screen: CategoryListScreen },
   },
   { navigationOptions: HeaderStyles.default },
 );

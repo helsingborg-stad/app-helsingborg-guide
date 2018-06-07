@@ -9,7 +9,13 @@ declare type Action =
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
   | { type: "SELECT_CURRENT_IMAGE", url: ?string }
+  | { type: "SELECT_CURRENT_CATEGORY", id: number }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
+  | { type: "SET_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
+  | { type: "SET_GUIDES_AND_GUIDEGROUPS", guideGroups: GuideGroup[], guides: Guide[] }
+  | { type: "FETCH_NAVIGATION_REQUEST" }
+  | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
+  | { type: "FETCH_NAVIGATION_FAILURE", error: Error }
   | { type: "FETCH_GUIDEGROUPS_REQUEST" }
   | { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups: GuideGroup[] }
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
@@ -32,7 +38,24 @@ declare type Action =
   | { type: "AUDIO_UPDATE", audio: AudioState }
   | { type: "AUDIO_MOVE_SLIDER", position: number }
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
+  | { type: "GEOLOCATION_UPDATE_SUCCESS", position: GeolocationType }
   ;
+
+declare type NavigationItemType = 'guide' | 'guidegroup';
+
+declare type NavigationItem = {
+  id: number,
+  type: NavigationItemType,
+  guide?: Guide,
+  guideGroup?: GuideGroup,
+}
+
+declare type NavigationCategory = {
+  id: number,
+  name: string,
+  slug: string,
+  items: NavigationItem[]
+}
 
 declare type Coords = {
   speed: number,
@@ -124,7 +147,8 @@ declare type Guide = {
   guideType: GuideType,
   childFriendly: boolean,
   images: Images,
-  contentObjects: ContentObject[]
+  contentObjects: ContentObject[],
+  distance?: number,
 }
 
 declare type GuideType = 'guide' | 'trail';
@@ -138,6 +162,8 @@ declare type GuideGroup = {
   active: boolean,
   location: Location,
   pointProperties: PointProperty[],
+  guidesCount?: number,
+  distance?: number,
 };
 
 declare type GuideGroupState = {
@@ -232,7 +258,13 @@ declare type UIState = {
   currentContentObjectImageIndex: number,
   currentGuide: ?Guide,
   currentImage: ?string,
+  currentCategory: ?number,
   developerMode: boolean,
+}
+
+declare type NavigationState = {
+  isFetching: boolean,
+  navigationCategories: NavigationCategory[],
 }
 
 declare type RootState = {
@@ -242,4 +274,5 @@ declare type RootState = {
   geolocation: GeolocationType,
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
+  navigation: NavigationState,
 }
