@@ -52,6 +52,7 @@ declare type NavigationItem = {
 
 declare type NavigationCategory = {
   id: number,
+  description: string,
   name: string,
   slug: string,
   items: NavigationItem[]
