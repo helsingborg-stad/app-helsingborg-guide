@@ -49,7 +49,7 @@ class BottomBarView extends Component<Props> {
     if (!this.props.showBottomBar) { return null; }
 
     return (
-      <SafeAreaView style={styles.viewContainer}>
+      <View style={styles.viewContainer}>
         {displayButtonTabs(this.props.currentBottomBarTab)}
         <Image
           style={styles.imageBackground}
@@ -58,7 +58,7 @@ class BottomBarView extends Component<Props> {
         {this.displayIcons(this.props.currentBottomBarTab)}
 
 
-      </SafeAreaView>
+      </View>
     );
   }
 }

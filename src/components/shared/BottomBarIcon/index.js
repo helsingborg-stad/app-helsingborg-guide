@@ -1,11 +1,12 @@
 // @flow
 
 import React, { Component } from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import SVGImage from "react-native-remote-svg";
 import styles from "./style";
 import { AnalyticsUtils } from "../../../utils/";
 import NavigatorService from "../../../services/navigationService";
+import LangService from "../../../services/langService";
 
 const selectedColor: string = "#ffffffff";
 const inactiveColor: string = "#ffffffaa";
@@ -72,6 +73,18 @@ function getIcon(index: number, color: string) {
   }
 }
 
+function getText(index: number) {
+  switch (index) {
+    case 0:
+      return LangService.strings.HOME;
+    case 1:
+      return LangService.strings.CALENDAR;
+    case 2:
+      return LangService.strings.SETTINGS;
+    default: return null;
+  }
+}
+
 type Props = {
   index: number,
   selected: boolean,
@@ -88,6 +101,7 @@ class BottomBarIcon extends Component<Props> {
           source={getIcon(this.props.index, color)}
           style={styles.icon}
         />
+        <Text style={[styles.text, { color }]}>{getText(this.props.index)}</Text>
       </TouchableOpacity>
     );
     return bottomBarIcon;

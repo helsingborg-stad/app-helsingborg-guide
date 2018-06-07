@@ -1,14 +1,12 @@
 import { StyleSheet } from "react-native";
 import { Colors } from "../../../styles";
-import { StyleSheetUtils } from "../../../utils/";
-
 
 export default StyleSheet.create({
   viewContainer: {
-    flex: 0.12,
+    flex: 0.11,
     justifyContent: "center",
     // alignItems: "stretch",
-    backgroundColor: "#00000000",
+    backgroundColor: Colors.darkPurple,
   },
   imageBackground: {
     width: "100%",
@@ -24,13 +22,13 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    top: -31,
+    top: -40,
     zIndex: -2,
 
   },
   iconContainer: {
     position: "absolute",
-    top: 16,
+    top: 8,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

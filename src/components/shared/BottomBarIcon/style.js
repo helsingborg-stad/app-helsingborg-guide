@@ -14,4 +14,14 @@ export default StyleSheet.create({
     height: 30,
     width: 30,
   },
+  text: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 11,
+      fontWeight: "500",
+      color: Colors.white,
+      alignSelf: "center",
+      backgroundColor: "#ffffff00",
+      paddingTop: 4,
+    },
+  ]),
 });
