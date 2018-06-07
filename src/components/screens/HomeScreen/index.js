@@ -63,10 +63,6 @@ class HomeScreen extends Component<Props> {
     this.props.dispatchShowBottomBar(true);
   }
 
-  componentWillReceiveProps() {
-    console.log("receive props");
-  }
-
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
       case "guide":
@@ -132,24 +128,23 @@ class HomeScreen extends Component<Props> {
       return { title: cat.name, data, category: cat };
     });
     return (
-      <View style={styles.viewContainer}>
-        <SectionList
-          style={styles.container}
-          stickySectionHeadersEnabled={false}
-          renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
-          renderItem={({ item }) => (<NavigationListItem
-            item={item}
-            onPressItem={this.onPressItem}
-          />)
-          }
-          renderSectionFooter={({ section }) =>
-            // $FlowFixMe flow doesn't understand me
-            this.renderSectionFooter(section)
-          }
-          keyExtractor={item => item.id}
-          sections={sections}
-        />
-      </View>);
+      <SectionList
+        style={styles.container}
+        stickySectionHeadersEnabled={false}
+        renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
+        renderItem={({ item }) => (<NavigationListItem
+          item={item}
+          onPressItem={this.onPressItem}
+        />)
+        }
+        renderSectionFooter={({ section }) =>
+          // $FlowFixMe flow doesn't understand me
+          this.renderSectionFooter(section)
+        }
+        keyExtractor={item => item.id}
+        sections={sections}
+      />
+    );
   }
 }
 

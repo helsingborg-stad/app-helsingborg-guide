@@ -1,19 +1,14 @@
 import React from "react";
-import { WebView, View, StyleSheet } from "react-native";
+import { WebView, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import {
   Colors,
 } from "../../styles/";
-import BottomBarView from "../shared/BottomBarView";
 
 
 const styles = StyleSheet.create({
   header: {
     backgroundColor: Colors.darkPurple,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: Colors.white,
   },
 });
 
@@ -21,11 +16,8 @@ const WebScreen = (props) => {
   const { url } = props.navigation.state.params;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.container}>
-        <WebView source={{ uri: url }} />
-      </View>
-    </View >
+    <WebView source={{ uri: url }} />
+
   );
 };
 

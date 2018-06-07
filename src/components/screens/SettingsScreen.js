@@ -30,26 +30,11 @@ import * as oldGuideGroupActions from "../../actions/oldGuideGroupActions";
 import * as navigationActions from "../../actions/navigationActions";
 import * as subLocationActions from "../../actions/subLoactionActions";
 import { setDeveloperMode } from "../../actions/uiStateActions";
-import BottomBarView from "../shared/BottomBarView";
 
 const defaultMargin = 20;
 const helsingborgIcon = require("../../images/HBG.png");
-const goBackIcon = require("../../images/iconBack.png");
 
 const styles = StyleSheet.create({
-  barButtonItem: {
-    width: 44,
-    height: 44,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  barButtonFiller: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 58,
-  },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -125,11 +110,6 @@ const textStyles = StyleSheet.create({
       lineHeight: 23,
       color: Colors.black,
       textAlign: "center",
-    }],
-  ),
-  choiceText: StyleSheetUtils.flatten([
-    TextStyles.body, {
-      color: Colors.black,
     }],
   ),
 });
@@ -272,38 +252,34 @@ class SettingsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.container}>
-          {this.displayLanguageSegment()}
-          <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
-            <Text style={textStyles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
-          </TouchableOpacity>
-          <View style={styles.divider} />
-          <TouchableOpacity onPress={this.navigateToDownloadsScreen}>
-            <Text style={textStyles.linkText}>{LangService.strings.OFFLINE_CONTENT}</Text>
-          </TouchableOpacity>
+        {this.displayLanguageSegment()}
+        <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
+          <Text style={textStyles.linkText}>{LangService.strings.SEE} {LangService.strings.TUTORIAL}</Text>
+        </TouchableOpacity>
+        <View style={styles.divider} />
+        <TouchableOpacity onPress={this.navigateToDownloadsScreen}>
+          <Text style={textStyles.linkText}>{LangService.strings.OFFLINE_CONTENT}</Text>
+        </TouchableOpacity>
 
-          {this.props.developerMode ? this.displayDeveloperMenuButton() : null}
-          <View style={styles.divider} />
-          <View style={styles.contactUsContainer}>
-            <TouchableWithoutFeedback onPress={this.updateDeveloperMode}>
-              <Image source={helsingborgIcon} style={this.props.developerMode ? styles.debugIcon : styles.icon} />
-            </TouchableWithoutFeedback>
-            <View style={styles.contactTextContainer}>
-              <Text
-                onPress={() =>
-                  Linking.openURL(`mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${LangService.strings.CONTACT_MAIL_SUBJECT}`)}
-                style={textStyles.contactEmailText}
-              >{LangService.strings.CONTACT_MAIL_ADRESS}</Text>
-              <Text
-                onPress={() =>
-                  Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)}
-                style={textStyles.contactPhoneText}
-              >{LangService.strings.CONTACT_PHONE_DISPLAY}</Text>
-            </View>
+        {this.props.developerMode ? this.displayDeveloperMenuButton() : null}
+        <View style={styles.divider} />
+        <View style={styles.contactUsContainer}>
+          <TouchableWithoutFeedback onPress={this.updateDeveloperMode}>
+            <Image source={helsingborgIcon} style={this.props.developerMode ? styles.debugIcon : styles.icon} />
+          </TouchableWithoutFeedback>
+          <View style={styles.contactTextContainer}>
+            <Text
+              onPress={() =>
+                Linking.openURL(`mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${LangService.strings.CONTACT_MAIL_SUBJECT}`)}
+              style={textStyles.contactEmailText}
+            >{LangService.strings.CONTACT_MAIL_ADRESS}</Text>
+            <Text
+              onPress={() =>
+                Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)}
+              style={textStyles.contactPhoneText}
+            >{LangService.strings.CONTACT_PHONE_DISPLAY}</Text>
           </View>
-
         </View>
-
       </View>
     );
   }
