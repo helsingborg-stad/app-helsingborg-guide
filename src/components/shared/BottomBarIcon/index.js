@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { TouchableOpacity, Text } from "react-native";
 import SVGImage from "react-native-remote-svg";
+import Home from "../../shared/svg/home";
 import styles from "./style";
 import { AnalyticsUtils } from "../../../utils/";
 import NavigatorService from "../../../services/navigationService";
@@ -97,10 +98,7 @@ class BottomBarIcon extends Component<Props> {
 
     const bottomBarIcon = (
       <TouchableOpacity style={styles.touchableIcon} onPress={() => this.onTouchIcon(this.props.index, this.props.selected)}>
-        <SVGImage
-          source={getIcon(this.props.index, color)}
-          style={styles.icon}
-        />
+        <Home style={styles.icon} />
         <Text style={[styles.text, { color }]}>{getText(this.props.index)}</Text>
       </TouchableOpacity>
     );
@@ -133,3 +131,9 @@ class BottomBarIcon extends Component<Props> {
 }
 
 export default BottomBarIcon;
+
+
+// <SVGImage
+//        source={getIcon(this.props.index, color)}
+//      style={styles.icon}
+//  />
