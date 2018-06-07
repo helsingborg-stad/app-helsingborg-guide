@@ -13,9 +13,9 @@ export default StyleSheet.create({
     elevation: 3,
     backgroundColor: Colors.white,
     shadowColor: Colors.black,
-    shadowOpacity: 0.15,
-    shadowRadius: 15,
-    shadowOffset: { width: 5, height: 0 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 5 },
     marginBottom: 20,
   },
   listItemGuideCount: StyleSheetUtils.flatten([
