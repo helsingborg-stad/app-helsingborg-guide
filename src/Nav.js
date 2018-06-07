@@ -127,7 +127,7 @@ export default class Nav extends Component<Props> {
             NavigatorService.setContainer(navigatorRef);
           }}
         />
-        {true ? <BottomBarView /> : null}
+        <BottomBarView />
       </ViewContainer>
     );
   }

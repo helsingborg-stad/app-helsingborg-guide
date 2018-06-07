@@ -24,7 +24,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    top: -20,
+    top: -28,
     zIndex: -2,
 
   },
