@@ -94,21 +94,21 @@ class BottomBarIcon extends Component<Props> {
   }
 
   onTouchIcon(index: number, selected: boolean) {
-    // if (!selected) {
-    switch (index) {
-      case 0:
-        if (!selected) { NavigatorService.reset("HomeScreen"); }
-        break;
-      case 1:
-        NavigatorService.reset("WebScreen", { url: eventCalendarURL });
-        AnalyticsUtils.logEvent("open_url", { eventCalendarURL });
-        break;
-      case 2:
-        NavigatorService.reset("SettingsScreen");
-        break;
-      default: break;
+    if (!selected) {
+      switch (index) {
+        case 0:
+          NavigatorService.reset("HomeScreen");
+          break;
+        case 1:
+          NavigatorService.reset("WebScreen", { url: eventCalendarURL });
+          AnalyticsUtils.logEvent("open_url", { eventCalendarURL });
+          break;
+        case 2:
+          NavigatorService.reset("SettingsScreen");
+          break;
+        default: break;
+      }
     }
-    // }
 
     this.props.selectBottomBarTab(index); // dispatch
   }
