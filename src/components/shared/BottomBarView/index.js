@@ -26,9 +26,9 @@ type Props = {
 function displayButtonTabs(currentBottomBarTab: number) {
   return (
     <View style={styles.buttonTabContainer}>
-      <Image style={styles.imageTab} resizeMode="contain" source={currentBottomBarTab === 0 ? barTabLeft : barTabLeftDisabled} />
-      <Image style={styles.imageTab} resizeMode="contain" source={currentBottomBarTab === 1 ? barTabCenter : barTabCenterDisabled} />
-      <Image style={styles.imageTab} resizeMode="contain" source={currentBottomBarTab === 2 ? barTabRight : barTabRightDisabled} />
+      <Image style={styles.imageTab} resizeMode="stretch" source={currentBottomBarTab === 0 ? barTabLeft : barTabLeftDisabled} />
+      <Image style={styles.imageTab} resizeMode="stretch" source={currentBottomBarTab === 1 ? barTabCenter : barTabCenterDisabled} />
+      <Image style={styles.imageTab} resizeMode="stretch" source={currentBottomBarTab === 2 ? barTabRight : barTabRightDisabled} />
     </View>
   );
 }

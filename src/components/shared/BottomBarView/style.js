@@ -12,18 +12,16 @@ export default StyleSheet.create({
     height: "100%",
   },
   imageTab: {
-    width: "33.333333%",
-    flex: 0,
-    alignSelf: "center",
+    flex: 1,
+    height: "100%",
   },
   buttonTabContainer: {
     position: "absolute",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    top: -38,
-    zIndex: -2,
-
+    top: -16,
+    bottom: 77,
+    left: 0,
+    right: 0,
   },
   iconContainer: {
     position: "absolute",
@@ -31,6 +29,5 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 2,
   },
 });
