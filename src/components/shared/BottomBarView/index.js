@@ -16,6 +16,7 @@ const barTabRight = require("../../../images/bottom-right2.png");
 
 type Props = {
   currentBottomBarTab: number,
+  reachedHomeScreen: boolean,
   selectBottomBarTab(id: number): void,
 }
 
@@ -42,6 +43,8 @@ class BottomBarView extends Component<Props> {
   }
 
   render() {
+    if (!this.props.reachedHomeScreen) { return null; }
+
     return (
       <SafeAreaView style={styles.viewContainer}>
         {displayButtonTabs(this.props.currentBottomBarTab)}
@@ -59,9 +62,10 @@ class BottomBarView extends Component<Props> {
 
 
 function mapStateToProps(state: RootState) {
-  const { currentBottomBarTab } = state.uiState;
+  const { currentBottomBarTab, reachedHomeScreen } = state.uiState;
   return {
     currentBottomBarTab,
+    reachedHomeScreen,
   };
 }
 

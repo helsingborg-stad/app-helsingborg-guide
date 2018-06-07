@@ -93,8 +93,6 @@ export default class Nav extends Component<Props> {
   static onNavigationStateChange(prevState, currentState) {
     const currentScreen = Nav.getCurrentRouteName(currentState);
     const prevScreen = Nav.getCurrentRouteName(prevState);
-    console.log(`going from ${prevScreen} to ${currentScreen}`);
-
 
     if (prevScreen !== currentScreen) {
       AnalyticsUtils.setScreen(currentScreen);

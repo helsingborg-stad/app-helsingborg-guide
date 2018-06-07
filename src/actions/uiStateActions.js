@@ -7,6 +7,10 @@ export function appBecameActive(): Action {
   return { type: "APP_BECAME_ACTIVE" };
 }
 
+export function appReachedHomeScreen(): Action {
+  return { type: "APP_REACHED_HOMESCREEN" };
+}
+
 export function appBecameInactive(): Action {
   return { type: "APP_BECAME_INACTIVE" };
 }

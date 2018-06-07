@@ -16,6 +16,7 @@ import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   selectCurrentCategory,
+  // appReachedHomeScreen,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
 
@@ -49,6 +50,7 @@ type Props = {
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
   selectCurrentCategory(section: NavigationCategory): void,
+  // dispatchReachedHomeScreen(): void,
 }
 
 class HomeScreen extends Component<Props> {
@@ -66,6 +68,10 @@ class HomeScreen extends Component<Props> {
       ),
     });
   }
+
+  //  componentDidMount() {
+  // this.props.dispatchReachedHomeScreen();
+  // }
 
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
@@ -165,6 +171,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
     selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
+    // dispatchReachedHomeScreen: () => dispatch(appReachedHomeScreen()),
   };
 }
 
