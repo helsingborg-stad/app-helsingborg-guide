@@ -9,10 +9,9 @@ export default StyleSheet.create({
   touchableIcon: {
     flex: 1,
   },
-  icon: {
+  iconView: {
     alignSelf: "center",
-    height: 30,
-    width: 30,
+    flex: 1,
   },
   text: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
