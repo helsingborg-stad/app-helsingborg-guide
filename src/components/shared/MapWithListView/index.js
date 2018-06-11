@@ -16,7 +16,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import PropTypes from "prop-types";
 import { Colors, TextStyles } from "../../../styles/";
 import {
   AnalyticsUtils,
@@ -200,9 +199,15 @@ const styles = StyleSheet.create({
   ]),
 });
 
+export type MapItem = {
+  guide?: Guide,
+  guideGroup?: GuideGroup,
+  contentObject?: ContentObject,
+}
+
 type Props = {
   id: number,
-  items: ContentObject[],
+  items: MapItem[],
   navigation: any,
   initialLocation?: Location,
   dispatchSelectContentObject(obj: ContentObject): void
@@ -210,10 +215,18 @@ type Props = {
 
 type State = {
   isInitialized: boolean,
-  activeMarker: ContentObject,
+  activeMarker: MapItem,
   markersFocused: boolean,
   recentlyTappedPin: boolean,
 };
+
+function extractKey(item: MapItem): string {
+  if (item.contentObject) { return item.contentObject.id; }
+  if (item.guide) { return `${item.guide.id}`; }
+  if (item.guideGroup) { return `${item.guideGroup.id}`; }
+
+  return "";
+}
 
 class MapWithListView extends Component<Props, State> {
   static createMapItemsFromNavItems(navItems) {
@@ -403,7 +416,7 @@ class MapWithListView extends Component<Props, State> {
     index,
   });
 
-  onListItemPressed = (listItem) => {
+  onListItemPressed = (listItem: MapItem) => {
     const { navigate } = this.props.navigation;
     const { contentType, contentObject } = listItem;
     switch (contentType) {
@@ -427,14 +440,15 @@ class MapWithListView extends Component<Props, State> {
         return;
       }
       default: {
-        const { item } = listItem;
-        // const stopAudioOnUnmount = this.props.stopAudioOnUnmount === true;
-        this.props.dispatchSelectContentObject(item);
+        const { contentObject: item } = listItem;
+        if (item) {
+          this.props.dispatchSelectContentObject(item);
 
-        AnalyticsUtils.logEvent("view_object", { name: item.title });
-        navigate("ObjectScreen", {
-          title: item.title,
-        });
+          AnalyticsUtils.logEvent("view_object", { name: item.title });
+          navigate("ObjectScreen", {
+            title: item.title,
+          });
+        }
       }
     }
   };
@@ -585,7 +599,7 @@ class MapWithListView extends Component<Props, State> {
       } else {
         textString = `${LangService.strings.TOUR} ${
           LangService.strings.WITH
-        } ${numberOfGuides} ${locationString}`;
+          } ${numberOfGuides} ${locationString}`;
       }
     } else if (type === "guide") {
       if (isAccessibility) {
@@ -593,7 +607,7 @@ class MapWithListView extends Component<Props, State> {
       } else {
         textString = `${LangService.strings.MEDIAGUIDE} ${
           LangService.strings.WITH
-        } ${numberOfGuides} ${LangService.strings.OBJECT}`;
+          } ${numberOfGuides} ${LangService.strings.OBJECT}`;
       }
     }
 
@@ -614,12 +628,35 @@ class MapWithListView extends Component<Props, State> {
     return numberView;
   };
 
-  renderListItem = (item: ContentObject, listItemStyle) => {
-    const { title } = item;
-    const { streetAddress } = item.location;
-    const thumbnailUrl =
-      item.images.length > 0 ? item.images[0].thumbnail : null;
-    const TrailScreen = item.guideType === "trail";
+  getMapItemProps = (item: MapItem): {
+    title: ?string,
+    streetAddress: ?string,
+    thumbnailUrl: ?string,
+    isTrail?: boolean
+  } => {
+    const { contentObject, guide, guideGroup } = item;
+    let streetAddress = null;
+    let thumbnailUrl = null;
+    if (contentObject) {
+      const { title, location, images } = contentObject;
+      if (location) {
+        ({ streetAddress } = location);
+      }
+      if (images.length > 0) {
+        thumbnailUrl = images[0].thumbnail;
+      }
+      return {
+        title,
+        streetAddress,
+        thumbnailUrl,
+      };
+    }
+
+    return { title: null, streetAddress, thumbnailUrl };
+  }
+
+  renderListItem = (item: MapItem, listItemStyle: any) => {
+    const { title, streetAddress, thumbnailUrl, isTrail } = this.getMapItemProps(item);
     const titleLineCount =
       screenHeight > 600 && PixelRatio.getFontScale() === 1 ? 2 : 1;
     return (
@@ -636,7 +673,7 @@ class MapWithListView extends Component<Props, State> {
             <Text style={styles.listItemAddress} numberOfLines={1}>
               {streetAddress}
             </Text>
-            {!TrailScreen ? null : (
+            {!isTrail ? null : (
               <IconTextTouchable
                 iconName="directions"
                 text={LangService.strings.DIRECTIONS}
@@ -650,24 +687,22 @@ class MapWithListView extends Component<Props, State> {
     );
   };
 
-  renderItem = listItem => this.renderListItem(listItem.item, styles.listItem);
-
   androidRenderItem = (item, index) => (
     <View key={index}>{this.renderListItem(item, styles.androidListItem)}</View>
   );
-  renderHorizontalList(items) {
-    // androidFakeMargin = androidFakeMargin === 1 ? 2 : 1;
+
+  renderHorizontalList(items: MapItem[]) {
     if (ios) {
       return (
         <FlatList
           contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
           data={items}
           horizontal
-          keyExtractor={item => item.id}
+          keyExtractor={extractKey}
           ref={(ref) => {
             this.listRef = ref;
           }}
-          renderItem={item => this.renderItem(item)}
+          renderItem={item => this.renderListItem(item.item, styles.listItem)}
           style={styles.listStyle}
           getItemLayout={this.getItemLayout}
           onScroll={this.onListScroll}

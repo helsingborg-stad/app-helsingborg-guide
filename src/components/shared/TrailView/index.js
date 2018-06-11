@@ -2,9 +2,8 @@
 
 import React from "react";
 import { TouchableWithoutFeedback, View } from "react-native";
-
 import styles from "./style";
-import MapWithListView from "../../shared/MapWithListView";
+import MapWithListView, { type MapItem } from "../../shared/MapWithListView";
 import MapInformationOverlay from "../../shared/MapInformationOverlay";
 import AudioPlayerView from "../AudioPlayerView";
 import DownloadButtonContainer from "../DownloadButton";
@@ -39,20 +38,24 @@ function renderMapInformationOverlay(
   );
 }
 
-const TrailView = (props: Props) => (
-  <View style={styles.container}>
-    <MapWithListView
-      items={props.trail.contentObjects}
-      initialLocation={props.trail.contentObjects[0].location}
-      navigation={props.navigation}
-      stopAudioOnUnmount
-      id={props.trail.id}
-    />
-    {props.showInfoOverlay
-      ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay)
-      : null}
-    <AudioPlayerView />
-  </View>
-);
+const TrailView = (props: Props) => {
+  const mapItems: MapItem[] = props.trail.contentObjects.map(item => ({ contentObject: item }));
+
+  return (
+    <View style={styles.container}>
+      <MapWithListView
+        items={mapItems}
+        initialLocation={props.trail.contentObjects[0].location}
+        navigation={props.navigation}
+        stopAudioOnUnmount
+        id={props.trail.id}
+      />
+      {props.showInfoOverlay
+        ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay)
+        : null}
+      <AudioPlayerView />
+    </View>
+  );
+};
 
 export default TrailView;
