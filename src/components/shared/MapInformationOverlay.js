@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { Colors, TextStyles } from "../../styles/";
 import { StyleSheetUtils } from "../../utils/";
+import SharingService from "../../services/SharingService";
 
 const closeIcon = require("../../images/ic_close.png");
 
@@ -72,10 +73,15 @@ const styles = StyleSheet.create({
       lineHeight: 22,
     },
   ]),
+  shareBtn: {
+    position: "absolute",
+    right: 25,
+    zIndex: 50,
+  },
 });
 
 type Props = {
-  trailInformation: { title: string, description: string },
+  trailInformation: { title: string, description: string, image: Images },
   onPressFunction: () => void,
   downloadComponent: () => void
 };
@@ -118,6 +124,13 @@ class MapInformationOverlay extends Component<Props> {
             <Image style={styles.closeButton} source={closeIcon} />
           </TouchableOpacity>
           {renderDescription(this.props.trailInformation)}
+        </View>
+        <View style={styles.shareBtn}>
+          {SharingService.showShareButton(
+            this.props.trailInformation.title,
+            this.props.trailInformation.image,
+            this,
+          )}
         </View>
         <View style={styles.downloadContainer}>
           {this.props.downloadComponent ? this.props.downloadComponent() : null}

@@ -30,7 +30,11 @@ function renderMapInformationOverlay(
   return (
     <TouchableWithoutFeedback onPress={onToggleInfoOverlay}>
       <MapInformationOverlay
-        trailInformation={{ title: trail.name, description: trail.description }}
+        trailInformation={{
+          title: trail.name,
+          description: trail.description,
+          image: trail.images,
+        }}
         onPressFunction={onToggleInfoOverlay}
         downloadComponent={renderDownloadButton}
       />
@@ -39,7 +43,9 @@ function renderMapInformationOverlay(
 }
 
 const TrailView = (props: Props) => {
-  const mapItems: MapItem[] = props.trail.contentObjects.map(item => ({ contentObject: item }));
+  const mapItems: MapItem[] = props.trail.contentObjects.map(item => ({
+    contentObject: item,
+  }));
 
   return (
     <View style={styles.container}>
@@ -51,11 +57,9 @@ const TrailView = (props: Props) => {
         showNumberedMapMarkers
         showDirections
       />
-      {
-        props.showInfoOverlay
-          ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay)
-          : null
-      }
+      {props.showInfoOverlay
+        ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay)
+        : null}
       <AudioPlayerView />
     </View>
   );
