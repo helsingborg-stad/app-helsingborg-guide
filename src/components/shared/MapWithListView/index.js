@@ -200,11 +200,21 @@ const styles = StyleSheet.create({
   ]),
 });
 
-class MapWithListView extends Component {
-  static propTypes = {
-    items: PropTypes.array.isRequired,
-  };
+type Props = {
+  id: number,
+  items: ContentObject[],
+  navigation: any,
+  initialLocation?: Location,
+}
 
+type State = {
+  isInitialized: boolean,
+  activeMarker: ContentObject,
+  markersFocused: boolean,
+  recentlyTappedPin: boolean,
+};
+
+class MapWithListView extends Component<Props, State> {
   static createMapItemsFromNavItems(navItems) {
     const items = [];
     navItems.forEach((item) => {
@@ -302,7 +312,6 @@ class MapWithListView extends Component {
       isInitialized: false,
       activeMarker: items[0],
       markersFocused: false,
-      guideID: id,
       recentlyTappedPin: false,
     };
   }
@@ -312,6 +321,8 @@ class MapWithListView extends Component {
       this.setState({ isInitialized: true, activeMarker: items[0] });
     }
   }
+
+  map: ?MapView;
 
   focusMarkers(markers) {
     if (!markers) return;
