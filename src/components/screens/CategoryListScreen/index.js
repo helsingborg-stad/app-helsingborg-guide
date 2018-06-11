@@ -11,6 +11,7 @@ import {
   selectCurrentCategory,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
+import { compareDistance } from "../../../utils/SortingUtils";
 
 type Props = {
   navigation: any,
@@ -19,7 +20,7 @@ type Props = {
   selectGuideGroup(id: number): void,
 }
 
-class HomeScreen extends Component<Props> {
+class CategoryListScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
     let title = null;
     const { params } = navigation.state;
@@ -69,6 +70,9 @@ class HomeScreen extends Component<Props> {
     const { currentCategory } = this.props;
     if (!currentCategory) return null;
 
+    const { items } = currentCategory;
+    const sortedItems = items.sort(compareDistance);
+
     return (
       <FlatList
         style={styles.container}
@@ -77,7 +81,7 @@ class HomeScreen extends Component<Props> {
           onPressItem={this.onPressItem}
         />)}
         keyExtractor={item => String(item.id)}
-        data={currentCategory.items}
+        data={sortedItems}
       />);
   }
 }
@@ -101,4 +105,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryListScreen);
