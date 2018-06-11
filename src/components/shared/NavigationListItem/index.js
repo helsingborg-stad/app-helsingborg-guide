@@ -58,11 +58,11 @@ function getNameAndImage(item: NavigationItem): { imageUrl: ?string, name: ?stri
   const { guide, guideGroup } = item;
   if (guide) {
     const { name, images } = guide;
-    return { imageUrl: images.medium, name };
+    return { imageUrl: images.large, name };
   }
   if (guideGroup) {
     const { name, images } = guideGroup;
-    return { name, imageUrl: images.medium };
+    return { name, imageUrl: images.large };
   }
   return {
     imageUrl: null,
