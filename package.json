@@ -5,8 +5,7 @@
   "scripts": {
     "prepare": "patch-package",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "eslint":
-      "eslint flow-typed/** index.js src/** --ext .js --report-unused-disable-directives",
+    "eslint": "eslint flow-typed/** index.js src/** --ext .js --report-unused-disable-directives",
     "test": "jest",
     "flow": "flow --show-all-errors",
     "clean": "react-native-clean-project"
@@ -25,9 +24,9 @@
     "react-native-image-marker": "0.1.0",
     "react-native-maps": "0.20.1",
     "react-native-photo-view": "1.5.2",
+    "react-native-remote-svg": "1.2.0",
     "react-native-share": "1.0.27",
     "react-native-svg": "6.3.1",
-    "react-native-remote-svg": "^1.2.0",
     "react-native-swiper": "1.5.13",
     "react-native-tab-view": "0.0.70",
     "react-native-vector-icons": "4.6.0",
@@ -64,9 +63,13 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": ["./jest/mocks.js"]
+    "setupFiles": [
+      "./jest/mocks.js"
+    ]
   },
   "rnpm": {
-    "assets": ["./src/fonts"]
+    "assets": [
+      "./src/fonts"
+    ]
   }
 }

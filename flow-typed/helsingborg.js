@@ -4,12 +4,14 @@ declare type Action =
   | { type: "APP_STARTED" }
   | { type: "APP_BECAME_INACTIVE" }
   | { type: "APP_BECAME_ACTIVE" }
+  | { type: "SHOW_BOTTOM_BAR", visible: boolean }
   | { type: "SELECT_CURRENT_GUIDEGROUP", guideGroup: GuideGroup, guides: Guide[] }
   | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
   | { type: "SELECT_CURRENT_IMAGE", url: ?string }
   | { type: "SELECT_CURRENT_CATEGORY", id: number }
+  | { type: "SELECT_CURRENT_BOTTOM_BAR_TAB", tabIndex: number }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
   | { type: "SET_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
   | { type: "SET_GUIDES_AND_GUIDEGROUPS", guideGroups: GuideGroup[], guides: Guide[] }
@@ -261,6 +263,8 @@ declare type UIState = {
   currentImage: ?string,
   currentCategory: ?number,
   developerMode: boolean,
+  currentBottomBarTab: number,
+  showBottomBar: boolean,
 }
 
 declare type NavigationState = {

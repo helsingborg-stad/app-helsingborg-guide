@@ -9,6 +9,7 @@ import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   selectCurrentCategory,
+  showBottomBar,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
 import { compareDistance } from "../../../utils/SortingUtils";
@@ -18,6 +19,7 @@ type Props = {
   currentCategory: ?NavigationCategory,
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
+  dispatchShowBottomBar(visible: boolean): void,
 }
 
 class CategoryListScreen extends Component<Props> {
@@ -41,6 +43,11 @@ class CategoryListScreen extends Component<Props> {
       props.navigation.setParams({ title });
     }
   }
+
+  componentWillUnmount() {
+    this.props.dispatchShowBottomBar(true);
+  }
+
 
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
@@ -102,6 +109,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
     selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
+    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
   };
 }
 

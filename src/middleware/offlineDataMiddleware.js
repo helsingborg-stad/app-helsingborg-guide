@@ -58,19 +58,19 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     }
     case "DOWNLOAD_TASK_SUCCESS":
     case "DOWNLOAD_TASK_FAILURE":
-    {
-      const { task } = action;
-      const { guideId } = task;
-      const guide: ?OfflineGuide = nextState.downloadedGuides.offlineGuides[guideId];
-      if (guide && guide.status === "pending") {
-        const nextTask: ?DownloadTask = getNextDownloadTask(guide);
-        if (nextTask) {
-          dispatch({ type: "DOWNLOAD_TASK_START", task: nextTask });
+      {
+        const { task } = action;
+        const { guideId } = task;
+        const guide: ?OfflineGuide = nextState.downloadedGuides.offlineGuides[guideId];
+        if (guide && guide.status === "pending") {
+          const nextTask: ?DownloadTask = getNextDownloadTask(guide);
+          if (nextTask) {
+            dispatch({ type: "DOWNLOAD_TASK_START", task: nextTask });
+          }
+          // TODO: else verify downloads and retry failed tasks
         }
-        // TODO: else verify downloads and retry failed tasks
+        break;
       }
-      break;
-    }
     default:
       break;
   }

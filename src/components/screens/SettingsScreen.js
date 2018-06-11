@@ -30,22 +30,8 @@ import { setDeveloperMode } from "../../actions/uiStateActions";
 
 const defaultMargin = 20;
 const helsingborgIcon = require("../../images/HBG.png");
-const goBackIcon = require("../../images/iconBack.png");
 
 const styles = StyleSheet.create({
-  barButtonItem: {
-    width: 44,
-    height: 44,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  barButtonFiller: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 58,
-  },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -123,11 +109,6 @@ const textStyles = StyleSheet.create({
       textAlign: "center",
     }],
   ),
-  choiceText: StyleSheetUtils.flatten([
-    TextStyles.body, {
-      color: Colors.black,
-    }],
-  ),
 });
 
 class SettingsScreen extends Component {
@@ -140,21 +121,11 @@ class SettingsScreen extends Component {
   }
 
 
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     const title = LangService.strings.SETTINGS;
     return {
       title,
-      headerLeft: (
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.barButtonItem}
-        >
-          <Image source={goBackIcon} />
-        </TouchableOpacity>
-      ),
-      headerRight: (
-        <View style={styles.barButtonFiller} />
-      ),
+      headerLeft: null,
     };
   };
 

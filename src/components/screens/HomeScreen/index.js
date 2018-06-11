@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import {
   ActivityIndicator,
-  Image,
   SectionList,
   Text,
   TouchableOpacity,
@@ -16,11 +15,11 @@ import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   selectCurrentCategory,
+  showBottomBar,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
 import { compareDistance } from "../../../utils/SortingUtils";
 
-const settingsIcon = require("../../../images/settings.png");
 
 type Props = {
   navigation: any,
@@ -28,23 +27,20 @@ type Props = {
   navigationSections: NavigationCategory[],
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
-  selectCurrentCategory(section: NavigationCategory): void
+  selectCurrentCategory(section: NavigationCategory): void,
+  dispatchShowBottomBar(visible: boolean): void,
 }
 
 class HomeScreen extends Component<Props> {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     const title = LangService.strings.APP_NAME;
     return Object.assign(HeaderStyles.noElevation, {
       title,
-      headerLeft: (
-        <TouchableOpacity
-          onPress={() => navigation.navigate("SettingsScreen")}
-          style={styles.barButtonItem}
-        >
-          <Image style={styles.barButtonImage} source={settingsIcon} />
-        </TouchableOpacity>
-      ),
     });
+  }
+
+  componentDidMount() {
+    this.props.dispatchShowBottomBar(true);
   }
 
   onPressItem = (item: NavigationItem): void => {
@@ -57,8 +53,10 @@ class HomeScreen extends Component<Props> {
           const type = guide.guideType;
           if (type === "guide") {
             this.props.navigation.navigate("GuideDetailsScreen");
+            this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
             this.props.navigation.navigate("TrailScreen");
+            this.props.dispatchShowBottomBar(false);
           }
         }
         break;
@@ -66,6 +64,7 @@ class HomeScreen extends Component<Props> {
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
         this.props.navigation.navigate("LocationScreen");
+        this.props.dispatchShowBottomBar(false);
         break;
       default:
         break;
@@ -75,6 +74,7 @@ class HomeScreen extends Component<Props> {
   onPressViewAll = (category: NavigationCategory) => {
     this.props.selectCurrentCategory(category);
     this.props.navigation.navigate("CategoryListScreen");
+    this.props.dispatchShowBottomBar(false);
   }
 
   renderSectionHeader = (section: { title: string, category: NavigationCategory }) =>
@@ -124,14 +124,15 @@ class HomeScreen extends Component<Props> {
         }
         keyExtractor={item => item.id}
         sections={sections}
-      />);
+      />
+    );
   }
 }
-
 
 function mapStateToProps(state: RootState) {
   const { navigation } = state;
   const { isFetching, navigationCategories } = navigation;
+
 
   return {
     showLoadingSpinner: isFetching,
@@ -144,6 +145,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
     selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
+    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
   };
 }
 

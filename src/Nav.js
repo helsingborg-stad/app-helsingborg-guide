@@ -27,11 +27,13 @@ import {
   WelcomeScreen,
 } from "./components/screens";
 import ViewContainer from "./components/shared/view_container";
+import BottomBarView from "./components/shared/BottomBarView";
 import {
   Colors,
   HeaderStyles,
 } from "./styles/";
 import AnalyticsUtils from "./utils/AnalyticsUtils";
+import NavigatorService from "./services/navigationService";
 
 const GuideNavigator = StackNavigator(
   {
@@ -119,7 +121,13 @@ export default class Nav extends Component<Props> {
           backgroundColor={Colors.darkPurple}
         />
         {/* $FlowFixMe should be fixed in later flow versions */}
-        <RootNavigator onNavigationStateChange={Nav.onNavigationStateChange} />
+        <RootNavigator
+          onNavigationStateChange={Nav.onNavigationStateChange}
+          ref={(navigatorRef) => {
+            NavigatorService.setContainer(navigatorRef);
+          }}
+        />
+        <BottomBarView />
       </ViewContainer>
     );
   }
