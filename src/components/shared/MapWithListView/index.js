@@ -434,7 +434,6 @@ class MapWithListView extends Component<Props, State> {
         AnalyticsUtils.logEvent("view_object", { name: item.title });
         navigate("ObjectScreen", {
           title: item.title,
-          currentGuide: this.props.currentGuide,
         });
       }
     }
@@ -734,15 +733,11 @@ class MapWithListView extends Component<Props, State> {
   }
 }
 
-function mapStateToProps(state) {
-  const { currentGuide } = state.uiState;
-
-  return {
-    currentGuide,
-  };
+function mapStateToProps() {
+  return {};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch) {
   return {
     dispatchSelectContentObject: contentObject =>
       dispatch(selectCurrentContentObject(contentObject)),
