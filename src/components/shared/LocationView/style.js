@@ -1,8 +1,5 @@
 import { StyleSheet } from "react-native";
-import {
-  Colors,
-  TextStyles,
-} from "../../../styles/";
+import { Colors, TextStyles } from "../../../styles/";
 import { StyleSheetUtils } from "../../../utils/";
 
 export default StyleSheet.create({
@@ -26,9 +23,11 @@ export default StyleSheet.create({
     backgroundColor: Colors.lightPurple,
   },
   comingSoonText: StyleSheetUtils.flatten([
-    TextStyles.comingSoonText, {
+    TextStyles.comingSoonText,
+    {
       color: Colors.white,
-    }]),
+    },
+  ]),
   imageBackground: {
     width: "100%",
     height: "auto",
@@ -48,39 +47,49 @@ export default StyleSheet.create({
     paddingBottom: 4,
   },
   title: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 30,
       textAlign: "center",
       color: Colors.black,
-    }],
-  ),
+    },
+  ]),
   openingHoursAndDistanceContainer: {
     flex: 1,
     paddingVertical: 4,
   },
   distanceText: StyleSheetUtils.flatten([
-    TextStyles.description, {
+    TextStyles.description,
+    {
       fontWeight: "400",
       color: Colors.warmGrey,
       textAlign: "left",
-    }],
-  ),
+    },
+  ]),
   articleContainer: {
     flex: 4,
     paddingTop: 10,
     paddingBottom: 5,
   },
   articleDescriptionText: StyleSheetUtils.flatten([
-    TextStyles.description, {
+    TextStyles.description,
+    {
       color: Colors.warmGrey,
-    }],
-  ),
+    },
+  ]),
   articleHeaderText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 20,
       lineHeight: 21,
       paddingBottom: 10,
       color: Colors.black,
-    }],
-  ),
+    },
+  ]),
+  shareBtn: {
+    position: "absolute",
+    bottom: 25,
+    right: 25,
+    zIndex: 50,
+  },
 });

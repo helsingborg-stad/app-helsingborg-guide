@@ -10,10 +10,10 @@ import LangService from "../../../services/langService";
 import OpeningHoursView from "../OpeningHoursView";
 import PointPropertiesView from "../PointPropertiesView";
 import LocationGuidesView from "../LocationGuidesView";
+import SharingService from "../../../services/SharingService";
 
 import { UrlUtils, LocationUtils } from "../../../utils/";
 import WebLinkView from "../WebLinkView";
-
 
 type Props = {
   guideGroup: GuideGroup,
@@ -23,7 +23,7 @@ type Props = {
   isFetchingGuides?: boolean,
   navigation: any,
   onPressGuide(guide: Guide): void
-}
+};
 
 function getWebUrl(links: LinkAndService[]): ?string {
   let webUrl = null;
@@ -56,9 +56,19 @@ function displayDistance(currentLocation: GeolocationType, location: Location) {
   );
 }
 
-function openGoogleMapApp(geolocation: GeolocationType, lat: number, lng: number) {
+function openGoogleMapApp(
+  geolocation: GeolocationType,
+  lat: number,
+  lng: number,
+) {
   const directionsUrl = LocationUtils.directionsUrl(lat, lng, geolocation);
-  UrlUtils.openUrlIfValid(directionsUrl, LangService.strings.OPEN_IN_MAPS, "", LangService.strings.CANCEL, LangService.strings.OPEN);
+  UrlUtils.openUrlIfValid(
+    directionsUrl,
+    LangService.strings.OPEN_IN_MAPS,
+    "",
+    LangService.strings.CANCEL,
+    LangService.strings.OPEN,
+  );
 }
 
 function displayDirections(geolocation: GeolocationType, location: Location) {
@@ -67,9 +77,7 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
       iconName="directions"
       text={LangService.strings.DIRECTIONS}
       onPress={() => {
-        openGoogleMapApp(geolocation,
-          location.latitude,
-          location.longitude);
+        openGoogleMapApp(geolocation, location.latitude, location.longitude);
       }}
     />
   );
@@ -100,7 +108,6 @@ const LocationView = (props: Props) => {
               />
               {props.geolocation ? displayDistance(props.geolocation, props.guideGroup.location) : null}
             </View>
-            {props.geolocation ? displayDirections(props.geolocation, props.guideGroup.location) : null}
           </View>
           {isFetchingGuides ? <ActivityIndicator /> :
           <LocationGuidesView guides={props.guides} onPressGuide={props.onPressGuide} />
@@ -109,13 +116,11 @@ const LocationView = (props: Props) => {
             <Text style={styles.articleHeaderText}>{`${LangService.strings.ABOUT} ${props.guideGroup.name}`}</Text>
             <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
           </View>
-          {webUrl ? <WebLinkView url={webUrl} navigation={props.navigation} /> : null}
-          <PointPropertiesView pointProperties={props.guideGroup.pointProperties} />
-        </View>
-      </ScrollView>
-    </View>
-  );
-};
+        </ScrollView>
+      </View>
+    );
+  }
+}
 
 LocationView.defaultProps = {
   geolocation: null,
