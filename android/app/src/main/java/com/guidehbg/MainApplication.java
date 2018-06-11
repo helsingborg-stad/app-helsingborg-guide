@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.beaconmodule.BeaconPackage;
 import com.facebook.react.ReactApplication;
+import com.entria.views.RNViewOverflowPackage;
 import com.apsl.versionnumber.RNVersionNumberPackage;
 import cl.json.RNSharePackage;
 import com.jimmydaddy.imagemarker.ImageMarkerPackage;
@@ -45,6 +46,7 @@ public class MainApplication extends Application implements ShareApplication, Re
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new RNViewOverflowPackage(),
             new RNVersionNumberPackage(), new RNSharePackage(), new ImageMarkerPackage(),
                     new SvgPackage(), new RNFirebasePackage(), new RNFirebaseAnalyticsPackage(), new PhotoViewPackage(),
                     new BeaconPackage(), new VectorIconsPackage(), new MapsPackage(), new ReactVideoPackage(),

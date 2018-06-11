@@ -104,7 +104,7 @@ android {
     defaultConfig {
         applicationId "com.guidehbg"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 22
         versionCode 18
         versionName "1.41"
         ndk {
@@ -160,6 +160,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-view-overflow')
     compile project(':react-native-version-number')
     compile project(':react-native-share')
     compile project(':react-native-image-marker')

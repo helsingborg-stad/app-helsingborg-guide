@@ -3,7 +3,8 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { View, Image, SafeAreaView } from "react-native";
+import { View, Image } from "react-native";
+import ViewOverflow from "react-native-view-overflow";
 import styles from "./style";
 import { selectCurrentBottomBarTab } from "../../../actions/uiStateActions";
 import BottomBarIcon from "../../../components/shared/BottomBarIcon";
@@ -49,7 +50,7 @@ class BottomBarView extends Component<Props> {
     if (!this.props.showBottomBar) { return null; }
 
     return (
-      <View style={styles.viewContainer}>
+      <ViewOverflow style={styles.viewContainer}>
         {displayButtonTabs(this.props.currentBottomBarTab)}
         <Image
           style={styles.imageBackground}
@@ -58,7 +59,7 @@ class BottomBarView extends Component<Props> {
         {this.displayIcons(this.props.currentBottomBarTab)}
 
 
-      </View>
+      </ViewOverflow>
     );
   }
 }
