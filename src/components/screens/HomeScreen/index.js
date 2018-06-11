@@ -18,29 +18,9 @@ import {
   selectCurrentCategory,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
+import { compareDistance } from "../../../utils/SortingUtils";
 
 const settingsIcon = require("../../../images/settings.png");
-
-function getDistance(item: NavigationItem): number {
-  const { guideGroup, guide } = item;
-  if (guideGroup) {
-    const { distance } = guideGroup;
-    if (distance) {
-      return distance;
-    }
-  }
-  if (guide) {
-    const { distance } = guide;
-    if (distance) {
-      return distance;
-    }
-  }
-  return Number.MAX_VALUE;
-}
-
-function compareDistance(a: NavigationItem, b: NavigationItem): number {
-  return getDistance(a) - getDistance(b);
-}
 
 type Props = {
   navigation: any,
