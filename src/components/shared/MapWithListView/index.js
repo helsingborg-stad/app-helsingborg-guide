@@ -205,6 +205,7 @@ type Props = {
   items: ContentObject[],
   navigation: any,
   initialLocation?: Location,
+  dispatchSelectContentObject(obj: ContentObject): void
 }
 
 type State = {
@@ -323,6 +324,7 @@ class MapWithListView extends Component<Props, State> {
   }
 
   map: ?MapView;
+  listRef: ?FlatList<any> | ?ViewPagerAndroid;
 
   focusMarkers(markers) {
     if (!markers) return;
@@ -338,7 +340,7 @@ class MapWithListView extends Component<Props, State> {
       edgePadding,
       animated: false,
     };
-    this.map.fitToCoordinates(markers.map(marker => marker.location), options);
+    if (this.map) { this.map.fitToCoordinates(markers.map(marker => marker.location), options); }
   }
 
   scrollToIndex = (index) => {
@@ -359,7 +361,7 @@ class MapWithListView extends Component<Props, State> {
 
     if (marker !== activeMarker) {
       this.setState({ activeMarker: marker });
-      this.map.animateToCoordinate(marker.location);
+      if (this.map) { this.map.animateToCoordinate(marker.location); }
     }
   };
   /**
