@@ -192,6 +192,7 @@ class SettingsScreen extends Component {
   loadContents(langCode) {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
+        LangService.storeLangCode(langCode);
         this.props.dispatchFetchNavigation(langCode);
         this.props.dispatchFetchGuideGroups(langCode);
         this.props.dispatchFetchGuides(langCode);
