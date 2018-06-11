@@ -17,18 +17,18 @@ import {
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import PropTypes from "prop-types";
-import { Colors, TextStyles } from "../../styles/";
+import { Colors, TextStyles } from "../../../styles/";
 import {
   AnalyticsUtils,
   StyleSheetUtils,
   LocationUtils,
   UrlUtils,
-} from "../../utils/";
-import LangService from "../../services/langService";
-import IconTextTouchable from "./IconTextTouchable";
-import ViewPagerAndroidContainer from "../shared/ViewPagerAndroidContainer";
+} from "../../../utils/";
+import LangService from "../../../services/langService";
+import IconTextTouchable from "./../IconTextTouchable";
+import ViewPagerAndroidContainer from "../../shared/ViewPagerAndroidContainer";
 
-import { selectCurrentContentObject } from "../../actions/uiStateActions";
+import { selectCurrentContentObject } from "../../../actions/uiStateActions";
 
 const ios = Platform.OS === "ios";
 
@@ -44,14 +44,14 @@ const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 const listItemWidth = screenWidth - defaultMargin * 2;
 
-const locationMarkerActive = require("../../images/map/marker-location-active.png");
-const locationMarkerInactive = require("../../images/map/marker-location.png");
+const locationMarkerActive = require("../../../images/map/marker-location-active.png");
+const locationMarkerInactive = require("../../../images/map/marker-location.png");
 
-const trailMarkerActive = require("../../images/map/marker-trail-active.png");
-const trailMarkerInactive = require("../../images/map/marker-trail.png");
+const trailMarkerActive = require("../../../images/map/marker-trail-active.png");
+const trailMarkerInactive = require("../../../images/map/marker-trail.png");
 
-const numberedMarkerActive = require("../../images/map/marker-number-active.png");
-const numberedMarkerInactive = require("../../images/map/marker-number.png");
+const numberedMarkerActive = require("../../../images/map/marker-number-active.png");
+const numberedMarkerInactive = require("../../../images/map/marker-number.png");
 
 /*
 * Shared style constants
