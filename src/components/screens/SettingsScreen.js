@@ -13,9 +13,6 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import PropTypes from "prop-types";
-import {
-  bindActionCreators,
-} from "redux";
 import connect from "react-redux/es/connect/connect";
 import LangService from "../../services/langService";
 import {
@@ -26,9 +23,9 @@ import {
   StyleSheetUtils,
   AnalyticsUtils,
 } from "../../utils/";
-import * as oldGuideGroupActions from "../../actions/oldGuideGroupActions";
-import * as navigationActions from "../../actions/navigationActions";
-import * as subLocationActions from "../../actions/subLoactionActions";
+import { fetchGuideGroups } from "../../actions/guideGroupActions";
+import { fetchGuides } from "../../actions/guideActions";
+import { fetchNavigation } from "../../actions/navigationActions";
 import { setDeveloperMode } from "../../actions/uiStateActions";
 
 const defaultMargin = 20;
@@ -136,9 +133,9 @@ const textStyles = StyleSheet.create({
 class SettingsScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
-    oldGuideGroupActions: PropTypes.object.isRequired,
-    navigationActions: PropTypes.object.isRequired,
-    subLocationActions: PropTypes.object.isRequired,
+    dispatchFetchNavigation: PropTypes.func.isRequired,
+    dispatchFetchGuideGroups: PropTypes.func.isRequired,
+    dispatchFetchGuides: PropTypes.func.isRequired,
     dispatchSetDeveloperMode: PropTypes.func.isRequired,
   }
 
@@ -196,9 +193,9 @@ class SettingsScreen extends Component {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
         LangService.storeLangCode(langCode);
-        this.props.oldGuideGroupActions.loadOldGuideGroups(langCode);
-        this.props.navigationActions.fetchNavigation(langCode);
-        this.props.subLocationActions.loadSubLocations(langCode);
+        this.props.dispatchFetchNavigation(langCode);
+        this.props.dispatchFetchGuideGroups(langCode);
+        this.props.dispatchFetchGuides(langCode);
         LangService.getLanguages();
       }
     });
@@ -324,9 +321,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    oldGuideGroupActions: bindActionCreators(oldGuideGroupActions, dispatch),
-    navigationActions: bindActionCreators(navigationActions, dispatch),
-    subLocationActions: bindActionCreators(subLocationActions, dispatch),
+    dispatchFetchNavigation: langCode => dispatch(fetchNavigation(langCode)),
+    dispatchFetchGuides: langCode => dispatch(fetchGuides(langCode)),
+    dispatchFetchGuideGroups: langCode => dispatch(fetchGuideGroups(langCode)),
     dispatchSetDeveloperMode: enabled => dispatch(setDeveloperMode(enabled)),
   };
 }
