@@ -1,4 +1,6 @@
-import React from "react";
+// @flow
+
+import React, { Component } from "react";
 import {
   Dimensions,
   ScrollView,
@@ -8,13 +10,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import {
-  Colors,
-  TextStyles,
-} from "../../styles/";
-import {
-  StyleSheetUtils,
-} from "../../utils/";
+import { Colors, TextStyles } from "../../styles/";
+import { StyleSheetUtils } from "../../utils/";
 
 const closeIcon = require("../../images/ic_close.png");
 
@@ -28,7 +25,7 @@ const scrollViewMaxHeight = screenHeight - 350; // magic number here, but roughl
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    width: screenWidth - (defaultMargin * 2),
+    width: screenWidth - defaultMargin * 2,
     margin: defaultMargin,
     backgroundColor: Colors.white,
     shadowColor: "rgba(0, 0, 0, 0.23)",
@@ -58,7 +55,8 @@ const styles = StyleSheet.create({
     borderRadius: closeButtonSize / 2,
   },
   titleText: StyleSheetUtils.flatten([
-    TextStyles.title, {
+    TextStyles.title,
+    {
       color: Colors.black,
       fontSize: 30,
       lineHeight: 36,
@@ -67,7 +65,8 @@ const styles = StyleSheet.create({
     },
   ]),
   descriptionText: StyleSheetUtils.flatten([
-    TextStyles.description, {
+    TextStyles.description,
+    {
       margin: defaultMargin,
       color: Colors.greyBodyText,
       lineHeight: 22,
@@ -75,38 +74,57 @@ const styles = StyleSheet.create({
   ]),
 });
 
+type Props = {
+  trailInformation: { title: string, description: string },
+  onPressFunction: () => void,
+  downloadComponent: () => void
+};
+
 function renderTitle(trailInformation) {
   if (trailInformation.title) {
-    return (<Text style={styles.titleText}>{trailInformation.title} </Text>);
+    return <Text style={styles.titleText}>{trailInformation.title} </Text>;
   }
   return null;
 }
 
 function renderDescription(trailInformation) {
   if (trailInformation.title) {
-    return (<ScrollView style={styles.scrollView}>
-      <Text style={styles.descriptionText}>{trailInformation.description}</Text>
-    </ScrollView>);
+    return (
+      <ScrollView style={styles.scrollView}>
+        <Text style={styles.descriptionText}>
+          {trailInformation.description}
+        </Text>
+      </ScrollView>
+    );
   }
-  return (<ScrollView style={styles.scrollViewNoTitle}>
-    <Text style={styles.descriptionText}>{trailInformation.description}</Text>
-  </ScrollView>);
+  return (
+    <ScrollView style={styles.scrollViewNoTitle}>
+      <Text style={styles.descriptionText}>{trailInformation.description}</Text>
+    </ScrollView>
+  );
 }
 
-const MapInformationOverlay = ({ trailInformation, onPressFunction, downloadComponent }) => (
-  <View style={styles.container}>
-    <View style={styles.flexing}>
-      {renderTitle(trailInformation)}
-      <TouchableOpacity onPress={onPressFunction} style={styles.closeButtonContainer}>
-        <Image style={styles.closeButton} source={closeIcon} />
-      </TouchableOpacity>
-      {renderDescription(trailInformation)}
-
-    </View>
-    <View style={styles.downloadContainer}>
-      {downloadComponent ? downloadComponent() : null}
-    </View>
-  </View>
-);
+// eslint-disable-next-line react/prefer-stateless-function
+class MapInformationOverlay extends Component<Props> {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.flexing}>
+          {renderTitle(this.props.trailInformation)}
+          <TouchableOpacity
+            onPress={this.props.onPressFunction}
+            style={styles.closeButtonContainer}
+          >
+            <Image style={styles.closeButton} source={closeIcon} />
+          </TouchableOpacity>
+          {renderDescription(this.props.trailInformation)}
+        </View>
+        <View style={styles.downloadContainer}>
+          {this.props.downloadComponent ? this.props.downloadComponent() : null}
+        </View>
+      </View>
+    );
+  }
+}
 
 export default MapInformationOverlay;
