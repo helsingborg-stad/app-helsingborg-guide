@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { View, Image, SafeAreaView } from "react-native";
+import { Animated, View, Image } from "react-native";
 import styles from "./style";
 import { selectCurrentBottomBarTab } from "../../../actions/uiStateActions";
 import BottomBarIcon from "../../../components/shared/BottomBarIcon";
@@ -23,6 +23,11 @@ type Props = {
   selectBottomBarTab(id: number): void,
 }
 
+type State = {
+  animValue: Animated.Value
+}
+
+
 function displayButtonTabs(currentBottomBarTab: number) {
   return (
     <View style={styles.buttonTabContainer}>
@@ -34,7 +39,28 @@ function displayButtonTabs(currentBottomBarTab: number) {
 }
 
 
-class BottomBarView extends Component<Props> {
+class BottomBarView extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      animValue: new Animated.Value(100),
+    };
+  }
+  componentDidMount() {
+    // Animated.timing(this.state.animValue, { toValue: 100, duration: 5000 }).start();
+    // console.log("start animate on mount");
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.showBottomBar && !this.props.showBottomBar) {
+      console.log("start animate on will receive");
+      Animated.timing(this.state.animValue, { toValue: 0, duration: 1000 }).start();
+    } else if (!nextProps.showBottomBar && this.props.showBottomBar) {
+      this.setState({ animValue: new Animated.Value(100) });
+      console.log("reset animate on will receive");
+    }
+  }
+
   displayIcons(currentBottomBarTab: number) {
     return (
       <View style={styles.iconContainer}>
@@ -49,7 +75,10 @@ class BottomBarView extends Component<Props> {
     if (!this.props.showBottomBar) { return null; }
 
     return (
-      <View style={styles.viewContainer}>
+      <Animated.View style={[styles.viewContainer,
+      { transform: [{ translateY: this.state.animValue }] },
+      ]}
+      >
         {displayButtonTabs(this.props.currentBottomBarTab)}
         <Image
           style={styles.imageBackground}
@@ -58,7 +87,8 @@ class BottomBarView extends Component<Props> {
         {this.displayIcons(this.props.currentBottomBarTab)}
 
 
-      </View>
+      </Animated.View>
+
     );
   }
 }
