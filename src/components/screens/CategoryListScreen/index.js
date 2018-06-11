@@ -9,6 +9,7 @@ import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   selectCurrentCategory,
+  showBottomBar,
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
 
@@ -17,6 +18,7 @@ type Props = {
   currentCategory: ?NavigationCategory,
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
+  dispatchShowBottomBar(visible: boolean): void,
 }
 
 class HomeScreen extends Component<Props> {
@@ -40,6 +42,11 @@ class HomeScreen extends Component<Props> {
       props.navigation.setParams({ title });
     }
   }
+
+  componentWillUnmount() {
+    this.props.dispatchShowBottomBar(true);
+  }
+
 
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
@@ -98,6 +105,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
     selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
+    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
   };
 }
 
