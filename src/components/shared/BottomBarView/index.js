@@ -136,6 +136,3 @@ function mapDispatchToProps(dispatch: Dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BottomBarView);
-
-
-{ /* <View style={[styles.buttonTabContainer, { bottom: this.state.animTabBottom }]}> */ }
