@@ -589,23 +589,24 @@ class MapWithListView extends Component<Props, State> {
     );
   };
 
-  defaultMapViewMarker = (trailObject) => {
-    const { id, location } = trailObject;
+  defaultMapViewMarker = (mapItem: MapItem, index: number) => {
+    const id = getIdFromMapItem(mapItem);
+    const location: ?Location = getLocationFromItem(mapItem);
     const { activeMarker } = this.state;
-    const markerImage = this.markerImageForTrailObject(trailObject);
-    const active = activeMarker.id === trailObject.id;
+    const active = getIdFromMapItem(activeMarker) === id;
+    const markerImage = this.markerImageForTrailObject(mapItem, active);
     // Warning: zIndex is bugged on iOS 11!
     // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
     // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 999 over any other marker.
     // This is why the active marker ALWAYS should have a zIndex of 999 until this issue is fixed.
-    const zIndex = active ? 999 : trailObject.labelDisplayNumber;
+    const zIndex = active ? 999 : index;
     return (
       <Marker
         key={id}
         coordinate={location}
         identifier={id}
         image={markerImage}
-        onPress={!active ? () => this.onMarkerPressed(trailObject) : null}
+        onPress={!active ? () => this.onMarkerPressed(mapItem) : null}
         zIndex={zIndex}
       />
     );
@@ -617,7 +618,7 @@ class MapWithListView extends Component<Props, State> {
       if (showNumberedMapMarkers) {
         return this.numberedMapViewMarker(item, index);
       }
-      return this.defaultMapViewMarker(item);
+      return this.defaultMapViewMarker(item, index);
     });
   }
 
