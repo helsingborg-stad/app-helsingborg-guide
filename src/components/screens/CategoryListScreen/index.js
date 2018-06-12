@@ -17,6 +17,7 @@ import {
 import NavigationListItem from "../../shared/NavigationListItem";
 import { compareDistance } from "../../../utils/SortingUtils";
 import { AnalyticsUtils } from "../../../utils/";
+import MapWithListView, { type MapItem } from "../../shared/MapWithListView";
 
 const mapIcon = require("./images/mapIcon.png");
 
@@ -93,14 +94,31 @@ class CategoryListScreen extends Component<Props, State> {
   }
 
   render() {
-    const { currentCategory } = this.props;
+    const { currentCategory, navigation } = this.props;
     if (!currentCategory) return null;
 
     const { items } = currentCategory;
     const sortedItems = items.map(item => item).sort(compareDistance);
     const { showMap } = this.state;
 
-    if (showMap) return null;
+    if (showMap) {
+      const mapItems: MapItem[] = [];
+      items.forEach((navItem) => {
+        const { guide, guideGroup } = navItem;
+        if (guideGroup) {
+          mapItems.push({ guideGroup: navItem.guideGroup });
+        }
+        if (guide) {
+          mapItems.push({ guide });
+        }
+      });
+      return (
+        <MapWithListView
+          items={mapItems}
+          navigation={navigation}
+        />
+      );
+    }
 
     return (
       <View >

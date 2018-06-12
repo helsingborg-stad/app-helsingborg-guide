@@ -50,7 +50,6 @@ const TrailView = (props: Props) => {
         stopAudioOnUnmount
         showNumberedMapMarkers
         showDirections
-        id={props.trail.id}
       />
       {
         props.showInfoOverlay
