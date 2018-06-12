@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  trailInformation: { title: string, description: ?string, image: Images },
+  trailInformation: { title: ?string, description: ?string, image: Images },
   onPressFunction: () => void,
   downloadComponent: () => Node
 };
@@ -97,7 +97,7 @@ function renderTitle(trailInformation) {
 }
 
 function renderDescription(trailInformation) {
-  if (trailInformation.description) {
+  if (trailInformation.title) {
     return (
       <ScrollView style={styles.scrollView}>
         <Text style={styles.descriptionText}>
