@@ -620,9 +620,9 @@ class MapWithListView extends Component<Props, State> {
     const { showNumberedMapMarkers } = this.props;
     return items.map((item, index) => {
       if (showNumberedMapMarkers) {
-        return this.numberedMapViewMarker(item, index);
+        return this.numberedMapViewMarker(item, index + 1);
       }
-      return this.defaultMapViewMarker(item, index);
+      return this.defaultMapViewMarker(item, index + 1);
     });
   }
 
@@ -662,11 +662,8 @@ class MapWithListView extends Component<Props, State> {
     return <Text style={styles.guideNumberText}>{textString}</Text>;
   };
 
-  displayNumberView = (item) => {
-    const TrailScreen = item.guideType === "trail";
-    if (!TrailScreen) return null;
-
-    const numberString = item.labelDisplayNumber;
+  displayNumberView = (item: MapItem, index: number) => {
+    const numberString = `${index}`;
     const numberView = (
       <View style={styles.listImageNumberView}>
         <Text style={styles.listImageNumberText}>{numberString}</Text>
@@ -728,9 +725,9 @@ class MapWithListView extends Component<Props, State> {
     return { title: null, streetAddress, thumbnailUrl };
   }
 
-  renderListItem = (item: MapItem, listItemStyle: any) => {
+  renderListItem = (item: MapItem, listItemStyle: any, number: number) => {
     const { title, streetAddress, thumbnailUrl } = this.getMapItemProps(item);
-    const { showDirections } = this.props;
+    const { showDirections, showNumberedMapMarkers } = this.props;
     const titleLineCount =
       screenHeight > 600 && PixelRatio.getFontScale() === 1 ? 2 : 1;
     return (
@@ -739,7 +736,7 @@ class MapWithListView extends Component<Props, State> {
           {thumbnailUrl && (
             <Image style={styles.listImage} source={{ uri: thumbnailUrl }} />
           )}
-          {this.displayNumberView(item)}
+          {showNumberedMapMarkers ? this.displayNumberView(item, number) : null}
           <View style={styles.listItemTextContainer}>
             <Text style={styles.listItemTitle} numberOfLines={titleLineCount}>
               {title}
@@ -762,7 +759,7 @@ class MapWithListView extends Component<Props, State> {
   };
 
   androidRenderItem = (item, index) => (
-    <View key={index}>{this.renderListItem(item, styles.androidListItem)}</View>
+    <View key={index}>{this.renderListItem(item, styles.androidListItem, index)}</View>
   );
 
   renderHorizontalList(items: MapItem[]) {
@@ -776,7 +773,7 @@ class MapWithListView extends Component<Props, State> {
           ref={(ref) => {
             this.listRef = ref;
           }}
-          renderItem={item => this.renderListItem(item.item, styles.listItem)}
+          renderItem={({ item, index }) => this.renderListItem(item, styles.listItem, index + 1)}
           style={styles.listStyle}
           getItemLayout={this.getItemLayout}
           onScroll={this.onListScroll}
