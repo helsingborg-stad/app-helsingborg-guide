@@ -121,16 +121,14 @@ class MapInformationOverlay extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.flexing}>
-          {renderTitle(this.props.trailInformation)}
-          <TouchableOpacity
-            onPress={this.props.onPressFunction}
-            style={styles.closeButtonContainer}
-          >
-            <Image style={styles.closeButton} source={closeIcon} />
-          </TouchableOpacity>
-          {renderDescription(this.props.trailInformation)}
-        </View>
+        {renderTitle(this.props.trailInformation)}
+        <TouchableOpacity
+          onPress={this.props.onPressFunction}
+          style={styles.closeButtonContainer}
+        >
+          <Image style={styles.closeButton} source={closeIcon} />
+        </TouchableOpacity>
+        {renderDescription(this.props.trailInformation)}
         <View style={styles.shareContainer}>
           <View style={styles.shareBtn}>
             {SharingService.showShareButton(
@@ -140,9 +138,7 @@ class MapInformationOverlay extends Component<Props> {
             )}
           </View>
         </View>
-        <View style={styles.downloadContainer}>
-          {this.props.downloadComponent ? this.props.downloadComponent() : null}
-        </View>
+        {this.props.downloadComponent ? this.props.downloadComponent() : null}
       </View>
     );
   }
