@@ -52,6 +52,8 @@ const trailMarkerInactive = require("../../../images/map/marker-trail.png");
 const numberedMarkerActive = require("../../../images/map/marker-number-active.png");
 const numberedMarkerInactive = require("../../../images/map/marker-number.png");
 
+const listIcon = require("../../../images/listIcon.png");
+
 /*
 * Shared style constants
 */
@@ -171,6 +173,16 @@ const styles = StyleSheet.create({
       color: Colors.warmGrey,
     },
   ]),
+  listButton: {
+    position: "absolute",
+    bottom: listItemImageSize + defaultMargin,
+    right: 0,
+    zIndex: 100,
+  },
+  listIcon: {
+    width: 60,
+    height: 60,
+  },
   numberedMarkerText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
@@ -216,6 +228,8 @@ type Props = {
   showNumberedMapMarkers?: boolean,
   showDirections?: boolean,
   userLocation: ?GeolocationType,
+  showListButton?: boolean,
+  onPressListButton?: () => void,
   dispatchSelectContentObject(obj: ContentObject): void
 }
 
@@ -764,10 +778,25 @@ class MapWithListView extends Component<Props, State> {
     );
   }
 
+  renderListButton = () => {
+    const { onPressListButton } = this.props;
+    return (
+      <TouchableOpacity
+        style={styles.listButton}
+        onPress={() => (onPressListButton ? onPressListButton() : null)}
+      >
+        <Image
+          style={styles.listIcon}
+          source={listIcon}
+        />
+      </TouchableOpacity>);
+  }
+
   render() {
     const {
       items,
       initialLocation = { latitude: 56.0471881, longitude: 12.6963658 },
+      showListButton,
     } = this.props;
     const { longitude, latitude } = initialLocation;
     return (
@@ -791,6 +820,7 @@ class MapWithListView extends Component<Props, State> {
           >
             {this.renderMapMarkers(items)}
           </MapView>
+          {showListButton ? this.renderListButton() : null}
           {this.renderHorizontalList(items)}
         </View>
       </SafeAreaView>

@@ -19,7 +19,7 @@ import { compareDistance } from "../../../utils/SortingUtils";
 import { AnalyticsUtils } from "../../../utils/";
 import MapWithListView, { type MapItem } from "../../shared/MapWithListView";
 
-const mapIcon = require("./images/mapIcon.png");
+const mapIcon = require("../../../images/mapIcon.png");
 
 type Props = {
   navigation: any,
@@ -116,6 +116,8 @@ class CategoryListScreen extends Component<Props, State> {
         <MapWithListView
           items={mapItems}
           navigation={navigation}
+          showListButton
+          onPressListButton={() => this.setState({ showMap: false })}
         />
       );
     }
