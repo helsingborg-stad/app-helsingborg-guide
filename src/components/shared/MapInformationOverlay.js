@@ -81,9 +81,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
   },
-  shareBtn: {
-    width: "30%",
-  },
 });
 
 type Props = {
@@ -130,13 +127,11 @@ class MapInformationOverlay extends Component<Props> {
         </TouchableOpacity>
         {renderDescription(this.props.trailInformation)}
         <View style={styles.shareContainer}>
-          <View style={styles.shareBtn}>
-            {SharingService.showShareButton(
-              this.props.trailInformation.title,
-              this.props.trailInformation.image,
-              this,
-            )}
-          </View>
+          {SharingService.showShareButton(
+            this.props.trailInformation.title,
+            this.props.trailInformation.image,
+            this,
+          )}
         </View>
         {this.props.downloadComponent ? this.props.downloadComponent() : null}
       </View>
