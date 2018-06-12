@@ -20,6 +20,7 @@ import {
   cancelDownloadGuide,
   resumeDownloadGuide,
 } from "../../../actions/downloadGuidesActions";
+import AnalyticsUtils from "../../../utils/AnalyticsUtils";
 
 type Props = {
   style?: any,
@@ -94,6 +95,7 @@ export class DownloadButton extends Component<Props> {
           if (currentGuide) {
             if (status === "stopped") {
               this.props.startDownload(currentGuide);
+              AnalyticsUtils.logEvent("download_guide", { name: currentGuide.slug });
             } else if (status === "pending") {
               this.props.pauseDownload(currentGuide);
             }
