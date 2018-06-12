@@ -134,10 +134,11 @@ class CategoryListScreen extends Component<Props, State> {
           data={sortedItems}
         />
         <TouchableOpacity
+          style={styles.mapButton}
           onPress={() => this.setState({ showMap: true })}
         >
           <Image
-            style={styles.floatingButton}
+            style={styles.mapIcon}
             source={mapIcon}
           />
         </TouchableOpacity>
