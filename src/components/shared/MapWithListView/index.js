@@ -215,6 +215,8 @@ type Props = {
   navigation: any,
   initialLocation?: Location,
   showNumberedMapMarkers?: boolean,
+  showDirections?: boolean,
+  userLocation: ?GeolocationType,
   dispatchSelectContentObject(obj: ContentObject): void
 }
 
@@ -494,13 +496,16 @@ class MapWithListView extends Component<Props, State> {
     }, 500);
   };
 
-  onListItemDirectionsButtonPressed = (listItem) => {
-    const { location } = listItem;
+  onListItemDirectionsButtonPressed = (item: MapItem) => {
+    const location = getLocationFromItem(item);
+    if (!location) return;
+
+    const { userLocation } = this.props;
     const { latitude, longitude } = location;
     const directionsUrl = LocationUtils.directionsUrl(
       latitude,
       longitude,
-      this.state.geolocation,
+      userLocation,
     );
     UrlUtils.openUrlIfValid(
       directionsUrl,
@@ -629,7 +634,7 @@ class MapWithListView extends Component<Props, State> {
       } else {
         textString = `${LangService.strings.TOUR} ${
           LangService.strings.WITH
-        } ${numberOfGuides} ${locationString}`;
+          } ${numberOfGuides} ${locationString}`;
       }
     } else if (type === "guide") {
       if (isAccessibility) {
@@ -637,7 +642,7 @@ class MapWithListView extends Component<Props, State> {
       } else {
         textString = `${LangService.strings.MEDIAGUIDE} ${
           LangService.strings.WITH
-        } ${numberOfGuides} ${LangService.strings.OBJECT}`;
+          } ${numberOfGuides} ${LangService.strings.OBJECT}`;
       }
     }
 
@@ -662,7 +667,6 @@ class MapWithListView extends Component<Props, State> {
     title: ?string,
     streetAddress: ?string,
     thumbnailUrl: ?string,
-    isTrail?: boolean
   } => {
     // TODO extract from Guide and GuideGroup
     const { contentObject, guide, guideGroup } = item;
@@ -687,7 +691,8 @@ class MapWithListView extends Component<Props, State> {
   }
 
   renderListItem = (item: MapItem, listItemStyle: any) => {
-    const { title, streetAddress, thumbnailUrl, isTrail } = this.getMapItemProps(item);
+    const { title, streetAddress, thumbnailUrl } = this.getMapItemProps(item);
+    const { showDirections } = this.props;
     const titleLineCount =
       screenHeight > 600 && PixelRatio.getFontScale() === 1 ? 2 : 1;
     return (
@@ -704,13 +709,13 @@ class MapWithListView extends Component<Props, State> {
             <Text style={styles.listItemAddress} numberOfLines={1}>
               {streetAddress}
             </Text>
-            {!isTrail ? null : (
+            {showDirections ? (
               <IconTextTouchable
                 iconName="directions"
                 text={LangService.strings.DIRECTIONS}
                 onPress={() => this.onListItemDirectionsButtonPressed(item)}
               />
-            )}
+            ) : null}
             {/* this.displayGuideNumber(item.contentObject.numberOfGuides, item.contentType) */}
           </View>
         </View>
@@ -799,8 +804,11 @@ class MapWithListView extends Component<Props, State> {
   }
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state: RootState) {
+  const { geolocation } = state;
+  return {
+    userLocation: geolocation,
+  };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
