@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from "react";
+import React, { Component, type Node } from "react";
 import {
   Dimensions,
   ScrollView,
@@ -21,7 +21,7 @@ const screenHeight = Dimensions.get("window").height;
 
 const defaultMargin = 17;
 const closeButtonSize = 26;
-const scrollViewMaxHeight = screenHeight - 350; // magic number here, but roughly (listitem + header + margins)
+const scrollViewMaxHeight = screenHeight - 410; // magic number here, but roughly (listitem + header + margins)
 
 const styles = StyleSheet.create({
   container: {
@@ -73,17 +73,23 @@ const styles = StyleSheet.create({
       lineHeight: 22,
     },
   ]),
+  shareContainer: {
+    paddingLeft: defaultMargin,
+    paddingRight: defaultMargin,
+    paddingTop: 8,
+    paddingBottom: 8,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
   shareBtn: {
-    position: "absolute",
-    right: 25,
-    zIndex: 50,
+    width: "30%",
   },
 });
 
 type Props = {
-  trailInformation: { title: string, description: string, image: Images },
+  trailInformation: { title: string, description: ?string, image: Images },
   onPressFunction: () => void,
-  downloadComponent: () => void
+  downloadComponent: () => Node
 };
 
 function renderTitle(trailInformation) {
@@ -94,7 +100,7 @@ function renderTitle(trailInformation) {
 }
 
 function renderDescription(trailInformation) {
-  if (trailInformation.title) {
+  if (trailInformation.description) {
     return (
       <ScrollView style={styles.scrollView}>
         <Text style={styles.descriptionText}>
@@ -125,12 +131,14 @@ class MapInformationOverlay extends Component<Props> {
           </TouchableOpacity>
           {renderDescription(this.props.trailInformation)}
         </View>
-        <View style={styles.shareBtn}>
-          {SharingService.showShareButton(
-            this.props.trailInformation.title,
-            this.props.trailInformation.image,
-            this,
-          )}
+        <View style={styles.shareContainer}>
+          <View style={styles.shareBtn}>
+            {SharingService.showShareButton(
+              this.props.trailInformation.title,
+              this.props.trailInformation.image,
+              this,
+            )}
+          </View>
         </View>
         <View style={styles.downloadContainer}>
           {this.props.downloadComponent ? this.props.downloadComponent() : null}
