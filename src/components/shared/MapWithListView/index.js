@@ -77,6 +77,10 @@ const listItemShared = {
 */
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    backgroundColor: Colors.listBackgroundColor,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -210,6 +214,7 @@ type Props = {
   items: MapItem[],
   navigation: any,
   initialLocation?: Location,
+  showNumberedMapMarkers?: boolean,
   dispatchSelectContentObject(obj: ContentObject): void
 }
 
@@ -220,12 +225,33 @@ type State = {
   recentlyTappedPin: boolean,
 };
 
-function extractKey(item: MapItem): string {
+function getIdFromMapItem(item: MapItem): string {
   if (item.contentObject) { return item.contentObject.id; }
   if (item.guide) { return `${item.guide.id}`; }
   if (item.guideGroup) { return `${item.guideGroup.id}`; }
 
   return "";
+}
+
+function getLocationFromItem(item: MapItem): ?Location {
+  const { contentObject, guide, guideGroup } = item;
+
+  if (guide) { return guide.location; }
+  if (guideGroup) { return guideGroup.location; }
+  if (contentObject) { return contentObject.location; }
+
+  return null;
+}
+
+function getLocations(items: MapItem[]): Location[] {
+  const locs: Location[] = [];
+  items.forEach((i) => {
+    const l = getLocationFromItem(i);
+    if (l) {
+      locs.push(l);
+    }
+  });
+  return locs;
 }
 
 class MapWithListView extends Component<Props, State> {
@@ -321,7 +347,7 @@ class MapWithListView extends Component<Props, State> {
   constructor(props) {
     super(props);
 
-    const { items, id } = this.props;
+    const { items } = this.props;
     this.state = {
       isInitialized: false,
       activeMarker: items[0],
@@ -339,7 +365,7 @@ class MapWithListView extends Component<Props, State> {
   map: ?MapView;
   listRef: ?FlatList<any> | ?ViewPagerAndroid;
 
-  focusMarkers(markers) {
+  focusMarkers(markers: MapItem[]) {
     if (!markers) return;
 
     const padding = 50;
@@ -353,7 +379,8 @@ class MapWithListView extends Component<Props, State> {
       edgePadding,
       animated: false,
     };
-    if (this.map) { this.map.fitToCoordinates(markers.map(marker => marker.location), options); }
+    const locations: Location[] = getLocations(markers);
+    if (this.map) { this.map.fitToCoordinates(locations, options); }
   }
 
   scrollToIndex = (index) => {
@@ -511,17 +538,19 @@ class MapWithListView extends Component<Props, State> {
    * RENDER FUNCTIONS
    */
 
-  numberedMapViewMarker = (trailObject) => {
-    const { id, location } = trailObject;
+  numberedMapViewMarker = (mapItem: MapItem, index: number) => {
+    const id = getIdFromMapItem(mapItem);
+    const location: ?Location = getLocationFromItem(mapItem);
+
     const { activeMarker } = this.state;
-    const markerImage = this.markerImageForTrailObject(trailObject);
-    const numberString = trailObject.labelDisplayNumber;
-    const active = activeMarker.id === trailObject.id;
+    const markerImage = this.markerImageForTrailObject(mapItem);
+    const numberString: string = `${index}`;
+    const active = getIdFromMapItem(activeMarker) === id;
     // Warning: zIndex is bugged on iOS 11!
     // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
     // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 999 over any other marker.
     // This is why the active marker ALWAYS should have a zIndex of 999 until this issue is fixed.
-    const zIndex = active ? 999 : trailObject.labelDisplayNumber;
+    const zIndex = active ? 999 : index;
 
     return (
       <Marker
@@ -529,7 +558,7 @@ class MapWithListView extends Component<Props, State> {
         coordinate={location}
         identifier={id}
         image={markerImage}
-        onPress={!active ? () => this.onMarkerPressed(trailObject) : null}
+        onPress={!active ? () => this.onMarkerPressed(mapItem) : null}
         anchor={{ x: 0.5, y: 1 }}
         centerOffset={{ x: 0.5, y: 1 }}
         zIndex={zIndex}
@@ -568,13 +597,13 @@ class MapWithListView extends Component<Props, State> {
     );
   };
 
-  renderMapMarkers() {
-    const { items } = this.props;
-    return items.map((trailObject) => {
-      if (trailObject.imageType === "TrailScreen") {
-        return this.numberedMapViewMarker(trailObject);
+  renderMapMarkers(items: MapItem[]) {
+    const { showNumberedMapMarkers } = this.props;
+    return items.map((item, index) => {
+      if (showNumberedMapMarkers) {
+        return this.numberedMapViewMarker(item, index);
       }
-      return this.defaultMapViewMarker(trailObject);
+      return this.defaultMapViewMarker(item);
     });
   }
 
@@ -599,7 +628,7 @@ class MapWithListView extends Component<Props, State> {
       } else {
         textString = `${LangService.strings.TOUR} ${
           LangService.strings.WITH
-          } ${numberOfGuides} ${locationString}`;
+        } ${numberOfGuides} ${locationString}`;
       }
     } else if (type === "guide") {
       if (isAccessibility) {
@@ -607,7 +636,7 @@ class MapWithListView extends Component<Props, State> {
       } else {
         textString = `${LangService.strings.MEDIAGUIDE} ${
           LangService.strings.WITH
-          } ${numberOfGuides} ${LangService.strings.OBJECT}`;
+        } ${numberOfGuides} ${LangService.strings.OBJECT}`;
       }
     }
 
@@ -634,6 +663,7 @@ class MapWithListView extends Component<Props, State> {
     thumbnailUrl: ?string,
     isTrail?: boolean
   } => {
+    // TODO extract from Guide and GuideGroup
     const { contentObject, guide, guideGroup } = item;
     let streetAddress = null;
     let thumbnailUrl = null;
@@ -698,7 +728,7 @@ class MapWithListView extends Component<Props, State> {
           contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
           data={items}
           horizontal
-          keyExtractor={extractKey}
+          keyExtractor={getIdFromMapItem}
           ref={(ref) => {
             this.listRef = ref;
           }}
@@ -742,7 +772,7 @@ class MapWithListView extends Component<Props, State> {
     const { longitude, latitude } = initialLocation;
     return (
       <SafeAreaView
-        style={{ flex: 1, backgroundColor: Colors.listBackgroundColor }}
+        style={styles.rootContainer}
       >
         <View style={styles.container}>
           <MapView
@@ -759,7 +789,7 @@ class MapWithListView extends Component<Props, State> {
               longitudeDelta: 0.06,
             }}
           >
-            {this.renderMapMarkers()}
+            {this.renderMapMarkers(items)}
           </MapView>
           {this.renderHorizontalList(items)}
         </View>

@@ -48,11 +48,14 @@ const TrailView = (props: Props) => {
         initialLocation={props.trail.contentObjects[0].location}
         navigation={props.navigation}
         stopAudioOnUnmount
+        showNumberedMapMarkers
         id={props.trail.id}
       />
-      {props.showInfoOverlay
-        ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay)
-        : null}
+      {
+        props.showInfoOverlay
+          ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay)
+          : null
+      }
       <AudioPlayerView />
     </View>
   );
