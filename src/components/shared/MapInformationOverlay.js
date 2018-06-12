@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     width: screenWidth - defaultMargin * 2,
     margin: defaultMargin,
     backgroundColor: Colors.white,
-    shadowColor: "rgba(0, 0, 0, 0.23)",
+    shadowColor: Colors.shadow,
     shadowOffset: {
       width: 0,
       height: 2,
