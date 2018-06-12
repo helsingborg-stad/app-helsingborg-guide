@@ -10,8 +10,8 @@ import { initAudioFile, pauseAudio } from "../../actions/audioActions";
 import { selectCurrentContentObjectImage, selectCurrentImage } from "../../actions/uiStateActions";
 
 type Props = {
-  currentGuide: Guide,
-  currentContentObject: ContentObject,
+  currentGuide: ?Guide,
+  currentContentObject: ?ContentObject,
   currentContentObjectImageIndex: number,
   navigation: Object,
   selectCurrentContentObjectImage(newIndex: number): void,
@@ -90,14 +90,19 @@ class ObjectScreen extends Component<Props> {
 
 
   render() {
-    const { currentContentObject, currentContentObjectImageIndex } = this.props;
-    const { params } = this.props.navigation.state;
-    const { currentGuide } = params;
+    const { currentContentObject, currentContentObjectImageIndex, currentGuide } = this.props;
+    if (!currentContentObject) return null;
+    let guideId;
+    let guideType;
+    if (currentGuide) {
+      guideId = currentGuide.id;
+      ({ guideType } = currentGuide);
+    }
 
     return (<ObjectView
       contentObject={currentContentObject}
-      guideId={currentGuide.id}
-      guideType={currentGuide.guideType}
+      guideId={guideId}
+      guideType={guideType}
       onSwiperIndexChanged={this.onSwiperIndexChanged}
       imageIndex={currentContentObjectImageIndex}
       audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}

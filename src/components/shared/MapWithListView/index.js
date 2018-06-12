@@ -210,7 +210,6 @@ export type MapItem = {
 }
 
 type Props = {
-  id: number,
   items: MapItem[],
   navigation: any,
   initialLocation?: Location,
