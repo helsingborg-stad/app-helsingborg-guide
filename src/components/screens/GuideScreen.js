@@ -41,7 +41,7 @@ class GuideScreen extends Component<Props> {
 
   componentWillUnmount() {
     this.props.dispatchReleaseAudio();
-    this.props.dispatchShowBottomBar(true);
+    // this.props.dispatchShowBottomBar(true);
   }
 
   onPressContentObject = (obj: ContentObject) => {
