@@ -677,7 +677,6 @@ class MapWithListView extends Component<Props, State> {
     streetAddress: ?string,
     thumbnailUrl: ?string,
   } => {
-    // TODO extract from Guide and GuideGroup
     const { contentObject, guide, guideGroup } = item;
     let streetAddress = null;
     let thumbnailUrl = null;
@@ -689,6 +688,32 @@ class MapWithListView extends Component<Props, State> {
       if (images.length > 0) {
         thumbnailUrl = images[0].thumbnail;
       }
+      return {
+        title,
+        streetAddress,
+        thumbnailUrl,
+      };
+    }
+
+    if (guide) {
+      const { name: title, location, images } = guide;
+      if (location) {
+        ({ streetAddress } = location);
+      }
+      thumbnailUrl = images.thumbnail;
+      return {
+        title,
+        streetAddress,
+        thumbnailUrl,
+      };
+    }
+
+    if (guideGroup) {
+      const { name: title, location, images } = guideGroup;
+      if (location) {
+        ({ streetAddress } = location);
+      }
+      thumbnailUrl = images.thumbnail;
       return {
         title,
         streetAddress,
