@@ -17,6 +17,7 @@ import ImageMarker from "react-native-image-marker";
 import LangService from "../services/langService";
 import Colors from "../styles/Colors";
 import fetchService from "../services/FetchService";
+import { AnalyticsUtils } from "../utils";
 
 const fontSize = 40;
 const lineDistance = 5;
@@ -91,6 +92,7 @@ export default {
   },
 
   beginShare(title, message, url, width, height, subject) {
+    AnalyticsUtils.logEvent("share_object", { name: title });
     // The sharing process is different on ios and android.
     if (Platform.OS === "android") {
       this.shareAndroid(title, message, url, width, height, subject);

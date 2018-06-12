@@ -13,6 +13,7 @@ import {
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
 import { compareDistance } from "../../../utils/SortingUtils";
+import { AnalyticsUtils } from "../../../utils/";
 
 type Props = {
   navigation: any,
@@ -58,8 +59,10 @@ class CategoryListScreen extends Component<Props> {
         if (guide) {
           const { guideType } = guide;
           if (guideType === "guide") {
+            AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
             this.props.navigation.navigate("GuideDetailsScreen");
           } else if (guideType === "trail") {
+            AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
             this.props.navigation.navigate("TrailScreen");
           }
         }
@@ -67,6 +70,9 @@ class CategoryListScreen extends Component<Props> {
       }
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
+        if (item.guideGroup) {
+          AnalyticsUtils.logEvent("view_location", { name: item.guideGroup.slug });
+        }
         this.props.navigation.navigate("LocationScreen");
         break;
       default:
