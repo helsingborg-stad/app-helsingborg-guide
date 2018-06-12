@@ -76,8 +76,7 @@ const styles = StyleSheet.create({
   shareContainer: {
     paddingLeft: defaultMargin,
     paddingRight: defaultMargin,
-    paddingTop: 8,
-    paddingBottom: 8,
+    paddingBottom: 4,
     flexDirection: "row",
     justifyContent: "flex-end",
   },
