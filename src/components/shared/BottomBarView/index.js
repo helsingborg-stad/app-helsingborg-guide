@@ -5,7 +5,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Animated, View, Image, Dimensions, Platform } from "react-native";
 import styles from "./style";
-import { selectCurrentBottomBarTab } from "../../../actions/uiStateActions";
 import BottomBarIcon from "../../../components/shared/BottomBarIcon";
 
 
@@ -33,14 +32,15 @@ const buttonTabBottom: number = isIphoneX() ? 77 : 68;
 const transitionDuration: number = 300;
 
 type Props = {
-  currentBottomBarTab: number,
+  // currentBottomBarTab: number,
   showBottomBar: boolean,
-  selectBottomBarTab(id: number): void,
+  // selectBottomBarTab(id: number): void,
 }
 
 type State = {
   animViewContainer: Animated.Value,
   animTabBottom: Animated.Value,
+  selectedTab: number,
 }
 
 class BottomBarView extends Component<Props, State> {
@@ -49,6 +49,7 @@ class BottomBarView extends Component<Props, State> {
     this.state = {
       animViewContainer: new Animated.Value(0),
       animTabBottom: new Animated.Value(0),
+      selectedTab: 0,
     };
   }
 
@@ -65,12 +66,18 @@ class BottomBarView extends Component<Props, State> {
     }
   }
 
+  onBottomBarTabSelected(index: number) {
+    console.log("on bottom bar tab selected");
+    this.setState({ selectedTab: index });
+    // this.props.selectBottomBarTab(index);
+  }
+
   displayIcons() {
     return (
       <View style={styles.iconContainer}>
-        <BottomBarIcon index={0} selected={this.props.currentBottomBarTab === 0} selectBottomBarTab={this.props.selectBottomBarTab} />
-        <BottomBarIcon index={1} selected={this.props.currentBottomBarTab === 1} selectBottomBarTab={this.props.selectBottomBarTab} />
-        <BottomBarIcon index={2} selected={this.props.currentBottomBarTab === 2} selectBottomBarTab={this.props.selectBottomBarTab} />
+        <BottomBarIcon index={0} selected={this.state.selectedTab === 0} selectBottomBarTab={index => this.onBottomBarTabSelected(index)} />
+        <BottomBarIcon index={1} selected={this.state.selectedTab === 1} selectBottomBarTab={index => this.onBottomBarTabSelected(index)} />
+        <BottomBarIcon index={2} selected={this.state.selectedTab === 2} selectBottomBarTab={index => this.onBottomBarTabSelected(index)} />
       </View >
     );
   }
@@ -84,17 +91,17 @@ class BottomBarView extends Component<Props, State> {
         <Image
           style={styles.imageTab}
           resizeMode="stretch"
-          source={this.props.currentBottomBarTab === 0 ? barTabLeft : barTabLeftDisabled}
+          source={this.state.selectedTab === 0 ? barTabLeft : barTabLeftDisabled}
         />
         <Image
           style={styles.imageTab}
           resizeMode="stretch"
-          source={this.props.currentBottomBarTab === 1 ? barTabCenter : barTabCenterDisabled}
+          source={this.state.selectedTab === 1 ? barTabCenter : barTabCenterDisabled}
         />
         <Image
           style={styles.imageTab}
           resizeMode="stretch"
-          source={this.props.currentBottomBarTab === 2 ? barTabRight : barTabRightDisabled}
+          source={this.state.selectedTab === 2 ? barTabRight : barTabRightDisabled}
         />
       </Animated.View>
     );
@@ -122,17 +129,10 @@ class BottomBarView extends Component<Props, State> {
 
 
 function mapStateToProps(state: RootState) {
-  const { currentBottomBarTab, showBottomBar } = state.uiState;
+  const { showBottomBar } = state.uiState;
   return {
-    currentBottomBarTab,
     showBottomBar,
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    selectBottomBarTab: (index: number) => dispatch(selectCurrentBottomBarTab(index)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BottomBarView);
+export default connect(mapStateToProps)(BottomBarView);

@@ -263,7 +263,6 @@ declare type UIState = {
   currentImage: ?string,
   currentCategory: ?number,
   developerMode: boolean,
-  currentBottomBarTab: number,
   showBottomBar: boolean,
 }
 

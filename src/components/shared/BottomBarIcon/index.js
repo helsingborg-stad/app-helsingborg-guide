@@ -57,7 +57,7 @@ type Props = {
   selectBottomBarTab: any,
 }
 
-class BottomBarIcon extends Component<Props> {
+class BottomBarIcon extends Component<Props, State> {
   getBottomBarIcon() {
     const color = this.props.selected ? selectedColor : inactiveColor;
 
