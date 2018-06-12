@@ -394,14 +394,15 @@ class MapWithListView extends Component<Props, State> {
     }
   };
 
-  panMapToIndex = (index) => {
+  panMapToIndex = (index: number) => {
     const { items } = this.props;
     const marker = items[index];
     const { activeMarker } = this.state;
 
     if (marker !== activeMarker) {
       this.setState({ activeMarker: marker });
-      if (this.map) { this.map.animateToCoordinate(marker.location); }
+      const location = getLocationFromItem(marker);
+      if (this.map && location) { this.map.animateToCoordinate(location); }
     }
   };
   /**
