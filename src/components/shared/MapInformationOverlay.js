@@ -21,7 +21,7 @@ const screenHeight = Dimensions.get("window").height;
 
 const defaultMargin = 17;
 const closeButtonSize = 26;
-const scrollViewMaxHeight = screenHeight - 300; // magic number here, but roughly (listitem + header + margins)
+const scrollViewMaxHeight = screenHeight - 138; // magic number here, but roughly (listitem + header + margins)
 
 const styles = StyleSheet.create({
   container: {
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     TextStyles.title,
     {
       color: Colors.black,
-      fontSize: 30,
+      fontSize: 24,
       lineHeight: 36,
       marginTop: 22,
       marginHorizontal: defaultMargin,
