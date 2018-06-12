@@ -515,26 +515,21 @@ class MapWithListView extends Component<Props, State> {
     );
   };
 
-  markerImageForTrailObject(trailObject) {
-    const { activeMarker } = this.state;
-    const { imageType, contentType } = trailObject;
+  markerImageForTrailObject(trailObject: MapItem, active: boolean) {
+    const { showNumberedMapMarkers } = this.props;
+    const { guide } = trailObject;
     let image;
-
-    if (imageType === "trail" || contentType === "trail") {
-      image =
-        activeMarker.id === trailObject.id
-          ? trailMarkerActive
-          : trailMarkerInactive;
-    } else if (imageType === "TrailScreen") {
-      image =
-        activeMarker.id === trailObject.id
-          ? numberedMarkerActive
-          : numberedMarkerInactive;
+    if (showNumberedMapMarkers) {
+      image = active ? numberedMarkerActive : numberedMarkerInactive;
+    } else if (guide) {
+      const { guideType } = guide;
+      if (guideType === "trail") {
+        image = active ? trailMarkerActive : trailMarkerInactive;
+      } else {
+        image = active ? trailMarkerActive : trailMarkerInactive;
+      }
     } else {
-      image =
-        activeMarker.id === trailObject.id
-          ? locationMarkerActive
-          : locationMarkerInactive;
+      image = active ? locationMarkerActive : locationMarkerInactive;
     }
     return image;
   }
@@ -548,9 +543,9 @@ class MapWithListView extends Component<Props, State> {
     const location: ?Location = getLocationFromItem(mapItem);
 
     const { activeMarker } = this.state;
-    const markerImage = this.markerImageForTrailObject(mapItem);
-    const numberString: string = `${index}`;
     const active = getIdFromMapItem(activeMarker) === id;
+    const markerImage = this.markerImageForTrailObject(mapItem, active);
+    const numberString: string = `${index}`;
     // Warning: zIndex is bugged on iOS 11!
     // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
     // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 999 over any other marker.
