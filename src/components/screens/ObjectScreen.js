@@ -62,6 +62,9 @@ class ObjectScreen extends Component<Props> {
 
   onGoToVideo = (video?: MediaContent) => {
     if (!video) { return; }
+    const { currentGuide } = this.props;
+    if (!currentGuide) return;
+    const guideID = currentGuide.id;
 
     this.props.dispatchPauseAudio();
 
@@ -69,18 +72,21 @@ class ObjectScreen extends Component<Props> {
     if (title) AnalyticsUtils.logEvent("play_video", { title });
 
     const { navigate } = this.props.navigation;
-    navigate("VideoScreen", { videoUrl: url, title, guideID: this.props.currentGuide.id });
+    navigate("VideoScreen", { videoUrl: url, title, guideID });
   }
 
   loadAudioFile = () => {
-    const { audio, title } = this.props.currentContentObject;
+    const { currentContentObject } = this.props;
+    if (!currentContentObject) return;
+
+    const { audio, title } = currentContentObject;
 
     if (!audio || !audio.url) return;
 
     const audioState: AudioState = defaultState;
 
     audioState.title = title || LangService.strings.UNKNOWN_TITLE;
-    audioState.avatar_url = this.props.currentContentObject.images[0].thumbnail || "";
+    audioState.avatar_url = currentContentObject.images[0].thumbnail || "";
     audioState.url = audio.url;
 
     if (audioState.title) AnalyticsUtils.logEvent("play_audio", { name: audioState.title });
