@@ -1,7 +1,10 @@
 // @flow
 import React, { Component } from "react";
 import {
+  Image,
   FlatList,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { connect } from "react-redux";
 import styles from "./styles";
@@ -15,6 +18,8 @@ import NavigationListItem from "../../shared/NavigationListItem";
 import { compareDistance } from "../../../utils/SortingUtils";
 import { AnalyticsUtils } from "../../../utils/";
 
+const mapIcon = require("./images/mapIcon.png");
+
 type Props = {
   navigation: any,
   currentCategory: ?NavigationCategory,
@@ -23,7 +28,11 @@ type Props = {
   dispatchShowBottomBar(visible: boolean): void,
 }
 
-class CategoryListScreen extends Component<Props> {
+type State = {
+  showMap: boolean,
+}
+
+class CategoryListScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
     let title = null;
     const { params } = navigation.state;
@@ -37,6 +46,10 @@ class CategoryListScreen extends Component<Props> {
 
   constructor(props: Props) {
     super(props);
+
+    this.state = {
+      showMap: false,
+    };
 
     const { currentCategory } = props;
     if (currentCategory) {
@@ -85,17 +98,30 @@ class CategoryListScreen extends Component<Props> {
 
     const { items } = currentCategory;
     const sortedItems = items.map(item => item).sort(compareDistance);
+    const { showMap } = this.state;
+
+    if (showMap) return null;
 
     return (
-      <FlatList
-        style={styles.container}
-        renderItem={({ item }) => (<NavigationListItem
-          item={item}
-          onPressItem={this.onPressItem}
-        />)}
-        keyExtractor={item => String(item.id)}
-        data={sortedItems}
-      />);
+      <View >
+        <FlatList
+          style={styles.container}
+          renderItem={({ item }) => (<NavigationListItem
+            item={item}
+            onPressItem={this.onPressItem}
+          />)}
+          keyExtractor={item => String(item.id)}
+          data={sortedItems}
+        />
+        <TouchableOpacity
+          onPress={() => this.setState({ showMap: true })}
+        >
+          <Image
+            style={styles.floatingButton}
+            source={mapIcon}
+          />
+        </TouchableOpacity>
+      </View>);
   }
 }
 
