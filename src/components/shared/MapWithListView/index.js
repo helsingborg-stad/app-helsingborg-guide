@@ -27,7 +27,11 @@ import LangService from "../../../services/langService";
 import IconTextTouchable from "./../IconTextTouchable";
 import ViewPagerAndroidContainer from "../../shared/ViewPagerAndroidContainer";
 
-import { selectCurrentContentObject } from "../../../actions/uiStateActions";
+import {
+  selectCurrentContentObject,
+  selectCurrentGuideGroup,
+  selectCurrentGuide,
+} from "../../../actions/uiStateActions";
 
 const ios = Platform.OS === "ios";
 
@@ -230,6 +234,8 @@ type Props = {
   userLocation: ?GeolocationType,
   showListButton?: boolean,
   onPressListButton?: () => void,
+  selectGuide(guide: Guide): void,
+  selectGuideGroup(id: number): void,
   dispatchSelectContentObject(obj: ContentObject): void
 }
 
@@ -461,40 +467,38 @@ class MapWithListView extends Component<Props, State> {
 
   onListItemPressed = (listItem: MapItem) => {
     const { navigate } = this.props.navigation;
-    const { contentType, contentObject } = listItem;
-    switch (contentType) {
-      case "location": {
-        AnalyticsUtils.logEvent("view_location", { name: contentObject.slug });
-        navigate("LocationScreen", { location: contentObject });
-        break;
-      }
-      case "trail": {
-        const trail = contentObject;
-        const title = trail.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
-        navigate("OldTrailScreen", { trail, id: trail.id, title });
-        return;
-      }
-      case "guide": {
-        const guide = contentObject;
-        const title = guide.guidegroup[0].name;
-        AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-        navigate("GuideDetailsScreen", { id: guide.id, title });
-        return;
-      }
-      default: {
-        const { contentObject: item } = listItem;
-        if (item) {
-          this.props.dispatchSelectContentObject(item);
+    const { guide, guideGroup, contentObject } = listItem;
+    if (guideGroup) {
+      AnalyticsUtils.logEvent("view_location", { name: guideGroup.slug });
+      this.props.selectGuideGroup(guideGroup.id);
+      navigate("LocationScreen");
+      return;
+    }
 
-          AnalyticsUtils.logEvent("view_object", { name: item.title });
-          navigate("ObjectScreen", {
-            title: item.title,
-          });
-        }
+    if (guide) {
+      const { guideType } = guide;
+      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      this.props.selectGuide(guide);
+
+      switch (guideType) {
+        case "trail":
+          navigate("TrailScreen");
+          return;
+        case "guide":
+        default:
+          navigate("GuideDetailsScreen");
+          return;
       }
     }
-  };
+
+    if (contentObject) {
+      this.props.dispatchSelectContentObject(contentObject);
+      AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
+      navigate("ObjectScreen", {
+        title: contentObject.title,
+      });
+    }
+  }
 
   // When a map marker is pressed on either OS
   onMarkerPressed = (marker) => {
@@ -865,6 +869,8 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     dispatchSelectContentObject: contentObject =>
       dispatch(selectCurrentContentObject(contentObject)),
+    selectGuideGroup: id => dispatch(selectCurrentGuideGroup(id)),
+    selectGuide: guide => dispatch(selectCurrentGuide(guide)),
   };
 }
 
