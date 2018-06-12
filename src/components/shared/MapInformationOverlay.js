@@ -106,7 +106,7 @@ function renderShareButton(
   trailInformation: TrailInformation,
   renderingComponent: Component<*>,
 ) {
-  if (trailInformation) {
+  if (trailInformation.title && trailInformation.image) {
     return (
       <View style={styles.shareContainer}>
         {SharingService.showShareButton(
