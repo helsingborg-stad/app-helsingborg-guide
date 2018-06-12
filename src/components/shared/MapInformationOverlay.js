@@ -21,7 +21,7 @@ const screenHeight = Dimensions.get("window").height;
 
 const defaultMargin = 17;
 const closeButtonSize = 26;
-const scrollViewMaxHeight = screenHeight - 410; // magic number here, but roughly (listitem + header + margins)
+const scrollViewMaxHeight = screenHeight - 350; // magic number here, but roughly (listitem + header + margins)
 
 const styles = StyleSheet.create({
   container: {
@@ -83,32 +83,56 @@ const styles = StyleSheet.create({
   },
 });
 
+type TrailInformation = {
+  title: ?string,
+  description: ?string,
+  image: ?Images
+};
+
 type Props = {
-  trailInformation: { title: ?string, description: ?string, image: Images },
+  trailInformation: TrailInformation,
   onPressFunction: () => void,
   downloadComponent: () => Node
 };
 
-function renderTitle(trailInformation) {
+function renderTitle(trailInformation: TrailInformation) {
   if (trailInformation.title) {
     return <Text style={styles.titleText}>{trailInformation.title} </Text>;
   }
   return null;
 }
 
-function renderDescription(trailInformation) {
-  if (trailInformation.title) {
+function renderShareButton(
+  trailInformation: TrailInformation,
+  renderingComponent: Component<*>,
+) {
+  if (trailInformation) {
     return (
-      <ScrollView style={styles.scrollView}>
-        <Text style={styles.descriptionText}>
-          {trailInformation.description}
-        </Text>
-      </ScrollView>
+      <View style={styles.shareContainer}>
+        {SharingService.showShareButton(
+          trailInformation.title,
+          trailInformation.image,
+          renderingComponent,
+        )}
+      </View>
     );
   }
+
+  return null;
+}
+
+function renderScrollableContent(
+  trailInformation: TrailInformation,
+  renderingComponent: Component<*>,
+) {
+  const style = trailInformation.title
+    ? styles.scrollView
+    : styles.scrollViewNoTitle;
+
   return (
-    <ScrollView style={styles.scrollViewNoTitle}>
+    <ScrollView style={style}>
       <Text style={styles.descriptionText}>{trailInformation.description}</Text>
+      {renderShareButton(trailInformation, renderingComponent)}
     </ScrollView>
   );
 }
@@ -125,14 +149,7 @@ class MapInformationOverlay extends Component<Props> {
         >
           <Image style={styles.closeButton} source={closeIcon} />
         </TouchableOpacity>
-        {renderDescription(this.props.trailInformation)}
-        <View style={styles.shareContainer}>
-          {SharingService.showShareButton(
-            this.props.trailInformation.title,
-            this.props.trailInformation.image,
-            this,
-          )}
-        </View>
+        {renderScrollableContent(this.props.trailInformation, this)}
         {this.props.downloadComponent ? this.props.downloadComponent() : null}
       </View>
     );
