@@ -21,7 +21,7 @@ const screenHeight = Dimensions.get("window").height;
 
 const defaultMargin = 17;
 const closeButtonSize = 26;
-const scrollViewMaxHeight = screenHeight - 350; // magic number here, but roughly (listitem + header + margins)
+const scrollViewMaxHeight = screenHeight - 300; // magic number here, but roughly (listitem + header + margins)
 
 const styles = StyleSheet.create({
   container: {
@@ -117,7 +117,6 @@ function renderShareButton(
       </View>
     );
   }
-
   return null;
 }
 
@@ -131,6 +130,7 @@ function renderScrollableContent(
 
   return (
     <ScrollView style={style}>
+      {renderTitle(trailInformation)}
       <Text style={styles.descriptionText}>{trailInformation.description}</Text>
       {renderShareButton(trailInformation, renderingComponent)}
     </ScrollView>
@@ -142,14 +142,13 @@ class MapInformationOverlay extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        {renderTitle(this.props.trailInformation)}
+        {renderScrollableContent(this.props.trailInformation, this)}
         <TouchableOpacity
           onPress={this.props.onPressFunction}
           style={styles.closeButtonContainer}
         >
           <Image style={styles.closeButton} source={closeIcon} />
         </TouchableOpacity>
-        {renderScrollableContent(this.props.trailInformation, this)}
         {this.props.downloadComponent ? this.props.downloadComponent() : null}
       </View>
     );
