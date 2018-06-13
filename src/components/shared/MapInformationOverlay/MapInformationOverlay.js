@@ -37,6 +37,7 @@ function renderShareButton(
           trailInformation.title,
           trailInformation.image,
           renderingComponent,
+          "share_guide",
         )}
       </View>
     );

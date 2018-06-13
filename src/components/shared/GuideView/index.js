@@ -70,7 +70,7 @@ class GuideView extends Component<Props> {
               style={styles.image}
             />
             <View style={styles.shareBtn}>
-              {SharingService.showShareButton(guide.name, guide.images, this)}
+              {SharingService.showShareButton(guide.name, guide.images, this, "share_guide")}
             </View>
           </View>
           <DownloadButtonContainer style={styles.downloadButton} />

@@ -133,7 +133,11 @@ class ObjectView extends Component<Props> {
               onGoToImage={this.props.onGoToImage}
             />
             <View style={styles.shareBtn}>
-              {SharingService.showShareButton(this.props.contentObject.title, this.props.contentObject.images[this.props.imageIndex], this)}
+              {SharingService.showShareButton(
+                this.props.contentObject.title,
+                this.props.contentObject.images[this.props.imageIndex],
+                this, "share_object",
+              )}
             </View>
           </View>
 
