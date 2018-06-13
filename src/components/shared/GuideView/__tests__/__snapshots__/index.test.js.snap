@@ -24,21 +24,33 @@ exports[`Guide with tagline 1`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -1023,21 +1035,33 @@ exports[`Guide with tagline 2`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -2022,21 +2046,33 @@ exports[`Guide with tagline 3`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -3021,21 +3057,33 @@ exports[`Guide with tagline 4`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -4020,21 +4068,33 @@ exports[`Guide with tagline 5`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -5019,21 +5079,33 @@ exports[`Guide with tagline 6`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -6018,21 +6090,33 @@ exports[`Guide with tagline 7`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -7017,21 +7101,33 @@ exports[`Guide without tagline 1`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -7999,21 +8095,33 @@ exports[`Guide without tagline 2`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -8981,21 +9089,33 @@ exports[`Guide without tagline 3`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -9963,21 +10083,33 @@ exports[`Guide without tagline 4`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -10945,21 +11077,33 @@ exports[`Guide without tagline 5`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -11927,21 +12071,33 @@ exports[`Guide without tagline 6`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
@@ -12909,21 +13065,33 @@ exports[`Guide without tagline 7`] = `
     }
   >
     <View>
-      <ImageView
-        source={
-          Object {
-            "sessionId": 200468,
-            "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+      <View>
+        <ImageView
+          source={
+            Object {
+              "sessionId": 200468,
+              "uri": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+            }
           }
-        }
-        style={
-          Object {
-            "aspectRatio": 2,
-            "height": "auto",
-            "width": "100%",
+          style={
+            Object {
+              "aspectRatio": 2,
+              "height": "auto",
+              "width": "100%",
+            }
           }
-        }
-      />
+        />
+        <View
+          style={
+            Object {
+              "bottom": 25,
+              "position": "absolute",
+              "right": 25,
+              "zIndex": 50,
+            }
+          }
+        />
+      </View>
       <DownloadButton
         style={
           Object {
