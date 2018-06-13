@@ -26,7 +26,7 @@ import {
 import { fetchGuideGroups } from "../../actions/guideGroupActions";
 import { fetchGuides } from "../../actions/guideActions";
 import { fetchNavigation } from "../../actions/navigationActions";
-import { setDeveloperMode } from "../../actions/uiStateActions";
+import { setDeveloperMode, showBottomBar, selectCurrentBottomBarTab } from "../../actions/uiStateActions";
 
 const defaultMargin = 20;
 const helsingborgIcon = require("../../images/HBG.png");
@@ -118,6 +118,8 @@ class SettingsScreen extends Component {
     dispatchFetchGuideGroups: PropTypes.func.isRequired,
     dispatchFetchGuides: PropTypes.func.isRequired,
     dispatchSetDeveloperMode: PropTypes.func.isRequired,
+    dispatchShowBottomBar: PropTypes.func.isRequired,
+    dispatchSelectBottomBarTab: PropTypes.func.isRequired,
   }
 
 
@@ -174,6 +176,8 @@ class SettingsScreen extends Component {
 
   navigateToWelcomeScreen = () => {
     const { navigate } = this.props.navigation;
+    this.props.dispatchShowBottomBar(false);
+    this.props.dispatchSelectBottomBarTab(0);
     navigate("WelcomeScreen");
   };
 
@@ -296,6 +300,8 @@ function mapDispatchToProps(dispatch) {
     dispatchFetchGuides: langCode => dispatch(fetchGuides(langCode)),
     dispatchFetchGuideGroups: langCode => dispatch(fetchGuideGroups(langCode)),
     dispatchSetDeveloperMode: enabled => dispatch(setDeveloperMode(enabled)),
+    dispatchShowBottomBar: visible => dispatch(showBottomBar(visible)),
+    dispatchSelectBottomBarTab: index => dispatch(selectCurrentBottomBarTab(index)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);
