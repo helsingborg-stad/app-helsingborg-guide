@@ -5,7 +5,7 @@ import { TouchableWithoutFeedback, View } from "react-native";
 
 import styles from "./style";
 import MapWithListView from "../../shared/MapWithListView";
-import MapInformationOverlay from "../../shared/MapInformationOverlay";
+import MapInformationOverlay from "../../shared/MapInformationOverlay/MapInformationOverlay";
 import AudioPlayerView from "../AudioPlayerView";
 import DownloadButtonContainer from "../DownloadButton";
 

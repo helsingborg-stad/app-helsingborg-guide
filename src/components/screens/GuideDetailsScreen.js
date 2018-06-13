@@ -21,7 +21,7 @@ import Footer from "../shared/footer";
 import IconTextTouchable from "../shared/IconTextTouchable";
 import ImageView from "../shared/image_view";
 import Keypad from "../shared/KeyPad";
-import MapInformationOverlay from "../shared/MapInformationOverlay";
+import MapInformationOverlay from "../shared/MapInformationOverlay/MapInformationOverlay";
 import NoInternetText from "../shared/noInternetText";
 import SlimNotificationBar from "../shared/SlimNotificationBar";
 import ViewContainer from "../shared/view_container";
