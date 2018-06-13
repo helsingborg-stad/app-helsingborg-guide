@@ -396,7 +396,8 @@ class MapWithListView extends Component<Props, State> {
   }
 
   map: ?MapView;
-  listRef: ?FlatList<any> | ?ViewPagerAndroid;
+  listRef: ?FlatList<MapItem>;
+  viewPager: ?ViewPagerAndroid;
 
   focusMarkers(markers: MapItem[]) {
     if (!markers) return;
@@ -417,13 +418,13 @@ class MapWithListView extends Component<Props, State> {
   }
 
   scrollToIndex = (index) => {
-    if (!this.listRef) return;
-
     if (ios) {
+      if (!this.listRef) return;
       const x = (listItemWidth + defaultMargin / 2) * index - 15;
       this.listRef.scrollToOffset({ offset: x });
     } else {
-      this.listRef.setPage(index);
+      if (!this.viewPager) return;
+      this.viewPager.setPage(index);
     }
   };
 
@@ -807,7 +808,7 @@ class MapWithListView extends Component<Props, State> {
       <ViewPagerAndroidContainer style={styles.listStyle}>
         <ViewPagerAndroid
           ref={(ref) => {
-            this.listRef = ref;
+            this.viewPager = ref;
           }}
           onPageSelected={this.onPageSelected}
           peekEnabled
@@ -816,7 +817,7 @@ class MapWithListView extends Component<Props, State> {
           initialPage={0}
         >
           {items.map((element, index) =>
-            this.androidRenderItem(element, index),
+            this.androidRenderItem(element, index + 1),
           )}
         </ViewPagerAndroid>
       </ViewPagerAndroidContainer>
