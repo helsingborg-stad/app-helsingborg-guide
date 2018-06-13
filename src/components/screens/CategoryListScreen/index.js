@@ -84,7 +84,7 @@ class CategoryListScreen extends Component<Props> {
     if (!currentCategory) return null;
 
     const { items } = currentCategory;
-    const sortedItems = items.sort(compareDistance);
+    const sortedItems = items.map(item => item).sort(compareDistance);
 
     return (
       <FlatList
