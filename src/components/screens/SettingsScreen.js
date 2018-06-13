@@ -119,7 +119,7 @@ class SettingsScreen extends Component {
     dispatchFetchGuides: PropTypes.func.isRequired,
     dispatchSetDeveloperMode: PropTypes.func.isRequired,
     dispatchShowBottomBar: PropTypes.func.isRequired,
-    selectBottomBarTab: PropTypes.func.isRequired,
+    dispatchSelectBottomBarTab: PropTypes.func.isRequired,
   }
 
 
@@ -177,7 +177,7 @@ class SettingsScreen extends Component {
   navigateToWelcomeScreen = () => {
     const { navigate } = this.props.navigation;
     this.props.dispatchShowBottomBar(false);
-    this.props.selectBottomBarTab(0);
+    this.props.dispatchSelectBottomBarTab(0);
     navigate("WelcomeScreen");
   };
 
@@ -301,7 +301,7 @@ function mapDispatchToProps(dispatch) {
     dispatchFetchGuideGroups: langCode => dispatch(fetchGuideGroups(langCode)),
     dispatchSetDeveloperMode: enabled => dispatch(setDeveloperMode(enabled)),
     dispatchShowBottomBar: visible => dispatch(showBottomBar(visible)),
-    selectBottomBarTab: index => dispatch(selectCurrentBottomBarTab(index)),
+    dispatchSelectBottomBarTab: index => dispatch(selectCurrentBottomBarTab(index)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);
