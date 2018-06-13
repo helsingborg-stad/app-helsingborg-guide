@@ -275,6 +275,18 @@ function getLocations(items: MapItem[]): Location[] {
   return locs;
 }
 
+function getNumberOfGuides(item: MapItem): ?number {
+  const { guide, guideGroup } = item;
+  if (guide) {
+    return guide.contentObjects.length;
+  }
+  if (guideGroup) {
+    return guideGroup.guidesCount;
+  }
+
+  return 0;
+}
+
 class MapWithListView extends Component<Props, State> {
   static createMapItemsFromNavItems(navItems) {
     const items = [];
@@ -626,8 +638,10 @@ class MapWithListView extends Component<Props, State> {
     });
   }
 
-  displayGuideNumber = (numberOfGuides, type) => {
-    if (!numberOfGuides || !type) return null;
+  displayGuideNumber = (item: MapItem) => {
+    const numberOfGuides = getNumberOfGuides(item);
+    if (!numberOfGuides) return null;
+
     let textString;
     const plural = numberOfGuides > 1;
 
@@ -639,23 +653,27 @@ class MapWithListView extends Component<Props, State> {
       : LangService.strings.MEDIAGUIDE;
     const isAccessibility = PixelRatio.getFontScale() > 1;
 
-    if (type === "location") {
+    const { guide, guideGroup } = item;
+    if (guideGroup) {
       textString = `${numberOfGuides} ${mediaGuideString.toLowerCase()}`;
-    } else if (type === "trail") {
-      if (isAccessibility) {
-        textString = `${numberOfGuides} ${locationString}`;
-      } else {
-        textString = `${LangService.strings.TOUR} ${
-          LangService.strings.WITH
-        } ${numberOfGuides} ${locationString}`;
-      }
-    } else if (type === "guide") {
-      if (isAccessibility) {
-        textString = `${numberOfGuides} ${LangService.strings.OBJECT}`;
-      } else {
-        textString = `${LangService.strings.MEDIAGUIDE} ${
-          LangService.strings.WITH
-        } ${numberOfGuides} ${LangService.strings.OBJECT}`;
+    } else if (guide) {
+      const { guideType } = guide;
+      if (guideType === "trail") {
+        if (isAccessibility) {
+          textString = `${numberOfGuides} ${locationString}`;
+        } else {
+          textString = `${LangService.strings.TOUR} ${
+            LangService.strings.WITH
+          } ${numberOfGuides} ${locationString}`;
+        }
+      } else if (guideType === "guide") {
+        if (isAccessibility) {
+          textString = `${numberOfGuides} ${LangService.strings.OBJECT}`;
+        } else {
+          textString = `${LangService.strings.MEDIAGUIDE} ${
+            LangService.strings.WITH
+          } ${numberOfGuides} ${LangService.strings.OBJECT}`;
+        }
       }
     }
 
@@ -751,7 +769,7 @@ class MapWithListView extends Component<Props, State> {
                 onPress={() => this.onListItemDirectionsButtonPressed(item)}
               />
             ) : null}
-            {/* this.displayGuideNumber(item.contentObject.numberOfGuides, item.contentType) */}
+            {this.displayGuideNumber(item)}
           </View>
         </View>
       </TouchableOpacity>
