@@ -23,9 +23,7 @@ import {
   StyleSheetUtils,
   AnalyticsUtils,
 } from "../../utils/";
-import { fetchGuideGroups } from "../../actions/guideGroupActions";
-import { fetchGuides } from "../../actions/guideActions";
-import { fetchNavigation, setLanguage } from "../../actions/navigationActions";
+import { setLanguage } from "../../actions/navigationActions";
 import { setDeveloperMode, showBottomBar, selectCurrentBottomBarTab } from "../../actions/uiStateActions";
 
 const defaultMargin = 20;
@@ -292,9 +290,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchFetchNavigation: langCode => dispatch(fetchNavigation(langCode)),
-    dispatchFetchGuides: langCode => dispatch(fetchGuides(langCode)),
-    dispatchFetchGuideGroups: langCode => dispatch(fetchGuideGroups(langCode)),
     dispatchSetDeveloperMode: enabled => dispatch(setDeveloperMode(enabled)),
     dispatchShowBottomBar: visible => dispatch(showBottomBar(visible)),
     dispatchSelectBottomBarTab: index => dispatch(selectCurrentBottomBarTab(index)),
