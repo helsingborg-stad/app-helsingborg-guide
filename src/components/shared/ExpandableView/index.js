@@ -58,18 +58,17 @@ class ExpandableView extends Component<Props, State> {
             }
           }}
         >
-          <View
-            style={[...extraStyles]}
-          >
-            {this.props.children}
+          <View>
+            <View style={[...extraStyles]}>
+              {this.props.children}
+              {showCollapsed ?
+                <Image source={alphaGradient} resizeMode="stretch" style={styles.alphaGradient} />
+                : null}
+            </View>
             {showCollapsed ?
-              <Image source={alphaGradient} resizeMode="stretch" style={styles.alphaGradient} />
-              : null}
+              <Text style={styles.readMoreText}>{LangService.strings.READ_MORE}</Text> : null}
           </View>
         </TouchableWithoutFeedback >
-        {showCollapsed ?
-          <Text style={styles.readMoreText}>{LangService.strings.READ_MORE}</Text>
-          : null}
       </View>
     );
   }
