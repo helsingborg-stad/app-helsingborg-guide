@@ -8,6 +8,7 @@ import LangService from "../../services/langService";
 import fetchService from "../../services/FetchService";
 import { initAudioFile, pauseAudio } from "../../actions/audioActions";
 import { selectCurrentContentObjectImage, selectCurrentImage } from "../../actions/uiStateActions";
+import { HeaderStyles } from "../../styles";
 
 type Props = {
   currentGuide: ?Guide,
@@ -44,6 +45,13 @@ function isMediaAvailable(media?: MediaContent): boolean {
 }
 
 class ObjectScreen extends Component<Props> {
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params;
+    return Object.assign(HeaderStyles.noElevation, {
+      title,
+    });
+  }
+
   onSwiperIndexChanged = (newIndex: number) => {
     this.props.selectCurrentContentObjectImage(newIndex);
   };

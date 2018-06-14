@@ -77,7 +77,7 @@ class BottomBarIcon extends Component<Props> {
           NavigatorService.reset("HomeScreen");
           break;
         case 1:
-          NavigatorService.reset("WebScreen", { url: eventCalendarURL });
+          NavigatorService.reset("WebScreen", { url: eventCalendarURL, title: LangService.strings.CALENDAR });
           AnalyticsUtils.logEvent("open_url", { eventCalendarURL });
           break;
         case 2:

@@ -484,7 +484,7 @@ class MapWithListView extends Component<Props, State> {
     if (guideGroup) {
       AnalyticsUtils.logEvent("view_location", { name: guideGroup.slug });
       this.props.selectGuideGroup(guideGroup.id);
-      navigate("LocationScreen");
+      navigate("LocationScreen", { title: guideGroup.name });
       return;
     }
 
@@ -495,11 +495,11 @@ class MapWithListView extends Component<Props, State> {
 
       switch (guideType) {
         case "trail":
-          navigate("TrailScreen");
+          navigate("TrailScreen", { title: guide.name });
           return;
         case "guide":
         default:
-          navigate("GuideDetailsScreen");
+          navigate("GuideDetailsScreen", { title: guide.name });
           return;
       }
     }
