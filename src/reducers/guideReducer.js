@@ -20,8 +20,7 @@ export default function guideReducer(state: GuideState = initialState, action: A
           // push
           items.push(g);
         }
-      },
-      );
+      });
       return { ...state, items, isFetching: false };
     }
     case "FETCH_GUIDES_FAILURE":
