@@ -66,10 +66,12 @@ class HomeScreen extends Component<Props> {
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
         if (item.guideGroup) {
+          const title = item.guideGroup.name;
           AnalyticsUtils.logEvent("view_location", { name: item.guideGroup.slug });
+          this.props.navigation.navigate("LocationScreen", { title });
+          this.props.dispatchShowBottomBar(false);
         }
-        this.props.navigation.navigate("LocationScreen");
-        this.props.dispatchShowBottomBar(false);
+
         break;
       default:
         break;

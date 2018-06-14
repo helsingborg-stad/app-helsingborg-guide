@@ -484,7 +484,7 @@ class MapWithListView extends Component<Props, State> {
     if (guideGroup) {
       AnalyticsUtils.logEvent("view_location", { name: guideGroup.slug });
       this.props.selectGuideGroup(guideGroup.id);
-      navigate("LocationScreen");
+      navigate("LocationScreen", { title: guideGroup.name });
       return;
     }
 

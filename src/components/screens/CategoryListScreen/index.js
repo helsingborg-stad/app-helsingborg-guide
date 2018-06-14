@@ -63,7 +63,6 @@ class CategoryListScreen extends Component<Props, State> {
     this.props.dispatchShowBottomBar(true);
   }
 
-
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
       case "guide":
@@ -85,9 +84,10 @@ class CategoryListScreen extends Component<Props, State> {
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
         if (item.guideGroup) {
+          const title = item.guideGroup.name;
           AnalyticsUtils.logEvent("view_location", { name: item.guideGroup.slug });
+          this.props.navigation.navigate("LocationScreen", { title });
         }
-        this.props.navigation.navigate("LocationScreen");
         break;
       default:
     }
