@@ -4,7 +4,6 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  Text,
   View,
 } from "react-native";
 import { connect } from "react-redux";
