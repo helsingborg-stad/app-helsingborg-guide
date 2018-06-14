@@ -1,5 +1,5 @@
 // @flow
-import { setNavigationCategories, setLanguage, fetchNavigation } from "../actions/navigationActions";
+import { setNavigationCategories, fetchNavigation } from "../actions/navigationActions";
 import { fetchGuides } from "../actions/guideActions";
 import { fetchGuideGroups } from "../actions/guideGroupActions";
 
@@ -58,10 +58,24 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     }
     case "FETCH_NAVIGATION_SUCCESS":
     {
-      const { currentLanguage } = nextState.navigation;
-      // TODO fetch a range of guides/guidegroups
-      dispatch(fetchGuides(currentLanguage));
-      dispatch(fetchGuideGroups(currentLanguage));
+      const { navigation } = nextState;
+      const { currentLanguage, navigationCategories } = navigation;
+
+      // batch fetch a range of guides/guidegroups per navigation section
+      navigationCategories.forEach((cat) => {
+        const guides: number[] = [];
+        const guideGroups: number[] = [];
+        cat.items.forEach((navItem) => {
+          const { type, id } = navItem;
+          if (type === "guide") {
+            guides.push(id);
+          } else if (type === "guidegroup") {
+            guideGroups.push(id);
+          }
+        });
+        dispatch(fetchGuides(currentLanguage, guides));
+        dispatch(fetchGuideGroups(currentLanguage, guideGroups));
+      });
       break;
     }
     case "SET_GUIDES_AND_GUIDEGROUPS":

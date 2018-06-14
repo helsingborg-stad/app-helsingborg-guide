@@ -18,11 +18,11 @@ export function fetchGuideGroupsFailure(error: Error): Action {
   return { type: "FETCH_GUIDEGROUPS_FAILURE", error };
 }
 
-export function fetchGuideGroups(langCode: string): ThunkAction {
+export function fetchGuideGroups(langCode: string, ids: number[]): ThunkAction {
   return function fetchGuideGroupsDispatch(dispatch: Dispatch) {
     dispatch(fetchGuideGroupsRequest());
 
-    return fetchUtils.getGuideGroups(langCode)
+    return fetchUtils.getGuideGroups(langCode, ids)
       .then(guideGroups => dispatch(fetchGuideGroupsSuccess(guideGroups)))
       .catch((error) => {
         dispatch(fetchGuideGroupsFailure(error.message));
