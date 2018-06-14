@@ -63,7 +63,6 @@ class CategoryListScreen extends Component<Props, State> {
     this.props.dispatchShowBottomBar(true);
   }
 
-
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
       case "guide":
