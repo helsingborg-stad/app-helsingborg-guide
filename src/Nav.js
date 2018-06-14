@@ -21,7 +21,6 @@ import {
   SearchObjectScreen,
   SettingsScreen,
   SplashScreen,
-  OldTrailScreen,
   TrailScreen,
   VideoScreen,
   WebScreen,
@@ -39,7 +38,6 @@ import NavigatorService from "./services/navigationService";
 const GuideNavigator = StackNavigator(
   {
     HomeScreen: { screen: HomeScreen },
-    OldTrailScreen: { screen: OldTrailScreen },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
     ObjectScreen: { screen: ObjectScreen },
