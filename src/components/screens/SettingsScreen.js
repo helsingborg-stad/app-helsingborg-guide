@@ -25,7 +25,7 @@ import {
 } from "../../utils/";
 import { fetchGuideGroups } from "../../actions/guideGroupActions";
 import { fetchGuides } from "../../actions/guideActions";
-import { fetchNavigation } from "../../actions/navigationActions";
+import { fetchNavigation, setLanguage } from "../../actions/navigationActions";
 import { setDeveloperMode, showBottomBar, selectCurrentBottomBarTab } from "../../actions/uiStateActions";
 
 const defaultMargin = 20;
@@ -111,12 +111,19 @@ const textStyles = StyleSheet.create({
   ),
 });
 
+function loadContents(langCode) {
+  NetInfo.isConnected.fetch().then((isConnected) => {
+    if (isConnected) {
+      LangService.storeLangCode(langCode);
+      LangService.getLanguages();
+    }
+  });
+}
+
 class SettingsScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
-    dispatchFetchNavigation: PropTypes.func.isRequired,
-    dispatchFetchGuideGroups: PropTypes.func.isRequired,
-    dispatchFetchGuides: PropTypes.func.isRequired,
+    setLanguage: PropTypes.func.isRequired,
     dispatchSetDeveloperMode: PropTypes.func.isRequired,
     dispatchShowBottomBar: PropTypes.func.isRequired,
     dispatchSelectBottomBarTab: PropTypes.func.isRequired,
@@ -157,21 +164,10 @@ class SettingsScreen extends Component {
     AnalyticsUtils.logEvent("change_language", { language_code: code });
     this.setState({ selectedLanguageCode: code });
     LangService.setLanguage(code);
+    this.props.setLanguage(code);
     // Set navigation params to force an update
     this.props.navigation.setParams();
-    this.loadContents(code);
-  }
-
-  loadContents(langCode) {
-    NetInfo.isConnected.fetch().then((isConnected) => {
-      if (isConnected) {
-        LangService.storeLangCode(langCode);
-        this.props.dispatchFetchNavigation(langCode);
-        this.props.dispatchFetchGuideGroups(langCode);
-        this.props.dispatchFetchGuides(langCode);
-        LangService.getLanguages();
-      }
-    });
+    loadContents(code);
   }
 
   navigateToWelcomeScreen = () => {
@@ -302,6 +298,7 @@ function mapDispatchToProps(dispatch) {
     dispatchSetDeveloperMode: enabled => dispatch(setDeveloperMode(enabled)),
     dispatchShowBottomBar: visible => dispatch(showBottomBar(visible)),
     dispatchSelectBottomBarTab: index => dispatch(selectCurrentBottomBarTab(index)),
+    setLanguage: langCode => dispatch(setLanguage(langCode)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);
