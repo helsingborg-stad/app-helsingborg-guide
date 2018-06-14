@@ -57,7 +57,7 @@ class HomeScreen extends Component<Props> {
             this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("TrailScreen");
+            this.props.navigation.navigate("TrailScreen", { title: guide.name });
             this.props.dispatchShowBottomBar(false);
           }
         }

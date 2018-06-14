@@ -76,7 +76,7 @@ class CategoryListScreen extends Component<Props, State> {
             this.props.navigation.navigate("GuideDetailsScreen");
           } else if (guideType === "trail") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("TrailScreen");
+            this.props.navigation.navigate("TrailScreen", { title: guide.name });
           }
         }
         break;

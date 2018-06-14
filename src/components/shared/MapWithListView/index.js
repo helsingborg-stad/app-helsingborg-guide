@@ -495,7 +495,7 @@ class MapWithListView extends Component<Props, State> {
 
       switch (guideType) {
         case "trail":
-          navigate("TrailScreen");
+          navigate("TrailScreen", { title: guide.name });
           return;
         case "guide":
         default:
@@ -665,7 +665,7 @@ class MapWithListView extends Component<Props, State> {
         } else {
           textString = `${LangService.strings.TOUR} ${
             LangService.strings.WITH
-          } ${numberOfGuides} ${locationString}`;
+            } ${numberOfGuides} ${locationString}`;
         }
       } else if (guideType === "guide") {
         if (isAccessibility) {
@@ -673,7 +673,7 @@ class MapWithListView extends Component<Props, State> {
         } else {
           textString = `${LangService.strings.MEDIAGUIDE} ${
             LangService.strings.WITH
-          } ${numberOfGuides} ${LangService.strings.OBJECT}`;
+            } ${numberOfGuides} ${LangService.strings.OBJECT}`;
         }
       }
     }
