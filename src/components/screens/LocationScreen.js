@@ -36,7 +36,7 @@ class LocationScreen extends Component<Props> {
       navigate("TrailScreen", { guide, title: guide.name });
     } else if (guide.guideType === "guide") {
       this.props.selectCurrentGuide(guide);
-      navigate("GuideDetailsScreen");
+      navigate("GuideDetailsScreen", { title: guide.name });
     }
   }
 
