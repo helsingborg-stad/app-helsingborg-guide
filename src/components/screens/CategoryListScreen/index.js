@@ -60,13 +60,9 @@ class CategoryListScreen extends Component<Props, State> {
     }
   }
 
-  componentDidMount() {
-  }
-
   componentWillUnmount() {
     this.props.dispatchShowBottomBar(true);
   }
-
 
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {

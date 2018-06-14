@@ -36,11 +36,10 @@ class LocationScreen extends Component<Props> {
       navigation.navigate("TrailScreen", {
         guide,
         title: guide.name,
-        disableBottomBarOnUnmount: true,
       });
     } else if (guide.guideType === "guide") {
       this.props.selectCurrentGuide(guide);
-      navigation.navigate("GuideDetailsScreen", { disableBottomBarOnUnmount: true });
+      navigation.navigate("GuideDetailsScreen");
     }
   }
 

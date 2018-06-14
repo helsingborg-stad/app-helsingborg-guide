@@ -41,7 +41,6 @@ class GuideScreen extends Component<Props> {
 
   componentWillUnmount() {
     this.props.dispatchReleaseAudio();
-    // this.props.dispatchShowBottomBar(true);
     const { navigation } = this.props;
     if (navigation.state.params && navigation.state.params.bottomBarOnUnMount) {
       this.props.dispatchShowBottomBar(true);
