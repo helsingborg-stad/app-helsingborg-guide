@@ -36,7 +36,7 @@ import LangService from "../../services/langService";
 import DownloadItemView2 from "../shared/DownloadItemView2";
 import IconTextTouchable from "../shared/IconTextTouchable";
 import MapWithListView from "../shared/MapWithListView";
-import MapInformationOverlay from "../shared/MapInformationOverlay";
+import MapInformationOverlay from "../shared/MapInformationOverlay/MapInformationOverlay";
 
 const infoBarButtonIcon = require("../../images/iconInfo.png");
 

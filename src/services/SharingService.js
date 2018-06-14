@@ -91,8 +91,8 @@ export default {
     return RNFetchBlob.config(config).fetch("GET", url);
   },
 
-  beginShare(title, message, url, width, height, subject) {
-    AnalyticsUtils.logEvent("share_object", { name: title });
+  beginShare(title, message, url, width, height, subject, shareType) {
+    AnalyticsUtils.logEvent(shareType, { name: title });
     // The sharing process is different on ios and android.
     if (Platform.OS === "android") {
       this.shareAndroid(title, message, url, width, height, subject);
@@ -227,7 +227,7 @@ export default {
     }
   },
 
-  showShareButton(title, image, sender) {
+  showShareButton(title, image, sender, shareType) {
     origin = sender;
     let imageUrl = image.large;
     let imageWidth = 0;
@@ -243,7 +243,7 @@ export default {
 
     return (
       <View>
-        <TouchableOpacity onPress={() => { this.beginShare(title, "", imageUrl, imageWidth, imageHeight, title); }}>
+        <TouchableOpacity onPress={() => { this.beginShare(title, "", imageUrl, imageWidth, imageHeight, title, shareType); }}>
           <View style={styles.shareBoxOuter}>
             <Image style={styles.shareIcon} source={shareIcon} />
             <Text style={styles.shareText}>{LangService.strings.SHARE}</Text>
