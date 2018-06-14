@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { WebView, StyleSheet } from "react-native";
+import { WebView, StyleSheet, Linking } from "react-native";
 import PropTypes from "prop-types";
-import {
-  Colors,
-} from "../../styles/";
+import { Colors } from "../../styles/";
 
 const styles = StyleSheet.create({
   header: {
@@ -27,6 +25,17 @@ export default class WebScreen extends Component {
 
   render() {
     const { url } = this.props.navigation.state.params;
-    return (<WebView source={{ uri: url }} />);
+    return (<WebView
+      ref={(ref) => {
+        this.webView = ref;
+      }}
+      source={{ uri: url }}
+      onNavigationStateChange={(event) => {
+        if (event.url !== url) {
+          this.webView.stopLoading();
+          Linking.openURL(event.url);
+        }
+      }}
+    />);
   }
 }
