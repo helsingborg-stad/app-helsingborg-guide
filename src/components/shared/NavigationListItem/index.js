@@ -33,25 +33,28 @@ function renderGuideCount(item: NavigationItem) {
   const { type, guide, guideGroup } = item;
 
 
-  let textString = null;
+  let textString = "";
   if (type === "guidegroup") {
     const guidesCount = getGuidesCount(guideGroup);
-    const plural = guidesCount > 1;
-    const mediaGuideString: string = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
-    textString = `${guidesCount} ${mediaGuideString.toUpperCase()}`;
+    if (guidesCount > 0) {
+      const plural = guidesCount > 1;
+      const mediaGuideString: string = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
+      textString = `${guidesCount} ${mediaGuideString.toUpperCase()}`;
+    }
   } else if (type === "guide" && guide && guide.guideType === "trail") {
     const guidesCount = getGuidesCountFromGuide(guide);
-    const plural = guidesCount > 1;
-    const locationString: string = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
-    textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${guidesCount} ${locationString}`;
-    textString = textString.toUpperCase();
+    if (guidesCount > 0) {
+      const plural = guidesCount > 1;
+      const locationString: string = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
+      textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${guidesCount} ${locationString}`;
+      textString = textString.toUpperCase();
+    }
   } else if (type === "guide" && guide && guide.guideType === "guide") {
     const guidesCount = getGuidesCountFromGuide(guide);
-    textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${guidesCount} ${LangService.strings.OBJECT}`;
+    if (guidesCount > 0) {
+      textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${guidesCount} ${LangService.strings.OBJECT}`;
+    }
   }
-
-  if (!textString) return null;
-
   return (<Text style={styles.listItemGuideCount}>{textString}</Text>);
 }
 
