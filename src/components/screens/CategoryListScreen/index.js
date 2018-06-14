@@ -4,6 +4,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  Text,
   View,
 } from "react-native";
 import { connect } from "react-redux";
@@ -123,7 +124,7 @@ class CategoryListScreen extends Component<Props, State> {
     }
 
     return (
-      <View >
+      <View>
         <FlatList
           style={styles.container}
           renderItem={({ item }) => (<NavigationListItem
@@ -132,6 +133,7 @@ class CategoryListScreen extends Component<Props, State> {
           />)}
           keyExtractor={item => String(item.id)}
           data={sortedItems}
+          ListFooterComponent={() => (<View style={styles.footer} />)}
         />
         <TouchableOpacity
           style={styles.mapButton}

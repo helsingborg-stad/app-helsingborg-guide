@@ -6,6 +6,9 @@ export default StyleSheet.create({
     padding: "4%",
     backgroundColor: Colors.white,
   },
+  footer: {
+    paddingVertical: 10,
+  },
   mapButton: {
     position: "absolute",
     right: 0,
