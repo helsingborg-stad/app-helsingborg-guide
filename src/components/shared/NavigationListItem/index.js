@@ -11,6 +11,7 @@ import LangService from "../../../services/langService";
 import styles from "./styles";
 
 const defaultImage = require("../../../images/no-image-featured-image.png");
+const iconKids = require("../../../images/kids.png");
 
 type Props = {
   item: NavigationItem,
@@ -69,10 +70,27 @@ function getNameAndImage(item: NavigationItem): { imageUrl: ?string, name: ?stri
     name: null,
   };
 }
+function isChildFriendly(item: NavigationItem): boolean {
+  const { guide } = item;
+  if (guide) {
+    return guide.childFriendly;
+  }
+  return false;
+}
+
+function renderChildFriendly() {
+  return (
+    <View style={styles.forChildrenContainer} >
+      <Text style={styles.forChildrenText}>{LangService.strings.FOR_CHILDREN.toUpperCase()}</Text>
+      <Image source={iconKids} resizeMode="contain" style={styles.forChildrenIcon} />
+    </View >
+  );
+}
 
 const NavigationListItem = (props: Props) => {
   const { item } = props;
   const { imageUrl, name } = getNameAndImage(item);
+  const childFriendly = isChildFriendly(item);
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
   return (<TouchableOpacity
     onPress={() => props.onPressItem(item)}
@@ -86,7 +104,10 @@ const NavigationListItem = (props: Props) => {
     </View>
     <View style={styles.listItemTextContainer}>
       <Text style={styles.listItemTitle}>{name}</Text>
-      {renderGuideCount(item)}
+      <View style={styles.extrasContainer}>
+        {renderGuideCount(item)}
+        {childFriendly ? renderChildFriendly() : null}
+      </View>
     </View>
   </TouchableOpacity>
   );

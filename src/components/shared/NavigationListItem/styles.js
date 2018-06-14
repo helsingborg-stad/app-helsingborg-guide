@@ -43,4 +43,27 @@ export default StyleSheet.create({
       color: Colors.black,
     },
   ]),
+  extrasContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  forChildrenContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  forChildrenText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily, {
+      fontSize: 12,
+      fontWeight: "500",
+      fontStyle: "normal",
+      letterSpacing: 1,
+      color: Colors.warmGrey,
+    },
+  ]),
+  forChildrenIcon: {
+    marginLeft: 4,
+    width: 16,
+    height: 16,
+  },
 });
