@@ -33,7 +33,7 @@ export default StyleSheet.create({
     aspectRatio: 339 / 154,
   },
   listItemTextContainer: {
-    padding: "4%",
+    padding: 8,
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
@@ -63,7 +63,7 @@ export default StyleSheet.create({
   ]),
   forChildrenIcon: {
     marginLeft: 4,
-    width: 16,
-    height: 16,
+    width: 20,
+    height: 20,
   },
 });
