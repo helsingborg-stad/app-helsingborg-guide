@@ -46,23 +46,23 @@ class HomeScreen extends Component<Props> {
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
       case "guide":
-      {
-        const { guide } = item;
-        if (guide) {
-          this.props.selectGuide(guide.id);
-          const type = guide.guideType;
-          if (type === "guide") {
-            AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name });
-            this.props.dispatchShowBottomBar(false);
-          } else if (type === "trail") {
-            AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("TrailScreen", { title: guide.name });
-            this.props.dispatchShowBottomBar(false);
+        {
+          const { guide } = item;
+          if (guide) {
+            this.props.selectGuide(guide.id);
+            const type = guide.guideType;
+            if (type === "guide") {
+              AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+              this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name, bottomBarOnUnmount: true });
+              this.props.dispatchShowBottomBar(false);
+            } else if (type === "trail") {
+              AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+              this.props.navigation.navigate("TrailScreen", { title: guide.name, bottomBarOnUnmount: true });
+              this.props.dispatchShowBottomBar(false);
+            }
           }
+          break;
         }
-        break;
-      }
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
         if (item.guideGroup) {
@@ -71,7 +71,12 @@ class HomeScreen extends Component<Props> {
           this.props.navigation.navigate("LocationScreen", { title });
           this.props.dispatchShowBottomBar(false);
         }
+<<<<<<< HEAD
 
+=======
+        this.props.navigation.navigate("LocationScreen", { bottomBarOnUnmount: true });
+        this.props.dispatchShowBottomBar(false);
+>>>>>>> develop
         break;
       default:
         break;
