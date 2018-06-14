@@ -152,6 +152,7 @@ declare type Guide = {
   images: Images,
   contentObjects: ContentObject[],
   distance?: number,
+  location?: Location,
 }
 
 declare type GuideType = 'guide' | 'trail';

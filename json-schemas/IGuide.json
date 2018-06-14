@@ -327,6 +327,9 @@
         "images": {
             "$ref": "#/definitions/IImageUrls"
         },
+        "location": {
+            "$ref": "#/definitions/ILocation"
+        },
         "name": {
             "type": "string"
         },
@@ -356,4 +359,3 @@
     ],
     "type": "object"
 }
-

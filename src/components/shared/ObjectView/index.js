@@ -17,7 +17,7 @@ type Props = {
   contentObject: ContentObject,
   guideId?: number,
   imageIndex: number,
-  guideType: GuideType,
+  guideType?: GuideType,
   onSwiperIndexChanged: (newIndex: number) => (void),
   audioButtonDisabled: boolean,
   videoButtonDisabled: boolean,
@@ -38,7 +38,7 @@ function displayID(searchableID: string) {
   return idText;
 }
 
-function displayTitle(title: string, searchableID: string, guideType: GuideType) {
+function displayTitle(title: string, searchableID: string, guideType: ?GuideType) {
   return (
     <View>
       <View style={styles.titleContainer} >
