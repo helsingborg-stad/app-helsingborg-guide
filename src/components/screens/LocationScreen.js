@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import LocationView from "../shared/LocationView";
 import { AnalyticsUtils } from "../../utils/";
+import { HeaderStyles } from "../../styles";
 import { selectCurrentGuide, showBottomBar } from "../../actions/uiStateActions";
 
 type Props = {
@@ -16,24 +17,32 @@ type Props = {
 }
 
 class LocationScreen extends Component<Props> {
-  constructor() {
-    super();
-    console.log("constructor");
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params;
+    return Object.assign(HeaderStyles.noElevation, {
+      title,
+    });
   }
 
   componentWillUnmount() {
-    this.props.dispatchShowBottomBar(true);
+    const { navigation } = this.props;
+    if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
+      this.props.dispatchShowBottomBar(true);
+    }
   }
 
   onPressGuide = (guide: Guide) => {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
     if (guide.guideType === "trail") {
       this.props.selectCurrentGuide(guide);
-      navigate("TrailScreen", { guide, title: guide.name });
+      navigation.navigate("TrailScreen", {
+        guide,
+        title: guide.name,
+      });
     } else if (guide.guideType === "guide") {
       this.props.selectCurrentGuide(guide);
-      navigate("GuideDetailsScreen");
+      navigation.navigate("GuideDetailsScreen", { title: guide.name });
     }
   }
 
