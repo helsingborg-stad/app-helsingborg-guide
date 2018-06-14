@@ -1,11 +1,12 @@
 // @flow
-import { setNavigationCategories } from "../actions/navigationActions";
+import { setNavigationCategories, setLanguage, fetchNavigation } from "../actions/navigationActions";
+import { fetchGuides } from "../actions/guideActions";
+import { fetchGuideGroups } from "../actions/guideGroupActions";
 
 /**
- * Responsible for updating the renderable navigation categories.
+ * Responsible for linking the navigation categories with it's content (guide, guidegroups etc.).
  *
- * Listens for changes in navigation , guides and guidegroups.
- * Reacts and updates the renderable navigation categories.
+ * Also reloads navigation when language is changed.
  */
 
 function linkNavigationWithContent(
@@ -50,7 +51,19 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
   const nextState = getState();
 
   switch (action.type) {
+    case "SET_LANGUAGE": {
+      const { currentLanguage } = nextState.navigation;
+      dispatch(fetchNavigation(currentLanguage));
+      break;
+    }
     case "FETCH_NAVIGATION_SUCCESS":
+    {
+      const { currentLanguage } = nextState.navigation;
+      // TODO fetch a range of guides/guidegroups
+      dispatch(fetchGuides(currentLanguage));
+      dispatch(fetchGuideGroups(currentLanguage));
+      break;
+    }
     case "SET_GUIDES_AND_GUIDEGROUPS":
       {
         const { items: guideGroups } = nextState.guideGroups;
