@@ -53,6 +53,8 @@ class TrailScreen extends Component<Props, State> {
 
   componentWillUnmount() {
     this.props.dispatchReleaseAudio();
+    const { navigation } = this.props;
+    if (navigation.state.params && navigation.state.params.disableBottomBarOnUnmount) { return; }
     this.props.dispatchShowBottomBar(true);
   }
 

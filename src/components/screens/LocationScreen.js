@@ -22,18 +22,24 @@ class LocationScreen extends Component<Props> {
   }
 
   componentWillUnmount() {
+    const { navigation } = this.props;
+    if (navigation.state.params && navigation.state.params.disableBottomBarOnUnmount) { return; }
     this.props.dispatchShowBottomBar(true);
   }
 
   onPressGuide = (guide: Guide) => {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
     if (guide.guideType === "trail") {
       this.props.selectCurrentGuide(guide);
-      navigate("TrailScreen", { guide, title: guide.name });
+      navigation.navigate("TrailScreen", {
+        guide,
+        title: guide.name,
+        disableBottomBarOnUnmount: true,
+      });
     } else if (guide.guideType === "guide") {
       this.props.selectCurrentGuide(guide);
-      navigate("GuideDetailsScreen");
+      navigation.navigate("GuideDetailsScreen", { disableBottomBarOnUnmount: true });
     }
   }
 
