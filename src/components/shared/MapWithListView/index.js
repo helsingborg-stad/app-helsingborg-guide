@@ -484,7 +484,7 @@ class MapWithListView extends Component<Props, State> {
     if (guideGroup) {
       AnalyticsUtils.logEvent("view_location", { name: guideGroup.slug });
       this.props.selectGuideGroup(guideGroup.id);
-      navigate("LocationScreen", { disableBottomBarOnUnmount: true });
+      navigate("LocationScreen");
       return;
     }
 
@@ -495,11 +495,11 @@ class MapWithListView extends Component<Props, State> {
 
       switch (guideType) {
         case "trail":
-          navigate("TrailScreen", { disableBottomBarOnUnmount: true });
+          navigate("TrailScreen");
           return;
         case "guide":
         default:
-          navigate("GuideDetailsScreen", { disableBottomBarOnUnmount: true });
+          navigate("GuideDetailsScreen");
           return;
       }
     }

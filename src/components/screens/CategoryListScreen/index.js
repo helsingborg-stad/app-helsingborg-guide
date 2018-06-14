@@ -78,10 +78,10 @@ class CategoryListScreen extends Component<Props, State> {
           const { guideType } = guide;
           if (guideType === "guide") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("GuideDetailsScreen", { disableBottomBarOnUnmount: true });
+            this.props.navigation.navigate("GuideDetailsScreen");
           } else if (guideType === "trail") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("TrailScreen", { disableBottomBarOnUnmount: true });
+            this.props.navigation.navigate("TrailScreen");
           }
         }
         break;
@@ -91,7 +91,7 @@ class CategoryListScreen extends Component<Props, State> {
         if (item.guideGroup) {
           AnalyticsUtils.logEvent("view_location", { name: item.guideGroup.slug });
         }
-        this.props.navigation.navigate("LocationScreen", { disableBottomBarOnUnmount: true });
+        this.props.navigation.navigate("LocationScreen");
         break;
       default:
     }

@@ -53,11 +53,11 @@ class HomeScreen extends Component<Props> {
           const type = guide.guideType;
           if (type === "guide") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("GuideDetailsScreen");
+            this.props.navigation.navigate("GuideDetailsScreen", { bottomBarOnUnmount: true });
             this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("TrailScreen");
+            this.props.navigation.navigate("TrailScreen", { bottomBarOnUnmount: true });
             this.props.dispatchShowBottomBar(false);
           }
         }
@@ -68,7 +68,7 @@ class HomeScreen extends Component<Props> {
         if (item.guideGroup) {
           AnalyticsUtils.logEvent("view_location", { name: item.guideGroup.slug });
         }
-        this.props.navigation.navigate("LocationScreen");
+        this.props.navigation.navigate("LocationScreen", { bottomBarOnUnmount: true });
         this.props.dispatchShowBottomBar(false);
         break;
       default:
