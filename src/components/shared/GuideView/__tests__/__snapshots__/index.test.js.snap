@@ -128,29 +128,33 @@ exports[`Guide with tagline 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -1123,29 +1127,33 @@ exports[`Guide with tagline 2`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -2118,29 +2126,33 @@ exports[`Guide with tagline 3`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -3113,29 +3125,33 @@ exports[`Guide with tagline 4`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -4108,29 +4124,33 @@ exports[`Guide with tagline 5`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -5103,29 +5123,33 @@ exports[`Guide with tagline 6`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -6098,29 +6122,33 @@ exports[`Guide with tagline 7`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -7076,29 +7104,33 @@ exports[`Guide without tagline 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -8054,29 +8086,33 @@ exports[`Guide without tagline 2`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -9032,29 +9068,33 @@ exports[`Guide without tagline 3`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -10010,29 +10050,33 @@ exports[`Guide without tagline 4`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -10988,29 +11032,33 @@ exports[`Guide without tagline 5`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -11966,29 +12014,33 @@ exports[`Guide without tagline 6`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -12944,29 +12996,33 @@ exports[`Guide without tagline 7`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={Array []}
+            style={undefined}
             testID={undefined}
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontFamily": "Roboto",
-                  "fontSize": 17,
-                  "lineHeight": 23,
-                }
-              }
+            <View
+              style={Array []}
             >
-              I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                    "fontSize": 17,
+                    "lineHeight": 23,
+                  }
+                }
+              >
+                I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.
 
 The Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.
 
 Konstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.
 
 Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
-            </Text>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
