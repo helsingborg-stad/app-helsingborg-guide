@@ -10,6 +10,8 @@ import {
   pauseDownloadGuide,
   resumeDownloadGuide,
 } from "../../actions/downloadGuidesActions";
+import { selectCurrentGuide } from "../../actions/uiStateActions";
+import { AnalyticsUtils } from "../../utils";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -21,7 +23,9 @@ type Props = {
   downloads: OfflineGuide[],
   cancelDownload(guide: Guide): void,
   pauseDownload(guide: Guide): void,
-  resumeDownload(guide: Guide): void
+  resumeDownload(guide: Guide): void,
+  selectGuide(guide: Guide): void,
+  navigation: any,
 };
 
 class DownloadsScreen extends Component<Props> {
@@ -33,6 +37,20 @@ class DownloadsScreen extends Component<Props> {
     };
   };
 
+  navigateToGuide = (offlineGuide: OfflineGuide): void => {
+    const { guide } = offlineGuide;
+    const { guideType } = guide;
+    this.props.selectGuide(guide);
+
+    if (guideType === "guide") {
+      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name });
+    } else if (guideType === "trail") {
+      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      this.props.navigation.navigate("TrailScreen", { title: guide.name });
+    }
+  }
+
   renderItem = ({ item }) => (
     <DownloadItemView
       title={item.guide.name}
@@ -42,8 +60,9 @@ class DownloadsScreen extends Component<Props> {
       onPausePress={() => this.props.pauseDownload(item.guide)}
       onResumePress={() => this.props.resumeDownload(item.guide)}
       onClearPress={() => this.props.cancelDownload(item.guide)}
+      onPressItem={() => this.navigateToGuide(item)}
     />
-  );
+  )
 
   render() {
     return (
@@ -69,6 +88,7 @@ function mapDispatchToProps(dispatch) {
     cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
     pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
     resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
+    selectGuide: guide => dispatch(selectCurrentGuide(guide)),
   };
 }
 
