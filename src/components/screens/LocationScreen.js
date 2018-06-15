@@ -13,6 +13,7 @@ type Props = {
   currentGuides: Guide[],
   geolocation: GeolocationType,
   navigation: Object,
+  isFetchingGuides: boolean,
   selectCurrentGuide(guide: Guide): void,
   dispatchShowBottomBar(visible: boolean): void,
 }
@@ -49,7 +50,7 @@ class LocationScreen extends Component<Props> {
   }
 
   render() {
-    const { currentGuideGroup, currentGuides, geolocation } = this.props;
+    const { currentGuideGroup, currentGuides, geolocation, isFetchingGuides } = this.props;
     const now = new Date();
     return (<LocationView
       guideGroup={currentGuideGroup}
@@ -58,12 +59,14 @@ class LocationScreen extends Component<Props> {
       geolocation={geolocation}
       navigation={this.props.navigation}
       onPressGuide={this.onPressGuide}
+      isFetchingGuides={isFetchingGuides}
     />);
   }
 }
 
 
 function mapStateToProps(state: RootState) {
+  const { isFetching } = state.guides;
   const { currentGuideGroup } = state.uiState;
   const { geolocation } = state;
 
@@ -76,6 +79,7 @@ function mapStateToProps(state: RootState) {
     currentGuideGroup,
     currentGuides,
     geolocation,
+    isFetchingGuides: isFetching,
   };
 }
 
