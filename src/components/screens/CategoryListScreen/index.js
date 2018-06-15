@@ -38,6 +38,7 @@ class CategoryListScreen extends Component<Props> {
     }
     return Object.assign(HeaderStyles.noElevation, {
       title,
+      headerRight: <View />,
     });
   }
 

@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { View } from "react-native";
 import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
@@ -10,6 +11,7 @@ import {
 
 import { AnalyticsUtils } from "../../../utils/";
 import MapWithListView, { type MapItem } from "../../shared/MapWithListView";
+import { HeaderStyles } from "../../../styles";
 
 type Props = {
   navigation: any,
@@ -26,9 +28,10 @@ class CategoryMapScreen extends Component<Props> {
     if (params) {
       ({ title } = params);
     }
-    return {
+    return Object.assign(HeaderStyles.noElevation, {
       title,
-    };
+      headerRight: <View />,
+    });
   }
 
   constructor(props: Props) {
