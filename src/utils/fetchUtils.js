@@ -8,7 +8,6 @@ async function fetchJSON(relativeUrl: string, langCode: string, params?: ?string
   if (params) {
     url += params;
   }
-  console.log(`Fetching from: ${url}`);
 
   const response = await fetch(url);
   if (!response.ok) {
