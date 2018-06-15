@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import { connect } from "react-redux";
+import Icon from "react-native-vector-icons/SimpleLineIcons";
 import styles from "./styles";
 import {
   selectCurrentGuideByID,
@@ -41,6 +42,7 @@ class CategoryListScreen extends Component<Props, State> {
       ({ title } = params);
     }
     return {
+      headerLeft: params ? params.headerLeft : null,
       title,
     };
   }
@@ -61,6 +63,20 @@ class CategoryListScreen extends Component<Props, State> {
 
   componentWillUnmount() {
     this.props.dispatchShowBottomBar(true);
+  }
+
+  goBackToListView = () => {
+    this.setState({ showMap: false });
+    this.props.navigation.setParams({
+      headerLeft: (<Icon style={styles.barButtonItem} name="arrow-left" onPress={() => { this.props.navigation.goBack(); }} />),
+    });
+  }
+
+  goToMapView = () => {
+    this.setState({ showMap: true });
+    this.props.navigation.setParams({
+      headerLeft: (<Icon style={styles.barButtonItem} name="arrow-left" onPress={() => { this.goBackToListView(); }} />),
+    });
   }
 
   onPressItem = (item: NavigationItem): void => {
@@ -116,7 +132,7 @@ class CategoryListScreen extends Component<Props, State> {
         <MapWithListView
           items={mapItems}
           navigation={navigation}
-          showListButton
+          showListButton={false}
           onPressListButton={() => this.setState({ showMap: false })}
         />
       );
@@ -136,7 +152,7 @@ class CategoryListScreen extends Component<Props, State> {
         />
         <TouchableOpacity
           style={styles.mapButton}
-          onPress={() => this.setState({ showMap: true })}
+          onPress={() => this.goToMapView()}
         >
           <Image
             style={styles.mapIcon}

@@ -18,4 +18,13 @@ export default StyleSheet.create({
     width: 90,
     height: 90,
   },
+  barButtonItem: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    opacity: 0.75,
+    paddingHorizontal: 14,
+    color: Colors.white,
+  },
 });
