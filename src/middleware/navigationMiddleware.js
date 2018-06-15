@@ -1,7 +1,7 @@
 // @flow
 import { setNavigationCategories, fetchNavigation } from "../actions/navigationActions";
 import { fetchGuides, fetchGuidesForGuideGroup } from "../actions/guideActions";
-import { fetchGuideGroups } from "../actions/guideGroupActions";
+import { fetchGuideGroups, setGuidesAndGuideGroups } from "../actions/guideGroupActions";
 
 /**
  * Responsible for linking the navigation categories with it's content (guide, guidegroups etc.).
@@ -66,6 +66,9 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     {
       const { navigation } = nextState;
       const { currentLanguage, navigationCategories } = navigation;
+
+      // clear downloaded guides/guidegroups
+      dispatch(setGuidesAndGuideGroups([], []));
 
       // batch fetch a range of guides/guidegroups per navigation section
       navigationCategories.forEach((cat) => {
