@@ -87,6 +87,8 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
       });
       break;
     }
+    case "FETCH_GUIDES_SUCCESS":
+    case "FETCH_GUIDEGROUPS_SUCCESS":
     case "SET_GUIDES_AND_GUIDEGROUPS":
       {
         const { items: guideGroups } = nextState.guideGroups;

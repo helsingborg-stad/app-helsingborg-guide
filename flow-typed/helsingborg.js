@@ -167,7 +167,7 @@ declare type GuideGroup = {
   active: boolean,
   location: Location,
   pointProperties: PointProperty[],
-  guidesCount?: number,
+  guidesCount: number,
   distance?: number,
 };
 
