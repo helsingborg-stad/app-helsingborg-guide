@@ -1,6 +1,6 @@
 // @flow
 import { setNavigationCategories, fetchNavigation } from "../actions/navigationActions";
-import { fetchGuides } from "../actions/guideActions";
+import { fetchGuides, fetchGuidesForGuideGroup } from "../actions/guideActions";
 import { fetchGuideGroups } from "../actions/guideGroupActions";
 
 /**
@@ -54,6 +54,12 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     case "SET_LANGUAGE": {
       const { currentLanguage } = nextState.navigation;
       dispatch(fetchNavigation(currentLanguage));
+      break;
+    }
+    case "SELECT_CURRENT_GUIDEGROUP": {
+      const { guideGroup } = action;
+      const { currentLanguage } = nextState.navigation;
+      dispatch(fetchGuidesForGuideGroup(currentLanguage, guideGroup.id));
       break;
     }
     case "FETCH_NAVIGATION_SUCCESS":

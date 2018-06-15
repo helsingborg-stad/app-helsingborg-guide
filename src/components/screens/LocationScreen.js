@@ -65,8 +65,12 @@ class LocationScreen extends Component<Props> {
 
 function mapStateToProps(state: RootState) {
   const { currentGuideGroup } = state.uiState;
-  const { currentGuides } = state.uiState;
   const { geolocation } = state;
+
+  let currentGuides = [];
+  if (currentGuideGroup) {
+    currentGuides = state.guides.items.filter(guide => guide.guideGroupId === currentGuideGroup.id);
+  }
 
   return {
     currentGuideGroup,

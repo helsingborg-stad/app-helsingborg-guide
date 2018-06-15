@@ -8,6 +8,8 @@ async function fetchJSON(relativeUrl: string, langCode: string, params?: ?string
   if (params) {
     url += params;
   }
+  console.log(`Fetching from: ${url}`);
+
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch ${relativeUrl}`);
@@ -64,6 +66,14 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
   return fetchedGuides;
 }
 
+async function getGuidesForGuideGroup(langCode: string, guideGroupId: number): Promise<Guide[]> {
+  const params = `&guideGroupId=${guideGroupId}`;
+  const json = await fetchJSON("guide", langCode, params);
+  const fetchedGuides: Guide[] = validateData(json, "guide");
+
+  return fetchedGuides;
+}
+
 export async function getNavigation(langCode: string): Promise<NavigationCategory[]> {
   const json = await fetchJSON("navigation", langCode);
   const fetchedNavigation: NavigationCategory[] = validateData(json, "navigationCategory");
@@ -74,5 +84,6 @@ export async function getNavigation(langCode: string): Promise<NavigationCategor
 export default {
   getGuideGroups,
   getGuides,
+  getGuidesForGuideGroup,
   getNavigation,
 };

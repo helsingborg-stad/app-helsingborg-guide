@@ -25,3 +25,15 @@ export function fetchGuides(langCode: string, ids: number[]): ThunkAction {
       });
   };
 }
+
+export function fetchGuidesForGuideGroup(langCode: string, guideGroupId: number): ThunkAction {
+  return function fetchGuidesDispatch(dispatch: Dispatch) {
+    dispatch(fetchGuidesRequest());
+
+    return fetchUtils.getGuidesForGuideGroup(langCode, guideGroupId)
+      .then(guides => dispatch(fetchGuidesSuccess(guides)))
+      .catch((error) => {
+        dispatch(fetchGuidesFailure(error.message));
+      });
+  };
+}
