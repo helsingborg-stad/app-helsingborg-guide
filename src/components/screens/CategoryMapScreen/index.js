@@ -1,25 +1,17 @@
 // @flow
 import React, { Component } from "react";
-import {
-  Image,
-  FlatList,
-  TouchableOpacity,
-  View,
-} from "react-native";
 import { connect } from "react-redux";
-import styles from "./styles";
+import { View } from "react-native";
 import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   selectCurrentCategory,
   showBottomBar,
 } from "../../../actions/uiStateActions";
-import NavigationListItem from "../../shared/NavigationListItem";
-import { compareDistance } from "../../../utils/SortingUtils";
-import { AnalyticsUtils } from "../../../utils/";
-import { HeaderStyles } from "../../../styles";
 
-const mapIcon = require("../../../images/mapIcon.png");
+import { AnalyticsUtils } from "../../../utils/";
+import MapWithListView, { type MapItem } from "../../shared/MapWithListView";
+import { HeaderStyles } from "../../../styles";
 
 type Props = {
   navigation: any,
@@ -29,7 +21,7 @@ type Props = {
   dispatchShowBottomBar(visible: boolean): void,
 }
 
-class CategoryListScreen extends Component<Props> {
+class CategoryMapScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
     let title = null;
     const { params } = navigation.state;
@@ -53,7 +45,7 @@ class CategoryListScreen extends Component<Props> {
   }
 
   componentWillUnmount() {
-    this.props.dispatchShowBottomBar(true);
+    this.props.dispatchShowBottomBar(false); // TODO: it dependS!=?
   }
 
   onPressItem = (item: NavigationItem): void => {
@@ -91,30 +83,24 @@ class CategoryListScreen extends Component<Props> {
     if (!currentCategory) return null;
 
     const { items } = currentCategory;
-    const sortedItems = items.map(item => item).sort(compareDistance);
 
+    const mapItems: MapItem[] = [];
+    items.forEach((navItem) => {
+      const { guide, guideGroup } = navItem;
+      if (guideGroup) {
+        mapItems.push({ guideGroup: navItem.guideGroup });
+      }
+      if (guide) {
+        mapItems.push({ guide });
+      }
+    });
     return (
-      <View>
-        <FlatList
-          style={styles.container}
-          renderItem={({ item }) => (<NavigationListItem
-            item={item}
-            onPressItem={this.onPressItem}
-          />)}
-          keyExtractor={item => String(item.id)}
-          data={sortedItems}
-          ListFooterComponent={() => (<View style={styles.footer} />)}
-        />
-        <TouchableOpacity
-          style={styles.mapButton}
-          onPress={() => navigation.navigate("CategoryMapScreen")}
-        >
-          <Image
-            style={styles.mapIcon}
-            source={mapIcon}
-          />
-        </TouchableOpacity>
-      </View >);
+      <MapWithListView
+        items={mapItems}
+        navigation={navigation}
+        showListButton={false}
+      />
+    );
   }
 }
 
@@ -138,4 +124,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryListScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryMapScreen);

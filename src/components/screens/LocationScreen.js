@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { View } from "react-native";
 import LocationView from "../shared/LocationView";
 import { AnalyticsUtils } from "../../utils/";
 import { HeaderStyles } from "../../styles";
@@ -21,6 +22,7 @@ class LocationScreen extends Component<Props> {
     const { title } = navigation.state.params;
     return Object.assign(HeaderStyles.noElevation, {
       title,
+      headerRight: <View />,
     });
   }
 
