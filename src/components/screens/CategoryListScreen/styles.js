@@ -11,11 +11,11 @@ export default StyleSheet.create({
   },
   mapButton: {
     position: "absolute",
-    right: 0,
+    right: -5,
     bottom: "2%",
   },
   mapIcon: {
-    width: 60,
-    height: 60,
+    width: 90,
+    height: 90,
   },
 });
