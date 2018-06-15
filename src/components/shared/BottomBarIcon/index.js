@@ -11,7 +11,7 @@ import NavigatorService from "../../../services/navigationService";
 import LangService from "../../../services/langService";
 
 const selectedColor: string = "#ffffffff";
-const inactiveColor: string = "#e2c2dbff";
+const inactiveColor: string = "#d6aacdff";
 
 const eventCalendarURL = "https://kalender.helsingborg.se/event/page/2/?simpleAppView";
 

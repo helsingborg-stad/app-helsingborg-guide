@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   text: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily, {
-      fontSize: 11,
+      fontSize: 12,
       fontWeight: "500",
       color: Colors.white,
       alignSelf: "center",
