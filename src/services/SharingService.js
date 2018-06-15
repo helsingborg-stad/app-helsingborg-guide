@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Platform,
   PermissionsAndroid,
+  PixelRatio,
 } from "react-native";
 import React from "react";
 import Share from "react-native-share";
@@ -195,16 +196,17 @@ export default {
         Image.getSize(fadeUrl, (fadeWidth, fadeHeight) => {
           Image.getSize(iconUrl, async (iconWidth, iconHeight) => {
             // Constructing the sharing image by layering the various elements on top one after another.
-            // iOS does weird stuff with the size of the image, meaning that all positioning needs to be multiplied by 2.
+            const pixelRatio = PixelRatio.get();
+
             const resultA = await ImageMarker.markWithImage(url, fadeUrl, 0, parseInt(height) - fadeHeight, 1);
             const resultB = await ImageMarker.addText(
-              resultA, title, (margin * 2), (parseInt(height) * 2) - (fontSize * 4) - (margin * 2) - lineDistance,
-              Colors.white, "Roboto-bold", fontSize * 2);
+              resultA, title, (margin * pixelRatio), (parseInt(height) * pixelRatio) - (fontSize * (2 * pixelRatio)) - (margin * pixelRatio) - lineDistance,
+              Colors.white, "Roboto-bold", fontSize * pixelRatio);
             const resultC = await ImageMarker.addText(
-              resultB, LangService.strings.SHARING_OVERLAY_TITLE, margin * 2, (parseInt(height) * 2) - (fontSize * 2) - (margin * 2),
-              Colors.white, "Roboto", fontSize * 2);
+              resultB, LangService.strings.SHARING_OVERLAY_TITLE, margin * pixelRatio, (parseInt(height) * pixelRatio) - (fontSize * pixelRatio) - (margin * pixelRatio),
+              Colors.white, "Roboto", fontSize * pixelRatio);
             const resultD = await ImageMarker.markWithImage(
-              resultC, iconUrl, (parseInt(width) * 2) - iconWidth - (margin * 2), (parseInt(height) * 2) - iconHeight - (margin * 2), 1);
+              resultC, iconUrl, (parseInt(width) * pixelRatio) - iconWidth - (margin * pixelRatio), (parseInt(height) * pixelRatio) - iconHeight - (margin * pixelRatio), 1);
 
             // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
             iosShare.message = message;
