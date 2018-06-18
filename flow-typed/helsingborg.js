@@ -284,3 +284,9 @@ declare type RootState = {
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
 }
+
+declare type Language = {
+  name: string,
+  slug: string,
+  locale: string,
+}

@@ -15,6 +15,7 @@ const navigationCategory = require("../../json-schemas/INavigationCategory.json"
 const navigationItem = require("../../json-schemas/INavigationItem.json");
 const pointProperty = require("../../json-schemas/IPointProperty.json");
 const position = require("../../json-schemas/IPosition.json");
+const language = require("../../json-schemas/ILanguage.json");
 
 const options = { verbose: true };
 const ajv = Ajv(options);
@@ -27,6 +28,7 @@ ajv.addSchema(pointProperty, "pointProperty");
 ajv.addSchema(guide, "guide");
 ajv.addSchema(mediaContent, "mediaContent");
 ajv.addSchema(contentObject, "contentObject");
+ajv.addSchema(language, "language");
 ajv.addSchema(link, "link");
 ajv.addSchema(beacon, "beacon");
 ajv.addSchema(position, "position");
