@@ -81,7 +81,10 @@ export async function getNavigation(langCode: string): Promise<NavigationCategor
 }
 
 export async function getLanguages(): Promise<Language[]> {
-  return [];
+  const json = await fetchJSON("languages", "");
+  const languages: Language[] = validateData(json, "language");
+
+  return languages;
 }
 
 export default {

@@ -19,7 +19,7 @@ import FullScreenVideoScreen from "src/components/screens/FullScreenVideoScreen"
 import LocationService from "src/services/locationService";
 import DownloadTasksManager from "src/services/DownloadTasksManager";
 import { appStarted, appBecameActive, appBecameInactive } from "src/actions/uiStateActions";
-import { setLanguage } from "src/actions/navigationActions";
+import { setLanguage, fetchAvailableLanguages } from "src/actions/navigationActions";
 
 const { store, persistor } = configureStore();
 
@@ -79,6 +79,8 @@ export default class GuideHbg extends Component {
   }
 
   componentDidMount() {
+    store.dispatch(fetchAvailableLanguages());
+
     const locationService = LocationService.getInstance();
     locationService.watchGeoLocation().catch(() => {
       locationService.askForPermission().then((permission) => {
