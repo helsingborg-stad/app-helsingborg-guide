@@ -80,9 +80,14 @@ export async function getNavigation(langCode: string): Promise<NavigationCategor
   return fetchedNavigation;
 }
 
+export async function getLanguages(): Promise<Language[]> {
+  return [];
+}
+
 export default {
   getGuideGroups,
   getGuides,
   getGuidesForGuideGroup,
+  getLanguages,
   getNavigation,
 };

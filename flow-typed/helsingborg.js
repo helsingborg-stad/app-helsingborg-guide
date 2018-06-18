@@ -24,6 +24,9 @@ declare type Action =
   | { type: "FETCH_GUIDES_REQUEST" }
   | { type: "FETCH_GUIDES_SUCCESS", guides: Guide[] }
   | { type: "FETCH_GUIDES_FAILURE", error: Error }
+  | { type: "FETCH_LANGUAGES_REQUEST" }
+  | { type: "FETCH_LANGUAGES_SUCCESS", languages: Language[] }
+  | { type: "FETCH_LANGUAGES_FAILURE", error: Error }
   | { type: "START_DOWNLOAD_GUIDE", guide: Guide }
   | { type: "PAUSE_DOWNLOAD_GUIDE", guide: Guide }
   | { type: "RESUME_DOWNLOAD_GUIDE", guide: Guide }
@@ -42,6 +45,7 @@ declare type Action =
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   | { type: "GEOLOCATION_UPDATE_SUCCESS", position: GeolocationType }
   | { type: "SET_LANGUAGE", langCode: string }
+  | { type: "SET_AVAILABLE_LANGUAGES", languages: Language[] }
   ;
 
 declare type NavigationItemType = 'guide' | 'guidegroup';
@@ -272,7 +276,8 @@ declare type UIState = {
 declare type NavigationState = {
   isFetching: boolean,
   navigationCategories: NavigationCategory[],
-  currentLanguage: string
+  currentLanguage: string,
+  availableLanguages: Language[],
 }
 
 declare type RootState = {
