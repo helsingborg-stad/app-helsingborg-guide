@@ -10,7 +10,7 @@ import {
   pauseDownloadGuide,
   resumeDownloadGuide,
 } from "../../actions/downloadGuidesActions";
-import { selectCurrentGuide } from "../../actions/uiStateActions";
+import { selectCurrentGuide, showBottomBar } from "../../actions/uiStateActions";
 import { AnalyticsUtils } from "../../utils";
 
 const styles = StyleSheet.create({
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
 type Props = {
   downloads: OfflineGuide[],
   cancelDownload(guide: Guide): void,
+  hideBottomBar(): void,
   pauseDownload(guide: Guide): void,
   resumeDownload(guide: Guide): void,
   selectGuide(guide: Guide): void,
@@ -43,11 +44,13 @@ class DownloadsScreen extends Component<Props> {
     this.props.selectGuide(guide);
 
     if (guideType === "guide") {
+      this.props.hideBottomBar();
       AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-      this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name });
+      this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name, bottomBarOnUnmount: true });
     } else if (guideType === "trail") {
+      this.props.hideBottomBar();
       AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-      this.props.navigation.navigate("TrailScreen", { title: guide.name });
+      this.props.navigation.navigate("TrailScreen", { title: guide.name, bottomBarOnUnmount: true });
     }
   }
 
@@ -89,6 +92,7 @@ function mapDispatchToProps(dispatch) {
     pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
     resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
     selectGuide: guide => dispatch(selectCurrentGuide(guide)),
+    hideBottomBar: () => dispatch(showBottomBar(false)),
   };
 }
 
