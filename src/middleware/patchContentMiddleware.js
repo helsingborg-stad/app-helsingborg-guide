@@ -4,22 +4,8 @@ import { setGuidesAndGuideGroups } from "../actions/guideGroupActions";
 
 /**
  * Responsible for patching local content.
- * Adding data sucha s guidesCount and distance.
+ * Adding data such as distance.
  */
-
-function updateGuidesCount(guideGroups: GuideGroup[], guides: Guide[]): GuideGroup[] {
-  if (guides.length === 0) {
-    return guideGroups.map(gg => ({ ...gg, guideCount: 0 }));
-  }
-
-  const updated: GuideGroup[] = guideGroups.map((gg) => {
-    // search for belonging guides
-    const guidesCount = guides.filter(g => g.guideGroupId === gg.id).length;
-    return { ...gg, guidesCount };
-  });
-
-  return updated;
-}
 
 function updateDistance(guideGroups: GuideGroup[], currentPosition: PositionLongLat): GuideGroup[] {
   const updated = guideGroups.map((gg) => {
@@ -58,15 +44,6 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
   const nextState = getState();
 
   switch (action.type) {
-    case "FETCH_GUIDEGROUPS_SUCCESS":
-    case "FETCH_GUIDES_SUCCESS":
-    {
-      // calculate new guidesCount
-      const { guideGroups, guides } = nextState;
-      const updatedGG: GuideGroup[] = updateGuidesCount(guideGroups.items, guides.items);
-      dispatch(setGuidesAndGuideGroups(updatedGG, guides.items));
-      break;
-    }
     case "GEOLOCATION_UPDATE_SUCCESS":
     {
       // updating guide groups distances

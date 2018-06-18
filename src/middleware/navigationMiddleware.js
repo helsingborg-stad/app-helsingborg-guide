@@ -1,11 +1,12 @@
 // @flow
-import { setNavigationCategories } from "../actions/navigationActions";
+import { setNavigationCategories, fetchNavigation } from "../actions/navigationActions";
+import { fetchGuides, fetchGuidesForGuideGroup } from "../actions/guideActions";
+import { fetchGuideGroups, setGuidesAndGuideGroups } from "../actions/guideGroupActions";
 
 /**
- * Responsible for updating the renderable navigation categories.
+ * Responsible for linking the navigation categories with it's content (guide, guidegroups etc.).
  *
- * Listens for changes in navigation , guides and guidegroups.
- * Reacts and updates the renderable navigation categories.
+ * Also reloads navigation when language is changed.
  */
 
 function linkNavigationWithContent(
@@ -50,7 +51,44 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
   const nextState = getState();
 
   switch (action.type) {
+    case "SET_LANGUAGE": {
+      const { currentLanguage } = nextState.navigation;
+      dispatch(fetchNavigation(currentLanguage));
+      break;
+    }
+    case "SELECT_CURRENT_GUIDEGROUP": {
+      const { guideGroup } = action;
+      const { currentLanguage } = nextState.navigation;
+      dispatch(fetchGuidesForGuideGroup(currentLanguage, guideGroup.id));
+      break;
+    }
     case "FETCH_NAVIGATION_SUCCESS":
+    {
+      const { navigation } = nextState;
+      const { currentLanguage, navigationCategories } = navigation;
+
+      // clear downloaded guides/guidegroups
+      dispatch(setGuidesAndGuideGroups([], []));
+
+      // batch fetch a range of guides/guidegroups per navigation section
+      navigationCategories.forEach((cat) => {
+        const guides: number[] = [];
+        const guideGroups: number[] = [];
+        cat.items.forEach((navItem) => {
+          const { type, id } = navItem;
+          if (type === "guide") {
+            guides.push(id);
+          } else if (type === "guidegroup") {
+            guideGroups.push(id);
+          }
+        });
+        dispatch(fetchGuides(currentLanguage, guides));
+        dispatch(fetchGuideGroups(currentLanguage, guideGroups));
+      });
+      break;
+    }
+    case "FETCH_GUIDES_SUCCESS":
+    case "FETCH_GUIDEGROUPS_SUCCESS":
     case "SET_GUIDES_AND_GUIDEGROUPS":
       {
         const { items: guideGroups } = nextState.guideGroups;

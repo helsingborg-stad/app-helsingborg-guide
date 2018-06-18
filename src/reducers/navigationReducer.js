@@ -2,6 +2,7 @@
 const initialState: NavigationState = {
   isFetching: false,
   navigationCategories: [],
+  currentLanguage: "",
 };
 
 export default function navigationReducer(state: NavigationState = initialState, action: Action): NavigationState {
@@ -28,6 +29,11 @@ export default function navigationReducer(state: NavigationState = initialState,
       return {
         ...state,
         navigationCategories: action.categories,
+      };
+    case "SET_LANGUAGE":
+      return {
+        ...state,
+        currentLanguage: action.langCode,
       };
     default:
       return state;

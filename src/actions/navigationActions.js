@@ -2,6 +2,10 @@
 
 import { getNavigation } from "../utils/fetchUtils";
 
+export function setLanguage(langCode: string): Action {
+  return { type: "SET_LANGUAGE", langCode };
+}
+
 export function setNavigationCategories(categories: NavigationCategory[]): Action {
   return {
     type: "SET_NAVIGATION_CATEGORIES",

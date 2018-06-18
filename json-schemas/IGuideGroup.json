@@ -192,6 +192,9 @@
         "description": {
             "type": "string"
         },
+        "guidesCount": {
+            "type": "number"
+        },
         "id": {
             "type": "number"
         },
@@ -217,6 +220,7 @@
     "required": [
         "active",
         "description",
+        "guidesCount",
         "id",
         "images",
         "location",
@@ -226,4 +230,3 @@
     ],
     "type": "object"
 }
-

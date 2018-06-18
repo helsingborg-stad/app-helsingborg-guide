@@ -41,6 +41,7 @@ declare type Action =
   | { type: "AUDIO_MOVE_SLIDER", position: number }
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   | { type: "GEOLOCATION_UPDATE_SUCCESS", position: GeolocationType }
+  | { type: "SET_LANGUAGE", langCode: string }
   ;
 
 declare type NavigationItemType = 'guide' | 'guidegroup';
@@ -166,7 +167,7 @@ declare type GuideGroup = {
   active: boolean,
   location: Location,
   pointProperties: PointProperty[],
-  guidesCount?: number,
+  guidesCount: number,
   distance?: number,
 };
 
@@ -271,6 +272,7 @@ declare type UIState = {
 declare type NavigationState = {
   isFetching: boolean,
   navigationCategories: NavigationCategory[],
+  currentLanguage: string
 }
 
 declare type RootState = {

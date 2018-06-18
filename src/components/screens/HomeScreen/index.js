@@ -110,7 +110,7 @@ class HomeScreen extends Component<Props> {
     const { navigationSections } = this.props;
     const sections = navigationSections.map((cat) => {
       const data = cat.items
-        .map(item => item)
+        .filter(item => item.guide || item.guideGroup)
         .sort(compareDistance)
         .slice(0, 2);
       return { title: cat.name, data, category: cat };

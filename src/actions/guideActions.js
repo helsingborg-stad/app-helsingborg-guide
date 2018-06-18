@@ -14,11 +14,23 @@ export function fetchGuidesFailure(error: Error): Action {
   return { type: "FETCH_GUIDES_FAILURE", error };
 }
 
-export function fetchGuides(langCode: string): ThunkAction {
+export function fetchGuides(langCode: string, ids: number[]): ThunkAction {
   return function fetchGuidesDispatch(dispatch: Dispatch) {
     dispatch(fetchGuidesRequest());
 
-    return fetchUtils.getGuides(langCode)
+    return fetchUtils.getGuides(langCode, ids)
+      .then(guides => dispatch(fetchGuidesSuccess(guides)))
+      .catch((error) => {
+        dispatch(fetchGuidesFailure(error.message));
+      });
+  };
+}
+
+export function fetchGuidesForGuideGroup(langCode: string, guideGroupId: number): ThunkAction {
+  return function fetchGuidesDispatch(dispatch: Dispatch) {
+    dispatch(fetchGuidesRequest());
+
+    return fetchUtils.getGuidesForGuideGroup(langCode, guideGroupId)
       .then(guides => dispatch(fetchGuidesSuccess(guides)))
       .catch((error) => {
         dispatch(fetchGuidesFailure(error.message));

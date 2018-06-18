@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { View, Text, ScrollView, ImageBackground } from "react-native";
+import { ActivityIndicator, View, Text, ScrollView, ImageBackground } from "react-native";
 import styles from "./style";
 
 import DistanceView from "../DistanceViewNew";
@@ -20,6 +20,7 @@ type Props = {
   guides: Guide[],
   now: Date,
   geolocation?: ?GeolocationType,
+  isFetchingGuides?: boolean,
   navigation: any,
   onPressGuide(guide: Guide): void
 }
@@ -75,6 +76,7 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
 }
 
 const LocationView = (props: Props) => {
+  const { isFetchingGuides } = props;
   const webUrl = getWebUrl(props.guideGroup.location.links);
   return (
     <View style={styles.viewContainer} >
@@ -100,7 +102,9 @@ const LocationView = (props: Props) => {
             </View>
             {props.geolocation ? displayDirections(props.geolocation, props.guideGroup.location) : null}
           </View>
+          {isFetchingGuides ? <ActivityIndicator /> :
           <LocationGuidesView guides={props.guides} onPressGuide={props.onPressGuide} />
+          }
           <View style={styles.articleContainer}>
             <Text style={styles.articleHeaderText}>{`${LangService.strings.ABOUT} ${props.guideGroup.name}`}</Text>
             <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
@@ -116,6 +120,7 @@ const LocationView = (props: Props) => {
 LocationView.defaultProps = {
   geolocation: null,
   onPressGuide: null,
+  isFetchingGuides: false,
 };
 
 export default LocationView;

@@ -16,12 +16,10 @@ import LangService from "src/services/langService";
 import Opener from "src/services/SettingsService";
 import { errorHappened } from "src/actions/errorActions";
 import FullScreenVideoScreen from "src/components/screens/FullScreenVideoScreen";
-import { fetchGuideGroups } from "src/actions/guideGroupActions";
-import { fetchGuides } from "src/actions/guideActions";
-import { fetchNavigation } from "src/actions/navigationActions";
 import LocationService from "src/services/locationService";
 import DownloadTasksManager from "src/services/DownloadTasksManager";
 import { appStarted, appBecameActive, appBecameInactive } from "src/actions/uiStateActions";
+import { setLanguage } from "src/actions/navigationActions";
 
 const { store, persistor } = configureStore();
 
@@ -42,20 +40,15 @@ export default class GuideHbg extends Component {
     LangService.loadStoredLanguage()
       .then(() => {
         // Check the network and load the content.
+        store.dispatch(setLanguage(LangService.code));
         GuideHbg.loadContents(LangService.code);
       })
       .catch(error => store.dispatch(errorHappened(error)));
   }
 
-  static loadContents(langCode) {
+  static loadContents() {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
-        // TODO move this block redux middleware
-        store.dispatch(fetchNavigation(langCode));
-        // store.dispatch(loadOldGuideGroups(langCode)); // old guide groups
-        store.dispatch(fetchGuideGroups(langCode)); // new guide groups
-        // store.dispatch(loadSubLocations(langCode)); // old guides
-        store.dispatch(fetchGuides(langCode)); // new guides
         LangService.getLanguages();
       }
     });
@@ -74,17 +67,6 @@ export default class GuideHbg extends Component {
       ],
       { cancelable: false },
     );
-  }
-
-  static loadExistingDownloads() {
-    // TODO implement
-    /*
-    getStoredState({ storage: AsyncStorage }, (err, state) => {
-      if (state && state.downloads && state.downloads.length) {
-        downloadManager.loadExistingTasks(state.downloads);
-      }
-    });
-    */
   }
 
   constructor() {
@@ -106,7 +88,6 @@ export default class GuideHbg extends Component {
 
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
-    GuideHbg.loadExistingDownloads();
   }
 
   componentWillUnmount() {

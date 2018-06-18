@@ -11,7 +11,17 @@ export default function guideGroupReducer(state: GuideGroupState = initialState,
     case "FETCH_GUIDEGROUPS_REQUEST":
       return { ...state, isFetching: true };
     case "FETCH_GUIDEGROUPS_SUCCESS": {
-      const items = action.guideGroups;
+      const items = [...state.items];
+      action.guideGroups.forEach((g) => {
+        const index = items.findIndex(item => item.id === g.id);
+        if (index >= 0) {
+          // replace
+          items[index] = g;
+        } else {
+          // push
+          items.push(g);
+        }
+      });
       return { ...state, items, isFetching: false };
     }
     case "FETCH_GUIDEGROUPS_FAILURE":
