@@ -4,6 +4,7 @@ import {
   Image,
   Text,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   View,
 } from "react-native";
 import styles from "./styles";
@@ -14,13 +15,13 @@ const alphaGradient = require("../../../images/gradient.png");
 type Props = {
   style?: any,
   children?: Node,
-  maxHeight: number,
+  maxHeight: number
 };
 
 type State = {
   expanded: boolean,
-  overflow: boolean,
-}
+  overflow: boolean
+};
 
 class ExpandableView extends Component<Props, State> {
   static defaultProps = {
@@ -37,18 +38,15 @@ class ExpandableView extends Component<Props, State> {
     this.setState({
       expanded: !this.state.expanded,
     });
-  }
-
+  };
 
   render() {
     const { expanded, overflow } = this.state;
     const { maxHeight } = this.props;
-    const showCollapsed = (overflow && !expanded);
+    const showCollapsed = overflow && !expanded;
     const extraStyles = showCollapsed ? [styles.collapsed, { maxHeight }] : [];
     return (
-      <View
-        style={this.props.style}
-      >
+      <View style={this.props.style}>
         <TouchableWithoutFeedback
           onPress={this.onPress}
           onLayout={({ nativeEvent }) => {
@@ -58,17 +56,24 @@ class ExpandableView extends Component<Props, State> {
             }
           }}
         >
-          <View>
-            <View style={[...extraStyles]}>
-              {this.props.children}
-              {showCollapsed ?
-                <Image source={alphaGradient} resizeMode="stretch" style={styles.alphaGradient} />
-                : null}
-            </View>
-            {showCollapsed ?
-              <Text style={styles.readMoreText}>{LangService.strings.READ_MORE}</Text> : null}
+          <View style={[...extraStyles]}>
+            {this.props.children}
+            {showCollapsed ? (
+              <Image
+                source={alphaGradient}
+                resizeMode="stretch"
+                style={styles.alphaGradient}
+              />
+            ) : null}
           </View>
-        </TouchableWithoutFeedback >
+        </TouchableWithoutFeedback>
+        <TouchableOpacity onPress={this.onPress}>
+          {showCollapsed ? (
+            <Text style={styles.readMoreText}>
+              {LangService.strings.READ_MORE}
+            </Text>
+          ) : null}
+        </TouchableOpacity>
       </View>
     );
   }
