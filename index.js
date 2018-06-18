@@ -40,7 +40,6 @@ export default class GuideHbg extends Component {
     LangService.loadStoredLanguage()
       .then(() => {
         // Check the network and load the content.
-        // TODO lang code needs to be moved into redux
         store.dispatch(setLanguage(LangService.code));
         GuideHbg.loadContents(LangService.code);
       })
@@ -70,17 +69,6 @@ export default class GuideHbg extends Component {
     );
   }
 
-  static loadExistingDownloads() {
-    // TODO remove dead code
-    /*
-    getStoredState({ storage: AsyncStorage }, (err, state) => {
-      if (state && state.downloads && state.downloads.length) {
-        downloadManager.loadExistingTasks(state.downloads);
-      }
-    });
-    */
-  }
-
   constructor() {
     super();
     if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -100,7 +88,6 @@ export default class GuideHbg extends Component {
 
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
-    GuideHbg.loadExistingDownloads();
   }
 
   componentWillUnmount() {
