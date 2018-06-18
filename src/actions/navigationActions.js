@@ -6,10 +6,6 @@ export function setLanguage(langCode: string): Action {
   return { type: "SET_LANGUAGE", langCode };
 }
 
-export function setAvailableLanguages(languages: Language[]): Action {
-  return { type: "SET_AVAILABLE_LANGUAGES", languages };
-}
-
 export function fetchLanguagesRequest(): Action {
   return { type: "FETCH_LANGUAGES_REQUEST" };
 }

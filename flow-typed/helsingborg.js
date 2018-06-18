@@ -45,7 +45,6 @@ declare type Action =
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   | { type: "GEOLOCATION_UPDATE_SUCCESS", position: GeolocationType }
   | { type: "SET_LANGUAGE", langCode: string }
-  | { type: "SET_AVAILABLE_LANGUAGES", languages: Language[] }
   ;
 
 declare type NavigationItemType = 'guide' | 'guidegroup';

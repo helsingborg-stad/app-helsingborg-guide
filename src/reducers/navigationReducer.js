@@ -36,6 +36,11 @@ export default function navigationReducer(state: NavigationState = initialState,
         ...state,
         currentLanguage: action.langCode,
       };
+    case "FETCH_LANGUAGES_SUCCESS":
+      return {
+        ...state,
+        availableLanguages: action.languages,
+      };
     default:
       return state;
   }
