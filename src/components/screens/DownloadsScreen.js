@@ -10,6 +10,8 @@ import {
   pauseDownloadGuide,
   resumeDownloadGuide,
 } from "../../actions/downloadGuidesActions";
+import { selectCurrentGuide, showBottomBar } from "../../actions/uiStateActions";
+import { AnalyticsUtils } from "../../utils";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -20,8 +22,11 @@ const styles = StyleSheet.create({
 type Props = {
   downloads: OfflineGuide[],
   cancelDownload(guide: Guide): void,
+  hideBottomBar(): void,
   pauseDownload(guide: Guide): void,
-  resumeDownload(guide: Guide): void
+  resumeDownload(guide: Guide): void,
+  selectGuide(guide: Guide): void,
+  navigation: any,
 };
 
 class DownloadsScreen extends Component<Props> {
@@ -33,6 +38,22 @@ class DownloadsScreen extends Component<Props> {
     };
   };
 
+  navigateToGuide = (offlineGuide: OfflineGuide): void => {
+    const { guide } = offlineGuide;
+    const { guideType } = guide;
+    this.props.selectGuide(guide);
+
+    if (guideType === "guide") {
+      this.props.hideBottomBar();
+      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name, bottomBarOnUnmount: true });
+    } else if (guideType === "trail") {
+      this.props.hideBottomBar();
+      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      this.props.navigation.navigate("TrailScreen", { title: guide.name, bottomBarOnUnmount: true });
+    }
+  }
+
   renderItem = ({ item }) => (
     <DownloadItemView
       title={item.guide.name}
@@ -42,8 +63,9 @@ class DownloadsScreen extends Component<Props> {
       onPausePress={() => this.props.pauseDownload(item.guide)}
       onResumePress={() => this.props.resumeDownload(item.guide)}
       onClearPress={() => this.props.cancelDownload(item.guide)}
+      onPressItem={() => this.navigateToGuide(item)}
     />
-  );
+  )
 
   render() {
     return (
@@ -69,6 +91,8 @@ function mapDispatchToProps(dispatch) {
     cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
     pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
     resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
+    selectGuide: guide => dispatch(selectCurrentGuide(guide)),
+    hideBottomBar: () => dispatch(showBottomBar(false)),
   };
 }
 
