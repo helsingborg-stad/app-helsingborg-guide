@@ -1,0 +1,781 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`status => done, progress < 1 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 2,
+        "borderColor": "#D6D6D6",
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "paddingBottom": "2%",
+        "paddingHorizontal": "4%",
+        "paddingTop": "2%",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "green",
+            "fontSize": 16,
+          },
+          undefined,
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "green",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+        }
+      }
+    >
+      Available offline
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`status => done, progress >= 1 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 2,
+        "borderColor": "#D6D6D6",
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "paddingBottom": "2%",
+        "paddingHorizontal": "4%",
+        "paddingTop": "2%",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "green",
+            "fontSize": 16,
+          },
+          undefined,
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "green",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+        }
+      }
+    >
+      Available offline
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`status => paused, progress < 1 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 2,
+        "borderColor": "#D6D6D6",
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": "2%",
+        "paddingTop": "4%",
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#a61380",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "500",
+          }
+        }
+      >
+        Cancel
+      </Text>
+    </View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#a61380",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "500",
+          }
+        }
+      >
+        Resume
+      </Text>
+    </View>
+  </View>
+  <View>
+    <RCTProgressView
+      progress={0}
+      progressTintColor="#D35098"
+      style={
+        Array [
+          Object {
+            "height": 2,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`status => paused, progress >= 1 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 2,
+        "borderColor": "#D6D6D6",
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingBottom": "2%",
+        "paddingTop": "4%",
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#a61380",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "500",
+          }
+        }
+      >
+        Cancel
+      </Text>
+    </View>
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#a61380",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "500",
+          }
+        }
+      >
+        Resume
+      </Text>
+    </View>
+  </View>
+  <View>
+    <RCTProgressView
+      progress={2}
+      progressTintColor="#D35098"
+      style={
+        Array [
+          Object {
+            "height": 2,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`status => pending, progress < 1 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 2,
+        "borderColor": "#D6D6D6",
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "paddingBottom": "1%",
+        "paddingHorizontal": "4%",
+        "paddingTop": "4%",
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flexDirection": "row",
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#a61380",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#a61380",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "lineHeight": 23,
+            "marginRight": 13,
+          }
+        }
+      >
+        Downloading 0% (touch to pause)
+      </Text>
+    </View>
+  </View>
+  <View>
+    <RCTProgressView
+      progress={0}
+      progressTintColor="#D35098"
+      style={
+        Array [
+          Object {
+            "height": 2,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`status => pending, progress >= 1 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 2,
+        "borderColor": "#D6D6D6",
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "paddingBottom": "1%",
+        "paddingHorizontal": "4%",
+        "paddingTop": "4%",
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flexDirection": "row",
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#a61380",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#a61380",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "lineHeight": 23,
+            "marginRight": 13,
+          }
+        }
+      >
+        Downloading 100% (touch to pause)
+      </Text>
+    </View>
+  </View>
+  <View>
+    <RCTProgressView
+      progress={2}
+      progressTintColor="#D35098"
+      style={
+        Array [
+          Object {
+            "height": 2,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`status => stopped 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 2,
+        "borderColor": "#D6D6D6",
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "paddingBottom": "1%",
+        "paddingHorizontal": "4%",
+        "paddingTop": "4%",
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flexDirection": "row",
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#a61380",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#a61380",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "lineHeight": 23,
+            "marginRight": 13,
+          }
+        }
+      >
+        Download for offline use
+      </Text>
+    </View>
+  </View>
+  <View>
+    <RCTProgressView
+      progress={0}
+      progressTintColor="#D35098"
+      style={
+        Array [
+          Object {
+            "height": 2,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`status => stopped, progress >= 1 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 2,
+        "borderColor": "#D6D6D6",
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "paddingBottom": "1%",
+        "paddingHorizontal": "4%",
+        "paddingTop": "4%",
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flexDirection": "row",
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#a61380",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#a61380",
+            "fontFamily": "Roboto",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "lineHeight": 23,
+            "marginRight": 13,
+          }
+        }
+      >
+        Download for offline use
+      </Text>
+    </View>
+  </View>
+  <View>
+    <RCTProgressView
+      progress={2}
+      progressTintColor="#D35098"
+      style={
+        Array [
+          Object {
+            "height": 2,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;

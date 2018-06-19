@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 
 const screenWidth = Dimensions.get("window").width;
 
-export default ({ items, navigation }) => {
+export default ({ items, navigation, dispatchSelectGuideGroup, dispatchSelectCurrentGuide }) => {
   function getOpeningHours(location) {
     const openingList = location._embedded.location[0].open_hours;
     const expList = location._embedded.location[0].open_hour_exceptions;
@@ -25,17 +25,19 @@ export default ({ items, navigation }) => {
     return text;
   }
 
-
   const _navigateToLocation = (location) => {
+    // TODO fetch from the the new GuideGroup state
+    dispatchSelectGuideGroup(location);
     const { navigate } = navigation;
     AnalyticsUtils.logEvent("view_location", { name: location.slug });
-    navigate("LocationDetailsScreen", { location });
+    navigate("LocationScreen", { location });
   };
 
   const _navigateToTrail = (trail) => {
     const { navigate } = navigation;
     const title = trail.guidegroup[0].name;
     AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
+    dispatchSelectCurrentGuide(trail);
     navigate("TrailScreen", { trail, title });
   };
 
@@ -43,6 +45,7 @@ export default ({ items, navigation }) => {
     const { navigate } = navigation;
     const title = guide.title.plain_text;
     AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+    dispatchSelectCurrentGuide(guide);
     navigate("GuideDetailsScreen", { id: guide.id, title });
   };
 

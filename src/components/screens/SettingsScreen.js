@@ -10,11 +10,9 @@ import {
   Image,
   View,
   Linking,
+  TouchableWithoutFeedback,
 } from "react-native";
 import PropTypes from "prop-types";
-import {
-  bindActionCreators,
-} from "redux";
 import connect from "react-redux/es/connect/connect";
 import LangService from "../../services/langService";
 import {
@@ -25,28 +23,13 @@ import {
   StyleSheetUtils,
   AnalyticsUtils,
 } from "../../utils/";
-import * as guideActions from "../../actions/guideActions";
-import * as navigationActions from "../../actions/navigationActions";
-import * as subLocationActions from "../../actions/subLoactionActions";
+import { setLanguage } from "../../actions/navigationActions";
+import { setDeveloperMode, showBottomBar, selectCurrentBottomBarTab } from "../../actions/uiStateActions";
 
 const defaultMargin = 20;
 const helsingborgIcon = require("../../images/HBG.png");
-const goBackIcon = require("../../images/iconBack.png");
 
 const styles = StyleSheet.create({
-  barButtonItem: {
-    width: 44,
-    height: 44,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  barButtonFiller: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 58,
-  },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -64,6 +47,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     tintColor: Colors.black,
+    margin: defaultMargin,
+  },
+  debugIcon: {
+    tintColor: Colors.purple,
     margin: defaultMargin,
   },
   contactUsContainer: {
@@ -120,37 +107,32 @@ const textStyles = StyleSheet.create({
       textAlign: "center",
     }],
   ),
-  choiceText: StyleSheetUtils.flatten([
-    TextStyles.body, {
-      color: Colors.black,
-    }],
-  ),
 });
+
+function loadContents(langCode) {
+  NetInfo.isConnected.fetch().then((isConnected) => {
+    if (isConnected) {
+      LangService.storeLangCode(langCode);
+      LangService.getLanguages();
+    }
+  });
+}
 
 class SettingsScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object, // eslint-disable-line react/require-default-props
-    guideActions: PropTypes.object.isRequired,
-    navigationActions: PropTypes.object.isRequired,
-    subLocationActions: PropTypes.object.isRequired,
+    setLanguage: PropTypes.func.isRequired,
+    dispatchSetDeveloperMode: PropTypes.func.isRequired,
+    dispatchShowBottomBar: PropTypes.func.isRequired,
+    dispatchSelectBottomBarTab: PropTypes.func.isRequired,
   }
 
 
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     const title = LangService.strings.SETTINGS;
     return {
       title,
-      headerLeft: (
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.barButtonItem}
-        >
-          <Image source={goBackIcon} />
-        </TouchableOpacity>
-      ),
-      headerRight: (
-        <View style={styles.barButtonFiller} />
-      ),
+      headerLeft: null,
     };
   };
 
@@ -158,9 +140,12 @@ class SettingsScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.updateDeveloperMode = this.updateDeveloperMode.bind(this);
+
     this.state = {
       selectedLanguageCode: LangService.code,
       languages: LangService.languageObj,
+      debugStatus: 0,
     };
   }
 
@@ -177,25 +162,16 @@ class SettingsScreen extends Component {
     AnalyticsUtils.logEvent("change_language", { language_code: code });
     this.setState({ selectedLanguageCode: code });
     LangService.setLanguage(code);
+    this.props.setLanguage(code);
     // Set navigation params to force an update
     this.props.navigation.setParams();
-    this.loadContents(code);
-  }
-
-  loadContents(langCode) {
-    NetInfo.isConnected.fetch().then((isConnected) => {
-      if (isConnected) {
-        LangService.storeLangCode(langCode);
-        this.props.guideActions.loadGuides(langCode);
-        this.props.navigationActions.fetchNavigation(langCode);
-        this.props.subLocationActions.loadSubLocations(langCode);
-        LangService.getLanguages();
-      }
-    });
+    loadContents(code);
   }
 
   navigateToWelcomeScreen = () => {
     const { navigate } = this.props.navigation;
+    this.props.dispatchShowBottomBar(false);
+    this.props.dispatchSelectBottomBarTab(0);
     navigate("WelcomeScreen");
   };
 
@@ -203,6 +179,12 @@ class SettingsScreen extends Component {
     const { navigate } = this.props.navigation;
     navigate("DownloadsScreen");
   };
+
+  navigateToDebugScreen = () => {
+    const { navigate } = this.props.navigation;
+    navigate("DebugScreen");
+  };
+
 
   displayLanguageSegment() {
     const { languages } = this.state;
@@ -244,6 +226,24 @@ class SettingsScreen extends Component {
     });
   }
 
+  displayDeveloperMenuButton() {
+    return (
+      <View>
+        <View style={styles.divider} />
+        <TouchableOpacity onPress={this.navigateToDebugScreen}>
+          <Text style={textStyles.linkText}>Developer Info</Text>
+        </TouchableOpacity>
+      </View>);
+  }
+
+  updateDeveloperMode() {
+    this.setState({ debugStatus: this.state.debugStatus + 1 });
+    if (this.state.debugStatus >= 10) {
+      this.setState({ debugStatus: 0 });
+      this.props.dispatchSetDeveloperMode(!this.props.developerMode);
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -255,12 +255,24 @@ class SettingsScreen extends Component {
         <TouchableOpacity onPress={this.navigateToDownloadsScreen}>
           <Text style={textStyles.linkText}>{LangService.strings.OFFLINE_CONTENT}</Text>
         </TouchableOpacity>
+
+        {this.props.developerMode ? this.displayDeveloperMenuButton() : null}
         <View style={styles.divider} />
         <View style={styles.contactUsContainer}>
-          <Image source={helsingborgIcon} style={styles.icon} />
+          <TouchableWithoutFeedback onPress={this.updateDeveloperMode}>
+            <Image source={helsingborgIcon} style={this.props.developerMode ? styles.debugIcon : styles.icon} />
+          </TouchableWithoutFeedback>
           <View style={styles.contactTextContainer}>
-            <Text onPress={() => Linking.openURL(`mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${LangService.strings.CONTACT_MAIL_SUBJECT}`)} style={textStyles.contactEmailText}>{LangService.strings.CONTACT_MAIL_ADRESS}</Text>
-            <Text onPress={() => Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)} style={textStyles.contactPhoneText}>{LangService.strings.CONTACT_PHONE_DISPLAY}</Text>
+            <Text
+              onPress={() =>
+                Linking.openURL(`mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${LangService.strings.CONTACT_MAIL_SUBJECT}`)}
+              style={textStyles.contactEmailText}
+            >{LangService.strings.CONTACT_MAIL_ADRESS}</Text>
+            <Text
+              onPress={() =>
+                Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)}
+              style={textStyles.contactPhoneText}
+            >{LangService.strings.CONTACT_PHONE_DISPLAY}</Text>
           </View>
         </View>
       </View>
@@ -269,15 +281,19 @@ class SettingsScreen extends Component {
 }
 
 // store config
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const { developerMode } = state.uiState;
+  return {
+    developerMode,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    guideActions: bindActionCreators(guideActions, dispatch),
-    navigationActions: bindActionCreators(navigationActions, dispatch),
-    subLocationActions: bindActionCreators(subLocationActions, dispatch),
+    dispatchSetDeveloperMode: enabled => dispatch(setDeveloperMode(enabled)),
+    dispatchShowBottomBar: visible => dispatch(showBottomBar(visible)),
+    dispatchSelectBottomBarTab: index => dispatch(selectCurrentBottomBarTab(index)),
+    setLanguage: langCode => dispatch(setLanguage(langCode)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);

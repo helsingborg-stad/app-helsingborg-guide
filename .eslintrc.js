@@ -3,22 +3,22 @@ module.exports = {
     browser: true,
     commonjs: true,
     es6: true,
-    "jest/globals": true,
+    "jest/globals": true
   },
-  extends: ["airbnb"],
+  extends: ["airbnb", "plugin:flowtype/recommended", "plugin:react-native/all"],
   globals: {
-    __DEV__: [true, true],
+    __DEV__: [true, true]
   },
   parser: "babel-eslint",
   parserOptions: {
     ecmaVersion: 8,
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
-      jsx: true,
+      jsx: true
     },
-    sourceType: "module",
+    sourceType: "module"
   },
-  plugins: ["jest", "react"],
+  plugins: ["jest", "react", "flowtype", "react-native"],
   rules: {
     quotes: [1, "double"],
     "function-paren-newline": ["off"],
@@ -33,16 +33,16 @@ module.exports = {
         args: "after-used",
         ignoreRestSiblings: true,
         varsIgnorePattern: "^unused",
-        argsIgnorePattern: "^unused",
-      },
+        argsIgnorePattern: "^unused"
+      }
     ],
     "max-len": [
       "error",
       140,
       {
         ignoreComments: true,
-        ignoreUrls: true,
-      },
+        ignoreUrls: true
+      }
     ],
     "object-curly-newline": ["error", { consistent: true }],
     "react/jsx-closing-tag-location": ["off"],
@@ -71,13 +71,16 @@ module.exports = {
             "shouldComponentUpdate",
             "componentWillUpdate",
             "componentDidUpdate",
-            "componentWillUnmount",
-          ],
-        },
-      },
-    ],
+            "componentWillUnmount"
+          ]
+        }
+      }
+    ]
   },
   settings: {
-    "import/resolver": "reactnative"
-  },
+    "import/resolver": {
+      "babel-module": {},
+      "reactnative": {}
+    }
+  }
 };

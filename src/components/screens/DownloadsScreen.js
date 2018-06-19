@@ -1,35 +1,35 @@
+// @flow
 import React, { Component } from "react";
-import { View, ListView, StyleSheet } from "react-native";
-import { bindActionCreators } from "redux";
+import { FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import ViewContainer from "../shared/view_container";
-import downloadManager from "../../services/DownloadTasksManager";
 import DownloadItemView from "../shared/DownloadItemView";
-import * as downloadActions from "../../actions/downloadActions";
 import LangService from "../../services/langService";
+import { Colors } from "../../styles/";
 import {
-  Colors,
-} from "../../styles/";
-
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+  cancelDownloadGuide,
+  pauseDownloadGuide,
+  resumeDownloadGuide,
+} from "../../actions/downloadGuidesActions";
+import { selectCurrentGuide, showBottomBar } from "../../actions/uiStateActions";
+import { AnalyticsUtils } from "../../utils";
 
 const styles = StyleSheet.create({
-  fo: {
-    color: Colors.lightPink,
-  },
   mainContainer: {
     backgroundColor: Colors.white,
   },
-  itemsScroll: {},
 });
 
-class DownloadsScreen extends Component {
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    downloads: PropTypes.array.isRequired,
-  }
+type Props = {
+  downloads: OfflineGuide[],
+  cancelDownload(guide: Guide): void,
+  hideBottomBar(): void,
+  pauseDownload(guide: Guide): void,
+  resumeDownload(guide: Guide): void,
+  selectGuide(guide: Guide): void,
+  navigation: any,
+};
 
+class DownloadsScreen extends Component<Props> {
   static navigationOptions = () => {
     const title = LangService.strings.OFFLINE_CONTENT;
     return {
@@ -38,64 +38,62 @@ class DownloadsScreen extends Component {
     };
   };
 
-  static renderFooter = () => (
-    <View style={{ height: 60 }} />
-  );
+  navigateToGuide = (offlineGuide: OfflineGuide): void => {
+    const { guide } = offlineGuide;
+    const { guideType } = guide;
+    this.props.selectGuide(guide);
 
-  static clearCache(id) {
-    downloadManager.clearCache(id);
-  }
-
-  static toggleTask(id) {
-    if (downloadManager.isExist(id)) {
-      const task = downloadManager.getTaskById(id);
-      if (task.isCanceled) downloadManager.resumeTask(task.id);
-      else downloadManager.cancelTask(task.id);
+    if (guideType === "guide") {
+      this.props.hideBottomBar();
+      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name, bottomBarOnUnmount: true });
+    } else if (guideType === "trail") {
+      this.props.hideBottomBar();
+      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      this.props.navigation.navigate("TrailScreen", { title: guide.name, bottomBarOnUnmount: true });
     }
   }
 
-  // #################################################
-
-  renderRow = item => (
+  renderItem = ({ item }) => (
     <DownloadItemView
-      key={item.id}
-      imageSource={{ uri: item.avatar }}
-      title={item.title}
-      total={item.urls.length}
-      currentPos={item.currentPos}
-      isCanceled={item.isCanceled}
-      progress={item.currentPos / item.urls.length}
-      onClosePress={() => DownloadsScreen.toggleTask(item.id)}
-      onClearPress={() => DownloadsScreen.clearCache(item.id)}
+      title={item.guide.name}
+      thumbnail={item.guide.images.thumbnail}
+      progress={item.progress}
+      isPaused={item.status === "paused"}
+      onPausePress={() => this.props.pauseDownload(item.guide)}
+      onResumePress={() => this.props.resumeDownload(item.guide)}
+      onClearPress={() => this.props.cancelDownload(item.guide)}
+      onPressItem={() => this.navigateToGuide(item)}
     />
-  );
+  )
 
   render() {
     return (
-      <ViewContainer style={styles.mainContainer}>
-        <ListView
-          ref={(ref) => {
-            this.itemsListView = ref;
-          }}
-          enableEmptySections
-          dataSource={ds.cloneWithRows(this.props.downloads)}
-          renderRow={this.renderRow}
-          renderFooter={DownloadsScreen.renderFooter}
-        />
-      </ViewContainer>
+      <FlatList
+        style={styles.mainContainer}
+        keyExtractor={item => `${item.guide.id}`}
+        data={this.props.downloads}
+        renderItem={this.renderItem}
+      />
     );
   }
 }
 
-// store config
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
+  const { offlineGuides } = state.downloadedGuides;
   return {
-    downloads: state.downloads,
+    downloads: Object.values(offlineGuides),
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
-    downloadActions: bindActionCreators(downloadActions, dispatch),
+    cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
+    pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
+    resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
+    selectGuide: guide => dispatch(selectCurrentGuide(guide)),
+    hideBottomBar: () => dispatch(showBottomBar(false)),
   };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(DownloadsScreen);

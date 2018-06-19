@@ -1,10 +1,7 @@
-import React from "react";
-import { WebView, StyleSheet } from "react-native";
+import React, { Component } from "react";
+import { WebView, StyleSheet, Linking } from "react-native";
 import PropTypes from "prop-types";
-import ViewContainer from "../shared/view_container";
-import {
-  Colors,
-} from "../../styles/";
+import { Colors } from "../../styles/";
 
 const styles = StyleSheet.create({
   header: {
@@ -12,23 +9,33 @@ const styles = StyleSheet.create({
   },
 });
 
-const WebScreen = (props) => {
-  const { url } = props.navigation.state.params;
+export default class WebScreen extends Component {
+  static propTypes = {
+    navigation: PropTypes.object, // eslint-disable-line react/require-default-props
+  }
 
-  return (
-    <ViewContainer>
-      <WebView source={{ uri: url }} />
-    </ViewContainer>
-  );
-};
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params;
+    return {
+      title,
+      headerRight: null,
+      headerStyle: styles.header,
+    };
+  };
 
-WebScreen.navigationOptions = {
-  headerRight: null,
-  headerStyle: styles.header,
-};
-
-WebScreen.propTypes = {
-  navigation: PropTypes.object.isRequired,
-};
-
-export default WebScreen;
+  render() {
+    const { url } = this.props.navigation.state.params;
+    return (<WebView
+      ref={(ref) => {
+        this.webView = ref;
+      }}
+      source={{ uri: url }}
+      onNavigationStateChange={(event) => {
+        if (event.url !== url) {
+          this.webView.stopLoading();
+          Linking.openURL(event.url);
+        }
+      }}
+    />);
+  }
+}

@@ -1,7 +1,5 @@
 android/release.properties
 
-# VS Code
-.vscode/
 android/.settings/
 android/app/.settings/
 
@@ -61,3 +59,6 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+.vscode/.react/debuggerWorker.js
+.vscode/.react/index.bundle
+.vscode/.react/index.map

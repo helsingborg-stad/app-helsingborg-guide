@@ -1,10 +1,8 @@
 import { NativeModules, DeviceEventEmitter, NativeEventEmitter, Platform } from "react-native";
 import NotificationService from "./notificationService";
-import store from "../store/configureStore";
-import { errorHappened } from "../actions/errorActions";
-import fetchService from "./FetchService";
 import LangService from "./langService";
-import { togglePlay, releaseAudioFile, loadAudioFile, loadAudioFileSuccess, updateAudio } from "../actions/audioActions";
+
+import { isFileInCache, getFilePathInCache } from "../utils/DownloadMediaUtils";
 
 let instance = null;
 let MediaPlayer;
@@ -43,6 +41,9 @@ export default class MediaService {
   audio;
   updateInterval;
   updatePaused;
+  onAudioInitedCallback;
+  onAudioLoadSuccessCallback;
+  onAudioUpdateCallback;
 
   constructor() {
     this.audio = RELEASED_AUDIO_OBJ;
@@ -55,53 +56,50 @@ export default class MediaService {
     return instance;
   }
 
-  static onErrorHandler = () => {
-    store.dispatch(errorHappened("error: reading audio file"));
+  tryLoadFromCache = async (guideId, uri) => {
+    if (!guideId || !uri) throw new Error("Null params passed");
+
+    try {
+      const isInCache = await isFileInCache(`${guideId}`, uri);
+      if (isInCache) { MediaService.url = `file://${getFilePathInCache(`${guideId}`, uri)}`; } else { MediaService.url = uri; }
+    } catch (err) {
+      // do not care
+      MediaService.url = uri;
+    }
   }
 
-  init(audio, guideID) {
+  async init(audio, guideID) {
     if (!audio || !audio.url) return Promise.reject(new Error("No url provided"));
 
-    fetchService
-      .isExist(audio.url, guideID)
-      .then((exist) => {
-        const fullPath = fetchService.getFullPath(audio.url, guideID);
-        if (exist) return Promise.resolve(`file://${fullPath}`);
-        return Promise.resolve(audio.url);
-      })
-      .then((uri) => {
-        console.log("Audio URI: ", uri);
-        MediaService.url = uri;
-        NotificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
-        this.onError(MediaService.onErrorHandler);
-        this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
-        this.onCompleted(this.onCompletedCallback);
+    await this.tryLoadFromCache(guideID, audio.url);
 
-        store.dispatch(loadAudioFile(this.audio));
-        this.onPrepared(this.onPreparedCallback);
+    console.log("Audio URI: ", MediaService.url);
+    NotificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
+    this.onError(MediaService.onErrorHandler);
+    this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
+    this.onCompleted(this.onCompletedCallback);
 
-        if (Platform.OS === "ios") return MediaPlayer.init(MediaService.url, audio.title, audio.description_plain);
-        return MediaPlayer.init(MediaService.url);
-      });
-    return null;
+    this.onAudioInited(this.audio);
+    this.onPrepared(this.onPreparedCallback);
+    this.resumeUpdatingState();
+
+    if (Platform.OS === "ios") return MediaPlayer.init(MediaService.url, audio.title, audio.description_plain);
+    return MediaPlayer.init(MediaService.url);
   }
 
   start() {
     MediaPlayer.start();
-    store.dispatch(togglePlay(true));
     this.resumeUpdatingState();
   }
 
   pause() {
     this.pauseUpdatingState();
     MediaPlayer.pause();
-    store.dispatch(togglePlay(false));
   }
 
   stop() {
     this.pauseUpdatingState();
     MediaPlayer.stop();
-    store.dispatch(togglePlay(false));
   }
 
   release() {
@@ -115,7 +113,7 @@ export default class MediaService {
 
     MediaService.url = null;
     this.audio = null;
-    store.dispatch(releaseAudioFile());
+
     NotificationService.closeNotification(MEDIA_NOTIFICATION_ID);
     this.unSubscribeOnError(MediaService.onErrorHandler);
     this.unSubscribeOnPrepared(this.onPreparedCallback);
@@ -162,7 +160,9 @@ export default class MediaService {
   }
 
   onPreparedCallback() {
-    store.dispatch(loadAudioFileSuccess());
+    this.onAudioPrepared();
+    this.audio.isPrepared = true;
+
     if (this.updateInterval) return;
     this.updateInterval = setInterval(() => {
       if (!this.updatePaused) this.updateAudioState();
@@ -178,12 +178,16 @@ export default class MediaService {
 
   updateAudioState() {
     this.getMeta().then((meta) => {
-      if (!this.updatePaused) store.dispatch(updateAudio(meta));
+      if (!this.updatePaused && this.audio) {
+        this.audio.currentPosition = meta.currentPosition;
+        this.audio.duration = meta.duration;
+        this.audio.isPlaying = meta.isPlaying;
+        this.onUpdateAudioState(this.audio);
+      }
     });
   }
 
   clearUpdateInterval() {
-    console.log("interval from clear func:", this.updateInterval);
     clearInterval(this.updateInterval);
     this.updateInterval = null;
   }
@@ -208,4 +212,36 @@ export default class MediaService {
   unSubscribeOnCompleted(callback) {
     EventEmitter.removeListener(MEDIA_COMPLETED, callback);
   }
+
+  onAudioInited = (audio) => {
+    this.onAudioInitedCallback(audio);
+  };
+
+  onAudioPrepared = () => {
+    this.onAudioLoadSuccessCallback();
+  };
+
+  onUpdateAudioState = (audio) => {
+    this.onAudioUpdateCallback(audio);
+  };
+
+  loadAudioFile = (audioState, hasAudio, guideID, onAudioInited, onAudioLoadSuccess, onAudioUpdate) => {
+    this.onAudioInitedCallback = onAudioInited;
+    this.onAudioLoadSuccessCallback = onAudioLoadSuccess;
+    this.onAudioUpdateCallback = onAudioUpdate;
+
+    if (hasAudio) this.release();
+    const audioName = audioState.title;
+    console.log(`load ${audioName}`);
+
+    const audioObject = {
+      url: audioState.url,
+      title: audioState.title,
+      avatar_url: audioState.avatar_url,
+      hasAudio: true,
+      isPlaying: true,
+      description_plain: "",
+    };
+    this.init(audioObject, guideID);
+  };
 }

@@ -1,19 +1,31 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import { getStoredState } from "redux-persist";
-import { AppRegistry, Alert, NetInfo, UIManager, AsyncStorage, Platform, Linking } from "react-native";
-import Nav from "guide-hbg/src/Nav";
-import store from "guide-hbg/src/store/configureStore";
-import { loadSubLocations } from "guide-hbg/src/actions/subLoactionActions";
-import internetChanged from "guide-hbg/src/actions/internetActions";
-import LangService from "guide-hbg/src/services/langService";
-import Opener from "guide-hbg/src/services/SettingsService";
-import { errorHappened } from "guide-hbg/src/actions/errorActions";
-import downloadManager from "guide-hbg/src/services/DownloadTasksManager";
-import FullScreenVideoScreen from "guide-hbg/src/components/screens/FullScreenVideoScreen";
-import { loadGuides } from "./src/actions/guideActions";
-import { fetchNavigation } from "./src/actions/navigationActions";
-import LocationService from "./src/services/locationService";
+import { PersistGate } from "redux-persist/integration/react";
+import {
+  AppRegistry,
+  Alert,
+  NetInfo,
+  UIManager,
+  Platform,
+  Linking,
+} from "react-native";
+import Nav from "src/Nav";
+import configureStore from "src/store/configureStore";
+import internetChanged from "src/actions/internetActions";
+import LangService from "src/services/langService";
+import Opener from "src/services/SettingsService";
+import { errorHappened } from "src/actions/errorActions";
+import FullScreenVideoScreen from "src/components/screens/FullScreenVideoScreen";
+import LocationService from "src/services/locationService";
+import DownloadTasksManager from "src/services/DownloadTasksManager";
+import { appStarted, appBecameActive, appBecameInactive } from "src/actions/uiStateActions";
+import { setLanguage } from "src/actions/navigationActions";
+
+const { store, persistor } = configureStore();
+
+// TODO decouple these store reference hacks
+LocationService.getInstance().store = store;
+DownloadTasksManager.store = store;
 
 export default class GuideHbg extends Component {
   static openInternetSettings() {
@@ -28,17 +40,15 @@ export default class GuideHbg extends Component {
     LangService.loadStoredLanguage()
       .then(() => {
         // Check the network and load the content.
+        store.dispatch(setLanguage(LangService.code));
         GuideHbg.loadContents(LangService.code);
       })
       .catch(error => store.dispatch(errorHappened(error)));
   }
 
-  static loadContents(langCode) {
+  static loadContents() {
     NetInfo.isConnected.fetch().then((isConnected) => {
       if (isConnected) {
-        store.dispatch(fetchNavigation(langCode));
-        store.dispatch(loadGuides(langCode));
-        store.dispatch(loadSubLocations(langCode));
         LangService.getLanguages();
       }
     });
@@ -57,14 +67,6 @@ export default class GuideHbg extends Component {
       ],
       { cancelable: false },
     );
-  }
-
-  static loadExistingDownloads() {
-    getStoredState({ storage: AsyncStorage }, (err, state) => {
-      if (state && state.downloads && state.downloads.length) {
-        downloadManager.loadExistingTasks(state.downloads);
-      }
-    });
   }
 
   constructor() {
@@ -86,7 +88,6 @@ export default class GuideHbg extends Component {
 
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
-    GuideHbg.loadExistingDownloads();
   }
 
   componentWillUnmount() {
@@ -121,7 +122,13 @@ export default class GuideHbg extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Nav />
+        <PersistGate persistor={persistor}>
+          <Nav
+            onAppStarted={() => store.dispatch(appStarted())}
+            onAppBecameActive={() => store.dispatch(appBecameActive())}
+            onAppBecameInactive={() => store.dispatch(appBecameInactive())}
+          />
+        </PersistGate>
       </Provider>
     );
   }

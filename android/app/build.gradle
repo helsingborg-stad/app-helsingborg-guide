@@ -105,8 +105,8 @@ android {
         applicationId "com.guidehbg"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 18
-        versionName "1.41"
+        versionCode 19
+        versionName "1.50"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -160,6 +160,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-version-number')
     compile project(':react-native-share')
     compile project(':react-native-image-marker')
     compile project(':react-native-svg')

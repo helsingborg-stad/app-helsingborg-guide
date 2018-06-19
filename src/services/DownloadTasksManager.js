@@ -1,9 +1,10 @@
 import * as _ from "lodash";
 import DownloadTask from "../lib/DownloadTask";
-import store from "../store/configureStore";
 import * as dActions from "../actions/downloadActions";
 
 class DownloadTasksManager {
+  // TODO decouple store from this class
+  store;
   tasks = [];
   currentDownloadedDataVersion = 2; // Bump if any changes to how we store downloaded data.
 
@@ -39,7 +40,7 @@ class DownloadTasksManager {
         this.purgeExistingTasks(downloads);
       }
     }
-    store.dispatch(dActions.setDownloadDataVersion(this.currentDownloadedDataVersion));
+    this.store.dispatch(dActions.setDownloadDataVersion(this.currentDownloadedDataVersion));
   }
 
   getTaskById(id) {
@@ -53,9 +54,9 @@ class DownloadTasksManager {
     if (this.isExist(data.id)) return false;
     // console.log('download:Creating a new task', data.id);
 
-    const task = new DownloadTask(data);
+    const task = new DownloadTask(data, this.store);
     this.tasks.push(task);
-    if (!resumed) store.dispatch(dActions.createTaskSuccess(task.getMeta()));
+    if (!resumed) this.store.dispatch(dActions.createTaskSuccess(task.getMeta()));
     return task;
   }
 

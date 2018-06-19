@@ -2,12 +2,12 @@ import { PermissionsAndroid, Alert, Platform, Linking } from "react-native";
 import LangService from "./langService";
 import Opener from "./SettingsService";
 import geolocationUpdated from "../actions/geolocationActions";
-import store from "../store/configureStore";
-
+// TODO decouple the store from this class!
 let instance = null;
 
 export default class LocationService {
   watcher;
+  store;
 
   static getInstance() {
     if (!instance) instance = new LocationService();
@@ -55,7 +55,7 @@ export default class LocationService {
           if (granted) {
             navigator.geolocation.getCurrentPosition(
               (position) => {
-                store.dispatch(geolocationUpdated(position));
+                this.store.dispatch(geolocationUpdated(position));
                 resolve(position);
               },
               (error) => {
@@ -78,7 +78,7 @@ export default class LocationService {
           if (granted) {
             this.watcher = navigator.geolocation.watchPosition(
               (position) => {
-                store.dispatch(geolocationUpdated(position));
+                this.store.dispatch(geolocationUpdated(position));
                 resolve(position);
               },
               error => reject(error),

@@ -1,28 +1,27 @@
-import { combineReducers } from "redux";
+import guideGroups from "./guideGroupReducer";
 import guides from "./guideReducer";
 import navigation from "./navigationReducer";
-import subLocations from "./subLocationReducer";
-import metrics from "./metricReducer";
 import audio from "./audioReducer";
 import internet from "./internetReducer";
 import error from "./errorReducer";
 import downloads from "./downloadReducer";
 import geolocation from "./geolocationReducer";
-import pointproperties from "./pointPropertiesReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
+import uiState from "./uiStateReducer";
+import downloadedGuides from "./downloadedGuides";
 
-const rootReducer = combineReducers({
+const rootReducer = {
+  guideGroups,
   guides,
   navigation,
-  subLocations,
   audio,
-  metrics,
   internet,
   error,
   downloads,
   geolocation,
-  pointproperties,
   downloadDataVersion,
-});
+  downloadedGuides,
+  uiState,
+};
 
 export default rootReducer;

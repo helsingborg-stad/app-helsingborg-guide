@@ -25,6 +25,7 @@ export default StyleSheet.create({
     lineHeight: 23.0,
     textAlign: "center",
     alignSelf: "center",
+    flex: 1, // added this to center title on android //BP
     color: Colors.white,
   },
   tabBarLabel: {
@@ -50,5 +51,20 @@ export default StyleSheet.create({
     ...defaultFont,
     fontSize: 16,
     lineHeight: 22.0,
+  },
+  medium: {
+    ...defaultFont,
+    fontSize: 16,
+    fontWeight: "normal",
+    fontStyle: "normal",
+    textAlign: "left",
+    color: Colors.black,
+  },
+  small: {
+    ...defaultFont,
+    fontSize: 14,
+    fontWeight: "normal",
+    fontStyle: "normal",
+    textAlign: "left",
   },
 });

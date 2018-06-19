@@ -1,5 +1,7 @@
 import LangService from "./langService";
 
+/* TODO:  phase out */
+
 export default {
   getOpeningHours(openingList, expList) {
     const now = new Date();

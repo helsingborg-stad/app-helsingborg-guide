@@ -15,6 +15,9 @@ const colors = {
   white: "#ffffff",
   greyBodyText: "#505050",
   darkGrey: "#505050",
+  transparent: "#00000000",
+  green: "green",
+  shadow: "#0000003b",
 };
 
 export default {
