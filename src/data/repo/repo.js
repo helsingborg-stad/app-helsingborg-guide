@@ -1,8 +1,6 @@
-import guide from "./repo.guide";
 import language from "./repo.language";
 
 const repos = {
-  guide,
   language,
 };
 
