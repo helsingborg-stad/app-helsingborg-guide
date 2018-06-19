@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import { TextStyles, Colors } from "../../../styles";
 
-
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
@@ -55,6 +54,12 @@ const styles = StyleSheet.create({
   },
   contentTitleText: {
     ...StyleSheet.flatten(TextStyles.medium),
+  },
+  shareBtn: {
+    position: "absolute",
+    bottom: 25,
+    right: 25,
+    zIndex: 50,
   },
 });
 

@@ -1,7 +1,13 @@
 // @flow
 
 import React from "react";
-import { ActivityIndicator, View, Text, ScrollView, ImageBackground } from "react-native";
+import {
+  ActivityIndicator,
+  View,
+  Text,
+  ScrollView,
+  ImageBackground,
+} from "react-native";
 import styles from "./style";
 
 import DistanceView from "../DistanceViewNew";
@@ -14,7 +20,6 @@ import LocationGuidesView from "../LocationGuidesView";
 import { UrlUtils, LocationUtils } from "../../../utils/";
 import WebLinkView from "../WebLinkView";
 
-
 type Props = {
   guideGroup: GuideGroup,
   guides: Guide[],
@@ -23,7 +28,7 @@ type Props = {
   isFetchingGuides?: boolean,
   navigation: any,
   onPressGuide(guide: Guide): void
-}
+};
 
 function getWebUrl(links: LinkAndService[]): ?string {
   let webUrl = null;
@@ -56,9 +61,19 @@ function displayDistance(currentLocation: GeolocationType, location: Location) {
   );
 }
 
-function openGoogleMapApp(geolocation: GeolocationType, lat: number, lng: number) {
+function openGoogleMapApp(
+  geolocation: GeolocationType,
+  lat: number,
+  lng: number,
+) {
   const directionsUrl = LocationUtils.directionsUrl(lat, lng, geolocation);
-  UrlUtils.openUrlIfValid(directionsUrl, LangService.strings.OPEN_IN_MAPS, "", LangService.strings.CANCEL, LangService.strings.OPEN);
+  UrlUtils.openUrlIfValid(
+    directionsUrl,
+    LangService.strings.OPEN_IN_MAPS,
+    "",
+    LangService.strings.CANCEL,
+    LangService.strings.OPEN,
+  );
 }
 
 function displayDirections(geolocation: GeolocationType, location: Location) {
@@ -67,9 +82,7 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
       iconName="directions"
       text={LangService.strings.DIRECTIONS}
       onPress={() => {
-        openGoogleMapApp(geolocation,
-          location.latitude,
-          location.longitude);
+        openGoogleMapApp(geolocation, location.latitude, location.longitude);
       }}
     />
   );
@@ -79,14 +92,16 @@ const LocationView = (props: Props) => {
   const { isFetchingGuides } = props;
   const webUrl = getWebUrl(props.guideGroup.location.links);
   return (
-    <View style={styles.viewContainer} >
+    <View style={styles.viewContainer}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.imageViewContainer}>
           <ImageBackground
             source={{ uri: props.guideGroup.images.large }}
             style={styles.imageBackground}
           >
-            {!props.guideGroup.active ? displayComingSoon(LangService.strings.COMING_SOON) : null}
+            {!props.guideGroup.active
+              ? displayComingSoon(LangService.strings.COMING_SOON)
+              : null}
           </ImageBackground>
         </View>
         <View style={styles.bodyContainer}>
@@ -95,22 +110,41 @@ const LocationView = (props: Props) => {
             <View style={styles.openingHoursAndDistanceContainer}>
               <OpeningHoursView
                 openHours={props.guideGroup.location.openingHours}
-                openHoursException={props.guideGroup.location.openingHourExceptions}
+                openHoursException={
+                  props.guideGroup.location.openingHourExceptions
+                }
                 now={props.now}
               />
-              {props.geolocation ? displayDistance(props.geolocation, props.guideGroup.location) : null}
+              {props.geolocation
+                ? displayDistance(props.geolocation, props.guideGroup.location)
+                : null}
             </View>
-            {props.geolocation ? displayDirections(props.geolocation, props.guideGroup.location) : null}
+            {props.geolocation
+              ? displayDirections(props.geolocation, props.guideGroup.location)
+              : null}
           </View>
-          {isFetchingGuides ? <ActivityIndicator /> :
-          <LocationGuidesView guides={props.guides} onPressGuide={props.onPressGuide} />
-          }
+          {isFetchingGuides ? (
+            <ActivityIndicator />
+          ) : (
+            <LocationGuidesView
+              guides={props.guides}
+              onPressGuide={props.onPressGuide}
+            />
+          )}
           <View style={styles.articleContainer}>
-            <Text style={styles.articleHeaderText}>{`${LangService.strings.ABOUT} ${props.guideGroup.name}`}</Text>
-            <Text style={styles.articleDescriptionText}>{props.guideGroup.description}</Text>
+            <Text style={styles.articleHeaderText}>{`${
+              LangService.strings.ABOUT
+            } ${props.guideGroup.name}`}</Text>
+            <Text style={styles.articleDescriptionText}>
+              {props.guideGroup.description}
+            </Text>
           </View>
-          {webUrl ? <WebLinkView url={webUrl} navigation={props.navigation} /> : null}
-          <PointPropertiesView pointProperties={props.guideGroup.pointProperties} />
+          {webUrl ? (
+            <WebLinkView url={webUrl} navigation={props.navigation} />
+          ) : null}
+          <PointPropertiesView
+            pointProperties={props.guideGroup.pointProperties}
+          />
         </View>
       </ScrollView>
     </View>
