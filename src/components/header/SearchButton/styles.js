@@ -8,7 +8,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
-    marginHorizontal: 14,
+    paddingHorizontal: 14,
   },
   text: StyleSheetUtils.flatten([
     TextStyles.description, {
