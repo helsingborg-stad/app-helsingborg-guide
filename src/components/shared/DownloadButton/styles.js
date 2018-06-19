@@ -25,6 +25,7 @@ export default StyleSheet.create({
     paddingTop: "4%",
     paddingHorizontal: "4%",
     paddingBottom: "1%",
+    alignItems: "center",
   },
   cancelResumeContainer: {
     flexDirection: "row",
