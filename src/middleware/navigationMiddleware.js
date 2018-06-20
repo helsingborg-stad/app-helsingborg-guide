@@ -19,6 +19,9 @@ function linkNavigationWithContent(
       const { id, type } = item;
 
       let result: NavigationItem = { ...item };
+      delete result.guide;
+      delete result.guideGroup;
+
       if (type === "guide") {
         const guide = guides.find(i => i.id === id);
         if (guide) {
