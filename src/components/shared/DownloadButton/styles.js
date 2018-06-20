@@ -16,7 +16,8 @@ export default StyleSheet.create({
     paddingBottom: "2%",
   },
   doneText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 16,
       color: Colors.green,
     },
@@ -24,17 +25,19 @@ export default StyleSheet.create({
   textContainer: {
     paddingTop: "4%",
     paddingHorizontal: "4%",
-    paddingBottom: "1%",
+    paddingBottom: "2%",
+    alignItems: "center",
   },
   cancelResumeContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
     paddingTop: "4%",
-    paddingBottom: "2%",
+    paddingBottom: "3%",
   },
   buttonText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 16,
       fontWeight: "500",
       color: Colors.purple,
@@ -43,5 +46,8 @@ export default StyleSheet.create({
   progressBarAndroid: {
     marginTop: -4,
     marginBottom: -8,
+  },
+  progressViewIOS: {
+    transform: [{ scaleX: 1.0 }, { scaleY: 2.5 }],
   },
 });

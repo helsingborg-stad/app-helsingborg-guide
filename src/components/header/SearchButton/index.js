@@ -2,7 +2,6 @@
 import React from "react";
 import { Image, Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
-import LangService from "../../../services/langService";
 
 const searchIcon = require("../../../images/search-id.png");
 
@@ -20,7 +19,6 @@ const SearchButton = (props: Props) =>
     onPress={() => onPress(props.navigation)}
     style={styles.container}
   >
-    <Text style={styles.text}>{LangService.strings.SEARCH_BY_NUMBER_SHORT}</Text>
     <Image style={styles.image} source={searchIcon} />
   </TouchableOpacity>);
 

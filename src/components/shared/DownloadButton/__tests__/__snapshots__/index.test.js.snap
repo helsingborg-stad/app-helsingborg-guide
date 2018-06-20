@@ -144,7 +144,7 @@ exports[`status => paused, progress < 1 1`] = `
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "space-around",
-        "paddingBottom": "2%",
+        "paddingBottom": "3%",
         "paddingTop": "4%",
       }
     }
@@ -239,9 +239,19 @@ exports[`status => paused, progress < 1 1`] = `
           Object {
             "height": 2,
           },
-          undefined,
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+              Object {
+                "scaleY": 2.5,
+              },
+            ],
+          },
         ]
       }
+      trackTintColor="#00000000"
     />
   </View>
 </View>
@@ -265,7 +275,7 @@ exports[`status => paused, progress >= 1 1`] = `
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "space-around",
-        "paddingBottom": "2%",
+        "paddingBottom": "3%",
         "paddingTop": "4%",
       }
     }
@@ -360,9 +370,19 @@ exports[`status => paused, progress >= 1 1`] = `
           Object {
             "height": 2,
           },
-          undefined,
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+              Object {
+                "scaleY": 2.5,
+              },
+            ],
+          },
         ]
       }
+      trackTintColor="#00000000"
     />
   </View>
 </View>
@@ -383,7 +403,8 @@ exports[`status => pending, progress < 1 1`] = `
   <View
     style={
       Object {
-        "paddingBottom": "1%",
+        "alignItems": "center",
+        "paddingBottom": "2%",
         "paddingHorizontal": "4%",
         "paddingTop": "4%",
       }
@@ -463,9 +484,19 @@ exports[`status => pending, progress < 1 1`] = `
           Object {
             "height": 2,
           },
-          undefined,
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+              Object {
+                "scaleY": 2.5,
+              },
+            ],
+          },
         ]
       }
+      trackTintColor="#00000000"
     />
   </View>
 </View>
@@ -486,7 +517,8 @@ exports[`status => pending, progress >= 1 1`] = `
   <View
     style={
       Object {
-        "paddingBottom": "1%",
+        "alignItems": "center",
+        "paddingBottom": "2%",
         "paddingHorizontal": "4%",
         "paddingTop": "4%",
       }
@@ -566,9 +598,19 @@ exports[`status => pending, progress >= 1 1`] = `
           Object {
             "height": 2,
           },
-          undefined,
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+              Object {
+                "scaleY": 2.5,
+              },
+            ],
+          },
         ]
       }
+      trackTintColor="#00000000"
     />
   </View>
 </View>
@@ -589,7 +631,8 @@ exports[`status => stopped 1`] = `
   <View
     style={
       Object {
-        "paddingBottom": "1%",
+        "alignItems": "center",
+        "paddingBottom": "2%",
         "paddingHorizontal": "4%",
         "paddingTop": "4%",
       }
@@ -656,7 +699,7 @@ exports[`status => stopped 1`] = `
           }
         }
       >
-        Download for offline use
+        Download
       </Text>
     </View>
   </View>
@@ -669,9 +712,19 @@ exports[`status => stopped 1`] = `
           Object {
             "height": 2,
           },
-          undefined,
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+              Object {
+                "scaleY": 2.5,
+              },
+            ],
+          },
         ]
       }
+      trackTintColor="#00000000"
     />
   </View>
 </View>
@@ -692,7 +745,8 @@ exports[`status => stopped, progress >= 1 1`] = `
   <View
     style={
       Object {
-        "paddingBottom": "1%",
+        "alignItems": "center",
+        "paddingBottom": "2%",
         "paddingHorizontal": "4%",
         "paddingTop": "4%",
       }
@@ -759,7 +813,7 @@ exports[`status => stopped, progress >= 1 1`] = `
           }
         }
       >
-        Download for offline use
+        Download
       </Text>
     </View>
   </View>
@@ -772,9 +826,19 @@ exports[`status => stopped, progress >= 1 1`] = `
           Object {
             "height": 2,
           },
-          undefined,
+          Object {
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+              Object {
+                "scaleY": 2.5,
+              },
+            ],
+          },
         ]
       }
+      trackTintColor="#00000000"
     />
   </View>
 </View>
