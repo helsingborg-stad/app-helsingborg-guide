@@ -5,6 +5,7 @@ export default StyleSheet.create({
   container: {
     padding: "4%",
     backgroundColor: Colors.white,
+    height: "100%",
   },
   footer: {
     paddingVertical: 10,
