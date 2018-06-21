@@ -30,26 +30,29 @@ type Props = {
   startDownload(guide: Guide): void,
   pauseDownload(guide: Guide): void,
   cancelDownload(guide: Guide): void,
-  resumeDownload(guide: Guide): void,
-}
+  resumeDownload(guide: Guide): void
+};
 
 function renderProgressbar(progress: number) {
   return (
     <View>
       {Platform.OS === "ios" ? (
         <ProgressViewIOS
+          style={styles.progressViewIOS}
+          trackTintColor={Colors.transparent}
           progressTintColor={Colors.lightPink}
           progress={progress}
-        />)
-        : (
-          <ProgressBarAndroid
-            color={Colors.lightPink}
-            styleAttr="Horizontal"
-            indeterminate={false}
-            progress={progress}
-            style={styles.progressBarAndroid}
-          />)}
-    </View >
+        />
+      ) : (
+        <ProgressBarAndroid
+          color={Colors.lightPink}
+          styleAttr="Horizontal"
+          indeterminate={false}
+          progress={progress}
+          style={styles.progressBarAndroid}
+        />
+      )}
+    </View>
   );
 }
 
@@ -64,64 +67,79 @@ export class DownloadButton extends Component<Props> {
       <View style={styles.cancelResumeContainer}>
         <TouchableOpacity
           onPress={() => {
-            if (currentGuide) { this.props.cancelDownload(currentGuide); }
+            if (currentGuide) {
+              this.props.cancelDownload(currentGuide);
+            }
           }}
         >
-          <Text style={styles.buttonText}>{LangService.strings.DOWNLOADING_CANCEL}</Text>
+          <Text style={styles.buttonText}>
+            {LangService.strings.DOWNLOADING_CANCEL}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            if (currentGuide) { this.props.resumeDownload(currentGuide); }
+            if (currentGuide) {
+              this.props.resumeDownload(currentGuide);
+            }
           }}
         >
-          <Text style={styles.buttonText}>{LangService.strings.DOWNLOADING_RESUME}</Text>
+          <Text style={styles.buttonText}>
+            {LangService.strings.DOWNLOADING_RESUME}
+          </Text>
         </TouchableOpacity>
       </View>
     );
-  }
+  };
 
   renderDefault = () => {
     const { progress, currentGuide, status } = this.props;
     const percentage = Math.min(parseInt(progress * 100), 100);
-    const buttonText = status === "stopped" ? LangService.strings.DOWNLOAD :
-      `${LangService.strings.DOWNLOADING} ${percentage}% ${LangService.strings.DOWNLOADING_PAUSE}`;
-    return (<View
-      style={styles.textContainer}
-    >
-      <IconTextTouchable
-        text={buttonText}
-        iconName="get-app"
-        onPress={() => {
-          if (currentGuide) {
-            if (status === "stopped") {
-              this.props.startDownload(currentGuide);
-              AnalyticsUtils.logEvent("download_guide", { name: currentGuide.slug });
-            } else if (status === "pending") {
-              this.props.pauseDownload(currentGuide);
+    const buttonText =
+      status === "stopped"
+        ? LangService.strings.DOWNLOAD
+        : `${LangService.strings.DOWNLOADING} ${percentage}% ${
+          LangService.strings.DOWNLOADING_PAUSE
+        }`;
+    return (
+      <View style={styles.textContainer}>
+        <IconTextTouchable
+          text={buttonText}
+          iconName="get-app"
+          onPress={() => {
+            if (currentGuide) {
+              if (status === "stopped") {
+                this.props.startDownload(currentGuide);
+                AnalyticsUtils.logEvent("download_guide", {
+                  name: currentGuide.slug,
+                });
+              } else if (status === "pending") {
+                this.props.pauseDownload(currentGuide);
+              }
             }
-          }
-        }}
-      />
-    </View>
+          }}
+        />
+      </View>
     );
-  }
+  };
 
   renderDone = () => (
     <View style={styles.doneContainer}>
       <Icon name="check" size={16} color="green" />
       <Text style={styles.doneText}>{LangService.strings.DOWNLOADED}</Text>
-    </View >
-  )
+    </View>
+  );
 
   render() {
     const { style, status, progress } = this.props;
     return (
-      <View style={[styles.container, style]} >
+      <View style={[styles.container, style]}>
         {status === "paused" ? this.renderPaused() : null}
-        {status === "pending" || status === "stopped" ? this.renderDefault() : null}
+        {status === "pending" || status === "stopped"
+          ? this.renderDefault()
+          : null}
         {status === "done" ? this.renderDone() : null}
         {status !== "done" ? renderProgressbar(progress) : null}
-      </View >
+      </View>
     );
   }
 }
@@ -154,4 +172,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DownloadButton);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DownloadButton);

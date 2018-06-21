@@ -92,19 +92,15 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   map: {
-    position: "absolute",
-    bottom: listItemImageSize + defaultMargin,
-    left: 0,
-    right: 0,
-    top: 0,
+    flex: 1,
   },
   listStyle: {
     position: "absolute",
-    bottom: 0,
+    bottom: 14,
     left: 0,
     right: 0,
     height: listItemImageSize + defaultMargin,
-    backgroundColor: Colors.listBackgroundColor,
+    backgroundColor: Colors.transparent,
   },
   listItem: {
     ...listItemShared,
@@ -222,8 +218,8 @@ const styles = StyleSheet.create({
 export type MapItem = {
   guide?: Guide,
   guideGroup?: GuideGroup,
-  contentObject?: ContentObject,
-}
+  contentObject?: ContentObject
+};
 
 type Props = {
   items: MapItem[],
@@ -237,19 +233,25 @@ type Props = {
   selectGuide(guide: Guide): void,
   selectGuideGroup(id: number): void,
   dispatchSelectContentObject(obj: ContentObject): void
-}
+};
 
 type State = {
   isInitialized: boolean,
   activeMarker: MapItem,
   markersFocused: boolean,
-  recentlyTappedPin: boolean,
+  recentlyTappedPin: boolean
 };
 
 function getIdFromMapItem(item: MapItem): string {
-  if (item.contentObject) { return item.contentObject.id; }
-  if (item.guide) { return `${item.guide.id}`; }
-  if (item.guideGroup) { return `${item.guideGroup.id}`; }
+  if (item.contentObject) {
+    return item.contentObject.id;
+  }
+  if (item.guide) {
+    return `${item.guide.id}`;
+  }
+  if (item.guideGroup) {
+    return `${item.guideGroup.id}`;
+  }
 
   return "";
 }
@@ -257,9 +259,15 @@ function getIdFromMapItem(item: MapItem): string {
 function getLocationFromItem(item: MapItem): ?Location {
   const { contentObject, guide, guideGroup } = item;
 
-  if (guide) { return guide.location; }
-  if (guideGroup) { return guideGroup.location; }
-  if (contentObject) { return contentObject.location; }
+  if (guide) {
+    return guide.location;
+  }
+  if (guideGroup) {
+    return guideGroup.location;
+  }
+  if (contentObject) {
+    return contentObject.location;
+  }
 
   return null;
 }
@@ -414,7 +422,9 @@ class MapWithListView extends Component<Props, State> {
       animated: false,
     };
     const locations: Location[] = getLocations(markers);
-    if (this.map) { this.map.fitToCoordinates(locations, options); }
+    if (this.map) {
+      this.map.fitToCoordinates(locations, options);
+    }
   }
 
   scrollToIndex = (index) => {
@@ -436,7 +446,9 @@ class MapWithListView extends Component<Props, State> {
     if (marker !== activeMarker) {
       this.setState({ activeMarker: marker });
       const location = getLocationFromItem(marker);
-      if (this.map && location) { this.map.animateToCoordinate(location); }
+      if (this.map && location) {
+        this.map.animateToCoordinate(location);
+      }
     }
   };
   /**
@@ -511,7 +523,7 @@ class MapWithListView extends Component<Props, State> {
         title: contentObject.title,
       });
     }
-  }
+  };
 
   // When a map marker is pressed on either OS
   onMarkerPressed = (marker) => {
@@ -692,10 +704,12 @@ class MapWithListView extends Component<Props, State> {
     return numberView;
   };
 
-  getMapItemProps = (item: MapItem): {
+  getMapItemProps = (
+    item: MapItem,
+  ): {
     title: ?string,
     streetAddress: ?string,
-    thumbnailUrl: ?string,
+    thumbnailUrl: ?string
   } => {
     const { contentObject, guide, guideGroup } = item;
     let streetAddress = null;
@@ -742,7 +756,7 @@ class MapWithListView extends Component<Props, State> {
     }
 
     return { title: null, streetAddress, thumbnailUrl };
-  }
+  };
 
   renderListItem = (item: MapItem, listItemStyle: any, number: number) => {
     const { title, streetAddress, thumbnailUrl } = this.getMapItemProps(item);
@@ -778,7 +792,9 @@ class MapWithListView extends Component<Props, State> {
   };
 
   androidRenderItem = (item, index) => (
-    <View key={index}>{this.renderListItem(item, styles.androidListItem, index)}</View>
+    <View key={index}>
+      {this.renderListItem(item, styles.androidListItem, index)}
+    </View>
   );
 
   renderHorizontalList(items: MapItem[]) {
@@ -792,7 +808,9 @@ class MapWithListView extends Component<Props, State> {
           ref={(ref) => {
             this.listRef = ref;
           }}
-          renderItem={({ item, index }) => this.renderListItem(item, styles.listItem, index + 1)}
+          renderItem={({ item, index }) =>
+            this.renderListItem(item, styles.listItem, index + 1)
+          }
           style={styles.listStyle}
           getItemLayout={this.getItemLayout}
           onScroll={this.onListScroll}
@@ -831,12 +849,10 @@ class MapWithListView extends Component<Props, State> {
         style={styles.listButton}
         onPress={() => (onPressListButton ? onPressListButton() : null)}
       >
-        <Image
-          style={styles.listIcon}
-          source={listIcon}
-        />
-      </TouchableOpacity>);
-  }
+        <Image style={styles.listIcon} source={listIcon} />
+      </TouchableOpacity>
+    );
+  };
 
   render() {
     const {
@@ -846,9 +862,7 @@ class MapWithListView extends Component<Props, State> {
     } = this.props;
     const { longitude, latitude } = initialLocation;
     return (
-      <SafeAreaView
-        style={styles.rootContainer}
-      >
+      <SafeAreaView style={styles.rootContainer}>
         <View style={styles.container}>
           <MapView
             ref={(ref) => {
@@ -890,4 +904,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapWithListView);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MapWithListView);
