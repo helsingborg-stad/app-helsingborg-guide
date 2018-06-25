@@ -70,4 +70,7 @@ export default StyleSheet.create({
       color: Colors.lightGrey,
     },
   ]),
+  sectionLoadingSpinner: {
+    padding: 20,
+  },
 });
