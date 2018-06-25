@@ -83,10 +83,6 @@ const listItemShared = {
 */
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    backgroundColor: Colors.listBackgroundColor,
-  },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -707,10 +703,10 @@ class MapWithListView extends Component<Props, State> {
   getMapItemProps = (
     item: MapItem,
   ): {
-    title: ?string,
-    streetAddress: ?string,
-    thumbnailUrl: ?string
-  } => {
+      title: ?string,
+      streetAddress: ?string,
+      thumbnailUrl: ?string
+    } => {
     const { contentObject, guide, guideGroup } = item;
     let streetAddress = null;
     let thumbnailUrl = null;
@@ -862,28 +858,26 @@ class MapWithListView extends Component<Props, State> {
     } = this.props;
     const { longitude, latitude } = initialLocation;
     return (
-      <SafeAreaView style={styles.rootContainer}>
-        <View style={styles.container}>
-          <MapView
-            ref={(ref) => {
-              this.map = ref;
-            }}
-            style={styles.map}
-            showsUserLocation
-            onMapReady={this.onMapReady}
-            initialRegion={{
-              latitude,
-              longitude,
-              latitudeDelta: 0.09,
-              longitudeDelta: 0.06,
-            }}
-          >
-            {this.renderMapMarkers(items)}
-          </MapView>
-          {showListButton ? this.renderListButton() : null}
-          {this.renderHorizontalList(items)}
-        </View>
-      </SafeAreaView>
+      <View style={styles.container}>
+        <MapView
+          ref={(ref) => {
+            this.map = ref;
+          }}
+          style={styles.map}
+          showsUserLocation
+          onMapReady={this.onMapReady}
+          initialRegion={{
+            latitude,
+            longitude,
+            latitudeDelta: 0.09,
+            longitudeDelta: 0.06,
+          }}
+        >
+          {this.renderMapMarkers(items)}
+        </MapView>
+        {showListButton ? this.renderListButton() : null}
+        {this.renderHorizontalList(items)}
+      </View>
     );
   }
 }
