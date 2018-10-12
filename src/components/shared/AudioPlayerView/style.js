@@ -57,7 +57,10 @@ export default StyleSheet.create({
     width: PLAYER_HEIGHT,
     height: PLAYER_HEIGHT,
   },
-  spinner: {},
+  loadingSpinner: {
+    height: "100%",
+    width: "100%",
+  },
   closeBtnContainer: {
     flex: 0,
     width: 46,

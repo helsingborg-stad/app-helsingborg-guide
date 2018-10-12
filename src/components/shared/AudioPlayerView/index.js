@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { Animated, Platform, SafeAreaView, Slider, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Animated, Platform, SafeAreaView, Slider, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
@@ -39,6 +39,14 @@ function displayControlButton(isPlaying: boolean, dispatchToggle: any): any {
         <Icon name="play" size={26} color="purple" />
       </TouchableOpacity >);
   return btn;
+}
+
+function displayLoadingSpinner(isPlaying: boolean, currentPosition: number): any {
+  if (isPlaying && currentPosition == 0.0) {
+    return <ActivityIndicator style={styles.loadingSpinner} />;
+  }
+
+  return null;
 }
 
 function padWithZeros(time: number): string {
@@ -94,6 +102,7 @@ class AudioPlayerView extends Component<Props, State> {
               <Text numberOfLines={1} style={[styles.titleText, !this.props.audio.isPrepared ? styles.disabledText : {}]}>
                 {this.props.audio.title}
               </Text>
+              {displayLoadingSpinner(this.props.audio.isPlaying, this.props.audio.currentPosition)}
             </View>
             <View style={styles.sliderContainer}>
               {displayControlButton(this.props.audio.isPlaying, this.props.dispatchTogglePlaying)}
