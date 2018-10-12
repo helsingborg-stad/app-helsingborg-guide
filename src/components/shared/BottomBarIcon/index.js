@@ -13,7 +13,7 @@ import LangService from "../../../services/langService";
 const selectedColor: string = "#ffffffff";
 const inactiveColor: string = "#d6aacdff";
 
-const eventCalendarURL = "https://kalender.helsingborg.se/event/page/2/?simpleAppView";
+const eventCalendarURL = "https://kalender.helsingborg.se/event/?simpleAppView";
 
 function getIcon(index: number, color: string) {
   switch (index) {
