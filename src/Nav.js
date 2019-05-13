@@ -6,7 +6,8 @@ import {
   Platform,
 } from "react-native";
 import {
-  StackNavigator,
+  createStackNavigator,
+  createAppContainer
 } from "react-navigation";
 import {
   DebugScreen,
@@ -35,7 +36,7 @@ import {
 import AnalyticsUtils from "./utils/AnalyticsUtils";
 import NavigatorService from "./services/navigationService";
 
-const GuideNavigator = StackNavigator(
+const GuideNavigator = createStackNavigator(
   {
     HomeScreen: { screen: HomeScreen },
     TrailScreen: { screen: TrailScreen },
@@ -54,7 +55,7 @@ const GuideNavigator = StackNavigator(
   { navigationOptions: HeaderStyles.default },
 );
 
-const RootNavigator = StackNavigator(
+const RootNavigator = createStackNavigator(
   {
     SplashScreen: { screen: SplashScreen },
     WelcomeScreen: { screen: WelcomeScreen },
@@ -66,6 +67,8 @@ const RootNavigator = StackNavigator(
     mode: "modal",
   },
 );
+
+const NavigatorWrapper = createAppContainer(RootNavigator);
 
 const ios = Platform.OS === "ios";
 
@@ -121,7 +124,7 @@ export default class Nav extends Component<Props> {
           backgroundColor={Colors.darkPurple}
         />
         {/* $FlowFixMe should be fixed in later flow versions */}
-        <RootNavigator
+        <NavigatorWrapper
           onNavigationStateChange={Nav.onNavigationStateChange}
           ref={(navigatorRef) => {
             NavigatorService.setContainer(navigatorRef);

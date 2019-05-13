@@ -3,7 +3,6 @@ import React,
   Component,
 } from "react";
 import {
-  NetInfo,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,8 +11,9 @@ import {
   Linking,
   TouchableWithoutFeedback,
 } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 import PropTypes from "prop-types";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import LangService from "../../services/langService";
 import {
   Colors,

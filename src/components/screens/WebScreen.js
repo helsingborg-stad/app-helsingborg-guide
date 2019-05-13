@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { WebView, StyleSheet, Linking } from "react-native";
+import { StyleSheet, Linking } from "react-native";
+import WebView from "react-native-webview";
 import PropTypes from "prop-types";
 import { Colors } from "../../styles/";
 

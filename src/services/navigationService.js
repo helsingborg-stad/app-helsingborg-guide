@@ -1,6 +1,6 @@
 // @flow
 
-import { NavigationActions } from "react-navigation";
+import { StackActions, NavigationActions } from "react-navigation";
 import type { NavigationParams, NavigationRoute } from "react-navigation";
 
 let _container; // eslint-disable-line
@@ -11,11 +11,11 @@ function setContainer(container: Object) {
 
 function reset(routeName: string, params?: NavigationParams) {
   _container.dispatch(
-    NavigationActions.reset({
+    StackActions.reset({
       index: 0,
+      key: undefined, // Required to route from the root navigator (see: https://github.com/react-navigation/react-navigation/issues/5706#issuecomment-482246719)
       actions: [
         NavigationActions.navigate({
-          type: "Navigation/NAVIGATE",
           routeName,
           params,
         }),
@@ -27,7 +27,6 @@ function reset(routeName: string, params?: NavigationParams) {
 function navigate(routeName: string, params?: NavigationParams) {
   _container.dispatch(
     NavigationActions.navigate({
-      type: "Navigation/NAVIGATE",
       routeName,
       params,
     }),

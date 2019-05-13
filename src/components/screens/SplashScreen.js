@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Dimensions, Image, LayoutAnimation, AsyncStorage } from "react-native";
-import { NavigationActions } from "react-navigation";
+import { StackActions, NavigationActions } from "react-navigation";
 import ViewContainer from "../shared/view_container";
 import { IS_WELCOMED } from "../../lib/my_consts";
 import ColoredBar from "../shared/ColoredBar";
@@ -96,7 +96,7 @@ export default class SplashScreen extends Component {
       if (value) welcomed = JSON.parse(value);
 
       const route = welcomed ? "MainScreen" : "WelcomeScreen";
-      const resetAction = NavigationActions.reset({
+      const resetAction = StackActions.reset({
         index: 0,
         actions: [NavigationActions.navigate({ routeName: route })],
       });

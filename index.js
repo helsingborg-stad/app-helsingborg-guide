@@ -4,11 +4,11 @@ import { PersistGate } from "redux-persist/integration/react";
 import {
   AppRegistry,
   Alert,
-  NetInfo,
   UIManager,
   Platform,
   Linking,
 } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 import Nav from "src/Nav";
 import configureStore from "src/store/configureStore";
 import internetChanged from "src/actions/internetActions";

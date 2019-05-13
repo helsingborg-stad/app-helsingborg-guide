@@ -19,14 +19,14 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - yoga (0.50.3.React)
+  - yoga (0.59.5.React)
 
 DEPENDENCIES:
   - Firebase/Core
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -45,8 +45,8 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
+  yoga: 2e571f113e8cbeb0eb752aeebc86c1bfe7a8200c
 
-PODFILE CHECKSUM: 12208f7cb2174c9bb42d6076cb9d794a739cd03f
+PODFILE CHECKSUM: 4df440c124fbd507660c429969b192b7141317dc
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.6.1

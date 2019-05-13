@@ -159,7 +159,7 @@ export default class MapThumbnailsView extends Component {
     if (this.state.items[index].id !== this.state.active.id) {
       this.setState({ active: this.state.items[index] });
       const correspondingMarker = this.state.markers.find(marker => marker.itemId === this.state.items[index].id);
-      this.map.animateToCoordinate(correspondingMarker.location);
+      this.map.animateToRegion(correspondingMarker.location);
     }
   }
 

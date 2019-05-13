@@ -443,7 +443,7 @@ class MapWithListView extends Component<Props, State> {
       this.setState({ activeMarker: marker });
       const location = getLocationFromItem(marker);
       if (this.map && location) {
-        this.map.animateToCoordinate(location);
+        this.map.animateToRegion(location);
       }
     }
   };

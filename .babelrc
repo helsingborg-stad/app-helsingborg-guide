@@ -1,25 +1,5 @@
 {
   "presets": [
-    "react-native"
-  ],
-  "plugins": [
-    [
-      "module-resolver",
-      {
-        "root": [
-          "."
-        ],
-        "extensions": [
-          ".js",
-          ".ios.js",
-          ".android.js"
-        ],
-        "alias": {
-          "src": "./src",
-          "screens": "./src/components/screens",
-          "underscore": "lodash"
-        }
-      }
-    ]
+    "module:metro-react-native-babel-preset"
   ]
 }
