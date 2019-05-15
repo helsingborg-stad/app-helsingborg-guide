@@ -84,7 +84,6 @@ exports[`Basic GuideObject 1`] = `
             showsHorizontalScrollIndicator={false}
             showsPagination={true}
             showsVerticalScrollIndicator={false}
-            style={undefined}
           >
             <View>
               <View
@@ -102,21 +101,13 @@ exports[`Basic GuideObject 1`] = `
               >
                 <View>
                   <View
-                    accessibilityComponentType={undefined}
-                    accessibilityLabel={undefined}
-                    accessibilityTraits={undefined}
                     accessible={true}
-                    hitSlop={undefined}
-                    nativeID={undefined}
-                    onLayout={undefined}
                     onResponderGrant={[Function]}
                     onResponderMove={[Function]}
                     onResponderRelease={[Function]}
                     onResponderTerminate={[Function]}
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
-                    style={undefined}
-                    testID={undefined}
                   >
                     <Image
                       resizeMode="cover"
@@ -150,21 +141,13 @@ exports[`Basic GuideObject 1`] = `
               >
                 <View>
                   <View
-                    accessibilityComponentType={undefined}
-                    accessibilityLabel={undefined}
-                    accessibilityTraits={undefined}
                     accessible={true}
-                    hitSlop={undefined}
-                    nativeID={undefined}
-                    onLayout={undefined}
                     onResponderGrant={[Function]}
                     onResponderMove={[Function]}
                     onResponderRelease={[Function]}
                     onResponderTerminate={[Function]}
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
-                    style={undefined}
-                    testID={undefined}
                   >
                     <Image
                       resizeMode="cover"
@@ -198,21 +181,13 @@ exports[`Basic GuideObject 1`] = `
               >
                 <View>
                   <View
-                    accessibilityComponentType={undefined}
-                    accessibilityLabel={undefined}
-                    accessibilityTraits={undefined}
                     accessible={true}
-                    hitSlop={undefined}
-                    nativeID={undefined}
-                    onLayout={undefined}
                     onResponderGrant={[Function]}
                     onResponderMove={[Function]}
                     onResponderRelease={[Function]}
                     onResponderTerminate={[Function]}
                     onResponderTerminationRequest={[Function]}
                     onStartShouldSetResponder={[Function]}
-                    style={undefined}
-                    testID={undefined}
                   >
                     <Image
                       resizeMode="cover"
@@ -336,9 +311,6 @@ exports[`Basic GuideObject 1`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "fontFamily": "Roboto",
@@ -361,9 +333,6 @@ exports[`Basic GuideObject 1`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "#7f7f7f",
@@ -390,15 +359,8 @@ exports[`Basic GuideObject 1`] = `
           }
         >
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -421,8 +383,6 @@ exports[`Basic GuideObject 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View
               style={
@@ -443,9 +403,7 @@ exports[`Basic GuideObject 1`] = `
                 }
               >
                 <Text
-                  accessible={true}
                   allowFontScaling={false}
-                  ellipsizeMode="tail"
                   style={
                     Array [
                       Object {
@@ -463,6 +421,7 @@ exports[`Basic GuideObject 1`] = `
                         "fontStyle": "normal",
                         "fontWeight": "normal",
                       },
+                      Object {},
                     ]
                   }
                 >
@@ -479,9 +438,6 @@ exports[`Basic GuideObject 1`] = `
                 }
               >
                 <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
                   style={
                     Array [
                       Object {
@@ -512,9 +468,6 @@ exports[`Basic GuideObject 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "fontSize": 14,
@@ -525,15 +478,8 @@ exports[`Basic GuideObject 1`] = `
             Välkommen in! Trappan upp till vaktvåningen säger något om svårigheten att inta borgen.
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -547,13 +493,9 @@ exports[`Basic GuideObject 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
-              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
@@ -566,15 +508,13 @@ exports[`Basic GuideObject 1`] = `
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
+                  Object {},
                 ]
               }
             >
               
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "#a61380",
@@ -594,11 +534,7 @@ exports[`Basic GuideObject 1`] = `
       </View>
     </View>
   </RCTScrollView>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
+  <Text>
     Audio Player
   </Text>
 </View>
