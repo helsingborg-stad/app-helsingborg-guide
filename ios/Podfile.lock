@@ -19,7 +19,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - yoga (0.59.5.React)
+  - yoga (0.59.8.React)
 
 DEPENDENCIES:
   - Firebase/Core
@@ -45,7 +45,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  yoga: 2e571f113e8cbeb0eb752aeebc86c1bfe7a8200c
+  yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
 PODFILE CHECKSUM: 4df440c124fbd507660c429969b192b7141317dc
 

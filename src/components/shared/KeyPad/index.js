@@ -65,7 +65,7 @@ export default class KeyPad extends Component<Props, State> {
     this.props.onSearch(number);
   }
 
-  displayDigits() {
+  displayDigits() : any[] {
     return this.state.displayedNumber.map((digit, index) => (
       // eslint-disable-next-line react/no-array-index-key
       <View key={index} style={[styles.rowItem, styles.upperDigitContainer]}>

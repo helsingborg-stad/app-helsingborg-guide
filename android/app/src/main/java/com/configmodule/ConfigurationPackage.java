@@ -1,32 +1,29 @@
 package com.configmodule;
 
+import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.guidehbg.BuildConfig;
+import com.facebook.react.uimanager.ViewManager;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import javax.annotation.Nullable;
+/**
+ * Created by ErikAlfredsson on 2019-05-15.
+ */
 
-public class ConfigurationModule extends ReactContextBaseJavaModule {
-  public ConfigurationModule(ReactApplicationContext reactContext) {
-    super(reactContext);
-  }
+public class ConfigurationPackage implements ReactPackage {
+    @Override
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+        List<NativeModule> modules = new ArrayList<>();
+        modules.add(new ConfigurationModule(reactContext));
 
-  @Override
-  public String getName() {
-    return "Configuration";
-  }
+        return modules;
+    }
 
-  @Nullable
-  @Override
-  public Map<String, Object> getConstants() {
-    final HashMap<String, Object> constants = new HashMap<>();
-    constants.put("applicationId", BuildConfig.APPLICATION_ID);
-    constants.put("appVersion", BuildConfig.VERSION_NAME);
-    constants.put("buildVersion", BuildConfig.VERSION_CODE);
-    
-    return constants;
-  }
+    @Override
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        return Collections.emptyList();
+    }
 }

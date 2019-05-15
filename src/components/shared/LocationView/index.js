@@ -153,7 +153,7 @@ const LocationView = (props: Props) => {
 
 LocationView.defaultProps = {
   geolocation: null,
-  onPressGuide: null,
+  onPressGuide: () => {},
   isFetchingGuides: false,
 };
 

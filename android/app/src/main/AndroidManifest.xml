@@ -4,23 +4,18 @@
           android:versionName="1.0">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    
+
 
     <uses-feature android:name="android.hardware.location.gps"/>
     <uses-feature
             android:name="android.hardware.bluetooth_le"
             android:required="true"/>
-
-    <uses-sdk
-            android:minSdkVersion="18"
-            android:targetSdkVersion="23"/>
 
     <application
             android:name=".MainApplication"

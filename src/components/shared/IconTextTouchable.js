@@ -6,9 +6,11 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { StyleSheetUtils } from "../../utils/";
 import { TextStyles, Colors } from "../../styles/";
 
+import type { MaterialIconsGlyphs } from "react-native-vector-icons/MaterialIcons";
+
 type Props = {
   onPress: Function,
-  iconName: string,
+  iconName: MaterialIconsGlyphs,
   text: string,
 }
 

@@ -33,6 +33,8 @@
 	<string>Used to detect nearby beacons</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used to fetch nearby content and show user location on map.</string>
+	<key>NSAllowsArbitraryLoads</key>
+    <true/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

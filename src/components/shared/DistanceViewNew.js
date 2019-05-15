@@ -6,7 +6,7 @@ import LangService from "../../services/langService";
 import LocationUtils from "../../utils/LocationUtils";
 
 type Props = {
-  textStyle: StyleSheet,
+  textStyle: Object,
   currentLocation: GeolocationType,
   location: Location,
   useFromHereText: boolean

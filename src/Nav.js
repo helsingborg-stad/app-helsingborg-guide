@@ -52,7 +52,7 @@ const GuideNavigator = createStackNavigator(
     CategoryListScreen: { screen: CategoryListScreen },
     CategoryMapScreen: { screen: CategoryMapScreen },
   },
-  { navigationOptions: HeaderStyles.default },
+  { defaultNavigationOptions: HeaderStyles.default },
 );
 
 const RootNavigator = createStackNavigator(
@@ -81,7 +81,7 @@ type Props = {
 }
 
 export default class Nav extends Component<Props> {
-  static getCurrentRouteName(navigationState) {
+  static getCurrentRouteName(navigationState: Object) {
     if (!navigationState) {
       return null;
     }
@@ -93,7 +93,7 @@ export default class Nav extends Component<Props> {
     return route.routeName;
   }
 
-  static onNavigationStateChange(prevState, currentState) {
+  static onNavigationStateChange(prevState: Object, currentState: Object) {
     const currentScreen = Nav.getCurrentRouteName(currentState);
     const prevScreen = Nav.getCurrentRouteName(prevState);
 
