@@ -93,7 +93,7 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
-def keystorePropertiesFile = rootProject.file("release.properties")
+def keystorePropertiesFile = rootProject.file(System.getenv("KEYSTORE_PROPERTIES") ?: "release.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
@@ -113,16 +113,10 @@ android {
         versionName "1.52"
     }
     signingConfigs {
-        debug {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file('config/debug.keystore')
-            storePassword 'android'
-        }
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
+            storeFile rootProject.file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
         }
     }
@@ -134,11 +128,24 @@ android {
             include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
     }
+    flavorDimensions 'env'
+    productFlavors {
+        alpha {
+            dimension 'env'
+            applicationIdSuffix '.alpha'
+        }
+        store {
+            dimension 'env'
+        }        
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig (project.hasProperty("unsigned") ? null : signingConfigs.release)
+            signingConfig signingConfigs.release
         }
     }
     lintOptions {
