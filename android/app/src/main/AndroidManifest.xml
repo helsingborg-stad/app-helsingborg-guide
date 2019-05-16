@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
 
     <uses-feature android:name="android.hardware.location.gps"/>
@@ -57,6 +58,7 @@
                 android:resource="@xml/filepaths"/>
         </provider>
 
+        <meta-data android:name="com.google.ar.core" android:value="optional" />
     </application>
 
 </manifest>

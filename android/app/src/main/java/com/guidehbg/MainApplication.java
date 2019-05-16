@@ -32,6 +32,7 @@ import com.settingsmodule.SettingsPackage;
 import com.configmodule.ConfigurationPackage;
 
 import com.fullscreenvideomodule.FullScreenVideoModule;
+import com.viromedia.bridge.ReactViroPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +50,7 @@ public class MainApplication extends Application implements ShareApplication, Re
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("GVR")),
             new RNCWebViewPackage(),
             new RNGestureHandlerPackage(),
             new NetInfoPackage(),
