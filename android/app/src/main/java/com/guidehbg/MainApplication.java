@@ -29,6 +29,7 @@ import com.mediamodule.MediaControlPackage;
 import com.mediamodule.MediaPackage;
 import com.notificationmodule.NotificationPackage;
 import com.settingsmodule.SettingsPackage;
+import com.configmodule.ConfigurationPackage;
 
 import com.fullscreenvideomodule.FullScreenVideoModule;
 
@@ -54,7 +55,7 @@ public class MainApplication extends Application implements ShareApplication, Re
             new RNVersionNumberPackage(), new RNSharePackage(), new ImageMarkerPackage(),
                     new SvgPackage(), new RNFirebasePackage(), new RNFirebaseAnalyticsPackage(), new PhotoViewPackage(),
                     new BeaconPackage(), new VectorIconsPackage(), new MapsPackage(), new ReactVideoPackage(),
-                    new RNFetchBlobPackage(), new NotificationPackage(), new SettingsPackage(), new MediaPackage(),
+                    new RNFetchBlobPackage(), new NotificationPackage(), new SettingsPackage(), new ConfigurationPackage(), new MediaPackage(),
                     new MediaControlPackage(), new AppPackages());
         }
 

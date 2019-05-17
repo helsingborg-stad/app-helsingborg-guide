@@ -2,22 +2,22 @@
 
 import React from "react";
 import { View, Text } from "react-native";
-import SVGView from "../../shared/SVGView";
+import SVGView from "../SVGView";
 import styles from "./style";
 
-const pointPropertyPlaceholderImage = require("../../../images/iconPointPropertyPlaceholder.svg");
+const pointPropertyPlaceholderImage = require("../../../images/iconPointPropertyPlaceholder.png");
 
 function getPointProperties(pointProperties: PointProperty[]) {
   const pointPropertyView = (
     <View>
       <View style={styles.divider} />
       <View style={styles.pointPropertiesSectionContainer}>
-        {pointProperties.map(element =>
-          (<View style={styles.pointPropertyContainer} key={element.id} >
+        {pointProperties.map(element => (
+          <View style={styles.pointPropertyContainer} key={element.id}>
             <SVGView logoType={element.icon} placeholderImage={pointPropertyPlaceholderImage} customStyle={styles.pointPropertyIcon} />
-            <Text style={styles.pointPropertyText} >{element.name}</Text>
-          </View>),
-        )}
+            <Text style={styles.pointPropertyText}>{element.name}</Text>
+          </View>
+        ))}
       </View>
     </View>
   );
@@ -25,8 +25,8 @@ function getPointProperties(pointProperties: PointProperty[]) {
 }
 
 type Props = {
-  pointProperties: PointProperty[]
-}
+  pointProperties: PointProperty[],
+};
 
 export default function PointPropertiesView(props: Props) {
   return getPointProperties(props.pointProperties);

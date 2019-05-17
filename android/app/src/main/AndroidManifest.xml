@@ -48,8 +48,8 @@
                 android:value="AIzaSyDN7yMDr1efvJ06u4plXiGl-JuQGvv0lpQ"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.guidehbg.provider"
-            android:readPermission="com.guidehbg.provider"
+            android:authorities="${applicationId}.provider"
+            android:readPermission="${applicationId}.provider"
             android:grantUriPermissions="true"
             android:exported="false">
             <meta-data

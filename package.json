@@ -8,7 +8,11 @@
     "eslint": "eslint flow-typed/** index.js src/** --ext .js --report-unused-disable-directives",
     "test": "jest",
     "flow": "flow --show-all-errors",
-    "clean": "react-native-clean-project"
+    "clean": "react-native-clean-project",
+    "android:alpha:debug": "react-native run-android --variant alphaDebug --appIdSuffix alpha",
+    "android:alpha:release": "react-native run-android --variant alphaRelease --appIdSuffix alpha",
+    "android:store:debug": "react-native run-android --variant storeDebug",
+    "android:store:release": "react-native run-android --variant storeRelease"
   },
   "dependencies": {
     "@react-native-community/netinfo": "^2.0.10",

@@ -78,7 +78,7 @@ public class MediaControlService extends Service {
         intent.setAction( ACTION_STOP );
         PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 1, intent, 0);
         Notification.Builder builder = new Notification.Builder( this )
-                .setSmallIcon(R.drawable.src_images_hbg)
+                .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle( "Lock Screen Media example Service" )
                 .setContentText( "Artist Name" )
                 .setDeleteIntent( pendingIntent )

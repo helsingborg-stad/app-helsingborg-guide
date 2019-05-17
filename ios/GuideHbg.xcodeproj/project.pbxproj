@@ -13,6 +13,7 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* GuideHbgTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* GuideHbgTests.m */; };
+		0333E22A228C08360021B58B /* BuildConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0333E1EE228C08360021B58B /* BuildConfiguration.m */; };
 		09E4914D1FB140DCA6B88885 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B31AE14BEE0E474893C6C54D /* Roboto-Light.ttf */; };
 		0DC72978BB284760A1AEA44F /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F10D0D424B6C416798968634 /* FontAwesome.ttf */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
@@ -532,6 +533,8 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* GuideHbgTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideHbgTests.m; sourceTree = "<group>"; };
 		0293AA8E6CA04D379D6E3895 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		0333E1EE228C08360021B58B /* BuildConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildConfiguration.m; sourceTree = "<group>"; };
+		0333E229228C08360021B58B /* BuildConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildConfiguration.h; sourceTree = "<group>"; };
 		066FE2B12AB54A67B737310D /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		0CC196D2AA274350A8900BD1 /* libRCTImageMarker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTImageMarker.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
@@ -798,6 +801,8 @@
 				776D771D1FB3502600B86970 /* NotificationManager.m */,
 				776D770D1FB34F8800B86970 /* ESSTimer.h */,
 				776D770E1FB34F8800B86970 /* ESSTimer.m */,
+				0333E229228C08360021B58B /* BuildConfiguration.h */,
+				0333E1EE228C08360021B58B /* BuildConfiguration.m */,
 				776D770F1FB34F8800B86970 /* ESSBeaconScanner.h */,
 				776D77101FB34F8800B86970 /* ESSBeaconScanner.m */,
 				776D77111FB34F8800B86970 /* ESSEddystone.h */,
@@ -1889,6 +1894,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				776D77171FB34F8800B86970 /* ESSTimer.m in Sources */,
+				0333E22A228C08360021B58B /* BuildConfiguration.m in Sources */,
 				776D771A1FB34F8800B86970 /* IosBeacon.m in Sources */,
 				776D771E1FB3502600B86970 /* NotificationManager.m in Sources */,
 				776D771B1FB34F8800B86970 /* AudioManager.m in Sources */,

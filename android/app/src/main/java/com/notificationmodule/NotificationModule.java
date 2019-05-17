@@ -144,7 +144,7 @@ public class NotificationModule extends ReactContextBaseJavaModule {
         Notification notification = new NotificationCompat.Builder(context)
                 // Show controls on lock screen even when user hides sensitive content.
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setSmallIcon(R.drawable.src_images_hbg)
+                .setSmallIcon(R.drawable.notification_icon)
                 // Add media control buttons that invoke intents in your media service
                 //.addAction(R.drawable.common_google_signin_btn_icon_dark_normal, "Previous", ) // #0
 
