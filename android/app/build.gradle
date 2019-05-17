@@ -97,6 +97,12 @@ def keystorePropertiesFile = rootProject.file(System.getenv("KEYSTORE_PROPERTIES
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+def VERSION_MAJOR = 1
+def VERSION_MINOR = 52
+
+def VERSION_CODE = ((VERSION_MAJOR * 100) + VERSION_MINOR) * 100000)
+def VERSION_NAME ="${VERSION_MAJOR}.${VERSION_MINOR}.${'git rev-list --count HEAD'.execute().text.trim()}"
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -109,8 +115,8 @@ android {
         applicationId "com.guidehbg"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 21
-        versionName "1.52"
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
     }
     signingConfigs {
         release {
