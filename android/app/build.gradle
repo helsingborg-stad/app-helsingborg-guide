@@ -100,7 +100,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 def VERSION_MAJOR = 1
 def VERSION_MINOR = 52
 
-def VERSION_CODE = ((VERSION_MAJOR * 100) + VERSION_MINOR) * 100000)
+def VERSION_CODE = ((VERSION_MAJOR * 100) + VERSION_MINOR) * 100000
 def VERSION_NAME ="${VERSION_MAJOR}.${VERSION_MINOR}.${'git rev-list --count HEAD'.execute().text.trim()}"
 
 android {
