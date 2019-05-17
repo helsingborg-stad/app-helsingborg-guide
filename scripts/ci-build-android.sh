@@ -9,6 +9,6 @@ FLAVOR="store"
 
   ./gradlew ":app:lint${FLAVOR}Debug"
   ./gradlew ":app:lint${FLAVOR}Release"
-  ./gradlew ":app:assemble${FLAVOR}Debug"
+  ./gradlew ":app:assemble${FLAVOR}Debug" -Punsigned
   ./gradlew ":app:assemble${FLAVOR}Release" -Punsigned
 )
