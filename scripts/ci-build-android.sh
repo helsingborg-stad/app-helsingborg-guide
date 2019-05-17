@@ -1,12 +1,14 @@
 #!/bin/sh
 set -e -u
 
+FLAVOR="store"
+
 (
   set -x
   cd android/
 
-  ./gradlew ":app:lintDebug"
-  ./gradlew ":app:lintRelease"
-  ./gradlew ":app:assembleDebug"
-  ./gradlew ":app:assembleRelease" -Punsigned
+  ./gradlew ":app:lint${FLAVOR}Debug"
+  ./gradlew ":app:lint${FLAVOR}Release"
+  ./gradlew ":app:assemble${FLAVOR}Debug"
+  ./gradlew ":app:assemble${FLAVOR}Release" -Punsigned
 )
