@@ -1,9 +1,8 @@
-language: node_js
-node_js:
-  - '10'
 matrix:
   include:
     - language: node_js
+      node_js:
+        - '10'
       addons:
         apt:
           sources:
@@ -33,6 +32,7 @@ matrix:
           - android-25
           - android-23
           - android-26
+          - android-28
       env:
         - CXX=g++-4.8
       addons:
