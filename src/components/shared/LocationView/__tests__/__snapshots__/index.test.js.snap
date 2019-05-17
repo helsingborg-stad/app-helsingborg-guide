@@ -438,7 +438,7 @@ exports[`weekdays 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -478,7 +478,7 @@ exports[`weekdays 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1069,7 +1069,7 @@ exports[`weekdays 2`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1109,7 +1109,7 @@ exports[`weekdays 2`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1700,7 +1700,7 @@ exports[`weekdays 3`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1740,7 +1740,7 @@ exports[`weekdays 3`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -2331,7 +2331,7 @@ exports[`weekdays 4`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -2371,7 +2371,7 @@ exports[`weekdays 4`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -2962,7 +2962,7 @@ exports[`weekdays 5`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3002,7 +3002,7 @@ exports[`weekdays 5`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3593,7 +3593,7 @@ exports[`weekdays 6`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3633,7 +3633,7 @@ exports[`weekdays 6`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4224,7 +4224,7 @@ exports[`weekdays 7`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4264,7 +4264,7 @@ exports[`weekdays 7`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4924,7 +4924,7 @@ exports[`with geolocation 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4964,7 +4964,7 @@ exports[`with geolocation 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -5555,7 +5555,7 @@ exports[`with point properties 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -5595,7 +5595,7 @@ exports[`with point properties 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
