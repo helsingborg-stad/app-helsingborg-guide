@@ -2,14 +2,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
-import {
-  selectCurrentGuideByID,
-  selectCurrentGuideGroup,
-  selectCurrentCategory,
-  showBottomBar,
-} from "../../../actions/uiStateActions";
+import { selectCurrentGuideByID, selectCurrentGuideGroup, selectCurrentCategory, showBottomBar } from "../../../actions/uiStateActions";
 
-import { AnalyticsUtils } from "../../../utils/";
+import { AnalyticsUtils } from "../../../utils";
 import MapWithListView, { type MapItem } from "../../shared/MapWithListView";
 import { HeaderStyles } from "../../../styles";
 
@@ -19,7 +14,7 @@ type Props = {
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
   dispatchShowBottomBar(visible: boolean): void,
-}
+};
 
 class CategoryMapScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
@@ -32,7 +27,7 @@ class CategoryMapScreen extends Component<Props> {
       title,
       headerRight: <View />,
     });
-  }
+  };
 
   constructor(props: Props) {
     super(props);
@@ -50,8 +45,7 @@ class CategoryMapScreen extends Component<Props> {
 
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
-      case "guide":
-      {
+      case "guide": {
         this.props.selectGuide(item.id);
         const { guide } = item;
         if (guide) {
@@ -76,7 +70,7 @@ class CategoryMapScreen extends Component<Props> {
         break;
       default:
     }
-  }
+  };
 
   render() {
     const { currentCategory, navigation } = this.props;
@@ -94,16 +88,10 @@ class CategoryMapScreen extends Component<Props> {
         mapItems.push({ guide });
       }
     });
-    return (
-      <MapWithListView
-        items={mapItems}
-        navigation={navigation}
-        showListButton={false}
-      />
-    );
+
+    return <MapWithListView items={mapItems} navigation={navigation} showListButton={false} />;
   }
 }
-
 
 function mapStateToProps(state: RootState) {
   const { uiState, navigation } = state;
@@ -124,4 +112,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryMapScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CategoryMapScreen);

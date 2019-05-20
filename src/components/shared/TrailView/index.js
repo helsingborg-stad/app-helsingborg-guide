@@ -3,8 +3,8 @@
 import React from "react";
 import { TouchableWithoutFeedback, View } from "react-native";
 import styles from "./style";
-import MapWithListView, { type MapItem } from "../../shared/MapWithListView";
-import MapInformationOverlay from "../../shared/MapInformationOverlay/MapInformationOverlay";
+import MarkerListView from "../MarkerListView";
+import MapInformationOverlay from "../MapInformationOverlay/MapInformationOverlay";
 import AudioPlayerView from "../AudioPlayerView";
 import DownloadButtonContainer from "../DownloadButton";
 
@@ -12,17 +12,14 @@ type Props = {
   trail: Guide,
   showInfoOverlay: boolean,
   onToggleInfoOverlay: () => void,
-  navigation: Object
+  navigation: Object,
 };
 
 function renderDownloadButton() {
   return <DownloadButtonContainer style={styles.downloadButton} />;
 }
 
-function renderMapInformationOverlay(
-  trail: Guide,
-  onToggleInfoOverlay: () => void,
-) {
+function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => void) {
   if (!trail) {
     return null;
   }
@@ -49,17 +46,8 @@ const TrailView = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <MapWithListView
-        items={mapItems}
-        initialLocation={props.trail.contentObjects[0].location}
-        navigation={props.navigation}
-        stopAudioOnUnmount
-        showNumberedMapMarkers
-        showDirections
-      />
-      {props.showInfoOverlay
-        ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay)
-        : null}
+      <MarkerListView items={mapItems} initialLocation={props.trail.contentObjects[0].location} showNumberedMapMarkers showDirections />
+      {props.showInfoOverlay ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay) : null}
       <AudioPlayerView />
     </View>
   );

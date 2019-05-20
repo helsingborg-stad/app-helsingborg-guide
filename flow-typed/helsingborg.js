@@ -34,32 +34,31 @@ declare type Action =
   | { type: "AUDIO_INIT_FILE", audio: AudioState }
   | { type: "AUDIO_LOAD_FILE", audio: AudioState }
   | { type: "AUDIO_LOAD_FILE_SUCCESS", prepared: boolean }
-  | { type: "AUDIO_RELEASE_FILE", }
-  | { type: "AUDIO_TOGGLE_PLAY", }
-  | { type: "AUDIO_PAUSE", }
+  | { type: "AUDIO_RELEASE_FILE" }
+  | { type: "AUDIO_TOGGLE_PLAY" }
+  | { type: "AUDIO_PAUSE" }
   | { type: "AUDIO_UPDATE", audio: AudioState }
   | { type: "AUDIO_MOVE_SLIDER", position: number }
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   | { type: "GEOLOCATION_UPDATE_SUCCESS", position: GeolocationType }
-  | { type: "SET_LANGUAGE", langCode: string }
-  ;
+  | { type: "SET_LANGUAGE", langCode: string };
 
-declare type NavigationItemType = 'guide' | 'guidegroup';
+declare type NavigationItemType = "guide" | "guidegroup";
 
 declare type NavigationItem = {
   id: number,
   type: NavigationItemType,
   guide?: Guide,
   guideGroup?: GuideGroup,
-}
+};
 
 declare type NavigationCategory = {
   id: number,
   description: string,
   name: string,
   slug: string,
-  items: NavigationItem[]
-}
+  items: NavigationItem[],
+};
 
 declare type Coords = {
   speed: number,
@@ -68,25 +67,25 @@ declare type Coords = {
   accuracy: number,
   heading: number,
   altitude: number,
-  altitudeAccuracy: number
-}
+  altitudeAccuracy: number,
+};
 
 declare type Dispatch = (action: Action | ThunkAction) => any;
 
 declare type Store = {
   dispatch: Dispatch,
-  getState: GetState
-}
+  getState: GetState,
+};
 
 /* in lack of a better name. Geolocation was taken */
 declare type GeolocationType = {
   timestamp: number,
-  coords: Coords
-}
+  coords: Coords,
+};
 
 declare type GetState = () => RootState;
 
-declare type ContentType = 'audio' | 'video';
+declare type ContentType = "audio" | "video";
 
 declare type MediaContent = {
   contentType: ContentType,
@@ -97,27 +96,27 @@ declare type MediaContent = {
   created: string,
   /** @format date-time */
   modified: string,
-  url: string
-}
+  url: string,
+};
 
 declare type PositionLongLat = {
   longitude: number,
-  latitude: number
-}
+  latitude: number,
+};
 
 declare type Beacon = {
   id: string,
   nid: string,
-  distance?: number
-}
+  distance?: number,
+};
 
-declare type LinkType = 'web' | 'instagram' | 'facebook' | 'twitter' | 'spotify' | 'youtube' | 'vimeo';
+declare type LinkType = "web" | "instagram" | "facebook" | "twitter" | "spotify" | "youtube" | "vimeo";
 
 declare type Link = {
   url: string,
   title?: string,
-  type?: LinkType
-}
+  type?: LinkType,
+};
 
 declare type ContentObject = {
   id: string,
@@ -131,8 +130,8 @@ declare type ContentObject = {
   video?: MediaContent,
   links?: Link[],
   beacon?: Beacon,
-  location?: Location
-}
+  location?: Location,
+};
 
 declare type Guide = {
   id: number,
@@ -154,9 +153,9 @@ declare type Guide = {
   contentObjects: ContentObject[],
   distance?: number,
   location?: Location,
-}
+};
 
-declare type GuideType = 'guide' | 'trail';
+declare type GuideType = "guide" | "trail";
 
 declare type GuideGroup = {
   id: number,
@@ -174,20 +173,20 @@ declare type GuideGroup = {
 declare type GuideGroupState = {
   isFetching: boolean,
   items: GuideGroup[],
-}
+};
 
 declare type GuideState = {
   isFetching: boolean,
   items: Guide[],
-}
+};
 
 declare type Images = {
   thumbnail?: ?string,
   medium?: ?string,
-  large?: ?string
+  large?: ?string,
 };
 
-declare type ResizeMode = 'cover' | 'contain' | 'stretch' | 'repeat' | 'center';
+declare type ResizeMode = "cover" | "contain" | "stretch" | "repeat" | "center";
 
 declare type LinkAndService = { service: string, url: string };
 
@@ -198,7 +197,13 @@ declare type Location = {
   longitude: number,
   openingHours: OpenHour[],
   openingHourExceptions: OpenHourException[],
-  links: LinkAndService[]
+  links: LinkAndService[],
+};
+
+declare type MapItem = {
+  guide?: Guide,
+  guideGroup?: GuideGroup,
+  contentObject?: ContentObject,
 };
 
 declare type OpenHour = {
@@ -206,19 +211,19 @@ declare type OpenHour = {
   closed: boolean,
   opening: string,
   closing: string,
-  dayNumber: number
+  dayNumber: number,
 };
 
 declare type OpenHourException = {
   date: string,
-  description: string
+  description: string,
 };
 
 declare type PointProperty = {
   id: number,
   slug: string,
   name: string,
-  icon?: string
+  icon?: string,
 };
 
 declare type AudioState = {
@@ -230,17 +235,17 @@ declare type AudioState = {
   isPlaying: boolean,
   duration: number,
   currentPosition: number,
-  isMovingSlider: boolean
+  isMovingSlider: boolean,
 };
 
-declare type PostStatus = 'publish' | 'draft';
+declare type PostStatus = "publish" | "draft";
 
 declare type TaskStatus = "not_started" | "failed" | "pending" | "done";
 declare type DownloadTask = {
   guideId: number,
   url: string,
   status: TaskStatus,
-}
+};
 
 declare type DownloadStatus = "stopped" | "pending" | "paused" | "done";
 declare type OfflineGuide = {
@@ -248,17 +253,17 @@ declare type OfflineGuide = {
   progress: number, // between 0 and 1
   downloadTasks: { [string]: DownloadTask },
   guide: Guide,
-}
+};
 
 declare type DownloadedGuidesState = {
-  offlineGuides: { [number]: OfflineGuide }
-}
+  offlineGuides: { [number]: OfflineGuide },
+};
 
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
 
 declare type UIState = {
   currentGuideGroup: ?GuideGroup,
-  currentGuides: ?Guide[],
+  currentGuides: ?(Guide[]),
   currentContentObject: ?ContentObject,
   currentContentObjectImageIndex: number,
   currentGuide: ?Guide,
@@ -267,13 +272,13 @@ declare type UIState = {
   developerMode: boolean,
   currentBottomBarTab: number,
   showBottomBar: boolean,
-}
+};
 
 declare type NavigationState = {
   isFetching: boolean,
   navigationCategories: NavigationCategory[],
-  currentLanguage: string
-}
+  currentLanguage: string,
+};
 
 declare type RootState = {
   uiState: UIState,
@@ -283,4 +288,4 @@ declare type RootState = {
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
-}
+};
