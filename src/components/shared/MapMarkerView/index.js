@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import { MapItemUtils } from "../../../utils";
 import styles from "./styles";
 
 const locationMarkerActive = require("../../../images/map/marker-location-active.png");
@@ -25,47 +26,6 @@ type State = {
   isInitialized: boolean,
   markersFocused: boolean,
 };
-
-function getIdFromMapItem(item: MapItem): string {
-  if (item.contentObject) {
-    return item.contentObject.id;
-  }
-  if (item.guide) {
-    return `${item.guide.id}`;
-  }
-  if (item.guideGroup) {
-    return `${item.guideGroup.id}`;
-  }
-
-  return "";
-}
-
-function getLocationFromItem(item: MapItem): ?Location {
-  const { contentObject, guide, guideGroup } = item;
-
-  if (guide) {
-    return guide.location;
-  }
-  if (guideGroup) {
-    return guideGroup.location;
-  }
-  if (contentObject) {
-    return contentObject.location;
-  }
-
-  return null;
-}
-
-function getLocations(items: MapItem[]): Location[] {
-  const locs: Location[] = [];
-  items.forEach((i) => {
-    const l = getLocationFromItem(i);
-    if (l) {
-      locs.push(l);
-    }
-  });
-  return locs;
-}
 
 class MapMarkerView extends Component<Props, State> {
   static defaultProps = {
@@ -96,7 +56,7 @@ class MapMarkerView extends Component<Props, State> {
       edgePadding,
       animated: false,
     };
-    const locations: Location[] = getLocations(markers);
+    const locations: Location[] = MapItemUtils.getLocations(markers);
     if (this.map) {
       this.map.fitToCoordinates(locations, options);
     }
@@ -122,11 +82,11 @@ class MapMarkerView extends Component<Props, State> {
   }
 
   numberedMapViewMarker = (mapItem: MapItem, index: number) => {
-    const id = getIdFromMapItem(mapItem);
-    const location: ?Location = getLocationFromItem(mapItem);
+    const id = MapItemUtils.getIdFromMapItem(mapItem);
+    const location: ?Location = MapItemUtils.getLocationFromItem(mapItem);
 
     const { activeMarker } = this.props;
-    const active = getIdFromMapItem(activeMarker) === id;
+    const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
     const markerImage = this.markerImageForTrailObject(mapItem, active);
     const numberString: string = `${index}`;
     // Warning: zIndex is bugged on iOS 11!
@@ -154,10 +114,10 @@ class MapMarkerView extends Component<Props, State> {
   };
 
   defaultMapViewMarker = (mapItem: MapItem, index: number) => {
-    const id = getIdFromMapItem(mapItem);
-    const location: ?Location = getLocationFromItem(mapItem);
+    const id = MapItemUtils.getIdFromMapItem(mapItem);
+    const location: ?Location = MapItemUtils.getLocationFromItem(mapItem);
     const { activeMarker } = this.props;
-    const active = getIdFromMapItem(activeMarker) === id;
+    const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
     const markerImage = this.markerImageForTrailObject(mapItem, active);
     // Warning: zIndex is bugged on iOS 11!
     // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
@@ -216,7 +176,7 @@ class MapMarkerView extends Component<Props, State> {
         onMapMarkerPressed(index);
       }
 
-      const location = getLocationFromItem(marker);
+      const location = MapItemUtils.getLocationFromItem(marker);
       if (this.map && location) {
         this.map.animateToRegion(location);
       }

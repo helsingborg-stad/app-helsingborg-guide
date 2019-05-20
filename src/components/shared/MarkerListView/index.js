@@ -7,7 +7,7 @@ import IconTextTouchable from "../IconTextTouchable";
 import SegmentControl from "../SegmentControl";
 import MapMarkerView from "../MapMarkerView";
 import LangService from "../../../services/langService";
-import { LocationUtils, UrlUtils, AnalyticsUtils } from "../../../utils";
+import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 
@@ -28,48 +28,6 @@ type State = {
   recentlyTappedPin: boolean,
   activeMarker: MapItem,
 };
-
-function getIdFromMapItem(item: MapItem): string {
-  if (item.contentObject) {
-    return item.contentObject.id;
-  }
-  if (item.guide) {
-    return `${item.guide.id}`;
-  }
-  if (item.guideGroup) {
-    return `${item.guideGroup.id}`;
-  }
-
-  return "";
-}
-
-function getLocationFromItem(item: MapItem): ?Location {
-  const { contentObject, guide, guideGroup } = item;
-
-  if (guide) {
-    return guide.location;
-  }
-  if (guideGroup) {
-    return guideGroup.location;
-  }
-  if (contentObject) {
-    return contentObject.location;
-  }
-
-  return null;
-}
-
-function getNumberOfGuides(item: MapItem): ?number {
-  const { guide, guideGroup } = item;
-  if (guide) {
-    return guide.contentObjects.length;
-  }
-  if (guideGroup) {
-    return guideGroup.guidesCount;
-  }
-
-  return 0;
-}
 
 class MarkerListView extends Component<Props, State> {
   constructor(props: Props) {
@@ -183,7 +141,7 @@ class MarkerListView extends Component<Props, State> {
   };
 
   onListItemDirectionsButtonPressed = (item: MapItem) => {
-    const location = getLocationFromItem(item);
+    const location = MapItemUtils.getLocationFromItem(item);
     if (!location) return;
 
     const { userLocation } = this.props;
@@ -204,7 +162,7 @@ class MarkerListView extends Component<Props, State> {
   };
 
   displayGuideNumber = (item: MapItem) => {
-    const numberOfGuides = getNumberOfGuides(item);
+    const numberOfGuides = MapItemUtils.getNumberOfGuides(item);
     if (!numberOfGuides) return null;
 
     let textString;
@@ -273,7 +231,7 @@ class MarkerListView extends Component<Props, State> {
       contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
       data={items}
       horizontal
-      keyExtractor={getIdFromMapItem}
+      keyExtractor={MapItemUtils.getIdFromMapItem}
       ref={(ref) => {
         this.listRef = ref;
       }}
