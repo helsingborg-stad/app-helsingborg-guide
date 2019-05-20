@@ -16,7 +16,6 @@ const numberedMarkerInactive = require("../../../images/map/marker-number.png");
 
 type Props = {
   items: MapItem[],
-  initialLocation?: ?Location,
   showNumberedMapMarkers?: boolean,
   userLocation: ?GeolocationType,
   onMapMarkerPressed?: ?(index: number) => void,
@@ -29,7 +28,6 @@ type State = {
 
 class MapMarkerView extends Component<Props, State> {
   static defaultProps = {
-    initialLocation: { latitude: 56.0471881, longitude: 12.6963658 },
     showNumberedMapMarkers: true,
     onMapMarkerPressed: null,
   };
@@ -189,8 +187,8 @@ class MapMarkerView extends Component<Props, State> {
   };
 
   render() {
-    const { items, initialLocation } = this.props;
-    const { longitude, latitude } = initialLocation;
+    const { items, activeMarker } = this.props;
+    const location = MapItemUtils.getLocationFromItem(activeMarker);
 
     return (
       <View style={styles.container}>
@@ -202,10 +200,10 @@ class MapMarkerView extends Component<Props, State> {
           showsUserLocation
           onMapReady={this.onMapReady}
           initialRegion={{
-            latitude,
-            longitude,
-            latitudeDelta: 0.09,
-            longitudeDelta: 0.06,
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0,
+            longitudeDelta: 0,
           }}
         >
           {this.renderMapMarkers(items)}
