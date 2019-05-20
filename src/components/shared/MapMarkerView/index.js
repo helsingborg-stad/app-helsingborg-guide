@@ -178,7 +178,12 @@ class MapMarkerView extends Component<Props, State> {
 
       const location = MapItemUtils.getLocationFromItem(marker);
       if (this.map && location) {
-        this.map.animateToRegion(location);
+        this.map.animateToRegion({
+          latitude: location.latitude,
+          longitude: location.longitude,
+          latitudeDelta: 0,
+          longitudeDelta: 0,
+        });
       }
     }
   };
