@@ -39,15 +39,34 @@ function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => vo
   );
 }
 
+// Hacky solution for now. Hopefully this information
+// will come from the CMS in the future
+function getSupportedNavigationModesForTrail(trail: Guide): Array<string> {
+  // 1627406 is Sofiero Topp-10
+  if (trail.id === 1627406) {
+    return ["Karta", "Guide"];
+  }
+
+  return ["Karta"];
+}
+
 const TrailView = (props: Props) => {
-  const mapItems: MapItem[] = props.trail.contentObjects.map(item => ({
+  const { trail, onToggleInfoOverlay, showInfoOverlay, navigation } = props;
+  const mapItems: MapItem[] = trail.contentObjects.map(item => ({
     contentObject: item,
   }));
 
   return (
     <View style={styles.container}>
-      <MarkerListView items={mapItems} initialLocation={props.trail.contentObjects[0].location} showNumberedMapMarkers showDirections />
-      {props.showInfoOverlay ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay) : null}
+      <MarkerListView
+        items={mapItems}
+        initialLocation={trail.contentObjects[0].location}
+        showNumberedMapMarkers
+        showDirections
+        supportedNavigationModes={getSupportedNavigationModesForTrail(trail)}
+        navigation={navigation}
+      />
+      {showInfoOverlay ? renderMapInformationOverlay(trail, onToggleInfoOverlay) : null}
       <AudioPlayerView />
     </View>
   );
