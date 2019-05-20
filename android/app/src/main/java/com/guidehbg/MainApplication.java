@@ -49,16 +49,30 @@ public class MainApplication extends Application implements ShareApplication, Re
 
         @Override
         protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("GVR")),
-            new RNCWebViewPackage(),
-            new RNGestureHandlerPackage(),
-            new NetInfoPackage(),
-            new RNVersionNumberPackage(), new RNSharePackage(), new ImageMarkerPackage(),
-                    new SvgPackage(), new RNFirebasePackage(), new RNFirebaseAnalyticsPackage(), new PhotoViewPackage(),
-                    new BeaconPackage(), new VectorIconsPackage(), new MapsPackage(), new ReactVideoPackage(),
-                    new RNFetchBlobPackage(), new NotificationPackage(), new SettingsPackage(), new ConfigurationPackage(), new MediaPackage(),
-                    new MediaControlPackage(), new AppPackages());
+            return Arrays.<ReactPackage>asList(
+                new MainReactPackage(),
+                new RNCWebViewPackage(),
+                new RNGestureHandlerPackage(),
+                new NetInfoPackage(),
+                new RNVersionNumberPackage(),
+                new RNSharePackage(),
+                new ImageMarkerPackage(),
+                new SvgPackage(),
+                new RNFirebasePackage(),
+                new RNFirebaseAnalyticsPackage(),
+                new PhotoViewPackage(),
+                new BeaconPackage(),
+                new VectorIconsPackage(),
+                new MapsPackage(),
+                new ReactVideoPackage(),
+                new RNFetchBlobPackage(),
+                new NotificationPackage(),
+                new SettingsPackage(),
+                new MediaPackage(),
+                new MediaControlPackage(),
+                new AppPackages(),
+                new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("GVR"))
+            );
         }
 
         @Override
