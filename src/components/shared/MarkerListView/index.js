@@ -18,7 +18,7 @@ type Props = {
   showNumberedMapMarkers: boolean,
   showDirections: boolean,
   userLocation: ?GeolocationType,
-  supportedNavigationModes: Array<string>,
+  supportedNavigationModes?: Array<string>,
   selectGuide(guide: Guide): void,
   selectGuideGroup(id: number): void,
   dispatchSelectContentObject(obj: ContentObject): void,
@@ -30,6 +30,10 @@ type State = {
 };
 
 class MarkerListView extends Component<Props, State> {
+  static defaultProps = {
+    supportedNavigationModes: ["Karta"],
+  };
+
   constructor(props: Props) {
     super(props);
 
@@ -238,7 +242,7 @@ class MarkerListView extends Component<Props, State> {
       renderItem={({ item, index }) => this.renderListItem(item, styles.listItem, index + 1)}
       style={styles.listStyle}
       getItemLayout={this.getItemLayout}
-      onScroll={this.onListScroll}
+      onMomentumScrollEnd={this.onListScroll}
       snapToAlignment="center"
       snapToInterval={ListItemWidth + 10}
       decelerationRate="fast"
