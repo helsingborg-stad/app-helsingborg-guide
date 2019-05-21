@@ -14,7 +14,6 @@ import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 type Props = {
   navigation: any,
   items: MapItem[],
-  initialLocation?: Location,
   showNumberedMapMarkers: boolean,
   showDirections: boolean,
   userLocation: ?GeolocationType,
