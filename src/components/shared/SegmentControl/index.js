@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Text, Animated } from "react-native";
 import styles from "./styles";
 
 type Props = {
@@ -26,10 +26,19 @@ export default class SegmentControl extends Component<Props, State> {
     };
   }
 
+  containerWidth: ?number;
+
+  selectedViewLeftInset = new Animated.Value(0);
+
   onPressSegmentIndex = (index: number) => {
+    const { onSegmentIndexChange, labels } = this.props;
+
+    Animated.spring(this.selectedViewLeftInset, {
+      toValue: (index / labels.length) * this.containerWidth,
+    }).start();
+
     this.setState({ selectedIndex: index });
 
-    const { onSegmentIndexChange } = this.props;
     if (onSegmentIndexChange) {
       onSegmentIndexChange(index);
     }
@@ -47,6 +56,22 @@ export default class SegmentControl extends Component<Props, State> {
 
   render() {
     const { labels } = this.props;
-    return <View style={styles.container}>{labels.map(this.renderSegmentItem)}</View>;
+    const width = (1 / labels.length) * 100;
+    const selectionViewStyle = {
+      width: `${width}%`,
+      left: this.selectedViewLeftInset,
+    };
+
+    return (
+      <View
+        style={styles.container}
+        onLayout={(e) => {
+          this.containerWidth = e.nativeEvent.layout.width;
+        }}
+      >
+        {labels.map(this.renderSegmentItem)}
+        <Animated.View style={[styles.selectionView, selectionViewStyle]} />
+      </View>
+    );
   }
 }

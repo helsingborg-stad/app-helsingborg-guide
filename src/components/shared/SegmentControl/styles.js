@@ -6,7 +6,7 @@ export default StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.purple,
     flexDirection: "row",
-    height: 44,
+    height: 54,
     justifyContent: "center",
     width: "100%",
   },
@@ -17,9 +17,17 @@ export default StyleSheet.create({
   },
   segmentLabel: {
     ...TextStyles.segmentControlLabel,
+    opacity: 0.5,
   },
   segmentLabelSelected: {
     ...TextStyles.segmentControlLabel,
-    fontWeight: "800",
+    opacity: 1,
+  },
+  selectionView: {
+    backgroundColor: Colors.white,
+    bottom: 0,
+    height: 4,
+    left: 0,
+    position: "absolute",
   },
 });

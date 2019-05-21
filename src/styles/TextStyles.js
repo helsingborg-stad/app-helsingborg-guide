@@ -47,7 +47,7 @@ export default StyleSheet.create({
     alignSelf: "center",
     color: Colors.white,
     fontSize: 18,
-    fontWeight: "300",
+    fontWeight: "600",
     lineHeight: 23.0,
     textAlign: "center",
   },
