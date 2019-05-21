@@ -17,7 +17,6 @@ const numberedMarkerInactive = require("../../../images/map/marker-number.png");
 type Props = {
   items: MapItem[],
   showNumberedMapMarkers?: boolean,
-  userLocation: ?GeolocationType,
   onMapMarkerPressed?: ?(index: number) => void,
   activeMarker: MapItem,
 };
