@@ -26,8 +26,6 @@ import {
 import { setLanguage } from "../../actions/navigationActions";
 import { setDeveloperMode, showBottomBar, selectCurrentBottomBarTab } from "../../actions/uiStateActions";
 
-import ARView from "../shared/ARView";
-
 const defaultMargin = 20;
 const helsingborgIcon = require("../../images/HBG.png");
 
@@ -247,8 +245,6 @@ class SettingsScreen extends Component {
   }
 
   render() {
-    return <ARView />
-
     return (
       <View style={styles.container}>
         {this.displayLanguageSegment()}
