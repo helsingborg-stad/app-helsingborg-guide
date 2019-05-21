@@ -1,32 +1,54 @@
+// @flow
+
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { View, Text } from "react-native";
 import { ViroARSceneNavigator, ViroUtils } from "react-viro";
+import CameraService from "../../../services/cameraService";
+import LangService from "../../../services/langService";
 
 import MarkerScene from "./MarkerScene";
 
 const { isARSupportedOnDevice } = ViroUtils;
 
-export default class ARView extends Component {
-  constructor(props) {
-    super(props);
+const ARState = {
+  CAMERA_DISABLED: "AR_CAMERA_DISABLED",
+  CHECKING: "AR_CHECKING",
+  TRANSIENT: "AR_TRANSIENT",
+  SUPPORTED: "AR_SUPPORTED",
+  UNKNOWN: "AR_UNKNOWN",
+  UNSUPPORTED: "AR_UNSUPPORTED",
+};
 
-    this.state = {
-      arSupported: true,
-      reason: "",
-    };
+type Props = {}
 
-    const unsupportedCallback = reason => this.setState({ arSupported: false, reason });
-    const supportedCallback = () => this.setState({ arSupported: true });
+type State = {
+  arSupported: boolean,
+  arState: string
+}
 
+export default class ARView extends Component<Props, State> {
+  state = { arSupported: false, arState: ARState.CHECKING };
+
+  componentDidMount() {
+    CameraService
+      .getInstance()
+      .checkCameraPermissions()
+      .then(
+        () => { this.checkSupport(); }, // permitted
+        () => { this.setState({ arSupported: false, arState: ARState.CAMERA_DISABLED }); }, // not permitted
+      );
+  }
+
+  checkSupport() {
+    const unsupportedCallback = reason => this.setState({ arSupported: false, arState: ARState[reason] });
+    const supportedCallback = () => this.setState({ arSupported: true, arState: ARState.SUPPORTED });
     isARSupportedOnDevice(unsupportedCallback, supportedCallback);
   }
 
   render() {
     const {
-      state: { arSupported, reason },
+      state: { arSupported, arState },
     } = this;
-
-    console.log(arSupported, reason);
 
     return (
       arSupported ? (
@@ -37,7 +59,9 @@ export default class ARView extends Component {
           worldAlignment="GravityAndHeading"
         />
       ) : (
-        <View/>
+        <View>
+          <Text>{LangService.strings[arState]}</Text>
+        </View>
       )
     );
   }
