@@ -40,6 +40,10 @@ class MapMarkerView extends Component<Props, State> {
     };
   }
 
+  longitudeDelta = 0;
+
+  latitudeDelta = 0;
+
   focusMarkers(markers: MapItem[]) {
     if (!markers) return;
 
@@ -175,8 +179,8 @@ class MapMarkerView extends Component<Props, State> {
         this.map.animateToRegion({
           latitude: location.latitude,
           longitude: location.longitude,
-          latitudeDelta: 0,
-          longitudeDelta: 0,
+          latitudeDelta: this.latitudeDelta,
+          longitudeDelta: this.longitudeDelta,
         });
       }
     }
@@ -192,14 +196,18 @@ class MapMarkerView extends Component<Props, State> {
           ref={(ref) => {
             this.map = ref;
           }}
+          onRegionChangeComplete={(e) => {
+            this.longitudeDelta = e.longitudeDelta;
+            this.latitudeDelta = e.latitudeDelta;
+          }}
           style={styles.map}
           showsUserLocation
           onMapReady={this.onMapReady}
           initialRegion={{
             latitude: location.latitude,
             longitude: location.longitude,
-            latitudeDelta: 0,
-            longitudeDelta: 0,
+            latitudeDelta: this.latitudeDelta,
+            longitudeDelta: this.longitudeDelta,
           }}
         >
           {this.renderMapMarkers(items)}
