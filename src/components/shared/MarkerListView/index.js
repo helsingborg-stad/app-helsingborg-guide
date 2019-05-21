@@ -280,7 +280,7 @@ class MarkerListView extends Component<Props, State> {
     // Setting a timeout to prevent map from "jumping" while panning
     setTimeout(() => {
       this.setState({ recentlyTappedPin: false });
-    }, 500);
+    }, 1000);
   };
 
   onNavigationModeChange = (index: number) => {

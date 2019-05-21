@@ -167,13 +167,9 @@ class MapMarkerView extends Component<Props, State> {
   panMapToIndex = (index: number) => {
     const { items } = this.props;
     const marker = items[index];
-    const { activeMarker, onMapMarkerPressed } = this.props;
+    const { activeMarker } = this.props;
 
     if (marker !== activeMarker) {
-      if (onMapMarkerPressed) {
-        onMapMarkerPressed(index);
-      }
-
       const location = MapItemUtils.getLocationFromItem(marker);
       if (this.map && location) {
         this.map.animateToRegion({
