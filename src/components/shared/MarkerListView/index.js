@@ -7,7 +7,7 @@ import IconTextTouchable from "../IconTextTouchable";
 import SegmentControl from "../SegmentControl";
 import MapMarkerView from "../MapMarkerView";
 import LangService from "../../../services/langService";
-import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils } from "../../../utils";
+import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 
@@ -31,7 +31,7 @@ type State = {
 
 class MarkerListView extends Component<Props, State> {
   static defaultProps = {
-    supportedNavigationModes: ["Karta"],
+    supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map],
   };
 
   constructor(props: Props) {
@@ -295,9 +295,12 @@ class MarkerListView extends Component<Props, State> {
     return (
       <View style={styles.container}>
         {supportedNavigationModes.length > 1 && (
-          <SegmentControl labels={supportedNavigationModes} onSegmentIndexChange={this.onNavigationModeChange} />
+          <SegmentControl
+            labels={supportedNavigationModes.map(mode => `${LangService.strings[mode]}`)}
+            onSegmentIndexChange={this.onNavigationModeChange}
+          />
         )}
-        {selectedNavigationMode === "Karta" && (
+        {selectedNavigationMode === NavigationModeUtils.NavigationModes.Map && (
           <MapMarkerView
             items={items}
             ref={(ref) => {

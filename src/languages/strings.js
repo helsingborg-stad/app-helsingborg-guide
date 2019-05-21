@@ -79,6 +79,7 @@ export default {
     VIDEO: "Play video",
     VIEW_ALL: "View all",
     WITH: "with",
+    AR: "Guide",
   },
   sv: {
     ABOUT_GUIDE_HELS: "Om Guide Helsingborg",
@@ -157,6 +158,7 @@ export default {
     VIDEO: "Spela film",
     WITH: "med",
     VIEW_ALL: "Se alla",
+    AR: "Vägvisare",
   },
   de: {
     ABOUT_GUIDE_HELS: "Über Guide Helsingborg",
@@ -181,7 +183,8 @@ export default {
     DELETE_STORED_DATA: "DE Radera sparad media",
     DOWNLOAD: "Download",
     DOWNLOADED: "Offline verfügbar",
-    DOWNLOADED_INFO: "Der Inhalt wird heruntergeladen und offline verfügbar. Gehen Sie zu Einstellungen, wenn Sie heruntergeladene Inhalte entfernen möchten.",
+    DOWNLOADED_INFO:
+      "Der Inhalt wird heruntergeladen und offline verfügbar. Gehen Sie zu Einstellungen, wenn Sie heruntergeladene Inhalte entfernen möchten.",
     DOWNLOADING: "Lädt herunter",
     DOWNLOADING_PAUSE: "(berühren, um zu pausieren)",
     DOWNLOADING_CANCEL: "Beenden",
@@ -235,5 +238,6 @@ export default {
     VIDEO: "Video spielen",
     VIEW_ALL: "Alle ansehen",
     WITH: "mit",
+    AR: "Wegweiser",
   },
 };

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { TouchableWithoutFeedback, View } from "react-native";
+import { NavigationModeUtils } from "src/utils";
 import styles from "./style";
 import MarkerListView from "../MarkerListView";
 import MapInformationOverlay from "../MapInformationOverlay/MapInformationOverlay";
@@ -39,17 +40,6 @@ function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => vo
   );
 }
 
-// Hacky solution for now. Hopefully this information
-// will come from the CMS in the future
-function getSupportedNavigationModesForTrail(trail: Guide): Array<string> {
-  // 1627406 is Sofiero Topp-10
-  if (trail.id === 1627406) {
-    return ["Karta", "Guide"];
-  }
-
-  return ["Karta"];
-}
-
 const TrailView = (props: Props) => {
   const { trail, onToggleInfoOverlay, showInfoOverlay, navigation } = props;
   const mapItems: MapItem[] = trail.contentObjects.map(item => ({
@@ -63,7 +53,7 @@ const TrailView = (props: Props) => {
         initialLocation={trail.contentObjects[0].location}
         showNumberedMapMarkers
         showDirections
-        supportedNavigationModes={getSupportedNavigationModesForTrail(trail)}
+        supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(trail)}
         navigation={navigation}
       />
       {showInfoOverlay ? renderMapInformationOverlay(trail, onToggleInfoOverlay) : null}
