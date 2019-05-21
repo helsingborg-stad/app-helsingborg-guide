@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.beaconmodule.BeaconPackage;
 import com.facebook.react.ReactApplication;
+import com.levelasquez.androidopensettings.AndroidOpenSettingsPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
@@ -51,6 +52,7 @@ public class MainApplication extends Application implements ShareApplication, Re
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
+            new AndroidOpenSettingsPackage(),
                 new RNCWebViewPackage(),
                 new RNGestureHandlerPackage(),
                 new NetInfoPackage(),
