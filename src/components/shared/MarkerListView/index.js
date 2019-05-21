@@ -2,64 +2,50 @@
 import React, { Component } from "react";
 import { View, FlatList, TouchableOpacity, Dimensions, PixelRatio, Image, Text } from "react-native";
 import { connect } from "react-redux";
+import { isEqual } from "lodash";
 import IconTextTouchable from "../IconTextTouchable";
+import SegmentControl from "../SegmentControl";
+import MapMarkerView from "../MapMarkerView";
 import LangService from "../../../services/langService";
-import { LocationUtils, UrlUtils } from "../../../utils";
+import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
+import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 
 type Props = {
+  navigation: any,
   items: MapItem[],
-  initialLocation?: Location,
   showNumberedMapMarkers: boolean,
   showDirections: boolean,
   userLocation: ?GeolocationType,
+  supportedNavigationModes?: Array<string>,
+  selectGuide(guide: Guide): void,
+  selectGuideGroup(id: number): void,
+  dispatchSelectContentObject(obj: ContentObject): void,
 };
-type State = {};
-
-function getIdFromMapItem(item: MapItem): string {
-  if (item.contentObject) {
-    return item.contentObject.id;
-  }
-  if (item.guide) {
-    return `${item.guide.id}`;
-  }
-  if (item.guideGroup) {
-    return `${item.guideGroup.id}`;
-  }
-
-  return "";
-}
-
-function getLocationFromItem(item: MapItem): ?Location {
-  const { contentObject, guide, guideGroup } = item;
-
-  if (guide) {
-    return guide.location;
-  }
-  if (guideGroup) {
-    return guideGroup.location;
-  }
-  if (contentObject) {
-    return contentObject.location;
-  }
-
-  return null;
-}
-
-function getNumberOfGuides(item: MapItem): ?number {
-  const { guide, guideGroup } = item;
-  if (guide) {
-    return guide.contentObjects.length;
-  }
-  if (guideGroup) {
-    return guideGroup.guidesCount;
-  }
-
-  return 0;
-}
+type State = {
+  selectedNavigationMode: string,
+  recentlyTappedPin: boolean,
+  activeMarker: MapItem,
+};
 
 class MarkerListView extends Component<Props, State> {
+  static defaultProps = {
+    supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map],
+  };
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      selectedNavigationMode: props.supportedNavigationModes[0],
+      recentlyTappedPin: false,
+      activeMarker: props.items[0],
+    };
+  }
+
   listRef: ?FlatList<MapItem>;
+
+  mapMarkerViewRef: ?MapMarkerView;
 
   getMapItemProps = (
     item: MapItem,
@@ -122,31 +108,43 @@ class MarkerListView extends Component<Props, State> {
   });
 
   onListItemPressed = (listItem: MapItem) => {
-    // const { navigate } = this.props.navigation;
-    // const { guide, guideGroup, contentObject } = listItem;
-    // if (guideGroup) {
-    //   AnalyticsUtils.logEvent("view_location", { name: guideGroup.slug });
-    //   this.props.selectGuideGroup(guideGroup.id);
-    //   navigate("LocationScreen", { title: guideGroup.name });
-    //   return;
-    // }
-    // if (guide) {
-    //   const { guideType } = guide;
-    //   AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-    //   this.props.selectGuide(guide);
-    //   switch (guideType) {
-    //     case "trail":
-    //       navigate("TrailScreen", { title: guide.name });
-    //       return;
-    //     case "guide":
-    //     default:
-    //       navigate("GuideDetailsScreen", { title: guide.name });
-    //   }
-    // }
+    const { navigation, selectGuideGroup, selectGuide, dispatchSelectContentObject } = this.props;
+    const { navigate } = navigation;
+    const { guide, guideGroup, contentObject } = listItem;
+    if (guideGroup) {
+      AnalyticsUtils.logEvent("view_location", { name: guideGroup.slug });
+      selectGuideGroup(guideGroup.id);
+      navigate("LocationScreen", { title: guideGroup.name });
+      return;
+    }
+
+    if (guide) {
+      const { guideType } = guide;
+      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      selectGuide(guide);
+
+      switch (guideType) {
+        case "trail":
+          navigate("TrailScreen", { title: guide.name });
+          return;
+        case "guide":
+        default:
+          navigate("GuideDetailsScreen", { title: guide.name });
+          return;
+      }
+    }
+
+    if (contentObject) {
+      dispatchSelectContentObject(contentObject);
+      AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
+      navigate("ObjectScreen", {
+        title: contentObject.title,
+      });
+    }
   };
 
   onListItemDirectionsButtonPressed = (item: MapItem) => {
-    const location = getLocationFromItem(item);
+    const location = MapItemUtils.getLocationFromItem(item);
     if (!location) return;
 
     const { userLocation } = this.props;
@@ -167,7 +165,7 @@ class MarkerListView extends Component<Props, State> {
   };
 
   displayGuideNumber = (item: MapItem) => {
-    const numberOfGuides = getNumberOfGuides(item);
+    const numberOfGuides = MapItemUtils.getNumberOfGuides(item);
     if (!numberOfGuides) return null;
 
     let textString;
@@ -236,14 +234,14 @@ class MarkerListView extends Component<Props, State> {
       contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
       data={items}
       horizontal
-      keyExtractor={getIdFromMapItem}
+      keyExtractor={MapItemUtils.getIdFromMapItem}
       ref={(ref) => {
         this.listRef = ref;
       }}
       renderItem={({ item, index }) => this.renderListItem(item, styles.listItem, index + 1)}
       style={styles.listStyle}
       getItemLayout={this.getItemLayout}
-      onScroll={this.onListScroll}
+      onMomentumScrollEnd={this.onListScroll}
       snapToAlignment="center"
       snapToInterval={ListItemWidth + 10}
       decelerationRate="fast"
@@ -254,19 +252,68 @@ class MarkerListView extends Component<Props, State> {
 
   // iOS callback event when the list is changed
   onListScroll = (e: any) => {
-    // const { recentlyTappedPin } = this.state;
-    // if (!recentlyTappedPin) {
-    //   const xOffset = e.nativeEvent.contentOffset.x;
-    //   const fullItemWidth = ListItemWidth + DefaultMargin / 2;
-    //   const index = Math.round(Math.abs(xOffset / fullItemWidth));
-    //   this.panMapToIndex(index);
-    // }
+    const { recentlyTappedPin, activeMarker } = this.state;
+    const { items } = this.props;
+    const xOffset = e.nativeEvent.contentOffset.x;
+    const fullItemWidth = ListItemWidth + DefaultMargin / 2;
+    const index = Math.round(Math.abs(xOffset / fullItemWidth));
+
+    if (!isEqual(activeMarker !== items[index])) {
+      this.setState({ activeMarker: items[index] });
+    }
+
+    if (!recentlyTappedPin && this.mapMarkerViewRef) {
+      this.mapMarkerViewRef.panMapToIndex(index);
+    }
+  };
+
+  scrollToIndex = (index) => {
+    const { items } = this.props;
+    this.setState({ recentlyTappedPin: true, activeMarker: items[index] });
+
+    if (this.listRef) {
+      const x = (ListItemWidth + DefaultMargin / 2) * index - 15;
+      this.listRef.scrollToOffset({ offset: x });
+    }
+
+    // Setting a timeout to prevent map from "jumping" while panning
+    setTimeout(() => {
+      this.setState({ recentlyTappedPin: false });
+    }, 1000);
+  };
+
+  onNavigationModeChange = (index: number) => {
+    const { supportedNavigationModes } = this.props;
+    this.setState({ selectedNavigationMode: supportedNavigationModes[index] });
   };
 
   render() {
-    const { items } = this.props;
+    const { items, supportedNavigationModes, userLocation } = this.props;
+    const { selectedNavigationMode, activeMarker } = this.state;
 
-    return <View style={styles.container}>{this.renderHorizontalList(items)}</View>;
+    return (
+      <View style={styles.container}>
+        {supportedNavigationModes.length > 1 && (
+          <SegmentControl
+            labels={supportedNavigationModes.map(mode => `${LangService.strings[mode]}`)}
+            onSegmentIndexChange={this.onNavigationModeChange}
+          />
+        )}
+        {selectedNavigationMode === NavigationModeUtils.NavigationModes.Map && (
+          <MapMarkerView
+            items={items}
+            ref={(ref) => {
+              this.mapMarkerViewRef = ref;
+            }}
+            userLocation={userLocation}
+            showNumberedMapMarkers
+            onMapMarkerPressed={index => this.scrollToIndex(index)}
+            activeMarker={activeMarker}
+          />
+        )}
+        {this.renderHorizontalList(items)}
+      </View>
+    );
   }
 }
 
@@ -279,9 +326,9 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    // dispatchSelectContentObject: contentObject => dispatch(selectCurrentContentObject(contentObject)),
-    // selectGuideGroup: id => dispatch(selectCurrentGuideGroup(id)),
-    // selectGuide: guide => dispatch(selectCurrentGuide(guide)),
+    dispatchSelectContentObject: contentObject => dispatch(selectCurrentContentObject(contentObject)),
+    selectGuideGroup: id => dispatch(selectCurrentGuideGroup(id)),
+    selectGuide: guide => dispatch(selectCurrentGuide(guide)),
   };
 }
 

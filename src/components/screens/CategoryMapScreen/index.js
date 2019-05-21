@@ -2,10 +2,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
+import MarkerListView from "src/components/shared/MarkerListView";
 import { selectCurrentGuideByID, selectCurrentGuideGroup, selectCurrentCategory, showBottomBar } from "../../../actions/uiStateActions";
 
 import { AnalyticsUtils } from "../../../utils";
-import MapWithListView, { type MapItem } from "../../shared/MapWithListView";
 import { HeaderStyles } from "../../../styles";
 
 type Props = {
@@ -89,7 +89,7 @@ class CategoryMapScreen extends Component<Props> {
       }
     });
 
-    return <MapWithListView items={mapItems} navigation={navigation} showListButton={false} />;
+    return <MarkerListView items={mapItems} navigation={navigation} showListButton={false} />;
   }
 }
 
