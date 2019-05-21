@@ -27,11 +27,9 @@ type State = {
 }
 
 export default class ARView extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
+  state = { arSupported: false, arState: ARState.CHECKING };
 
-    this.state = { arSupported: false, arState: ARState.CHECKING };
-
+  componentDidMount() {
     CameraService
       .getInstance()
       .checkCameraPermissions()
