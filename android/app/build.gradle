@@ -178,26 +178,28 @@ dependencies {
     implementation project(':react-native-webview')
     implementation project(':react-native-gesture-handler')
     implementation project(':@react-native-community_netinfo')
-    compile project(':react-native-version-number')
-    compile project(':react-native-share')
-    compile project(':react-native-image-marker')
-    compile project(':react-native-svg')
-    compile(project(':react-native-firebase')) {
+    implementation project(':react-native-version-number')
+    implementation project(':react-native-share')
+    implementation project(':react-native-image-marker')
+    implementation project(':react-native-svg')
+    implementation(project(':react-native-firebase')) {
         transitive = false
     }
-    compile project(':react-native-photo-view')
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-maps')
-    compile 'com.google.android.gms:play-services-base:16.1.0'
-    compile 'com.google.android.gms:play-services-maps:16.1.0'
-    compile "com.google.firebase:firebase-core:16.0.9"
-    compile "com.google.firebase:firebase-analytics:16.5.0"
+    implementation project(':react-native-photo-view')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-maps')
+    implementation 'com.google.android.gms:play-services-base:16.1.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation "com.google.firebase:firebase-core:16.0.9"
+    implementation "com.google.firebase:firebase-analytics:16.5.0"
 
-    compile project(':react-native-video')
-    compile project(':react-native-fetch-blob')
-    compile 'org.altbeacon:android-beacon-library:2.12.3'
+    implementation project(':react-native-video')
+    implementation project(':react-native-fetch-blob')
+    implementation 'org.altbeacon:android-beacon-library:2.16.1'
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation project(':gvr_common')
