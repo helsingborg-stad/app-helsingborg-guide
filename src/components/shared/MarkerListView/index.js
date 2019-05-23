@@ -7,6 +7,7 @@ import IconTextTouchable from "../IconTextTouchable";
 import SegmentControl from "../SegmentControl";
 import MapMarkerView from "../MapMarkerView";
 import LangService from "../../../services/langService";
+import ARView from "../ARView";
 import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
@@ -310,6 +311,9 @@ class MarkerListView extends Component<Props, State> {
             onMapMarkerPressed={index => this.scrollToIndex(index)}
             activeMarker={activeMarker}
           />
+        )}
+        {selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && (
+          <ARView items={items} userLocation={userLocation} activeMarker={activeMarker} />
         )}
         {this.renderHorizontalList(items)}
       </View>

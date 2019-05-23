@@ -1,18 +1,39 @@
+// @flow
 import React, { Component } from "react";
+import { ViroARScene, ViroText, ViroConstants, ViroNode, ViroImage } from "react-viro";
+import { LocationUtils, MapItemUtils } from "src/utils";
+import Marker from "./Marker";
 
-import {
-  ViroARScene,
-  ViroText,
-  ViroConstants,
-  ViroNode,
-  ViroImage
-} from "react-viro";
+type Props = {
+  arSceneNavigator: any,
+};
+type State = {
+  isInitialized: boolean,
+  markers: Array<any>,
+};
 
+export default class MarkerScene extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
 
-export default class MarkerScene extends Component {
-  state = {
-    isInitialized: false,
-  };
+    const { userLocation, items } = props.arSceneNavigator.viroAppProps;
+
+    this.state = {
+      isInitialized: false,
+      markers: items.map((item) => {
+        const relativePosition = LocationUtils.getLocationRelativePosition(
+          userLocation,
+          item.contentObject.location.latitude,
+          item.contentObject.location.longitude,
+        );
+
+        return {
+          ...item,
+          relativePosition,
+        };
+      }),
+    };
+  }
 
   _onInitialized = (tracking) => {
     switch (tracking) {
@@ -23,25 +44,38 @@ export default class MarkerScene extends Component {
       case ViroConstants.TRACKING_LIMITED:
         console.log("Tracking Limited");
         this.setState({ isInitialized: true });
+        break;
       case ViroConstants.TRACKING_NONE:
       default:
         console.log("Tracking uninitialised");
         this.setState({ isInitialized: false });
         break;
     }
-  }
+  };
 
   render() {
     const {
-      state: {
-        isInitialized,
+      state: { isInitialized, markers },
+      props: {
+        arSceneNavigator: {
+          viroAppProps: { activeMarker },
+        },
       },
       _onInitialized,
     } = this;
 
     return (
-      <ViroARScene onInitialized={_onInitialized}>
-        { !isInitialized && (<ViroText text="Starting AR" />) }
+      <ViroARScene onTrackingUpdated={_onInitialized}>
+        {!isInitialized ? (
+          <ViroText text="Starting AR" />
+        ) : (
+          markers.map((marker) => {
+            const id = MapItemUtils.getIdFromMapItem(marker);
+            const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
+
+            return <Marker marker={marker} active={active} />;
+          })
+        )}
       </ViroARScene>
     );
   }

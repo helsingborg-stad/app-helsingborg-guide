@@ -1,12 +1,10 @@
 // @flow
-import {
-  Platform,
-} from "react-native";
+import { Platform } from "react-native";
 import geolib from "geolib";
+import { fromLatLngToPoint } from "mercator-projection";
 
 function getDistanceBetweenCoordinates(firstLocation: PositionLongLat, secondLocation: PositionLongLat): number {
-  if (firstLocation.latitude && firstLocation.longitude &&
-    secondLocation.latitude && secondLocation.longitude) {
+  if (firstLocation.latitude && firstLocation.longitude && secondLocation.latitude && secondLocation.longitude) {
     return geolib.getDistanceSimple(firstLocation, secondLocation);
   }
   return 0;
@@ -36,8 +34,28 @@ function directionsUrl(latitude: number, longitude: number, userLocation: Geoloc
   return url;
 }
 
+function getLocationRelativePosition(userLocation: GeolocationType, latitude: number, longitude: number) {
+  const result = {};
+  const hotspotPoint = fromLatLngToPoint({
+    lat: latitude,
+    lng: longitude,
+  });
+  const currentPoint = fromLatLngToPoint({
+    // lat: userLocation.coords.latitude,
+    // lng: userLocation.coords.longitude,
+    lat: 56.083793, // location of first mapItem in Sofiero-Topp-10
+    lng: 12.6594562,
+  });
+
+  result.x = hotspotPoint.x - currentPoint.x;
+  result.y = hotspotPoint.y - currentPoint.y;
+
+  return result;
+}
+
 export default {
   getDistanceBetweenCoordinates,
   getShortestDistance,
   directionsUrl,
+  getLocationRelativePosition,
 };
