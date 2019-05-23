@@ -50,7 +50,6 @@ const TrailView = (props: Props) => {
     <View style={styles.container}>
       <MarkerListView
         items={mapItems}
-        initialLocation={trail.contentObjects[0].location}
         showNumberedMapMarkers
         showDirections
         supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(trail)}

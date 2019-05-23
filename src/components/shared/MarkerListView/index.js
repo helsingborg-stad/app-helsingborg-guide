@@ -7,6 +7,7 @@ import IconTextTouchable from "../IconTextTouchable";
 import SegmentControl from "../SegmentControl";
 import MapMarkerView from "../MapMarkerView";
 import LangService from "../../../services/langService";
+import LocationService from "../../../services/locationService";
 import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
@@ -198,30 +199,62 @@ class MarkerListView extends Component<Props, State> {
     return <Text style={styles.guideNumberText}>{textString}</Text>;
   };
 
+  renderDirections = (item: MapItem) => (
+    <IconTextTouchable
+      iconName="directions"
+      text={LangService.strings.DIRECTIONS}
+      onPress={() => this.onListItemDirectionsButtonPressed(item)}
+    />
+  );
+
+  renderEstimates = (item: MapItem) => {
+    const location = MapItemUtils.getLocationFromItem(item);
+    if (!location) return null;
+
+    const { userLocation: { coords } } = this.props;
+
+    const distance = Math.round(LocationService.getTravelDistance(coords, location));
+    const time = Math.round(LocationService.getTravelTime(distance));
+
+    const min = LangService.strings.MINUTE;
+    const hour = LangService.strings.HOUR;
+
+    return (
+      <View style={styles.listEstimatesContainer}>
+        <Text style={styles.listEstimatesDistance}>
+          {distance < 1000 ? `${distance} m` : `${Math.round(distance / 1000)} km`}
+        </Text>
+        <Text style={styles.listEstimatesTime}>
+          { (time > 60 && `>1 ${hour}`) || (time > 1 && `${time} ${min}`) || (`<1 ${min}`) }
+        </Text>
+      </View>
+    );
+  };
+
   renderListItem = (item: MapItem, listItemStyle: any, number: number) => {
+    const {
+      props: { showDirections, showNumberedMapMarkers },
+      state: { selectedNavigationMode },
+    } = this;
     const { title, streetAddress, thumbnailUrl } = this.getMapItemProps(item);
-    const { showDirections, showNumberedMapMarkers } = this.props;
-    const titleLineCount = ScreenHeight > 600 && PixelRatio.getFontScale() === 1 ? 2 : 1;
+    const showEstimates = selectedNavigationMode === NavigationModeUtils.NavigationModes.AR;
+    const titleLineCount = ScreenHeight > 600 && PixelRatio.getFontScale() === 1 && !showEstimates ? 2 : 1;
 
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
         <View style={listItemStyle}>
           {thumbnailUrl && <Image style={styles.listImage} source={{ uri: thumbnailUrl }} />}
-          {showNumberedMapMarkers ? this.displayNumberView(item, number) : null}
           <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle} numberOfLines={titleLineCount}>
-              {title}
-            </Text>
-            <Text style={styles.listItemAddress} numberOfLines={1}>
+            <View style={styles.listItemTitleContainer}>
+              <Text style={styles.listItemTitle} numberOfLines={1}>
+                {title}
+              </Text>
+              {showNumberedMapMarkers ? this.displayNumberView(item, number) : null}
+            </View>
+            <Text style={styles.listItemAddress} numberOfLines={titleLineCount}>
               {streetAddress}
             </Text>
-            {showDirections ? (
-              <IconTextTouchable
-                iconName="directions"
-                text={LangService.strings.DIRECTIONS}
-                onPress={() => this.onListItemDirectionsButtonPressed(item)}
-              />
-            ) : null}
+            { (showEstimates && this.renderEstimates(item)) || (showDirections && this.renderDirections(item)) || null }
             {this.displayGuideNumber(item)}
           </View>
         </View>

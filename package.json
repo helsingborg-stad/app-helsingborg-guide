@@ -12,13 +12,15 @@
     "android:alpha:debug": "react-native run-android --variant alphaDebug --appIdSuffix alpha",
     "android:alpha:release": "react-native run-android --variant alphaRelease --appIdSuffix alpha",
     "android:store:debug": "react-native run-android --variant storeDebug",
-    "android:store:release": "react-native run-android --variant storeRelease"
+    "android:store:release": "react-native run-android --variant storeRelease",
+    "translate": "node ./scripts/translate.js"
   },
   "dependencies": {
     "@react-native-community/netinfo": "^2.0.10",
     "ajv": "6.10.0",
     "axios": "0.18.0",
     "geolib": "2.0.24",
+    "haversine": "^1.1.1",
     "lodash": "4.17.11",
     "prop-types": "15.7.2",
     "react": "16.8.6",

@@ -79,18 +79,13 @@ export default class GuideHbg extends Component {
   }
 
   componentDidMount() {
-    const locationService = LocationService.getInstance();
-    locationService.watchGeoLocation().catch(() => {
-      locationService.askForPermission().then((permission) => {
-        if (permission === "granted") locationService.watchGeoLocation();
-      });
-    });
-
+    LocationService.getInstance().watchGeoLocation().catch(console.warn);
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
   }
 
   componentWillUnmount() {
+    LocationService.getInstance().unwatchGeoLocation();
     this.stopListeningToNetworkChanges();
   }
 
