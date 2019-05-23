@@ -58,7 +58,7 @@ export default class MarkerScene extends Component<Props, State> {
       state: { isInitialized, markers },
       props: {
         arSceneNavigator: {
-          viroAppProps: { activeMarker },
+          viroAppProps: { activeMarker, onArMarkerPressed },
         },
       },
       _onInitialized,
@@ -73,7 +73,7 @@ export default class MarkerScene extends Component<Props, State> {
             const id = MapItemUtils.getIdFromMapItem(marker);
             const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
 
-            return <Marker marker={marker} active={active} />;
+            return <Marker key={id} marker={marker} active={active} onPress={onArMarkerPressed} />;
           })
         )}
       </ViroARScene>

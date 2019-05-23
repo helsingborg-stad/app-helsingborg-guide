@@ -313,7 +313,12 @@ class MarkerListView extends Component<Props, State> {
           />
         )}
         {selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && (
-          <ARView items={items} userLocation={userLocation} activeMarker={activeMarker} />
+          <ARView
+            items={items}
+            userLocation={userLocation}
+            activeMarker={activeMarker}
+            onArMarkerPressed={index => this.scrollToIndex(index)}
+          />
         )}
         {this.renderHorizontalList(items)}
       </View>

@@ -23,6 +23,7 @@ type Props = {
   items: Array<MapItem>,
   userLocation: ?GeolocationType,
   activeMarker: MapItem,
+  onArMarkerPressed: ?(index: number) => void,
 };
 
 type State = {
@@ -55,13 +56,13 @@ export default class ARView extends Component<Props, State> {
   render() {
     const {
       state: { arSupported, arState },
-      props: { items, userLocation, activeMarker },
+      props: { items, userLocation, activeMarker, onArMarkerPressed },
     } = this;
 
     return arSupported ? (
       <ViroARSceneNavigator
         initialScene={{ scene: MarkerScene }}
-        viroAppProps={{ items, userLocation, activeMarker }}
+        viroAppProps={{ items, userLocation, activeMarker, onArMarkerPressed }}
         apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
         worldAlignment="GravityAndHeading"
       />
