@@ -296,6 +296,7 @@ class MarkerListView extends Component<Props, State> {
       <View style={styles.container}>
         {supportedNavigationModes.length > 1 && (
           <SegmentControl
+            style={styles.segmentControl}
             labels={supportedNavigationModes.map(mode => `${LangService.strings[mode]}`)}
             onSegmentIndexChange={this.onNavigationModeChange}
           />
