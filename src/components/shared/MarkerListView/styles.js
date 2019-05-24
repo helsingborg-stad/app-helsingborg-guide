@@ -52,6 +52,9 @@ export default StyleSheet.create({
     right: 0,
     zIndex: 100,
   },
+  listContainerStyle: {
+    paddingHorizontal: ios ? 0 : 15,
+  },
   listEstimatesContainer: {
     flex: 1,
     flexDirection: "row",
@@ -89,15 +92,19 @@ export default StyleSheet.create({
       fontSize: 12,
       letterSpacing: -2.0,
       left: ios ? -1 : 0,
+      flex: 1,
       fontWeight: "500",
       textAlign: "center",
       backgroundColor: "transparent",
     },
   ]),
   listImageNumberView: {
+    alignItems: "center",
     backgroundColor: Colors.purple,
     borderRadius: 11,
+    flexDirection: "row",
     height: 22,
+    justifyContent: "center",
     width: 22,
   },
   listItem: {

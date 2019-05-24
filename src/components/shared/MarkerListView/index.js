@@ -29,6 +29,8 @@ type State = {
   activeMarker: MapItem,
 };
 
+const HalfListMargin = DefaultMargin * 0.5;
+
 class MarkerListView extends Component<Props, State> {
   static defaultProps = {
     supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map],
@@ -42,6 +44,10 @@ class MarkerListView extends Component<Props, State> {
       recentlyTappedPin: false,
       activeMarker: props.items[0],
     };
+  }
+
+  componentDidMount() {
+    this.scrollToIndex(0);
   }
 
   listRef: ?FlatList<MapItem>;
@@ -103,8 +109,8 @@ class MarkerListView extends Component<Props, State> {
   };
 
   getItemLayout = (data: any, index: number) => ({
-    length: ListItemWidth,
-    offset: (ListItemWidth + DefaultMargin / 2) * index,
+    length: ListItemWidth + DefaultMargin,
+    offset: (ListItemWidth + HalfListMargin) * index,
     index,
   });
 
@@ -264,7 +270,8 @@ class MarkerListView extends Component<Props, State> {
 
   renderHorizontalList = (items: Array<MapItem>) => (
     <FlatList
-      contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
+      contentInset={{ left: 20, top: 0, bottom: 0, right: 20 }}
+      contentContainerStyle={styles.listContainerStyle}
       data={items}
       horizontal
       keyExtractor={MapItemUtils.getIdFromMapItem}
@@ -273,10 +280,9 @@ class MarkerListView extends Component<Props, State> {
       }}
       renderItem={({ item, index }) => this.renderListItem(item, styles.listItem, index + 1)}
       style={styles.listStyle}
-      getItemLayout={this.getItemLayout}
       onMomentumScrollEnd={this.onListScroll}
       snapToAlignment="center"
-      snapToInterval={ListItemWidth + 10}
+      snapToInterval={ListItemWidth + HalfListMargin}
       decelerationRate="fast"
       scrollEventThrottle={300}
       swipeEnabled
@@ -288,7 +294,7 @@ class MarkerListView extends Component<Props, State> {
     const { recentlyTappedPin, activeMarker } = this.state;
     const { items } = this.props;
     const xOffset = e.nativeEvent.contentOffset.x;
-    const fullItemWidth = ListItemWidth + DefaultMargin / 2;
+    const fullItemWidth = ListItemWidth + HalfListMargin;
     const index = Math.round(Math.abs(xOffset / fullItemWidth));
 
     if (!isEqual(activeMarker !== items[index])) {
