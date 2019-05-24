@@ -21,7 +21,6 @@ type Props = {
   activeMarker: MapItem,
 };
 type State = {
-  isInitialized: boolean,
   markersFocused: boolean,
 };
 
@@ -42,6 +41,8 @@ class MapMarkerView extends Component<Props, State> {
   longitudeDelta = 0;
 
   latitudeDelta = 0;
+
+  map: ?MapView;
 
   focusMarkers(markers: MapItem[]) {
     if (!markers) return;
@@ -137,7 +138,7 @@ class MapMarkerView extends Component<Props, State> {
     );
   };
 
-  renderMapMarkers(items: MapItem[]) {
+  renderMapMarkers(items: Array<MapItem>): Array<any> {
     const { showNumberedMapMarkers } = this.props;
     return items.map((item, index) => {
       if (showNumberedMapMarkers) {
@@ -156,7 +157,7 @@ class MapMarkerView extends Component<Props, State> {
     }
   };
 
-  onMarkerPressed = (marker) => {
+  onMarkerPressed = (marker: MapItem) => {
     const { items, onMapMarkerPressed } = this.props;
     const index = items.findIndex(item => item === marker);
 

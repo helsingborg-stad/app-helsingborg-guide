@@ -6,10 +6,13 @@ import styles from "./styles";
 
 type Props = {
   marker: {
-    contentObject: MapItem,
-    relativePosition: number,
+    contentObject: ContentObject,
+    relativePosition: {
+      x: number,
+      y: number,
+    },
   },
-  onPress: () => void,
+  onPress: (index: number) => void,
   active: boolean,
 };
 

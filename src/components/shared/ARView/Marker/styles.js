@@ -1,6 +1,6 @@
 // @flow
 import { StyleSheet } from "react-native";
-import { Colors } from "src/styles";
+import { Colors } from "../../../../styles";
 
 export default StyleSheet.create({
   text: {

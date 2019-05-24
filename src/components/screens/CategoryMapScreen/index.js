@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
-import MarkerListView from "src/components/shared/MarkerListView";
+import MarkerListView from "../../shared/MarkerListView";
 import { selectCurrentGuideByID, selectCurrentGuideGroup, selectCurrentCategory, showBottomBar } from "../../../actions/uiStateActions";
 
 import { AnalyticsUtils } from "../../../utils";
