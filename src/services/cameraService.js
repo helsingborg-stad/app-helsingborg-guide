@@ -1,7 +1,7 @@
 import { Alert, Platform, Linking } from "react-native";
 import Permissions from "react-native-permissions";
-import LangService from "./langService";
 import AndroidOpenSettings from "react-native-android-open-settings";
+import LangService from "./langService";
 
 const ios = Platform.OS === "ios";
 

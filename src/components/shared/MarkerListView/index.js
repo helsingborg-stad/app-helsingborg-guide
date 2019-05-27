@@ -6,8 +6,9 @@ import { isEqual } from "lodash";
 import IconTextTouchable from "../IconTextTouchable";
 import SegmentControl from "../SegmentControl";
 import MapMarkerView from "../MapMarkerView";
-import LangService from "../../../services/langService";
 import ARView from "../ARView";
+import LangService from "../../../services/langService";
+import LocationService from "../../../services/locationService";
 import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
@@ -29,6 +30,8 @@ type State = {
   activeMarker: MapItem,
 };
 
+const HalfListMargin = DefaultMargin * 0.5;
+
 class MarkerListView extends Component<Props, State> {
   static defaultProps = {
     supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map],
@@ -42,6 +45,10 @@ class MarkerListView extends Component<Props, State> {
       recentlyTappedPin: false,
       activeMarker: props.items[0],
     };
+  }
+
+  componentDidMount() {
+    this.scrollToIndex(0);
   }
 
   listRef: ?FlatList<MapItem>;
@@ -103,8 +110,8 @@ class MarkerListView extends Component<Props, State> {
   };
 
   getItemLayout = (data: any, index: number) => ({
-    length: ListItemWidth,
-    offset: (ListItemWidth + DefaultMargin / 2) * index,
+    length: ListItemWidth + DefaultMargin,
+    offset: (ListItemWidth + HalfListMargin) * index,
     index,
   });
 
@@ -199,30 +206,63 @@ class MarkerListView extends Component<Props, State> {
     return <Text style={styles.guideNumberText}>{textString}</Text>;
   };
 
+  renderDirections = (item: MapItem) => (
+    <IconTextTouchable
+      iconName="directions"
+      text={LangService.strings.DIRECTIONS}
+      onPress={() => this.onListItemDirectionsButtonPressed(item)}
+    />
+  );
+
+  renderEstimates = (item: MapItem) => {
+    const location = MapItemUtils.getLocationFromItem(item);
+    const { userLocation } = this.props;
+
+    if (!location || !userLocation) return null;
+
+    const { coords } = userLocation;
+    const distance = Math.round(LocationService.getTravelDistance(coords, location));
+    const time = Math.round(LocationService.getTravelTime(distance));
+
+    const min = LangService.strings.MINUTE;
+    const hour = LangService.strings.HOUR;
+
+    return (
+      <View style={styles.listEstimatesContainer}>
+        <Text style={styles.listEstimatesDistance}>
+          {distance < 1000 ? `${distance} m` : `${Math.round(distance / 1000)} km`}
+        </Text>
+        <Text style={styles.listEstimatesTime}>
+          { (time > 60 && `>1 ${hour}`) || (time > 1 && `${time} ${min}`) || (`<1 ${min}`) }
+        </Text>
+      </View>
+    );
+  };
+
   renderListItem = (item: MapItem, listItemStyle: any, number: number) => {
+    const {
+      props: { showDirections, showNumberedMapMarkers },
+      state: { selectedNavigationMode },
+    } = this;
     const { title, streetAddress, thumbnailUrl } = this.getMapItemProps(item);
-    const { showDirections, showNumberedMapMarkers } = this.props;
-    const titleLineCount = ScreenHeight > 600 && PixelRatio.getFontScale() === 1 ? 2 : 1;
+    const showEstimates = selectedNavigationMode === NavigationModeUtils.NavigationModes.AR;
+    const titleLineCount = ScreenHeight > 600 && PixelRatio.getFontScale() === 1 && !showEstimates ? 2 : 1;
 
     return (
       <TouchableOpacity onPress={() => this.onListItemPressed(item)}>
         <View style={listItemStyle}>
           {thumbnailUrl && <Image style={styles.listImage} source={{ uri: thumbnailUrl }} />}
-          {showNumberedMapMarkers ? this.displayNumberView(item, number) : null}
           <View style={styles.listItemTextContainer}>
-            <Text style={styles.listItemTitle} numberOfLines={titleLineCount}>
-              {title}
-            </Text>
-            <Text style={styles.listItemAddress} numberOfLines={1}>
+            <View style={styles.listItemTitleContainer}>
+              <Text style={styles.listItemTitle} numberOfLines={1}>
+                {title}
+              </Text>
+              {showNumberedMapMarkers ? this.displayNumberView(item, number) : null}
+            </View>
+            <Text style={styles.listItemAddress} numberOfLines={titleLineCount}>
               {streetAddress}
             </Text>
-            {showDirections ? (
-              <IconTextTouchable
-                iconName="directions"
-                text={LangService.strings.DIRECTIONS}
-                onPress={() => this.onListItemDirectionsButtonPressed(item)}
-              />
-            ) : null}
+            { (showEstimates && this.renderEstimates(item)) || (showDirections && this.renderDirections(item)) || null }
             {this.displayGuideNumber(item)}
           </View>
         </View>
@@ -232,7 +272,8 @@ class MarkerListView extends Component<Props, State> {
 
   renderHorizontalList = (items: Array<MapItem>) => (
     <FlatList
-      contentInset={{ left: 10, top: 0, bottom: 0, right: 10 }}
+      contentInset={{ left: 20, top: 0, bottom: 0, right: 20 }}
+      contentContainerStyle={styles.listContainerStyle}
       data={items}
       horizontal
       keyExtractor={MapItemUtils.getIdFromMapItem}
@@ -241,10 +282,9 @@ class MarkerListView extends Component<Props, State> {
       }}
       renderItem={({ item, index }) => this.renderListItem(item, styles.listItem, index + 1)}
       style={styles.listStyle}
-      getItemLayout={this.getItemLayout}
       onMomentumScrollEnd={this.onListScroll}
       snapToAlignment="center"
-      snapToInterval={ListItemWidth + 10}
+      snapToInterval={ListItemWidth + HalfListMargin}
       decelerationRate="fast"
       scrollEventThrottle={300}
       swipeEnabled
@@ -256,7 +296,7 @@ class MarkerListView extends Component<Props, State> {
     const { recentlyTappedPin, activeMarker } = this.state;
     const { items } = this.props;
     const xOffset = e.nativeEvent.contentOffset.x;
-    const fullItemWidth = ListItemWidth + DefaultMargin / 2;
+    const fullItemWidth = ListItemWidth + HalfListMargin;
     const index = Math.round(Math.abs(xOffset / fullItemWidth));
 
     if (!isEqual(activeMarker !== items[index])) {
