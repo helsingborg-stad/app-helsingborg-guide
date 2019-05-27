@@ -4,7 +4,11 @@ import { View, TouchableOpacity, Image, Text, Modal } from "react-native";
 import LangService from "../../../../services/langService";
 import styles from "./styles";
 
-export default ({ onRequestClose }) => (
+type Props = {
+  onRequestClose: () => void,
+}
+
+export default ({ onRequestClose }: Props) => (
   <Modal
     animationType="slide"
     transparent={false}

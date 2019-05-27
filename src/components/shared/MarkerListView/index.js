@@ -216,10 +216,11 @@ class MarkerListView extends Component<Props, State> {
 
   renderEstimates = (item: MapItem) => {
     const location = MapItemUtils.getLocationFromItem(item);
-    if (!location) return null;
+    const { userLocation } = this.props;
 
-    const { userLocation: { coords } } = this.props;
+    if (!location || !userLocation) return null;
 
+    const { coords } = userLocation;
     const distance = Math.round(LocationService.getTravelDistance(coords, location));
     const time = Math.round(LocationService.getTravelTime(distance));
 
