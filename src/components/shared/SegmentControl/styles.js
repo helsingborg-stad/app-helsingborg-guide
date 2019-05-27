@@ -1,12 +1,14 @@
 import { StyleSheet } from "react-native";
 import { Colors, TextStyles } from "../../../styles";
 
+export const SegmentControlHeight = 54;
+
 export default StyleSheet.create({
   container: {
     alignItems: "center",
     backgroundColor: Colors.darkPurple,
     flexDirection: "row",
-    height: 54,
+    height: SegmentControlHeight,
     justifyContent: "center",
     width: "100%",
   },

@@ -9,6 +9,8 @@ export const DefaultMargin = 20;
 export const ScreenWidth = Dimensions.get("window").width;
 export const ScreenHeight = Dimensions.get("window").height;
 export const ListItemWidth = ScreenWidth - DefaultMargin * 2;
+export const ListHeight = ListItemImageSize + DefaultMargin;
+export const ListBottomMargin = 14;
 
 const ios = Platform.OS === "ios";
 
@@ -116,8 +118,8 @@ export default StyleSheet.create({
   ]),
   listStyle: {
     backgroundColor: Colors.transparent,
-    bottom: 14,
-    height: ListItemImageSize + DefaultMargin,
+    bottom: ListBottomMargin,
+    height: ListHeight,
     left: 0,
     position: "absolute",
     right: 0,

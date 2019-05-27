@@ -1,12 +1,16 @@
 import { PermissionsAndroid, Alert, Platform, Linking } from "react-native";
+import RNSimpleCompass from "react-native-simple-compass";
 import LangService from "./langService";
 import Opener from "./SettingsService";
-import geolocationUpdated from "../actions/geolocationActions";
+import GeoLocationActions from "../actions/geolocationActions";
 // TODO decouple the store from this class!
 let instance = null;
 
 export default class LocationService {
   watcher;
+
+  compassWatcher;
+
   store;
 
   static getInstance() {
@@ -30,6 +34,7 @@ export default class LocationService {
     };
     return PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION, content);
   }
+
   // alert if the location is turned off. (the feature not the permission)
   alert() {
     Alert.alert(
@@ -37,11 +42,12 @@ export default class LocationService {
       LangService.strings.MESSAGE_LOCATION_PERMISSION,
       [
         { text: LangService.strings.SETTINGS, onPress: () => this.openLocationSettings() },
-        { text: LangService.strings.CLOSE, onPress: () => { }, style: "cancel" },
+        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
       ],
       { cancelable: false },
     );
   }
+
   // open location setting
   openLocationSettings() {
     if (Platform.OS == "ios") Linking.openURL("app-settings:");
@@ -50,44 +56,42 @@ export default class LocationService {
 
   getGeoLocation() {
     return this.checkLocationPermission().then(
-      granted =>
-        new Promise((resolve, reject) => {
-          if (granted) {
-            navigator.geolocation.getCurrentPosition(
-              (position) => {
-                this.store.dispatch(geolocationUpdated(position));
-                resolve(position);
-              },
-              (error) => {
-                this.alert();
-                reject(error);
-              },
-            );
-          } else {
-            this.askForPermission();
-            reject("ss");
-          }
-        }),
+      granted => new Promise((resolve, reject) => {
+        if (granted) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              this.store.dispatch(GeoLocationActions.geolocationUpdated(position));
+              resolve(position);
+            },
+            (error) => {
+              this.alert();
+              reject(error);
+            },
+          );
+        } else {
+          this.askForPermission();
+          reject("ss");
+        }
+      }),
     );
   }
 
   watchGeoLocation() {
     return this.checkLocationPermission().then(
-      granted =>
-        new Promise((resolve, reject) => {
-          if (granted) {
-            this.watcher = navigator.geolocation.watchPosition(
-              (position) => {
-                this.store.dispatch(geolocationUpdated(position));
-                resolve(position);
-              },
-              error => reject(error),
-              { distanceFilter: 10 },
-            );
-          } else {
-            reject("no access to fine location");
-          }
-        }),
+      granted => new Promise((resolve, reject) => {
+        if (granted) {
+          this.watcher = navigator.geolocation.watchPosition(
+            (position) => {
+              this.store.dispatch(GeoLocationActions.geolocationUpdated(position));
+              resolve(position);
+            },
+            error => reject(error),
+            { distanceFilter: 10 },
+          );
+        } else {
+          reject("no access to fine location");
+        }
+      }),
     );
   }
 
@@ -100,4 +104,21 @@ export default class LocationService {
     const y = Math.abs(coord1.longitude - coord2.longitude);
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
   }
+
+  subscribeCompassBearing = () => new Promise((resolve, reject) => {
+    try {
+      // Number of degrees changed before the callback is triggered
+      const degreeUpdateRate = 1;
+      this.compassWatcher = RNSimpleCompass.start(degreeUpdateRate, (degree) => {
+        this.store.dispatch(GeoLocationActions.compassbearingUpdated(degree));
+        resolve(degree);
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+  clearCompassBearingWatch = () => {
+    if (this.compassWatcher) RNSimpleCompass.stop();
+  };
 }

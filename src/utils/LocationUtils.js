@@ -43,7 +43,7 @@ function getLocationRelativePosition(userLocation: GeolocationType, latitude: nu
   const currentPoint = fromLatLngToPoint({
     // lat: userLocation.coords.latitude,
     // lng: userLocation.coords.longitude,
-    lat: 56.083793, // location of first mapItem in Sofiero-Topp-10
+    lat: 56.083793, // location of first mapItem in Sofiero-Topp-10, for testing purpose
     lng: 12.6594562,
   });
 
@@ -54,8 +54,9 @@ function getLocationRelativePosition(userLocation: GeolocationType, latitude: nu
 }
 
 function angleBetweenCoords(start: { latitude: number, longitude: number }, end: { latitude: number, longitude: number }) {
-  const x = end.latitude - start.latitude;
-  const y = end.longitude - start.longitude;
+  // location of first mapItem in Sofiero-Topp-10, for testing purpose
+  const x = end.latitude - 56.083793; // start.latitude;
+  const y = end.longitude - 12.6594562; // start.longitude;
   let angle;
 
   if (Math.atan2(y, x) >= 0) {

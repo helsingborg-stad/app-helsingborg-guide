@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Image, Text, View } from "react-native";
 import { MapItemUtils, MathUtils, LocationUtils } from "../../../../utils";
 import * as Images from "../../../../images/AR";
@@ -13,8 +14,9 @@ const OFFSCREEN_ANGLE_MAX = 135;
 type Props = {
   items: Array<MapItem>,
   userLocation: ?GeolocationType,
-  degree: number,
   activeMarker: MapItem,
+  compassBearing: number,
+  style: any,
 };
 type State = {
   screen: {
@@ -26,18 +28,18 @@ type State = {
 };
 
 const OffscreenMarker = (marker) => {
-  const { id, x, y, angle, selected } = marker;
+  const { id, order, x, y, angle, selected } = marker;
   const imagePin = selected ? Images.PinSelected : Images.Pin;
 
   return (
     <View key={id} style={{ ...styles.marker, transform: [{ translateX: x }, { translateY: y }] }}>
       <Image source={imagePin} style={{ transform: [{ rotateZ: `${angle - 180}deg` }] }} />
-      <Text style={styles.label}>{id}</Text>
+      <Text style={styles.label}>{`${order + 1}`}</Text>
     </View>
   );
 };
 
-export default class OffscreenMarkers extends Component<Props, State> {
+class OffscreenMarkers extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -46,11 +48,13 @@ export default class OffscreenMarkers extends Component<Props, State> {
     };
   }
 
-  _getMarkers = () => {
+  containerRef;
+
+  getMarkers = () => {
     const {
-      props: { items, degree: currentBearing, userLocation, activeMarker },
+      props: { items, compassBearing, userLocation, activeMarker },
       state: {
-        screen: { width, height },
+        screen: { width, height, y: containerY },
       },
     } = this;
 
@@ -74,11 +78,11 @@ export default class OffscreenMarkers extends Component<Props, State> {
       const markers = items.map((item) => {
         const markerLocation = MapItemUtils.getLocationFromItem(item);
         let angle = LocationUtils.angleBetweenCoords(userLocation.coords, markerLocation);
-        angle = angle - currentBearing < 0 ? angle - currentBearing + 360 : angle - currentBearing;
+        angle = angle - compassBearing < 0 ? angle - compassBearing + 360 : angle - compassBearing;
 
         const radians = (angle - 90) * MathUtils.DEG_TO_RAD;
         const rx = Math.cos(radians) * radius - halfWidth;
-        const ry = Math.sin(radians) * radius - halfHeight;
+        const ry = Math.sin(radians) * radius - halfHeight + containerY;
 
         const x = MathUtils.clamp(rx, xLimits);
         const y = MathUtils.clamp(ry, yLimits);
@@ -87,7 +91,7 @@ export default class OffscreenMarkers extends Component<Props, State> {
         const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
         const selected = markerId === selectedMarkerId;
 
-        return { id: markerId, x, y, angle, selected };
+        return { id: markerId, order: item.contentObject.order, x, y, angle, selected };
       });
 
       // make the selected marker always be on top
@@ -105,22 +109,52 @@ export default class OffscreenMarkers extends Component<Props, State> {
     return [];
   };
 
-  _onLayout = (event) => {
-    const {
-      nativeEvent: {
-        layout: { x, y, width, height },
-      },
-    } = event;
-    this.setState({ screen: { x, y, width, height } });
+  onLayout = (event) => {
+    if (this.containerRef) {
+      // Measure the absolut position of the view on screen, i.e including navigation bar and status bar
+      this.containerRef.measure((fx, fy, width, height, px, py) => {
+        this.setState({ screen: { x: fx, y: py, width, height } });
+      });
+    } else {
+      const {
+        nativeEvent: {
+          layout: { x, y, width, height },
+        },
+      } = event;
+
+      this.setState({ screen: { x, y, width, height } });
+    }
   };
 
   render() {
-    const markers = this._getMarkers();
+    const { style } = this.props;
+    const markers = this.getMarkers();
 
     return (
-      <View style={styles.container} onLayout={this._onLayout}>
+      <View
+        ref={(ref) => {
+          this.containerRef = ref;
+        }}
+        style={[styles.container, style]}
+        onLayout={this.onLayout}
+      >
         {markers.map(OffscreenMarker)}
       </View>
     );
   }
 }
+
+function mapStateToProps(state: RootState) {
+  const {
+    geolocation: { bearing },
+  } = state;
+
+  return {
+    compassBearing: bearing,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null,
+)(OffscreenMarkers);

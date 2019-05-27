@@ -6,7 +6,7 @@ import { ViroARSceneNavigator, ViroUtils } from "react-viro";
 import CameraService from "../../../services/cameraService";
 import LangService from "../../../services/langService";
 import MarkerScene from "./MarkerScene";
-import OffscreenMarkers from "./OffscreenMarker";
+import OffscreenMarkers from "./OffscreenMarkers";
 
 const { isARSupportedOnDevice } = ViroUtils;
 
@@ -24,6 +24,7 @@ type Props = {
   userLocation: ?GeolocationType,
   activeMarker: MapItem,
   onArMarkerPressed: ?(index: number) => void,
+  offScreenMarkerViewStyle: any,
 };
 
 type State = {
@@ -56,7 +57,7 @@ export default class ARView extends Component<Props, State> {
   render() {
     const {
       state: { arSupported, arState },
-      props: { items, userLocation, activeMarker, onArMarkerPressed },
+      props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle },
     } = this;
     const containerStyle = { flex: 1 };
 
@@ -68,7 +69,13 @@ export default class ARView extends Component<Props, State> {
           apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
           worldAlignment="GravityAndHeading"
         />
-        <OffscreenMarkers items={items} userLocation={userLocation} activeMarker={activeMarker} degree={150} />
+        <OffscreenMarkers
+          style={offScreenMarkerViewStyle}
+          items={items}
+          userLocation={userLocation}
+          activeMarker={activeMarker}
+          pointerEvents="none"
+        />
       </View>
     ) : (
       <View>

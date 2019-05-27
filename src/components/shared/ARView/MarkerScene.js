@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { ViroARScene, ViroText, ViroConstants } from "react-viro";
+import LocationService from "../../../services/locationService";
 import { LocationUtils, MapItemUtils } from "../../../utils";
 import Marker from "./Marker";
 
@@ -35,7 +36,15 @@ export default class MarkerScene extends Component<Props, State> {
     };
   }
 
-  _onInitialized = (tracking) => {
+  componentDidMount() {
+    LocationService.getInstance().subscribeCompassBearing();
+  }
+
+  componentWillUnmount() {
+    LocationService.getInstance().clearCompassBearingWatch();
+  }
+
+  onInitialized = (tracking) => {
     switch (tracking) {
       case ViroConstants.TRACKING_NORMAL:
         console.log("Tracking initialised");
@@ -61,11 +70,11 @@ export default class MarkerScene extends Component<Props, State> {
           viroAppProps: { activeMarker, onArMarkerPressed },
         },
       },
-      _onInitialized,
+      onInitialized,
     } = this;
 
     return (
-      <ViroARScene onTrackingUpdated={_onInitialized}>
+      <ViroARScene onTrackingUpdated={onInitialized}>
         {!isInitialized ? (
           <ViroText text="Starting AR" />
         ) : (
