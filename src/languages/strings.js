@@ -1,5 +1,5 @@
 /**
- * Created at Thu May 23 2019 16:43:52 GMT+0200 (Central European Summer Time)
+ * Created at Mon May 27 2019 14:22:40 GMT+0200 (Central European Summer Time)
  */
 
 export default {
@@ -11,6 +11,9 @@ export default {
     AR: "Vägvisare",
     AR_CAMERA_DISABLED: "Camera permission needs to be granted",
     AR_CHECKING: "Checking if this feature is supported",
+    AR_INTRO_BUTTON: "Starta Runturen",
+    AR_INTRO_INSTRUCTIONS: "Håll upp telefonen och leta efter din valda plats runt omkring dig. Följ vägvisaren \"Kaj\" tills du hittat platsen.",
+    AR_INTRO_TITLE: "Prova ett nytt, roligt sätt att utforska Sofiero",
     AR_SUPPORTED: "This feature is supported",
     AR_TRANSIENT: "This feature is waiting to be activated",
     AR_UNKNOWN: "This feature is unsupported",
@@ -100,6 +103,9 @@ export default {
     AR: "Guide",
     AR_CAMERA_DISABLED: "Camera permission needs to be granted",
     AR_CHECKING: "Checking if this feature is supported",
+    AR_INTRO_BUTTON: "Starta Runturen",
+    AR_INTRO_INSTRUCTIONS: "Håll upp telefonen och leta efter din valda plats runt omkring dig. Följ vägvisaren \"Kaj\" tills du hittat platsen.",
+    AR_INTRO_TITLE: "Prova ett nytt, roligt sätt att utforska Sofiero",
     AR_SUPPORTED: "This feature is supported",
     AR_TRANSIENT: "This feature is waiting to be activated",
     AR_UNKNOWN: "This feature is unsupported",
@@ -116,8 +122,8 @@ export default {
     COMING_SOON: "Coming soon",
     CONTACT_MAIL_ADRESS: "kontaktcenter@helsingborg.se",
     CONTACT_MAIL_SUBJECT: "Guide Helsingborg App",
-    CONTACT_PHONE: "+4642105000",
-    CONTACT_PHONE_DISPLAY: "042-10 50 00",
+    CONTACT_PHONE: "+4642105001",
+    CONTACT_PHONE_DISPLAY: "042-10 50 01",
     CONTACT_US: "Contact us",
     CONTENT_MISSING: "No content available in your selected language",
     DELETE_STORED_DATA: "Delete stored data",
@@ -189,6 +195,9 @@ export default {
     AR: "Wegweiser",
     AR_CAMERA_DISABLED: "Camera permission needs to be granted",
     AR_CHECKING: "Checking if this feature is supported",
+    AR_INTRO_BUTTON: "Starta Runturen",
+    AR_INTRO_INSTRUCTIONS: "Håll upp telefonen och leta efter din valda plats runt omkring dig. Följ vägvisaren \"Kaj\" tills du hittat platsen.",
+    AR_INTRO_TITLE: "Prova ett nytt, roligt sätt att utforska Sofiero",
     AR_SUPPORTED: "This feature is supported",
     AR_TRANSIENT: "This feature is waiting to be activated",
     AR_UNKNOWN: "This feature is unsupported",
@@ -205,8 +214,8 @@ export default {
     COMING_SOON: "Bald verfügbar",
     CONTACT_MAIL_ADRESS: "kontaktcenter@helsingborg.se",
     CONTACT_MAIL_SUBJECT: "Guide Helsingborg App",
-    CONTACT_PHONE: "+4642105000",
-    CONTACT_PHONE_DISPLAY: "042-10 50 00",
+    CONTACT_PHONE: "+4642105002",
+    CONTACT_PHONE_DISPLAY: "042-10 50 02",
     CONTACT_US: "Kontakt",
     CONTENT_MISSING: "Kein Inhalt in Ihrer ausgewählten Sprache verfügbar",
     DELETE_STORED_DATA: "DE Radera sparad media",

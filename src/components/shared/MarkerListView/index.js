@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { View, FlatList, TouchableOpacity, PixelRatio, Image, Text } from "react-native";
+import { View, FlatList, TouchableOpacity, PixelRatio, Image, Text, AsyncStorage } from "react-native";
 import { connect } from "react-redux";
 import { isEqual } from "lodash";
 import IconTextTouchable from "../IconTextTouchable";
@@ -12,6 +12,8 @@ import LocationService from "../../../services/locationService";
 import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
+import { AR_INSTRUCTIONS_SHOWN } from "../../../lib/my_consts";
+import UsageModal from "./UsageModal";
 
 type Props = {
   navigation: any,
@@ -28,6 +30,7 @@ type State = {
   selectedNavigationMode: string,
   recentlyTappedPin: boolean,
   activeMarker: MapItem,
+  shouldShowInstructions: boolean
 };
 
 const HalfListMargin = DefaultMargin * 0.5;
@@ -44,11 +47,23 @@ class MarkerListView extends Component<Props, State> {
       selectedNavigationMode: props.supportedNavigationModes ? props.supportedNavigationModes[0] : NavigationModeUtils.NavigationModes.Map,
       recentlyTappedPin: false,
       activeMarker: props.items[0],
+      shouldShowInstructions: false,
     };
   }
 
   componentDidMount() {
     this.scrollToIndex(0);
+
+    AsyncStorage.getItem(AR_INSTRUCTIONS_SHOWN).then((value) => {
+      this.setState({
+        shouldShowInstructions: value ? JSON.parse(value) : true,
+      });
+    });
+  }
+
+  closeInstructions = () => {
+    AsyncStorage.setItem(AR_INSTRUCTIONS_SHOWN, JSON.stringify(false));
+    this.setState({ shouldShowInstructions: false });
   }
 
   listRef: ?FlatList<MapItem>;
@@ -333,10 +348,11 @@ class MarkerListView extends Component<Props, State> {
 
   render() {
     const { items, supportedNavigationModes, userLocation } = this.props;
-    const { selectedNavigationMode, activeMarker } = this.state;
+    const { selectedNavigationMode, activeMarker, shouldShowInstructions } = this.state;
 
     return (
       <View style={styles.container}>
+        {shouldShowInstructions && <UsageModal onRequestClose={() => { this.closeInstructions(); }} />}
         {supportedNavigationModes && supportedNavigationModes.length > 1 && (
           <SegmentControl
             style={styles.segmentControl}
