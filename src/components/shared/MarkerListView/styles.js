@@ -125,4 +125,12 @@ export default StyleSheet.create({
   map: {
     flex: 1,
   },
+  segmentControl: {
+    left: 0,
+    opacity: 0.8,
+    position: "absolute",
+    top: 0,
+    width: ScreenWidth,
+    zIndex: 500,
+  },
 });

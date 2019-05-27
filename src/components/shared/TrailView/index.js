@@ -1,8 +1,7 @@
 // @flow
-
 import React from "react";
 import { TouchableWithoutFeedback, View } from "react-native";
-import { NavigationModeUtils } from "src/utils";
+import { NavigationModeUtils } from "../../../utils";
 import styles from "./style";
 import MarkerListView from "../MarkerListView";
 import MapInformationOverlay from "../MapInformationOverlay/MapInformationOverlay";

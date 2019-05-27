@@ -23,6 +23,7 @@
 
 [untyped]
 .*/react-native-swiper/*.
+.*/node_modules/react-native/.*
 
 [include]
 

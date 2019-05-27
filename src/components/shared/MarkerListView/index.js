@@ -7,6 +7,7 @@ import IconTextTouchable from "../IconTextTouchable";
 import SegmentControl from "../SegmentControl";
 import MapMarkerView from "../MapMarkerView";
 import LangService from "../../../services/langService";
+import ARView from "../ARView";
 import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
@@ -37,7 +38,7 @@ class MarkerListView extends Component<Props, State> {
     super(props);
 
     this.state = {
-      selectedNavigationMode: props.supportedNavigationModes[0],
+      selectedNavigationMode: props.supportedNavigationModes ? props.supportedNavigationModes[0] : NavigationModeUtils.NavigationModes.Map,
       recentlyTappedPin: false,
       activeMarker: props.items[0],
     };
@@ -284,7 +285,10 @@ class MarkerListView extends Component<Props, State> {
 
   onNavigationModeChange = (index: number) => {
     const { supportedNavigationModes } = this.props;
-    this.setState({ selectedNavigationMode: supportedNavigationModes[index] });
+
+    if (supportedNavigationModes) {
+      this.setState({ selectedNavigationMode: supportedNavigationModes[index] });
+    }
   };
 
   render() {
@@ -293,8 +297,9 @@ class MarkerListView extends Component<Props, State> {
 
     return (
       <View style={styles.container}>
-        {supportedNavigationModes.length > 1 && (
+        {supportedNavigationModes && supportedNavigationModes.length > 1 && (
           <SegmentControl
+            style={styles.segmentControl}
             labels={supportedNavigationModes.map(mode => `${LangService.strings[mode]}`)}
             onSegmentIndexChange={this.onNavigationModeChange}
           />
@@ -309,6 +314,14 @@ class MarkerListView extends Component<Props, State> {
             showNumberedMapMarkers
             onMapMarkerPressed={index => this.scrollToIndex(index)}
             activeMarker={activeMarker}
+          />
+        )}
+        {selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && (
+          <ARView
+            items={items}
+            userLocation={userLocation}
+            activeMarker={activeMarker}
+            onArMarkerPressed={index => this.scrollToIndex(index)}
           />
         )}
         {this.renderHorizontalList(items)}

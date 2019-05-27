@@ -15,9 +15,9 @@ import React from "react";
 import Share from "react-native-share";
 import RNFetchBlob from "react-native-fetch-blob";
 import ImageMarker from "react-native-image-marker";
-import LangService from "../services/langService";
+import LangService from "./langService";
 import Colors from "../styles/Colors";
-import fetchService from "../services/FetchService";
+import fetchService from "./FetchService";
 import { AnalyticsUtils } from "../utils";
 
 const fontSize = 40;
@@ -38,51 +38,49 @@ const iosShare = {
 const Background = require("../images/black.png");
 const shareIcon = require("../images/share.png");
 
-
 const styles = StyleSheet.create({
   activityIndicator: {
+    left: Dimensions.get("window").width / 2 - 12.5,
     position: "absolute",
-    left: (Dimensions.get("window").width / 2) - 12.5,
-    top: (Dimensions.get("window").height / 2) - 12.5,
+    top: Dimensions.get("window").height / 2 - 12.5,
   },
   image: {
-    width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
     left: 0,
-    top: 0,
     opacity: 0.5,
     position: "absolute",
+    top: 0,
+    width: Dimensions.get("window").width,
   },
   imageHolder: {
-    position: "absolute",
-    left: 0,
-    top: 0,
     backgroundColor: "black",
+    left: 0,
+    position: "absolute",
+    top: 0,
     width: Dimensions.get("window").width,
   },
   shareBoxOuter: {
-    flexDirection: "row",
-    borderWidth: 1,
-    borderColor: Colors.darkPurple,
     backgroundColor: "#ffffffff",
+    borderColor: Colors.darkPurple,
     borderRadius: 1,
+    borderWidth: 1,
+    flexDirection: "row",
     padding: 10,
   },
   shareIcon: {
-    marginRight: 10,
     marginLeft: 5,
+    marginRight: 10,
     tintColor: Colors.darkPurple,
   },
   shareText: {
-    fontSize: 16,
-    marginRight: 5,
-    fontWeight: "500",
     color: Colors.darkPurple,
+    fontSize: 16,
+    fontWeight: "500",
+    marginRight: 5,
   },
 });
 
 export default {
-
   fetch(url) {
     const config = {
       fileCache: true,
@@ -131,22 +129,35 @@ export default {
                     // Warnign: Font styles can behave weirdly on Android. If you make changes that don't look correctly, check out node_modules/react-native-image-marker/android/src/main/java/com/jimmydaddy/imagemarker/ImageMarkerManager.java: 130-143
                     const resultA = await ImageMarker.markWithImage(localMainUrl, localFadeUrl, 0, height - fadeHeight, 1);
                     const resultB = await ImageMarker.addText(
-                      resultA, title, margin, parseInt(height) - (fontSize) - margin - lineDistance,
-                      Colors.white, "Roboto-Bold", fontSize);
+                      resultA,
+                      title,
+                      margin,
+                      parseInt(height) - fontSize - margin - lineDistance,
+                      Colors.white,
+                      "Roboto-Bold",
+                      fontSize,
+                    );
                     const resultC = await ImageMarker.addText(
-                      resultB, LangService.strings.SHARING_OVERLAY_TITLE, margin, parseInt(height) - margin,
-                      Colors.white, "Roboto", fontSize);
+                      resultB,
+                      LangService.strings.SHARING_OVERLAY_TITLE,
+                      margin,
+                      parseInt(height) - margin,
+                      Colors.white,
+                      "Roboto",
+                      fontSize,
+                    );
                     const resultD = await ImageMarker.markWithImage(
-                      resultC, localIconUrl, parseInt(width) - (iconWidth / 2) - margin, parseInt(height) - (iconHeight / 2) - margin, 0.5);
+                      resultC,
+                      localIconUrl,
+                      parseInt(width) - iconWidth / 2 - margin,
+                      parseInt(height) - iconHeight / 2 - margin,
+                      0.5,
+                    );
 
                     // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
-                    const granted = await PermissionsAndroid.check(
-                      "android.permission.READ_EXTERNAL_STORAGE",
-                    );
+                    const granted = await PermissionsAndroid.check("android.permission.READ_EXTERNAL_STORAGE");
                     if (!granted) {
-                      const response = await PermissionsAndroid.request(
-                        "android.permission.READ_EXTERNAL_STORAGE",
-                      );
+                      const response = await PermissionsAndroid.request("android.permission.READ_EXTERNAL_STORAGE");
                       if (!response) {
                         // Oh. well. No share for you :(
                         return;
@@ -156,23 +167,22 @@ export default {
                       let finalPath = `${RNFetchBlob.fs.dirs.DownloadDir}/guideHBG.jpg`;
                       finalPath = `file://${finalPath}`;
 
-                      RNFetchBlob.fs.exists(finalPath)
-                        .then((exist) => {
-                          // Only attempt to share the file if we successfully managed to move it.
-                          if (exist) {
-                            const shareImg = {
-                              title,
-                              message,
-                              subject,
-                              url: finalPath,
-                            };
+                      RNFetchBlob.fs.exists(finalPath).then((exist) => {
+                        // Only attempt to share the file if we successfully managed to move it.
+                        if (exist) {
+                          const shareImg = {
+                            title,
+                            message,
+                            subject,
+                            url: finalPath,
+                          };
 
-                            Share.open(shareImg);
+                          Share.open(shareImg);
 
-                            isCreatingImage = false;
-                            origin.forceUpdate();
-                          }
-                        });
+                          isCreatingImage = false;
+                          origin.forceUpdate();
+                        }
+                      });
                     });
                   });
                 });
@@ -200,13 +210,30 @@ export default {
 
             const resultA = await ImageMarker.markWithImage(url, fadeUrl, 0, parseInt(height) - fadeHeight, 1);
             const resultB = await ImageMarker.addText(
-              resultA, title, (margin * pixelRatio), (parseInt(height) * pixelRatio) - (fontSize * (2 * pixelRatio)) - (margin * pixelRatio) - lineDistance,
-              Colors.white, "Roboto-bold", fontSize * pixelRatio);
+              resultA,
+              title,
+              margin * pixelRatio,
+              parseInt(height) * pixelRatio - fontSize * (2 * pixelRatio) - margin * pixelRatio - lineDistance,
+              Colors.white,
+              "Roboto-bold",
+              fontSize * pixelRatio,
+            );
             const resultC = await ImageMarker.addText(
-              resultB, LangService.strings.SHARING_OVERLAY_TITLE, margin * pixelRatio, (parseInt(height) * pixelRatio) - (fontSize * pixelRatio) - (margin * pixelRatio),
-              Colors.white, "Roboto", fontSize * pixelRatio);
+              resultB,
+              LangService.strings.SHARING_OVERLAY_TITLE,
+              margin * pixelRatio,
+              parseInt(height) * pixelRatio - fontSize * pixelRatio - margin * pixelRatio,
+              Colors.white,
+              "Roboto",
+              fontSize * pixelRatio,
+            );
             const resultD = await ImageMarker.markWithImage(
-              resultC, iconUrl, (parseInt(width) * pixelRatio) - iconWidth - (margin * pixelRatio), (parseInt(height) * pixelRatio) - iconHeight - (margin * pixelRatio), 1);
+              resultC,
+              iconUrl,
+              parseInt(width) * pixelRatio - iconWidth - margin * pixelRatio,
+              parseInt(height) * pixelRatio - iconHeight - margin * pixelRatio,
+              1,
+            );
 
             // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
             iosShare.message = message;
@@ -235,32 +262,33 @@ export default {
     let imageWidth = 0;
     let imageHeight = 0;
 
-    Image.getSize(imageUrl, (width, height) => { imageWidth = width; imageHeight = height; });
+    Image.getSize(imageUrl, (width, height) => {
+      imageWidth = width;
+      imageHeight = height;
+    });
     // If the main image is wider than 1900, we need to use a smaller one. The largest one generated by Wordpress is unfortunately only 1000 wide, but it's better than potentially crashing the app.
     if (imageWidth > 1900) {
       imageUrl = image.medium;
-      Image.getSize(imageUrl, (width, height) => { imageWidth = width; imageHeight = height; });
+      Image.getSize(imageUrl, (width, height) => {
+        imageWidth = width;
+        imageHeight = height;
+      });
     }
-
 
     return (
       <View>
-        <TouchableOpacity onPress={() => { this.beginShare(title, "", imageUrl, imageWidth, imageHeight, title, shareType); }}>
+        <TouchableOpacity
+          onPress={() => {
+            this.beginShare(title, "", imageUrl, imageWidth, imageHeight, title, shareType);
+          }}
+        >
           <View style={styles.shareBoxOuter}>
             <Image style={styles.shareIcon} source={shareIcon} />
             <Text style={styles.shareText}>{LangService.strings.SHARE}</Text>
           </View>
         </TouchableOpacity>
-        <Modal
-          visible={isCreatingImage}
-          animationType="fade"
-          transparent
-          onDismiss={this.modalClosed}
-          onRequestClose={this.modalClosed}
-        >
-          <View >
-            {this.loadOverlay()}
-          </View>
+        <Modal visible={isCreatingImage} animationType="fade" transparent onDismiss={this.modalClosed} onRequestClose={this.modalClosed}>
+          <View>{this.loadOverlay()}</View>
         </Modal>
       </View>
     );
@@ -268,14 +296,9 @@ export default {
 
   loadOverlay() {
     return (
-      <View style={styles.imageHolder} >
+      <View style={styles.imageHolder}>
         <Image source={Background} style={styles.image} />
-        <ActivityIndicator
-          animating
-          color="#bc2b78"
-          size="large"
-          style={styles.activityIndicator}
-        />
+        <ActivityIndicator animating color="#bc2b78" size="large" style={styles.activityIndicator} />
       </View>
     );
   },
