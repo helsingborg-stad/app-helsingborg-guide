@@ -4,7 +4,7 @@ import { Colors, TextStyles } from "../../../styles";
 export default StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: Colors.purple,
+    backgroundColor: Colors.darkPurple,
     flexDirection: "row",
     height: 54,
     justifyContent: "center",

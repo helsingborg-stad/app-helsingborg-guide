@@ -1,25 +1,19 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import {
-  AppRegistry,
-  Alert,
-  UIManager,
-  Platform,
-  Linking,
-} from "react-native";
+import { AppRegistry, Alert, UIManager, Platform, Linking } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
-import Nav from "src/Nav";
-import configureStore from "src/store/configureStore";
-import internetChanged from "src/actions/internetActions";
-import LangService from "src/services/langService";
-import Opener from "src/services/SettingsService";
-import { errorHappened } from "src/actions/errorActions";
-import FullScreenVideoScreen from "src/components/screens/FullScreenVideoScreen";
-import LocationService from "src/services/locationService";
-import DownloadTasksManager from "src/services/DownloadTasksManager";
-import { appStarted, appBecameActive, appBecameInactive } from "src/actions/uiStateActions";
-import { setLanguage } from "src/actions/navigationActions";
+import Nav from "./src/Nav";
+import configureStore from "./src/store/configureStore";
+import internetChanged from "./src/actions/internetActions";
+import LangService from "./src/services/langService";
+import Opener from "./src/services/SettingsService";
+import { errorHappened } from "./src/actions/errorActions";
+import FullScreenVideoScreen from "./src/components/screens/FullScreenVideoScreen";
+import LocationService from "./src/services/locationService";
+import DownloadTasksManager from "./src/services/DownloadTasksManager";
+import { appStarted, appBecameActive, appBecameInactive } from "./src/actions/uiStateActions";
+import { setLanguage } from "./src/actions/navigationActions";
 
 const { store, persistor } = configureStore();
 
@@ -63,7 +57,7 @@ export default class GuideHbg extends Component {
           text: LangService.strings.SETTINGS,
           onPress: GuideHbg.openInternetSettings,
         },
-        { text: LangService.strings.CLOSE, onPress: () => { }, style: "cancel" },
+        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
       ],
       { cancelable: false },
     );

@@ -19,23 +19,31 @@ const ARState = {
   UNSUPPORTED: "AR_UNSUPPORTED",
 };
 
-type Props = {}
+type Props = {
+  items: Array<MapItem>,
+  userLocation: ?GeolocationType,
+  activeMarker: MapItem,
+  onArMarkerPressed: ?(index: number) => void,
+};
 
 type State = {
   arSupported: boolean,
-  arState: string
-}
+  arState: string,
+};
 
 export default class ARView extends Component<Props, State> {
   state = { arSupported: false, arState: ARState.CHECKING };
 
   componentDidMount() {
-    CameraService
-      .getInstance()
+    CameraService.getInstance()
       .checkCameraPermissions()
       .then(
-        () => { this.checkSupport(); }, // permitted
-        () => { this.setState({ arSupported: false, arState: ARState.CAMERA_DISABLED }); }, // not permitted
+        () => {
+          this.checkSupport();
+        }, // permitted
+        () => {
+          this.setState({ arSupported: false, arState: ARState.CAMERA_DISABLED });
+        }, // not permitted
       );
   }
 
@@ -48,22 +56,20 @@ export default class ARView extends Component<Props, State> {
   render() {
     const {
       state: { arSupported, arState },
+      props: { items, userLocation, activeMarker, onArMarkerPressed },
     } = this;
 
-    return (
-      arSupported ? (
-        <ViroARSceneNavigator
-          initialScene={{ scene: MarkerScene }}
-          viroAppProps={{ }}
-          apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
-          worldAlignment="GravityAndHeading"
-        />
-      ) : (
-        <View>
-          <Text>{LangService.strings[arState]}</Text>
-        </View>
-      )
+    return arSupported ? (
+      <ViroARSceneNavigator
+        initialScene={{ scene: MarkerScene }}
+        viroAppProps={{ items, userLocation, activeMarker, onArMarkerPressed }}
+        apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
+        worldAlignment="GravityAndHeading"
+      />
+    ) : (
+      <View>
+        <Text>{LangService.strings[arState]}</Text>
+      </View>
     );
   }
 }
-

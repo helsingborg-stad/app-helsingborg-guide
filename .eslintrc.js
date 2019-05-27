@@ -20,14 +20,6 @@ module.exports = {
   },
   plugins: ["jest", "react", "flowtype", "react-native"],
   rules: {
-    "import/no-extraneous-dependencies": [
-      "error", {
-         "devDependencies": false,
-         "optionalDependencies": false,
-         "peerDependencies": false,
-         "packageDir": "./"
-      }
-    ],
     quotes: [1, "double"],
     "function-paren-newline": ["off"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
