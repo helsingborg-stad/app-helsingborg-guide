@@ -1,10 +1,6 @@
-import React, {
-  Component,
-} from "react";
-import {
-  NativeModules,
-} from "react-native";
-import VideoPlayer from "src/components/shared/VideoPlayer";
+import React, { Component } from "react";
+import { NativeModules } from "react-native";
+import VideoPlayer from "../shared/VideoPlayer";
 
 const { FullScreenVideoModule } = NativeModules;
 
@@ -33,13 +29,17 @@ export default class FullScreenVideoScreen extends Component {
 
   render() {
     const { url, paused, currentTime } = this.state;
-    return url && (<VideoPlayer
-      containerStyle={{ flex: 1 }}
-      style={{ flex: 1 }}
-      isAndroidFullscreen
-      playOnLoad={!paused}
-      initialCurrentTime={currentTime}
-      filePath={url}
-    />);
+    return (
+      url && (
+        <VideoPlayer
+          containerStyle={{ flex: 1 }}
+          style={{ flex: 1 }}
+          isAndroidFullscreen
+          playOnLoad={!paused}
+          initialCurrentTime={currentTime}
+          filePath={url}
+        />
+      )
+    );
   }
 }

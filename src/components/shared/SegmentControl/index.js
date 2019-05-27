@@ -27,7 +27,7 @@ export default class SegmentControl extends Component<Props, State> {
     };
   }
 
-  containerWidth: ?number;
+  containerWidth = 0;
 
   selectedViewLeftInset = new Animated.Value(0);
 

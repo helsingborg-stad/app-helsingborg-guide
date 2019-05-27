@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { ViroARScene, ViroText, ViroConstants, ViroNode, ViroImage } from "react-viro";
-import { LocationUtils, MapItemUtils } from "src/utils";
+import { LocationUtils, MapItemUtils } from "../../../utils";
 import Marker from "./Marker";
 
 type Props = {
