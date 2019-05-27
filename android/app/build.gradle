@@ -146,7 +146,7 @@ android {
     }
     buildTypes {
         debug {
-            signingConfig signingConfigs.release
+            signingConfig (project.hasProperty("unsigned") ? null : signingConfigs.release)
         }
         release {
             minifyEnabled enableProguardInReleaseBuilds
