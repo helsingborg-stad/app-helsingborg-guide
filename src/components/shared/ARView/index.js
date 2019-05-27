@@ -5,8 +5,8 @@ import { View, Text } from "react-native";
 import { ViroARSceneNavigator, ViroUtils } from "react-viro";
 import CameraService from "../../../services/cameraService";
 import LangService from "../../../services/langService";
-
 import MarkerScene from "./MarkerScene";
+import OffscreenMarkers from "./OffscreenMarker";
 
 const { isARSupportedOnDevice } = ViroUtils;
 
@@ -58,14 +58,18 @@ export default class ARView extends Component<Props, State> {
       state: { arSupported, arState },
       props: { items, userLocation, activeMarker, onArMarkerPressed },
     } = this;
+    const containerStyle = { flex: 1 };
 
     return arSupported ? (
-      <ViroARSceneNavigator
-        initialScene={{ scene: MarkerScene }}
-        viroAppProps={{ items, userLocation, activeMarker, onArMarkerPressed }}
-        apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
-        worldAlignment="GravityAndHeading"
-      />
+      <View style={containerStyle}>
+        <ViroARSceneNavigator
+          initialScene={{ scene: MarkerScene }}
+          viroAppProps={{ items, userLocation, activeMarker, onArMarkerPressed }}
+          apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
+          worldAlignment="GravityAndHeading"
+        />
+        <OffscreenMarkers items={items} userLocation={userLocation} activeMarker={activeMarker} degree={150} />
+      </View>
     ) : (
       <View>
         <Text>{LangService.strings[arState]}</Text>

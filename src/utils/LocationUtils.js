@@ -53,9 +53,24 @@ function getLocationRelativePosition(userLocation: GeolocationType, latitude: nu
   return result;
 }
 
+function angleBetweenCoords(start: { latitude: number, longitude: number }, end: { latitude: number, longitude: number }) {
+  const x = end.latitude - start.latitude;
+  const y = end.longitude - start.longitude;
+  let angle;
+
+  if (Math.atan2(y, x) >= 0) {
+    angle = Math.atan2(y, x) * (180 / Math.PI);
+  } else {
+    angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
+  }
+
+  return angle;
+}
+
 export default {
   getDistanceBetweenCoordinates,
   getShortestDistance,
   directionsUrl,
   getLocationRelativePosition,
+  angleBetweenCoords,
 };
