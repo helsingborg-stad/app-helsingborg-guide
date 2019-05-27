@@ -352,7 +352,7 @@ class MarkerListView extends Component<Props, State> {
 
     return (
       <View style={styles.container}>
-        {shouldShowInstructions && <UsageModal onRequestClose={() => { this.closeInstructions(); }} />}
+        {shouldShowInstructions && <UsageModal onRequestClose={() => this.closeInstructions()} />}
         {supportedNavigationModes && supportedNavigationModes.length > 1 && (
           <SegmentControl
             style={styles.segmentControl}
