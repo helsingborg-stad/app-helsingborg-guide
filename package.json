@@ -14,13 +14,15 @@
     "android:store:debug": "react-native run-android --variant storeDebug",
     "android:store:release": "react-native run-android --variant storeRelease",
     "ios:device:debug": "react-native run-ios --device --configuration Debug",
-    "ios:device:release": "react-native run-ios --device --configuration Release"
+    "ios:device:release": "react-native run-ios --device --configuration Release",
+    "translate": "node ./scripts/translate.js"
   },
   "dependencies": {
     "@react-native-community/netinfo": "^2.0.10",
     "ajv": "6.10.0",
     "axios": "0.18.0",
     "geolib": "2.0.24",
+    "haversine": "^1.1.1",
     "lodash": "4.17.11",
     "mercator-projection": "0.0.2",
     "prop-types": "15.7.2",

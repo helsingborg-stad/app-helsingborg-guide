@@ -2,8 +2,8 @@ import { StyleSheet, Dimensions, Platform } from "react-native";
 import { Colors, TextStyles } from "../../../styles";
 import { StyleSheetUtils } from "../../../utils";
 
-export const TextMargin = 10;
-export const ListItemImageSize = 120;
+export const TextMargin = 18;
+export const ListItemImageSize = 100;
 export const DefaultMargin = 20;
 
 export const ScreenWidth = Dimensions.get("window").width;
@@ -54,6 +54,31 @@ export default StyleSheet.create({
     right: 0,
     zIndex: 100,
   },
+  listContainerStyle: {
+    paddingHorizontal: ios ? 0 : 15,
+  },
+  listEstimatesContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 6,
+  },
+  listEstimatesDistance: StyleSheetUtils.flatten([
+    TextStyles.body,
+    {
+      fontSize: 24,
+      fontWeight: "bold",
+      color: Colors.black,
+    },
+  ]),
+  listEstimatesTime: StyleSheetUtils.flatten([
+    TextStyles.body,
+    {
+      fontSize: 24,
+      fontWeight: "normal",
+    },
+  ]),
   listIcon: {
     height: 60,
     width: 60,
@@ -65,35 +90,35 @@ export default StyleSheet.create({
   listImageNumberText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
-      color: Colors.black,
-      marginTop: 1,
-      fontSize: 18,
+      color: Colors.white,
+      fontSize: 12,
       letterSpacing: -2.0,
       left: ios ? -1 : 0,
+      flex: 1,
       fontWeight: "500",
       textAlign: "center",
       backgroundColor: "transparent",
     },
   ]),
   listImageNumberView: {
-    backgroundColor: Colors.white,
-    borderRadius: 13,
-    height: 26,
-    left: 5,
-    position: "absolute",
-    top: 5,
-    width: 26,
+    alignItems: "center",
+    backgroundColor: Colors.purple,
+    borderRadius: 11,
+    flexDirection: "row",
+    height: 22,
+    justifyContent: "center",
+    width: 22,
   },
   listItem: {
     ...listItemShared,
+    borderRadius: 5,
     marginHorizontal: 5,
+    overflow: "hidden",
   },
   listItemAddress: StyleSheetUtils.flatten([
     TextStyles.body,
     {
-      fontSize: 16,
-      marginTop: 4,
-      lineHeight: 21,
+      fontSize: 12,
       marginRight: TextMargin,
       color: Colors.warmGrey,
     },
@@ -102,20 +127,25 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     marginHorizontal: TextMargin,
+    marginBottom: 14,
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       color: Colors.black,
-      marginTop: 8,
-      flexWrap: "wrap",
-      fontSize: 20,
-      fontWeight: "500",
-      lineHeight: 23.0,
-      letterSpacing: 0.1,
+      fontSize: 16,
+      fontWeight: "bold",
+      letterSpacing: 0.08,
       marginRight: TextMargin,
+      width: 161,
     },
   ]),
+  listItemTitleContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 15,
+  },
   listStyle: {
     backgroundColor: Colors.transparent,
     bottom: ListBottomMargin,
