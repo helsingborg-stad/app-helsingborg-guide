@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
 import LocationView from "../shared/LocationView";
-import { AnalyticsUtils } from "../../utils/";
+import { AnalyticsUtils } from "../../utils";
 import { HeaderStyles } from "../../styles";
 import { selectCurrentGuide, showBottomBar } from "../../actions/uiStateActions";
 
@@ -16,7 +16,7 @@ type Props = {
   isFetchingGuides: boolean,
   selectCurrentGuide(guide: Guide): void,
   dispatchShowBottomBar(visible: boolean): void,
-}
+};
 
 class LocationScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
@@ -25,7 +25,7 @@ class LocationScreen extends Component<Props> {
       title,
       headerRight: <View />,
     });
-  }
+  };
 
   componentWillUnmount() {
     const { navigation } = this.props;
@@ -47,23 +47,24 @@ class LocationScreen extends Component<Props> {
       this.props.selectCurrentGuide(guide);
       navigation.navigate("GuideDetailsScreen", { title: guide.name });
     }
-  }
+  };
 
   render() {
     const { currentGuideGroup, currentGuides, geolocation, isFetchingGuides } = this.props;
     const now = new Date();
-    return (<LocationView
-      guideGroup={currentGuideGroup}
-      guides={currentGuides}
-      now={now}
-      geolocation={geolocation}
-      navigation={this.props.navigation}
-      onPressGuide={this.onPressGuide}
-      isFetchingGuides={isFetchingGuides}
-    />);
+    return (
+      <LocationView
+        guideGroup={currentGuideGroup}
+        guides={currentGuides}
+        now={now}
+        geolocation={geolocation}
+        navigation={this.props.navigation}
+        onPressGuide={this.onPressGuide}
+        isFetchingGuides={isFetchingGuides}
+      />
+    );
   }
 }
-
 
 function mapStateToProps(state: RootState) {
   const { isFetching } = state.guides;
@@ -78,7 +79,7 @@ function mapStateToProps(state: RootState) {
   return {
     currentGuideGroup,
     currentGuides,
-    geolocation,
+    geolocation: geolocation.position,
     isFetchingGuides: isFetching,
   };
 }
@@ -90,4 +91,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LocationScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LocationScreen);

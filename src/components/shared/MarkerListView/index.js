@@ -391,7 +391,7 @@ class MarkerListView extends Component<Props, State> {
 function mapStateToProps(state: RootState) {
   const { geolocation } = state;
   return {
-    userLocation: geolocation,
+    userLocation: geolocation.position,
   };
 }
 

@@ -284,7 +284,10 @@ declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
   guides: GuideState,
-  geolocation: GeolocationType,
+  geolocation: {
+    position: GeolocationType,
+    bearing: number,
+  },
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
