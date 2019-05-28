@@ -6,7 +6,7 @@ import { ViroARSceneNavigator, ViroUtils } from "react-viro";
 import CameraService from "../../../services/cameraService";
 import LangService from "../../../services/langService";
 import MarkerScene from "./MarkerScene";
-import OffscreenMarkers from "./OffscreenMarkers";
+import OffscreenMarkersView from "./OffscreenMarkersView";
 
 const { isARSupportedOnDevice } = ViroUtils;
 
@@ -69,7 +69,7 @@ export default class ARView extends Component<Props, State> {
           apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
           worldAlignment="GravityAndHeading"
         />
-        <OffscreenMarkers
+        <OffscreenMarkersView
           style={offScreenMarkerViewStyle}
           items={items}
           userLocation={userLocation}

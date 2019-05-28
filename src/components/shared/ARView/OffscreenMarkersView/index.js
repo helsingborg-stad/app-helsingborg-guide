@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Image, Text, View } from "react-native";
+import { View } from "react-native";
 import { MapItemUtils, MathUtils, LocationUtils } from "../../../../utils";
-import * as Images from "../../../../images/AR";
 import styles from "./styles";
+import OffscreenMarker from "./OffscreenMarker";
 
 const IMAGE_OFFSET = 60;
 const HALF_IMAGE_OFFSET = IMAGE_OFFSET * 0.5;
@@ -27,19 +27,7 @@ type State = {
   },
 };
 
-const OffscreenMarker = (marker) => {
-  const { id, order, x, y, angle, selected } = marker;
-  const imagePin = selected ? Images.PinSelected : Images.Pin;
-
-  return (
-    <View key={id} style={{ ...styles.marker, transform: [{ translateX: x }, { translateY: y }] }}>
-      <Image source={imagePin} style={{ transform: [{ rotateZ: `${angle - 180}deg` }] }} />
-      <Text style={styles.label}>{`${order + 1}`}</Text>
-    </View>
-  );
-};
-
-class OffscreenMarkers extends Component<Props, State> {
+class OffscreenMarkersView extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -138,7 +126,9 @@ class OffscreenMarkers extends Component<Props, State> {
         style={[styles.container, style]}
         onLayout={this.onLayout}
       >
-        {markers.map(OffscreenMarker)}
+        {markers.map(marker => (
+          <OffscreenMarker {...marker} />
+        ))}
       </View>
     );
   }
@@ -157,4 +147,4 @@ function mapStateToProps(state: RootState) {
 export default connect(
   mapStateToProps,
   null,
-)(OffscreenMarkers);
+)(OffscreenMarkersView);
