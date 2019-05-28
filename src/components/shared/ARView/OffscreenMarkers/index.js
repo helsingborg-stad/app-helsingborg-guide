@@ -75,7 +75,7 @@ class OffscreenMarkers extends Component<Props, State> {
       };
 
       // map all markers on a circle of the longest view dimension and then clip to view edges
-      const markers = items.map((item) => {
+      const markers = items.map((item, index) => {
         const markerLocation = MapItemUtils.getLocationFromItem(item);
         let angle = LocationUtils.angleBetweenCoords(userLocation.coords, markerLocation);
         angle = angle - compassBearing < 0 ? angle - compassBearing + 360 : angle - compassBearing;
@@ -91,7 +91,7 @@ class OffscreenMarkers extends Component<Props, State> {
         const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
         const selected = markerId === selectedMarkerId;
 
-        return { id: markerId, order: item.contentObject.order, x, y, angle, selected };
+        return { id: markerId, order: index, x, y, angle, selected };
       });
 
       // make the selected marker always be on top
