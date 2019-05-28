@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Colors } from ".";
+import Colors from "./Colors";
 
 const defaultFont = {
   fontFamily: "Roboto",

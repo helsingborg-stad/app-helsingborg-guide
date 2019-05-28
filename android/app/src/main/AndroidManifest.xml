@@ -10,8 +10,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
 
-
-    <uses-feature android:name="android.hardware.location.gps"/>
     <uses-feature
             android:name="android.hardware.bluetooth_le"
             android:required="true"/>
@@ -61,7 +59,7 @@
             android:exported="false">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths"/>
+                android:resource="@xml/provider_paths"/>
         </provider>
 
         <meta-data android:name="com.google.ar.core" android:value="optional" />

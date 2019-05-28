@@ -1,6 +1,6 @@
 import RNFirebase from "react-native-firebase";
 
-const firebase = RNFirebase.initializeApp();
+const firebase = RNFirebase.app();
 
 export default {
   setScreen: (screenName) => {

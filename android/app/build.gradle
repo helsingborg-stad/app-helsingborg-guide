@@ -142,7 +142,7 @@ android {
         }
         store {
             dimension 'env'
-        }        
+        }
     }
     buildTypes {
         debug {
@@ -174,6 +174,8 @@ android {
 }
 
 dependencies {
+    implementation project(':@react-native-community_async-storage')
+    implementation project(':rn-fetch-blob')
     implementation project(':react-native-android-open-settings')
     implementation project(':react-native-webview')
     implementation project(':react-native-gesture-handler')
@@ -185,17 +187,15 @@ dependencies {
     implementation(project(':react-native-firebase')) {
         transitive = false
     }
-    implementation project(':react-native-photo-view')
-    implementation project(':react-native-vector-icons')
-    implementation project(':react-native-maps')
-    implementation 'com.google.android.gms:play-services-base:16.1.0'
-    implementation 'com.google.android.gms:play-services-maps:16.1.0'
-    implementation "com.google.firebase:firebase-core:16.0.9"
-    implementation "com.google.firebase:firebase-analytics:16.5.0"
-
-    implementation project(':react-native-video')
-    implementation project(':react-native-fetch-blob')
-    implementation 'org.altbeacon:android-beacon-library:2.16.1'
+    compile project(':react-native-photo-view')
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-maps')
+    compile 'com.google.android.gms:play-services-base:16.1.0'
+    compile 'com.google.android.gms:play-services-maps:16.1.0'
+    compile "com.google.firebase:firebase-core:16.0.9"
+    compile "com.google.firebase:firebase-analytics:16.5.0"
+    compile project(':react-native-video')
+    compile 'org.altbeacon:android-beacon-library:2.12.3'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
