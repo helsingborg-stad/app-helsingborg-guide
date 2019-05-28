@@ -1,14 +1,16 @@
 const fs = require("fs");
 
-if (process.argv.length === 3) {
-  return console.error("Please pass a .tsv translations file and an output filename");
+if (process.argv.length < 3) { // 0: process, 1: input, 2: output
+  return console.error(
+    "Please pass a .tsv translations file and an output file e.g.:\nnpm run translate GuideHelsingborgTranslations.tsv ./src/languages/strings.js",
+  );
 }
 
 const INPUT_PATH = process.argv[2];
 const OUTPUT_PATH = process.argv[3];
 const SEPARATOR = "\t";
 const ENCODING = "utf8";
-const STRIP_REGEX = /[\r"]/gi;
+const STRIP_REGEX = /[\r]/gi;
 
 const indent = (strings, depth) => {
   for (let i = 0; i < (2 * depth); i += 1) {
@@ -30,7 +32,7 @@ const printObject = (object, strings, depth = 0) => {
       strings.push("},\n");
     } else {
       strings.push("\"");
-      strings.push(value.replace(STRIP_REGEX, ""));
+      strings.push(value.replace(STRIP_REGEX, "").replace(/"/gi, "\\\""));
       strings.push("\",\n");
     }
   });
@@ -87,7 +89,7 @@ const writeFile = (filename, data) => new Promise((resolve, reject) => {
 });
 
 (async function translate() {
-  const data = await readFile(INPUT_PATH);
-  const result = await writeFile(OUTPUT_PATH, data);
+  const data = await readFile(INPUT_PATH).catch(console.error);
+  const result = await writeFile(OUTPUT_PATH, data).catch(console.error);
   console.log(result);
 }());

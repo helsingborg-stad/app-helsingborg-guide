@@ -1,8 +1,11 @@
 // @flow
 import React from "react";
-import { View, TouchableOpacity, Image, Text, Modal } from "react-native";
+import { View, TouchableOpacity, ImageBackground, Text, Modal } from "react-native";
 import LangService from "../../../../services/langService";
 import styles from "./styles";
+import Illustration from "./illustration";
+
+const numberedMarkerActive = require("../../../../images/AR/PinSelected.png");
 
 type Props = {
   onRequestClose: () => void,
@@ -17,8 +20,11 @@ export default ({ onRequestClose }: Props) => (
   >
     <View style={styles.container}>
       <Text style={styles.title}>{LangService.strings.AR_INTRO_TITLE}</Text>
-      <View style={styles.exampleImageContainer}>
-        <Image style={styles.exampleImage} />
+      <View style={styles.illustrationImageContainer}>
+        <Illustration />
+        <ImageBackground source={numberedMarkerActive} style={styles.marker}>
+          <Text style={styles.markerNumber}>1</Text>
+        </ImageBackground>
       </View>
       <Text style={styles.instructions}>{LangService.strings.AR_INTRO_INSTRUCTIONS}</Text>
       <TouchableOpacity style={styles.startButton} onPress={onRequestClose}>

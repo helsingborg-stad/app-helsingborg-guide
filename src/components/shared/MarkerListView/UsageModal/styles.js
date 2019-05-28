@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Platform } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Colors, TextStyles } from "../../../../styles";
 import { StyleSheetUtils } from "../../../../utils";
 
@@ -13,22 +13,40 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
-  exampleImage: {
-    backgroundColor: Colors.lightGrey,
-    height: 231,
-    marginLeft: 127,
-    width: 195,
-  },
-  exampleImageContainer: {
+  illustrationImageContainer: {
     marginHorizontal: 30,
     marginVertical: 15,
+    paddingLeft: 127,
+    paddingRight: 53,
+    paddingTop: 40,
   },
   instructions: StyleSheetUtils.flatten([
     TextStyles.body,
     {
-      marginHorizontal: 30,
+      fontSize: 16,
       letterSpacing: 0.09,
-      lineHeight: 36,
+      lineHeight: 23,
+      marginHorizontal: 30,
+      textAlign: "center",
+    },
+  ]),
+  marker: {
+    alignItems: "center",
+    flexDirection: "row",
+    height: 24,
+    justifyContent: "center",
+    position: "absolute",
+    right: 193,
+    top: 100,
+    width: 20,
+  },
+  markerNumber: StyleSheetUtils.flatten([
+    TextStyles.body,
+    {
+      color: Colors.white,
+      fontSize: 9,
+      letterSpacing: 0,
+      lineHeight: 13,
       textAlign: "center",
     },
   ]),
