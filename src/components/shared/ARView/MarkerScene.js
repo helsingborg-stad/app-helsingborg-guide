@@ -2,7 +2,10 @@
 import React, { Component } from "react";
 import { ViroARScene, ViroText, ViroConstants, ViroNode, ViroImage } from "react-viro";
 import { LocationUtils, MapItemUtils } from "../../../utils";
+import LocationService from "../../../services/locationService";
 import Marker from "./Marker";
+
+const ARRIVE_DISTANCE = 10;
 
 type Props = {
   arSceneNavigator: any,
@@ -58,7 +61,7 @@ export default class MarkerScene extends Component<Props, State> {
       state: { isInitialized, markers },
       props: {
         arSceneNavigator: {
-          viroAppProps: { activeMarker, onArMarkerPressed },
+          viroAppProps: { userLocation, activeMarker, onArMarkerPressed },
         },
       },
       _onInitialized,
@@ -72,8 +75,9 @@ export default class MarkerScene extends Component<Props, State> {
           markers.map((marker) => {
             const id = MapItemUtils.getIdFromMapItem(marker);
             const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
+            const arrived = LocationService.getTravelDistance(userLocation.coords, marker.contentObject.location) < ARRIVE_DISTANCE;
 
-            return <Marker key={id} marker={marker} active={active} onPress={onArMarkerPressed} />;
+            return <Marker key={id} marker={marker} active={active} onPress={onArMarkerPressed} arrived={arrived} />;
           })
         )}
       </ViroARScene>
