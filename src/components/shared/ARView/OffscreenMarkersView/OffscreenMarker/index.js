@@ -32,7 +32,7 @@ export default class OffscreenMarker extends Component<Props> {
       toValue: props.y,
     }).start();
     Animated.spring(this.animatedAngle, {
-      toValue: props.angle - 180,
+      toValue: -props.angle - 180,
     }).start();
   }
 

@@ -1,21 +1,20 @@
 // @flow
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { View } from "react-native";
-import { MapItemUtils, MathUtils, LocationUtils } from "../../../../utils";
+import { MapItemUtils, MathUtils } from "../../../../utils";
 import styles from "./styles";
 import OffscreenMarker from "./OffscreenMarker";
 
 const IMAGE_OFFSET = 60;
 const HALF_IMAGE_OFFSET = IMAGE_OFFSET * 0.5;
-const OFFSCREEN_ANGLE_MIN = -135;
-const OFFSCREEN_ANGLE_MAX = 135;
+const OFFSCREEN_ANGLE_MIN = -160;
+const OFFSCREEN_ANGLE_MAX = 160;
 
 type Props = {
   items: Array<MapItem>,
   userLocation: ?GeolocationType,
   activeMarker: MapItem,
-  compassBearing: number,
+  angle: number,
   style: any,
 };
 type State = {
@@ -27,7 +26,7 @@ type State = {
   },
 };
 
-class OffscreenMarkersView extends Component<Props, State> {
+export default class OffscreenMarkersView extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -40,7 +39,7 @@ class OffscreenMarkersView extends Component<Props, State> {
 
   getMarkers = () => {
     const {
-      props: { items, compassBearing, userLocation, activeMarker },
+      props: { items, angle, userLocation, activeMarker },
       state: {
         screen: { width, height, y: containerY },
       },
@@ -64,11 +63,7 @@ class OffscreenMarkersView extends Component<Props, State> {
 
       // map all markers on a circle of the longest view dimension and then clip to view edges
       const markers = items.map((item, index) => {
-        const markerLocation = MapItemUtils.getLocationFromItem(item);
-        let angle = LocationUtils.angleBetweenCoords(userLocation.coords, markerLocation);
-        angle = angle - compassBearing < 0 ? angle - compassBearing + 360 : angle - compassBearing;
-
-        const radians = (angle - 90) * MathUtils.DEG_TO_RAD;
+        const radians = (-angle - 90) * MathUtils.DEG_TO_RAD;
         const rx = Math.cos(radians) * radius - halfWidth;
         const ry = Math.sin(radians) * radius - halfHeight + containerY;
 
@@ -133,18 +128,3 @@ class OffscreenMarkersView extends Component<Props, State> {
     );
   }
 }
-
-function mapStateToProps(state: RootState) {
-  const {
-    geolocation: { bearing },
-  } = state;
-
-  return {
-    compassBearing: bearing,
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  null,
-)(OffscreenMarkersView);

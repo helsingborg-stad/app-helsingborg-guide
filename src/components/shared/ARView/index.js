@@ -30,10 +30,11 @@ type Props = {
 type State = {
   arSupported: boolean,
   arState: string,
+  angle: number,
 };
 
 export default class ARView extends Component<Props, State> {
-  state = { arSupported: false, arState: ARState.CHECKING };
+  state = { arSupported: false, arState: ARState.CHECKING, angle: 0 };
 
   componentDidMount() {
     CameraService.getInstance()
@@ -56,7 +57,7 @@ export default class ARView extends Component<Props, State> {
 
   render() {
     const {
-      state: { arSupported, arState },
+      state: { arSupported, arState, angle },
       props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle },
     } = this;
     const containerStyle = { flex: 1 };
@@ -65,7 +66,14 @@ export default class ARView extends Component<Props, State> {
       <View style={containerStyle}>
         <ViroARSceneNavigator
           initialScene={{ scene: MarkerScene }}
-          viroAppProps={{ items, userLocation, activeMarker, onArMarkerPressed }}
+          viroAppProps={{
+            items,
+            userLocation,
+            activeMarker,
+            onArMarkerPressed,
+            onDirectionAngleChange: newAngle => this.setState({ angle: newAngle }),
+          }}
+          autofocus
           apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
           worldAlignment="GravityAndHeading"
         />
@@ -74,6 +82,7 @@ export default class ARView extends Component<Props, State> {
           items={items}
           userLocation={userLocation}
           activeMarker={activeMarker}
+          angle={angle}
           pointerEvents="none"
         />
       </View>
