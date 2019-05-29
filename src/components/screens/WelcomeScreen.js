@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import Swiper from "react-native-swiper";
 import { StackActions, NavigationActions } from "react-navigation";
 import { PropTypes } from "prop-types";

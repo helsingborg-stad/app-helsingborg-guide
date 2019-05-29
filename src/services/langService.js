@@ -1,4 +1,4 @@
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import { LANGUAGE } from "../lib/my_consts";
 import strings from "../languages/strings";
 import instructions from "../languages/instructions";

@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import React from "react";
 import Share from "react-native-share";
-import RNFetchBlob from "react-native-fetch-blob";
+import RNFetchBlob from "rn-fetch-blob";
 import ImageMarker from "react-native-image-marker";
 import LangService from "./langService";
 import Colors from "../styles/Colors";
