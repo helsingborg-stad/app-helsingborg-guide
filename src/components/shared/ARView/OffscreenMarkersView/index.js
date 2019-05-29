@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { View } from "react-native";
 import { MapItemUtils, MathUtils } from "../../../../utils";
 import styles from "./styles";
-import OffscreenMarker from "./OffscreenMarker";
+import OffscreenMarker, { type OffscreenMarkerProps } from "./OffscreenMarker";
 
 const IMAGE_OFFSET = 60;
 const HALF_IMAGE_OFFSET = IMAGE_OFFSET * 0.5;
@@ -35,9 +35,9 @@ export default class OffscreenMarkersView extends Component<Props, State> {
     };
   }
 
-  containerRef;
+  containerRef: ?View;
 
-  getMarkers = () => {
+  getMarkers = (): Array<OffscreenMarkerProps> => {
     const {
       props: { items, angle, userLocation, activeMarker },
       state: {
@@ -62,7 +62,7 @@ export default class OffscreenMarkersView extends Component<Props, State> {
       };
 
       // map all markers on a circle of the longest view dimension and then clip to view edges
-      const markers = items.map((item, index) => {
+      const markers: Array<OffscreenMarkerProps> = items.map((item, index) => {
         const radians = (-angle - 90) * MathUtils.DEG_TO_RAD;
         const rx = Math.cos(radians) * radius - halfWidth;
         const ry = Math.sin(radians) * radius - halfHeight + containerY;
@@ -74,25 +74,24 @@ export default class OffscreenMarkersView extends Component<Props, State> {
         const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
         const selected = markerId === selectedMarkerId;
 
-        return { id: markerId, order: index, x, y, angle, selected };
+        return {
+          id: markerId,
+          order: index,
+          x,
+          y,
+          angle,
+          selected,
+          visible: angle - 180 > OFFSCREEN_ANGLE_MIN && angle - 180 < OFFSCREEN_ANGLE_MAX,
+        };
       });
 
-      // make the selected marker always be on top
-      markers.sort((a, b) => {
-        if (a.selected) return 1;
-        if (b.selected) return -1;
-        return a.id - b.id;
-      });
-
-      return markers.filter(
-        marker => marker.selected && (marker.angle - 180 > OFFSCREEN_ANGLE_MIN && marker.angle - 180 < OFFSCREEN_ANGLE_MAX),
-      );
+      return markers.filter(marker => marker.selected);
     }
 
     return [];
   };
 
-  onLayout = (event) => {
+  onLayout = (event: any) => {
     if (this.containerRef) {
       // Measure the absolut position of the view on screen, i.e including navigation bar and status bar
       this.containerRef.measure((fx, fy, width, height, px, py) => {

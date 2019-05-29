@@ -4,27 +4,29 @@ import { Text, Animated } from "react-native";
 import * as Images from "../../../../../images/AR";
 import styles from "./styles";
 
-type Props = {
+export type OffscreenMarkerProps = {
   id: string,
   order: number,
   x: number,
   y: number,
   angle: number,
   selected: boolean,
+  visible: boolean,
 };
 
-export default class OffscreenMarker extends Component<Props> {
-  constructor(props: Props) {
+export default class OffscreenMarker extends Component<OffscreenMarkerProps> {
+  constructor(props: OffscreenMarkerProps) {
     super(props);
 
     this.animatedX = new Animated.Value(props.x);
-
     this.animatedY = new Animated.Value(props.y);
-
     this.animatedAngle = new Animated.Value(props.angle);
+    this.opacity = new Animated.Value(props.visible ? 1 : 0);
   }
 
-  componentWillReceiveProps(props: Props) {
+  componentWillReceiveProps(props: OffscreenMarkerProps) {
+    const { visible } = this.props;
+
     Animated.spring(this.animatedX, {
       toValue: props.x,
     }).start();
@@ -34,6 +36,12 @@ export default class OffscreenMarker extends Component<Props> {
     Animated.spring(this.animatedAngle, {
       toValue: -props.angle - 180,
     }).start();
+
+    if (props.visible !== visible) {
+      Animated.spring(this.opacity, {
+        toValue: props.visible ? 1 : 0,
+      }).start();
+    }
   }
 
   animatedX = new Animated.Value(0);
@@ -41,6 +49,8 @@ export default class OffscreenMarker extends Component<Props> {
   animatedY = new Animated.Value(0);
 
   animatedAngle = new Animated.Value(0);
+
+  opacity = new Animated.Value(0);
 
   render() {
     const { id, order, selected } = this.props;
@@ -51,7 +61,10 @@ export default class OffscreenMarker extends Component<Props> {
     });
 
     return (
-      <Animated.View key={id} style={{ ...styles.marker, transform: [{ translateX: this.animatedX }, { translateY: this.animatedY }] }}>
+      <Animated.View
+        key={id}
+        style={{ ...styles.marker, opacity: this.opacity, transform: [{ translateX: this.animatedX }, { translateY: this.animatedY }] }}
+      >
         <Animated.Image source={imagePin} style={{ transform: [{ rotateZ: rotation }] }} />
         <Text style={styles.label}>{`${order + 1}`}</Text>
       </Animated.View>
