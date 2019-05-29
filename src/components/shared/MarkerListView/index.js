@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
-import { View, FlatList, TouchableOpacity, PixelRatio, Image, Text, AsyncStorage } from "react-native";
+import { View, FlatList, TouchableOpacity, PixelRatio, Image, Text } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import { connect } from "react-redux";
 import { isEqual } from "lodash";
 import IconTextTouchable from "../IconTextTouchable";
