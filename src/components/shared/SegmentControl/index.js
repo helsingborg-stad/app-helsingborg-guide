@@ -56,7 +56,7 @@ export default class SegmentControl extends Component<Props, State> {
   };
 
   render() {
-    const { labels, style } = this.props;
+    const { labels, style, initalSelectedIndex } = this.props;
     const width = (1 / labels.length) * 100;
     const selectionViewStyle = {
       width: `${width}%`,
@@ -67,7 +67,10 @@ export default class SegmentControl extends Component<Props, State> {
       <View
         style={[styles.container, style]}
         onLayout={(e) => {
-          this.containerWidth = e.nativeEvent.layout.width;
+          if (this.containerWidth === 0) {
+            this.containerWidth = e.nativeEvent.layout.width;
+            this.selectedViewLeftInset = new Animated.Value((initalSelectedIndex / labels.length) * this.containerWidth);
+          }
         }}
       >
         {labels.map(this.renderSegmentItem)}
