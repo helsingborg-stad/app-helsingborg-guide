@@ -47,7 +47,7 @@ const Marker = ({ marker, onPress, active, arrived }: Props) => {
         interruptible: true,
       }}
     >
-      {!arrived && (
+      {imagePin !== Images.PinArrived && (
         <ViroText
           text={`${order + 1}`}
           style={active ? styles.textActive : styles.text}

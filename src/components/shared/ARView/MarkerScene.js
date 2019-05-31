@@ -28,7 +28,8 @@ export default class MarkerScene extends Component<Props, State> {
       isInitialized: false,
       markers: items.map((item) => {
         const relativePosition = LocationUtils.getLocationRelativePosition(
-          userLocation,
+          // TODOL use actual userLocation
+          LocationUtils.mockLocation,
           item.contentObject.location.latitude,
           item.contentObject.location.longitude,
         );
@@ -121,7 +122,9 @@ export default class MarkerScene extends Component<Props, State> {
           markers.map((marker) => {
             const id = MapItemUtils.getIdFromMapItem(marker);
             const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
-            const arrived = LocationService.getTravelDistance(userLocation.coords, marker.contentObject.location) < ARRIVE_DISTANCE;
+            // TODO: use actual userLocation
+            // const arrived = LocationService.getTravelDistance(userLocation.coords, marker.contentObject.location) < ARRIVE_DISTANCE;
+            const arrived = LocationService.getTravelDistance(LocationUtils.mockLocation.coords, marker.contentObject.location) < ARRIVE_DISTANCE;
 
             return <Marker key={id} marker={marker} active={active} onPress={onArMarkerPressed} arrived={arrived} />;
           })
