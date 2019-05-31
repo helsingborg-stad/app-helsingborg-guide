@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import RNFetchBlob from "react-native-fetch-blob";
+import RNFetchBlob from "rn-fetch-blob";
 import {
   Platform,
 } from "react-native";
