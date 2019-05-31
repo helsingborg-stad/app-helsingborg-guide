@@ -65,7 +65,8 @@ class MarkerListView extends Component<Props, State> {
     AsyncStorage.getItem(AR_INSTRUCTIONS_SHOWN).then((value) => {
       this.setState({
         shouldShowInstructions: value
-          ? JSON.parse(value) && supportedNavigationModes.includes(NavigationModeUtils.NavigationModes.AR)
+          ? JSON.parse(value)
+            && (supportedNavigationModes ? supportedNavigationModes.includes(NavigationModeUtils.NavigationModes.AR) : false)
           : true,
       });
     });

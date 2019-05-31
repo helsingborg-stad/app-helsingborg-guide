@@ -69,7 +69,7 @@ export default class SegmentControl extends Component<Props, State> {
         onLayout={(e) => {
           if (this.containerWidth === 0) {
             this.containerWidth = e.nativeEvent.layout.width;
-            this.selectedViewLeftInset = new Animated.Value((initalSelectedIndex / labels.length) * this.containerWidth);
+            this.selectedViewLeftInset = new Animated.Value(((initalSelectedIndex || 0) / labels.length) * this.containerWidth);
           }
         }}
       >
