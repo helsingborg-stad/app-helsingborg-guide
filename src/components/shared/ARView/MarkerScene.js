@@ -84,7 +84,7 @@ export default class MarkerScene extends Component<Props, State> {
         position: [px, py, pz],
       } = active;
       const [cx, cy, cz] = cameraPosition;
-      const [fx, , fz] = cameraForward;
+      const [fx, fy, fz] = cameraForward;
 
       const dx = px - cx;
       const dy = py - cy;
@@ -92,14 +92,17 @@ export default class MarkerScene extends Component<Props, State> {
       const dl = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
       const nx = dx / dl;
-      const ny = dy / dl;
       const nz = dz / dl;
 
       const cameraAngle = Math.atan2(fz, fx);
       const markerAngle = Math.atan2(nz, nx);
       const angleDifference = (MathUtils.PI2 + cameraAngle - markerAngle) % MathUtils.PI2;
+      const cameraVerticalRotation = Math.atan2(fy, fz) * MathUtils.RAD_TO_DEG + 180;
 
-      onDirectionAngleChange(angleDifference * MathUtils.RAD_TO_DEG);
+      onDirectionAngleChange({
+        angleDifference: angleDifference * MathUtils.RAD_TO_DEG,
+        cameraVerticalRotation,
+      });
     }
   };
 
