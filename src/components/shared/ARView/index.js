@@ -65,22 +65,22 @@ export default class ARView extends Component<Props, State> {
     // Horizontal rotation
     if (angle > 20) {
       if (angle < 140) {
-        return "Kolla åt vänster";
+        return LangService.strings.AR_HINT_LOOK_LEFT;
       }
       if (angle < 220) {
-        return "Vänd dig om";
+        return LangService.strings.AR_HINT_TURN_AROUND;
       }
       if (angle < 340) {
-        return "Kolla åt höger";
+        return LangService.strings.AR_HINT_LOOK_RIGHT;
       }
     }
 
     // Vertical rotation
     if (isWithinRange(cameraVerticalRotation, 90, 160) || isWithinRange(cameraVerticalRotation, 25, 90)) {
-      return "Kolla upp";
+      return LangService.strings.AR_HINT_LOOK_UP;
     }
     if (isWithinRange(cameraVerticalRotation, 190, 270) || isWithinRange(cameraVerticalRotation, 270, 340)) {
-      return "Kolla ner";
+      return LangService.strings.AR_HINT_LOOK_DOWN;
     }
 
     return null;

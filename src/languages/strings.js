@@ -1,5 +1,5 @@
 /**
- * Created at Mon May 27 2019 14:22:40 GMT+0200 (Central European Summer Time)
+ * Created at Mon Jun 03 2019 12:05:35 GMT+0200 (CEST)
  */
 
 export default {
@@ -11,6 +11,11 @@ export default {
     AR: "Vägvisare",
     AR_CAMERA_DISABLED: "Camera permission needs to be granted",
     AR_CHECKING: "Checking if this feature is supported",
+    AR_HINT_LOOK_DOWN: "Titta ner",
+    AR_HINT_LOOK_LEFT: "Titta åt vänster",
+    AR_HINT_LOOK_RIGHT: "Titta åt höger",
+    AR_HINT_LOOK_UP: "Titta upp",
+    AR_HINT_TURN_AROUND: "Vänd dig om",
     AR_INTRO_BUTTON: "Starta Runturen",
     AR_INTRO_INSTRUCTIONS: "Håll upp telefonen och leta efter din valda plats runt omkring dig. Följ vägvisaren \"Kaj\" tills du hittat platsen.",
     AR_INTRO_TITLE: "Prova ett nytt, roligt sätt att utforska Sofiero",
@@ -103,6 +108,11 @@ export default {
     AR: "Guide",
     AR_CAMERA_DISABLED: "Camera permission needs to be granted",
     AR_CHECKING: "Checking if this feature is supported",
+    AR_HINT_LOOK_DOWN: "Look down",
+    AR_HINT_LOOK_LEFT: "Look to the left",
+    AR_HINT_LOOK_RIGHT: "Look to the right",
+    AR_HINT_LOOK_UP: "Look up",
+    AR_HINT_TURN_AROUND: "Turn around",
     AR_INTRO_BUTTON: "Starta Runturen",
     AR_INTRO_INSTRUCTIONS: "Håll upp telefonen och leta efter din valda plats runt omkring dig. Följ vägvisaren \"Kaj\" tills du hittat platsen.",
     AR_INTRO_TITLE: "Prova ett nytt, roligt sätt att utforska Sofiero",
@@ -195,6 +205,11 @@ export default {
     AR: "Wegweiser",
     AR_CAMERA_DISABLED: "Camera permission needs to be granted",
     AR_CHECKING: "Checking if this feature is supported",
+    AR_HINT_LOOK_DOWN: "",
+    AR_HINT_LOOK_LEFT: "",
+    AR_HINT_LOOK_RIGHT: "",
+    AR_HINT_LOOK_UP: "",
+    AR_HINT_TURN_AROUND: "",
     AR_INTRO_BUTTON: "Starta Runturen",
     AR_INTRO_INSTRUCTIONS: "Håll upp telefonen och leta efter din valda plats runt omkring dig. Följ vägvisaren \"Kaj\" tills du hittat platsen.",
     AR_INTRO_TITLE: "Prova ett nytt, roligt sätt att utforska Sofiero",
