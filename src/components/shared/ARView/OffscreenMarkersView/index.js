@@ -75,6 +75,7 @@ export default class OffscreenMarkersView extends Component<Props, State> {
         const selected = markerId === selectedMarkerId;
 
         return {
+          key: markerId,
           id: markerId,
           order: index,
           x,
