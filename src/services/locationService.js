@@ -100,7 +100,23 @@ export default class LocationService {
 
   getGeoLocation = () => checkPermissions().then(this.upatePosition);
 
-  watchGeoLocation = () => checkPermissions().then(this.upatePosition);
+  watchGeoLocation = () => checkPermissions().then(
+    () => new Promise((resolve, reject) => {
+      this.watcher = navigator.geolocation.watchPosition(
+        (position) => {
+          this.store.dispatch(GeoLocationActions.geolocationUpdated(position));
+          return resolve(position);
+        },
+        reject,
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 5000,
+          distanceFilter: 10,
+        },
+      );
+    }),
+  );
 
   unwatchGeoLocation = () => this.watcher && navigator.geolocation.clearWatch(this.watcher);
 
