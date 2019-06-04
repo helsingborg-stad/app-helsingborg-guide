@@ -28,8 +28,7 @@ export default class MarkerScene extends Component<Props, State> {
       isInitialized: false,
       markers: items.map((item) => {
         const relativePosition = LocationUtils.getLocationRelativePosition(
-          // TODOL use actual userLocation
-          LocationUtils.mockLocation,
+          userLocation,
           item.contentObject.location.latitude,
           item.contentObject.location.longitude,
         );
@@ -81,23 +80,27 @@ export default class MarkerScene extends Component<Props, State> {
 
     if (active) {
       const {
-        position: [px, py, pz],
+        position: [positionX, positionY, positionZ],
       } = active;
-      const [cx, cy, cz] = cameraPosition;
-      const [fx, fy, fz] = cameraForward;
+      const [cameraX, cameraY, cameraZ] = cameraPosition;
+      const [forwardX, forwardY, forwardZ] = cameraForward;
 
-      const dx = px - cx;
-      const dy = py - cy;
-      const dz = pz - cz;
+      // calculate and normalize direction from camera to marker position
+      const dx = positionX - cameraX;
+      const dy = positionY - cameraY;
+      const dz = positionZ - cameraZ;
       const dl = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-      const nx = dx / dl;
-      const nz = dz / dl;
+      const normalX = dx / dl;
+      const normalZ = dz / dl;
 
-      const cameraAngle = Math.atan2(fz, fx);
-      const markerAngle = Math.atan2(nz, nx);
+      // calculate angle between the camera's forward direction and the direction to the marker
+      const cameraAngle = Math.atan2(forwardZ, forwardX);
+      const markerAngle = Math.atan2(normalZ, normalX);
       const angleDifference = (MathUtils.PI2 + cameraAngle - markerAngle) % MathUtils.PI2;
-      const cameraVerticalRotation = Math.atan2(fy, fz) * MathUtils.RAD_TO_DEG + 180;
+
+      // get the camera's rotation around the x-axis
+      const cameraVerticalRotation = Math.atan2(forwardY, forwardZ) * MathUtils.RAD_TO_DEG + 180;
 
       onDirectionAngleChange({
         angleDifference: angleDifference * MathUtils.RAD_TO_DEG,
@@ -125,10 +128,7 @@ export default class MarkerScene extends Component<Props, State> {
           markers.map((marker) => {
             const id = MapItemUtils.getIdFromMapItem(marker);
             const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
-            // TODO: use actual userLocation
-            // const arrived = LocationService.getTravelDistance(userLocation.coords, marker.contentObject.location) < ARRIVE_DISTANCE;
-            const arrived = LocationService.getTravelDistance(LocationUtils.mockLocation.coords, marker.contentObject.location) < ARRIVE_DISTANCE;
-
+            const arrived = LocationService.getTravelDistance(userLocation.coords, marker.contentObject.location) < ARRIVE_DISTANCE;
             return <Marker key={id} marker={marker} active={active} onPress={onArMarkerPressed} arrived={arrived} />;
           })
         )}
