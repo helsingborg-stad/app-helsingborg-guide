@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { View, Text } from "react-native";
 import { ViroARSceneNavigator, ViroUtils } from "react-viro";
 import CameraService from "../../../services/cameraService";
@@ -8,6 +9,9 @@ import LangService from "../../../services/langService";
 import MarkerScene from "./MarkerScene";
 import OffscreenMarkersView from "./OffscreenMarkersView";
 import styles from "./styles";
+
+import { arriveAtDestination } from "../../../actions/arActions";
+import AudioHook from "../../../hooks/AudioHook";
 
 const { isARSupportedOnDevice } = ViroUtils;
 
@@ -26,6 +30,7 @@ type Props = {
   activeMarker: MapItem,
   onArMarkerPressed: ?(index: number) => void,
   offScreenMarkerViewStyle: any,
+  dispatchArriveAtDestination: Action,
 };
 
 type State = {
@@ -35,7 +40,7 @@ type State = {
   cameraVerticalRotation: number,
 };
 
-export default class ARView extends Component<Props, State> {
+class ARView extends Component<Props, State> {
   state = { arSupported: false, arState: ARState.CHECKING, angle: 0, cameraVerticalRotation: 0 };
 
   componentDidMount() {
@@ -89,12 +94,13 @@ export default class ARView extends Component<Props, State> {
   render() {
     const {
       state: { arSupported, arState, angle },
-      props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle },
+      props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle, dispatchArriveAtDestination },
     } = this;
     const hint = this.getCurrentHintText();
 
     return arSupported ? (
       <View style={styles.container}>
+        <AudioHook />
         <ViroARSceneNavigator
           initialScene={{ scene: MarkerScene }}
           viroAppProps={{
@@ -106,19 +112,20 @@ export default class ARView extends Component<Props, State> {
               angle: newAngle,
               cameraVerticalRotation: newCameraVerticalRotation,
             }),
+            dispatchArriveAtDestination,
           }}
           autofocus
           apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
           worldAlignment="GravityAndHeading"
         />
-        <OffscreenMarkersView
+        { /* <OffscreenMarkersView
           style={offScreenMarkerViewStyle}
           items={items}
           userLocation={userLocation}
           activeMarker={activeMarker}
           angle={angle}
           pointerEvents="none"
-        />
+        /> */ }
         {hint && (
           <View style={{ ...styles.hintContainer, top: offScreenMarkerViewStyle.top + 10 }}>
             <View style={styles.hintOverlay}>
@@ -134,3 +141,11 @@ export default class ARView extends Component<Props, State> {
     );
   }
 }
+
+const mapState = () => ({});
+
+const mapDispatch = (dispatch: Dispatch) => ({
+  dispatchArriveAtDestination: (markerId: string) => dispatch(arriveAtDestination(markerId)),
+});
+
+export default connect(mapState, mapDispatch)(ARView);

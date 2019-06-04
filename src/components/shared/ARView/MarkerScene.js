@@ -13,37 +13,78 @@ type Props = {
 type State = {
   isInitialized: boolean,
   markers: Array<any>,
+  dispatchedArrival: any,
 };
 
 const MODIFIER = 5000; // 10000; //Math.log(distance)*1000;
 const HEIGHT = 0.5; // 1; //1.5+Math.log(distance/1000);
 
+const MOCK_LOCATION = true;// (!process.env.NODE_ENV || process.env.NODE_ENV === "development");
+console.warn("Mock Location", MOCK_LOCATION);
+
 export default class MarkerScene extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    const { userLocation, items } = props.arSceneNavigator.viroAppProps;
-
-    this.state = {
-      isInitialized: false,
-      markers: items.map((item) => {
-        const relativePosition = LocationUtils.getLocationRelativePosition(
+  static getDerivedStateFromProps(props: Props, state: State) {
+    const {
+      arSceneNavigator: {
+        viroAppProps: {
+          items,
           userLocation,
-          item.contentObject.location.latitude,
-          item.contentObject.location.longitude,
-        );
+          activeMarker,
+          onArMarkerPressed,
+          dispatchArriveAtDestination,
+        },
+      },
+    } = props;
 
-        const position = [relativePosition.x * MODIFIER, HEIGHT, relativePosition.y * MODIFIER];
+    const {
+      dispatchedArrival,
+    } = state;
 
-        return {
-          ...item,
-          position,
-        };
-      }),
+    let newDestinationArrival = dispatchedArrival;
+
+    const markers = items.map((item) => {
+      const { contentObject: { location: contentLocation } } = item;
+      const id = MapItemUtils.getIdFromMapItem(item);
+      const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
+
+      const relativePosition = LocationUtils.getLocationRelativePosition(
+        MOCK_LOCATION ? LocationUtils.mockLocation : userLocation,
+        contentLocation.latitude,
+        contentLocation.longitude,
+      );
+
+      const position = [relativePosition.x * MODIFIER, HEIGHT, relativePosition.y * MODIFIER];
+      const arrived = LocationService.getTravelDistance((MOCK_LOCATION ? LocationUtils.mockLocation : userLocation).coords, contentLocation) < ARRIVE_DISTANCE;
+
+      if (active && arrived && id !== newDestinationArrival) {
+        newDestinationArrival = id;
+        dispatchArriveAtDestination(id);
+      }
+
+      return {
+        ...item,
+        key: id,
+        id,
+        active,
+        arrived,
+        position,
+        onPress: onArMarkerPressed,
+      };
+    });
+
+    return {
+      markers,
+      dispatchedArrival: newDestinationArrival,
     };
   }
 
-  onInitialized = (tracking: any) => {
+  state = {
+    isInitialized: false,
+    markers: [],
+    dispatchedArrival: null,
+  }
+
+  onInitialized = (tracking: ViroConstants) => {
     switch (tracking) {
       case ViroConstants.TRACKING_NORMAL:
         console.log("Tracking initialised");
@@ -112,11 +153,6 @@ export default class MarkerScene extends Component<Props, State> {
   render() {
     const {
       state: { isInitialized, markers },
-      props: {
-        arSceneNavigator: {
-          viroAppProps: { userLocation, activeMarker, onArMarkerPressed },
-        },
-      },
       onInitialized,
     } = this;
 
@@ -125,12 +161,7 @@ export default class MarkerScene extends Component<Props, State> {
         {!isInitialized ? (
           <ViroText text="Starting AR" />
         ) : (
-          markers.map((marker) => {
-            const id = MapItemUtils.getIdFromMapItem(marker);
-            const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
-            const arrived = LocationService.getTravelDistance(userLocation.coords, marker.contentObject.location) < ARRIVE_DISTANCE;
-            return <Marker key={id} marker={marker} active={active} onPress={onArMarkerPressed} arrived={arrived} />;
-          })
+          markers.map(marker => (<Marker {...marker} />))
         )}
       </ViroARScene>
     );

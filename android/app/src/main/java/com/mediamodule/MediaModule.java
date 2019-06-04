@@ -150,7 +150,6 @@ public class MediaModule extends ReactContextBaseJavaModule implements
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
-        mediaPlayer.start();
         sendEvent(context, MEDIA_PREPARED, Arguments.createMap());
     }
 

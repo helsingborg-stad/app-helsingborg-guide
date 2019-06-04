@@ -24,10 +24,10 @@ RCT_EXPORT_METHOD(init:(NSString *)fileName title:(NSString*) title body:(NSStri
   NSURL *urlStream = [NSURL URLWithString:fileName];
   AVAsset *asset = [AVURLAsset URLAssetWithURL:urlStream options:nil];
   AVPlayerItem *anItem = [AVPlayerItem playerItemWithAsset:asset];
-  
+
   if (self.audioPlayer != nil)
     [self.audioPlayer removeObserver:self forKeyPath:@"status"];
-  
+
   self.audioPlayer = [AVPlayer playerWithPlayerItem:anItem];
   [self.audioPlayer addObserver:self forKeyPath:@"status" options:0 context:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.audioPlayer.currentItem];
@@ -55,7 +55,6 @@ RCT_EXPORT_METHOD(init:(NSString *)fileName title:(NSString*) title body:(NSStri
       if (!result) {
         NSLog(@"Error activating audio session: %@", error);
       }
-      [self.audioPlayer play];
     } else if (self.audioPlayer.status == AVPlayerItemStatusFailed) {
       [self sendEventWithName:@"MEDIA_ERROR" body:@"SomeBody"];
     }
@@ -97,8 +96,8 @@ RCT_REMAP_METHOD(getDuration,
 {
   CMTime time = self.audioPlayer.currentItem.asset.duration;
   float floatTime = (float) time.value/time.timescale;
-  
-  
+
+
   resolve([NSNumber numberWithFloat:floatTime]);
 }
 
@@ -124,7 +123,7 @@ RCT_REMAP_METHOD(isPlaying,
   if(([self.audioPlayer rate] != 0) && ([self.audioPlayer error] == nil)){
     result = @"true";
   }
-  
+
   return result;
 }
 

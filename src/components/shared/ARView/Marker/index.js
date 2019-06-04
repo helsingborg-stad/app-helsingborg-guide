@@ -5,10 +5,8 @@ import * as Images from "../../../../images/AR";
 import styles from "./styles";
 
 type Props = {
-  marker: {
-    contentObject: ContentObject,
-    position: Array<number>,
-  },
+  contentObject: ContentObject,
+  position: Array<number>,
   onPress: (index: number) => void,
   active: boolean,
   arrived: boolean,
@@ -19,11 +17,7 @@ const DROP_ANIMATION = "DROP_ANIMATION";
 const PIN_ANIMATION = "PIN_ANIMATION";
 const RESET_ANIMATION = "RESET_ANIMATION";
 
-const Marker = ({ marker, onPress, active, arrived }: Props) => {
-  const {
-    contentObject: { order },
-    position,
-  } = marker;
+const Marker = ({ contentObject: { order }, position, onPress, active, arrived }: Props) => {
   const scaleMod = 1; // distance / 100; // 1; //Math.log(distance);
   const scale = [1 * scaleMod, 1 * scaleMod, 1 * scaleMod];
   const imagePin = (arrived && active && Images.PinArrived) || (active && Images.PinSelected) || Images.Pin;

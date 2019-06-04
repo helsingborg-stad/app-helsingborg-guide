@@ -22,6 +22,7 @@ const RELEASED_AUDIO_OBJ = {
   isPlaying: true,
   duration: 0,
   currentPosition: 0,
+  autoplay: true,
 };
 
 const config = () => {
@@ -167,6 +168,10 @@ export default class MediaService {
     this.updateInterval = setInterval(() => {
       if (!this.updatePaused) this.updateAudioState();
     }, 700);
+
+    if (this.audio.autoplay) {
+      this.start();
+    }
   }
 
   pauseUpdatingState() {
@@ -238,10 +243,12 @@ export default class MediaService {
       url: audioState.url,
       title: audioState.title,
       avatar_url: audioState.avatar_url,
+      autoplay: audioState.autoplay,
       hasAudio: true,
       isPlaying: true,
       description_plain: "",
     };
+
     this.init(audioObject, guideID);
   };
 }

@@ -31,6 +31,7 @@ const defaultState: AudioState = {
   duration: 0,
   currentPosition: 0,
   isMovingSlider: false,
+  autoplay: true,
 };
 
 function isMediaAvailable(media?: MediaContent): boolean {

@@ -41,7 +41,8 @@ declare type Action =
   | { type: "AUDIO_MOVE_SLIDER", position: number }
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   | { type: "GEOLOCATION_UPDATE_SUCCESS", position: GeolocationType }
-  | { type: "SET_LANGUAGE", langCode: string };
+  | { type: "SET_LANGUAGE", langCode: string }
+  | { type: "AR_ARRIVED_DESTINATION", destinationMarker: string };
 
 declare type NavigationItemType = "guide" | "guidegroup";
 
@@ -236,6 +237,7 @@ declare type AudioState = {
   duration: number,
   currentPosition: number,
   isMovingSlider: boolean,
+  autoplay: boolean,
 };
 
 declare type PostStatus = "publish" | "draft";
@@ -291,4 +293,8 @@ declare type RootState = {
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
+};
+
+declare type ARState = {
+  destinationMarker: string
 };

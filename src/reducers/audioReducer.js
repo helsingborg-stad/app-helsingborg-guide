@@ -10,6 +10,7 @@ const defaultState: AudioState = {
   duration: 0,
   currentPosition: 0,
   isMovingSlider: false,
+  autoplay: true,
 };
 
 export default function audioReducer(state: AudioState = defaultState, action: Action): AudioState {
