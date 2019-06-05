@@ -19,9 +19,6 @@ type State = {
 const MODIFIER = 5000; // 10000; //Math.log(distance)*1000;
 const HEIGHT = 0.5; // 1; //1.5+Math.log(distance/1000);
 
-const MOCK_LOCATION = true;// (!process.env.NODE_ENV || process.env.NODE_ENV === "development");
-console.warn("Mock Location", MOCK_LOCATION);
-
 export default class MarkerScene extends Component<Props, State> {
   static getDerivedStateFromProps(props: Props, state: State) {
     const {
@@ -48,13 +45,13 @@ export default class MarkerScene extends Component<Props, State> {
       const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
 
       const relativePosition = LocationUtils.getLocationRelativePosition(
-        MOCK_LOCATION ? LocationUtils.mockLocation : userLocation,
+        userLocation,
         contentLocation.latitude,
         contentLocation.longitude,
       );
 
       const position = [relativePosition.x * MODIFIER, HEIGHT, relativePosition.y * MODIFIER];
-      const arrived = LocationService.getTravelDistance((MOCK_LOCATION ? LocationUtils.mockLocation : userLocation).coords, contentLocation) < ARRIVE_DISTANCE;
+      const arrived = LocationService.getTravelDistance(userLocation.coords, contentLocation) < ARRIVE_DISTANCE;
 
       if (active && arrived && id !== newDestinationArrival) {
         newDestinationArrival = id;

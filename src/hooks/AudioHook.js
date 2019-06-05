@@ -4,22 +4,26 @@ import { connect } from "react-redux";
 import { initAudioFile, releaseAudioFile } from "../actions/audioActions";
 import LangService from "../services/langService";
 
-function AudioHook({ audioState, dispatchInitAudioFile, dispatchReleaseAudioFile }) {
-  console.warn(audio);
-  useEffect(() => { if (audioState) dispatchReleaseAudioFile(); });
-  useEffect(() => { if (audioState) dispatchInitAudioFile({ ...audioState, autoplay: false }); }, [audioState]);
+const isValid = (currentAudio, audioState) => (audioState && (!currentAudio || !currentAudio.isPlaying));
+
+function AudioHook({ currentAudio, audioState, dispatchInitAudioFile, dispatchReleaseAudioFile }) {
+  useEffect(() => { if (isValid(currentAudio, audioState)) dispatchReleaseAudioFile(); });
+  useEffect(() => { if (isValid(currentAudio, audioState)) dispatchInitAudioFile({ ...audioState, autoplay: false }); }, [audioState]);
   return null;
 }
 
 const mapState = (state) => {
   const {
+    audio: { isPlaying },
     arState: { destinationMarker },
     uiState: { currentGuide: { contentObjects = [] } },
   } = state;
 
   const destinationContent = contentObjects.find(object => object.id === destinationMarker);
   const { audio, title = LangService.strings.UNKNOWN_TITLE } = (destinationContent || {});
-  return Object.assign({}, audio, { title });
+  const audioState = Object.assign({}, audio, { title });
+  const currentAudio = { isPlaying };
+  return { audioState, currentAudio };
 };
 
 const mapDispatch = dispatch => ({
