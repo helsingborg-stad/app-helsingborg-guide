@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.beaconmodule.BeaconPackage;
 import com.facebook.react.ReactApplication;
+import com.reactlibrary.RNSimpleCompassPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.levelasquez.androidopensettings.AndroidOpenSettingsPackage;
@@ -53,6 +54,7 @@ public class MainApplication extends Application implements ShareApplication, Re
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
+                new RNSimpleCompassPackage(),
                 new AsyncStoragePackage(),
                 new AndroidOpenSettingsPackage(),
                 new RNCWebViewPackage(),

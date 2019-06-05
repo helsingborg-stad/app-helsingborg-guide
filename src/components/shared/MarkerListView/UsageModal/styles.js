@@ -12,6 +12,7 @@ export default StyleSheet.create({
     alignItems: "center",
     flex: 1,
     flexDirection: "column",
+    justifyContent: "space-between",
   },
   illustrationImageContainer: {
     marginHorizontal: 30,

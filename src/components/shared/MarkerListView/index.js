@@ -6,15 +6,16 @@ import { connect } from "react-redux";
 import { isEqual } from "lodash";
 import IconTextTouchable from "../IconTextTouchable";
 import SegmentControl from "../SegmentControl";
+import { SegmentControlHeight } from "../SegmentControl/styles";
 import MapMarkerView from "../MapMarkerView";
 import ARView from "../ARView";
 import LangService from "../../../services/langService";
 import LocationService from "../../../services/locationService";
 import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
-import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 import { AR_INSTRUCTIONS_SHOWN } from "../../../lib/my_consts";
 import UsageModal from "./UsageModal";
+import styles, { ListItemWidth, DefaultMargin, ScreenHeight, ListHeight, ListBottomMargin } from "./styles";
 
 type Props = {
   navigation: any,
@@ -31,7 +32,7 @@ type State = {
   selectedNavigationMode: string,
   recentlyTappedPin: boolean,
   activeMarker: MapItem,
-  shouldShowInstructions: boolean
+  shouldShowInstructions: boolean,
 };
 
 const HalfListMargin = DefaultMargin * 0.5;
@@ -44,8 +45,12 @@ class MarkerListView extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    const { supportedNavigationModes } = props;
+
     this.state = {
-      selectedNavigationMode: props.supportedNavigationModes ? props.supportedNavigationModes[0] : NavigationModeUtils.NavigationModes.Map,
+      selectedNavigationMode: supportedNavigationModes
+        ? supportedNavigationModes[supportedNavigationModes.length - 1]
+        : NavigationModeUtils.NavigationModes.Map,
       recentlyTappedPin: false,
       activeMarker: props.items[0],
       shouldShowInstructions: false,
@@ -55,9 +60,14 @@ class MarkerListView extends Component<Props, State> {
   componentDidMount() {
     this.scrollToIndex(0);
 
+    const { supportedNavigationModes } = this.props;
+
     AsyncStorage.getItem(AR_INSTRUCTIONS_SHOWN).then((value) => {
       this.setState({
-        shouldShowInstructions: value ? JSON.parse(value) : true,
+        shouldShowInstructions: value
+          ? JSON.parse(value)
+            && (supportedNavigationModes ? supportedNavigationModes.includes(NavigationModeUtils.NavigationModes.AR) : false)
+          : true,
       });
     });
   }
@@ -65,7 +75,7 @@ class MarkerListView extends Component<Props, State> {
   closeInstructions = () => {
     AsyncStorage.setItem(AR_INSTRUCTIONS_SHOWN, JSON.stringify(false));
     this.setState({ shouldShowInstructions: false });
-  }
+  };
 
   listRef: ?FlatList<MapItem>;
 
@@ -245,12 +255,8 @@ class MarkerListView extends Component<Props, State> {
 
     return (
       <View style={styles.listEstimatesContainer}>
-        <Text style={styles.listEstimatesDistance}>
-          {distance < 1000 ? `${distance} m` : `${Math.round(distance / 1000)} km`}
-        </Text>
-        <Text style={styles.listEstimatesTime}>
-          { (time > 60 && `>1 ${hour}`) || (time > 1 && `${time} ${min}`) || (`<1 ${min}`) }
-        </Text>
+        <Text style={styles.listEstimatesDistance}>{distance < 1000 ? `${distance} m` : `${Math.round(distance / 1000)} km`}</Text>
+        <Text style={styles.listEstimatesTime}>{(time > 60 && `>1 ${hour}`) || (time > 1 && `${time} ${min}`) || `<1 ${min}`}</Text>
       </View>
     );
   };
@@ -278,7 +284,7 @@ class MarkerListView extends Component<Props, State> {
             <Text style={styles.listItemAddress} numberOfLines={titleLineCount}>
               {streetAddress}
             </Text>
-            { (showEstimates && this.renderEstimates(item)) || (showDirections && this.renderDirections(item)) || null }
+            {(showEstimates && this.renderEstimates(item)) || (showDirections && this.renderDirections(item)) || null}
             {this.displayGuideNumber(item)}
           </View>
         </View>
@@ -359,6 +365,7 @@ class MarkerListView extends Component<Props, State> {
             style={styles.segmentControl}
             labels={supportedNavigationModes.map(mode => `${LangService.strings[mode]}`)}
             onSegmentIndexChange={this.onNavigationModeChange}
+            initalSelectedIndex={supportedNavigationModes.indexOf(selectedNavigationMode)}
           />
         )}
         {selectedNavigationMode === NavigationModeUtils.NavigationModes.Map && (
@@ -375,6 +382,7 @@ class MarkerListView extends Component<Props, State> {
         )}
         {selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && (
           <ARView
+            offScreenMarkerViewStyle={{ top: SegmentControlHeight + 10, bottom: ListHeight + ListBottomMargin + 10 }}
             items={items}
             userLocation={userLocation}
             activeMarker={activeMarker}
@@ -390,7 +398,7 @@ class MarkerListView extends Component<Props, State> {
 function mapStateToProps(state: RootState) {
   const { geolocation } = state;
   return {
-    userLocation: geolocation,
+    userLocation: geolocation.position,
   };
 }
 

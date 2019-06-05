@@ -7,3 +7,4 @@ export { default as DownloadMediaUtils } from "./DownloadMediaUtils";
 export { default as JSONValidator } from "./JSONValidator";
 export { default as MapItemUtils } from "./MapItemUtils";
 export { default as NavigationModeUtils } from "./NavigationModeUtils";
+export { default as MathUtils } from "./MathUtils";

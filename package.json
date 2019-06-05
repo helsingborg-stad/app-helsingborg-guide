@@ -39,6 +39,7 @@
     "react-native-photo-view": "1.5.2",
     "react-native-remote-svg": "2.0.3",
     "react-native-share": "1.1.3",
+    "react-native-simple-compass": "^1.0.0",
     "react-native-svg": "9.4.0",
     "react-native-swiper": "1.5.14",
     "react-native-tab-view": "2.2.0",

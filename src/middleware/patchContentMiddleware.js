@@ -20,14 +20,13 @@ function updateDistanceForGuides(guides: Guide[], currentPosition: PositionLongL
   const updated = guides.map((g) => {
     const distances: number[] = [];
     // calculting distances to all objects
-    g.contentObjects.forEach(
-      (obj) => {
-        const { location } = obj;
-        if (location) {
-          const d = LocationUtils.getDistanceBetweenCoordinates(currentPosition, obj.location);
-          distances.push(d);
-        }
-      });
+    g.contentObjects.forEach((obj) => {
+      const { location } = obj;
+      if (location) {
+        const d = LocationUtils.getDistanceBetweenCoordinates(currentPosition, obj.location);
+        distances.push(d);
+      }
+    });
     // finding the shortest
     if (distances.length > 0) {
       const shortest = Math.min(...distances);
@@ -44,13 +43,16 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
   const nextState = getState();
 
   switch (action.type) {
-    case "GEOLOCATION_UPDATE_SUCCESS":
-    {
+    case "GEOLOCATION_UPDATE_SUCCESS": {
       // updating guide groups distances
-      const { geolocation, guideGroups, guides } = nextState;
-      if (!geolocation) break;
+      const {
+        geolocation: { position },
+        guideGroups,
+        guides,
+      } = nextState;
+      if (!position) break;
 
-      const { coords } = geolocation;
+      const { coords } = position;
       const updatedGG: GuideGroup[] = updateDistance(guideGroups.items, coords);
       const updatedGuides: Guide[] = updateDistanceForGuides(guides.items, coords);
       dispatch(setGuidesAndGuideGroups(updatedGG, updatedGuides));

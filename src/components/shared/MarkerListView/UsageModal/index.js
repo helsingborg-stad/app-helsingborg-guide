@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { View, TouchableOpacity, ImageBackground, Text, Modal } from "react-native";
+import { View, TouchableOpacity, ImageBackground, Text, Modal, StatusBar } from "react-native";
 import LangService from "../../../../services/langService";
 import styles from "./styles";
 import Illustration from "./illustration";
@@ -9,15 +9,11 @@ const numberedMarkerActive = require("../../../../images/AR/PinSelected.png");
 
 type Props = {
   onRequestClose: () => void,
-}
+};
 
 export default ({ onRequestClose }: Props) => (
-  <Modal
-    animationType="slide"
-    transparent={false}
-    visible
-    onRequestClose={onRequestClose}
-  >
+  <Modal animationType="slide" transparent={false} visible onRequestClose={onRequestClose}>
+    <StatusBar barStyle="dark-content" />
     <View style={styles.container}>
       <Text style={styles.title}>{LangService.strings.AR_INTRO_TITLE}</Text>
       <View style={styles.illustrationImageContainer}>

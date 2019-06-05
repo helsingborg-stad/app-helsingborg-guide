@@ -1,9 +1,10 @@
 import { Alert, Platform, Linking } from "react-native";
 import Permissions from "react-native-permissions";
 import AndroidOpenSettings from "react-native-android-open-settings";
+import RNSimpleCompass from "react-native-simple-compass";
 import haversine from "haversine";
 import LangService from "./langService";
-import geolocationUpdated from "../actions/geolocationActions";
+import GeoLocationActions from "../actions/geolocationActions";
 
 const ios = Platform.OS === "ios";
 
@@ -22,11 +23,7 @@ const RATIONALE = {
   message: LangService.strings.MESSAGE_LOCATION_PERMISSION,
 };
 
-const openSettings = () => (
-  (ios)
-    ? Linking.openURL("app-settings:")
-    : AndroidOpenSettings.locationSourceSettings()
-);
+const openSettings = () => (ios ? Linking.openURL("app-settings:") : AndroidOpenSettings.locationSourceSettings());
 
 const promptPermissions = () => {
   Alert.alert(
@@ -75,6 +72,9 @@ let instance = null;
 
 export default class LocationService {
   watcher;
+
+  compassWatcher;
+
   store;
 
   static getInstance() {
@@ -82,20 +82,41 @@ export default class LocationService {
     return instance;
   }
 
-  static getTravelDistance = (fromLocation, toLocation, unit = "meter") => (haversine(fromLocation, toLocation, { unit }) || 0);
+  static getTravelDistance = (fromLocation, toLocation, unit = "meter") => haversine(fromLocation, toLocation, { unit }) || 0;
 
   static getTravelTime = distance => distance / WALKING_SPEED;
 
-  upatePosition = () => new Promise((resolve, reject) => getLocation()
-    .then(
-      (position) => { this.store.dispatch(geolocationUpdated(position)); return resolve(position); },
-      (error) => { checkPermissions(); reject(error); },
-    ),
+  upatePosition = () => new Promise((resolve, reject) => getLocation().then(
+    (position) => {
+      this.store.dispatch(GeoLocationActions.geolocationUpdated(position));
+      return resolve(position);
+    },
+    (error) => {
+      checkPermissions();
+      reject(error);
+    },
+  ),
   );
 
   getGeoLocation = () => checkPermissions().then(this.upatePosition);
 
-  watchGeoLocation = () => checkPermissions().then(this.upatePosition);
+  watchGeoLocation = () => checkPermissions().then(
+    () => new Promise((resolve, reject) => {
+      this.watcher = navigator.geolocation.watchPosition(
+        (position) => {
+          this.store.dispatch(GeoLocationActions.geolocationUpdated(position));
+          return resolve(position);
+        },
+        reject,
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 5000,
+          distanceFilter: 10,
+        },
+      );
+    }),
+  );
 
   unwatchGeoLocation = () => this.watcher && navigator.geolocation.clearWatch(this.watcher);
 
@@ -104,4 +125,21 @@ export default class LocationService {
     const y = Math.abs(coord1.longitude - coord2.longitude);
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
   }
+
+  subscribeCompassBearing = () => new Promise((resolve, reject) => {
+    try {
+      // Number of degrees changed before the callback is triggered
+      const degreeUpdateRate = 1;
+      this.compassWatcher = RNSimpleCompass.start(degreeUpdateRate, (degree) => {
+        this.store.dispatch(GeoLocationActions.compassbearingUpdated(degree));
+        resolve(degree);
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+  clearCompassBearingWatch = () => {
+    if (this.compassWatcher) RNSimpleCompass.stop();
+  };
 }

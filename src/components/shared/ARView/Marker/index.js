@@ -7,10 +7,7 @@ import styles from "./styles";
 type Props = {
   marker: {
     contentObject: ContentObject,
-    relativePosition: {
-      x: number,
-      y: number,
-    },
+    position: Array<number>,
   },
   onPress: (index: number) => void,
   active: boolean,
@@ -25,13 +22,10 @@ const RESET_ANIMATION = "RESET_ANIMATION";
 const Marker = ({ marker, onPress, active, arrived }: Props) => {
   const {
     contentObject: { order },
-    relativePosition,
+    position,
   } = marker;
-  const height = 0.5; // 1; //1.5+Math.log(distance/1000);
-  const modifier = 5000; // 10000; //Math.log(distance)*1000;
   const scaleMod = 1; // distance / 100; // 1; //Math.log(distance);
   const scale = [1 * scaleMod, 1 * scaleMod, 1 * scaleMod];
-  const position = [relativePosition.x * modifier, height, relativePosition.y * modifier];
   const imagePin = (arrived && active && Images.PinArrived) || (active && Images.PinSelected) || Images.Pin;
   const animationName = active ? PIN_ANIMATION : RESET_ANIMATION;
   const animationLoop = active;
@@ -53,18 +47,16 @@ const Marker = ({ marker, onPress, active, arrived }: Props) => {
         interruptible: true,
       }}
     >
-      { !arrived
-        && (
-          <ViroText
-            text={`${order + 1}`}
-            style={active ? styles.textActive : styles.text}
-            extrusionDepth={3}
-            position={[0, -0.075, 0]}
-            textAlign="Center"
-            textAlignVertical="Center"
-          />
-        )
-      }
+      {imagePin !== Images.PinArrived && (
+        <ViroText
+          text={`${order + 1}`}
+          style={active ? styles.textActive : styles.text}
+          extrusionDepth={3}
+          position={[0, -0.075, 0]}
+          textAlign="Center"
+          textAlignVertical="Center"
+        />
+      )}
       <ViroImage source={imagePin} width={0.6} height={0.6} position={[0, 0, 0]} />
     </ViroNode>
   );

@@ -41,10 +41,8 @@ function getLocationRelativePosition(userLocation: GeolocationType, latitude: nu
     lng: longitude,
   });
   const currentPoint = fromLatLngToPoint({
-    // lat: userLocation.coords.latitude,
-    // lng: userLocation.coords.longitude,
-    lat: 56.083793, // location of first mapItem in Sofiero-Topp-10
-    lng: 12.6594562,
+    lat: userLocation.coords.latitude,
+    lng: userLocation.coords.longitude,
   });
 
   result.x = hotspotPoint.x - currentPoint.x;
@@ -53,9 +51,34 @@ function getLocationRelativePosition(userLocation: GeolocationType, latitude: nu
   return result;
 }
 
+function angleBetweenCoords(start: { latitude: number, longitude: number }, end: { latitude: number, longitude: number }) {
+  // location of first mapItem in Sofiero-Topp-10, for testing purpose
+  const x = end.latitude - 56.083793; // start.latitude;
+  const y = end.longitude - 12.6594562; // start.longitude;
+  let angle;
+
+  if (Math.atan2(y, x) >= 0) {
+    angle = Math.atan2(y, x) * (180 / Math.PI);
+  } else {
+    angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
+  }
+
+  return angle;
+}
+
+// Location of second mapItem in Sofiero-Topp-10, for testing purpose
+const mockLocation = {
+  coords: {
+    latitude: 56.083793,
+    longitude: 12.6594562,
+  },
+};
+
 export default {
   getDistanceBetweenCoordinates,
   getShortestDistance,
   directionsUrl,
   getLocationRelativePosition,
+  angleBetweenCoords,
+  mockLocation,
 };
