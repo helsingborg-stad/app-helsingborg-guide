@@ -126,6 +126,13 @@ export default class LocationService {
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
   }
 
+  getCompassBearing = () => new Promise((resolve, reject) => {
+    RNSimpleCompass.start(1, (degree) => {
+      resolve(degree);
+      RNSimpleCompass.stop();
+    });
+  });
+
   subscribeCompassBearing = () => new Promise((resolve, reject) => {
     try {
       // Number of degrees changed before the callback is triggered

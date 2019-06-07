@@ -16,7 +16,6 @@ type State = {
   dispatchedArrival: any,
 };
 
-const MODIFIER = 5000; // 10000; //Math.log(distance)*1000;
 const HEIGHT = 0.5; // 1; //1.5+Math.log(distance/1000);
 
 export default class MarkerScene extends Component<Props, State> {
@@ -27,6 +26,7 @@ export default class MarkerScene extends Component<Props, State> {
           items,
           userLocation,
           activeMarker,
+          initialBearing,
           onArMarkerPressed,
           dispatchArriveAtDestination,
         },
@@ -48,9 +48,10 @@ export default class MarkerScene extends Component<Props, State> {
         userLocation,
         contentLocation.latitude,
         contentLocation.longitude,
+        initialBearing,
       );
 
-      const position = [relativePosition.x * MODIFIER, HEIGHT, relativePosition.y * MODIFIER];
+      const position = [relativePosition.x, HEIGHT, relativePosition.y];
       const arrived = LocationService.getTravelDistance(userLocation.coords, contentLocation) < ARRIVE_DISTANCE;
 
       if (active && arrived && id !== newDestinationArrival) {
