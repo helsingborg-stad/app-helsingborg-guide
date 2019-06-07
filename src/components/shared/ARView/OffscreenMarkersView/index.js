@@ -120,6 +120,7 @@ export default class OffscreenMarkersView extends Component<Props, State> {
         }}
         style={[styles.container, style]}
         onLayout={this.onLayout}
+        pointerEvents="none"
       >
         {markers.map(marker => (
           <OffscreenMarker {...marker} />

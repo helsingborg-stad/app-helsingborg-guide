@@ -28,8 +28,6 @@ const Marker = ({ contentObject: { order }, position, onPress, active, arrived }
     <ViroNode
       position={position}
       scale={scale}
-      width={0.6}
-      height={0.6}
       transformBehaviors="billboard"
       onClick={() => {
         onPress(order);
