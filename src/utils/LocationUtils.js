@@ -1,10 +1,10 @@
 // @flow
 import { Platform } from "react-native";
 import geolib from "geolib";
-import { fromLatLngToPoint } from "mercator-projection";
 import haversine from "haversine";
+import MathUtils from "./MathUtils";
 
-const ios = Platform.os === "ios";
+const ios = Platform.OS === "ios";
 
 function getDistanceBetweenCoordinates(firstLocation: PositionLongLat, secondLocation: PositionLongLat): number {
   if (firstLocation.latitude && firstLocation.longitude && secondLocation.latitude && secondLocation.longitude) {
@@ -37,15 +37,28 @@ function directionsUrl(latitude: number, longitude: number, userLocation: Geoloc
   return url;
 }
 
+function angleBetweenCoords(start: { latitude: number, longitude: number }, end: { latitude: number, longitude: number }) {
+  const x = end.latitude - start.latitude;
+  const y = end.longitude - start.longitude;
+  let angle;
+
+  if (Math.atan2(y, x) >= 0) {
+    angle = Math.atan2(y, x) * MathUtils.RAD_TO_DEG;
+  } else {
+    angle = (Math.atan2(y, x) + 2 * Math.PI) * MathUtils.RAD_TO_DEG;
+  }
+
+  return angle;
+}
+
 function getLocationRelativePosition(userLocation: GeolocationType, latitude: number, longitude: number, initialBearing: number = 0) {
   const distance = haversine(userLocation.coords, { latitude, longitude }, { unit: "meter" }) || 0;
-  let angle = (angleBetweenCoords(userLocation.coords, { latitude, longitude }) - initialBearing) * (Math.PI / 180);
+  const angle = (angleBetweenCoords(userLocation.coords, { latitude, longitude }) - initialBearing - 90) * MathUtils.DEG_TO_RAD;
 
   const x = Math.cos(angle) * distance;
   const y = Math.sin(angle) * distance;
 
   if (!ios) {
-    angle -= (Math.PI / 2);
     return {
       x: x * Math.cos(angle) - y * Math.sin(angle),
       y: x * Math.sin(angle) + y * Math.cos(angle),
@@ -53,20 +66,6 @@ function getLocationRelativePosition(userLocation: GeolocationType, latitude: nu
   }
 
   return { x, y };
-}
-
-function angleBetweenCoords(start: { latitude: number, longitude: number }, end: { latitude: number, longitude: number }) {
-  const x = end.latitude - start.latitude;
-  const y = end.longitude - start.longitude;
-  let angle;
-
-  if (Math.atan2(y, x) >= 0) {
-    angle = Math.atan2(y, x) * (180 / Math.PI);
-  } else {
-    angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
-  }
-
-  return angle;
 }
 
 // Location of second mapItem in Sofiero-Topp-10, for testing purpose

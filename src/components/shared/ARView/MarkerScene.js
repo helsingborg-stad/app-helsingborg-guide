@@ -22,25 +22,18 @@ export default class MarkerScene extends Component<Props, State> {
   static getDerivedStateFromProps(props: Props, state: State) {
     const {
       arSceneNavigator: {
-        viroAppProps: {
-          items,
-          userLocation,
-          activeMarker,
-          initialBearing,
-          onArMarkerPressed,
-          dispatchArriveAtDestination,
-        },
+        viroAppProps: { items, userLocation, activeMarker, initialBearing, onArMarkerPressed, dispatchArriveAtDestination },
       },
     } = props;
 
-    const {
-      dispatchedArrival,
-    } = state;
+    const { dispatchedArrival } = state;
 
     let newDestinationArrival = dispatchedArrival;
 
     const markers = items.map((item) => {
-      const { contentObject: { location: contentLocation } } = item;
+      const {
+        contentObject: { location: contentLocation },
+      } = item;
       const id = MapItemUtils.getIdFromMapItem(item);
       const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
 
@@ -80,7 +73,7 @@ export default class MarkerScene extends Component<Props, State> {
     isInitialized: false,
     markers: [],
     dispatchedArrival: null,
-  }
+  };
 
   onInitialized = (tracking: ViroConstants) => {
     switch (tracking) {
@@ -156,11 +149,7 @@ export default class MarkerScene extends Component<Props, State> {
 
     return (
       <ViroARScene onTrackingUpdated={onInitialized} onCameraTransformUpdate={this.onCameraTransformUpdate}>
-        {!isInitialized ? (
-          <ViroText text="Starting AR" />
-        ) : (
-          markers.map(marker => (<Marker {...marker} />))
-        )}
+        {!isInitialized ? <ViroText text="Starting AR" /> : markers.map(marker => <Marker {...marker} />)}
       </ViroARScene>
     );
   }

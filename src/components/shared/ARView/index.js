@@ -15,7 +15,7 @@ import { arriveAtDestination } from "../../../actions/arActions";
 import AudioHook from "../../../hooks/AudioHook";
 
 const { isARSupportedOnDevice } = ViroUtils;
-const ios = Platform.os === "ios";
+const ios = Platform.OS === "ios";
 
 const ARState = {
   CAMERA_DISABLED: "AR_CAMERA_DISABLED",
@@ -58,9 +58,11 @@ class ARView extends Component<Props, State> {
         }, // not permitted
       );
     if (!ios) {
-      LocationService.getInstance().getCompassBearing().then((initialBearing) => {
-        this.setState({ initialBearing });
-      });
+      LocationService.getInstance()
+        .getCompassBearing()
+        .then((initialBearing) => {
+          this.setState({ initialBearing });
+        });
     }
   }
 
@@ -127,21 +129,21 @@ class ARView extends Component<Props, State> {
           apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
           worldAlignment="GravityAndHeading"
         />
-        {/* <OffscreenMarkersView
+        <OffscreenMarkersView
           style={offScreenMarkerViewStyle}
           items={items}
           userLocation={userLocation}
           activeMarker={activeMarker}
           angle={angle}
           pointerEvents="none"
-        /> */ }
-        {/*hint && (
+        />
+        {/* hint && (
           <View style={{ ...styles.hintContainer, top: offScreenMarkerViewStyle.top + 10 }}>
             <View style={styles.hintOverlay}>
               <Text style={styles.hintText}>{hint}</Text>
             </View>
           </View>
-        )*/}
+        ) */}
       </View>
     ) : (
       <View>
@@ -157,4 +159,7 @@ const mapDispatch = (dispatch: Dispatch) => ({
   dispatchArriveAtDestination: (markerId: string) => dispatch(arriveAtDestination(markerId)),
 });
 
-export default connect(mapState, mapDispatch)(ARView);
+export default connect(
+  mapState,
+  mapDispatch,
+)(ARView);
