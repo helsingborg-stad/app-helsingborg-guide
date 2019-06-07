@@ -1,15 +1,18 @@
 // @flow
 
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { connect } from "react-redux";
+import { View, Text, Platform } from "react-native";
 import { ViroARSceneNavigator, ViroUtils } from "react-viro";
 import CameraService from "../../../services/cameraService";
 import LangService from "../../../services/langService";
+import LocationService from "../../../services/locationService";
 import MarkerScene from "./MarkerScene";
 import OffscreenMarkersView from "./OffscreenMarkersView";
 import styles from "./styles";
 
 const { isARSupportedOnDevice } = ViroUtils;
+const ios = Platform.os === "ios";
 
 const ARState = {
   CAMERA_DISABLED: "AR_CAMERA_DISABLED",
@@ -33,10 +36,11 @@ type State = {
   arState: string,
   angle: number,
   cameraVerticalRotation: number,
+  initialBearing: number,
 };
 
-export default class ARView extends Component<Props, State> {
-  state = { arSupported: false, arState: ARState.CHECKING, angle: 0, cameraVerticalRotation: 0 };
+class ARView extends Component<Props, State> {
+  state = { arSupported: false, arState: ARState.CHECKING, angle: 0, cameraVerticalRotation: 0, initialBearing: 0 };
 
   componentDidMount() {
     CameraService.getInstance()
@@ -49,6 +53,19 @@ export default class ARView extends Component<Props, State> {
           this.setState({ arSupported: false, arState: ARState.CAMERA_DISABLED });
         }, // not permitted
       );
+    if (!ios) {
+      LocationService
+        .getInstance()
+        .subscribeCompassBearing();
+    }
+  }
+
+  componentWillUnmount() {
+    if (!ios) {
+      LocationService
+        .getInstance()
+        .clearCompassBearingWatch();
+    }
   }
 
   checkSupport() {
@@ -88,7 +105,7 @@ export default class ARView extends Component<Props, State> {
 
   render() {
     const {
-      state: { arSupported, arState, angle },
+      state: { arSupported, arState, angle, initialBearing },
       props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle },
     } = this;
     const hint = this.getCurrentHintText();
@@ -101,6 +118,7 @@ export default class ARView extends Component<Props, State> {
             items,
             userLocation,
             activeMarker,
+            initialBearing,
             onArMarkerPressed,
             onDirectionAngleChange: ({ angleDifference: newAngle, cameraVerticalRotation: newCameraVerticalRotation }) => this.setState({
               angle: newAngle,
@@ -111,21 +129,21 @@ export default class ARView extends Component<Props, State> {
           apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
           worldAlignment="GravityAndHeading"
         />
-        <OffscreenMarkersView
+        { /* <OffscreenMarkersView
           style={offScreenMarkerViewStyle}
           items={items}
           userLocation={userLocation}
           activeMarker={activeMarker}
           angle={angle}
           pointerEvents="none"
-        />
-        {hint && (
+        /> */}
+        { /* {hint && (
           <View style={{ ...styles.hintContainer, top: offScreenMarkerViewStyle.top + 10 }}>
             <View style={styles.hintOverlay}>
               <Text style={styles.hintText}>{hint}</Text>
             </View>
           </View>
-        )}
+        )} */ }
       </View>
     ) : (
       <View>
@@ -134,3 +152,7 @@ export default class ARView extends Component<Props, State> {
     );
   }
 }
+
+const mapState = ({ geolocation: { bearing } }) => ({ initialBearing: bearing });
+
+export default connect(mapState)(ARView);

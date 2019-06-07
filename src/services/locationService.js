@@ -112,7 +112,7 @@ export default class LocationService {
           enableHighAccuracy: true,
           timeout: 15000,
           maximumAge: 5000,
-          distanceFilter: 10,
+          distanceFilter: 1,
         },
       );
     }),
@@ -126,10 +126,17 @@ export default class LocationService {
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
   }
 
+  getCompassBearing = () => new Promise((resolve, reject) => {
+    RNSimpleCompass.start(0.1, (degree) => {
+      resolve(degree);
+      RNSimpleCompass.stop();
+    });
+  });
+
   subscribeCompassBearing = () => new Promise((resolve, reject) => {
     try {
       // Number of degrees changed before the callback is triggered
-      const degreeUpdateRate = 1;
+      const degreeUpdateRate = 0.1;
       this.compassWatcher = RNSimpleCompass.start(degreeUpdateRate, (degree) => {
         this.store.dispatch(GeoLocationActions.compassbearingUpdated(degree));
         resolve(degree);
