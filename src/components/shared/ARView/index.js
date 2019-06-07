@@ -30,13 +30,12 @@ type Props = {
 
 type State = {
   arSupported: boolean,
-  arState: string,
   angle: number,
   cameraVerticalRotation: number,
 };
 
 export default class ARView extends Component<Props, State> {
-  state = { arSupported: false, arState: ARState.CHECKING, angle: 0, cameraVerticalRotation: 0 };
+  state = { arSupported: false, angle: 0, cameraVerticalRotation: 0 };
 
   componentDidMount() {
     CameraService.getInstance()
@@ -46,14 +45,14 @@ export default class ARView extends Component<Props, State> {
           this.checkSupport();
         }, // permitted
         () => {
-          this.setState({ arSupported: false, arState: ARState.CAMERA_DISABLED });
+          this.setState({ arSupported: false });
         }, // not permitted
       );
   }
 
   checkSupport() {
-    const unsupportedCallback = reason => this.setState({ arSupported: false, arState: ARState[reason] });
-    const supportedCallback = () => this.setState({ arSupported: true, arState: ARState.SUPPORTED });
+    const unsupportedCallback = () => this.setState({ arSupported: false });
+    const supportedCallback = () => this.setState({ arSupported: true });
     isARSupportedOnDevice(unsupportedCallback, supportedCallback);
   }
 
@@ -88,48 +87,52 @@ export default class ARView extends Component<Props, State> {
 
   render() {
     const {
-      state: { arSupported, arState, angle },
+      state: { arSupported, angle },
       props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle },
     } = this;
     const hint = this.getCurrentHintText();
 
-    return arSupported ? (
+    return (
       <View style={styles.container}>
-        <ViroARSceneNavigator
-          initialScene={{ scene: MarkerScene }}
-          viroAppProps={{
-            items,
-            userLocation,
-            activeMarker,
-            onArMarkerPressed,
-            onDirectionAngleChange: ({ angleDifference: newAngle, cameraVerticalRotation: newCameraVerticalRotation }) => this.setState({
-              angle: newAngle,
-              cameraVerticalRotation: newCameraVerticalRotation,
-            }),
-          }}
-          autofocus
-          apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
-          worldAlignment="GravityAndHeading"
-        />
-        <OffscreenMarkersView
-          style={offScreenMarkerViewStyle}
-          items={items}
-          userLocation={userLocation}
-          activeMarker={activeMarker}
-          angle={angle}
-          pointerEvents="none"
-        />
-        {hint && (
-          <View style={{ ...styles.hintContainer, top: offScreenMarkerViewStyle.top + 10 }}>
-            <View style={styles.hintOverlay}>
-              <Text style={styles.hintText}>{hint}</Text>
-            </View>
+        {arSupported ? (
+          <View>
+            <ViroARSceneNavigator
+              initialScene={{ scene: MarkerScene }}
+              viroAppProps={{
+                items,
+                userLocation,
+                activeMarker,
+                onArMarkerPressed,
+                onDirectionAngleChange: ({ angleDifference: newAngle, cameraVerticalRotation: newCameraVerticalRotation }) => this.setState({
+                  angle: newAngle,
+                  cameraVerticalRotation: newCameraVerticalRotation,
+                }),
+              }}
+              autofocus
+              apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
+              worldAlignment="GravityAndHeading"
+            />
+            <OffscreenMarkersView
+              style={offScreenMarkerViewStyle}
+              items={items}
+              userLocation={userLocation}
+              activeMarker={activeMarker}
+              angle={angle}
+              pointerEvents="none"
+            />
+            {hint && (
+              <View style={{ ...styles.hintContainer, top: offScreenMarkerViewStyle.top + 10 }}>
+                <View style={styles.hintOverlay}>
+                  <Text style={styles.hintText}>{hint}</Text>
+                </View>
+              </View>
+            )}
+          </View>
+        ) : (
+          <View style={[offScreenMarkerViewStyle, styles.unsupportedContainer]}>
+            <Text style={styles.unsupportedText}>{LangService.strings[ARState.UNSUPPORTED]}</Text>
           </View>
         )}
-      </View>
-    ) : (
-      <View>
-        <Text>{LangService.strings[arState]}</Text>
       </View>
     );
   }

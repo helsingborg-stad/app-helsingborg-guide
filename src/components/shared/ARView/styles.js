@@ -27,4 +27,11 @@ export default StyleSheet.create({
     flex: 1,
     textAlign: "center",
   },
+  unsupportedContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  unsupportedText: {
+    ...TextStyles.medium,
+  },
 });
