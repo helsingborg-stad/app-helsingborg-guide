@@ -51,9 +51,10 @@ function angleBetweenCoords(start: { latitude: number, longitude: number }, end:
   return angle;
 }
 
-function getLocationRelativePosition(userLocation: GeolocationType, targetLocation: object, initialBearing: number = 0) {
+function getLocationRelativePosition(userLocation: GeolocationType, targetLocation: object, bearing: number = 0) {
   const distance = haversine(userLocation.coords, targetLocation, { unit: "meter" }) || 0;
-  let angle = (angleBetweenCoords(userLocation.coords, targetLocation) - initialBearing) * MathUtils.DEG_TO_RAD;
+  const bearingOffset = ios ? 0 : bearing;
+  const angle = (angleBetweenCoords(userLocation.coords, targetLocation) - bearingOffset - 90) * MathUtils.DEG_TO_RAD;
 
   const offset = Math.min(distance, 10);
 
@@ -61,7 +62,6 @@ function getLocationRelativePosition(userLocation: GeolocationType, targetLocati
   const y = Math.sin(angle) * offset;
 
   if (!ios) {
-    angle -= (Math.PI / 2);
     return {
       x: x * Math.cos(angle) - y * Math.sin(angle),
       y: x * Math.sin(angle) + y * Math.cos(angle),

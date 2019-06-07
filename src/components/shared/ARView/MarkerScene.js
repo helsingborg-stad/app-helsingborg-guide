@@ -16,13 +16,13 @@ type State = {
 };
 
 const ACTIVE_HEIGHT = 1;
-const HEIGHT = 0.5;
+const HEIGHT = 0;
 
 export default class MarkerScene extends Component<Props, State> {
   static getDerivedStateFromProps(props: Props) {
     const {
       arSceneNavigator: {
-        viroAppProps: { items, userLocation, activeMarker, initialBearing, onArMarkerPressed },
+        viroAppProps: { items, userLocation, activeMarker, bearing, onArMarkerPressed },
       },
     } = props;
 
@@ -32,7 +32,7 @@ export default class MarkerScene extends Component<Props, State> {
       } = item;
       const id = MapItemUtils.getIdFromMapItem(item);
       const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
-      const relativePosition = LocationUtils.getLocationRelativePosition(userLocation, contentLocation, initialBearing);
+      const relativePosition = LocationUtils.getLocationRelativePosition(userLocation, contentLocation, bearing);
       const height = active ? ACTIVE_HEIGHT : HEIGHT;
       const position = [relativePosition.x, height, relativePosition.y];
       const arrived = LocationService.getTravelDistance(userLocation.coords, contentLocation) < ARRIVE_DISTANCE;
@@ -75,51 +75,51 @@ export default class MarkerScene extends Component<Props, State> {
   };
 
   onCameraTransformUpdate = (cameraTransform: any) => {
-    // const { position: cameraPosition, forward: cameraForward } = cameraTransform;
-    // const {
-    //   props: {
-    //     arSceneNavigator: {
-    //       viroAppProps: { activeMarker, onDirectionAngleChange },
-    //     },
-    //   },
-    //   state: { markers },
-    // } = this;
+    const { position: cameraPosition, forward: cameraForward } = cameraTransform;
+    const {
+      props: {
+        arSceneNavigator: {
+          viroAppProps: { activeMarker, onDirectionAngleChange },
+        },
+      },
+      state: { markers },
+    } = this;
 
-    // const active = markers.find((marker) => {
-    //   const markerId = MapItemUtils.getIdFromMapItem(marker);
-    //   const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
-    //   return markerId === selectedMarkerId;
-    // });
+    const active = markers.find((marker) => {
+      const markerId = MapItemUtils.getIdFromMapItem(marker);
+      const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
+      return markerId === selectedMarkerId;
+    });
 
-    // if (active) {
-    //   const {
-    //     position: [positionX, positionY, positionZ],
-    //   } = active;
-    //   const [cameraX, cameraY, cameraZ] = cameraPosition;
-    //   const [forwardX, forwardY, forwardZ] = cameraForward;
+    if (active) {
+      const {
+        position: [positionX, positionY, positionZ],
+      } = active;
+      const [cameraX, cameraY, cameraZ] = cameraPosition;
+      const [forwardX, forwardY, forwardZ] = cameraForward;
 
-    //   // calculate and normalize direction from camera to marker position
-    //   const dx = positionX - cameraX;
-    //   const dy = positionY - cameraY;
-    //   const dz = positionZ - cameraZ;
-    //   const dl = Math.sqrt(dx * dx + dy * dy + dz * dz);
+      // calculate and normalize direction from camera to marker position
+      const dx = positionX - cameraX;
+      const dy = positionY - cameraY;
+      const dz = positionZ - cameraZ;
+      const dl = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-    //   const normalX = dx / dl;
-    //   const normalZ = dz / dl;
+      const normalX = dx / dl;
+      const normalZ = dz / dl;
 
-    //   // calculate angle between the camera's forward direction and the direction to the marker
-    //   const cameraAngle = Math.atan2(forwardZ, forwardX);
-    //   const markerAngle = Math.atan2(normalZ, normalX);
-    //   const angleDifference = (MathUtils.PI2 + cameraAngle - markerAngle) % MathUtils.PI2;
+      // calculate angle between the camera's forward direction and the direction to the marker
+      const cameraAngle = Math.atan2(forwardZ, forwardX);
+      const markerAngle = Math.atan2(normalZ, normalX);
+      const angleDifference = (MathUtils.PI2 + cameraAngle - markerAngle) % MathUtils.PI2;
 
-    //   // get the camera's rotation around the x-axis
-    //   const cameraVerticalRotation = Math.atan2(forwardY, forwardZ) * MathUtils.RAD_TO_DEG + 180;
+      // get the camera's rotation around the x-axis
+      const cameraVerticalRotation = Math.atan2(forwardY, forwardZ) * MathUtils.RAD_TO_DEG + 180;
 
-    //   onDirectionAngleChange({
-    //     angleDifference: angleDifference * MathUtils.RAD_TO_DEG,
-    //     cameraVerticalRotation,
-    //   });
-    // }
+      onDirectionAngleChange({
+        angleDifference: angleDifference * MathUtils.RAD_TO_DEG,
+        cameraVerticalRotation,
+      });
+    }
   };
 
   render() {
