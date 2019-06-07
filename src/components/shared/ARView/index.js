@@ -12,7 +12,7 @@ import OffscreenMarkersView from "./OffscreenMarkersView";
 import styles from "./styles";
 
 const { isARSupportedOnDevice } = ViroUtils;
-const ios = Platform.os === "ios";
+const ios = Platform.OS === "ios";
 
 const ARState = {
   CAMERA_DISABLED: "AR_CAMERA_DISABLED",
@@ -136,8 +136,8 @@ class ARView extends Component<Props, State> {
           activeMarker={activeMarker}
           angle={angle}
           pointerEvents="none"
-        /> */}
-        { /* {hint && (
+        />
+        {/* hint && (
           <View style={{ ...styles.hintContainer, top: offScreenMarkerViewStyle.top + 10 }}>
             <View style={styles.hintOverlay}>
               <Text style={styles.hintText}>{hint}</Text>
@@ -156,3 +156,4 @@ class ARView extends Component<Props, State> {
 const mapState = ({ geolocation: { bearing } }) => ({ initialBearing: bearing });
 
 export default connect(mapState)(ARView);
+

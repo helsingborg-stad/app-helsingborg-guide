@@ -1,10 +1,10 @@
 // @flow
 import { Platform } from "react-native";
 import geolib from "geolib";
-import { fromLatLngToPoint } from "mercator-projection";
 import haversine from "haversine";
+import MathUtils from "./MathUtils";
 
-const ios = Platform.os === "ios";
+const ios = Platform.OS === "ios";
 
 function getDistanceBetweenCoordinates(firstLocation: PositionLongLat, secondLocation: PositionLongLat): number {
   if (firstLocation.latitude && firstLocation.longitude && secondLocation.latitude && secondLocation.longitude) {
@@ -43,9 +43,9 @@ function angleBetweenCoords(start: { latitude: number, longitude: number }, end:
   let angle;
 
   if (Math.atan2(y, x) >= 0) {
-    angle = Math.atan2(y, x) * (180 / Math.PI);
+    angle = Math.atan2(y, x) * MathUtils.RAD_TO_DEG;
   } else {
-    angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
+    angle = (Math.atan2(y, x) + 2 * Math.PI) * MathUtils.RAD_TO_DEG;
   }
 
   return angle;
@@ -53,7 +53,7 @@ function angleBetweenCoords(start: { latitude: number, longitude: number }, end:
 
 function getLocationRelativePosition(userLocation: GeolocationType, targetLocation: object, initialBearing: number = 0) {
   const distance = haversine(userLocation.coords, targetLocation, { unit: "meter" }) || 0;
-  let angle = (angleBetweenCoords(userLocation.coords, targetLocation) - initialBearing) * (Math.PI / 180);
+  let angle = (angleBetweenCoords(userLocation.coords, targetLocation) - initialBearing) * MathUtils.DEG_TO_RAD;
 
   const offset = Math.min(distance, 10);
 
