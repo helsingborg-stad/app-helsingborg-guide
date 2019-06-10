@@ -14,13 +14,6 @@ export default StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
   },
-  illustrationImageContainer: {
-    marginHorizontal: 30,
-    marginVertical: 15,
-    paddingLeft: 127,
-    paddingRight: 53,
-    paddingTop: 40,
-  },
   instructions: StyleSheetUtils.flatten([
     TextStyles.body,
     {
@@ -31,45 +24,6 @@ export default StyleSheet.create({
       textAlign: "center",
     },
   ]),
-  marker: {
-    alignItems: "center",
-    flexDirection: "row",
-    height: 33,
-    justifyContent: "center",
-    position: "absolute",
-    right: 136,
-    top: 60,
-    width: 28,
-  },
-  markerNumber: StyleSheetUtils.flatten([
-    TextStyles.body,
-    {
-      color: Colors.white,
-      fontSize: 9,
-      letterSpacing: 0,
-      lineHeight: 13,
-      textAlign: "center",
-    },
-  ]),
-  mobileHandContainer: {
-    right: 50,
-  },
-  speechBubble: {
-    alignItems: "center",
-    flexDirection: "row",
-    height: 110,
-    justifyContent: "center",
-    paddingHorizontal: 20,
-    position: "absolute",
-    right: 60,
-    top: 30,
-    width: 112,
-  },
-  speechBubbleText: {
-    ...TextStyles.medium,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
   startButton: {
     alignItems: "center",
     backgroundColor: Colors.purple,
