@@ -137,7 +137,6 @@ export default StyleSheet.create({
       fontWeight: "bold",
       letterSpacing: 0.08,
       marginRight: TextMargin,
-      width: 161,
     },
   ]),
   listItemTitleContainer: {
