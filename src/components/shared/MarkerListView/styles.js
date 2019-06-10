@@ -34,6 +34,15 @@ const listItemShared = {
   shadowOpacity: 1,
 };
 
+const listImageNumberViewShared = {
+  alignItems: "center",
+  borderRadius: 11,
+  flexDirection: "row",
+  height: 22,
+  justifyContent: "center",
+  width: 22,
+};
+
 export default StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
@@ -101,13 +110,12 @@ export default StyleSheet.create({
     },
   ]),
   listImageNumberView: {
-    alignItems: "center",
+    ...listImageNumberViewShared,
     backgroundColor: Colors.purple,
-    borderRadius: 11,
-    flexDirection: "row",
-    height: 22,
-    justifyContent: "center",
-    width: 22,
+  },
+  listImageNumberViewArrived: {
+    ...listImageNumberViewShared,
+    backgroundColor: Colors.green,
   },
   listItem: {
     ...listItemShared,

@@ -10,7 +10,6 @@ import { SegmentControlHeight } from "../SegmentControl/styles";
 import MapMarkerView from "../MapMarkerView";
 import ARView from "../ARView";
 import LangService from "../../../services/langService";
-import LocationService from "../../../services/locationService";
 import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import { AR_INSTRUCTIONS_SHOWN } from "../../../lib/my_consts";
@@ -189,8 +188,15 @@ class MarkerListView extends Component<Props, State> {
 
   displayNumberView = (item: MapItem, index: number) => {
     const numberString = `${index}`;
+    const { userLocation } = this.props;
+    let hasArrived = false;
+
+    if (userLocation) {
+      hasArrived = LocationUtils.hasArrivedAtDestination(userLocation, MapItemUtils.getLocationFromItem(item));
+    }
+
     const numberView = (
-      <View style={styles.listImageNumberView}>
+      <View style={hasArrived ? styles.listImageNumberViewArrived : styles.listImageNumberView}>
         <Text style={styles.listImageNumberText}>{numberString}</Text>
       </View>
     );
@@ -247,8 +253,8 @@ class MarkerListView extends Component<Props, State> {
     if (!location || !userLocation) return null;
 
     const { coords } = userLocation;
-    const distance = Math.round(LocationService.getTravelDistance(coords, location));
-    const time = Math.round(LocationService.getTravelTime(distance));
+    const distance = Math.round(LocationUtils.getTravelDistance(coords, location));
+    const time = Math.round(LocationUtils.getTravelTime(distance));
 
     const min = LangService.strings.MINUTE;
     const hour = LangService.strings.HOUR;

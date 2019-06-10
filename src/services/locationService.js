@@ -2,13 +2,10 @@ import { Alert, Platform, Linking } from "react-native";
 import Permissions from "react-native-permissions";
 import AndroidOpenSettings from "react-native-android-open-settings";
 import RNSimpleCompass from "react-native-simple-compass";
-import haversine from "haversine";
 import LangService from "./langService";
 import GeoLocationActions from "../actions/geolocationActions";
 
 const ios = Platform.OS === "ios";
-
-const WALKING_SPEED = 80; // metres per minute
 
 // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
 const PermissionsResponse = {
@@ -81,10 +78,6 @@ export default class LocationService {
     if (!instance) instance = new LocationService();
     return instance;
   }
-
-  static getTravelDistance = (fromLocation, toLocation, unit = "meter") => haversine(fromLocation, toLocation, { unit }) || 0;
-
-  static getTravelTime = distance => distance / WALKING_SPEED;
 
   upatePosition = () => new Promise((resolve, reject) => getLocation().then(
     (position) => {
