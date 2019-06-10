@@ -1,11 +1,12 @@
 // @flow
 import React from "react";
-import { View, TouchableOpacity, ImageBackground, Text, Modal, StatusBar } from "react-native";
+import { View, TouchableOpacity, ImageBackground, Image, Text, Modal, StatusBar } from "react-native";
 import LangService from "../../../../services/langService";
 import styles from "./styles";
 import Illustration from "./illustration";
 
-const numberedMarkerActive = require("../../../../images/AR/PinSelected.png");
+const numberedMarkerActive = require("../../../../images/AR/PinArrived.png");
+const speechBubble = require("../../../../images/SpeechBubble.png");
 
 type Props = {
   onRequestClose: () => void,
@@ -17,10 +18,13 @@ export default ({ onRequestClose }: Props) => (
     <View style={styles.container}>
       <Text style={styles.title}>{LangService.strings.AR_INTRO_TITLE}</Text>
       <View style={styles.illustrationImageContainer}>
-        <Illustration />
-        <ImageBackground source={numberedMarkerActive} style={styles.marker}>
-          <Text style={styles.markerNumber}>1</Text>
+        <ImageBackground source={speechBubble} style={styles.speechBubble}>
+          <Text style={styles.speechBubbleText}>{LangService.strings.BETA_VERSION.toUpperCase()}</Text>
         </ImageBackground>
+        <View style={styles.mobileHandContainer}>
+          <Illustration />
+          <Image source={numberedMarkerActive} style={styles.marker} />
+        </View>
       </View>
       <Text style={styles.instructions}>{LangService.strings.AR_INTRO_INSTRUCTIONS}</Text>
       <TouchableOpacity style={styles.startButton} onPress={onRequestClose}>
