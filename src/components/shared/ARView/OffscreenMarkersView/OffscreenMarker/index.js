@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { Text, Animated } from "react-native";
+import { Text, Animated, Image } from "react-native";
 import * as Images from "../../../../../images/AR";
 import styles from "./styles";
 
@@ -20,7 +20,6 @@ export default class OffscreenMarker extends Component<OffscreenMarkerProps> {
 
     this.animatedX = new Animated.Value(props.x);
     this.animatedY = new Animated.Value(props.y);
-    this.animatedAngle = new Animated.Value(props.angle);
     this.opacity = new Animated.Value(props.visible ? 1 : 0);
   }
 
@@ -32,9 +31,6 @@ export default class OffscreenMarker extends Component<OffscreenMarkerProps> {
     }).start();
     Animated.spring(this.animatedY, {
       toValue: props.y,
-    }).start();
-    Animated.spring(this.animatedAngle, {
-      toValue: -props.angle - 180,
     }).start();
 
     if (props.visible !== visible) {
@@ -48,17 +44,11 @@ export default class OffscreenMarker extends Component<OffscreenMarkerProps> {
 
   animatedY = new Animated.Value(0);
 
-  animatedAngle = new Animated.Value(0);
-
   opacity = new Animated.Value(0);
 
   render() {
-    const { id, order, selected } = this.props;
+    const { id, order, selected, angle } = this.props;
     const imagePin = selected ? Images.PinSelected : Images.Pin;
-    const rotation = this.animatedAngle.interpolate({
-      inputRange: [0, 360],
-      outputRange: ["0deg", "360deg"],
-    });
 
     return (
       <Animated.View
@@ -66,7 +56,7 @@ export default class OffscreenMarker extends Component<OffscreenMarkerProps> {
         style={{ ...styles.marker, opacity: this.opacity, transform: [{ translateX: this.animatedX }, { translateY: this.animatedY }] }}
         pointerEvents="none"
       >
-        <Animated.Image source={imagePin} style={{ transform: [{ rotateZ: rotation }] }} />
+        <Image source={imagePin} style={{ transform: [{ rotateZ: angle }] }} />
         <Text style={styles.label}>{`${order + 1}`}</Text>
       </Animated.View>
     );

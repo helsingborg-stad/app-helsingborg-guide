@@ -1,30 +1,41 @@
 // @flow
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { ViroARScene, ViroText, ViroConstants } from "react-viro";
 import LocationService from "../../../services/locationService";
 import { LocationUtils, MapItemUtils, MathUtils } from "../../../utils";
 import Marker from "./Marker";
 
-const ARRIVE_DISTANCE = 10;
+import { updateCameraAngles } from "../../../actions/arActions";
 
 type Props = {
   arSceneNavigator: any,
+  dispatchCameraUpdateAngles(ARState): void,
 };
 type State = {
   isInitialized: boolean,
   markers: Array<any>,
+  bearing: number,
+  currentVerticalAngle: number,
+  currentHorizontalAngleDelta: number,
 };
 
+const ARRIVE_DISTANCE = 10;
+const ANGLE_THRESHOLD = 10;
 const ACTIVE_HEIGHT = 1;
 const HEIGHT = 0;
 
-export default class MarkerScene extends Component<Props, State> {
-  static getDerivedStateFromProps(props: Props) {
+const exceedsThreshold = (a, b) => Math.abs(a - b) >= ANGLE_THRESHOLD;
+
+class MarkerScene extends Component<Props, State> {
+  static getDerivedStateFromProps(props: Props, state: State) {
     const {
       arSceneNavigator: {
-        viroAppProps: { items, userLocation, activeMarker, bearing, onArMarkerPressed },
+        viroAppProps: { items, userLocation, activeMarker, onArMarkerPressed },
       },
     } = props;
+
+    const { bearing } = state;
 
     const markers = items.map((item) => {
       const {
@@ -54,7 +65,17 @@ export default class MarkerScene extends Component<Props, State> {
   state = {
     isInitialized: false,
     markers: [],
+    bearing: 0,
+    currentVerticalAngle: 0,
+    currentHorizontalAngleDelta: 0,
   };
+
+  componentDidMount() {
+    LocationService
+      .getInstance()
+      .getCompassBearing()
+      .then(bearing => this.setState({ bearing }));
+  }
 
   onInitialized = (tracking: ViroConstants) => {
     switch (tracking) {
@@ -79,10 +100,15 @@ export default class MarkerScene extends Component<Props, State> {
     const {
       props: {
         arSceneNavigator: {
-          viroAppProps: { activeMarker, onDirectionAngleChange },
+          viroAppProps: { activeMarker },
         },
+        dispatchCameraUpdateAngles,
       },
-      state: { markers },
+      state: {
+        markers,
+        currentVerticalAngle,
+        currentHorizontalAngleDelta,
+      },
     } = this;
 
     const active = markers.find((marker) => {
@@ -110,15 +136,15 @@ export default class MarkerScene extends Component<Props, State> {
       // calculate angle between the camera's forward direction and the direction to the marker
       const cameraAngle = Math.atan2(forwardZ, forwardX);
       const markerAngle = Math.atan2(normalZ, normalX);
-      const angleDifference = (MathUtils.PI2 + cameraAngle - markerAngle) % MathUtils.PI2;
+      const angleDelta = MathUtils.limitPrecision(((MathUtils.PI2 + cameraAngle - markerAngle) % MathUtils.PI2) * MathUtils.RAD_TO_DEG, 2);
 
       // get the camera's rotation around the x-axis
-      const cameraVerticalRotation = Math.atan2(forwardY, forwardZ) * MathUtils.RAD_TO_DEG + 180;
+      const verticalAngle = MathUtils.limitPrecision(Math.atan2(forwardY, forwardZ) * MathUtils.RAD_TO_DEG + 180, 2);
 
-      onDirectionAngleChange({
-        angleDifference: angleDifference * MathUtils.RAD_TO_DEG,
-        cameraVerticalRotation,
-      });
+      if (exceedsThreshold(currentHorizontalAngleDelta, angleDelta) || exceedsThreshold(currentVerticalAngle, verticalAngle)) {
+        this.setState({ currentHorizontalAngleDelta: angleDelta, currentVerticalAngle: verticalAngle });
+        dispatchCameraUpdateAngles({ verticalAngle, angleDelta });
+      }
     }
   };
 
@@ -135,3 +161,10 @@ export default class MarkerScene extends Component<Props, State> {
     );
   }
 }
+
+const mapState = () => ({});
+const mapDispatch = (dispatch: Dispatch) => ({
+  dispatchCameraUpdateAngles: (cameraTransform: Object) => dispatch(updateCameraAngles(cameraTransform)),
+});
+
+export default connect(mapState, mapDispatch)(MarkerScene);

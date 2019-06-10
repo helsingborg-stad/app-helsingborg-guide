@@ -51,7 +51,7 @@ function angleBetweenCoords(start: { latitude: number, longitude: number }, end:
   return angle;
 }
 
-function getLocationRelativePosition(userLocation: GeolocationType, targetLocation: object, bearing: number = 0) {
+function getLocationRelativePosition(userLocation: GeolocationType, targetLocation: Object, bearing: number = 0) {
   const distance = haversine(userLocation.coords, targetLocation, { unit: "meter" }) || 0;
   const bearingOffset = ios ? 0 : bearing;
   const angle = (angleBetweenCoords(userLocation.coords, targetLocation) - bearingOffset - 90) * MathUtils.DEG_TO_RAD;
