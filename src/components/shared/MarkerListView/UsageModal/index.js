@@ -5,7 +5,7 @@ import LangService from "../../../../services/langService";
 import styles from "./styles";
 import Illustration from "./illustration";
 
-const numberedMarkerActive = require("../../../../images/AR/PinArrived.png");
+const numberedMarkerActive = require("../../../../images/PinArrived_2D.png");
 const speechBubble = require("../../../../images/SpeechBubble.png");
 
 type Props = {

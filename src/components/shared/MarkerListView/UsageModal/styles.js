@@ -34,12 +34,12 @@ export default StyleSheet.create({
   marker: {
     alignItems: "center",
     flexDirection: "row",
-    height: 30,
+    height: 33,
     justifyContent: "center",
     position: "absolute",
-    right: 135,
-    top: 65,
-    width: 30,
+    right: 136,
+    top: 60,
+    width: 28,
   },
   markerNumber: StyleSheetUtils.flatten([
     TextStyles.body,
