@@ -17,6 +17,7 @@ export default ({ onRequestClose }: Props) => (
     <StatusBar barStyle="dark-content" />
     <View style={styles.container}>
       <Text style={styles.title}>{LangService.strings.AR_INTRO_TITLE}</Text>
+      <Text style={styles.instructions}>{LangService.strings.AR_INTRO_INSTRUCTIONS}</Text>
       <View style={styles.illustrationImageContainer}>
         <ImageBackground source={speechBubble} style={styles.speechBubble}>
           <Text style={styles.speechBubbleText}>{LangService.strings.BETA_VERSION.toUpperCase()}</Text>
@@ -26,7 +27,7 @@ export default ({ onRequestClose }: Props) => (
           <Image source={numberedMarkerActive} style={styles.marker} />
         </View>
       </View>
-      <Text style={styles.instructions}>{LangService.strings.AR_INTRO_INSTRUCTIONS}</Text>
+      <Text style={styles.instructions}>{LangService.strings.AR_INTRO_BETA_BADGE}</Text>
       <TouchableOpacity style={styles.startButton} onPress={onRequestClose}>
         <Text style={styles.startButtonText}>{LangService.strings.AR_INTRO_BUTTON}</Text>
       </TouchableOpacity>

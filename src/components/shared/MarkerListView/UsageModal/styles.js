@@ -27,7 +27,7 @@ export default StyleSheet.create({
       fontSize: 16,
       letterSpacing: 0.09,
       lineHeight: 23,
-      marginHorizontal: 30,
+      marginHorizontal: 40,
       textAlign: "center",
     },
   ]),
