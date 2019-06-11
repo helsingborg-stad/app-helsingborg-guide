@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { View, FlatList, TouchableOpacity, PixelRatio, Image, Text } from "react-native";
+import { ViroUtils } from "react-viro";
 import AsyncStorage from "@react-native-community/async-storage";
 import { connect } from "react-redux";
 import { isEqual } from "lodash";
@@ -17,6 +18,8 @@ import { AR_INSTRUCTIONS_SHOWN } from "../../../lib/my_consts";
 import UsageModal from "./UsageModal";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight, ListHeight, ListBottomMargin } from "./styles";
 
+const { isARSupportedOnDevice } = ViroUtils;
+
 type Props = {
   navigation: any,
   items: MapItem[],
@@ -32,7 +35,9 @@ type State = {
   selectedNavigationMode: string,
   recentlyTappedPin: boolean,
   activeMarker: MapItem,
-  shouldShowInstructions: boolean,
+  shouldShowInstructions: ?boolean,
+  showHorizontalList: boolean,
+  arSupported: boolean,
 };
 
 const HalfListMargin = DefaultMargin * 0.5;
@@ -53,7 +58,8 @@ class MarkerListView extends Component<Props, State> {
         : NavigationModeUtils.NavigationModes.Map,
       recentlyTappedPin: false,
       activeMarker: props.items[0],
-      shouldShowInstructions: false,
+      shouldShowInstructions: null,
+      arSupported: false,
     };
   }
 
@@ -61,16 +67,24 @@ class MarkerListView extends Component<Props, State> {
     this.scrollToIndex(0);
 
     const { supportedNavigationModes } = this.props;
+    const includesAR = supportedNavigationModes.includes(NavigationModeUtils.NavigationModes.AR);
 
-    AsyncStorage.getItem(AR_INSTRUCTIONS_SHOWN).then((value) => {
-      this.setState({
-        shouldShowInstructions: value
-          ? JSON.parse(value)
-            && (supportedNavigationModes ? supportedNavigationModes.includes(NavigationModeUtils.NavigationModes.AR) : false)
-          : true,
+    if (includesAR) {
+      Promise.all([this.checkARSupport(), AsyncStorage.getItem(AR_INSTRUCTIONS_SHOWN)]).then((results) => {
+        const arSupported = results[0];
+        const shouldShowInstructions = results[1];
+
+        this.setState({
+          shouldShowInstructions: shouldShowInstructions ? JSON.parse(shouldShowInstructions) && arSupported : true,
+          arSupported,
+        });
       });
-    });
+    }
   }
+
+  checkARSupport = () => new Promise((resolve) => {
+    isARSupportedOnDevice(() => resolve(false), () => resolve(true));
+  });
 
   closeInstructions = () => {
     AsyncStorage.setItem(AR_INSTRUCTIONS_SHOWN, JSON.stringify(false));
@@ -355,11 +369,17 @@ class MarkerListView extends Component<Props, State> {
 
   render() {
     const { items, supportedNavigationModes, userLocation } = this.props;
-    const { selectedNavigationMode, activeMarker, shouldShowInstructions } = this.state;
+    const { selectedNavigationMode, activeMarker, shouldShowInstructions, arSupported } = this.state;
+
+    if (shouldShowInstructions === null) {
+      return <View />;
+    }
+    if (shouldShowInstructions === true) {
+      return <UsageModal onRequestClose={() => this.closeInstructions()} />;
+    }
 
     return (
       <View style={styles.container}>
-        {shouldShowInstructions && <UsageModal onRequestClose={() => this.closeInstructions()} />}
         {supportedNavigationModes && supportedNavigationModes.length > 1 && (
           <SegmentControl
             style={styles.segmentControl}
@@ -387,9 +407,10 @@ class MarkerListView extends Component<Props, State> {
             userLocation={userLocation}
             activeMarker={activeMarker}
             onArMarkerPressed={index => this.scrollToIndex(index)}
+            arSupported={arSupported}
           />
         )}
-        {this.renderHorizontalList(items)}
+        {(selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && !arSupported) || this.renderHorizontalList(items)}
       </View>
     );
   }

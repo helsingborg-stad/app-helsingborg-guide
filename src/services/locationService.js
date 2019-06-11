@@ -1,12 +1,10 @@
-import { Alert, Platform, Linking } from "react-native";
+import { Alert } from "react-native";
 import Permissions from "react-native-permissions";
-import AndroidOpenSettings from "react-native-android-open-settings";
 import RNSimpleCompass from "react-native-simple-compass";
 import haversine from "haversine";
 import LangService from "./langService";
 import GeoLocationActions from "../actions/geolocationActions";
-
-const ios = Platform.OS === "ios";
+import { SettingsUtils } from "../utils";
 
 const WALKING_SPEED = 80; // metres per minute
 
@@ -23,14 +21,12 @@ const RATIONALE = {
   message: LangService.strings.MESSAGE_LOCATION_PERMISSION,
 };
 
-const openSettings = () => (ios ? Linking.openURL("app-settings:") : AndroidOpenSettings.locationSourceSettings());
-
 const promptPermissions = () => {
   Alert.alert(
     LangService.strings.CHECK_LOCATION_SERVICE,
     LangService.strings.MESSAGE_LOCATION_PERMISSION,
     [
-      { text: LangService.strings.SETTINGS, onPress: () => openSettings() },
+      { text: LangService.strings.SETTINGS, onPress: () => SettingsUtils.openSettings() },
       { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
     ],
     { cancelable: false },

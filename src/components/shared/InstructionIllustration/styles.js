@@ -13,7 +13,6 @@ export default StyleSheet.create({
     marginVertical: 15,
     paddingLeft: 127,
     paddingRight: 53,
-    paddingTop: 40,
   },
   instructions: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -23,6 +22,7 @@ export default StyleSheet.create({
       lineHeight: 23,
       marginHorizontal: 40,
       textAlign: "center",
+      paddingTop: 20,
     },
   ]),
   marker: {
@@ -43,10 +43,10 @@ export default StyleSheet.create({
     flexDirection: "row",
     height: 110,
     justifyContent: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     position: "absolute",
     right: 60,
-    top: 30,
+
     width: 112,
   },
   speechBubbleText: {

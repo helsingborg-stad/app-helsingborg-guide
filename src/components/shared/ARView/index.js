@@ -1,15 +1,17 @@
 // @flow
 
 import React, { Component } from "react";
-import { View, Text } from "react-native";
-import { ViroARSceneNavigator, ViroUtils } from "react-viro";
+import { View, Text, TouchableOpacity } from "react-native";
+import { ViroARSceneNavigator } from "react-viro";
 import CameraService from "../../../services/cameraService";
 import LangService from "../../../services/langService";
 import MarkerScene from "./MarkerScene";
 import OffscreenMarkersView from "./OffscreenMarkersView";
+import InstructionIllustration from "../InstructionIllustration";
+import { SettingsUtils } from "../../../utils";
 import styles from "./styles";
 
-const { isARSupportedOnDevice } = ViroUtils;
+const arrivalPinImage = require("../../../images/PinArrived_2D_grayscale.png");
 
 const ARState = {
   CAMERA_DISABLED: "AR_CAMERA_DISABLED",
@@ -26,34 +28,28 @@ type Props = {
   activeMarker: MapItem,
   onArMarkerPressed: ?(index: number) => void,
   offScreenMarkerViewStyle: any,
+  arSupported: boolean,
 };
 
 type State = {
-  arSupported: boolean,
+  cameraPermission: boolean,
   angle: number,
   cameraVerticalRotation: number,
 };
 
 export default class ARView extends Component<Props, State> {
-  state = { arSupported: false, angle: 0, cameraVerticalRotation: 0 };
+  state = { cameraPermission: null, angle: 0, cameraVerticalRotation: 0 };
 
   componentDidMount() {
-    CameraService.getInstance()
-      .checkCameraPermissions()
-      .then(
-        () => {
-          this.checkSupport();
-        }, // permitted
-        () => {
-          this.setState({ arSupported: false });
-        }, // not permitted
-      );
-  }
-
-  checkSupport() {
-    const unsupportedCallback = () => this.setState({ arSupported: false });
-    const supportedCallback = () => this.setState({ arSupported: true });
-    isARSupportedOnDevice(unsupportedCallback, supportedCallback);
+    const { arSupported } = this.props;
+    if (arSupported === true) {
+      CameraService.getInstance()
+        .checkCameraPermissions()
+        .then(() => this.setState({ cameraPermission: true }))
+        .catch(() => this.setState({ cameraPermission: false }));
+    } else {
+      this.setState({ cameraPermission: false });
+    }
   }
 
   getCurrentHintText = (): ?string => {
@@ -87,53 +83,70 @@ export default class ARView extends Component<Props, State> {
 
   render() {
     const {
-      state: { arSupported, angle },
-      props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle },
+      state: { cameraPermission, angle },
+      props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle, arSupported },
     } = this;
     const hint = this.getCurrentHintText();
 
-    return (
-      <View style={styles.container}>
-        {arSupported ? (
-          <View>
-            <ViroARSceneNavigator
-              initialScene={{ scene: MarkerScene }}
-              viroAppProps={{
-                items,
-                userLocation,
-                activeMarker,
-                onArMarkerPressed,
-                onDirectionAngleChange: ({ angleDifference: newAngle, cameraVerticalRotation: newCameraVerticalRotation }) => this.setState({
-                  angle: newAngle,
-                  cameraVerticalRotation: newCameraVerticalRotation,
-                }),
-              }}
-              autofocus
-              apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
-              worldAlignment="GravityAndHeading"
-            />
-            <OffscreenMarkersView
-              style={offScreenMarkerViewStyle}
-              items={items}
-              userLocation={userLocation}
-              activeMarker={activeMarker}
-              angle={angle}
-              pointerEvents="none"
-            />
-            {hint && (
-              <View style={{ ...styles.hintContainer, top: offScreenMarkerViewStyle.top + 10 }}>
-                <View style={styles.hintOverlay}>
-                  <Text style={styles.hintText}>{hint}</Text>
+    if (cameraPermission !== null) {
+      return (
+        <View style={styles.container}>
+          {cameraPermission && arSupported ? (
+            <View style={styles.container}>
+              <ViroARSceneNavigator
+                initialScene={{ scene: MarkerScene }}
+                viroAppProps={{
+                  items,
+                  userLocation,
+                  activeMarker,
+                  onArMarkerPressed,
+                  onDirectionAngleChange: ({ angleDifference: newAngle, cameraVerticalRotation: newCameraVerticalRotation }) => this.setState({
+                    angle: newAngle,
+                    cameraVerticalRotation: newCameraVerticalRotation,
+                  }),
+                }}
+                autofocus
+                apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
+                worldAlignment="GravityAndHeading"
+              />
+              <OffscreenMarkersView
+                style={offScreenMarkerViewStyle}
+                items={items}
+                userLocation={userLocation}
+                activeMarker={activeMarker}
+                angle={angle}
+                pointerEvents="none"
+              />
+              {hint && (
+                <View style={{ ...styles.hintContainer, top: offScreenMarkerViewStyle.top + 10 }}>
+                  <View style={styles.hintOverlay}>
+                    <Text style={styles.hintText}>{hint}</Text>
+                  </View>
                 </View>
-              </View>
-            )}
-          </View>
-        ) : (
-          <View style={[offScreenMarkerViewStyle, styles.unsupportedContainer]}>
-            <Text style={styles.unsupportedText}>{LangService.strings[ARState.UNSUPPORTED]}</Text>
-          </View>
-        )}
-      </View>
-    );
+              )}
+            </View>
+          ) : (
+            <View style={[styles.unsupportedContainer, { paddingTop: offScreenMarkerViewStyle.top }]}>
+              <InstructionIllustration
+                speechBubbleText={"Hoppsan".toUpperCase()}
+                instructionText={
+                  arSupported && !cameraPermission
+                    ? LangService.strings.MESSAGE_CAMERA_PERMISSION
+                    : LangService.strings[ARState.UNSUPPORTED]
+                }
+                image={arrivalPinImage}
+              />
+              {arSupported && !cameraPermission && (
+                <TouchableOpacity style={styles.goToSettingsButton} onPress={() => SettingsUtils.openSettings()}>
+                  <Text style={styles.goToSettingsButtonText}>{LangService.strings.SETTINGS}</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
+        </View>
+      );
+    }
+
+    return <View />;
   }
 }

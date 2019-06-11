@@ -24,6 +24,9 @@ export default StyleSheet.create({
       textAlign: "center",
     },
   ]),
+  outerContainer: {
+    height: ScreenHeight,
+  },
   startButton: {
     alignItems: "center",
     backgroundColor: Colors.purple,
