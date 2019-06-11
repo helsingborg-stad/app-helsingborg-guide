@@ -29,6 +29,7 @@ type Props = {
   onArMarkerPressed: ?(index: number) => void,
   offScreenMarkerViewStyle: any,
   arSupported: boolean,
+  onCameraPermissionDenied: ?() => void,
 };
 
 type State = {
@@ -42,7 +43,7 @@ export default class ARView extends Component<Props, State> {
   state = { cameraPermission: null, angle: 0, cameraVerticalRotation: 0, hint: null };
 
   componentDidMount() {
-    const { arSupported } = this.props;
+    const { arSupported, onCameraPermissionDenied } = this.props;
     if (arSupported === true) {
       CameraService.getInstance()
         .checkCameraPermissions()
@@ -53,6 +54,10 @@ export default class ARView extends Component<Props, State> {
         .catch(() => {
           AnalyticsUtils.logEvent("camera_permission_denied");
           this.setState({ cameraPermission: false });
+
+          if (onCameraPermissionDenied) {
+            onCameraPermissionDenied();
+          }
         });
     } else {
       this.setState({ cameraPermission: false });

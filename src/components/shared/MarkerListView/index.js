@@ -427,6 +427,7 @@ class MarkerListView extends Component<Props, State> {
               this.scrollToIndex(index);
             }}
             arSupported={arSupported}
+            onCameraPermissionDenied={() => this.setState({ arSupported: false })}
           />
         )}
         {(selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && !arSupported) || this.renderHorizontalList(items)}
