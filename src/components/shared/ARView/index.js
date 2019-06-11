@@ -32,7 +32,7 @@ type Props = {
 };
 
 type State = {
-  cameraPermission: boolean,
+  cameraPermission: ?boolean,
   angle: number,
   cameraVerticalRotation: number,
 };

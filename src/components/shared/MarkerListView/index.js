@@ -36,7 +36,6 @@ type State = {
   recentlyTappedPin: boolean,
   activeMarker: MapItem,
   shouldShowInstructions: ?boolean,
-  showHorizontalList: boolean,
   arSupported: boolean,
 };
 
@@ -67,7 +66,7 @@ class MarkerListView extends Component<Props, State> {
     this.scrollToIndex(0);
 
     const { supportedNavigationModes } = this.props;
-    const includesAR = supportedNavigationModes.includes(NavigationModeUtils.NavigationModes.AR);
+    const includesAR = supportedNavigationModes ? supportedNavigationModes.includes(NavigationModeUtils.NavigationModes.AR) : false;
 
     if (includesAR) {
       Promise.all([this.checkARSupport(), AsyncStorage.getItem(AR_INSTRUCTIONS_SHOWN)]).then((results) => {
