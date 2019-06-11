@@ -8,7 +8,7 @@ import LangService from "../../../services/langService";
 import MarkerScene from "./MarkerScene";
 import OffscreenMarkersView from "./OffscreenMarkersView";
 import InstructionIllustration from "../InstructionIllustration";
-import { SettingsUtils } from "../../../utils";
+import { SettingsUtils, AnalyticsUtils } from "../../../utils";
 import styles from "./styles";
 
 const arrivalPinImage = require("../../../images/PinArrived_2D_grayscale.png");
@@ -35,24 +35,31 @@ type State = {
   cameraPermission: ?boolean,
   angle: number,
   cameraVerticalRotation: number,
+  hint: ?string,
 };
 
 export default class ARView extends Component<Props, State> {
-  state = { cameraPermission: null, angle: 0, cameraVerticalRotation: 0 };
+  state = { cameraPermission: null, angle: 0, cameraVerticalRotation: 0, hint: null };
 
   componentDidMount() {
     const { arSupported } = this.props;
     if (arSupported === true) {
       CameraService.getInstance()
         .checkCameraPermissions()
-        .then(() => this.setState({ cameraPermission: true }))
-        .catch(() => this.setState({ cameraPermission: false }));
+        .then(() => {
+          AnalyticsUtils.logEvent("camera_permission_accepted");
+          this.setState({ cameraPermission: true });
+        })
+        .catch(() => {
+          AnalyticsUtils.logEvent("camera_permission_denied");
+          this.setState({ cameraPermission: false });
+        });
     } else {
       this.setState({ cameraPermission: false });
     }
   }
 
-  getCurrentHintText = (): ?string => {
+  getCurrentHintLocalisationKey = (): ?string => {
     const { angle, cameraVerticalRotation } = this.state;
 
     const isWithinRange = (value, min, max) => value > min && value < max;
@@ -60,33 +67,48 @@ export default class ARView extends Component<Props, State> {
     // Horizontal rotation
     if (angle > 20) {
       if (angle < 140) {
-        return LangService.strings.AR_HINT_LOOK_LEFT;
+        return "AR_HINT_LOOK_LEFT";
       }
       if (angle < 220) {
-        return LangService.strings.AR_HINT_TURN_AROUND;
+        return "AR_HINT_TURN_AROUND";
       }
       if (angle < 340) {
-        return LangService.strings.AR_HINT_LOOK_RIGHT;
+        return "AR_HINT_LOOK_RIGHT";
       }
     }
 
     // Vertical rotation
     if (isWithinRange(cameraVerticalRotation, 90, 160) || isWithinRange(cameraVerticalRotation, 25, 90)) {
-      return LangService.strings.AR_HINT_LOOK_UP;
+      return "AR_HINT_LOOK_UP";
     }
     if (isWithinRange(cameraVerticalRotation, 190, 270) || isWithinRange(cameraVerticalRotation, 270, 340)) {
-      return LangService.strings.AR_HINT_LOOK_DOWN;
+      return "AR_HINT_LOOK_DOWN";
     }
 
     return null;
   };
 
+  handleDirectionAngleChange = (angleDifference: number, cameraVerticalRotation: number) => {
+    const { hint } = this.state;
+    const nextHintKey = this.getCurrentHintLocalisationKey();
+    const nextHint = nextHintKey ? LangService.strings[nextHintKey] : null;
+
+    if (nextHint && nextHint !== hint) {
+      AnalyticsUtils.logEvent("ar_hint_shown", { name: nextHintKey });
+    }
+
+    this.setState({
+      angle: angleDifference,
+      cameraVerticalRotation,
+      hint: nextHint,
+    });
+  };
+
   render() {
     const {
-      state: { cameraPermission, angle },
+      state: { cameraPermission, angle, hint },
       props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle, arSupported },
     } = this;
-    const hint = this.getCurrentHintText();
 
     if (cameraPermission !== null) {
       return (
@@ -100,10 +122,9 @@ export default class ARView extends Component<Props, State> {
                   userLocation,
                   activeMarker,
                   onArMarkerPressed,
-                  onDirectionAngleChange: ({ angleDifference: newAngle, cameraVerticalRotation: newCameraVerticalRotation }) => this.setState({
-                    angle: newAngle,
-                    cameraVerticalRotation: newCameraVerticalRotation,
-                  }),
+                  onDirectionAngleChange: ({ angleDifference, cameraVerticalRotation }) => {
+                    this.handleDirectionAngleChange(angleDifference, cameraVerticalRotation);
+                  },
                 }}
                 autofocus
                 apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
@@ -137,7 +158,13 @@ export default class ARView extends Component<Props, State> {
                 image={arrivalPinImage}
               />
               {arSupported && !cameraPermission && (
-                <TouchableOpacity style={styles.goToSettingsButton} onPress={() => SettingsUtils.openSettings()}>
+                <TouchableOpacity
+                  style={styles.goToSettingsButton}
+                  onPress={() => {
+                    AnalyticsUtils.logEvent("tap_open_settings_from_ar");
+                    SettingsUtils.openSettings();
+                  }}
+                >
                   <Text style={styles.goToSettingsButtonText}>{LangService.strings.SETTINGS}</Text>
                 </TouchableOpacity>
               )}
