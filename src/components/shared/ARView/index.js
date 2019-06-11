@@ -128,7 +128,7 @@ export default class ARView extends Component<Props, State> {
           ) : (
             <View style={[styles.unsupportedContainer, { paddingTop: offScreenMarkerViewStyle.top }]}>
               <InstructionIllustration
-                speechBubbleText={"Hoppsan".toUpperCase()}
+                speechBubbleText={LangService.strings.AR_NOT_SUPPORTED_CALLOUT.toUpperCase()}
                 instructionText={
                   arSupported && !cameraPermission
                     ? LangService.strings.MESSAGE_CAMERA_PERMISSION
