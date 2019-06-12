@@ -11,13 +11,17 @@ import {
   ViroMaterials,
 } from "react-viro";
 
+type Props = {
+  markerPosition: Array<number>
+};
+
 const CHARACTER_MATERIAL = "CHARACTER_MATERIAL";
 const ANIMATION_CIRCLE = "ANIMATION_CIRCLE";
 const FLIGHT_RADIUS = 10;
 const FLIGHT_ALTITUDE = 5;
 const FLIGHT_DURATION = 20000;
 
-export default function AnimatedCharacter({ markerPosition: [x, , z] }) {
+export default function AnimatedCharacter({ markerPosition: [x, , z] }: Props) {
   const characterPosition = [x, 0, z];
   const flightAnimation = { name: ANIMATION_CIRCLE, run: true, loop: true, interruptible: true };
 
@@ -31,6 +35,7 @@ export default function AnimatedCharacter({ markerPosition: [x, , z] }) {
           position={[0, FLIGHT_ALTITUDE, FLIGHT_RADIUS]}
           rotation={[0, 90, 0]}
           scale={[0.01, 0.01, 0.01]}
+          // $FlowFixMe flow can't find this file for some reason
           source={require("../../../../3D/seagull.vrx")}
           type="VRX"
           materials={[CHARACTER_MATERIAL]}
