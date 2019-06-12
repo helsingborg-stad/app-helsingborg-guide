@@ -162,9 +162,8 @@ class MarkerScene extends Component<Props, State> {
   }
 }
 
-const mapState = () => ({});
 const mapDispatch = (dispatch: Dispatch) => ({
   dispatchCameraUpdateAngles: (cameraTransform: Object) => dispatch(updateCameraAngles(cameraTransform)),
 });
 
-export default connect(mapState, mapDispatch)(MarkerScene);
+export default connect(null, mapDispatch)(MarkerScene);
