@@ -41,7 +41,8 @@ declare type Action =
   | { type: "AUDIO_MOVE_SLIDER", position: number }
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   | { type: "GEOLOCATION_UPDATE_SUCCESS", position: GeolocationType }
-  | { type: "SET_LANGUAGE", langCode: string };
+  | { type: "SET_LANGUAGE", langCode: string }
+  | { type: "UPDATE_CAMERA_ANGLES", cameraAngles: ARState };
 
 declare type NavigationItemType = "guide" | "guidegroup";
 
@@ -280,6 +281,11 @@ declare type NavigationState = {
   currentLanguage: string,
 };
 
+declare type ARState = {
+  angleDelta: number,
+  verticalAngle: number,
+};
+
 declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
@@ -291,4 +297,5 @@ declare type RootState = {
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
+  arState: ARState,
 };

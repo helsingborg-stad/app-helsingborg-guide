@@ -14,9 +14,15 @@ const clamp = (value: number, { min, max }: { min: number, max: number }) => {
   return value;
 };
 
+const limitPrecision = (value: number, precision: number) => {
+  const exp = 10 ** precision;
+  return Math.round(value * exp) / exp;
+};
+
 export default {
   DEG_TO_RAD,
   RAD_TO_DEG,
   PI2,
   clamp,
+  limitPrecision,
 };

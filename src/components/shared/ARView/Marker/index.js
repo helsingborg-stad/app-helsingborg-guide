@@ -6,10 +6,8 @@ import * as Images from "../../../../images/AR";
 import styles from "./styles";
 
 type Props = {
-  marker: {
-    contentObject: ContentObject,
-    position: Array<number>,
-  },
+  contentObject: ContentObject,
+  position: Array<number>,
   onPress: (index: number) => void,
   active: boolean,
   arrived: boolean,
@@ -22,25 +20,23 @@ const RESET_ANIMATION = "RESET_ANIMATION";
 
 class Marker extends Component<Props> {
   componentWillReceiveProps(props: Props) {
-    const { arrived, marker } = this.props;
+    const { arrived, contentObject } = this.props;
 
     if (!arrived && props.arrived) {
-      const {
-        contentObject: { title },
-      } = marker;
+      const { title } = contentObject;
 
       AnalyticsUtils.logEvent("ar_arrived_at_object", { name: title });
     }
   }
 
   render() {
-    const { marker, onPress, active, arrived } = this.props;
     const {
       contentObject: { order },
       position,
-    } = marker;
-    const scaleMod = 1; // distance / 100; // 1; //Math.log(distance);
-    const scale = [1 * scaleMod, 1 * scaleMod, 1 * scaleMod];
+      onPress,
+      active,
+      arrived,
+    } = this.props;
     const imagePin = (arrived && active && Images.PinArrived) || (active && Images.PinSelected) || Images.Pin;
     const animationName = active ? PIN_ANIMATION : RESET_ANIMATION;
     const animationLoop = active;
@@ -48,9 +44,7 @@ class Marker extends Component<Props> {
     return (
       <ViroNode
         position={position}
-        scale={scale}
-        width={0.6}
-        height={0.6}
+        scale={[2, 2, 2]}
         transformBehaviors="billboard"
         onClick={() => {
           onPress(order);
@@ -91,14 +85,14 @@ ViroAnimations.registerAnimations({
     properties: {
       positionY: 0.5,
     },
-    easing: "Bounce",
+    easing: "EaseInOut",
     duration: 250,
   },
   [RESET_ANIMATION]: {
     properties: {
       positionY: 0.5,
     },
-    easing: "Bounce",
+    easing: "EaseInOut",
     duration: 250,
   },
   [PIN_ANIMATION]: [[RAISE_ANIMATION, DROP_ANIMATION]],

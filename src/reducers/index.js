@@ -9,6 +9,7 @@ import geolocation from "./geolocationReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
 import uiState from "./uiStateReducer";
 import downloadedGuides from "./downloadedGuides";
+import arState from "./arReducer";
 
 const rootReducer = {
   guideGroups,
@@ -22,6 +23,7 @@ const rootReducer = {
   downloadDataVersion,
   downloadedGuides,
   uiState,
+  arState,
 };
 
 export default rootReducer;

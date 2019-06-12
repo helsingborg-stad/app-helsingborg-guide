@@ -7,15 +7,13 @@ import { connect } from "react-redux";
 import { isEqual } from "lodash";
 import IconTextTouchable from "../IconTextTouchable";
 import SegmentControl from "../SegmentControl";
-import { SegmentControlHeight } from "../SegmentControl/styles";
 import MapMarkerView from "../MapMarkerView";
 import ARView from "../ARView";
 import LangService from "../../../services/langService";
-import LocationService from "../../../services/locationService";
 import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import { AR_INSTRUCTIONS_SHOWN } from "../../../lib/my_consts";
-import styles, { ListItemWidth, DefaultMargin, ScreenHeight, ListHeight, ListBottomMargin } from "./styles";
+import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 
 const { isARSupportedOnDevice } = ViroUtils;
 
@@ -36,6 +34,7 @@ type State = {
   activeMarker: MapItem,
   shouldShowInstructions: ?boolean,
   arSupported: boolean,
+  showHorizontalList: boolean,
 };
 
 const HalfListMargin = DefaultMargin * 0.5;
@@ -58,6 +57,7 @@ class MarkerListView extends Component<Props, State> {
       activeMarker: props.items[0],
       shouldShowInstructions: null,
       arSupported: false,
+      showHorizontalList: true,
     };
   }
 
@@ -210,8 +210,15 @@ class MarkerListView extends Component<Props, State> {
 
   displayNumberView = (item: MapItem, index: number) => {
     const numberString = `${index}`;
+    const { userLocation } = this.props;
+    let hasArrived = false;
+
+    if (userLocation) {
+      hasArrived = LocationUtils.hasArrivedAtDestination(userLocation, MapItemUtils.getLocationFromItem(item));
+    }
+
     const numberView = (
-      <View style={styles.listImageNumberView}>
+      <View style={hasArrived ? styles.listImageNumberViewArrived : styles.listImageNumberView}>
         <Text style={styles.listImageNumberText}>{numberString}</Text>
       </View>
     );
@@ -268,8 +275,8 @@ class MarkerListView extends Component<Props, State> {
     if (!location || !userLocation) return null;
 
     const { coords } = userLocation;
-    const distance = Math.round(LocationService.getTravelDistance(coords, location));
-    const time = Math.round(LocationService.getTravelTime(distance));
+    const distance = Math.round(LocationUtils.getTravelDistance(coords, location));
+    const time = Math.round(LocationUtils.getTravelTime(distance));
 
     const min = LangService.strings.MINUTE;
     const hour = LangService.strings.HOUR;
@@ -385,7 +392,7 @@ class MarkerListView extends Component<Props, State> {
 
   render() {
     const { items, supportedNavigationModes, userLocation } = this.props;
-    const { selectedNavigationMode, activeMarker, shouldShowInstructions, arSupported } = this.state;
+    const { selectedNavigationMode, activeMarker, shouldShowInstructions, arSupported, showHorizontalList } = this.state;
 
     if (shouldShowInstructions === null) {
       return <View />;
@@ -418,7 +425,6 @@ class MarkerListView extends Component<Props, State> {
         )}
         {selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && (
           <ARView
-            offScreenMarkerViewStyle={{ top: SegmentControlHeight + 10, bottom: ListHeight + ListBottomMargin + 10 }}
             items={items}
             userLocation={userLocation}
             activeMarker={activeMarker}
@@ -427,10 +433,12 @@ class MarkerListView extends Component<Props, State> {
               this.scrollToIndex(index);
             }}
             arSupported={arSupported}
-            onCameraPermissionDenied={() => this.setState({ arSupported: false })}
+            onCameraPermissionDenied={() => this.setState({ showHorizontalList: false })}
           />
         )}
-        {(selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && !arSupported) || this.renderHorizontalList(items)}
+        {!showHorizontalList
+          || (selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && !arSupported)
+          || this.renderHorizontalList(items)}
       </View>
     );
   }

@@ -9,6 +9,8 @@ import MarkerScene from "./MarkerScene";
 import OffscreenMarkersView from "./OffscreenMarkersView";
 import InstructionIllustration from "../InstructionIllustration";
 import { SettingsUtils, AnalyticsUtils } from "../../../utils";
+import OffscreenHintView from "./OffscreenHintView";
+import { SegmentControlHeight } from "../SegmentControl/styles";
 import styles from "./styles";
 
 const arrivalPinImage = require("../../../images/PinArrived_2D_grayscale.png");
@@ -27,23 +29,20 @@ type Props = {
   userLocation: ?GeolocationType,
   activeMarker: MapItem,
   onArMarkerPressed: ?(index: number) => void,
-  offScreenMarkerViewStyle: any,
   arSupported: boolean,
   onCameraPermissionDenied: ?() => void,
 };
 
 type State = {
   cameraPermission: ?boolean,
-  angle: number,
-  cameraVerticalRotation: number,
-  hint: ?string,
 };
 
 export default class ARView extends Component<Props, State> {
-  state = { cameraPermission: null, angle: 0, cameraVerticalRotation: 0, hint: null };
+  state = { cameraPermission: null };
 
   componentDidMount() {
     const { arSupported, onCameraPermissionDenied } = this.props;
+
     if (arSupported === true) {
       CameraService.getInstance()
         .checkCameraPermissions()
@@ -64,55 +63,10 @@ export default class ARView extends Component<Props, State> {
     }
   }
 
-  getCurrentHintLocalisationKey = (): ?string => {
-    const { angle, cameraVerticalRotation } = this.state;
-
-    const isWithinRange = (value, min, max) => value > min && value < max;
-
-    // Horizontal rotation
-    if (angle > 20) {
-      if (angle < 140) {
-        return "AR_HINT_LOOK_LEFT";
-      }
-      if (angle < 220) {
-        return "AR_HINT_TURN_AROUND";
-      }
-      if (angle < 340) {
-        return "AR_HINT_LOOK_RIGHT";
-      }
-    }
-
-    // Vertical rotation
-    if (isWithinRange(cameraVerticalRotation, 90, 160) || isWithinRange(cameraVerticalRotation, 25, 90)) {
-      return "AR_HINT_LOOK_UP";
-    }
-    if (isWithinRange(cameraVerticalRotation, 190, 270) || isWithinRange(cameraVerticalRotation, 270, 340)) {
-      return "AR_HINT_LOOK_DOWN";
-    }
-
-    return null;
-  };
-
-  handleDirectionAngleChange = (angleDifference: number, cameraVerticalRotation: number) => {
-    const { hint } = this.state;
-    const nextHintKey = this.getCurrentHintLocalisationKey();
-    const nextHint = nextHintKey ? LangService.strings[nextHintKey] : null;
-
-    if (nextHint && nextHint !== hint) {
-      AnalyticsUtils.logEvent("ar_hint_shown", { name: nextHintKey });
-    }
-
-    this.setState({
-      angle: angleDifference,
-      cameraVerticalRotation,
-      hint: nextHint,
-    });
-  };
-
   render() {
     const {
-      state: { cameraPermission, angle, hint },
-      props: { items, userLocation, activeMarker, onArMarkerPressed, offScreenMarkerViewStyle, arSupported },
+      state: { cameraPermission },
+      props: { items, userLocation, activeMarker, onArMarkerPressed, arSupported },
     } = this;
 
     if (cameraPermission !== null) {
@@ -127,32 +81,16 @@ export default class ARView extends Component<Props, State> {
                   userLocation,
                   activeMarker,
                   onArMarkerPressed,
-                  onDirectionAngleChange: ({ angleDifference, cameraVerticalRotation }) => {
-                    this.handleDirectionAngleChange(angleDifference, cameraVerticalRotation);
-                  },
                 }}
                 autofocus
                 apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
                 worldAlignment="GravityAndHeading"
               />
-              <OffscreenMarkersView
-                style={offScreenMarkerViewStyle}
-                items={items}
-                userLocation={userLocation}
-                activeMarker={activeMarker}
-                angle={angle}
-                pointerEvents="none"
-              />
-              {hint && (
-                <View style={{ ...styles.hintContainer, top: offScreenMarkerViewStyle.top + 10 }}>
-                  <View style={styles.hintOverlay}>
-                    <Text style={styles.hintText}>{hint}</Text>
-                  </View>
-                </View>
-              )}
+              <OffscreenMarkersView items={items} userLocation={userLocation} activeMarker={activeMarker} pointerEvents="none" />
+              <OffscreenHintView />
             </View>
           ) : (
-            <View style={[styles.unsupportedContainer, { paddingTop: offScreenMarkerViewStyle.top }]}>
+            <View style={[styles.unsupportedContainer, { paddingTop: SegmentControlHeight + 10 }]}>
               <InstructionIllustration
                 speechBubbleText={LangService.strings.AR_NOT_SUPPORTED_CALLOUT.toUpperCase()}
                 instructionText={
