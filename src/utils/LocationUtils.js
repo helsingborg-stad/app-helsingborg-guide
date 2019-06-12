@@ -70,11 +70,15 @@ function angleBetweenCoords(start: { latitude: number, longitude: number }, end:
   return angle;
 }
 
-function getTravelDistance(fromLocation, toLocation, unit = "meter") {
+function getTravelDistance(
+  fromLocation: { latitude: number, longitude: number },
+  toLocation: { latitude: number, longitude: number },
+  unit: string = "meter",
+) {
   return haversine(fromLocation, toLocation, { unit }) || 0;
 }
 
-function getTravelTime(distance) {
+function getTravelTime(distance: number) {
   return distance / WALKING_SPEED;
 }
 
