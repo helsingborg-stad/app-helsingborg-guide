@@ -1,14 +1,7 @@
 // @flow
 import React, { Component } from "react";
-import {
-  AppState,
-  StatusBar,
-  Platform,
-} from "react-native";
-import {
-  createStackNavigator,
-  createAppContainer
-} from "react-navigation";
+import { AppState, StatusBar, Platform } from "react-native";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import {
   DebugScreen,
   DownloadsScreen,
@@ -26,16 +19,13 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
+  ARIntroductionScreen,
 } from "./components/screens";
 import ViewContainer from "./components/shared/view_container";
 import BottomBarView from "./components/shared/BottomBarView";
-import {
-  Colors,
-  HeaderStyles,
-} from "./styles/";
+import { Colors, HeaderStyles } from "./styles";
 import AnalyticsUtils from "./utils/AnalyticsUtils";
 import NavigatorService from "./services/navigationService";
-
 
 const GuideNavigator = createStackNavigator(
   {
@@ -62,6 +52,7 @@ const RootNavigator = createStackNavigator(
     WelcomeScreen: { screen: WelcomeScreen },
     MainScreen: { screen: GuideNavigator },
     SearchObjectScreen: { screen: SearchObjectScreen },
+    ARIntroductionScreen: { screen: ARIntroductionScreen },
   },
   {
     headerMode: "none",
@@ -79,7 +70,7 @@ type Props = {
   onAppStarted(): void,
   onAppBecameActive(): void,
   onAppBecameInactive(): void,
-}
+};
 
 export default class Nav extends Component<Props> {
   static getCurrentRouteName(navigationState: Object) {
@@ -106,7 +97,7 @@ export default class Nav extends Component<Props> {
   componentDidMount = () => {
     this.props.onAppStarted();
     AppState.addEventListener("change", this.onAppStateChange);
-  }
+  };
 
   onAppStateChange = (nextAppState: AppStateStatus) => {
     if (nextAppState === "active") {
@@ -114,16 +105,12 @@ export default class Nav extends Component<Props> {
     } else if (nextAppState === "inactive") {
       this.props.onAppBecameInactive();
     }
-  }
+  };
 
   render() {
     return (
       <ViewContainer>
-        <StatusBar
-          translucent={ios}
-          barStyle="light-content"
-          backgroundColor={Colors.darkPurple}
-        />
+        <StatusBar translucent={ios} barStyle="light-content" backgroundColor={Colors.darkPurple} />
         {/* $FlowFixMe should be fixed in later flow versions */}
         <NavigatorWrapper
           onNavigationStateChange={Nav.onNavigationStateChange}

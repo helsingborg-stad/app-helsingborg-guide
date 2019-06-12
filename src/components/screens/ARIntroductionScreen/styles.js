@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { Colors, TextStyles } from "../../../../styles";
-import { StyleSheetUtils } from "../../../../utils";
+import { Colors, TextStyles } from "../../../styles";
+import { StyleSheetUtils } from "../../../utils";
 
 export const ScreenWidth = Dimensions.get("window").width;
 export const ScreenHeight = Dimensions.get("window").height;
