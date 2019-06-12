@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { isEqual } from "lodash";
 import IconTextTouchable from "../IconTextTouchable";
 import SegmentControl from "../SegmentControl";
-import { SegmentControlHeight } from "../SegmentControl/styles";
 import MapMarkerView from "../MapMarkerView";
 import ARView from "../ARView";
 import LangService from "../../../services/langService";
@@ -14,7 +13,7 @@ import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUt
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import { AR_INSTRUCTIONS_SHOWN } from "../../../lib/my_consts";
 import UsageModal from "./UsageModal";
-import styles, { ListItemWidth, DefaultMargin, ScreenHeight, ListHeight, ListBottomMargin } from "./styles";
+import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 
 type Props = {
   navigation: any,
@@ -388,7 +387,6 @@ class MarkerListView extends Component<Props, State> {
         )}
         {selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && (
           <ARView
-            offScreenMarkerViewStyle={{ top: SegmentControlHeight + 10, bottom: ListHeight + ListBottomMargin + 10 }}
             items={items}
             userLocation={userLocation}
             activeMarker={activeMarker}

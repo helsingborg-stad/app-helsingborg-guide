@@ -7,6 +7,9 @@ import GeoLocationActions from "../actions/geolocationActions";
 
 const ios = Platform.OS === "ios";
 
+const DEGREE_UPDATE_THRESHOLD = 10; // number of degrees to trigger callback (in degrees)
+const DISTANCE_UPDATE_THRESHOLD = 1; // distance to move to trigger callback (in meters)
+
 // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
 const PermissionsResponse = {
   AUTHORIZED: "authorized",
@@ -105,7 +108,7 @@ export default class LocationService {
           enableHighAccuracy: true,
           timeout: 15000,
           maximumAge: 5000,
-          distanceFilter: 10,
+          distanceFilter: DISTANCE_UPDATE_THRESHOLD,
         },
       );
     }),
@@ -119,13 +122,19 @@ export default class LocationService {
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
   }
 
+  getCompassBearing = () => new Promise((resolve, reject) => {
+    RNSimpleCompass.start(DEGREE_UPDATE_THRESHOLD, (degree) => {
+      resolve(degree);
+      RNSimpleCompass.stop();
+    });
+  });
+
   subscribeCompassBearing = () => new Promise((resolve, reject) => {
     try {
-      // Number of degrees changed before the callback is triggered
-      const degreeUpdateRate = 1;
-      this.compassWatcher = RNSimpleCompass.start(degreeUpdateRate, (degree) => {
-        this.store.dispatch(GeoLocationActions.compassbearingUpdated(degree));
-        resolve(degree);
+      this.compassWatcher = RNSimpleCompass.start(DEGREE_UPDATE_THRESHOLD, (degree) => {
+        const modifiedDegree = degree.toFixed(0);
+        this.store.dispatch(GeoLocationActions.compassbearingUpdated(modifiedDegree));
+        resolve(modifiedDegree);
       });
     } catch (e) {
       reject(e);
