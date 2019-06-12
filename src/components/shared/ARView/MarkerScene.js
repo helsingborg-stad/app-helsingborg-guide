@@ -2,9 +2,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { ViroARScene, ViroText, ViroConstants } from "react-viro";
-import LocationService from "../../../services/locationService";
 import { LocationUtils, MapItemUtils, MathUtils } from "../../../utils";
 import Marker from "./Marker";
+import LocationService from "../../../services/locationService";
 
 import { updateCameraAngles } from "../../../actions/arActions";
 
@@ -20,7 +20,6 @@ type State = {
   currentHorizontalAngleDelta: number,
 };
 
-const ARRIVE_DISTANCE = 10;
 const ANGLE_THRESHOLD = 10;
 const ACTIVE_HEIGHT = 1;
 const HEIGHT = 0;
@@ -46,7 +45,7 @@ class MarkerScene extends Component<Props, State> {
       const relativePosition = LocationUtils.getLocationRelativePosition(userLocation, contentLocation, bearing);
       const height = active ? ACTIVE_HEIGHT : HEIGHT;
       const position = [relativePosition.x, height, relativePosition.y];
-      const arrived = LocationService.getTravelDistance(userLocation.coords, contentLocation) < ARRIVE_DISTANCE;
+      const arrived = LocationUtils.hasArrivedAtDestination(userLocation, contentLocation);
 
       return {
         ...item,

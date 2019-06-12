@@ -56,7 +56,7 @@ export default class OffscreenMarker extends Component<OffscreenMarkerProps> {
         style={{ ...styles.marker, opacity: this.opacity, transform: [{ translateX: this.animatedX }, { translateY: this.animatedY }] }}
         pointerEvents="none"
       >
-        <Image source={imagePin} style={{ transform: [{ rotateZ: angle }] }} />
+        <Image source={imagePin} style={{ transform: [{ rotateZ: `${angle}rad` }] }} />
         <Text style={styles.label}>{`${order + 1}`}</Text>
       </Animated.View>
     );
