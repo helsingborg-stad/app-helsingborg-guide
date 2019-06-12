@@ -138,6 +138,8 @@ const mockLocations = [
   },
 ];
 
+const mockItems = mockLocations.map(createMockItem);
+
 function renderDownloadButton() {
   return <DownloadButtonContainer style={styles.downloadButton} />;
 }
@@ -164,11 +166,9 @@ function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => vo
 
 const TrailView = (props: Props) => {
   const { trail, onToggleInfoOverlay, showInfoOverlay, navigation } = props;
-  // const mapItems: MapItem[] = trail.contentObjects.map(item => ({
-  //   contentObject: item,
-  // }));
-
-  const mockItems = mockLocations.map(createMockItem);
+  const mapItems: MapItem[] = trail.contentObjects.map(item => ({
+    contentObject: item,
+  }));
 
   return (
     <View style={styles.container}>

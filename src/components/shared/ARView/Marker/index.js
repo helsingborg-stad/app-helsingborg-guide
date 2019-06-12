@@ -65,14 +65,14 @@ ViroAnimations.registerAnimations({
     properties: {
       positionY: 0.5,
     },
-    easing: "Bounce",
+    easing: "EaseInOut",
     duration: 250,
   },
   [RESET_ANIMATION]: {
     properties: {
       positionY: 0.5,
     },
-    easing: "Bounce",
+    easing: "EaseInOut",
     duration: 250,
   },
   [PIN_ANIMATION]: [[RAISE_ANIMATION, DROP_ANIMATION]],

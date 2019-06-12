@@ -75,12 +75,7 @@ export default class ARView extends Component<Props, State> {
           apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
           worldAlignment="GravityAndHeading"
         />
-        <OffscreenMarkersView
-          items={items}
-          userLocation={userLocation}
-          activeMarker={activeMarker}
-          pointerEvents="none"
-        />
+        <OffscreenMarkersView items={items} userLocation={userLocation} activeMarker={activeMarker} pointerEvents="none" />
         <OffscreenHintView />
       </View>
     ) : (
@@ -90,4 +85,3 @@ export default class ARView extends Component<Props, State> {
     );
   }
 }
-
