@@ -1,7 +1,11 @@
 // @flow
 import { Platform } from "react-native";
 import geolib from "geolib";
+import haversine from "haversine";
 import { fromLatLngToPoint } from "mercator-projection";
+
+const WALKING_SPEED = 80; // metres per minute
+const ARRIVE_DISTANCE = 20;
 
 function getDistanceBetweenCoordinates(firstLocation: PositionLongLat, secondLocation: PositionLongLat): number {
   if (firstLocation.latitude && firstLocation.longitude && secondLocation.latitude && secondLocation.longitude) {
@@ -66,6 +70,22 @@ function angleBetweenCoords(start: { latitude: number, longitude: number }, end:
   return angle;
 }
 
+function getTravelDistance(
+  fromLocation: { latitude: number, longitude: number },
+  toLocation: { latitude: number, longitude: number },
+  unit: string = "meter",
+) {
+  return haversine(fromLocation, toLocation, { unit }) || 0;
+}
+
+function getTravelTime(distance: number) {
+  return distance / WALKING_SPEED;
+}
+
+function hasArrivedAtDestination(userLocation: GeolocationType, destination: { latitude: number, longitude: number }) {
+  return getTravelDistance(userLocation.coords, destination) < ARRIVE_DISTANCE;
+}
+
 // Location of second mapItem in Sofiero-Topp-10, for testing purpose
 const mockLocation = {
   coords: {
@@ -81,4 +101,7 @@ export default {
   getLocationRelativePosition,
   angleBetweenCoords,
   mockLocation,
+  getTravelDistance,
+  getTravelTime,
+  hasArrivedAtDestination,
 };
