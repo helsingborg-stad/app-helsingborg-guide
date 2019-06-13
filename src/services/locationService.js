@@ -1,11 +1,9 @@
-import { Alert, Platform, Linking } from "react-native";
+import { Alert } from "react-native";
 import Permissions from "react-native-permissions";
-import AndroidOpenSettings from "react-native-android-open-settings";
 import RNSimpleCompass from "react-native-simple-compass";
 import LangService from "./langService";
 import GeoLocationActions from "../actions/geolocationActions";
-
-const ios = Platform.OS === "ios";
+import { SettingsUtils } from "../utils";
 
 const DEGREE_UPDATE_THRESHOLD = 10; // number of degrees to trigger callback (in degrees)
 const DISTANCE_UPDATE_THRESHOLD = 1; // distance to move to trigger callback (in meters)
@@ -23,14 +21,12 @@ const RATIONALE = {
   message: LangService.strings.MESSAGE_LOCATION_PERMISSION,
 };
 
-const openSettings = () => (ios ? Linking.openURL("app-settings:") : AndroidOpenSettings.locationSourceSettings());
-
 const promptPermissions = () => {
   Alert.alert(
     LangService.strings.CHECK_LOCATION_SERVICE,
     LangService.strings.MESSAGE_LOCATION_PERMISSION,
     [
-      { text: LangService.strings.SETTINGS, onPress: () => openSettings() },
+      { text: LangService.strings.SETTINGS, onPress: () => SettingsUtils.openSettings() },
       { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
     ],
     { cancelable: false },

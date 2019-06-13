@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { View, FlatList, TouchableOpacity, PixelRatio, Image, Text } from "react-native";
+import { ViroUtils } from "react-viro";
 import AsyncStorage from "@react-native-community/async-storage";
 import { connect } from "react-redux";
 import { isEqual } from "lodash";
@@ -12,8 +13,9 @@ import LangService from "../../../services/langService";
 import { LocationUtils, UrlUtils, AnalyticsUtils, MapItemUtils, NavigationModeUtils } from "../../../utils";
 import { selectCurrentContentObject, selectCurrentGuideGroup, selectCurrentGuide } from "../../../actions/uiStateActions";
 import { AR_INSTRUCTIONS_SHOWN } from "../../../lib/my_consts";
-import UsageModal from "./UsageModal";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
+
+const { isARSupportedOnDevice } = ViroUtils;
 
 type Props = {
   navigation: any,
@@ -30,7 +32,9 @@ type State = {
   selectedNavigationMode: string,
   recentlyTappedPin: boolean,
   activeMarker: MapItem,
-  shouldShowInstructions: boolean,
+  shouldShowInstructions: ?boolean,
+  arSupported: boolean,
+  showHorizontalList: boolean,
 };
 
 const HalfListMargin = DefaultMargin * 0.5;
@@ -51,29 +55,48 @@ class MarkerListView extends Component<Props, State> {
         : NavigationModeUtils.NavigationModes.Map,
       recentlyTappedPin: false,
       activeMarker: props.items[0],
-      shouldShowInstructions: false,
+      shouldShowInstructions: null,
+      arSupported: false,
+      showHorizontalList: true,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.scrollToIndex(0);
 
-    const { supportedNavigationModes } = this.props;
+    const arSupported = await this.checkARSupport();
+    await this.showInstructionsIfNeeded(arSupported);
+    this.setState({ shouldShowInstructions: false, arSupported });
+  }
 
-    AsyncStorage.getItem(AR_INSTRUCTIONS_SHOWN).then((value) => {
-      this.setState({
-        shouldShowInstructions: value
-          ? JSON.parse(value)
-            && (supportedNavigationModes ? supportedNavigationModes.includes(NavigationModeUtils.NavigationModes.AR) : false)
-          : true,
-      });
+  async showInstructionsIfNeeded(arSupported: boolean): Promise<void> {
+    return new Promise(async (resolve) => {
+      const { supportedNavigationModes, navigation } = this.props;
+      const includesAR = supportedNavigationModes ? supportedNavigationModes.includes(NavigationModeUtils.NavigationModes.AR) : false;
+
+      if (includesAR) {
+        const hasShownInstructions = await AsyncStorage.getItem(AR_INSTRUCTIONS_SHOWN);
+        const shouldShowInstructions = hasShownInstructions ? JSON.parse(hasShownInstructions) === false && arSupported : true;
+
+        if (shouldShowInstructions) {
+          navigation.navigate("ARIntroductionScreen", {
+            onRequestClose: () => {
+              AsyncStorage.setItem(AR_INSTRUCTIONS_SHOWN, JSON.stringify(true));
+              resolve();
+            },
+          });
+        } else {
+          resolve();
+        }
+      } else {
+        resolve();
+      }
     });
   }
 
-  closeInstructions = () => {
-    AsyncStorage.setItem(AR_INSTRUCTIONS_SHOWN, JSON.stringify(false));
-    this.setState({ shouldShowInstructions: false });
-  };
+  checkARSupport = () => new Promise((resolve) => {
+    isARSupportedOnDevice(() => resolve(false), () => resolve(true));
+  });
 
   listRef: ?FlatList<MapItem>;
 
@@ -328,6 +351,7 @@ class MarkerListView extends Component<Props, State> {
 
     if (!isEqual(activeMarker !== items[index])) {
       this.setState({ activeMarker: items[index] });
+      AnalyticsUtils.logEvent("scroll_object_list");
     }
 
     if (!recentlyTappedPin && this.mapMarkerViewRef) {
@@ -354,17 +378,28 @@ class MarkerListView extends Component<Props, State> {
     const { supportedNavigationModes } = this.props;
 
     if (supportedNavigationModes) {
-      this.setState({ selectedNavigationMode: supportedNavigationModes[index] });
+      const selectedNavigationMode = supportedNavigationModes[index];
+
+      if (selectedNavigationMode === NavigationModeUtils.NavigationModes.AR) {
+        AnalyticsUtils.logEvent("tap_ar_tab_button");
+      } else if (selectedNavigationMode === NavigationModeUtils.NavigationModes.Map) {
+        AnalyticsUtils.logEvent("tap_map_tab_button");
+      }
+
+      this.setState({ selectedNavigationMode });
     }
   };
 
   render() {
     const { items, supportedNavigationModes, userLocation } = this.props;
-    const { selectedNavigationMode, activeMarker, shouldShowInstructions } = this.state;
+    const { selectedNavigationMode, activeMarker, shouldShowInstructions, arSupported, showHorizontalList } = this.state;
+
+    if (shouldShowInstructions === null) {
+      return <View />;
+    }
 
     return (
       <View style={styles.container}>
-        {shouldShowInstructions && <UsageModal onRequestClose={() => this.closeInstructions()} />}
         {supportedNavigationModes && supportedNavigationModes.length > 1 && (
           <SegmentControl
             style={styles.segmentControl}
@@ -381,7 +416,10 @@ class MarkerListView extends Component<Props, State> {
             }}
             userLocation={userLocation}
             showNumberedMapMarkers
-            onMapMarkerPressed={index => this.scrollToIndex(index)}
+            onMapMarkerPressed={(index) => {
+              AnalyticsUtils.logEvent("tap_map_pin");
+              this.scrollToIndex(index);
+            }}
             activeMarker={activeMarker}
           />
         )}
@@ -390,10 +428,17 @@ class MarkerListView extends Component<Props, State> {
             items={items}
             userLocation={userLocation}
             activeMarker={activeMarker}
-            onArMarkerPressed={index => this.scrollToIndex(index)}
+            onArMarkerPressed={(index) => {
+              AnalyticsUtils.logEvent("tap_ar_pin");
+              this.scrollToIndex(index);
+            }}
+            arSupported={arSupported}
+            onCameraPermissionDenied={() => this.setState({ showHorizontalList: false })}
           />
         )}
-        {this.renderHorizontalList(items)}
+        {!showHorizontalList
+          || (selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && !arSupported)
+          || this.renderHorizontalList(items)}
       </View>
     );
   }
