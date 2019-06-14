@@ -1,9 +1,4 @@
-import { Alert, Platform, Linking } from "react-native";
 import Permissions from "react-native-permissions";
-import AndroidOpenSettings from "react-native-android-open-settings";
-import LangService from "./langService";
-
-const ios = Platform.OS === "ios";
 
 // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
 const PermissionsResponse = {
@@ -11,25 +6,6 @@ const PermissionsResponse = {
   DENIED: "denied",
   RESTRICTED: "restricted",
   UNDETERMINED: "undetermined",
-};
-
-const openSettings = () => (
-  (ios)
-    ? Linking.openURL("app-settings:")
-    : AndroidOpenSettings.appDetailsSettings()
-);
-
-const promptPermissions = () => {
-  Alert.alert(
-    LangService.strings.CHECK_CAMERA_SERVICE,
-    LangService.strings.MESSAGE_CAMERA_PERMISSION,
-    [
-      { text: LangService.strings.SETTINGS, onPress: () => openSettings() },
-      { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
-    ],
-    { cancelable: false },
-  );
-  return Promise.reject();
 };
 
 const requestPermissions = () => Permissions.request("camera").then((response) => {
@@ -40,7 +16,7 @@ const requestPermissions = () => Permissions.request("camera").then((response) =
     case PermissionsResponse.RESTRICTED: // fallthrough
     case PermissionsResponse.UNDETERMINED:
     default:
-      return promptPermissions();
+      return Promise.reject();
   }
 });
 
@@ -57,14 +33,14 @@ const checkPermissions = () => Permissions.check("camera").then((response) => {
   }
 });
 
-
 let instance = null;
 export default class CameraService {
   static getInstance() {
-    if (!instance) { instance = new CameraService(); }
+    if (!instance) {
+      instance = new CameraService();
+    }
     return instance;
   }
 
   checkCameraPermissions = () => checkPermissions();
 }
-

@@ -4,6 +4,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
+import { AnalyticsUtils } from "../../utils";
 import InfoOverlayToggleView from "../shared/InfoOverlayToggleView";
 import TrailView from "../shared/TrailView";
 import { releaseAudioFile } from "../../actions/audioActions";
@@ -17,13 +18,13 @@ type Props = {
 };
 
 type State = {
-  showInfoOverlay: boolean
+  showInfoOverlay: boolean,
 };
 
 class TrailScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
     let title = null;
-    let toggleInfoOverlay = () => { };
+    let toggleInfoOverlay = () => {};
     const { params = {} } = navigation.state;
     if (params) {
       ({ title } = params);
@@ -31,9 +32,7 @@ class TrailScreen extends Component<Props, State> {
     }
     return {
       title,
-      headerRight: (
-        <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />
-      ),
+      headerRight: <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />,
     };
   };
 
@@ -60,7 +59,11 @@ class TrailScreen extends Component<Props, State> {
   }
 
   toggleInfoOverlay = () => {
-    this.setState({ showInfoOverlay: !this.state.showInfoOverlay });
+    const { showInfoOverlay } = this.state;
+
+    AnalyticsUtils.logEvent(showInfoOverlay ? "close_info_overlay" : "open_info_overlay", { name: this.props.currentGuide.slug });
+
+    this.setState({ showInfoOverlay: !showInfoOverlay });
   };
 
   render() {
@@ -91,4 +94,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TrailScreen);
