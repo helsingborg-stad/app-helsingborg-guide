@@ -93,6 +93,7 @@ class MarkerScene extends Component<Props, State> {
           const position = [relativePosition.x, height, relativePosition.y];
           const positionFixed = [relativePositionFixed.x, 0, relativePositionFixed.y];
           const arrived = LocationUtils.hasArrivedAtDestination(userLocation, contentLocation);
+          const distance = LocationUtils.getTravelDistance(userLocation.coords, contentLocation);
 
           return {
             ...item,
@@ -100,6 +101,7 @@ class MarkerScene extends Component<Props, State> {
             id,
             active,
             arrived,
+            distance,
             position,
             positionFixed,
             onPress: onArMarkerPressed,
