@@ -9,8 +9,8 @@ type Props = {
 const seagullModel = require("../../../../3D/seagull.vrx");
 const seagullTexture = require("../../../../3D/Mat_Seagull.png");
 const hatTexture = require("../../../../3D/Hat-512x512.png");
-const seagullNormalMap = require("../../../../3D/Hat-512x512-Normal.png");
-const seagullSpecularMap = require("../../../../3D/Mat_Seagull_Specular.png");
+const seagullNormal = require("../../../../3D/Hat-512x512-Normal.png");
+const seagullSpecular = require("../../../../3D/Mat_Seagull_Specular.png");
 
 const CHARACTER_MATERIAL = "CHARACTER_MATERIAL";
 const ANIMATION_CIRCLE = "ANIMATION_CIRCLE";
@@ -34,7 +34,7 @@ export default function AnimatedCharacter({ markerPosition: [x, , z] }: Props) {
           source={seagullModel}
           type="VRX"
           materials={[CHARACTER_MATERIAL]}
-          resources={[seagullTexture, hatTexture, seagullNormalMap, seagullSpecularMap]}
+          resources={[seagullTexture, hatTexture, seagullNormal, seagullSpecular]}
           animation={{ name: "CINEMA_4D_Main", run: true, loop: true }}
         />
       </ViroNode>
@@ -46,6 +46,8 @@ ViroMaterials.createMaterials({
   [CHARACTER_MATERIAL]: {
     shininess: 1.0,
     lightingModel: "PBR",
+    normalTexture: seagullNormal,
+    specularTexture: seagullSpecular,
   },
 });
 
