@@ -139,6 +139,13 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = GuideHbg;
 		};
+		03ADE86F22B78D4A00E71C64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1691BDE437EE4DEAB6A543B6 /* RNSimpleCompass.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSimpleCompass;
+		};
 		0DAD54E720236176006DC9A6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F20C98B478CA44B49BEDED82 /* RNFirebase.xcodeproj */;
@@ -780,6 +787,14 @@
 				00E356F11AD99517003FC87E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03ADE86C22B78D4A00E71C64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03ADE87022B78D4A00E71C64 /* libRNSimpleCompass.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		0DAD54BA20236174006DC9A6 /* Recovered References */ = {
@@ -1465,6 +1480,13 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		03ADE87022B78D4A00E71C64 /* libRNSimpleCompass.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSimpleCompass.a;
+			remoteRef = 03ADE86F22B78D4A00E71C64 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0DAD54E820236176006DC9A6 /* libRNFirebase.a */ = {

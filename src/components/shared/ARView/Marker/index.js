@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from "react";
 import { ViroNode, ViroText, ViroImage, ViroAnimations } from "react-viro";
-import { AnalyticsUtils } from "../../../../utils";
+
+import { AnalyticsUtils, MathUtils } from "../../../../utils";
 import * as Images from "../../../../images/AR";
 import styles from "./styles";
 
@@ -10,6 +11,7 @@ type Props = {
   position: Array<number>,
   onPress: (index: number) => void,
   active: boolean,
+  distance: number,
   arrived: boolean,
 };
 
@@ -33,6 +35,7 @@ class Marker extends Component<Props> {
     const {
       contentObject: { order },
       position,
+      distance,
       onPress,
       active,
       arrived,
@@ -40,11 +43,13 @@ class Marker extends Component<Props> {
     const imagePin = (arrived && active && Images.PinArrived) || (active && Images.PinSelected) || Images.Pin;
     const animationName = active ? PIN_ANIMATION : RESET_ANIMATION;
     const animationLoop = active;
+    const modifiedScale = 1 * (distance / 5);
+    const scale = MathUtils.clamp(modifiedScale, { min: 1, max: 20 });
 
     return (
       <ViroNode
         position={position}
-        scale={[2, 2, 2]}
+        scale={[scale, scale, scale]}
         transformBehaviors="billboard"
         onClick={() => {
           onPress(order);
