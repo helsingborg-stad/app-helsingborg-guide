@@ -6,6 +6,7 @@ type Props = {
   markerPosition: Array<number>,
 };
 
+// $FlowFixMe for some reason flow can't find this file.
 const seagullModel = require("../../../../3D/seagull.vrx");
 const seagullTexture = require("../../../../3D/Mat_Seagull.png");
 const hatTexture = require("../../../../3D/Hat-512x512.png");
