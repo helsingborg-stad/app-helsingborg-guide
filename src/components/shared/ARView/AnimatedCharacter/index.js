@@ -15,9 +15,9 @@ const seagullSpecular = require("../../../../3D/Mat_Seagull_Specular.png");
 
 const CHARACTER_MATERIAL = "CHARACTER_MATERIAL";
 const ANIMATION_CIRCLE = "ANIMATION_CIRCLE";
-const FLIGHT_RADIUS = 10;
+const FLIGHT_RADIUS = 5;
 const FLIGHT_ALTITUDE = 5;
-const FLIGHT_DURATION = 20000;
+const FLIGHT_DURATION = 10000;
 
 export default function AnimatedCharacter({ markerPosition: [x, , z] }: Props) {
   const characterPosition = [x, 0, z];
