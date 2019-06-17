@@ -1,6 +1,6 @@
 // @flow
 import { Platform } from "react-native";
-import RNFetchBlob, { type FetchBlobResponse, StatefulPromise } from "react-native-fetch-blob";
+import RNFetchBlob from "rn-fetch-blob";
 
 const basePath = RNFetchBlob.fs.dirs.CacheDir;
 

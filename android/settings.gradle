@@ -1,4 +1,18 @@
 rootProject.name = 'GuideHbg'
+include ':react-native-simple-compass'
+project(':react-native-simple-compass').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-simple-compass/android')
+include ':@react-native-community_async-storage'
+project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
+include ':rn-fetch-blob'
+project(':rn-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/rn-fetch-blob/android')
+include ':react-native-android-open-settings'
+project(':react-native-android-open-settings').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-android-open-settings/android')
+include ':react-native-webview'
+project(':react-native-webview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview/android')
+include ':react-native-gesture-handler'
+project(':react-native-gesture-handler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gesture-handler/android')
+include ':@react-native-community_netinfo'
+project(':@react-native-community_netinfo').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/netinfo/android')
 include ':react-native-version-number'
 project(':react-native-version-number').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-version-number/android')
 include ':react-native-share'
@@ -21,8 +35,11 @@ project(':react-native-vector-icons').projectDir = new File(rootProject.projectD
 include ':react-native-video'
 project(':react-native-video').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-video/android')
 
-include ':react-native-fetch-blob'
-project(':react-native-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fetch-blob/android')
 
+include ':react_viro', ':arcore_client', ':gvr_common', ':viro_renderer'
+project(':arcore_client').projectDir = new File('../node_modules/react-viro/android/arcore_client')
+project(':gvr_common').projectDir = new File('../node_modules/react-viro/android/gvr_common')
+project(':viro_renderer').projectDir = new File('../node_modules/react-viro/android/viro_renderer')
+project(':react_viro').projectDir = new File('../node_modules/react-viro/android/react_viro')
 
 include ':app'

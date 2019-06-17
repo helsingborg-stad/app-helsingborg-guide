@@ -1,12 +1,76 @@
-import { PermissionsAndroid, Alert, Platform, Linking } from "react-native";
+import { Alert } from "react-native";
+import Permissions from "react-native-permissions";
+import RNSimpleCompass from "react-native-simple-compass";
 import LangService from "./langService";
-import Opener from "./SettingsService";
-import geolocationUpdated from "../actions/geolocationActions";
+import GeoLocationActions from "../actions/geolocationActions";
+import { SettingsUtils } from "../utils";
+
+const DEGREE_UPDATE_THRESHOLD = 10; // number of degrees to trigger callback (in degrees)
+const DISTANCE_UPDATE_THRESHOLD = 1; // distance to move to trigger callback (in meters)
+
+// Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+const PermissionsResponse = {
+  AUTHORIZED: "authorized",
+  DENIED: "denied",
+  RESTRICTED: "restricted",
+  UNDETERMINED: "undetermined",
+};
+
+const RATIONALE = {
+  title: LangService.strings.ACCESS_TO_LOCATION,
+  message: LangService.strings.MESSAGE_LOCATION_PERMISSION,
+};
+
+const promptPermissions = () => {
+  Alert.alert(
+    LangService.strings.CHECK_LOCATION_SERVICE,
+    LangService.strings.MESSAGE_LOCATION_PERMISSION,
+    [
+      { text: LangService.strings.SETTINGS, onPress: () => SettingsUtils.openSettings() },
+      { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
+    ],
+    { cancelable: false },
+  );
+  return Promise.reject();
+};
+
+const requestPermissions = () => Permissions.request("location", RATIONALE).then((response) => {
+  switch (response) {
+    case PermissionsResponse.AUTHORIZED:
+      return Promise.resolve(true);
+    case PermissionsResponse.DENIED: // fallthrough
+    case PermissionsResponse.RESTRICTED: // fallthrough
+    case PermissionsResponse.UNDETERMINED:
+    default:
+      return promptPermissions();
+  }
+});
+
+const checkPermissions = () => Permissions.check("location").then((response) => {
+  switch (response) {
+    case PermissionsResponse.AUTHORIZED:
+      return Promise.resolve(true);
+    case PermissionsResponse.DENIED: // fallthrough
+    case PermissionsResponse.RESTRICTED: // fallthrough
+    case PermissionsResponse.UNDETERMINED:
+      return requestPermissions();
+    default:
+      return Promise.reject();
+  }
+});
+
+const getLocation = () => new Promise((resolve, reject) => {
+  navigator.geolocation.getCurrentPosition(resolve, reject);
+});
+
 // TODO decouple the store from this class!
 let instance = null;
 
 export default class LocationService {
   watcher;
+
+  compassWatcher;
+
   store;
 
   static getInstance() {
@@ -14,90 +78,66 @@ export default class LocationService {
     return instance;
   }
 
-  checkLocationPermission() {
-    if (Platform.OS === "ios") return Promise.resolve(true);
+  upatePosition = () => new Promise((resolve, reject) => getLocation().then(
+    (position) => {
+      this.store.dispatch(GeoLocationActions.geolocationUpdated(position));
+      return resolve(position);
+    },
+    (error) => {
+      checkPermissions();
+      reject(error);
+    },
+  ),
+  );
 
-    return PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
-  }
+  getGeoLocation = () => checkPermissions().then(this.upatePosition);
 
-  // Ask for access location permission.
-  askForPermission() {
-    if (Platform.OS === "ios") return Promise.resolve(true);
+  watchGeoLocation = () => checkPermissions().then(
+    () => new Promise((resolve, reject) => {
+      this.watcher = navigator.geolocation.watchPosition(
+        (position) => {
+          this.store.dispatch(GeoLocationActions.geolocationUpdated(position));
+          return resolve(position);
+        },
+        reject,
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 5000,
+          distanceFilter: DISTANCE_UPDATE_THRESHOLD,
+        },
+      );
+    }),
+  );
 
-    const content = {
-      title: LangService.strings.ACCESS_TO_LOCATION,
-      message: LangService.strings.MESSAGE_LOCATION_PERMISSION,
-    };
-    return PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION, content);
-  }
-  // alert if the location is turned off. (the feature not the permission)
-  alert() {
-    Alert.alert(
-      LangService.strings.CHECK_LOCATION_SERVICE,
-      LangService.strings.MESSAGE_LOCATION_PERMISSION,
-      [
-        { text: LangService.strings.SETTINGS, onPress: () => this.openLocationSettings() },
-        { text: LangService.strings.CLOSE, onPress: () => { }, style: "cancel" },
-      ],
-      { cancelable: false },
-    );
-  }
-  // open location setting
-  openLocationSettings() {
-    if (Platform.OS == "ios") Linking.openURL("app-settings:");
-    else Opener.openLocationSetting();
-  }
-
-  getGeoLocation() {
-    return this.checkLocationPermission().then(
-      granted =>
-        new Promise((resolve, reject) => {
-          if (granted) {
-            navigator.geolocation.getCurrentPosition(
-              (position) => {
-                this.store.dispatch(geolocationUpdated(position));
-                resolve(position);
-              },
-              (error) => {
-                this.alert();
-                reject(error);
-              },
-            );
-          } else {
-            this.askForPermission();
-            reject("ss");
-          }
-        }),
-    );
-  }
-
-  watchGeoLocation() {
-    return this.checkLocationPermission().then(
-      granted =>
-        new Promise((resolve, reject) => {
-          if (granted) {
-            this.watcher = navigator.geolocation.watchPosition(
-              (position) => {
-                this.store.dispatch(geolocationUpdated(position));
-                resolve(position);
-              },
-              error => reject(error),
-              { distanceFilter: 10 },
-            );
-          } else {
-            reject("no access to fine location");
-          }
-        }),
-    );
-  }
-
-  clearWatch() {
-    if (this.watcher) navigator.geolocation.clearWatch(this.watcher);
-  }
+  unwatchGeoLocation = () => this.watcher && navigator.geolocation.clearWatch(this.watcher);
 
   getMathDistance(coord1, coord2) {
     const x = Math.abs(coord1.latitude - coord2.latitude);
     const y = Math.abs(coord1.longitude - coord2.longitude);
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
   }
+
+  getCompassBearing = () => new Promise((resolve, reject) => {
+    RNSimpleCompass.start(DEGREE_UPDATE_THRESHOLD, (degree) => {
+      resolve(degree);
+      RNSimpleCompass.stop();
+    });
+  });
+
+  subscribeCompassBearing = () => new Promise((resolve, reject) => {
+    try {
+      this.compassWatcher = RNSimpleCompass.start(DEGREE_UPDATE_THRESHOLD, (degree) => {
+        const modifiedDegree = degree.toFixed(0);
+        this.store.dispatch(GeoLocationActions.compassbearingUpdated(modifiedDegree));
+        resolve(modifiedDegree);
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+  clearCompassBearingWatch = () => {
+    if (this.compassWatcher) RNSimpleCompass.stop();
+  };
 }

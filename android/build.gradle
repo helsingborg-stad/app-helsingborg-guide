@@ -1,13 +1,21 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext {
+        buildToolsVersion = "28.0.3"
+        minSdkVersion = 21
+        compileSdkVersion = 28
+        targetSdkVersion = 28
+        supportLibVersion = "28.0.0"
+    }
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
-        classpath 'com.google.gms:google-services:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.21.0'
+        classpath 'com.google.gms:google-services:4.2.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -17,6 +25,7 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
+        google()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
@@ -34,10 +43,6 @@ apply plugin: 'com.github.ben-manes.versions'
 dependencyUpdates.resolutionStrategy = {
     componentSelection { rules ->
         rules.all { ComponentSelection selection ->
-            if (selection.candidate.group == 'com.android.tools.build' && selection.candidate.version ==~ /2\.[345]\..*/) {
-                selection.reject('Minimum compile version API 15')
-                return
-            }
             boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'SNAPSHOT'].any { qualifier ->
                 selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
             }

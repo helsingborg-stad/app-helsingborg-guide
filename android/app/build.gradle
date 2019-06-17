@@ -93,35 +93,36 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
-def keystorePropertiesFile = rootProject.file("release.properties")
+def keystorePropertiesFile = rootProject.file(System.getenv("KEYSTORE_PROPERTIES") ?: "release.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+def VERSION_MAJOR = 1
+def VERSION_MINOR = 52
+
+def VERSION_CODE = ((VERSION_MAJOR * 100) + VERSION_MINOR) * 100000
+def VERSION_NAME ="${VERSION_MAJOR}.${VERSION_MINOR}.${'git rev-list --count HEAD'.execute().text.trim()}"
+
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.1'
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "com.guidehbg"
-        minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 21
-        versionName "1.52"
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
     }
     signingConfigs {
-        debug {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file('config/debug.keystore')
-            storePassword 'android'
-        }
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
+            storeFile rootProject.file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
         }
     }
@@ -130,10 +131,23 @@ android {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
-            include "armeabi-v7a", "x86"
+            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+        }
+    }
+    flavorDimensions 'env'
+    productFlavors {
+        alpha {
+            dimension 'env'
+            applicationIdSuffix '.alpha'
+        }
+        store {
+            dimension 'env'
         }
     }
     buildTypes {
+        debug {
+            signingConfig (project.hasProperty("unsigned") ? null : signingConfigs.release)
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
@@ -149,7 +163,7 @@ android {
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
+            def versionCodes = ["armeabi-v7a":1, "x86":2, "arm64-v8a": 3, "x86_64": 4]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
@@ -160,30 +174,46 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-version-number')
-    compile project(':react-native-share')
-    compile project(':react-native-image-marker')
-    compile project(':react-native-svg')
-    compile(project(':react-native-firebase')) {
+    implementation project(':react-native-simple-compass')
+    implementation project(':@react-native-community_async-storage')
+    implementation project(':rn-fetch-blob')
+    implementation project(':react-native-android-open-settings')
+    implementation project(':react-native-webview')
+    implementation project(':react-native-gesture-handler')
+    implementation project(':@react-native-community_netinfo')
+    implementation project(':react-native-version-number')
+    implementation project(':react-native-share')
+    implementation project(':react-native-image-marker')
+    implementation project(':react-native-svg')
+    implementation(project(':react-native-firebase')) {
         transitive = false
     }
-    compile project(':react-native-photo-view')
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-maps')
-    compile 'com.google.android.gms:play-services-base:11.6.0'
-    compile 'com.google.android.gms:play-services-maps:11.6.0'
-    compile "com.google.firebase:firebase-core:11.6.0"
-    compile "com.google.firebase:firebase-analytics:11.6.0"
+    implementation project(':react-native-photo-view')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-maps')
+    implementation 'com.google.android.gms:play-services-base:16.1.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation "com.google.firebase:firebase-core:16.0.9"
+    implementation "com.google.firebase:firebase-analytics:16.5.0"
+    implementation project(':react-native-video')
+    implementation 'org.altbeacon:android-beacon-library:2.16.1'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    //noinspection GradleDynamicVersion
+    implementation "com.facebook.react:react-native:+"  // From node_modules
 
-    compile project(':react-native-video')
-    compile project(':react-native-fetch-blob')
-    compile 'org.altbeacon:android-beacon-library:2.12.3'
-    compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:27.0.0"
-    compile 'com.android.support:support-compat:27.0.0'
-    compile 'com.android.support:support-media-compat:27.0.0'
-    compile "com.facebook.react:react-native:+"  // From node_modules
-
+    implementation project(':gvr_common')
+    implementation project(':arcore_client')
+    implementation project(path: ':react_viro')
+    implementation project(path: ':viro_renderer')
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.1'
+    implementation 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'
+    implementation 'com.amazonaws:aws-android-sdk-core:2.7.7'
+    implementation 'com.amazonaws:aws-android-sdk-ddb:2.7.7'
+    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.7.7'
+    implementation 'com.amazonaws:aws-android-sdk-cognito:2.7.7'
+    implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.7.7'
 }
 
 // Run this once to be able to run the application with BUCK

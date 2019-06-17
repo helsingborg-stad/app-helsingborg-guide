@@ -1,4 +1,4 @@
-android/release.properties
+android/*release.properties
 
 android/.settings/
 android/app/.settings/
@@ -62,3 +62,12 @@ buck-out/
 .vscode/.react/debuggerWorker.js
 .vscode/.react/index.bundle
 .vscode/.react/index.map
+
+# Bundle artifact
+*.jsbundle
+
+# appcenter
+# scripts to upload to builds to appcenter for internal distribution.
+# these scripts contains secrets, therefore don't check them into git
+scripts/local_build_upload*.sh
+scripts/export_options.plist

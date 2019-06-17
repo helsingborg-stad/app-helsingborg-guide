@@ -19,14 +19,18 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - yoga (0.50.3.React)
+  - ViroKit_static_lib (1.0)
+  - ViroReact (1.0)
+  - yoga (0.59.8.React)
 
 DEPENDENCIES:
   - Firebase/Core
+  - ViroKit_static_lib (from `../node_modules/react-viro/ios/dist/ViroRenderer/static_lib`)
+  - ViroReact (from `../node_modules/react-viro/ios/`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -35,6 +39,10 @@ SPEC REPOS:
     - nanopb
 
 EXTERNAL SOURCES:
+  ViroKit_static_lib:
+    :path: "../node_modules/react-viro/ios/dist/ViroRenderer/static_lib"
+  ViroReact:
+    :path: "../node_modules/react-viro/ios/"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
@@ -45,8 +53,10 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
+  ViroKit_static_lib: ae9c112ac4b128f8d4466fc581c7b07a0264754d
+  ViroReact: 7ec32276dcd1883662b4587eaedfff67f7fc3625
+  yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: 12208f7cb2174c9bb42d6076cb9d794a739cd03f
+PODFILE CHECKSUM: 8f199b37b89e3b7807f6e159dbe91cf9d6b1f75d
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.6.1

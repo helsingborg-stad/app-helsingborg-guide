@@ -25,9 +25,7 @@ exports[`status => done, progress < 1 1`] = `
     }
   >
     <Text
-      accessible={true}
       allowFontScaling={false}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {
@@ -40,15 +38,13 @@ exports[`status => done, progress < 1 1`] = `
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >
       
     </Text>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Object {
           "color": "green",
@@ -88,9 +84,7 @@ exports[`status => done, progress >= 1 1`] = `
     }
   >
     <Text
-      accessible={true}
       allowFontScaling={false}
-      ellipsizeMode="tail"
       style={
         Array [
           Object {
@@ -103,15 +97,13 @@ exports[`status => done, progress >= 1 1`] = `
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >
       
     </Text>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Object {
           "color": "green",
@@ -150,15 +142,8 @@ exports[`status => paused, progress < 1 1`] = `
     }
   >
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -170,13 +155,8 @@ exports[`status => paused, progress < 1 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#a61380",
@@ -190,15 +170,8 @@ exports[`status => paused, progress < 1 1`] = `
       </Text>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -210,13 +183,8 @@ exports[`status => paused, progress < 1 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#a61380",
@@ -281,15 +249,8 @@ exports[`status => paused, progress >= 1 1`] = `
     }
   >
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -301,13 +262,8 @@ exports[`status => paused, progress >= 1 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#a61380",
@@ -321,15 +277,8 @@ exports[`status => paused, progress >= 1 1`] = `
       </Text>
     </View>
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -341,13 +290,8 @@ exports[`status => paused, progress >= 1 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#a61380",
@@ -411,15 +355,8 @@ exports[`status => pending, progress < 1 1`] = `
     }
   >
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -432,13 +369,9 @@ exports[`status => pending, progress < 1 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -451,15 +384,13 @@ exports[`status => pending, progress < 1 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
         
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#a61380",
@@ -525,15 +456,8 @@ exports[`status => pending, progress >= 1 1`] = `
     }
   >
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -546,13 +470,9 @@ exports[`status => pending, progress >= 1 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -565,15 +485,13 @@ exports[`status => pending, progress >= 1 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
         
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#a61380",
@@ -639,15 +557,8 @@ exports[`status => stopped 1`] = `
     }
   >
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -660,13 +571,9 @@ exports[`status => stopped 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -679,15 +586,13 @@ exports[`status => stopped 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
         
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#a61380",
@@ -753,15 +658,8 @@ exports[`status => stopped, progress >= 1 1`] = `
     }
   >
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
       accessible={true}
-      collapsable={undefined}
-      hitSlop={undefined}
       isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -774,13 +672,9 @@ exports[`status => stopped, progress >= 1 1`] = `
           "opacity": 1,
         }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -793,15 +687,13 @@ exports[`status => stopped, progress >= 1 1`] = `
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
+            Object {},
           ]
         }
       >
         
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "color": "#a61380",

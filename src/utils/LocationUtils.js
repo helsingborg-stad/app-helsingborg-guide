@@ -1,12 +1,16 @@
 // @flow
-import {
-  Platform,
-} from "react-native";
+import { Platform } from "react-native";
 import geolib from "geolib";
+import haversine from "haversine";
+import MathUtils from "./MathUtils";
+
+const ios = Platform.OS === "ios";
+
+const WALKING_SPEED = 80; // metres per minute
+const ARRIVE_DISTANCE = 20;
 
 function getDistanceBetweenCoordinates(firstLocation: PositionLongLat, secondLocation: PositionLongLat): number {
-  if (firstLocation.latitude && firstLocation.longitude &&
-    secondLocation.latitude && secondLocation.longitude) {
+  if (firstLocation.latitude && firstLocation.longitude && secondLocation.latitude && secondLocation.longitude) {
     return geolib.getDistanceSimple(firstLocation, secondLocation);
   }
   return 0;
@@ -29,15 +33,79 @@ function directionsUrl(latitude: number, longitude: number, userLocation: Geoloc
     userCoordinate = `${userLocation.coords.latitude},${userLocation.coords.longitude}`;
   }
   let url = `google.navigation:q=${directionsCoordinate}`;
-  if (Platform.OS === "ios") {
+  if (ios) {
     url = `http://maps.apple.com/?t=m&dirflg=d&daddr=${directionsCoordinate}&saddr=${userCoordinate}`;
   }
 
   return url;
 }
 
+function angleBetweenCoords(start: { latitude: number, longitude: number }, end: { latitude: number, longitude: number }) {
+  const x = end.latitude - start.latitude;
+  const y = end.longitude - start.longitude;
+  let angle;
+
+  if (Math.atan2(y, x) >= 0) {
+    angle = Math.atan2(y, x) * MathUtils.RAD_TO_DEG;
+  } else {
+    angle = (Math.atan2(y, x) + 2 * Math.PI) * MathUtils.RAD_TO_DEG;
+  }
+
+  return angle;
+}
+
+function getLocationRelativePosition(userLocation: GeolocationType, targetLocation: Object, bearing: number = 0, limit: number = 0) {
+  const distance = haversine(userLocation.coords, targetLocation, { unit: "meter" }) || 0;
+  const bearingOffset = ios ? 0 : bearing;
+  const angle = (angleBetweenCoords(userLocation.coords, targetLocation) - bearingOffset - 90) * MathUtils.DEG_TO_RAD;
+
+  const offset = limit ? Math.min(distance, limit) : distance;
+
+  const x = Math.cos(angle) * offset;
+  const y = Math.sin(angle) * offset;
+
+  if (!ios) {
+    return {
+      x: x * Math.cos(angle) - y * Math.sin(angle),
+      y: x * Math.sin(angle) + y * Math.cos(angle),
+    };
+  }
+
+  return { x, y };
+}
+
+function getTravelDistance(
+  fromLocation: { latitude: number, longitude: number },
+  toLocation: { latitude: number, longitude: number },
+  unit: string = "meter",
+) {
+  return haversine(fromLocation, toLocation, { unit }) || 0;
+}
+
+function getTravelTime(distance: number) {
+  return distance / WALKING_SPEED;
+}
+
+function hasArrivedAtDestination(userLocation: GeolocationType, destination: { latitude: number, longitude: number }) {
+  return getTravelDistance(userLocation.coords, destination) < ARRIVE_DISTANCE;
+}
+
+// Location of second mapItem in Sofiero-Topp-10, for testing purpose
+const mockLocation = {
+  coords: {
+    latitude: 56.083793,
+    longitude: 12.6594562,
+  },
+};
+
 export default {
   getDistanceBetweenCoordinates,
   getShortestDistance,
   directionsUrl,
+  getLocationRelativePosition,
+  angleBetweenCoords,
+  mockLocation,
+  getTravelDistance,
+  getTravelTime,
+  hasArrivedAtDestination,
 };

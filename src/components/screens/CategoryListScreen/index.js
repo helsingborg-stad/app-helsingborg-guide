@@ -1,22 +1,12 @@
 // @flow
 import React, { Component } from "react";
-import {
-  Image,
-  FlatList,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, FlatList, TouchableOpacity, View } from "react-native";
 import { connect } from "react-redux";
 import styles from "./styles";
-import {
-  selectCurrentGuideByID,
-  selectCurrentGuideGroup,
-  selectCurrentCategory,
-  showBottomBar,
-} from "../../../actions/uiStateActions";
+import { selectCurrentGuideByID, selectCurrentGuideGroup, selectCurrentCategory, showBottomBar } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
 import { compareDistance } from "../../../utils/SortingUtils";
-import { AnalyticsUtils } from "../../../utils/";
+import { AnalyticsUtils } from "../../../utils";
 import { HeaderStyles } from "../../../styles";
 
 const mapIcon = require("../../../images/mapIcon.png");
@@ -27,7 +17,7 @@ type Props = {
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
   dispatchShowBottomBar(visible: boolean): void,
-}
+};
 
 class CategoryListScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
@@ -40,7 +30,7 @@ class CategoryListScreen extends Component<Props> {
       title,
       headerRight: <View />,
     });
-  }
+  };
 
   constructor(props: Props) {
     super(props);
@@ -58,8 +48,7 @@ class CategoryListScreen extends Component<Props> {
 
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
-      case "guide":
-      {
+      case "guide": {
         this.props.selectGuide(item.id);
         const { guide } = item;
         if (guide) {
@@ -84,7 +73,7 @@ class CategoryListScreen extends Component<Props> {
         break;
       default:
     }
-  }
+  };
 
   render() {
     const { currentCategory, navigation } = this.props;
@@ -97,27 +86,18 @@ class CategoryListScreen extends Component<Props> {
       <View>
         <FlatList
           style={styles.container}
-          renderItem={({ item }) => (<NavigationListItem
-            item={item}
-            onPressItem={this.onPressItem}
-          />)}
+          renderItem={({ item }) => <NavigationListItem item={item} onPressItem={this.onPressItem} />}
           keyExtractor={item => String(item.id)}
           data={sortedItems}
-          ListFooterComponent={() => (<View style={styles.footer} />)}
+          ListFooterComponent={() => <View style={styles.footer} />}
         />
-        <TouchableOpacity
-          style={styles.mapButton}
-          onPress={() => navigation.navigate("CategoryMapScreen")}
-        >
-          <Image
-            style={styles.mapIcon}
-            source={mapIcon}
-          />
+        <TouchableOpacity style={styles.mapButton} onPress={() => navigation.navigate("CategoryMapScreen")}>
+          <Image style={styles.mapIcon} source={mapIcon} />
         </TouchableOpacity>
-      </View >);
+      </View>
+    );
   }
 }
-
 
 function mapStateToProps(state: RootState) {
   const { uiState, navigation } = state;
@@ -138,4 +118,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryListScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CategoryListScreen);

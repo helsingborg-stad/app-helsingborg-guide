@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import Swiper from "react-native-swiper";
-import { NavigationActions } from "react-navigation";
+import { StackActions, NavigationActions } from "react-navigation";
 import { PropTypes } from "prop-types";
 import ViewContainer from "../shared/view_container";
 import FirstInstructionSlide from "../shared/FirstInstructionSlide";
@@ -149,7 +150,7 @@ export default class WelcomeScreen extends Component {
 
   skipPress() {
     AsyncStorage.setItem(IS_WELCOMED, JSON.stringify(true));
-    const resetAction = NavigationActions.reset({
+    const resetAction = StackActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: "MainScreen" })],
     });

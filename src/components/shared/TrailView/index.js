@@ -1,10 +1,10 @@
 // @flow
-
 import React from "react";
 import { TouchableWithoutFeedback, View } from "react-native";
+import { NavigationModeUtils } from "../../../utils";
 import styles from "./style";
-import MapWithListView, { type MapItem } from "../../shared/MapWithListView";
-import MapInformationOverlay from "../../shared/MapInformationOverlay/MapInformationOverlay";
+import MarkerListView from "../MarkerListView";
+import MapInformationOverlay from "../MapInformationOverlay/MapInformationOverlay";
 import AudioPlayerView from "../AudioPlayerView";
 import DownloadButtonContainer from "../DownloadButton";
 
@@ -12,17 +12,14 @@ type Props = {
   trail: Guide,
   showInfoOverlay: boolean,
   onToggleInfoOverlay: () => void,
-  navigation: Object
+  navigation: Object,
 };
 
 function renderDownloadButton() {
   return <DownloadButtonContainer style={styles.downloadButton} />;
 }
 
-function renderMapInformationOverlay(
-  trail: Guide,
-  onToggleInfoOverlay: () => void,
-) {
+function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => void) {
   if (!trail) {
     return null;
   }
@@ -43,23 +40,21 @@ function renderMapInformationOverlay(
 }
 
 const TrailView = (props: Props) => {
-  const mapItems: MapItem[] = props.trail.contentObjects.map(item => ({
+  const { trail, onToggleInfoOverlay, showInfoOverlay, navigation } = props;
+  const mapItems: MapItem[] = trail.contentObjects.map(item => ({
     contentObject: item,
   }));
 
   return (
     <View style={styles.container}>
-      <MapWithListView
+      <MarkerListView
         items={mapItems}
-        initialLocation={props.trail.contentObjects[0].location}
-        navigation={props.navigation}
-        stopAudioOnUnmount
         showNumberedMapMarkers
         showDirections
+        supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(trail)}
+        navigation={navigation}
       />
-      {props.showInfoOverlay
-        ? renderMapInformationOverlay(props.trail, props.onToggleInfoOverlay)
-        : null}
+      {showInfoOverlay ? renderMapInformationOverlay(trail, onToggleInfoOverlay) : null}
       <AudioPlayerView />
     </View>
   );

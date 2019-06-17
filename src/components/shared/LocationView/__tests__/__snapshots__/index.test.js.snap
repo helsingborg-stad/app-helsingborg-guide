@@ -24,6 +24,7 @@ exports[`weekdays 1`] = `
         }
       >
         <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "aspectRatio": 1.7777777777777777,
@@ -79,9 +80,6 @@ exports[`weekdays 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -102,9 +100,6 @@ exports[`weekdays 1`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "black",
@@ -128,9 +123,6 @@ exports[`weekdays 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -144,15 +136,8 @@ exports[`weekdays 1`] = `
             Media guides
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -176,8 +161,6 @@ exports[`weekdays 1`] = `
                 "shadowRadius": 5,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -207,9 +190,6 @@ exports[`weekdays 1`] = `
                   }
                 >
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -224,9 +204,6 @@ exports[`weekdays 1`] = `
                     Shaun Tan  14.4-12.8.2018
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -240,9 +217,6 @@ exports[`weekdays 1`] = `
                     
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -270,9 +244,6 @@ exports[`weekdays 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -286,9 +257,6 @@ exports[`weekdays 1`] = `
             About Sofiero
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#7f7f7f",
@@ -302,15 +270,8 @@ exports[`weekdays 1`] = `
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -324,13 +285,9 @@ exports[`weekdays 1`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -343,15 +300,13 @@ exports[`weekdays 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
             
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#a61380",
@@ -414,9 +369,6 @@ exports[`weekdays 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -457,9 +409,6 @@ exports[`weekdays 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -489,7 +438,7 @@ exports[`weekdays 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -500,9 +449,6 @@ exports[`weekdays 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -532,7 +478,7 @@ exports[`weekdays 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -543,9 +489,6 @@ exports[`weekdays 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -586,9 +529,6 @@ exports[`weekdays 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -629,9 +569,6 @@ exports[`weekdays 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -672,9 +609,6 @@ exports[`weekdays 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -721,6 +655,7 @@ exports[`weekdays 2`] = `
         }
       >
         <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "aspectRatio": 1.7777777777777777,
@@ -776,9 +711,6 @@ exports[`weekdays 2`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -799,9 +731,6 @@ exports[`weekdays 2`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "black",
@@ -825,9 +754,6 @@ exports[`weekdays 2`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -841,15 +767,8 @@ exports[`weekdays 2`] = `
             Media guides
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -873,8 +792,6 @@ exports[`weekdays 2`] = `
                 "shadowRadius": 5,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -904,9 +821,6 @@ exports[`weekdays 2`] = `
                   }
                 >
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -921,9 +835,6 @@ exports[`weekdays 2`] = `
                     Shaun Tan  14.4-12.8.2018
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -937,9 +848,6 @@ exports[`weekdays 2`] = `
                     
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -967,9 +875,6 @@ exports[`weekdays 2`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -983,9 +888,6 @@ exports[`weekdays 2`] = `
             About Sofiero
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#7f7f7f",
@@ -999,15 +901,8 @@ exports[`weekdays 2`] = `
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1021,13 +916,9 @@ exports[`weekdays 2`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -1040,15 +931,13 @@ exports[`weekdays 2`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
             
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#a61380",
@@ -1111,9 +1000,6 @@ exports[`weekdays 2`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1154,9 +1040,6 @@ exports[`weekdays 2`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1186,7 +1069,7 @@ exports[`weekdays 2`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1197,9 +1080,6 @@ exports[`weekdays 2`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1229,7 +1109,7 @@ exports[`weekdays 2`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1240,9 +1120,6 @@ exports[`weekdays 2`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1283,9 +1160,6 @@ exports[`weekdays 2`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1326,9 +1200,6 @@ exports[`weekdays 2`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1369,9 +1240,6 @@ exports[`weekdays 2`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1418,6 +1286,7 @@ exports[`weekdays 3`] = `
         }
       >
         <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "aspectRatio": 1.7777777777777777,
@@ -1473,9 +1342,6 @@ exports[`weekdays 3`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -1496,9 +1362,6 @@ exports[`weekdays 3`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "black",
@@ -1522,9 +1385,6 @@ exports[`weekdays 3`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -1538,15 +1398,8 @@ exports[`weekdays 3`] = `
             Media guides
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -1570,8 +1423,6 @@ exports[`weekdays 3`] = `
                 "shadowRadius": 5,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -1601,9 +1452,6 @@ exports[`weekdays 3`] = `
                   }
                 >
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -1618,9 +1466,6 @@ exports[`weekdays 3`] = `
                     Shaun Tan  14.4-12.8.2018
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -1634,9 +1479,6 @@ exports[`weekdays 3`] = `
                     
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -1664,9 +1506,6 @@ exports[`weekdays 3`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -1680,9 +1519,6 @@ exports[`weekdays 3`] = `
             About Sofiero
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#7f7f7f",
@@ -1696,15 +1532,8 @@ exports[`weekdays 3`] = `
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1718,13 +1547,9 @@ exports[`weekdays 3`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -1737,15 +1562,13 @@ exports[`weekdays 3`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
             
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#a61380",
@@ -1808,9 +1631,6 @@ exports[`weekdays 3`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1851,9 +1671,6 @@ exports[`weekdays 3`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1883,7 +1700,7 @@ exports[`weekdays 3`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1894,9 +1711,6 @@ exports[`weekdays 3`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1926,7 +1740,7 @@ exports[`weekdays 3`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1937,9 +1751,6 @@ exports[`weekdays 3`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -1980,9 +1791,6 @@ exports[`weekdays 3`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2023,9 +1831,6 @@ exports[`weekdays 3`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2066,9 +1871,6 @@ exports[`weekdays 3`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2115,6 +1917,7 @@ exports[`weekdays 4`] = `
         }
       >
         <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "aspectRatio": 1.7777777777777777,
@@ -2170,9 +1973,6 @@ exports[`weekdays 4`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -2193,9 +1993,6 @@ exports[`weekdays 4`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "black",
@@ -2219,9 +2016,6 @@ exports[`weekdays 4`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -2235,15 +2029,8 @@ exports[`weekdays 4`] = `
             Media guides
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -2267,8 +2054,6 @@ exports[`weekdays 4`] = `
                 "shadowRadius": 5,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -2298,9 +2083,6 @@ exports[`weekdays 4`] = `
                   }
                 >
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -2315,9 +2097,6 @@ exports[`weekdays 4`] = `
                     Shaun Tan  14.4-12.8.2018
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -2331,9 +2110,6 @@ exports[`weekdays 4`] = `
                     
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -2361,9 +2137,6 @@ exports[`weekdays 4`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -2377,9 +2150,6 @@ exports[`weekdays 4`] = `
             About Sofiero
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#7f7f7f",
@@ -2393,15 +2163,8 @@ exports[`weekdays 4`] = `
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2415,13 +2178,9 @@ exports[`weekdays 4`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -2434,15 +2193,13 @@ exports[`weekdays 4`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
             
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#a61380",
@@ -2505,9 +2262,6 @@ exports[`weekdays 4`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2548,9 +2302,6 @@ exports[`weekdays 4`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2580,7 +2331,7 @@ exports[`weekdays 4`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -2591,9 +2342,6 @@ exports[`weekdays 4`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2623,7 +2371,7 @@ exports[`weekdays 4`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -2634,9 +2382,6 @@ exports[`weekdays 4`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2677,9 +2422,6 @@ exports[`weekdays 4`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2720,9 +2462,6 @@ exports[`weekdays 4`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2763,9 +2502,6 @@ exports[`weekdays 4`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -2812,6 +2548,7 @@ exports[`weekdays 5`] = `
         }
       >
         <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "aspectRatio": 1.7777777777777777,
@@ -2867,9 +2604,6 @@ exports[`weekdays 5`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -2890,9 +2624,6 @@ exports[`weekdays 5`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "black",
@@ -2916,9 +2647,6 @@ exports[`weekdays 5`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -2932,15 +2660,8 @@ exports[`weekdays 5`] = `
             Media guides
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -2964,8 +2685,6 @@ exports[`weekdays 5`] = `
                 "shadowRadius": 5,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -2995,9 +2714,6 @@ exports[`weekdays 5`] = `
                   }
                 >
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -3012,9 +2728,6 @@ exports[`weekdays 5`] = `
                     Shaun Tan  14.4-12.8.2018
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -3028,9 +2741,6 @@ exports[`weekdays 5`] = `
                     
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -3058,9 +2768,6 @@ exports[`weekdays 5`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -3074,9 +2781,6 @@ exports[`weekdays 5`] = `
             About Sofiero
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#7f7f7f",
@@ -3090,15 +2794,8 @@ exports[`weekdays 5`] = `
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -3112,13 +2809,9 @@ exports[`weekdays 5`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -3131,15 +2824,13 @@ exports[`weekdays 5`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
             
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#a61380",
@@ -3202,9 +2893,6 @@ exports[`weekdays 5`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -3245,9 +2933,6 @@ exports[`weekdays 5`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -3277,7 +2962,7 @@ exports[`weekdays 5`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3288,9 +2973,6 @@ exports[`weekdays 5`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -3320,7 +3002,7 @@ exports[`weekdays 5`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3331,9 +3013,6 @@ exports[`weekdays 5`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -3374,9 +3053,6 @@ exports[`weekdays 5`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -3417,9 +3093,6 @@ exports[`weekdays 5`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -3460,9 +3133,6 @@ exports[`weekdays 5`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -3509,6 +3179,7 @@ exports[`weekdays 6`] = `
         }
       >
         <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "aspectRatio": 1.7777777777777777,
@@ -3564,9 +3235,6 @@ exports[`weekdays 6`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -3587,9 +3255,6 @@ exports[`weekdays 6`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "black",
@@ -3613,9 +3278,6 @@ exports[`weekdays 6`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -3629,15 +3291,8 @@ exports[`weekdays 6`] = `
             Media guides
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -3661,8 +3316,6 @@ exports[`weekdays 6`] = `
                 "shadowRadius": 5,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -3692,9 +3345,6 @@ exports[`weekdays 6`] = `
                   }
                 >
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -3709,9 +3359,6 @@ exports[`weekdays 6`] = `
                     Shaun Tan  14.4-12.8.2018
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -3725,9 +3372,6 @@ exports[`weekdays 6`] = `
                     
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -3755,9 +3399,6 @@ exports[`weekdays 6`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -3771,9 +3412,6 @@ exports[`weekdays 6`] = `
             About Sofiero
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#7f7f7f",
@@ -3787,15 +3425,8 @@ exports[`weekdays 6`] = `
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -3809,13 +3440,9 @@ exports[`weekdays 6`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -3828,15 +3455,13 @@ exports[`weekdays 6`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
             
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#a61380",
@@ -3899,9 +3524,6 @@ exports[`weekdays 6`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -3942,9 +3564,6 @@ exports[`weekdays 6`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -3974,7 +3593,7 @@ exports[`weekdays 6`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3985,9 +3604,6 @@ exports[`weekdays 6`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4017,7 +3633,7 @@ exports[`weekdays 6`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4028,9 +3644,6 @@ exports[`weekdays 6`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4071,9 +3684,6 @@ exports[`weekdays 6`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4114,9 +3724,6 @@ exports[`weekdays 6`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4157,9 +3764,6 @@ exports[`weekdays 6`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4206,6 +3810,7 @@ exports[`weekdays 7`] = `
         }
       >
         <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "aspectRatio": 1.7777777777777777,
@@ -4261,9 +3866,6 @@ exports[`weekdays 7`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -4284,9 +3886,6 @@ exports[`weekdays 7`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "black",
@@ -4310,9 +3909,6 @@ exports[`weekdays 7`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -4326,15 +3922,8 @@ exports[`weekdays 7`] = `
             Media guides
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -4358,8 +3947,6 @@ exports[`weekdays 7`] = `
                 "shadowRadius": 5,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -4389,9 +3976,6 @@ exports[`weekdays 7`] = `
                   }
                 >
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -4406,9 +3990,6 @@ exports[`weekdays 7`] = `
                     Shaun Tan  14.4-12.8.2018
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -4422,9 +4003,6 @@ exports[`weekdays 7`] = `
                     
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -4452,9 +4030,6 @@ exports[`weekdays 7`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -4468,9 +4043,6 @@ exports[`weekdays 7`] = `
             About Sofiero
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#7f7f7f",
@@ -4484,15 +4056,8 @@ exports[`weekdays 7`] = `
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -4506,13 +4071,9 @@ exports[`weekdays 7`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -4525,15 +4086,13 @@ exports[`weekdays 7`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
             
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#a61380",
@@ -4596,9 +4155,6 @@ exports[`weekdays 7`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4639,9 +4195,6 @@ exports[`weekdays 7`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4671,7 +4224,7 @@ exports[`weekdays 7`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4682,9 +4235,6 @@ exports[`weekdays 7`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4714,7 +4264,7 @@ exports[`weekdays 7`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4725,9 +4275,6 @@ exports[`weekdays 7`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4768,9 +4315,6 @@ exports[`weekdays 7`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4811,9 +4355,6 @@ exports[`weekdays 7`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4854,9 +4395,6 @@ exports[`weekdays 7`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -4903,6 +4441,7 @@ exports[`with geolocation 1`] = `
         }
       >
         <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "aspectRatio": 1.7777777777777777,
@@ -4958,9 +4497,6 @@ exports[`with geolocation 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -4981,9 +4517,6 @@ exports[`with geolocation 1`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "black",
@@ -4997,9 +4530,6 @@ exports[`with geolocation 1`] = `
               Open today 10:00-18:00
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "#7f7f7f",
@@ -5019,15 +4549,8 @@ exports[`with geolocation 1`] = `
             </Text>
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -5040,13 +4563,9 @@ exports[`with geolocation 1`] = `
                 "opacity": 1,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
-              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
@@ -5059,15 +4578,13 @@ exports[`with geolocation 1`] = `
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
+                  Object {},
                 ]
               }
             >
               
             </Text>
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "#a61380",
@@ -5092,9 +4609,6 @@ exports[`with geolocation 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -5108,15 +4622,8 @@ exports[`with geolocation 1`] = `
             Media guides
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -5140,8 +4647,6 @@ exports[`with geolocation 1`] = `
                 "shadowRadius": 5,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -5171,9 +4676,6 @@ exports[`with geolocation 1`] = `
                   }
                 >
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -5188,9 +4690,6 @@ exports[`with geolocation 1`] = `
                     Shaun Tan  14.4-12.8.2018
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -5204,9 +4703,6 @@ exports[`with geolocation 1`] = `
                     
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -5234,9 +4730,6 @@ exports[`with geolocation 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -5250,9 +4743,6 @@ exports[`with geolocation 1`] = `
             About Sofiero
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#7f7f7f",
@@ -5266,15 +4756,8 @@ exports[`with geolocation 1`] = `
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -5288,13 +4771,9 @@ exports[`with geolocation 1`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -5307,15 +4786,13 @@ exports[`with geolocation 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
             
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#a61380",
@@ -5378,9 +4855,6 @@ exports[`with geolocation 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -5421,9 +4895,6 @@ exports[`with geolocation 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -5453,7 +4924,7 @@ exports[`with geolocation 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -5464,9 +4935,6 @@ exports[`with geolocation 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -5496,7 +4964,7 @@ exports[`with geolocation 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -5507,9 +4975,6 @@ exports[`with geolocation 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -5550,9 +5015,6 @@ exports[`with geolocation 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -5593,9 +5055,6 @@ exports[`with geolocation 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -5636,9 +5095,6 @@ exports[`with geolocation 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -5685,6 +5141,7 @@ exports[`with point properties 1`] = `
         }
       >
         <View
+          accessibilityIgnoresInvertColors={true}
           style={
             Object {
               "aspectRatio": 1.7777777777777777,
@@ -5740,9 +5197,6 @@ exports[`with point properties 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -5763,9 +5217,6 @@ exports[`with point properties 1`] = `
             }
           >
             <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
               style={
                 Object {
                   "color": "black",
@@ -5789,9 +5240,6 @@ exports[`with point properties 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -5805,15 +5253,8 @@ exports[`with point properties 1`] = `
             Media guides
           </Text>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
             accessible={true}
-            collapsable={undefined}
-            hitSlop={undefined}
             isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -5837,8 +5278,6 @@ exports[`with point properties 1`] = `
                 "shadowRadius": 5,
               }
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View>
               <View>
@@ -5868,9 +5307,6 @@ exports[`with point properties 1`] = `
                   }
                 >
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -5885,9 +5321,6 @@ exports[`with point properties 1`] = `
                     Shaun Tan  14.4-12.8.2018
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -5901,9 +5334,6 @@ exports[`with point properties 1`] = `
                     
                   </Text>
                   <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
                     numberOfLines={1}
                     style={
                       Object {
@@ -5931,9 +5361,6 @@ exports[`with point properties 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "black",
@@ -5947,9 +5374,6 @@ exports[`with point properties 1`] = `
             About Sofiero
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#7f7f7f",
@@ -5963,15 +5387,8 @@ exports[`with point properties 1`] = `
           </Text>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -5985,13 +5402,9 @@ exports[`with point properties 1`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -6004,15 +5417,13 @@ exports[`with point properties 1`] = `
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
             
           </Text>
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             style={
               Object {
                 "color": "#a61380",
@@ -6075,9 +5486,6 @@ exports[`with point properties 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -6118,9 +5526,6 @@ exports[`with point properties 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -6150,7 +5555,7 @@ exports[`with point properties 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -6161,9 +5566,6 @@ exports[`with point properties 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -6193,7 +5595,7 @@ exports[`with point properties 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.svg",
+                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -6204,9 +5606,6 @@ exports[`with point properties 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -6247,9 +5646,6 @@ exports[`with point properties 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -6290,9 +5686,6 @@ exports[`with point properties 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
@@ -6333,9 +5726,6 @@ exports[`with point properties 1`] = `
                 }
               />
               <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
                 style={
                   Object {
                     "color": "#7f7f7f",
