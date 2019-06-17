@@ -1,19 +1,16 @@
 // @flow
-
 import React from "react";
-
-import {
-  ViroNode,
-  ViroAmbientLight,
-  ViroDirectionalLight,
-  Viro3DObject,
-  ViroAnimations,
-  ViroMaterials,
-} from "react-viro";
+import { ViroNode, ViroAmbientLight, ViroDirectionalLight, Viro3DObject, ViroAnimations, ViroMaterials } from "react-viro";
 
 type Props = {
-  markerPosition: Array<number>
+  markerPosition: Array<number>,
 };
+
+const seagullModel = require("../../../../3D/seagull.vrx");
+const seagullTexture = require("../../../../3D/Mat_Seagull.png");
+const hatTexture = require("../../../../3D/Hat-512x512.png");
+const seagullNormalMap = require("../../../../3D/Hat-512x512-Normal.png");
+const seagullSpecularMap = require("../../../../3D/Mat_Seagull_Specular.png");
 
 const CHARACTER_MATERIAL = "CHARACTER_MATERIAL";
 const ANIMATION_CIRCLE = "ANIMATION_CIRCLE";
@@ -29,22 +26,15 @@ export default function AnimatedCharacter({ markerPosition: [x, , z] }: Props) {
     <ViroNode>
       <ViroAmbientLight color="#FFFFFF" intensity={500} />
       <ViroDirectionalLight color="#FFFFFF" direction={[0, -1, 0]} castsShadow={false} />
-
       <ViroNode position={characterPosition} animation={flightAnimation}>
         <Viro3DObject
           position={[0, FLIGHT_ALTITUDE, FLIGHT_RADIUS]}
           rotation={[0, 90, 0]}
           scale={[0.01, 0.01, 0.01]}
-          // $FlowFixMe flow can't find this file for some reason
-          source={require("../../../../3D/seagull.vrx")}
+          source={seagullModel}
           type="VRX"
           materials={[CHARACTER_MATERIAL]}
-          resources={[
-            require("../../../../3D/Mat_Seagull.png"),
-            require("../../../../3D/Hat-512x512.png"),
-            require("../../../../3D/Hat-512x512-Normal.png"),
-            require("../../../../3D/Mat_Seagull_Specular.png"),
-          ]}
+          resources={[seagullTexture, hatTexture, seagullNormalMap, seagullSpecularMap]}
           animation={{ name: "CINEMA_4D_Main", run: true, loop: true }}
         />
       </ViroNode>
