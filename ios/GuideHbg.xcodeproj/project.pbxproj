@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -49,6 +50,7 @@
 		57064E1C05BC404CB8C2A2E9 /* libRCTImageMarker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC196D2AA274350A8900BD1 /* libRCTImageMarker.a */; };
 		57C573E2056B4DB3A535D841 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C884F906A44BA911296B5 /* Roboto-Regular.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		673B9B3E78B24B0581AEF1D2 /* libRNSimpleCompass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DD6B1A22C0412583B2DC37 /* libRNSimpleCompass.a */; };
 		692F8BCD0DD845E68B96656C /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB048FC6E5044653A27A8FC4 /* libRNFirebase.a */; };
 		6EE44A41E3044D22910CE300 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B4132F6B34EC4FD68A0B766A /* MaterialCommunityIcons.ttf */; };
 		76085DA00A6945F3899EBA59 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79354A57FCE544D0AB6F99FC /* FontAwesome5_Solid.ttf */; };
@@ -91,7 +93,6 @@
 		DD8D739DA0DF4B4C94BD177E /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD6D658118FE4DDEA9D6ED3F /* FontAwesome5_Regular.ttf */; };
 		DE3A0C2570134C7EA79AC304 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B37D76B01F8B4A66AA095221 /* FontAwesome5_Brands.ttf */; };
 		F89AAB83DF1F4B13838B25CB /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A4F075CC4A040F495590C1A /* Roboto-Thin.ttf */; };
-		673B9B3E78B24B0581AEF1D2 /* libRNSimpleCompass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DD6B1A22C0412583B2DC37 /* libRNSimpleCompass.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = GuideHbg;
+		};
+		03ADE86F22B78D4A00E71C64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1691BDE437EE4DEAB6A543B6 /* RNSimpleCompass.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSimpleCompass;
 		};
 		0DAD54E720236176006DC9A6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -564,6 +572,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GuideHbg/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GuideHbg/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1691BDE437EE4DEAB6A543B6 /* RNSimpleCompass.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSimpleCompass.xcodeproj; path = "../node_modules/react-native-simple-compass/ios/RNSimpleCompass.xcodeproj"; sourceTree = "<group>"; };
 		2A4F075CC4A040F495590C1A /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../src/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		2B3EC723865D48278CE94D3A /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../src/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		2CF3E9F343DE764258F06416 /* Pods-GuideHbg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideHbg.release.xcconfig"; path = "Pods/Target Support Files/Pods-GuideHbg/Pods-GuideHbg.release.xcconfig"; sourceTree = "<group>"; };
@@ -622,6 +631,7 @@
 		C83EA02AE9344B3DB2F5FD52 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		CE11FB3230DC4BB1A0E418EB /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BoldItalic.ttf"; path = "../src/fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
 		D0B6A40D42C1410793E45663 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		D0DD6B1A22C0412583B2DC37 /* libRNSimpleCompass.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSimpleCompass.a; sourceTree = "<group>"; };
 		D114DC0FA9FE478382270870 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../src/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		D71BF54931F24B03A660F8AA /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		DA649C82B39D7AD69BEE5F9A /* libPods-GuideHbg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GuideHbg.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -633,8 +643,6 @@
 		F20C98B478CA44B49BEDED82 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		F4AE27E3FEB04C28861A53D0 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../src/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		FA9BFAE006364D7F831DDF48 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		1691BDE437EE4DEAB6A543B6 /* RNSimpleCompass.xcodeproj */ = {isa = PBXFileReference; name = "RNSimpleCompass.xcodeproj"; path = "../node_modules/react-native-simple-compass/ios/RNSimpleCompass.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		D0DD6B1A22C0412583B2DC37 /* libRNSimpleCompass.a */ = {isa = PBXFileReference; name = "libRNSimpleCompass.a"; path = "libRNSimpleCompass.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -770,11 +778,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		03ADE86C22B78D4A00E71C64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03ADE87022B78D4A00E71C64 /* libRNSimpleCompass.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0DAD54BA20236174006DC9A6 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				EB048FC6E5044653A27A8FC4 /* libRNFirebase.a */,
 				0CC196D2AA274350A8900BD1 /* libRCTImageMarker.a */,
+				D0DD6B1A22C0412583B2DC37 /* libRNSimpleCompass.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1381,6 +1398,10 @@
 					ProjectRef = 77190BF12086321100564990 /* RNShare.xcodeproj */;
 				},
 				{
+					ProductGroup = 03ADE86C22B78D4A00E71C64 /* Products */;
+					ProjectRef = 1691BDE437EE4DEAB6A543B6 /* RNSimpleCompass.xcodeproj */;
+				},
+				{
 					ProductGroup = 4011863D201F688900D78CDD /* Products */;
 					ProjectRef = 4011863C201F688900D78CDD /* RNSVG.xcodeproj */;
 				},
@@ -1437,6 +1458,13 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		03ADE87022B78D4A00E71C64 /* libRNSimpleCompass.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSimpleCompass.a;
+			remoteRef = 03ADE86F22B78D4A00E71C64 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0DAD54E820236176006DC9A6 /* libRNFirebase.a */ = {
