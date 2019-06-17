@@ -3,12 +3,6 @@ matrix:
     - language: node_js
       node_js:
         - '10'
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-4.8
       install:
         - npm install
       before_script:
@@ -33,14 +27,6 @@ matrix:
           - android-23
           - android-26
           - android-28
-      env:
-        - CXX=g++-4.8
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-4.8
       before_install:
         - openssl aes-256-cbc -K $encrypted_a533b106a22c_key -iv $encrypted_a533b106a22c_iv -in android/release.properties.enc -out android/release.properties -d
         - nvm install 10
