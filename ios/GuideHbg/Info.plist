@@ -17,24 +17,40 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.52</string>
+	<string>1.60</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAllowsArbitraryLoads</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Not being used</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Used to detect nearby beacons</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Not being used</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera is used for AR</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used to fetch nearby content and show user location on map.</string>
-	<key>NSAllowsArbitraryLoads</key>
-    <true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Not being used</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Not being used</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Not being used</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Not being used</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Not being used</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -82,7 +98,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera is used for AR</string>
 </dict>
 </plist>

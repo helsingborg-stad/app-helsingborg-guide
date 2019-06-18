@@ -139,13 +139,6 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = GuideHbg;
 		};
-		03ADE86F22B78D4A00E71C64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1691BDE437EE4DEAB6A543B6 /* RNSimpleCompass.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNSimpleCompass;
-		};
 		0DAD54E720236176006DC9A6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F20C98B478CA44B49BEDED82 /* RNFirebase.xcodeproj */;
@@ -789,14 +782,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		03ADE86C22B78D4A00E71C64 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				03ADE87022B78D4A00E71C64 /* libRNSimpleCompass.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		0DAD54BA20236174006DC9A6 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -1280,7 +1265,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 45R8QXMNDJ;
+						DevelopmentTeam = MHBEW6TVG2;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1480,13 +1465,6 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		03ADE87022B78D4A00E71C64 /* libRNSimpleCompass.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNSimpleCompass.a;
-			remoteRef = 03ADE86F22B78D4A00E71C64 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0DAD54E820236176006DC9A6 /* libRNFirebase.a */ = {
@@ -1967,7 +1945,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2175,7 +2153,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 45R8QXMNDJ;
+				DEVELOPMENT_TEAM = MHBEW6TVG2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2193,13 +2171,14 @@
 					"$(SRCROOT)/../node_modules/react-native-simple-compass/ios",
 				);
 				INFOPLIST_FILE = GuideHbg/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ustwo.GuideHbg;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hbg.GuideHbg;
 				PRODUCT_NAME = GuideHbg;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2211,7 +2190,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 45R8QXMNDJ;
+				DEVELOPMENT_TEAM = MHBEW6TVG2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2229,13 +2208,14 @@
 					"$(SRCROOT)/../node_modules/react-native-simple-compass/ios",
 				);
 				INFOPLIST_FILE = GuideHbg/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ustwo.GuideHbg;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hbg.GuideHbg;
 				PRODUCT_NAME = GuideHbg;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
