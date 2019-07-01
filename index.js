@@ -73,13 +73,17 @@ export default class GuideHbg extends Component {
   }
 
   componentDidMount() {
-    LocationService.getInstance().watchGeoLocation().catch(console.warn);
+    LocationService.getInstance().subscribeGeoLocation().catch(console.warn);
+    LocationService.getInstance().subscribeCompassBearing().catch(console.warn);
+
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
   }
 
   componentWillUnmount() {
-    LocationService.getInstance().unwatchGeoLocation();
+    LocationService.getInstance().unsubscribeGeoLocation();
+    LocationService.getInstance().unsubscribeCompassLocation();
+
     this.stopListeningToNetworkChanges();
   }
 

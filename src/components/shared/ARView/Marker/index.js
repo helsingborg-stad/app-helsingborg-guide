@@ -43,8 +43,7 @@ class Marker extends Component<Props> {
     const imagePin = (arrived && active && Images.PinArrived) || (active && Images.PinSelected) || Images.Pin;
     const animationName = active ? PIN_ANIMATION : RESET_ANIMATION;
     const animationLoop = active;
-    const modifiedScale = 1 * (distance / 5);
-    const scale = MathUtils.clamp(modifiedScale, { min: 1, max: 20 });
+    const scale = 2;
 
     return (
       <ViroNode

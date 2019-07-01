@@ -3,10 +3,11 @@ import Permissions from "react-native-permissions";
 import RNSimpleCompass from "react-native-simple-compass";
 import LangService from "./langService";
 import GeoLocationActions from "../actions/geolocationActions";
-import { SettingsUtils } from "../utils";
+import { SettingsUtils, MathUtils } from "../utils";
 
 const DEGREE_UPDATE_THRESHOLD = 10; // number of degrees to trigger callback (in degrees)
-const DISTANCE_UPDATE_THRESHOLD = 1; // distance to move to trigger callback (in meters)
+const DISTANCE_UPDATE_THRESHOLD = 10; // distance to move to trigger callback (in meters)
+const COMPASS_PRECISION = 0; // limit the compass readings to 0 decimal places
 
 // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
 const PermissionsResponse = {
@@ -92,7 +93,7 @@ export default class LocationService {
 
   getGeoLocation = () => checkPermissions().then(this.upatePosition);
 
-  watchGeoLocation = () => checkPermissions().then(
+  subscribeGeoLocation = () => checkPermissions().then(
     () => new Promise((resolve, reject) => {
       this.watcher = navigator.geolocation.watchPosition(
         (position) => {
@@ -110,12 +111,12 @@ export default class LocationService {
     }),
   );
 
-  unwatchGeoLocation = () => this.watcher && navigator.geolocation.clearWatch(this.watcher);
+  unsubscribeGeoLocation = () => this.watcher && navigator.geolocation.clearWatch(this.watcher);
 
   getMathDistance(coord1, coord2) {
-    const x = Math.abs(coord1.latitude - coord2.latitude);
-    const y = Math.abs(coord1.longitude - coord2.longitude);
-    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    const x = coord2.latitude - coord1.latitude;
+    const y = coord2.longitude - coord1.longitude;
+    return Math.sqrt(x * x + y * y);
   }
 
   getCompassBearing = () => new Promise((resolve, reject) => {
@@ -128,16 +129,16 @@ export default class LocationService {
   subscribeCompassBearing = () => new Promise((resolve, reject) => {
     try {
       this.compassWatcher = RNSimpleCompass.start(DEGREE_UPDATE_THRESHOLD, (degree) => {
-        const modifiedDegree = degree.toFixed(0);
-        this.store.dispatch(GeoLocationActions.compassbearingUpdated(modifiedDegree));
-        resolve(modifiedDegree);
+        const bearing = MathUtils.limitPrecision(degree, COMPASS_PRECISION);
+        this.store.dispatch(GeoLocationActions.compassbearingUpdated(bearing));
+        resolve(bearing);
       });
     } catch (e) {
       reject(e);
     }
   });
 
-  clearCompassBearingWatch = () => {
+  unsubscribeCompassBearing = () => {
     if (this.compassWatcher) RNSimpleCompass.stop();
   };
 }
