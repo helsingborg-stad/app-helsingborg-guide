@@ -47,16 +47,14 @@ function angleBetweenCoords(start: { latitude: number, longitude: number }, end:
   return (angle >= 0 ) ? angle : angle + 2 * Math.PI;
 }
 
-function getLocationRelativePosition(userLocation: GeolocationType, targetLocation: Object, bearing: number = 0, limit: number = 0) {
+function getLocationRelativePosition(userLocation: GeolocationType, targetLocation: Object, bearing: number = 0) {
   const distance = haversine(userLocation.coords, targetLocation, { unit: "meter" }) || 0;
   const bearingOffset = ios ? 0 : bearing;
   const angle = angleBetweenCoords(userLocation.coords, targetLocation) - bearingOffset - (Math.PI / 2);
 
-  const offset = (limit === 0) ? distance : Math.min(distance, limit);
-
   return {
-    x: Math.cos(angle) * offset,
-    y: Math.sin(angle) * offset,
+    x: Math.cos(angle) * distance,
+    y: Math.sin(angle) * distance,
   };
 }
 

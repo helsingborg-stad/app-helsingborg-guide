@@ -6,7 +6,7 @@ import GeoLocationActions from "../actions/geolocationActions";
 import { SettingsUtils, MathUtils } from "../utils";
 
 const DEGREE_UPDATE_THRESHOLD = 10; // number of degrees to trigger callback (in degrees)
-const DISTANCE_UPDATE_THRESHOLD = 10; // distance to move to trigger callback (in meters)
+const DISTANCE_UPDATE_THRESHOLD = 1; // distance to move to trigger callback (in meters)
 const COMPASS_PRECISION = 0; // limit the compass readings to 0 decimal places
 
 // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
@@ -104,7 +104,7 @@ export default class LocationService {
         {
           enableHighAccuracy: true,
           timeout: 15000,
-          maximumAge: 5000,
+          maximumAge: 1000,
           distanceFilter: DISTANCE_UPDATE_THRESHOLD,
         },
       );

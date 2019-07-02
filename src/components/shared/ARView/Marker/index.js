@@ -15,6 +15,8 @@ type Props = {
   arrived: boolean,
 };
 
+const DISTANCE_SCALING_FACTOR = 2;
+
 const RAISE_ANIMATION = "RAISE_ANIMATION";
 const DROP_ANIMATION = "DROP_ANIMATION";
 const PIN_ANIMATION = "PIN_ANIMATION";
@@ -43,7 +45,8 @@ class Marker extends Component<Props> {
     const imagePin = (arrived && active && Images.PinArrived) || (active && Images.PinSelected) || Images.Pin;
     const animationName = active ? PIN_ANIMATION : RESET_ANIMATION;
     const animationLoop = active;
-    const scale = 2;
+    const logarithmicScale = distance ? Math.log10(distance ** DISTANCE_SCALING_FACTOR) : 0;
+    const scale = 1 + logarithmicScale;
 
     return (
       <ViroNode
