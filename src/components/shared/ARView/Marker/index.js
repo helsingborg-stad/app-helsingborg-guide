@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { ViroNode, ViroText, ViroImage, ViroAnimations } from "react-viro";
 
-import { AnalyticsUtils, MathUtils } from "../../../../utils";
+import { AnalyticsUtils } from "../../../../utils";
 import * as Images from "../../../../images/AR";
 import styles from "./styles";
 

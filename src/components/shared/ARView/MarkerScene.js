@@ -5,7 +5,6 @@ import { ViroARScene, ViroText, ViroConstants, ViroNode, ViroCamera } from "reac
 import { LocationUtils, MapItemUtils, MathUtils } from "../../../utils";
 import AnimatedCharacter from "./AnimatedCharacter";
 import Marker from "./Marker";
-import LocationService from "../../../services/locationService";
 
 import { updateCameraAngles } from "../../../actions/arActions";
 
@@ -31,7 +30,49 @@ const HEIGHT = 0;
 const CAMERA_UPDATE_LIMIT = 10; // Number of camera updates before triggering an action (for performance reasons)
 
 class MarkerScene extends Component<Props, State> {
-  currentCameraUpdate = 0;
+  static getDerivedStateFromProps(props: Props, state: State) {
+    const {
+      arSceneNavigator: {
+        viroAppProps: { activeMarker },
+      },
+      bearing,
+      position: userLocation,
+    } = props;
+
+    const { markers } = state;
+
+    const newMarkers = markers.map((marker) => {
+      const {
+        contentObject: { location: contentLocation },
+      } = marker;
+
+      const id = MapItemUtils.getIdFromMapItem(marker);
+      const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
+      const arrived = LocationUtils.hasArrivedAtDestination(userLocation, contentLocation);
+
+      const distance = LocationUtils.getTravelDistance(userLocation.coords, contentLocation);
+      const relativePosition = LocationUtils.getLocationRelativePosition(userLocation, contentLocation, bearing);
+
+      const height = active ? ACTIVE_HEIGHT : HEIGHT;
+      const position = [relativePosition.x, height, relativePosition.y];
+
+      return {
+        ...marker,
+        active,
+        arrived,
+        distance,
+        position,
+      };
+    });
+
+    const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
+    const selectedMarker = markers.find((marker) => {
+      const markerId = MapItemUtils.getIdFromMapItem(marker);
+      return markerId === selectedMarkerId;
+    });
+
+    return { markers: newMarkers, selectedMarker };
+  }
 
   constructor(props: Props) {
     super(props);
@@ -82,54 +123,10 @@ class MarkerScene extends Component<Props, State> {
       currentHorizontalAngleDelta: 0,
       markers,
       selectedMarker,
-      distance: 0,
     };
   }
 
-  static getDerivedStateFromProps(props: Props, state: State) {
-    const {
-      arSceneNavigator: {
-        viroAppProps: { activeMarker },
-      },
-      bearing,
-      position: userLocation,
-      sceneNavigator,
-    } = props;
-
-    const { markers } = state;
-
-    const newMarkers = markers.map((marker) => {
-      const {
-        contentObject: { location: contentLocation },
-      } = marker;
-
-      const id = MapItemUtils.getIdFromMapItem(marker);
-      const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
-      const arrived = LocationUtils.hasArrivedAtDestination(userLocation, contentLocation);
-
-      const distance = LocationUtils.getTravelDistance(userLocation.coords, contentLocation);
-      const relativePosition = LocationUtils.getLocationRelativePosition(userLocation, contentLocation, bearing);
-
-      const height = active ? ACTIVE_HEIGHT : HEIGHT;
-      const position = [relativePosition.x, height, relativePosition.y];
-
-      return {
-        ...marker,
-        active,
-        arrived,
-        distance,
-        position,
-      };
-    });
-
-    const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
-    const selectedMarker = markers.find((marker) => {
-      const markerId = MapItemUtils.getIdFromMapItem(marker);
-      return markerId === selectedMarkerId;
-    });
-
-    return { markers: newMarkers, selectedMarker };
-  }
+  currentCameraUpdate = 0;
 
   onInitialized = (tracking: ViroConstants) => {
     switch (tracking) {
@@ -150,7 +147,8 @@ class MarkerScene extends Component<Props, State> {
   };
 
   onCameraTransformUpdate = (cameraTransform: any) => {
-    if (this.currentCameraUpdate++ <= CAMERA_UPDATE_LIMIT) {
+    if (this.currentCameraUpdate <= CAMERA_UPDATE_LIMIT) {
+      this.currentCameraUpdate += 1;
       return;
     }
     this.currentCameraUpdate = 0;
@@ -196,7 +194,8 @@ class MarkerScene extends Component<Props, State> {
       // get the camera's rotation around the x-axis
       const verticalAngle = MathUtils.limitPrecision(Math.atan2(forwardY, forwardZ) * MathUtils.RAD_TO_DEG + 180, 2);
 
-      if (MathUtils.exceedsThreshold(currentHorizontalAngleDelta, angleDelta, ANGLE_THRESHOLD) || MathUtils.exceedsThreshold(currentVerticalAngle, verticalAngle, ANGLE_THRESHOLD)) {
+      if (MathUtils.exceedsThreshold(currentHorizontalAngleDelta, angleDelta, ANGLE_THRESHOLD)
+        || MathUtils.exceedsThreshold(currentVerticalAngle, verticalAngle, ANGLE_THRESHOLD)) {
         this.setState({ currentHorizontalAngleDelta: angleDelta, currentVerticalAngle: verticalAngle });
         dispatchCameraUpdateAngles({ verticalAngle, angleDelta });
       }
@@ -234,7 +233,7 @@ class MarkerScene extends Component<Props, State> {
 const mapState = (state: RootState) => {
   const { geolocation: { bearing, position } } = state;
   return { bearing, position };
-}
+};
 
 const mapDispatch = (dispatch: Dispatch) => ({
   dispatchCameraUpdateAngles: (cameraTransform: Object) => dispatch(updateCameraAngles(cameraTransform)),

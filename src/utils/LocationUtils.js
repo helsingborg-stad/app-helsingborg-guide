@@ -2,7 +2,6 @@
 import { Platform } from "react-native";
 import geolib from "geolib";
 import haversine from "haversine";
-import MathUtils from "./MathUtils";
 
 const ios = Platform.OS === "ios";
 
@@ -44,7 +43,7 @@ function angleBetweenCoords(start: { latitude: number, longitude: number }, end:
   const x = end.latitude - start.latitude;
   const y = end.longitude - start.longitude;
   const angle = Math.atan2(y, x);
-  return (angle >= 0 ) ? angle : angle + 2 * Math.PI;
+  return (angle >= 0) ? angle : angle + 2 * Math.PI;
 }
 
 function getLocationRelativePosition(userLocation: GeolocationType, targetLocation: Object, bearing: number = 0) {
