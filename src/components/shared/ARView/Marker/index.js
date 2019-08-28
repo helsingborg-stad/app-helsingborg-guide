@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { ViroNode, ViroText, ViroImage, ViroAnimations } from "react-viro";
 
-import { AnalyticsUtils, MathUtils } from "../../../../utils";
+import { AnalyticsUtils } from "../../../../utils";
 import * as Images from "../../../../images/AR";
 import styles from "./styles";
 
@@ -14,6 +14,8 @@ type Props = {
   distance: number,
   arrived: boolean,
 };
+
+const DISTANCE_SCALING_FACTOR = 2;
 
 const RAISE_ANIMATION = "RAISE_ANIMATION";
 const DROP_ANIMATION = "DROP_ANIMATION";
@@ -43,8 +45,8 @@ class Marker extends Component<Props> {
     const imagePin = (arrived && active && Images.PinArrived) || (active && Images.PinSelected) || Images.Pin;
     const animationName = active ? PIN_ANIMATION : RESET_ANIMATION;
     const animationLoop = active;
-    const modifiedScale = 1 * (distance / 5);
-    const scale = MathUtils.clamp(modifiedScale, { min: 1, max: 20 });
+    const logarithmicScale = distance ? Math.log10(distance ** DISTANCE_SCALING_FACTOR) : 0;
+    const scale = 1 + logarithmicScale;
 
     return (
       <ViroNode
