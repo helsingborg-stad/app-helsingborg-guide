@@ -61,9 +61,10 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
       const offlineGuides = { ...state.offlineGuides };
       const keys = Object.keys(offlineGuides);
       keys.forEach((key) => {
-        const oGuide: OfflineGuide = offlineGuides[key];
+        const index = parseInt(key);
+        const oGuide: OfflineGuide = offlineGuides[index];
         if (oGuide.status === "pending") {
-          offlineGuides[key] = { ...oGuide, status: "paused" };
+          offlineGuides[index] = { ...oGuide, status: "paused" };
         }
       });
 

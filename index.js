@@ -82,7 +82,7 @@ export default class GuideHbg extends Component {
 
   componentWillUnmount() {
     LocationService.getInstance().unsubscribeGeoLocation();
-    LocationService.getInstance().unsubscribeCompassLocation();
+    LocationService.getInstance().unsubscribeCompassBearing();
 
     this.stopListeningToNetworkChanges();
   }

@@ -1,4 +1,4 @@
-import Permissions from "react-native-permissions";
+import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions";
 
 // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
 const PermissionsResponse = {
@@ -8,25 +8,27 @@ const PermissionsResponse = {
   UNDETERMINED: "undetermined",
 };
 
-const requestPermissions = () => Permissions.request("camera").then((response) => {
+const CAMERA_PERMISSION = Platform.OS === "ios" ? PERMISSIONS.IOS.CAMERA : PERMISSIONS.ANDROID.CAMERA;
+
+const requestPermissions = () => request(CAMERA_PERMISSION).then((response) => {
   switch (response) {
-    case PermissionsResponse.AUTHORIZED:
+    case RESULTS.GRANTED:
       return Promise.resolve(true);
-    case PermissionsResponse.DENIED: // fallthrough
-    case PermissionsResponse.RESTRICTED: // fallthrough
-    case PermissionsResponse.UNDETERMINED:
+    case RESULTS.DENIED: // fallthrough
+    case RESULTS.BLOCKED: // fallthrough
+    case RESULTS.UNAVAILABLE:
     default:
       return Promise.reject();
   }
 });
 
-const checkPermissions = () => Permissions.check("camera").then((response) => {
+const checkPermissions = () => check(CAMERA_PERMISSION).then((response) => {
   switch (response) {
-    case PermissionsResponse.AUTHORIZED:
+    case RESULTS.GRANTED:
       return Promise.resolve(true);
-    case PermissionsResponse.DENIED: // fallthrough
-    case PermissionsResponse.RESTRICTED: // fallthrough
-    case PermissionsResponse.UNDETERMINED:
+    case RESULTS.DENIED: // fallthrough
+    case RESULTS.BLOCKED: // fallthrough
+    case RESULTS.UNAVAILABLE:
       return requestPermissions();
     default:
       return Promise.reject();

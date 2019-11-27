@@ -1,7 +1,8 @@
 // @flow
 
 import React, { Component } from "react";
-import { ActivityIndicator, Animated, Platform, SafeAreaView, Slider, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Animated, Platform, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import Slider from "@react-native-community/slider";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";

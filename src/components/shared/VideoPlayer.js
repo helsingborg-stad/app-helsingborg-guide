@@ -4,13 +4,13 @@ import React, {
 import {
   ActivityIndicator,
   Platform,
-  Slider,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   NativeModules,
 } from "react-native";
+import Slider from "@react-native-community/slider";
 import PropTypes from "prop-types";
 import Video from "react-native-video";
 import Icon from "react-native-vector-icons/MaterialIcons";

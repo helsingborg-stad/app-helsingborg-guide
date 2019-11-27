@@ -230,9 +230,9 @@ class MarkerScene extends Component<Props, State> {
   }
 }
 
-const mapState = (state: RootState) => {
+const mapState = (state: RootState, ownProps: ?Props) => {
   const { geolocation: { bearing, position } } = state;
-  return { bearing, position };
+  return { bearing, position, ...ownProps };
 };
 
 const mapDispatch = (dispatch: Dispatch) => ({

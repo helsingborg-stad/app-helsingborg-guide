@@ -23,6 +23,8 @@ import { AnalyticsUtils } from "../utils";
 const fontSize = 40;
 const lineDistance = 5;
 const margin = 40;
+const iconScale = 0.5;
+
 const fadeUrl = "https://api.helsingborg.se/assets/guide/images/share_fade.png";
 const iconUrl = "https://api.helsingborg.se/assets/guide/images/share_icon.png";
 
@@ -80,226 +82,195 @@ const styles = StyleSheet.create({
   },
 });
 
-export default {
-  fetch(url) {
-    const config = {
-      fileCache: true,
-      path: `${RNFetchBlob.fs.dirs.DownloadDir}/fade.png`,
-    };
+const SharedImageProperties = {
+  markerScale: 1,
+  scale: 1,
+  quality: 100,
+};
 
-    return RNFetchBlob.config(config).fetch("GET", url);
-  },
+const SharedTextProperties = { color: Colors.white, fontSize };
 
-  beginShare(title, message, url, width, height, subject, shareType) {
-    AnalyticsUtils.logEvent(shareType, { name: title });
-    // The sharing process is different on ios and android.
-    if (Platform.OS === "android") {
-      this.shareAndroid(title, message, url, width, height, subject);
-    } else {
-      this.shareIOs(title, message, url, width, height, subject);
-    }
-  },
+const getPlatformURI = (path) => Platform.OS === "ios" ? path : `file://${path}`;
 
-  shareAndroid(title, message, url, width, height, subject) {
-    // Examples: https://github.com/JimmyDaddy/react-native-image-marker/blob/master/example/example/app.js
+function beginShare(title, message, url, width, height, subject, shareType) {
+  AnalyticsUtils.logEvent(shareType, { name: title });
+  // The sharing process is different on ios and android.
+  if (Platform.OS === "android") {
+    shareAndroid(title, message, url, width, height, subject);
+  } else {
+    shareIOs(title, message, url, width, height, subject);
+  }
+}
 
-    isCreatingImage = true;
-    origin.forceUpdate();
+async function shareAndroid(title, message, url, width, height, subject) {
+  // Examples: https://github.com/JimmyDaddy/react-native-image-marker/blob/master/example/example/app.js
 
-    // First we need to download the main image.
-    const mainTask = fetchService.fetch(url);
-    return mainTask.then((mainRes) => {
-      if (mainRes) {
-        // Once we have the main image, we need to download the fade overlay. //TODO: Check if cached instead of re-downloading every time.
-        const fadeTask = fetchService.fetch(fadeUrl);
-        return fadeTask.then((fadeRes) => {
-          if (fadeRes) {
-            // Last thing we need to download is the icon for the overlay. //TODO: Check if cached instead of re-downloading every time.
-            const iconTask = fetchService.fetch(iconUrl);
-            return iconTask.then((iconRes) => {
-              if (iconRes) {
-                // Setting up the paths of the local files.
-                const localMainUrl = mainRes.path();
-                const localFadeUrl = fadeRes.path();
-                const localIconUrl = iconRes.path();
-                // Once we have all parts of the overlay, we need to get the size of the files.
-                Image.getSize(`file://${localFadeUrl}`, (fadeWidth, fadeHeight) => {
-                  Image.getSize(`file://${localIconUrl}`, async (iconWidth, iconHeight) => {
-                    // Constructing the sharing image by layering the various elements on top one after another.
-                    // Warnign: Font styles can behave weirdly on Android. If you make changes that don't look correctly, check out node_modules/react-native-image-marker/android/src/main/java/com/jimmydaddy/imagemarker/ImageMarkerManager.java: 130-143
-                    const resultA = await ImageMarker.markWithImage(localMainUrl, localFadeUrl, 0, height - fadeHeight, 1);
-                    const resultB = await ImageMarker.addText(
-                      resultA,
-                      title,
-                      margin,
-                      parseInt(height) - fontSize - margin - lineDistance,
-                      Colors.white,
-                      "Roboto-Bold",
-                      fontSize,
-                    );
-                    const resultC = await ImageMarker.addText(
-                      resultB,
-                      LangService.strings.SHARING_OVERLAY_TITLE,
-                      margin,
-                      parseInt(height) - margin,
-                      Colors.white,
-                      "Roboto",
-                      fontSize,
-                    );
-                    const resultD = await ImageMarker.markWithImage(
-                      resultC,
-                      localIconUrl,
-                      parseInt(width) - iconWidth / 2 - margin,
-                      parseInt(height) - iconHeight / 2 - margin,
-                      0.5,
-                    );
+  isCreatingImage = true;
+  origin.forceUpdate();
 
-                    // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
-                    const granted = await PermissionsAndroid.check("android.permission.READ_EXTERNAL_STORAGE");
-                    if (!granted) {
-                      const response = await PermissionsAndroid.request("android.permission.READ_EXTERNAL_STORAGE");
-                      if (!response) {
-                        // Oh. well. No share for you :(
-                        return;
-                      }
-                    }
-                    RNFetchBlob.fs.cp(resultD, `${RNFetchBlob.fs.dirs.DownloadDir}/guideHBG.jpg`).then(() => {
-                      let finalPath = `${RNFetchBlob.fs.dirs.DownloadDir}/guideHBG.jpg`;
-                      finalPath = `file://${finalPath}`;
+  // First we need to download the main image.
+  const mainRes = await fetchService.fetch(url);
+  const fadeRes = await fetchService.fetch(fadeUrl); //TODO: Check if cached instead of re-downloading every time.
+  const iconRes = await fetchService.fetch(iconUrl); //TODO: Check if cached instead of re-downloading every time.
+  // Setting up the paths of the local files.
+  const localMainUrl = getPlatformURI(mainRes.path());
+  const localFadeUrl = getPlatformURI(fadeRes.path());
+  const localIconUrl = getPlatformURI(iconRes.path());
 
-                      RNFetchBlob.fs.exists(finalPath).then((exist) => {
-                        // Only attempt to share the file if we successfully managed to move it.
-                        if (exist) {
-                          const shareImg = {
-                            title,
-                            message,
-                            subject,
-                            url: finalPath,
-                          };
-
-                          Share.open(shareImg);
-
-                          isCreatingImage = false;
-                          origin.forceUpdate();
-                        }
-                      });
-                    });
-                  });
-                });
-              }
-            });
-          }
-        });
-      }
-    });
-  },
-
-  shareIOs(title, message, url, width, height, subject) {
-    isCreatingImage = true;
-    origin.forceUpdate();
-
-    // First we need to download the main image.
-    const mainTask = fetchService.fetch(url);
-    return mainTask.then((mainRes) => {
-      if (mainRes) {
-        // Once we have all parts of the overlay, we need to get the size of the files.
-        Image.getSize(fadeUrl, (fadeWidth, fadeHeight) => {
-          Image.getSize(iconUrl, async (iconWidth, iconHeight) => {
-            // Constructing the sharing image by layering the various elements on top one after another.
-            const pixelRatio = PixelRatio.get();
-
-            const resultA = await ImageMarker.markWithImage(url, fadeUrl, 0, parseInt(height) - fadeHeight, 1);
-            const resultB = await ImageMarker.addText(
-              resultA,
-              title,
-              margin * pixelRatio,
-              parseInt(height) * pixelRatio - fontSize * (2 * pixelRatio) - margin * pixelRatio - lineDistance,
-              Colors.white,
-              "Roboto-bold",
-              fontSize * pixelRatio,
-            );
-            const resultC = await ImageMarker.addText(
-              resultB,
-              LangService.strings.SHARING_OVERLAY_TITLE,
-              margin * pixelRatio,
-              parseInt(height) * pixelRatio - fontSize * pixelRatio - margin * pixelRatio,
-              Colors.white,
-              "Roboto",
-              fontSize * pixelRatio,
-            );
-            const resultD = await ImageMarker.markWithImage(
-              resultC,
-              iconUrl,
-              parseInt(width) * pixelRatio - iconWidth - margin * pixelRatio,
-              parseInt(height) * pixelRatio - iconHeight - margin * pixelRatio,
-              1,
-            );
-
-            // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
-            iosShare.message = message;
-            iosShare.subject = subject;
-            iosShare.title = title;
-            iosShare.url = resultD;
-
-            isCreatingImage = false;
-            await origin.forceUpdate();
-          });
-        });
-      }
-    });
-  },
-
-  modalClosed() {
-    // Forcing update doesn't affect Android share overlay.
-    if (Platform.OS === "ios") {
-      Share.open(iosShare);
-    }
-  },
-
-  showShareButton(title, image, sender, shareType) {
-    origin = sender;
-    let imageUrl = image.large;
-    let imageWidth = 0;
-    let imageHeight = 0;
-
-    Image.getSize(imageUrl, (width, height) => {
-      imageWidth = width;
-      imageHeight = height;
-    });
-    // If the main image is wider than 1900, we need to use a smaller one. The largest one generated by Wordpress is unfortunately only 1000 wide, but it's better than potentially crashing the app.
-    if (imageWidth > 1900) {
-      imageUrl = image.medium;
-      Image.getSize(imageUrl, (width, height) => {
-        imageWidth = width;
-        imageHeight = height;
+  // Once we have all parts of the overlay, we need to get the size of the files.
+  Image.getSize(localFadeUrl, async (fadeWidth, fadeHeight) => {
+    Image.getSize(localIconUrl, async (iconWidth, iconHeight) => {
+      const outputImage = await watermark({
+        title,
+        source: { url: mainRes.path(), width, height },
+        fade: { url: fadeRes.path(), width: fadeWidth, height: fadeHeight },
+        icon: { url: iconRes.path(), width: iconWidth, height: iconHeight },
       });
-    }
 
-    return (
-      <View>
-        <TouchableOpacity
-          onPress={() => {
-            this.beginShare(title, "", imageUrl, imageWidth, imageHeight, title, shareType);
-          }}
-        >
-          <View style={styles.shareBoxOuter}>
-            <Image style={styles.shareIcon} source={shareIcon} />
-            <Text style={styles.shareText}>{LangService.strings.SHARE}</Text>
-          </View>
-        </TouchableOpacity>
-        <Modal visible={isCreatingImage} animationType="fade" transparent onDismiss={this.modalClosed} onRequestClose={this.modalClosed}>
-          <View>{this.loadOverlay()}</View>
-        </Modal>
-      </View>
-    );
-  },
+      // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
+      const granted = await PermissionsAndroid.check("android.permission.READ_EXTERNAL_STORAGE");
+      if (!granted) {
+        const response = await PermissionsAndroid.request("android.permission.READ_EXTERNAL_STORAGE");
+        if (!response) return // Oh. well. No share for you :(
+      }
 
-  loadOverlay() {
-    return (
-      <View style={styles.imageHolder}>
-        <Image source={Background} style={styles.image} />
-        <ActivityIndicator animating color="#bc2b78" size="large" style={styles.activityIndicator} />
-      </View>
-    );
-  },
+      await RNFetchBlob.fs.cp(outputImage, `${RNFetchBlob.fs.dirs.DownloadDir}/guideHBG.jpg`);
+      const finalPath = getPlatformURI(`${RNFetchBlob.fs.dirs.DownloadDir}/guideHBG.jpg`);
+        // Only attempt to share the file if we successfully managed to move it.
+        const exist = await RNFetchBlob.fs.exists(finalPath);
+        if (exist) {
+          Share.open({ title, message, subject, url: finalPath });
+          isCreatingImage = false;
+          origin.forceUpdate();
+        }
+    });
+  });
+}
+
+async function shareIOs(title, message, url, width, height, subject) {
+  isCreatingImage = true;
+  origin.forceUpdate();
+
+  // First we need to download the main image.
+  const mainRes = await fetchService.fetch(url);
+  if (mainRes) {
+    // Once we have all parts of the overlay, we need to get the size of the files.
+    Image.getSize(fadeUrl, async (fadeWidth, fadeHeight) => {
+      Image.getSize(iconUrl, async (iconWidth, iconHeight) => {
+        // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
+        const outputImage = await watermark({
+          title,
+          source: { url, width, height },
+          fade: { url: fadeUrl, width: fadeWidth, height: fadeHeight },
+          icon: { url: iconUrl, width: iconWidth, height: iconHeight },
+        });
+
+        iosShare.message = message;
+        iosShare.subject = subject;
+        iosShare.title = title;
+        iosShare.url = outputImage;
+
+        isCreatingImage = false;
+        await origin.forceUpdate();
+      });
+    });
+  }
+}
+
+// Constructing the sharing image by layering the various elements on top one after another.
+async function watermark(watermarkProperties) {
+  const {
+    title,
+    source: { url: sourceUrl, width: sourceWidth, height: sourceHeight },
+    fade: { url: fadeUrl, width: fadeWidth, height: fadeHeight },
+    icon: { url: iconUrl, width: iconWidth, height: iconHeight },
+  } = watermarkProperties;
+
+  // Add the fade overlay
+  const resultA = await ImageMarker.markImage({
+    src: getPlatformURI(sourceUrl),
+    markerSrc: getPlatformURI(fadeUrl),
+    X: 0,
+    Y: parseInt(sourceHeight) - fadeHeight,
+    ...SharedImageProperties,
+  });
+
+  // Add the title for the image
+  const resultB = await ImageMarker.markText({
+    src: getPlatformURI(resultA),
+    text: title,
+    X: margin,
+    Y: parseInt(sourceHeight) - fontSize * (2) - margin - lineDistance,
+    fontName: "Roboto-bold",
+    ...SharedTextProperties,
+    ...SharedImageProperties,
+  });
+
+  // Add the subtitle (currently the App name)
+  const resultC = await ImageMarker.markText({
+    src: getPlatformURI(resultB),
+    text: LangService.strings.SHARING_OVERLAY_TITLE,
+    X: margin,
+    Y: parseInt(sourceHeight) - fontSize - margin,
+    fontName: "Roboto",
+    ...SharedTextProperties,
+    ...SharedImageProperties,
+  });
+
+  // Add the icon
+  return await ImageMarker.markImage({
+    src: getPlatformURI(resultC),
+    markerSrc: getPlatformURI(iconUrl),
+    X: parseInt(sourceWidth) - (iconWidth * iconScale) - margin,
+    Y: parseInt(sourceHeight) - (iconHeight * iconScale) - margin,
+    ...SharedImageProperties,
+    markerScale: iconScale,
+  });
+}
+
+function modalClosed() {
+  if (Platform.OS === "ios") Share.open(iosShare);
+}
+
+function showShareButton(title, image, sender, shareType) {
+  origin = sender;
+  let imageUrl = image.large;
+  let imageWidth = 0;
+  let imageHeight = 0;
+
+  Image.getSize(imageUrl, (width, height) => { imageWidth = width; imageHeight = height; });
+  // If the main image is wider than 1900, we need to use a smaller one. The largest one generated by Wordpress is unfortunately only 1000 wide, but it's better than potentially crashing the app.
+  if (imageWidth > 1900) {
+    imageUrl = image.medium;
+    Image.getSize(imageUrl, (width, height) => { imageWidth = width; imageHeight = height; });
+  }
+
+  return (
+    <View>
+      <TouchableOpacity
+        onPress={() => { beginShare(title, "", imageUrl, imageWidth, imageHeight, title, shareType); }}
+      >
+        <View style={styles.shareBoxOuter}>
+          <Image style={styles.shareIcon} source={shareIcon} />
+          <Text style={styles.shareText}>{LangService.strings.SHARE}</Text>
+        </View>
+      </TouchableOpacity>
+      <Modal visible={isCreatingImage} animationType="fade" transparent onDismiss={modalClosed} onRequestClose={modalClosed}>
+        <View>{loadOverlay()}</View>
+      </Modal>
+    </View>
+  );
+}
+
+function loadOverlay() {
+  return (
+    <View style={styles.imageHolder}>
+      <Image source={Background} style={styles.image} />
+      <ActivityIndicator animating color="#bc2b78" size="large" style={styles.activityIndicator} />
+    </View>
+  );
+}
+
+export default {
+  showShareButton,
 };

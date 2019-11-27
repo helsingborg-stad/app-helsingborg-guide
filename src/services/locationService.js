@@ -1,5 +1,6 @@
-import { Alert } from "react-native";
-import Permissions from "react-native-permissions";
+import { Alert, Platform } from "react-native";
+import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions";
+import Geolocation from "@react-native-community/geolocation";
 import RNSimpleCompass from "react-native-simple-compass";
 import LangService from "./langService";
 import GeoLocationActions from "../actions/geolocationActions";
@@ -22,6 +23,8 @@ const RATIONALE = {
   message: LangService.strings.MESSAGE_LOCATION_PERMISSION,
 };
 
+const LOCATION_PERMISSION = Platform.OS === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
+
 const promptPermissions = () => {
   Alert.alert(
     LangService.strings.CHECK_LOCATION_SERVICE,
@@ -35,25 +38,25 @@ const promptPermissions = () => {
   return Promise.reject();
 };
 
-const requestPermissions = () => Permissions.request("location", RATIONALE).then((response) => {
+const requestPermissions = () => request(LOCATION_PERMISSION, RATIONALE).then((response) => {
   switch (response) {
-    case PermissionsResponse.AUTHORIZED:
+    case RESULTS.GRANTED:
       return Promise.resolve(true);
-    case PermissionsResponse.DENIED: // fallthrough
-    case PermissionsResponse.RESTRICTED: // fallthrough
-    case PermissionsResponse.UNDETERMINED:
+    case RESULTS.DENIED: // fallthrough
+    case RESULTS.BLOCKED: // fallthrough
+    case RESULTS.UNAVAILABLE:
     default:
       return promptPermissions();
   }
 });
 
-const checkPermissions = () => Permissions.check("location").then((response) => {
+const checkPermissions = () => check(LOCATION_PERMISSION).then((response) => {
   switch (response) {
-    case PermissionsResponse.AUTHORIZED:
+    case RESULTS.GRANTED:
       return Promise.resolve(true);
-    case PermissionsResponse.DENIED: // fallthrough
-    case PermissionsResponse.RESTRICTED: // fallthrough
-    case PermissionsResponse.UNDETERMINED:
+    case RESULTS.DENIED: // fallthrough
+    case RESULTS.BLOCKED: // fallthrough
+    case RESULTS.UNAVAILABLE:
       return requestPermissions();
     default:
       return Promise.reject();
@@ -61,7 +64,7 @@ const checkPermissions = () => Permissions.check("location").then((response) => 
 });
 
 const getLocation = () => new Promise((resolve, reject) => {
-  navigator.geolocation.getCurrentPosition(resolve, reject);
+  Geolocation.getCurrentPosition(resolve, reject);
 });
 
 // TODO decouple the store from this class!
@@ -95,7 +98,7 @@ export default class LocationService {
 
   subscribeGeoLocation = () => checkPermissions().then(
     () => new Promise((resolve, reject) => {
-      this.watcher = navigator.geolocation.watchPosition(
+      this.watcher = Geolocation.watchPosition(
         (position) => {
           this.store.dispatch(GeoLocationActions.geolocationUpdated(position));
           return resolve(position);
@@ -111,7 +114,7 @@ export default class LocationService {
     }),
   );
 
-  unsubscribeGeoLocation = () => this.watcher && navigator.geolocation.clearWatch(this.watcher);
+  unsubscribeGeoLocation = () => this.watcher && Geolocation.clearWatch(this.watcher);
 
   getMathDistance(coord1, coord2) {
     const x = coord2.latitude - coord1.latitude;

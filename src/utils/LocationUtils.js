@@ -1,6 +1,6 @@
 // @flow
 import { Platform } from "react-native";
-import geolib from "geolib";
+import { getDistance } from "geolib";
 import haversine from "haversine";
 
 const ios = Platform.OS === "ios";
@@ -10,7 +10,7 @@ const ARRIVE_DISTANCE = 20;
 
 function getDistanceBetweenCoordinates(firstLocation: PositionLongLat, secondLocation: PositionLongLat): number {
   if (firstLocation.latitude && firstLocation.longitude && secondLocation.latitude && secondLocation.longitude) {
-    return geolib.getDistanceSimple(firstLocation, secondLocation);
+    return getDistance(firstLocation, secondLocation);
   }
   return 0;
 }
