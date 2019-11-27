@@ -48,6 +48,7 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
+!debug.keystore
 
 # fastlane
 #
@@ -71,3 +72,6 @@ buck-out/
 # these scripts contains secrets, therefore don't check them into git
 scripts/local_build_upload*.sh
 scripts/export_options.plist
+
+# CocoaPods
+/ios/Pods/
