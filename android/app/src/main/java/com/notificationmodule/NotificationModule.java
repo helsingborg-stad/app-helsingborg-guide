@@ -9,12 +9,11 @@ import android.graphics.Color;
 import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.media.app.NotificationCompat.MediaStyle;
 import android.support.v4.media.session.MediaSessionCompat;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -84,7 +83,7 @@ public class NotificationModule extends ReactContextBaseJavaModule {
                 .setContentTitle(title)
                 .setColor(BKG_COLOR)
                 .setContentText(content)
-                .setVisibility(Notification.VISIBILITY_PUBLIC)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentIntent(PendingIntent.getActivity(context, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT));
         return mBuilder;
     }
@@ -136,27 +135,27 @@ public class NotificationModule extends ReactContextBaseJavaModule {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @ReactMethod
-    public void showMediaControl() {
-        MediaSession mMediaSession = new MediaSession(context, "GooMedia");
-
-        Notification notification = new NotificationCompat.Builder(context)
-                // Show controls on lock screen even when user hides sensitive content.
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setSmallIcon(R.drawable.notification_icon)
-                // Add media control buttons that invoke intents in your media service
-                //.addAction(R.drawable.common_google_signin_btn_icon_dark_normal, "Previous", ) // #0
-
-                // Apply the media style template
-                .setStyle(new MediaStyle()
-                        //.setShowActionsInCompactView(0 /* #1: pause button */)
-                        .setMediaSession(MediaSessionCompat.Token.fromToken(mMediaSession.getSessionToken())))
-                .setContentTitle("Wonderful music")
-                .setContentText("My Awesome Band")
-                //.setLargeIcon(albumArtBitmap)
-                .build();
-        mManager.notify(2000, notification);
-
-    }
+//    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//    @ReactMethod
+//    public void showMediaControl() {
+//        MediaSession mMediaSession = new MediaSession(context, "GooMedia");
+//
+//        Notification notification = new NotificationCompat.Builder(context)
+//                // Show controls on lock screen even when user hides sensitive content.
+//                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+//                .setSmallIcon(R.drawable.notification_icon)
+//                // Add media control buttons that invoke intents in your media service
+//                //.addAction(R.drawable.common_google_signin_btn_icon_dark_normal, "Previous", ) // #0
+//
+//                // Apply the media style template
+//                .setStyle(new Notification.MediaStyle()
+//                        //.setShowActionsInCompactView(0 /* #1: pause button */)
+//                        .setMediaSession(MediaSessionCompat.Token.fromToken(mMediaSession.getSessionToken())))
+//                .setContentTitle("Wonderful music")
+//                .setContentText("My Awesome Band")
+//                //.setLargeIcon(albumArtBitmap)
+//                .build();
+//        mManager.notify(2000, notification);
+//
+//    }
 }

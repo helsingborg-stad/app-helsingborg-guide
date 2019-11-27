@@ -1,105 +1,87 @@
 package com.guidehbg;
 
 import android.app.Application;
+import android.content.Context;
 
-import com.example.beaconmodule.BeaconPackage;
+import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.reactlibrary.RNSimpleCompassPackage;
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.RNFetchBlob.RNFetchBlobPackage;
-import com.levelasquez.androidopensettings.AndroidOpenSettingsPackage;
-import com.reactnativecommunity.webview.RNCWebViewPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.reactnativecommunity.netinfo.NetInfoPackage;
-import com.apsl.versionnumber.RNVersionNumberPackage;
-import cl.json.RNSharePackage;
-import com.jimmydaddy.imagemarker.ImageMarkerPackage;
-import com.horcrux.svg.SvgPackage;
-import io.invertase.firebase.RNFirebasePackage;
-import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.reactnative.photoview.PhotoViewPackage;
-import com.airbnb.android.react.maps.MapsPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-
-import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+
+import com.viromedia.bridge.ReactViroPackage;
 
 import com.mediamodule.MediaControlPackage;
 import com.mediamodule.MediaPackage;
 import com.notificationmodule.NotificationPackage;
-import com.settingsmodule.SettingsPackage;
-import com.configmodule.ConfigurationPackage;
 
-import com.fullscreenvideomodule.FullScreenVideoModule;
-import com.viromedia.bridge.ReactViroPackage;
+public class MainApplication extends Application implements ReactApplication {
 
-import java.util.Arrays;
-import java.util.List;
-
-import cl.json.ShareApplication;
-
-public class MainApplication extends Application implements ShareApplication, ReactApplication {
-
-    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+  private final ReactNativeHost mReactNativeHost =
+      new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
-            return BuildConfig.DEBUG;
+          return BuildConfig.DEBUG;
         }
 
         @Override
         protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new RNSimpleCompassPackage(),
-                new AsyncStoragePackage(),
-                new AndroidOpenSettingsPackage(),
-                new RNCWebViewPackage(),
-                new RNGestureHandlerPackage(),
-                new NetInfoPackage(),
-                new RNVersionNumberPackage(),
-                new RNSharePackage(),
-                new ImageMarkerPackage(),
-                new SvgPackage(),
-                new RNFirebasePackage(),
-                new RNFirebaseAnalyticsPackage(),
-                new PhotoViewPackage(),
-                new BeaconPackage(),
-                new VectorIconsPackage(),
-                new MapsPackage(),
-                new ReactVideoPackage(),
-                new RNFetchBlobPackage(),
-                new NotificationPackage(),
-                new SettingsPackage(),
-                new MediaPackage(),
-                new MediaControlPackage(),
-                new AppPackages(),
-                new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("GVR"))
-            );
+          @SuppressWarnings("UnnecessaryLocalVariable")
+          List<ReactPackage> packages = new PackageList(this).getPackages();
+          // Packages that cannot be autolinked yet can be added manually here, for example:
+          // packages.add(new MyReactNativePackage());
+          packages.add(new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("GVR")));
+          packages.add(new MediaPackage());
+          packages.add(new MediaControlPackage());
+          packages.add(new NotificationPackage());
+          return packages;
         }
 
         @Override
         protected String getJSMainModuleName() {
-            return "index";
+          return "index";
         }
-    };
+      };
 
-    @Override
-    public String getFileProviderAuthority() {
-        return "com.guidehbg.provider";
-    }
+  @Override
+  public ReactNativeHost getReactNativeHost() {
+    return mReactNativeHost;
+  }
 
-    @Override
-    public ReactNativeHost getReactNativeHost() {
-        return mReactNativeHost;
-    }
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false);
+    initializeFlipper(this); // Remove this line if you don't want Flipper enabled
+  }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        SoLoader.init(this, /* native exopackage */ false);
+  /**
+   * Loads Flipper in React Native templates.
+   *
+   * @param context
+   */
+  private static void initializeFlipper(Context context) {
+    if (BuildConfig.DEBUG) {
+      try {
+        /*
+         We use reflection here to pick up the class that initializes Flipper,
+        since Flipper library is not available in release mode
+        */
+        Class<?> aClass = Class.forName("com.facebook.flipper.ReactNativeFlipper");
+        aClass.getMethod("initializeFlipper", Context.class).invoke(null, context);
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      }
     }
+  }
 }
+
+
