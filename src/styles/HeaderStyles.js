@@ -5,13 +5,13 @@ import TextStyles from "./TextStyles";
 const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: Colors.darkPurple,
-    borderBottomWidth: 0,
+    borderBottomWidth: 0
   },
   noElevation: {
     backgroundColor: Colors.darkPurple,
     borderBottomWidth: 0,
-    elevation: 0,
-  },
+    elevation: 0
+  }
 });
 
 const defaultHeader = {
@@ -19,7 +19,7 @@ const defaultHeader = {
   headerTintColor: Colors.menuButtonWhite,
   headerTitleStyle: TextStyles.headerTitleLabel,
   headerBackTitleStyle: TextStyles.defaultFontFamily,
-  headerBackTitle: " ",
+  headerBackTitle: " "
 };
 
 const noElevation = {
@@ -27,10 +27,10 @@ const noElevation = {
   headerTintColor: Colors.white,
   headerTitleStyle: TextStyles.headerTitleLabel,
   headerBackTitleStyle: TextStyles.defaultFontFamily,
-  headerBackTitle: " ",
+  headerBackTitle: " "
 };
 
 export default {
   default: defaultHeader,
-  noElevation,
+  noElevation
 };

@@ -1,18 +1,20 @@
 // @flow
 
-
 const initialState: GuideGroupState = {
   isFetching: false,
-  items: [],
+  items: []
 };
 
-export default function guideGroupReducer(state: GuideGroupState = initialState, action: Action): GuideGroupState {
+export default function guideGroupReducer(
+  state: GuideGroupState = initialState,
+  action: Action
+): GuideGroupState {
   switch (action.type) {
     case "FETCH_GUIDEGROUPS_REQUEST":
       return { ...state, isFetching: true };
     case "FETCH_GUIDEGROUPS_SUCCESS": {
       const items = [...state.items];
-      action.guideGroups.forEach((g) => {
+      action.guideGroups.forEach(g => {
         const index = items.findIndex(item => item.id === g.id);
         if (index >= 0) {
           // replace

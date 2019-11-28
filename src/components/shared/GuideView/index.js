@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Dimensions,
+  Dimensions
 } from "react-native";
 import ExpandableView from "../ExpandableView";
 import { TextStyles } from "../../../styles";
@@ -51,7 +51,7 @@ class GuideView extends Component<Props> {
 
   renderContentObjects = (
     sessionId: number,
-    contentObjects: ContentObject[],
+    contentObjects: ContentObject[]
   ) => (
     <View style={styles.objectsContainer}>
       {contentObjects.map(item => this.renderContentObject(sessionId, item))}
@@ -70,7 +70,12 @@ class GuideView extends Component<Props> {
               style={styles.image}
             />
             <View style={styles.shareBtn}>
-              {SharingService.showShareButton(guide.name, guide.images, this, "share_guide")}
+              {SharingService.showShareButton(
+                guide.name,
+                guide.images,
+                this,
+                "share_guide"
+              )}
             </View>
           </View>
           <DownloadButtonContainer style={styles.downloadButton} />

@@ -17,22 +17,22 @@ const styles = StyleSheet.create({
     width: 120,
     height: 44,
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "flex-end"
   },
   barButtonItemImage: {
-    margin: 5,
+    margin: 5
   },
   barButtonItemText: StyleSheetUtils.flatten([
-    TextStyles.description, {
-      color: Colors.white,
-    },
-  ]),
+    TextStyles.description,
+    {
+      color: Colors.white
+    }
+  ])
 });
 
-declare type Props =
-  {
-    onToggleInfoOverlay: () => (void),
-  }
+declare type Props = {
+  onToggleInfoOverlay: () => void
+};
 
 export default function InfoOverlayToggleView(props: Props) {
   const button = (

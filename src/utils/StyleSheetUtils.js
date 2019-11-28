@@ -1,6 +1,4 @@
-import {
-  StyleSheet,
-} from "react-native";
+import { StyleSheet } from "react-native";
 
 function flatten(style: any): Object {
   return StyleSheet.flatten(style);
@@ -9,7 +7,7 @@ function flatten(style: any): Object {
 export default {
   concat: (...args: any[]) => {
     let result = [];
-    args.forEach((arg) => {
+    args.forEach(arg => {
       if (arg) {
         const type = typeof arg;
         if (Array.isArray(arg)) {
@@ -24,5 +22,5 @@ export default {
     return result;
   },
 
-  flatten,
+  flatten
 };

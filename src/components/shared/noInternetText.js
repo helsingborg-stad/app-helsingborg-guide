@@ -6,22 +6,22 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   noInternetContainer: {
-    flex: 1,
+    flex: 1
   },
   iconContainer: { flex: 1, alignItems: "center", maxWidth: 30 },
   icon: {},
   bigTextContainer: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   bigText: {
     fontSize: 12,
-    color: "white",
-  },
+    color: "white"
+  }
 });
 
 export default class NoInternetText extends Component {
@@ -35,7 +35,9 @@ export default class NoInternetText extends Component {
       <View style={styles.wrapper}>
         <View style={styles.noInternetContainer}>
           <View style={styles.bigTextContainer}>
-            <Text style={styles.bigText}>{LangService.strings.NO_INTERNET_CONNECTION}</Text>
+            <Text style={styles.bigText}>
+              {LangService.strings.NO_INTERNET_CONNECTION}
+            </Text>
           </View>
         </View>
       </View>

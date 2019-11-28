@@ -14,7 +14,7 @@ const config = {
   storage: AsyncStorage,
   blacklist: ["error", "menu", "internet", "audio", "uiState"],
   version: 1,
-  debug: __DEV__,
+  debug: __DEV__
 };
 
 const reducer = persistCombineReducers(config, reducers);
@@ -24,14 +24,12 @@ const middlewares = [
   offlineDataMiddleware,
   audioMiddleware,
   navigationMiddleware,
-  thunk,
+  thunk
 ];
 
 if (__DEV__) {
   // Middlewares used only in debug
-  middlewares.push(
-    reduxImmutableStateInvariant(),
-  );
+  middlewares.push(reduxImmutableStateInvariant());
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -39,16 +37,12 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export default function configureStore() {
   const store = createStore(
     reducer,
-    composeEnhancers(
-      applyMiddleware(
-        ...middlewares,
-      ),
-    ),
+    composeEnhancers(applyMiddleware(...middlewares))
   );
   const persistor = persistStore(store);
 
   return {
     store,
-    persistor,
+    persistor
   };
 }

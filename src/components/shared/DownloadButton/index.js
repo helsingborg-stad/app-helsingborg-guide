@@ -6,7 +6,7 @@ import {
   ProgressBarAndroid,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -18,7 +18,7 @@ import {
   startDownloadGuide,
   pauseDownloadGuide,
   cancelDownloadGuide,
-  resumeDownloadGuide,
+  resumeDownloadGuide
 } from "../../../actions/downloadGuidesActions";
 import AnalyticsUtils from "../../../utils/AnalyticsUtils";
 
@@ -58,7 +58,7 @@ function renderProgressbar(progress: number) {
 
 export class DownloadButton extends Component<Props> {
   static defaultProps = {
-    style: {},
+    style: {}
   };
 
   renderPaused = () => {
@@ -98,8 +98,8 @@ export class DownloadButton extends Component<Props> {
       status === "stopped"
         ? LangService.strings.DOWNLOAD
         : `${LangService.strings.DOWNLOADING} ${percentage}% ${
-          LangService.strings.DOWNLOADING_PAUSE
-        }`;
+            LangService.strings.DOWNLOADING_PAUSE
+          }`;
     return (
       <View style={styles.textContainer}>
         <IconTextTouchable
@@ -110,7 +110,7 @@ export class DownloadButton extends Component<Props> {
               if (status === "stopped") {
                 this.props.startDownload(currentGuide);
                 AnalyticsUtils.logEvent("download_guide", {
-                  name: currentGuide.slug,
+                  name: currentGuide.slug
                 });
               } else if (status === "pending") {
                 this.props.pauseDownload(currentGuide);
@@ -159,7 +159,7 @@ function mapStateToProps(state: RootState) {
   return {
     currentGuide,
     progress,
-    status,
+    status
   };
 }
 
@@ -168,11 +168,11 @@ function mapDispatchToProps(dispatch: Dispatch) {
     startDownload: (guide: Guide) => dispatch(startDownloadGuide(guide)),
     pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
     cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
-    resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
+    resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide))
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(DownloadButton);

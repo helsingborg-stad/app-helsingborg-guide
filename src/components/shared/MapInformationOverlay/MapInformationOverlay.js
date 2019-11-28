@@ -28,7 +28,7 @@ function renderTitle(trailInformation: TrailInformation) {
 
 function renderShareButton(
   trailInformation: TrailInformation,
-  renderingComponent: Component<*>,
+  renderingComponent: Component<*>
 ) {
   if (trailInformation.title && trailInformation.image) {
     return (
@@ -37,7 +37,7 @@ function renderShareButton(
           trailInformation.title,
           trailInformation.image,
           renderingComponent,
-          "share_guide",
+          "share_guide"
         )}
       </View>
     );
@@ -47,7 +47,7 @@ function renderShareButton(
 
 function renderScrollableContent(
   trailInformation: TrailInformation,
-  renderingComponent: Component<*>,
+  renderingComponent: Component<*>
 ) {
   const style = trailInformation.title
     ? styles.scrollView
@@ -62,7 +62,6 @@ function renderScrollableContent(
   );
 }
 
-// eslint-disable-next-line react/prefer-stateless-function
 class MapInformationOverlay extends Component<Props> {
   render() {
     return (

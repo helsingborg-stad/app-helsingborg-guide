@@ -3,19 +3,20 @@ import { TextStyles, Colors } from "../../../styles";
 
 export default StyleSheet.create({
   collapsed: {
-    overflow: "hidden",
+    overflow: "hidden"
   },
   readMoreText: StyleSheet.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 16,
       fontWeight: "500",
-      color: Colors.purple,
-    },
+      color: Colors.purple
+    }
   ]),
   alphaGradient: {
     position: "absolute",
     width: "100%",
     height: 30,
-    bottom: 0,
-  },
+    bottom: 0
+  }
 });

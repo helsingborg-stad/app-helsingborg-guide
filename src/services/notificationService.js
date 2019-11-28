@@ -6,7 +6,7 @@ const _DefaultExtNotification = {
   title: "Extended Notification",
   content: "Drag down to see more",
   big_content_title: "Some Important Things",
-  ext_content: ["line 1", "line 2", "line 3", "line 4"],
+  ext_content: ["line 1", "line 2", "line 3", "line 4"]
 };
 
 export default {
@@ -15,11 +15,15 @@ export default {
   },
 
   showMediaNotification(title, content, id) {
-    if (Platform.OS === "android") Notifier.showMediaNotification(title, content, id);
+    if (Platform.OS === "android") {
+      Notifier.showMediaNotification(title, content, id);
+    }
   },
 
   closeNotification(id) {
-    if (Platform.OS === "android") Notifier.closeNotification(id);
+    if (Platform.OS === "android") {
+      Notifier.closeNotification(id);
+    }
   },
 
   closeNotifications() {
@@ -33,5 +37,5 @@ export default {
 
   showMediaControl() {
     Notifier.showMediaControl();
-  },
+  }
 };

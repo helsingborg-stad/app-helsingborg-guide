@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import OImage from "./image";
 
 const FULL_WIDTH = Dimensions.get("window").width;
-const IMAGE_WIDTH = (FULL_WIDTH / 2) - (FULL_WIDTH / 10);
+const IMAGE_WIDTH = FULL_WIDTH / 2 - FULL_WIDTH / 10;
 
 const styles = StyleSheet.create({
   thumbnail: {
@@ -12,13 +12,19 @@ const styles = StyleSheet.create({
     borderColor: "#ebebeb",
     backgroundColor: "white",
     justifyContent: "flex-start",
-    alignItems: "center",
+    alignItems: "center"
   },
   image: {
     width: IMAGE_WIDTH,
-    height: IMAGE_WIDTH,
+    height: IMAGE_WIDTH
   },
-  bodyContainer: { maxWidth: IMAGE_WIDTH, minWidth: IMAGE_WIDTH, flex: 4, justifyContent: "flex-start", alignItems: "flex-start" },
+  bodyContainer: {
+    maxWidth: IMAGE_WIDTH,
+    minWidth: IMAGE_WIDTH,
+    flex: 4,
+    justifyContent: "flex-start",
+    alignItems: "flex-start"
+  },
   checkedContainer: {
     width: 30,
     height: 30,
@@ -28,11 +34,18 @@ const styles = StyleSheet.create({
     left: 0,
     zIndex: 1000,
     justifyContent: "center",
-    alignItems: "center",
-  },
+    alignItems: "center"
+  }
 });
 
-export default class ContentThumbnail extends Component {
+type Props = {
+  checked: any,
+  imageSource: any,
+  guideID: any,
+  children: Array
+};
+
+export default class ContentThumbnail extends Component<Props> {
   displayImage() {
     const checkMarkIcon = (
       <View style={styles.checkedContainer}>
@@ -42,7 +55,11 @@ export default class ContentThumbnail extends Component {
     const checkMark = this.props.checked ? checkMarkIcon : null;
 
     return (
-      <OImage style={[{ width: IMAGE_WIDTH, height: IMAGE_WIDTH }, styles.image]} source={this.props.imageSource} guideID={this.props.guideID}>
+      <OImage
+        style={[{ width: IMAGE_WIDTH, height: IMAGE_WIDTH }, styles.image]}
+        source={this.props.imageSource}
+        guideID={this.props.guideID}
+      >
         {checkMark}
       </OImage>
     );

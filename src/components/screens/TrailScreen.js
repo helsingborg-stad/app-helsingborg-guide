@@ -14,11 +14,11 @@ type Props = {
   currentGuide: Guide,
   navigation: Object,
   dispatchReleaseAudio(): void,
-  dispatchShowBottomBar(visible: boolean): void,
+  dispatchShowBottomBar(visible: boolean): void
 };
 
 type State = {
-  showInfoOverlay: boolean,
+  showInfoOverlay: boolean
 };
 
 class TrailScreen extends Component<Props, State> {
@@ -32,7 +32,9 @@ class TrailScreen extends Component<Props, State> {
     }
     return {
       title,
-      headerRight: <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />,
+      headerRight: (
+        <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />
+      )
     };
   };
 
@@ -40,13 +42,13 @@ class TrailScreen extends Component<Props, State> {
     super(props);
 
     this.state = {
-      showInfoOverlay: true,
+      showInfoOverlay: true
     };
   }
 
   componentDidMount() {
     this.props.navigation.setParams({
-      toggleInfoOverlay: this.toggleInfoOverlay,
+      toggleInfoOverlay: this.toggleInfoOverlay
     });
   }
 
@@ -61,7 +63,10 @@ class TrailScreen extends Component<Props, State> {
   toggleInfoOverlay = () => {
     const { showInfoOverlay } = this.state;
 
-    AnalyticsUtils.logEvent(showInfoOverlay ? "close_info_overlay" : "open_info_overlay", { name: this.props.currentGuide.slug });
+    AnalyticsUtils.logEvent(
+      showInfoOverlay ? "close_info_overlay" : "open_info_overlay",
+      { name: this.props.currentGuide.slug }
+    );
 
     this.setState({ showInfoOverlay: !showInfoOverlay });
   };
@@ -90,11 +95,12 @@ function mapStateToProps(state: RootState) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     dispatchReleaseAudio: () => dispatch(releaseAudioFile()),
-    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
+    dispatchShowBottomBar: (visible: boolean) =>
+      dispatch(showBottomBar(visible))
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(TrailScreen);

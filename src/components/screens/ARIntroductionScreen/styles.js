@@ -12,7 +12,7 @@ export default StyleSheet.create({
     alignItems: "center",
     flex: 1,
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   instructions: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -21,11 +21,11 @@ export default StyleSheet.create({
       letterSpacing: 0.09,
       lineHeight: 23,
       marginHorizontal: 40,
-      textAlign: "center",
-    },
+      textAlign: "center"
+    }
   ]),
   outerContainer: {
-    height: ScreenHeight,
+    height: ScreenHeight
   },
   startButton: {
     alignItems: "center",
@@ -36,15 +36,15 @@ export default StyleSheet.create({
     justifyContent: "center",
     margin: 30,
     textAlign: "center",
-    width: ButtonWidth,
+    width: ButtonWidth
   },
   startButtonText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       fontSize: 16,
       fontWeight: "bold",
-      color: Colors.white,
-    },
+      color: Colors.white
+    }
   ]),
   title: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -56,7 +56,7 @@ export default StyleSheet.create({
       lineHeight: 36,
       marginHorizontal: 20,
       marginTop: 70,
-      textAlign: "center",
-    },
-  ]),
+      textAlign: "center"
+    }
+  ])
 });

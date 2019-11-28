@@ -17,24 +17,55 @@ const styles = StyleSheet.create({
   mapViewContainer: {
     flex: 4,
     justifyContent: "flex-start",
-    alignItems: "stretch",
+    alignItems: "stretch"
   },
   map: { flex: 1 },
 
   listViewContainer: {
-    flex: 3,
+    flex: 3
   },
 
   itemsScroll: {
     justifyContent: "flex-start",
     alignItems: "center",
     paddingHorizontal: THUMBNAIL_WIDTH / 5,
-    backgroundColor: "#fefefe",
-  },
+    backgroundColor: "#fefefe"
+  }
 });
 
-export default class MapThumbnailsView extends Component {
-  constructor(props) {
+type Props = {
+  items: any,
+  markers: any,
+  active: any,
+  connected: any,
+  renderRow: any,
+  mapFlex: any
+};
+
+type State = {
+  region: any,
+  items: any,
+  markers: any,
+  active: any,
+  connected: any
+};
+
+export default class MapThumbnailsView extends Component<Props, State> {
+  static getDerivedStatefromProps(nextProps: Props, prevState: State) {
+    const { items, active, markers, connected } = nextProps;
+    const { items: previousItems, connected: previouslyConnected } = prevState;
+
+    if (
+      items.length !== previousItems.length ||
+      connected !== previouslyConnected
+    ) {
+      return { items, active, markers, connected };
+    }
+
+    return null;
+  }
+
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -42,25 +73,14 @@ export default class MapThumbnailsView extends Component {
         latitude: 56.04765769999999,
         longitude: 12.6888389,
         latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        longitudeDelta: 0.0421
       },
       items: this.props.items || [],
       markers: this.props.markers || [],
       active: this.props.active || {}, // item which is slided to.
-      connected: this.props.connected,
+      connected: this.props.connected
     };
     this.locationService = LocationService.getInstance();
-  }
-
-  static getDerivedStatefromProps(nextProps, prevState) {
-    const { items, active, markers, connected } = nextProps;
-    const { items: previousItems, connected: previouslyConnected } = prevState;
-
-    if (items.length !== previousItems.length || connected !== previouslyConnected) {
-      return { items, active, markers, connected };
-    }
-
-    return null;
   }
 
   componentDidMount() {
@@ -74,19 +94,27 @@ export default class MapThumbnailsView extends Component {
   }
 
   componentWillUnmount() {
-    if (this.markersTimeout) clearTimeout(this.markersTimeout);
+    if (this.markersTimeout) {
+      clearTimeout(this.markersTimeout);
+    }
 
     this.locationService.clearWatch();
   }
 
   sortItemsList(position) {
     const items = [];
-    this.state.markers.forEach((marker) => {
-      const mathDistance = this.locationService.getMathDistance(position.coords, marker.location);
+    this.state.markers.forEach(marker => {
+      const mathDistance = this.locationService.getMathDistance(
+        position.coords,
+        marker.location
+      );
       // make copy to not mutate the state by adding distance to the object.
-      const item = Object.assign({}, this.state.items.find(item => item.id === marker.itemId));
-      item.distance = mathDistance;
-      items.push(item);
+      const foundItem = Object.assign(
+        {},
+        this.state.items.find(item => item.id === marker.itemId)
+      );
+      foundItem.distance = mathDistance;
+      items.push(foundItem);
     });
     items.sort((a, b) => a.distance - b.distance);
     this.setState({ items, active: items[0] });
@@ -99,7 +127,9 @@ export default class MapThumbnailsView extends Component {
 
   _onMarkerPressed(marker) {
     if (this.state.items && this.state.items.length) {
-      const itemIndex = this.state.items.findIndex(item => item.id === marker.itemId);
+      const itemIndex = this.state.items.findIndex(
+        item => item.id === marker.itemId
+      );
       this.scrollToItem(itemIndex, false);
     }
   }
@@ -110,11 +140,16 @@ export default class MapThumbnailsView extends Component {
   }
 
   _showMarkers() {
-    if (!this.state.markers.length || !Object.keys(this.state.active).length) return null;
+    if (!this.state.markers.length || !Object.keys(this.state.active).length) {
+      return null;
+    }
     const activeItem = this.state.active.id;
-    return this.state.markers.map((marker) => {
-      if (!marker.location.latitude || !marker.location.latitude) return null;
-      const image = marker.itemId === activeItem ? markerImageActive : markerImageInActive;
+    return this.state.markers.map(marker => {
+      if (!marker.location.latitude || !marker.location.latitude) {
+        return null;
+      }
+      const image =
+        marker.itemId === activeItem ? markerImageActive : markerImageInActive;
       return (
         <MapView.Marker
           key={marker.itemId}
@@ -132,7 +167,7 @@ export default class MapThumbnailsView extends Component {
       top: 100,
       right: 50,
       bottom: 20,
-      left: 50,
+      left: 50
     };
     const options = { edgePadding, animated: true };
     this.map.fitToCoordinates(markers.map(marker => marker.location), options);
@@ -142,7 +177,7 @@ export default class MapThumbnailsView extends Component {
   sortGuidegroups() {
     this.locationService
       .getGeoLocation()
-      .then((position) => {
+      .then(position => {
         this.sortItemsList(position);
       })
       .catch(err => console.log("error in location", err));
@@ -151,24 +186,30 @@ export default class MapThumbnailsView extends Component {
   // ########################################3
 
   onScroll(e) {
-    if (!this.state.markers.length) return;
+    if (!this.state.markers.length) {
+      return;
+    }
 
     const xOffset = e.nativeEvent.contentOffset.x;
     const index = Math.abs(parseInt(xOffset / (THUMBNAIL_WIDTH - 20)));
 
     if (this.state.items[index].id !== this.state.active.id) {
       this.setState({ active: this.state.items[index] });
-      const correspondingMarker = this.state.markers.find(marker => marker.itemId === this.state.items[index].id);
+      const correspondingMarker = this.state.markers.find(
+        marker => marker.itemId === this.state.items[index].id
+      );
       this.map.animateToRegion(correspondingMarker.location);
     }
   }
 
   displayList() {
-    if (!this.state.items.length) return null;
+    if (!this.state.items.length) {
+      return null;
+    }
     return (
       <ListView
         contentContainerStyle={styles.itemsScroll}
-        ref={(ref) => {
+        ref={ref => {
           this.itemsListView = ref;
         }}
         enableEmptySections
@@ -192,18 +233,22 @@ export default class MapThumbnailsView extends Component {
   }
 
   displayListSection() {
-    if (!this.state.connected && !this.state.items.length) return this.displayNoInternet();
+    if (!this.state.connected && !this.state.items.length) {
+      return this.displayNoInternet();
+    }
     return this.displayList();
   }
 
   render() {
-    const mapFlexStyle = this.props.mapFlex ? { flex: this.props.mapFlex } : null;
+    const mapFlexStyle = this.props.mapFlex
+      ? { flex: this.props.mapFlex }
+      : null;
     return (
       <ViewContainer>
         <View style={[styles.mapViewContainer, mapFlexStyle]}>
           <MapView
             style={styles.map}
-            ref={(ref) => {
+            ref={ref => {
               this.map = ref;
             }}
             initialRegion={this.state.region}
@@ -215,7 +260,9 @@ export default class MapThumbnailsView extends Component {
           </MapView>
         </View>
 
-        <View style={styles.listViewContainer}>{this.displayListSection()}</View>
+        <View style={styles.listViewContainer}>
+          {this.displayListSection()}
+        </View>
       </ViewContainer>
     );
   }

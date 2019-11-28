@@ -3,7 +3,11 @@
 import { API_BASE_URL } from "../data/repo/endpoints";
 import { validate } from "./JSONValidator";
 
-async function fetchJSON(relativeUrl: string, langCode: string, params?: ?string): Promise<any> {
+async function fetchJSON(
+  relativeUrl: string,
+  langCode: string,
+  params?: ?string
+): Promise<any> {
   let url = `${API_BASE_URL}/${relativeUrl}/?lang=${langCode}`;
   if (params) {
     url += params;
@@ -33,19 +37,28 @@ function validateData(data: any, scheme: string): any[] {
   return validatedData;
 }
 function idsToParamString(ids: number[]): ?string {
-  if (ids.length === 0) { return null; }
+  if (ids.length === 0) {
+    return null;
+  }
 
   let params = "&include=";
   params += ids.reduce((sum, id, index) => {
-    if (index === 0) { return id; }
+    if (index === 0) {
+      return id;
+    }
 
     return `${sum},${id}`;
   }, "");
   return params;
 }
 
-async function getGuideGroups(langCode: string, ids: number[]): Promise<GuideGroup[]> {
-  if (ids.length === 0) return [];
+async function getGuideGroups(
+  langCode: string,
+  ids: number[]
+): Promise<GuideGroup[]> {
+  if (ids.length === 0) {
+    return [];
+  }
 
   const params = idsToParamString(ids);
   const json = await fetchJSON("guidegroup", langCode, params);
@@ -55,7 +68,9 @@ async function getGuideGroups(langCode: string, ids: number[]): Promise<GuideGro
 }
 
 async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
-  if (ids.length === 0) return [];
+  if (ids.length === 0) {
+    return [];
+  }
 
   const params = idsToParamString(ids);
 
@@ -65,7 +80,10 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
   return fetchedGuides;
 }
 
-async function getGuidesForGuideGroup(langCode: string, guideGroupId: number): Promise<Guide[]> {
+async function getGuidesForGuideGroup(
+  langCode: string,
+  guideGroupId: number
+): Promise<Guide[]> {
   const params = `&guideGroupId=${guideGroupId}`;
   const json = await fetchJSON("guide", langCode, params);
   const fetchedGuides: Guide[] = validateData(json, "guide");
@@ -73,9 +91,14 @@ async function getGuidesForGuideGroup(langCode: string, guideGroupId: number): P
   return fetchedGuides;
 }
 
-export async function getNavigation(langCode: string): Promise<NavigationCategory[]> {
+export async function getNavigation(
+  langCode: string
+): Promise<NavigationCategory[]> {
   const json = await fetchJSON("navigation", langCode);
-  const fetchedNavigation: NavigationCategory[] = validateData(json, "navigationCategory");
+  const fetchedNavigation: NavigationCategory[] = validateData(
+    json,
+    "navigationCategory"
+  );
 
   return fetchedNavigation;
 }
@@ -84,5 +107,5 @@ export default {
   getGuideGroups,
   getGuides,
   getGuidesForGuideGroup,
-  getNavigation,
+  getNavigation
 };

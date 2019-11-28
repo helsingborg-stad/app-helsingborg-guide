@@ -8,16 +8,17 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
-    paddingHorizontal: 14,
+    paddingHorizontal: 14
   },
   text: StyleSheetUtils.flatten([
-    TextStyles.description, {
+    TextStyles.description,
+    {
       color: Colors.white,
-      marginRight: 8,
-    },
+      marginRight: 8
+    }
   ]),
   image: {
     height: 17,
-    width: 16,
-  },
+    width: 16
+  }
 });

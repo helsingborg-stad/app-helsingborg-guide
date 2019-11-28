@@ -5,26 +5,30 @@ import ViewContainer from "../shared/view_container";
 import VideoPlayer from "../shared/VideoPlayer";
 import Colors from "../../styles/Colors";
 
-import { isFileInCache, getFilePathInCache } from "../../utils/DownloadMediaUtils";
+import {
+  isFileInCache,
+  getFilePathInCache
+} from "../../utils/DownloadMediaUtils";
 
 const styles = StyleSheet.create({
-  mainContainer: { backgroundColor: "black" },
+  safeArea: { flex: 1, backgroundColor: Colors.black },
+  mainContainer: { backgroundColor: "black" }
 });
 
 export default class VideoScreen extends Component {
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-  }
-
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     return {
       title,
       headerRight: null,
       headerStyle: styles.mainContainer,
-      tabBarVisible: false,
+      tabBarVisible: false
     };
-  }
+  };
+
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -37,7 +41,7 @@ export default class VideoScreen extends Component {
 
     console.log(`video URL: ${uri}`);
 
-    this.setState({ url: uri });
+    this.setState({ url: uri }); //eslint-disable-line react/no-did-mount-set-state
   }
 
   componentWillUnmount() {
@@ -45,25 +49,32 @@ export default class VideoScreen extends Component {
   }
 
   tryLoadFromCache = async (guideId, uri) => {
-    if (!guideId || !uri) throw new Error("Null params passed");
+    if (!guideId || !uri) {
+      throw new Error("Null params passed");
+    }
 
     try {
       const isInCache = await isFileInCache(`${guideId}`, uri);
-      if (isInCache) { return `file://${getFilePathInCache(`${guideId}`, uri)}`; } return uri;
+      if (isInCache) {
+        return `file://${getFilePathInCache(`${guideId}`, uri)}`;
+      }
+      return uri;
     } catch (err) {
       // do not care
       return uri;
     }
-  }
+  };
 
   displayVideoPlayer() {
-    if (this.state.url) return <VideoPlayer filePath={this.state.url} />;
+    if (this.state.url) {
+      return <VideoPlayer filePath={this.state.url} />;
+    }
     return null;
   }
 
   displayVideo() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: Colors.black }}>
+      <SafeAreaView style={styles.safeArea}>
         <ViewContainer style={styles.mainContainer}>
           {this.displayVideoPlayer()}
         </ViewContainer>

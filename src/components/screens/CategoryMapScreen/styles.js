@@ -4,19 +4,19 @@ import { Colors } from "../../../styles";
 export default StyleSheet.create({
   container: {
     padding: "4%",
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.white
   },
   footer: {
-    paddingVertical: 10,
+    paddingVertical: 10
   },
   mapButton: {
     position: "absolute",
     right: -5,
-    bottom: "2%",
+    bottom: "2%"
   },
   mapIcon: {
     width: 90,
-    height: 90,
+    height: 90
   },
   barButtonItem: {
     flex: 1,
@@ -25,6 +25,6 @@ export default StyleSheet.create({
     justifyContent: "center",
     opacity: 0.75,
     paddingHorizontal: 14,
-    color: Colors.white,
-  },
+    color: Colors.white
+  }
 });

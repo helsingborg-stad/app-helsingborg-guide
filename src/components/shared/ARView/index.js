@@ -21,7 +21,7 @@ const ARState = {
   TRANSIENT: "AR_TRANSIENT",
   SUPPORTED: "AR_SUPPORTED",
   UNKNOWN: "AR_UNKNOWN",
-  UNSUPPORTED: "AR_UNSUPPORTED",
+  UNSUPPORTED: "AR_UNSUPPORTED"
 };
 
 type Props = {
@@ -30,11 +30,11 @@ type Props = {
   activeMarker: MapItem,
   onArMarkerPressed: ?(index: number) => void,
   arSupported: boolean,
-  onCameraPermissionDenied: ?() => void,
+  onCameraPermissionDenied: ?() => void
 };
 
 type State = {
-  cameraPermission: ?boolean,
+  cameraPermission: ?boolean
 };
 
 export default class ARView extends Component<Props, State> {
@@ -59,14 +59,20 @@ export default class ARView extends Component<Props, State> {
           }
         });
     } else {
-      this.setState({ cameraPermission: false });
+      this.setState({ cameraPermission: false }); //eslint-disable-line react/no-did-mount-set-state
     }
   }
 
   render() {
     const {
       state: { cameraPermission },
-      props: { items, userLocation, activeMarker, onArMarkerPressed, arSupported },
+      props: {
+        items,
+        userLocation,
+        activeMarker,
+        onArMarkerPressed,
+        arSupported
+      }
     } = this;
 
     if (cameraPermission !== null) {
@@ -80,17 +86,27 @@ export default class ARView extends Component<Props, State> {
                   items,
                   userLocation,
                   activeMarker,
-                  onArMarkerPressed,
+                  onArMarkerPressed
                 }}
                 autofocus
                 apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
                 worldAlignment="GravityAndHeading"
               />
-              <OffscreenMarkersView items={items} userLocation={userLocation} activeMarker={activeMarker} pointerEvents="none" />
+              <OffscreenMarkersView
+                items={items}
+                userLocation={userLocation}
+                activeMarker={activeMarker}
+                pointerEvents="none"
+              />
               <OffscreenHintView />
             </View>
           ) : (
-            <View style={[styles.unsupportedContainer, { paddingTop: SegmentControlHeight + 10 }]}>
+            <View
+              style={[
+                styles.unsupportedContainer,
+                { paddingTop: SegmentControlHeight + 10 }
+              ]}
+            >
               <InstructionIllustration
                 speechBubbleText={LangService.strings.AR_NOT_SUPPORTED_CALLOUT.toUpperCase()}
                 instructionText={
@@ -108,7 +124,9 @@ export default class ARView extends Component<Props, State> {
                     SettingsUtils.openSettings();
                   }}
                 >
-                  <Text style={styles.goToSettingsButtonText}>{LangService.strings.SETTINGS}</Text>
+                  <Text style={styles.goToSettingsButtonText}>
+                    {LangService.strings.SETTINGS}
+                  </Text>
                 </TouchableOpacity>
               )}
             </View>

@@ -7,70 +7,71 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "stretch",
-    backgroundColor: Colors.white,
-
+    backgroundColor: Colors.white
   },
   container: {
     paddingHorizontal: "4%",
     backgroundColor: Colors.white,
-    flex: 1,
-
+    flex: 1
   },
   barButtonItem: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     opacity: 0.75,
-    paddingHorizontal: 14,
+    paddingHorizontal: 14
   },
   barButtonImage: {
     maxHeight: 44,
-    maxWidth: 44,
+    maxWidth: 44
   },
   loadingSpinner: {
     height: "100%",
-    width: "100%",
+    width: "100%"
   },
   sectionContainer: {
-    paddingVertical: 20,
+    paddingVertical: 20
   },
   sectionFooterContainer: {
     width: "100%",
-    paddingBottom: "6%",
+    paddingBottom: "6%"
   },
   sectionFooterButton: {
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
     height: 45,
-    backgroundColor: Colors.lightPink,
+    backgroundColor: Colors.lightPink
   },
   sectionFooterText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 15,
       fontWeight: "bold",
       fontStyle: "normal",
       letterSpacing: 1,
-      color: Colors.white,
-    },
+      color: Colors.white
+    }
   ]),
   sectionTitle: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 32,
       fontWeight: "bold",
       fontStyle: "normal",
-      color: Colors.black,
-    },
+      color: Colors.black
+    }
   ]),
   sectionDescription: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 16,
       fontWeight: "normal",
       fontStyle: "normal",
-      color: Colors.lightGrey,
-    },
+      color: Colors.lightGrey
+    }
   ]),
   sectionLoadingSpinner: {
-    padding: 20,
-  },
+    padding: 20
+  }
 });

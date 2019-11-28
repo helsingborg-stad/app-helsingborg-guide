@@ -12,14 +12,17 @@ type Props = {
   trail: Guide,
   showInfoOverlay: boolean,
   onToggleInfoOverlay: () => void,
-  navigation: Object,
+  navigation: Object
 };
 
 function renderDownloadButton() {
   return <DownloadButtonContainer style={styles.downloadButton} />;
 }
 
-function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => void) {
+function renderMapInformationOverlay(
+  trail: Guide,
+  onToggleInfoOverlay: () => void
+) {
   if (!trail) {
     return null;
   }
@@ -30,7 +33,7 @@ function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => vo
         trailInformation={{
           title: trail.name,
           description: trail.description,
-          image: trail.images,
+          image: trail.images
         }}
         onPressFunction={onToggleInfoOverlay}
         downloadComponent={renderDownloadButton}
@@ -42,7 +45,7 @@ function renderMapInformationOverlay(trail: Guide, onToggleInfoOverlay: () => vo
 const TrailView = (props: Props) => {
   const { trail, onToggleInfoOverlay, showInfoOverlay, navigation } = props;
   const mapItems: MapItem[] = trail.contentObjects.map(item => ({
-    contentObject: item,
+    contentObject: item
   }));
 
   return (
@@ -51,10 +54,14 @@ const TrailView = (props: Props) => {
         items={mapItems}
         showNumberedMapMarkers
         showDirections
-        supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(trail)}
+        supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(
+          trail
+        )}
         navigation={navigation}
       />
-      {showInfoOverlay ? renderMapInformationOverlay(trail, onToggleInfoOverlay) : null}
+      {showInfoOverlay
+        ? renderMapInformationOverlay(trail, onToggleInfoOverlay)
+        : null}
       <AudioPlayerView />
     </View>
   );

@@ -19,28 +19,28 @@ export default StyleSheet.create({
     shadowColor: Colors.shadow,
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowRadius: 5,
-    shadowOpacity: 1,
+    shadowOpacity: 1
   },
   scrollView: {
-    maxHeight: scrollViewMaxHeight,
+    maxHeight: scrollViewMaxHeight
   },
   scrollViewNoTitle: {
     maxHeight: scrollViewMaxHeight,
-    width: "90%",
+    width: "90%"
   },
   closeButtonContainer: {
     position: "absolute",
     top: 10,
-    right: 10,
+    right: 10
   },
   closeButton: {
     width: closeButtonSize,
     height: closeButtonSize,
     backgroundColor: Colors.white,
-    borderRadius: closeButtonSize / 2,
+    borderRadius: closeButtonSize / 2
   },
   titleText: StyleSheetUtils.flatten([
     TextStyles.title,
@@ -49,22 +49,22 @@ export default StyleSheet.create({
       fontSize: 24,
       lineHeight: 36,
       marginTop: 22,
-      marginHorizontal: defaultMargin,
-    },
+      marginHorizontal: defaultMargin
+    }
   ]),
   descriptionText: StyleSheetUtils.flatten([
     TextStyles.description,
     {
       margin: defaultMargin,
       color: Colors.greyBodyText,
-      lineHeight: 22,
-    },
+      lineHeight: 22
+    }
   ]),
   shareContainer: {
     paddingLeft: defaultMargin,
     paddingRight: defaultMargin,
     paddingBottom: 4,
     flexDirection: "row",
-    justifyContent: "flex-end",
-  },
+    justifyContent: "flex-end"
+  }
 });

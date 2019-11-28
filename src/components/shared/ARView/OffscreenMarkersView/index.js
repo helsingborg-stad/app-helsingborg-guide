@@ -17,15 +17,15 @@ type Props = {
   items: Array<MapItem>,
   userLocation: ?GeolocationType,
   activeMarker: MapItem,
-  angleDelta: number,
+  angleDelta: number
 };
 
 type State = {
   screen: {
     width: number,
     height: number,
-    diagonal: number,
-  },
+    diagonal: number
+  }
 };
 
 class OffscreenMarkersView extends Component<Props, State> {
@@ -33,7 +33,7 @@ class OffscreenMarkersView extends Component<Props, State> {
     super(props);
 
     this.state = {
-      screen: { width: 0, height: 0, diagonal: 0 },
+      screen: { width: 0, height: 0, diagonal: 0 }
     };
   }
 
@@ -43,8 +43,8 @@ class OffscreenMarkersView extends Component<Props, State> {
     const {
       props: { items, angleDelta, userLocation, activeMarker },
       state: {
-        screen: { width, height, diagonal },
-      },
+        screen: { width, height, diagonal }
+      }
     } = this;
 
     if (userLocation) {
@@ -55,12 +55,12 @@ class OffscreenMarkersView extends Component<Props, State> {
 
       const xLimits = {
         min: HALF_IMAGE_OFFSET - halfWidth,
-        max: halfWidth - HALF_IMAGE_OFFSET,
+        max: halfWidth - HALF_IMAGE_OFFSET
       };
 
       const yLimits = {
         min: HALF_IMAGE_OFFSET - halfHeight,
-        max: halfHeight - HALF_IMAGE_OFFSET,
+        max: halfHeight - HALF_IMAGE_OFFSET
       };
 
       const radians = (270 - angleDelta) * MathUtils.DEG_TO_RAD;
@@ -69,8 +69,10 @@ class OffscreenMarkersView extends Component<Props, State> {
       const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
       const x = MathUtils.clamp(rx, xLimits);
       const y = MathUtils.clamp(ry, yLimits);
-      const markerRotation = radians - (Math.PI / 2);
-      const visible = markerRotation > OFFSCREEN_ANGLE_MIN && markerRotation < OFFSCREEN_ANGLE_MAX;
+      const markerRotation = radians - Math.PI / 2;
+      const visible =
+        markerRotation > OFFSCREEN_ANGLE_MIN &&
+        markerRotation < OFFSCREEN_ANGLE_MAX;
 
       // map all markers on a circle of the longest view dimension and then clip to view edges
       const markers: Array<OffscreenMarkerProps> = items.map((item, index) => {
@@ -85,7 +87,7 @@ class OffscreenMarkersView extends Component<Props, State> {
           y,
           angle: markerRotation,
           selected,
-          visible,
+          visible
         };
       });
 
@@ -96,7 +98,9 @@ class OffscreenMarkersView extends Component<Props, State> {
   };
 
   onLayout = (event: any) => {
-    const { screen: { width: currentWidth, height: currentHeight } } = this.state;
+    const {
+      screen: { width: currentWidth, height: currentHeight }
+    } = this.state;
     if (this.containerRef) {
       // Measure the absolute position of the view on screen, i.e including navigation bar and status bar
       this.containerRef.measure((fx, fy, width, height) => {
@@ -108,8 +112,8 @@ class OffscreenMarkersView extends Component<Props, State> {
     } else {
       const {
         nativeEvent: {
-          layout: { width, height },
-        },
+          layout: { width, height }
+        }
       } = event;
 
       if (width !== currentWidth || height !== currentHeight) {
@@ -124,10 +128,14 @@ class OffscreenMarkersView extends Component<Props, State> {
 
     return (
       <View
-        ref={(ref) => {
+        ref={ref => {
           this.containerRef = ref;
         }}
-        style={{ ...styles.container, top: SegmentControlHeight + 10, bottom: ListHeight + ListBottomMargin + 10 }}
+        style={{
+          ...styles.container,
+          top: SegmentControlHeight + 10,
+          bottom: ListHeight + ListBottomMargin + 10
+        }}
         onLayout={this.onLayout}
         pointerEvents="none"
       >
@@ -140,7 +148,9 @@ class OffscreenMarkersView extends Component<Props, State> {
 }
 
 const mapState = (state: RootState) => {
-  const { arState: { angleDelta } } = state;
+  const {
+    arState: { angleDelta }
+  } = state;
   return { angleDelta };
 };
 

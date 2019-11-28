@@ -1,6 +1,4 @@
-import React, {
-  Component,
-} from "react";
+import React, { Component } from "react";
 import {
   ActivityIndicator,
   Platform,
@@ -8,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  NativeModules,
+  NativeModules
 } from "react-native";
 import Slider from "@react-native-community/slider";
 import PropTypes from "prop-types";
@@ -27,44 +25,45 @@ const ios = Platform.OS === "ios";
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: BKGD_COLOR,
+    backgroundColor: BKGD_COLOR
   },
+  innerWrapper: { flex: 4 },
   playerContainer: {
     height: 50,
     backgroundColor: BKGD_COLOR,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   sliderContainer: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "center"
   },
   trackSlider: {
-    flex: 1,
+    flex: 1
   },
   duration: {
     fontSize: 14,
-    color: "white",
+    color: "white"
   },
   backgroundVideo: {
     position: "absolute",
     top: 0,
     left: 0,
     bottom: 0,
-    right: 0,
+    right: 0
   },
   button: {
     width: 40,
     height: 40,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   buttonIcon: {
-    color: "white",
-  },
+    color: "white"
+  }
 });
 
 export default class VideoPlayer extends Component {
@@ -72,20 +71,24 @@ export default class VideoPlayer extends Component {
     filePath: PropTypes.string.isRequired,
     isAndroidFullscreen: PropTypes.bool,
     playOnLoad: PropTypes.bool,
-    initialCurrentTime: PropTypes.number,
-  }
+    initialCurrentTime: PropTypes.number
+  };
 
   static defaultProps = {
     isAndroidFullscreen: false,
     playOnLoad: true,
-    initialCurrentTime: 0,
-  }
+    initialCurrentTime: 0
+  };
 
   constructor(props) {
     super(props);
     const { playOnLoad = false } = props;
 
-    this.state = { currentTime: 0.0, isPlaying: playOnLoad, loading: playOnLoad };
+    this.state = {
+      currentTime: 0.0,
+      isPlaying: playOnLoad,
+      loading: playOnLoad
+    };
   }
 
   displaySpinner() {
@@ -97,8 +100,15 @@ export default class VideoPlayer extends Component {
 
   renderPlayPauseButton(isPlaying) {
     return (
-      <TouchableOpacity style={styles.button} onPress={() => this.togglePlayState()}>
-        <Icon name={isPlaying ? "pause" : "play-arrow"} size={ICON_SIZE} style={styles.buttonIcon} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => this.togglePlayState()}
+      >
+        <Icon
+          name={isPlaying ? "pause" : "play-arrow"}
+          size={ICON_SIZE}
+          style={styles.buttonIcon}
+        />
       </TouchableOpacity>
     );
   }
@@ -128,7 +138,9 @@ export default class VideoPlayer extends Component {
       return;
     }
 
-    if (!this.player) return;
+    if (!this.player) {
+      return;
+    }
 
     if (ios) {
       this.player.presentFullscreenPlayer();
@@ -137,15 +149,17 @@ export default class VideoPlayer extends Component {
       const { isPlaying, currentTime } = this.state;
 
       if (isPlaying) {
-        this.setState({ isPlaying: false }, () => this.OpenFullScreenVideo(filePath, isPlaying, currentTime));
+        this.setState({ isPlaying: false }, () =>
+          this.OpenFullScreenVideo(filePath, isPlaying, currentTime)
+        );
       }
     }
-  }
+  };
 
   OpenFullScreenVideo(filePath, isPlaying, currentTime) {
     FullScreenVideoModule.open(filePath, !isPlaying, currentTime);
 
-    FullScreenVideoModule.getPlayerStateOnCollapse().then((stateOnCollapse) => {
+    FullScreenVideoModule.getPlayerStateOnCollapse().then(stateOnCollapse => {
       const time = stateOnCollapse.currentTime;
       this.player.seek(time);
       this.setState({ isPlaying: !stateOnCollapse.paused, currentTime: time });
@@ -154,16 +168,16 @@ export default class VideoPlayer extends Component {
 
   onEnd = () => {
     this.setState({ isPlaying: false, currentTime: 0 });
-  }
+  };
 
-  onLoad = (data) => {
+  onLoad = data => {
     const { initialCurrentTime } = this.props;
     if (initialCurrentTime) {
       this.player.seek(initialCurrentTime);
       this.setState({ currentTime: initialCurrentTime });
     }
     this.setState({ duration: data.duration, loading: false });
-  }
+  };
 
   render() {
     const { isPlaying, currentTime } = this.state;
@@ -174,10 +188,10 @@ export default class VideoPlayer extends Component {
     return (
       <ViewContainer style={styles.wrapper}>
         <View>{this.displaySpinner()}</View>
-        <View style={{ flex: 4 }}>
+        <View style={styles.innerWrapper}>
           <Video
             source={{ uri: this.props.filePath }} // Can be a URL or a local file.
-            ref={(ref) => {
+            ref={ref => {
               this.player = ref;
             }} // Store reference
             rate={1.0} // 0 is paused, 1 is normal.
@@ -198,11 +212,13 @@ export default class VideoPlayer extends Component {
           />
         </View>
 
-        <View style={styles.playerContainer} >
+        <View style={styles.playerContainer}>
           {this.renderPlayPauseButton(isPlaying)}
 
           <View style={styles.sliderContainer}>
-            <Text style={styles.duration}>{timeHelper.toTimeMarker(currentTime)}</Text>
+            <Text style={styles.duration}>
+              {timeHelper.toTimeMarker(currentTime)}
+            </Text>
             <Slider
               style={styles.trackSlider}
               maximumValue={this.state.duration}
@@ -211,19 +227,23 @@ export default class VideoPlayer extends Component {
               maximumTrackTintColor="white"
               thumbTintColor="white"
               value={currentTime}
-              onValueChange={data =>
-                this._changeCurrentTime(data)
-              }
-              onSlidingComplete={data =>
-                this._changeCurrentTimeCompleted(data)
-              }
+              onValueChange={data => this._changeCurrentTime(data)}
+              onSlidingComplete={data => this._changeCurrentTimeCompleted(data)}
             />
-            <Text style={styles.duration}>{timeHelper.toTimeMarker(this.state.duration)}</Text>
+            <Text style={styles.duration}>
+              {timeHelper.toTimeMarker(this.state.duration)}
+            </Text>
           </View>
-          <TouchableOpacity style={styles.button} onPress={this.toggleFullscreen}>
-            <Icon name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"} size={ICON_SIZE} style={styles.buttonIcon} />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.toggleFullscreen}
+          >
+            <Icon
+              name={isAndroidFullscreen ? "fullscreen-exit" : "fullscreen"}
+              size={ICON_SIZE}
+              style={styles.buttonIcon}
+            />
           </TouchableOpacity>
-
         </View>
       </ViewContainer>
     );

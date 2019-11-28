@@ -2,23 +2,38 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, Image, StyleSheet, Animated, Dimensions, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Animated,
+  Dimensions,
+  TouchableWithoutFeedback
+} from "react-native";
 
 const MENU_WIDTH = Dimensions.get("window").width;
 const MENU_HEIGHT = Dimensions.get("window").height;
 
-export default class OptionsView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { animValue: new Animated.Value(0), visible: props.visible };
-  }
+type Props = {
+  visible: any,
+  onPress: any,
+  style: any,
+  children: Array
+};
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+type State = {
+  visible: any,
+  animValue: Animated.Value
+};
+
+export default class OptionsView extends Component<Props, State> {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     const { visible } = nextProps;
     const { animValue, visible: previouslyVisible } = prevState;
 
     if (visible !== previouslyVisible) {
-      const animationProperties = visible ? { toValue: 1, duration: 200 } : { toValue: 0, duration: 200 };
+      const animationProperties = visible
+        ? { toValue: 1, duration: 200 }
+        : { toValue: 0, duration: 200 };
       Animated.timing(animValue, animationProperties).start();
       return { visible };
     }
@@ -26,30 +41,35 @@ export default class OptionsView extends Component {
     return null;
   }
 
+  constructor(props) {
+    super(props);
+    this.state = { animValue: new Animated.Value(0), visible: props.visible };
+  }
+
   onPress() {
     this.props.onPress();
   }
 
   render() {
-    const { state: { animValue } } = this;
+    const {
+      state: { animValue }
+    } = this;
 
-    if (animValue) {
-      const translateAnim = animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [MENU_WIDTH, 0],
-      });
+    // const translateAnim = animValue.interpolate({
+    //   inputRange: [0, 1],
+    //   outputRange: [MENU_WIDTH, 0]
+    // });
 
-      const zIndexAnim = animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [-100, 10009],
-      });
+    const zIndexAnim = animValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [-100, 10009]
+    });
 
-      const animatedStyle = {
-        // transform:[{translateX:translateAnim} ]
-        opacity: animatedValue,
-        zIndex: zIndexAnim,
-      };
-    }
+    const animatedStyle = {
+      // transform:[{translateX:translateAnim} ]
+      opacity: animValue,
+      zIndex: zIndexAnim
+    };
 
     return (
       <Animated.View style={[styles.wrapper, this.props.style, animatedStyle]}>
@@ -71,10 +91,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     right: 0,
-    zIndex: 10000,
+    zIndex: 10000
   },
   mainContainer: {
-    flex: 1,
+    flex: 1
     // backgroundColor:'red',
-  },
+  }
 });

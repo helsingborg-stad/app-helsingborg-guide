@@ -7,7 +7,7 @@
 
 const NavigationModes = {
   Map: "MAP",
-  AR: "AR",
+  AR: "AR"
 };
 
 function navigationModesForGuide(trail: Guide): Array<string> {
@@ -21,5 +21,5 @@ function navigationModesForGuide(trail: Guide): Array<string> {
 
 export default {
   NavigationModes,
-  navigationModesForGuide,
+  navigationModesForGuide
 };

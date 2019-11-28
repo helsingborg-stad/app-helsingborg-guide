@@ -4,7 +4,13 @@ import initialState from "./initialState";
 
 export default function guideReducer(state = initialState.downloads, action) {
   const replace = () =>
-    _.sortBy([...state.filter(item => item.id !== action.taskMeta.id), Object.assign({}, action.taskMeta)], ["startedAt"]);
+    _.sortBy(
+      [
+        ...state.filter(item => item.id !== action.taskMeta.id),
+        Object.assign({}, action.taskMeta)
+      ],
+      ["startedAt"]
+    );
 
   switch (action.type) {
     case types.CREATE_DOWNLOAD_TASK_SUCCESS:

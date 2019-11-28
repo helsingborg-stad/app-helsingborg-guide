@@ -3,7 +3,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
 import MarkerListView from "../../shared/MarkerListView";
-import { selectCurrentGuideByID, selectCurrentGuideGroup, selectCurrentCategory, showBottomBar } from "../../../actions/uiStateActions";
+import {
+  selectCurrentGuideByID,
+  selectCurrentGuideGroup,
+  selectCurrentCategory,
+  showBottomBar
+} from "../../../actions/uiStateActions";
 
 import { AnalyticsUtils } from "../../../utils";
 import { HeaderStyles } from "../../../styles";
@@ -13,7 +18,7 @@ type Props = {
   currentCategory: ?NavigationCategory,
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
-  dispatchShowBottomBar(visible: boolean): void,
+  dispatchShowBottomBar(visible: boolean): void
 };
 
 class CategoryMapScreen extends Component<Props> {
@@ -25,7 +30,7 @@ class CategoryMapScreen extends Component<Props> {
     }
     return Object.assign(HeaderStyles.noElevation, {
       title,
-      headerRight: <View />,
+      headerRight: <View />
     });
   };
 
@@ -52,10 +57,14 @@ class CategoryMapScreen extends Component<Props> {
           const { guideType } = guide;
           if (guideType === "guide") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name });
+            this.props.navigation.navigate("GuideDetailsScreen", {
+              title: guide.name
+            });
           } else if (guideType === "trail") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("TrailScreen", { title: guide.name });
+            this.props.navigation.navigate("TrailScreen", {
+              title: guide.name
+            });
           }
         }
         break;
@@ -64,7 +73,9 @@ class CategoryMapScreen extends Component<Props> {
         this.props.selectGuideGroup(item.id);
         if (item.guideGroup) {
           const title = item.guideGroup.name;
-          AnalyticsUtils.logEvent("view_location", { name: item.guideGroup.slug });
+          AnalyticsUtils.logEvent("view_location", {
+            name: item.guideGroup.slug
+          });
           this.props.navigation.navigate("LocationScreen", { title });
         }
         break;
@@ -74,12 +85,14 @@ class CategoryMapScreen extends Component<Props> {
 
   render() {
     const { currentCategory, navigation } = this.props;
-    if (!currentCategory) return null;
+    if (!currentCategory) {
+      return null;
+    }
 
     const { items } = currentCategory;
 
     const mapItems: MapItem[] = [];
-    items.forEach((navItem) => {
+    items.forEach(navItem => {
       const { guide, guideGroup } = navItem;
       if (guideGroup) {
         mapItems.push({ guideGroup: navItem.guideGroup });
@@ -89,17 +102,25 @@ class CategoryMapScreen extends Component<Props> {
       }
     });
 
-    return <MarkerListView items={mapItems} navigation={navigation} showListButton={false} />;
+    return (
+      <MarkerListView
+        items={mapItems}
+        navigation={navigation}
+        showListButton={false}
+      />
+    );
   }
 }
 
 function mapStateToProps(state: RootState) {
   const { uiState, navigation } = state;
   const { currentCategory } = uiState;
-  const category = navigation.navigationCategories.find(cat => cat.id === currentCategory);
+  const category = navigation.navigationCategories.find(
+    cat => cat.id === currentCategory
+  );
 
   return {
-    currentCategory: category,
+    currentCategory: category
   };
 }
 
@@ -107,12 +128,14 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
-    selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
-    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
+    selectCurrentCategory: (category: NavigationCategory) =>
+      dispatch(selectCurrentCategory(category.id)),
+    dispatchShowBottomBar: (visible: boolean) =>
+      dispatch(showBottomBar(visible))
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(CategoryMapScreen);

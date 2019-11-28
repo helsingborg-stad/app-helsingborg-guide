@@ -7,23 +7,35 @@ import { setGuidesAndGuideGroups } from "../actions/guideGroupActions";
  * Adding data such as distance.
  */
 
-function updateDistance(guideGroups: GuideGroup[], currentPosition: PositionLongLat): GuideGroup[] {
-  const updated = guideGroups.map((gg) => {
-    const distance = LocationUtils.getDistanceBetweenCoordinates(currentPosition, gg.location);
+function updateDistance(
+  guideGroups: GuideGroup[],
+  currentPosition: PositionLongLat
+): GuideGroup[] {
+  const updated = guideGroups.map(gg => {
+    const distance = LocationUtils.getDistanceBetweenCoordinates(
+      currentPosition,
+      gg.location
+    );
     return { ...gg, distance };
   });
 
   return updated;
 }
 
-function updateDistanceForGuides(guides: Guide[], currentPosition: PositionLongLat): Guide[] {
-  const updated = guides.map((g) => {
+function updateDistanceForGuides(
+  guides: Guide[],
+  currentPosition: PositionLongLat
+): Guide[] {
+  const updated = guides.map(g => {
     const distances: number[] = [];
     // calculting distances to all objects
-    g.contentObjects.forEach((obj) => {
+    g.contentObjects.forEach(obj => {
       const { location } = obj;
       if (location) {
-        const d = LocationUtils.getDistanceBetweenCoordinates(currentPosition, obj.location);
+        const d = LocationUtils.getDistanceBetweenCoordinates(
+          currentPosition,
+          obj.location
+        );
         distances.push(d);
       }
     });
@@ -38,7 +50,9 @@ function updateDistanceForGuides(guides: Guide[], currentPosition: PositionLongL
   return updated;
 }
 
-export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: Action) => {
+export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
+  action: Action
+) => {
   const result = next(action);
   const nextState = getState();
 
@@ -48,13 +62,18 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
       const {
         geolocation: { position },
         guideGroups,
-        guides,
+        guides
       } = nextState;
-      if (!position) break;
+      if (!position) {
+        break;
+      }
 
       const { coords } = position;
       const updatedGG: GuideGroup[] = updateDistance(guideGroups.items, coords);
-      const updatedGuides: Guide[] = updateDistanceForGuides(guides.items, coords);
+      const updatedGuides: Guide[] = updateDistanceForGuides(
+        guides.items,
+        coords
+      );
       dispatch(setGuidesAndGuideGroups(updatedGG, updatedGuides));
       break;
     }

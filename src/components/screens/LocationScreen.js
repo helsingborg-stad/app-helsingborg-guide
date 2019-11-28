@@ -6,7 +6,10 @@ import { View } from "react-native";
 import LocationView from "../shared/LocationView";
 import { AnalyticsUtils } from "../../utils";
 import { HeaderStyles } from "../../styles";
-import { selectCurrentGuide, showBottomBar } from "../../actions/uiStateActions";
+import {
+  selectCurrentGuide,
+  showBottomBar
+} from "../../actions/uiStateActions";
 
 type Props = {
   currentGuideGroup: GuideGroup,
@@ -15,7 +18,7 @@ type Props = {
   navigation: Object,
   isFetchingGuides: boolean,
   selectCurrentGuide(guide: Guide): void,
-  dispatchShowBottomBar(visible: boolean): void,
+  dispatchShowBottomBar(visible: boolean): void
 };
 
 class LocationScreen extends Component<Props> {
@@ -23,7 +26,7 @@ class LocationScreen extends Component<Props> {
     const { title } = navigation.state.params;
     return Object.assign(HeaderStyles.noElevation, {
       title,
-      headerRight: <View />,
+      headerRight: <View />
     });
   };
 
@@ -41,7 +44,7 @@ class LocationScreen extends Component<Props> {
       this.props.selectCurrentGuide(guide);
       navigation.navigate("TrailScreen", {
         guide,
-        title: guide.name,
+        title: guide.name
       });
     } else if (guide.guideType === "guide") {
       this.props.selectCurrentGuide(guide);
@@ -50,7 +53,12 @@ class LocationScreen extends Component<Props> {
   };
 
   render() {
-    const { currentGuideGroup, currentGuides, geolocation, isFetchingGuides } = this.props;
+    const {
+      currentGuideGroup,
+      currentGuides,
+      geolocation,
+      isFetchingGuides
+    } = this.props;
     const now = new Date();
     return (
       <LocationView
@@ -73,25 +81,28 @@ function mapStateToProps(state: RootState) {
 
   let currentGuides = [];
   if (currentGuideGroup) {
-    currentGuides = state.guides.items.filter(guide => guide.guideGroupId === currentGuideGroup.id);
+    currentGuides = state.guides.items.filter(
+      guide => guide.guideGroupId === currentGuideGroup.id
+    );
   }
 
   return {
     currentGuideGroup,
     currentGuides,
     geolocation: geolocation.position,
-    isFetchingGuides: isFetching,
+    isFetchingGuides: isFetching
   };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectCurrentGuide: (guide: Guide) => dispatch(selectCurrentGuide(guide)),
-    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
+    dispatchShowBottomBar: (visible: boolean) =>
+      dispatch(showBottomBar(visible))
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(LocationScreen);

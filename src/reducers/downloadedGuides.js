@@ -2,7 +2,7 @@
 import { getUrlsFromGuide } from "../utils/UrlUtils";
 
 const defaultState: DownloadedGuidesState = {
-  offlineGuides: {},
+  offlineGuides: {}
 };
 
 function getProgress(tasks: { [string]: DownloadTask }): number {
@@ -10,7 +10,9 @@ function getProgress(tasks: { [string]: DownloadTask }): number {
   const values: DownloadTask[] = Object.values(tasks);
   const totalCount = values.length;
 
-  if (totalCount === 0) return 1;
+  if (totalCount === 0) {
+    return 1;
+  }
 
   const totalDone: number = values.reduce((count, task) => {
     if (task.status === "done") {
@@ -22,7 +24,11 @@ function getProgress(tasks: { [string]: DownloadTask }): number {
   return totalDone / totalCount;
 }
 
-function updateDownloadTaskStatus(offlineGuide: OfflineGuide, url: string, status: TaskStatus): OfflineGuide {
+function updateDownloadTaskStatus(
+  offlineGuide: OfflineGuide,
+  url: string,
+  status: TaskStatus
+): OfflineGuide {
   const nextGuide = { ...offlineGuide };
 
   const nextTasks = { ...offlineGuide.downloadTasks };
@@ -39,12 +45,20 @@ function updateDownloadTaskStatus(offlineGuide: OfflineGuide, url: string, statu
   return nextGuide;
 }
 
-function updateTaskStatusAndProgress(state: DownloadedGuidesState, task: DownloadTask, status: TaskStatus): DownloadedGuidesState {
+function updateTaskStatusAndProgress(
+  state: DownloadedGuidesState,
+  task: DownloadTask,
+  status: TaskStatus
+): DownloadedGuidesState {
   const { guideId } = task;
   const offlineGuide: OfflineGuide = state.offlineGuides[guideId];
   if (offlineGuide) {
     // replace offline guide
-    const nextOfflineGuide = updateDownloadTaskStatus(offlineGuide, task.url, status);
+    const nextOfflineGuide = updateDownloadTaskStatus(
+      offlineGuide,
+      task.url,
+      status
+    );
     const offlineGuides = { ...state.offlineGuides };
     offlineGuides[guideId] = nextOfflineGuide;
 
@@ -53,14 +67,16 @@ function updateTaskStatusAndProgress(state: DownloadedGuidesState, task: Downloa
   return state;
 }
 
-export default function reducer(state: DownloadedGuidesState = defaultState, action: Action): DownloadedGuidesState {
+export default function reducer(
+  state: DownloadedGuidesState = defaultState,
+  action: Action
+): DownloadedGuidesState {
   switch (action.type) {
-    case "APP_STARTED":
-    {
+    case "APP_STARTED": {
       // reset the offline guides status
       const offlineGuides = { ...state.offlineGuides };
       const keys = Object.keys(offlineGuides);
-      keys.forEach((key) => {
+      keys.forEach(key => {
         const index = parseInt(key);
         const oGuide: OfflineGuide = offlineGuides[index];
         if (oGuide.status === "pending") {
@@ -71,8 +87,7 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
       return { ...state, offlineGuides };
     }
     case "START_DOWNLOAD_GUIDE":
-    case "RESUME_DOWNLOAD_GUIDE":
-    {
+    case "RESUME_DOWNLOAD_GUIDE": {
       const { guide } = action;
       let offlineGuide: OfflineGuide = state.offlineGuides[guide.id];
       if (!offlineGuide) {
@@ -85,7 +100,7 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
         }
 
         const downloadTasks: { [string]: DownloadTask } = {};
-        mediaUrls.forEach((url) => {
+        mediaUrls.forEach(url => {
           downloadTasks[url] = { guideId, url, status: "not_started" };
         });
 
@@ -93,7 +108,7 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
           guide,
           progress: 0,
           status: "pending",
-          downloadTasks,
+          downloadTasks
         };
       }
 
@@ -103,8 +118,7 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
       offlineGuides[guide.id] = offlineGuide;
       return { ...state, offlineGuides };
     }
-    case "PAUSE_DOWNLOAD_GUIDE":
-    {
+    case "PAUSE_DOWNLOAD_GUIDE": {
       const { guide } = action;
       const oldDownload: OfflineGuide = state.offlineGuides[guide.id];
       if (oldDownload) {
@@ -115,8 +129,7 @@ export default function reducer(state: DownloadedGuidesState = defaultState, act
       }
       return state;
     }
-    case "CANCEL_DOWNLOAD_GUIDE":
-    {
+    case "CANCEL_DOWNLOAD_GUIDE": {
       const { guide } = action;
       const offlineGuide: OfflineGuide = state.offlineGuides[guide.id];
       if (offlineGuide) {

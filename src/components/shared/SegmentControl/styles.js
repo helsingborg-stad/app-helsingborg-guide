@@ -10,26 +10,26 @@ export default StyleSheet.create({
     flexDirection: "row",
     height: SegmentControlHeight,
     justifyContent: "center",
-    width: "100%",
+    width: "100%"
   },
   segmentItem: {
     alignItems: "center",
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "center"
   },
   segmentLabel: {
     ...TextStyles.segmentControlLabel,
-    opacity: 0.5,
+    opacity: 0.5
   },
   segmentLabelSelected: {
     ...TextStyles.segmentControlLabel,
-    opacity: 1,
+    opacity: 1
   },
   selectionView: {
     backgroundColor: Colors.white,
     bottom: 0,
     height: 4,
     left: 0,
-    position: "absolute",
-  },
+    position: "absolute"
+  }
 });

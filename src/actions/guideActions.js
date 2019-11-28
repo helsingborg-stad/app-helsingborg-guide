@@ -18,21 +18,26 @@ export function fetchGuides(langCode: string, ids: number[]): ThunkAction {
   return function fetchGuidesDispatch(dispatch: Dispatch) {
     dispatch(fetchGuidesRequest());
 
-    return fetchUtils.getGuides(langCode, ids)
+    return fetchUtils
+      .getGuides(langCode, ids)
       .then(guides => dispatch(fetchGuidesSuccess(guides)))
-      .catch((error) => {
+      .catch(error => {
         dispatch(fetchGuidesFailure(error.message));
       });
   };
 }
 
-export function fetchGuidesForGuideGroup(langCode: string, guideGroupId: number): ThunkAction {
+export function fetchGuidesForGuideGroup(
+  langCode: string,
+  guideGroupId: number
+): ThunkAction {
   return function fetchGuidesDispatch(dispatch: Dispatch) {
     dispatch(fetchGuidesRequest());
 
-    return fetchUtils.getGuidesForGuideGroup(langCode, guideGroupId)
+    return fetchUtils
+      .getGuidesForGuideGroup(langCode, guideGroupId)
       .then(guides => dispatch(fetchGuidesSuccess(guides)))
-      .catch((error) => {
+      .catch(error => {
         dispatch(fetchGuidesFailure(error.message));
       });
   };

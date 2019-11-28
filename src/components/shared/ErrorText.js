@@ -5,8 +5,12 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-export default class ErrorText extends Component {
-  constructor(props) {
+type Props = {
+  text: any
+};
+
+export default class ErrorText extends Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.state = {};
   }
@@ -32,17 +36,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    padding: 15,
+    padding: 15
   },
   iconContainer: { flex: 1, alignItems: "flex-start" },
   icon: {},
   bigTextContainer: {
     flex: 10,
     paddingHorizontal: 10,
-    alignItems: "flex-start",
+    alignItems: "flex-start"
   },
   bigText: {
     fontSize: 12,
-    color: "#f9f9f9",
-  },
+    color: "#f9f9f9"
+  }
 });

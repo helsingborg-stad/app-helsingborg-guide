@@ -4,10 +4,10 @@ import { Colors } from "../../../styles/";
 export default StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.white
   },
   downloadButton: {
-    width: "100%",
+    width: "100%"
   },
   overlayStyle: {
     position: "absolute",
@@ -15,6 +15,6 @@ export default StyleSheet.create({
     right: 0,
     left: 0,
     bottom: 0,
-    backgroundColor: Colors.transparent,
-  },
+    backgroundColor: Colors.transparent
+  }
 });

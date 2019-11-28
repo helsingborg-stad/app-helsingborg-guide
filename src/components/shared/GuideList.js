@@ -1,22 +1,35 @@
 import React from "react";
-import {
-  Dimensions,
-  FlatList,
-  StyleSheet,
-} from "react-native";
+import { Dimensions, FlatList, StyleSheet } from "react-native";
 import { AnalyticsUtils } from "../../utils";
 import ListCard from "./ListCard";
 import TimingService from "../../services/timingService";
 
 const styles = StyleSheet.create({
   listContainer: {
-    flex: 1,
-  },
+    flex: 1
+  }
 });
 
 const screenWidth = Dimensions.get("window").width;
 
-export default ({ items, navigation, dispatchSelectGuideGroup, dispatchSelectCurrentGuide }) => {
+type GuideViewProps = {
+  items: any,
+  navigation: any,
+  dispatchSelectGuideGroup: any,
+  dispatchSelectCurrentGuide: any,
+  item: any
+};
+
+type RenderItemProps = {
+  item: any
+};
+
+export default ({
+  items,
+  navigation,
+  dispatchSelectGuideGroup,
+  dispatchSelectCurrentGuide
+}: GuideViewProps) => {
   function getOpeningHours(location) {
     const openingList = location._embedded.location[0].open_hours;
     const expList = location._embedded.location[0].open_hour_exceptions;
@@ -25,7 +38,7 @@ export default ({ items, navigation, dispatchSelectGuideGroup, dispatchSelectCur
     return text;
   }
 
-  const _navigateToLocation = (location) => {
+  const _navigateToLocation = location => {
     // TODO fetch from the the new GuideGroup state
     dispatchSelectGuideGroup(location);
     const { navigate } = navigation;
@@ -33,7 +46,7 @@ export default ({ items, navigation, dispatchSelectGuideGroup, dispatchSelectCur
     navigate("LocationScreen", { location });
   };
 
-  const _navigateToTrail = (trail) => {
+  const _navigateToTrail = trail => {
     const { navigate } = navigation;
     const title = trail.guidegroup[0].name;
     AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
@@ -41,7 +54,7 @@ export default ({ items, navigation, dispatchSelectGuideGroup, dispatchSelectCur
     navigate("TrailScreen", { trail, title });
   };
 
-  const _navigateToGuide = (guide) => {
+  const _navigateToGuide = guide => {
     const { navigate } = navigation;
     const title = guide.title.plain_text;
     AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
@@ -49,7 +62,7 @@ export default ({ items, navigation, dispatchSelectGuideGroup, dispatchSelectCur
     navigate("GuideDetailsScreen", { id: guide.id, title });
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: RenderItemProps) => {
     const { distance, contentType } = item;
 
     let image;
@@ -75,7 +88,9 @@ export default ({ items, navigation, dispatchSelectGuideGroup, dispatchSelectCur
       guideID = item.id;
     }
 
-    if (!image) return null;
+    if (!image) {
+      return null;
+    }
 
     return (
       <ListCard

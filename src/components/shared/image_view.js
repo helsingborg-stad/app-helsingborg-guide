@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, ActivityIndicator } from "react-native";
 import OImage from "./image";
 
 const MAX_IMAGE_HEIGHT = Dimensions.get("window").height * 0.65;
@@ -8,17 +8,26 @@ const styles = StyleSheet.create({
   imageContainer: {},
   image: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
-  spinner: { flex: 1, width: 100, height: 100 },
+  spinner: { flex: 1, width: 100, height: 100 }
 });
 
-export default class ImageView extends Component {
+type Props = {
+  source: any,
+  guideID: any,
+  width: any,
+  height: any,
+  blur: any,
+  children: Array
+};
+
+export default class ImageView extends Component<Props> {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: false,
+      loading: false
     };
 
     this.onLoadStart = this.onLoadStart.bind(this);
@@ -41,34 +50,41 @@ export default class ImageView extends Component {
   }
 
   displaySpinner() {
-    if (this.state.loading) return <ActivityIndicator style={[styles.spinner]} />;
+    if (this.state.loading) {
+      return <ActivityIndicator style={[styles.spinner]} />;
+    }
   }
 
   displayImage() {
     // If no source image is defined, use placeholder image
     let uri = this.props.source;
     const { guideID } = this.props;
-    if (!uri || !uri.uri) uri = require("../../images/no-image-featured-image.png");
+    if (!uri || !uri.uri) {
+      uri = require("../../images/no-image-featured-image.png");
+    }
 
     // Using full screen width and a 16:9 aspect ratio
     let displayWidth = Dimensions.get("window").width;
     let displayHeight = (displayWidth / 16) * 9;
 
     // If height and/or width is defined, use that instead
-    if (this.props.width) { displayWidth = this._getOptWidth(this.props.width); }
-    if (this.props.height) { displayHeight = this._getOptHeight(this.props.height); }
+    if (this.props.width) {
+      displayWidth = this._getOptWidth(this.props.width);
+    }
+    if (this.props.height) {
+      displayHeight = this._getOptHeight(this.props.height);
+    }
+
+    const displayStyle = {
+      width: displayWidth,
+      height: displayHeight,
+      maxHeight: MAX_IMAGE_HEIGHT,
+      zIndex: 1000
+    };
 
     return (
       <OImage
-        style={[
-          {
-            width: displayWidth,
-            height: displayHeight,
-            maxHeight: MAX_IMAGE_HEIGHT,
-            zIndex: 1000,
-          },
-          styles.image,
-        ]}
+        style={[displayStyle, styles.image]}
         source={uri}
         blurRadius={this.props.blur}
         onLoadStart={this.onLoadStart}

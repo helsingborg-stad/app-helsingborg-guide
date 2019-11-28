@@ -28,10 +28,10 @@ const listItemShared = {
   shadowColor: "rgba(0, 0, 0, 0.23)",
   shadowOffset: {
     width: 0,
-    height: 2,
+    height: 2
   },
   shadowRadius: 5,
-  shadowOpacity: 1,
+  shadowOpacity: 1
 };
 
 const listImageNumberViewShared = {
@@ -40,13 +40,13 @@ const listImageNumberViewShared = {
   flexDirection: "row",
   height: 22,
   justifyContent: "center",
-  width: 22,
+  width: 22
 };
 
 export default StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
-    flex: 1,
+    flex: 1
   },
   guideNumberText: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -54,47 +54,47 @@ export default StyleSheet.create({
       fontSize: 16,
       fontWeight: "500",
       marginRight: TextMargin,
-      color: Colors.purple,
-    },
+      color: Colors.purple
+    }
   ]),
   listButton: {
     bottom: ListItemImageSize + DefaultMargin,
     position: "absolute",
     right: 0,
-    zIndex: 100,
+    zIndex: 100
   },
   listContainerStyle: {
-    paddingHorizontal: ios ? 0 : 15,
+    paddingHorizontal: ios ? 0 : 15
   },
   listEstimatesContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 6,
+    marginTop: 6
   },
   listEstimatesDistance: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       fontSize: 24,
       fontWeight: "bold",
-      color: Colors.black,
-    },
+      color: Colors.black
+    }
   ]),
   listEstimatesTime: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       fontSize: 24,
-      fontWeight: "normal",
-    },
+      fontWeight: "normal"
+    }
   ]),
   listIcon: {
     height: 60,
-    width: 60,
+    width: 60
   },
   listImage: {
     height: ListItemImageSize,
-    width: ListItemImageSize,
+    width: ListItemImageSize
   },
   listImageNumberText: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -106,36 +106,36 @@ export default StyleSheet.create({
       flex: 1,
       fontWeight: "500",
       textAlign: "center",
-      backgroundColor: "transparent",
-    },
+      backgroundColor: "transparent"
+    }
   ]),
   listImageNumberView: {
     ...listImageNumberViewShared,
-    backgroundColor: Colors.purple,
+    backgroundColor: Colors.purple
   },
   listImageNumberViewArrived: {
     ...listImageNumberViewShared,
-    backgroundColor: Colors.green,
+    backgroundColor: Colors.green
   },
   listItem: {
     ...listItemShared,
     borderRadius: 5,
     marginHorizontal: 5,
-    overflow: "hidden",
+    overflow: "hidden"
   },
   listItemAddress: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       fontSize: 12,
       marginRight: TextMargin,
-      color: Colors.warmGrey,
-    },
+      color: Colors.warmGrey
+    }
   ]),
   listItemTextContainer: {
     flex: 1,
     flexDirection: "column",
     marginHorizontal: TextMargin,
-    marginBottom: 14,
+    marginBottom: 14
   },
   listItemTitle: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -144,14 +144,14 @@ export default StyleSheet.create({
       fontSize: 16,
       fontWeight: "bold",
       letterSpacing: 0.08,
-      marginRight: TextMargin,
-    },
+      marginRight: TextMargin
+    }
   ]),
   listItemTitleContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 15,
+    marginTop: 15
   },
   listStyle: {
     backgroundColor: Colors.transparent,
@@ -159,10 +159,10 @@ export default StyleSheet.create({
     height: ListHeight,
     left: 0,
     position: "absolute",
-    right: 0,
+    right: 0
   },
   map: {
-    flex: 1,
+    flex: 1
   },
   segmentControl: {
     left: 0,
@@ -170,6 +170,6 @@ export default StyleSheet.create({
     position: "absolute",
     top: 0,
     width: ScreenWidth,
-    zIndex: 500,
-  },
+    zIndex: 500
+  }
 });

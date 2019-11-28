@@ -1,4 +1,10 @@
-import { NativeModules, DeviceEventEmitter, AppState, PermissionsAndroid, Alert } from "react-native";
+import {
+  NativeModules,
+  DeviceEventEmitter,
+  AppState,
+  PermissionsAndroid,
+  Alert
+} from "react-native";
 import NotificationService from "../services/notificationService";
 import LangService from "./langService";
 import Opener from "./SettingsService";
@@ -16,7 +22,9 @@ export class BeaconService {
   }
 
   static getInstance() {
-    if (!instance) instance = new BeaconService();
+    if (!instance) {
+      instance = new BeaconService();
+    }
     return instance;
   }
 
@@ -26,7 +34,7 @@ export class BeaconService {
   }
 
   checkBluetooth() {
-    this.isBluetoothEnabled().then((enabled) => {
+    this.isBluetoothEnabled().then(enabled => {
       console.log("BLE enabled:", enabled);
       if (!enabled) {
         this.alert();
@@ -39,10 +47,13 @@ export class BeaconService {
       LangService.strings.NO_BLE_CONNECTION,
       LangService.strings.NO_BLE_CONNECTION_MESSAGE,
       [
-        { text: LangService.strings.SETTINGS, onPress: this.openBLESettings.bind(this) },
-        { text: LangService.strings.CLOSE, onPress: () => { }, style: "cancel" },
+        {
+          text: LangService.strings.SETTINGS,
+          onPress: this.openBLESettings.bind(this)
+        },
+        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" }
       ],
-      { cancelable: false },
+      { cancelable: false }
     );
   }
 
@@ -51,24 +62,31 @@ export class BeaconService {
   }
 
   init() {
-    this.checkLocationPermission().then((granted) => {
-      if (!granted) return this.askForPermission();
+    this.checkLocationPermission().then(granted => {
+      if (!granted) {
+        return this.askForPermission();
+      }
     });
     // this.askForPermission();
     return BeaconManager.init();
   }
 
   checkLocationPermission() {
-    return PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+    return PermissionsAndroid.check(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+    );
   }
 
   // Ask for access location permission.
   askForPermission() {
     const content = {
       title: LangService.strings.ACCESS_TO_LOCATION,
-      message: LangService.strings.MESSAGE_LOCATION_PERMISSION,
+      message: LangService.strings.MESSAGE_LOCATION_PERMISSION
     };
-    return PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION, content);
+    return PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      content
+    );
   }
 
   unbind() {
@@ -101,27 +119,35 @@ export class BeaconService {
   }
 
   getTheClosest(beacons) {
-    if (!beacons || !beacons.length) return {};
-    const sorted = beacons.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+    if (!beacons || !beacons.length) {
+      return {};
+    }
+    const sorted = beacons.sort(
+      (a, b) => parseFloat(a.distance) - parseFloat(b.distance)
+    );
     return sorted[0];
 
     // return beacons.reduce((prev,curr)=> prev.distance<curr.distance?prev:curr);
   }
 
   getOptimizedDistanceBeacons(beacons) {
-    if (!beacons || !beacons.length) return [];
+    if (!beacons || !beacons.length) {
+      return [];
+    }
     return beacons.map(_beacon => this.optimizeDistance(_beacon));
   }
 
   optimizeDistance(_beacon) {
     const beacon = _beacon;
     beacon.txPower = parseInt(beacon.txPower);
-    beacon.distance = Math.sqrt(Math.pow(10, (parseInt(beacon.txPower) - parseInt(beacon.rssi)) / 10));
+    beacon.distance = Math.sqrt(
+      Math.pow(10, (parseInt(beacon.txPower) - parseInt(beacon.rssi)) / 10)
+    );
     return beacon;
   }
 
   notify() {
-    if (AppState.currentState == "background") {
+    if (AppState.currentState === "background") {
       const title = LangService.strings.SOMETHING_NEAR_BY;
       NotificationService.showSimple(title, "", BEACON_NOTIFICATION_ID);
     }

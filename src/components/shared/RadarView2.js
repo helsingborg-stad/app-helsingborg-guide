@@ -2,9 +2,7 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Animated, Dimensions, Image } from "react-native";
-import ViewContainer from "./view_container";
-import ScaledTouchableItem from "./ScaledTouchable";
+import { View, StyleSheet, Animated, Dimensions } from "react-native";
 
 const WRAPPER_HEIGHT = 200;
 const CORE_RAD = 120;
@@ -12,15 +10,24 @@ const WAVE1_RAD = 150;
 const WAVE2_RAD = 180;
 const FULL_WIDTH = Dimensions.get("window").width;
 
-export default class RadarView extends Component {
-  timer;
+type Props = {
+  style: any,
+  title: any
+};
 
-  constructor(props) {
+type State = {
+  animValue: Animated.Value,
+  scaleAnim: Animated.Value,
+  animatedIn: boolean
+};
+
+export default class RadarView extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       animValue: new Animated.Value(0),
       scaleValue: new Animated.Value(1),
-      animatedIn: false,
+      animatedIn: false
     };
   }
 
@@ -29,13 +36,20 @@ export default class RadarView extends Component {
     this.timer = setInterval(() => this.animate(), 1000);
   }
   componentWillUnmount() {
-    if (this.timer) clearInterval(this.timer);
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
     Animated.spring(this.state.scaleValue, { toValue: 0 }).start();
   }
 
+  timer;
+
   animate() {
-    if (this.state.animatedIn) Animated.spring(this.state.animValue, { toValue: 1 }).start();
-    else Animated.spring(this.state.animValue, { toValue: 0 }).start();
+    if (this.state.animatedIn) {
+      Animated.spring(this.state.animValue, { toValue: 1 }).start();
+    } else {
+      Animated.spring(this.state.animValue, { toValue: 0 }).start();
+    }
 
     this.setState({ animatedIn: !this.state.animatedIn });
   }
@@ -43,34 +57,59 @@ export default class RadarView extends Component {
   render() {
     const scaleAnim = this.state.animValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [0.9, 1.1],
+      outputRange: [0.9, 1.1]
     });
 
-    const rotateAnim = this.state.animValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: ["0deg", "130deg"],
-    });
+    // const rotateAnim = this.state.animValue.interpolate({
+    //   inputRange: [0, 1],
+    //   outputRange: ["0deg", "130deg"]
+    // });
+
     const fadeAnim = this.state.animValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [0.2, 1],
+      outputRange: [0.2, 1]
     });
 
     const transform = [{ scale: scaleAnim }];
     const animatedStyle = { transform, opacity: fadeAnim };
     return (
-      <Animated.View style={[styles.radarItem, this.props.style, { transform: [{ scale: this.state.scaleValue }] }]}>
+      <Animated.View
+        style={[
+          styles.radarItem,
+          this.props.style,
+          { transform: [{ scale: this.state.scaleValue }] }
+        ]}
+      >
         <View style={styles.wrapper}>
-          <Animated.View style={[styles.absolutePosition, styles.contentContainer]}>
+          <Animated.View
+            style={[styles.absolutePosition, styles.contentContainer]}
+          >
             <View style={[styles.textContainer]}>
-              <Animated.Text style={[styles.text, { opacity: fadeAnim }]}>{this.props.title}</Animated.Text>
+              <Animated.Text style={[styles.text, { opacity: fadeAnim }]}>
+                {this.props.title}
+              </Animated.Text>
             </View>
           </Animated.View>
 
-          <Animated.View style={[styles.absolutePosition, styles.coreContainer]} />
+          <Animated.View
+            style={[styles.absolutePosition, styles.coreContainer]}
+          />
 
-          <Animated.View style={[styles.absolutePosition, animatedStyle, styles.wave1Container]} />
+          <Animated.View
+            style={[
+              styles.absolutePosition,
+              animatedStyle,
+              styles.wave1Container
+            ]}
+          />
 
-          <Animated.View style={[styles.absolutePosition, animatedStyle, styles.wave2Container]} />
+          <Animated.View
+            style={[
+              styles.absolutePosition,
+              animatedStyle,
+              styles.wave2Container
+            ]}
+          />
         </View>
       </Animated.View>
     );
@@ -80,7 +119,7 @@ export default class RadarView extends Component {
 const styles = StyleSheet.create({
   radarItem: {
     flex: 1,
-    minHeight: WRAPPER_HEIGHT,
+    minHeight: WRAPPER_HEIGHT
     // backgroundColor:'red'
   },
   wrapper: {
@@ -88,18 +127,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "stretch",
     padding: 50,
-    width: FULL_WIDTH,
+    width: FULL_WIDTH
   },
   mainContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(222,222,211,0.5)",
-    borderRadius: 150,
+    borderRadius: 150
   },
   absolutePosition: {
     flex: 1,
-    position: "absolute",
+    position: "absolute"
   },
   coreContainer: {
     flex: 1,
@@ -113,7 +152,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     // padding:-30,
     borderWidth: 1,
-    borderColor: "#dd51a0",
+    borderColor: "#dd51a0"
   },
   contentContainer: {
     top: (WRAPPER_HEIGHT - WAVE2_RAD) / 2,
@@ -125,19 +164,19 @@ const styles = StyleSheet.create({
     padding: 40,
     zIndex: 50,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   textContainer: {
     padding: 10,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0)",
+    backgroundColor: "rgba(0,0,0,0)"
   },
   text: {
     fontSize: 14,
     fontWeight: "bold",
     color: "#dd51a0",
-    textAlign: "center",
+    textAlign: "center"
   },
 
   avatarContainer: { width: 50, height: 50 },
@@ -147,11 +186,11 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 1,
     borderColor: "white",
-    transform: [{ rotate: "315deg" }],
+    transform: [{ rotate: "315deg" }]
   },
   dotContainer: {
     width: 20,
-    height: 20,
+    height: 20
   },
   dot: {
     width: 10,
@@ -160,19 +199,19 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 10,
     borderWidth: 1,
-    borderColor: "white",
+    borderColor: "white"
   },
   smallDot: {
     width: 6,
     height: 6,
     backgroundColor: "green",
     borderRadius: 3,
-    margin: 3,
+    margin: 3
   },
   voidDot: {
     width: 10,
     height: 10,
-    margin: 5,
+    margin: 5
   },
   wave1Container: {
     top: (WRAPPER_HEIGHT - WAVE1_RAD) / 2,
@@ -181,7 +220,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(244,244,244,0.3)",
     width: WAVE1_RAD,
     height: WAVE1_RAD,
-    zIndex: 8,
+    zIndex: 8
   },
   wave2Container: {
     top: (WRAPPER_HEIGHT - WAVE2_RAD) / 2,
@@ -190,6 +229,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(237,88,172,0.2)",
     width: WAVE2_RAD,
     height: WAVE2_RAD,
-    zIndex: 7,
-  },
+    zIndex: 7
+  }
 });

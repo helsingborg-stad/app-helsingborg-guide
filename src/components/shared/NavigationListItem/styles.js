@@ -6,7 +6,7 @@ export default StyleSheet.create({
   imageWrapper: {
     overflow: "hidden",
     borderTopLeftRadius: 2,
-    borderTopRightRadius: 2,
+    borderTopRightRadius: 2
   },
   listItemContainer: {
     borderRadius: 2,
@@ -16,54 +16,57 @@ export default StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 5 },
-    marginBottom: 20,
+    marginBottom: 20
   },
   listItemGuideCount: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 12,
       fontWeight: "500",
       fontStyle: "normal",
       letterSpacing: 1,
-      color: Colors.warmGrey,
-    },
+      color: Colors.warmGrey
+    }
   ]),
   listItemImage: {
     height: "auto",
     width: "100%",
-    aspectRatio: 339 / 154,
+    aspectRatio: 339 / 154
   },
   listItemTextContainer: {
-    padding: 8,
+    padding: 8
   },
   listItemTitle: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 18,
       fontWeight: "bold",
       fontStyle: "normal",
-      color: Colors.black,
-    },
+      color: Colors.black
+    }
   ]),
   extrasContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "center"
   },
   forChildrenContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "center"
   },
   forChildrenText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 12,
       fontWeight: "500",
       fontStyle: "normal",
       letterSpacing: 1,
-      color: Colors.warmGrey,
-    },
+      color: Colors.warmGrey
+    }
   ]),
   forChildrenIcon: {
     marginLeft: 4,
     width: 20,
-    height: 20,
-  },
+    height: 20
+  }
 });

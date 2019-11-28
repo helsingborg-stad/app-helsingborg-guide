@@ -2,35 +2,70 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Dimensions, Animated } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Animated
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default class RoundedBtn extends Component {
+type Props = {
+  idle: any,
+  active: any,
+  isActive: any,
+  style: any,
+  disabled: any,
+  outline: any,
+  label: any,
+  onPress: any
+};
+
+type State = {
+  animValue: Animated.Value
+};
+
+const viewStyle = { flex: 1 };
+
+export default class RoundedBtn extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      animValue: new Animated.Value(1),
+      animValue: new Animated.Value(1)
     };
     this.onPressIn = this.onPressIn.bind(this);
     this.onPressOut = this.onPressOut.bind(this);
   }
-  componentDidMount() { }
+  componentDidMount() {}
 
   displayBtn() {
-    const close = this.props.idle || <Icon name="info" size={20} color="white" />;
-    const open = this.props.active || <Icon name="times" size={20} color="white" />;
+    const close = this.props.idle || (
+      <Icon name="info" size={20} color="white" />
+    );
+    const open = this.props.active || (
+      <Icon name="times" size={20} color="white" />
+    );
     const icon = this.props.isActive ? open : close;
     const _styles = [styles.closeBtn, this.props.style];
-    if (this.props.disabled) _styles.push(styles.disabled);
-    if (this.props.outline) _styles.push(styles.outline);
+    if (this.props.disabled) {
+      _styles.push(styles.disabled);
+    }
+    if (this.props.outline) {
+      _styles.push(styles.outline);
+    }
 
     const animatedStyle = {
-      transform: [{ scale: this.state.animValue }],
+      transform: [{ scale: this.state.animValue }]
     };
 
     return (
-      <Animated.View style={[{ flex: 1 }, animatedStyle]}>
-        <TouchableWithoutFeedback onPressIn={this.onPressIn} onPressOut={this.onPressOut} onPress={() => this.toggle()}>
+      <Animated.View style={[viewStyle, animatedStyle]}>
+        <TouchableWithoutFeedback
+          onPressIn={this.onPressIn}
+          onPressOut={this.onPressOut}
+          onPress={() => this.toggle()}
+        >
           <View style={styles.mainContainer}>
             <View style={styles.labelContainer}>
               <Text style={styles.labelText}>{this.props.label}</Text>
@@ -50,10 +85,10 @@ export default class RoundedBtn extends Component {
     this.props.onPress();
   }
 
-  onPressIn(e) {
+  onPressIn() {
     Animated.spring(this.state.animValue, { toValue: 1.4 }).start();
   }
-  onPressOut(e) {
+  onPressOut() {
     Animated.spring(this.state.animValue, { toValue: 1 }).start();
   }
 
@@ -67,11 +102,11 @@ const styles = StyleSheet.create({
     flex: 1,
     minWidth: 200,
     // backgroundColor:'red',
-    flexDirection: "row",
+    flexDirection: "row"
   },
 
   btnContainer: {
-    flex: 1,
+    flex: 1
   },
 
   closeBtn: {
@@ -80,28 +115,28 @@ const styles = StyleSheet.create({
     height: 32,
     borderRadius: 50,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   bigger: {
     width: 45,
     height: 45,
-    backgroundColor: "#ed57ac",
+    backgroundColor: "#ed57ac"
   },
   disabled: { backgroundColor: "#f6f6f6" },
   outline: {
     backgroundColor: "rgba(0,0,0,0)",
     borderWidth: 2,
-    borderColor: "white",
+    borderColor: "white"
   },
   labelContainer: {
     flex: 3,
     // backgroundColor:'orange',
     justifyContent: "center",
     alignItems: "flex-end",
-    paddingHorizontal: 10,
+    paddingHorizontal: 10
   },
   labelText: {
     color: "#D35098",
-    fontSize: 16,
-  },
+    fontSize: 16
+  }
 });

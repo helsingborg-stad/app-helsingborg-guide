@@ -5,7 +5,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import styles from "./styles";
 import LangService from "../../../services/langService";
@@ -26,17 +26,17 @@ type State = {
 class ExpandableView extends Component<Props, State> {
   static defaultProps = {
     style: null,
-    children: null,
+    children: null
   };
 
   state = {
     expanded: false,
-    overflow: false,
+    overflow: false
   };
 
   onPress = () => {
     this.setState({
-      expanded: !this.state.expanded,
+      expanded: !this.state.expanded
     });
   };
 

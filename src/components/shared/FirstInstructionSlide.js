@@ -3,63 +3,60 @@ import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import { PropTypes } from "prop-types";
 import LangService from "../../services/langService";
 import BackgroundImage from "./BackgroundImage";
-import {
-  Colors,
-  TextStyles,
-} from "../../styles/";
-import {
-  StyleSheetUtils,
-} from "../../utils/";
+import { Colors, TextStyles } from "../../styles/";
+import { StyleSheetUtils } from "../../utils/";
 
 const HALS_LOGO = require("../../images/HBG.png");
 
 const styles = StyleSheet.create({
   slide: {
     backgroundColor: Colors.darkPurple,
-    flex: 1,
+    flex: 1
   },
   mainContainer: {
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    zIndex: 50,
+    zIndex: 50
   },
   headerContainer: {
     flex: 1,
     minHeight: Dimensions.get("window").height * 0.35,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   headerText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       color: Colors.white,
       fontSize: 38,
       fontWeight: "300",
       lineHeight: 36,
-      minHeight: 50,
-    }],
-  ),
+      minHeight: 50
+    }
+  ]),
   contentContainer: {
     flex: 3,
-    width: Dimensions.get("window").width * 0.7,
+    width: Dimensions.get("window").width * 0.7
   },
   contentText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       color: Colors.white,
       fontSize: 16,
       fontWeight: "400",
       lineHeight: 26,
       minHeight: 50,
-      textAlign: "center",
-    }],
-  ),
+      textAlign: "center"
+    }
+  ]),
   logoContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-end",
-    padding: 22,
+    padding: 22
   },
-  logo: { width: 62, height: 66 },
+  logo: { width: 62, height: 66 }
 });
 
 const FirstInstructionSlide = ({ style, content, backgroundImageSource }) => (
@@ -77,20 +74,18 @@ const FirstInstructionSlide = ({ style, content, backgroundImageSource }) => (
         <Image resizeMethod="scale" resizeMode="center" source={HALS_LOGO} />
       </View>
     </View>
-    <BackgroundImage
-      source={backgroundImageSource}
-    />
+    <BackgroundImage source={backgroundImageSource} />
   </View>
 );
 
 FirstInstructionSlide.defaultProps = {
-  style: null,
+  style: null
 };
 
 FirstInstructionSlide.propTypes = {
   style: PropTypes.object,
   content: PropTypes.string.isRequired,
-  backgroundImageSource: PropTypes.number.isRequired,
+  backgroundImageSource: PropTypes.number.isRequired
 };
 
 export default FirstInstructionSlide;

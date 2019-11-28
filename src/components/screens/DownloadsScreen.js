@@ -8,15 +8,18 @@ import { Colors } from "../../styles/";
 import {
   cancelDownloadGuide,
   pauseDownloadGuide,
-  resumeDownloadGuide,
+  resumeDownloadGuide
 } from "../../actions/downloadGuidesActions";
-import { selectCurrentGuide, showBottomBar } from "../../actions/uiStateActions";
+import {
+  selectCurrentGuide,
+  showBottomBar
+} from "../../actions/uiStateActions";
 import { AnalyticsUtils } from "../../utils";
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: Colors.white,
-  },
+    backgroundColor: Colors.white
+  }
 });
 
 type Props = {
@@ -26,7 +29,7 @@ type Props = {
   pauseDownload(guide: Guide): void,
   resumeDownload(guide: Guide): void,
   selectGuide(guide: Guide): void,
-  navigation: any,
+  navigation: any
 };
 
 class DownloadsScreen extends Component<Props> {
@@ -34,7 +37,7 @@ class DownloadsScreen extends Component<Props> {
     const title = LangService.strings.OFFLINE_CONTENT;
     return {
       title,
-      headerRight: null,
+      headerRight: null
     };
   };
 
@@ -46,13 +49,19 @@ class DownloadsScreen extends Component<Props> {
     if (guideType === "guide") {
       this.props.hideBottomBar();
       AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-      this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name, bottomBarOnUnmount: true });
+      this.props.navigation.navigate("GuideDetailsScreen", {
+        title: guide.name,
+        bottomBarOnUnmount: true
+      });
     } else if (guideType === "trail") {
       this.props.hideBottomBar();
       AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-      this.props.navigation.navigate("TrailScreen", { title: guide.name, bottomBarOnUnmount: true });
+      this.props.navigation.navigate("TrailScreen", {
+        title: guide.name,
+        bottomBarOnUnmount: true
+      });
     }
-  }
+  };
 
   renderItem = ({ item }) => (
     <DownloadItemView
@@ -65,7 +74,7 @@ class DownloadsScreen extends Component<Props> {
       onClearPress={() => this.props.cancelDownload(item.guide)}
       onPressItem={() => this.navigateToGuide(item)}
     />
-  )
+  );
 
   render() {
     return (
@@ -82,7 +91,7 @@ class DownloadsScreen extends Component<Props> {
 function mapStateToProps(state: RootState) {
   const { offlineGuides } = state.downloadedGuides;
   return {
-    downloads: Object.values(offlineGuides),
+    downloads: Object.values(offlineGuides)
   };
 }
 
@@ -92,8 +101,11 @@ function mapDispatchToProps(dispatch) {
     pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
     resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
     selectGuide: guide => dispatch(selectCurrentGuide(guide)),
-    hideBottomBar: () => dispatch(showBottomBar(false)),
+    hideBottomBar: () => dispatch(showBottomBar(false))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DownloadsScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DownloadsScreen);

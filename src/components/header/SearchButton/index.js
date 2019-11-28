@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { Image, Text, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 
 const searchIcon = require("../../../images/search-id.png");
@@ -14,12 +14,13 @@ function onPress(navigation: any) {
   navigate("SearchObjectScreen");
 }
 
-const SearchButton = (props: Props) =>
-  (<TouchableOpacity
+const SearchButton = (props: Props) => (
+  <TouchableOpacity
     onPress={() => onPress(props.navigation)}
     style={styles.container}
   >
     <Image style={styles.image} source={searchIcon} />
-  </TouchableOpacity>);
+  </TouchableOpacity>
+);
 
 export default SearchButton;

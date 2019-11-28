@@ -13,15 +13,18 @@ const DEFAULT_ARR: string[] = [DEFAULT_CHAR, DEFAULT_CHAR, DEFAULT_CHAR];
 function strToArray(str, max) {
   const arr = [];
   for (let i = 0; i < max; i += 1) {
-    if (i >= str.length) arr.push(DEFAULT_CHAR);
-    else arr.push(str[i]);
+    if (i >= str.length) {
+      arr.push(DEFAULT_CHAR);
+    } else {
+      arr.push(str[i]);
+    }
   }
   return arr;
 }
 
 type Props = {
   onPressClose(): void,
-  onSearch(id: string): void,
+  onSearch(id: string): void
 };
 
 type State = {
@@ -36,15 +39,15 @@ export default class KeyPad extends Component<Props, State> {
     this.state = {
       number: "",
       displayedNumber: DEFAULT_ARR,
-      shakeValue: new Animated.Value(0),
+      shakeValue: new Animated.Value(0)
     };
   }
 
   shake = () => {
     Animated.sequence([
-      Animated.spring(this.state.shakeValue, { toValue: 1, velocity: 30 }),
+      Animated.spring(this.state.shakeValue, { toValue: 1, velocity: 30 })
     ]).start();
-  }
+  };
 
   onDigitPressed = (digit: number) => {
     const number = this.state.number + digit;
@@ -55,19 +58,18 @@ export default class KeyPad extends Component<Props, State> {
     } else {
       this.setState({ number, displayedNumber: strToArray(number, 3) });
     }
-  }
+  };
 
   clearAll = () => {
     this.setState({ number: "", displayedNumber: DEFAULT_ARR });
-  }
+  };
 
   search = (number: string) => {
     this.props.onSearch(number);
-  }
+  };
 
-  displayDigits() : any[] {
+  displayDigits(): any[] {
     return this.state.displayedNumber.map((digit, index) => (
-      // eslint-disable-next-line react/no-array-index-key
       <View key={index} style={[styles.rowItem, styles.upperDigitContainer]}>
         <Text style={[styles.digitText, styles.darkText]}>{digit}</Text>
       </View>
@@ -79,7 +81,7 @@ export default class KeyPad extends Component<Props, State> {
 
     const scale = this.state.shakeValue.interpolate({
       inputRange: [0, 0.5, 1],
-      outputRange: [1, 1.1, 1],
+      outputRange: [1, 1.1, 1]
     });
     const shakeAnimatedStyle = { transform: [{ scale }] };
 
@@ -95,7 +97,9 @@ export default class KeyPad extends Component<Props, State> {
             />
           </View>
           <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>{LangService.strings.SEARCH_BY_NUMBER}</Text>
+            <Text style={styles.titleText}>
+              {LangService.strings.SEARCH_BY_NUMBER}
+            </Text>
           </View>
         </View>
         <View style={styles.padContainer}>
@@ -106,47 +110,88 @@ export default class KeyPad extends Component<Props, State> {
             {this.displayDigits()}
           </Animated.View>
           <View style={styles.rowContainer}>
-            <TouchableOpacity onPress={() => this.onDigitPressed(1)} style={[styles.rowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(1)}
+              style={[styles.rowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>1</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.onDigitPressed(2)} style={[styles.rowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(2)}
+              style={[styles.rowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>2</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.onDigitPressed(3)} style={[styles.rowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(3)}
+              style={[styles.rowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>3</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.rowContainer}>
-            <TouchableOpacity onPress={() => this.onDigitPressed(4)} style={[styles.rowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(4)}
+              style={[styles.rowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>4</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.onDigitPressed(5)} style={[styles.rowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(5)}
+              style={[styles.rowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>5</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.onDigitPressed(6)} style={[styles.rowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(6)}
+              style={[styles.rowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>6</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.rowContainer}>
-            <TouchableOpacity onPress={() => this.onDigitPressed(7)} style={[styles.rowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(7)}
+              style={[styles.rowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>7</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.onDigitPressed(8)} style={[styles.rowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(8)}
+              style={[styles.rowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>8</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.onDigitPressed(9)} style={[styles.rowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(9)}
+              style={[styles.rowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>9</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.rowContainer}>
-            <TouchableOpacity onPress={() => this.onDigitPressed(0)} style={[styles.doubleRowItem, styles.digitContainer]}>
+            <TouchableOpacity
+              onPress={() => this.onDigitPressed(0)}
+              style={[styles.doubleRowItem, styles.digitContainer]}
+            >
               <Text style={styles.digitText}>0</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={this.clearAll}
-              style={[styles.rowItem, styles.digitContainer, noNumber ? styles.disabled : null]}
+              style={[
+                styles.rowItem,
+                styles.digitContainer,
+                noNumber ? styles.disabled : null
+              ]}
             >
-              <Text style={[styles.digitText, noNumber ? styles.disabledText : null]}>x</Text>
+              <Text
+                style={[
+                  styles.digitText,
+                  noNumber ? styles.disabledText : null
+                ]}
+              >
+                x
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

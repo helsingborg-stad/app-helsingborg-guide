@@ -11,31 +11,29 @@ import type { MaterialIconsGlyphs } from "react-native-vector-icons/MaterialIcon
 type Props = {
   onPress: Function,
   iconName: MaterialIconsGlyphs,
-  text: string,
-}
+  text: string
+};
 
 const textMargin = 13;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: "row"
   },
   text: StyleSheetUtils.flatten([
-    TextStyles.body, {
+    TextStyles.body,
+    {
       fontSize: 16,
       fontWeight: "500",
       marginRight: textMargin,
-      color: Colors.purple,
-    },
-  ]),
+      color: Colors.purple
+    }
+  ])
 });
 
 export default function IconTextTouchable(props: Props) {
   const directions = (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={props.onPress}
-    >
+    <TouchableOpacity style={styles.container} onPress={props.onPress}>
       <Icon name={props.iconName} size={24} color={Colors.purple} />
       <Text style={styles.text}>{props.text}</Text>
     </TouchableOpacity>

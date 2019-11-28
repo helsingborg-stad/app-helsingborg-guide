@@ -4,13 +4,15 @@ import VideoPlayer from "../shared/VideoPlayer";
 
 const { FullScreenVideoModule } = NativeModules;
 
+const flexStyle = { flex: 1 };
+
 export default class FullScreenVideoScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       url: null,
       paused: null,
-      currentTime: null,
+      currentTime: null
     };
   }
 
@@ -23,7 +25,7 @@ export default class FullScreenVideoScreen extends Component {
     this.setState({
       url: parameters.url,
       paused: parameters.paused,
-      currentTime: parameters.currentTime,
+      currentTime: parameters.currentTime
     });
   }
 
@@ -32,8 +34,8 @@ export default class FullScreenVideoScreen extends Component {
     return (
       url && (
         <VideoPlayer
-          containerStyle={{ flex: 1 }}
-          style={{ flex: 1 }}
+          containerStyle={flexStyle}
+          style={flexStyle}
           isAndroidFullscreen
           playOnLoad={!paused}
           initialCurrentTime={currentTime}

@@ -1,31 +1,34 @@
 /**
  * Created by msaeed on 2017-02-04.
  */
-import React, {
-  Component,
-} from "react";
-import {
-  View,
-  StyleSheet,
-} from "react-native";
-import {
-  Colors,
-} from "../../styles/";
+import React, { Component } from "react";
+import { View, StyleSheet } from "react-native";
+import { Colors } from "../../styles/";
 
-const COLORS = [Colors.lightPink, "#712082", Colors.lightPurple, Colors.darkPurple, Colors.purple];
+const COLORS = [
+  Colors.lightPink,
+  "#712082",
+  Colors.lightPurple,
+  Colors.darkPurple,
+  Colors.purple
+];
 
 const styles = StyleSheet.create({
   barsContainer: {
     flex: 1,
-    maxWidth: 10,
+    maxWidth: 10
   },
   bar: {
-    flex: 1,
-  },
+    flex: 1
+  }
 });
 
-export default class ColoredBar extends Component {
-  constructor(props) {
+type Props = {
+  visible: any
+};
+
+export default class ColoredBar extends Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.state = { colors: COLORS };
   }

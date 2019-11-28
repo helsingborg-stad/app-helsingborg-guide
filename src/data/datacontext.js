@@ -6,7 +6,7 @@ const datacontext = () => {
   const service = {};
 
   function defineLazyLoadedRepos() {
-    repoNames.forEach((name) => {
+    repoNames.forEach(name => {
       Object.defineProperty(service, name, {
         configurable: true,
         get() {
@@ -14,10 +14,10 @@ const datacontext = () => {
           Object.defineProperty(service, name, {
             value: thisRepo,
             configurable: false,
-            enumerable: true,
+            enumerable: true
           });
           return thisRepo;
-        },
+        }
       });
     });
   }

@@ -7,5 +7,5 @@ export default {
 
   compassbearingUpdated(bearing) {
     return { type: types.GEOLOCATION_BEARING_UPDATE_SUCCESS, bearing };
-  },
+  }
 };

@@ -6,15 +6,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "stretch",
-    backgroundColor: "white",
-  },
+    backgroundColor: "white"
+  }
 });
 
-const view_container = props => (
-  <View onMagicTap={props.onMagicTap} accessible={props.accessible} style={[styles.viewContainer, props.style]}>
+type Props = {
+  onMagicTap: any,
+  accessible: any,
+  style: Object,
+  children: Array
+};
+
+const view_container = (props: Props) => (
+  <View
+    onMagicTap={props.onMagicTap}
+    accessible={props.accessible}
+    style={[styles.viewContainer, props.style]}
+  >
     {props.children}
   </View>
 );
 
 export default view_container;
-

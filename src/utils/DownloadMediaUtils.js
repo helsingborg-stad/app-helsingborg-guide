@@ -7,11 +7,15 @@ const basePath = RNFetchBlob.fs.dirs.CacheDir;
 type PendingTask = StatefulPromise<FetchBlobResponse>;
 
 /*
-* Map with key "sessionId", containing maps with key "url".
-*/
+ * Map with key "sessionId", containing maps with key "url".
+ */
 const pendingTasks: { [string]: { [string]: PendingTask } } = {};
 
-function addPendingTask(sessionId: string, url: string, fetchPromise: PendingTask): void {
+function addPendingTask(
+  sessionId: string,
+  url: string,
+  fetchPromise: PendingTask
+): void {
   let sessionTasks = pendingTasks[sessionId];
   if (!sessionTasks) {
     sessionTasks = {};
@@ -40,7 +44,9 @@ function removePendingTasks(sessionId: string): void {
 
 export async function cancelPendingTasks(sessionId: string): Promise<any> {
   const sessionTasks = pendingTasks[sessionId];
-  if (!sessionTasks) { return true; }
+  if (!sessionTasks) {
+    return true;
+  }
 
   // $FlowFixMe flow doesn't understand Object.values()
   const tasks: PendingTask[] = Object.values(sessionTasks);
@@ -52,16 +58,19 @@ export async function cancelPendingTasks(sessionId: string): Promise<any> {
   return Promise.all(promises);
 }
 
-export async function startDownload(sessionId: string, url: string): Promise<boolean> {
+export async function startDownload(
+  sessionId: string,
+  url: string
+): Promise<boolean> {
   const config = {
     fileCache: true,
     path: `${basePath}/${sessionId}/${url}`,
-    session: sessionId,
+    session: sessionId
   };
 
   const fetchPromise = RNFetchBlob.config(config).fetch("GET", url);
   fetchPromise
-    .then((res) => {
+    .then(res => {
       console.log("Successfully downloaded to: ", res.path());
       removePendingTask(sessionId, url);
     })
@@ -73,7 +82,7 @@ export async function startDownload(sessionId: string, url: string): Promise<boo
 export async function remove(sessionId: number, url: string): Promise<any> {
   const config = {
     fileCache: true,
-    path: `${basePath}/${sessionId}/${url}`,
+    path: `${basePath}/${sessionId}/${url}`
   };
 
   try {
@@ -107,7 +116,10 @@ export function getFilePathInCache(sessionId: string, url: string) {
   return path;
 }
 
-export async function loadFromCache(sessionId: string, url: string): Promise<any> {
+export async function loadFromCache(
+  sessionId: string,
+  url: string
+): Promise<any> {
   console.log(`loadFromCache: ${sessionId}`);
   let path = getFilePathInCache(sessionId, url);
   path = Platform.OS === "android" ? `file://${path}` : path;
@@ -120,7 +132,10 @@ export async function loadFromCache(sessionId: string, url: string): Promise<any
   return fetchPromise;
 }
 
-export async function isFileInCache(sessionId: string, url: string): Promise<boolean> {
+export async function isFileInCache(
+  sessionId: string,
+  url: string
+): Promise<boolean> {
   let path = getFilePathInCache(sessionId, url);
   path = Platform.OS === "android" ? `file://${path}` : path;
   try {
@@ -138,6 +153,5 @@ export default {
   cancelPendingTasks,
   startDownload,
   remove,
-  removeMultiple,
+  removeMultiple
 };
-

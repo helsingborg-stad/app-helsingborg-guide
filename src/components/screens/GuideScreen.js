@@ -7,7 +7,10 @@ import { connect } from "react-redux";
 import GuideView from "../shared/GuideView";
 import { AnalyticsUtils } from "../../utils/";
 import SearchButton from "../header/SearchButton";
-import { selectCurrentContentObject, showBottomBar } from "../../actions/uiStateActions";
+import {
+  selectCurrentContentObject,
+  showBottomBar
+} from "../../actions/uiStateActions";
 import { releaseAudioFile } from "../../actions/audioActions";
 
 declare type Props = {
@@ -15,8 +18,8 @@ declare type Props = {
   navigation: any,
   dispatchSelectContentObject(contentObject: ContentObject): void,
   dispatchReleaseAudio(): void,
-  dispatchShowBottomBar(visible: boolean): void,
-}
+  dispatchShowBottomBar(visible: boolean): void
+};
 
 class GuideScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
@@ -25,7 +28,7 @@ class GuideScreen extends Component<Props> {
       const { title } = params;
       return {
         title,
-        headerRight: (<SearchButton navigation={navigation} />),
+        headerRight: <SearchButton navigation={navigation} />
       };
     }
     return {};
@@ -50,18 +53,22 @@ class GuideScreen extends Component<Props> {
   onPressContentObject = (obj: ContentObject) => {
     this.props.dispatchSelectContentObject(obj);
     AnalyticsUtils.logEvent("view_object", { name: obj.title });
-    this.props.navigation.navigate("ObjectScreen", { title: obj.title, currentGuide: this.props.currentGuide });
-  }
+    this.props.navigation.navigate("ObjectScreen", {
+      title: obj.title,
+      currentGuide: this.props.currentGuide
+    });
+  };
 
   render() {
     const { currentGuide } = this.props;
-    return currentGuide ?
-      (
-        <GuideView
-          guide={currentGuide}
-          onPressContentObject={this.onPressContentObject}
-        />
-      ) : <View />;
+    return currentGuide ? (
+      <GuideView
+        guide={currentGuide}
+        onPressContentObject={this.onPressContentObject}
+      />
+    ) : (
+      <View />
+    );
   }
 }
 
@@ -70,13 +77,17 @@ function mapStateToProps(state: RootState) {
   return { currentGuide };
 }
 
-
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    dispatchSelectContentObject: (contentObject: ContentObject) => dispatch(selectCurrentContentObject(contentObject)),
+    dispatchSelectContentObject: (contentObject: ContentObject) =>
+      dispatch(selectCurrentContentObject(contentObject)),
     dispatchReleaseAudio: () => dispatch(releaseAudioFile()),
-    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
+    dispatchShowBottomBar: (visible: boolean) =>
+      dispatch(showBottomBar(visible))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GuideScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GuideScreen);

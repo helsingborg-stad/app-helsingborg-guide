@@ -1,12 +1,6 @@
-
 // @flow
 import React from "react";
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import LangService from "../../../services/langService";
 import styles from "./styles";
 
@@ -19,46 +13,61 @@ type Props = {
 };
 
 function getGuidesCount(guideGroup: ?GuideGroup): number {
-  if (!guideGroup) return 0;
-  if (!guideGroup.guidesCount) return 0;
+  if (!guideGroup) {
+    return 0;
+  }
+  if (!guideGroup.guidesCount) {
+    return 0;
+  }
   return guideGroup.guidesCount;
 }
 
 function getGuidesCountFromGuide(guide: ?Guide): number {
-  if (!guide) return 0;
+  if (!guide) {
+    return 0;
+  }
   return guide.contentObjects.length;
 }
 
 function renderGuideCount(item: NavigationItem) {
   const { type, guide, guideGroup } = item;
 
-
   let textString = "";
   if (type === "guidegroup") {
     const guidesCount = getGuidesCount(guideGroup);
     if (guidesCount > 0) {
       const plural = guidesCount > 1;
-      const mediaGuideString: string = plural ? LangService.strings.MEDIAGUIDES : LangService.strings.MEDIAGUIDE;
+      const mediaGuideString: string = plural
+        ? LangService.strings.MEDIAGUIDES
+        : LangService.strings.MEDIAGUIDE;
       textString = `${guidesCount} ${mediaGuideString.toUpperCase()}`;
     }
   } else if (type === "guide" && guide && guide.guideType === "trail") {
     const guidesCount = getGuidesCountFromGuide(guide);
     if (guidesCount > 0) {
       const plural = guidesCount > 1;
-      const locationString: string = plural ? LangService.strings.LOCATIONS : LangService.strings.LOCATION;
-      textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${guidesCount} ${locationString}`;
+      const locationString: string = plural
+        ? LangService.strings.LOCATIONS
+        : LangService.strings.LOCATION;
+      textString = `${LangService.strings.TOUR} ${
+        LangService.strings.WITH
+      } ${guidesCount} ${locationString}`;
       textString = textString.toUpperCase();
     }
   } else if (type === "guide" && guide && guide.guideType === "guide") {
     const guidesCount = getGuidesCountFromGuide(guide);
     if (guidesCount > 0) {
-      textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${guidesCount} ${LangService.strings.OBJECT}`;
+      textString = `${LangService.strings.MEDIAGUIDE} ${
+        LangService.strings.WITH
+      } ${guidesCount} ${LangService.strings.OBJECT}`;
     }
   }
-  return (<Text style={styles.listItemGuideCount}>{textString}</Text>);
+  return <Text style={styles.listItemGuideCount}>{textString}</Text>;
 }
 
-function getNameAndImage(item: NavigationItem): { imageUrl: ?string, name: ?string } {
+function getNameAndImage(
+  item: NavigationItem
+): { imageUrl: ?string, name: ?string } {
   const { guide, guideGroup } = item;
   if (guide) {
     const { name, images } = guide;
@@ -70,7 +79,7 @@ function getNameAndImage(item: NavigationItem): { imageUrl: ?string, name: ?stri
   }
   return {
     imageUrl: null,
-    name: null,
+    name: null
   };
 }
 function isChildFriendly(item: NavigationItem): boolean {
@@ -83,10 +92,16 @@ function isChildFriendly(item: NavigationItem): boolean {
 
 function renderChildFriendly() {
   return (
-    <View style={styles.forChildrenContainer} >
-      <Text style={styles.forChildrenText}>{LangService.strings.FOR_CHILDREN.toUpperCase()}</Text>
-      <Image source={iconKids} resizeMode="contain" style={styles.forChildrenIcon} />
-    </View >
+    <View style={styles.forChildrenContainer}>
+      <Text style={styles.forChildrenText}>
+        {LangService.strings.FOR_CHILDREN.toUpperCase()}
+      </Text>
+      <Image
+        source={iconKids}
+        resizeMode="contain"
+        style={styles.forChildrenIcon}
+      />
+    </View>
   );
 }
 
@@ -95,26 +110,23 @@ const NavigationListItem = (props: Props) => {
   const { imageUrl, name } = getNameAndImage(item);
   const childFriendly = isChildFriendly(item);
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
-  return (<TouchableOpacity
-    onPress={() => props.onPressItem(item)}
-    style={styles.listItemContainer}
-  >
-    <View style={styles.imageWrapper}>
-      <Image
-        style={styles.listItemImage}
-        source={image}
-      />
-    </View>
-    <View style={styles.listItemTextContainer}>
-      <Text style={styles.listItemTitle}>{name}</Text>
-      <View style={styles.extrasContainer}>
-        {renderGuideCount(item)}
-        {childFriendly ? renderChildFriendly() : null}
+  return (
+    <TouchableOpacity
+      onPress={() => props.onPressItem(item)}
+      style={styles.listItemContainer}
+    >
+      <View style={styles.imageWrapper}>
+        <Image style={styles.listItemImage} source={image} />
       </View>
-    </View>
-  </TouchableOpacity>
+      <View style={styles.listItemTextContainer}>
+        <Text style={styles.listItemTitle}>{name}</Text>
+        <View style={styles.extrasContainer}>
+          {renderGuideCount(item)}
+          {childFriendly ? renderChildFriendly() : null}
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 };
-
 
 export default NavigationListItem;

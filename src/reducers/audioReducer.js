@@ -9,10 +9,13 @@ const defaultState: AudioState = {
   isPlaying: true,
   duration: 0,
   currentPosition: 0,
-  isMovingSlider: false,
+  isMovingSlider: false
 };
 
-export default function audioReducer(state: AudioState = defaultState, action: Action): AudioState {
+export default function audioReducer(
+  state: AudioState = defaultState,
+  action: Action
+): AudioState {
   switch (action.type) {
     case "AUDIO_LOAD_FILE_SUCCESS":
       return { ...state, isPrepared: true };
@@ -29,9 +32,17 @@ export default function audioReducer(state: AudioState = defaultState, action: A
     case "AUDIO_PAUSE":
       return { ...state, isPlaying: false };
     case "AUDIO_MOVE_SLIDER":
-      return { ...state, currentSliderPosition: action.position, isMovingSlider: true };
+      return {
+        ...state,
+        currentSliderPosition: action.position,
+        isMovingSlider: true
+      };
     case "AUDIO_MOVE_SLIDER_COMPLETE":
-      return { ...state, currentSliderPosition: action.position, isMovingSlider: false };
+      return {
+        ...state,
+        currentSliderPosition: action.position,
+        isMovingSlider: false
+      };
     default:
       return state;
   }

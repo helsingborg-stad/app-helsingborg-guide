@@ -24,7 +24,7 @@ function displayImage(imageSource: Object) {
       style={styles.imageContainer}
       source={imageSource}
       resizeMode="cover"
-    /* guideID={id} */ // TODO: offline support
+      /* guideID={id} */ // TODO: offline support
     />
   );
 }
@@ -35,17 +35,21 @@ type Props = {
   description?: ?string,
   startDate?: string,
   endDate?: string,
-  imageSource: Object,
+  imageSource: Object
   // id: number // TODO: we will need id later for offline lookup
-}
+};
 
 const ListItem = (props: Props) => (
   <View>
     <View>{displayImage(props.imageSource)}</View>
     <View>
       <View style={styles.titleContainer}>
-        <Text style={styles.title} numberOfLines={1}>{props.title}</Text>
-        <Text style={styles.description} numberOfLines={1}>{props.description}</Text>
+        <Text style={styles.title} numberOfLines={1}>
+          {props.title}
+        </Text>
+        <Text style={styles.description} numberOfLines={1}>
+          {props.description}
+        </Text>
         <DateView startDate={props.startDate} endDate={props.endDate} />
         {props.forKids ? forKidsView() : null}
       </View>
@@ -53,11 +57,10 @@ const ListItem = (props: Props) => (
   </View>
 );
 
-ListItem.defaultProps =
-  {
-    startDate: "",
-    endDate: "",
-    description: "",
-  };
+ListItem.defaultProps = {
+  startDate: "",
+  endDate: "",
+  description: ""
+};
 
 export default ListItem;

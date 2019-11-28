@@ -1,7 +1,13 @@
 // @flow
-import { setNavigationCategories, fetchNavigation } from "../actions/navigationActions";
+import {
+  setNavigationCategories,
+  fetchNavigation
+} from "../actions/navigationActions";
 import { fetchGuides, fetchGuidesForGuideGroup } from "../actions/guideActions";
-import { fetchGuideGroups, setGuidesAndGuideGroups } from "../actions/guideGroupActions";
+import {
+  fetchGuideGroups,
+  setGuidesAndGuideGroups
+} from "../actions/guideGroupActions";
 
 /**
  * Responsible for linking the navigation categories with it's content (guide, guidegroups etc.).
@@ -12,10 +18,11 @@ import { fetchGuideGroups, setGuidesAndGuideGroups } from "../actions/guideGroup
 function linkNavigationWithContent(
   categories: NavigationCategory[],
   guideGroups: GuideGroup[],
-  guides: Guide[]): NavigationCategory[] {
-  const sections: NavigationCategory[] = categories.map((cat) => {
+  guides: Guide[]
+): NavigationCategory[] {
+  const sections: NavigationCategory[] = categories.map(cat => {
     const items: NavigationItem[] = [];
-    cat.items.forEach((item) => {
+    cat.items.forEach(item => {
       const { id, type } = item;
 
       let result: NavigationItem = { ...item };
@@ -27,7 +34,7 @@ function linkNavigationWithContent(
         if (guide) {
           result = {
             ...item,
-            guide,
+            guide
           };
         }
       } else if (type === "guidegroup") {
@@ -35,7 +42,7 @@ function linkNavigationWithContent(
         if (guideGroup) {
           result = {
             ...item,
-            guideGroup,
+            guideGroup
           };
         }
       }
@@ -49,7 +56,9 @@ function linkNavigationWithContent(
   return sections;
 }
 
-export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: Action) => {
+export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
+  action: Action
+) => {
   const result = next(action);
   const nextState = getState();
 
@@ -65,8 +74,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
       dispatch(fetchGuidesForGuideGroup(currentLanguage, guideGroup.id));
       break;
     }
-    case "FETCH_NAVIGATION_SUCCESS":
-    {
+    case "FETCH_NAVIGATION_SUCCESS": {
       const { navigation } = nextState;
       const { currentLanguage, navigationCategories } = navigation;
 
@@ -74,10 +82,10 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
       dispatch(setGuidesAndGuideGroups([], []));
 
       // batch fetch a range of guides/guidegroups per navigation section
-      navigationCategories.forEach((cat) => {
+      navigationCategories.forEach(cat => {
         const guides: number[] = [];
         const guideGroups: number[] = [];
-        cat.items.forEach((navItem) => {
+        cat.items.forEach(navItem => {
           const { type, id } = navItem;
           if (type === "guide") {
             guides.push(id);
@@ -97,7 +105,11 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
         const { items: guideGroups } = nextState.guideGroups;
         const { items: guides } = nextState.guides;
         const { navigationCategories: categories } = nextState.navigation;
-        const renderableCategories = linkNavigationWithContent(categories, guideGroups, guides);
+        const renderableCategories = linkNavigationWithContent(
+          categories,
+          guideGroups,
+          guides
+        );
         dispatch(setNavigationCategories(renderableCategories));
       }
       break;

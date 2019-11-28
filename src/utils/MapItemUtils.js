@@ -32,7 +32,7 @@ function getLocationFromItem(item: MapItem): ?Location {
 
 function getLocations(items: MapItem[]): Location[] {
   const locs: Location[] = [];
-  items.forEach((i) => {
+  items.forEach(i => {
     const l = getLocationFromItem(i);
     if (l) {
       locs.push(l);
@@ -57,5 +57,5 @@ export default {
   getIdFromMapItem,
   getLocationFromItem,
   getLocations,
-  getNumberOfGuides,
+  getNumberOfGuides
 };

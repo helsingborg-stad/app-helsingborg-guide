@@ -2,6 +2,8 @@
  * Created at Tue Jun 11 2019 14:17:09 GMT+0200 (CEST)
  */
 
+/* eslint-disable max-len */
+
 export default {
   sv: {
     ABOUT: "Om",
@@ -11,7 +13,8 @@ export default {
     AR: "Vägvisare",
     AR_CAMERA_DISABLED: "Ge appen tillåtelse att använda kameran",
     AR_CHECKING: "Kontrollerar om funktionen stöds av din telefon",
-    AR_HINT_ARRIVED: "Utforska platsen genom att klicka på kortet eller lyssna på ljudguiden",
+    AR_HINT_ARRIVED:
+      "Utforska platsen genom att klicka på kortet eller lyssna på ljudguiden",
     AR_HINT_LOOK_DOWN: "Titta ner",
     AR_HINT_LOOK_LEFT: "Titta åt vänster",
     AR_HINT_LOOK_RIGHT: "Titta åt höger",
@@ -19,13 +22,16 @@ export default {
     AR_HINT_TURN_AROUND: "Vänd dig om",
     AR_INTRO_BETA_BADGE: "Vi testar funktionen och hoppas du ska gilla den!",
     AR_INTRO_BUTTON: "Prova Nu",
-    AR_INTRO_INSTRUCTIONS: "Håll upp telefonen och leta efter din valda plats runt omkring dig.",
+    AR_INTRO_INSTRUCTIONS:
+      "Håll upp telefonen och leta efter din valda plats runt omkring dig.",
     AR_INTRO_TITLE: "Ett nytt sätt att utforska Sofiero",
     AR_NOT_SUPPORTED_CALLOUT: "Hoppsan!",
     AR_SUPPORTED: "Funktionen stöds av din telefon",
     AR_TRANSIENT: "Funktionen väntar på att aktiveras",
-    AR_UNKNOWN: "Funktionen stöds inte av din telefon. Kontakta oss om du har frågor eller feedback!",
-    AR_UNSUPPORTED: "Funktionen stöds inte av din telefon. Kontakta oss om du har frågor eller feedback!",
+    AR_UNKNOWN:
+      "Funktionen stöds inte av din telefon. Kontakta oss om du har frågor eller feedback!",
+    AR_UNSUPPORTED:
+      "Funktionen stöds inte av din telefon. Kontakta oss om du har frågor eller feedback!",
     BETA_VERSION: "Beta version",
     CALENDAR: "Kalender",
     CANCEL: "Avbryt",
@@ -47,7 +53,8 @@ export default {
     DIRECTIONS: "Vägbeskrivning",
     DOWNLOAD: "Ladda ner",
     DOWNLOADED: "Tillgängligt offline",
-    DOWNLOADED_INFO: "Innehållet är nedladdat och tillgängligt offline. Du kan alltid radera detta från Inställningar.",
+    DOWNLOADED_INFO:
+      "Innehållet är nedladdat och tillgängligt offline. Du kan alltid radera detta från Inställningar.",
     DOWNLOADING: "Laddar ner",
     DOWNLOADING_CANCEL: "Avbryt",
     DOWNLOADING_PAUSE: "(tryck för att pausa)",
@@ -69,15 +76,19 @@ export default {
     MAP: "Karta",
     MEDIAGUIDE: "Mediaguide",
     MEDIAGUIDES: "Mediaguider",
-    MESSAGE_CAMERA_PERMISSION: "För att fortsätta, ge appen tillgång till din kamera",
-    MESSAGE_LOCATION_PERMISSION: "För att fortsätta låt appen använda telefonens platstjänst",
+    MESSAGE_CAMERA_PERMISSION:
+      "För att fortsätta, ge appen tillgång till din kamera",
+    MESSAGE_LOCATION_PERMISSION:
+      "För att fortsätta låt appen använda telefonens platstjänst",
     MINUTE: "min",
     MORE_INFO: "Mer info",
     NEW_CONTENT: "Nytt innehåll",
     NO_BLE_CONNECTION: "Bluetooth avstängd",
-    NO_BLE_CONNECTION_MESSAGE: "För full tillgång till Guide Helsingborg behöver du aktivera Bluetooth",
+    NO_BLE_CONNECTION_MESSAGE:
+      "För full tillgång till Guide Helsingborg behöver du aktivera Bluetooth",
     NO_INTERNET_CONNECTION: "Inget nätverk",
-    NO_INTERNET_CONNECTION_MESSAGE: "För full tillgång till Guide Helsingborg behöver du aktivera wifi",
+    NO_INTERNET_CONNECTION_MESSAGE:
+      "För full tillgång till Guide Helsingborg behöver du aktivera wifi",
     OBJECT: "objekt",
     OBS: "Något gick fel",
     OFFLINE_CONTENT: "Nedladdat innehåll",
@@ -102,7 +113,7 @@ export default {
     UNKNOWN_TITLE: "Okänd titel",
     VIDEO: "Spela film",
     VIEW_ALL: "Se alla",
-    WITH: "med",
+    WITH: "med"
   },
   en: {
     ABOUT: "About",
@@ -120,13 +131,16 @@ export default {
     AR_HINT_TURN_AROUND: "Turn around",
     AR_INTRO_BETA_BADGE: "",
     AR_INTRO_BUTTON: "Try it out",
-    AR_INTRO_INSTRUCTIONS: "Hold your phone up in front of you and look around to find your chosen place.",
+    AR_INTRO_INSTRUCTIONS:
+      "Hold your phone up in front of you and look around to find your chosen place.",
     AR_INTRO_TITLE: "A new way to explore Sofiero",
     AR_NOT_SUPPORTED_CALLOUT: "Oops!",
     AR_SUPPORTED: "This feature is supported",
     AR_TRANSIENT: "This feature is waiting to be activated",
-    AR_UNKNOWN: "This feature is unsupported. Contact us if you have any questions or feedback!",
-    AR_UNSUPPORTED: "This feature is unsupported. Contact us if you have any questions or feedback!",
+    AR_UNKNOWN:
+      "This feature is unsupported. Contact us if you have any questions or feedback!",
+    AR_UNSUPPORTED:
+      "This feature is unsupported. Contact us if you have any questions or feedback!",
     BETA_VERSION: "Beta version",
     CALENDAR: "Calendar",
     CANCEL: "Cancel",
@@ -148,7 +162,8 @@ export default {
     DIRECTIONS: "Directions",
     DOWNLOAD: "Download",
     DOWNLOADED: "Available offline",
-    DOWNLOADED_INFO: "The content is downloaded and available offline. Go to Settings if you want to remove downloaded content.",
+    DOWNLOADED_INFO:
+      "The content is downloaded and available offline. Go to Settings if you want to remove downloaded content.",
     DOWNLOADING: "Downloading",
     DOWNLOADING_CANCEL: "Cancel",
     DOWNLOADING_PAUSE: "(touch to pause)",
@@ -171,14 +186,17 @@ export default {
     MEDIAGUIDE: "Media guide",
     MEDIAGUIDES: "Media guides",
     MESSAGE_CAMERA_PERMISSION: "To continue, let the app access your camera",
-    MESSAGE_LOCATION_PERMISSION: "To continue, let the app access your location",
+    MESSAGE_LOCATION_PERMISSION:
+      "To continue, let the app access your location",
     MINUTE: "min",
     MORE_INFO: "More info",
     NEW_CONTENT: "New content",
     NO_BLE_CONNECTION: "Bluetooth disabled",
-    NO_BLE_CONNECTION_MESSAGE: "Activate Bluetooth for full access to Guide Helsingborg",
+    NO_BLE_CONNECTION_MESSAGE:
+      "Activate Bluetooth for full access to Guide Helsingborg",
     NO_INTERNET_CONNECTION: "No internet connection",
-    NO_INTERNET_CONNECTION_MESSAGE: "Activate wifi for full access to Guide Helsingborg",
+    NO_INTERNET_CONNECTION_MESSAGE:
+      "Activate wifi for full access to Guide Helsingborg",
     OBJECT: "object",
     OBS: "Something went wrong",
     OFFLINE_CONTENT: "Offline content",
@@ -203,7 +221,7 @@ export default {
     UNKNOWN_TITLE: "Unknown title.",
     VIDEO: "Play video",
     VIEW_ALL: "View all",
-    WITH: "with",
+    WITH: "with"
   },
   de: {
     ABOUT: "Über",
@@ -212,8 +230,10 @@ export default {
     APP_NAME: "Guide Helsingborg",
     AR: "Wegweiser",
     AR_CAMERA_DISABLED: "Erlaube das App, die Kamera zu benutzen",
-    AR_CHECKING: "Überprüft, ob die Funktion von Ihrem Telefon unterstützt wird",
-    AR_HINT_ARRIVED: "Entecken Sie den Platz, indem Sie auf die Karte klicken oder den Audioguide anhören",
+    AR_CHECKING:
+      "Überprüft, ob die Funktion von Ihrem Telefon unterstützt wird",
+    AR_HINT_ARRIVED:
+      "Entecken Sie den Platz, indem Sie auf die Karte klicken oder den Audioguide anhören",
     AR_HINT_LOOK_DOWN: "Schau nach unten",
     AR_HINT_LOOK_LEFT: "Schau nach links",
     AR_HINT_LOOK_RIGHT: "Schau nach rechts",
@@ -221,8 +241,10 @@ export default {
     AR_HINT_TURN_AROUND: "Dreh dich um",
     AR_INTRO_BETA_BADGE: "",
     AR_INTRO_BUTTON: "Starten Sie die Führung",
-    AR_INTRO_INSTRUCTIONS: "Halten Sie das Telefon auf und suchen Sie den gewünschten Ort in Ihrer Nähe.",
-    AR_INTRO_TITLE: "Probieren Sie eine neue, unterhaltsame Art, Sofiero zu entdecken",
+    AR_INTRO_INSTRUCTIONS:
+      "Halten Sie das Telefon auf und suchen Sie den gewünschten Ort in Ihrer Nähe.",
+    AR_INTRO_TITLE:
+      "Probieren Sie eine neue, unterhaltsame Art, Sofiero zu entdecken",
     AR_NOT_SUPPORTED_CALLOUT: "",
     AR_SUPPORTED: "Die Funktion wird von Ihrem Telefon unterstützt",
     AR_TRANSIENT: "Die Funktion wartet darauf, aktiviert zu werden",
@@ -249,7 +271,8 @@ export default {
     DIRECTIONS: "Route",
     DOWNLOAD: "Download",
     DOWNLOADED: "Offline verfügbar",
-    DOWNLOADED_INFO: "Der Inhalt wird heruntergeladen und offline verfügbar. Gehen Sie zu Einstellungen, wenn Sie heruntergeladene Inhalte entfernen möchten.",
+    DOWNLOADED_INFO:
+      "Der Inhalt wird heruntergeladen und offline verfügbar. Gehen Sie zu Einstellungen, wenn Sie heruntergeladene Inhalte entfernen möchten.",
     DOWNLOADING: "Lädt herunter",
     DOWNLOADING_CANCEL: "Beenden",
     DOWNLOADING_PAUSE: "(berühren, um zu pausieren)",
@@ -271,15 +294,19 @@ export default {
     MAP: "Karte",
     MEDIAGUIDE: "Media guide",
     MEDIAGUIDES: "Media guides",
-    MESSAGE_CAMERA_PERMISSION: "Geben Sie das App zum Fortfahren Zugang auf Ihre Kamera",
-    MESSAGE_LOCATION_PERMISSION: "Erlauben Sie der App Verwendung des Location Service  um fortzufahren.",
+    MESSAGE_CAMERA_PERMISSION:
+      "Geben Sie das App zum Fortfahren Zugang auf Ihre Kamera",
+    MESSAGE_LOCATION_PERMISSION:
+      "Erlauben Sie der App Verwendung des Location Service  um fortzufahren.",
     MINUTE: "Minute (minut) Minuten (minuter)",
     MORE_INFO: "Mehr Info",
     NEW_CONTENT: "Neuer Inhalt",
     NO_BLE_CONNECTION: "Kein Bluetooth",
-    NO_BLE_CONNECTION_MESSAGE: "Um den Guide Helsingborg zu verwenden  ist Bluetooth notwendig",
+    NO_BLE_CONNECTION_MESSAGE:
+      "Um den Guide Helsingborg zu verwenden  ist Bluetooth notwendig",
     NO_INTERNET_CONNECTION: "Kein Netzwerk",
-    NO_INTERNET_CONNECTION_MESSAGE: "Um den Guide Helsingborg zu verwenden ist eine Internetverbindung notwendig",
+    NO_INTERNET_CONNECTION_MESSAGE:
+      "Um den Guide Helsingborg zu verwenden ist eine Internetverbindung notwendig",
     OBJECT: "objekt",
     OBS: "Etwas ist schiefgegangen",
     OFFLINE_CONTENT: "Downloads",
@@ -304,6 +331,6 @@ export default {
     UNKNOWN_TITLE: "Unbekannter Titel",
     VIDEO: "Video spielen",
     VIEW_ALL: "Alle ansehen",
-    WITH: "mit",
-  },
+    WITH: "mit"
+  }
 };

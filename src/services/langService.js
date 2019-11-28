@@ -33,7 +33,7 @@ export default class LangService {
 
   static loadStoredLanguage() {
     return AsyncStorage.getItem(LANGUAGE)
-      .then((value) => {
+      .then(value => {
         if (value) {
           LangService.setLanguage(JSON.parse(value));
         } else {
@@ -49,10 +49,12 @@ export default class LangService {
   }
 
   static getLanguages() {
-    if (Object.keys(LangService.languageObj).length) return Promise.resolve(LangService.languageObj);
+    if (Object.keys(LangService.languageObj).length) {
+      return Promise.resolve(LangService.languageObj);
+    }
 
     const instance = dc();
-    return instance.language.getAvailableLanguages().then((languageObj) => {
+    return instance.language.getAvailableLanguages().then(languageObj => {
       if (languageObj) {
         LangService.languageObj = languageObj;
         return Promise.resolve(languageObj);
@@ -63,7 +65,9 @@ export default class LangService {
 
   static getString(key, langCode) {
     const keys = Object.keys(LangService.languageObj);
-    if (keys.find(item => item === langCode)) return strings[langCode][key];
+    if (keys.find(item => item === langCode)) {
+      return strings[langCode][key];
+    }
     return null;
   }
 }

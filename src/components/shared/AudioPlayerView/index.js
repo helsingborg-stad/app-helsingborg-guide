@@ -1,7 +1,15 @@
 // @flow
 
 import React, { Component } from "react";
-import { ActivityIndicator, Animated, Platform, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  Animated,
+  Platform,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
 import Slider from "@react-native-community/slider";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
@@ -11,7 +19,7 @@ import {
   togglePlay,
   releaseAudioFile,
   moveAudioSlider,
-  moveAudioSliderComplete,
+  moveAudioSliderComplete
 } from "../../../actions/audioActions";
 
 import styles from "./style";
@@ -23,27 +31,32 @@ type Props = {
   dispatchTogglePlaying(): void,
   dispatchReleaseAudioFile(): void,
   dispatchMoveAudioSlider(position: number): void,
-  dispatchMoveAudioSliderComplete(position: number): void,
-}
+  dispatchMoveAudioSliderComplete(position: number): void
+};
 
 type State = {
   animValue: Animated.Value
-}
+};
 
 function displayControlButton(isPlaying: boolean, dispatchToggle: any): any {
   let btn = null;
   btn = isPlaying ? (
     <TouchableOpacity style={styles.closeBtnContainer} onPress={dispatchToggle}>
       <Icon name="pause" size={26} color="purple" />
-    </TouchableOpacity>) : (
-      <TouchableOpacity style={styles.closeBtnContainer} onPress={dispatchToggle}>
-        <Icon name="play" size={26} color="purple" />
-      </TouchableOpacity >);
+    </TouchableOpacity>
+  ) : (
+    <TouchableOpacity style={styles.closeBtnContainer} onPress={dispatchToggle}>
+      <Icon name="play" size={26} color="purple" />
+    </TouchableOpacity>
+  );
   return btn;
 }
 
-function displayLoadingSpinner(isPlaying: boolean, currentPosition: number): any {
-  if (isPlaying && currentPosition == 0.0) {
+function displayLoadingSpinner(
+  isPlaying: boolean,
+  currentPosition: number
+): any {
+  if (isPlaying && currentPosition === 0.0) {
     return <ActivityIndicator style={styles.loadingSpinner} />;
   }
 
@@ -56,7 +69,9 @@ function padWithZeros(time: number): string {
 
 function getDurationString(currentPosition: number): string {
   let totalSecondsModified = currentPosition;
-  if (!ios) { totalSecondsModified /= 1000; }
+  if (!ios) {
+    totalSecondsModified /= 1000;
+  }
 
   const hours = Math.floor(totalSecondsModified / 3600);
   const remainingSeconds = totalSecondsModified % 3600;
@@ -70,24 +85,36 @@ function getDurationString(currentPosition: number): string {
   return `${minutes}:${padWithZeros(seconds)}`;
 }
 
-function onSliderValueCompleted(value: number, dispatchSliderMoveComplete: any): void {
+function onSliderValueCompleted(
+  value: number,
+  dispatchSliderMoveComplete: any
+): void {
   dispatchSliderMoveComplete(value);
 }
 
-function onSliderValueChanged(value: number, dispatchMoveAudioSlider: any, isMovingSlider: boolean) {
-  if (!isMovingSlider) dispatchMoveAudioSlider(value);
+function onSliderValueChanged(
+  value: number,
+  dispatchMoveAudioSlider: any,
+  isMovingSlider: boolean
+) {
+  if (!isMovingSlider) {
+    dispatchMoveAudioSlider(value);
+  }
 }
 
 class AudioPlayerView extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      animValue: new Animated.Value(0),
+      animValue: new Animated.Value(0)
     };
   }
 
   componentDidMount() {
-    Animated.timing(this.state.animValue, { toValue: 1, duration: 1000 }).start();
+    Animated.timing(this.state.animValue, {
+      toValue: 1,
+      duration: 1000
+    }).start();
   }
 
   render() {
@@ -97,17 +124,33 @@ class AudioPlayerView extends Component<Props, State> {
 
     return (
       <SafeAreaView style={styles.audioPlayer}>
-        <Animated.View style={[styles.playerContainer, { opacity: this.state.animValue }]}>
+        <Animated.View
+          style={[styles.playerContainer, { opacity: this.state.animValue }]}
+        >
           <View style={styles.sliderAndTitleContainer}>
             <View style={styles.titleContainer}>
-              <Text numberOfLines={1} style={[styles.titleText, !this.props.audio.isPrepared ? styles.disabledText : {}]}>
+              <Text
+                numberOfLines={1}
+                style={[
+                  styles.titleText,
+                  !this.props.audio.isPrepared ? styles.disabledText : {}
+                ]}
+              >
                 {this.props.audio.title}
               </Text>
-              {displayLoadingSpinner(this.props.audio.isPlaying, this.props.audio.currentPosition)}
+              {displayLoadingSpinner(
+                this.props.audio.isPlaying,
+                this.props.audio.currentPosition
+              )}
             </View>
             <View style={styles.sliderContainer}>
-              {displayControlButton(this.props.audio.isPlaying, this.props.dispatchTogglePlaying)}
-              <Text style={styles.durationText}>{getDurationString(this.props.audio.currentPosition)}</Text>
+              {displayControlButton(
+                this.props.audio.isPlaying,
+                this.props.dispatchTogglePlaying
+              )}
+              <Text style={styles.durationText}>
+                {getDurationString(this.props.audio.currentPosition)}
+              </Text>
               <View style={styles.slider}>
                 <Slider
                   disabled={!this.props.audio.isPrepared}
@@ -115,25 +158,41 @@ class AudioPlayerView extends Component<Props, State> {
                   maximumValue={this.props.audio.duration}
                   value={this.props.audio.currentPosition}
                   minimumTrackTintColor={Colors.purple}
-                  onValueChange={value => onSliderValueChanged(value, this.props.dispatchMoveAudioSlider, this.props.audio.isMovingSlider)}
-                  onSlidingComplete={value => onSliderValueCompleted(value, this.props.dispatchMoveAudioSliderComplete)}
+                  onValueChange={value =>
+                    onSliderValueChanged(
+                      value,
+                      this.props.dispatchMoveAudioSlider,
+                      this.props.audio.isMovingSlider
+                    )
+                  }
+                  onSlidingComplete={value =>
+                    onSliderValueCompleted(
+                      value,
+                      this.props.dispatchMoveAudioSliderComplete
+                    )
+                  }
                 />
               </View>
-              <Text style={styles.durationText}>{getDurationString(this.props.audio.duration)}</Text>
-              <TouchableOpacity style={styles.closeBtnContainer} onPress={this.props.dispatchReleaseAudioFile}>
+              <Text style={styles.durationText}>
+                {getDurationString(this.props.audio.duration)}
+              </Text>
+              <TouchableOpacity
+                style={styles.closeBtnContainer}
+                onPress={this.props.dispatchReleaseAudioFile}
+              >
                 <Icon2 name="cancel" color={Colors.warmGrey} size={32} />
               </TouchableOpacity>
             </View>
           </View>
         </Animated.View>
-      </SafeAreaView >
+      </SafeAreaView>
     );
   }
 }
 
 function mapStateToProps(state: RootState) {
   return {
-    audio: state.audio,
+    audio: state.audio
   };
 }
 
@@ -142,8 +201,12 @@ function mapDispatchToProps(dispatch: Dispatch) {
     dispatchTogglePlaying: () => dispatch(togglePlay()),
     dispatchReleaseAudioFile: () => dispatch(releaseAudioFile()),
     dispatchMoveAudioSlider: position => dispatch(moveAudioSlider(position)),
-    dispatchMoveAudioSliderComplete: position => dispatch(moveAudioSliderComplete(position)),
+    dispatchMoveAudioSliderComplete: position =>
+      dispatch(moveAudioSliderComplete(position))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AudioPlayerView);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AudioPlayerView);

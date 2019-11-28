@@ -3,7 +3,7 @@
 import { StackActions, NavigationActions } from "react-navigation";
 import type { NavigationParams, NavigationRoute } from "react-navigation";
 
-let _container; // eslint-disable-line
+let _container;
 
 function setContainer(container: Object) {
   _container = container;
@@ -17,10 +17,10 @@ function reset(routeName: string, params?: NavigationParams) {
       actions: [
         NavigationActions.navigate({
           routeName,
-          params,
-        }),
-      ],
-    }),
+          params
+        })
+      ]
+    })
   );
 }
 
@@ -28,8 +28,8 @@ function navigate(routeName: string, params?: NavigationParams) {
   _container.dispatch(
     NavigationActions.navigate({
       routeName,
-      params,
-    }),
+      params
+    })
   );
 }
 
@@ -45,5 +45,5 @@ export default {
   setContainer,
   navigate,
   reset,
-  getCurrentRoute,
+  getCurrentRoute
 };

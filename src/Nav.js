@@ -21,7 +21,7 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
-  ARIntroductionScreen,
+  ARIntroductionScreen
 } from "./components/screens";
 import ViewContainer from "./components/shared/view_container";
 import BottomBarView from "./components/shared/BottomBarView";
@@ -43,9 +43,9 @@ const GuideNavigator = createStackNavigator(
     SettingsScreen: { screen: SettingsScreen },
     DebugScreen: { screen: DebugScreen },
     CategoryListScreen: { screen: CategoryListScreen },
-    CategoryMapScreen: { screen: CategoryMapScreen },
+    CategoryMapScreen: { screen: CategoryMapScreen }
   },
-  { defaultNavigationOptions: HeaderStyles.default },
+  { defaultNavigationOptions: HeaderStyles.default }
 );
 
 const RootNavigator = createStackNavigator(
@@ -54,12 +54,12 @@ const RootNavigator = createStackNavigator(
     WelcomeScreen: { screen: WelcomeScreen },
     MainScreen: { screen: GuideNavigator },
     SearchObjectScreen: { screen: SearchObjectScreen },
-    ARIntroductionScreen: { screen: ARIntroductionScreen },
+    ARIntroductionScreen: { screen: ARIntroductionScreen }
   },
   {
     headerMode: "none",
-    mode: "modal",
-  },
+    mode: "modal"
+  }
 );
 
 const NavigatorWrapper = createAppContainer(RootNavigator);
@@ -71,7 +71,7 @@ type AppStateStatus = "inactive" | "active" | "background";
 type Props = {
   onAppStarted(): void,
   onAppBecameActive(): void,
-  onAppBecameInactive(): void,
+  onAppBecameInactive(): void
 };
 
 export default class Nav extends Component<Props> {
@@ -112,11 +112,15 @@ export default class Nav extends Component<Props> {
   render() {
     return (
       <ViewContainer>
-        <StatusBar translucent={ios} barStyle="light-content" backgroundColor={Colors.darkPurple} />
+        <StatusBar
+          translucent={ios}
+          barStyle="light-content"
+          backgroundColor={Colors.darkPurple}
+        />
         {/* $FlowFixMe should be fixed in later flow versions */}
         <NavigatorWrapper
           onNavigationStateChange={Nav.onNavigationStateChange}
-          ref={(navigatorRef) => {
+          ref={navigatorRef => {
             NavigatorService.setContainer(navigatorRef);
           }}
         />

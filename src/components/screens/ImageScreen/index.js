@@ -1,10 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import {
-  ActivityIndicator,
-  View,
-} from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import PhotoView from "react-native-photo-view";
 import { connect } from "react-redux";
 import { loadFromCache } from "../../../utils/DownloadMediaUtils";
@@ -13,22 +10,16 @@ import styles from "./styles";
 const MAX_SCALE = 2.5;
 const MIN_SCALE = 0.95;
 
-
 type Props = {
   guideId: ?number,
-  url: ?string,
+  url: ?string
 };
 
 type State = {
-  imageSource?: ?any,
+  imageSource?: ?any
 };
 
 class ImageScreen extends Component<Props, State> {
-  static navigationOptions = {
-    headerRight: null,
-    headerStyle: styles.mainContainer,
-  }
-
   constructor(props: Props) {
     super(props);
 
@@ -38,8 +29,15 @@ class ImageScreen extends Component<Props, State> {
     this.tryLoadFromCache(guideId, url);
   }
 
+  static navigationOptions = {
+    headerRight: null,
+    headerStyle: styles.mainContainer
+  };
+
   tryLoadFromCache = async (guideId: ?number, uri: ?string): Promise<any> => {
-    if (!guideId || !uri) throw new Error("Null params passed");
+    if (!guideId || !uri) {
+      throw new Error("Null params passed");
+    }
 
     try {
       const data = await loadFromCache(`${guideId}`, uri);
@@ -48,12 +46,13 @@ class ImageScreen extends Component<Props, State> {
       // do not care
       this.setState({ imageSource: { uri } });
     }
-  }
+  };
 
   renderLoadingScreen = () => (
     <View style={styles.loadingContainer}>
       <ActivityIndicator />
-    </View>)
+    </View>
+  );
 
   render() {
     const { imageSource } = this.state;
@@ -82,7 +81,7 @@ function mapStateToProps(state: RootState) {
 
   return {
     url: currentImage,
-    guideId: id,
+    guideId: id
   };
 }
 

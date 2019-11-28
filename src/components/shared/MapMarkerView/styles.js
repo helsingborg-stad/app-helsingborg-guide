@@ -10,10 +10,10 @@ const markerImageInactiveWidth = 32;
 export default StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
-    flex: 1,
+    flex: 1
   },
   map: {
-    flex: 1,
+    flex: 1
   },
   numberedMarkerText: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -27,8 +27,8 @@ export default StyleSheet.create({
       fontWeight: "500",
       lineHeight: 23.0,
       textAlign: "center",
-      color: Colors.white,
-    },
+      color: Colors.white
+    }
   ]),
   numberedMarkerTextActive: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -42,7 +42,7 @@ export default StyleSheet.create({
       fontWeight: "500",
       lineHeight: 23.0,
       textAlign: "center",
-      color: Colors.black,
-    },
-  ]),
+      color: Colors.black
+    }
+  ])
 });

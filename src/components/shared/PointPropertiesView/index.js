@@ -14,7 +14,11 @@ function getPointProperties(pointProperties: PointProperty[]) {
       <View style={styles.pointPropertiesSectionContainer}>
         {pointProperties.map(element => (
           <View style={styles.pointPropertyContainer} key={element.id}>
-            <SVGView logoType={element.icon} placeholderImage={pointPropertyPlaceholderImage} customStyle={styles.pointPropertyIcon} />
+            <SVGView
+              logoType={element.icon}
+              placeholderImage={pointPropertyPlaceholderImage}
+              customStyle={styles.pointPropertyIcon}
+            />
             <Text style={styles.pointPropertyText}>{element.name}</Text>
           </View>
         ))}
@@ -25,7 +29,7 @@ function getPointProperties(pointProperties: PointProperty[]) {
 }
 
 type Props = {
-  pointProperties: PointProperty[],
+  pointProperties: PointProperty[]
 };
 
 export default function PointPropertiesView(props: Props) {

@@ -6,13 +6,13 @@ export default StyleSheet.create({
   container: {
     alignItems: "center",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   illustrationImageContainer: {
     marginHorizontal: 30,
     marginVertical: 15,
     paddingLeft: 127,
-    paddingRight: 53,
+    paddingRight: 53
   },
   instructions: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -22,8 +22,8 @@ export default StyleSheet.create({
       lineHeight: 23,
       marginHorizontal: 40,
       textAlign: "center",
-      paddingTop: 20,
-    },
+      paddingTop: 20
+    }
   ]),
   marker: {
     alignItems: "center",
@@ -33,10 +33,10 @@ export default StyleSheet.create({
     position: "absolute",
     right: 136,
     top: 60,
-    width: 28,
+    width: 28
   },
   mobileHandContainer: {
-    right: 50,
+    right: 50
   },
   speechBubble: {
     alignItems: "center",
@@ -47,11 +47,11 @@ export default StyleSheet.create({
     position: "absolute",
     right: 60,
 
-    width: 112,
+    width: 112
   },
   speechBubbleText: {
     ...TextStyles.medium,
     fontWeight: "bold",
-    textAlign: "center",
-  },
+    textAlign: "center"
+  }
 });

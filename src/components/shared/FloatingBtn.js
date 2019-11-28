@@ -2,23 +2,36 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Dimensions, Animated, TouchableOpacity } from "react-native";
-import ViewContainer from "./view_container";
+import {
+  Text,
+  StyleSheet,
+  Dimensions,
+  Animated,
+  TouchableOpacity
+} from "react-native";
 
 const FULL_WIDTH = Dimensions.get("window").width;
 
-export default class FloatingBtn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { animValue: new Animated.Value(0), visible: props.visible };
-  }
+type Props = {
+  visible: any,
+  onPress: any,
+  content: any
+};
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+type State = {
+  visible: any,
+  animValue: Animated.Value
+};
+
+export default class FloatingBtn extends Component<Props, State> {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     const { visible } = nextProps;
     const { animValue, visible: previouslyVisible } = prevState;
 
-    if ( visible !== previouslyVisible) {
-      const animationProperties = visible ? { toValue: 1, friction: 2 } : { toValue: 0 };
+    if (visible !== previouslyVisible) {
+      const animationProperties = visible
+        ? { toValue: 1, friction: 2 }
+        : { toValue: 0 };
       Animated.spring(animValue, animationProperties).start();
       return { visible };
     }
@@ -26,21 +39,36 @@ export default class FloatingBtn extends Component {
     return null;
   }
 
+  constructor(props) {
+    super(props);
+    this.state = { animValue: new Animated.Value(0), visible: props.visible };
+  }
+
   render() {
     const {
-      props: { onPress. content },
+      props: { onPress, content },
       state: { animValue }
     } = this;
 
     const indexAnim = animValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [-10, 1000],
+      outputRange: [-10, 1000]
     });
 
+    const outerWrapperStyle = [styles.wrapper, { zIndex: indexAnim }];
+    const innerWrapperStyle = [
+      styles.innerWrapper,
+      { transform: [{ scale: animValue }] }
+    ];
+
     return (
-      <Animated.View style={[styles.wrapper, { zIndex: indexAnim }]}>
-        <Animated.View style={[{ flex: 1, transform: [{ scale: animValue }] }]}>
-          <TouchableOpacity onPress={onPress} activeOpacity={0.9} style={styles.mainContainer}>
+      <Animated.View style={outerWrapperStyle}>
+        <Animated.View style={innerWrapperStyle}>
+          <TouchableOpacity
+            onPress={onPress}
+            activeOpacity={0.9}
+            style={styles.mainContainer}
+          >
             <Text style={styles.text}>{content}</Text>
           </TouchableOpacity>
         </Animated.View>
@@ -59,8 +87,9 @@ const styles = StyleSheet.create({
     top: 70,
     left: 0,
     zIndex: 1000,
-    alignItems: "center",
+    alignItems: "center"
   },
+  innerWrapper: { flex: 1 },
   mainContainer: {
     flex: 1,
     height: 32,
@@ -70,7 +99,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 50,
     paddingHorizontal: 15,
-    zIndex: 2000,
+    zIndex: 2000
   },
-  text: { fontSize: 14, color: "white" },
+  text: { fontSize: 14, color: "white" }
 });

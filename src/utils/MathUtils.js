@@ -19,9 +19,11 @@ const limitPrecision = (value: number, precision: number) => {
   return Math.round(value * exp) / exp;
 };
 
-const getAverage = (array: Array<number>) => array.reduce((accumulator, value) => accumulator + value, 0) / array.length;
+const getAverage = (array: Array<number>) =>
+  array.reduce((accumulator, value) => accumulator + value, 0) / array.length;
 
-const exceedsThreshold = (a: number, b: number, c: number) => Math.abs(a - b) >= c;
+const exceedsThreshold = (a: number, b: number, c: number) =>
+  Math.abs(a - b) >= c;
 
 export default {
   DEG_TO_RAD,
@@ -30,5 +32,5 @@ export default {
   clamp,
   limitPrecision,
   getAverage,
-  exceedsThreshold,
+  exceedsThreshold
 };

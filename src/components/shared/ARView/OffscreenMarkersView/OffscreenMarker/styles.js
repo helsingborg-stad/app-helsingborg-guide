@@ -7,11 +7,11 @@ export default StyleSheet.create({
     color: Colors.white,
     fontFamily: "Arial",
     fontSize: 20,
-    position: "absolute",
+    position: "absolute"
   },
   marker: {
     alignItems: "center",
     justifyContent: "center",
-    position: "absolute",
-  },
+    position: "absolute"
+  }
 });

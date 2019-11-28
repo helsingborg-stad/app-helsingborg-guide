@@ -7,7 +7,10 @@ import { AnalyticsUtils } from "../../utils/";
 import LangService from "../../services/langService";
 import fetchService from "../../services/FetchService";
 import { initAudioFile, pauseAudio } from "../../actions/audioActions";
-import { selectCurrentContentObjectImage, selectCurrentImage } from "../../actions/uiStateActions";
+import {
+  selectCurrentContentObjectImage,
+  selectCurrentImage
+} from "../../actions/uiStateActions";
 import { HeaderStyles } from "../../styles";
 
 type Props = {
@@ -19,7 +22,7 @@ type Props = {
   selectCurrentImage(url: ?string): void,
   dispatchInitAudioFile(audio: AudioState): void,
   dispatchPauseAudio(): void
-}
+};
 
 const defaultState: AudioState = {
   url: "",
@@ -30,15 +33,16 @@ const defaultState: AudioState = {
   isPlaying: true,
   duration: 0,
   currentPosition: 0,
-  isMovingSlider: false,
+  isMovingSlider: false
 };
 
 function isMediaAvailable(media?: MediaContent): boolean {
   const internet = true; // TODO: how will this work?
   let available = false;
   if (media && media.url) {
-    fetchService.isExist(media.url/* , this.state.guideID */).then((exist) => { // TODO: and this?!
-      available = (exist);
+    fetchService.isExist(media.url /* , this.state.guideID */).then(exist => {
+      // TODO: and this?!
+      available = exist;
     });
   }
   return available || internet;
@@ -48,9 +52,9 @@ class ObjectScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     return Object.assign(HeaderStyles.noElevation, {
-      title,
+      title
     });
-  }
+  };
 
   onSwiperIndexChanged = (newIndex: number) => {
     this.props.selectCurrentContentObjectImage(newIndex);
@@ -69,27 +73,37 @@ class ObjectScreen extends Component<Props> {
   };
 
   onGoToVideo = (video?: MediaContent) => {
-    if (!video) { return; }
+    if (!video) {
+      return;
+    }
     const { currentGuide } = this.props;
-    if (!currentGuide) return;
+    if (!currentGuide) {
+      return;
+    }
     const guideID = currentGuide.id;
 
     this.props.dispatchPauseAudio();
 
     const { url, title } = video;
-    if (title) AnalyticsUtils.logEvent("play_video", { title });
+    if (title) {
+      AnalyticsUtils.logEvent("play_video", { title });
+    }
 
     const { navigate } = this.props.navigation;
     navigate("VideoScreen", { videoUrl: url, title, guideID });
-  }
+  };
 
   loadAudioFile = () => {
     const { currentContentObject } = this.props;
-    if (!currentContentObject) return;
+    if (!currentContentObject) {
+      return;
+    }
 
     const { audio, title } = currentContentObject;
 
-    if (!audio || !audio.url) return;
+    if (!audio || !audio.url) {
+      return;
+    }
 
     const audioState: AudioState = defaultState;
 
@@ -97,15 +111,22 @@ class ObjectScreen extends Component<Props> {
     audioState.avatar_url = currentContentObject.images[0].thumbnail || "";
     audioState.url = audio.url;
 
-    if (audioState.title) AnalyticsUtils.logEvent("play_audio", { name: audioState.title });
+    if (audioState.title) {
+      AnalyticsUtils.logEvent("play_audio", { name: audioState.title });
+    }
 
     this.props.dispatchInitAudioFile(audioState);
   };
 
-
   render() {
-    const { currentContentObject, currentContentObjectImageIndex, currentGuide } = this.props;
-    if (!currentContentObject) return null;
+    const {
+      currentContentObject,
+      currentContentObjectImageIndex,
+      currentGuide
+    } = this.props;
+    if (!currentContentObject) {
+      return null;
+    }
     let guideId;
     let guideType;
     if (currentGuide) {
@@ -113,39 +134,50 @@ class ObjectScreen extends Component<Props> {
       ({ guideType } = currentGuide);
     }
 
-    return (<ObjectView
-      contentObject={currentContentObject}
-      guideId={guideId}
-      guideType={guideType}
-      onSwiperIndexChanged={this.onSwiperIndexChanged}
-      imageIndex={currentContentObjectImageIndex}
-      audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}
-      videoButtonDisabled={!isMediaAvailable(currentContentObject.video)}
-      onGoToImage={this.onGoToImage}
-      onGoToLink={this.onGoToLink}
-      loadAudioFile={this.loadAudioFile}
-      onGoToVideo={this.onGoToVideo}
-    />);
+    return (
+      <ObjectView
+        contentObject={currentContentObject}
+        guideId={guideId}
+        guideType={guideType}
+        onSwiperIndexChanged={this.onSwiperIndexChanged}
+        imageIndex={currentContentObjectImageIndex}
+        audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}
+        videoButtonDisabled={!isMediaAvailable(currentContentObject.video)}
+        onGoToImage={this.onGoToImage}
+        onGoToLink={this.onGoToLink}
+        loadAudioFile={this.loadAudioFile}
+        onGoToVideo={this.onGoToVideo}
+      />
+    );
   }
 }
 
 function mapStateToProps(state: RootState) {
-  const { currentGuide, currentContentObject, currentContentObjectImageIndex } = state.uiState;
+  const {
+    currentGuide,
+    currentContentObject,
+    currentContentObjectImageIndex
+  } = state.uiState;
 
   return {
     currentGuide,
     currentContentObject,
-    currentContentObjectImageIndex,
+    currentContentObjectImageIndex
   };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    selectCurrentContentObjectImage: (newIndex: number) => dispatch(selectCurrentContentObjectImage(newIndex)),
-    dispatchInitAudioFile: (audio: AudioState) => dispatch(initAudioFile(audio)),
+    selectCurrentContentObjectImage: (newIndex: number) =>
+      dispatch(selectCurrentContentObjectImage(newIndex)),
+    dispatchInitAudioFile: (audio: AudioState) =>
+      dispatch(initAudioFile(audio)),
     dispatchPauseAudio: () => dispatch(pauseAudio()),
-    selectCurrentImage: (url: ?string) => dispatch(selectCurrentImage(url)),
+    selectCurrentImage: (url: ?string) => dispatch(selectCurrentImage(url))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ObjectScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ObjectScreen);

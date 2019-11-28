@@ -7,8 +7,12 @@ module.exports = () => {
     const seconds = Math.floor(_seconds);
     let m;
     let s;
-    if (!seconds || seconds < 0) return "00:00";
-    if (seconds < 60) return `00:${add0(seconds)}`;
+    if (!seconds || seconds < 0) {
+      return "00:00";
+    }
+    if (seconds < 60) {
+      return `00:${add0(seconds)}`;
+    }
     if (seconds < 3600) {
       m = parseInt(seconds / 60);
       s = seconds % 60;
@@ -23,6 +27,6 @@ module.exports = () => {
   }
 
   return {
-    toTimeMarker,
+    toTimeMarker
   };
 };

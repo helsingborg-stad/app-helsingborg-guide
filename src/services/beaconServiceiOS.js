@@ -1,4 +1,9 @@
-import { AlertIOS, NativeModules, NativeEventEmitter, DeviceEventEmitter } from "react-native";
+import {
+  AlertIOS,
+  NativeModules,
+  NativeEventEmitter,
+  DeviceEventEmitter
+} from "react-native";
 
 let instance = null;
 
@@ -8,7 +13,7 @@ let rangedBeacons = [];
 
 let scannerIsRunning = false;
 
-let resultsCallback = () => { };
+let resultsCallback = () => {};
 
 export class BeaconServiceiOS {
   static threshold = 3;
@@ -24,19 +29,26 @@ export class BeaconServiceiOS {
     this.startRanging = this.startRanging.bind(this);
     this.stopRanging = this.stopRanging.bind(this);
 
-    this.convertRawBeaconDataIntoBeaconObject = this.convertRawBeaconDataIntoBeaconObject.bind(this);
+    this.convertRawBeaconDataIntoBeaconObject = this.convertRawBeaconDataIntoBeaconObject.bind(
+      this
+    );
 
     this.hookUpEvents();
   }
 
   hookUpEvents() {
-    this.eventEmitter.addListener("BEACON_ENTERED_REGION_IOS", this.createBeaconList);
+    this.eventEmitter.addListener(
+      "BEACON_ENTERED_REGION_IOS",
+      this.createBeaconList
+    );
     this.eventEmitter.addListener("UPDATE_BEACON_DATA", this.createBeaconList);
   }
 
   updateBeaconDataInList(data) {
     const beacon = this.convertRawBeaconDataIntoBeaconObject(data);
-    if (!rangedBeacons.find(b => b.uid === beacon.uid)) rangedBeacons.push(beacon);
+    if (!rangedBeacons.find(b => b.uid === beacon.uid)) {
+      rangedBeacons.push(beacon);
+    }
     resultsCallback({ beacons: rangedBeacons });
     rangedBeacons = [];
   }
@@ -73,7 +85,9 @@ export class BeaconServiceiOS {
   }
 
   static getInstance() {
-    if (!instance) instance = new BeaconServiceiOS();
+    if (!instance) {
+      instance = new BeaconServiceiOS();
+    }
     return instance;
   }
 
@@ -87,11 +101,11 @@ export class BeaconServiceiOS {
     }, 2000);
     return BeaconManager.startScanning();
   }
-  checkBluetooth() { }
+  checkBluetooth() {}
 
-  unbind() { }
+  unbind() {}
 
-  startRanging(regionId) { }
+  startRanging(regionId) {}
 
   stopRanging(regionId) {
     this.hasRangedBeacons = false;
@@ -101,24 +115,30 @@ export class BeaconServiceiOS {
   onRangingResult(callback) {
     resultsCallback = callback;
   }
-  onServiceConnected(callback) { }
+  onServiceConnected(callback) {}
   unSubscribeOnRangingResult(callback) {
     this.eventEmitter.removeListener("BEACON_ENTERED_REGION_IOS", callback);
   }
 
   getTheClosest(beacons) {
-    if (!beacons || !beacons.length) return;
-    const sorted = beacons.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+    if (!beacons || !beacons.length) {
+      return;
+    }
+    const sorted = beacons.sort(
+      (a, b) => parseFloat(a.distance) - parseFloat(b.distance)
+    );
     return sorted[0];
 
     // return beacons.reduce((prev,curr)=> prev.distance<curr.distance?prev:curr);
   }
-  unSubscribeOnRangingResult(callback) { }
+  unSubscribeOnRangingResult(callback) {}
   getOptimizedDistanceBeacons(beacons) {
-    if (!beacons || !beacons.length) return [];
+    if (!beacons || !beacons.length) {
+      return [];
+    }
     return beacons.map(_beacon => this.optimizeDistance(_beacon));
   }
-  unSubscribeOnServiceConnected(callback) { }
+  unSubscribeOnServiceConnected(callback) {}
 
   // for estimot
   // optimizeDistance(_beacon){
@@ -131,13 +151,19 @@ export class BeaconServiceiOS {
   optimizeDistance(_beacon) {
     const beacon = _beacon;
     beacon.txPower = parseInt(beacon.txPower);
-    beacon.distance = Math.sqrt(Math.pow(10, (parseInt(beacon.txPower) - parseInt(beacon.rssi)) / 10));
+    beacon.distance = Math.sqrt(
+      Math.pow(10, (parseInt(beacon.txPower) - parseInt(beacon.rssi)) / 10)
+    );
     return beacon;
   }
 
   getTheClosest(beacons) {
-    if (!beacons || !beacons.length) return {};
-    const sorted = beacons.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+    if (!beacons || !beacons.length) {
+      return {};
+    }
+    const sorted = beacons.sort(
+      (a, b) => parseFloat(a.distance) - parseFloat(b.distance)
+    );
     return sorted[0];
 
     // return beacons.reduce((prev,curr)=> prev.distance<curr.distance?prev:curr);

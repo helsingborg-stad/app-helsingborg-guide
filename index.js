@@ -12,7 +12,11 @@ import { errorHappened } from "./src/actions/errorActions";
 import FullScreenVideoScreen from "./src/components/screens/FullScreenVideoScreen";
 import LocationService from "./src/services/locationService";
 import DownloadTasksManager from "./src/services/DownloadTasksManager";
-import { appStarted, appBecameActive, appBecameInactive } from "./src/actions/uiStateActions";
+import {
+  appStarted,
+  appBecameActive,
+  appBecameInactive
+} from "./src/actions/uiStateActions";
 import { setLanguage } from "./src/actions/navigationActions";
 
 const { store, persistor } = configureStore();
@@ -41,7 +45,7 @@ export default class GuideHbg extends Component {
   }
 
   static loadContents() {
-    NetInfo.isConnected.fetch().then((isConnected) => {
+    NetInfo.isConnected.fetch().then(isConnected => {
       if (isConnected) {
         LangService.getLanguages();
       }
@@ -55,11 +59,11 @@ export default class GuideHbg extends Component {
       [
         {
           text: LangService.strings.SETTINGS,
-          onPress: GuideHbg.openInternetSettings,
+          onPress: GuideHbg.openInternetSettings
         },
-        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
+        { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" }
       ],
-      { cancelable: false },
+      { cancelable: false }
     );
   }
 
@@ -73,8 +77,12 @@ export default class GuideHbg extends Component {
   }
 
   componentDidMount() {
-    LocationService.getInstance().subscribeGeoLocation().catch(console.warn);
-    LocationService.getInstance().subscribeCompassBearing().catch(console.warn);
+    LocationService.getInstance()
+      .subscribeGeoLocation()
+      .catch(console.warn);
+    LocationService.getInstance()
+      .subscribeCompassBearing()
+      .catch(console.warn);
 
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
@@ -88,11 +96,17 @@ export default class GuideHbg extends Component {
   }
 
   startListeningToNetworkChanges() {
-    NetInfo.isConnected.addEventListener("connectionChange", this.handleConnectivityChange);
+    NetInfo.isConnected.addEventListener(
+      "connectionChange",
+      this.handleConnectivityChange
+    );
   }
 
   stopListeningToNetworkChanges() {
-    NetInfo.isConnected.removeEventListener("connectionChange", this.handleConnectivityChange);
+    NetInfo.isConnected.removeEventListener(
+      "connectionChange",
+      this.handleConnectivityChange
+    );
   }
 
   handleConnectivityChange(isConnected) {

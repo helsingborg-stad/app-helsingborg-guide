@@ -9,14 +9,19 @@ import Colors from "../../../styles/Colors";
 
 function getImageSwiper(
   images: Images[],
-  onSwiperIndexChanged: (newIndex: number) => (void),
-  onGoToImage: (image: Images) => (void),
-  sessionId?: number) {
+  onSwiperIndexChanged: (newIndex: number) => void,
+  onGoToImage: (image: Images) => void,
+  sessionId?: number
+) {
   const slides = images.map((image, index) => (
     <View key={image.thumbnail || index}>
       <TouchableWithoutFeedback onPress={() => onGoToImage(image)}>
         <View>
-          <ImageView source={{ uri: image.large, sessionId }} style={styles.image} resizeMode="cover" />
+          <ImageView
+            source={{ uri: image.large, sessionId }}
+            style={styles.image}
+            resizeMode="cover"
+          />
         </View>
       </TouchableWithoutFeedback>
     </View>
@@ -39,10 +44,15 @@ function getImageSwiper(
 type Props = {
   images: Images[],
   sessionId?: number,
-  onSwiperIndexChanged: (newIndex: number) => (void),
-  onGoToImage: (image: Images) => (void)
-}
+  onSwiperIndexChanged: (newIndex: number) => void,
+  onGoToImage: (image: Images) => void
+};
 
 export default function ImageSwiper(props: Props) {
-  return getImageSwiper(props.images, props.onSwiperIndexChanged, props.onGoToImage, props.sessionId);
+  return getImageSwiper(
+    props.images,
+    props.onSwiperIndexChanged,
+    props.onGoToImage,
+    props.sessionId
+  );
 }

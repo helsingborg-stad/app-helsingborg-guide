@@ -10,22 +10,17 @@ import NormalInstructionSlide from "../shared/NormalInstructionSlide";
 import { IS_WELCOMED } from "../../lib/my_consts";
 import LangService from "../../services/langService";
 import ColoredBar from "../shared/ColoredBar";
-import {
-  Colors,
-  TextStyles,
-} from "../../styles/";
-import {
-  StyleSheetUtils,
-} from "../../utils/";
+import { Colors, TextStyles } from "../../styles/";
+import { StyleSheetUtils } from "../../utils/";
 
 const IMAGE1 = require("../../images/firstInstructionImage.png");
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    flex: 1
   },
   swiper: {
-    backgroundColor: Colors.darkPurple,
+    backgroundColor: Colors.darkPurple
   },
   dot: {
     backgroundColor: Colors.white,
@@ -33,7 +28,7 @@ const styles = StyleSheet.create({
     height: 9,
     marginVertical: 6,
     marginHorizontal: 10,
-    width: 9,
+    width: 9
   },
   activeDot: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -43,10 +38,10 @@ const styles = StyleSheet.create({
     height: 14,
     marginVertical: 7,
     marginHorizontal: 10,
-    width: 14,
+    width: 14
   },
   pagination: {
-    top: 300,
+    top: 300
   },
   btnContainer: {
     alignItems: "center",
@@ -57,37 +52,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 100,
     justifyContent: "center",
-    position: "absolute",
+    position: "absolute"
   },
   btnText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       color: Colors.darkPurple,
       fontWeight: "500",
       fontSize: 15,
       lineHeight: 23,
       textAlign: "center",
       textAlignVertical: "center",
-      includeFontPadding: false,
-    }],
-  ),
+      includeFontPadding: false
+    }
+  ]),
   colorBar: {
     left: 0,
     position: "absolute",
     top: 0,
     bottom: 0,
-    width: 20,
-  },
+    width: 20
+  }
 });
 
 export default class WelcomeScreen extends Component {
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-  }
-
-  static navigationOptions = {
-    header: null,
-  }
-
   static displayColorBar() {
     return (
       <View style={styles.colorBar}>
@@ -96,11 +84,15 @@ export default class WelcomeScreen extends Component {
     );
   }
 
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       index: 0,
-      total: 0,
+      total: 0
     };
     this.onMomentumScrollEnd = this.onMomentumScrollEnd.bind(this);
   }
@@ -118,6 +110,10 @@ export default class WelcomeScreen extends Component {
     return false;
   }
 
+  static navigationOptions = {
+    header: null
+  };
+
   onMomentumScrollEnd(e, state, context) {
     this.setState({ index: context.state.index, total: context.state.total });
   }
@@ -125,11 +121,14 @@ export default class WelcomeScreen extends Component {
   displaySlides() {
     const instructions = LangService.instructions.steps;
     return instructions.map((item, index) => {
-      const btnText = index === instructions.length - 1 ? LangService.strings.LETS_GO : LangService.strings.JUMP_OVER;
+      const btnText =
+        index === instructions.length - 1
+          ? LangService.strings.LETS_GO
+          : LangService.strings.JUMP_OVER;
       if (index === 0) {
         return (
           <FirstInstructionSlide
-            key={index} // eslint-disable-line react/no-array-index-key
+            key={index}
             content={item.content}
             closeBtnText={btnText}
             backgroundImageSource={IMAGE1}
@@ -138,7 +137,7 @@ export default class WelcomeScreen extends Component {
       }
       return (
         <NormalInstructionSlide
-          key={index} // eslint-disable-line react/no-array-index-key
+          key={index}
           content={item.content}
           thumbnailSource={item.thumbnail}
           closeBtnText={btnText}
@@ -152,7 +151,7 @@ export default class WelcomeScreen extends Component {
     AsyncStorage.setItem(IS_WELCOMED, JSON.stringify(true));
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: "MainScreen" })],
+      actions: [NavigationActions.navigate({ routeName: "MainScreen" })]
     });
     this.props.navigation.dispatch(resetAction);
   }
@@ -162,7 +161,9 @@ export default class WelcomeScreen extends Component {
       <View style={styles.btnContainer}>
         <TouchableOpacity onPress={() => this.skipPress()}>
           <Text style={styles.btnText}>
-            {this.state.index === this.state.total - 1 ? LangService.strings.LETS_GO : LangService.strings.JUMP_OVER}
+            {this.state.index === this.state.total - 1
+              ? LangService.strings.LETS_GO
+              : LangService.strings.JUMP_OVER}
           </Text>
         </TouchableOpacity>
       </View>

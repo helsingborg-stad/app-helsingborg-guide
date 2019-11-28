@@ -9,7 +9,7 @@ const speechBubble = require("../../../images/SpeechBubble.png");
 type Props = {
   speechBubbleText: string,
   instructionText: string,
-  image: any,
+  image: any
 };
 
 export default ({ speechBubbleText, instructionText, image }: Props) => (

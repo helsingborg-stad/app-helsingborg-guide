@@ -9,11 +9,11 @@ const placeholderImage = require("../../../images/no-image-featured-image.png");
 type Props = {
   source: { uri?: ?string, sessionId?: number },
   style?: Object,
-  resizeMode?: ResizeMode,
-}
+  resizeMode?: ResizeMode
+};
 
 type State = {
-  imageSource: any,
+  imageSource: any
 };
 
 export default class ImageView extends Component<Props, State> {
@@ -27,9 +27,11 @@ export default class ImageView extends Component<Props, State> {
     if (uri) {
       if (sessionId) {
         loadFromCache(`${sessionId}`, uri)
-          .then((data) => {
+          .then(data => {
             // cache hit, download image
-            this.setState({ imageSource: { uri: `data:image/png;base64,${data}` } });
+            this.setState({
+              imageSource: { uri: `data:image/png;base64,${data}` }
+            });
           })
           .catch(() => {
             // cache miss, download image
@@ -46,8 +48,6 @@ export default class ImageView extends Component<Props, State> {
   render() {
     const { style, resizeMode } = this.props;
     const { imageSource } = this.state;
-    return (
-      <Image source={imageSource} style={style} resizeMode={resizeMode} />
-    );
+    return <Image source={imageSource} style={style} resizeMode={resizeMode} />;
   }
 }

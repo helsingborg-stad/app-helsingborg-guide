@@ -6,7 +6,7 @@ import {
   Text,
   StyleSheet,
   ProgressBarAndroid,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ViewContainer from "./view_container";
@@ -16,52 +16,63 @@ import LangService from "../../services/langService";
 const styles = StyleSheet.create({
   wrapper: {
     borderBottomWidth: 1,
-    borderBottomColor: "#c6c6c6",
+    borderBottomColor: "#c6c6c6"
   },
   mainContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 15,
+    paddingHorizontal: 15
   },
   header: {
     height: 40,
     backgroundColor: "#F2F2F2",
     justifyContent: "center",
     alignItems: "flex-start",
-    paddingHorizontal: 15,
+    paddingHorizontal: 15
   },
   headerText: {
     fontSize: 12,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   avatarContainer: {
-    flex: 1,
+    flex: 1
   },
   progressBarContainer: {
     flex: 4,
     paddingHorizontal: 10,
     paddingVertical: 20,
     alignItems: "stretch",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   progressTextContainer: { flex: 1 },
   progressText: { fontSize: 12, lineHeight: 14 },
   barContainer: {
-    flex: 1,
+    flex: 1
   },
   btnContainer: {
-    flex: 1,
+    flex: 1
   },
   touchContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-  },
+    justifyContent: "center"
+  }
 });
 
-export default class DownloadItemView extends Component {
-  constructor(props) {
+type Props = {
+  progress: any,
+  isPaused: any,
+  title: title,
+  onPressItem: any,
+  thumbnail: any,
+  onResumePress: any,
+  onPausePress: any,
+  onClearPress: any
+};
+
+export default class DownloadItemView extends Component<Props> {
+  constructor(props: Props) {
     super(props);
 
     this.renderProgressBar = this.renderProgressBar.bind(this);

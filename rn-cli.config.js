@@ -2,12 +2,12 @@ const { getDefaultConfig } = require("metro-config");
 
 module.exports = (async () => {
   const {
-    resolver: { assetExts },
+    resolver: { assetExts }
   } = await getDefaultConfig();
 
   return {
     resolver: {
-      assetExts: [...assetExts, "obj", "mtl", "JPG", "vrx", "fbx", "hdr"],
-    },
+      assetExts: [...assetExts, "obj", "mtl", "JPG", "vrx", "fbx", "hdr"]
+    }
   };
 })();

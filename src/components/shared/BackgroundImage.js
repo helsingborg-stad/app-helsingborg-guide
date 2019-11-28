@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Image, StyleSheet, Dimensions, ActivityIndicator } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Dimensions,
+  ActivityIndicator
+} from "react-native";
 import PropTypes from "prop-types";
 
 const FULL_WIDTH = Dimensions.get("window").width;
@@ -13,37 +19,37 @@ const styles = StyleSheet.create({
     left: 0,
     zIndex: 0,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   image: {
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "flex-start"
   },
   spinner: {
     flex: 3,
     padding: 10,
     alignItems: "center",
-    justifyContent: "flex-start",
-  },
+    justifyContent: "flex-start"
+  }
 });
 
 export default class BackgroundImage extends Component {
   static propTypes = {
     source: PropTypes.number.isRequired,
     style: PropTypes.object,
-    blurRadius: PropTypes.number,
-  }
+    blurRadius: PropTypes.number
+  };
 
   static defaultProps = {
     style: {},
-    blurRadius: 0,
-  }
+    blurRadius: 0
+  };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: false,
+      loading: false
     };
 
     this.onLoadStart = this.onLoadStart.bind(this);
@@ -58,7 +64,9 @@ export default class BackgroundImage extends Component {
   }
 
   displaySpinner() {
-    if (this.state.loading) return <ActivityIndicator style={[styles.spinner]} />;
+    if (this.state.loading) {
+      return <ActivityIndicator style={[styles.spinner]} />;
+    }
     return null;
   }
 
@@ -67,7 +75,7 @@ export default class BackgroundImage extends Component {
 
     const imageSize = {
       width: FULL_WIDTH,
-      height: FULL_HEIGHT,
+      height: FULL_HEIGHT
     };
     return (
       <View>
@@ -86,6 +94,10 @@ export default class BackgroundImage extends Component {
   }
 
   render() {
-    return <View style={[styles.imageContainer, this.props.style]}>{this.displayImage()}</View>;
+    return (
+      <View style={[styles.imageContainer, this.props.style]}>
+        {this.displayImage()}
+      </View>
+    );
   }
 }

@@ -1,22 +1,20 @@
 import { StyleSheet } from "react-native";
-import {
-  Colors,
-  TextStyles,
-} from "../../../styles/";
+import { Colors, TextStyles } from "../../../styles/";
 import { StyleSheetUtils } from "../../../utils/";
 
 export default StyleSheet.create({
   guideListHeaderText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily, {
+    TextStyles.defaultFontFamily,
+    {
       fontSize: 20,
       lineHeight: 21,
       paddingVertical: 10,
-      color: Colors.black,
-    }],
-  ),
+      color: Colors.black
+    }
+  ]),
   guideListContainer: {
     flex: 1,
-    paddingVertical: 20,
+    paddingVertical: 20
   },
   guideContainer: {
     backgroundColor: Colors.white,
@@ -27,6 +25,6 @@ export default StyleSheet.create({
     shadowColor: Colors.black,
     shadowOpacity: 0.4,
     shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-  },
+    shadowOffset: { width: 0, height: 2 }
+  }
 });

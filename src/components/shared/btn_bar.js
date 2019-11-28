@@ -2,11 +2,13 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import ButtonsBarItem from "./btn_bar_item";
+import { View, StyleSheet } from "react-native";
 
-export default class ButtonsBar extends Component {
+type Props = {
+  children: Array
+};
+
+export default class ButtonsBar extends Component<Props> {
   render() {
     return <View style={styles.bar}>{this.props.children}</View>;
   }
@@ -19,6 +21,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     // padding:10,
-    backgroundColor: "white",
-  },
+    backgroundColor: "white"
+  }
 });

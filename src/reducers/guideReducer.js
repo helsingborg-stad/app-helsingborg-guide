@@ -2,16 +2,19 @@
 
 const initialState: GuideState = {
   isFetching: false,
-  items: [],
+  items: []
 };
 
-export default function guideReducer(state: GuideState = initialState, action: Action): GuideState {
+export default function guideReducer(
+  state: GuideState = initialState,
+  action: Action
+): GuideState {
   switch (action.type) {
     case "FETCH_GUIDES_REQUEST":
       return { ...state, isFetching: true };
     case "FETCH_GUIDES_SUCCESS": {
       const items = [...state.items];
-      action.guides.forEach((g) => {
+      action.guides.forEach(g => {
         const index = items.findIndex(item => item.id === g.id);
         if (index >= 0) {
           // replace

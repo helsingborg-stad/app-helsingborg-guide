@@ -9,25 +9,23 @@ const textMargin = 13;
 const styles = StyleSheet.create({
   linkContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "center"
   },
   listItemLinkText: StyleSheetUtils.flatten([
-    TextStyles.body, {
+    TextStyles.body,
+    {
       fontSize: 16,
       fontWeight: "500",
       marginRight: textMargin,
       marginLeft: 7,
-      color: Colors.purple,
-    },
-  ]),
+      color: Colors.purple
+    }
+  ])
 });
 
 export default function LinkTouchable(props) {
   const link = (
-    <TouchableOpacity
-      style={styles.linkContainer}
-      onPress={props.onPress}
-    >
+    <TouchableOpacity style={styles.linkContainer} onPress={props.onPress}>
       <Icon name="language" size={24} color={Colors.purple} />
       <Text style={styles.listItemLinkText}>{props.title}</Text>
     </TouchableOpacity>

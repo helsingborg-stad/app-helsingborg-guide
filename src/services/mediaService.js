@@ -1,4 +1,9 @@
-import { NativeModules, DeviceEventEmitter, NativeEventEmitter, Platform } from "react-native";
+import {
+  NativeModules,
+  DeviceEventEmitter,
+  NativeEventEmitter,
+  Platform
+} from "react-native";
 import NotificationService from "./notificationService";
 import LangService from "./langService";
 
@@ -21,7 +26,7 @@ const RELEASED_AUDIO_OBJ = {
   isPrepared: false,
   isPlaying: true,
   duration: 0,
-  currentPosition: 0,
+  currentPosition: 0
 };
 
 const config = () => {
@@ -52,29 +57,43 @@ export default class MediaService {
   }
 
   static getInstance() {
-    if (!instance) instance = new MediaService();
+    if (!instance) {
+      instance = new MediaService();
+    }
     return instance;
   }
 
   tryLoadFromCache = async (guideId, uri) => {
-    if (!guideId || !uri) throw new Error("Null params passed");
+    if (!guideId || !uri) {
+      throw new Error("Null params passed");
+    }
 
     try {
       const isInCache = await isFileInCache(`${guideId}`, uri);
-      if (isInCache) { MediaService.url = `file://${getFilePathInCache(`${guideId}`, uri)}`; } else { MediaService.url = uri; }
+      if (isInCache) {
+        MediaService.url = `file://${getFilePathInCache(`${guideId}`, uri)}`;
+      } else {
+        MediaService.url = uri;
+      }
     } catch (err) {
       // do not care
       MediaService.url = uri;
     }
-  }
+  };
 
   async init(audio, guideID) {
-    if (!audio || !audio.url) return Promise.reject(new Error("No url provided"));
+    if (!audio || !audio.url) {
+      return Promise.reject(new Error("No url provided"));
+    }
 
     await this.tryLoadFromCache(guideID, audio.url);
 
     console.log("Audio URI: ", MediaService.url);
-    NotificationService.showMediaNotification(LangService.strings.PLAYING, audio.title, MEDIA_NOTIFICATION_ID);
+    NotificationService.showMediaNotification(
+      LangService.strings.PLAYING,
+      audio.title,
+      MEDIA_NOTIFICATION_ID
+    );
     this.onError(MediaService.onErrorHandler);
     this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
     this.onCompleted(this.onCompletedCallback);
@@ -83,7 +102,13 @@ export default class MediaService {
     this.onPrepared(this.onPreparedCallback);
     this.resumeUpdatingState();
 
-    if (Platform.OS === "ios") return MediaPlayer.init(MediaService.url, audio.title, audio.description_plain);
+    if (Platform.OS === "ios") {
+      return MediaPlayer.init(
+        MediaService.url,
+        audio.title,
+        audio.description_plain
+      );
+    }
     return MediaPlayer.init(MediaService.url);
   }
 
@@ -121,19 +146,21 @@ export default class MediaService {
   }
 
   getMeta() {
-    if (!this.audio.hasAudio) return Promise.reject(new Error("Audio object is null"));
+    if (!this.audio.hasAudio) {
+      return Promise.reject(new Error("Audio object is null"));
+    }
 
     const meta = {};
     return this.isPlaying()
-      .then((isPlaying) => {
+      .then(isPlaying => {
         meta.isPlaying = isPlaying;
         return this.getDuration();
       })
-      .then((duration) => {
+      .then(duration => {
         meta.duration = duration;
         return this.getCurrentPosition();
       })
-      .then((position) => {
+      .then(position => {
         meta.currentPosition = position;
         return Promise.resolve(meta);
       });
@@ -163,21 +190,29 @@ export default class MediaService {
     this.onAudioPrepared();
     this.audio.isPrepared = true;
 
-    if (this.updateInterval) return;
+    if (this.updateInterval) {
+      return;
+    }
     this.updateInterval = setInterval(() => {
-      if (!this.updatePaused) this.updateAudioState();
+      if (!this.updatePaused) {
+        this.updateAudioState();
+      }
     }, 700);
   }
 
   pauseUpdatingState() {
-    if (!this.updatePaused) this.updatePaused = true;
+    if (!this.updatePaused) {
+      this.updatePaused = true;
+    }
   }
   resumeUpdatingState() {
-    if (this.updatePaused) this.updatePaused = false;
+    if (this.updatePaused) {
+      this.updatePaused = false;
+    }
   }
 
   updateAudioState() {
-    this.getMeta().then((meta) => {
+    this.getMeta().then(meta => {
       if (!this.updatePaused && this.audio) {
         this.audio.currentPosition = meta.currentPosition;
         this.audio.duration = meta.duration;
@@ -213,7 +248,7 @@ export default class MediaService {
     EventEmitter.removeListener(MEDIA_COMPLETED, callback);
   }
 
-  onAudioInited = (audio) => {
+  onAudioInited = audio => {
     this.onAudioInitedCallback(audio);
   };
 
@@ -221,16 +256,25 @@ export default class MediaService {
     this.onAudioLoadSuccessCallback();
   };
 
-  onUpdateAudioState = (audio) => {
+  onUpdateAudioState = audio => {
     this.onAudioUpdateCallback(audio);
   };
 
-  loadAudioFile = (audioState, hasAudio, guideID, onAudioInited, onAudioLoadSuccess, onAudioUpdate) => {
+  loadAudioFile = (
+    audioState,
+    hasAudio,
+    guideID,
+    onAudioInited,
+    onAudioLoadSuccess,
+    onAudioUpdate
+  ) => {
     this.onAudioInitedCallback = onAudioInited;
     this.onAudioLoadSuccessCallback = onAudioLoadSuccess;
     this.onAudioUpdateCallback = onAudioUpdate;
 
-    if (hasAudio) this.release();
+    if (hasAudio) {
+      this.release();
+    }
     const audioName = audioState.title;
     console.log(`load ${audioName}`);
 
@@ -240,7 +284,7 @@ export default class MediaService {
       avatar_url: audioState.avatar_url,
       hasAudio: true,
       isPlaying: true,
-      description_plain: "",
+      description_plain: ""
     };
     this.init(audioObject, guideID);
   };

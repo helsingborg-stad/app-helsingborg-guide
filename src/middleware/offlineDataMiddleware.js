@@ -3,7 +3,11 @@
  * This middleware is responsible of maintaining pending download tasks.
  */
 
-import { removeMultiple, startDownload, cancelPendingTasks } from "../utils/DownloadMediaUtils";
+import {
+  removeMultiple,
+  startDownload,
+  cancelPendingTasks
+} from "../utils/DownloadMediaUtils";
 
 function getNextDownloadTask(offlineGuide: ?OfflineGuide): ?DownloadTask {
   if (!offlineGuide) {
@@ -11,13 +15,17 @@ function getNextDownloadTask(offlineGuide: ?OfflineGuide): ?DownloadTask {
   }
 
   const { downloadTasks } = offlineGuide;
-  if (downloadTasks.length === 0) { return null; }
+  if (downloadTasks.length === 0) {
+    return null;
+  }
 
   // $FlowFixMe flow doesn't understand Object.values()
-  return Object.values(downloadTasks).find((task: DownloadTask) => task.status === "not_started");
+  return Object.values(downloadTasks).find((task: DownloadTask) => task.status === "not_started"); //eslint-disable-line prettier/prettier
 }
 
-export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: Action) => {
+export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
+  action: Action
+) => {
   const result = next(action);
   const nextState = getState();
 
@@ -26,7 +34,8 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
     case "RESUME_DOWNLOAD_GUIDE":
       {
         const { guide } = action;
-        const offlineGuide: OfflineGuide = nextState.downloadedGuides.offlineGuides[guide.id];
+        const offlineGuide: OfflineGuide =
+          nextState.downloadedGuides.offlineGuides[guide.id];
         const nextTask: ?DownloadTask = getNextDownloadTask(offlineGuide);
         if (nextTask) {
           dispatch({ type: "DOWNLOAD_TASK_START", task: nextTask });
@@ -51,26 +60,27 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (action: A
       startDownload(`${task.guideId}`, task.url)
         .then(() => {
           dispatch({ type: "DOWNLOAD_TASK_SUCCESS", task });
-        }).catch((error) => {
+        })
+        .catch(error => {
           dispatch({ type: "DOWNLOAD_TASK_FAILURE", task, error });
         });
       break;
     }
     case "DOWNLOAD_TASK_SUCCESS":
-    case "DOWNLOAD_TASK_FAILURE":
-      {
-        const { task } = action;
-        const { guideId } = task;
-        const guide: ?OfflineGuide = nextState.downloadedGuides.offlineGuides[guideId];
-        if (guide && guide.status === "pending") {
-          const nextTask: ?DownloadTask = getNextDownloadTask(guide);
-          if (nextTask) {
-            dispatch({ type: "DOWNLOAD_TASK_START", task: nextTask });
-          }
-          // TODO: else verify downloads and retry failed tasks
+    case "DOWNLOAD_TASK_FAILURE": {
+      const { task } = action;
+      const { guideId } = task;
+      const guide: ?OfflineGuide =
+        nextState.downloadedGuides.offlineGuides[guideId];
+      if (guide && guide.status === "pending") {
+        const nextTask: ?DownloadTask = getNextDownloadTask(guide);
+        if (nextTask) {
+          dispatch({ type: "DOWNLOAD_TASK_START", task: nextTask });
         }
-        break;
+        // TODO: else verify downloads and retry failed tasks
       }
+      break;
+    }
     default:
       break;
   }

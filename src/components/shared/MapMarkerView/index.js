@@ -18,23 +18,23 @@ type Props = {
   items: MapItem[],
   showNumberedMapMarkers?: boolean,
   onMapMarkerPressed?: ?(index: number) => void,
-  activeMarker: MapItem,
+  activeMarker: MapItem
 };
 type State = {
-  markersFocused: boolean,
+  markersFocused: boolean
 };
 
 class MapMarkerView extends Component<Props, State> {
   static defaultProps = {
     showNumberedMapMarkers: true,
-    onMapMarkerPressed: null,
+    onMapMarkerPressed: null
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      markersFocused: false,
+      markersFocused: false
     };
   }
 
@@ -45,18 +45,20 @@ class MapMarkerView extends Component<Props, State> {
   map: ?MapView;
 
   focusMarkers(markers: MapItem[]) {
-    if (!markers) return;
+    if (!markers) {
+      return;
+    }
 
     const padding = 50;
     const edgePadding = {
       top: padding,
       right: padding,
       bottom: padding,
-      left: padding,
+      left: padding
     };
     const options = {
       edgePadding,
-      animated: false,
+      animated: false
     };
     const locations: Location[] = MapItemUtils.getLocations(markers);
     if (this.map) {
@@ -108,7 +110,12 @@ class MapMarkerView extends Component<Props, State> {
         centerOffset={{ x: 0.5, y: 1 }}
         zIndex={zIndex}
       >
-        <Text allowFontScaling={false} style={active ? styles.numberedMarkerTextActive : styles.numberedMarkerText}>
+        <Text
+          allowFontScaling={false}
+          style={
+            active ? styles.numberedMarkerTextActive : styles.numberedMarkerText
+          }
+        >
           {numberString}
         </Text>
       </Marker>
@@ -180,7 +187,7 @@ class MapMarkerView extends Component<Props, State> {
           latitude: location.latitude,
           longitude: location.longitude,
           latitudeDelta: this.latitudeDelta,
-          longitudeDelta: this.longitudeDelta,
+          longitudeDelta: this.longitudeDelta
         });
       }
     }
@@ -193,10 +200,10 @@ class MapMarkerView extends Component<Props, State> {
     return (
       <View style={styles.container}>
         <MapView
-          ref={(ref) => {
+          ref={ref => {
             this.map = ref;
           }}
-          onRegionChangeComplete={(e) => {
+          onRegionChangeComplete={e => {
             this.longitudeDelta = e.longitudeDelta;
             this.latitudeDelta = e.latitudeDelta;
           }}
@@ -207,7 +214,7 @@ class MapMarkerView extends Component<Props, State> {
             latitude: location.latitude,
             longitude: location.longitude,
             latitudeDelta: this.latitudeDelta,
-            longitudeDelta: this.longitudeDelta,
+            longitudeDelta: this.longitudeDelta
           }}
         >
           {this.renderMapMarkers(items)}

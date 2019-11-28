@@ -18,44 +18,47 @@ type Props = {
   guideId?: number,
   imageIndex: number,
   guideType?: GuideType,
-  onSwiperIndexChanged: (newIndex: number) => (void),
+  onSwiperIndexChanged: (newIndex: number) => void,
   audioButtonDisabled: boolean,
   videoButtonDisabled: boolean,
-  onGoToImage: (image: Images) => (void),
-  onGoToLink: (url: string, title?: string) => (void),
-  loadAudioFile: () => (void),
-  onGoToVideo: (video?: MediaContent) => (void),
-}
+  onGoToImage: (image: Images) => void,
+  onGoToLink: (url: string, title?: string) => void,
+  loadAudioFile: () => void,
+  onGoToVideo: (video?: MediaContent) => void
+};
 
 function displayID(searchableID: string) {
   const idText = (
     <View style={styles.idContainer}>
-      <Text style={styles.idText}>
-        {`ID #${searchableID}`}
-      </Text>
+      <Text style={styles.idText}>{`ID #${searchableID}`}</Text>
     </View>
   );
   return idText;
 }
 
-function displayTitle(title: string, searchableID: string, guideType: ?GuideType) {
+function displayTitle(
+  title: string,
+  searchableID: string,
+  guideType: ?GuideType
+) {
   return (
     <View>
-      <View style={styles.titleContainer} >
+      <View style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
-      </View >
+      </View>
       {guideType === "guide" ? displayID(searchableID) : null}
-    </View >
+    </View>
   );
 }
 
 function displayText(description?: string) {
-  return (
-    <Text style={styles.article}>{description}</Text>
-  );
+  return <Text style={styles.article}>{description}</Text>;
 }
 
-function displayLinks(links: Link[], onGoToLink: (url: string, title?: string) => (void)) {
+function displayLinks(
+  links: Link[],
+  onGoToLink: (url: string, title?: string) => void
+) {
   return links.map((item, index) => (
     <LinkTouchable
       key={item.url || index}
@@ -67,22 +70,27 @@ function displayLinks(links: Link[], onGoToLink: (url: string, title?: string) =
   ));
 }
 
-
-function displayButtonsBar(audio?: MediaContent,
+function displayButtonsBar(
+  audio?: MediaContent,
   video?: MediaContent,
   audioButtonDisabled: boolean,
   videoButtonDisabled: boolean,
-  loadAudioFile: () => (void),
-  onGoToVideo: (video?: MediaContent) => (void)) {
+  loadAudioFile: () => void,
+  onGoToVideo: (video?: MediaContent) => void
+) {
   const audioBtnInvisible = !audio || !audio.url;
   const videoBtnInvisible = !video || !video.url;
 
-  if (videoBtnInvisible && audioBtnInvisible) { return null; }
+  if (videoBtnInvisible && audioBtnInvisible) {
+    return null;
+  }
 
   const audioBarItem = audioBtnInvisible ? null : (
     <ButtonsBarItem
       disabled={audioButtonDisabled}
-      onPress={() => { loadAudioFile(); }}
+      onPress={() => {
+        loadAudioFile();
+      }}
       name="headphones"
       color={Colors.darkPurple}
       size={18}
@@ -105,7 +113,6 @@ function displayButtonsBar(audio?: MediaContent,
     />
   );
 
-
   return (
     <ButtonsBar>
       {audioBarItem}
@@ -114,11 +121,9 @@ function displayButtonsBar(audio?: MediaContent,
   );
 }
 
-
 /*
-* Underlying sharingservice needs a reference to a Component instance
-*/
-// eslint-disable-next-line react/prefer-stateless-function
+ * Underlying sharingservice needs a reference to a Component instance
+ */
 class ObjectView extends Component<Props> {
   render() {
     const { guideId } = this.props;
@@ -136,30 +141,41 @@ class ObjectView extends Component<Props> {
               {SharingService.showShareButton(
                 this.props.contentObject.title,
                 this.props.contentObject.images[this.props.imageIndex],
-                this, "share_object",
+                this,
+                "share_object"
               )}
             </View>
           </View>
 
           <View style={styles.bodyContainer}>
-
-            {displayTitle(this.props.contentObject.title, this.props.contentObject.searchableId, this.props.guideType)}
-            {displayButtonsBar(this.props.contentObject.audio,
+            {displayTitle(
+              this.props.contentObject.title,
+              this.props.contentObject.searchableId,
+              this.props.guideType
+            )}
+            {displayButtonsBar(
+              this.props.contentObject.audio,
               this.props.contentObject.video,
               this.props.audioButtonDisabled,
               this.props.videoButtonDisabled,
               this.props.loadAudioFile,
-              this.props.onGoToVideo)}
+              this.props.onGoToVideo
+            )}
             <View style={styles.articleContainer}>
-              {this.props.contentObject.description ? displayText(this.props.contentObject.description) : null}
-              {this.props.contentObject.links ? displayLinks(this.props.contentObject.links, this.props.onGoToLink) : null}
+              {this.props.contentObject.description
+                ? displayText(this.props.contentObject.description)
+                : null}
+              {this.props.contentObject.links
+                ? displayLinks(
+                    this.props.contentObject.links,
+                    this.props.onGoToLink
+                  )
+                : null}
             </View>
           </View>
         </ScrollView>
         <AudioPlayerView />
-
       </View>
-
     );
   }
 }

@@ -9,5 +9,5 @@ export default {
     if (params) {
       console.log(name + params.toString);
     }
-  },
+  }
 };

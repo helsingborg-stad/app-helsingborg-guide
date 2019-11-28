@@ -67,6 +67,7 @@ exports[`Basic GuideObject 1`] = `
               }
             }
             disableNextButton={false}
+            disablePrevButton={false}
             dotColor="#ffffff"
             horizontal={true}
             index={0}
@@ -102,6 +103,8 @@ exports[`Basic GuideObject 1`] = `
                 <View>
                   <View
                     accessible={true}
+                    focusable={true}
+                    onClick={[Function]}
                     onResponderGrant={[Function]}
                     onResponderMove={[Function]}
                     onResponderRelease={[Function]}
@@ -142,6 +145,8 @@ exports[`Basic GuideObject 1`] = `
                 <View>
                   <View
                     accessible={true}
+                    focusable={true}
+                    onClick={[Function]}
                     onResponderGrant={[Function]}
                     onResponderMove={[Function]}
                     onResponderRelease={[Function]}
@@ -182,6 +187,8 @@ exports[`Basic GuideObject 1`] = `
                 <View>
                   <View
                     accessible={true}
+                    focusable={true}
+                    onClick={[Function]}
                     onResponderGrant={[Function]}
                     onResponderMove={[Function]}
                     onResponderRelease={[Function]}
@@ -360,7 +367,9 @@ exports[`Basic GuideObject 1`] = `
         >
           <View
             accessible={true}
+            focusable={true}
             isTVSelectable={true}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -479,7 +488,9 @@ exports[`Basic GuideObject 1`] = `
           </Text>
           <View
             accessible={true}
+            focusable={true}
             isTVSelectable={true}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}

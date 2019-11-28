@@ -7,23 +7,23 @@ type Props = {
   labels: Array<string>,
   initalSelectedIndex?: number,
   onSegmentIndexChange?: ?(index: number) => void,
-  style: any,
+  style: any
 };
 type State = {
-  selectedIndex: number,
+  selectedIndex: number
 };
 
 export default class SegmentControl extends Component<Props, State> {
   static defaultProps = {
     initalSelectedIndex: 0,
-    onSegmentIndexChange: null,
+    onSegmentIndexChange: null
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      selectedIndex: props.initalSelectedIndex || 0,
+      selectedIndex: props.initalSelectedIndex || 0
     };
   }
 
@@ -35,7 +35,7 @@ export default class SegmentControl extends Component<Props, State> {
     const { onSegmentIndexChange, labels } = this.props;
 
     Animated.spring(this.selectedViewLeftInset, {
-      toValue: (index / labels.length) * this.containerWidth,
+      toValue: (index / labels.length) * this.containerWidth
     }).start();
 
     this.setState({ selectedIndex: index });
@@ -49,8 +49,20 @@ export default class SegmentControl extends Component<Props, State> {
     const { selectedIndex } = this.state;
 
     return (
-      <TouchableOpacity style={styles.segmentItem} key={label} onPress={() => this.onPressSegmentIndex(index)}>
-        <Text style={index === selectedIndex ? styles.segmentLabelSelected : styles.segmentLabel}>{label}</Text>
+      <TouchableOpacity
+        style={styles.segmentItem}
+        key={label}
+        onPress={() => this.onPressSegmentIndex(index)}
+      >
+        <Text
+          style={
+            index === selectedIndex
+              ? styles.segmentLabelSelected
+              : styles.segmentLabel
+          }
+        >
+          {label}
+        </Text>
       </TouchableOpacity>
     );
   };
@@ -60,16 +72,18 @@ export default class SegmentControl extends Component<Props, State> {
     const width = (1 / labels.length) * 100;
     const selectionViewStyle = {
       width: `${width}%`,
-      left: this.selectedViewLeftInset,
+      left: this.selectedViewLeftInset
     };
 
     return (
       <View
         style={[styles.container, style]}
-        onLayout={(e) => {
+        onLayout={e => {
           if (this.containerWidth === 0) {
             this.containerWidth = e.nativeEvent.layout.width;
-            this.selectedViewLeftInset = new Animated.Value(((initalSelectedIndex || 0) / labels.length) * this.containerWidth);
+            this.selectedViewLeftInset = new Animated.Value(
+              ((initalSelectedIndex || 0) / labels.length) * this.containerWidth
+            );
           }
         }}
       >

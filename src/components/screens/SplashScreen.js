@@ -1,14 +1,19 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Dimensions, Image, LayoutAnimation } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  LayoutAnimation
+} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { StackActions, NavigationActions } from "react-navigation";
 import ViewContainer from "../shared/view_container";
 import { IS_WELCOMED } from "../../lib/my_consts";
 import ColoredBar from "../shared/ColoredBar";
 import BackgroundImage from "../shared/BackgroundImage";
-import {
-  Colors,
-} from "../../styles/";
+import { Colors } from "../../styles/";
 
 const HALS_LOGO = require("../../images/HBG.png");
 const IMAGE = require("../../images/SplashscreenFinal.png");
@@ -19,21 +24,21 @@ const TIME_OUT = 2000;
 
 const styles = StyleSheet.create({
   splash: {
-    backgroundColor: Colors.darkPurple,
+    backgroundColor: Colors.darkPurple
   },
   wrapper: {
     flex: 1,
-    zIndex: 10,
+    zIndex: 10
   },
   mainContainer: {
     flex: 10,
-    alignItems: "center",
+    alignItems: "center"
   },
   headerContainer: {
     height: Dimensions.get("window").height * 0.35,
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 20,
+    paddingVertical: 20
   },
 
   headerText: {
@@ -41,29 +46,41 @@ const styles = StyleSheet.create({
     fontSize: 38,
     fontWeight: "300",
     lineHeight: 36,
-    minHeight: 50,
+    minHeight: 50
   },
   logoContainer: {
     flex: 1,
     justifyContent: "flex-end",
     paddingVertical: 22,
-    zIndex: 10,
+    zIndex: 10
   },
   logo: {
     width: 62,
-    height: 66,
+    height: 66
   },
+  colorBarStyle: {
+    position: "absolute",
+    zIndex: 100,
+    height: FULL_HEIGHT,
+    width: 20,
+    top: 0,
+    left: 0
+  }
 });
 
-export default class SplashScreen extends Component {
-  static navigationOptions = {
-    header: null,
-  }
+type Props = {
+  navigation: any
+};
 
-  constructor(props) {
+type State = {
+  barsVisible: any
+};
+
+export default class SplashScreen extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
-      barsVisible: true,
+      barsVisible: true
     };
   }
 
@@ -73,9 +90,17 @@ export default class SplashScreen extends Component {
   }
 
   componentWillUnmount() {
-    if (this.timer) clearTimeout(this.timer);
-    if (this.colorsTimer) clearInterval(this.colorsTimer);
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    if (this.colorsTimer) {
+      clearInterval(this.colorsTimer);
+    }
   }
+
+  static navigationOptions = {
+    header: null
+  };
 
   timer;
   colorsTimer;
@@ -92,14 +117,16 @@ export default class SplashScreen extends Component {
   }
 
   skip() {
-    AsyncStorage.getItem(IS_WELCOMED).then((value) => {
+    AsyncStorage.getItem(IS_WELCOMED).then(value => {
       let welcomed = false;
-      if (value) welcomed = JSON.parse(value);
+      if (value) {
+        welcomed = JSON.parse(value);
+      }
 
       const route = welcomed ? "MainScreen" : "WelcomeScreen";
       const resetAction = StackActions.reset({
         index: 0,
-        actions: [NavigationActions.navigate({ routeName: route })],
+        actions: [NavigationActions.navigate({ routeName: route })]
       });
       this.props.navigation.dispatch(resetAction);
     });
@@ -107,7 +134,7 @@ export default class SplashScreen extends Component {
 
   displayColorBar() {
     return (
-      <View style={{ position: "absolute", zIndex: 100, height: FULL_HEIGHT, width: 20, top: 0, left: 0 }}>
+      <View style={styles.colorBarStyle}>
         <ColoredBar visible={this.state.barsVisible} />
       </View>
     );
@@ -124,7 +151,11 @@ export default class SplashScreen extends Component {
               <Text style={styles.headerText}>Helsingborg</Text>
             </View>
             <View style={styles.logoContainer}>
-              <Image resizeMethod="scale" resizeMode="center" source={HALS_LOGO} />
+              <Image
+                resizeMethod="scale"
+                resizeMode="center"
+                source={HALS_LOGO}
+              />
             </View>
           </View>
         </View>

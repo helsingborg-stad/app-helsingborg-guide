@@ -13,15 +13,17 @@ function goToLink(url: string, title: string, navigation: Object) {
 type Props = {
   url: string,
   navigation: Object
-}
+};
 
-export default function (props: Props) {
-  const webLink = (<LinkTouchable
-    title={props.url.replace(/^https?:\/\//, "")}
-    onPress={() => {
-      goToLink(props.url, props.url, props.navigation);
-    }}
-  />);
+export default function(props: Props) {
+  const webLink = (
+    <LinkTouchable
+      title={props.url.replace(/^https?:\/\//, "")}
+      onPress={() => {
+        goToLink(props.url, props.url, props.navigation);
+      }}
+    />
+  );
 
   return webLink;
 }

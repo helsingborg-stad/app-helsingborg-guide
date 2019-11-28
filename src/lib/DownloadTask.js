@@ -28,7 +28,9 @@ export default class DownloadTask {
     this.startedAt = data.startedAt || new Date().toISOString();
     this.title = data.title || LangService.strings.UNKNOWN_TITLE;
     this.avatar = data.avatar || DEFAULT_AVATAR;
-    this.completedUrls = data.currentPos ? _.slice(data.urls, 0, data.currentPos) : [];
+    this.completedUrls = data.currentPos
+      ? _.slice(data.urls, 0, data.currentPos)
+      : [];
     this.fileDownloadTasks = [];
     this.closedInfo = false;
     this.store = store;
@@ -40,14 +42,19 @@ export default class DownloadTask {
 
   // sequence function. stops when the the list is completed or the task getting canceled.
   _fetchUrl(url) {
-    if (this.isCanceled || this.isCompleted()) return null;
+    if (this.isCanceled || this.isCompleted()) {
+      return null;
+    }
     const encoded = encodeURI(url);
     const mTask = fetchService.fetch(encoded, this.id);
     return mTask
-      .then((res) => {
+      .then(res => {
         if (res && !this.isCanceled) {
           res.session(`${this.id}`);
-          console.log("download:file downloaded and stored in path ", res.path());
+          console.log(
+            "download:file downloaded and stored in path ",
+            res.path()
+          );
           this.completedUrls.push(url);
           // Add the task to this array to cancel it if we need to.
           this.fileDownloadTasks.push(mTask);
@@ -85,7 +92,7 @@ export default class DownloadTask {
       startedAt: this.startedAt,
       title: this.title,
       avatar: this.avatar,
-      closedInfo: this.closedInfo,
+      closedInfo: this.closedInfo
     };
   }
   clearCompletedUrls() {
@@ -98,20 +105,23 @@ export default class DownloadTask {
   clearCache() {
     // cancel the task first then clear the cache
     this.cancelTask();
-    fetchService.clearSessionCache(`${this.id}`).then(() => {
-      this.clearCompletedUrls();
-      this.store.dispatch(dActions.clearCacheTaskSuccess(this.getMeta()));
-    }).catch(error => this.store.dispatch(errorHappened(error)));
+    fetchService
+      .clearSessionCache(`${this.id}`)
+      .then(() => {
+        this.clearCompletedUrls();
+        this.store.dispatch(dActions.clearCacheTaskSuccess(this.getMeta()));
+      })
+      .catch(error => this.store.dispatch(errorHappened(error)));
   }
 
   cancelTask() {
     this.isCanceled = true;
     this.store.dispatch(dActions.cancelTaskSuccess(this.getMeta()));
-    _.forEach(this.fileDownloadTasks, (mTask) => {
+    _.forEach(this.fileDownloadTasks, mTask => {
       //  debugger;
       if (mTask) {
-        mTask.catch(() => { });
-        mTask.cancel(() => { });
+        mTask.catch(() => {});
+        mTask.cancel(() => {});
       }
     });
     this.fileDownloadTasks = [];

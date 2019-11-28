@@ -2,14 +2,19 @@
  * Created by msaeed on 2017-02-04.
  */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableWithoutFeedback, Animated } from "react-native";
-import ViewContainer from "./view_container";
+import { StyleSheet, TouchableWithoutFeedback, Animated } from "react-native";
 
-export default class TouchableItem extends Component {
+type Props = {
+  onPress: any,
+  style: any,
+  children: Array
+};
+
+export default class TouchableItem extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      animValue: new Animated.Value(1),
+      animValue: new Animated.Value(1)
     };
 
     this.onPressIn = this.onPressIn.bind(this);
@@ -25,13 +30,19 @@ export default class TouchableItem extends Component {
   render() {
     const style = { transform: [{ scale: this.state.animValue }] };
     return (
-      <TouchableWithoutFeedback onPress={this.props.onPress} onPressIn={this.onPressIn} onPressOut={this.onPressOut}>
-        <Animated.View style={[style, styles.mainContainer, this.props.style]}>{this.props.children}</Animated.View>
+      <TouchableWithoutFeedback
+        onPress={this.props.onPress}
+        onPressIn={this.onPressIn}
+        onPressOut={this.onPressOut}
+      >
+        <Animated.View style={[style, styles.mainContainer, this.props.style]}>
+          {this.props.children}
+        </Animated.View>
       </TouchableWithoutFeedback>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {},
+  mainContainer: {}
 });

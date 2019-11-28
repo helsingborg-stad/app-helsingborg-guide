@@ -10,7 +10,7 @@ const ButtonWidth = ScreenWidth - 60;
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   goToSettingsButton: {
     alignItems: "center",
@@ -24,22 +24,22 @@ export default StyleSheet.create({
     marginTop: 20,
     paddingHorizontal: 40,
     textAlign: "center",
-    width: ButtonWidth,
+    width: ButtonWidth
   },
   goToSettingsButtonText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       fontSize: 16,
       fontWeight: "bold",
-      color: Colors.white,
-    },
+      color: Colors.white
+    }
   ]),
   unsupportedContainer: {
     alignItems: "center",
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "center"
   },
   unsupportedText: {
-    ...TextStyles.medium,
-  },
+    ...TextStyles.medium
+  }
 });

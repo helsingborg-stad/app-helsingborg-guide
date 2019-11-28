@@ -6,7 +6,7 @@ import {
   View,
   Text,
   ScrollView,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
 import styles from "./style";
 
@@ -33,7 +33,7 @@ type Props = {
 function getWebUrl(links: LinkAndService[]): ?string {
   let webUrl = null;
   if (links) {
-    links.forEach((element) => {
+    links.forEach(element => {
       if (element.service === "webpage") {
         webUrl = element.url;
       }
@@ -64,7 +64,7 @@ function displayDistance(currentLocation: GeolocationType, location: Location) {
 function openGoogleMapApp(
   geolocation: GeolocationType,
   lat: number,
-  lng: number,
+  lng: number
 ) {
   const directionsUrl = LocationUtils.directionsUrl(lat, lng, geolocation);
   UrlUtils.openUrlIfValid(
@@ -72,7 +72,7 @@ function openGoogleMapApp(
     LangService.strings.OPEN_IN_MAPS,
     "",
     LangService.strings.CANCEL,
-    LangService.strings.OPEN,
+    LangService.strings.OPEN
   );
 }
 
@@ -154,7 +154,7 @@ const LocationView = (props: Props) => {
 LocationView.defaultProps = {
   geolocation: null,
   onPressGuide: () => {},
-  isFetchingGuides: false,
+  isFetchingGuides: false
 };
 
 export default LocationView;

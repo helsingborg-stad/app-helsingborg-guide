@@ -35,7 +35,8 @@ function getIcon(index: number, color: string) {
           <Settings color={color} />
         </View>
       );
-    default: return null;
+    default:
+      return null;
   }
 }
 
@@ -47,24 +48,30 @@ function getText(index: number) {
       return LangService.strings.CALENDAR;
     case 2:
       return LangService.strings.SETTINGS;
-    default: return null;
+    default:
+      return null;
   }
 }
 
 type Props = {
   index: number,
   selected: boolean,
-  selectBottomBarTab: any,
-}
+  selectBottomBarTab: any
+};
 
 class BottomBarIcon extends Component<Props> {
   getBottomBarIcon() {
     const color = this.props.selected ? selectedColor : inactiveColor;
 
     const bottomBarIcon = (
-      <TouchableOpacity style={styles.touchableIcon} onPress={() => this.onTouchIcon(this.props.index, this.props.selected)}>
+      <TouchableOpacity
+        style={styles.touchableIcon}
+        onPress={() => this.onTouchIcon(this.props.index, this.props.selected)}
+      >
         {getIcon(this.props.index, color)}
-        <Text style={[styles.text, { color }]}>{getText(this.props.index)}</Text>
+        <Text style={[styles.text, { color }]}>
+          {getText(this.props.index)}
+        </Text>
       </TouchableOpacity>
     );
     return bottomBarIcon;
@@ -77,13 +84,17 @@ class BottomBarIcon extends Component<Props> {
           NavigatorService.reset("HomeScreen");
           break;
         case 1:
-          NavigatorService.reset("WebScreen", { url: eventCalendarURL, title: LangService.strings.CALENDAR });
+          NavigatorService.reset("WebScreen", {
+            url: eventCalendarURL,
+            title: LangService.strings.CALENDAR
+          });
           AnalyticsUtils.logEvent("open_url", { eventCalendarURL });
           break;
         case 2:
           NavigatorService.reset("SettingsScreen");
           break;
-        default: break;
+        default:
+          break;
       }
     }
 

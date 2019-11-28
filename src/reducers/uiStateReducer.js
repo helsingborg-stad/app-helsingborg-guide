@@ -10,15 +10,26 @@ const defaultState: UIState = {
   currentCategory: null,
   currentBottomBarTab: 0,
   developerMode: false,
-  showBottomBar: false,
+  showBottomBar: false
 };
 
-export default function uiStateReducer(state: UIState = defaultState, action: Action): UIState {
+export default function uiStateReducer(
+  state: UIState = defaultState,
+  action: Action
+): UIState {
   switch (action.type) {
     case "SELECT_CURRENT_GUIDEGROUP":
-      return { ...state, currentGuideGroup: action.guideGroup, currentGuides: action.guides };
+      return {
+        ...state,
+        currentGuideGroup: action.guideGroup,
+        currentGuides: action.guides
+      };
     case "SELECT_CURRENT_CONTENTOBJECT":
-      return { ...state, currentContentObject: action.contentObject, currentContentObjectImageIndex: 0 };
+      return {
+        ...state,
+        currentContentObject: action.contentObject,
+        currentContentObjectImageIndex: 0
+      };
     case "SELECT_CURRENT_CONTENTOBJECT_IMAGE":
       return { ...state, currentContentObjectImageIndex: action.swiperIndex };
     case "SELECT_CURRENT_GUIDE":

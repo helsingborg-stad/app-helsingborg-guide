@@ -12,12 +12,12 @@ type Props = {
   onPress: (index: number) => void,
   active: boolean,
   distance: number,
-  arrived: boolean,
+  arrived: boolean
 };
 
 type State = {
   arrived: boolean
-}
+};
 
 const DISTANCE_SCALING_FACTOR = 2;
 
@@ -27,21 +27,26 @@ const PIN_ANIMATION = "PIN_ANIMATION";
 const RESET_ANIMATION = "RESET_ANIMATION";
 
 class Marker extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { arrived: props.arrived };
-  }
-
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    const { arrived, contentObject: { title: name } } = nextProps;
+    const {
+      arrived,
+      contentObject: { title: name }
+    } = nextProps;
     const { arrived: previouslyArrived } = prevState;
 
     if (arrived !== previouslyArrived) {
-      if (arrived) AnalyticsUtils.logEvent("ar_arrived_at_object", { name });
+      if (arrived) {
+        AnalyticsUtils.logEvent("ar_arrived_at_object", { name });
+      }
       return { arrived };
     }
 
     return null;
+  }
+
+  constructor(props: Props) {
+    super(props);
+    this.state = { arrived: props.arrived };
   }
 
   render() {
@@ -51,12 +56,17 @@ class Marker extends Component<Props, State> {
       distance,
       onPress,
       active,
-      arrived,
+      arrived
     } = this.props;
-    const imagePin = (arrived && active && Images.PinArrived) || (active && Images.PinSelected) || Images.Pin;
+    const imagePin =
+      (arrived && active && Images.PinArrived) ||
+      (active && Images.PinSelected) ||
+      Images.Pin;
     const animationName = active ? PIN_ANIMATION : RESET_ANIMATION;
     const animationLoop = active;
-    const logarithmicScale = distance ? Math.log10(distance ** DISTANCE_SCALING_FACTOR) : 0;
+    const logarithmicScale = distance
+      ? Math.log10(distance ** DISTANCE_SCALING_FACTOR)
+      : 0;
     const scale = 1 + logarithmicScale;
 
     return (
@@ -71,7 +81,7 @@ class Marker extends Component<Props, State> {
           name: animationName,
           run: true,
           loop: animationLoop,
-          interruptible: true,
+          interruptible: true
         }}
       >
         {imagePin !== Images.PinArrived && (
@@ -84,7 +94,12 @@ class Marker extends Component<Props, State> {
             textAlignVertical="Center"
           />
         )}
-        <ViroImage source={imagePin} width={0.6} height={0.6} position={[0, 0, 0]} />
+        <ViroImage
+          source={imagePin}
+          width={0.6}
+          height={0.6}
+          position={[0, 0, 0]}
+        />
       </ViroNode>
     );
   }
@@ -93,27 +108,27 @@ class Marker extends Component<Props, State> {
 ViroAnimations.registerAnimations({
   [RAISE_ANIMATION]: {
     properties: {
-      positionY: 1.0,
+      positionY: 1.0
     },
     easing: "EaseInOut",
     duration: 500,
-    delay: 500,
+    delay: 500
   },
   [DROP_ANIMATION]: {
     properties: {
-      positionY: 0.5,
+      positionY: 0.5
     },
     easing: "EaseInOut",
-    duration: 250,
+    duration: 250
   },
   [RESET_ANIMATION]: {
     properties: {
-      positionY: 0.5,
+      positionY: 0.5
     },
     easing: "EaseInOut",
-    duration: 250,
+    duration: 250
   },
-  [PIN_ANIMATION]: [[RAISE_ANIMATION, DROP_ANIMATION]],
+  [PIN_ANIMATION]: [[RAISE_ANIMATION, DROP_ANIMATION]]
 });
 
 export default Marker;

@@ -23,7 +23,7 @@ const rootReducer = {
   downloadDataVersion,
   downloadedGuides,
   uiState,
-  arState,
+  arState
 };
 
 export default rootReducer;

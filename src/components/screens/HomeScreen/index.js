@@ -5,7 +5,7 @@ import {
   SectionList,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "../../../services/langService";
@@ -15,7 +15,7 @@ import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   selectCurrentCategory,
-  showBottomBar,
+  showBottomBar
 } from "../../../actions/uiStateActions";
 import NavigationListItem from "../../shared/NavigationListItem";
 import { compareDistance } from "../../../utils/SortingUtils";
@@ -29,16 +29,16 @@ type Props = {
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
   selectCurrentCategory(section: NavigationCategory): void,
-  dispatchShowBottomBar(visible: boolean): void,
-}
+  dispatchShowBottomBar(visible: boolean): void
+};
 
 class HomeScreen extends Component<Props> {
   static navigationOptions = () => {
     const title = LangService.strings.APP_NAME;
     return Object.assign(HeaderStyles.noElevation, {
-      title,
+      title
     });
-  }
+  };
 
   componentDidMount() {
     this.props.dispatchShowBottomBar(true);
@@ -46,19 +46,24 @@ class HomeScreen extends Component<Props> {
 
   onPressItem = (item: NavigationItem): void => {
     switch (item.type) {
-      case "guide":
-      {
+      case "guide": {
         const { guide } = item;
         if (guide) {
           this.props.selectGuide(guide.id);
           const type = guide.guideType;
           if (type === "guide") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("GuideDetailsScreen", { title: guide.name, bottomBarOnUnmount: true });
+            this.props.navigation.navigate("GuideDetailsScreen", {
+              title: guide.name,
+              bottomBarOnUnmount: true
+            });
             this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("TrailScreen", { title: guide.name, bottomBarOnUnmount: true });
+            this.props.navigation.navigate("TrailScreen", {
+              title: guide.name,
+              bottomBarOnUnmount: true
+            });
             this.props.dispatchShowBottomBar(false);
           }
         }
@@ -68,32 +73,52 @@ class HomeScreen extends Component<Props> {
         this.props.selectGuideGroup(item.id);
         if (item.guideGroup) {
           const title = item.guideGroup.name;
-          AnalyticsUtils.logEvent("view_location", { name: item.guideGroup.slug });
-          this.props.navigation.navigate("LocationScreen", { title, bottomBarOnUnmount: true });
+          AnalyticsUtils.logEvent("view_location", {
+            name: item.guideGroup.slug
+          });
+          this.props.navigation.navigate("LocationScreen", {
+            title,
+            bottomBarOnUnmount: true
+          });
           this.props.dispatchShowBottomBar(false);
         }
         break;
       default:
         break;
     }
-  }
+  };
 
   onPressViewAll = (category: NavigationCategory) => {
     this.props.selectCurrentCategory(category);
     this.props.navigation.navigate("CategoryListScreen");
     this.props.dispatchShowBottomBar(false);
-  }
+  };
 
-  renderSectionHeader = (section: { title: string, category: NavigationCategory, showSpinner?: boolean }) => (
-    <View style={styles.sectionContainer} >
+  renderSectionHeader = (section: {
+    title: string,
+    category: NavigationCategory,
+    showSpinner?: boolean
+  }) => (
+    <View style={styles.sectionContainer}>
       <Text style={styles.sectionTitle}>{section.title}</Text>
-      <Text style={styles.sectionDescription}>{section.category.description}</Text>
-      {section.showSpinner ? <ActivityIndicator style={styles.sectionLoadingSpinner} /> : null}
-    </View >
-  )
+      <Text style={styles.sectionDescription}>
+        {section.category.description}
+      </Text>
+      {section.showSpinner ? (
+        <ActivityIndicator style={styles.sectionLoadingSpinner} />
+      ) : null}
+    </View>
+  );
 
-  renderSectionFooter = (section: { title: string, data: NavigationItem[], category: NavigationCategory, hideFooter?: boolean }) => {
-    if (section.hideFooter) return null;
+  renderSectionFooter = (section: {
+    title: string,
+    data: NavigationItem[],
+    category: NavigationCategory,
+    hideFooter?: boolean
+  }) => {
+    if (section.hideFooter) {
+      return null;
+    }
 
     return (
       <View style={styles.sectionFooterContainer}>
@@ -101,21 +126,23 @@ class HomeScreen extends Component<Props> {
           style={styles.sectionFooterButton}
           onPress={() => this.onPressViewAll(section.category)}
         >
-          <Text style={styles.sectionFooterText}>{LangService.strings.VIEW_ALL.toUpperCase()}</Text>
+          <Text style={styles.sectionFooterText}>
+            {LangService.strings.VIEW_ALL.toUpperCase()}
+          </Text>
         </TouchableOpacity>
       </View>
     );
-  }
+  };
 
   render() {
     if (this.props.showLoadingSpinner) {
-      return (<ActivityIndicator style={styles.loadingSpinner} />);
+      return <ActivityIndicator style={styles.loadingSpinner} />;
     }
 
     // TODO move to mapStateToProps()
     const { navigationSections, noContent } = this.props;
     const sections = [];
-    navigationSections.forEach((cat) => {
+    navigationSections.forEach(cat => {
       const data = cat.items
         .filter(item => item.guide || item.guideGroup)
         .sort(compareDistance)
@@ -123,7 +150,13 @@ class HomeScreen extends Component<Props> {
       if (data.length > 0) {
         sections.push({ title: cat.name, data, category: cat });
       } else if (noContent) {
-        sections.push({ title: cat.name, data, category: cat, showSpinner: true, hideFooter: true });
+        sections.push({
+          title: cat.name,
+          data,
+          category: cat,
+          showSpinner: true,
+          hideFooter: true
+        });
       }
     });
 
@@ -132,11 +165,9 @@ class HomeScreen extends Component<Props> {
         style={styles.container}
         stickySectionHeadersEnabled={false}
         renderSectionHeader={({ section }) => this.renderSectionHeader(section)}
-        renderItem={({ item }) => (<NavigationListItem
-          item={item}
-          onPressItem={this.onPressItem}
-        />)
-        }
+        renderItem={({ item }) => (
+          <NavigationListItem item={item} onPressItem={this.onPressItem} />
+        )}
         renderSectionFooter={({ section }) =>
           // $FlowFixMe flow doesn't understand me
           this.renderSectionFooter(section)
@@ -157,7 +188,7 @@ function mapStateToProps(state: RootState) {
   return {
     showLoadingSpinner: isFetching,
     navigationSections: navigationCategories,
-    noContent,
+    noContent
   };
 }
 
@@ -165,9 +196,14 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
-    selectCurrentCategory: (category: NavigationCategory) => dispatch(selectCurrentCategory(category.id)),
-    dispatchShowBottomBar: (visible: boolean) => dispatch(showBottomBar(visible)),
+    selectCurrentCategory: (category: NavigationCategory) =>
+      dispatch(selectCurrentCategory(category.id)),
+    dispatchShowBottomBar: (visible: boolean) =>
+      dispatch(showBottomBar(visible))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreen);
