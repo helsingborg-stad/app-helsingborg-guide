@@ -41,6 +41,7 @@ type Props = {
 type State = {
   animViewContainer: Animated.Value,
   animTabBottom: Animated.Value,
+  showBottomBar: boolean,
 }
 
 class BottomBarView extends Component<Props, State> {
@@ -58,17 +59,17 @@ class BottomBarView extends Component<Props, State> {
     const { animViewContainer, animTabBottom, showBottomBar: previouslyShowingBottomBar } = prevState;
 
     if (showBottomBar !== previouslyShowingBottomBar) {
-      const newState = { showBottomBar };
-
       if (showBottomBar) {
         Animated.timing(animViewContainer, { toValue: viewContainerHeight, duration: transitionDuration }).start();
         Animated.timing(animTabBottom, { toValue: buttonTabBottom, duration: transitionDuration }).start();
+        return { showBottomBar };
       } else {
-        newState.animViewContainer = new Animated.Value(0);
-        newState.animTabBottom = new Animated.Value(0);
+        return {
+          showBottomBar,
+          animViewContainer: new Animated.Value(0),
+          animTabBottom: new Animated.Value(0),
+        };
       }
-
-      return newState;
     }
 
     return null;

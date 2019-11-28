@@ -15,6 +15,10 @@ type Props = {
   arrived: boolean,
 };
 
+type State = {
+  arrived: boolean
+}
+
 const DISTANCE_SCALING_FACTOR = 2;
 
 const RAISE_ANIMATION = "RAISE_ANIMATION";
@@ -22,13 +26,13 @@ const DROP_ANIMATION = "DROP_ANIMATION";
 const PIN_ANIMATION = "PIN_ANIMATION";
 const RESET_ANIMATION = "RESET_ANIMATION";
 
-class Marker extends Component<Props> {
-  constructor(props) {
+class Marker extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { arrived: props.arrived };
   }
 
-  static getDerivedStateFromProps(nextProps: Props, prevState) {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     const { arrived, contentObject: { title: name } } = nextProps;
     const { arrived: previouslyArrived } = prevState;
 

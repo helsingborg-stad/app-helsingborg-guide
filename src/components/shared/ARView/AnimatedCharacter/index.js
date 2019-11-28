@@ -19,7 +19,7 @@ const FLIGHT_RADIUS = 5;
 const FLIGHT_ALTITUDE = 5;
 const FLIGHT_DURATION = 10000;
 
-export default class extends Component {
+export default class extends Component<Props> {
 
 
   componentDidMount() {

@@ -14,19 +14,29 @@ export type OffscreenMarkerProps = {
   visible: boolean,
 };
 
-export default class OffscreenMarker extends Component<OffscreenMarkerProps> {
+type OffscreenMarkerState = {
+  x: number,
+  y: number,
+  visible: boolean,
+  animatedX: Animated.Value,
+  animatedY: Animated.Value,
+  opacity: Animated.Value,
+}
+
+export default class OffscreenMarker extends Component<OffscreenMarkerProps, OffscreenMarkerState> {
   constructor(props: OffscreenMarkerProps) {
     super(props);
     this.state = {
-      x: props.x,
-      y: props.y,
+      x: 0,
+      y: 0,
+      visible: false,
       animatedX: new Animated.Value(0),
       animatedY: new Animated.Value(0),
       opacity: new Animated.Value(0),
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps: OffscreenMarkerProps, prevState: OffscreenMarkerState) {
     const { visible, x, y } = nextProps;
     const { animatedX, animatedY, opacity, visible: previouslyVisible, x: previousX, y: previousY } = prevState;
 
