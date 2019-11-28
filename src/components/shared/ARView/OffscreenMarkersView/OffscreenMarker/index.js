@@ -17,43 +17,51 @@ export type OffscreenMarkerProps = {
 export default class OffscreenMarker extends Component<OffscreenMarkerProps> {
   constructor(props: OffscreenMarkerProps) {
     super(props);
-
-    this.animatedX = new Animated.Value(props.x);
-    this.animatedY = new Animated.Value(props.y);
-    this.opacity = new Animated.Value(props.visible ? 1 : 0);
+    this.state = {
+      x: props.x,
+      y: props.y,
+      animatedX: new Animated.Value(0),
+      animatedY: new Animated.Value(0),
+      opacity: new Animated.Value(0),
+    };
   }
 
-  componentWillReceiveProps(props: OffscreenMarkerProps) {
-    const { visible } = this.props;
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { visible, x, y } = nextProps;
+    const { animatedX, animatedY, opacity, visible: previouslyVisible, x: previousX, y: previousY } = prevState;
 
-    Animated.spring(this.animatedX, {
-      toValue: props.x,
-    }).start();
-    Animated.spring(this.animatedY, {
-      toValue: props.y,
-    }).start();
+    const newState = {};
 
-    if (props.visible !== visible) {
-      Animated.spring(this.opacity, {
-        toValue: props.visible ? 1 : 0,
-      }).start();
+    if (x !== previousX) {
+      Animated.spring(animatedX, { toValue: x }).start();
+      newState.x = x;
     }
+
+    if (y !== previousY) {
+      Animated.spring(animatedY, { toValue: y }).start();
+      newState.y = y;
+    }
+
+    if ( visible !== previouslyVisible) {
+      Animated.spring(opacity, { toValue: visible ? 1 : 0 }).start();
+      newState.visible = visible;
+    }
+
+    return (Object.keys(newState).length > 0) ? newState : null;
   }
-
-  animatedX = new Animated.Value(0);
-
-  animatedY = new Animated.Value(0);
-
-  opacity = new Animated.Value(0);
 
   render() {
-    const { id, order, selected, angle } = this.props;
+    const {
+      props: { id, order, selected, angle },
+      state: { animatedX, animatedY, opacity },
+    } = this;
+
     const imagePin = selected ? Images.PinSelected : Images.Pin;
 
     return (
       <Animated.View
         key={id}
-        style={{ ...styles.marker, opacity: this.opacity, transform: [{ translateX: this.animatedX }, { translateY: this.animatedY }] }}
+        style={{ ...styles.marker, opacity: opacity, transform: [{ translateX: animatedX }, { translateY: animatedY }] }}
         pointerEvents="none"
       >
         <Image source={imagePin} style={{ transform: [{ rotateZ: `${angle}rad` }] }} />

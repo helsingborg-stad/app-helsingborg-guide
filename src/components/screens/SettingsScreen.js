@@ -149,13 +149,14 @@ class SettingsScreen extends Component {
     };
   }
 
-  componentWillReceiveProps() {
-    if (!this.state.languages || !Object.keys(this.state.languages).length) {
-      this.setState({
-        selectedLanguageCode: LangService.code,
-        languages: LangService.languageObj,
-      });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { languages } = prevState;
+
+    if (!languages || Object.keys(languages).length === 0) {
+      return { selectedLanguageCode: LangService.code, languages: LangService.languageObj };
     }
+
+    return null;
   }
 
   setLanguageAndReload = (code) => {

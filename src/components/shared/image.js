@@ -22,17 +22,32 @@ class OImage extends Component {
     this.onLoadEnd = this.onLoadEnd.bind(this);
   }
 
+  static async getDerivedStateFromProps(nextProps, prevState) {
+    const { internet, source, guideID } = nextProps;
+    const { internet: previousInternet } = prevState;
 
-  componentDidMount() {
-    this.mounted = true;
-    this.setSource();
-  }
+    if (internet.connected !== previousInternet.connected) {
+      if (internet.connected) {
+        return { internet, source };
+      } else {
+        // Only load the offline image if no internet.
+        if (source && source.uri && typeof source.uri === "string") {
+          const path = source.uri;
+          const fullPath = fetchService.getFullPath(path, guideID);
 
-  componentWillReceiveProps(nextProps) {
-    if (this.state.internet.connected !== nextProps.internet.connected) {
-      this.setState({ internet: nextProps.internet });
-      if (nextProps.internet.connected) this.setSource();
+          try {
+            const exist = await fetchService.isExist(path, guideID);
+            return exist ? { source: { uri: `file://${fullPath}` } } : { source: { uri: path } };
+          } catch(error) {
+            console.warn("error in OImage:isExist", error);
+          }
+        } else {
+          return { source: placeholderImage }
+        }
+      }
     }
+
+    return null;
   }
 
   onLoadStart() {
@@ -63,31 +78,6 @@ class OImage extends Component {
     } else if (Platform.OS === "android") {
       this.setState({ source: { uri: `file://${fullPath}` } });
     }
-  }
-
-  // not used
-  setSource() {
-    const { source } = this.props;
-    if (this.state.internet.connected) {
-      this.setState({ source });
-      return;
-    }
-    // Only load the offline image if no internet.
-    if (source && source.uri && typeof source.uri === "string") {
-      const { guideID } = this.props;
-      const path = source.uri;
-      const fullPath = fetchService.getFullPath(path, guideID);
-      fetchService
-        .isExist(path, guideID)
-        .then((exist) => {
-          if (exist) {
-            this.setState({ source: { uri: `file://${fullPath}` } });
-          } else {
-            this.setState({ source: { uri: path } });
-          }
-        })
-        .catch(error => console.log("error in OImage:isExist"));
-    } else this.setState({ source: placeholderImage });
   }
 
   displayImage() {

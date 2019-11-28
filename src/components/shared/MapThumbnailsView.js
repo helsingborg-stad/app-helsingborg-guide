@@ -52,6 +52,17 @@ export default class MapThumbnailsView extends Component {
     this.locationService = LocationService.getInstance();
   }
 
+  static getDerivedStatefromProps(nextProps, prevState) {
+    const { items, active, markers, connected } = nextProps;
+    const { items: previousItems, connected: previouslyConnected } = prevState;
+
+    if (items.length !== previousItems.length || connected !== previouslyConnected) {
+      return { items, active, markers, connected };
+    }
+
+    return null;
+  }
+
   componentDidMount() {
     // console.log('page did mount');
     if (this.state.markers.length) {
@@ -60,17 +71,6 @@ export default class MapThumbnailsView extends Component {
         this.sortGuidegroups();
       }, TIMEOUT);
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.items.length !== nextProps.items.length) {
-      this.setState({
-        items: nextProps.items,
-        active: nextProps.active,
-        markers: nextProps.markers,
-      });
-    }
-    if (nextProps.connected !== this.state.connected) this.setState({ connected: nextProps.connected });
   }
 
   componentWillUnmount() {

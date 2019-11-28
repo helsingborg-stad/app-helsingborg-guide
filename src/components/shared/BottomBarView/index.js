@@ -49,20 +49,29 @@ class BottomBarView extends Component<Props, State> {
     this.state = {
       animViewContainer: new Animated.Value(0),
       animTabBottom: new Animated.Value(0),
+      showBottomBar: props.showBottomBar,
     };
   }
 
-  componentDidMount() {
-  }
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+    const { showBottomBar } = nextProps;
+    const { animViewContainer, animTabBottom, showBottomBar: previouslyShowingBottomBar } = prevState;
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.showBottomBar && !this.props.showBottomBar) {
-      Animated.timing(this.state.animViewContainer, { toValue: viewContainerHeight, duration: transitionDuration }).start();
-      Animated.timing(this.state.animTabBottom, { toValue: buttonTabBottom, duration: transitionDuration }).start();
-    } else if (!nextProps.showBottomBar && this.props.showBottomBar) {
-      this.setState({ animViewContainer: new Animated.Value(0) });
-      this.setState({ animTabBottom: new Animated.Value(0) });
+    if (showBottomBar !== previouslyShowingBottomBar) {
+      const newState = { showBottomBar };
+
+      if (showBottomBar) {
+        Animated.timing(animViewContainer, { toValue: viewContainerHeight, duration: transitionDuration }).start();
+        Animated.timing(animTabBottom, { toValue: buttonTabBottom, duration: transitionDuration }).start();
+      } else {
+        newState.animViewContainer = new Animated.Value(0);
+        newState.animTabBottom = new Animated.Value(0);
+      }
+
+      return newState;
     }
+
+    return null;
   }
 
   displayIcons() {

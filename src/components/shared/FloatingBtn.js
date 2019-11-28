@@ -10,35 +10,38 @@ const FULL_WIDTH = Dimensions.get("window").width;
 export default class FloatingBtn extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      animValue: new Animated.Value(0),
-    };
+    this.state = { animValue: new Animated.Value(0), visible: props.visible };
   }
 
-  componentWillMount() {
-    this.animate(this.props.visible);
-  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { visible } = nextProps;
+    const { animValue, visible: previouslyVisible } = prevState;
 
-  componentWillReceiveProps(nextProps) {
-    this.animate(nextProps.visible);
-  }
+    if ( visible !== previouslyVisible) {
+      const animationProperties = visible ? { toValue: 1, friction: 2 } : { toValue: 0 };
+      Animated.spring(animValue, animationProperties).start();
+      return { visible };
+    }
 
-  animate(visible) {
-    if (visible) Animated.spring(this.state.animValue, { toValue: 1, friction: 2 }).start();
-    else Animated.spring(this.state.animValue, { toValue: 0 }).start();
+    return null;
   }
 
   render() {
-    const indexAnim = this.state.animValue.interpolate({
+    const {
+      props: { onPress. content },
+      state: { animValue }
+    } = this;
+
+    const indexAnim = animValue.interpolate({
       inputRange: [0, 1],
       outputRange: [-10, 1000],
     });
 
     return (
       <Animated.View style={[styles.wrapper, { zIndex: indexAnim }]}>
-        <Animated.View style={[{ flex: 1, transform: [{ scale: this.state.animValue }] }]}>
-          <TouchableOpacity onPress={this.props.onPress} activeOpacity={0.9} style={styles.mainContainer}>
-            <Text style={styles.text}>{this.props.content}</Text>
+        <Animated.View style={[{ flex: 1, transform: [{ scale: animValue }] }]}>
+          <TouchableOpacity onPress={onPress} activeOpacity={0.9} style={styles.mainContainer}>
+            <Text style={styles.text}>{content}</Text>
           </TouchableOpacity>
         </Animated.View>
       </Animated.View>

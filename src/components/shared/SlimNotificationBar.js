@@ -11,32 +11,25 @@ const FULL_WIDTH = Dimensions.get("window").width;
 export default class SlimNotificationBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      animValue: new Animated.Value(0),
-    };
+    this.state = { animValue: new Animated.Value(0) };
   }
 
-  componentWillMount() {
-    this.animate(this.props.visible);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.animate(nextProps.visible);
-  }
-
-  animate(visible) {
-    if (visible) Animated.spring(this.state.animValue, { toValue: 1, friction: 2 }).start();
-    else Animated.spring(this.state.animValue, { toValue: 0 }).start();
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { visible } = nextProps;
+    const animationProperties = visible ? { toValue: 1, friction: 2 } : { toValue: 0 };
+    Animated.spring(prevState.animValue, animationProperties).start();
   }
 
   render() {
-    const indexAnim = this.state.animValue.interpolate({
+    const { state: { animValue } } = this;
+
+    const indexAnim = animValue.interpolate({
       inputRange: [0, 1],
       outputRange: [-10000, 2000],
     });
 
     return (
-      <Animated.View style={[styles.bar, this.props.style || null, { opacity: this.state.animValue, zIndex: indexAnim }]}>
+      <Animated.View style={[styles.bar, this.props.style || null, { opacity: animValue, zIndex: indexAnim }]}>
         {this.props.children}
       </Animated.View>
     );

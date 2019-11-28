@@ -13,32 +13,29 @@ const FULL_WIDTH = Dimensions.get("window").width;
 class NotificationBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      animValue: new Animated.Value(0),
-      visible: this.props.visible,
-    };
+    this.state = { animValue: new Animated.Value(0), visible: props.visible };
   }
 
-  componentWillMount() { }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { visible } = nextProps;
+    const { animValue, visible: previouslyVisible } = prevState;
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.visible != this.state.visible) {
-      this.animate(nextProps.visible);
-      this.setState({ visible: nextProps.visible });
+    if (visible !== previouslyVisible) {
+      const animationProperties = visible ? { toValue: 1, friction: 2 } : { toValue: 0 };
+      Animated.timing(animValue, animationProperties).start();
+      return { visible };
     }
+
+    return null;
   }
 
   clearErrorMsg() {
     this.props.errorActions.clearError();
   }
 
-  animate(visible) {
-    if (visible) Animated.spring(this.state.animValue, { toValue: 1, friction: 2 }).start();
-    else Animated.spring(this.state.animValue, { toValue: 0 }).start();
-  }
-
   render() {
-    const indexAnim = this.state.animValue.interpolate({
+    const { state: { animValue } } = this;
+    const indexAnim = animValue.interpolate({
       inputRange: [0, 1],
       outputRange: [-10, 1000],
     });

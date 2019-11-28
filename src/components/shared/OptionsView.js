@@ -10,24 +10,20 @@ const MENU_HEIGHT = Dimensions.get("window").height;
 export default class OptionsView extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      animValue: new Animated.Value(0),
-      visible: this.props.visible,
-    };
+    this.state = { animValue: new Animated.Value(0), visible: props.visible };
   }
 
-  componentDidMount() { }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { visible } = nextProps;
+    const { animValue, visible: previouslyVisible } = prevState;
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      visible: nextProps.visible,
-    });
-    this.animate(nextProps.visible);
-  }
+    if (visible !== previouslyVisible) {
+      const animationProperties = visible ? { toValue: 1, duration: 200 } : { toValue: 0, duration: 200 };
+      Animated.timing(animValue, animationProperties).start();
+      return { visible };
+    }
 
-  animate(visible) {
-    if (visible) Animated.timing(this.state.animValue, { toValue: 1, duration: 200 }).start();
-    else Animated.timing(this.state.animValue, { toValue: 0, duration: 200 }).start();
+    return null;
   }
 
   onPress() {
@@ -35,21 +31,22 @@ export default class OptionsView extends Component {
   }
 
   render() {
-    let animatedStyle;
-    if (this.state.animValue) {
-      const translateAnim = this.state.animValue.interpolate({
+    const { state: { animValue } } = this;
+
+    if (animValue) {
+      const translateAnim = animatedValue.interpolate({
         inputRange: [0, 1],
         outputRange: [MENU_WIDTH, 0],
       });
 
-      const zIndexAnim = this.state.animValue.interpolate({
+      const zIndexAnim = animatedValue.interpolate({
         inputRange: [0, 1],
         outputRange: [-100, 10009],
       });
 
-      animatedStyle = {
+      const animatedStyle = {
         // transform:[{translateX:translateAnim} ]
-        opacity: this.state.animValue,
+        opacity: animatedValue,
         zIndex: zIndexAnim,
       };
     }

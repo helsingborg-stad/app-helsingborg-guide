@@ -23,14 +23,21 @@ const PIN_ANIMATION = "PIN_ANIMATION";
 const RESET_ANIMATION = "RESET_ANIMATION";
 
 class Marker extends Component<Props> {
-  componentWillReceiveProps(props: Props) {
-    const { arrived, contentObject } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = { arrived: props.arrived };
+  }
 
-    if (!arrived && props.arrived) {
-      const { title } = contentObject;
+  static getDerivedStateFromProps(nextProps: Props, prevState) {
+    const { arrived, contentObject: { title: name } } = nextProps;
+    const { arrived: previouslyArrived } = prevState;
 
-      AnalyticsUtils.logEvent("ar_arrived_at_object", { name: title });
+    if (arrived !== previouslyArrived) {
+      if (arrived) AnalyticsUtils.logEvent("ar_arrived_at_object", { name });
+      return { arrived };
     }
+
+    return null;
   }
 
   render() {
