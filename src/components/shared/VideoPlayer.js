@@ -81,13 +81,11 @@ export default class VideoPlayer extends Component {
     initialCurrentTime: 0,
   }
 
-  state = {
-    currentTime: 0.0,
-  }
+  constructor(props) {
+    super(props);
+    const { playOnLoad = false } = props;
 
-  componentWillMount() {
-    const { playOnLoad } = this.props;
-    this.setState({ isPlaying: playOnLoad, loading: playOnLoad });
+    this.state = { currentTime: 0.0, isPlaying: playOnLoad, loading: playOnLoad };
   }
 
   displaySpinner() {

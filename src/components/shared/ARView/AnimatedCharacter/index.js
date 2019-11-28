@@ -22,7 +22,7 @@ const FLIGHT_DURATION = 10000;
 export default class extends Component {
 
 
-  componentWillMount() {
+  componentDidMount() {
     // Animations needs to be registered after materials for Android devices with Mali chipset: https://github.com/viromedia/viro/issues/535#issuecomment-517453000
     ViroAnimations.registerAnimations({
       [ANIMATION_CIRCLE]: { properties: { rotateY: "+=360" }, duration: FLIGHT_DURATION },
