@@ -19,6 +19,8 @@ import {
 } from "./src/actions/uiStateActions";
 import { setLanguage } from "./src/actions/navigationActions";
 
+import { name as AppName } from "./app.json";
+
 const { store, persistor } = configureStore();
 
 // TODO decouple these store reference hacks
@@ -141,5 +143,5 @@ export default class GuideHbg extends Component {
   }
 }
 
-AppRegistry.registerComponent("GuideHbg", () => GuideHbg);
+AppRegistry.registerComponent(AppName, () => GuideHbg);
 AppRegistry.registerComponent("VideoApp", () => FullScreenVideoScreen);

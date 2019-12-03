@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.guidehbg">
+  package="com.guideapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -23,46 +23,51 @@
     <uses-feature android:name="android.hardware.location.network" />
 
     <application
-            android:name=".MainApplication"
-            android:allowBackup="true"
-            android:label="@string/app_name"
-            android:icon="@mipmap/ic_launcher"
-            android:theme="@style/AppTheme">
-        <activity
-                android:name=".MainActivity"
-                android:launchMode="singleInstance"
-                android:label="@string/app_name"
-                android:screenOrientation="portrait"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-                android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity
-                android:name=".VideoActivity"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-                android:label="@string/app_name"
-                android:screenOrientation="sensorLandscape"
-                android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
+      android:name=".MainApplication"
+      android:allowBackup="true"
+      android:label="@string/app_name"
+      android:icon="@mipmap/ic_launcher"
+      android:theme="@style/AppTheme"
+      android:usesCleartextTraffic="true">
 
+      <activity
+        android:name=".MainActivity"
+        android:launchMode="singleInstance"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+        android:windowSoftInputMode="adjustResize">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+
+      <activity
+        android:name=".VideoActivity"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        android:label="@string/app_name"
+        android:screenOrientation="sensorLandscape"
+        android:windowSoftInputMode="adjustResize" />
+      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+      <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyDN7yMDr1efvJ06u4plXiGl-JuQGvv0lpQ"/>
+
+      <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="${applicationId}.provider"
+        android:readPermission="${applicationId}.provider"
+        android:grantUriPermissions="true"
+        android:exported="false">
         <meta-data
-                android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyDN7yMDr1efvJ06u4plXiGl-JuQGvv0lpQ"/>
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:readPermission="${applicationId}.provider"
-            android:grantUriPermissions="true"
-            android:exported="false">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
-        </provider>
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/provider_paths"/>
+      </provider>
 
-        <meta-data android:name="com.google.ar.core" android:value="optional" />
+      <meta-data android:name="com.google.ar.core" android:value="optional" />
+
     </application>
 
 </manifest>

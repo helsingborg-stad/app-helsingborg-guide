@@ -16,7 +16,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.guidehbg.R;
+import com.guideapp.R;
 
 public class MediaControlService extends Service {
 

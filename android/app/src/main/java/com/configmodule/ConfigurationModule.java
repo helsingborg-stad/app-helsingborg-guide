@@ -2,7 +2,7 @@ package com.configmodule;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.guidehbg.BuildConfig;
+import com.guideapp.BuildConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class ConfigurationModule extends ReactContextBaseJavaModule {
     constants.put("applicationId", BuildConfig.APPLICATION_ID);
     constants.put("appVersion", BuildConfig.VERSION_NAME);
     constants.put("buildVersion", BuildConfig.VERSION_CODE);
-    
+
     return constants;
   }
 }

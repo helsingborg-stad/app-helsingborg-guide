@@ -23,8 +23,8 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.guidehbg.MainActivity;
-import com.guidehbg.R;
+import com.guideapp.MainActivity;
+import com.guideapp.R;
 
 /**
  * Created by msaeed on 2017-03-14.
