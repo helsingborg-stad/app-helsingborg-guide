@@ -20,7 +20,7 @@ EOF
     exit 1
 }
 
-if [[ $# -ne 3 ]]; then
+if [[ $# -ne 1 ]]; then
     usage
 fi
 
