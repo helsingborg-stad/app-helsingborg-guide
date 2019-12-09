@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   divider: {
     margin: defaultMargin,
     height: 1,
-    backgroundColor: Colors.lighterGrey
+    backgroundColor: Colors.gray6
   },
   emptySpace: {
     margin: defaultMargin * 0.5

@@ -128,7 +128,7 @@ export default StyleSheet.create({
     {
       fontSize: 12,
       marginRight: TextMargin,
-      color: Colors.warmGrey
+      color: Colors.gray3
     }
   ]),
   listItemTextContainer: {

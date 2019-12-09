@@ -60,7 +60,7 @@ export default class RoundedBtn extends Component<Props> {
 
 const styles = StyleSheet.create({
   closeBtn: {
-    backgroundColor: Colors.grey6,
+    backgroundColor: Colors.gray5,
     width: 32,
     height: 32,
     borderRadius: 50,

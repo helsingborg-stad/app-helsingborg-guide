@@ -52,7 +52,7 @@ export default class OptionsFloatingBtn extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { flex: 1, backgroundColor: Colors.darkerGrey },
+  wrapper: { flex: 1, backgroundColor: Colors.gray8 },
 
   fabContainer: {
     height: PARENT_FAB_HEIGHT,

@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   headerContainer: {
     height: 60,
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
     flexDirection: "row",
     alignItems: "center"
   },
@@ -38,13 +38,13 @@ export default StyleSheet.create({
     justifyContent: "space-around"
   },
   digitContainer: {
-    backgroundColor: Colors.grey2,
+    backgroundColor: Colors.gray11,
     alignItems: "center",
     justifyContent: "center",
     margin: 1
   },
   upperDigitContainer: {
-    backgroundColor: Colors.grey2,
+    backgroundColor: Colors.gray11,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -58,13 +58,13 @@ export default StyleSheet.create({
     fontSize: 48,
     lineHeight: 57,
     fontWeight: "300",
-    color: Colors.grey3
+    color: Colors.gray4
   },
   disabled: {
-    backgroundColor: Colors.grey4
+    backgroundColor: Colors.gray12
   },
   disabledText: {
-    color: Colors.grey5
+    color: Colors.gray9
   },
   darkText: {
     color: Colors.black

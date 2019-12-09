@@ -24,14 +24,14 @@ export default StyleSheet.create({
   date: StyleSheetUtils.flatten([
     TextStyles.description,
     {
-      color: Colors.warmGrey
+      color: Colors.gray3
     }
   ]),
   forKidsText: StyleSheetUtils.flatten([
     TextStyles.description,
     {
       paddingHorizontal: 5,
-      color: Colors.darkGrey
+      color: Colors.gray2
     }
   ]),
   checkedContainer: {

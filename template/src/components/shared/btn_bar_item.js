@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
     lineHeight: 22.0
   },
   disabledText: {
-    color: Colors.darkerGrey
+    color: Colors.gray8
   },
   disabledBkgd: {
-    backgroundColor: Colors.slightlyOffWhite
+    backgroundColor: Colors.offWhite1
   }
 });
 

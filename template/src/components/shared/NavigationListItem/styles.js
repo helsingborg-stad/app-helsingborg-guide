@@ -25,7 +25,7 @@ export default StyleSheet.create({
       fontWeight: "500",
       fontStyle: "normal",
       letterSpacing: 1,
-      color: Colors.warmGrey
+      color: Colors.gray3
     }
   ]),
   listItemImage: {
@@ -61,7 +61,7 @@ export default StyleSheet.create({
       fontWeight: "500",
       fontStyle: "normal",
       letterSpacing: 1,
-      color: Colors.warmGrey
+      color: Colors.gray3
     }
   ]),
   forChildrenIcon: {

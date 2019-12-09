@@ -92,7 +92,7 @@ class OImage extends Component<Props, State> {
       };
 
       return (
-        <View style={{ width, height, backgroundColor: Colors.moreOffWhite }}>
+        <View style={{ width, height, backgroundColor: Colors.offWhite4 }}>
           <ActivityIndicator style={indicatorStyle} />
         </View>
       );

@@ -12,7 +12,7 @@ import { Colors } from "@assets/styles";
 function forKidsView() {
   return (
     <View style={styles.checkedContainer}>
-      <Icon name="face" size={20} color={Colors.darkGrey} />
+      <Icon name="face" size={20} color={Colors.gray2} />
       <Text style={styles.forKidsText}>{LangService.strings.FOR_CHILDREN}</Text>
     </View>
   );

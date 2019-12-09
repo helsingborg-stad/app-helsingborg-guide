@@ -56,7 +56,7 @@ export default StyleSheet.create({
     TextStyles.description,
     {
       margin: defaultMargin,
-      color: Colors.greyBodyText,
+      color: Colors.gray2,
       lineHeight: 22
     }
   ]),

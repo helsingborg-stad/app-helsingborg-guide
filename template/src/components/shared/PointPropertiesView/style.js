@@ -25,7 +25,7 @@ export default StyleSheet.create({
       fontWeight: "500",
       lineHeight: 24.0,
       paddingLeft: 9,
-      color: Colors.warmGrey
+      color: Colors.gray3
     }
   ]),
   divider: {

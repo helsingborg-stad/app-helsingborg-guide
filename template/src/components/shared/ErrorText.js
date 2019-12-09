@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
   },
   bigText: {
     fontSize: 12,
-    color: Colors.lessOffWhite
+    color: Colors.offWhite3
   }
 });

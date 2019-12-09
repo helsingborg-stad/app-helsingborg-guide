@@ -50,7 +50,7 @@ export default StyleSheet.create({
       fontSize: 16,
       fontWeight: "400",
       lineHeight: 21,
-      color: Colors.warmGrey
+      color: Colors.gray3
     }
   ]),
   articleContainer: {

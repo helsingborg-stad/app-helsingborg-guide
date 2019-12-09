@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   contentIdText: {
     ...StyleSheet.flatten(TextStyles.small),
-    color: Colors.warmGrey,
+    color: Colors.gray3,
     marginTop: 2
   },
   contentTitleText: {

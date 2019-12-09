@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   descriptionText: StyleSheetUtils.flatten([
     TextStyles.description,
     {
-      color: Colors.darkGrey,
+      color: Colors.gray2,
       textAlign: "left",
       fontWeight: "400",
       fontStyle: "italic",
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     TextStyles.description,
     {
       fontWeight: "400",
-      color: Colors.warmGrey,
+      color: Colors.gray3,
       textAlign: "left"
     }
   ]),
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   forChildrenText: StyleSheetUtils.flatten([
     TextStyles.description,
     {
-      color: Colors.darkGrey,
+      color: Colors.gray2,
       marginLeft: 6,
       fontWeight: "500",
       textAlign: "left"

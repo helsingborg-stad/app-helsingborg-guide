@@ -68,7 +68,7 @@ export default StyleSheet.create({
       fontSize: 16,
       fontWeight: "normal",
       fontStyle: "normal",
-      color: Colors.lightGrey
+      color: Colors.gray1
     }
   ]),
   sectionLoadingSpinner: {

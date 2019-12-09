@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     paddingHorizontal: THUMBNAIL_WIDTH / 5,
-    backgroundColor: Colors.offWhite
+    backgroundColor: Colors.offWhite5
   }
 });
 

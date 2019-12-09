@@ -7,7 +7,7 @@ import { Colors } from "@assets/styles";
 
 const COLORS = [
   Colors.themeControl,
-  Colors.themeExtra,
+  Colors.themeExtra1,
   Colors.themeTertiary,
   Colors.themeSecondary,
   Colors.themePrimary

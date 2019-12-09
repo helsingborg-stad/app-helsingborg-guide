@@ -62,7 +62,7 @@ export default StyleSheet.create({
     TextStyles.description,
     {
       fontWeight: "400",
-      color: Colors.warmGrey,
+      color: Colors.gray3,
       textAlign: "left"
     }
   ]),
@@ -74,7 +74,7 @@ export default StyleSheet.create({
   articleDescriptionText: StyleSheetUtils.flatten([
     TextStyles.description,
     {
-      color: Colors.warmGrey
+      color: Colors.gray3
     }
   ]),
   articleHeaderText: StyleSheetUtils.flatten([

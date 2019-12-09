@@ -8,7 +8,7 @@ export default StyleSheet.create({
   text: StyleSheetUtils.flatten([
     TextStyles.description,
     {
-      color: Colors.warmGrey
+      color: Colors.gray3
     }
   ])
 });

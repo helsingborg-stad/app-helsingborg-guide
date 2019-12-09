@@ -180,7 +180,7 @@ class AudioPlayerView extends Component<Props, State> {
                 style={styles.closeBtnContainer}
                 onPress={this.props.dispatchReleaseAudioFile}
               >
-                <Icon2 name="cancel" color={Colors.warmGrey} size={32} />
+                <Icon2 name="cancel" color={Colors.gray3} size={32} />
               </TouchableOpacity>
             </View>
           </View>

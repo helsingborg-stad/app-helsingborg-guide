@@ -7,7 +7,7 @@ const BTN_DIM = 36;
 export default StyleSheet.create({
   playerContainer: {
     height: PLAYER_HEIGHT,
-    backgroundColor: Colors.moreOffWhite,
+    backgroundColor: Colors.offWhite4,
     flex: 1,
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -16,7 +16,7 @@ export default StyleSheet.create({
   },
   sliderAndTitleContainer: {
     flex: 3,
-    backgroundColor: Colors.moreOffWhite,
+    backgroundColor: Colors.offWhite4,
     justifyContent: "space-between",
     alignItems: "stretch",
     paddingVertical: 10
@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
   titleContainer: { flex: 1, alignItems: "center", paddingHorizontal: 15 },
   titleText: { fontSize: 12, lineHeight: 14, fontWeight: "bold" },
-  disabledText: { color: Colors.darkerGrey },
+  disabledText: { color: Colors.gray8 },
   trackSlider: { flex: 1 },
   slider: { flex: 0, flexGrow: 1 },
   durationText: { fontSize: 12, paddingHorizontal: 10 },
@@ -68,6 +68,6 @@ export default StyleSheet.create({
   closeBtn: {},
   audioPlayer: {
     flex: 0.12,
-    backgroundColor: Colors.moreOffWhite
+    backgroundColor: Colors.offWhite4
   }
 });

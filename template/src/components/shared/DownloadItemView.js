@@ -17,7 +17,7 @@ import { Colors } from "@assets/styles";
 const styles = StyleSheet.create({
   wrapper: {
     borderBottomWidth: 1,
-    borderBottomColor: Colors.lightestGrey
+    borderBottomColor: Colors.gray7
   },
   mainContainer: {
     flex: 1,
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   header: {
     height: 40,
-    backgroundColor: Colors.slightlyOffWhite,
+    backgroundColor: Colors.offWhite1,
     justifyContent: "center",
     alignItems: "flex-start",
     paddingHorizontal: 15
@@ -103,8 +103,8 @@ export default class DownloadItemView extends Component<Props> {
     const isCompleted = this.props.progress >= 1;
     const color = isCompleted ? Colors.green : Colors.themeControl;
 
-    const resumeIcon = <Icon name="reload" color={Colors.themeExtra3} size={25} />;
-    const pauseIcon = <Icon name="stop" color={Colors.themeExtra3} size={25} />;
+    const resumeIcon = <Icon name="reload" color={Colors.themeControl} size={25} />;
+    const pauseIcon = <Icon name="stop" color={Colors.themeControl} size={25} />;
     let icon = this.props.isPaused ? resumeIcon : pauseIcon;
     icon = isCompleted ? null : icon;
     const percentage = parseInt(this.props.progress * 100);
@@ -146,7 +146,7 @@ export default class DownloadItemView extends Component<Props> {
               style={styles.touchContainer}
               onPress={this.props.onClearPress}
             >
-              <Icon name="delete" size={25} color={Colors.themeExtra3} />
+              <Icon name="delete" size={25} color={Colors.themeControl} />
             </TouchableOpacity>
           </View>
         </View>
