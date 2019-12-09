@@ -6,7 +6,7 @@ import BackgroundImage from "@shared-components/BackgroundImage";
 import { Colors, TextStyles } from "@assets/styles";
 import { StyleSheetUtils } from "@utils";
 
-const HALS_LOGO = require("@assets/images/HBG.png");
+const LOGO = require("@assets/images/logo.png");
 
 const styles = StyleSheet.create({
   slide: {
@@ -64,14 +64,14 @@ const FirstInstructionSlide = ({ style, content, backgroundImageSource }) => (
     <View style={[styles.mainContainer, style]}>
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>{LangService.strings.GUIDE}</Text>
-        <Text style={styles.headerText}>{LangService.strings.HELSINGBORG}</Text>
+        <Text style={styles.headerText}>{LangService.strings.CITY_NAME}</Text>
       </View>
       <View style={styles.contentContainer}>
         <Text style={styles.contentText}>{content}</Text>
       </View>
 
       <View style={styles.logoContainer}>
-        <Image resizeMethod="scale" resizeMode="center" source={HALS_LOGO} />
+        <Image resizeMethod="scale" resizeMode="center" source={LOGO} />
       </View>
     </View>
     <BackgroundImage source={backgroundImageSource} />

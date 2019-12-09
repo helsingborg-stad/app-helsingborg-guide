@@ -19,14 +19,12 @@ import Colors from "@assets/styles/Colors";
 import fetchService from "@services/FetchService";
 import { AnalyticsUtils } from "@utils";
 import TextStyles from "@assets/styles/TextStyles";
+import { sharingFadeUrl, sharingIconUrl } from "@data/urls";
 
 const fontSize = 40;
 const lineDistance = 5;
 const margin = 40;
 const iconScale = 0.5;
-
-const fadeUrl = "https://api.helsingborg.se/assets/guide/images/share_fade.png";
-const iconUrl = "https://api.helsingborg.se/assets/guide/images/share_icon.png";
 
 let origin;
 let isCreatingImage = false;
@@ -111,8 +109,8 @@ async function shareAndroid(title, message, url, width, height, subject) {
 
   // First we need to download the main image.
   const mainRes = await fetchService.fetch(url);
-  const fadeRes = await fetchService.fetch(fadeUrl); //TODO: Check if cached instead of re-downloading every time.
-  const iconRes = await fetchService.fetch(iconUrl); //TODO: Check if cached instead of re-downloading every time.
+  const fadeRes = await fetchService.fetch(sharingFadeUrl); //TODO: Check if cached instead of re-downloading every time.
+  const iconRes = await fetchService.fetch(sharingIconUrl); //TODO: Check if cached instead of re-downloading every time.
   // Setting up the paths of the local files.
   const localFadeUrl = getPlatformURI(fadeRes.path());
   const localIconUrl = getPlatformURI(iconRes.path());
@@ -142,10 +140,10 @@ async function shareAndroid(title, message, url, width, height, subject) {
 
       await RNFetchBlob.fs.cp(
         outputImage,
-        `${RNFetchBlob.fs.dirs.DownloadDir}/guideHBG.jpg`
+        `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
       );
       const finalPath = getPlatformURI(
-        `${RNFetchBlob.fs.dirs.DownloadDir}/guideHBG.jpg`
+        `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
       );
       // Only attempt to share the file if we successfully managed to move it.
       const exist = await RNFetchBlob.fs.exists(finalPath);
@@ -166,14 +164,14 @@ async function shareIOs(title, message, url, width, height, subject) {
   const mainRes = await fetchService.fetch(url);
   if (mainRes) {
     // Once we have all parts of the overlay, we need to get the size of the files.
-    Image.getSize(fadeUrl, async (fadeWidth, fadeHeight) => {
-      Image.getSize(iconUrl, async (iconWidth, iconHeight) => {
+    Image.getSize(sharingFadeUrl, async (fadeWidth, fadeHeight) => {
+      Image.getSize(sharingIconUrl, async (iconWidth, iconHeight) => {
         // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
         const outputImage = await watermark({
           title,
           source: { url, width, height },
-          fade: { url: fadeUrl, width: fadeWidth, height: fadeHeight },
-          icon: { url: iconUrl, width: iconWidth, height: iconHeight }
+          fade: { url: sharingFadeUrl, width: fadeWidth, height: fadeHeight },
+          icon: { url: sharingIconUrl, width: iconWidth, height: iconHeight }
         });
 
         iosShare.message = message;

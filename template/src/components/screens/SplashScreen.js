@@ -15,7 +15,7 @@ import ColoredBar from "@shared-components/ColoredBar";
 import BackgroundImage from "@shared-components/BackgroundImage";
 import { Colors } from "@assets/styles";
 
-const HALS_LOGO = require("@assets/images/HBG.png");
+const LOGO = require("@assets/images/logo.png");
 const IMAGE = require("@assets/images/SplashscreenFinal.png");
 
 const FULL_HEIGHT = Dimensions.get("window").height;
@@ -154,7 +154,7 @@ export default class SplashScreen extends Component<Props, State> {
               <Image
                 resizeMethod="scale"
                 resizeMode="center"
-                source={HALS_LOGO}
+                source={LOGO}
               />
             </View>
           </View>

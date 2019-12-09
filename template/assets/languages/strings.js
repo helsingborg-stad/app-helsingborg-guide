@@ -7,7 +7,7 @@
 export default {
   sv: {
     ABOUT: "Om",
-    ABOUT_GUIDE_HELS: "Om Guide Helsingborg",
+    ABOUT_GUIDE_APP: "Om Guide Helsingborg",
     ACCESS_TO_LOCATION: "Tillåt åtkomst till plats",
     APP_NAME: "Guide Helsingborg",
     AR: "Vägvisare",
@@ -117,7 +117,7 @@ export default {
   },
   en: {
     ABOUT: "About",
-    ABOUT_GUIDE_HELS: "About Helsingborg Guide",
+    ABOUT_GUIDE_APP: "About Helsingborg Guide",
     ACCESS_TO_LOCATION: "Allow access to location",
     APP_NAME: "Guide Helsingborg",
     AR: "Guide",
@@ -225,7 +225,7 @@ export default {
   },
   de: {
     ABOUT: "Über",
-    ABOUT_GUIDE_HELS: "Über Guide Helsingborg",
+    ABOUT_GUIDE_APP: "Über Guide Helsingborg",
     ACCESS_TO_LOCATION: "Zugriff auf Location erlauben",
     APP_NAME: "Guide Helsingborg",
     AR: "Wegweiser",

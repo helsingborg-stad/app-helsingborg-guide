@@ -22,7 +22,7 @@ import {
 } from "@actions/uiStateActions";
 
 const defaultMargin = 20;
-const helsingborgIcon = require("@assets/images/HBG.png");
+const LOGO = require("@assets/images/logo.png");
 
 const styles = StyleSheet.create({
   container: {
@@ -286,7 +286,7 @@ class SettingsScreen extends Component<Props, State> {
         <View style={styles.contactUsContainer}>
           <TouchableWithoutFeedback onPress={this.updateDeveloperMode}>
             <Image
-              source={helsingborgIcon}
+              source={LOGO}
               style={this.props.developerMode ? styles.debugIcon : styles.icon}
             />
           </TouchableWithoutFeedback>
