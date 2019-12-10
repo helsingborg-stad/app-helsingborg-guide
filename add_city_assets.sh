@@ -28,12 +28,28 @@ ROOT_DIRECTORY=$PWD
 APP_NAME=$1
 
 TEMPLATE_DIRECTORY=$ROOT_DIRECTORY/template
-ASSETS_DIRECTORY=$ROOT_DIRECTORY/assets/$APP_NAME
+
 DATA_DIRECTORY=$ROOT_DIRECTORY/data/$APP_NAME
 
-mkdir -p $ASSETS_DIRECTORY
+ASSETS_DIRECTORY=$ROOT_DIRECTORY/assets/$APP_NAME
+ASSETS_DIRECTORY_IOS=$ASSETS_DIRECTORY/ios
+ASSETS_DIRECTORY_ANDROID=$ASSETS_DIRECTORY/android
+
 mkdir -p $DATA_DIRECTORY
+
+mkdir -p $ASSETS_DIRECTORY
+mkdir -p $ASSETS_DIRECTORY_IOS
+mkdir -p $ASSETS_DIRECTORY_ANDROID
 
 # Copy files from the template that will be used later to override
 rsync -ahP --update --inplace $TEMPLATE_DIRECTORY/assets $ASSETS_DIRECTORY/
 rsync -ahP --update --inplace $TEMPLATE_DIRECTORY/data $DATA_DIRECTORY/
+
+# Copy iOS icons and launch screens
+rsync -ahP --update --inplace $TEMPLATE_DIRECTORY/ios/GuideApp/Images.xcassets $ASSETS_DIRECTORY_IOS
+rsync -ahP --update --inplace $TEMPLATE_DIRECTORY/ios/GuideApp/Base.lproj $ASSETS_DIRECTORY_IOS
+
+# Copy android icons
+rsync -ahP --update --inplace $TEMPLATE_DIRECTORY/android/app/src/main/res/drawable-* $ASSETS_DIRECTORY_ANDROID
+rsync -ahP --update --inplace $TEMPLATE_DIRECTORY/android/app/src/main/res/mipmap-* $ASSETS_DIRECTORY_ANDROID
+
