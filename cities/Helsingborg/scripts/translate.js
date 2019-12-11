@@ -3,7 +3,7 @@ const fs = require('fs');
 if (process.argv.length < 3) {
   // 0: process, 1: input, 2: output
   return console.error(
-    'Please pass a .tsv translations file and an output file e.g.:\nnpm run translate GuideHelsingborgTranslations.tsv ./src/languages/strings.js',
+    'Please pass a .tsv translations file and an output file e.g.:\n\tnpm run translate GuideTranslations.tsv ./assets/languages/strings.js',
   );
 }
 
@@ -39,11 +39,12 @@ const printObject = (object, strings, depth = 0) => {
   });
 };
 
-const printHeader = () =>
+const printHeader = () => [
   '/**\n',
   ' * Created at ', new Date().toString(), '\n',
   ' */\n',
   '\n',
+  '/* eslint-disable max-len */ \n'
 ].join('');
 
 const printContent = output => {
