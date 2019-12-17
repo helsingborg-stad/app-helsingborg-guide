@@ -1,9 +1,12 @@
-jest.mock("../src/utils/AnalyticsUtils", () => ({ default: jest.fn() }));
-jest.mock("../src/utils/DownloadMediaUtils");
-jest.mock("../src/services/langService");
-jest.mock("../src/services/SharingService");
+import mockAsyncStorage from "@react-native-community/async-storage/jest/async-storage-mock";
+
+jest.mock("@utils/AnalyticsUtils", () => ({ default: jest.fn() }));
+jest.mock("@utils/DownloadMediaUtils");
+jest.mock("@services/langService");
+jest.mock("@services/SharingService");
 jest.mock("react-native-remote-svg", () => "SVGImg");
-jest.mock("../src/components/shared/AudioPlayerView");
+jest.mock("@shared-components/AudioPlayerView");
+jest.mock("@react-native-community/async-storage", () => mockAsyncStorage);
 
 // enable mock when needed
 // jest.mock("Dimensions");
