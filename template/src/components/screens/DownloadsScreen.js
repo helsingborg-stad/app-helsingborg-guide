@@ -10,10 +10,7 @@ import {
   pauseDownloadGuide,
   resumeDownloadGuide
 } from "@actions/downloadGuidesActions";
-import {
-  selectCurrentGuide,
-  showBottomBar
-} from "@actions/uiStateActions";
+import { selectCurrentGuide, showBottomBar } from "@actions/uiStateActions";
 import { AnalyticsUtils } from "@utils";
 
 const styles = StyleSheet.create({

@@ -102,7 +102,11 @@ const DownloadItemView2 = ({
       </View>
     );
   } else if (isCompleted) {
-    const textStyle = { fontSize: 16, color: Colors.green, paddingHorizontal: 10 };
+    const textStyle = {
+      fontSize: 16,
+      color: Colors.green,
+      paddingHorizontal: 10
+    };
     item = (
       <View style={styles.container}>
         <Icon name="check" size={16} color={Colors.green} />

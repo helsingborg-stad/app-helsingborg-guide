@@ -50,7 +50,11 @@ export default class ContentThumbnail extends Component<Props> {
   displayImage() {
     const checkMarkIcon = (
       <View style={styles.checkedContainer}>
-        <Icon name="ios-checkmark-circle-outline" size={20} color={Colors.white}/>
+        <Icon
+          name="ios-checkmark-circle-outline"
+          size={20}
+          color={Colors.white}
+        />
       </View>
     );
     const checkMark = this.props.checked ? checkMarkIcon : null;

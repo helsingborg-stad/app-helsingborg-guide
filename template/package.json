@@ -5,7 +5,7 @@
   "scripts": {
     "prepare": "patch-package",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "eslint": "eslint flow-typed index.js src --report-unused-disable-directives",
+    "eslint": "eslint flow-typed/guideapp.js index.js src --report-unused-disable-directives --fix",
     "test": "jest",
     "flow": "flow --show-all-errors",
     "clean": "react-native-clean-project",

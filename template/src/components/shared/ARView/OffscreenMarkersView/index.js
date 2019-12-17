@@ -6,7 +6,10 @@ import { MapItemUtils, MathUtils } from "@utils";
 import styles from "./styles";
 import OffscreenMarker, { type OffscreenMarkerProps } from "./OffscreenMarker";
 import { SegmentControlHeight } from "@shared-components/SegmentControl/styles";
-import { ListHeight, ListBottomMargin } from "@shared-components/MarkerListView/styles";
+import {
+  ListHeight,
+  ListBottomMargin
+} from "@shared-components/MarkerListView/styles";
 
 const IMAGE_OFFSET = 60;
 const HALF_IMAGE_OFFSET = IMAGE_OFFSET * 0.5;
