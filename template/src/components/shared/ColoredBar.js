@@ -5,14 +5,6 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { Colors } from "@assets/styles";
 
-const COLORS = [
-  Colors.themeControl,
-  Colors.themeExtra1,
-  Colors.themeTertiary,
-  Colors.themeSecondary,
-  Colors.themePrimary
-];
-
 const styles = StyleSheet.create({
   barsContainer: {
     flex: 1,
@@ -30,7 +22,7 @@ type Props = {
 export default class ColoredBar extends Component<Props> {
   constructor(props: Props) {
     super(props);
-    this.state = { colors: COLORS };
+    this.state = { colors: Colors.coloredBar };
   }
 
   displayBars() {
