@@ -1,0 +1,275 @@
+{
+  "childFriendly": false,
+  "contentObjects": [
+    {
+      "id": "5aec12a9bb898",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-300x169.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/portrait_kristina_foto_uno_yang_guowei-150x150.jpg"
+        }
+      ],
+      "order": 0,
+      "postStatus": "publish",
+      "searchableId": "100",
+      "title": "Introduktion Kristina Möster Nilsson",
+      "description": "Hör utställningens curator Kristina Möster Nilsson introducera Dunkers kulturhus utställning The Climate Experiment av Birgert och Bergström.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:50.000Z",
+        "description": "\"bob-intro\". Släppt: 2018. Spår 1.",
+        "id": 200479,
+        "modified": "2018-05-04T07:58:29.000Z",
+        "title": "bob-intro",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/bob-intro.mp3"
+      }
+    },
+    {
+      "id": "5aec063ba8db9",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-1024x576.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-300x169.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_8_16_9-150x150.jpg"
+        }
+      ],
+      "order": 1,
+      "postStatus": "publish",
+      "searchableId": "101",
+      "title": "Incubator for Earthquake",
+      "description": "Incubator for Earthquake är ett bord dukat för sex personer. En uppblåst plastkupol med hängande plasthandskar omsluter dukningen. Vid det här bordet kan ingen äta en rofylld middag, då och då skakas det av en simulerad jordbävning.\nIncubator for Earthquake är ett exempel på hur Bigert & Bergström skapar rum där människor kan få känslan av att kunna tämja naturen och mildra naturkatastrofer. Här får handskarna och önskan om att kunna stoppa skakningarna med händerna symbolisera det. Men det hotfulla är alltid närvarande. Känslan av hot triggar frågan: Vem är starkast, naturen eller människan?\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:33.000Z",
+        "description": "\"bob-1\". Släppt: 2018. Spår 1.",
+        "id": 200471,
+        "modified": "2018-05-04T07:05:18.000Z",
+        "title": "Incubator for Earthquake",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/bob-1.mp3"
+      }
+    },
+    {
+      "id": "5aec063bbbbc6",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-1024x576.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-300x169.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12_16_9-150x150.jpg"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_10_16_9-1024x576.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_10_16_9-300x169.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_10_16_9-150x150.jpg"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_9_16_9-1024x576.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_9_16_9-300x169.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_9_16_9-150x150.jpg"
+        }
+      ],
+      "order": 2,
+      "postStatus": "publish",
+      "searchableId": "102",
+      "title": "Meteorologi, historiska händelser och konst",
+      "description": "Att klimatet inverkar på både människans och samhällets utveckling är bortom allt tvivel. Men vädrets makter har också betydelse för vardagliga situationer och enskilda historiska händelser. Allt ifrån ett möte mellan personer som får oväntade konsekvenser för deras framtid, till att få en säker start på en rymdresa eller att vinna eller förlora ett militärt slag.\nMeteorologin som vetenskap utvecklades samtidigt med militärens behov av att förutse morgondagen väder. Bra prognoser gav ett övertag på slagfältet eller i luftrummet. Militärens strategiska kartor och språk fördes över till väderkartorna och blev så småningom till ett globalt vetenskapligt språk med symboler för olika vädertyper och väderfenomen.\nI de båda verken Weather Impact Maps och The Weather – A Synoptic Battlefield skildras vädrets inverkan på olika historiska ögonblick genom ett meteorologiskt perspektiv. The Weather – A Synoptic Battlefield består av metallsymboler baserade på synoptiska väderkartor från olika platser och tidspunkter. Det är former av varm- och kallfronter, isobarer, vindpilar, moln och solar. För åskådaren är det som att promenera in i en skulpterad meteorologisk karta.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:36.000Z",
+        "description": "\"bob-2\". Släppt: 2018. Spår 1.",
+        "id": 200472,
+        "modified": "2018-05-04T07:04:36.000Z",
+        "title": "bob-2",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/bob-2.mp3"
+      }
+    },
+    {
+      "id": "5aec063bd0def",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-1024x576.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-300x169.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-storm-150x150.jpg"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-300x169.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-150x150.jpg"
+        }
+      ],
+      "order": 3,
+      "postStatus": "publish",
+      "searchableId": "103",
+      "title": "Storm Chamber, Steam Chamber, 1994",
+      "description": "Inne i Storm Chamber stiger besökaren upp på en skulptural scen. Däruppe är det som att stå i stormens öga. Vinden kan nå upp till styrkor av femton meter per sekund.\n1994 skapade Bigert & Bergström fem olika skulpturala klimatkammare. På Dunkers kulturhus visas nu två i The Climate Experiment. Inne i klimatkammaren kommer besökaren att uppleva ett extremt klimat. Projektet testar gränserna mellan erfarenhet och uthållighet. Hur är det att stanna kvar i en storm, för alltid? Vad händer när ett skulpturalt rum tillförs en funktion utöver dess formella egenskaper? Vem stannar i kvar i en miljö när en till synes behaglig situation blir ett hot?\nI Steam Chamber står besökaren i ett växthus av topografiskt formade sektioner. En rostig noshörning sprider ånga från öppna kroppsdelar. Djuret är muterat till en maskin som genererar klimatet.\nSamtidigt som ångan och vattnet är förutsättningar för liv är desamma också en dödande frätande kraft. Korrosion bryter långsamt ner noshörningen till skrot.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:38.000Z",
+        "description": "\"bob-3\". Släppt: 2018. Spår 1.",
+        "id": 200473,
+        "modified": "2018-05-04T07:04:38.000Z",
+        "title": "bob-3",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/bob-3.mp3"
+      }
+    },
+    {
+      "id": "5aec063be5bae",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-1024x592.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-300x173.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_1-150x150.jpg"
+        }
+      ],
+      "order": 4,
+      "postStatus": "publish",
+      "searchableId": "104",
+      "title": "If You Don’t Like the Weather, Change It, 2007",
+      "description": "If You Don’t Like the Weather, Change It är en film om människans ständiga försök att kontrollera vädret där Bigert & Bergström undersöker allt från forntida ritualer till moderna vetenskapliga metoder som använts för att ändra på vädret.\nFilmen visar också konstnärsduons försök att skapa ett hål i ett moln genom att bomba det med kolsyreis från ett flygplan. En metod som idag ofta används för att framkalla eller avlägsna en specifik väderlek. Det kan innebära att ta bort oönskade regnmoln inför ett stort idrottsevenemang eller tvärtom, göra regn i uttorkade områden.\nSamtidigt som Bigert & Bergström experimenterar med vädret ändrar de landskapet genom att de skapar ett immateriellt och obeständigt konstverk där himlen blir en gigantisk canvasduk och kolsyreisen färgen.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:41.000Z",
+        "description": "\"bob-4\". Släppt: 2018. Spår 1.",
+        "id": 200474,
+        "modified": "2018-05-04T07:04:41.000Z",
+        "title": "bob-4",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/bob-4.mp3"
+      }
+    },
+    {
+      "id": "5aec063c07e33",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-1024x683.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-300x200.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_3-150x150.jpg"
+        }
+      ],
+      "order": 5,
+      "postStatus": "publish",
+      "searchableId": "105",
+      "title": "Adrenaline Dream, 1993/2018",
+      "description": "Adrenaline Dream är ett växthus med kamouflagemönstrat glas. Inuti ligger en krocktestdocka på en metallsäng. Dockan är klädd i en säkerhetsdräkt av silvertyg. Dräkten skyddar mot värme och kan bäras av brandmän. Varannan minut rister dockan till, sedan ligger den still igen.\nDe häftiga rörelserna kan läsas som något slags anfall eller ett oförmodat tillstånd. Kanske är det precis som känslan av att vara i transit i det ögonblick som inträder mellan vakenhet och sömn. Det händer ibland att en människa som precis ska somna istället vaknar upp med ett ryck av sina egna skakningar.\nNär verket visades 1993 var krockdockan klädd i en paljetterdräkt som anspelade på det stora nöjesvärdet som katastrofer då hade i media. Bigert & Bergström uppmärksammar genom hela sitt konstnärskap medias beskrivning av klimatkatastrofer och extrema väderhändelser. 2018 görs verket i en omarbetad version. I silverdräkten är dockan både vårt hot och vår räddare.\nMaterial: Aluminium, screentryck på glas, kakel, vibrator, latexväggar, värmebeständig skyddsdräkt, krockdocka\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:43.000Z",
+        "description": "\"bob-5\". Släppt: 2018. Spår 1.",
+        "id": 200475,
+        "modified": "2018-05-04T07:04:43.000Z",
+        "title": "bob-5",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/bob-5.mp3"
+      }
+    },
+    {
+      "id": "5aec063c1d485",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-1024x683.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-300x200.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_4-150x150.jpg"
+        }
+      ],
+      "order": 6,
+      "postStatus": "publish",
+      "searchableId": "106",
+      "title": "Expedition, 2006",
+      "description": "I fotoskulpturen Expedition återges Bigert & Bergström forskningsresa med isbrytaren Oden 2005. Resan på fartyget från Göteborgs öppna vatten till Nordpolens packis dokumenterades genom 360° fotografi. Skulpturen har formen av en molekyl. Genom historien har konstnärer experimenterat med hur natur kan avbildas. Expedition blir ett gestaltat möte mellan konst och vetenskap.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:44.000Z",
+        "description": "\"bob-6\". Släppt: 2018. Spår 1.",
+        "id": 200476,
+        "modified": "2018-05-04T07:04:44.000Z",
+        "title": "bob-6",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/bob-6.mp3"
+      }
+    },
+    {
+      "id": "5aec063c321e5",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-1024x620.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-300x182.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_5-150x150.jpg"
+        }
+      ],
+      "order": 7,
+      "postStatus": "publish",
+      "searchableId": "107",
+      "title": "Winter Storage, 2017",
+      "description": "Winter Storage är ett objet trouvé som Bigert & Bergström hittade på Biologiska museet i Stockholm. Isbjörnen användes som stöd vid förvaringen av fyra vinterdäck. Från och med 2017 är det ett konstverk signerat Bigert & Bergström. Isbjörnen är alltid densamma, men däcken skiftas ut när det är dags för däckbyte.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:46.000Z",
+        "description": "\"bob-7\". Släppt: 2018. Spår 1.",
+        "id": 200477,
+        "modified": "2018-05-04T07:04:46.000Z",
+        "title": "bob-7",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/bob-7.mp3"
+      }
+    },
+    {
+      "id": "5aec063c51982",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-1024x683.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-300x200.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_12-150x150.jpg"
+        }
+      ],
+      "order": 8,
+      "postStatus": "publish",
+      "searchableId": "108",
+      "title": "Backstage Diorama, 2008",
+      "description": "Dioraman är en arrangerad miljö som fanns på Biologiska museet i Stockholm. Den byggdes i början av 1900-talet för att visa besökarna naturen som den ser ut i verkligheten. Fotografierna är tagna inne i dioramat, ett perspektiv som inte är tänkt att nå den vanliga besökarens blick. I bilderna har dioramats illusion fallit isär och påminner om den tid som vi står inför nu med klimatförändringar och smältande isar.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:50.000Z",
+        "description": "\"diorama\". Släppt: 2018. Spår 1.",
+        "id": 200480,
+        "modified": "2018-05-04T07:51:11.000Z",
+        "title": "Diorama",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/diorama.mp3"
+      }
+    },
+    {
+      "id": "5aec063c69463",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-1024x576.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-300x169.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate_6_16_9-150x150.jpg"
+        }
+      ],
+      "order": 9,
+      "postStatus": "publish",
+      "searchableId": "109",
+      "title": "Stationary, Established but Incomplete och The Party is Over, 2017.",
+      "description": "En grupp laboratorieställ i utställningen fokuserar på människans experimenterande för att lösa klimatproblematiken.\nLabbstället Established but Incomplete handlar om förändringar och tidsperspektiv. Jorden ändras ständigt med eller utan människans inblandning. Kommer människan i sin tur att förvandlas eller blir dagens människor bara en förångad tidsdroppe i universums historia och framtid?\nI labbstället Stationary har vädersymbolerna låsts i ett läge av ständigt regn. Regnrocken är inte bara ett skydd utan även ett redskap för att kommunicera med vädret. Termometern är omvandlad till ett provrör med en ny livsmiljö utan kontroll. Experimentet fortsätter i ett kretslopp av teser och hypoteser.\nI labbstället The Party is Over verkar experimentet ha övergivits och forskarna flytt. Söndervittrade vädertecken och skrumpna ballonger vittnar om firandet av tidigare trodda forskningsframsteg.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2018-05-04T07:04:47.000Z",
+        "description": "\"bob-8\". Släppt: 2018. Spår 1.",
+        "id": 200478,
+        "modified": "2018-05-04T07:52:47.000Z",
+        "title": "bob-8",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/bob-8.mp3"
+      }
+    }
+  ],
+  "description": "I mer än trettio år har konstnärsduon Bigert &amp; Bergström intresserat sig för hur människan med vetenskapen och teknikens hjälp försökt kontrollera väder och skapa artificiella klimat. Vädret påverkar oss ständigt, både fysiskt och psykiskt, och historien hade sett väldigt annorlunda ut utan dess nyckfullhet.\r\n\r\nThe Climate Experiment visar konstverk som alla har väder och klimat som gemensamt tema. Utställningens titel är dubbeltydig. Klimatexperimentet kan läsas som en hypotes där Bigert &amp; Bergström jämför de av människan skapade klimatförändringar med ett gigantiskt experiment, en storskalig laboration där vi inte känner till slutet. Men titeln syftar även på konstnärernas egna experiment med klimat och väder där de olika elementen använts både som konstnärligt medium och inspirationskälla.\r\n\r\nKonstnärsduon Bigert & Bergström består av Mats Bigert och Lars Bergström. De har arbetat tillsammans sedan de träffades på konsthögskolan 1986.\r\n\r\nTack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag",
+  "guideGroupId": 221,
+  "guideType": "guide",
+  "id": 200468,
+  "images": {
+    "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-1024x576.jpg",
+    "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-300x169.jpg",
+    "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2018/05/climate-steam-150x150.jpg"
+  },
+  "name": "The Climate Experiment",
+  "postStatus": "publish",
+  "slug": "the-climate-experiment-5-5-21-10-18",
+  "tagline": null,
+  "dateStart": "2018-05-05T00:00:00.000Z",
+  "dateEnd": "2018-10-21T00:00:00.000Z"
+}

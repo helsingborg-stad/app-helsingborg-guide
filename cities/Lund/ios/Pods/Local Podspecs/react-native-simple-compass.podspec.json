@@ -1,0 +1,23 @@
+{
+  "name": "react-native-simple-compass",
+  "version": "1.0.0",
+  "summary": "Some summary",
+  "description": "This is a great description",
+  "homepage": "https://github.com/vnil/react-native-simple-compass",
+  "license": "MIT",
+  "authors": {
+    "Some guy": "some.guy@internett.com"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source": {
+    "git": "https://github.com/vnil/react-native-simple-compass"
+  },
+  "source_files": "ios/**/*.{h,m}",
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}

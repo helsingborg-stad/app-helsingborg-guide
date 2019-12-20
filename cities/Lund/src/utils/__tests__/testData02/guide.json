@@ -1,0 +1,343 @@
+{
+  "childFriendly": false,
+  "contentObjects": [
+    {
+      "id": "59b28763cd49d",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-skize-2.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-skize-2-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-skize-2-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-dsc00081.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-dsc00081-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-dsc00081-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Jimmy.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Jimmy-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Jimmy-150x150.png"
+        }
+      ],
+      "order": 0,
+      "postStatus": "publish",
+      "searchableId": "001",
+      "title": "Jimmy Skize - Color Invasion",
+      "description": "Jimmy Skize skapade det första verket i #ArtStreetHbg. Hans uppdrag var att förkroppsliga ambitionen med hela projektet i ett enda verk på Bussterminalen, Helsingborg C.\n”Color Invasion” berättar i bild om hur robotar tar över Helsingborg med hjälp av färg. Något som kan liknas vid #ArtStreetHbg:s ambition med projektet – att sätta färg på det offentliga rummet.\nJimmy Skize är en av Sveriges bästa graffittiartister och har ett öga för detaljer som få andra. Han lägger mycket tid och detaljer på att skapa lager av färg som tillsammans blir en imponerande bild.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2017-09-29T13:17:25.000Z",
+        "description": "Berättelse om Jimmy Skizes konstverk \"Color Invasion\"",
+        "id": 51883,
+        "modified": "2017-09-29T13:17:42.000Z",
+        "title": "Jimmy Skize",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Jimmy-Skize.mp3"
+      },
+      "video": {
+        "contentType": "video",
+        "created": "2017-09-25T07:29:19.000Z",
+        "description": "Intervju med Jimmy Skize i #artstreethbg. Konstnären bakom \"Color invasion\" på knutpunktens bussterminal.",
+        "id": 50939,
+        "modified": "2017-09-25T07:31:27.000Z",
+        "title": "Jimmy Skize",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Intervju-Jimmy-Skize_1.mp4"
+      },
+      "links": [
+        {
+          "title": "Jimmy Skize webbplats",
+          "url": "http://www.skize.se/"
+        },
+        {
+          "title": "Jimmy Skize Instagram",
+          "url": "https://www.instagram.com/skize_cas/"
+        }
+      ],
+      "beacon": {
+        "distance": 15,
+        "id": "346738505575",
+        "nid": "f7826da6bc5b71e0893e"
+      },
+      "location": {
+        "id": 47810,
+        "latitude": 56.04353,
+        "links": null,
+        "longitude": 12.69381,
+        "streetAddress": "Terminalgatan 3"
+      }
+    },
+    {
+      "id": "59b28763e7916",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Ilse_2.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Ilse_2-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Ilse_2-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Ilse.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Ilse-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Ilse-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Ilse-1024x1024.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Ilse-300x300.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Ilse-150x150.jpg"
+        }
+      ],
+      "order": 1,
+      "postStatus": "publish",
+      "searchableId": "002",
+      "title": "Ilse Weisfelt - Mr. Fisherman",
+      "description": "Titta upp! Mr. Fisherman kräver att du höjer blicken och tittar högt upp på taknocken på Södergatan. Verket skapades av den holländska grafikern och konstnären Ilse Weisfelt. Med hjälp av Kulturmagasinet har hon skapat en bild som knyter an till Helsingborgs stads historia som fiskeläge.\nMr. Fisherman sitter på en utmanande plats både för konstnären och besökaren. Från början trodde Ilse att väggen var av betong som hon kunde måla med vanlig färg på – men det visade sig vara grusad plywood. Så hon fick använda sig av sprayfärg istället. Inga problem för Ilse!\nIlse har varit verksam som grafiker och illustratör i flera år och har producerat material för flera kunder. Det var hennes pojkvän som fick henne intresserad av muralmålningar, något som hon nu behärskar till fullo.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2017-09-29T13:19:59.000Z",
+        "description": "Berättelse om Iles Weisfelts konstverk Mr. Fisherman",
+        "id": 51887,
+        "modified": "2017-09-29T13:20:22.000Z",
+        "title": "Ilse Weisfelt",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Ilse-Weisfelt.mp3"
+      },
+      "video": {
+        "contentType": "video",
+        "created": "2017-09-25T07:35:22.000Z",
+        "description": "Intervju med Ilse Weisfelt i #artstreethbg. Konstnären bakom Mr. Fisherman på Södergatan.",
+        "id": 50942,
+        "modified": "2017-09-25T07:35:43.000Z",
+        "title": "Intervju - Ilse Weisfelt",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Intervju-Ilse-Weisfelt.mp4"
+      },
+      "links": [
+        {
+          "title": "Ilse Weisfelts Instagram",
+          "url": "https://www.instagram.com/ilseweisfelt/"
+        },
+        {
+          "title": "Ilse Weisfelts webbplats",
+          "url": "http://www.ilseweisfelt.com/"
+        }
+      ],
+      "beacon": {
+        "distance": 40,
+        "id": "6f6b567a6a76",
+        "nid": "f7826da6bc5b71e0893e"
+      },
+      "location": {
+        "id": 47812,
+        "latitude": 56.042545,
+        "links": null,
+        "longitude": 12.700915,
+        "streetAddress": "Södergatan 10"
+      }
+    },
+    {
+      "id": "59b2876408db5",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-_MG_0398.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-_MG_0398-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-_MG_0398-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-_MG_0830.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-_MG_0830-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-_MG_0830-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/SpiderTag-1024x1024.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/SpiderTag-300x300.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/SpiderTag-150x150.jpg"
+        }
+      ],
+      "order": 2,
+      "postStatus": "publish",
+      "searchableId": "003",
+      "title": "SpiderTag - Untitled 26",
+      "description": "Verket av SpiderTag är hans största hitintills med ljuskablar. Vi är stolta över att det är just i Helsingborg som han valt att lägga mycket energi och tid!\nSpiderTag, multikonstnär från Argentina, har provat flera olika konstformer innan han fastnade för ljuskablar. Han började egentligen med garn och blev på den vägen intresserade av hur garn och färg kan bilda nya mönster och former – för att slutligen kombinera det med ljus.\nLjuskablarna är så kallade optiska fiber! Optiska fiber är betydligt böjligare och följsammare än till exempel LED-lister. Det gör att man kan jobba med dem ungefär som garn.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2017-09-29T13:21:44.000Z",
+        "description": "Berättelse om konstverket av SpiderTag",
+        "id": 51890,
+        "modified": "2017-09-29T13:21:53.000Z",
+        "title": "SpiderTag",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/SpiderTag.mp3"
+      },
+      "video": {
+        "contentType": "video",
+        "created": "2017-09-25T07:36:24.000Z",
+        "description": "Intervju med konstnären \"SpiderTag\". Konstnären bakom ljuskonstverket på Södergatan vid spelhallen.",
+        "id": 50944,
+        "modified": "2017-09-25T07:36:46.000Z",
+        "title": "Intervju - SpiderTag",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Intervju-SpiderTag.mp4"
+      },
+      "links": [
+        {
+          "title": "SpiderTags Instagram",
+          "url": "https://www.instagram.com/spidertag/"
+        },
+        {
+          "title": "SpiderTags Facebook-sida",
+          "url": "https://www.facebook.com/spidertag/"
+        }
+      ],
+      "beacon": {
+        "distance": 40,
+        "id": "4a5a50717673",
+        "nid": "f7826da6bc5b71e0893e"
+      },
+      "location": {
+        "id": 47814,
+        "latitude": 56.040165,
+        "links": null,
+        "longitude": 12.702522,
+        "streetAddress": "Södergatan 19"
+      }
+    },
+    {
+      "id": "59b287642393b",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Tims-kameleont.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Tims-kameleont-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Tims-kameleont-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Tim.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Tim-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Tim-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Tim-1024x1024.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Tim-300x300.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Tim-150x150.jpg"
+        }
+      ],
+      "order": 3,
+      "postStatus": "publish",
+      "searchableId": "004",
+      "title": "Tim Timmey - Be Unique",
+      "description": "På Smedjegatan finns numera en ordentlig färgklick. Här har den lokala målaren Tim Timmey skapat ”Be Unique” med mycket färg, djur och intressanta mönster!\nTim Timmey är känd för att använda sig av djur i sina sprayfärgsmålningar och om du tittar nog och länge kan du också hitta flera olika djur i verket. När #Artstreethbg var över fick de två lokala målarna Tim Timmey och Jimmy Skize sätta varsin prägel på varandras konstverk.\nFör #ArtStreetHbg var det viktigt att låta de lokala målarna ta plats. Därför fick de båda stora ytor att jobba med. Just Smedjegatan var dessutom extra viktig att piffa upp – det är en hårt trafikerad gata där många rör sig antingen på vägen till eller från jobbet eller hem från Filmstaden på kvällen.\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2017-09-29T13:29:10.000Z",
+        "description": "Berättelse om Tim Timmeys konstverk Be Unique",
+        "id": 51893,
+        "modified": "2017-09-29T13:29:34.000Z",
+        "title": "Tim Timmey",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Tim-Timmey.mp3"
+      },
+      "video": {
+        "contentType": "video",
+        "created": "2017-09-25T07:37:26.000Z",
+        "description": "Intervju med konstnären Tim Timmey i #artstreethbg. Konstnären bakom \"Be Unique\" på Smedjegatan.",
+        "id": 50946,
+        "modified": "2017-09-25T07:40:07.000Z",
+        "title": "Intervju - Tim Timmey",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Intervju-Tim-Timmey.mp4"
+      },
+      "links": [
+        {
+          "title": "Tim Timmeys Instagram",
+          "url": "https://www.instagram.com/timtimmey/"
+        },
+        {
+          "title": "Tim Timmeys webbplats",
+          "url": "http://www.timnedrup.com/"
+        }
+      ],
+      "beacon": {
+        "distance": 40,
+        "id": "364c4c634555",
+        "nid": "f7826da6bc5b71e0893e"
+      },
+      "location": {
+        "id": 47816,
+        "latitude": 56.04054,
+        "links": null,
+        "longitude": 12.703638,
+        "streetAddress": "Smedjegatan 5"
+      }
+    },
+    {
+      "id": "59b2876437d2c",
+      "images": [
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Levi-Jacobs-2.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Levi-Jacobs-2-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Levi-Jacobs-2-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Levi-Jacobs-12.png",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Levi-Jacobs-12-300x300.png",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Levi-Jacobs-12-150x150.png"
+        },
+        {
+          "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Levi-1024x1024.jpg",
+          "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Levi-300x300.jpg",
+          "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Levi-150x150.jpg"
+        }
+      ],
+      "order": 4,
+      "postStatus": "publish",
+      "searchableId": "005",
+      "title": "Levi Jacobs - The Söder Wall",
+      "description": "Det största verket som gjordes under #ArtStreetHbg finns i Furutorpsparken. The Söder Wall gjordes av den holländska grafikerna Levi Jacobs och det är faktiskt hans första stora muralmålning! Levi började sin bana som ren grafittikonstnär men har på senare tid också arbetat kommersiellt som grafiker.\nFör att verket skulle bli så bra som möjligt fick han göra flera förslag som visades för boende och förbipasserande vid Furutorpsparken. Det första förslaget refuserades och Levi fick återvända till skissbordet. Men andra gången gillt! Det ni ser framför er är enbart det andra förslaget Levi gjorde!\n",
+      "audio": {
+        "contentType": "audio",
+        "created": "2017-09-29T13:30:48.000Z",
+        "description": "Berättelse om Levi Jacobs konstverk The Söder Wall",
+        "id": 51895,
+        "modified": "2017-09-29T13:31:09.000Z",
+        "title": "Levi Jacobs",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Levi-Jacobs.mp3"
+      },
+      "video": {
+        "contentType": "video",
+        "created": "2017-09-25T07:40:42.000Z",
+        "description": "Intervju med konstnären Levi Jacobs i #artstreethbg. Konstnären bakom \"The Söder Wall\" på studenthemmet vid Furutorpsparken.",
+        "id": 50948,
+        "modified": "2017-09-25T07:41:24.000Z",
+        "title": "Intervju - Levi Jacobs",
+        "url": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/Intervju-Levi-Jacobs.mp4"
+      },
+      "links": [
+        {
+          "title": "Levi Jacobs Instagram",
+          "url": "https://www.instagram.com/levijacobss/"
+        },
+        {
+          "title": "Levi Jacobs webbplats",
+          "url": "http://www.levijacobs.nl/"
+        }
+      ],
+      "beacon": {
+        "distance": 50,
+        "id": "6a71736b6552",
+        "nid": "f7826da6bc5b71e0893e"
+      },
+      "location": {
+        "id": 47818,
+        "latitude": 56.03668,
+        "links": null,
+        "longitude": 12.70785,
+        "streetAddress": "Bryggaregatan 34"
+      }
+    }
+  ],
+  "description": "#artstreethbg är en årligen återkommande streetart-festival sedan 2017. Hitintills har fem internationella gatukonstnärer fått sätta egna präglar på väggar från Knutpunkten i norr (Helsingborg C) till studentehemmet på Bryggaregatan intill Furutorpsparken i söder. Gå en guidad tur bland gatukonsten och lyssna på intervjuer med respektive konstnär. Missa inte de målade elskåpen längs vägen!",
+  "guideGroupId": 638,
+  "guideType": "trail",
+  "id": 47613,
+  "images": {
+    "large": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Levi-Jacobs-2.png",
+    "medium": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Levi-Jacobs-2-300x300.png",
+    "thumbnail": "https://api.helsingborg.se/wp-content/uploads/sites/2/2017/09/1000x1000-Levi-Jacobs-2-150x150.png"
+  },
+  "name": "#artstreethbg",
+  "postStatus": "publish",
+  "slug": "artstreethbg",
+  "tagline": null
+}
