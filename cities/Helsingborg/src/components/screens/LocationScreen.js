@@ -6,10 +6,7 @@ import { View } from "react-native";
 import LocationView from "@shared-components/LocationView";
 import { AnalyticsUtils } from "@utils";
 import { HeaderStyles } from "@assets/styles";
-import {
-  selectCurrentGuide,
-  showBottomBar
-} from "@actions/uiStateActions";
+import { selectCurrentGuide, showBottomBar } from "@actions/uiStateActions";
 
 type Props = {
   currentGuideGroup: GuideGroup,

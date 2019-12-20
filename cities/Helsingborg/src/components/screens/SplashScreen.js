@@ -151,11 +151,7 @@ export default class SplashScreen extends Component<Props, State> {
               <Text style={styles.headerText}>Helsingborg</Text>
             </View>
             <View style={styles.logoContainer}>
-              <Image
-                resizeMethod="scale"
-                resizeMode="center"
-                source={LOGO}
-              />
+              <Image resizeMethod="scale" resizeMode="center" source={LOGO} />
             </View>
           </View>
         </View>

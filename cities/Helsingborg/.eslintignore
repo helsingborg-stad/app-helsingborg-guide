@@ -1,0 +1,4 @@
+src/services/beaconService.js
+src/services/beaconServiceiOS.js
+**/__mocks__
+**/__tests__

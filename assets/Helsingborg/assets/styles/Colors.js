@@ -40,6 +40,15 @@ const colors = {
   slightlyTransparentWhite: "#fffffff0",
   transparent: "#00000000",
   shadow: "#0000003b",
+
+  //LOADING BAR
+  coloredBar: [
+    "#D35098",
+    "#712082",
+    "#A84C98",
+    "#7B075E",
+    "#a61380"
+  ]
 };
 
 export default {

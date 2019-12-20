@@ -6,7 +6,10 @@ import LangService from "@services/langService";
 import styles from "./styles";
 import { SegmentControlHeight } from "@shared-components/SegmentControl/styles";
 import { AnalyticsUtils } from "@utils";
-import { ListHeight, ListBottomMargin } from "@shared-components/MarkerListView/styles";
+import {
+  ListHeight,
+  ListBottomMargin
+} from "@shared-components/MarkerListView/styles";
 
 type Props = {
   angleDelta: number,

@@ -2,7 +2,7 @@
  * Created at Wed Dec 11 2019 10:20:54 GMT+0100 (Central European Standard Time)
  */
 
-/* eslint-disable max-len */ 
+/* eslint-disable max-len */
 export default {
   sv: {
     ABOUT: "Om",

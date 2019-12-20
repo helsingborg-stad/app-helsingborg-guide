@@ -140,10 +140,10 @@ async function shareAndroid(title, message, url, width, height, subject) {
 
       await RNFetchBlob.fs.cp(
         outputImage,
-        `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
+        `${RNFetchBlob.fs.dirs.DownloadDir}/Helsingborg.jpg`
       );
       const finalPath = getPlatformURI(
-        `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
+        `${RNFetchBlob.fs.dirs.DownloadDir}/Helsingborg.jpg`
       );
       // Only attempt to share the file if we successfully managed to move it.
       const exist = await RNFetchBlob.fs.exists(finalPath);

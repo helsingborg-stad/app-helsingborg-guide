@@ -5,10 +5,7 @@ import ViewContainer from "@shared-components/view_container";
 import VideoPlayer from "@shared-components/VideoPlayer";
 import Colors from "@assets/styles/Colors";
 
-import {
-  isFileInCache,
-  getFilePathInCache
-} from "@utils/DownloadMediaUtils";
+import { isFileInCache, getFilePathInCache } from "@utils/DownloadMediaUtils";
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: Colors.black },

@@ -42,7 +42,11 @@ export default StyleSheet.create({
     top: 0,
     left: 0
   },
-  playBtn: { width: BTN_DIM, height: BTN_DIM, backgroundColor: Colors.themeControl },
+  playBtn: {
+    width: BTN_DIM,
+    height: BTN_DIM,
+    backgroundColor: Colors.themeControl
+  },
   control: { flex: 1, alignItems: "center" },
   avatarContainer: {
     flex: 1,

@@ -4,7 +4,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { Colors } from "@assets/styles"
+import { Colors } from "@assets/styles";
 
 // const FULL_HEIGHT = Dimensions.get("window").height;
 // const FULL_WIDTH = Dimensions.get("window").width;

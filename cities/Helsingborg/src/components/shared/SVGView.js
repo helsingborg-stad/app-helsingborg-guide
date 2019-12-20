@@ -6,7 +6,7 @@ import SVGImg from "react-native-remote-svg";
 
 type Props = {
   logoType: ?string,
-  placeholderImage: ?number,
+  placeholderImage: ?string,
   customStyle: any
 };
 

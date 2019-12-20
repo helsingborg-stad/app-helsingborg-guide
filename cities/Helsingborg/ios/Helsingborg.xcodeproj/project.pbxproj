@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* HelsingborgTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HelsingborgTests.m */; };
 		0763B2C48EF214737332AE52 /* libPods-Helsingborg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB369FC560C44D04DB11168C /* libPods-Helsingborg.a */; };

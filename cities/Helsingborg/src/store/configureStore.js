@@ -10,7 +10,7 @@ import navigationMiddleware from "@src/middleware/navigationMiddleware";
 import patchContentMiddleware from "@src/middleware/patchContentMiddleware";
 
 const config = {
-  key: "GuideAppRoot",
+  key: "HelsingborgRoot",
   storage: AsyncStorage,
   blacklist: ["error", "menu", "internet", "audio", "uiState"],
   version: 1,
