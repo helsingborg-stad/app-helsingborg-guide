@@ -69,7 +69,7 @@ exports[`Guide with tagline 1`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -90,7 +90,7 @@ exports[`Guide with tagline 1`] = `
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -105,7 +105,7 @@ exports[`Guide with tagline 1`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -133,7 +133,7 @@ exports[`Guide with tagline 1`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -216,7 +216,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -233,7 +233,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -285,7 +285,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -302,7 +302,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -354,7 +354,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -371,7 +371,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -423,7 +423,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -440,7 +440,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -492,7 +492,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -509,7 +509,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -561,7 +561,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -578,7 +578,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -630,7 +630,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -647,7 +647,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -699,7 +699,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -716,7 +716,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -768,7 +768,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -785,7 +785,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -837,7 +837,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -854,7 +854,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -943,7 +943,7 @@ exports[`Guide with tagline 2`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -964,7 +964,7 @@ exports[`Guide with tagline 2`] = `
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -979,7 +979,7 @@ exports[`Guide with tagline 2`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -1007,7 +1007,7 @@ exports[`Guide with tagline 2`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -1090,7 +1090,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1107,7 +1107,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1159,7 +1159,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1176,7 +1176,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1228,7 +1228,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1245,7 +1245,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1297,7 +1297,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1314,7 +1314,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1366,7 +1366,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1383,7 +1383,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1435,7 +1435,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1452,7 +1452,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1504,7 +1504,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1521,7 +1521,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1573,7 +1573,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1590,7 +1590,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1642,7 +1642,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1659,7 +1659,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1711,7 +1711,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1728,7 +1728,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1817,7 +1817,7 @@ exports[`Guide with tagline 3`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -1838,7 +1838,7 @@ exports[`Guide with tagline 3`] = `
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1853,7 +1853,7 @@ exports[`Guide with tagline 3`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -1881,7 +1881,7 @@ exports[`Guide with tagline 3`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -1964,7 +1964,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -1981,7 +1981,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2033,7 +2033,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2050,7 +2050,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2102,7 +2102,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2119,7 +2119,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2171,7 +2171,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2188,7 +2188,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2240,7 +2240,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2257,7 +2257,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2309,7 +2309,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2326,7 +2326,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2378,7 +2378,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2395,7 +2395,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2447,7 +2447,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2464,7 +2464,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2516,7 +2516,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2533,7 +2533,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2585,7 +2585,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2602,7 +2602,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2691,7 +2691,7 @@ exports[`Guide with tagline 4`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -2712,7 +2712,7 @@ exports[`Guide with tagline 4`] = `
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2727,7 +2727,7 @@ exports[`Guide with tagline 4`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -2755,7 +2755,7 @@ exports[`Guide with tagline 4`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -2838,7 +2838,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2855,7 +2855,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2907,7 +2907,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2924,7 +2924,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2976,7 +2976,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -2993,7 +2993,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3045,7 +3045,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3062,7 +3062,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3114,7 +3114,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3131,7 +3131,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3183,7 +3183,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3200,7 +3200,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3252,7 +3252,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3269,7 +3269,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3321,7 +3321,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3338,7 +3338,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3390,7 +3390,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3407,7 +3407,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3459,7 +3459,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3476,7 +3476,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3565,7 +3565,7 @@ exports[`Guide with tagline 5`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -3586,7 +3586,7 @@ exports[`Guide with tagline 5`] = `
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3601,7 +3601,7 @@ exports[`Guide with tagline 5`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -3629,7 +3629,7 @@ exports[`Guide with tagline 5`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -3712,7 +3712,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3729,7 +3729,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3781,7 +3781,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3798,7 +3798,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3850,7 +3850,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3867,7 +3867,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3919,7 +3919,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3936,7 +3936,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -3988,7 +3988,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4005,7 +4005,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4057,7 +4057,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4074,7 +4074,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4126,7 +4126,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4143,7 +4143,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4195,7 +4195,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4212,7 +4212,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4264,7 +4264,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4281,7 +4281,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4333,7 +4333,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4350,7 +4350,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4439,7 +4439,7 @@ exports[`Guide with tagline 6`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -4460,7 +4460,7 @@ exports[`Guide with tagline 6`] = `
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4475,7 +4475,7 @@ exports[`Guide with tagline 6`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -4503,7 +4503,7 @@ exports[`Guide with tagline 6`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -4586,7 +4586,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4603,7 +4603,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4655,7 +4655,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4672,7 +4672,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4724,7 +4724,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4741,7 +4741,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4793,7 +4793,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4810,7 +4810,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4862,7 +4862,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4879,7 +4879,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4931,7 +4931,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -4948,7 +4948,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5000,7 +5000,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5017,7 +5017,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5069,7 +5069,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5086,7 +5086,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5138,7 +5138,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5155,7 +5155,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5207,7 +5207,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5224,7 +5224,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5313,7 +5313,7 @@ exports[`Guide with tagline 7`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -5334,7 +5334,7 @@ exports[`Guide with tagline 7`] = `
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5349,7 +5349,7 @@ exports[`Guide with tagline 7`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -5377,7 +5377,7 @@ exports[`Guide with tagline 7`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -5460,7 +5460,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5477,7 +5477,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5529,7 +5529,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5546,7 +5546,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5598,7 +5598,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5615,7 +5615,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5667,7 +5667,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5684,7 +5684,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5736,7 +5736,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5753,7 +5753,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5805,7 +5805,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5822,7 +5822,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5874,7 +5874,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5891,7 +5891,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5943,7 +5943,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -5960,7 +5960,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6012,7 +6012,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6029,7 +6029,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6081,7 +6081,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6098,7 +6098,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6187,7 +6187,7 @@ exports[`Guide without tagline 1`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -6209,7 +6209,7 @@ exports[`Guide without tagline 1`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -6237,7 +6237,7 @@ exports[`Guide without tagline 1`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -6320,7 +6320,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6337,7 +6337,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6389,7 +6389,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6406,7 +6406,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6458,7 +6458,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6475,7 +6475,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6527,7 +6527,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6544,7 +6544,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6596,7 +6596,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6613,7 +6613,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6665,7 +6665,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6682,7 +6682,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6734,7 +6734,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6751,7 +6751,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6803,7 +6803,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6820,7 +6820,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6872,7 +6872,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6889,7 +6889,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6941,7 +6941,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -6958,7 +6958,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7047,7 +7047,7 @@ exports[`Guide without tagline 2`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -7069,7 +7069,7 @@ exports[`Guide without tagline 2`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -7097,7 +7097,7 @@ exports[`Guide without tagline 2`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -7180,7 +7180,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7197,7 +7197,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7249,7 +7249,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7266,7 +7266,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7318,7 +7318,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7335,7 +7335,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7387,7 +7387,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7404,7 +7404,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7456,7 +7456,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7473,7 +7473,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7525,7 +7525,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7542,7 +7542,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7594,7 +7594,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7611,7 +7611,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7663,7 +7663,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7680,7 +7680,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7732,7 +7732,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7749,7 +7749,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7801,7 +7801,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7818,7 +7818,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -7907,7 +7907,7 @@ exports[`Guide without tagline 3`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -7929,7 +7929,7 @@ exports[`Guide without tagline 3`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -7957,7 +7957,7 @@ exports[`Guide without tagline 3`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -8040,7 +8040,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8057,7 +8057,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8109,7 +8109,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8126,7 +8126,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8178,7 +8178,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8195,7 +8195,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8247,7 +8247,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8264,7 +8264,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8316,7 +8316,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8333,7 +8333,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8385,7 +8385,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8402,7 +8402,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8454,7 +8454,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8471,7 +8471,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8523,7 +8523,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8540,7 +8540,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8592,7 +8592,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8609,7 +8609,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8661,7 +8661,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8678,7 +8678,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8767,7 +8767,7 @@ exports[`Guide without tagline 4`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -8789,7 +8789,7 @@ exports[`Guide without tagline 4`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -8817,7 +8817,7 @@ exports[`Guide without tagline 4`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -8900,7 +8900,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8917,7 +8917,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8969,7 +8969,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -8986,7 +8986,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9038,7 +9038,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9055,7 +9055,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9107,7 +9107,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9124,7 +9124,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9176,7 +9176,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9193,7 +9193,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9245,7 +9245,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9262,7 +9262,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9314,7 +9314,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9331,7 +9331,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9383,7 +9383,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9400,7 +9400,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9452,7 +9452,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9469,7 +9469,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9521,7 +9521,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9538,7 +9538,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9627,7 +9627,7 @@ exports[`Guide without tagline 5`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -9649,7 +9649,7 @@ exports[`Guide without tagline 5`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -9677,7 +9677,7 @@ exports[`Guide without tagline 5`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -9760,7 +9760,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9777,7 +9777,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9829,7 +9829,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9846,7 +9846,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9898,7 +9898,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9915,7 +9915,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9967,7 +9967,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -9984,7 +9984,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10036,7 +10036,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10053,7 +10053,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10105,7 +10105,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10122,7 +10122,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10174,7 +10174,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10191,7 +10191,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10243,7 +10243,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10260,7 +10260,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10312,7 +10312,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10329,7 +10329,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10381,7 +10381,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10398,7 +10398,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10487,7 +10487,7 @@ exports[`Guide without tagline 6`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -10509,7 +10509,7 @@ exports[`Guide without tagline 6`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -10537,7 +10537,7 @@ exports[`Guide without tagline 6`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -10620,7 +10620,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10637,7 +10637,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10689,7 +10689,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10706,7 +10706,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10758,7 +10758,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10775,7 +10775,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10827,7 +10827,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10844,7 +10844,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10896,7 +10896,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10913,7 +10913,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10965,7 +10965,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -10982,7 +10982,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11034,7 +11034,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11051,7 +11051,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11103,7 +11103,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11120,7 +11120,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11172,7 +11172,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11189,7 +11189,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11241,7 +11241,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11258,7 +11258,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11347,7 +11347,7 @@ exports[`Guide without tagline 7`] = `
           numberOfLines={1}
           style={
             Object {
-              "fontFamily": "Roboto",
+              "fontFamily": "Tahoma",
               "fontSize": 22,
               "fontWeight": "500",
               "letterSpacing": 0.11,
@@ -11369,7 +11369,7 @@ exports[`Guide without tagline 7`] = `
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "lineHeight": 22,
               }
@@ -11397,7 +11397,7 @@ exports[`Guide without tagline 7`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 17,
                   "lineHeight": 23,
                 }
@@ -11480,7 +11480,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11497,7 +11497,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11549,7 +11549,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11566,7 +11566,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11618,7 +11618,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11635,7 +11635,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11687,7 +11687,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11704,7 +11704,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11756,7 +11756,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11773,7 +11773,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11825,7 +11825,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11842,7 +11842,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11894,7 +11894,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11911,7 +11911,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11963,7 +11963,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -11980,7 +11980,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -12032,7 +12032,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -12049,7 +12049,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -12101,7 +12101,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "#7f7f7f",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 14,
                 "fontStyle": "normal",
                 "fontWeight": "normal",
@@ -12118,7 +12118,7 @@ Tack till: Bigert &amp; Bergström, Skissernas Museum, Artipelag
             style={
               Object {
                 "color": "black",
-                "fontFamily": "Roboto",
+                "fontFamily": "Tahoma",
                 "fontSize": 16,
                 "fontStyle": "normal",
                 "fontWeight": "normal",

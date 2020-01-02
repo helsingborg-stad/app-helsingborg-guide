@@ -6,7 +6,7 @@ exports[`Correct input 1`] = `
   style={
     Object {
       "color": "#7f7f7f",
-      "fontFamily": "Roboto",
+      "fontFamily": "Tahoma",
       "fontSize": 16,
       "lineHeight": 22,
     }

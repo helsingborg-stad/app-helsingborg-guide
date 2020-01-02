@@ -48,7 +48,7 @@ exports[`status => done, progress < 1 1`] = `
       style={
         Object {
           "color": "green",
-          "fontFamily": "Roboto",
+          "fontFamily": "Tahoma",
           "fontSize": 16,
         }
       }
@@ -107,7 +107,7 @@ exports[`status => done, progress >= 1 1`] = `
       style={
         Object {
           "color": "green",
-          "fontFamily": "Roboto",
+          "fontFamily": "Tahoma",
           "fontSize": 16,
         }
       }
@@ -161,8 +161,8 @@ exports[`status => paused, progress < 1 1`] = `
       <Text
         style={
           Object {
-            "color": "#a61380",
-            "fontFamily": "Roboto",
+            "color": "#007176",
+            "fontFamily": "Tahoma",
             "fontSize": 16,
             "fontWeight": "500",
           }
@@ -191,8 +191,8 @@ exports[`status => paused, progress < 1 1`] = `
       <Text
         style={
           Object {
-            "color": "#a61380",
-            "fontFamily": "Roboto",
+            "color": "#007176",
+            "fontFamily": "Tahoma",
             "fontSize": 16,
             "fontWeight": "500",
           }
@@ -205,7 +205,7 @@ exports[`status => paused, progress < 1 1`] = `
   <View>
     <RCTProgressView
       progress={0}
-      progressTintColor="#D35098"
+      progressTintColor="#007176"
       style={
         Array [
           Object {
@@ -272,8 +272,8 @@ exports[`status => paused, progress >= 1 1`] = `
       <Text
         style={
           Object {
-            "color": "#a61380",
-            "fontFamily": "Roboto",
+            "color": "#007176",
+            "fontFamily": "Tahoma",
             "fontSize": 16,
             "fontWeight": "500",
           }
@@ -302,8 +302,8 @@ exports[`status => paused, progress >= 1 1`] = `
       <Text
         style={
           Object {
-            "color": "#a61380",
-            "fontFamily": "Roboto",
+            "color": "#007176",
+            "fontFamily": "Tahoma",
             "fontSize": 16,
             "fontWeight": "500",
           }
@@ -316,7 +316,7 @@ exports[`status => paused, progress >= 1 1`] = `
   <View>
     <RCTProgressView
       progress={2}
-      progressTintColor="#D35098"
+      progressTintColor="#007176"
       style={
         Array [
           Object {
@@ -385,7 +385,7 @@ exports[`status => pending, progress < 1 1`] = `
         style={
           Array [
             Object {
-              "color": "#a61380",
+              "color": "#007176",
               "fontSize": 24,
             },
             undefined,
@@ -403,8 +403,8 @@ exports[`status => pending, progress < 1 1`] = `
       <Text
         style={
           Object {
-            "color": "#a61380",
-            "fontFamily": "Roboto",
+            "color": "#007176",
+            "fontFamily": "Tahoma",
             "fontSize": 16,
             "fontWeight": "500",
             "lineHeight": 23,
@@ -412,14 +412,14 @@ exports[`status => pending, progress < 1 1`] = `
           }
         }
       >
-        Downloading 0% (touch to pause)
+        Downloading 0% (tap to pause)
       </Text>
     </View>
   </View>
   <View>
     <RCTProgressView
       progress={0}
-      progressTintColor="#D35098"
+      progressTintColor="#007176"
       style={
         Array [
           Object {
@@ -488,7 +488,7 @@ exports[`status => pending, progress >= 1 1`] = `
         style={
           Array [
             Object {
-              "color": "#a61380",
+              "color": "#007176",
               "fontSize": 24,
             },
             undefined,
@@ -506,8 +506,8 @@ exports[`status => pending, progress >= 1 1`] = `
       <Text
         style={
           Object {
-            "color": "#a61380",
-            "fontFamily": "Roboto",
+            "color": "#007176",
+            "fontFamily": "Tahoma",
             "fontSize": 16,
             "fontWeight": "500",
             "lineHeight": 23,
@@ -515,14 +515,14 @@ exports[`status => pending, progress >= 1 1`] = `
           }
         }
       >
-        Downloading 100% (touch to pause)
+        Downloading 100% (tap to pause)
       </Text>
     </View>
   </View>
   <View>
     <RCTProgressView
       progress={2}
-      progressTintColor="#D35098"
+      progressTintColor="#007176"
       style={
         Array [
           Object {
@@ -591,7 +591,7 @@ exports[`status => stopped 1`] = `
         style={
           Array [
             Object {
-              "color": "#a61380",
+              "color": "#007176",
               "fontSize": 24,
             },
             undefined,
@@ -609,8 +609,8 @@ exports[`status => stopped 1`] = `
       <Text
         style={
           Object {
-            "color": "#a61380",
-            "fontFamily": "Roboto",
+            "color": "#007176",
+            "fontFamily": "Tahoma",
             "fontSize": 16,
             "fontWeight": "500",
             "lineHeight": 23,
@@ -625,7 +625,7 @@ exports[`status => stopped 1`] = `
   <View>
     <RCTProgressView
       progress={0}
-      progressTintColor="#D35098"
+      progressTintColor="#007176"
       style={
         Array [
           Object {
@@ -694,7 +694,7 @@ exports[`status => stopped, progress >= 1 1`] = `
         style={
           Array [
             Object {
-              "color": "#a61380",
+              "color": "#007176",
               "fontSize": 24,
             },
             undefined,
@@ -712,8 +712,8 @@ exports[`status => stopped, progress >= 1 1`] = `
       <Text
         style={
           Object {
-            "color": "#a61380",
-            "fontFamily": "Roboto",
+            "color": "#007176",
+            "fontFamily": "Tahoma",
             "fontSize": 16,
             "fontWeight": "500",
             "lineHeight": 23,
@@ -728,7 +728,7 @@ exports[`status => stopped, progress >= 1 1`] = `
   <View>
     <RCTProgressView
       progress={2}
-      progressTintColor="#D35098"
+      progressTintColor="#007176"
       style={
         Array [
           Object {

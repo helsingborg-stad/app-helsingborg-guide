@@ -47,7 +47,7 @@ exports[`Basic GuideObject 1`] = `
           }
         >
           <RCTScrollView
-            activeDotColor="#D35098"
+            activeDotColor="#007176"
             automaticallyAdjustContentInsets={false}
             autoplay={false}
             autoplayDirection={true}
@@ -238,7 +238,7 @@ exports[`Basic GuideObject 1`] = `
               style={
                 Array [
                   Object {
-                    "backgroundColor": "#D35098",
+                    "backgroundColor": "#007176",
                     "borderRadius": 4,
                     "height": 8,
                     "marginBottom": 3,
@@ -320,7 +320,7 @@ exports[`Basic GuideObject 1`] = `
             <Text
               style={
                 Object {
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 24,
                   "fontWeight": "300",
                   "lineHeight": 30,
@@ -343,7 +343,7 @@ exports[`Basic GuideObject 1`] = `
               style={
                 Object {
                   "color": "#7f7f7f",
-                  "fontFamily": "Roboto",
+                  "fontFamily": "Tahoma",
                   "fontSize": 16,
                   "fontWeight": "400",
                   "lineHeight": 21,
@@ -416,7 +416,7 @@ exports[`Basic GuideObject 1`] = `
                   style={
                     Array [
                       Object {
-                        "color": "#7B075E",
+                        "color": "#004447",
                         "fontSize": 18,
                       },
                       Array [
@@ -450,7 +450,7 @@ exports[`Basic GuideObject 1`] = `
                   style={
                     Array [
                       Object {
-                        "color": "#a61380",
+                        "color": "#007176",
                         "fontSize": 16,
                         "fontWeight": "500",
                         "lineHeight": 22,
@@ -510,7 +510,7 @@ exports[`Basic GuideObject 1`] = `
               style={
                 Array [
                   Object {
-                    "color": "#a61380",
+                    "color": "#007176",
                     "fontSize": 24,
                   },
                   undefined,
@@ -528,8 +528,8 @@ exports[`Basic GuideObject 1`] = `
             <Text
               style={
                 Object {
-                  "color": "#a61380",
-                  "fontFamily": "Roboto",
+                  "color": "#007176",
+                  "fontFamily": "Tahoma",
                   "fontSize": 16,
                   "fontWeight": "500",
                   "lineHeight": 23,
