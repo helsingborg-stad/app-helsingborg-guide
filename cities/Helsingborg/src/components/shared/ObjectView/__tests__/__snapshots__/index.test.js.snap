@@ -5,7 +5,7 @@ exports[`Basic GuideObject 1`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -14,7 +14,7 @@ exports[`Basic GuideObject 1`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -68,7 +68,7 @@ exports[`Basic GuideObject 1`] = `
             }
             disableNextButton={false}
             disablePrevButton={false}
-            dotColor="#ffffff"
+            dotColor="white"
             horizontal={true}
             index={0}
             loadMinimal={false}
@@ -255,7 +255,7 @@ exports[`Basic GuideObject 1`] = `
               style={
                 Array [
                   Object {
-                    "backgroundColor": "#ffffff",
+                    "backgroundColor": "white",
                     "borderRadius": 4,
                     "height": 8,
                     "marginBottom": 3,
@@ -272,7 +272,7 @@ exports[`Basic GuideObject 1`] = `
               style={
                 Array [
                   Object {
-                    "backgroundColor": "#ffffff",
+                    "backgroundColor": "white",
                     "borderRadius": 4,
                     "height": 8,
                     "marginBottom": 3,
@@ -302,7 +302,7 @@ exports[`Basic GuideObject 1`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
           }
         }
       >
@@ -450,7 +450,7 @@ exports[`Basic GuideObject 1`] = `
                   style={
                     Array [
                       Object {
-                        "color": "purple",
+                        "color": "#a61380",
                         "fontSize": 16,
                         "fontWeight": "500",
                         "lineHeight": 22,

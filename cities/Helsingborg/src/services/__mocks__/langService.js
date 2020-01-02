@@ -1,4 +1,4 @@
-import * as strings from "@assets/languages/strings";
+import strings from "@assets/languages/strings";
 
 export default class LangService {
   static strings = strings.en;

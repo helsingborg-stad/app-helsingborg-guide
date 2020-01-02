@@ -5,7 +5,7 @@ exports[`Guide with tagline 1`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -14,7 +14,7 @@ exports[`Guide with tagline 1`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -879,7 +879,7 @@ exports[`Guide with tagline 2`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -888,7 +888,7 @@ exports[`Guide with tagline 2`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -1753,7 +1753,7 @@ exports[`Guide with tagline 3`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -1762,7 +1762,7 @@ exports[`Guide with tagline 3`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -2627,7 +2627,7 @@ exports[`Guide with tagline 4`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -2636,7 +2636,7 @@ exports[`Guide with tagline 4`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -3501,7 +3501,7 @@ exports[`Guide with tagline 5`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -3510,7 +3510,7 @@ exports[`Guide with tagline 5`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -4375,7 +4375,7 @@ exports[`Guide with tagline 6`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -4384,7 +4384,7 @@ exports[`Guide with tagline 6`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -5249,7 +5249,7 @@ exports[`Guide with tagline 7`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -5258,7 +5258,7 @@ exports[`Guide with tagline 7`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -6123,7 +6123,7 @@ exports[`Guide without tagline 1`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -6132,7 +6132,7 @@ exports[`Guide without tagline 1`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -6983,7 +6983,7 @@ exports[`Guide without tagline 2`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -6992,7 +6992,7 @@ exports[`Guide without tagline 2`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -7843,7 +7843,7 @@ exports[`Guide without tagline 3`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -7852,7 +7852,7 @@ exports[`Guide without tagline 3`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -8703,7 +8703,7 @@ exports[`Guide without tagline 4`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -8712,7 +8712,7 @@ exports[`Guide without tagline 4`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -9563,7 +9563,7 @@ exports[`Guide without tagline 5`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -9572,7 +9572,7 @@ exports[`Guide without tagline 5`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -10423,7 +10423,7 @@ exports[`Guide without tagline 6`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -10432,7 +10432,7 @@ exports[`Guide without tagline 6`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -11283,7 +11283,7 @@ exports[`Guide without tagline 7`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-end",
     }
@@ -11292,7 +11292,7 @@ exports[`Guide without tagline 7`] = `
   <RCTScrollView
     style={
       Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "white",
         "bottom": 0,
         "left": 0,
         "position": "absolute",

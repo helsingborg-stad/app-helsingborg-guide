@@ -5,7 +5,7 @@ exports[`weekdays 1`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-start",
     }
@@ -18,7 +18,7 @@ exports[`weekdays 1`] = `
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
           }
         }
@@ -62,7 +62,7 @@ exports[`weekdays 1`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
             "paddingHorizontal": 20,
           }
@@ -148,7 +148,7 @@ exports[`weekdays 1`] = `
             onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "backgroundColor": "#ffffff",
+                "backgroundColor": "white",
                 "elevation": 8,
                 "justifyContent": "center",
                 "marginVertical": 10,
@@ -442,7 +442,7 @@ exports[`weekdays 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -482,7 +482,7 @@ exports[`weekdays 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -640,7 +640,7 @@ exports[`weekdays 2`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-start",
     }
@@ -653,7 +653,7 @@ exports[`weekdays 2`] = `
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
           }
         }
@@ -697,7 +697,7 @@ exports[`weekdays 2`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
             "paddingHorizontal": 20,
           }
@@ -783,7 +783,7 @@ exports[`weekdays 2`] = `
             onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "backgroundColor": "#ffffff",
+                "backgroundColor": "white",
                 "elevation": 8,
                 "justifyContent": "center",
                 "marginVertical": 10,
@@ -1077,7 +1077,7 @@ exports[`weekdays 2`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1117,7 +1117,7 @@ exports[`weekdays 2`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1275,7 +1275,7 @@ exports[`weekdays 3`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-start",
     }
@@ -1288,7 +1288,7 @@ exports[`weekdays 3`] = `
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
           }
         }
@@ -1332,7 +1332,7 @@ exports[`weekdays 3`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
             "paddingHorizontal": 20,
           }
@@ -1418,7 +1418,7 @@ exports[`weekdays 3`] = `
             onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "backgroundColor": "#ffffff",
+                "backgroundColor": "white",
                 "elevation": 8,
                 "justifyContent": "center",
                 "marginVertical": 10,
@@ -1712,7 +1712,7 @@ exports[`weekdays 3`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1752,7 +1752,7 @@ exports[`weekdays 3`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -1910,7 +1910,7 @@ exports[`weekdays 4`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-start",
     }
@@ -1923,7 +1923,7 @@ exports[`weekdays 4`] = `
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
           }
         }
@@ -1967,7 +1967,7 @@ exports[`weekdays 4`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
             "paddingHorizontal": 20,
           }
@@ -2053,7 +2053,7 @@ exports[`weekdays 4`] = `
             onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "backgroundColor": "#ffffff",
+                "backgroundColor": "white",
                 "elevation": 8,
                 "justifyContent": "center",
                 "marginVertical": 10,
@@ -2347,7 +2347,7 @@ exports[`weekdays 4`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -2387,7 +2387,7 @@ exports[`weekdays 4`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -2545,7 +2545,7 @@ exports[`weekdays 5`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-start",
     }
@@ -2558,7 +2558,7 @@ exports[`weekdays 5`] = `
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
           }
         }
@@ -2602,7 +2602,7 @@ exports[`weekdays 5`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
             "paddingHorizontal": 20,
           }
@@ -2688,7 +2688,7 @@ exports[`weekdays 5`] = `
             onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "backgroundColor": "#ffffff",
+                "backgroundColor": "white",
                 "elevation": 8,
                 "justifyContent": "center",
                 "marginVertical": 10,
@@ -2982,7 +2982,7 @@ exports[`weekdays 5`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3022,7 +3022,7 @@ exports[`weekdays 5`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3180,7 +3180,7 @@ exports[`weekdays 6`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-start",
     }
@@ -3193,7 +3193,7 @@ exports[`weekdays 6`] = `
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
           }
         }
@@ -3237,7 +3237,7 @@ exports[`weekdays 6`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
             "paddingHorizontal": 20,
           }
@@ -3323,7 +3323,7 @@ exports[`weekdays 6`] = `
             onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "backgroundColor": "#ffffff",
+                "backgroundColor": "white",
                 "elevation": 8,
                 "justifyContent": "center",
                 "marginVertical": 10,
@@ -3617,7 +3617,7 @@ exports[`weekdays 6`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3657,7 +3657,7 @@ exports[`weekdays 6`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -3815,7 +3815,7 @@ exports[`weekdays 7`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-start",
     }
@@ -3828,7 +3828,7 @@ exports[`weekdays 7`] = `
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
           }
         }
@@ -3872,7 +3872,7 @@ exports[`weekdays 7`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
             "paddingHorizontal": 20,
           }
@@ -3958,7 +3958,7 @@ exports[`weekdays 7`] = `
             onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "backgroundColor": "#ffffff",
+                "backgroundColor": "white",
                 "elevation": 8,
                 "justifyContent": "center",
                 "marginVertical": 10,
@@ -4252,7 +4252,7 @@ exports[`weekdays 7`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4292,7 +4292,7 @@ exports[`weekdays 7`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4450,7 +4450,7 @@ exports[`with geolocation 1`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-start",
     }
@@ -4463,7 +4463,7 @@ exports[`with geolocation 1`] = `
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
           }
         }
@@ -4507,7 +4507,7 @@ exports[`with geolocation 1`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
             "paddingHorizontal": 20,
           }
@@ -4664,7 +4664,7 @@ exports[`with geolocation 1`] = `
             onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "backgroundColor": "#ffffff",
+                "backgroundColor": "white",
                 "elevation": 8,
                 "justifyContent": "center",
                 "marginVertical": 10,
@@ -4958,7 +4958,7 @@ exports[`with geolocation 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -4998,7 +4998,7 @@ exports[`with geolocation 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -5156,7 +5156,7 @@ exports[`with point properties 1`] = `
   style={
     Object {
       "alignItems": "stretch",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "white",
       "flex": 1,
       "justifyContent": "flex-start",
     }
@@ -5169,7 +5169,7 @@ exports[`with point properties 1`] = `
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
           }
         }
@@ -5213,7 +5213,7 @@ exports[`with point properties 1`] = `
         style={
           Object {
             "alignItems": "stretch",
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "white",
             "flex": 1,
             "paddingHorizontal": 20,
           }
@@ -5299,7 +5299,7 @@ exports[`with point properties 1`] = `
             onStartShouldSetResponder={[Function]}
             style={
               Object {
-                "backgroundColor": "#ffffff",
+                "backgroundColor": "white",
                 "elevation": 8,
                 "justifyContent": "center",
                 "marginVertical": 10,
@@ -5593,7 +5593,7 @@ exports[`with point properties 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
@@ -5633,7 +5633,7 @@ exports[`with point properties 1`] = `
               <SVGImg
                 source={
                   Object {
-                    "testUri": "../../../src/images/iconPointPropertyPlaceholder.png",
+                    "testUri": "../../../assets/images/iconPointPropertyPlaceholder.png",
                   }
                 }
                 style={
