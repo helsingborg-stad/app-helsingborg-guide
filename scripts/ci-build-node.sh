@@ -1,15 +1,13 @@
 #!/bin/sh
+set -e -u
 
-function build_city {
+build_city() {
     CITY_PATH=$1
     PREVIOUS_PATH=$PWD
 
     cd $CITY_PATH
-    # extract encryption key
-    openssl aes-256-cbc -K $encrypted_a533b106a22c_key -iv $encrypted_a533b106a22c_iv -in android/release.properties.enc -out android/release.properties -d
 
     # ensure we don't run out of file watchers
-
     echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
     # build

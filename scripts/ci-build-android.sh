@@ -1,6 +1,7 @@
 #!/bin/sh
+set -e -u
 
-function build_city {
+build_city() {
     CITY_PATH=$1
     PREVIOUS_PATH=$PWD
 
