@@ -32,12 +32,12 @@ export default class LangService {
   }
 
   static loadStoredLanguage() {
+    LangService.setLanguage(DEFAULT_CODE); // we need to read the app name for the splash screen
+
     return AsyncStorage.getItem(LANGUAGE)
       .then(value => {
         if (value) {
           LangService.setLanguage(JSON.parse(value));
-        } else {
-          LangService.setLanguage(DEFAULT_CODE);
         }
         return Promise.resolve(true);
       })

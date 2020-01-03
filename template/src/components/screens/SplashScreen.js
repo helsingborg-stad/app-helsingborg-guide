@@ -14,6 +14,7 @@ import { IS_WELCOMED } from "@src/lib/my_consts";
 import ColoredBar from "@shared-components/ColoredBar";
 import BackgroundImage from "@shared-components/BackgroundImage";
 import { Colors } from "@assets/styles";
+import LangService from "@services/langService";
 
 const LOGO = require("@assets/images/logo.png");
 const IMAGE = require("@assets/images/SplashscreenFinal.png");
@@ -141,14 +142,19 @@ export default class SplashScreen extends Component<Props, State> {
   }
 
   render() {
+    const appName = LangService.strings.APP_NAME;
     return (
       <ViewContainer style={styles.splash}>
         {this.displayColorBar()}
         <View style={styles.wrapper}>
           <View style={styles.mainContainer}>
             <View style={styles.headerContainer}>
-              <Text style={styles.headerText}>Guide</Text>
-              <Text style={styles.headerText}>Helsingborg</Text>
+              <Text style={styles.headerText}>
+                {appName ? appName.split(" ")[0] : ""}
+              </Text>
+              <Text style={styles.headerText}>
+                {appName ? appName.split(" ")[1] : ""}
+              </Text>
             </View>
             <View style={styles.logoContainer}>
               <Image resizeMethod="scale" resizeMode="center" source={LOGO} />
