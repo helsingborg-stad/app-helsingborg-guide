@@ -7,6 +7,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "eslint": "eslint flow-typed/guideapp.js index.js src --report-unused-disable-directives --fix",
     "test": "jest",
+    "test:watch": "jest --watchAll",
     "flow": "flow --show-all-errors",
     "clean": "react-native-clean-project",
     "android:alpha:debug": "react-native run-android --variant alphaDebug --appIdSuffix alpha",
@@ -94,14 +95,14 @@
       "./jest/mocks.js"
     ],
     "moduleNameMapper": {
-        "^@actions(.*)$": "<rootDir>/src/actions$1",
-        "^@assets(.*)$": "<rootDir>/assets$1",
-        "^@data(.*)$": "<rootDir>/data$1",
-        "^@json-schemas(.*)$": "<rootDir>/json-schemas$1",
-        "^@services(.*)$": "<rootDir>/src/services$1",
-        "^@shared-components(.*)$": "<rootDir>/src/components/shared$1",
-        "^@src(.*)$": "<rootDir>/src$1",
-        "^@utils(.*)$": "<rootDir>/src/utils$1"
+      "^@actions(.*)$": "<rootDir>/src/actions$1",
+      "^@assets(.*)$": "<rootDir>/assets$1",
+      "^@data(.*)$": "<rootDir>/data$1",
+      "^@json-schemas(.*)$": "<rootDir>/json-schemas$1",
+      "^@services(.*)$": "<rootDir>/src/services$1",
+      "^@shared-components(.*)$": "<rootDir>/src/components/shared$1",
+      "^@src(.*)$": "<rootDir>/src$1",
+      "^@utils(.*)$": "<rootDir>/src/utils$1"
     }
   }
 }
