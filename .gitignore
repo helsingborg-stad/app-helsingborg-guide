@@ -70,8 +70,8 @@ buck-out/
 # appcenter
 # scripts to upload to builds to appcenter for internal distribution.
 # these scripts contains secrets, therefore don't check them into git
-scripts/local_build_upload*.sh
-scripts/export_options.plist
+**/scripts/local_build_upload*.sh
+**/scripts/export_options.plist
 
 # CocoaPods
 /ios/Pods/
