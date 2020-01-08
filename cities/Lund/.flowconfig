@@ -42,22 +42,22 @@ module.name_mapper='^react-native/\(.*\)$' -> '<PROJECT_ROOT>/node_modules/react
 module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> '<PROJECT_ROOT>/node_modules/react-native/Libraries/Image/RelativeImageStub'
 
 # Follow our module aliases (found in babel.config.js)
-module.name_mapper='^\@actions\/\(.*\)$' -> '<PROJECT_ROOT>/src/actions/\1'
-module.name_mapper='^\@actions$' -> '<PROJECT_ROOT>/src/actions'
+module.name_mapper='^\@actions\/\(.*\)$' -> '<PROJECT_ROOT>/../../template/src/actions/\1'
+module.name_mapper='^\@actions$' -> '<PROJECT_ROOT>/../../template/src/actions'
 module.name_mapper='^\@assets\/\(.*\)$' -> '<PROJECT_ROOT>/assets/\1'
 module.name_mapper='^\@assets$' -> '<PROJECT_ROOT>/assets'
 module.name_mapper='^\@data\/\(.*\)$' -> '<PROJECT_ROOT>/data/\1'
 module.name_mapper='^\@data$' -> '<PROJECT_ROOT>/data'
 module.name_mapper='^\@json\-schemas\/\(.*\)$' -> '<PROJECT_ROOT>/json-schemas/\1'
 module.name_mapper='^\@json\-schemas$' -> '<PROJECT_ROOT>/json-schemas'
-module.name_mapper='^\@services\/\(.*\)$' -> '<PROJECT_ROOT>/src/services/\1'
-module.name_mapper='^\@services$' -> '<PROJECT_ROOT>/src/services'
-module.name_mapper='^\@shared\-components\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/shared/\1'
-module.name_mapper='^\@shared\-components$' -> '<PROJECT_ROOT>/src/components/shared'
-module.name_mapper='^\@src\/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
-module.name_mapper='^\@src$' -> '<PROJECT_ROOT>/src'
-module.name_mapper='^\@utils\/\(.*\)$' -> '<PROJECT_ROOT>/src/utils/\1'
-module.name_mapper='^\@utils$' -> '<PROJECT_ROOT>/src/utils'
+module.name_mapper='^\@services\/\(.*\)$' -> '<PROJECT_ROOT>/../../template/src/services/\1'
+module.name_mapper='^\@services$' -> '<PROJECT_ROOT>/../../template/src/services'
+module.name_mapper='^\@shared\-components\/\(.*\)$' -> '<PROJECT_ROOT>/../../template/src/components/shared/\1'
+module.name_mapper='^\@shared\-components$' -> '<PROJECT_ROOT>/../../template/src/components/shared'
+module.name_mapper='^\@src\/\(.*\)$' -> '<PROJECT_ROOT>/../../template/src/\1'
+module.name_mapper='^\@src$' -> '<PROJECT_ROOT>/../../template/src'
+module.name_mapper='^\@utils\/\(.*\)$' -> '<PROJECT_ROOT>/../../template/src/utils/\1'
+module.name_mapper='^\@utils$' -> '<PROJECT_ROOT>/../../template/src/utils'
 
 module.file_ext=.js
 module.file_ext=.jsx

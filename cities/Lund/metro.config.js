@@ -6,6 +6,7 @@
  */
 
 const { getDefaultConfig } = require("metro-config");
+const path = require("path");
 
 module.exports = (async () => {
   const {
@@ -28,5 +29,10 @@ module.exports = (async () => {
         "gif"
       ]
     },
+    projectRoot: path.resolve(__dirname),
+    watchFolders: [
+      path.resolve(__dirname, "../../template/src"),
+      path.resolve(__dirname, "../../template/node_modules")
+    ]
   };
 })();
