@@ -8,6 +8,11 @@
 const { getDefaultConfig } = require("metro-config");
 const path = require("path");
 
+const extraNodeModules = {
+  "guide-app": path.resolve(__dirname + "../../../template/")
+};
+const watchFolders = [path.resolve(__dirname + "../../../template/")];
+
 module.exports = (async () => {
   const {
     resolver: { assetExts }
@@ -27,12 +32,10 @@ module.exports = (async () => {
         "bin",
         "arobject",
         "gif"
-      ]
+      ],
+      extraNodeModules
     },
     projectRoot: path.resolve(__dirname),
-    watchFolders: [
-      path.resolve(__dirname, "../../template/src"),
-      path.resolve(__dirname, "../../template/node_modules")
-    ]
+    watchFolders
   };
 })();

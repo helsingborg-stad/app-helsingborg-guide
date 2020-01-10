@@ -29,6 +29,7 @@
     "ajv": "6.10.2",
     "axios": "0.19.0",
     "geolib": "3.1.0",
+    "guide-app": "file:../../template",
     "haversine": "^1.1.1",
     "lodash": "4.17.15",
     "mercator-projection": "0.0.2",

@@ -8,14 +8,14 @@ module.exports = {
       {
         extensions: [".ios.js", ".android.js", ".js", ".ts", ".tsx", ".json"],
         alias: {
-          "@actions": "../../template/src/actions",
+          "@actions": "guide-app/src/actions",
           "@assets": "./assets",
           "@data": "./data",
           "@json-schemas": "./json-schemas",
-          "@services": "../../template/src/services",
-          "@shared-components": "../../template/src/components/shared",
-          "@src": "../../template/src",
-          "@utils": "../../template/src/utils"
+          "@services": "guide-app/src/services",
+          "@shared-components": "guide-app/src/components/shared",
+          "@src": "guide-app/src",
+          "@utils": "guide-app/src/utils"
         }
       }
     ]

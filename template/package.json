@@ -2,6 +2,11 @@
   "name": "GuideApp",
   "version": "0.0.1",
   "private": true,
+  "files": [
+    "src/",
+    "json-schemas/"
+  ],
+  "main": "index.js",
   "scripts": {
     "prepare": "patch-package",
     "start": "node node_modules/react-native/local-cli/cli.js start",
