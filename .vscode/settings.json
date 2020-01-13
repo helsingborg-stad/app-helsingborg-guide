@@ -1,8 +1,14 @@
 {
   "javascript.format.enable": true,
   "editor.formatOnSave": true,
-  "eslint.autoFixOnSave": true,
   "editor.tabSize": 2,
   "javascript.validate.enable": false,
-  "flow.useNPMPackagedFlow": true
+  "flow.useNPMPackagedFlow": true,
+  "git.ignoreLimitWarning": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.exclude": {
+    "**/third-party": true
+  }
 }
