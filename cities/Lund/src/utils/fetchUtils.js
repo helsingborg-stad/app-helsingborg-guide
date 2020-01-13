@@ -1,6 +1,6 @@
 // @flow
 
-import { API_BASE_URL } from "@data/endpoints";
+import { API_BASE_URL, GROUP_ID } from "@data/endpoints";
 import { validate } from "./JSONValidator";
 
 async function fetchJSON(
@@ -94,7 +94,8 @@ async function getGuidesForGuideGroup(
 export async function getNavigation(
   langCode: string
 ): Promise<NavigationCategory[]> {
-  const json = await fetchJSON("navigation", langCode);
+  const params = `&userGroupId=${GROUP_ID}`;
+  const json = await fetchJSON("navigation", langCode, params);
   const fetchedNavigation: NavigationCategory[] = validateData(
     json,
     "navigationCategory"
