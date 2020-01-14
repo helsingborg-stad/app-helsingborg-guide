@@ -9,9 +9,9 @@ const { getDefaultConfig } = require("metro-config");
 const path = require("path");
 
 const extraNodeModules = {
-  "guide-app": path.resolve(__dirname + "../../../template/")
+  "guide-app": path.resolve(__dirname + "../../../guide-app/")
 };
-const watchFolders = [path.resolve(__dirname + "../../../template/")];
+const watchFolders = [path.resolve(__dirname + "../../../guide-app/")];
 
 module.exports = (async () => {
   const {

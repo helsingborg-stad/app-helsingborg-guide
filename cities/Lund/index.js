@@ -3,21 +3,21 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { AppRegistry, Alert, UIManager, Platform, Linking } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
-import Nav from "@src/Nav";
-import configureStore from "@src/store/configureStore";
-import internetChanged from "@actions/internetActions";
-import LangService from "@services/langService";
-import Opener from "@services/SettingsService";
-import { errorHappened } from "@actions/errorActions";
-import FullScreenVideoScreen from "@src/components/screens/FullScreenVideoScreen";
-import LocationService from "@services/locationService";
-import DownloadTasksManager from "@services/DownloadTasksManager";
+import Nav from "guide-app/src/Nav";
+import configureStore from "guide-app/src/store/configureStore";
+import internetChanged from "guide-app/src/actions/internetActions";
+import LangService from "guide-app/src/services/langService";
+import Opener from "guide-app/src/services/SettingsService";
+import { errorHappened } from "guide-app/src/actions/errorActions";
+import FullScreenVideoScreen from "guide-app/src/components/screens/FullScreenVideoScreen";
+import LocationService from "guide-app/src/services/locationService";
+import DownloadTasksManager from "guide-app/src/services/DownloadTasksManager";
 import {
   appStarted,
   appBecameActive,
   appBecameInactive
-} from "@actions/uiStateActions";
-import { setLanguage } from "@actions/navigationActions";
+} from "guide-app/src/actions/uiStateActions";
+import { setLanguage } from "guide-app/src/actions/navigationActions";
 
 import { name as AppName } from "./app.json";
 
