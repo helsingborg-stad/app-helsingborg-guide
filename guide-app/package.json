@@ -7,23 +7,8 @@
     "json-schemas/"
   ],
   "main": "index.js",
-  "scripts": {
-    "prepare": "patch-package",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "eslint": "eslint flow-typed/guideapp.js index.js src --report-unused-disable-directives --fix",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
-    "flow": "flow --show-all-errors",
-    "clean": "react-native-clean-project",
-    "android:alpha:debug": "react-native run-android --variant alphaDebug --appIdSuffix alpha",
-    "android:alpha:release": "react-native run-android --variant alphaRelease --appIdSuffix alpha",
-    "android:store:debug": "react-native run-android --variant storeDebug",
-    "android:store:release": "react-native run-android --variant storeRelease",
-    "ios:device:debug": "react-native run-ios --device --configuration Debug",
-    "ios:device:release": "react-native run-ios --device --configuration Release",
-    "translate": "node ./scripts/translate.js"
-  },
-  "dependencies": {
+  "scripts": {},
+  "peerDependencies": {
     "@react-native-community/async-storage": "^1.6.3",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/netinfo": "^4.6.1",
@@ -65,32 +50,5 @@
     "redux-persist": "6.0.0",
     "redux-thunk": "2.3.0",
     "rn-fetch-blob": "^0.11.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/runtime": "^7.7.4",
-    "@react-native-community/eslint-config": "0.0.5",
-    "babel-eslint": "10.0.3",
-    "babel-jest": "24.9.0",
-    "babel-plugin-module-resolver": "3.2.0",
-    "babel-preset-flow": "6.23.0",
-    "babel-preset-react-native": "^4.0.1",
-    "eslint": "^6.7.1",
-    "eslint-config-airbnb": "18.0.1",
-    "eslint-import-resolver-babel-module": "5.1.0",
-    "eslint-import-resolver-reactnative": "1.0.2",
-    "eslint-plugin-flowtype": "4.5.2",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jest": "23.0.4",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-react-native": "3.8.1",
-    "flow-bin": "0.112.0",
-    "jest": "24.9.0",
-    "jetifier": "^1.6.4",
-    "metro-react-native-babel-preset": "^0.57.0",
-    "patch-package": "6.2.0",
-    "react-native-clean-project": "3.3.0",
-    "react-test-renderer": "16.12.0"
   }
 }
