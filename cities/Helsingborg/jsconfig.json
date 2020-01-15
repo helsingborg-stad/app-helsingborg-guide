@@ -1,21 +1,19 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "*": [
-                "*",
-            ],
-            "src": [
-                "src"
-            ],
-            "screens": [
-                "src/components/screens"
-            ]
-        },
-        "allowJs": true,
-        "allowSyntheticDefaultImports": true
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*"],
+      "@actions": ["../../guide-app/src/actions"],
+      "@assets": ["./assets"],
+      "@data": ["./data"],
+      "@json-schemas": ["../../guide-app/json-schemas"],
+      "@services": ["../../guide-app/src/services"],
+      "@shared-components": ["./src/components/shared"],
+      "@src": ["../../guide-app/src"],
+      "@utils": ["../../guide-app/src/utils"]
     },
-    "exclude": [
-        "node_modules"
-    ]
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules"]
 }
