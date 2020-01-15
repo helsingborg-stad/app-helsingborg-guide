@@ -35,10 +35,6 @@ target 'Lund' do
   pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/glog.podspec"
   pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
 
-  # ViroReact (AR)
-  pod 'ViroReact', :path => '../node_modules/react-viro/ios/'
-  pod 'ViroKit_static_lib', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/static_lib'
-
   #PERMISSIONS
   permissions_path = "#{rn_path}-permissions/ios"
 
