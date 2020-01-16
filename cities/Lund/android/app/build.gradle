@@ -9,7 +9,7 @@ import com.android.build.OutputFile
  * cycle. By default, bundleDebugJsAndAssets is skipped, as in debug/dev mode we prefer to load the
  * bundle directly from the development server. Below you can see all the possible configurations
  * and their defaults. If you decide to add a configuration block, make sure to add it before the
- * `apply from: "../../node_modules/react-native/react.gradle"` line.
+ * `apply from: "../../../../node_modules/react-native/react.gradle"` line.
  *
  * project.ext.react = [
  *   // the name of the generated asset file containing your JS bundle
@@ -80,7 +80,7 @@ project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
 ]
 
-apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../../../node_modules/react-native/react.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.lund"
+        applicationId "com.ustwo.lund"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -199,19 +199,11 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03"
 
-    implementation "com.google.android.exoplayer:exoplayer:2.7.1"
-    implementation "com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7"
-    implementation "com.amazonaws:aws-android-sdk-core:2.7.7"
-    implementation "com.amazonaws:aws-android-sdk-ddb:2.7.7"
-    implementation "com.amazonaws:aws-android-sdk-ddb-mapper:2.7.7"
-    implementation "com.amazonaws:aws-android-sdk-cognito:2.7.7"
-    implementation "com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.7.7"
-
     // Beacons
     implementation 'org.altbeacon:android-beacon-library:2.16.1'
 
     if (enableHermes) {
-        def hermesPath = "../../node_modules/hermes-engine/android/";
+        def hermesPath = "../../../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
         releaseImplementation files(hermesPath + "hermes-release.aar")
     } else {
@@ -226,6 +218,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply from: file("../../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply plugin: 'com.google.gms.google-services'
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: "../../../../node_modules/react-native-vector-icons/fonts.gradle"
