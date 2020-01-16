@@ -7,7 +7,7 @@ matrix:
       before_install:
         - cd ./cities/Helsingborg
       install:
-        - npm install
+        - yarn install
       before_script:
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       script:
@@ -20,7 +20,7 @@ matrix:
       before_install:
         - cd ./cities/Lund
       install:
-        - npm install
+        - yarn install
       before_script:
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       script:
@@ -57,7 +57,7 @@ matrix:
         - nvm use --lts
         - node --version
         - npm --version
-        - npm install
+        - yarn install
 
       before_script:
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
@@ -95,7 +95,7 @@ matrix:
         - nvm use --lts
         - node --version
         - npm --version
-        - npm install
+        - yarn install
       before_script:
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       script:
