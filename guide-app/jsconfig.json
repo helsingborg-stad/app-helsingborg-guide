@@ -3,14 +3,14 @@
     "baseUrl": ".",
     "paths": {
       "*": ["*"],
-      "@actions": ["../../guide-app/src/actions"],
+      "@actions": ["./src/actions"],
       "@assets": ["./assets"],
       "@data": ["./data"],
-      "@json-schemas": ["../../guide-app/json-schemas"],
-      "@services": ["../../guide-app/src/services"],
+      "@json-schemas": ["./json-schemas"],
+      "@services": ["./src/services"],
       "@shared-components": ["./src/components/shared"],
-      "@src": ["../../guide-app/src"],
-      "@utils": ["../../guide-app/src/utils"]
+      "@src": ["./src"],
+      "@utils": ["./src/utils"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true

@@ -7,7 +7,13 @@
     "json-schemas/"
   ],
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "prepare": "patch-package",
+    "eslint": "eslint flow-typed index.js src --report-unused-disable-directives",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "flow": "flow --show-all-errors"
+  },
   "peerDependencies": {
     "@react-native-community/async-storage": "^1.6.3",
     "@react-native-community/geolocation": "^2.0.2",
@@ -49,5 +55,21 @@
     "redux-persist": "6.0.0",
     "redux-thunk": "2.3.0",
     "rn-fetch-blob": "^0.11.2"
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": [
+      "./jest/mocks.js"
+    ],
+    "moduleNameMapper": {
+      "^@actions(.*)$": "<rootDir>/src/actions$1",
+      "^@assets(.*)$": "<rootDir>/assets$1",
+      "^@data(.*)$": "<rootDir>/data$1",
+      "^@json-schemas(.*)$": "<rootDir>/json-schemas$1",
+      "^@services(.*)$": "<rootDir>/src/services$1",
+      "^@shared-components(.*)$": "<rootDir>/src/components/shared$1",
+      "^@src(.*)$": "<rootDir>/src$1",
+      "^@utils(.*)$": "<rootDir>/src/utils$1"
+    }
   }
 }
