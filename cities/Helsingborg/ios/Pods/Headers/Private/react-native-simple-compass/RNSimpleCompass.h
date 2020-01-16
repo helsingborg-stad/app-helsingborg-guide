@@ -1,1 +1,0 @@
-../../../../../node_modules/react-native-simple-compass/ios/RNSimpleCompass.h
