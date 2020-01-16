@@ -199,13 +199,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03"
 
-    // ViroReact
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation project(":arcore_client")
-    implementation project(":gvr_common")
-    implementation project(path: ":viro_renderer")
-    implementation project(path: ":react_viro")
     implementation "com.google.android.exoplayer:exoplayer:2.7.1"
     implementation "com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7"
     implementation "com.amazonaws:aws-android-sdk-core:2.7.7"

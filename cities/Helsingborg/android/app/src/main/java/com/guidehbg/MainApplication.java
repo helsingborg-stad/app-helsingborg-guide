@@ -11,7 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import com.guidehbg.AppPackages;
-import com.viromedia.bridge.ReactViroPackage;
 import com.mediamodule.MediaControlPackage;
 import com.mediamodule.MediaPackage;
 import com.notificationmodule.NotificationPackage;
@@ -32,7 +31,6 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
 
-          packages.add(new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("GVR")));
           packages.add(new MediaPackage());
           packages.add(new MediaControlPackage());
           packages.add(new NotificationPackage());
