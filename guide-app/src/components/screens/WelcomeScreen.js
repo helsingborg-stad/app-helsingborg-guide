@@ -114,6 +114,8 @@ export default class WelcomeScreen extends Component {
     header: null
   };
 
+  // TODO: something broke here during updates, look at https://github.com/leecade/react-native-swiper and try and fix
+  // index is off when swiping so button shows wrong text
   onMomentumScrollEnd(e, state, context) {
     this.setState({ index: context.state.index, total: context.state.total });
   }
@@ -121,16 +123,11 @@ export default class WelcomeScreen extends Component {
   displaySlides() {
     const instructions = LangService.instructions.steps;
     return instructions.map((item, index) => {
-      const btnText =
-        index === instructions.length - 1
-          ? LangService.strings.LETS_GO
-          : LangService.strings.JUMP_OVER;
       if (index === 0) {
         return (
           <FirstInstructionSlide
             key={index}
             content={item.content}
-            closeBtnText={btnText}
             backgroundImageSource={IMAGE1}
           />
         );
@@ -140,7 +137,6 @@ export default class WelcomeScreen extends Component {
           key={index}
           content={item.content}
           thumbnailSource={item.thumbnail}
-          closeBtnText={btnText}
           backgroundImageSource={item.background}
         />
       );
