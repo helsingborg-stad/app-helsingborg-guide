@@ -54,9 +54,10 @@ const TrailView = (props: Props) => {
         items={mapItems}
         showNumberedMapMarkers
         showDirections
-        supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(
-          trail
-        )}
+        // NOTE: this disables checking for AR mode
+        // supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(
+        //   trail
+        // )}
         navigation={navigation}
       />
       {showInfoOverlay

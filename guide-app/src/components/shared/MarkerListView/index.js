@@ -8,14 +8,12 @@ import {
   Image,
   Text
 } from "react-native";
-import { ViroUtils } from "react-viro";
 import AsyncStorage from "@react-native-community/async-storage";
 import { connect } from "react-redux";
 import { isEqual } from "lodash";
 import IconTextTouchable from "@shared-components/IconTextTouchable";
 import SegmentControl from "@shared-components/SegmentControl";
 import MapMarkerView from "@shared-components/MapMarkerView";
-// import ARView from "@shared-components/ARView";
 import LangService from "@services/langService";
 import {
   LocationUtils,
@@ -31,8 +29,6 @@ import {
 } from "@actions/uiStateActions";
 import { AR_INSTRUCTIONS_SHOWN } from "@src/lib/my_consts";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
-
-const { isARSupportedOnDevice } = ViroUtils;
 
 type Props = {
   navigation: any,
@@ -80,52 +76,7 @@ class MarkerListView extends Component<Props, State> {
 
   async componentDidMount() {
     this.scrollToIndex(0);
-
-    const arSupported = await this.checkARSupport();
-    await this.showInstructionsIfNeeded(arSupported);
-    this.setState({ shouldShowInstructions: false, arSupported }); //eslint-disable-line react/no-did-mount-set-state
   }
-
-  async showInstructionsIfNeeded(arSupported: boolean): Promise<void> {
-    return new Promise(async resolve => {
-      const { supportedNavigationModes, navigation } = this.props;
-      const includesAR = supportedNavigationModes
-        ? supportedNavigationModes.includes(
-            NavigationModeUtils.NavigationModes.AR
-          )
-        : false;
-
-      if (includesAR) {
-        const hasShownInstructions = await AsyncStorage.getItem(
-          AR_INSTRUCTIONS_SHOWN
-        );
-        const shouldShowInstructions = hasShownInstructions
-          ? JSON.parse(hasShownInstructions) === false && arSupported
-          : true;
-
-        if (shouldShowInstructions) {
-          navigation.navigate("ARIntroductionScreen", {
-            onRequestClose: () => {
-              AsyncStorage.setItem(AR_INSTRUCTIONS_SHOWN, JSON.stringify(true));
-              resolve();
-            }
-          });
-        } else {
-          resolve();
-        }
-      } else {
-        resolve();
-      }
-    });
-  }
-
-  checkARSupport = () =>
-    new Promise(resolve => {
-      isARSupportedOnDevice(
-        () => resolve(false),
-        () => resolve(true)
-      );
-    });
 
   listRef: ?FlatList<MapItem>;
 
@@ -482,14 +433,8 @@ class MarkerListView extends Component<Props, State> {
     const {
       selectedNavigationMode,
       activeMarker,
-      shouldShowInstructions,
-      arSupported,
       showHorizontalList
     } = this.state;
-
-    if (shouldShowInstructions === null) {
-      return <View />;
-    }
 
     return (
       <View style={styles.container}>
@@ -520,24 +465,9 @@ class MarkerListView extends Component<Props, State> {
             activeMarker={activeMarker}
           />
         )}
-        {/* {selectedNavigationMode === NavigationModeUtils.NavigationModes.AR && (
-          <ARView
-            items={items}
-            userLocation={userLocation}
-            activeMarker={activeMarker}
-            onArMarkerPressed={index => {
-              AnalyticsUtils.logEvent("tap_ar_pin");
-              this.scrollToIndex(index);
-            }}
-            arSupported={arSupported}
-            onCameraPermissionDenied={() =>
-              this.setState({ showHorizontalList: false })
-            }
-          />
-        )} */}
+
         {!showHorizontalList ||
-          (selectedNavigationMode === NavigationModeUtils.NavigationModes.AR &&
-            !arSupported) ||
+          selectedNavigationMode === NavigationModeUtils.NavigationModes.AR ||
           this.renderHorizontalList(items)}
       </View>
     );
