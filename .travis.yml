@@ -1,11 +1,37 @@
 matrix:
   include:
-    - name: "Build Node"
+    - name: "Run flow & tests"
       language: node_js
       node_js:
         - lts/*
       before_install:
         - cd ./guide-app
+      install:
+        - yarn install
+      before_script:
+        - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      script:
+        - ./scripts/ci-run-tests.sh
+
+    - name: "Helsingborg build bundle"
+      language: node_js
+      node_js:
+        - lts/*
+      before_install:
+        - cd ./cities/Helsingborg
+      install:
+        - yarn install
+      before_script:
+        - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      script:
+        - ./scripts/ci-build-node.sh
+
+    - name: "Lund build bundle"
+      language: node_js
+      node_js:
+        - lts/*
+      before_install:
+        - cd ./cities/Lund
       install:
         - yarn install
       before_script:
