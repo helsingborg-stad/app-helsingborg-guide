@@ -2,6 +2,9 @@
 ; We fork some components by platform
 .*/*[.]android.js
 
+; We kept the AR/Viro things but they wont resolve
+.*/src/components/shared/ARView/.*
+
 ; Ignore "BUCK" generated dirs
 <PROJECT_ROOT>/\.buckd/
 
@@ -19,11 +22,12 @@ node_modules/warning/.*
 
 [include]
 ../../guide-app/src
+../../node_modules
 
 [libs]
-node_modules/react-native/Libraries/react-native/react-native-interface.js
-node_modules/react-native/flow/
-node_modules/rn-fetch-blob/index.js.flow
+../../node_modules/react-native/Libraries/react-native/react-native-interface.js
+../../node_modules/react-native/flow/
+../../node_modules/rn-fetch-blob/index.js.flow
 flow-typed/
 
 [options]
@@ -38,8 +42,8 @@ module.file_ext=.ios.js
 
 munge_underscores=true
 
-module.name_mapper='^react-native$' -> '<PROJECT_ROOT>/node_modules/react-native/Libraries/react-native/react-native-implementation'
-module.name_mapper='^react-native/\(.*\)$' -> '<PROJECT_ROOT>/node_modules/react-native/\1'
+module.name_mapper='^react-native$' -> '<PROJECT_ROOT>/../../node_modules/react-native/Libraries/react-native/react-native-implementation'
+module.name_mapper='^react-native/\(.*\)$' -> '<PROJECT_ROOT>/../../node_modules/react-native/\1'
 module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> '<PROJECT_ROOT>/node_modules/react-native/Libraries/Image/RelativeImageStub'
 
 # Follow our module aliases (found in babel.config.js)
