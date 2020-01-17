@@ -7,16 +7,33 @@ App for iphone/android displaying guides on specific locations in helsingborg. I
 ## Getting started
 
 1. Clone repo from [Repo](ssh://git@github.com:helsingborg-stad/app-helsingborg-guide.git)
-2. Change to the directory of your chosen city in ./cities
+2. Change to the directory of your chosen city in `./cities`
 3. Run `yarn install` to install node packages
 4. Run `yarn start` to get Metro running
 5. Run `npx react-native run-ios --device` or `npx react-native run-android` to build the app as normal
 
 ## Working with cities
 
+The javascript code is shared between cities, so any changes are made in the `./guide-app/src` directory.
+To facilitate that, we use yarn [workspaces](https://yarnpkg.com/lang/en/docs/workspaces/), meaning all npm packages lives in `./node_modules`. The configuration for that is in `./package.json`
+
+```json
+  "workspaces": [
+    "cities/*",
+    "guide-app"
+  ],
+```
+
+For each app to be able to build, we use a `babel.config.js` with `module-resolver` aliases that point to `./guide-app`. The **only exceptions** are `@assets` (points to `guide-app/assets/[city]`) and `@data` (e.g `cities/Lund/data`).\
+There is also a `metro.config.js` in each city folder that makes sure Metro looks for packages in `./node_modules`.
+
+### API integration
+
+To fetch data from the API for respective city, the app uses a `GROUP_ID`, found in `[city]/data/endpoints.js`.
+
 ### Updating a city
 
-As the javascript code is meant to be shared between cities, make any changes in the `./guide-app/src` directory.
+**NOTE** Might be obsolete
 
 Once you have a city-specific assets directory (see below) make any asset changes in the `./assets/city_name` directory.
 
