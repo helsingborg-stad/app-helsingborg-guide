@@ -20,8 +20,7 @@
     "ios:simulator:debug": "react-native run-ios --simulator --configuration Debug",
     "ios:simulator:release": "react-native run-ios --simulator --configuration Release",
     "react:link": "react-native link",
-    "translate": "node ./scripts/translate.js",
-    "postinstall": "jetify"
+    "translate": "node ./scripts/translate.js"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.3",
