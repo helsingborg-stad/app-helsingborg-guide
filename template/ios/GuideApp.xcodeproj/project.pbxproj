@@ -276,7 +276,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				73A3AEF5FCDBC4A1038D5DF7 /* [CP] Embed Pods Frameworks */,
 				75BFEB4CC57C2D7A09022230 /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
@@ -427,7 +426,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\nexport PROJECT_ROOT=\"$PROJECT_DIR/../..\"\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export NODE_BINARY=node\nexport PROJECT_ROOT=\"$PROJECT_DIR/../..\"\nexport BUNDLE_CONFIG=\"$PROJECT_DIR/../metro.config.js\"\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		08F82723EB8CA7AD8E50F9F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

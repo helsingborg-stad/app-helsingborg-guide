@@ -506,7 +506,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\nexport PROJECT_ROOT=\"$PROJECT_DIR/../..\"\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export NODE_BINARY=node\nexport PROJECT_ROOT=\"$PROJECT_DIR/../..\"\nexport BUNDLE_CONFIG=\"$PROJECT_DIR/../metro.config.js\"\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		08F82723EB8CA7AD8E50F9F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
