@@ -6,6 +6,7 @@ import jsonSchema from "ajv/lib/refs/json-schema-draft-06.json";
 
 const beacon = require("@json-schemas/IBeacon.json");
 const contentObject = require("@json-schemas/IContentObject.json");
+const event = require("@json-schemas/IEvent.json");
 const guide = require("@json-schemas/IGuide.json");
 const guideGroup = require("@json-schemas/IGuideGroup.json");
 const link = require("@json-schemas/ILink.json");
@@ -24,6 +25,7 @@ ajv.addMetaSchema(jsonSchema);
 // Add schemas
 ajv.addSchema(guideGroup, "guideGroup");
 ajv.addSchema(pointProperty, "pointProperty");
+ajv.addSchema(event, "event");
 ajv.addSchema(guide, "guide");
 ajv.addSchema(mediaContent, "mediaContent");
 ajv.addSchema(contentObject, "contentObject");

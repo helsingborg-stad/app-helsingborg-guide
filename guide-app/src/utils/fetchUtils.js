@@ -104,7 +104,23 @@ export async function getNavigation(
   return fetchedNavigation;
 }
 
+export async function getEvents(
+  langCode: string,
+  dateStart: Date,
+  dateEnd: Date
+): Promise<Event[]> {
+  // TODO: use date-fns or similar
+  const dateStartFmt = new Date(dateStart).toISOString().substring(0, 10);
+  const dateEndFmt = new Date(dateEnd).toISOString().substring(0, 10);
+  const params = `&userGroupId=${GROUP_ID}&dateStart=${dateStartFmt}&dateEnd=${dateEndFmt}`;
+  const json = await fetchJSON("events", langCode, params);
+  const fetchedEvents: Event[] = validateData(json, "event");
+
+  return fetchedEvents;
+}
+
 export default {
+  getEvents,
   getGuideGroups,
   getGuides,
   getGuidesForGuideGroup,

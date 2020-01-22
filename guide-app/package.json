@@ -71,5 +71,8 @@
       "^@src(.*)$": "<rootDir>/src$1",
       "^@utils(.*)$": "<rootDir>/src/utils$1"
     }
+  },
+  "dependencies": {
+    "html-entities": "^1.2.1"
   }
 }

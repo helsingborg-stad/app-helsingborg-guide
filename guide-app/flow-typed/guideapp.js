@@ -32,6 +32,9 @@ declare type Action =
   | { type: "FETCH_GUIDES_REQUEST" }
   | { type: "FETCH_GUIDES_SUCCESS", guides: Guide[] }
   | { type: "FETCH_GUIDES_FAILURE", error: Error }
+  | { type: "FETCH_EVENTS_REQUEST" }
+  | { type: "FETCH_EVENTS_SUCCESS", events: Event[] }
+  | { type: "FETCH_EVENTS_FAILURE", error: Error }
   | { type: "START_DOWNLOAD_GUIDE", guide: Guide }
   | { type: "PAUSE_DOWNLOAD_GUIDE", guide: Guide }
   | { type: "RESUME_DOWNLOAD_GUIDE", guide: Guide }
@@ -149,6 +152,18 @@ declare type ContentObject = {
   location?: Location
 };
 
+declare type Event = {
+  id: string,
+  eventId: number,
+  description: string,
+  name: string,
+  slug: string,
+  location: Location,
+  imageUrl: string,
+  dateStart: string,
+  dateEnd: string
+};
+
 declare type Guide = {
   id: number,
   slug: string,
@@ -196,6 +211,11 @@ declare type GuideState = {
   items: Guide[]
 };
 
+declare type EventState = {
+  isFetching: boolean,
+  items: Event[]
+};
+
 declare type Images = {
   thumbnail?: ?string,
   medium?: ?string,
@@ -213,7 +233,8 @@ declare type Location = {
   longitude: number,
   openingHours: OpenHour[],
   openingHourExceptions: OpenHourException[],
-  links: LinkAndService[]
+  links: LinkAndService[],
+  title?: String
 };
 
 declare type MapItem = {
@@ -305,6 +326,7 @@ declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
   guides: GuideState,
+  events: EventState,
   geolocation: {
     position: GeolocationType,
     bearing: number

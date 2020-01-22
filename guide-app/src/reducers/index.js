@@ -1,5 +1,6 @@
 import guideGroups from "./guideGroupReducer";
 import guides from "./guideReducer";
+import events from "./eventReducer";
 import navigation from "./navigationReducer";
 import audio from "./audioReducer";
 import internet from "./internetReducer";
@@ -12,6 +13,7 @@ import downloadedGuides from "./downloadedGuides";
 import arState from "./arReducer";
 
 const rootReducer = {
+  events,
   guideGroups,
   guides,
   navigation,

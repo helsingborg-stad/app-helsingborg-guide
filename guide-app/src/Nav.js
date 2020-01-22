@@ -5,6 +5,7 @@ import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
 import {
+  CalendarScreen,
   DebugScreen,
   DownloadsScreen,
   GuideScreen,
@@ -43,7 +44,8 @@ const GuideNavigator = createStackNavigator(
     SettingsScreen: { screen: SettingsScreen },
     DebugScreen: { screen: DebugScreen },
     CategoryListScreen: { screen: CategoryListScreen },
-    CategoryMapScreen: { screen: CategoryMapScreen }
+    CategoryMapScreen: { screen: CategoryMapScreen },
+    CalendarScreen: { screen: CalendarScreen }
   },
   { defaultNavigationOptions: HeaderStyles.default }
 );
