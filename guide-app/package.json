@@ -73,6 +73,8 @@
     }
   },
   "dependencies": {
+    "date-fns": "^2.9.0",
+    "date-fns-tz": "^1.0.9",
     "html-entities": "^1.2.1"
   }
 }
