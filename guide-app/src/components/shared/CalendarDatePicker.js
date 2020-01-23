@@ -6,14 +6,17 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { Colors, TextStyles } from "@assets/styles";
 import { StyleSheetUtils } from "@utils";
 import { DateUtils } from "@utils";
+import { isToday } from "date-fns";
 
 const styles = StyleSheet.create({
   datePickerContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 5,
-    marginBottom: 15
+    alignSelf: "center",
+    marginTop: 4,
+    marginBottom: 12,
+    width: "70%"
   },
   datePickerText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -41,14 +44,21 @@ function CalendarDatePicker({
   getPrevDate
 }: Props) {
   const dateFmt = DateUtils.longDate(chosenDate, currentLanguage);
+  const chosenDateIsToday = isToday(chosenDate);
+  const prevBtnOpacity = chosenDateIsToday ? 0.5 : 1;
+  const prevBtnStyles = { opacity: prevBtnOpacity };
   return (
     <View style={styles.datePickerContainer}>
-      <TouchableOpacity onPress={getPrevDate}>
-        <Icon name="chevron-left" size={30} color="black" />
+      <TouchableOpacity
+        onPress={getPrevDate}
+        disabled={chosenDateIsToday}
+        style={prevBtnStyles}
+      >
+        <Icon name="chevron-left" size={34} color="black" />
       </TouchableOpacity>
       <Text style={styles.datePickerText}>{dateFmt}</Text>
       <TouchableOpacity onPress={getNextDate}>
-        <Icon name="chevron-right" size={30} color="black" />
+        <Icon name="chevron-right" size={34} color="black" />
       </TouchableOpacity>
     </View>
   );
