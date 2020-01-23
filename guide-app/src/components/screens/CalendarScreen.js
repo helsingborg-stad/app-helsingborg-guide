@@ -11,6 +11,7 @@ import {
   SafeAreaView
 } from "react-native";
 import { connect } from "react-redux";
+import { addDays, subDays } from "date-fns";
 
 import CalendarEvent from "@shared-components/CalendarEvent";
 import CalendarDatePicker from "@shared-components/CalendarDatePicker";
@@ -112,8 +113,7 @@ class CalendarScreen extends Component<Props, State> {
   getNextDate = () => {
     const { currentLanguage, getEvents } = this.props;
     const { chosenDate } = this.state;
-    const nextDate = new Date();
-    nextDate.setDate(chosenDate.getDate() + 1);
+    const nextDate = addDays(chosenDate, 1);
     getEvents(currentLanguage, nextDate, nextDate);
     this.setState({ chosenDate: nextDate });
   };
@@ -121,8 +121,7 @@ class CalendarScreen extends Component<Props, State> {
   getPrevDate = () => {
     const { currentLanguage, getEvents } = this.props;
     const { chosenDate } = this.state;
-    const prevDate = new Date();
-    prevDate.setDate(chosenDate.getDate() - 1);
+    const prevDate = subDays(chosenDate, 1);
     getEvents(currentLanguage, prevDate, prevDate);
     this.setState({ chosenDate: prevDate });
   };
