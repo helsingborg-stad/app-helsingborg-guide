@@ -19,6 +19,7 @@ const colors = {
   gray11: "#F0F0F0",
   gray12: "#f8f8f8",
   gray2C: "#2C2C2C",
+  grayEA: "#EAEAEA",
 
   //OFF WHITE
   offWhite1: "#f2f2f2",

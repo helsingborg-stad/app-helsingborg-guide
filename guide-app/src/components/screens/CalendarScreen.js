@@ -14,11 +14,14 @@ import { connect } from "react-redux";
 
 import CalendarEvent from "@shared-components/CalendarEvent";
 import CalendarDatePicker from "@shared-components/CalendarDatePicker";
-import { Colors } from "@assets/styles";
+import LangService from "@services/langService";
+import { Colors, TextStyles } from "@assets/styles";
 import { showBottomBar } from "@actions/uiStateActions";
 import { fetchEvents } from "@actions/eventActions";
+import { StyleSheetUtils } from "@utils";
 
 const styles = StyleSheet.create({
+  flex: { flex: 1 },
   container: {
     flex: 1,
     flexDirection: "row",
@@ -29,9 +32,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4
   },
   loadingSpinner: {
-    height: "100%",
-    width: "100%"
-  }
+    flex: 1
+  },
+  noContent: {
+    backgroundColor: Colors.grayEA,
+    justifyContent: "center",
+    alignItems: "center",
+    opacity: 0.6
+  },
+  noContentText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily,
+    {
+      color: Colors.black26,
+      fontWeight: "500",
+      fontSize: 19,
+      lineHeight: 22,
+      textAlign: "center",
+      width: "50%"
+    }
+  ])
 });
 
 type LayoutProps = {
@@ -40,10 +59,20 @@ type LayoutProps = {
 
 function Layout({ children }: LayoutProps) {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.flex}>
       <StatusBar barStyle="dark-content" />
       {children}
     </SafeAreaView>
+  );
+}
+
+function NoContent() {
+  return (
+    <View style={{ ...styles.flex, ...styles.noContent }}>
+      <Text style={styles.noContentText}>
+        {LangService.strings.CALENDAR_NO_CONTENT}
+      </Text>
+    </View>
   );
 }
 
@@ -116,7 +145,6 @@ class CalendarScreen extends Component<Props, State> {
       />
     );
 
-    // TODO: extract actual content to new component
     if (showLoadingSpinner) {
       return (
         <Layout>
@@ -130,7 +158,7 @@ class CalendarScreen extends Component<Props, State> {
       return (
         <Layout>
           {datePicker}
-          <Text>No CONTENT</Text>
+          <NoContent />
         </Layout>
       );
     }
