@@ -22,18 +22,9 @@ import { showBottomBar } from "@actions/uiStateActions";
 import { fetchEvents } from "@actions/eventActions";
 import { StyleSheetUtils } from "@utils";
 import { eventCalendarURL } from "@data/urls";
+import { DateUtils } from "@utils";
 
 const defaultImage = require("@assets/images/no-image-featured-image.png");
-
-type Props = {
-  navigation: any,
-  items: Event[],
-  showLoadingSpinner: boolean,
-  noContent: boolean,
-  currentLanguage: string,
-  dispatchShowBottomBar(visible: boolean): void,
-  getEvents(currentLanguage: string, dateStart: Date, dateEnd: Date): void
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -55,12 +46,16 @@ const styles = StyleSheet.create({
   datePickerText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: "500",
       fontStyle: "normal",
       color: Colors.black26
     }
   ]),
+  loadingSpinner: {
+    height: "100%",
+    width: "100%"
+  },
   item: {
     marginBottom: 30,
     padding: 4,
@@ -80,7 +75,7 @@ const styles = StyleSheet.create({
   listItemHoursContainer: {
     alignItems: "center",
     marginTop: -10,
-    marginBottom: 8
+    marginBottom: 4
   },
   listItemHoursView: {
     borderRadius: 4,
@@ -102,56 +97,80 @@ const styles = StyleSheet.create({
       color: Colors.black
     }
   ]),
-  listItemTitle: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily,
-    {
-      fontSize: 16,
-      lineHeight: 16,
-      fontWeight: "900",
-      fontStyle: "normal",
-      color: Colors.black26,
-      paddingBottom: 12
-    }
-  ]),
   listLocationText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
       fontSize: 12,
+      lineHeight: 14,
       fontWeight: "500",
-      lineHeight: 12,
       letterSpacing: 0.75,
       textTransform: "uppercase",
       color: Colors.gray3,
-      padding: 5
+      padding: 5,
+      textAlign: "center"
+    }
+  ]),
+  listItemTitle: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily,
+    {
+      fontSize: 16,
+      fontWeight: "900",
+      fontStyle: "normal",
+      color: Colors.black26,
+      paddingBottom: 8,
+      textAlign: "center",
+      width: "80%"
     }
   ]),
   listItemDescription: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
       fontSize: 13,
-      lineHeight: 13,
+      lineHeight: 15,
+      letterSpacing: 0.19,
       fontWeight: "normal",
       fontStyle: "normal",
       color: Colors.gray2C,
-      textAlign: "center"
+      textAlign: "center",
+      paddingHorizontal: 4
     }
   ])
 });
 
-function DatePicker({}) {
+function DatePicker({
+  chosenDate,
+  currentLanguage,
+  getNextDate,
+  getPrevDate
+}: {
+  chosenDate: Date,
+  currentLanguage: string,
+  getNextDate: any,
+  getPrevDate: any
+}) {
+  const dateFmt = DateUtils.longDate(chosenDate, currentLanguage);
   return (
     <View style={styles.datePickerContainer}>
-      <Icon name="chevron-left" size={30} color="black" />
-      <Text style={styles.datePickerText}>{new Date().toDateString()}</Text>
-      <Icon name="chevron-right" size={30} color="black" />
+      <TouchableOpacity onPress={getPrevDate}>
+        <Icon name="chevron-left" size={30} color="black" />
+      </TouchableOpacity>
+      <Text style={styles.datePickerText}>{dateFmt}</Text>
+      <TouchableOpacity onPress={getNextDate}>
+        <Icon name="chevron-right" size={30} color="black" />
+      </TouchableOpacity>
     </View>
   );
 }
 
-function EventItem({ event }: { event: Event }) {
+function EventItem({
+  event,
+  currentLanguage
+}: {
+  event: Event,
+  currentLanguage: string
+}) {
   const {
     description,
-    id,
     imageUrl,
     location,
     name,
@@ -163,9 +182,8 @@ function EventItem({ event }: { event: Event }) {
 
   const entities = new XmlEntities();
   const decodedLocationTitle = entities.decode(location.title);
-  // TODO: use date-fns or similar
-  const startTime = dateStart.substring(11, 16);
-  const endTime = dateEnd.substring(11, 16);
+  const startTime = DateUtils.getHours(dateStart, currentLanguage);
+  const endTime = DateUtils.getHours(dateEnd, currentLanguage);
 
   return (
     <TouchableOpacity
@@ -199,37 +217,108 @@ function EventItem({ event }: { event: Event }) {
   );
 }
 
-class CalendarScreen extends Component<Props> {
+type Props = {
+  navigation: any,
+  items: Event[],
+  showLoadingSpinner: boolean,
+  noContent: boolean,
+  currentLanguage: string,
+  dispatchShowBottomBar(visible: boolean): void,
+  getEvents(currentLanguage: string, dateStart: Date, dateEnd: Date): void
+};
+
+type State = {
+  chosenDate: Date
+};
+
+class CalendarScreen extends Component<Props, State> {
   static navigationOptions = () => {
     return { headerShown: false };
   };
 
-  componentDidMount() {
-    const { currentLanguage, dispatchShowBottomBar, getEvents } = this.props;
-    dispatchShowBottomBar(true);
-    const dateToday = new Date();
-    getEvents(currentLanguage, dateToday, dateToday);
+  constructor(props: Props) {
+    super(props);
+
+    const chosenDate = new Date();
+    this.state = { chosenDate };
   }
 
-  render() {
-    const { noContent, showLoadingSpinner, items } = this.props;
+  componentDidMount() {
+    const { currentLanguage, dispatchShowBottomBar, getEvents } = this.props;
+    const { chosenDate } = this.state;
+    dispatchShowBottomBar(true);
+    getEvents(currentLanguage, chosenDate, chosenDate);
+  }
 
+  getNextDate = () => {
+    const { currentLanguage, getEvents } = this.props;
+    const { chosenDate } = this.state;
+    const nextDate = new Date();
+    nextDate.setDate(chosenDate.getDate() + 1);
+    getEvents(currentLanguage, nextDate, nextDate);
+    this.setState({ chosenDate: nextDate });
+  };
+
+  getPrevDate = () => {
+    const { currentLanguage, getEvents } = this.props;
+    const { chosenDate } = this.state;
+    const prevDate = new Date();
+    prevDate.setDate(chosenDate.getDate() - 1);
+    getEvents(currentLanguage, prevDate, prevDate);
+    this.setState({ chosenDate: prevDate });
+  };
+
+  render() {
+    const {
+      currentLanguage,
+      noContent,
+      showLoadingSpinner,
+      items
+    } = this.props;
+    const { chosenDate } = this.state;
+
+    const datePicker = (
+      <DatePicker
+        chosenDate={chosenDate}
+        currentLanguage={currentLanguage}
+        getNextDate={() => this.getNextDate()}
+        getPrevDate={() => this.getPrevDate()}
+      />
+    );
+
+    // TODO: extract actual content to new component
     if (showLoadingSpinner) {
-      return <ActivityIndicator style={styles.loadingSpinner} />;
+      return (
+        <SafeAreaView>
+          <StatusBar barStyle="dark-content" />
+          {datePicker}
+          <ActivityIndicator style={styles.loadingSpinner} />
+        </SafeAreaView>
+      );
     }
 
     if (noContent) {
-      return <Text>No CONTENT</Text>;
+      return (
+        <SafeAreaView>
+          <StatusBar barStyle="dark-content" />
+          {datePicker}
+          <Text>No CONTENT</Text>
+        </SafeAreaView>
+      );
     }
 
     return (
       <SafeAreaView>
         <StatusBar barStyle="dark-content" />
-        <DatePicker />
+        {datePicker}
         <ScrollView>
           <View style={styles.container}>
             {items.map(event => (
-              <EventItem key={event.id} event={event} />
+              <EventItem
+                key={event.id}
+                event={event}
+                currentLanguage={currentLanguage}
+              />
             ))}
           </View>
         </ScrollView>
