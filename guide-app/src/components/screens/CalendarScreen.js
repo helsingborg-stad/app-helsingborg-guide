@@ -1,30 +1,22 @@
 // @flow
-import React, { Component } from "react";
+import * as React from "react";
+import { Component } from "react";
 import {
   ActivityIndicator,
-  Image,
-  Linking,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   SafeAreaView
 } from "react-native";
 import { connect } from "react-redux";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import { XmlEntities } from "html-entities";
 
-import LangService from "@services/langService";
-import { Colors, TextStyles } from "@assets/styles";
+import CalendarEvent from "@shared-components/CalendarEvent";
+import CalendarDatePicker from "@shared-components/CalendarDatePicker";
+import { Colors } from "@assets/styles";
 import { showBottomBar } from "@actions/uiStateActions";
 import { fetchEvents } from "@actions/eventActions";
-import { StyleSheetUtils } from "@utils";
-import { eventCalendarURL } from "@data/urls";
-import { DateUtils } from "@utils";
-
-const defaultImage = require("@assets/images/no-image-featured-image.png");
 
 const styles = StyleSheet.create({
   container: {
@@ -36,184 +28,22 @@ const styles = StyleSheet.create({
     marginBottom: 100,
     paddingHorizontal: 4
   },
-  datePickerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    marginTop: 5,
-    marginBottom: 15
-  },
-  datePickerText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily,
-    {
-      fontSize: 18,
-      fontWeight: "500",
-      fontStyle: "normal",
-      color: Colors.black26
-    }
-  ]),
   loadingSpinner: {
     height: "100%",
     width: "100%"
-  },
-  item: {
-    marginBottom: 30,
-    padding: 4,
-    width: "50%"
-  },
-  listItemImage: {
-    height: 205,
-    aspectRatio: 205 / 175
-  },
-  imageWrapper: {
-    overflow: "hidden",
-    alignItems: "stretch"
-  },
-  listItemTextContainer: {
-    alignItems: "center"
-  },
-  listItemHoursContainer: {
-    alignItems: "center",
-    marginTop: -10,
-    marginBottom: 4
-  },
-  listItemHoursView: {
-    borderRadius: 4,
-    backgroundColor: Colors.white,
-    paddingTop: 5,
-    paddingBottom: 4,
-    paddingHorizontal: 15,
-    shadowRadius: 12,
-    shadowColor: "black",
-    shadowOpacity: 0.16
-  },
-  listItemHoursText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily,
-    {
-      fontSize: 13,
-      lineHeight: 13,
-      fontWeight: "500",
-      fontStyle: "normal",
-      color: Colors.black
-    }
-  ]),
-  listLocationText: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily,
-    {
-      fontSize: 12,
-      lineHeight: 14,
-      fontWeight: "500",
-      letterSpacing: 0.75,
-      textTransform: "uppercase",
-      color: Colors.gray3,
-      padding: 5,
-      textAlign: "center"
-    }
-  ]),
-  listItemTitle: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily,
-    {
-      fontSize: 16,
-      fontWeight: "900",
-      fontStyle: "normal",
-      color: Colors.black26,
-      paddingBottom: 8,
-      textAlign: "center",
-      width: "80%"
-    }
-  ]),
-  listItemDescription: StyleSheetUtils.flatten([
-    TextStyles.defaultFontFamily,
-    {
-      fontSize: 13,
-      lineHeight: 15,
-      letterSpacing: 0.19,
-      fontWeight: "normal",
-      fontStyle: "normal",
-      color: Colors.gray2C,
-      textAlign: "center",
-      paddingHorizontal: 4
-    }
-  ])
+  }
 });
 
-function DatePicker({
-  chosenDate,
-  currentLanguage,
-  getNextDate,
-  getPrevDate
-}: {
-  chosenDate: Date,
-  currentLanguage: string,
-  getNextDate: any,
-  getPrevDate: any
-}) {
-  const dateFmt = DateUtils.longDate(chosenDate, currentLanguage);
+type LayoutProps = {
+  children?: React.Node
+};
+
+function Layout({ children }: LayoutProps) {
   return (
-    <View style={styles.datePickerContainer}>
-      <TouchableOpacity onPress={getPrevDate}>
-        <Icon name="chevron-left" size={30} color="black" />
-      </TouchableOpacity>
-      <Text style={styles.datePickerText}>{dateFmt}</Text>
-      <TouchableOpacity onPress={getNextDate}>
-        <Icon name="chevron-right" size={30} color="black" />
-      </TouchableOpacity>
-    </View>
-  );
-}
-
-function EventItem({
-  event,
-  currentLanguage
-}: {
-  event: Event,
-  currentLanguage: string
-}) {
-  const {
-    description,
-    imageUrl,
-    location,
-    name,
-    slug,
-    dateStart,
-    dateEnd
-  } = event;
-  const image = imageUrl ? { uri: imageUrl } : defaultImage;
-
-  const entities = new XmlEntities();
-  const decodedLocationTitle = entities.decode(location.title);
-  const startTime = DateUtils.getHours(dateStart, currentLanguage);
-  const endTime = DateUtils.getHours(dateEnd, currentLanguage);
-
-  return (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() => Linking.openURL(`${eventCalendarURL}/${slug}`)}
-    >
-      <View style={styles.imageWrapper}>
-        <Image style={styles.listItemImage} source={image} />
-      </View>
-      <View style={styles.listItemHoursContainer}>
-        <View style={styles.listItemHoursView}>
-          <Text style={styles.listItemHoursText}>
-            {startTime} - {endTime}
-          </Text>
-        </View>
-      </View>
-      <View style={styles.listItemTextContainer}>
-        <Text style={styles.listLocationText}>{decodedLocationTitle}</Text>
-        <Text style={styles.listItemTitle}>{name}</Text>
-        <View>
-          <Text
-            style={styles.listItemDescription}
-            numberOfLines={3}
-            ellipsizeMode="tail"
-          >
-            {description}
-          </Text>
-        </View>
-      </View>
-    </TouchableOpacity>
+    <SafeAreaView>
+      <StatusBar barStyle="dark-content" />
+      {children}
+    </SafeAreaView>
   );
 }
 
@@ -278,7 +108,7 @@ class CalendarScreen extends Component<Props, State> {
     const { chosenDate } = this.state;
 
     const datePicker = (
-      <DatePicker
+      <CalendarDatePicker
         chosenDate={chosenDate}
         currentLanguage={currentLanguage}
         getNextDate={() => this.getNextDate()}
@@ -289,32 +119,29 @@ class CalendarScreen extends Component<Props, State> {
     // TODO: extract actual content to new component
     if (showLoadingSpinner) {
       return (
-        <SafeAreaView>
-          <StatusBar barStyle="dark-content" />
+        <Layout>
           {datePicker}
           <ActivityIndicator style={styles.loadingSpinner} />
-        </SafeAreaView>
+        </Layout>
       );
     }
 
     if (noContent) {
       return (
-        <SafeAreaView>
-          <StatusBar barStyle="dark-content" />
+        <Layout>
           {datePicker}
           <Text>No CONTENT</Text>
-        </SafeAreaView>
+        </Layout>
       );
     }
 
     return (
-      <SafeAreaView>
-        <StatusBar barStyle="dark-content" />
+      <Layout>
         {datePicker}
         <ScrollView>
           <View style={styles.container}>
             {items.map(event => (
-              <EventItem
+              <CalendarEvent
                 key={event.id}
                 event={event}
                 currentLanguage={currentLanguage}
@@ -322,7 +149,7 @@ class CalendarScreen extends Component<Props, State> {
             ))}
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </Layout>
     );
   }
 }
