@@ -1,0 +1,74 @@
+platform :ios, '9.3' # 9.3 required for ViroReact
+require_relative '../../../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+target 'Helsingborg' do
+  # Pods for Helsingborg
+  rn_path = '../../../node_modules/react-native'
+  pod 'FBLazyVector', :path => "#{rn_path}/Libraries/FBLazyVector"
+  pod 'FBReactNativeSpec', :path => "#{rn_path}/Libraries/FBReactNativeSpec"
+  pod 'RCTRequired', :path => "#{rn_path}/Libraries/RCTRequired"
+  pod 'RCTTypeSafety', :path => "#{rn_path}/Libraries/TypeSafety"
+  pod 'React', :path => "#{rn_path}/"
+  pod 'React-Core', :path => "#{rn_path}/"
+  pod 'React-CoreModules', :path => "#{rn_path}/React/CoreModules"
+  pod 'React-Core/DevSupport', :path => "#{rn_path}/"
+  pod 'React-RCTActionSheet', :path => "#{rn_path}/Libraries/ActionSheetIOS"
+  pod 'React-RCTAnimation', :path => "#{rn_path}/Libraries/NativeAnimation"
+  pod 'React-RCTBlob', :path => "#{rn_path}/Libraries/Blob"
+  pod 'React-RCTImage', :path => "#{rn_path}/Libraries/Image"
+  pod 'React-RCTLinking', :path => "#{rn_path}/Libraries/LinkingIOS"
+  pod 'React-RCTNetwork', :path => "#{rn_path}/Libraries/Network"
+  pod 'React-RCTSettings', :path => "#{rn_path}/Libraries/Settings"
+  pod 'React-RCTText', :path => "#{rn_path}/Libraries/Text"
+  pod 'React-RCTVibration', :path => "#{rn_path}/Libraries/Vibration"
+  pod 'React-Core/RCTWebSocket', :path => "#{rn_path}/"
+
+  pod 'React-cxxreact', :path => "#{rn_path}/ReactCommon/cxxreact"
+  pod 'React-jsi', :path => "#{rn_path}/ReactCommon/jsi"
+  pod 'React-jsiexecutor', :path => "#{rn_path}/ReactCommon/jsiexecutor"
+  pod 'React-jsinspector', :path => "#{rn_path}/ReactCommon/jsinspector"
+  pod 'ReactCommon/jscallinvoker', :path => "#{rn_path}/ReactCommon"
+  pod 'ReactCommon/turbomodule/core', :path => "#{rn_path}/ReactCommon"
+  pod 'Yoga', :path => "#{rn_path}/ReactCommon/yoga"
+
+  pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"
+  pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/glog.podspec"
+  pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
+
+  #PERMISSIONS
+  permissions_path = "#{rn_path}-permissions/ios"
+
+  pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral.podspec"
+  # pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars.podspec"
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+  # pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts.podspec"
+  # pod 'Permission-FaceID', :path => "#{permissions_path}/FaceID.podspec"
+  # pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways.podspec"
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse.podspec"
+  # pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary.podspec"
+  # pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone.podspec"
+  # pod 'Permission-Motion', :path => "#{permissions_path}/Motion.podspec"
+  pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications.podspec"
+  # pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary.podspec"
+  # pod 'Permission-Reminders', :path => "#{permissions_path}/Reminders.podspec"
+  # pod 'Permission-Siri', :path => "#{permissions_path}/Siri.podspec"
+  # pod 'Permission-SpeechRecognition', :path => "#{permissions_path}/SpeechRecognition.podspec"
+  # pod 'Permission-StoreKit', :path => "#{permissions_path}/StoreKit.podspec"
+
+  target 'HelsingborgTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  use_native_modules!
+end
+
+target 'Helsingborg-tvOS' do
+  # Pods for Helsingborg-tvOS
+
+  target 'Helsingborg-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

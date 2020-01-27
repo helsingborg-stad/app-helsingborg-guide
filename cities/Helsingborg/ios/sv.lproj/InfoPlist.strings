@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Helsingborg
+
+  Created by Matt O'Sullivan on 2019-12-04.
+  Copyright © 2019 Facebook. All rights reserved.
+*/
+
+"NSBluetoothPeripheralUsageDescription" = "Används för att hitta närliggande beacons.";
+"NSCameraUsageDescription" = "Kameran används enbart i den virtuella guiden.";
+"NSLocationWhenInUseUsageDescription" = "Används för att hämta innehåll och visa din position på kartan.";

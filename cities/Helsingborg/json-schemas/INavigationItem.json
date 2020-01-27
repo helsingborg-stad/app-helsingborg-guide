@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "definitions": {
+        "NavigationItemType": {
+            "enum": [
+                "guide",
+                "guidegroup"
+            ],
+            "type": "string"
+        }
+    },
+    "properties": {
+        "id": {
+            "type": "number"
+        },
+        "type": {
+            "$ref": "#/definitions/NavigationItemType"
+        }
+    },
+    "required": [
+        "id",
+        "type"
+    ],
+    "type": "object"
+}
+
