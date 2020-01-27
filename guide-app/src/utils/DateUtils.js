@@ -9,6 +9,10 @@ function longDate(date: Date, locale: string): string {
   return format(new Date(date), "PP", { locale: locales[locale] });
 }
 
+function shortDate(date: Date): string {
+  return format(date, "yyyy-MM-dd");
+}
+
 // https://date-fns.org/v2.9.0/docs/I18n
 function getHours(date: string, locale: string): string {
   return format(new Date(date), "kk:mm", { locale: locales[locale] });
@@ -16,5 +20,6 @@ function getHours(date: string, locale: string): string {
 
 export default {
   getHours,
-  longDate
+  longDate,
+  shortDate
 };

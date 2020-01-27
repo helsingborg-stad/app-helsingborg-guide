@@ -14,7 +14,6 @@ export function fetchEventsFailure(error: Error): Action {
   return { type: "FETCH_EVENTS_FAILURE", error };
 }
 
-// TODO: dateStart, dateEnd
 export function fetchEvents(
   langCode: string,
   dateStart: Date,

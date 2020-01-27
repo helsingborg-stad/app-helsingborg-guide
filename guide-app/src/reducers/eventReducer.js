@@ -29,7 +29,7 @@ export default function eventReducer(
       return { ...state, items, isFetching: false };
     }
     case "FETCH_EVENTS_FAILURE":
-      return { ...state, isFetching: false };
+      return { ...state, isFetching: false, items: [] };
     default:
       return state;
   }
