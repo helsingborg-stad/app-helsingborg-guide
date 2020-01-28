@@ -31,7 +31,7 @@ const colors = {
   themeExtra2: "#d6aacd",
   themeExtra3: "#ED57AC",
   themeExtra4: "#bc2b78",
-  themePrimary: "#a61380",
+  themePrimary: "#711A5B",
   themeSecondary: "#7B075E",
   themeTertiary: "#A84C98",
 
