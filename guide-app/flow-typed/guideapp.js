@@ -287,6 +287,7 @@ declare type UIState = {
   currentCategory: ?number,
   developerMode: boolean,
   currentBottomBarTab: number,
+  currentHomeTab: number,
   showBottomBar: boolean
 };
 

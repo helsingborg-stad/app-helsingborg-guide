@@ -9,6 +9,7 @@ const defaultState: UIState = {
   currentImage: null,
   currentCategory: null,
   currentBottomBarTab: 0,
+  currentHomeTab: 0,
   developerMode: false,
   showBottomBar: false
 };
@@ -42,6 +43,8 @@ export default function uiStateReducer(
       return { ...state, currentCategory: action.id };
     case "SELECT_CURRENT_BOTTOM_BAR_TAB":
       return { ...state, currentBottomBarTab: action.tabIndex };
+    case "SELECT_CURRENT_HOME_TAB":
+      return { ...state, currentHomeTab: action.tabIndex };
     case "SHOW_BOTTOM_BAR":
       return { ...state, showBottomBar: action.visible };
     default:

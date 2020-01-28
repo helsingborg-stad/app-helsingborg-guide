@@ -31,7 +31,13 @@ import NavigatorService from "@services/navigationService";
 
 const GuideNavigator = createStackNavigator(
   {
-    HomeScreen: { screen: HomeScreen },
+    HomeScreen: {
+      screen: HomeScreen,
+      navigationOptions: {
+        backgroundColor: "#FFFFFF",
+        header: () => null
+      }
+    },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
     ObjectScreen: { screen: ObjectScreen },
@@ -114,7 +120,7 @@ export default class Nav extends Component<Props> {
       <ViewContainer>
         <StatusBar
           translucent={ios}
-          barStyle="light-content"
+          barStyle="dark-content" // @TODO `barStyle` should probably be added to `Colors`
           backgroundColor={Colors.themeSecondary}
         />
         {/* $FlowFixMe should be fixed in later flow versions */}

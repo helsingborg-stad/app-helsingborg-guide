@@ -55,6 +55,14 @@ export default StyleSheet.create({
     lineHeight: 23.0,
     textAlign: "center"
   },
+  segmentControlPillLabel: {
+    ...defaultFont,
+    color: Colors.white,
+    fontSize: 14,
+    fontWeight: "500",
+    lineHeight: 18.0,
+    textAlign: "center"
+  },
   small: {
     ...defaultFont,
     fontSize: 14,

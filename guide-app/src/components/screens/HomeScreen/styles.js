@@ -10,9 +10,12 @@ export default StyleSheet.create({
     backgroundColor: Colors.white
   },
   container: {
-    paddingHorizontal: "4%",
     backgroundColor: Colors.white,
     flex: 1
+  },
+  contentContainer: {
+    paddingHorizontal: 16,
+    paddingBottom: 100
   },
   barButtonItem: {
     flexDirection: "row",
@@ -73,5 +76,17 @@ export default StyleSheet.create({
   ]),
   sectionLoadingSpinner: {
     padding: 20
+  },
+  topBarNavigation: {
+    paddingVertical: 16
+  },
+  mapButton: {
+    position: "absolute",
+    right: -5,
+    bottom: "2%"
+  },
+  mapIcon: {
+    width: 90,
+    height: 90
   }
 });
