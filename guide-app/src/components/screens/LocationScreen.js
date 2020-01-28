@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LocationView from "@shared-components/LocationView";
 import { AnalyticsUtils } from "@utils";
 import { HeaderStyles } from "@assets/styles";
@@ -24,7 +25,8 @@ class LocationScreen extends Component<Props> {
     return {
       ...HeaderStyles.noElevation,
       title,
-      headerRight: <View />
+      headerRight: <View />,
+      headerLeft: <HeaderBackButton navigation={navigation} />
     };
   };
 

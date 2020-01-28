@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import ObjectView from "@shared-components/ObjectView";
 import { AnalyticsUtils } from "@utils";
 import LangService from "@services/langService";
@@ -53,7 +54,8 @@ class ObjectScreen extends Component<Props> {
     const { title } = navigation.state.params;
     return {
       ...HeaderStyles.noElevation,
-      title
+      title,
+      headerLeft: <HeaderBackButton navigation={navigation} />
     };
   };
 
