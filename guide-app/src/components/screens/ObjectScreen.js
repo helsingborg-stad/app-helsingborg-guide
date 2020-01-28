@@ -51,9 +51,10 @@ function isMediaAvailable(media?: MediaContent): boolean {
 class ObjectScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
-    return Object.assign(HeaderStyles.noElevation, {
+    return {
+      ...HeaderStyles.noElevation,
       title
-    });
+    };
   };
 
   onSwiperIndexChanged = (newIndex: number) => {
@@ -177,7 +178,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ObjectScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ObjectScreen);

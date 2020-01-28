@@ -31,10 +31,11 @@ class CategoryListScreen extends Component<Props> {
     if (params) {
       ({ title } = params);
     }
-    return Object.assign(HeaderStyles.noElevation, {
+    return {
+      ...HeaderStyles.noElevation,
       title,
       headerRight: <View />
-    });
+    };
   };
 
   constructor(props: Props) {

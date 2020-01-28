@@ -21,10 +21,11 @@ type Props = {
 class LocationScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
-    return Object.assign(HeaderStyles.noElevation, {
+    return {
+      ...HeaderStyles.noElevation,
       title,
       headerRight: <View />
-    });
+    };
   };
 
   componentWillUnmount() {
@@ -99,7 +100,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LocationScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LocationScreen);
