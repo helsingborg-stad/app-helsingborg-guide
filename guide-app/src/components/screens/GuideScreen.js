@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 import GuideView from "@shared-components/GuideView";
 import { AnalyticsUtils } from "@utils";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import SearchButton from "@src/components/header/SearchButton";
 import {
   selectCurrentContentObject,
@@ -28,7 +29,8 @@ class GuideScreen extends Component<Props> {
       const { title } = params;
       return {
         title,
-        headerRight: <SearchButton navigation={navigation} />
+        headerRight: <SearchButton navigation={navigation} />,
+        headerLeft: <HeaderBackButton navigation={navigation} />
       };
     }
     return {};
@@ -87,7 +89,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GuideScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(GuideScreen);

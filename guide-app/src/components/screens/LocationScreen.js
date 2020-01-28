@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LocationView from "@shared-components/LocationView";
 import { AnalyticsUtils } from "@utils";
 import { HeaderStyles } from "@assets/styles";
@@ -21,10 +22,12 @@ type Props = {
 class LocationScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
-    return Object.assign(HeaderStyles.noElevation, {
+    return {
+      ...HeaderStyles.noElevation,
       title,
-      headerRight: <View />
-    });
+      headerRight: <View />,
+      headerLeft: <HeaderBackButton navigation={navigation} />
+    };
   };
 
   componentWillUnmount() {
@@ -99,7 +102,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LocationScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LocationScreen);

@@ -35,9 +35,10 @@ type Props = {
 class HomeScreen extends Component<Props> {
   static navigationOptions = () => {
     const title = LangService.strings.APP_NAME;
-    return Object.assign(HeaderStyles.noElevation, {
+    return {
+      ...HeaderStyles.noElevation,
       title
-    });
+    };
   };
 
   componentDidMount() {
@@ -203,7 +204,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

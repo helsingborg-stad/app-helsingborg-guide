@@ -28,10 +28,11 @@ class CategoryMapScreen extends Component<Props> {
     if (params) {
       ({ title } = params);
     }
-    return Object.assign(HeaderStyles.noElevation, {
+    return {
+      ...HeaderStyles.noElevation,
       title,
       headerRight: <View />
-    });
+    };
   };
 
   constructor(props: Props) {
@@ -135,7 +136,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CategoryMapScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryMapScreen);

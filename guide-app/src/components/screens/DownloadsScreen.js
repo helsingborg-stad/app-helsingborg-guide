@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import DownloadItemView from "@shared-components/DownloadItemView";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LangService from "@services/langService";
 import { Colors } from "@assets/styles";
 import {
@@ -30,11 +31,12 @@ type Props = {
 };
 
 class DownloadsScreen extends Component<Props> {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
     const title = LangService.strings.OFFLINE_CONTENT;
     return {
       title,
-      headerRight: null
+      headerRight: null,
+      headerLeft: <HeaderBackButton navigation={navigation} />
     };
   };
 
@@ -102,7 +104,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DownloadsScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(DownloadsScreen);
