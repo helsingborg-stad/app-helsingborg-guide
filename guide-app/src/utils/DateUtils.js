@@ -6,7 +6,7 @@ const locales = { de, en, sv };
 
 // Dates from the API is always UTC
 function longDate(date: Date, locale: string): string {
-  return format(new Date(date), "PP", { locale: locales[locale] });
+  return format(new Date(date), "d MMMM yyyy", { locale: locales[locale] });
 }
 
 function shortDate(date: Date): string {
