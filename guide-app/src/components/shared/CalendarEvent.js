@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     {
       fontSize: 13,
       lineHeight: 15,
-      letterSpacing: 0.19,
+      letterSpacing: 0.1,
       fontWeight: "normal",
       fontStyle: "normal",
       color: Colors.gray2C,

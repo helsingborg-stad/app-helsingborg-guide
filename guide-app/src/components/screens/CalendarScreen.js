@@ -61,7 +61,7 @@ type LayoutProps = {
 function Layout({ children }: LayoutProps) {
   return (
     <SafeAreaView style={styles.flex}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
       {children}
     </SafeAreaView>
   );
