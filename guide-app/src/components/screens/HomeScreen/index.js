@@ -141,7 +141,7 @@ class HomeScreen extends Component<Props> {
               />
             );
           }}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           data={items}
         />
         <TouchableOpacity
