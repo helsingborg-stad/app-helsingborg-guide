@@ -11,7 +11,7 @@ type Props = {
   onPressItem(item: NavigationItem): void
 };
 
-function getDescrition(item: NavigationItem) {
+function getDescription(item: NavigationItem) {
   const { type, guide } = item;
   const guidesCount = GuideUtils.getGuidesCount(item);
   const plural = guidesCount > 1;
@@ -75,6 +75,7 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
   const { imageUrl, name } = getNameAndImage(item);
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
   const size = index < 2 ? "expanded" : "compact";
+  const showMapIcon = !!item.guide;
 
   const onPress = useCallback(() => {
     onPressItem(item);
@@ -85,8 +86,8 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
       size={size}
       image={image}
       title={name}
-      subTitle={getDescrition(item)}
-      showMapIcon={true}
+      subTitle={getDescription(item)}
+      showMapIcon={showMapIcon}
       showChildFriendlyIcon={isChildFriendly(item)}
       onPress={onPress}
     />
