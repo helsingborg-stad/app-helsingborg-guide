@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
     height: 32,
     marginLeft: 8
   },
-  titleLabel: { color: Colors.white, fontSize: 20, lineHeight: 26.5 },
+  titleLabel: { color: Colors.white, fontSize: 22, lineHeight: 26.5 },
   subTitleLabel: {
     color: Colors.gray9,
-    fontSize: 11,
+    fontSize: 13,
     lineHeight: 13,
     letterSpacing: 1,
-    marginTop: 4
+    marginTop: 6
   },
   descriptionLabel: {},
   mapIcon: {
