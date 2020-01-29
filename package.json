@@ -10,7 +10,9 @@
     "cities/*",
     "guide-app"
   ],
-  "scripts": {},
+  "scripts": {
+    "postinstall": "jetify"
+  },
   "dependencies": {
     "react-native": "*"
   },

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
+import { HeaderStyles } from "@assets/styles";
 import styles from "./styles";
 import {
   selectCurrentGuideByID,
@@ -22,7 +23,6 @@ import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
 import { AnalyticsUtils } from "@utils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
-
 import mapIcon from "@assets/images/mapIcon.png";
 
 type Section = {
@@ -49,9 +49,10 @@ type Props = {
 class HomeScreen extends Component<Props> {
   static navigationOptions = () => {
     const title = LangService.strings.APP_NAME;
-    return Object.assign({}, HeaderStyles.noElevation, {
+    return {
+      ...HeaderStyles.noElevation,
       title
-    });
+    };
   };
 
   componentDidMount() {
@@ -212,7 +213,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

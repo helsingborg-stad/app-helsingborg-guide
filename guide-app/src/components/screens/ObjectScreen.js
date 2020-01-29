@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import ObjectView from "@shared-components/ObjectView";
 import { AnalyticsUtils } from "@utils";
 import LangService from "@services/langService";
@@ -51,9 +52,11 @@ function isMediaAvailable(media?: MediaContent): boolean {
 class ObjectScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
-    return Object.assign(HeaderStyles.noElevation, {
-      title
-    });
+    return {
+      ...HeaderStyles.noElevation,
+      title,
+      headerLeft: <HeaderBackButton navigation={navigation} />
+    };
   };
 
   onSwiperIndexChanged = (newIndex: number) => {
@@ -177,7 +180,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ObjectScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ObjectScreen);

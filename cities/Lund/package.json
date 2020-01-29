@@ -13,6 +13,7 @@
     "ios:device:release": "react-native run-ios --device --configuration Release",
     "ios:simulator:debug": "react-native run-ios --simulator --configuration Debug",
     "ios:simulator:release": "react-native run-ios --simulator --configuration Release",
+    "postinstall": "(cd ../../ && yarn jetify)",
     "react:link": "react-native link",
     "translate": "node ./scripts/translate.js"
   },
