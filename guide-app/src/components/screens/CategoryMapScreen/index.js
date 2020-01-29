@@ -47,8 +47,12 @@ class CategoryMapScreen extends Component<Props> {
     }
   }
 
+  componentDidMount() {
+    this.props.dispatchShowBottomBar(false);
+  }
+
   componentWillUnmount() {
-    this.props.dispatchShowBottomBar(false); // TODO: it dependS!=?
+    this.props.dispatchShowBottomBar(true);
   }
 
   onPressItem = (item: NavigationItem): void => {
