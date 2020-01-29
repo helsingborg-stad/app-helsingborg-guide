@@ -117,10 +117,8 @@ class CategoryMapScreen extends Component<Props> {
 
 function mapStateToProps(state: RootState) {
   const { uiState, navigation } = state;
-  const { currentCategory } = uiState;
-  const category = navigation.navigationCategories.find(
-    cat => cat.id === currentCategory
-  );
+  const { currentHomeTab: categoryIndex } = uiState;
+  const category = navigation.navigationCategories[categoryIndex];
 
   return {
     currentCategory: category
