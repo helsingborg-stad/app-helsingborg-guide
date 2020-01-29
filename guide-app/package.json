@@ -63,8 +63,8 @@
     ],
     "moduleNameMapper": {
       "^@actions(.*)$": "<rootDir>/src/actions$1",
-      "^@assets(.*)$": "<rootDir>/assets$1",
-      "^@data(.*)$": "<rootDir>/data$1",
+      "^@assets(.*)$": "<rootDir>/../cities/Helsingborg/assets$1",
+      "^@data(.*)$": "<rootDir>/../cities/Helsingborg/data$1",
       "^@json-schemas(.*)$": "<rootDir>/json-schemas$1",
       "^@services(.*)$": "<rootDir>/src/services$1",
       "^@shared-components(.*)$": "<rootDir>/src/components/shared$1",

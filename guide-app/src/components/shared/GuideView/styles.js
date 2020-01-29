@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
   },
   objectContainer: {
     width: "50%",
-    height: "auto",
+    height: "auto"
+  },
+  objectButtonContainer: {
     padding: "4%"
   },
   objectImage: {

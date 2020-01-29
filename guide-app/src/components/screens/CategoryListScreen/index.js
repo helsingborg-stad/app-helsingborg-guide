@@ -9,6 +9,7 @@ import {
   selectCurrentCategory,
   showBottomBar
 } from "@actions/uiStateActions";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
 import { AnalyticsUtils } from "@utils";
@@ -31,10 +32,12 @@ class CategoryListScreen extends Component<Props> {
     if (params) {
       ({ title } = params);
     }
-    return Object.assign(HeaderStyles.noElevation, {
+    return {
+      ...HeaderStyles.noElevation,
       title,
-      headerRight: <View />
-    });
+      headerRight: <View />,
+      headerLeft: <HeaderBackButton navigation={navigation} />
+    };
   };
 
   constructor(props: Props) {

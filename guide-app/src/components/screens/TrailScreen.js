@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 import { AnalyticsUtils } from "@utils";
 import InfoOverlayToggleView from "@shared-components/InfoOverlayToggleView";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import TrailView from "@shared-components/TrailView";
 import { releaseAudioFile } from "@actions/audioActions";
 import { showBottomBar } from "@actions/uiStateActions";
@@ -30,11 +31,13 @@ class TrailScreen extends Component<Props, State> {
       ({ title } = params);
       ({ toggleInfoOverlay } = params);
     }
+
     return {
       title,
       headerRight: (
         <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />
-      )
+      ),
+      headerLeft: <HeaderBackButton navigation={navigation} />
     };
   };
 
@@ -100,7 +103,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TrailScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);

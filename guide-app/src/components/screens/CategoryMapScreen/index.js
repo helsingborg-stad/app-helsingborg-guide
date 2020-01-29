@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import MarkerListView from "@shared-components/MarkerListView";
 import {
   selectCurrentGuideByID,
@@ -28,10 +29,12 @@ class CategoryMapScreen extends Component<Props> {
     if (params) {
       ({ title } = params);
     }
-    return Object.assign(HeaderStyles.noElevation, {
+    return {
+      ...HeaderStyles.noElevation,
       title,
-      headerRight: <View />
-    });
+      headerRight: <View />,
+      headerLeft: <HeaderBackButton navigation={navigation} />
+    };
   };
 
   constructor(props: Props) {
@@ -135,7 +138,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CategoryMapScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryMapScreen);

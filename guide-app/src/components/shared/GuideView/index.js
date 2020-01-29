@@ -29,23 +29,24 @@ class GuideView extends Component<Props> {
     const { images } = obj;
     const uri = images.length > 0 ? images[0].medium : null;
     return (
-      <TouchableOpacity
-        key={obj.id}
-        style={styles.objectContainer}
-        onPress={() => this.props.onPressContentObject(obj)}
-      >
-        <ImageView
-          source={{ uri, sessionId }}
-          style={styles.objectImage}
-          resizeMode="cover"
-        />
-        <Text style={styles.contentIdText} numberOfLines={1}>
-          #{obj.searchableId}
-        </Text>
-        <Text style={styles.contentTitleText} numberOfLines={2}>
-          {obj.title}
-        </Text>
-      </TouchableOpacity>
+      <View key={obj.id} style={styles.objectContainer}>
+        <TouchableOpacity
+          style={styles.objectButtonContainer}
+          onPress={() => this.props.onPressContentObject(obj)}
+        >
+          <ImageView
+            source={{ uri, sessionId }}
+            style={styles.objectImage}
+            resizeMode="cover"
+          />
+          <Text style={styles.contentIdText} numberOfLines={1}>
+            #{obj.searchableId}
+          </Text>
+          <Text style={styles.contentTitleText} numberOfLines={2}>
+            {obj.title}
+          </Text>
+        </TouchableOpacity>
+      </View>
     );
   };
 
