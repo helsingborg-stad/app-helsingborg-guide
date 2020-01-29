@@ -13,9 +13,10 @@ export default function eventReducer(
     case "FETCH_EVENTS_REQUEST":
       return { ...state, isFetching: true };
     case "FETCH_EVENTS_SUCCESS": {
-      const items = [...action.events];
-      // const items = [...state.items];
-      // TODO: GROUP BY DATE?
+      // TODO: Group by date?
+      // If we want to save state per date and not have to re-fetch every time we switch the date
+      // we should group the events by date in state for easier accessing
+      //
       // action.events.forEach(g => {
       //   const index = items.findIndex(item => item.id === g.id);
       //   if (index >= 0) {
@@ -26,6 +27,7 @@ export default function eventReducer(
       //     items.push(g);
       //   }
       // });
+      const items = [...action.events];
       return { ...state, items, isFetching: false };
     }
     case "FETCH_EVENTS_FAILURE":
