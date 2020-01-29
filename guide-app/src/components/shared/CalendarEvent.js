@@ -11,8 +11,9 @@ import {
 import { XmlEntities } from "html-entities";
 
 import { Colors, TextStyles } from "@assets/styles";
-import { StyleSheetUtils } from "@utils";
 import { eventCalendarURL } from "@data/urls";
+import LangService from "@services/langService";
+import { StyleSheetUtils } from "@utils";
 import { DateUtils } from "@utils";
 
 const defaultImage = require("@assets/images/no-image-featured-image.png");
@@ -119,8 +120,14 @@ function CalendarEvent({ event, currentLanguage }: Props) {
 
   const entities = new XmlEntities();
   const decodedLocationTitle = entities.decode(location.title);
-  const startTime = DateUtils.getHours(dateStart, currentLanguage);
-  const endTime = DateUtils.getHours(dateEnd, currentLanguage);
+  let hoursString;
+  if (DateUtils.isFullDay(dateStart, dateEnd)) {
+    hoursString = LangService.strings.CALENDAR_FULL_DAY;
+  } else {
+    const startTime = DateUtils.getHours(dateStart, currentLanguage);
+    const endTime = DateUtils.getHours(dateEnd, currentLanguage);
+    hoursString = `${startTime} - ${endTime}`;
+  }
 
   return (
     <TouchableOpacity
@@ -132,9 +139,7 @@ function CalendarEvent({ event, currentLanguage }: Props) {
       </View>
       <View style={styles.listItemHoursContainer}>
         <View style={styles.listItemHoursView}>
-          <Text style={styles.listItemHoursText}>
-            {startTime} - {endTime}
-          </Text>
+          <Text style={styles.listItemHoursText}>{hoursString}</Text>
         </View>
       </View>
       <View style={styles.listItemTextContainer}>

@@ -1,6 +1,6 @@
 // @flow
 import { de, en, sv } from "date-fns/locale";
-import { format } from "date-fns";
+import { format, isEqual, startOfDay } from "date-fns";
 
 const locales = { de, en, sv };
 
@@ -18,8 +18,18 @@ function getHours(date: string, locale: string): string {
   return format(new Date(date), "kk:mm", { locale: locales[locale] });
 }
 
+function isFullDay(start: string, end: string): boolean {
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+  return (
+    isEqual(startDate, startOfDay(startDate)) &&
+    isEqual(endDate, startOfDay(endDate))
+  );
+}
+
 export default {
   getHours,
+  isFullDay,
   longDate,
   shortDate
 };
