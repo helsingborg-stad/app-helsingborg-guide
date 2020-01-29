@@ -128,11 +128,13 @@ function CalendarEvent({ event, currentLanguage }: Props) {
     const endTime = DateUtils.getHours(dateEnd, currentLanguage);
     hoursString = `${startTime} - ${endTime}`;
   }
+  const eventLinkDate = DateUtils.eventLinkDate(dateStart);
+  const eventUrl = `${eventCalendarURL}/${slug}?date=${eventLinkDate}`;
 
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => Linking.openURL(`${eventCalendarURL}/${slug}`)}
+      onPress={() => Linking.openURL(eventUrl)}
     >
       <View style={styles.imageWrapper}>
         <Image style={styles.listItemImage} source={image} />

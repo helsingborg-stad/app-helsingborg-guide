@@ -13,6 +13,12 @@ function shortDate(date: Date): string {
   return format(date, "yyyy-MM-dd");
 }
 
+// When linking to calendar home page we need a date string as param
+// to show correct occasion
+function eventLinkDate(date: string): string {
+  return format(new Date(date), "yyyyMMddhhmmss");
+}
+
 // https://date-fns.org/v2.9.0/docs/I18n
 function getHours(date: string, locale: string): string {
   return format(new Date(date), "kk:mm", { locale: locales[locale] });
@@ -28,6 +34,7 @@ function isFullDay(start: string, end: string): boolean {
 }
 
 export default {
+  eventLinkDate,
   getHours,
   isFullDay,
   longDate,
