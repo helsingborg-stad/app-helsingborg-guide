@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     shadowRadius: 12,
     shadowColor: "black",
-    shadowOpacity: 0.16
+    shadowOpacity: 0.16,
+    elevation: 0
   },
   listItemHoursText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
