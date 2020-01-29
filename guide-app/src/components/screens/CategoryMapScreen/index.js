@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import MarkerListView from "@shared-components/MarkerListView";
 import {
   selectCurrentGuideByID,
@@ -31,7 +32,8 @@ class CategoryMapScreen extends Component<Props> {
     return {
       ...HeaderStyles.noElevation,
       title,
-      headerRight: <View />
+      headerRight: <View />,
+      headerLeft: <HeaderBackButton navigation={navigation} />
     };
   };
 
