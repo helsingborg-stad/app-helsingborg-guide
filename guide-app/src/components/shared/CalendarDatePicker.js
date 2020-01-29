@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 4,
-    marginBottom: 12,
+    marginTop: 0,
+    marginBottom: 7,
     width: "70%"
   },
   datePickerText: StyleSheetUtils.flatten([
@@ -32,9 +32,8 @@ const styles = StyleSheet.create({
 type Props = {
   chosenDate: Date,
   currentLanguage: string,
-  // TODO: :)
-  getNextDate: any,
-  getPrevDate: any
+  getNextDate: () => void,
+  getPrevDate: () => void
 };
 
 function CalendarDatePicker({
@@ -45,7 +44,7 @@ function CalendarDatePicker({
 }: Props) {
   const dateFmt = DateUtils.longDate(chosenDate, currentLanguage);
   const chosenDateIsToday = isToday(chosenDate);
-  const prevBtnOpacity = chosenDateIsToday ? 0.5 : 1;
+  const prevBtnOpacity = chosenDateIsToday ? 0.3 : 1;
   const prevBtnStyles = { opacity: prevBtnOpacity };
   return (
     <View style={styles.datePickerContainer}>
