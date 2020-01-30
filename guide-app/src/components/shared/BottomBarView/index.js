@@ -9,23 +9,25 @@ import { selectCurrentBottomBarTab } from "@actions/uiStateActions";
 import BottomBarIcon from "@shared-components/BottomBarIcon";
 
 const barBackground = require("@assets/images/background-navigation.png");
-const barTabLeft = require("@assets/images/bottom-left.png");
-const barTabCenter = require("@assets/images/bottom-center.png");
-const barTabRight = require("@assets/images/bottom-right.png");
+// TODO: remove image files?
+// const barTabLeft = require("@assets/images/bottom-left.png");
+// const barTabCenter = require("@assets/images/bottom-center.png");
+// const barTabRight = require("@assets/images/bottom-right.png");
 const barTabRightDisabled = require("@assets/images/bottom-right-disabled.png");
 const barTabCenterDisabled = require("@assets/images/bottom-center-disabled.png");
 const barTabLeftDisabled = require("@assets/images/bottom-left-disabled.png");
 
 // Sorry /Björn
+// TODO: rename to something with isIphoneXOrAbove?
 const isIphoneX = () => {
   const d = Dimensions.get("window");
   const { height, width } = d;
 
-  return Platform.OS === "ios" && (height === 812 || width === 812);
+  return Platform.OS === "ios" && (height >= 812 || width >= 812);
 };
 
-const viewContainerHeight: number = isIphoneX() ? 80 : 68;
-const buttonTabBottom: number = isIphoneX() ? 77 : 68;
+const viewContainerHeight: number = isIphoneX() ? 84 : 68;
+const buttonTabBottom: number = isIphoneX() ? 84 : 68;
 const transitionDuration: number = 300;
 
 type Props = {
@@ -103,6 +105,7 @@ class BottomBarView extends Component<Props, State> {
     );
   }
 
+  // TODO: is this even needed now without the tabs?
   displayButtonTabs() {
     return (
       <Animated.View
@@ -114,29 +117,17 @@ class BottomBarView extends Component<Props, State> {
         <Image
           style={styles.imageTab}
           resizeMode="stretch"
-          source={
-            this.props.currentBottomBarTab === 0
-              ? barTabLeft
-              : barTabLeftDisabled
-          }
+          source={barTabLeftDisabled}
         />
         <Image
           style={styles.imageTab}
           resizeMode="stretch"
-          source={
-            this.props.currentBottomBarTab === 1
-              ? barTabCenter
-              : barTabCenterDisabled
-          }
+          source={barTabCenterDisabled}
         />
         <Image
           style={styles.imageTab}
           resizeMode="stretch"
-          source={
-            this.props.currentBottomBarTab === 2
-              ? barTabRight
-              : barTabRightDisabled
-          }
+          source={barTabRightDisabled}
         />
       </Animated.View>
     );
@@ -174,7 +165,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BottomBarView);
+export default connect(mapStateToProps, mapDispatchToProps)(BottomBarView);
