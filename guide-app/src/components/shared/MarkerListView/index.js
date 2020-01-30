@@ -142,6 +142,13 @@ class MarkerListView extends Component<Props, State> {
     index
   });
 
+  getInitialLocation = () => {
+    const location = this.props.items
+      .map(item => MapItemUtils.getLocationFromItem(item))
+      .find(item => item != null);
+    return location;
+  };
+
   onListItemPressed = (listItem: MapItem) => {
     const {
       navigation,
@@ -436,6 +443,8 @@ class MarkerListView extends Component<Props, State> {
       showHorizontalList
     } = this.state;
 
+    const initialLocation = this.getInitialLocation();
+
     return (
       <View style={styles.container}>
         {supportedNavigationModes && supportedNavigationModes.length > 1 && (
@@ -463,6 +472,7 @@ class MarkerListView extends Component<Props, State> {
               this.scrollToIndex(index);
             }}
             activeMarker={activeMarker}
+            initialLocation={initialLocation}
           />
         )}
 

@@ -18,7 +18,8 @@ type Props = {
   items: MapItem[],
   showNumberedMapMarkers?: boolean,
   onMapMarkerPressed?: ?(index: number) => void,
-  activeMarker: MapItem
+  activeMarker: MapItem,
+  initialLocation?: Location
 };
 type State = {
   markersFocused: boolean
@@ -88,6 +89,10 @@ class MapMarkerView extends Component<Props, State> {
   numberedMapViewMarker = (mapItem: MapItem, index: number) => {
     const id = MapItemUtils.getIdFromMapItem(mapItem);
     const location: ?Location = MapItemUtils.getLocationFromItem(mapItem);
+    // TODO: something better, like a default marker telling there's a location missing?
+    if (!location) {
+      return null;
+    }
 
     const { activeMarker } = this.props;
     const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
@@ -125,6 +130,12 @@ class MapMarkerView extends Component<Props, State> {
   defaultMapViewMarker = (mapItem: MapItem, index: number) => {
     const id = MapItemUtils.getIdFromMapItem(mapItem);
     const location: ?Location = MapItemUtils.getLocationFromItem(mapItem);
+
+    // TODO: something better, like a default marker telling there's a location missing?
+    if (!location) {
+      return null;
+    }
+
     const { activeMarker } = this.props;
     const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
     const markerImage = this.markerImageForTrailObject(mapItem, active);
@@ -194,8 +205,7 @@ class MapMarkerView extends Component<Props, State> {
   };
 
   render() {
-    const { items, activeMarker } = this.props;
-    const location = MapItemUtils.getLocationFromItem(activeMarker);
+    const { items, initialLocation } = this.props;
 
     return (
       <View style={styles.container}>
@@ -211,8 +221,8 @@ class MapMarkerView extends Component<Props, State> {
           showsUserLocation
           onMapReady={this.onMapReady}
           initialRegion={{
-            latitude: location.latitude,
-            longitude: location.longitude,
+            latitude: initialLocation && initialLocation.latitude,
+            longitude: initialLocation && initialLocation.longitude,
             latitudeDelta: this.latitudeDelta,
             longitudeDelta: this.longitudeDelta
           }}
