@@ -187,7 +187,7 @@ function mapStateToProps(state: RootState) {
     }
   });
 
-  const items = categories[currentHomeTab].data;
+  const items = !isFetching ? categories[currentHomeTab]?.data : null;
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 
   return {
@@ -213,4 +213,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreen);
