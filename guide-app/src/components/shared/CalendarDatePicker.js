@@ -1,6 +1,12 @@
 // @flow
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import { Colors, TextStyles } from "@assets/styles";
@@ -10,6 +16,11 @@ import { isToday } from "date-fns";
 
 const styles = StyleSheet.create({
   datePickerContainer: {
+    ...Platform.select({
+      android: {
+        paddingTop: 16
+      }
+    }),
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
