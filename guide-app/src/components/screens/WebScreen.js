@@ -3,6 +3,7 @@ import { StyleSheet, Linking } from "react-native";
 import WebView from "react-native-webview";
 import PropTypes from "prop-types";
 import { Colors } from "@assets/styles";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 
 const styles = StyleSheet.create({
   header: {
@@ -15,6 +16,7 @@ export default class WebScreen extends Component {
     const { title } = navigation.state.params;
     return {
       title,
+      headerLeft: <HeaderBackButton navigation={navigation} />,
       headerRight: null,
       headerStyle: styles.header
     };
