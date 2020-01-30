@@ -13,6 +13,8 @@ const scrollViewMaxHeight = screenHeight - 138; // magic number here, but roughl
 export default StyleSheet.create({
   container: {
     position: "absolute",
+    top: 0,
+    bottom: 0,
     width: screenWidth - defaultMargin * 2,
     margin: defaultMargin,
     backgroundColor: Colors.white,
@@ -24,9 +26,7 @@ export default StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1
   },
-  scrollView: {
-    maxHeight: scrollViewMaxHeight
-  },
+  scrollView: {},
   scrollViewNoTitle: {
     maxHeight: scrollViewMaxHeight,
     width: "90%"

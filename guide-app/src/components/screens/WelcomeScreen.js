@@ -92,33 +92,17 @@ export default class WelcomeScreen extends Component {
     super(props);
     this.state = {
       index: 0,
-      total: 0
+      total: LangService.instructions.steps.length
     };
-    this.onMomentumScrollEnd = this.onMomentumScrollEnd.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (
-      nextState.index === 0 ||
-      nextState.index === 1 ||
-      nextState.index === nextState.total - 1 ||
-      nextState.index === nextState.total - 2
-    ) {
-      return true;
-    }
-
-    return false;
   }
 
   static navigationOptions = {
     header: null
   };
 
-  // TODO: something broke here during updates, look at https://github.com/leecade/react-native-swiper and try and fix
-  // index is off when swiping so button shows wrong text
-  onMomentumScrollEnd(e, state, context) {
-    this.setState({ index: context.state.index, total: context.state.total });
-  }
+  onIndexChanged = index => {
+    this.setState({ index });
+  };
 
   displaySlides() {
     const instructions = LangService.instructions.steps;
@@ -174,7 +158,7 @@ export default class WelcomeScreen extends Component {
       <ViewContainer style={[styles.wrapper]}>
         <Swiper
           style={styles.swiper}
-          onMomentumScrollEnd={this.onMomentumScrollEnd}
+          onIndexChanged={this.onIndexChanged}
           loop={false}
           dot={dot}
           paginationStyle={styles.pagination}
