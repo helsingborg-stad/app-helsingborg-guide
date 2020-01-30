@@ -2,6 +2,7 @@
 
 import { API_BASE_URL, GROUP_ID } from "@data/endpoints";
 import { validate } from "./JSONValidator";
+import { DateUtils } from "@utils";
 
 async function fetchJSON(
   relativeUrl: string,
@@ -104,7 +105,22 @@ export async function getNavigation(
   return fetchedNavigation;
 }
 
+export async function getEvents(
+  langCode: string,
+  dateStart: Date,
+  dateEnd: Date
+): Promise<Event[]> {
+  const dateStartFmt = DateUtils.shortDate(dateStart);
+  const dateEndFmt = DateUtils.shortDate(dateEnd);
+  const params = `&userGroupId=${GROUP_ID}&dateStart=${dateStartFmt}&dateEnd=${dateEndFmt}`;
+  const json = await fetchJSON("events", langCode, params);
+  const fetchedEvents: Event[] = validateData(json, "event");
+
+  return fetchedEvents;
+}
+
 export default {
+  getEvents,
   getGuideGroups,
   getGuides,
   getGuidesForGuideGroup,

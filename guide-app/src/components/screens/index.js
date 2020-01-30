@@ -1,3 +1,4 @@
+export { default as CalendarScreen } from "./CalendarScreen";
 export { default as DownloadsScreen } from "./DownloadsScreen";
 export { default as GuideScreen } from "./GuideScreen";
 export { default as HomeScreen } from "./HomeScreen";

@@ -1,29 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
     "definitions": {
-        "IImageUrls": {
-            "properties": {
-                "large": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                },
-                "medium": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                },
-                "thumbnail": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                }
-            },
-            "type": "object"
-        },
         "ILink": {
             "properties": {
                 "title": {
@@ -91,14 +68,20 @@
                         "null",
                         "string"
                     ]
+                },
+                "title": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 }
             },
             "required": [
                 "id",
                 "latitude",
-                "links",
                 "longitude",
-                "streetAddress"
+                "streetAddress",
+                "title"
             ],
             "type": "object"
         },
@@ -158,48 +141,30 @@
                 "weekday"
             ],
             "type": "object"
-        },
-        "IPointProperty": {
-            "properties": {
-                "icon": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                },
-                "id": {
-                    "type": "number"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id",
-                "name",
-                "slug"
-            ],
-            "type": "object"
         }
     },
     "properties": {
-        "active": {
-            "type": "boolean"
+        "dateEnd": {
+            "description": "Enables basic storage and retrieval of dates and times.",
+            "format": "date-time",
+            "type": "string"
+        },
+        "dateStart": {
+            "description": "Enables basic storage and retrieval of dates and times.",
+            "format": "date-time",
+            "type": "string"
         },
         "description": {
             "type": "string"
         },
-        "guidesCount": {
+        "eventId": {
             "type": "number"
         },
         "id": {
-            "type": "number"
+            "type": "string"
         },
-        "images": {
-            "$ref": "#/definitions/IImageUrls"
+        "imageUrl": {
+            "type": "string"
         },
         "location": {
             "$ref": "#/definitions/ILocation"
@@ -207,26 +172,21 @@
         "name": {
             "type": "string"
         },
-        "pointProperties": {
-            "items": {
-                "$ref": "#/definitions/IPointProperty"
-            },
-            "type": "array"
-        },
         "slug": {
             "type": "string"
         }
     },
     "required": [
-        "active",
+        "dateEnd",
+        "dateStart",
         "description",
-        "guidesCount",
+        "eventId",
         "id",
-        "images",
+        "imageUrl",
         "location",
         "name",
-        "pointProperties",
         "slug"
     ],
     "type": "object"
 }
+
