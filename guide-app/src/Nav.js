@@ -32,7 +32,13 @@ import NavigatorService from "@services/navigationService";
 
 const GuideNavigator = createStackNavigator(
   {
-    HomeScreen: { screen: HomeScreen },
+    HomeScreen: {
+      screen: HomeScreen,
+      navigationOptions: {
+        backgroundColor: "#FFFFFF",
+        header: () => null
+      }
+    },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
     ObjectScreen: { screen: ObjectScreen },

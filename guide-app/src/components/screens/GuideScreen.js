@@ -89,4 +89,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GuideScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GuideScreen);

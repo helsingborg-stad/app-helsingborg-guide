@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View } from "react-native";
+import { View, StatusBar } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LocationView from "@shared-components/LocationView";
 import { AnalyticsUtils } from "@utils";
@@ -61,15 +61,18 @@ class LocationScreen extends Component<Props> {
     } = this.props;
     const now = new Date();
     return (
-      <LocationView
-        guideGroup={currentGuideGroup}
-        guides={currentGuides}
-        now={now}
-        geolocation={geolocation}
-        navigation={this.props.navigation}
-        onPressGuide={this.onPressGuide}
-        isFetchingGuides={isFetchingGuides}
-      />
+      <>
+        <StatusBar barStyle="light-content" />
+        <LocationView
+          guideGroup={currentGuideGroup}
+          guides={currentGuides}
+          now={now}
+          geolocation={geolocation}
+          navigation={this.props.navigation}
+          onPressGuide={this.onPressGuide}
+          isFetchingGuides={isFetchingGuides}
+        />
+      </>
     );
   }
 }
@@ -89,7 +92,7 @@ function mapStateToProps(state: RootState) {
   return {
     currentGuideGroup,
     currentGuides,
-    geolocation: geolocation.position,
+    geolocation: geolocation?.position,
     isFetchingGuides: isFetching
   };
 }
@@ -102,4 +105,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LocationScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LocationScreen);

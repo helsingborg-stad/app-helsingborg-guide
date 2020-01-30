@@ -73,3 +73,7 @@ export function setDeveloperMode(enabled: boolean): Action {
 export function selectCurrentBottomBarTab(tabIndex: number): Action {
   return { type: "SELECT_CURRENT_BOTTOM_BAR_TAB", tabIndex };
 }
+
+export function selectCurrentHomeTab(tabIndex: number): Action {
+  return { type: "SELECT_CURRENT_HOME_TAB", tabIndex };
+}

@@ -16,6 +16,7 @@ declare type Action =
   | { type: "SELECT_CURRENT_IMAGE", url: ?string }
   | { type: "SELECT_CURRENT_CATEGORY", id: number }
   | { type: "SELECT_CURRENT_BOTTOM_BAR_TAB", tabIndex: number }
+  | { type: "SELECT_CURRENT_HOME_TAB", tabIndex: number }
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
   | { type: "SET_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
   | {
@@ -308,6 +309,7 @@ declare type UIState = {
   currentCategory: ?number,
   developerMode: boolean,
   currentBottomBarTab: number,
+  currentHomeTab: number,
   showBottomBar: boolean
 };
 

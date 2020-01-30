@@ -6,7 +6,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Dimensions
+  Dimensions,
+  StatusBar
 } from "react-native";
 import ExpandableView from "@shared-components/ExpandableView";
 import { TextStyles } from "@assets/styles";
@@ -64,6 +65,7 @@ class GuideView extends Component<Props> {
     const { id } = guide;
     return (
       <View style={styles.viewContainer}>
+        <StatusBar barStyle="light-content" />
         <ScrollView style={styles.container}>
           <View>
             <ImageView
