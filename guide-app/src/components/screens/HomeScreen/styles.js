@@ -78,7 +78,7 @@ export default StyleSheet.create({
     padding: 20
   },
   topBarNavigation: {
-    paddingVertical: 16
+    paddingBottom: 16
   },
   mapButton: {
     position: "absolute",
