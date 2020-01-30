@@ -134,6 +134,8 @@ async function shareAndroid(title, message, url, width, height, subject) {
           "android.permission.READ_EXTERNAL_STORAGE"
         );
         if (!response) {
+          isCreatingImage = false;
+          origin.forceUpdate();
           return;
         } // Oh. well. No share for you :(
       }
@@ -149,9 +151,10 @@ async function shareAndroid(title, message, url, width, height, subject) {
       const exist = await RNFetchBlob.fs.exists(finalPath);
       if (exist) {
         Share.open({ title, message, subject, url: finalPath });
-        isCreatingImage = false;
-        origin.forceUpdate();
       }
+
+      isCreatingImage = false;
+      origin.forceUpdate();
     });
   });
 }
