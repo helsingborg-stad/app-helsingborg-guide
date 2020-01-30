@@ -7,8 +7,8 @@ firebase.app();
 
 export default {
   setScreen: screenName => {
-    if (!__DEV__) {
-      analytics().setCurrentScreen(screenName, null);
+    if (!__DEV__ && screenName) {
+      analytics().setCurrentScreen(screenName);
     }
   },
 

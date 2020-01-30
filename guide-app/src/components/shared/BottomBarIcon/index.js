@@ -9,7 +9,6 @@ import styles from "./style";
 import { AnalyticsUtils } from "@utils";
 import NavigatorService from "@services/navigationService";
 import LangService from "@services/langService";
-import { eventCalendarURL } from "@data/urls";
 import { Colors } from "@assets/styles";
 
 const selectedColor: string = Colors.white;
@@ -85,6 +84,7 @@ class BottomBarIcon extends Component<Props> {
           break;
         case 1:
           NavigatorService.reset("CalendarScreen");
+          AnalyticsUtils.logEvent("view_calendar");
           break;
         case 2:
           NavigatorService.reset("SettingsScreen");
