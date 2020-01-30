@@ -6,6 +6,7 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: Colors.white
   },
+  innerContainer: { flex: 1, position: "relative" },
   downloadButton: {
     width: "100%"
   },

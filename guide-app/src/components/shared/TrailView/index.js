@@ -50,20 +50,22 @@ const TrailView = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <MarkerListView
-        items={mapItems}
-        showNumberedMapMarkers
-        showDirections
-        // NOTE: this disables checking for AR mode
-        // supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(
-        //   trail
-        // )}
-        navigation={navigation}
-      />
-      {showInfoOverlay
-        ? renderMapInformationOverlay(trail, onToggleInfoOverlay)
-        : null}
-      <AudioPlayerView />
+      <View style={styles.innerContainer}>
+        <MarkerListView
+          items={mapItems}
+          showNumberedMapMarkers
+          showDirections
+          // NOTE: this disables checking for AR mode
+          // supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(
+          //   trail
+          // )}
+          navigation={navigation}
+        />
+        {showInfoOverlay
+          ? renderMapInformationOverlay(trail, onToggleInfoOverlay)
+          : null}
+        <AudioPlayerView />
+      </View>
     </View>
   );
 };
