@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { Colors, TextStyles } from "@assets/styles";
 import { StyleSheetUtils } from "@utils";
 
@@ -78,6 +78,11 @@ export default StyleSheet.create({
     padding: 20
   },
   topBarNavigation: {
+    ...Platform.select({
+      android: {
+        paddingTop: 16
+      }
+    }),
     paddingBottom: 16
   },
   mapButton: {

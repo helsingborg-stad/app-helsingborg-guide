@@ -120,7 +120,7 @@ export default class Nav extends Component<Props> {
       <ViewContainer>
         <StatusBar
           translucent={ios}
-          barStyle="dark-content" // @TODO `barStyle` should probably be added to `Colors`
+          barStyle="light-content"
           backgroundColor={Colors.themeSecondary}
         />
         {/* $FlowFixMe should be fixed in later flow versions */}

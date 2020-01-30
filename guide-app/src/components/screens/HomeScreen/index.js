@@ -6,7 +6,8 @@ import {
   View,
   SafeAreaView,
   Image,
-  FlatList
+  FlatList,
+  StatusBar
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
@@ -109,15 +110,17 @@ class HomeScreen extends Component<Props> {
       items,
       navigation,
       navigationCategoryLabels,
-      selectCurrentTab
+      selectCurrentTab,
+      showLoadingSpinner
     } = this.props;
 
-    if (this.props.showLoadingSpinner) {
+    if (showLoadingSpinner) {
       return <ActivityIndicator style={styles.loadingSpinner} />;
     }
 
     return (
       <>
+        <StatusBar barStyle="dark-content" />
         <SafeAreaView>
           <View style={styles.topBarNavigation}>
             <SegmentControlPill

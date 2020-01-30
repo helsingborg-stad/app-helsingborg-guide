@@ -10,6 +10,7 @@ import HeaderBackButton from "@shared-components/HeaderBackButton";
 import TrailView from "@shared-components/TrailView";
 import { releaseAudioFile } from "@actions/audioActions";
 import { showBottomBar } from "@actions/uiStateActions";
+import { StatusBar } from "react-native";
 
 type Props = {
   currentGuide: Guide,
@@ -80,12 +81,15 @@ class TrailScreen extends Component<Props, State> {
     }
 
     return (
-      <TrailView
-        trail={this.props.currentGuide}
-        showInfoOverlay={this.state.showInfoOverlay}
-        onToggleInfoOverlay={this.toggleInfoOverlay}
-        navigation={this.props.navigation}
-      />
+      <>
+        <StatusBar barStyle="light-content" />
+        <TrailView
+          trail={this.props.currentGuide}
+          showInfoOverlay={this.state.showInfoOverlay}
+          onToggleInfoOverlay={this.toggleInfoOverlay}
+          navigation={this.props.navigation}
+        />
+      </>
     );
   }
 }
@@ -103,4 +107,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TrailScreen);

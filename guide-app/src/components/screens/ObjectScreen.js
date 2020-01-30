@@ -13,6 +13,7 @@ import {
   selectCurrentImage
 } from "@actions/uiStateActions";
 import { HeaderStyles } from "@assets/styles";
+import { StatusBar } from "react-native";
 
 type Props = {
   currentGuide: ?Guide,
@@ -138,19 +139,22 @@ class ObjectScreen extends Component<Props> {
     }
 
     return (
-      <ObjectView
-        contentObject={currentContentObject}
-        guideId={guideId}
-        guideType={guideType}
-        onSwiperIndexChanged={this.onSwiperIndexChanged}
-        imageIndex={currentContentObjectImageIndex}
-        audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}
-        videoButtonDisabled={!isMediaAvailable(currentContentObject.video)}
-        onGoToImage={this.onGoToImage}
-        onGoToLink={this.onGoToLink}
-        loadAudioFile={this.loadAudioFile}
-        onGoToVideo={this.onGoToVideo}
-      />
+      <>
+        <StatusBar barStyle="light-content" />
+        <ObjectView
+          contentObject={currentContentObject}
+          guideId={guideId}
+          guideType={guideType}
+          onSwiperIndexChanged={this.onSwiperIndexChanged}
+          imageIndex={currentContentObjectImageIndex}
+          audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}
+          videoButtonDisabled={!isMediaAvailable(currentContentObject.video)}
+          onGoToImage={this.onGoToImage}
+          onGoToLink={this.onGoToLink}
+          loadAudioFile={this.loadAudioFile}
+          onGoToVideo={this.onGoToVideo}
+        />
+      </>
     );
   }
 }
@@ -180,4 +184,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ObjectScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ObjectScreen);
