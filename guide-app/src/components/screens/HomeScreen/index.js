@@ -190,7 +190,11 @@ function mapStateToProps(state: RootState) {
     }
   });
 
-  const items = !isFetching ? categories[currentHomeTab]?.data : null;
+  const items =
+    !isFetching && categories.length > 0
+      ? categories[currentHomeTab]?.data
+      : null;
+
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 
   return {
