@@ -16,7 +16,8 @@ export default StyleSheet.create({
     padding: 2
   },
   pillContainer: {
-    flexGrow: 1
+    flexGrow: 1,
+    flexBasis: 0
   },
   pill: {
     borderRadius: 70,
