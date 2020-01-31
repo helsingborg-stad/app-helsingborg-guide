@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import MarkerListView from "@shared-components/MarkerListView";
 import {
@@ -12,7 +12,7 @@ import {
 } from "@actions/uiStateActions";
 
 import { AnalyticsUtils } from "@utils";
-import { HeaderStyles } from "@assets/styles";
+import { Colors, HeaderStyles } from "@assets/styles";
 
 type Props = {
   navigation: any,
@@ -110,11 +110,17 @@ class CategoryMapScreen extends Component<Props> {
     });
 
     return (
-      <MarkerListView
-        items={mapItems}
-        navigation={navigation}
-        showListButton={false}
-      />
+      <>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={Colors.themeSecondary}
+        />
+        <MarkerListView
+          items={mapItems}
+          navigation={navigation}
+          showListButton={false}
+        />
+      </>
     );
   }
 }

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-
+import { StatusBar } from "react-native";
 import { connect } from "react-redux";
 
 import { AnalyticsUtils } from "@utils";
@@ -10,7 +10,7 @@ import HeaderBackButton from "@shared-components/HeaderBackButton";
 import TrailView from "@shared-components/TrailView";
 import { releaseAudioFile } from "@actions/audioActions";
 import { showBottomBar } from "@actions/uiStateActions";
-import { StatusBar } from "react-native";
+import { Colors } from "@assets/styles";
 
 type Props = {
   currentGuide: Guide,
@@ -82,7 +82,10 @@ class TrailScreen extends Component<Props, State> {
 
     return (
       <>
-        <StatusBar barStyle="light-content" />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={Colors.themeSecondary}
+        />
         <TrailView
           trail={this.props.currentGuide}
           showInfoOverlay={this.state.showInfoOverlay}
@@ -107,7 +110,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TrailScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);
