@@ -10,7 +10,7 @@ import {
   StatusBar
 } from "react-native";
 import ExpandableView from "@shared-components/ExpandableView";
-import { TextStyles } from "@assets/styles";
+import { Colors, TextStyles } from "@assets/styles";
 import styles from "./styles";
 import ImageView from "@shared-components/ImageView";
 import DateView from "@shared-components/DateView";
@@ -65,7 +65,10 @@ class GuideView extends Component<Props> {
     const { id } = guide;
     return (
       <View style={styles.viewContainer}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={Colors.themeSecondary}
+        />
         <ScrollView style={styles.container}>
           <View>
             <ImageView

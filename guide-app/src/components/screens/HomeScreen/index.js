@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
-import { HeaderStyles } from "@assets/styles";
+import { Colors, HeaderStyles } from "@assets/styles";
 import styles from "./styles";
 import {
   selectCurrentGuideByID,
@@ -120,7 +120,7 @@ class HomeScreen extends Component<Props> {
 
     return (
       <>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
         <SafeAreaView>
           <View style={styles.topBarNavigation}>
             <SegmentControlPill
@@ -220,7 +220,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
