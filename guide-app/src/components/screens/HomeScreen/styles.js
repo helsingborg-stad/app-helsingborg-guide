@@ -46,6 +46,24 @@ export default StyleSheet.create({
     height: 45,
     backgroundColor: Colors.themeControl
   },
+  sectionNoContent: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    opacity: 0.6
+  },
+  sectionNoContentText: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily,
+    {
+      color: Colors.black26,
+      fontWeight: "500",
+      fontSize: 19,
+      lineHeight: 22,
+      textAlign: "center",
+      width: "50%"
+    }
+  ]),
   sectionFooterText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {

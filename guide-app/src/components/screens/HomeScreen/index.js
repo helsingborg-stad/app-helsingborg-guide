@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   Image,
   FlatList,
-  StatusBar
+  StatusBar,
+  Text
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
@@ -131,28 +132,38 @@ class HomeScreen extends Component<Props> {
           </View>
         </SafeAreaView>
 
-        <FlatList
-          key={currentHomeTab}
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-          renderItem={({ item, index }) => {
-            return (
-              <NavigationListItem
-                index={index}
-                item={item}
-                onPressItem={this.onPressItem}
-              />
-            );
-          }}
-          keyExtractor={item => item.id.toString()}
-          data={items}
-        />
-        <TouchableOpacity
-          style={styles.mapButton}
-          onPress={() => navigation.navigate("CategoryMapScreen")}
-        >
-          <Image style={styles.mapIcon} source={mapIcon} />
-        </TouchableOpacity>
+        {!items || (items && items.length === 0) ? (
+          <View style={styles.sectionNoContent}>
+            <Text style={styles.sectionNoContentText}>
+              {LangService.strings.CONTENT_MISSING}
+            </Text>
+          </View>
+        ) : (
+          <>
+            <FlatList
+              key={currentHomeTab}
+              style={styles.container}
+              contentContainerStyle={styles.contentContainer}
+              renderItem={({ item, index }) => {
+                return (
+                  <NavigationListItem
+                    index={index}
+                    item={item}
+                    onPressItem={this.onPressItem}
+                  />
+                );
+              }}
+              keyExtractor={item => item.id.toString()}
+              data={items}
+            />
+            <TouchableOpacity
+              style={styles.mapButton}
+              onPress={() => navigation.navigate("CategoryMapScreen")}
+            >
+              <Image style={styles.mapIcon} source={mapIcon} />
+            </TouchableOpacity>
+          </>
+        )}
       </>
     );
   }
@@ -161,13 +172,9 @@ class HomeScreen extends Component<Props> {
 function mapStateToProps(state: RootState) {
   const {
     navigation,
-    guides,
-    guideGroups,
     uiState: { currentHomeTab }
   } = state;
   const { isFetching, navigationCategories } = navigation;
-
-  const noContent = guides.items.length === 0 || guideGroups.items.length === 0;
 
   const categories = navigationCategories.map(cat => {
     const data = cat.items
@@ -178,14 +185,6 @@ function mapStateToProps(state: RootState) {
         title: cat.name,
         data,
         category: cat
-      };
-    } else if (noContent) {
-      return {
-        title: cat.name,
-        data,
-        category: cat,
-        showSpinner: true,
-        hideFooter: true
       };
     }
   });
@@ -220,4 +219,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreen);
