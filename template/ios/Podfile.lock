@@ -261,8 +261,6 @@ PODS:
     - React
   - react-native-photo-view (1.5.2):
     - React
-  - react-native-simple-compass (1.0.0):
-    - React
   - react-native-slider (2.0.8):
     - React
   - react-native-version-number (0.3.6):
@@ -357,7 +355,6 @@ DEPENDENCIES:
   - react-native-maps (from `../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-photo-view (from `../node_modules/react-native-photo-view`)
-  - react-native-simple-compass (from `../node_modules/react-native-simple-compass`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-version-number (from `../node_modules/react-native-version-number`)
   - react-native-video (from `../node_modules/react-native-video`)
@@ -444,8 +441,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-photo-view:
     :path: "../node_modules/react-native-photo-view"
-  react-native-simple-compass:
-    :path: "../node_modules/react-native-simple-compass"
   react-native-slider:
     :path: "../node_modules/@react-native-community/slider"
   react-native-version-number:
@@ -530,7 +525,6 @@ SPEC CHECKSUMS:
   react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
   react-native-netinfo: 3dd993921571d01b78a8f91f1caaffcab7a1e1c7
   react-native-photo-view: 63e9e61da873531f931008b545d8d10c5373ddf8
-  react-native-simple-compass: 2cd09f4e5dbb7a594c2f0d9f85d035e93c9fccca
   react-native-slider: b2f361499888302147205f17f6fffa921a7bda70
   react-native-version-number: 15563dc4145a94aabfc1faab2a9af10174a4204e
   react-native-video: 961749da457e73bf0b5565edfbaffc25abfb8974

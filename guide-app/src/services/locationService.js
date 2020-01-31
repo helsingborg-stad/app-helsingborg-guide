@@ -1,14 +1,11 @@
 import { Alert, Platform } from "react-native";
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions";
 import Geolocation from "@react-native-community/geolocation";
-import RNSimpleCompass from "react-native-simple-compass";
 import LangService from "./langService";
 import GeoLocationActions from "@actions/geolocationActions";
-import { SettingsUtils, MathUtils } from "@utils";
+import { SettingsUtils } from "@utils";
 
-const DEGREE_UPDATE_THRESHOLD = 10; // number of degrees to trigger callback (in degrees)
 const DISTANCE_UPDATE_THRESHOLD = 1; // distance to move to trigger callback (in meters)
-const COMPASS_PRECISION = 0; // limit the compass readings to 0 decimal places
 
 const RATIONALE = {
   title: LangService.strings.ACCESS_TO_LOCATION,
@@ -74,8 +71,6 @@ let instance = null;
 export default class LocationService {
   watcher;
 
-  compassWatcher;
-
   store;
 
   static getInstance() {
@@ -131,36 +126,4 @@ export default class LocationService {
     const y = coord2.longitude - coord1.longitude;
     return Math.sqrt(x * x + y * y);
   }
-
-  getCompassBearing = () =>
-    new Promise(resolve => {
-      RNSimpleCompass.start(DEGREE_UPDATE_THRESHOLD, degree => {
-        resolve(degree);
-        RNSimpleCompass.stop();
-      });
-    });
-
-  subscribeCompassBearing = () =>
-    new Promise((resolve, reject) => {
-      try {
-        this.compassWatcher = RNSimpleCompass.start(
-          DEGREE_UPDATE_THRESHOLD,
-          degree => {
-            const bearing = MathUtils.limitPrecision(degree, COMPASS_PRECISION);
-            this.store.dispatch(
-              GeoLocationActions.compassbearingUpdated(bearing)
-            );
-            resolve(bearing);
-          }
-        );
-      } catch (e) {
-        reject(e);
-      }
-    });
-
-  unsubscribeCompassBearing = () => {
-    if (this.compassWatcher) {
-      RNSimpleCompass.stop();
-    }
-  };
 }
