@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 import { NativeModules } from "react-native";
 import VideoPlayer from "@shared-components/VideoPlayer";
-import HeaderBackButton from "@shared-components/HeaderBackButton";
 
 const { FullScreenVideoModule } = NativeModules;
 
 const flexStyle = { flex: 1 };
 
 export default class FullScreenVideoScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerLeft: <HeaderBackButton navigation={navigation} />
-    };
-  };
-
   constructor(props) {
     super(props);
     this.state = {
