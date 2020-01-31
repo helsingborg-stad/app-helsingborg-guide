@@ -104,6 +104,11 @@ function beginShare(title, message, url, width, height, subject, shareType) {
 async function shareAndroid(title, message, url, width, height, subject) {
   // Examples: https://github.com/JimmyDaddy/react-native-image-marker/blob/master/example/example/app.js
 
+  function finish() {
+    isCreatingImage = false;
+    origin.forceUpdate();
+  }
+
   isCreatingImage = true;
   origin.forceUpdate();
 
@@ -126,35 +131,46 @@ async function shareAndroid(title, message, url, width, height, subject) {
       });
 
       // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
-      const granted = await PermissionsAndroid.check(
-        "android.permission.READ_EXTERNAL_STORAGE"
-      );
-      if (!granted) {
-        const response = await PermissionsAndroid.request(
+      try {
+        const granted = await PermissionsAndroid.check(
           "android.permission.READ_EXTERNAL_STORAGE"
         );
-        if (!response) {
-          isCreatingImage = false;
-          origin.forceUpdate();
-          return;
-        } // Oh. well. No share for you :(
+
+        if (!granted) {
+          const response = await PermissionsAndroid.request(
+            "android.permission.READ_EXTERNAL_STORAGE"
+          );
+
+          if (!response) {
+            throw new Error("Could not request permissions");
+          } // Oh. well. No share for you :(
+        }
+      } catch (e) {
+        // Unable to get permissions to share.
+        finish();
+        return;
       }
 
-      await RNFetchBlob.fs.cp(
-        outputImage,
-        `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
-      );
-      const finalPath = getPlatformURI(
-        `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
-      );
-      // Only attempt to share the file if we successfully managed to move it.
-      const exist = await RNFetchBlob.fs.exists(finalPath);
-      if (exist) {
-        Share.open({ title, message, subject, url: finalPath });
+      try {
+        await RNFetchBlob.fs.cp(
+          outputImage,
+          `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
+        );
+
+        const finalPath = getPlatformURI(
+          `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
+        );
+
+        const exist = await RNFetchBlob.fs.exists(finalPath);
+        if (exist) {
+          // Only attempt to share the file if we successfully managed to move it.
+          Share.open({ title, message, subject, url: finalPath });
+        }
+      } catch (e) {
+        // Could not share.
       }
 
-      isCreatingImage = false;
-      origin.forceUpdate();
+      finish();
     });
   });
 }
