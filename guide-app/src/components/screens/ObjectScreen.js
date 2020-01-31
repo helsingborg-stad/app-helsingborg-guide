@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
+import { StatusBar } from "react-native";
 import { connect } from "react-redux";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import ObjectView from "@shared-components/ObjectView";
@@ -12,8 +13,7 @@ import {
   selectCurrentContentObjectImage,
   selectCurrentImage
 } from "@actions/uiStateActions";
-import { HeaderStyles } from "@assets/styles";
-import { StatusBar } from "react-native";
+import { Colors, HeaderStyles } from "@assets/styles";
 
 type Props = {
   currentGuide: ?Guide,
@@ -140,7 +140,10 @@ class ObjectScreen extends Component<Props> {
 
     return (
       <>
-        <StatusBar barStyle="light-content" />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={Colors.themeSecondary}
+        />
         <ObjectView
           contentObject={currentContentObject}
           guideId={guideId}
@@ -184,7 +187,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ObjectScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ObjectScreen);

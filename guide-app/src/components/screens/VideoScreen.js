@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 import PropTypes from "prop-types";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import ViewContainer from "@shared-components/view_container";
 import VideoPlayer from "@shared-components/VideoPlayer";
 import Colors from "@assets/styles/Colors";
@@ -17,6 +18,7 @@ export default class VideoScreen extends Component {
     const { title } = navigation.state.params;
     return {
       title,
+      headerLeft: <HeaderBackButton navigation={navigation} />,
       headerRight: null,
       headerStyle: styles.mainContainer,
       tabBarVisible: false

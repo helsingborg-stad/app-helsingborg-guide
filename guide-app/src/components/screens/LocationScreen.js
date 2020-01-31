@@ -6,7 +6,7 @@ import { View, StatusBar } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LocationView from "@shared-components/LocationView";
 import { AnalyticsUtils } from "@utils";
-import { HeaderStyles } from "@assets/styles";
+import { Colors, HeaderStyles } from "@assets/styles";
 import { selectCurrentGuide, showBottomBar } from "@actions/uiStateActions";
 
 type Props = {
@@ -62,7 +62,10 @@ class LocationScreen extends Component<Props> {
     const now = new Date();
     return (
       <>
-        <StatusBar barStyle="light-content" />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={Colors.themeSecondary}
+        />
         <LocationView
           guideGroup={currentGuideGroup}
           guides={currentGuides}
@@ -105,7 +108,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LocationScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LocationScreen);
