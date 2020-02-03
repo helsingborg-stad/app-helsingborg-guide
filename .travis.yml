@@ -42,6 +42,8 @@ matrix:
     - name: "Helsingborg Android"
       language: android
       jdk: oraclejdk8
+      env:
+        - KEYSTORE_PROPERTIES=release.properties
       android:
         components:
           - tools
@@ -80,6 +82,8 @@ matrix:
     - name: "Lund Android"
       language: android
       jdk: oraclejdk8
+      env:
+        - KEYSTORE_PROPERTIES=release.properties
       android:
         components:
           - tools
