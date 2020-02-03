@@ -1,4 +1,5 @@
 **/android/*release.properties
+**/android/**/upload.properties
 
 android/.settings/
 android/app/.settings/
