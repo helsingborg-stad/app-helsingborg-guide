@@ -11,7 +11,7 @@ module.exports = {
           "@actions": "../../guide-app/src/actions",
           "@assets": path.resolve(__dirname, "./assets"),
           "@data": path.resolve(__dirname, "./data"),
-          "@json-schemas": "../../guide-app/json-schemas"),
+          "@json-schemas": "../../guide-app/json-schemas",
           "@services": "../../guide-app/src/services",
           "@shared-components": "../../guide-app/src/components/shared",
           "@src": "../../guide-app/src",
