@@ -104,8 +104,12 @@ class CategoryListScreen extends Component<Props> {
       <View>
         <FlatList
           style={styles.container}
-          renderItem={({ item }) => (
-            <NavigationListItem item={item} onPressItem={this.onPressItem} />
+          renderItem={({ item, index }) => (
+            <NavigationListItem
+              index={index}
+              item={item}
+              onPressItem={this.onPressItem}
+            />
           )}
           keyExtractor={item => String(item.id)}
           data={sortedItems}
