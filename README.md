@@ -4,6 +4,18 @@
 
 App for iphone/android displaying guides on specific locations in helsingborg. Integrated with event-api.
 
+## Table of contents
+
+- [Getting started](#getting-started)
+- [Monorepo](#monorepo)
+- [Working with cities](#working-with-cities)
+- [Adding a new city](#adding-a-new-city)
+- [API integration](#api-integration)
+- [Local development](#local-development)
+- [Overall solution](#overall-solution)
+- [Native components](#native-components)
+- [Build for release](#build-for-release)
+
 ## Getting started
 
 1. Clone repo from [Repo](ssh://git@github.com:helsingborg-stad/app-helsingborg-guide.git)
@@ -11,6 +23,13 @@ App for iphone/android displaying guides on specific locations in helsingborg. I
 3. Run `yarn install` to install node packages
 4. Run `yarn start` to get Metro running
 5. Run `npx react-native run-ios --device` or `npx react-native run-android` to build the app as normal
+
+## Monorepo
+
+We used [this article](https://web.archive.org/web/20200129104745/https://engineering.brigad.co/react-native-monorepos-code-sharing-f6c08172b417) to setup the monorepo and code sharing.
+Setting this up included changing a lot of references to `node_modules` in the React Native projects (iOS/Android).
+
+For `jetifier` there's a `postinstall` script in each cities `packages.json` to run it in the root directory. There's an [open issue](https://github.com/mikehardy/jetifier/issues/36) that would hopefully remove that need.
 
 ## Working with cities
 
@@ -27,21 +46,9 @@ To facilitate that, we use yarn [workspaces](https://yarnpkg.com/lang/en/docs/wo
 For each app to be able to build, we use a `babel.config.js` with `module-resolver` aliases that point to `./guide-app`. The **only exceptions** are `@assets` (points to `guide-app/assets/[city]`) and `@data` (e.g `cities/Lund/data`).\
 There is also a `metro.config.js` in each city folder that makes sure Metro looks for packages in `./node_modules`.
 
-### API integration
+## Adding a new city
 
-To fetch data from the API for respective city, the app uses a `GROUP_ID`, found in `[city]/data/endpoints.js`.
-
-### Updating a city
-
-**NOTE** Might be obsolete
-
-Once you have a city-specific assets directory (see below) make any asset changes in the `./assets/city_name` directory.
-
-Once the changes are ready, run the update_city shell script to copy all of the changed files into the city project (in ./cities/city_name)
-
-Each of these are separate ReactNative projects with the aim of building completely separate guide apps.
-
-### Adding a new city
+**NOTE** This hasn't been tested after moving to monorepo structure to use with care.
 
 1. In the top level of this repository run the add_city shell script with the name of the city and the ios and android bundle ids
    e.g. `sh add_city.sh Helsingborg org.hbg.GuideHbg com.guidehbg`
@@ -53,6 +60,22 @@ Each of these are separate ReactNative projects with the aim of building complet
 5. The metro bundler and any watchman watches should be killed as they get into a confused state
 
 > To debug the Javascript packager will have to run in background. This will give the option for hotreloding and remote debugging Javascript from Chrome. When building for release this features is disabled.
+
+### Updating a city (Might be obsolete)
+
+**NOTE** This hasn't been tested after moving to monorepo structure to use with care.
+
+Once you have a city-specific assets directory (see below) make any asset changes in the `./assets/city_name` directory.
+
+Once the changes are ready, run the update_city shell script to copy all of the changed files into the city project (in ./cities/city_name)
+
+Each of these are separate ReactNative projects with the aim of building completely separate guide apps.
+
+## API integration
+
+To fetch data from the API for respective city, the app uses a `GROUP_ID`, found in `[city]/data/endpoints.js`.
+
+## Local development
 
 ### IOS
 
@@ -93,6 +116,8 @@ storeFile=../relative/path/to/release.keystore
 
 1. Open android studio
 2. Click the bug symbol with the little play button on top in the ribbon.
+
+---
 
 ## Overall solution
 
