@@ -450,7 +450,7 @@ exports[`Basic GuideObject 1`] = `
                   style={
                     Array [
                       Object {
-                        "color": "#a61380",
+                        "color": "#711A5B",
                         "fontSize": 16,
                         "fontWeight": "500",
                         "lineHeight": 22,
@@ -510,7 +510,7 @@ exports[`Basic GuideObject 1`] = `
               style={
                 Array [
                   Object {
-                    "color": "#a61380",
+                    "color": "#711A5B",
                     "fontSize": 24,
                   },
                   undefined,
@@ -528,7 +528,7 @@ exports[`Basic GuideObject 1`] = `
             <Text
               style={
                 Object {
-                  "color": "#a61380",
+                  "color": "#711A5B",
                   "fontFamily": "Roboto",
                   "fontSize": 16,
                   "fontWeight": "500",
