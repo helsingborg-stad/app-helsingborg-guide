@@ -78,7 +78,7 @@ matrix:
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       script:
         - travis_retry ./scripts/ci-build-android.sh
-
+  exclude:
     - name: "Lund Android"
       language: android
       jdk: oraclejdk8
