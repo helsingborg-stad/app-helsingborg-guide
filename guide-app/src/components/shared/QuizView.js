@@ -1,6 +1,7 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { TextStyles } from "@assets/styles";
+import LinearGradient from "react-native-linear-gradient";
+import { Colors, TextStyles } from "@assets/styles";
 import { dunkersSwedishQuizItems } from "../../data/QuizContent";
 
 const nonEmojiRegExp = /[a-zA-Z0-9.!?]/;
@@ -64,9 +65,14 @@ function UserMessage({
   }
 
   return (
-    <View style={style}>
+    <LinearGradient
+      colors={[Colors.themePrimary, Colors.themeTertiary]}
+      useAngle
+      angle={90 - 22}
+      style={style}
+    >
       <Text style={styles.userMessageText}>{item.text}</Text>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -127,7 +133,6 @@ const userMessageShared = {
   marginHorizontal: 11,
   marginBottom: 4,
   maxWidth: "80%",
-  backgroundColor: "#A40082",
   paddingHorizontal: 17,
   paddingVertical: 11,
   borderRadius: radiusMax
