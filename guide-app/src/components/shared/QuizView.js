@@ -2,7 +2,6 @@ import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
-import { dunkersSwedishQuizItems } from "../../data/QuizContent";
 
 const nonEmojiRegExp = /[a-zA-Z0-9.!?]/;
 
@@ -76,8 +75,7 @@ function UserMessage({
   );
 }
 
-export default function QuizView() {
-  const items = dunkersSwedishQuizItems;
+export default function QuizView({ items }: { items: QuizItem[] }) {
   return (
     <FlatList
       inverted
