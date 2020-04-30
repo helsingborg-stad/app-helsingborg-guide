@@ -1,7 +1,8 @@
 import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
+import { QuizItem } from "../../data/QuizContent";
 
 const nonEmojiRegExp = /[a-zA-Z0-9.!?]/;
 
@@ -28,15 +29,10 @@ function BotMessage({
   let style = styles.botMessageSolo;
   if (isBotNonEmoji(nextItem) && isBotNonEmoji(prevItem)) {
     style = styles.botMessageMiddle;
-    console.log("MIDDLE", { item, prevItem, nextItem });
   } else if (isBotNonEmoji(prevItem)) {
     style = styles.botMessageFirst;
-    console.log("FIRST", { item, prevItem, nextItem });
   } else if (isBotNonEmoji(nextItem)) {
     style = styles.botMessageLast;
-    console.log("LAST", { item, prevItem, nextItem });
-  } else {
-    console.log("SOLO", { item, prevItem, nextItem });
   }
   return (
     <View style={style}>
@@ -75,7 +71,35 @@ function UserMessage({
   );
 }
 
-export default function QuizView({ items }: { items: QuizItem[] }) {
+function Prompt({
+  item,
+  onAlternativeSelected
+}: {
+  item: QuizPrompt,
+  onAlternativeSelected: (alternative: QuizPromptAlternative) => void
+}) {
+  return (
+    <View style={{}}>
+      {item.alternatives.map((alternative, index) => (
+        <Button
+          key={index}
+          title={alternative.text}
+          onPress={() => {
+            onAlternativeSelected(alternative);
+          }}
+        />
+      ))}
+    </View>
+  );
+}
+
+export default function QuizView({
+  items,
+  onPromptAlternativeSelected
+}: {
+  items: QuizItem[],
+  onPromptAlternativeSelected: (alternative: QuizPromptAlternative) => void
+}) {
   return (
     <FlatList
       inverted
@@ -99,6 +123,14 @@ export default function QuizView({ items }: { items: QuizItem[] }) {
               item={item}
               prevItem={prevItem}
               nextItem={nextItem}
+            />
+          );
+        } else if (item.type === "prompt") {
+          return (
+            <Prompt
+              key={item.id}
+              item={item}
+              onAlternativeSelected={onPromptAlternativeSelected}
             />
           );
         }

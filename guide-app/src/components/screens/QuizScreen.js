@@ -6,7 +6,11 @@ import { View, StatusBar, SafeAreaView } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import { Colors, HeaderStyles } from "@assets/styles";
 import QuizView from "@shared-components/QuizView";
-import { dunkersSwedishQuizItems } from "../../data/QuizContent";
+import {
+  QuizItem,
+  QuizPromptAlternative,
+  dunkersSwedishQuizItems
+} from "../../data/QuizContent";
 
 type Props = {
   navigation: Object
@@ -29,16 +33,8 @@ class QuizScreen extends Component<Props, State> {
 
   state = { items: [] };
 
-  componentWillMount() {
-    const upcomingItems = [...dunkersSwedishQuizItems];
-    this.interval = setInterval(() => {
-      const item = upcomingItems[0];
-      upcomingItems.splice(0, 1);
-      this.setState({ items: [item, ...this.state.items] });
-      if (upcomingItems.length === 0) {
-        clearInterval(this.interval);
-      }
-    }, 1000);
+  componentDidMount() {
+    this.displayNextItem();
   }
 
   componentWillUnmount() {
@@ -46,10 +42,45 @@ class QuizScreen extends Component<Props, State> {
     // if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
     //   this.props.dispatchShowBottomBar(true);
     // }
-    clearInterval(this.interval);
+    clearTimeout(this.timeout);
   }
 
-  interval: IntervalID;
+  displayNextItem = () => {
+    const item = this.upcomingItems[0];
+    this.upcomingItems.splice(0, 1);
+    const nextItem = this.upcomingItems[0];
+
+    this.setState(
+      ({ items }) => {
+        return { items: [item, ...items] };
+      },
+      () => {
+        if (nextItem && (item.type === "bot" || item.type === "user")) {
+          this.timeout = setTimeout(this.displayNextItem, 1000);
+        }
+      }
+    );
+  };
+
+  handlePromptAlternativeSelected = (alternative: QuizPromptAlternative) => {
+    const followUps = (alternative.followups || []).map((followUp, index) => ({
+      id: `${Math.random()}-${index}`,
+      type: "bot",
+      text: followUp.text
+    }));
+    this.upcomingItems = [
+      { id: String(Math.random()), type: "user", text: alternative.text },
+      ...followUps,
+      ...this.upcomingItems
+    ];
+
+    this.setState(({ items }) => {
+      return { items: items.slice(1) };
+    }, this.displayNextItem);
+  };
+
+  timeout: TimeoutID;
+  upcomingItems: QuizItem[] = [...dunkersSwedishQuizItems];
 
   render() {
     return (
@@ -59,7 +90,10 @@ class QuizScreen extends Component<Props, State> {
           backgroundColor={Colors.themeSecondary}
         />
         <SafeAreaView style={{ flex: 1 }}>
-          <QuizView items={this.state.items} />
+          <QuizView
+            items={this.state.items}
+            onPromptAlternativeSelected={this.handlePromptAlternativeSelected}
+          />
         </SafeAreaView>
       </>
     );
