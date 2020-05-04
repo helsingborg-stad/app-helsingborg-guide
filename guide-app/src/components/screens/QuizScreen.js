@@ -2,7 +2,13 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, StatusBar, SafeAreaView } from "react-native";
+import {
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  StatusBar,
+  View
+} from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import { Colors, HeaderStyles } from "@assets/styles";
 import QuizView from "@shared-components/QuizView";
@@ -55,6 +61,7 @@ class QuizScreen extends Component<Props, State> {
         return { items: [item, ...items] };
       },
       () => {
+        this.scrollToBottom();
         if (nextItem && (item.type === "bot" || item.type === "user")) {
           this.timeout = setTimeout(this.displayNextItem, 1000);
         }
@@ -79,8 +86,14 @@ class QuizScreen extends Component<Props, State> {
     }, this.displayNextItem);
   };
 
+  scrollToBottom() {
+    const flatlist = this.flatlistRef.current;
+    flatlist?.scrollToOffset({ offset: 0 });
+  }
+
   timeout: TimeoutID;
   upcomingItems: QuizItem[] = [...dunkersSwedishQuizItems];
+  flatlistRef = React.createRef<FlatList>();
 
   render() {
     return (
@@ -89,8 +102,9 @@ class QuizScreen extends Component<Props, State> {
           barStyle="light-content"
           backgroundColor={Colors.themeSecondary}
         />
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={styles.container}>
           <QuizView
+            flatlistRef={this.flatlistRef}
             items={this.state.items}
             onPromptAlternativeSelected={this.handlePromptAlternativeSelected}
           />
@@ -99,6 +113,10 @@ class QuizScreen extends Component<Props, State> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1 }
+});
 
 function mapStateToProps(unusedState: RootState) {
   return {};

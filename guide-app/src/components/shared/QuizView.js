@@ -97,13 +97,16 @@ function Prompt({
 
 export default function QuizView({
   items,
-  onPromptAlternativeSelected
+  onPromptAlternativeSelected,
+  flatlistRef
 }: {
   items: QuizItem[],
-  onPromptAlternativeSelected: (alternative: QuizPromptAlternative) => void
+  onPromptAlternativeSelected: (alternative: QuizPromptAlternative) => void,
+  flatlistRef: React.Ref<FlatList>
 }) {
   return (
     <FlatList
+      ref={flatlistRef}
       inverted
       data={items}
       renderItem={({ item, index }) => {
