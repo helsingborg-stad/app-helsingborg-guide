@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
+import Button from "@shared-components/Button";
 import { QuizItem } from "../../data/QuizContent";
 
 const nonEmojiRegExp = /[a-zA-Z0-9.!?]/;
@@ -79,10 +80,11 @@ function Prompt({
   onAlternativeSelected: (alternative: QuizPromptAlternative) => void
 }) {
   return (
-    <View style={{}}>
+    <View style={styles.promptContainer}>
       {item.alternatives.map((alternative, index) => (
         <Button
           key={index}
+          style={styles.promptButton}
           title={alternative.text}
           onPress={() => {
             onAlternativeSelected(alternative);
@@ -210,5 +212,15 @@ const styles = StyleSheet.create({
     ...userMessageShared,
     marginBottom: 20 + userMessageShared.marginBottom
   },
-  userMessageText: StyleSheet.flatten([TextStyles.normal, { color: "white" }])
+  userMessageText: StyleSheet.flatten([
+    TextStyles.normal,
+    { color: Colors.white }
+  ]),
+  promptContainer: {
+    marginTop: 15
+  },
+  promptButton: {
+    marginHorizontal: 11,
+    marginVertical: 5
+  }
 });
