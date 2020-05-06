@@ -62,7 +62,12 @@ class QuizScreen extends Component<Props, State> {
       },
       () => {
         this.scrollToBottom();
-        if (nextItem && (item.type === "bot" || item.type === "user")) {
+        if (
+          nextItem &&
+          (item.type === "bot" ||
+            item.type === "botimage" ||
+            item.type === "user")
+        ) {
           this.timeout = setTimeout(this.displayNextItem, 1000);
         }
       }

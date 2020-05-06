@@ -1,7 +1,19 @@
+import { ImageSourcePropType } from "react-native";
+const robotImage = require("@assets/images/quiz/dunkers/robot.png");
+const exhibitionRobotImage = require("@assets/images/quiz/dunkers/exhibition_robot.png");
+const elseMarieImage = require("@assets/images/quiz/dunkers/else_marie.png");
+
 type QuizBotMessage = {
   type: "bot",
   id: string,
   text: string
+};
+
+type QuizBotImageMessage = {
+  type: "botimage",
+  id: string,
+  source: ImageSourcePropType,
+  aspectRatio: number
 };
 
 type QuizUserMessage = {
@@ -21,10 +33,14 @@ export type QuizPromptAlternative = {
   followups?: { text: string }[]
 };
 
-export type QuizItem = QuizBotMessage | QuizUserMessage | QuizPrompt;
+export type QuizItem =
+  | QuizBotMessage
+  | QuizBotImageMessage
+  | QuizUserMessage
+  | QuizPrompt;
 
 export const dunkersSwedishQuizItems: QuizItem[] = [
-  { id: "0", type: "bot", text: "🤖" },
+  { id: "0", type: "botimage", source: robotImage, aspectRatio: 1 },
   { id: "1", type: "bot", text: "Hej!" },
   { id: "2", type: "bot", text: "Hallå!" },
 
@@ -131,7 +147,7 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     type: "bot",
     text: "Jag är utställningens robot."
   },
-  // TODO image
+  { id: "25", type: "botimage", source: exhibitionRobotImage, aspectRatio: 1 },
   {
     id: "26",
     type: "bot",
@@ -195,7 +211,7 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     type: "bot",
     text: "Vi startar där borta!"
   },
-  // TODO image
+  { id: "34", type: "botimage", source: elseMarieImage, aspectRatio: 1.4679 },
   {
     id: "35",
     type: "prompt",

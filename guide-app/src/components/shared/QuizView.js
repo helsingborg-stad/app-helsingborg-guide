@@ -1,5 +1,12 @@
 import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground
+} from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
 import Button from "@shared-components/Button";
@@ -39,6 +46,17 @@ function BotMessage({
     <View style={style}>
       <Text style={styles.botMessageText}>{item.text}</Text>
     </View>
+  );
+}
+
+function BotImageMessage({ item }: { item: QuizBotImageMessage }) {
+  return (
+    <ImageBackground
+      style={[styles.botImage, { aspectRatio: item.aspectRatio }]}
+      imageStyle={styles.botImageImage}
+      source={item.source}
+      resizeMode="contain"
+    />
   );
 }
 
@@ -121,6 +139,8 @@ export default function QuizView({
               nextItem={nextItem}
             />
           );
+        } else if (item.type === "botimage") {
+          return <BotImageMessage key={item.id} item={item} />;
         } else if (item.type === "user") {
           return (
             <UserMessage
@@ -201,6 +221,15 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: radiusLarge
   },
   botMessageText: TextStyles.normal,
+  botImage: {
+    alignSelf: "flex-start",
+    marginHorizontal: 11,
+    marginBottom: 4,
+    width: 300
+  },
+  botImageImage: {
+    borderRadius: 10
+  },
   userMessageSolo: userMessageShared,
   userMessageSoloVerticalMargin: {
     ...userMessageShared,
