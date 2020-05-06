@@ -3,6 +3,8 @@ const robotImage = require("@assets/images/quiz/dunkers/robot.png");
 const exhibitionRobotImage = require("@assets/images/quiz/dunkers/exhibition_robot.png");
 const elseMarieImage = require("@assets/images/quiz/dunkers/else_marie.png");
 const elseMarieFigurenImage = require("@assets/images/quiz/dunkers/else_marie_figuren.png");
+const lillZlatanImage = require("@assets/images/quiz/dunkers/lill_zlatan.png");
+const barnetImage = require("@assets/images/quiz/dunkers/barnet.png");
 
 type QuizBotMessage = {
   type: "bot",
@@ -576,5 +578,189 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     id: "siv-26",
     type: "bot",
     text: "Hoppas Siv kan somna snart. 😴"
+  },
+  {
+    id: "lillzlatan-0",
+    type: "bot",
+    text: "Ser du bilderna på väggen? 🧐️"
+  },
+  {
+    id: "lillzlatan-1",
+    type: "bot",
+    text: "Kan du hitta den här figuren?"
+  },
+  {
+    id: "lillzlatan-2",
+    type: "botimage",
+    source: lillZlatanImage,
+    aspectRatio: 1.4679
+  },
+  {
+    id: "lillzlatan-3",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Hittat!"
+      }
+    ]
+  },
+  {
+    id: "lillzlatan-4",
+    type: "bot",
+    text: "Hon heter Ella."
+  },
+  {
+    id: "lillzlatan-5",
+    type: "bot",
+    text: "Fast hon kallas Lill-Zlatan"
+  },
+  {
+    id: "lillzlatan-6",
+    type: "bot",
+    text: "Hon gillar att spela fotboll. ⚽⚽⚽⚽"
+  },
+  {
+    id: "lillzlatan-7",
+    type: "bot",
+    text: "Men vad har hänt innan den här bilden egentligen?"
+  },
+  {
+    id: "lillzlatan-8",
+    type: "bot",
+    text:
+      "Berätta för varandra varför ni tror att Ella ser lite arg ut och det ligger toapapper i handfatet"
+  },
+  {
+    id: "lillzlatan-9",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Vi har berättat!"
+      }
+    ]
+  },
+  {
+    id: "lillzlatan-10",
+    type: "bot",
+    text:
+      "Jag tror att Ella precis räddat världen eftersom det bodde tusen pyttesmå giftiga flugor i toapappret."
+  },
+  {
+    id: "lillzlatan-11",
+    type: "bot",
+    text: "Men när de hamnade i vattnet blev de snälla och ogiftiga. 😍"
+  },
+  {
+    id: "lillzlatan-12",
+    type: "bot",
+    text: "Trodde ni också det?"
+  },
+  {
+    id: "lillzlatan-13",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Nej!",
+        followups: [
+          { text: "Nä, ofta tror man inte samma." },
+          { text: "Vi tittar på samma bild och ändå ser vi helt olika saker." }
+        ]
+      },
+      {
+        text: "Ja, precis samma!",
+        followups: [
+          { text: "Oj! Tänk att vi tänker likadant." },
+          {
+            text:
+              "Ibland tittar man på samma bild men man ser helt olika saker! 😮"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "lillzlatan-14",
+    type: "bot",
+    text: "Vet du."
+  },
+  {
+    id: "lillzlatan-15",
+    type: "bot",
+    text: "Varje dag måste jag kolla vilken ordning bilderna på väggen är i. 😵"
+  },
+  {
+    id: "lillzlatan-16",
+    type: "bot",
+    text: "Så att vi kan kolla om det är rätt."
+  },
+  {
+    id: "lillzlatan-17",
+    type: "bot",
+    text: "Kan du titta på nummer 3 i Kollprotkollet."
+  },
+  {
+    id: "lillzlatan-18",
+    type: "bot",
+    text:
+      "Kan du kolla vilken ordning de är i på väggen och sedan skriva ett nummer vid varje?"
+  },
+  {
+    id: "lillzlatan-19",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Jag är färdig!"
+      }
+    ]
+  },
+  {
+    id: "lillzlatan-20",
+    type: "bot",
+    text: "👍"
+  },
+  {
+    id: "lillzlatan-21",
+    type: "bot",
+    text: "Vi kan använda allt du skriver ner i protokollet sen."
+  },
+  {
+    id: "lillzlatan-22",
+    type: "bot",
+    text: "När utställningen ska kollas av."
+  },
+  {
+    id: "lillzlatan-23",
+    type: "bot",
+    text: "Fast jag vet inte riktigt vem som gör det…"
+  },
+  {
+    id: "lillzlatan-24",
+    type: "bot",
+    text: "Varför måste de veta så mycket? 🤔"
+  },
+  {
+    id: "lillzlatan-25",
+    type: "bot",
+    text: "Jaja, det spelar ingen roll nu!"
+  },
+  {
+    id: "lillzlatan-26",
+    type: "bot",
+    text: "Kan du hitta barnet som ser ut såhär?"
+  },
+  {
+    id: "lillzlatan-27",
+    type: "botimage",
+    source: barnetImage,
+    aspectRatio: 1.4679
+  },
+  {
+    id: "lillzlatan-28",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Här är hen!"
+      }
+    ]
   }
 ];
