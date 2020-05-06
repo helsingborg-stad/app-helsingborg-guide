@@ -385,5 +385,196 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
         text: "Jag är framme!"
       }
     ]
+  },
+  {
+    id: "siv-0",
+    type: "bot",
+    text: "Oj här ligger visst Cerisia och sover! 😴"
+  },
+  {
+    id: "siv-1",
+    type: "bot",
+    text:
+      "Men Siv är vaken. Hon sover över hos Cerisia. För första gången någonsin! 😮"
+  },
+  {
+    id: "siv-2",
+    type: "bot",
+    text: "Siv verkar inte riktigt glad? Vad tycker du?"
+  },
+  {
+    id: "siv-3",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Hon ser lite ledsen ut",
+        followups: [
+          {
+            text: "Hon kan kanske inte somna. Om hon hälsar på hos en kompis."
+          },
+          { text: "Det kan vara läskigt att sova på en ny plats." }
+        ]
+      },
+      {
+        text: "Jag tycker inte hon verkar ledsen",
+        followups: [
+          { text: "Åh vad bra! ☺" },
+          { text: "Hon kanske bara har svårt att somna på en ny plats." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "siv-4",
+    type: "bot",
+    text: "Det är inte så lätt alltid. Att sova på ett nytt ställe."
+  },
+  {
+    id: "siv-5",
+    type: "bot",
+    text: "Allt är annorlunda. Och luktar fel."
+  },
+  {
+    id: "siv-6",
+    type: "bot",
+    text: "Då kan det vara svårt att sova."
+  },
+  {
+    id: "siv-7",
+    type: "bot",
+    text: "Har du svårt att somna ibland?"
+  },
+  {
+    id: "siv-8",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Ja, det har jag.",
+        followups: [
+          { text: "Det låter lite jobbigt. Tror jag." },
+          { text: "Jag sover inte alls. Det gör inte robotar!" }
+        ]
+      },
+      {
+        text: "Nej, nästan aldrig.",
+        followups: [
+          { text: "Vet du, jag sover aldrig." },
+          { text: "Robotar sover inte. Inte jag i alla fall." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "siv-9",
+    type: "bot",
+    text: "Men du kanske kan hjälpa Siv!"
+  },
+  {
+    id: "siv-10",
+    type: "bot",
+    text:
+      "Om du tar fram Kollprotokollet och skriver ner ditt bästa tips för att somna."
+  },
+  {
+    id: "siv-11",
+    type: "bot",
+    text: "Så kan jag ge det till Siv sen. 😄"
+  },
+  {
+    id: "siv-12",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Jag har skrivt ner ett tips!"
+      }
+    ]
+  },
+  {
+    id: "siv-13",
+    type: "bot",
+    text: "…"
+  },
+  {
+    id: "siv-14",
+    type: "bot",
+    text: "Har du tänkt på en sak?"
+  },
+  {
+    id: "siv-15",
+    type: "bot",
+    text:
+      "När man sover drömmer man ibland. Vuxna brukar säga att drömmar inte är på riktigt."
+  },
+  {
+    id: "siv-16",
+    type: "bot",
+    text: "Hur vet man att drömmar inte är på riktigt?"
+  },
+  {
+    id: "siv-17",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "När man vaknar är man kvar i sängen."
+      },
+      {
+        text: "Det händer konstiga saker som inte kan hända."
+      },
+      {
+        text: "Det kanske visst är på riktigt?"
+      }
+    ]
+  },
+  {
+    id: "siv-18",
+    type: "bot",
+    text: "Hmm, ja du har ju rätt."
+  },
+  {
+    id: "siv-19",
+    type: "bot",
+    text: "Det är ju på riktigt att jag sover och att jag drömmer."
+  },
+  {
+    id: "siv-20",
+    type: "bot",
+    text:
+      "Men jag har varken varit undervattenspirat, eller hoppat höjdhopp på månen."
+  },
+  {
+    id: "siv-21",
+    type: "bot",
+    text: "Vissa drömmar är jättekonstiga."
+  },
+  {
+    id: "siv-22",
+    type: "bot",
+    text:
+      "Som när jag drömde att jag hjälpte mini-elefanter simma över havet. Jag hjälpte dem att hålla upp snablarna över vattnet. Sen solade vi på stranden. ☀️🥰🥰"
+  },
+  {
+    id: "siv-23",
+    type: "bot",
+    text: "Har du drömt något roligt eller spännande någongång?"
+  },
+  {
+    id: "siv-24",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Vi har berättat för varandra!"
+      }
+    ]
+  },
+  {
+    id: "siv-25",
+    type: "bot",
+    text:
+      "Fast… om jag drömt en mardröm så är jag glad att drömmar inte är på riktigt.😰"
+  },
+  {
+    id: "siv-26",
+    type: "bot",
+    text: "Hoppas Siv kan somna snart. 😴"
   }
 ];

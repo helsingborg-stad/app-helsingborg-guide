@@ -1,7 +1,6 @@
 import React from "react";
 import {
   FlatList,
-  Image,
   StyleSheet,
   Text,
   View,
@@ -12,7 +11,7 @@ import { Colors, TextStyles } from "@assets/styles";
 import Button from "@shared-components/Button";
 import { QuizItem } from "../../data/QuizContent";
 
-const nonEmojiRegExp = /[a-zA-Z0-9.!?]/;
+const nonEmojiRegExp = /[a-zA-Z0-9.!?…]/;
 
 function containsNonEmoji(text: string): Boolean {
   return !!text.match(nonEmojiRegExp);
