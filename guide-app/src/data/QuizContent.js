@@ -2,6 +2,7 @@ import { ImageSourcePropType } from "react-native";
 const robotImage = require("@assets/images/quiz/dunkers/robot.png");
 const exhibitionRobotImage = require("@assets/images/quiz/dunkers/exhibition_robot.png");
 const elseMarieImage = require("@assets/images/quiz/dunkers/else_marie.png");
+const elseMarieFigurenImage = require("@assets/images/quiz/dunkers/else_marie_figuren.png");
 
 type QuizBotMessage = {
   type: "bot",
@@ -234,5 +235,155 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     id: "intro-35",
     type: "prompt",
     alternatives: [{ text: "Jag har hittat hit!" }]
+  },
+  {
+    id: "elsemarie-0",
+    type: "bot",
+    text: "Titta! :D"
+  },
+  {
+    id: "elsemarie-1",
+    type: "bot",
+    text: "Det är som en jättestor bok! 📖"
+  },
+  {
+    id: "elsemarie-2",
+    type: "bot",
+    text: "Tycker du om att läsa böcker?"
+  },
+  {
+    id: "elsemarie-3",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Ja, oftast!",
+        followups: [
+          { text: "Intressant!" },
+          { text: "Tror jag…" },
+          { text: "Jag har aldrig läst någon bok." }
+        ]
+      },
+      {
+        text: "Nej, kanske ibland.",
+        followups: [
+          { text: "Vet du, jag har faktiskt aldrig läst någon bok." },
+          { text: "Vi skulle kunna läsa tillsammans någon dag! 😊" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "elsemarie-4",
+    type: "bot",
+    text: "Men du! Har du någonsin sett så många fötter?"
+  },
+  {
+    id: "elsemarie-5",
+    type: "bot",
+    text: "Det är typ tusen fötter här!"
+  },
+  {
+    id: "elsemarie-6",
+    type: "bot",
+    text: "🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶"
+  },
+  {
+    id: "elsemarie-7",
+    type: "bot",
+    text: "Eller… Kanske inte tusen."
+  },
+  {
+    id: "elsemarie-8",
+    type: "bot",
+    text: "Jag är inte så bra på att räkna."
+  },
+  {
+    id: "elsemarie-9",
+    type: "bot",
+    text: "Hur många fötter hittar du?"
+  },
+  //TODO how to handle incorrect answers?
+  {
+    id: "elsemarie-10",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "12",
+        followups: [{ text: "Hmm...stämmer det verkligen?🤔" }]
+      },
+      {
+        text: "16",
+        followups: [{ text: "Perfekt! Tack!" }]
+      },
+      {
+        text: "1000",
+        followups: [{ text: "Är du säker? Räkna igen!" }]
+      }
+    ]
+  },
+  {
+    id: "elsemarie-11",
+    type: "bot",
+    text: "Okej, sexton fötter alltså. Bra att veta!"
+  },
+  {
+    id: "elsemarie-12",
+    type: "bot",
+    text: "Else-Marie, hon med spelet, hon har sju pappor!"
+  },
+  // TODO number of emojis?
+  {
+    id: "elsemarie-13",
+    type: "bot",
+    text: "Det är deras fötter du ser under🦶📄📄🦶🦶🦶🦶🦶🦶🦶🦶🦶"
+  },
+  {
+    id: "elsemarie-14",
+    type: "bot",
+    text: "Tänk att ha sju pappor."
+  },
+  {
+    id: "elsemarie-15",
+    type: "bot",
+    text: "Hur tror du det skulle vara att ha sju pappor?"
+  },
+  {
+    id: "elsemarie-16",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Vi har funderat!"
+      }
+    ]
+  },
+  {
+    id: "elsemarie-17",
+    type: "bot",
+    text: "Spännande!"
+  },
+  {
+    id: "elsemarie-18",
+    type: "bot",
+    text: "Vet du, här finns fler böcker! 📖 📖📖"
+  },
+  {
+    id: "elsemarie-19",
+    type: "bot",
+    text: "Kan du gå dit där du ser den här figuren?"
+  },
+  {
+    id: "elsemarie-20",
+    type: "botimage",
+    source: elseMarieFigurenImage,
+    aspectRatio: 1.4679
+  },
+  {
+    id: "elsemarie-21",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Jag är framme!"
+      }
+    ]
   }
 ];
