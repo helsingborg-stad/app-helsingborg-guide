@@ -170,9 +170,9 @@ export default function QuizView({
   );
 }
 
-const radiusSmall = 15;
-const radiusLarge = 35;
-const radiusMax = 1000;
+const radiusSmall = 7;
+const radiusLarge = 20;
+const radiusMax = 30;
 
 const botMessageShared = {
   alignSelf: "flex-start",
