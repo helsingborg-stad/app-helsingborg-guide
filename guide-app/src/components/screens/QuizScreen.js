@@ -57,6 +57,18 @@ class QuizScreen extends Component<Props, State> {
     this.upcomingItems.splice(0, 1);
     const nextItem = this.upcomingItems[0];
 
+    let delayToNextItem = 400;
+    if (item.type === "bot") {
+      const longMessageLength = 60;
+      const textLengthFactor = Math.min(
+        1.0,
+        item.text.length / longMessageLength
+      );
+      delayToNextItem = 700 + 800 * textLengthFactor;
+    } else if (item.type === "botimage") {
+      delayToNextItem = 600;
+    }
+
     this.setState(
       ({ items }) => {
         return { items: [item, ...items] };
@@ -69,7 +81,7 @@ class QuizScreen extends Component<Props, State> {
             item.type === "botimage" ||
             item.type === "user")
         ) {
-          this.timeout = setTimeout(this.displayNextItem, 1000);
+          this.timeout = setTimeout(this.displayNextItem, delayToNextItem);
         }
       }
     );
