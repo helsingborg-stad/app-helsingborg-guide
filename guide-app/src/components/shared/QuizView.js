@@ -94,7 +94,10 @@ function Prompt({
   onAlternativeSelected
 }: {
   item: QuizPrompt,
-  onAlternativeSelected: (alternative: QuizPromptAlternative) => void
+  onAlternativeSelected: (
+    item: QuizPrompt,
+    alternative: QuizPromptAlternative
+  ) => void
 }) {
   return (
     <View style={styles.promptContainer}>
@@ -104,7 +107,7 @@ function Prompt({
           style={styles.promptButton}
           title={alternative.text}
           onPress={() => {
-            onAlternativeSelected(alternative);
+            onAlternativeSelected(item, alternative);
           }}
         />
       ))}
@@ -118,7 +121,10 @@ export default function QuizView({
   flatlistRef
 }: {
   items: QuizItem[],
-  onPromptAlternativeSelected: (alternative: QuizPromptAlternative) => void,
+  onPromptAlternativeSelected: (
+    item: QuizPrompt,
+    alternative: QuizPromptAlternative
+  ) => void,
   flatlistRef: React.Ref<FlatList>
 }) {
   return (

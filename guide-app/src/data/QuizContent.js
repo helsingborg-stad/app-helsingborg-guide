@@ -34,6 +34,7 @@ type QuizPrompt = {
 
 export type QuizPromptAlternative = {
   text: string,
+  correct?: Boolean,
   followups?: { text: string }[]
 };
 
@@ -305,21 +306,23 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     type: "bot",
     text: "Hur många fötter hittar du?"
   },
-  //TODO how to handle incorrect answers?
   {
     id: "elsemarie-10",
     type: "prompt",
     alternatives: [
       {
         text: "12",
+        correct: false,
         followups: [{ text: "Hmm...stämmer det verkligen?🤔" }]
       },
       {
         text: "16",
+        correct: true,
         followups: [{ text: "Perfekt! Tack!" }]
       },
       {
         text: "1000",
+        correct: false,
         followups: [{ text: "Är du säker? Räkna igen!" }]
       }
     ]
@@ -1145,5 +1148,155 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
         text: "Jag har hittat dem!"
       }
     ]
+  },
+  {
+    id: "avslutning-0",
+    type: "bot",
+    text: "Här var ju alla vargarna! 🐺🐺🐺"
+  },
+  {
+    id: "avslutning-1",
+    type: "bot",
+    text: "Kan du räkna hur många de är och skriva ner i Kollprotokollet?"
+  },
+  {
+    id: "avslutning-2",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Fixat!"
+      }
+    ]
+  },
+  {
+    id: "avslutning-3",
+    type: "bot",
+    text: "Tack! 🙏🏾"
+  },
+  {
+    id: "avslutning-4",
+    type: "bot",
+    text: "Det är väldigt mycket räknande här inne…"
+  },
+  {
+    id: "avslutning-5",
+    type: "bot",
+    text:
+      "Som att de tror att bara för att jag är en robot, så kan jag en massa matte."
+  },
+  {
+    id: "avslutning-6",
+    type: "bot",
+    text: "Är du bra på matte?"
+  },
+  {
+    id: "avslutning-7",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Ganska så bra",
+        followups: [
+          { text: "Jag tycker du verkar jättebra!" },
+          { text: "Du har hjälpt mig så mycket!" }
+        ]
+      },
+      {
+        text: "Ja, det är jag!",
+        followups: [
+          { text: "Vilken tur! Då har det varit lätt för dig att hjälpa mig!" }
+        ]
+      },
+      {
+        text: "Nej, inte jätte",
+        followups: [
+          { text: "Och tänk att du hjälpt mig så bra ändå!" },
+          { text: "Wow!" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "avslutning-8",
+    type: "bot",
+    text: "Det känns nästan som vi är vänner på riktigt nu. 😍😍"
+  },
+  {
+    id: "avslutning-9",
+    type: "bot",
+    text: "Du har varit så snäll."
+  },
+  {
+    id: "avslutning-10",
+    type: "bot",
+    text: "Tack för all din hjälp!! Nu är det bara en sak kvar."
+  },
+  {
+    id: "avslutning-11",
+    type: "bot",
+    text: "Om du tar och delar Kollprotkollet nu. Längs den där linjen."
+  },
+  {
+    id: "avslutning-12",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Okej, jag har gjort det nu!"
+      }
+    ]
+  },
+  {
+    id: "avslutning-13",
+    type: "bot",
+    text: "Och så lägger du halvan med allt du hjälp mig med i lådan där borta."
+  },
+  {
+    id: "avslutning-14",
+    type: "bot",
+    text: "Den töms varje natt kl 03.18"
+  },
+  {
+    id: "avslutning-15",
+    type: "bot",
+    text:
+      "Då kommer all information du skrivit ner vara jättenödvändig. Så vi kan kolla att allt är som det ska i utställningen."
+  },
+  {
+    id: "avslutning-16",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Jag har lagt lappen i lådan!"
+      }
+    ]
+  },
+  {
+    id: "avslutning-17",
+    type: "bot",
+    text: "Den andra delen, med Väldigt Viktig Information, måste du behålla."
+  },
+  {
+    id: "avslutning-18",
+    type: "bot",
+    text: "Sån Information måste man ju hålla reda på."
+  },
+  {
+    id: "avslutning-19",
+    type: "bot",
+    text: "Som tack för att du hjälpte mig kan du ta med dig pennan också."
+  },
+  {
+    id: "avslutning-20",
+    type: "bot",
+    text: "Kanske kan du hjälpa någon annan robot."
+  },
+  {
+    id: "avslutning-21",
+    type: "bot",
+    text: "Du får gärna komma tillbaka en annan gång!"
+  },
+  {
+    id: "avslutning-22",
+    type: "bot",
+    text: "Hej då! 😍😃🙏🏾⭐🎈"
   }
 ];

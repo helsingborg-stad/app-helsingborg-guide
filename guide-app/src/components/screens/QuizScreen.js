@@ -14,6 +14,7 @@ import { Colors, HeaderStyles } from "@assets/styles";
 import QuizView from "@shared-components/QuizView";
 import {
   QuizItem,
+  QuizPrompt,
   QuizPromptAlternative,
   dunkersSwedishQuizItems
 } from "../../data/QuizContent";
@@ -74,15 +75,30 @@ class QuizScreen extends Component<Props, State> {
     );
   };
 
-  handlePromptAlternativeSelected = (alternative: QuizPromptAlternative) => {
+  handlePromptAlternativeSelected = (
+    item: QuizPrompt,
+    alternative: QuizPromptAlternative
+  ) => {
     const followUps = (alternative.followups || []).map((followUp, index) => ({
       id: `${Math.random()}-${index}`,
       type: "bot",
       text: followUp.text
     }));
+
+    const newPromptItems = [];
+    if (typeof alternative.correct === "boolean" && !alternative.correct) {
+      const newPromptItem = {
+        ...item,
+        id: `${item.id}-alt`,
+        alternatives: item.alternatives.filter(x => x !== alternative)
+      };
+      newPromptItems.push(newPromptItem);
+    }
+
     this.upcomingItems = [
       { id: String(Math.random()), type: "user", text: alternative.text },
       ...followUps,
+      ...newPromptItems,
       ...this.upcomingItems
     ];
 
