@@ -762,5 +762,176 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
         text: "Här är hen!"
       }
     ]
+  },
+  {
+    id: "gittan-0",
+    type: "bot",
+    text: "Vad mycket lego! Så kul!"
+  },
+  {
+    id: "gittan-1",
+    type: "bot",
+    text: "Jag skulle vilja bygga en vulkan! 🌋"
+  },
+  {
+    id: "gittan-2",
+    type: "bot",
+    text: "Eller en 🚀🛸"
+  },
+  {
+    id: "gittan-3",
+    type: "bot",
+    text: "Eller ett hus att bo i!"
+  },
+  {
+    id: "gittan-4",
+    type: "bot",
+    text: "Om du hade hur många legobitar som helst. Vad skulle du bygga då?"
+  },
+  {
+    id: "gittan-5",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Vi har pratat färdigt!"
+      }
+    ]
+  },
+  {
+    id: "gittan-6",
+    type: "bot",
+    text: "Coolt!"
+  },
+  {
+    id: "gittan-7",
+    type: "bot",
+    text: "Verkar vara många olika färger på legobitarna."
+  },
+  {
+    id: "gittan-8",
+    type: "bot",
+    text: "Undra om det är tillräckligt många? 🤔"
+  },
+  {
+    id: "gittan-9",
+    type: "bot",
+    text: "Det måste jag rapportera varje dag i Kollprotokollet. Nummer 4."
+  },
+  {
+    id: "gittan-10",
+    type: "bot",
+    text: "Kan du kryssa för alla färger du hittar?"
+  },
+  {
+    id: "gittan-11",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Klart!"
+      }
+    ]
+  },
+  {
+    id: "gittan-12",
+    type: "bot",
+    text: "Tack så mycket! 🙏"
+  },
+  {
+    id: "gittan-13",
+    type: "bot",
+    text: "Det var snällt av dig!"
+  },
+  {
+    id: "gittan-14",
+    type: "bot",
+    text: "Hoppas det var tillräckligt många färger idag."
+  },
+  {
+    id: "gittan-15",
+    type: "bot",
+    text: "Men du…"
+  },
+  {
+    id: "gittan-16",
+    type: "bot",
+    text: "Älgar bor ju oftast i skogen. 🌲🌱"
+  },
+  {
+    id: "gittan-17",
+    type: "bot",
+    text: "Tror du det är bra med älgar i lägenhet?"
+  },
+
+  {
+    id: "gittan-18",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Nej, de ska bo i skogen!",
+        followups: [{ text: "Ja, det är nog bäst kanske?" }]
+      },
+      {
+        text: "Ja, det vore kul tror jag!",
+        followups: [{ text: "Då har nog Gittan väldigt kul! Tre älgar!" }]
+      }
+    ]
+  },
+  {
+    id: "gittan-19",
+    type: "bot",
+    text: "Vet du! Vi har ju en skog här borta!"
+  },
+  {
+    id: "gittan-20",
+    type: "bot",
+    text: "Där kanske de kan bo?"
+  },
+  {
+    id: "gittan-21",
+    type: "bot",
+    text: "Skogen är jättenära. Kan du hitta den?"
+  },
+  {
+    id: "gittan-22",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Jag har hittat den!"
+      }
+    ]
+  },
+  {
+    id: "gittan-23",
+    type: "bot",
+    text: "Oj! Hjälp! 😲"
+  },
+  {
+    id: "gittan-24",
+    type: "bot",
+    text: "Där borta!"
+  },
+  {
+    id: "gittan-25",
+    type: "bot",
+    text: "Är det en varg?"
+  },
+  {
+    id: "gittan-26",
+    type: "bot",
+    text: "Gå försiiiiktigt fram till den!"
+  },
+  {
+    id: "gittan-27",
+    type: "bot",
+    text: "Smyg fram!"
+  },
+  {
+    id: "gittan-28",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Okej! Jag har smugit fram!"
+      }
+    ]
   }
 ];
