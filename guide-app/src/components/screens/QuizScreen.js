@@ -79,12 +79,14 @@ class QuizScreen extends Component<Props, State> {
     item: QuizPrompt,
     alternative: QuizPromptAlternative
   ) => {
+    // create items for all follow up messages
     const followUps = (alternative.followups || []).map((followUp, index) => ({
-      id: `${Math.random()}-${index}`,
+      id: `${item.id}-fu${index}`,
       type: "bot",
       text: followUp.text
     }));
 
+    // if the user selected an incorrect answer, create a new prompt item without the incorrect alternative
     const newPromptItems = [];
     if (typeof alternative.correct === "boolean" && !alternative.correct) {
       const newPromptItem = {
@@ -95,13 +97,15 @@ class QuizScreen extends Component<Props, State> {
       newPromptItems.push(newPromptItem);
     }
 
+    // add all new upcoming items
     this.upcomingItems = [
-      { id: String(Math.random()), type: "user", text: alternative.text },
+      { id: `${item.id}-resp`, type: "user", text: alternative.text },
       ...followUps,
       ...newPromptItems,
       ...this.upcomingItems
     ];
 
+    // remove the original prompt item display next item
     this.setState(({ items }) => {
       return { items: items.slice(1) };
     }, this.displayNextItem);
