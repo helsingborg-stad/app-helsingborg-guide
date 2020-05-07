@@ -143,7 +143,8 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "intro-21",
     type: "bot",
-    text: "Vem bestämmer vad som är sant egentligen? Vad tycker du?"
+    text:
+      "Vem bestämmer vad som är sant egentligen? Vad tycker du?\n\nDiskutera med din förälder! 💡"
   },
   {
     id: "intro-22",
@@ -337,7 +338,6 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     type: "bot",
     text: "Else-Marie, hon med spelet, hon har sju pappor!"
   },
-  // TODO number of emojis?
   {
     id: "elsemarie-13",
     type: "bot",
@@ -351,7 +351,8 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "elsemarie-15",
     type: "bot",
-    text: "Hur tror du det skulle vara att ha sju pappor?"
+    text:
+      "Hur tror du det skulle vara att ha sju pappor?\n\nFundera ihop med din förälder! 💡"
   },
   {
     id: "elsemarie-16",
@@ -561,7 +562,8 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "siv-23",
     type: "bot",
-    text: "Har du drömt något roligt eller spännande någongång?"
+    text:
+      "Har du drömt något roligt eller spännande någongång?\n\nDela med din förälder vad ni drömt om! 💡"
   },
   {
     id: "siv-24",
@@ -790,7 +792,8 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "gittan-4",
     type: "bot",
-    text: "Om du hade hur många legobitar som helst. Vad skulle du bygga då?"
+    text:
+      "Om du hade hur många legobitar som helst. Vad skulle du bygga då?\n\nBerätta för din förälder! 💡"
   },
   {
     id: "gittan-5",
@@ -1058,7 +1061,8 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "skogen-18",
     type: "bot",
-    text: "Hur tror du det skulle vara att bo i skogen?"
+    text:
+      "Hur tror du det skulle vara att bo i skogen?\n\nPrata med din förälder! 💡"
   },
   {
     id: "skogen-19",
