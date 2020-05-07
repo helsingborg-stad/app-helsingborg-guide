@@ -5,6 +5,7 @@ const elseMarieImage = require("@assets/images/quiz/dunkers/else_marie.png");
 const elseMarieFigurenImage = require("@assets/images/quiz/dunkers/else_marie_figuren.png");
 const lillZlatanImage = require("@assets/images/quiz/dunkers/lill_zlatan.png");
 const barnetImage = require("@assets/images/quiz/dunkers/barnet.png");
+const vargarImage = require("@assets/images/quiz/dunkers/vargar.png");
 
 type QuizBotMessage = {
   type: "bot",
@@ -931,6 +932,217 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     alternatives: [
       {
         text: "Okej! Jag har smugit fram!"
+      }
+    ]
+  },
+  {
+    id: "skogen-0",
+    type: "bot",
+    text: "🐺🤫🤫🤫🤫"
+  },
+  {
+    id: "skogen-1",
+    type: "bot",
+    text: "Vad tror du, verkar vargen snäll?"
+  },
+  {
+    id: "skogen-2",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Ja, det är den!",
+        followups: [
+          { text: "Åh vilken tur! ☺" },
+          { text: "Då ska jag inte vara rädd!" }
+        ]
+      },
+      {
+        text: "Nej, det tror jag inte!",
+        followups: [{ text: "Ojdå!😬" }, { text: "Då får vi vara försiktiga!" }]
+      }
+    ]
+  },
+  {
+    id: "skogen-3",
+    type: "bot",
+    text: "Vet du, jag har sett många barn som klappat vargen!"
+  },
+  {
+    id: "skogen-4",
+    type: "bot",
+    text: "Jag har ju inga händer men…"
+  },
+  {
+    id: "skogen-5",
+    type: "bot",
+    text: "Du kanske kan testa?"
+  },
+  {
+    id: "skogen-6",
+    type: "bot",
+    text: "Klappa försiktigt."
+  },
+  {
+    id: "skogen-7",
+    type: "bot",
+    text: "Det tror jag vargar tycker om! 🐺"
+  },
+  {
+    id: "skogen-8",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Jag vågade klappa vargen!"
+      }
+    ]
+  },
+  {
+    id: "skogen-9",
+    type: "bot",
+    text: "Så många träd här är…😮"
+  },
+  {
+    id: "skogen-10",
+    type: "bot",
+    text: "🌲🌲🌲🌲🌲🌲🌲🌲🌲"
+  },
+  {
+    id: "skogen-11",
+    type: "bot",
+    text: "Har du varit i en skog någon gång?"
+  },
+  {
+    id: "skogen-12",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Nej , det har jag inte.",
+        followups: [{ text: "Jag har heller aldrig varit i skogen!" }]
+      },
+      {
+        text: "Ja det har har jag.",
+        followups: [
+          { text: "Var det spännande? Kul? Läskigt? luktade det gott?" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "skogen-13",
+    type: "bot",
+    text: "Här är det ju som en skog. Och här verkar rätt mysigt."
+  },
+  {
+    id: "skogen-14",
+    type: "bot",
+    text: "Tänk om man skulle vara ett djur som bor i skogen."
+  },
+  {
+    id: "skogen-15",
+    type: "bot",
+    text: "Kanske en 🦔"
+  },
+  {
+    id: "skogen-16",
+    type: "bot",
+    text: "Eller en 🦉"
+  },
+  {
+    id: "skogen-17",
+    type: "bot",
+    text: "Eller kanske något helt annat? 🤔"
+  },
+  {
+    id: "skogen-18",
+    type: "bot",
+    text: "Hur tror du det skulle vara att bo i skogen?"
+  },
+  {
+    id: "skogen-19",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Vi är färdigpratade!"
+      }
+    ]
+  },
+  {
+    id: "skogen-20",
+    type: "bot",
+    text: "Just det ja! Nu minns jag varför vi är här!"
+  },
+  {
+    id: "skogen-21",
+    type: "bot",
+    text: "Jag måste kontrollera hur många grenar det är i skogen."
+  },
+  {
+    id: "skogen-22",
+    type: "bot",
+    text: "Kan du hjälpa mig?"
+  },
+  {
+    id: "skogen-23",
+    type: "bot",
+    text:
+      "När du räknat alla grenar skriv ner dem i Kollprotokollet på nummer 5."
+  },
+  {
+    id: "skogen-24",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Okej! Räknat och nedskrivet!"
+      }
+    ]
+  },
+  {
+    id: "skogen-25",
+    type: "bot",
+    text: "Tack! 😊"
+  },
+  {
+    id: "skogen-26",
+    type: "bot",
+    text: "Det är tur jag har dig!"
+  },
+  {
+    id: "skogen-27",
+    type: "bot",
+    text: "😍😍😍"
+  },
+  {
+    id: "skogen-28",
+    type: "bot",
+    text: "Jag glömmer så lätt allt som ska kollas annars…"
+  },
+  {
+    id: "skogen-29",
+    type: "bot",
+    text: "Men du! 🤨 Det var bara EN varg där borta va?"
+  },
+  {
+    id: "skogen-30",
+    type: "bot",
+    text: "Det ska finnas fler… Kan du hitta dem?"
+  },
+  {
+    id: "skogen-31",
+    type: "bot",
+    text: "De ser ut såhär:"
+  },
+  {
+    id: "skogen-32",
+    type: "botimage",
+    source: vargarImage,
+    aspectRatio: 1.4679
+  },
+  {
+    id: "skogen-33",
+    type: "prompt",
+    alternatives: [
+      {
+        text: "Jag har hittat dem!"
       }
     ]
   }
