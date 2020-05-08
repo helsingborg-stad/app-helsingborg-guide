@@ -77,7 +77,8 @@ class QuizScreen extends Component<Props, State> {
         this.scrollToBottom();
         if (
           nextItem &&
-          (item.type === "bot" ||
+          (item.type === "chapter" ||
+            item.type === "bot" ||
             item.type === "botimage" ||
             item.type === "user")
         ) {

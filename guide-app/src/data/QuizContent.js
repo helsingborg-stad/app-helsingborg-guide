@@ -7,6 +7,12 @@ const lillZlatanImage = require("@assets/images/quiz/dunkers/lill_zlatan.png");
 const barnetImage = require("@assets/images/quiz/dunkers/barnet.png");
 const vargarImage = require("@assets/images/quiz/dunkers/vargar.png");
 
+type QuizChapter = {
+  type: "chapter",
+  id: string,
+  text: string
+};
+
 type QuizBotMessage = {
   type: "bot",
   id: string,
@@ -39,12 +45,18 @@ export type QuizPromptAlternative = {
 };
 
 export type QuizItem =
+  | QuizChapter
   | QuizBotMessage
   | QuizBotImageMessage
   | QuizUserMessage
   | QuizPrompt;
 
 export const dunkersSwedishQuizItems: QuizItem[] = [
+  {
+    id: "intro-chapter",
+    type: "chapter",
+    text: "Välkommen till utställningen"
+  },
   { id: "intro-0", type: "botimage", source: robotImage, aspectRatio: 1 },
   { id: "intro-1", type: "bot", text: "Hej!" },
   { id: "intro-2", type: "bot", text: "Hallå!" },
@@ -242,6 +254,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     alternatives: [{ text: "Jag har hittat hit!" }]
   },
   {
+    id: "elsemarie-chapter",
+    type: "chapter",
+    text: "Else-Marie och småpapporna"
+  },
+  {
     id: "elsemarie-0",
     type: "bot",
     text: "Titta! :D"
@@ -392,6 +409,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
         text: "Jag är framme!"
       }
     ]
+  },
+  {
+    id: "siv-chapter",
+    type: "chapter",
+    text: "Siv sover vilse"
   },
   {
     id: "siv-0",
@@ -586,6 +608,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     text: "Hoppas Siv kan somna snart. 😴"
   },
   {
+    id: "lillzlatan-chapter",
+    type: "chapter",
+    text: "Lill-Zlatan och Morbror Raring"
+  },
+  {
     id: "lillzlatan-0",
     type: "bot",
     text: "Ser du bilderna på väggen? 🧐️"
@@ -770,6 +797,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     ]
   },
   {
+    id: "gittan-chapter",
+    type: "chapter",
+    text: "Gittan och Älgbrorsorna"
+  },
+  {
     id: "gittan-0",
     type: "bot",
     text: "Vad mycket lego! Så kul!"
@@ -940,6 +972,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
         text: "Okej! Jag har smugit fram!"
       }
     ]
+  },
+  {
+    id: "skogen-chapter",
+    type: "chapter",
+    text: "Gittan och Gråvargarna"
   },
   {
     id: "skogen-0",
@@ -1152,6 +1189,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
         text: "Jag har hittat dem!"
       }
     ]
+  },
+  {
+    id: "avslutning-chapter",
+    type: "chapter",
+    text: "Avslutning"
   },
   {
     id: "avslutning-0",

@@ -13,6 +13,10 @@ import { QuizItem } from "../../data/QuizContent";
 
 const nonEmojiRegExp = /[a-zA-Z0-9.!?…]/;
 
+function Chapter({ item }: { item: QuizChapter }) {
+  return <Text style={styles.chapter}>{item.text}</Text>;
+}
+
 function containsNonEmoji(text: string): Boolean {
   return !!text.match(nonEmojiRegExp);
 }
@@ -136,7 +140,9 @@ export default function QuizView({
       renderItem={({ item, index }) => {
         const prevItem = items[index - 1];
         const nextItem = items[index + 1];
-        if (item.type === "bot") {
+        if (item.type === "chapter") {
+          return <Chapter key={item.id} item={item} />;
+        } else if (item.type === "bot") {
           return (
             <BotMessage
               key={item.id}
@@ -201,6 +207,17 @@ const userMessageShared = {
 
 const styles = StyleSheet.create({
   list: { backgroundColor: Colors.gray12 },
+  chapter: StyleSheet.flatten([
+    TextStyles.medium,
+    {
+      marginHorizontal: 11,
+      marginTop: 40,
+      marginBottom: 44,
+      textAlign: "center",
+      fontWeight: "bold",
+      color: Colors.gray2C
+    }
+  ]),
   botMessageEmoji: StyleSheet.flatten([
     TextStyles.body,
     {
