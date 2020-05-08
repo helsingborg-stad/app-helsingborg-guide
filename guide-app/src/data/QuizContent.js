@@ -1344,5 +1344,10 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     id: "avslutning-22",
     type: "bot",
     text: "Hej då! 😍😃🙏🏾⭐🎈"
+  },
+  {
+    id: "avslutning-23",
+    type: "prompt",
+    alternatives: [{ text: "Hej då! 👋" }]
   }
 ];

@@ -1,5 +1,5 @@
 // @flow
-
+import { StackActions } from "react-navigation";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
@@ -83,6 +83,8 @@ class QuizScreen extends Component<Props, State> {
             item.type === "user")
         ) {
           this.timeout = setTimeout(this.displayNextItem, delayToNextItem);
+        } else if (!nextItem && item.type !== "prompt") {
+          this.timeout = setTimeout(this.handleQuizFinished, 500);
         }
       }
     );
@@ -122,6 +124,18 @@ class QuizScreen extends Component<Props, State> {
     this.setState(({ items }) => {
       return { items: items.slice(1) };
     }, this.displayNextItem);
+  };
+
+  handleQuizFinished = () => {
+    const { navigation } = this.props;
+    navigation.dispatch(
+      StackActions.replace({
+        routeName: "QuizResultScreen",
+        params: {
+          title: navigation.state.params.title
+        }
+      })
+    );
   };
 
   scrollToBottom() {
