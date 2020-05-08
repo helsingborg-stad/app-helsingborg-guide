@@ -71,5 +71,5 @@ const styles = StyleSheet.create({
     ...sharedContainer,
     backgroundColor: Colors.themePrimary
   },
-  text: StyleSheet.flatten([TextStyles.normal, { color: Colors.white }])
+  text: StyleSheet.flatten([TextStyles.body, { color: Colors.white }])
 });

@@ -132,6 +132,7 @@ export default function QuizView({
       ref={flatlistRef}
       inverted
       data={items}
+      style={styles.list}
       renderItem={({ item, index }) => {
         const prevItem = items[index - 1];
         const nextItem = items[index + 1];
@@ -199,14 +200,16 @@ const userMessageShared = {
 };
 
 const styles = StyleSheet.create({
+  list: { backgroundColor: Colors.gray12 },
   botMessageEmoji: StyleSheet.flatten([
-    TextStyles.normal,
+    TextStyles.body,
     {
       marginLeft: 11,
       marginTop: 6,
       marginBottom: 10,
       maxWidth: "80%",
-      fontSize: 30
+      fontSize: 30,
+      lineHeight: 36
     }
   ]),
   botMessageSolo: botMessageShared,
@@ -225,7 +228,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: radiusSmall,
     borderBottomLeftRadius: radiusLarge
   },
-  botMessageText: TextStyles.normal,
+  botMessageText: TextStyles.body,
   botImage: {
     alignSelf: "flex-start",
     marginHorizontal: 11,
@@ -250,7 +253,7 @@ const styles = StyleSheet.create({
     marginBottom: 20 + userMessageShared.marginBottom
   },
   userMessageText: StyleSheet.flatten([
-    TextStyles.normal,
+    TextStyles.body,
     { color: Colors.white }
   ]),
   promptContainer: {
