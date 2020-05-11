@@ -204,7 +204,10 @@ class QuizScreen extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 }
+  container: {
+    flex: 1,
+    backgroundColor: Colors.gray12
+  }
 });
 
 function mapStateToProps(unusedState: RootState) {

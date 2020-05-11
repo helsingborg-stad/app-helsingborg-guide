@@ -200,6 +200,70 @@ function DialogRecord({
   );
 }
 
+function renderFlatListItem(
+  item: QuizItem,
+  prevItem: ?QuizItem,
+  nextItem: ?QuizItem,
+  onPromptAlternativeSelected: (
+    item: QuizPrompt,
+    alternative: QuizPromptAlternative
+  ) => void,
+  onDialogAlternativeSelected: (
+    item: QuizDialog,
+    alternative: QuizDialogAlternative
+  ) => void
+) {
+  if (item.type === "chapter") {
+    return <Chapter key={item.id} item={item} />;
+  } else if (item.type === "bot") {
+    return (
+      <BotMessage
+        key={item.id}
+        item={item}
+        prevItem={prevItem}
+        nextItem={nextItem}
+      />
+    );
+  } else if (item.type === "botimage") {
+    return <BotImageMessage key={item.id} item={item} />;
+  } else if (item.type === "user") {
+    return (
+      <UserMessage
+        key={item.id}
+        item={item}
+        prevItem={prevItem}
+        nextItem={nextItem}
+      />
+    );
+  } else if (item.type === "prompt") {
+    return (
+      <Prompt
+        key={item.id}
+        item={item}
+        onAlternativeSelected={onPromptAlternativeSelected}
+      />
+    );
+  } else if (item.type === "dialog") {
+    return (
+      <Dialog
+        key={item.id}
+        item={item}
+        onAlternativeSelected={onDialogAlternativeSelected}
+      />
+    );
+  } else if (item.type === "dialogrecord") {
+    return (
+      <DialogRecord
+        key={item.id}
+        item={item}
+        prevItem={prevItem}
+        nextItem={nextItem}
+      />
+    );
+  }
+  return null;
+}
+
 export default function QuizView({
   items,
   onPromptAlternativeSelected,
@@ -226,55 +290,13 @@ export default function QuizView({
       renderItem={({ item, index }) => {
         const prevItem = items[index - 1];
         const nextItem = items[index + 1];
-        if (item.type === "chapter") {
-          return <Chapter key={item.id} item={item} />;
-        } else if (item.type === "bot") {
-          return (
-            <BotMessage
-              key={item.id}
-              item={item}
-              prevItem={prevItem}
-              nextItem={nextItem}
-            />
-          );
-        } else if (item.type === "botimage") {
-          return <BotImageMessage key={item.id} item={item} />;
-        } else if (item.type === "user") {
-          return (
-            <UserMessage
-              key={item.id}
-              item={item}
-              prevItem={prevItem}
-              nextItem={nextItem}
-            />
-          );
-        } else if (item.type === "prompt") {
-          return (
-            <Prompt
-              key={item.id}
-              item={item}
-              onAlternativeSelected={onPromptAlternativeSelected}
-            />
-          );
-        } else if (item.type === "dialog") {
-          return (
-            <Dialog
-              key={item.id}
-              item={item}
-              onAlternativeSelected={onDialogAlternativeSelected}
-            />
-          );
-        } else if (item.type === "dialogrecord") {
-          return (
-            <DialogRecord
-              key={item.id}
-              item={item}
-              prevItem={prevItem}
-              nextItem={nextItem}
-            />
-          );
-        }
-        return null;
+        return renderFlatListItem(
+          item,
+          prevItem,
+          nextItem,
+          onPromptAlternativeSelected,
+          onDialogAlternativeSelected
+        );
       }}
     />
   );
@@ -316,7 +338,7 @@ const dialogIconShared = {
 };
 
 const styles = StyleSheet.create({
-  list: { backgroundColor: Colors.gray12 },
+  list: {},
   chapter: StyleSheet.flatten([
     TextStyles.medium,
     {
