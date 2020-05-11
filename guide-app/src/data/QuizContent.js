@@ -44,12 +44,40 @@ export type QuizPromptAlternative = {
   followups?: { text: string }[]
 };
 
+export type QuizDialogIcon = "question" | "talk" | "look";
+
+export type QuizDialog = {
+  type: "dialog",
+  id: string,
+  icon: QuizDialogIcon,
+  title: string,
+  instructions: string,
+  message: string,
+  alternatives: QuizDialogAlternative[]
+};
+
+export type QuizDialogAlternative = {
+  text: string,
+  correct?: Boolean,
+  followups?: { text: string }[]
+};
+
+export type QuizDialogRecord = {
+  type: "dialogrecord",
+  id: string,
+  icon: QuizDialogIcon,
+  title: string,
+  message: string
+};
+
 export type QuizItem =
   | QuizChapter
   | QuizBotMessage
   | QuizBotImageMessage
   | QuizUserMessage
-  | QuizPrompt;
+  | QuizPrompt
+  | QuizDialog
+  | QuizDialogRecord;
 
 export const dunkersSwedishQuizItems: QuizItem[] = [
   {
@@ -60,7 +88,6 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   { id: "intro-0", type: "botimage", source: robotImage, aspectRatio: 1 },
   { id: "intro-1", type: "bot", text: "Hej!" },
   { id: "intro-2", type: "bot", text: "Hallå!" },
-
   { id: "intro-3", type: "bot", text: "Är du där? Kan du se mig?" },
   {
     id: "intro-4",
@@ -154,13 +181,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "intro-21",
-    type: "bot",
-    text:
-      "Vem bestämmer vad som är sant egentligen? Vad tycker du?\n\nDiskutera med din förälder! 💡"
-  },
-  {
-    id: "intro-22",
-    type: "prompt",
+    type: "dialog",
+    icon: "talk",
+    title: "Dags att diskutera med en vuxen",
+    instructions: "Ta din tid, jag finns kvar här. Hör av er när ni är klara.",
+    message: "Vem bestämmer vad som är sant egentligen? Vad tycker du?",
     alternatives: [{ text: "Vi har diskuterat färdigt!" }]
   },
   {
@@ -250,7 +275,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "intro-35",
-    type: "prompt",
+    type: "dialog",
+    icon: "look",
+    title: "Dags att hitta något",
+    instructions: "Leta efter Else-Marie som är på bilden",
+    message: "Hittar du Else-Marie?",
     alternatives: [{ text: "Jag har hittat hit!" }]
   },
   {
@@ -367,13 +396,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "elsemarie-15",
-    type: "bot",
-    text:
-      "Hur tror du det skulle vara att ha sju pappor?\n\nFundera ihop med din förälder! 💡"
-  },
-  {
-    id: "elsemarie-16",
-    type: "prompt",
+    type: "dialog",
+    icon: "talk",
+    title: "Dags att fundera med en vuxen",
+    instructions: "Ta din tid, jag finns kvar här. Hör av er när ni är klara.",
+    message: "Hur tror du det skulle vara att ha sju pappor?",
     alternatives: [
       {
         text: "Vi har funderat!"
@@ -403,7 +430,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "elsemarie-21",
-    type: "prompt",
+    type: "dialog",
+    icon: "look",
+    title: "Dags att hitta någon",
+    instructions: "Leta efter figuren som är på bilden",
+    message: "Hittar du figuren?",
     alternatives: [
       {
         text: "Jag är framme!"
@@ -583,13 +614,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "siv-23",
-    type: "bot",
-    text:
-      "Har du drömt något roligt eller spännande någongång?\n\nDela med din förälder vad ni drömt om! 💡"
-  },
-  {
-    id: "siv-24",
-    type: "prompt",
+    type: "dialog",
+    icon: "talk",
+    title: "Dags att berätta för en vuxen",
+    instructions: "Ta din tid, jag finns kvar här. Hör av er när ni är klara.",
+    message: "Har du drömt något roligt eller spännande någongång?",
     alternatives: [
       {
         text: "Vi har berättat för varandra!"
@@ -630,7 +659,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "lillzlatan-3",
-    type: "prompt",
+    type: "dialog",
+    icon: "look",
+    title: "Dags att hitta någon",
+    instructions: "Leta efter figuren på bilden",
+    message: "Hittar du figuren?",
     alternatives: [
       {
         text: "Hittat!"
@@ -659,13 +692,12 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "lillzlatan-8",
-    type: "bot",
-    text:
-      "Berätta för varandra varför ni tror att Ella ser lite arg ut och det ligger toapapper i handfatet"
-  },
-  {
-    id: "lillzlatan-9",
-    type: "prompt",
+    type: "dialog",
+    icon: "talk",
+    title: "Dags att berätta för en vuxen",
+    instructions: "Ta din tid, jag finns kvar här. Hör av er när ni är klara.",
+    message:
+      "Berätta för varandra varför ni tror att Ella ser lite arg ut och det ligger toapapper i handfatet",
     alternatives: [
       {
         text: "Vi har berättat!"
@@ -733,13 +765,12 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "lillzlatan-18",
-    type: "bot",
-    text:
-      "Kan du kolla vilken ordning de är i på väggen och sedan skriva ett nummer vid varje?"
-  },
-  {
-    id: "lillzlatan-19",
-    type: "prompt",
+    type: "dialog",
+    icon: "question",
+    title: "Dags att fylla i Kollprotokollet",
+    instructions: "Kolla ordningen och fyll i Kollprotokollet",
+    message:
+      "Kan du kolla vilken ordning de är i på väggen och sedan skriva ett nummer vid varje?",
     alternatives: [
       {
         text: "Jag är färdig!"
@@ -789,7 +820,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "lillzlatan-28",
-    type: "prompt",
+    type: "dialog",
+    icon: "look",
+    title: "Dags att hitta barnet",
+    instructions: "Leta efter barnet på bilden",
+    message: "Hittar du barnet?",
     alternatives: [
       {
         text: "Här är hen!"
@@ -823,13 +858,12 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "gittan-4",
-    type: "bot",
-    text:
-      "Om du hade hur många legobitar som helst. Vad skulle du bygga då?\n\nBerätta för din förälder! 💡"
-  },
-  {
-    id: "gittan-5",
-    type: "prompt",
+    type: "dialog",
+    icon: "talk",
+    title: "Dags att berätta för en vuxen",
+    instructions: "Ta din tid, jag finns kvar här. Hör av er när ni är klara.",
+    message:
+      "Om du hade hur många legobitar som helst. Vad skulle du bygga då?",
     alternatives: [
       {
         text: "Vi har pratat färdigt!"
@@ -858,12 +892,12 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "gittan-10",
-    type: "bot",
-    text: "Kan du kryssa för alla färger du hittar?"
-  },
-  {
-    id: "gittan-11",
-    type: "prompt",
+    type: "dialog",
+    icon: "question",
+    title: "Dags att fylla i Kollprotokollet",
+    instructions:
+      "Kryssa de färgerna du hittar på legobitarna i Kollprotokollet",
+    message: "Kan du kryssa för alla färger du hittar?",
     alternatives: [
       {
         text: "Klart!"
@@ -900,7 +934,6 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     type: "bot",
     text: "Tror du det är bra med älgar i lägenhet?"
   },
-
   {
     id: "gittan-18",
     type: "prompt",
@@ -927,12 +960,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "gittan-21",
-    type: "bot",
-    text: "Skogen är jättenära. Kan du hitta den?"
-  },
-  {
-    id: "gittan-22",
-    type: "prompt",
+    type: "dialog",
+    icon: "look",
+    title: "Dags att hitta skogen",
+    instructions: "Leta efter skogen",
+    message: "Skogen är jättenära. Kan du hitta den?",
     alternatives: [
       {
         text: "Jag har hittat den!"
@@ -1097,13 +1129,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "skogen-18",
-    type: "bot",
-    text:
-      "Hur tror du det skulle vara att bo i skogen?\n\nPrata med din förälder! 💡"
-  },
-  {
-    id: "skogen-19",
-    type: "prompt",
+    type: "dialog",
+    icon: "talk",
+    title: "Dags att prata med en vuxen",
+    instructions: "Ta din tid, jag finns kvar här. Hör av er när ni är klara.",
+    message: "Hur tror du det skulle vara att bo i skogen?",
     alternatives: [
       {
         text: "Vi är färdigpratade!"
@@ -1122,18 +1152,12 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "skogen-22",
-    type: "bot",
-    text: "Kan du hjälpa mig?"
-  },
-  {
-    id: "skogen-23",
-    type: "bot",
-    text:
-      "När du räknat alla grenar skriv ner dem i Kollprotokollet på nummer 5."
-  },
-  {
-    id: "skogen-24",
-    type: "prompt",
+    type: "dialog",
+    icon: "question",
+    title: "Räkna grenarna",
+    instructions:
+      "När du räknat alla grenar skriv ner dem i Kollprotokollet på nummer 5.",
+    message: "Kan du hjälpa mig?",
     alternatives: [
       {
         text: "Okej! Räknat och nedskrivet!"
@@ -1183,7 +1207,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "skogen-33",
-    type: "prompt",
+    type: "dialog",
+    icon: "look",
+    title: "Dags att hitta fler vargar",
+    instructions: "Leta efter fler vargar som på bilden",
+    message: "Hittar du fler vargar?",
     alternatives: [
       {
         text: "Jag har hittat dem!"
@@ -1308,7 +1336,11 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "avslutning-16",
-    type: "prompt",
+    type: "dialog",
+    icon: "question",
+    title: "Dags att lämna in ena halvan av Kollprotokollet",
+    instructions: "Lämna in halvan som du har fyllt i",
+    message: "Har du lagt lappen i lådan?",
     alternatives: [
       {
         text: "Jag har lagt lappen i lådan!"

@@ -1,15 +1,19 @@
 import React from "react";
 import {
   FlatList,
+  Image,
+  ImageBackground,
   StyleSheet,
   Text,
-  View,
-  ImageBackground
+  View
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
 import Button from "@shared-components/Button";
 import { QuizItem } from "../../data/QuizContent";
+const dialogLookImage = require("@assets/images/quiz/dialog-look.png");
+const dialogQuestionImage = require("@assets/images/quiz/dialog-question.png");
+const dialogTalkImage = require("@assets/images/quiz/dialog-talk.png");
 
 const nonEmojiRegExp = /[a-zA-Z0-9.!?…]/;
 
@@ -22,7 +26,30 @@ function containsNonEmoji(text: string): Boolean {
 }
 
 function isBotNonEmoji(item: ?QuizItem) {
-  return item?.type === "bot" && containsNonEmoji(item.text);
+  return (
+    item?.type === "dialogrecord" ||
+    (item?.type === "bot" && containsNonEmoji(item.text))
+  );
+}
+
+function BotMessageBlob({
+  children,
+  prevItem,
+  nextItem
+}: {
+  children: React.ReactNode,
+  prevItem: ?QuizItem,
+  nextItem: ?QuizItem
+}) {
+  let style = styles.botMessageSolo;
+  if (isBotNonEmoji(nextItem) && isBotNonEmoji(prevItem)) {
+    style = styles.botMessageMiddle;
+  } else if (isBotNonEmoji(prevItem)) {
+    style = styles.botMessageFirst;
+  } else if (isBotNonEmoji(nextItem)) {
+    style = styles.botMessageLast;
+  }
+  return <View style={style}>{children}</View>;
 }
 
 function BotMessage({
@@ -37,18 +64,10 @@ function BotMessage({
   if (!containsNonEmoji(item.text)) {
     return <Text style={styles.botMessageEmoji}>{item.text}</Text>;
   }
-  let style = styles.botMessageSolo;
-  if (isBotNonEmoji(nextItem) && isBotNonEmoji(prevItem)) {
-    style = styles.botMessageMiddle;
-  } else if (isBotNonEmoji(prevItem)) {
-    style = styles.botMessageFirst;
-  } else if (isBotNonEmoji(nextItem)) {
-    style = styles.botMessageLast;
-  }
   return (
-    <View style={style}>
+    <BotMessageBlob prevItem={prevItem} nextItem={nextItem}>
       <Text style={styles.botMessageText}>{item.text}</Text>
-    </View>
+    </BotMessageBlob>
   );
 }
 
@@ -119,15 +138,82 @@ function Prompt({
   );
 }
 
+function DialogIcon({ style, icon }: { style: any, icon: QuizDialogIcon }) {
+  let image;
+  if (icon === "look") {
+    image = dialogLookImage;
+  } else if (icon === "question") {
+    image = dialogQuestionImage;
+  } else if (icon === "talk") {
+    image = dialogTalkImage;
+  } else {
+    return null;
+  }
+  return <Image style={style} resizeMode="center" source={image} />;
+}
+
+function Dialog({
+  item,
+  onAlternativeSelected
+}: {
+  item: QuizDialog,
+  onAlternativeSelected: (
+    item: QuizDialog,
+    alternative: QuizDialogAlternative
+  ) => void
+}) {
+  return (
+    <View style={styles.dialogContainer}>
+      <DialogIcon style={styles.dialogIcon} icon={item.icon} />
+      <Text style={styles.dialogTitle}>{item.title}</Text>
+      <Text style={styles.dialogInstructions}>{item.instructions}</Text>
+      <Text style={styles.dialogMessage}>{item.message}</Text>
+      {item.alternatives.map((alternative, index) => (
+        <Button
+          key={index}
+          style={styles.promptButton}
+          title={alternative.text}
+          onPress={() => {
+            onAlternativeSelected(item, alternative);
+          }}
+        />
+      ))}
+    </View>
+  );
+}
+
+function DialogRecord({
+  item,
+  prevItem,
+  nextItem
+}: {
+  item: QuizDialogRecord,
+  prevItem: ?QuizItem,
+  nextItem: ?QuizItem
+}) {
+  return (
+    <BotMessageBlob prevItem={prevItem} nextItem={nextItem}>
+      <DialogIcon style={styles.dialogRecordIcon} icon={item.icon} />
+      <Text style={styles.botMessageText}>{item.title}</Text>
+      <Text style={styles.dialogRecordMessage}>{item.message}</Text>
+    </BotMessageBlob>
+  );
+}
+
 export default function QuizView({
   items,
   onPromptAlternativeSelected,
+  onDialogAlternativeSelected,
   flatlistRef
 }: {
   items: QuizItem[],
   onPromptAlternativeSelected: (
     item: QuizPrompt,
     alternative: QuizPromptAlternative
+  ) => void,
+  onDialogAlternativeSelected: (
+    item: QuizDialog,
+    alternative: QuizDialogAlternative
   ) => void,
   flatlistRef: React.Ref<FlatList>
 }) {
@@ -170,6 +256,23 @@ export default function QuizView({
               onAlternativeSelected={onPromptAlternativeSelected}
             />
           );
+        } else if (item.type === "dialog") {
+          return (
+            <Dialog
+              key={item.id}
+              item={item}
+              onAlternativeSelected={onDialogAlternativeSelected}
+            />
+          );
+        } else if (item.type === "dialogrecord") {
+          return (
+            <DialogRecord
+              key={item.id}
+              item={item}
+              prevItem={prevItem}
+              nextItem={nextItem}
+            />
+          );
         }
         return null;
       }}
@@ -203,6 +306,13 @@ const userMessageShared = {
   paddingHorizontal: 17,
   paddingVertical: 11,
   borderRadius: radiusMax
+};
+
+const dialogIconShared = {
+  borderRadius: 24,
+  width: 48,
+  height: 48,
+  backgroundColor: Colors.themeSecondary
 };
 
 const styles = StyleSheet.create({
@@ -279,5 +389,55 @@ const styles = StyleSheet.create({
   promptButton: {
     marginHorizontal: 11,
     marginVertical: 5
-  }
+  },
+  dialogContainer: {
+    backgroundColor: Colors.white,
+    paddingTop: 32,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+    marginTop: 15
+  },
+  dialogIcon: {
+    ...dialogIconShared,
+    alignSelf: "center",
+    marginBottom: 20
+  },
+  dialogRecordIcon: {
+    ...dialogIconShared,
+    alignSelf: "flex-start",
+    marginBottom: 20
+  },
+  dialogTitle: StyleSheet.flatten([
+    TextStyles.description,
+    {
+      marginHorizontal: 11,
+      textAlign: "center",
+      marginBottom: 4
+    }
+  ]),
+  dialogInstructions: StyleSheet.flatten([
+    TextStyles.description,
+    {
+      marginHorizontal: 11,
+      marginBottom: 20,
+      textAlign: "center",
+      color: Colors.gray4
+    }
+  ]),
+  dialogMessage: StyleSheet.flatten([
+    TextStyles.body,
+    {
+      marginHorizontal: 11,
+      marginBottom: 20,
+      textAlign: "center",
+      fontWeight: "bold"
+    }
+  ]),
+  dialogRecordMessage: StyleSheet.flatten([
+    TextStyles.body,
+    {
+      marginTop: 10,
+      fontWeight: "bold"
+    }
+  ])
 });

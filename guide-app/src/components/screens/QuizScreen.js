@@ -16,6 +16,8 @@ import {
   QuizItem,
   QuizPrompt,
   QuizPromptAlternative,
+  QuizDialog,
+  QuizDialogAlternative,
   dunkersSwedishQuizItems
 } from "../../data/QuizContent";
 
@@ -80,7 +82,8 @@ class QuizScreen extends Component<Props, State> {
           (item.type === "chapter" ||
             item.type === "bot" ||
             item.type === "botimage" ||
-            item.type === "user")
+            item.type === "user" ||
+            item.type === "dialogrecord")
         ) {
           this.timeout = setTimeout(this.displayNextItem, delayToNextItem);
         } else if (!nextItem && item.type !== "prompt") {
@@ -126,6 +129,39 @@ class QuizScreen extends Component<Props, State> {
     }, this.displayNextItem);
   };
 
+  handleDialogAlternativeSelected = (
+    item: QuizDialog,
+    alternative: QuizDialogAlternative
+  ) => {
+    const record = {
+      id: `${item.id}-record`,
+      type: "dialogrecord",
+      icon: item.icon,
+      title: item.title,
+      message: item.message
+    };
+
+    // create items for all follow up messages
+    const followUps = (alternative.followups || []).map((followUp, index) => ({
+      id: `${item.id}-fu${index}`,
+      type: "bot",
+      text: followUp.text
+    }));
+
+    // add all new upcoming items
+    this.upcomingItems = [
+      record,
+      { id: `${item.id}-resp`, type: "user", text: alternative.text },
+      ...followUps,
+      ...this.upcomingItems
+    ];
+
+    // remove the original dialog item display next item
+    this.setState(({ items }) => {
+      return { items: items.slice(1) };
+    }, this.displayNextItem);
+  };
+
   handleQuizFinished = () => {
     const { navigation } = this.props;
     navigation.dispatch(
@@ -159,6 +195,7 @@ class QuizScreen extends Component<Props, State> {
             flatlistRef={this.flatlistRef}
             items={this.state.items}
             onPromptAlternativeSelected={this.handlePromptAlternativeSelected}
+            onDialogAlternativeSelected={this.handleDialogAlternativeSelected}
           />
         </SafeAreaView>
       </>
