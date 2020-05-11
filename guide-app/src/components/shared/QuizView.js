@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FlatList,
   Image,
   ImageBackground,
+  SafeAreaView,
   StyleSheet,
   Text,
   View
@@ -154,16 +155,21 @@ function DialogIcon({ style, icon }: { style: any, icon: QuizDialogIcon }) {
 
 function Dialog({
   item,
+  onHeightChanged,
   onAlternativeSelected
 }: {
   item: QuizDialog,
+  onHeightChanged: (height: number) => void,
   onAlternativeSelected: (
     item: QuizDialog,
     alternative: QuizDialogAlternative
   ) => void
 }) {
   return (
-    <View style={styles.dialogContainer}>
+    <SafeAreaView
+      style={styles.dialogContainer}
+      onLayout={event => onHeightChanged(event.nativeEvent.layout.height)}
+    >
       <DialogIcon style={styles.dialogIcon} icon={item.icon} />
       <Text style={styles.dialogTitle}>{item.title}</Text>
       <Text style={styles.dialogInstructions}>{item.instructions}</Text>
@@ -178,7 +184,7 @@ function Dialog({
           }}
         />
       ))}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -207,10 +213,6 @@ function renderFlatListItem(
   onPromptAlternativeSelected: (
     item: QuizPrompt,
     alternative: QuizPromptAlternative
-  ) => void,
-  onDialogAlternativeSelected: (
-    item: QuizDialog,
-    alternative: QuizDialogAlternative
   ) => void
 ) {
   if (item.type === "chapter") {
@@ -243,14 +245,6 @@ function renderFlatListItem(
         onAlternativeSelected={onPromptAlternativeSelected}
       />
     );
-  } else if (item.type === "dialog") {
-    return (
-      <Dialog
-        key={item.id}
-        item={item}
-        onAlternativeSelected={onDialogAlternativeSelected}
-      />
-    );
   } else if (item.type === "dialogrecord") {
     return (
       <DialogRecord
@@ -281,24 +275,44 @@ export default function QuizView({
   ) => void,
   flatlistRef: React.Ref<FlatList>
 }) {
+  const [dialogHeight, setDialogHeight] = useState();
+  const dialogItem = items[0]?.type === "dialog" ? items[0] : null;
   return (
-    <FlatList
-      ref={flatlistRef}
-      inverted
-      data={items}
-      style={styles.list}
-      renderItem={({ item, index }) => {
-        const prevItem = items[index - 1];
-        const nextItem = items[index + 1];
-        return renderFlatListItem(
-          item,
-          prevItem,
-          nextItem,
-          onPromptAlternativeSelected,
-          onDialogAlternativeSelected
-        );
-      }}
-    />
+    <>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          ref={flatlistRef}
+          inverted
+          data={items}
+          renderItem={({ item, index }) => {
+            const prevItem = items[index - 1];
+            const nextItem = items[index + 1];
+            return renderFlatListItem(
+              item,
+              prevItem,
+              nextItem,
+              onPromptAlternativeSelected
+            );
+          }}
+          ListHeaderComponent={
+            dialogItem ? (
+              <View
+                style={{
+                  height: dialogHeight
+                }}
+              />
+            ) : null
+          }
+        />
+      </SafeAreaView>
+      {dialogItem && (
+        <Dialog
+          item={dialogItem}
+          onHeightChanged={setDialogHeight}
+          onAlternativeSelected={onDialogAlternativeSelected}
+        />
+      )}
+    </>
   );
 }
 
@@ -338,7 +352,10 @@ const dialogIconShared = {
 };
 
 const styles = StyleSheet.create({
-  list: {},
+  container: {
+    flex: 1,
+    backgroundColor: Colors.gray12
+  },
   chapter: StyleSheet.flatten([
     TextStyles.medium,
     {
@@ -413,15 +430,18 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   dialogContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
     backgroundColor: Colors.white,
-    paddingTop: 32,
     borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    marginTop: 15
+    borderTopRightRadius: 32
   },
   dialogIcon: {
     ...dialogIconShared,
     alignSelf: "center",
+    marginTop: 32,
     marginBottom: 20
   },
   dialogRecordIcon: {

@@ -2,13 +2,7 @@
 import { StackActions } from "react-navigation";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  StatusBar,
-  View
-} from "react-native";
+import { FlatList, StatusBar, View } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import { Colors, HeaderStyles } from "@assets/styles";
 import QuizView from "@shared-components/QuizView";
@@ -190,25 +184,16 @@ class QuizScreen extends Component<Props, State> {
           barStyle="light-content"
           backgroundColor={Colors.themeSecondary}
         />
-        <SafeAreaView style={styles.container}>
-          <QuizView
-            flatlistRef={this.flatlistRef}
-            items={this.state.items}
-            onPromptAlternativeSelected={this.handlePromptAlternativeSelected}
-            onDialogAlternativeSelected={this.handleDialogAlternativeSelected}
-          />
-        </SafeAreaView>
+        <QuizView
+          flatlistRef={this.flatlistRef}
+          items={this.state.items}
+          onPromptAlternativeSelected={this.handlePromptAlternativeSelected}
+          onDialogAlternativeSelected={this.handleDialogAlternativeSelected}
+        />
       </>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.gray12
-  }
-});
 
 function mapStateToProps(unusedState: RootState) {
   return {};
