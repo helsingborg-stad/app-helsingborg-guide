@@ -8,8 +8,6 @@ export default function geolocationReducer(
   switch (action.type) {
     case types.GEOLOCATION_UPDATE_SUCCESS:
       return { ...state, position: action.position };
-    case types.GEOLOCATION_BEARING_UPDATE_SUCCESS:
-      return { ...state, bearing: action.bearing };
     default:
       return state;
   }

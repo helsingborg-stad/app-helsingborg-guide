@@ -80,17 +80,12 @@ export default class GuideApp extends Component {
     LocationService.getInstance()
       .subscribeGeoLocation()
       .catch(console.warn);
-    LocationService.getInstance()
-      .subscribeCompassBearing()
-      .catch(console.warn);
-
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
   }
 
   componentWillUnmount() {
     LocationService.getInstance().unsubscribeGeoLocation();
-    LocationService.getInstance().unsubscribeCompassBearing();
 
     this.stopListeningToNetworkChanges();
   }

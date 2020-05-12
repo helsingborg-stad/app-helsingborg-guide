@@ -4046,8 +4046,6 @@ growly@^1.3.0:
 
 "guide-app@file:guide-app":
   version "0.0.1"
-  dependencies:
-    html-entities "^1.2.1"
 
 hammerjs@^2.0.8:
   version "2.0.8"
@@ -6789,10 +6787,6 @@ react-native-share@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-2.0.0.tgz#4543a746013e0d8fa9f765fb8937007cfbcffcf7"
   integrity sha512-J8Xl3mq0L9KDFtSYtKsQDAnZWw/niZIpAD1PRiNfZFHo44Rc+oS2bEIhskNnoQXKEgBNdPzCl/DenMXYAHXRYg==
-
-"react-native-simple-compass@https://github.com/cjrorvik/react-native-simple-compass.git":
-  version "1.0.0"
-  resolved "git+https://github.com/cjrorvik/react-native-simple-compass.git#1dfa34791dc53eb098500e41f1685d04813e2609"
 
 react-native-svg@9.13.3:
   version "9.13.3"
