@@ -3,6 +3,7 @@
 import React from "react";
 import {
   ActivityIndicator,
+  Button,
   View,
   Text,
   ScrollView,
@@ -123,6 +124,14 @@ const LocationView = (props: Props) => {
               ? displayDirections(props.geolocation, props.guideGroup.location)
               : null}
           </View>
+          <Button
+            title="Quiz"
+            onPress={() =>
+              props.navigation.navigate("QuizScreen", {
+                title: "Robothjälpen"
+              })
+            }
+          />
           {isFetchingGuides ? (
             <ActivityIndicator />
           ) : (
