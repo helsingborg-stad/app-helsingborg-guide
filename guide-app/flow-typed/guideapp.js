@@ -1,4 +1,5 @@
 // @flow
+import { ImageSourcePropType } from "react-native";
 
 declare type Action =
   | { type: "APP_STARTED" }
@@ -338,3 +339,75 @@ declare type RootState = {
   navigation: NavigationState,
   arState: ARState
 };
+
+declare type QuizChapter = {
+  type: "chapter",
+  id: string,
+  text: string
+};
+
+declare type QuizBotMessage = {
+  type: "bot",
+  id: string,
+  text: string
+};
+
+declare type QuizBotImageMessage = {
+  type: "botimage",
+  id: string,
+  source: ImageSourcePropType,
+  aspectRatio: number
+};
+
+declare type QuizUserMessage = {
+  type: "bot",
+  id: string,
+  text: string
+};
+
+declare type QuizPrompt = {
+  type: "prompt",
+  id: string,
+  alternatives: QuizPromptAlternative[]
+};
+
+declare type QuizPromptAlternative = {
+  text: string,
+  correct?: Boolean,
+  followups?: { text: string }[]
+};
+
+declare type QuizDialogIcon = "question" | "talk" | "look";
+
+declare type QuizDialog = {
+  type: "dialog",
+  id: string,
+  icon: QuizDialogIcon,
+  title: string,
+  instructions: string,
+  message: string,
+  alternatives: QuizDialogAlternative[]
+};
+
+declare type QuizDialogAlternative = {
+  text: string,
+  correct?: Boolean,
+  followups?: { text: string }[]
+};
+
+declare type QuizDialogRecord = {
+  type: "dialogrecord",
+  id: string,
+  icon: QuizDialogIcon,
+  title: string,
+  message: string
+};
+
+declare type QuizItem =
+  | QuizChapter
+  | QuizBotMessage
+  | QuizBotImageMessage
+  | QuizUserMessage
+  | QuizPrompt
+  | QuizDialog
+  | QuizDialogRecord;

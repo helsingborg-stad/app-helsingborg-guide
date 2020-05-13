@@ -11,7 +11,6 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
 import Button from "@shared-components/Button";
-import { QuizItem } from "../../data/QuizContent";
 const dialogLookImage = require("@assets/images/quiz/dialog-look.png");
 const dialogQuestionImage = require("@assets/images/quiz/dialog-question.png");
 const dialogTalkImage = require("@assets/images/quiz/dialog-talk.png");

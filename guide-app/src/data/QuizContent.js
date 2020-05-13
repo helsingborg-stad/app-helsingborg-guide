@@ -1,4 +1,3 @@
-import { ImageSourcePropType } from "react-native";
 const robotImage = require("@assets/images/quiz/dunkers/robot.png");
 const exhibitionRobotImage = require("@assets/images/quiz/dunkers/exhibition_robot.png");
 const elseMarieImage = require("@assets/images/quiz/dunkers/else_marie.png");
@@ -6,78 +5,6 @@ const elseMarieFigurenImage = require("@assets/images/quiz/dunkers/else_marie_fi
 const lillZlatanImage = require("@assets/images/quiz/dunkers/lill_zlatan.png");
 const barnetImage = require("@assets/images/quiz/dunkers/barnet.png");
 const vargarImage = require("@assets/images/quiz/dunkers/vargar.png");
-
-type QuizChapter = {
-  type: "chapter",
-  id: string,
-  text: string
-};
-
-type QuizBotMessage = {
-  type: "bot",
-  id: string,
-  text: string
-};
-
-type QuizBotImageMessage = {
-  type: "botimage",
-  id: string,
-  source: ImageSourcePropType,
-  aspectRatio: number
-};
-
-type QuizUserMessage = {
-  type: "bot",
-  id: string,
-  text: string
-};
-
-type QuizPrompt = {
-  type: "prompt",
-  id: string,
-  alternatives: QuizPromptAlternative[]
-};
-
-export type QuizPromptAlternative = {
-  text: string,
-  correct?: Boolean,
-  followups?: { text: string }[]
-};
-
-export type QuizDialogIcon = "question" | "talk" | "look";
-
-export type QuizDialog = {
-  type: "dialog",
-  id: string,
-  icon: QuizDialogIcon,
-  title: string,
-  instructions: string,
-  message: string,
-  alternatives: QuizDialogAlternative[]
-};
-
-export type QuizDialogAlternative = {
-  text: string,
-  correct?: Boolean,
-  followups?: { text: string }[]
-};
-
-export type QuizDialogRecord = {
-  type: "dialogrecord",
-  id: string,
-  icon: QuizDialogIcon,
-  title: string,
-  message: string
-};
-
-export type QuizItem =
-  | QuizChapter
-  | QuizBotMessage
-  | QuizBotImageMessage
-  | QuizUserMessage
-  | QuizPrompt
-  | QuizDialog
-  | QuizDialogRecord;
 
 export const dunkersSwedishQuizItems: QuizItem[] = [
   {

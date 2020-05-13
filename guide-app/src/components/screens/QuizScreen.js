@@ -6,14 +6,7 @@ import { FlatList, StatusBar, View } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import { Colors, HeaderStyles } from "@assets/styles";
 import QuizView from "@shared-components/QuizView";
-import {
-  QuizItem,
-  QuizPrompt,
-  QuizPromptAlternative,
-  QuizDialog,
-  QuizDialogAlternative,
-  dunkersSwedishQuizItems
-} from "../../data/QuizContent";
+import { dunkersSwedishQuizItems } from "../../data/QuizContent";
 
 type Props = {
   navigation: Object
