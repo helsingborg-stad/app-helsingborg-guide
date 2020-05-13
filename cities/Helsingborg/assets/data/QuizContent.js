@@ -6,7 +6,17 @@ const lillZlatanImage = require("@assets/images/quiz/dunkers/lill_zlatan.png");
 const barnetImage = require("@assets/images/quiz/dunkers/barnet.png");
 const vargarImage = require("@assets/images/quiz/dunkers/vargar.png");
 
-export const dunkersSwedishQuizItems: QuizItem[] = [
+export function getQuizForGuideId(langCode: string, guideId: number): ?Quiz {
+  if (langCode === 'sv' && guideId === 1764975) { //TODO replace guideId with proper, this is using UNG SVENSK FORM
+    return dunkersSwedishQuiz;
+  }
+  if (langCode === 'en' && guideId === 1765917) {  //TODO replace guideId with proper, this is using UNG SVENSK FORM
+    return dunkersEnglishQuiz;
+  }
+  return null;
+}
+
+const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "intro-chapter",
     type: "chapter",
@@ -1310,3 +1320,25 @@ export const dunkersSwedishQuizItems: QuizItem[] = [
     alternatives: [{ text: "Hej då! 👋" }]
   }
 ];
+
+const dunkersSwedishQuiz: Quiz = {
+  name: 'Robothjälpen',
+  items: dunkersSwedishQuizItems,
+};
+
+const dunkersEnglishQuizItems: QuizItem[] = [
+  {
+    id: "intro-chapter",
+    type: "chapter",
+    text: "Welcome to the exhibition"
+  },
+  { id: "intro-0", type: "botimage", source: robotImage, aspectRatio: 1 },
+  { id: "intro-1", type: "bot", text: "Hi there!" },
+  { id: "intro-2", type: "bot", text: "Hello!" },
+  { id: "intro-3", type: "bot", text: "Are you here? Can you see me?" },
+];
+
+const dunkersEnglishQuiz: Quiz = {
+  name: 'Robothjälpen',
+  items: dunkersEnglishQuizItems,
+};

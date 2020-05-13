@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import {
+  Button,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -20,7 +21,8 @@ import SharingService from "@services/SharingService";
 
 declare type Props = {
   guide: Guide,
-  onPressContentObject(obj: ContentObject): void
+  onPressContentObject(obj: ContentObject): void,
+  onPressQuiz: (quiz: Quiz) => void
 };
 
 const textMaxHeight = Dimensions.get("window").height * 0.2;
@@ -55,14 +57,14 @@ class GuideView extends Component<Props> {
     sessionId: number,
     contentObjects: ContentObject[]
   ) => (
-    <View style={styles.objectsContainer}>
-      {contentObjects.map(item => this.renderContentObject(sessionId, item))}
-    </View>
-  );
+      <View style={styles.objectsContainer}>
+        {contentObjects.map(item => this.renderContentObject(sessionId, item))}
+      </View>
+    );
 
   render() {
-    const { guide } = this.props;
-    const { id } = guide;
+    const { guide, onPressQuiz } = this.props;
+    const { id, quiz } = guide;
     return (
       <View style={styles.viewContainer}>
         <StatusBar
@@ -95,6 +97,9 @@ class GuideView extends Component<Props> {
               ) : null}
               <DateView startDate={guide.dateStart} endDate={guide.dateEnd} />
             </View>
+            {quiz && (
+              <Button onPress={() => onPressQuiz(quiz)} title={quiz.name} />
+            )}
             {guide.description ? (
               <ExpandableView maxHeight={textMaxHeight}>
                 <Text style={TextStyles.body}>{guide.description}</Text>

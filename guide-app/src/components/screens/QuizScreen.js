@@ -6,7 +6,6 @@ import { FlatList, StatusBar, View } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import { Colors, HeaderStyles } from "@assets/styles";
 import QuizView from "@shared-components/QuizView";
-import { dunkersSwedishQuizItems } from "@assets/data/QuizContent";
 
 type Props = {
   navigation: Object
@@ -18,14 +17,21 @@ type State = {
 
 class QuizScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params;
+    const { quiz } = navigation.state.params;
     return {
       ...HeaderStyles.noElevation,
-      title,
+      title: quiz.name,
       headerRight: <View />,
       headerLeft: <HeaderBackButton navigation={navigation} />
     };
   };
+
+  constructor(props: Props) {
+    super(props);
+
+    const { quiz } = props.navigation.state.params;
+    this.upcomingItems = [...quiz.items];
+  }
 
   state = { items: [] };
 
@@ -167,7 +173,7 @@ class QuizScreen extends Component<Props, State> {
   }
 
   timeout: TimeoutID;
-  upcomingItems: QuizItem[] = [...dunkersSwedishQuizItems];
+  upcomingItems: QuizItem[];
   flatlistRef = React.createRef<FlatList>();
 
   render() {

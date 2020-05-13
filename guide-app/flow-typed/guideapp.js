@@ -185,7 +185,8 @@ declare type Guide = {
   images: Images,
   contentObjects: ContentObject[],
   distance?: number,
-  location?: Location
+  location?: Location,
+  quiz?: Quiz
 };
 
 declare type GuideType = "guide" | "trail";
@@ -338,6 +339,11 @@ declare type RootState = {
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
   arState: ARState
+};
+
+declare type Quiz = {
+  name: string,
+  items: QuizItem[]
 };
 
 declare type QuizChapter = {
