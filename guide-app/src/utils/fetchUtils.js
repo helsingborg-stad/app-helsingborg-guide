@@ -95,6 +95,7 @@ async function getGuidesForGuideGroup(
   return fetchedGuides;
 }
 
+// TODO this is a temporary solution until quiz support is added to the CMS
 function amendGuidesWithQuiz(langCode: string, guides: Guide[]) {
   for (const guide of guides) {
     const quiz = getQuizForGuideId(langCode, guide.id);

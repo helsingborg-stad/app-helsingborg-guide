@@ -347,7 +347,7 @@ const dialogIconShared = {
   borderRadius: 24,
   width: 48,
   height: 48,
-  backgroundColor: Colors.themeSecondary
+  backgroundColor: Colors.gray3
 };
 
 const styles = StyleSheet.create({
