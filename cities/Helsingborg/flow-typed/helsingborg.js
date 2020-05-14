@@ -6,10 +6,10 @@ declare type Action =
   | { type: "APP_BECAME_ACTIVE" }
   | { type: "SHOW_BOTTOM_BAR", visible: boolean }
   | {
-      type: "SELECT_CURRENT_GUIDEGROUP",
-      guideGroup: GuideGroup,
-      guides: Guide[]
-    }
+    type: "SELECT_CURRENT_GUIDEGROUP",
+    guideGroup: GuideGroup,
+    guides: Guide[]
+  }
   | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
@@ -19,10 +19,10 @@ declare type Action =
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
   | { type: "SET_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
   | {
-      type: "SET_GUIDES_AND_GUIDEGROUPS",
-      guideGroups: GuideGroup[],
-      guides: Guide[]
-    }
+    type: "SET_GUIDES_AND_GUIDEGROUPS",
+    guideGroups: GuideGroup[],
+    guides: Guide[]
+  }
   | { type: "FETCH_NAVIGATION_REQUEST" }
   | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
   | { type: "FETCH_NAVIGATION_FAILURE", error: Error }
@@ -301,6 +301,10 @@ declare type ARState = {
   verticalAngle: number
 };
 
+declare type QuizState = {
+  latestQuestionId: string
+};
+
 declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
@@ -312,5 +316,6 @@ declare type RootState = {
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
-  arState: ARState
+  arState: ARState,
+  quizState: QuizState
 };

@@ -39,7 +39,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "intro-6",
     type: "prompt",
-    alternatives: [{ text: "Det har jag gjort" }]
+    alternatives: [{ text: "Det har jag gjort", id: "intro-6-alt1" }]
   },
   { id: "intro-7", type: "bot", text: "Vet du… jag har inget namn… 😭" },
   {
@@ -51,7 +51,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "intro-9",
     type: "prompt",
-    alternatives: [{ text: "Okej, det kan jag göra." }]
+    alternatives: [{ text: "Okej, det kan jag göra.", id: "intro-9-alt1" }]
   },
   { id: "intro-10", type: "bot", text: "Ja! 😮🤩🤩" },
   {
@@ -60,7 +60,11 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     text:
       "Du kanske kan skriva ner namnet i Kollprotokollet. Så att vi inte glömmer. Jag väntar här."
   },
-  { id: "intro-12", type: "prompt", alternatives: [{ text: "Fixat!" }] },
+  {
+    id: "intro-12",
+    type: "prompt",
+    alternatives: [{ text: "Fixat!", id: "intro-12-alt1" }]
+  },
   { id: "intro-13", type: "bot", text: "😭😍 Vilket fantastiskt namn. Tack!" },
   {
     id: "intro-14",
@@ -84,15 +88,21 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     alternatives: [
       {
         text: "Ja det kan jag väl!",
+        id: "intro-17-alt1",
         followups: [
-          { text: "Hurra! 🥳 En ny vän! Även om vi bara låtsas!" },
-          { text: "🥳🥳🥳" }
+          {
+            text: "Hurra! 🥳 En ny vän! Även om vi bara låtsas!",
+            id: "intro-17-alt1-fu1"
+          },
+          { text: "🥳🥳🥳", id: "intro-17-alt1-fu2" }
         ]
       },
       {
         text: "Fast vi känner ju inte varandra?",
+        id: "intro-17-alt2",
         followups: [
           {
+            id: "intro-17-alt2-fu1",
             text:
               "Nä, det har du rätt i. Men jag tänkte vi kunde låtsas? Då behöver det ju inte vara sant. 😊"
           }
@@ -123,7 +133,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     title: "Dags att diskutera med en vuxen",
     instructions: "Ta din tid, jag finns kvar här. Hör av er när ni är klara.",
     message: "Vem bestämmer vad som är sant egentligen? Vad tycker du?",
-    alternatives: [{ text: "Vi har diskuterat färdigt!" }]
+    alternatives: [{ text: "Vi har diskuterat färdigt!", id: "intro-21-alt1" }]
   },
   {
     id: "intro-23",
@@ -151,24 +161,33 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "intro-27-alt1",
         text: "Nej, det tror jag inte? 🤔",
         followups: [
-          { text: "Hmm... Ja, då är det bara jag kanske?" },
-          { text: "Så spännande! 😀" }
+          {
+            id: "intro-27-alt1-fu1",
+            text: "Hmm... Ja, då är det bara jag kanske?"
+          },
+          { id: "intro-27-alt1-fu2", text: "Så spännande! 😀" }
         ]
       },
       {
+        id: "intro-27-alt2",
         text: "Inte alla, men några kanske?",
         followups: [
-          { text: "Några robotar! Coolt!" },
-          { text: "Undra om jag kan träffa dem?" }
+          { id: "intro-27-alt2-fu1", text: "Några robotar! Coolt!" },
+          { id: "intro-27-alt2-fu2", text: "Undra om jag kan träffa dem?" }
         ]
       },
       {
         text: "Ja! Såklart de har!",
+        id: "intro-27-alt3",
         followups: [
-          { text: "Åh vad kul! 😄" },
-          { text: "Jag får leta reda på någon annan robot någon dag!" }
+          { id: "intro-27-alt3-fu1", text: "Åh vad kul! 😄" },
+          {
+            id: "intro-27-alt3-fu2",
+            text: "Jag får leta reda på någon annan robot någon dag!"
+          }
         ]
       }
     ]
@@ -217,7 +236,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     title: "Dags att hitta något",
     instructions: "Leta efter Else-Marie som är på bilden",
     message: "Hittar du Else-Marie?",
-    alternatives: [{ text: "Jag har hittat hit!" }]
+    alternatives: [{ id: "intro-35-alt1", text: "Jag har hittat hit!" }]
   },
   {
     id: "elsemarie-chapter",
@@ -244,18 +263,26 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "elsemarie-3-alt1",
         text: "Ja, oftast!",
         followups: [
-          { text: "Intressant!" },
-          { text: "Tror jag…" },
-          { text: "Jag har aldrig läst någon bok." }
+          { id: "elsemarie-3-alt1-fu1", text: "Intressant!" },
+          { id: "elsemarie-3-alt1-fu2", text: "Tror jag…" },
+          { id: "elsemarie-3-alt1-fu3", text: "Jag har aldrig läst någon bok." }
         ]
       },
       {
+        id: "elsemarie-3-alt2",
         text: "Nej, kanske ibland.",
         followups: [
-          { text: "Vet du, jag har faktiskt aldrig läst någon bok." },
-          { text: "Vi skulle kunna läsa tillsammans någon dag! 😊" }
+          {
+            id: "elsemarie-3-alt2-fu1",
+            text: "Vet du, jag har faktiskt aldrig läst någon bok."
+          },
+          {
+            id: "elsemarie-3-alt2-fu2",
+            text: "Vi skulle kunna läsa tillsammans någon dag! 😊"
+          }
         ]
       }
     ]
@@ -295,19 +322,29 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "elsemarie-10-alt1",
         text: "12",
         correct: false,
-        followups: [{ text: "Hmm...stämmer det verkligen?🤔" }]
+        followups: [
+          {
+            id: "elsemarie-10-alt1-fu1",
+            text: "Hmm...stämmer det verkligen?🤔"
+          }
+        ]
       },
       {
+        id: "elsemarie-10-alt2",
         text: "16",
         correct: true,
-        followups: [{ text: "Perfekt! Tack!" }]
+        followups: [{ id: "elsemarie-10-alt2-fu1", text: "Perfekt! Tack!" }]
       },
       {
+        id: "elsemarie-10-alt3",
         text: "1000",
         correct: false,
-        followups: [{ text: "Är du säker? Räkna igen!" }]
+        followups: [
+          { id: "elsemarie-10-alt3-fu1", text: "Är du säker? Räkna igen!" }
+        ]
       }
     ]
   },
@@ -340,6 +377,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Hur tror du det skulle vara att ha sju pappor?",
     alternatives: [
       {
+        id: "elsemarie-15-alt1",
         text: "Vi har funderat!"
       }
     ]
@@ -374,6 +412,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Hittar du figuren?",
     alternatives: [
       {
+        id: "elsemarie-21-alt1",
         text: "Jag är framme!"
       }
     ]
@@ -404,19 +443,28 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "siv-3-alt1",
         text: "Hon ser lite ledsen ut",
         followups: [
           {
+            id: "siv-3-alt1-fu1",
             text: "Hon kan kanske inte somna. Om hon hälsar på hos en kompis."
           },
-          { text: "Det kan vara läskigt att sova på en ny plats." }
+          {
+            id: "siv-3-alt1-fu2",
+            text: "Det kan vara läskigt att sova på en ny plats."
+          }
         ]
       },
       {
+        id: "siv-3-alt2",
         text: "Jag tycker inte hon verkar ledsen",
         followups: [
-          { text: "Åh vad bra! ☺" },
-          { text: "Hon kanske bara har svårt att somna på en ny plats." }
+          { id: "siv-3-alt2-fu1", text: "Åh vad bra! ☺" },
+          {
+            id: "siv-3-alt2-fu2",
+            text: "Hon kanske bara har svårt att somna på en ny plats."
+          }
         ]
       }
     ]
@@ -446,17 +494,25 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "siv-8-alt1",
         text: "Ja, det har jag.",
         followups: [
-          { text: "Det låter lite jobbigt. Tror jag." },
-          { text: "Jag sover inte alls. Det gör inte robotar!" }
+          { id: "siv-8-alt1-fu1", text: "Det låter lite jobbigt. Tror jag." },
+          {
+            id: "siv-8-alt1-fu2",
+            text: "Jag sover inte alls. Det gör inte robotar!"
+          }
         ]
       },
       {
+        id: "siv-8-alt2",
         text: "Nej, nästan aldrig.",
         followups: [
-          { text: "Vet du, jag sover aldrig." },
-          { text: "Robotar sover inte. Inte jag i alla fall." }
+          { id: "siv-8-alt2-fu1", text: "Vet du, jag sover aldrig." },
+          {
+            id: "siv-8-alt2-fu2",
+            text: "Robotar sover inte. Inte jag i alla fall."
+          }
         ]
       }
     ]
@@ -482,6 +538,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "siv-12-alt1",
         text: "Jag har skrivt ner ett tips!"
       }
     ]
@@ -512,12 +569,15 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "siv-17-alt1",
         text: "När man vaknar är man kvar i sängen."
       },
       {
+        id: "siv-17-alt2",
         text: "Det händer konstiga saker som inte kan hända."
       },
       {
+        id: "siv-17-alt3",
         text: "Det kanske visst är på riktigt?"
       }
     ]
@@ -558,6 +618,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Har du drömt något roligt eller spännande någongång?",
     alternatives: [
       {
+        id: "siv-23-alt1",
         text: "Vi har berättat för varandra!"
       }
     ]
@@ -603,6 +664,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Hittar du figuren?",
     alternatives: [
       {
+        id: "lillzlatan-3-alt1",
         text: "Hittat!"
       }
     ]
@@ -637,6 +699,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
       "Berätta för varandra varför ni tror att Ella ser lite arg ut och det ligger toapapper i handfatet",
     alternatives: [
       {
+        id: "lillzlatan-8-alt1",
         text: "Vi har berättat!"
       }
     ]
@@ -662,17 +725,29 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "lillzlatan-13-alt1",
         text: "Nej!",
         followups: [
-          { text: "Nä, ofta tror man inte samma." },
-          { text: "Vi tittar på samma bild och ändå ser vi helt olika saker." }
+          {
+            id: "lillzlatan-13-alt1-fu1",
+            text: "Nä, ofta tror man inte samma."
+          },
+          {
+            id: "lillzlatan-13-alt1-fu2",
+            text: "Vi tittar på samma bild och ändå ser vi helt olika saker."
+          }
         ]
       },
       {
+        id: "lillzlatan-13-alt2",
         text: "Ja, precis samma!",
         followups: [
-          { text: "Oj! Tänk att vi tänker likadant." },
           {
+            id: "lillzlatan-13-alt2-fu1",
+            text: "Oj! Tänk att vi tänker likadant."
+          },
+          {
+            id: "lillzlatan-13-alt2-fu2",
             text:
               "Ibland tittar man på samma bild men man ser helt olika saker! 😮"
           }
@@ -710,6 +785,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
       "Kan du kolla vilken ordning de är i på väggen och sedan skriva ett nummer vid varje?",
     alternatives: [
       {
+        id: "lillzlatan-18-alt1",
         text: "Jag är färdig!"
       }
     ]
@@ -764,6 +840,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Hittar du barnet?",
     alternatives: [
       {
+        id: "lillzlatan-28-alt1",
         text: "Här är hen!"
       }
     ]
@@ -803,6 +880,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
       "Om du hade hur många legobitar som helst. Vad skulle du bygga då?",
     alternatives: [
       {
+        id: "gittan-4-alt1",
         text: "Vi har pratat färdigt!"
       }
     ]
@@ -837,6 +915,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Kan du kryssa för alla färger du hittar?",
     alternatives: [
       {
+        id: "gittan-10-alt1",
         text: "Klart!"
       }
     ]
@@ -876,12 +955,21 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "gittan-18-alt1",
         text: "Nej, de ska bo i skogen!",
-        followups: [{ text: "Ja, det är nog bäst kanske?" }]
+        followups: [
+          { id: "gittan-18-alt1-fu1", text: "Ja, det är nog bäst kanske?" }
+        ]
       },
       {
+        id: "gittan-18-alt2",
         text: "Ja, det vore kul tror jag!",
-        followups: [{ text: "Då har nog Gittan väldigt kul! Tre älgar!" }]
+        followups: [
+          {
+            id: "gittan-18-alt2-fu1",
+            text: "Då har nog Gittan väldigt kul! Tre älgar!"
+          }
+        ]
       }
     ]
   },
@@ -904,6 +992,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Skogen är jättenära. Kan du hitta den?",
     alternatives: [
       {
+        id: "gittan-21-alt1",
         text: "Jag har hittat den!"
       }
     ]
@@ -938,6 +1027,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "gittan-28-alt1",
         text: "Okej! Jag har smugit fram!"
       }
     ]
@@ -962,15 +1052,20 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "skogen-2-alt1",
         text: "Ja, det är den!",
         followups: [
-          { text: "Åh vilken tur! ☺" },
-          { text: "Då ska jag inte vara rädd!" }
+          { id: "skogen-2-alt1-fu1", text: "Åh vilken tur! ☺" },
+          { id: "skogen-2-alt1-fu2", text: "Då ska jag inte vara rädd!" }
         ]
       },
       {
+        id: "skogen-2-alt2",
         text: "Nej, det tror jag inte!",
-        followups: [{ text: "Ojdå!😬" }, { text: "Då får vi vara försiktiga!" }]
+        followups: [
+          { id: "skogen-2-alt2-fu1", text: "Ojdå!😬" },
+          { id: "skogen-2-alt2-fu2", text: "Då får vi vara försiktiga!" }
+        ]
       }
     ]
   },
@@ -1004,6 +1099,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "skogen-8-alt1",
         text: "Jag vågade klappa vargen!"
       }
     ]
@@ -1028,13 +1124,23 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "skogen-12-alt1",
         text: "Nej , det har jag inte.",
-        followups: [{ text: "Jag har heller aldrig varit i skogen!" }]
+        followups: [
+          {
+            id: "skogen-12-alt1-fu1",
+            text: "Jag har heller aldrig varit i skogen!"
+          }
+        ]
       },
       {
+        id: "skogen-12-alt2",
         text: "Ja det har har jag.",
         followups: [
-          { text: "Var det spännande? Kul? Läskigt? luktade det gott?" }
+          {
+            id: "skogen-12-alt2-fu1",
+            text: "Var det spännande? Kul? Läskigt? luktade det gott?"
+          }
         ]
       }
     ]
@@ -1073,6 +1179,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Hur tror du det skulle vara att bo i skogen?",
     alternatives: [
       {
+        id: "skogen-18-alt1",
         text: "Vi är färdigpratade!"
       }
     ]
@@ -1097,6 +1204,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Kan du hjälpa mig?",
     alternatives: [
       {
+        id: "skogen-22-alt1",
         text: "Okej! Räknat och nedskrivet!"
       }
     ]
@@ -1151,6 +1259,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Hittar du fler vargar?",
     alternatives: [
       {
+        id: "skogen-33-alt1",
         text: "Jag har hittat dem!"
       }
     ]
@@ -1175,6 +1284,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "avslutning-2-alt1",
         text: "Fixat!"
       }
     ]
@@ -1205,23 +1315,35 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "avslutning-7-alt1",
         text: "Ganska så bra",
         followups: [
-          { text: "Jag tycker du verkar jättebra!" },
-          { text: "Du har hjälpt mig så mycket!" }
+          {
+            id: "avslutning-7-alt1-fu1",
+            text: "Jag tycker du verkar jättebra!"
+          },
+          { id: "avslutning-7-alt1-fu2", text: "Du har hjälpt mig så mycket!" }
         ]
       },
       {
+        id: "avslutning-7-alt2",
         text: "Ja, det är jag!",
         followups: [
-          { text: "Vilken tur! Då har det varit lätt för dig att hjälpa mig!" }
+          {
+            id: "avslutning-7-alt2-fu1",
+            text: "Vilken tur! Då har det varit lätt för dig att hjälpa mig!"
+          }
         ]
       },
       {
+        id: "avslutning-7-alt3",
         text: "Nej, inte jätte",
         followups: [
-          { text: "Och tänk att du hjälpt mig så bra ändå!" },
-          { text: "Wow!" }
+          {
+            id: "avslutning-7-alt3-fu1",
+            text: "Och tänk att du hjälpt mig så bra ändå!"
+          },
+          { id: "avslutning-7-alt3-fu2", text: "Wow!" }
         ]
       }
     ]
@@ -1251,6 +1373,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
+        id: "avslutning-12-alt1",
         text: "Okej, jag har gjort det nu!"
       }
     ]
@@ -1280,6 +1403,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     message: "Har du lagt lappen i lådan?",
     alternatives: [
       {
+        id: "avslutning-16-alt1",
         text: "Jag har lagt lappen i lådan!"
       }
     ]
@@ -1317,7 +1441,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "avslutning-23",
     type: "prompt",
-    alternatives: [{ text: "Hej då! 👋" }]
+    alternatives: [{ id: "avslutning-23-alt1", text: "Hej då! 👋" }]
   }
 ];
 

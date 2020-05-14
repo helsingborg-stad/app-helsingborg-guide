@@ -6,9 +6,19 @@ import { FlatList, StatusBar, View } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import { Colors, HeaderStyles } from "@assets/styles";
 import QuizView from "@shared-components/QuizView";
+import {
+  setLatestQuestionIdAction,
+  selectDialogChoiceAction,
+  resetDialogChoicesAction
+} from "@actions/quizActions";
 
 type Props = {
-  navigation: Object
+  navigation: Object,
+  latestQuestionId: string,
+  selectedDialogChoiceIds: [string],
+  setLatestQuestionId: string => void,
+  selectDialogChoice: DialogChoice => void,
+  resetDialogChoices: () => void
 };
 
 type State = {
@@ -26,14 +36,102 @@ class QuizScreen extends Component<Props, State> {
     };
   };
 
-  constructor(props: Props) {
+  static buildHistory = (
+    history: QuizItem[],
+    selectedChoices: DialogChoice[]
+  ): QuizItem[] => {
+    const builtHistory = history.flatMap(quizItem => {
+      if (quizItem.type === "prompt" || quizItem.type === "dialog") {
+        const filteredChoices = selectedChoices.filter(
+          choice => choice.questionId === quizItem.id
+        );
+
+        const uniqueAnswers = filteredChoices.reduce((acc, current) => {
+          const x = acc.find(
+            item => item.alternativeId === current.alternativeId
+          );
+          if (!x) {
+            return acc.concat([current]);
+          } else {
+            return acc;
+          }
+        }, []);
+
+        return uniqueAnswers.flatMap((choice, index) => {
+          const selectedAlternative = quizItem.alternatives.find(
+            alt => alt.id === choice.alternativeId
+          );
+
+          if (!selectedAlternative) {
+            return [];
+          }
+
+          const followUps = (selectedAlternative.followups || []).map(
+            followUp => ({
+              id: followUp.id,
+              type: "bot",
+              text: followUp.text
+            })
+          );
+
+          let records = [];
+
+          if (quizItem.type === "dialog") {
+            records = [
+              {
+                id: `${quizItem.id}-record`,
+                type: "dialogrecord",
+                icon: quizItem.icon,
+                title: quizItem.title,
+                message: quizItem.message
+              }
+            ];
+          }
+
+          return [
+            ...records,
+            {
+              id: `${quizItem.id}-resp-${index}`,
+              type: "user",
+              text: selectedAlternative.text
+            },
+            ...followUps
+          ];
+        });
+      }
+
+      return quizItem;
+    });
+
+    builtHistory.reverse();
+
+    return builtHistory;
+  };
+
+  constructor(props) {
     super(props);
 
     const { quiz } = props.navigation.state.params;
-    this.upcomingItems = [...quiz.items];
-  }
+    const quizItems = [...quiz.items];
 
-  state = { items: [] };
+    const latestQuestionIndex = quizItems.findIndex(
+      element => element.id === props.latestQuestionId
+    );
+
+    this.upcomingItems =
+      latestQuestionIndex > 0
+        ? quizItems.splice(latestQuestionIndex)
+        : [...quizItems];
+
+    this.state = {
+      items: [
+        ...QuizScreen.buildHistory(
+          quizItems.splice(0, latestQuestionIndex),
+          props.selectedDialogChoiceIds
+        )
+      ]
+    };
+  }
 
   componentDidMount() {
     this.displayNextItem();
@@ -51,6 +149,10 @@ class QuizScreen extends Component<Props, State> {
     const item = this.upcomingItems[0];
     this.upcomingItems.splice(0, 1);
     const nextItem = this.upcomingItems[0];
+
+    if (!item) {
+      return;
+    }
 
     let delayToNextItem = 400;
     if (item.type === "bot") {
@@ -81,6 +183,8 @@ class QuizScreen extends Component<Props, State> {
           this.timeout = setTimeout(this.displayNextItem, delayToNextItem);
         } else if (!nextItem && item.type !== "prompt") {
           this.timeout = setTimeout(this.handleQuizFinished, 500);
+        } else {
+          this.props.setLatestQuestionId(this.state.items[0].id);
         }
       }
     );
@@ -91,8 +195,8 @@ class QuizScreen extends Component<Props, State> {
     alternative: QuizPromptAlternative
   ) => {
     // create items for all follow up messages
-    const followUps = (alternative.followups || []).map((followUp, index) => ({
-      id: `${item.id}-fu${index}`,
+    const followUps = (alternative.followups || []).map(followUp => ({
+      id: followUp.id,
       type: "bot",
       text: followUp.text
     }));
@@ -102,19 +206,24 @@ class QuizScreen extends Component<Props, State> {
     if (typeof alternative.correct === "boolean" && !alternative.correct) {
       const newPromptItem = {
         ...item,
-        id: `${item.id}-alt`,
-        alternatives: item.alternatives.filter(x => x !== alternative)
+        key: `${item.id}`,
+        alternatives: item.alternatives.filter(x => x.id !== alternative.id)
       };
       newPromptItems.push(newPromptItem);
     }
 
     // add all new upcoming items
     this.upcomingItems = [
-      { id: `${item.id}-resp`, type: "user", text: alternative.text },
+      { id: `${alternative.id}-resp`, type: "user", text: alternative.text },
       ...followUps,
       ...newPromptItems,
       ...this.upcomingItems
     ];
+
+    this.props.selectDialogChoice({
+      questionId: item.id,
+      alternativeId: alternative.id
+    });
 
     // remove the original prompt item display next item
     this.setState(({ items }) => {
@@ -135,8 +244,8 @@ class QuizScreen extends Component<Props, State> {
     };
 
     // create items for all follow up messages
-    const followUps = (alternative.followups || []).map((followUp, index) => ({
-      id: `${item.id}-fu${index}`,
+    const followUps = (alternative.followups || []).map(followUp => ({
+      id: followUp.id,
       type: "bot",
       text: followUp.text
     }));
@@ -144,10 +253,15 @@ class QuizScreen extends Component<Props, State> {
     // add all new upcoming items
     this.upcomingItems = [
       record,
-      { id: `${item.id}-resp`, type: "user", text: alternative.text },
+      { id: `${alternative.id}-resp`, type: "user", text: alternative.text },
       ...followUps,
       ...this.upcomingItems
     ];
+
+    this.props.selectDialogChoice({
+      questionId: item.id,
+      alternativeId: alternative.id
+    });
 
     // remove the original dialog item display next item
     this.setState(({ items }) => {
@@ -157,6 +271,8 @@ class QuizScreen extends Component<Props, State> {
 
   handleQuizFinished = () => {
     const { navigation } = this.props;
+    this.props.setLatestQuestionId("");
+    this.props.resetDialogChoices();
     navigation.dispatch(
       StackActions.replace({
         routeName: "QuizResultScreen",
@@ -194,12 +310,20 @@ class QuizScreen extends Component<Props, State> {
   }
 }
 
-function mapStateToProps(unusedState: RootState) {
-  return {};
+function mapStateToProps(state: RootState) {
+  return {
+    latestQuestionId: state.quiz.latestQuestionId,
+    selectedDialogChoiceIds: state.quiz.selectedDialogChoiceIds
+  };
 }
-
-function mapDispatchToProps(unusedDispatch: Dispatch) {
-  return {};
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    setLatestQuestionId: (latestQuestionId: string) =>
+      dispatch(setLatestQuestionIdAction(latestQuestionId)),
+    resetDialogChoices: () => dispatch(resetDialogChoicesAction()),
+    selectDialogChoice: (dialogChoice: DialogChoice) =>
+      dispatch(selectDialogChoiceAction(dialogChoice))
+  };
 }
 
 export default connect(
