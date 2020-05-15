@@ -1,5 +1,5 @@
 /**
- * Created at Fri May 15 2020 11:05:34 GMT+0200 (Central European Summer Time)
+ * Created at Fri May 15 2020 13:40:18 GMT+0200 (Central European Summer Time)
  */
 
 /* eslint-disable max-len */
@@ -147,7 +147,7 @@ export default {
     COMING_SOON: "Coming soon",
     CONTACT_MAIL_ADRESS: "kontaktcenter@helsingborg.se",
     CONTACT_MAIL_SUBJECT: "Guide Helsingborg App",
-    CONTACT_PHONE: "+4642105001",
+    CONTACT_PHONE: "+4642105000",
     CONTACT_PHONE_DISPLAY: "042-10 50 00",
     CONTACT_US: "Contact us",
     CONTENT_MISSING: "No content available in your selected language",
@@ -251,7 +251,7 @@ export default {
     COMING_SOON: "Bald verfügbar",
     CONTACT_MAIL_ADRESS: "kontaktcenter@helsingborg.se",
     CONTACT_MAIL_SUBJECT: "Guide Helsingborg App",
-    CONTACT_PHONE: "+4642105002",
+    CONTACT_PHONE: "+4642105000",
     CONTACT_PHONE_DISPLAY: "042-10 50 00",
     CONTACT_US: "Kontakt",
     CONTENT_MISSING: "Kein Inhalt in Ihrer ausgewählten Sprache verfügbar",
@@ -302,7 +302,7 @@ export default {
     SEARCH_AROUND: "Suche läuft…",
     SEARCH_BY_NUMBER: "Nach ID suchen",
     SEE: "Siehe",
-    SEND: "Senden",
+    SEND: "Abschicken",
     SETTINGS: "Einstellungen",
     SHARE: "Teilen",
     SHARING_OVERLAY_TITLE: "Guide Helsingborg App",
