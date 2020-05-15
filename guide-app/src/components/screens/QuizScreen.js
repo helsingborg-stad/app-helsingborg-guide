@@ -75,8 +75,8 @@ class QuizScreen extends Component<Props, State> {
           );
 
           let records = [];
-
-          if (quizItem.type === "dialog") {
+          // Only show the dialog record for the first choice (when interactive skipRecord is used)
+          if (quizItem.type === "dialog" && index === 0) {
             records = [
               {
                 id: `${quizItem.id}-record`,
