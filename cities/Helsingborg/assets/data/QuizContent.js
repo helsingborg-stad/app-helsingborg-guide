@@ -311,13 +311,12 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     text: "Jag är inte så bra på att räkna."
   },
   {
-    id: "elsemarie-9",
-    type: "bot",
-    text: "Hur många fötter hittar du?"
-  },
-  {
     id: "elsemarie-10",
-    type: "prompt",
+    type: "dialog",
+    icon: "question",
+    title: "Dags för en fråga",
+    instructions: "Välj ett svar och tryck på Skicka när du känner dig säker!",
+    message: "Hur många fötter hittar du?",
     alternatives: [
       {
         id: "elsemarie-10-alt1",

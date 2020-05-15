@@ -407,7 +407,8 @@ declare type QuizDialog = {
   title: string,
   instructions: string,
   message: string,
-  alternatives: QuizDialogAlternative[]
+  alternatives: QuizDialogAlternative[],
+  skipRecord?: Boolean
 };
 
 declare type QuizDialogAlternative = {
