@@ -12,17 +12,23 @@ import { Colors, TextStyles } from "@assets/styles";
 type Props = {
   style?: ViewStyle,
   title: string,
+  enabled?: Boolean,
   onPress: () => void
 };
 
-export default function Button({ style, title, onPress }: Props) {
+export default function Button({ style, title, enabled, onPress }: Props) {
   const [pressed, setPressed] = useState(false);
-  const containerStyle = pressed
-    ? styles.pressedContainer
-    : styles.normalContainer;
+  const isDisabled = enabled === false;
+
+  let containerStyle = styles.normalContainer;
+  if (isDisabled) {
+    containerStyle = styles.disabledContainer;
+  } else if (pressed) {
+    containerStyle = styles.pressedContainer;
+  }
 
   let buttonContent;
-  if (pressed) {
+  if (isDisabled || pressed) {
     buttonContent = (
       <View style={style ? [style, containerStyle] : containerStyle}>
         <Text style={styles.text}>{title}</Text>
@@ -48,6 +54,7 @@ export default function Button({ style, title, onPress }: Props) {
       onPress={onPress}
       onPressIn={() => setPressed(true)}
       onPressOut={() => setPressed(false)}
+      disabled={isDisabled}
     >
       {buttonContent}
     </TouchableWithoutFeedback>
@@ -66,6 +73,10 @@ const styles = StyleSheet.create({
   normalContainer: {
     ...sharedContainer,
     backgroundColor: Colors.themePrimary
+  },
+  disabledContainer: {
+    ...sharedContainer,
+    backgroundColor: Colors.themeTertiary
   },
   pressedContainer: {
     ...sharedContainer,

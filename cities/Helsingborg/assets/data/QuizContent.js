@@ -1,5 +1,4 @@
 const robotImage = require("@assets/images/quiz/dunkers/robot.png");
-const exhibitionRobotImage = require("@assets/images/quiz/dunkers/exhibition_robot.png");
 const elseMarieImage = require("@assets/images/quiz/dunkers/else_marie.png");
 const elseMarieFigurenImage = require("@assets/images/quiz/dunkers/else_marie_figuren.png");
 const lillZlatanImage = require("@assets/images/quiz/dunkers/lill_zlatan.png");
@@ -148,7 +147,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "intro-25",
     type: "botimage",
-    source: exhibitionRobotImage,
+    source: robotImage,
     aspectRatio: 1
   },
   {
@@ -299,7 +298,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "elsemarie-6",
     type: "bot",
-    text: "🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶"
+    text: "🦶🦶🦶🦶🦶🦶🦶"
   },
   {
     id: "elsemarie-7",
