@@ -1,5 +1,4 @@
 const robotImage = require("@assets/images/quiz/dunkers/robot.png");
-const exhibitionRobotImage = require("@assets/images/quiz/dunkers/exhibition_robot.png");
 const elseMarieImage = require("@assets/images/quiz/dunkers/else_marie.png");
 const elseMarieFigurenImage = require("@assets/images/quiz/dunkers/else_marie_figuren.png");
 const lillZlatanImage = require("@assets/images/quiz/dunkers/lill_zlatan.png");
@@ -148,17 +147,16 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "intro-25",
     type: "botimage",
-    source: exhibitionRobotImage,
+    source: robotImage,
     aspectRatio: 1
   },
   {
     id: "intro-26",
-    type: "bot",
-    text: "Alla utställningar har väl robotar?"
-  },
-  {
-    id: "intro-27",
-    type: "prompt",
+    type: "dialog",
+    icon: "question",
+    title: "Dags för en fråga",
+    instructions: "Välj ett svar och tryck på Skicka när du känner dig säker!",
+    message: "Alla utställningar har väl robotar?",
     alternatives: [
       {
         id: "intro-27-alt1",
@@ -300,7 +298,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "elsemarie-6",
     type: "bot",
-    text: "🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶🦶"
+    text: "🦶🦶🦶🦶🦶🦶🦶"
   },
   {
     id: "elsemarie-7",
@@ -313,13 +311,12 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     text: "Jag är inte så bra på att räkna."
   },
   {
-    id: "elsemarie-9",
-    type: "bot",
-    text: "Hur många fötter hittar du?"
-  },
-  {
     id: "elsemarie-10",
-    type: "prompt",
+    type: "dialog",
+    icon: "question",
+    title: "Dags för en fråga",
+    instructions: "Välj ett svar och tryck på Skicka när du känner dig säker!",
+    message: "Hur många fötter hittar du?",
     alternatives: [
       {
         id: "elsemarie-10-alt1",
@@ -393,11 +390,6 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     text: "Vet du, här finns fler böcker! 📖 📖📖"
   },
   {
-    id: "elsemarie-19",
-    type: "bot",
-    text: "Kan du gå dit där du ser den här figuren?"
-  },
-  {
     id: "elsemarie-20",
     type: "botimage",
     source: elseMarieFigurenImage,
@@ -409,7 +401,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     icon: "look",
     title: "Dags att hitta någon",
     instructions: "Leta efter figuren som är på bilden",
-    message: "Hittar du figuren?",
+    message: "Kan du gå dit där du ser den här figuren?",
     alternatives: [
       {
         id: "elsemarie-21-alt1",
@@ -435,12 +427,11 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "siv-2",
-    type: "bot",
-    text: "Siv verkar inte riktigt glad? Vad tycker du?"
-  },
-  {
-    id: "siv-3",
-    type: "prompt",
+    type: "dialog",
+    icon: "question",
+    title: "Dags för en fråga",
+    instructions: "Välj ett svar och tryck på Skicka när du känner dig säker!",
+    message: "Siv verkar inte riktigt glad? Vad tycker du?",
     alternatives: [
       {
         id: "siv-3-alt1",
@@ -561,12 +552,11 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "siv-16",
-    type: "bot",
-    text: "Hur vet man att drömmar inte är på riktigt?"
-  },
-  {
-    id: "siv-17",
-    type: "prompt",
+    type: "dialog",
+    icon: "question",
+    title: "Dags för en fråga",
+    instructions: "Välj ett svar och tryck på Skicka när du känner dig säker!",
+    message: "Hur vet man att drömmar inte är på riktigt?",
     alternatives: [
       {
         id: "siv-17-alt1",
@@ -635,11 +625,6 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     text: "Hoppas Siv kan somna snart. 😴"
   },
   {
-    id: "lillzlatan-chapter",
-    type: "chapter",
-    text: "Lill-Zlatan och Morbror Raring"
-  },
-  {
     id: "lillzlatan-0",
     type: "bot",
     text: "Ser du bilderna på väggen? 🧐️"
@@ -668,6 +653,11 @@ const dunkersSwedishQuizItems: QuizItem[] = [
         text: "Hittat!"
       }
     ]
+  },
+  {
+    id: "lillzlatan-chapter",
+    type: "chapter",
+    text: "Lill-Zlatan och Morbror Raring"
   },
   {
     id: "lillzlatan-4",
@@ -777,12 +767,13 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "lillzlatan-18",
-    type: "dialog",
-    icon: "question",
-    title: "Dags att fylla i Kollprotokollet",
-    instructions: "Kolla ordningen och fyll i Kollprotokollet",
-    message:
+    type: "bot",
+    text:
       "Kan du kolla vilken ordning de är i på väggen och sedan skriva ett nummer vid varje?",
+  },
+  {
+    id: "lillzlatan-19",
+    type: "prompt",
     alternatives: [
       {
         id: "lillzlatan-18-alt1",
@@ -907,12 +898,12 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "gittan-10",
-    type: "dialog",
-    icon: "question",
-    title: "Dags att fylla i Kollprotokollet",
-    instructions:
-      "Kryssa de färgerna du hittar på legobitarna i Kollprotokollet",
-    message: "Kan du kryssa för alla färger du hittar?",
+    type: "bot",
+    text: "Kan du kryssa för alla färger du hittar?"
+  },
+  {
+    id: "gittan-11",
+    type: "prompt",
     alternatives: [
       {
         id: "gittan-10-alt1",
@@ -985,17 +976,27 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "gittan-21",
+    type: "bot",
+    text: "Skogen är jättenära."
+  },
+  {
+    id: "gittan-22",
     type: "dialog",
     icon: "look",
     title: "Dags att hitta skogen",
     instructions: "Leta efter skogen",
-    message: "Skogen är jättenära. Kan du hitta den?",
+    message: "Kan du hitta den?",
     alternatives: [
       {
         id: "gittan-21-alt1",
         text: "Jag har hittat den!"
       }
     ]
+  },
+  {
+    id: "skogen-chapter",
+    type: "chapter",
+    text: "Gittan och Gråvargarna"
   },
   {
     id: "gittan-23",
@@ -1031,11 +1032,6 @@ const dunkersSwedishQuizItems: QuizItem[] = [
         text: "Okej! Jag har smugit fram!"
       }
     ]
-  },
-  {
-    id: "skogen-chapter",
-    type: "chapter",
-    text: "Gittan och Gråvargarna"
   },
   {
     id: "skogen-0",
@@ -1196,12 +1192,18 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   },
   {
     id: "skogen-22",
-    type: "dialog",
-    icon: "question",
-    title: "Räkna grenarna",
-    instructions:
-      "När du räknat alla grenar skriv ner dem i Kollprotokollet på nummer 5.",
-    message: "Kan du hjälpa mig?",
+    type: "bot",
+    text: "Kan du hjälpa mig?"
+  },
+  {
+    id: "skogen-23",
+    type: "bot",
+    text:
+      "När du räknat alla grenar skriv ner dem i Kollprotokollet på nummer 5."
+  },
+  {
+    id: "skogen-24",
+    type: "prompt",
     alternatives: [
       {
         id: "skogen-22-alt1",
@@ -1256,7 +1258,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
     icon: "look",
     title: "Dags att hitta fler vargar",
     instructions: "Leta efter fler vargar som på bilden",
-    message: "Hittar du fler vargar?",
+    message: "Kan du hitta dem?",
     alternatives: [
       {
         id: "skogen-33-alt1",

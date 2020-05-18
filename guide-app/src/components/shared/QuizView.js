@@ -11,7 +11,9 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
+import LangService from "@services/langService";
 import Button from "@shared-components/Button";
+import SelectableButton from "@shared-components/SelectableButton";
 const dialogLookImage = require("@assets/images/quiz/dialog-look.png");
 const dialogQuestionImage = require("@assets/images/quiz/dialog-question.png");
 const dialogTalkImage = require("@assets/images/quiz/dialog-talk.png");
@@ -165,6 +167,40 @@ function Dialog({
     alternative: QuizDialogAlternative
   ) => void
 }) {
+  const [selectedAlternative, setSelectedAlternative] = useState(null);
+  const { alternatives } = item;
+  let buttons;
+  if (alternatives.length === 1) {
+    const alternative = alternatives[0];
+    buttons = (
+      <Button
+        style={styles.promptButton}
+        title={alternative.text}
+        onPress={() => onAlternativeSelected(item, alternative)}
+      />
+    );
+  } else {
+    buttons = (
+      <>
+        {alternatives.map((alternative, index) => (
+          <SelectableButton
+            key={index}
+            style={styles.dialogOptionButton}
+            title={alternative.text}
+            selected={alternative === selectedAlternative}
+            onPress={() => setSelectedAlternative(alternative)}
+          />
+        ))}
+        <Button
+          style={styles.dialogSendButton}
+          title={LangService.strings.SEND}
+          onPress={() => onAlternativeSelected(item, selectedAlternative)}
+          enabled={!!selectedAlternative}
+        />
+      </>
+    );
+  }
+
   return (
     <SafeAreaView
       style={styles.dialogContainer}
@@ -174,16 +210,7 @@ function Dialog({
       <Text style={styles.dialogTitle}>{item.title}</Text>
       <Text style={styles.dialogInstructions}>{item.instructions}</Text>
       <Text style={styles.dialogMessage}>{item.message}</Text>
-      {item.alternatives.map((alternative, index) => (
-        <Button
-          key={index}
-          style={styles.promptButton}
-          title={alternative.text}
-          onPress={() => {
-            onAlternativeSelected(item, alternative);
-          }}
-        />
-      ))}
+      {buttons}
     </SafeAreaView>
   );
 }
@@ -469,7 +496,7 @@ const dialogIconShared = {
   borderRadius: 24,
   width: 48,
   height: 48,
-  backgroundColor: Colors.themeSecondary
+  backgroundColor: Colors.black
 };
 
 const styles = StyleSheet.create({
@@ -607,6 +634,15 @@ const styles = StyleSheet.create({
       fontWeight: "bold"
     }
   ]),
+  dialogOptionButton: {
+    marginHorizontal: 28,
+    marginVertical: 2
+  },
+  dialogSendButton: {
+    marginHorizontal: 12,
+    marginTop: 11,
+    marginBottom: 5
+  },
   dialogRecordMessage: StyleSheet.flatten([
     TextStyles.body,
     {

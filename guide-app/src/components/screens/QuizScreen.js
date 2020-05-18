@@ -76,8 +76,8 @@ class QuizScreen extends Component<Props, State> {
           );
 
           let records = [];
-
-          if (quizItem.type === "dialog") {
+          // Only show the dialog record for the first choice (when interactive skipRecord is used)
+          if (quizItem.type === "dialog" && index === 0) {
             records = [
               {
                 id: `${quizItem.id}-record`,
@@ -242,13 +242,16 @@ class QuizScreen extends Component<Props, State> {
     item: QuizDialog,
     alternative: QuizDialogAlternative
   ) => {
-    const record = {
-      id: `${item.id}-record`,
-      type: "dialogrecord",
-      icon: item.icon,
-      title: item.title,
-      message: item.message
-    };
+    const records = [];
+    if (!item.skipRecord) {
+      records.push({
+        id: `${item.id}-record`,
+        type: "dialogrecord",
+        icon: item.icon,
+        title: item.title,
+        message: item.message
+      });
+    }
 
     // create items for all follow up messages
     const followUps = (alternative.followups || []).map(followUp => ({
@@ -257,11 +260,23 @@ class QuizScreen extends Component<Props, State> {
       text: followUp.text
     }));
 
+    // if the user selected an incorrect answer, create a new dialog item without the incorrect alternative
+    const newDialogItems = [];
+    if (typeof alternative.correct === "boolean" && !alternative.correct) {
+      newDialogItems.push({
+        ...item,
+        key: `${item.id}`,
+        alternatives: item.alternatives.filter(x => x.id !== alternative.id),
+        skipRecord: true
+      });
+    }
+
     // add all new upcoming items
     this.upcomingItems = [
-      record,
+      ...records,
       { id: `${alternative.id}-resp`, type: "user", text: alternative.text },
       ...followUps,
+      ...newDialogItems,
       ...this.upcomingItems
     ];
 
