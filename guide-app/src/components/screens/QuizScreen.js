@@ -22,7 +22,8 @@ type Props = {
 };
 
 type State = {
-  items: QuizItem[]
+  items: QuizItem[],
+  botIsTyping: boolean
 };
 
 class QuizScreen extends Component<Props, State> {
@@ -124,6 +125,7 @@ class QuizScreen extends Component<Props, State> {
         : [...quizItems];
 
     this.state = {
+      botIsTyping: false,
       items: [
         ...QuizScreen.buildHistory(
           quizItems.splice(0, latestQuestionIndex),
@@ -149,6 +151,8 @@ class QuizScreen extends Component<Props, State> {
     const item = this.upcomingItems[0];
     this.upcomingItems.splice(0, 1);
     const nextItem = this.upcomingItems[0];
+
+    this.setState({ botIsTyping: false });
 
     if (!item) {
       return;
@@ -180,6 +184,9 @@ class QuizScreen extends Component<Props, State> {
             item.type === "user" ||
             item.type === "dialogrecord")
         ) {
+          this.setState({
+            botIsTyping: nextItem.type === "bot" || nextItem.type === "botimage"
+          });
           this.timeout = setTimeout(this.displayNextItem, delayToNextItem);
         } else if (!nextItem && item.type !== "prompt") {
           this.timeout = setTimeout(this.handleQuizFinished, 500);
@@ -302,6 +309,7 @@ class QuizScreen extends Component<Props, State> {
         <QuizView
           flatlistRef={this.flatlistRef}
           items={this.state.items}
+          botIsTyping={this.state.botIsTyping}
           onPromptAlternativeSelected={this.handlePromptAlternativeSelected}
           onDialogAlternativeSelected={this.handleDialogAlternativeSelected}
         />

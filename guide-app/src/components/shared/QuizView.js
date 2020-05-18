@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
+  Animated,
   FlatList,
   Image,
   ImageBackground,
@@ -205,6 +206,105 @@ function DialogRecord({
   );
 }
 
+const TypingIndicator = () => {
+  const firstAnim = useRef(new Animated.Value(1)).current;
+  const secondAnim = useRef(new Animated.Value(1)).current;
+  const thirdAnim = useRef(new Animated.Value(1)).current;
+
+  React.useEffect(() => {
+    Animated.loop(
+      Animated.parallel([
+        Animated.sequence([
+          Animated.timing(firstAnim, {
+            toValue: 0.5,
+            duration: 500
+          }),
+          Animated.timing(firstAnim, {
+            toValue: 1,
+            duration: 250
+          })
+        ]),
+        Animated.sequence([
+          Animated.timing(secondAnim, {
+            toValue: 0.5,
+            duration: 500
+          }),
+          Animated.timing(secondAnim, {
+            toValue: 1,
+            duration: 250
+          })
+        ]),
+        Animated.sequence([
+          Animated.timing(thirdAnim, {
+            toValue: 0.5,
+            duration: 500
+          }),
+          Animated.timing(thirdAnim, {
+            toValue: 1,
+            duration: 250
+          })
+        ])
+      ]),
+      {
+        iterations: -1
+      }
+    ).start();
+  }, [firstAnim, secondAnim, thirdAnim]);
+
+  return (
+    <View style={styles.typingIndicatorContainer}>
+      <Animated.View
+        style={[
+          styles.dot,
+          {
+            opacity: firstAnim,
+            transform: [
+              {
+                translateY: firstAnim.interpolate({
+                  inputRange: [0.5, 1],
+                  outputRange: [-7, 0]
+                })
+              }
+            ]
+          }
+        ]}
+      />
+      <Animated.View
+        style={[
+          styles.dot,
+          {
+            opacity: secondAnim,
+            transform: [
+              {
+                translateY: secondAnim.interpolate({
+                  inputRange: [0.5, 1],
+                  outputRange: [-7, 0]
+                })
+              }
+            ]
+          }
+        ]}
+      />
+      <Animated.View
+        style={[
+          styles.dot,
+          {
+            opacity: thirdAnim,
+            transform: [
+              {
+                translateY: thirdAnim.interpolate({
+                  inputRange: [0.5, 1],
+                  outputRange: [-7, 0]
+                })
+              }
+            ]
+          }
+        ]}
+      />
+    </View>
+  );
+};
+
 function renderFlatListItem(
   item: QuizItem,
   prevItem: ?QuizItem,
@@ -216,6 +316,14 @@ function renderFlatListItem(
 ) {
   if (item.type === "chapter") {
     return <Chapter key={item.id} item={item} />;
+  } else if (item.type === "typing") {
+    return (
+      <TypingIndicator
+        key="typing-indicator"
+        prevItem={prevItem}
+        nextItem={nextItem}
+      />
+    );
   } else if (item.type === "bot") {
     return (
       <BotMessage
@@ -261,7 +369,8 @@ export default function QuizView({
   items,
   onPromptAlternativeSelected,
   onDialogAlternativeSelected,
-  flatlistRef
+  flatlistRef,
+  botIsTyping
 }: {
   items: QuizItem[],
   onPromptAlternativeSelected: (
@@ -272,7 +381,8 @@ export default function QuizView({
     item: QuizDialog,
     alternative: QuizDialogAlternative
   ) => void,
-  flatlistRef: React.Ref<FlatList>
+  flatlistRef: React.Ref<FlatList>,
+  botIsTyping: boolean
 }) {
   const [dialogHeight, setDialogHeight] = useState();
   const dialogItem = items[0]?.type === "dialog" ? items[0] : null;
@@ -286,22 +396,34 @@ export default function QuizView({
           renderItem={({ item, index }) => {
             const prevItem = items[index - 1];
             const nextItem = items[index + 1];
-            return renderFlatListItem(
-              item,
-              prevItem,
-              nextItem,
-              onPromptAlternativeSelected
+            return (
+              <>
+                {renderFlatListItem(
+                  item,
+                  prevItem,
+                  nextItem,
+                  onPromptAlternativeSelected
+                )}
+              </>
             );
           }}
-          ListHeaderComponent={
-            dialogItem ? (
-              <View
-                style={{
-                  height: dialogHeight
-                }}
-              />
-            ) : null
-          }
+          ListHeaderComponent={() => {
+            if (dialogItem) {
+              return (
+                <View
+                  style={{
+                    height: dialogHeight
+                  }}
+                />
+              );
+            }
+
+            if (botIsTyping) {
+              return <TypingIndicator />;
+            }
+
+            return null;
+          }}
         />
       </SafeAreaView>
       {dialogItem && (
@@ -402,6 +524,17 @@ const styles = StyleSheet.create({
   },
   botImageImage: {
     borderRadius: 10
+  },
+  typingIndicatorContainer: {
+    ...botMessageShared,
+    flexDirection: "row"
+  },
+  dot: {
+    height: 10,
+    width: 10,
+    borderRadius: 100,
+    backgroundColor: "#B4B5B9",
+    marginHorizontal: 2
   },
   userMessageSolo: userMessageShared,
   userMessageSoloVerticalMargin: {
