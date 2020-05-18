@@ -240,7 +240,7 @@ const TypingIndicator = () => {
 
   React.useEffect(() => {
     Animated.loop(
-      Animated.parallel([
+      Animated.stagger(150, [
         Animated.sequence([
           Animated.timing(firstAnim, {
             toValue: 0.5,
