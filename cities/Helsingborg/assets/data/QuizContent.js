@@ -17,11 +17,22 @@ export function getQuizForGuideId(langCode: string, guideId: number): ?Quiz {
 
 const dunkersSwedishQuizItems: QuizItem[] = [
   {
+    id: "start-screen",
+    type: "start",
+    text: "Make sure that you have picked up a fun kit at the entrance of the exhibition. The kit contrains a paper and a pen that will be very importing for our journey. Tap the button below when you are ready to start a conversation with the robot.",
+    image: {
+      source: robotImage,
+      aspectRatio: 1
+    },
+    action: {
+      text: "Jag är redo"
+    }
+  },
+  {
     id: "intro-chapter",
     type: "chapter",
     text: "Välkommen till utställningen"
   },
-  { id: "intro-0", type: "botimage", source: robotImage, aspectRatio: 1 },
   { id: "intro-1", type: "bot", text: "Hej!" },
   { id: "intro-2", type: "bot", text: "Hallå!" },
   { id: "intro-3", type: "bot", text: "Är du där? Kan du se mig?" },
@@ -1458,7 +1469,7 @@ const dunkersEnglishQuizItems: QuizItem[] = [
     type: "chapter",
     text: "Welcome to the exhibition"
   },
-  { id: "intro-0", type: "botimage", source: robotImage, aspectRatio: 1 },
+  // { id: "intro-0", type: "botimage", source: robotImage, aspectRatio: 1 },
   { id: "intro-1", type: "bot", text: "Hi there!" },
   { id: "intro-2", type: "bot", text: "Hello!" },
   { id: "intro-3", type: "bot", text: "Are you here? Can you see me?" },

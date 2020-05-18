@@ -115,6 +115,8 @@ class QuizScreen extends Component<Props, State> {
     const { quiz } = props.navigation.state.params;
     const quizItems = [...quiz.items];
 
+    this.startItem = quizItems.find(item => item.type === "start");
+
     const latestQuestionIndex = quizItems.findIndex(
       element => element.id === props.latestQuestionId
     );
@@ -135,10 +137,6 @@ class QuizScreen extends Component<Props, State> {
     };
   }
 
-  componentDidMount() {
-    this.displayNextItem();
-  }
-
   componentWillUnmount() {
     // const { navigation } = this.props;
     // if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
@@ -151,6 +149,7 @@ class QuizScreen extends Component<Props, State> {
     const item = this.upcomingItems[0];
     this.upcomingItems.splice(0, 1);
     const nextItem = this.upcomingItems[0];
+    console.log(item);
 
     this.setState({ botIsTyping: false });
 
@@ -188,6 +187,9 @@ class QuizScreen extends Component<Props, State> {
             botIsTyping: nextItem.type === "bot" || nextItem.type === "botimage"
           });
           this.timeout = setTimeout(this.displayNextItem, delayToNextItem);
+        } else if (item.type === "start") {
+          // console.log(item);
+          this.displayNextItem();
         } else if (!nextItem && item.type !== "prompt") {
           this.timeout = setTimeout(this.handleQuizFinished, 500);
         } else {
@@ -305,6 +307,10 @@ class QuizScreen extends Component<Props, State> {
     );
   };
 
+  handleQuizStartAction = () => {
+    this.displayNextItem();
+  };
+
   scrollToBottom() {
     const flatlist = this.flatlistRef.current;
     flatlist?.scrollToOffset({ offset: 0 });
@@ -312,6 +318,7 @@ class QuizScreen extends Component<Props, State> {
 
   timeout: TimeoutID;
   upcomingItems: QuizItem[];
+  startItem: QuizItem;
   flatlistRef = React.createRef<FlatList>();
 
   render() {
@@ -324,9 +331,11 @@ class QuizScreen extends Component<Props, State> {
         <QuizView
           flatlistRef={this.flatlistRef}
           items={this.state.items}
+          startItem={this.startItem}
           botIsTyping={this.state.botIsTyping}
           onPromptAlternativeSelected={this.handlePromptAlternativeSelected}
           onDialogAlternativeSelected={this.handleDialogAlternativeSelected}
+          onQuizStartAction={this.handleQuizStartAction}
         />
       </>
     );

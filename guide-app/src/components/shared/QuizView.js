@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   Animated,
   FlatList,
@@ -233,6 +233,63 @@ function DialogRecord({
   );
 }
 
+const QuizStart = ({
+  item,
+  onQuizStartAction,
+  isHistoryItem
+}: {
+  item: QuizItem,
+  onQuizStartAction: () => void,
+  isHistoryItem: boolean
+}) => (
+    <View style={styles.startContainer}>
+      <View>
+        <StartImage item={item.image} />
+        <StartText item={item} />
+      </View>
+      {!isHistoryItem && (
+        <StartAction item={item.action} onQuizStartAction={onQuizStartAction} />
+      )}
+    </View>
+  );
+
+const StartText = ({ item }: { item: QuizItem }) => (
+  <View style={styles.startTextContainer}>
+    <Text style={styles.startText}>{item.text}</Text>
+  </View>
+);
+
+const StartAction = ({
+  item,
+  onQuizStartAction
+}: {
+  item: QuizPrompt,
+  onQuizStartAction: () => void
+}) => {
+  return (
+    <View style={styles.promptContainer}>
+      <Button
+        style={styles.promptButton}
+        title={item.text}
+        onPress={() => {
+          onQuizStartAction(item);
+        }}
+      />
+    </View>
+  );
+};
+
+function StartImage({ item }): { item: QuizBotImageMessage } {
+  return (
+    <ImageBackground
+      style={[styles.startImage, { aspectRatio: item.aspectRatio }]}
+      imageStyle={styles.startImageImage}
+      source={item.source}
+      resizeMode="contain"
+    />
+  );
+}
+
 const TypingIndicator = () => {
   const firstAnim = useRef(new Animated.Value(1)).current;
   const secondAnim = useRef(new Animated.Value(1)).current;
@@ -339,7 +396,8 @@ function renderFlatListItem(
   onPromptAlternativeSelected: (
     item: QuizPrompt,
     alternative: QuizPromptAlternative
-  ) => void
+  ) => void,
+  onQuizStartAction: () => void
 ) {
   if (item.type === "chapter") {
     return <Chapter key={item.id} item={item} />;
@@ -388,18 +446,30 @@ function renderFlatListItem(
         nextItem={nextItem}
       />
     );
+  } else if (item.type === "start") {
+    return (
+      <QuizStart
+        key={item.id}
+        item={item}
+        onQuizStartAction={onQuizStartAction}
+        isHistoryItem
+      />
+    );
   }
   return null;
 }
 
 export default function QuizView({
   items,
+  startItem,
   onPromptAlternativeSelected,
   onDialogAlternativeSelected,
+  onQuizStartAction,
   flatlistRef,
   botIsTyping
 }: {
   items: QuizItem[],
+  startItem: QuizItem,
   onPromptAlternativeSelected: (
     item: QuizPrompt,
     alternative: QuizPromptAlternative
@@ -408,6 +478,7 @@ export default function QuizView({
     item: QuizDialog,
     alternative: QuizDialogAlternative
   ) => void,
+  onQuizStartAction: () => void,
   flatlistRef: React.Ref<FlatList>,
   botIsTyping: boolean
 }) {
@@ -418,22 +489,23 @@ export default function QuizView({
       <SafeAreaView style={styles.container}>
         <FlatList
           ref={flatlistRef}
-          inverted
+          inverted={items.length > 0} // This is a workaround for RN bug https://github.com/facebook/react-native/issues/21196
           data={items}
+          contentContainerStyle={{ flexGrow: 1 }}
           renderItem={({ item, index }) => {
             const prevItem = items[index - 1];
             const nextItem = items[index + 1];
-            return (
-              <>
-                {renderFlatListItem(
-                  item,
-                  prevItem,
-                  nextItem,
-                  onPromptAlternativeSelected
-                )}
-              </>
+            return renderFlatListItem(
+              item,
+              prevItem,
+              nextItem,
+              onPromptAlternativeSelected,
+              onQuizStartAction
             );
           }}
+          ListEmptyComponent={() => (
+            <QuizStart item={startItem} onQuizStartAction={onQuizStartAction} />
+          )}
           ListHeaderComponent={() => {
             if (dialogItem) {
               return (
@@ -548,6 +620,30 @@ const styles = StyleSheet.create({
     marginHorizontal: 11,
     marginBottom: 4,
     width: 300
+  },
+  startContainer: {
+    justifyContent: "space-between",
+    flexDirection: "column",
+    flexGrow: 1
+  },
+  startImage: {
+    marginHorizontal: 11,
+    marginTop: 24,
+    alignSelf: "center",
+    width: 300
+  },
+  startImageImage: {
+    borderRadius: 500
+  },
+  startTextContainer: {
+    marginVertical: 21,
+    marginHorizontal: 51
+  },
+  startText: {
+    ...TextStyles.description,
+    fontSize: 11,
+    lineHeight: 18,
+    color: "#979797"
   },
   botImageImage: {
     borderRadius: 10
