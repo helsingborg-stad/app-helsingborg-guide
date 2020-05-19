@@ -76,8 +76,8 @@ class GuideScreen extends Component<Props> {
         onPressQuiz={this.onPressQuiz}
       />
     ) : (
-      <View />
-    );
+        <View />
+      );
   }
 }
 

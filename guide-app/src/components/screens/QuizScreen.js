@@ -112,6 +112,8 @@ class QuizScreen extends Component<Props, State> {
   constructor(props) {
     super(props);
 
+    console.log(props.navigation);
+
     const { quiz } = props.navigation.state.params;
     const quizItems = [...quiz.items];
 
@@ -203,6 +205,8 @@ class QuizScreen extends Component<Props, State> {
     item: QuizPrompt,
     alternative: QuizPromptAlternative
   ) => {
+    this.handleQuizFinished();
+
     // create items for all follow up messages
     const followUps = (alternative.followups || []).map(followUp => ({
       id: followUp.id,
@@ -244,6 +248,7 @@ class QuizScreen extends Component<Props, State> {
     item: QuizDialog,
     alternative: QuizDialogAlternative
   ) => {
+    this.handleQuizFinished();
     const records = [];
     if (!item.skipRecord) {
       records.push({
@@ -297,11 +302,13 @@ class QuizScreen extends Component<Props, State> {
     const { navigation } = this.props;
     this.props.setLatestQuestionId("");
     this.props.resetDialogChoices();
+
     navigation.dispatch(
       StackActions.replace({
         routeName: "QuizResultScreen",
         params: {
-          title: navigation.state.params.title
+          title: navigation.state.params.title,
+          quiz: navigation.state.params.quiz
         }
       })
     );

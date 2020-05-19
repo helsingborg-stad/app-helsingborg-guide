@@ -4,6 +4,8 @@ const elseMarieFigurenImage = require("@assets/images/quiz/dunkers/else_marie_fi
 const lillZlatanImage = require("@assets/images/quiz/dunkers/lill_zlatan.png");
 const barnetImage = require("@assets/images/quiz/dunkers/barnet.png");
 const vargarImage = require("@assets/images/quiz/dunkers/vargar.png");
+const finishImage = require("@assets/images/quiz/dunkers/finish.png");
+const shareImage = require("@assets/images/quiz/dunkers/shareimage.js");
 
 export function getQuizForGuideId(langCode: string, guideId: number): ?Quiz {
   if (langCode === 'sv' && guideId === 1764975) { //TODO replace guideId with proper, this is using UNG SVENSK FORM
@@ -1461,6 +1463,16 @@ const dunkersSwedishQuizItems: QuizItem[] = [
 const dunkersSwedishQuiz: Quiz = {
   name: 'Robothjälpen',
   items: dunkersSwedishQuizItems,
+  finishScreen: {
+    title: 'Gråvargar och Älgbrorsor',
+    firstImage: finishImage,
+    secondImage: robotImage,
+    shareImage: shareImage.default,
+    body: {
+      title: 'Grattis!',
+      text: "You completed all the tasks! If you liked it, be sure to share it with your friends!"
+    }
+  }
 };
 
 const dunkersEnglishQuizItems: QuizItem[] = [
