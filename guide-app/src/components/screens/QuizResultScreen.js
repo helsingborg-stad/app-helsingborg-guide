@@ -68,6 +68,8 @@ class QuizResultScreen extends Component<Props, State> {
     }
   };
 
+  downloadImage = async () => { };
+
   render() {
     console.log(this.props);
     const {
@@ -115,21 +117,22 @@ class QuizResultScreen extends Component<Props, State> {
               <Text style={styles.bodyText}>{finishScreen.body.text}</Text>
             </View>
             <View style={styles.shareContainer}>
-              {/* <TouchableOpacity
-              style={styles.shareButton}
-              onPress={() => {
-              }}
+              <TouchableOpacity
+                style={styles.shareButton}
+                onPress={() => {
+                  this.downloadImage();
+                }}
               >
-              <EntypoIcon
-              style={[
-                styles.shareIcon,
-                { transform: [{ rotate: "180deg" }] }
-              ]}
-              name={"share-alternative"}
-              size={22}
-              color={Colors.black}
-              />
-            </TouchableOpacity> */}
+                <EntypoIcon
+                  style={[
+                    styles.shareIcon,
+                    { transform: [{ rotate: "180deg" }] }
+                  ]}
+                  name={"share-alternative"}
+                  size={22}
+                  color={Colors.black}
+                />
+              </TouchableOpacity>
               <TouchableOpacity
                 style={styles.shareButton}
                 onPress={() => {

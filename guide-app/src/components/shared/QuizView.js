@@ -115,32 +115,6 @@ function UserMessage({
   );
 }
 
-function Prompt({
-  item,
-  onAlternativeSelected
-}: {
-  item: QuizPrompt,
-  onAlternativeSelected: (
-    item: QuizPrompt,
-    alternative: QuizPromptAlternative
-  ) => void
-}) {
-  return (
-    <View style={styles.promptContainer}>
-      {item.alternatives.map((alternative, index) => (
-        <Button
-          key={index}
-          style={styles.promptButton}
-          title={alternative.text}
-          onPress={() => {
-            onAlternativeSelected(item, alternative);
-          }}
-        />
-      ))}
-    </View>
-  );
-}
-
 function DialogIcon({ style, icon }: { style: any, icon: QuizDialogIcon }) {
   let image;
   if (icon === "look") {
@@ -173,7 +147,6 @@ function Dialog({
   const { alternatives } = item;
   let buttons;
   if (isPrompt || alternatives.length === 1) {
-    // const alternative = alternatives[0];
     buttons = alternatives.map(alternative => (
       <Button
         style={styles.promptButton}
@@ -435,14 +408,6 @@ function renderFlatListItem(
         nextItem={nextItem}
       />
     );
-  } else if (item.type === "prompt") {
-    // return (
-    //   <Prompt
-    //     key={item.id}
-    //     item={item}
-    //     onAlternativeSelected={onPromptAlternativeSelected}
-    //   />
-    // );
   } else if (item.type === "dialogrecord") {
     return (
       <DialogRecord
