@@ -205,8 +205,6 @@ class QuizScreen extends Component<Props, State> {
     item: QuizPrompt,
     alternative: QuizPromptAlternative
   ) => {
-    this.handleQuizFinished();
-
     // create items for all follow up messages
     const followUps = (alternative.followups || []).map(followUp => ({
       id: followUp.id,
@@ -248,7 +246,6 @@ class QuizScreen extends Component<Props, State> {
     item: QuizDialog,
     alternative: QuizDialogAlternative
   ) => {
-    this.handleQuizFinished();
     const records = [];
     if (!item.skipRecord) {
       records.push({
