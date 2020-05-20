@@ -6,6 +6,7 @@ import { FlatList, StatusBar, View } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import { Colors, HeaderStyles } from "@assets/styles";
 import QuizView from "@shared-components/QuizView";
+import { AnalyticsUtils } from "@utils";
 import {
   setLatestQuestionIdAction,
   selectDialogChoiceAction,
@@ -115,6 +116,7 @@ class QuizScreen extends Component<Props, State> {
     console.log(props.navigation);
 
     const { quiz } = props.navigation.state.params;
+    this.quiz = quiz;
     const quizItems = [...quiz.items];
 
     this.startItem = quizItems.find(item => item.type === "start");
@@ -151,7 +153,6 @@ class QuizScreen extends Component<Props, State> {
     const item = this.upcomingItems[0];
     this.upcomingItems.splice(0, 1);
     const nextItem = this.upcomingItems[0];
-    console.log(item);
 
     this.setState({ botIsTyping: false });
 
@@ -185,6 +186,13 @@ class QuizScreen extends Component<Props, State> {
             item.type === "user" ||
             item.type === "dialogrecord")
         ) {
+          if (item.type === "chapter") {
+            AnalyticsUtils.logEvent("quiz_chapter_reached", {
+              name: this.quiz.name,
+              id: item.id
+            });
+          }
+
           this.setState({
             botIsTyping: nextItem.type === "bot" || nextItem.type === "botimage"
           });
@@ -297,21 +305,28 @@ class QuizScreen extends Component<Props, State> {
 
   handleQuizFinished = () => {
     const { navigation } = this.props;
+    const { name } = this.quiz;
+
     this.props.setLatestQuestionId("");
     this.props.resetDialogChoices();
+
+    AnalyticsUtils.logEvent("quiz_end", { name });
 
     navigation.dispatch(
       StackActions.replace({
         routeName: "QuizResultScreen",
         params: {
           title: navigation.state.params.title,
-          quiz: navigation.state.params.quiz
+          quiz: this.quiz
         }
       })
     );
   };
 
   handleQuizStartAction = () => {
+    const { name } = this.quiz;
+    AnalyticsUtils.logEvent("quiz_start", { name });
+
     this.displayNextItem();
   };
 
@@ -324,6 +339,7 @@ class QuizScreen extends Component<Props, State> {
   upcomingItems: QuizItem[];
   startItem: QuizItem;
   flatlistRef = React.createRef<FlatList>();
+  quiz: Quiz;
 
   render() {
     return (
