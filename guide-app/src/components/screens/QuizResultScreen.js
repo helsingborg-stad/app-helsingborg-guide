@@ -7,6 +7,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  ScrollView,
   ImageBackground
 } from "react-native";
 import { Colors, TextStyles } from "@assets/styles";
@@ -80,68 +81,70 @@ class QuizResultScreen extends Component<Props, State> {
           backgroundColor={Colors.themeSecondary}
         />
         <SafeAreaView style={styles.container}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{finishScreen.title}</Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                this.props.navigation.goBack();
-              }}
-            >
-              <Icon
-                style={styles.buttonIcon}
-                name={"close"}
-                size={16}
-                color={Colors.black}
-              />
-            </TouchableOpacity>
-          </View>
-          <ImageBackground
-            style={styles.finishedImage}
-            imageStyle={styles.botImageImage}
-            source={finishScreen.firstImage}
-            resizeMode="contain"
-          />
-          <ImageBackground
-            style={styles.finishedImage}
-            imageStyle={styles.botImageImage}
-            source={finishScreen.secondImage}
-            resizeMode="contain"
-          />
-          <View style={styles.bodyContainer}>
-            <Text style={styles.bodyTitle}>{finishScreen.body.title}</Text>
-            <Text style={styles.bodyText}>{finishScreen.body.text}</Text>
-          </View>
-          <View style={styles.shareContainer}>
-            {/* <TouchableOpacity
+          <ScrollView style={styles.container}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>{finishScreen.title}</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  this.props.navigation.goBack();
+                }}
+              >
+                <Icon
+                  style={styles.buttonIcon}
+                  name={"close"}
+                  size={16}
+                  color={Colors.black}
+                />
+              </TouchableOpacity>
+            </View>
+            <ImageBackground
+              style={styles.finishedImage}
+              imageStyle={styles.botImageImage}
+              source={finishScreen.firstImage}
+              resizeMode="contain"
+            />
+            <ImageBackground
+              style={styles.finishedImage}
+              imageStyle={styles.botImageImage}
+              source={finishScreen.secondImage}
+              resizeMode="contain"
+            />
+            <View style={styles.bodyContainer}>
+              <Text style={styles.bodyTitle}>{finishScreen.body.title}</Text>
+              <Text style={styles.bodyText}>{finishScreen.body.text}</Text>
+            </View>
+            <View style={styles.shareContainer}>
+              {/* <TouchableOpacity
               style={styles.shareButton}
               onPress={() => {
               }}
-            >
+              >
               <EntypoIcon
-                style={[
-                  styles.shareIcon,
-                  { transform: [{ rotate: "180deg" }] }
-                ]}
-                name={"share-alternative"}
-                size={22}
-                color={Colors.black}
+              style={[
+                styles.shareIcon,
+                { transform: [{ rotate: "180deg" }] }
+              ]}
+              name={"share-alternative"}
+              size={22}
+              color={Colors.black}
               />
             </TouchableOpacity> */}
-            <TouchableOpacity
-              style={styles.shareButton}
-              onPress={() => {
-                this.shareImage();
-              }}
-            >
-              <EntypoIcon
-                style={styles.shareIcon}
-                name={"share-alternative"}
-                size={22}
-                color={Colors.black}
-              />
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity
+                style={styles.shareButton}
+                onPress={() => {
+                  this.shareImage();
+                }}
+              >
+                <EntypoIcon
+                  style={styles.shareIcon}
+                  name={"share-alternative"}
+                  size={22}
+                  color={Colors.black}
+                />
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
         </SafeAreaView>
       </>
     );

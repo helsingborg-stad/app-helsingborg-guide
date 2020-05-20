@@ -158,27 +158,29 @@ function DialogIcon({ style, icon }: { style: any, icon: QuizDialogIcon }) {
 function Dialog({
   item,
   onHeightChanged,
-  onAlternativeSelected
+  onAlternativeSelected,
+  isPrompt
 }: {
   item: QuizDialog,
   onHeightChanged: (height: number) => void,
   onAlternativeSelected: (
     item: QuizDialog,
     alternative: QuizDialogAlternative
-  ) => void
+  ) => void,
+  isPrompt: boolean
 }) {
   const [selectedAlternative, setSelectedAlternative] = useState(null);
   const { alternatives } = item;
   let buttons;
-  if (alternatives.length === 1) {
-    const alternative = alternatives[0];
-    buttons = (
+  if (isPrompt || alternatives.length === 1) {
+    // const alternative = alternatives[0];
+    buttons = alternatives.map(alternative => (
       <Button
         style={styles.promptButton}
         title={alternative.text}
         onPress={() => onAlternativeSelected(item, alternative)}
       />
-    );
+    ));
   } else {
     buttons = (
       <>
@@ -206,10 +208,14 @@ function Dialog({
       style={styles.dialogContainer}
       onLayout={event => onHeightChanged(event.nativeEvent.layout.height)}
     >
-      <DialogIcon style={styles.dialogIcon} icon={item.icon} />
-      <Text style={styles.dialogTitle}>{item.title}</Text>
-      <Text style={styles.dialogInstructions}>{item.instructions}</Text>
-      <Text style={styles.dialogMessage}>{item.message}</Text>
+      {!isPrompt && (
+        <>
+          <DialogIcon style={styles.dialogIcon} icon={item.icon} />
+          <Text style={styles.dialogTitle}>{item.title}</Text>
+          <Text style={styles.dialogInstructions}>{item.instructions}</Text>
+          <Text style={styles.dialogMessage}>{item.message}</Text>
+        </>
+      )}
       {buttons}
     </SafeAreaView>
   );
@@ -430,13 +436,13 @@ function renderFlatListItem(
       />
     );
   } else if (item.type === "prompt") {
-    return (
-      <Prompt
-        key={item.id}
-        item={item}
-        onAlternativeSelected={onPromptAlternativeSelected}
-      />
-    );
+    // return (
+    //   <Prompt
+    //     key={item.id}
+    //     item={item}
+    //     onAlternativeSelected={onPromptAlternativeSelected}
+    //   />
+    // );
   } else if (item.type === "dialogrecord") {
     return (
       <DialogRecord
@@ -483,7 +489,9 @@ export default function QuizView({
   botIsTyping: boolean
 }) {
   const [dialogHeight, setDialogHeight] = useState();
+  const [promptHeight, setPromptHeight] = useState();
   const dialogItem = items[0]?.type === "dialog" ? items[0] : null;
+  const promptItem = items[0]?.type === "prompt" ? items[0] : null;
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -517,6 +525,16 @@ export default function QuizView({
               );
             }
 
+            if (promptItem) {
+              return (
+                <View
+                  style={{
+                    height: promptHeight
+                  }}
+                />
+              );
+            }
+
             if (botIsTyping) {
               return <TypingIndicator />;
             }
@@ -530,6 +548,14 @@ export default function QuizView({
           item={dialogItem}
           onHeightChanged={setDialogHeight}
           onAlternativeSelected={onDialogAlternativeSelected}
+        />
+      )}
+      {promptItem && (
+        <Dialog
+          item={promptItem}
+          isPrompt
+          onHeightChanged={setPromptHeight}
+          onAlternativeSelected={onPromptAlternativeSelected}
         />
       )}
     </>
