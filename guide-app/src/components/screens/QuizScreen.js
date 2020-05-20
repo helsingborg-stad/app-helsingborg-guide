@@ -113,32 +113,38 @@ class QuizScreen extends Component<Props, State> {
   constructor(props) {
     super(props);
 
-    console.log(props.navigation);
-
     const { quiz } = props.navigation.state.params;
     this.quiz = quiz;
     const quizItems = [...quiz.items];
 
     this.startItem = quizItems.find(item => item.type === "start");
 
-    const latestQuestionIndex = quizItems.findIndex(
+    this.latestQuestionIndex = quizItems.findIndex(
       element => element.id === props.latestQuestionId
     );
 
     this.upcomingItems =
-      latestQuestionIndex > 0
-        ? quizItems.splice(latestQuestionIndex)
+      this.latestQuestionIndex > 0
+        ? quizItems.slice(this.latestQuestionIndex)
         : [...quizItems];
 
     this.state = {
       botIsTyping: false,
       items: [
         ...QuizScreen.buildHistory(
-          quizItems.splice(0, latestQuestionIndex),
+          this.latestQuestionIndex > 0
+            ? quizItems.slice(0, this.latestQuestionIndex)
+            : [],
           props.selectedDialogChoiceIds
         )
       ]
     };
+  }
+
+  componentDidMount() {
+    if (this.latestQuestionIndex >= 0) {
+      this.displayNextItem();
+    }
   }
 
   componentWillUnmount() {
@@ -198,7 +204,6 @@ class QuizScreen extends Component<Props, State> {
           });
           this.timeout = setTimeout(this.displayNextItem, delayToNextItem);
         } else if (item.type === "start") {
-          // console.log(item);
           this.displayNextItem();
         } else if (!nextItem && item.type !== "prompt") {
           this.timeout = setTimeout(this.handleQuizFinished, 500);
@@ -340,6 +345,7 @@ class QuizScreen extends Component<Props, State> {
   startItem: QuizItem;
   flatlistRef = React.createRef<FlatList>();
   quiz: Quiz;
+  latestQuestionIndex: number;
 
   render() {
     return (
