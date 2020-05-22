@@ -50,7 +50,7 @@ class QuizResultScreen extends Component<Props, State> {
     } = this.props.navigation.state.params;
 
     const shareOptions = {
-      title: "Share file",
+      title: finishScreen.shareString,
       url: finishScreen.shareImage,
       failOnCancel: false
     };

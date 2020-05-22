@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import {
   Animated,
   FlatList,
-  Image,
   ImageBackground,
   SafeAreaView,
   StyleSheet,
@@ -14,9 +13,9 @@ import { Colors, TextStyles } from "@assets/styles";
 import LangService from "@services/langService";
 import Button from "@shared-components/Button";
 import SelectableButton from "@shared-components/SelectableButton";
-const dialogLookImage = require("@assets/images/quiz/dialog-look.png");
-const dialogQuestionImage = require("@assets/images/quiz/dialog-question.png");
-const dialogTalkImage = require("@assets/images/quiz/dialog-talk.png");
+
+import Octicons from "react-native-vector-icons/Octicons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 const nonEmojiRegExp = /[a-zA-Z0-9.!?…]/;
 
@@ -116,17 +115,32 @@ function UserMessage({
 }
 
 function DialogIcon({ style, icon }: { style: any, icon: QuizDialogIcon }) {
-  let image;
   if (icon === "look") {
-    image = dialogLookImage;
+    return (
+      <View style={style}>
+        <AntDesign
+          name={"search1"}
+          style={{ transform: [{ rotate: "90deg" }] }}
+          size={28}
+          color={Colors.white}
+        />
+      </View>
+    );
   } else if (icon === "question") {
-    image = dialogQuestionImage;
+    return (
+      <View style={style}>
+        <AntDesign name={"question"} size={28} color={Colors.white} />
+      </View>
+    );
   } else if (icon === "talk") {
-    image = dialogTalkImage;
-  } else {
-    return null;
+    return (
+      <View style={style}>
+        <Octicons name={"comment-discussion"} size={28} color={Colors.white} />
+      </View>
+    );
   }
-  return <Image style={style} resizeMode="center" source={image} />;
+
+  return null;
 }
 
 function Dialog({
@@ -556,7 +570,7 @@ const userMessageShared = {
 };
 
 const dialogIconShared = {
-  borderRadius: 24,
+  borderRadius: 48,
   width: 48,
   height: 48,
   backgroundColor: Colors.black
@@ -688,12 +702,17 @@ const styles = StyleSheet.create({
     ...dialogIconShared,
     alignSelf: "center",
     marginTop: 32,
-    marginBottom: 20
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1
   },
   dialogRecordIcon: {
     ...dialogIconShared,
     alignSelf: "flex-start",
-    marginBottom: 20
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center"
   },
   dialogTitle: StyleSheet.flatten([
     TextStyles.description,

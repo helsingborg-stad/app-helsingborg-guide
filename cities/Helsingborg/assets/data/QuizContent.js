@@ -21,7 +21,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "start-screen",
     type: "start",
-    text: "Make sure that you have picked up a fun kit at the entrance of the exhibition. The kit contrains a paper and a pen that will be very importing for our journey. Tap the button below when you are ready to start a conversation with the robot.",
+    text: "Se till att du har hämtat Kollprotokollet och en penna i början av utställningen. De kommer vara jätteviktiga för vår resa! Tryck på knappen nedan när du är redo att börja prata med roboten.",
     image: {
       source: robotImage,
       aspectRatio: 1
