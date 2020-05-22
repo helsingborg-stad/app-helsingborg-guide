@@ -62,6 +62,17 @@ const styles = StyleSheet.create({
     bottom: 25,
     right: 25,
     zIndex: 50
+  },
+  quizContainer: {
+    flexDirection: "row",
+    flex: 1,
+    marginHorizontal: 8
+  },
+  buttonIcon: {
+    alignSelf: "center"
+  },
+  quizText: {
+    color: Colors.themeSecondary
   }
 });
 

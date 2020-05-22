@@ -357,7 +357,19 @@ declare type RootState = {
 
 declare type Quiz = {
   name: string,
-  items: QuizItem[]
+  openTitle: string,
+  items: QuizItem[],
+  finishScreen: {
+    title: string,
+    firstImage: any,
+    secondImage: any,
+    shareImage: any,
+    shareString: string,
+    body: {
+      title: string,
+      text: string
+    }
+  }
 };
 
 declare type QuizChapter = {

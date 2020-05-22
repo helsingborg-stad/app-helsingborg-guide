@@ -2,7 +2,6 @@
 
 import React, { Component } from "react";
 import {
-  Button,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -17,7 +16,9 @@ import ImageView from "@shared-components/ImageView";
 import DateView from "@shared-components/DateView";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
 import DownloadButtonContainer from "@shared-components/DownloadButton";
+import IconTextTouchable from "@shared-components/IconTextTouchable";
 import SharingService from "@services/SharingService";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 declare type Props = {
   guide: Guide,
@@ -98,7 +99,19 @@ class GuideView extends Component<Props> {
               <DateView startDate={guide.dateStart} endDate={guide.dateEnd} />
             </View>
             {quiz && (
-              <Button onPress={() => onPressQuiz(quiz)} title={quiz.name} />
+              <IconTextTouchable
+                text={quiz.openTitle}
+                onPress={() => {
+                  onPressQuiz(quiz);
+                }}
+                Icon={
+                  <Icon
+                    name={"chat-processing"}
+                    size={24}
+                    color={Colors.themePrimary}
+                  />
+                }
+              />
             )}
             {guide.description ? (
               <ExpandableView maxHeight={textMaxHeight}>

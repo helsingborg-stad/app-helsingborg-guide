@@ -1463,6 +1463,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
 const dunkersSwedishQuiz: Quiz = {
   name: 'Robothjälpen',
   items: dunkersSwedishQuizItems,
+  openTitle: 'Öppna utställningens interaktiva guide',
   finishScreen: {
     title: 'Gråvargar och Älgbrorsor',
     firstImage: finishImage,
