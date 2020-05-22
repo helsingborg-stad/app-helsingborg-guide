@@ -38,7 +38,6 @@ export default function IconTextTouchable({
   iconName,
   text
 }: Props) {
-  console.log(Icon, iconName);
   const directions = (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       {Icon && Icon}
