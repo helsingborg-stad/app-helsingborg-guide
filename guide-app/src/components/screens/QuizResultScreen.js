@@ -116,37 +116,14 @@ class QuizResultScreen extends Component<Props, State> {
               <Text style={styles.bodyTitle}>{finishScreen.body.title}</Text>
               <Text style={styles.bodyText}>{finishScreen.body.text}</Text>
             </View>
-            <View style={styles.shareContainer}>
-              <TouchableOpacity
-                style={styles.shareButton}
-                onPress={() => {
-                  this.downloadImage();
-                }}
-              >
-                <EntypoIcon
-                  style={[
-                    styles.shareIcon,
-                    { transform: [{ rotate: "180deg" }] }
-                  ]}
-                  name={"share-alternative"}
-                  size={22}
-                  color={Colors.black}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.shareButton}
-                onPress={() => {
-                  this.shareImage();
-                }}
-              >
-                <EntypoIcon
-                  style={styles.shareIcon}
-                  name={"share-alternative"}
-                  size={22}
-                  color={Colors.black}
-                />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              style={styles.shareContainer}
+              onPress={() => {
+                this.shareImage();
+              }}
+            >
+              <Text style={styles.shareText}>{finishScreen.shareString}</Text>
+            </TouchableOpacity>
           </ScrollView>
         </SafeAreaView>
       </>
@@ -183,13 +160,23 @@ const styles = StyleSheet.create({
   shareContainer: {
     marginTop: 22,
     flexDirection: "row",
-    justifyContent: "space-evenly"
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    marginHorizontal: 38,
+    backgroundColor: "white",
+    textAlignVertical: "center",
+    borderRadius: 54,
+    height: 54
   },
   shareButton: {
     backgroundColor: "white",
     width: 54,
     height: 54,
     borderRadius: 54
+  },
+  shareText: {
+    textAlignVertical: "center"
   },
   shareIcon: {
     alignSelf: "center",
@@ -219,16 +206,17 @@ const styles = StyleSheet.create({
     ...TextStyles.title,
     color: "white",
     textAlign: "center",
-    width: 220,
-    fontSize: 26
+    fontSize: 26,
+    marginHorizontal: 42
   },
   bodyText: {
     marginTop: 8,
     color: "white",
     textAlign: "center",
-    width: 220,
+    flex: 1,
     fontSize: 16,
-    lineHeight: 22
+    lineHeight: 22,
+    marginHorizontal: 42
   }
 });
 

@@ -1468,9 +1468,10 @@ const dunkersSwedishQuiz: Quiz = {
     firstImage: finishImage,
     secondImage: robotImage,
     shareImage: shareImage.default,
+    shareString: 'Dela resultat',
     body: {
       title: 'Grattis!',
-      text: "You completed all the tasks! If you liked it, be sure to share it with your friends!"
+      text: "Bra jobbat! Du hjälpte verkligen roboten jättebra, tack! Om du gillade Robothjälpen så dela med dina kompisar!"
     }
   }
 };
