@@ -2970,14 +2970,14 @@ const dunkersEnglishQuiz: Quiz = {
   items: dunkersEnglishQuizItems,
   openTitle: 'Open exhibition’s interactive guide',
   finishScreen: {
-    title: 'Gråvargar och Älgbrorsor',
+    title: 'Grey Wolves and Moose Brothers',
     firstImage: finishImage,
     secondImage: robotImage,
     shareImage: shareImage.default,
     shareString: 'Share',
     body: {
-      title: 'Grattis!',
-      text: "Bra jobbat! Du hjälpte verkligen roboten jättebra, tack! Om du gillade Robothjälpen så dela med dina kompisar!"
+      title: 'Congratulations!',
+      text: "You completed all the tasks! If you liked it, be sure to share it with your friends!"
     }
   }
 };
