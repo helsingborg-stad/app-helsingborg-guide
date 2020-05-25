@@ -8,10 +8,10 @@ const finishImage = require("@assets/images/quiz/dunkers/finish.png");
 const shareImage = require("@assets/images/quiz/dunkers/shareimage.js");
 
 export function getQuizForGuideId(langCode: string, guideId: number): ?Quiz {
-  if (langCode === 'sv' && guideId === 1764975) { //TODO replace guideId with proper, this is using UNG SVENSK FORM
+  if (langCode === 'sv' && guideId === 1829815) {
     return dunkersSwedishQuiz;
   }
-  if (langCode === 'en' && guideId === 1765917) {  //TODO replace guideId with proper, this is using UNG SVENSK FORM
+  if (langCode === 'en' && guideId === 1831943) {
     return dunkersEnglishQuiz;
   }
   return null;
