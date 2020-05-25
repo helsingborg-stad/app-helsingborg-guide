@@ -23,6 +23,7 @@ const LocationGuidesView = (props: Props) => {
           return null;
         }
         const forKids = guide.childFriendly;
+        const hasQuiz = !!guide.quiz;
 
         return (
           <TouchableOpacity
@@ -37,7 +38,8 @@ const LocationGuidesView = (props: Props) => {
               startDate={guide.dateStart}
               endDate={guide.dateEnd}
               forKids={forKids}
-              // id={guide.id}
+              hasQuiz={hasQuiz}
+            // id={guide.id}
             />
           </TouchableOpacity>
         );
