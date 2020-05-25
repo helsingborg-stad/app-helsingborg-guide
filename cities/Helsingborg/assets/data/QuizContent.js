@@ -2913,7 +2913,7 @@ const dunkersEnglishQuizItems: QuizItem[] = [
     type: "prompt",
     alternatives: [
       {
-        id: "avslutning-12-alt1",
+        id: "avslutning-16-alt1",
         text: "I have put the paper in the box!"
       }
     ]
@@ -2966,7 +2966,7 @@ const dunkersEnglishQuizItems: QuizItem[] = [
 ];
 
 const dunkersEnglishQuiz: Quiz = {
-  name: 'Robothjälpen',
+  name: 'Robot Aid',
   items: dunkersEnglishQuizItems,
   openTitle: 'Open exhibition’s interactive guide',
   finishScreen: {

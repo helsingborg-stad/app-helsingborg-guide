@@ -182,7 +182,10 @@ function Dialog({
           />
         ))}
         <Button
-          style={styles.dialogSendButton}
+          style={[
+            styles.dialogSendButton,
+            { opacity: selectedAlternative ? 1 : 0.75 }
+          ]}
           title={LangService.strings.SEND}
           onPress={() => onAlternativeSelected(item, selectedAlternative)}
           enabled={!!selectedAlternative}
@@ -749,7 +752,8 @@ const styles = StyleSheet.create({
   dialogSendButton: {
     marginHorizontal: 12,
     marginTop: 11,
-    marginBottom: 5
+    marginBottom: 5,
+    opacity: 0.75
   },
   dialogRecordMessage: StyleSheet.flatten([
     TextStyles.body,
