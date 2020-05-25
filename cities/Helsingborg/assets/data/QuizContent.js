@@ -1492,7 +1492,7 @@ const dunkersSwedishQuiz: Quiz = {
     title: 'Gråvargar och Älgbrorsor',
     firstImage: finishImage,
     secondImage: robotImage,
-    shareImage: shareImage.default,
+    shareImage: shareImage.swedish,
     shareString: 'Dela resultat',
     body: {
       title: 'Grattis!',
@@ -2973,7 +2973,7 @@ const dunkersEnglishQuiz: Quiz = {
     title: 'Grey Wolves and Moose Brothers',
     firstImage: finishImage,
     secondImage: robotImage,
-    shareImage: shareImage.default,
+    shareImage: shareImage.english,
     shareString: 'Share',
     body: {
       title: 'Congratulations!',
