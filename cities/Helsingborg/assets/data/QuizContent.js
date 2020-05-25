@@ -1737,7 +1737,7 @@ const dunkersEnglishQuizItems: QuizItem[] = [
   {
     id: "elsemarie-chapter",
     type: "chapter",
-    text: "Else- Marie and her seven little daddies"
+    text: "Else-Marie and her seven little daddies"
   },
   {
     id: "elsemarie-0",

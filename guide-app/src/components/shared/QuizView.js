@@ -166,6 +166,7 @@ function Dialog({
         style={styles.promptButton}
         title={alternative.text}
         onPress={() => onAlternativeSelected(item, alternative)}
+        key={alternative.id}
       />
     ));
   } else {
@@ -192,7 +193,7 @@ function Dialog({
 
   return (
     <SafeAreaView
-      style={styles.dialogContainer}
+      style={[styles.dialogContainer, isPrompt ? styles.promptContainer : {}]}
       onLayout={event => onHeightChanged(event.nativeEvent.layout.height)}
     >
       {!isPrompt && (
@@ -683,7 +684,8 @@ const styles = StyleSheet.create({
     { color: Colors.white }
   ]),
   promptContainer: {
-    marginTop: 15
+    marginTop: 15,
+    backgroundColor: Colors.gray12
   },
   promptButton: {
     marginHorizontal: 11,
