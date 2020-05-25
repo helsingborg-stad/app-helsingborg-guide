@@ -1296,7 +1296,7 @@ const dunkersSwedishQuizItems: QuizItem[] = [
   {
     id: "avslutning-chapter",
     type: "chapter",
-    text: "Avslutning"
+    text: "Sista uppdraget"
   },
   {
     id: "avslutning-0",
@@ -2781,7 +2781,7 @@ const dunkersEnglishQuizItems: QuizItem[] = [
   {
     id: "avslutning-chapter",
     type: "chapter",
-    text: "Avslutning"
+    text: "Last task"
   },
   {
     id: "avslutning-0",
