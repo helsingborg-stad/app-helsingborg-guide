@@ -135,8 +135,8 @@ android {
         applicationId "com.guidehbg"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 15000176
-        versionName "1.7"
+        versionCode 15000177
+        versionName "1.8"
     }
     splits {
         abi {
