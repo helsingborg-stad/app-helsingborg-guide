@@ -3,6 +3,8 @@
 import React from "react";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
+
 import LangService from "@services/langService";
 import ImageView from "@shared-components/ImageView";
 import DateView from "@shared-components/DateView";
@@ -18,19 +20,29 @@ function forKidsView() {
   );
 }
 
+function hasQuizView() {
+  return (
+    <View style={styles.checkedContainer}>
+      <CommunityIcon name={"chat-processing"} size={20} color={Colors.gray2} />
+      <Text style={styles.forKidsText}>{LangService.strings.HAS_QUIZ}</Text>
+    </View>
+  );
+}
+
 function displayImage(imageSource: Object) {
   return (
     <ImageView
       style={styles.imageContainer}
       source={imageSource}
       resizeMode="cover"
-      /* guideID={id} */ // TODO: offline support
+    /* guideID={id} */ // TODO: offline support
     />
   );
 }
 
 type Props = {
   forKids: boolean,
+  hasQuiz: boolean,
   title: string,
   description?: ?string,
   startDate?: string,
@@ -52,6 +64,7 @@ const ListItem = (props: Props) => (
         </Text>
         <DateView startDate={props.startDate} endDate={props.endDate} />
         {props.forKids ? forKidsView() : null}
+        {props.hasQuiz ? hasQuizView() : null}
       </View>
     </View>
   </View>

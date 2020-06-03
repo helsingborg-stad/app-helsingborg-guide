@@ -44,7 +44,7 @@ const printHeader = () => [
   ' * Created at ', new Date().toString(), '\n',
   ' */\n',
   '\n',
-  '/* eslint-disable max-len */ \n'
+  '/* eslint-disable max-len */\n'
 ].join('');
 
 const printContent = output => {

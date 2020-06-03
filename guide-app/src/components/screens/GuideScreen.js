@@ -61,16 +61,23 @@ class GuideScreen extends Component<Props> {
     });
   };
 
+  onPressQuiz = (quiz: Quiz) => {
+    this.props.navigation.navigate("QuizScreen", {
+      quiz
+    });
+  };
+
   render() {
     const { currentGuide } = this.props;
     return currentGuide ? (
       <GuideView
         guide={currentGuide}
         onPressContentObject={this.onPressContentObject}
+        onPressQuiz={this.onPressQuiz}
       />
     ) : (
-      <View />
-    );
+        <View />
+      );
   }
 }
 

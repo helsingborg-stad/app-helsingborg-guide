@@ -11,6 +11,7 @@ import downloadDataVersion from "./downloadDataVersionReducer";
 import uiState from "./uiStateReducer";
 import downloadedGuides from "./downloadedGuides";
 import arState from "./arReducer";
+import quiz from "./quizReducer";
 
 const rootReducer = {
   events,
@@ -25,7 +26,8 @@ const rootReducer = {
   downloadDataVersion,
   downloadedGuides,
   uiState,
-  arState
+  arState,
+  quiz
 };
 
 export default rootReducer;

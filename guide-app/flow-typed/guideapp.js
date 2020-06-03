@@ -1,4 +1,5 @@
 // @flow
+import { ImageSourcePropType } from "react-native";
 
 declare type Action =
   | { type: "APP_STARTED" }
@@ -6,10 +7,10 @@ declare type Action =
   | { type: "APP_BECAME_ACTIVE" }
   | { type: "SHOW_BOTTOM_BAR", visible: boolean }
   | {
-      type: "SELECT_CURRENT_GUIDEGROUP",
-      guideGroup: GuideGroup,
-      guides: Guide[]
-    }
+    type: "SELECT_CURRENT_GUIDEGROUP",
+    guideGroup: GuideGroup,
+    guides: Guide[]
+  }
   | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
@@ -20,10 +21,10 @@ declare type Action =
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
   | { type: "SET_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
   | {
-      type: "SET_GUIDES_AND_GUIDEGROUPS",
-      guideGroups: GuideGroup[],
-      guides: Guide[]
-    }
+    type: "SET_GUIDES_AND_GUIDEGROUPS",
+    guideGroups: GuideGroup[],
+    guides: Guide[]
+  }
   | { type: "FETCH_NAVIGATION_REQUEST" }
   | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
   | { type: "FETCH_NAVIGATION_FAILURE", error: Error }
@@ -54,7 +55,10 @@ declare type Action =
   | { type: "AUDIO_MOVE_SLIDER_COMPLETE", position: number }
   | { type: "GEOLOCATION_UPDATE_SUCCESS", position: GeolocationType }
   | { type: "SET_LANGUAGE", langCode: string }
-  | { type: "UPDATE_CAMERA_ANGLES", cameraAngles: ARState };
+  | { type: "UPDATE_CAMERA_ANGLES", cameraAngles: ARState }
+  | { type: "SET_LATEST_QUESTION_ID", latestQuestionId: string }
+  | { type: "RESET_DIALOG_CHOICES" }
+  | { type: "SELECT_DIALOG_CHOICE", dialogChoice: DialogChoice };
 
 declare type NavigationItemType = "guide" | "guidegroup";
 
@@ -184,7 +188,8 @@ declare type Guide = {
   images: Images,
   contentObjects: ContentObject[],
   distance?: number,
-  location?: Location
+  location?: Location,
+  quiz?: Quiz
 };
 
 declare type GuideType = "guide" | "trail";
@@ -324,6 +329,16 @@ declare type ARState = {
   verticalAngle: number
 };
 
+declare type DialogChoice = {
+  questionId: string,
+  alternativeId: string
+};
+
+declare type QuizState = {
+  latestQuestionId: string,
+  selectedDialogChoiceIds: DialogChoice[]
+};
+
 declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
@@ -336,5 +351,98 @@ declare type RootState = {
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
-  arState: ARState
+  arState: ARState,
+  quiz: QuizState
 };
+
+declare type Quiz = {
+  name: string,
+  openTitle: string,
+  items: QuizItem[],
+  finishScreen: {
+    title: string,
+    firstImage: any,
+    secondImage: any,
+    shareImage: any,
+    shareString: string,
+    body: {
+      title: string,
+      text: string
+    }
+  }
+};
+
+declare type QuizChapter = {
+  type: "chapter",
+  id: string,
+  text: string
+};
+
+declare type QuizBotMessage = {
+  type: "bot",
+  id: string,
+  text: string
+};
+
+declare type QuizBotImageMessage = {
+  type: "botimage",
+  id: string,
+  source: ImageSourcePropType,
+  aspectRatio: number
+};
+
+declare type QuizUserMessage = {
+  type: "user",
+  id: string,
+  text: string
+};
+
+declare type QuizPrompt = {
+  type: "prompt",
+  id: string,
+  alternatives: QuizPromptAlternative[]
+};
+
+declare type QuizPromptAlternative = {
+  text: string,
+  id: string,
+  correct?: Boolean,
+  followups?: { text: string, id: string }[]
+};
+
+declare type QuizDialogIcon = "question" | "talk" | "look";
+
+declare type QuizDialog = {
+  type: "dialog",
+  id: string,
+  icon: QuizDialogIcon,
+  title: string,
+  instructions: string,
+  message: string,
+  alternatives: QuizDialogAlternative[],
+  skipRecord?: Boolean
+};
+
+declare type QuizDialogAlternative = {
+  text: string,
+  correct?: Boolean,
+  id: string,
+  followups?: { text: string, id: string }[]
+};
+
+declare type QuizDialogRecord = {
+  type: "dialogrecord",
+  id: string,
+  icon: QuizDialogIcon,
+  title: string,
+  message: string
+};
+
+declare type QuizItem =
+  | QuizChapter
+  | QuizBotMessage
+  | QuizBotImageMessage
+  | QuizUserMessage
+  | QuizPrompt
+  | QuizDialog
+  | QuizDialogRecord;

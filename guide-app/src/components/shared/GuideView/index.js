@@ -16,11 +16,14 @@ import ImageView from "@shared-components/ImageView";
 import DateView from "@shared-components/DateView";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
 import DownloadButtonContainer from "@shared-components/DownloadButton";
+import IconTextTouchable from "@shared-components/IconTextTouchable";
 import SharingService from "@services/SharingService";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 declare type Props = {
   guide: Guide,
-  onPressContentObject(obj: ContentObject): void
+  onPressContentObject(obj: ContentObject): void,
+  onPressQuiz: (quiz: Quiz) => void
 };
 
 const textMaxHeight = Dimensions.get("window").height * 0.2;
@@ -55,14 +58,14 @@ class GuideView extends Component<Props> {
     sessionId: number,
     contentObjects: ContentObject[]
   ) => (
-    <View style={styles.objectsContainer}>
-      {contentObjects.map(item => this.renderContentObject(sessionId, item))}
-    </View>
-  );
+      <View style={styles.objectsContainer}>
+        {contentObjects.map(item => this.renderContentObject(sessionId, item))}
+      </View>
+    );
 
   render() {
-    const { guide } = this.props;
-    const { id } = guide;
+    const { guide, onPressQuiz } = this.props;
+    const { id, quiz } = guide;
     return (
       <View style={styles.viewContainer}>
         <StatusBar
@@ -95,6 +98,21 @@ class GuideView extends Component<Props> {
               ) : null}
               <DateView startDate={guide.dateStart} endDate={guide.dateEnd} />
             </View>
+            {quiz && (
+              <IconTextTouchable
+                text={quiz.openTitle}
+                onPress={() => {
+                  onPressQuiz(quiz);
+                }}
+                Icon={
+                  <Icon
+                    name={"chat-processing"}
+                    size={24}
+                    color={Colors.themePrimary}
+                  />
+                }
+              />
+            )}
             {guide.description ? (
               <ExpandableView maxHeight={textMaxHeight}>
                 <Text style={TextStyles.body}>{guide.description}</Text>

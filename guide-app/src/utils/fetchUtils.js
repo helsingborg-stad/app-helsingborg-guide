@@ -3,6 +3,7 @@
 import { API_BASE_URL, GROUP_ID } from "@data/endpoints";
 import { validate } from "./JSONValidator";
 import { DateUtils } from "@utils";
+import { getQuizForGuideId } from "@assets/data/QuizContent";
 
 async function fetchJSON(
   relativeUrl: string,
@@ -89,7 +90,19 @@ async function getGuidesForGuideGroup(
   const json = await fetchJSON("guide", langCode, params);
   const fetchedGuides: Guide[] = validateData(json, "guide");
 
+  amendGuidesWithQuiz(langCode, fetchedGuides);
+
   return fetchedGuides;
+}
+
+// TODO this is a temporary solution until quiz support is added to the CMS
+function amendGuidesWithQuiz(langCode: string, guides: Guide[]) {
+  for (const guide of guides) {
+    const quiz = getQuizForGuideId(langCode, guide.id);
+    if (quiz) {
+      guide.quiz = quiz;
+    }
+  }
 }
 
 export async function getNavigation(
