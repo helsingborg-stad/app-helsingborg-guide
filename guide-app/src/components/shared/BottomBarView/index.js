@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Animated, View, Image, Dimensions, Platform } from "react-native";
 import styles from "./style";
 import { selectCurrentBottomBarTab } from "@actions/uiStateActions";
-import BottomBarIcon from "@shared-components/BottomBarIcon";
+import { Navigation } from "@config/ui";
 
 const barBackground = require("@assets/images/background-navigation.png");
 // TODO: remove image files?
@@ -33,13 +33,13 @@ const transitionDuration: number = 300;
 type Props = {
   currentBottomBarTab: number,
   showBottomBar: boolean,
-  selectBottomBarTab(id: number): void
+  selectBottomBarTab(id: number): void,
 };
 
 type State = {
   animViewContainer: Animated.Value,
   animTabBottom: Animated.Value,
-  showBottomBar: boolean
+  showBottomBar: boolean,
 };
 
 class BottomBarView extends Component<Props, State> {
@@ -48,25 +48,25 @@ class BottomBarView extends Component<Props, State> {
     const {
       animViewContainer,
       animTabBottom,
-      showBottomBar: previouslyShowingBottomBar
+      showBottomBar: previouslyShowingBottomBar,
     } = prevState;
 
     if (showBottomBar !== previouslyShowingBottomBar) {
       if (showBottomBar) {
         Animated.timing(animViewContainer, {
           toValue: viewContainerHeight,
-          duration: transitionDuration
+          duration: transitionDuration,
         }).start();
         Animated.timing(animTabBottom, {
           toValue: buttonTabBottom,
-          duration: transitionDuration
+          duration: transitionDuration,
         }).start();
         return { showBottomBar };
       } else {
         return {
           showBottomBar,
           animViewContainer: new Animated.Value(0),
-          animTabBottom: new Animated.Value(0)
+          animTabBottom: new Animated.Value(0),
         };
       }
     }
@@ -79,28 +79,20 @@ class BottomBarView extends Component<Props, State> {
     this.state = {
       animViewContainer: new Animated.Value(0),
       animTabBottom: new Animated.Value(0),
-      showBottomBar: props.showBottomBar
+      showBottomBar: props.showBottomBar,
     };
   }
 
   displayIcons() {
     return (
       <View style={styles.iconContainer}>
-        <BottomBarIcon
-          index={0}
-          selected={this.props.currentBottomBarTab === 0}
-          selectBottomBarTab={this.props.selectBottomBarTab}
-        />
-        <BottomBarIcon
-          index={1}
-          selected={this.props.currentBottomBarTab === 1}
-          selectBottomBarTab={this.props.selectBottomBarTab}
-        />
-        <BottomBarIcon
-          index={2}
-          selected={this.props.currentBottomBarTab === 2}
-          selectBottomBarTab={this.props.selectBottomBarTab}
-        />
+        {Navigation.bottomBarButtons.map(({ id, ButtonComponent }, index) => (
+          <ButtonComponent
+            key={id}
+            selected={this.props.currentBottomBarTab === index}
+            onPress={() => this.props.selectBottomBarTab(index)}
+          />
+        ))}
       </View>
     );
   }
@@ -111,7 +103,7 @@ class BottomBarView extends Component<Props, State> {
       <Animated.View
         style={[
           styles.buttonTabContainer,
-          { bottom: this.state.animTabBottom }
+          { bottom: this.state.animTabBottom },
         ]}
       >
         <Image
@@ -154,15 +146,18 @@ function mapStateToProps(state: RootState) {
   const { currentBottomBarTab, showBottomBar } = state.uiState;
   return {
     currentBottomBarTab,
-    showBottomBar
+    showBottomBar,
   };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectBottomBarTab: (index: number) =>
-      dispatch(selectCurrentBottomBarTab(index))
+      dispatch(selectCurrentBottomBarTab(index)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BottomBarView);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BottomBarView);
