@@ -4,11 +4,11 @@ import { StyleSheetUtils } from "@utils";
 
 export default StyleSheet.create({
   touchableIcon: {
-    flex: 1
+    flex: 1,
   },
   iconView: {
     alignSelf: "center",
-    flex: 1
+    flex: 1,
   },
   text: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -18,7 +18,7 @@ export default StyleSheet.create({
       color: Colors.white,
       alignSelf: "center",
       backgroundColor: Colors.transparent,
-      paddingTop: 4
-    }
-  ])
+      paddingTop: 4,
+    },
+  ]),
 });
