@@ -132,7 +132,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.ustwo.lund"
+        applicationId "com.lund"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
