@@ -89,9 +89,9 @@ find $APP_DIRECTORY -depth -type f -exec sed -i "" -e "s/$PLACEHOLDER_NAME/$APP_
 # Do it twice for similar reasons to above
 find $APP_DIRECTORY -depth -type f -exec sed -i "" -e "s/$PLACEHOLDER_NAME/$APP_NAME/" {} +
 
-# Install all of our npm modules
+# Install all of our node modules
 cd $APP_DIRECTORY
-npm install
+yarn
 
 # Install Pods and update the workspace
 cd $APP_DIRECTORY/ios
