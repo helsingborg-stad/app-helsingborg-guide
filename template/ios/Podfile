@@ -31,6 +31,9 @@ target 'GuideApp' do
   pod 'ReactCommon/turbomodule/core', :path => "#{rn_path}/ReactCommon"
   pod 'Yoga', :path => "#{rn_path}/ReactCommon/yoga"
 
+  # Manual linking should not be required, but can't get it to work without it.
+  # https://github.com/react-native-community/react-native-linear-gradient#linking-for-react-native--059-only
+  # https://github.com/react-native-community/react-native-linear-gradient/issues/434
   pod 'BVLinearGradient', :path => '../../../node_modules/react-native-linear-gradient'
 
   pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"

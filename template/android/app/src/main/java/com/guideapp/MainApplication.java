@@ -14,6 +14,12 @@ import com.guidehbg.AppPackages;
 import com.mediamodule.MediaControlPackage;
 import com.mediamodule.MediaPackage;
 import com.notificationmodule.NotificationPackage;
+/*
+  Manual linking should not be required, but can't get it to work without it.
+  https://github.com/react-native-community/react-native-linear-gradient#linking-for-react-native--059-only
+  https://github.com/react-native-community/react-native-linear-gradient/issues/434
+*/
+import com.BV.LinearGradient.LinearGradientPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -35,6 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
           packages.add(new MediaControlPackage());
           packages.add(new NotificationPackage());
           packages.add(new AppPackages());
+          packages.add(new LinearGradientPackage());
 
           return packages;
         }
