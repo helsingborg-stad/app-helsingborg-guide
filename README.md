@@ -48,28 +48,10 @@ There is also a `metro.config.js` in each city folder that makes sure Metro look
 
 ## Adding a new city
 
-**NOTE** This hasn't been tested after moving to monorepo structure to use with care.
-
-1. In the top level of this repository run the add_city shell script with the name of the city and the ios and android bundle ids
-   e.g. `sh add_city.sh Helsingborg org.hbg.GuideHbg com.guidehbg`
-2. Also in the top level run the add_city_assets shell script to create new override asset directories under assets
-   e.g. `sh add_city_assets.sh Helsingborg`
-3. Replace the templated assets in the assets/city_name folder with city-specific ones
-4. Run the update_city shell script in the top level of this repository to copy the assets from this override directory into the actual city project
-   e.g. `sh update_city.sh Helsingborg`
-5. The metro bundler and any watchman watches should be killed as they get into a confused state
+In the top level of this repository run the add_city shell script with the name of the city and the ios and android bundle ids, e.g. `sh add_city.sh Eskilstuna org.etuna.GuideEtuna com.guideEtuna`.
+Add/update any city specific assets and configuration in the `cities/Eskilstuna` folder.
 
 > To debug the Javascript packager will have to run in background. This will give the option for hotreloding and remote debugging Javascript from Chrome. When building for release this features is disabled.
-
-### Updating a city (Might be obsolete)
-
-**NOTE** This hasn't been tested after moving to monorepo structure to use with care.
-
-Once you have a city-specific assets directory (see below) make any asset changes in the `./assets/city_name` directory.
-
-Once the changes are ready, run the update_city shell script to copy all of the changed files into the city project (in ./cities/city_name)
-
-Each of these are separate ReactNative projects with the aim of building completely separate guide apps.
 
 ## API integration
 
