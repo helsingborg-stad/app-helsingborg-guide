@@ -794,7 +794,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lund.Lund;
+				PRODUCT_BUNDLE_IDENTIFIER = se.lund.guideLund;
 				PRODUCT_NAME = Lund;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -818,7 +818,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lund.Lund;
+				PRODUCT_BUNDLE_IDENTIFIER = se.lund.guideLund;
 				PRODUCT_NAME = Lund;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
