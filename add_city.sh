@@ -91,6 +91,9 @@ find $APP_DIRECTORY -depth -type f -exec sed -i "" -e "s/$PLACEHOLDER_NAME/$APP_
 cd $APP_DIRECTORY
 yarn
 
+# Add assets to the build (e.g. react-native-vector-icons)
+npx react-native link
+
 # Install Pods and update the workspace
 cd $APP_DIRECTORY/ios
 # Set the encoding to UTF-8 for cocoapods
