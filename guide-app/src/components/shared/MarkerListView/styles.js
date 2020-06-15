@@ -148,7 +148,6 @@ export default StyleSheet.create({
     },
   ]),
   listItemTitleContainer: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 15,
