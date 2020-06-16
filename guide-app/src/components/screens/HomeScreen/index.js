@@ -8,7 +8,7 @@ import {
   Image,
   FlatList,
   StatusBar,
-  Text
+  Text,
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
@@ -19,7 +19,7 @@ import {
   selectCurrentGuideGroup,
   selectCurrentCategory,
   selectCurrentHomeTab,
-  showBottomBar
+  showBottomBar,
 } from "@actions/uiStateActions";
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
@@ -31,7 +31,7 @@ type Section = {
   title: string,
   data: NavigationItem[],
   category: NavigationCategory,
-  hideFooter?: boolean
+  hideFooter?: boolean,
 };
 
 type Props = {
@@ -45,7 +45,7 @@ type Props = {
   selectGuideGroup(id: number): void,
   selectCurrentCategory(section: NavigationCategory): void,
   selectCurrentTab(tabIndex: number): void,
-  dispatchShowBottomBar(visible: boolean): void
+  dispatchShowBottomBar(visible: boolean): void,
 };
 
 class HomeScreen extends Component<Props> {
@@ -53,7 +53,7 @@ class HomeScreen extends Component<Props> {
     const title = LangService.strings.APP_NAME;
     return {
       ...HeaderStyles.noElevation,
-      title
+      title,
     };
   };
 
@@ -72,14 +72,14 @@ class HomeScreen extends Component<Props> {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
             this.props.navigation.navigate("GuideDetailsScreen", {
               title: guide.name,
-              bottomBarOnUnmount: true
+              bottomBarOnUnmount: true,
             });
             this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
             this.props.navigation.navigate("TrailScreen", {
               title: guide.name,
-              bottomBarOnUnmount: true
+              bottomBarOnUnmount: true,
             });
             this.props.dispatchShowBottomBar(false);
           }
@@ -91,11 +91,11 @@ class HomeScreen extends Component<Props> {
         if (item.guideGroup) {
           const title = item.guideGroup.name;
           AnalyticsUtils.logEvent("view_location", {
-            name: item.guideGroup.slug
+            name: item.guideGroup.slug,
           });
           this.props.navigation.navigate("LocationScreen", {
             title,
-            bottomBarOnUnmount: true
+            bottomBarOnUnmount: true,
           });
           this.props.dispatchShowBottomBar(false);
         }
@@ -112,7 +112,7 @@ class HomeScreen extends Component<Props> {
       navigation,
       navigationCategoryLabels,
       selectCurrentTab,
-      showLoadingSpinner
+      showLoadingSpinner,
     } = this.props;
 
     if (showLoadingSpinner) {
@@ -172,7 +172,7 @@ class HomeScreen extends Component<Props> {
 function mapStateToProps(state: RootState) {
   const {
     navigation,
-    uiState: { currentHomeTab }
+    uiState: { currentHomeTab },
   } = state;
   const { isFetching, navigationCategories } = navigation;
 
@@ -184,7 +184,7 @@ function mapStateToProps(state: RootState) {
       return {
         title: cat.name,
         data,
-        category: cat
+        category: cat,
       };
     }
   });
@@ -202,7 +202,7 @@ function mapStateToProps(state: RootState) {
     items,
     showLoadingSpinner: isFetching,
     navigationSections: navigationCategories,
-    navigationCategoryLabels
+    navigationCategoryLabels,
   };
 }
 
@@ -215,7 +215,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectCurrentTab: (tabIndex: number) =>
       dispatch(selectCurrentHomeTab(tabIndex)),
     dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible))
+      dispatch(showBottomBar(visible)),
   };
 }
 

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { MapItemUtils } from "@utils";
 import styles from "./styles";
@@ -19,23 +19,23 @@ type Props = {
   showNumberedMapMarkers?: boolean,
   onMapMarkerPressed?: ?(index: number) => void,
   activeMarker: MapItem,
-  initialLocation?: Location
+  initialLocation?: Location,
 };
 type State = {
-  markersFocused: boolean
+  markersFocused: boolean,
 };
 
 class MapMarkerView extends Component<Props, State> {
   static defaultProps = {
     showNumberedMapMarkers: true,
-    onMapMarkerPressed: null
+    onMapMarkerPressed: null,
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      markersFocused: false
+      markersFocused: false,
     };
   }
 
@@ -55,11 +55,11 @@ class MapMarkerView extends Component<Props, State> {
       top: padding,
       right: padding,
       bottom: padding,
-      left: padding
+      left: padding,
     };
     const options = {
       edgePadding,
-      animated: false
+      animated: false,
     };
     const locations: Location[] = MapItemUtils.getLocations(markers);
     if (this.map) {
@@ -109,20 +109,40 @@ class MapMarkerView extends Component<Props, State> {
         key={id}
         coordinate={location}
         identifier={id}
-        image={markerImage}
         onPress={!active ? () => this.onMarkerPressed(mapItem) : null}
         anchor={{ x: 0.5, y: 1 }}
         centerOffset={{ x: 0.5, y: 1 }}
         zIndex={zIndex}
       >
-        <Text
-          allowFontScaling={false}
-          style={
-            active ? styles.numberedMarkerTextActive : styles.numberedMarkerText
-          }
-        >
-          {numberString}
-        </Text>
+        <View style={styles.numberedMarkerOuterContainer}>
+          <View
+            style={
+              active
+                ? styles.numberedMarkerContainerActive
+                : styles.numberedMarkerContainer
+            }
+          >
+            <Image style={styles.numberedMarkerImage} source={markerImage} />
+            <View
+              style={
+                active
+                  ? styles.numberedMarkerTextContainerActive
+                  : styles.numberedMarkerTextContainer
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  active
+                    ? styles.numberedMarkerTextActive
+                    : styles.numberedMarkerText
+                }
+              >
+                {numberString}
+              </Text>
+            </View>
+          </View>
+        </View>
       </Marker>
     );
   };
@@ -198,7 +218,7 @@ class MapMarkerView extends Component<Props, State> {
           latitude: location.latitude,
           longitude: location.longitude,
           latitudeDelta: this.latitudeDelta,
-          longitudeDelta: this.longitudeDelta
+          longitudeDelta: this.longitudeDelta,
         });
       }
     }
@@ -224,7 +244,7 @@ class MapMarkerView extends Component<Props, State> {
             latitude: initialLocation && initialLocation.latitude,
             longitude: initialLocation && initialLocation.longitude,
             latitudeDelta: this.latitudeDelta,
-            longitudeDelta: this.longitudeDelta
+            longitudeDelta: this.longitudeDelta,
           }}
         >
           {this.renderMapMarkers(items)}

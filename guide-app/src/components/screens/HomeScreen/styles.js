@@ -7,51 +7,51 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "stretch",
-    backgroundColor: Colors.white
+    backgroundColor: Colors.white,
   },
   container: {
     backgroundColor: Colors.white,
-    flex: 1
+    flex: 1,
   },
   contentContainer: {
     paddingHorizontal: 16,
-    paddingBottom: 100
+    paddingBottom: 100,
   },
   barButtonItem: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     opacity: 0.75,
-    paddingHorizontal: 14
+    paddingHorizontal: 14,
   },
   barButtonImage: {
     maxHeight: 44,
-    maxWidth: 44
+    maxWidth: 44,
   },
   loadingSpinner: {
     height: "100%",
-    width: "100%"
+    width: "100%",
   },
   sectionContainer: {
-    paddingVertical: 20
+    paddingVertical: 20,
   },
   sectionFooterContainer: {
     width: "100%",
-    paddingBottom: "6%"
+    paddingBottom: "6%",
   },
   sectionFooterButton: {
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
     height: 45,
-    backgroundColor: Colors.themeControl
+    backgroundColor: Colors.themeControl,
   },
   sectionNoContent: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    opacity: 0.6
+    opacity: 0.6,
   },
   sectionNoContentText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -61,8 +61,8 @@ export default StyleSheet.create({
       fontSize: 19,
       lineHeight: 22,
       textAlign: "center",
-      width: "50%"
-    }
+      width: "50%",
+    },
   ]),
   sectionFooterText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -71,8 +71,8 @@ export default StyleSheet.create({
       fontWeight: "bold",
       fontStyle: "normal",
       letterSpacing: 1,
-      color: Colors.white
-    }
+      color: Colors.white,
+    },
   ]),
   sectionTitle: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -80,8 +80,8 @@ export default StyleSheet.create({
       fontSize: 32,
       fontWeight: "bold",
       fontStyle: "normal",
-      color: Colors.black
-    }
+      color: Colors.black,
+    },
   ]),
   sectionDescription: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -89,27 +89,46 @@ export default StyleSheet.create({
       fontSize: 16,
       fontWeight: "normal",
       fontStyle: "normal",
-      color: Colors.gray1
-    }
+      color: Colors.gray1,
+    },
   ]),
   sectionLoadingSpinner: {
-    padding: 20
+    padding: 20,
   },
   topBarNavigation: {
     ...Platform.select({
       android: {
-        paddingTop: 16
-      }
+        paddingTop: 16,
+      },
     }),
-    paddingBottom: 16
+    paddingBottom: 16,
   },
   mapButton: {
     position: "absolute",
-    right: -5,
-    bottom: "2%"
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    right: 0,
+    bottom: 0,
+    marginRight: 15,
+    marginBottom: 18,
+    width: 58,
+    height: 58,
+    borderRadius: 58,
+    backgroundColor: Colors.themeSecondary,
+    shadowColor: Colors.shadowColor,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 7,
+    elevation: 7,
   },
+  circle: {},
   mapIcon: {
-    width: 90,
-    height: 90
-  }
+    width: 19,
+    height: 24,
+  },
 });

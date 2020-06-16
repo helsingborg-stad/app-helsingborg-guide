@@ -11,7 +11,6 @@ import {
   GuideScreen,
   HomeScreen,
   ImageScreen,
-  CategoryListScreen,
   CategoryMapScreen,
   LocationScreen,
   ObjectScreen,
@@ -24,7 +23,7 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
-  ARIntroductionScreen
+  ARIntroductionScreen,
 } from "@src/components/screens";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
@@ -38,8 +37,8 @@ const GuideNavigator = createStackNavigator(
       screen: HomeScreen,
       navigationOptions: {
         backgroundColor: "#FFFFFF",
-        header: () => null
-      }
+        header: () => null,
+      },
     },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: { screen: LocationScreen },
@@ -53,9 +52,8 @@ const GuideNavigator = createStackNavigator(
     DownloadsScreen: { screen: DownloadsScreen },
     SettingsScreen: { screen: SettingsScreen },
     DebugScreen: { screen: DebugScreen },
-    CategoryListScreen: { screen: CategoryListScreen },
     CategoryMapScreen: { screen: CategoryMapScreen },
-    CalendarScreen: { screen: CalendarScreen }
+    CalendarScreen: { screen: CalendarScreen },
   },
   { defaultNavigationOptions: HeaderStyles.default }
 );
@@ -66,11 +64,11 @@ const RootNavigator = createStackNavigator(
     WelcomeScreen: { screen: WelcomeScreen },
     MainScreen: { screen: GuideNavigator },
     SearchObjectScreen: { screen: SearchObjectScreen },
-    ARIntroductionScreen: { screen: ARIntroductionScreen }
+    ARIntroductionScreen: { screen: ARIntroductionScreen },
   },
   {
     headerMode: "none",
-    mode: "modal"
+    mode: "modal",
   }
 );
 
@@ -83,7 +81,7 @@ type AppStateStatus = "inactive" | "active" | "background";
 type Props = {
   onAppStarted(): void,
   onAppBecameActive(): void,
-  onAppBecameInactive(): void
+  onAppBecameInactive(): void,
 };
 
 export default class Nav extends Component<Props> {
