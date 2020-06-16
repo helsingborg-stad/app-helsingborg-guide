@@ -1,48 +1,59 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 import { Colors, TextStyles } from "@assets/styles";
-import { StyleSheetUtils } from "@utils";
 
-const ios = Platform.OS === "ios";
+const numberedMarkerTextContainerShared = {
+  position: "absolute",
+  width: "100%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+};
 
-const markerImageActiveWidth = 42;
-const markerImageInactiveWidth = 32;
+const numberedMarkerTextShared = {
+  ...TextStyles.body,
+  fontSize: 18,
+  fontWeight: "500",
+  textAlign: "center",
+};
 
 export default StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
-    flex: 1
+    flex: 1,
   },
   map: {
-    flex: 1
+    flex: 1,
   },
-  numberedMarkerText: StyleSheetUtils.flatten([
-    TextStyles.body,
-    {
-      position: "absolute",
-      width: markerImageInactiveWidth,
-      top: ios ? 6 : 3,
-      left: ios ? -1 : -2,
-      fontSize: ios ? 18 : 16,
-      letterSpacing: -2.0,
-      fontWeight: "500",
-      lineHeight: 23.0,
-      textAlign: "center",
-      color: Colors.white
-    }
-  ]),
-  numberedMarkerTextActive: StyleSheetUtils.flatten([
-    TextStyles.body,
-    {
-      position: "absolute",
-      width: markerImageActiveWidth,
-      top: ios ? 9 : 7,
-      left: ios ? -1 : -3,
-      fontSize: 18,
-      letterSpacing: -2.0,
-      fontWeight: "500",
-      lineHeight: 23.0,
-      textAlign: "center",
-      color: Colors.black
-    }
-  ])
+  numberedMarkerOuterContainer: {
+    height: 57,
+  },
+  numberedMarkerContainer: {
+    width: 33,
+    height: 50,
+  },
+  numberedMarkerContainerActive: {
+    width: 42,
+    height: 57,
+  },
+  numberedMarkerImage: {
+    width: "100%",
+    height: "100%",
+  },
+  numberedMarkerTextContainer: {
+    ...numberedMarkerTextContainerShared,
+    height: 32,
+  },
+  numberedMarkerTextContainerActive: {
+    ...numberedMarkerTextContainerShared,
+    height: 38,
+  },
+  numberedMarkerText: {
+    ...numberedMarkerTextShared,
+    color: Colors.white,
+  },
+  numberedMarkerTextActive: {
+    ...numberedMarkerTextShared,
+    color: Colors.black,
+  },
 });
