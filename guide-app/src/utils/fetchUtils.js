@@ -32,7 +32,10 @@ function validateData(data: any, scheme: string): any[] {
         validatedData.push(element);
       }
     } catch (err) {
-      console.warn("Validation failed for fetched ", scheme, err);
+      console.warn(
+        `Validation failed for fetched ${scheme}`,
+        JSON.stringify(err, null, 2)
+      );
     }
   });
 
@@ -137,5 +140,5 @@ export default {
   getGuideGroups,
   getGuides,
   getGuidesForGuideGroup,
-  getNavigation
+  getNavigation,
 };
