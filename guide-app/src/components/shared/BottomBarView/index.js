@@ -9,13 +9,6 @@ import { selectCurrentBottomBarTab } from "@actions/uiStateActions";
 import { Navigation } from "@config/ui";
 
 const barBackground = require("@assets/images/background-navigation.png");
-// TODO: remove image files?
-// const barTabLeft = require("@assets/images/bottom-left.png");
-// const barTabCenter = require("@assets/images/bottom-center.png");
-// const barTabRight = require("@assets/images/bottom-right.png");
-const barTabRightDisabled = require("@assets/images/bottom-right-disabled.png");
-const barTabCenterDisabled = require("@assets/images/bottom-center-disabled.png");
-const barTabLeftDisabled = require("@assets/images/bottom-left-disabled.png");
 
 // Sorry /Björn
 // TODO: rename to something with isIphoneXOrAbove?
@@ -97,34 +90,6 @@ class BottomBarView extends Component<Props, State> {
     );
   }
 
-  // TODO: is this even needed now without the tabs?
-  displayButtonTabs() {
-    return (
-      <Animated.View
-        style={[
-          styles.buttonTabContainer,
-          { bottom: this.state.animTabBottom },
-        ]}
-      >
-        <Image
-          style={styles.imageTab}
-          resizeMode="stretch"
-          source={barTabLeftDisabled}
-        />
-        <Image
-          style={styles.imageTab}
-          resizeMode="stretch"
-          source={barTabCenterDisabled}
-        />
-        <Image
-          style={styles.imageTab}
-          resizeMode="stretch"
-          source={barTabRightDisabled}
-        />
-      </Animated.View>
-    );
-  }
-
   render() {
     if (!this.props.showBottomBar) {
       return null;
@@ -134,7 +99,6 @@ class BottomBarView extends Component<Props, State> {
       <Animated.View
         style={[styles.viewContainer, { height: this.state.animViewContainer }]}
       >
-        {this.displayButtonTabs()}
         <Image style={styles.imageBackground} source={barBackground} />
         {this.displayIcons()}
       </Animated.View>

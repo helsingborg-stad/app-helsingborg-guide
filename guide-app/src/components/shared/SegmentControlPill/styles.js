@@ -13,38 +13,40 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginHorizontal: 16,
-    padding: 2
+    padding: 2,
   },
   pillContainer: {
     flexGrow: 1,
-    flexBasis: 0
+    flexBasis: 0,
   },
   pill: {
     borderRadius: 70,
     borderWidth: 0.5,
     borderColor: Colors.transparent,
     flexGrow: 1,
-    padding: 5
+    flexDirection: "row",
+    justifyContent: "center",
+    padding: 5,
   },
   pillActive: {
     borderColor: "#00000004",
-    backgroundColor: Colors.themePrimary,
+    backgroundColor: Colors.themeSecondary,
 
     shadowColor: Colors.shadow,
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
 
-    elevation: 2
+    elevation: 2,
   },
   label: {
     ...TextStyles.segmentControlPillLabel,
-    color: Colors.black
+    color: Colors.black,
   },
   labelActive: {
-    color: Colors.white
-  }
+    color: Colors.white,
+  },
 });

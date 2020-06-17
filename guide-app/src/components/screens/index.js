@@ -3,7 +3,6 @@ export { default as DownloadsScreen } from "./DownloadsScreen";
 export { default as GuideScreen } from "./GuideScreen";
 export { default as HomeScreen } from "./HomeScreen";
 export { default as ImageScreen } from "./ImageScreen";
-export { default as CategoryListScreen } from "./CategoryListScreen";
 export { default as CategoryMapScreen } from "./CategoryMapScreen";
 export { default as LocationScreen } from "./LocationScreen";
 export { default as ObjectScreen } from "./ObjectScreen";
