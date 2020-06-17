@@ -5,13 +5,13 @@ import styles from "./styles";
 type Props = {
   labels: [],
   initialSelectedIndex: Number,
-  onSegmentIndexChange?: ?(index: number) => void
+  onSegmentIndexChange?: ?(index: number) => void,
 };
 
 export const SegmentControlPill = ({
   initialSelectedIndex = 0,
   onSegmentIndexChange,
-  labels
+  labels,
 }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
 
@@ -33,14 +33,14 @@ export const SegmentControlPill = ({
           <TouchableOpacity
             style={[
               styles.pill,
-              index === selectedIndex ? styles.pillActive : null
+              index === selectedIndex ? styles.pillActive : null,
             ]}
             onPress={onPressSegment(index)}
           >
             <Text
               style={[
                 styles.label,
-                index === selectedIndex ? styles.labelActive : null
+                index === selectedIndex ? styles.labelActive : null,
               ]}
             >
               {label}
