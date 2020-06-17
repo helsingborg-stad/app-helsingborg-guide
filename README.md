@@ -6,15 +6,32 @@ App for iphone/android displaying guides on specific locations in helsingborg. I
 
 ## Table of contents
 
-- [Getting started](#getting-started)
-- [Monorepo](#monorepo)
-- [Working with cities](#working-with-cities)
-- [Adding a new city](#adding-a-new-city)
-- [API integration](#api-integration)
-- [Local development](#local-development)
-- [Overall solution](#overall-solution)
-- [Native components](#native-components)
-- [Build for release](#build-for-release)
+- [Guide Helsingborg](#guide-helsingborg)
+  - [Table of contents](#table-of-contents)
+  - [Getting started](#getting-started)
+  - [Monorepo](#monorepo)
+  - [Working with cities](#working-with-cities)
+  - [Adding a new city](#adding-a-new-city)
+    - [Updating a city (Might be obsolete)](#updating-a-city-might-be-obsolete)
+  - [API integration](#api-integration)
+  - [Local development](#local-development)
+    - [IOS](#ios)
+    - [Android](#android)
+  - [Overall solution](#overall-solution)
+    - [React native](#react-native)
+  - [Native components](#native-components)
+    - [IOS](#ios-1)
+      - [Beacons](#beacons)
+      - [Notifications](#notifications)
+      - [AudioManager](#audiomanager)
+    - [Android](#android-1)
+      - [BeaconModule](#beaconmodule)
+      - [MediaModule](#mediamodule)
+  - [Build for release](#build-for-release)
+    - [IOS](#ios-2)
+      - [Upload to app store](#upload-to-app-store)
+          - [Tips: If it does not work to upload with Xcode use Application Loader Instead.](#tips-if-it-does-not-work-to-upload-with-xcode-use-application-loader-instead)
+    - [Android](#android-2)
 
 ## Getting started
 
@@ -423,6 +440,7 @@ keyPassword=key-password
 storePassword=store-password
 ```
 
-Then running `cd android && ./gradlew assembleRelease`
+From the `android/` directory:
 
-from root folder in application.
+- To build an App Bundle, run `./gradlew bundleStoreRelease`
+- To build an APK, run `./gradlew assembleStoreRelease`
