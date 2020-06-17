@@ -52,7 +52,6 @@ export default StyleSheet.create({
     TextStyles.body,
     {
       fontSize: 13,
-      fontWeight: "500",
       marginRight: TextMargin,
       color: Colors.themePrimary,
     },
