@@ -6,7 +6,7 @@ const defaultFont = {
 };
 
 const defaultBoldFont = {
-  fontFamily: "Tahoma Bold",
+  fontFamily: "Tahoma-Bold",
 };
 
 export default StyleSheet.create({
