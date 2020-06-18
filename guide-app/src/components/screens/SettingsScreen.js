@@ -6,7 +6,7 @@ import {
   Image,
   View,
   Linking,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import PropTypes from "prop-types";
@@ -18,7 +18,7 @@ import { setLanguage } from "@actions/navigationActions";
 import {
   setDeveloperMode,
   showBottomBar,
-  selectCurrentBottomBarTab
+  selectCurrentBottomBarTab,
 } from "@actions/uiStateActions";
 
 const defaultMargin = 20;
@@ -27,76 +27,76 @@ const LOGO = require("@assets/images/logo.png");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white
+    backgroundColor: Colors.white,
   },
   languageContainer: {
-    alignItems: "flex-start"
+    alignItems: "flex-start",
   },
   languageChoicesContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal: defaultMargin
+    marginHorizontal: defaultMargin,
   },
   choiceContainer: {
-    flex: 1
+    flex: 1,
   },
   icon: {
     tintColor: Colors.black,
-    margin: defaultMargin
+    margin: defaultMargin,
   },
   debugIcon: {
     tintColor: Colors.themePrimary,
-    margin: defaultMargin
+    margin: defaultMargin,
   },
   contactUsContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   divider: {
     margin: defaultMargin,
     height: 1,
-    backgroundColor: Colors.gray6
+    backgroundColor: Colors.gray6,
   },
   emptySpace: {
-    margin: defaultMargin * 0.5
-  }
+    margin: defaultMargin * 0.5,
+  },
 });
 
 const textStyles = StyleSheet.create({
   titleText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
+      ...TextStyles.bold,
       fontSize: 16,
       lineHeight: 23,
       color: Colors.black,
-      fontWeight: "bold",
       marginHorizontal: defaultMargin,
       marginTop: defaultMargin,
-      marginBottom: 10
-    }
+      marginBottom: 10,
+    },
   ]),
   languageText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       fontSize: 18,
-      color: Colors.black
-    }
+      color: Colors.black,
+    },
   ]),
   linkText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       fontSize: 18,
       color: Colors.black,
-      marginHorizontal: defaultMargin
-    }
+      marginHorizontal: defaultMargin,
+    },
   ]),
   contactEmailText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       color: Colors.black,
-      textAlign: "center"
-    }
+      textAlign: "center",
+    },
   ]),
   contactPhoneText: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -104,9 +104,9 @@ const textStyles = StyleSheet.create({
       marginTop: 10,
       lineHeight: 23,
       color: Colors.black,
-      textAlign: "center"
-    }
-  ])
+      textAlign: "center",
+    },
+  ]),
 });
 
 function loadContents(langCode) {
@@ -119,13 +119,13 @@ function loadContents(langCode) {
 }
 
 type Props = {
-  developerMode: any
+  developerMode: any,
 };
 
 type State = {
   selectedLanguageCode: any,
   languages: any,
-  debugStatus: any
+  debugStatus: any,
 };
 
 class SettingsScreen extends Component<Props, State> {
@@ -133,7 +133,7 @@ class SettingsScreen extends Component<Props, State> {
     const title = LangService.strings.SETTINGS;
     return {
       title,
-      headerLeft: null
+      headerLeft: null,
     };
   };
 
@@ -143,7 +143,7 @@ class SettingsScreen extends Component<Props, State> {
     if (!languages || Object.keys(languages).length === 0) {
       return {
         selectedLanguageCode: LangService.code,
-        languages: LangService.languageObj
+        languages: LangService.languageObj,
       };
     }
 
@@ -155,7 +155,7 @@ class SettingsScreen extends Component<Props, State> {
     setLanguage: PropTypes.func.isRequired,
     dispatchSetDeveloperMode: PropTypes.func.isRequired,
     dispatchShowBottomBar: PropTypes.func.isRequired,
-    dispatchSelectBottomBarTab: PropTypes.func.isRequired
+    dispatchSelectBottomBarTab: PropTypes.func.isRequired,
   };
 
   constructor(props: Props) {
@@ -166,7 +166,7 @@ class SettingsScreen extends Component<Props, State> {
     this.state = {
       selectedLanguageCode: LangService.code,
       languages: LangService.languageObj,
-      debugStatus: 0
+      debugStatus: 0,
     };
   }
 
@@ -222,9 +222,9 @@ class SettingsScreen extends Component<Props, State> {
     return languages.map(language => {
       const { name, slug } = language;
       const style = {
+        ...TextStyles.bold,
         color: Colors.themePrimary,
-        fontWeight: "bold",
-        textDecorationLine: "underline"
+        textDecorationLine: "underline",
       };
       const selectedStyle =
         this.state.selectedLanguageCode === slug ? style : null;
@@ -322,7 +322,7 @@ class SettingsScreen extends Component<Props, State> {
 function mapStateToProps(state) {
   const { developerMode } = state.uiState;
   return {
-    developerMode
+    developerMode,
   };
 }
 
@@ -332,7 +332,7 @@ function mapDispatchToProps(dispatch) {
     dispatchShowBottomBar: visible => dispatch(showBottomBar(visible)),
     dispatchSelectBottomBarTab: index =>
       dispatch(selectCurrentBottomBarTab(index)),
-    setLanguage: langCode => dispatch(setLanguage(langCode))
+    setLanguage: langCode => dispatch(setLanguage(langCode)),
   };
 }
 export default connect(

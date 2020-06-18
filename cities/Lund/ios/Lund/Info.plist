@@ -59,7 +59,7 @@
 	<string>Not being used</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Tahoma Bold.ttf</string>
+		<string>Tahoma-Bold.ttf</string>
 		<string>Tahoma.ttf</string>
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>

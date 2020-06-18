@@ -47,6 +47,8 @@ export default StyleSheet.create({
     color: Colors.black,
   },
   labelActive: {
+    ...TextStyles.segmentControlPillLabel,
+    ...TextStyles.bold,
     color: Colors.white,
   },
 });

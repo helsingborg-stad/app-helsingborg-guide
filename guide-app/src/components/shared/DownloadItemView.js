@@ -6,59 +6,59 @@ import {
   Text,
   StyleSheet,
   ProgressBarAndroid,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ViewContainer from "@shared-components/view_container";
 import RoundedThumbnail from "@shared-components/thumbnail_rounded";
 import LangService from "@services/langService";
-import { Colors } from "@assets/styles";
+import { Colors, TextStyles } from "@assets/styles";
 
 const styles = StyleSheet.create({
   wrapper: {
     borderBottomWidth: 1,
-    borderBottomColor: Colors.gray7
+    borderBottomColor: Colors.gray7,
   },
   mainContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   header: {
     height: 40,
     backgroundColor: Colors.offWhite1,
     justifyContent: "center",
     alignItems: "flex-start",
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   headerText: {
+    ...TextStyles.bold,
     fontSize: 12,
-    fontWeight: "bold"
   },
   avatarContainer: {
-    flex: 1
+    flex: 1,
   },
   progressBarContainer: {
     flex: 4,
     paddingHorizontal: 10,
     paddingVertical: 20,
     alignItems: "stretch",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   progressTextContainer: { flex: 1 },
   progressText: { fontSize: 12, lineHeight: 14 },
   barContainer: {
-    flex: 1
+    flex: 1,
   },
   btnContainer: {
-    flex: 1
+    flex: 1,
   },
   touchContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
 
 type Props = {
@@ -69,7 +69,7 @@ type Props = {
   thumbnail: any,
   onResumePress: any,
   onPausePress: any,
-  onClearPress: any
+  onClearPress: any,
 };
 
 export default class DownloadItemView extends Component<Props> {
