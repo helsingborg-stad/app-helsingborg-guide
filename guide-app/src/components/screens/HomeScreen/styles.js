@@ -68,7 +68,7 @@ export default StyleSheet.create({
     TextStyles.defaultFontFamily,
     {
       fontSize: 15,
-      fontWeight: "bold",
+      ...TextStyles.bold,
       fontStyle: "normal",
       letterSpacing: 1,
       color: Colors.white,
@@ -78,7 +78,7 @@ export default StyleSheet.create({
     TextStyles.defaultFontFamily,
     {
       fontSize: 32,
-      fontWeight: "bold",
+      ...TextStyles.bold,
       fontStyle: "normal",
       color: Colors.black,
     },

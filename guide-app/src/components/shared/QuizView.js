@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
@@ -37,11 +37,11 @@ function isBotNonEmoji(item: ?QuizItem) {
 function BotMessageBlob({
   children,
   prevItem,
-  nextItem
+  nextItem,
 }: {
   children: React.ReactNode,
   prevItem: ?QuizItem,
-  nextItem: ?QuizItem
+  nextItem: ?QuizItem,
 }) {
   let style = styles.botMessageSolo;
   if (isBotNonEmoji(nextItem) && isBotNonEmoji(prevItem)) {
@@ -57,11 +57,11 @@ function BotMessageBlob({
 function BotMessage({
   item,
   prevItem,
-  nextItem
+  nextItem,
 }: {
   item: QuizBotMessage,
   prevItem: ?QuizItem,
-  nextItem: ?QuizItem
+  nextItem: ?QuizItem,
 }) {
   if (!containsNonEmoji(item.text)) {
     return <Text style={styles.botMessageEmoji}>{item.text}</Text>;
@@ -87,11 +87,11 @@ function BotImageMessage({ item }: { item: QuizBotImageMessage }) {
 function UserMessage({
   item,
   prevItem,
-  nextItem
+  nextItem,
 }: {
   item: QuizUserMessage,
   prevItem: ?QuizItem,
-  nextItem: ?QuizItem
+  nextItem: ?QuizItem,
 }) {
   let style = styles.userMessageSolo;
   if (prevItem?.type !== "user" && nextItem?.type !== "user") {
@@ -147,7 +147,7 @@ function Dialog({
   item,
   onHeightChanged,
   onAlternativeSelected,
-  isPrompt
+  isPrompt,
 }: {
   item: QuizDialog,
   onHeightChanged: (height: number) => void,
@@ -155,7 +155,7 @@ function Dialog({
     item: QuizDialog,
     alternative: QuizDialogAlternative
   ) => void,
-  isPrompt: boolean
+  isPrompt: boolean,
 }) {
   const [selectedAlternative, setSelectedAlternative] = useState(null);
   const { alternatives } = item;
@@ -184,7 +184,7 @@ function Dialog({
         <Button
           style={[
             styles.dialogSendButton,
-            { opacity: selectedAlternative ? 1 : 0.75 }
+            { opacity: selectedAlternative ? 1 : 0.75 },
           ]}
           title={LangService.strings.SEND}
           onPress={() => onAlternativeSelected(item, selectedAlternative)}
@@ -215,11 +215,11 @@ function Dialog({
 function DialogRecord({
   item,
   prevItem,
-  nextItem
+  nextItem,
 }: {
   item: QuizDialogRecord,
   prevItem: ?QuizItem,
-  nextItem: ?QuizItem
+  nextItem: ?QuizItem,
 }) {
   return (
     <BotMessageBlob prevItem={prevItem} nextItem={nextItem}>
@@ -233,22 +233,22 @@ function DialogRecord({
 const QuizStart = ({
   item,
   onQuizStartAction,
-  isHistoryItem
+  isHistoryItem,
 }: {
   item: QuizItem,
   onQuizStartAction: () => void,
-  isHistoryItem: boolean
+  isHistoryItem: boolean,
 }) => (
-    <View style={styles.startContainer}>
-      <View>
-        <StartImage item={item.image} />
-        <StartText item={item} />
-      </View>
-      {!isHistoryItem && (
-        <StartAction item={item.action} onQuizStartAction={onQuizStartAction} />
-      )}
+  <View style={styles.startContainer}>
+    <View>
+      <StartImage item={item.image} />
+      <StartText item={item} />
     </View>
-  );
+    {!isHistoryItem && (
+      <StartAction item={item.action} onQuizStartAction={onQuizStartAction} />
+    )}
+  </View>
+);
 
 const StartText = ({ item }: { item: QuizItem }) => (
   <View style={styles.startTextContainer}>
@@ -258,10 +258,10 @@ const StartText = ({ item }: { item: QuizItem }) => (
 
 const StartAction = ({
   item,
-  onQuizStartAction
+  onQuizStartAction,
 }: {
   item: QuizPrompt,
-  onQuizStartAction: () => void
+  onQuizStartAction: () => void,
 }) => {
   return (
     <View style={styles.promptContainer}>
@@ -298,36 +298,36 @@ const TypingIndicator = () => {
         Animated.sequence([
           Animated.timing(firstAnim, {
             toValue: 0.5,
-            duration: 500
+            duration: 500,
           }),
           Animated.timing(firstAnim, {
             toValue: 1,
-            duration: 250
-          })
+            duration: 250,
+          }),
         ]),
         Animated.sequence([
           Animated.timing(secondAnim, {
             toValue: 0.5,
-            duration: 500
+            duration: 500,
           }),
           Animated.timing(secondAnim, {
             toValue: 1,
-            duration: 250
-          })
+            duration: 250,
+          }),
         ]),
         Animated.sequence([
           Animated.timing(thirdAnim, {
             toValue: 0.5,
-            duration: 500
+            duration: 500,
           }),
           Animated.timing(thirdAnim, {
             toValue: 1,
-            duration: 250
-          })
-        ])
+            duration: 250,
+          }),
+        ]),
       ]),
       {
-        iterations: -1
+        iterations: -1,
       }
     ).start();
   }, [firstAnim, secondAnim, thirdAnim]);
@@ -343,11 +343,11 @@ const TypingIndicator = () => {
               {
                 translateY: firstAnim.interpolate({
                   inputRange: [0.5, 1],
-                  outputRange: [-7, 0]
-                })
-              }
-            ]
-          }
+                  outputRange: [-7, 0],
+                }),
+              },
+            ],
+          },
         ]}
       />
       <Animated.View
@@ -359,11 +359,11 @@ const TypingIndicator = () => {
               {
                 translateY: secondAnim.interpolate({
                   inputRange: [0.5, 1],
-                  outputRange: [-7, 0]
-                })
-              }
-            ]
-          }
+                  outputRange: [-7, 0],
+                }),
+              },
+            ],
+          },
         ]}
       />
       <Animated.View
@@ -375,11 +375,11 @@ const TypingIndicator = () => {
               {
                 translateY: thirdAnim.interpolate({
                   inputRange: [0.5, 1],
-                  outputRange: [-7, 0]
-                })
-              }
-            ]
-          }
+                  outputRange: [-7, 0],
+                }),
+              },
+            ],
+          },
         ]}
       />
     </View>
@@ -455,7 +455,7 @@ export default function QuizView({
   onDialogAlternativeSelected,
   onQuizStartAction,
   flatlistRef,
-  botIsTyping
+  botIsTyping,
 }: {
   items: QuizItem[],
   startItem: QuizItem,
@@ -469,7 +469,7 @@ export default function QuizView({
   ) => void,
   onQuizStartAction: () => void,
   flatlistRef: React.Ref<FlatList>,
-  botIsTyping: boolean
+  botIsTyping: boolean,
 }) {
   const [dialogHeight, setDialogHeight] = useState();
   const [promptHeight, setPromptHeight] = useState();
@@ -502,7 +502,7 @@ export default function QuizView({
               return (
                 <View
                   style={{
-                    height: dialogHeight
+                    height: dialogHeight,
                   }}
                 />
               );
@@ -512,7 +512,7 @@ export default function QuizView({
               return (
                 <View
                   style={{
-                    height: promptHeight
+                    height: promptHeight,
                   }}
                 />
               );
@@ -560,7 +560,7 @@ const botMessageShared = {
   borderTopLeftRadius: radiusMax,
   borderTopRightRadius: radiusMax,
   borderBottomRightRadius: radiusMax,
-  borderBottomLeftRadius: radiusMax
+  borderBottomLeftRadius: radiusMax,
 };
 
 const userMessageShared = {
@@ -570,31 +570,31 @@ const userMessageShared = {
   maxWidth: "80%",
   paddingHorizontal: 17,
   paddingVertical: 11,
-  borderRadius: radiusMax
+  borderRadius: radiusMax,
 };
 
 const dialogIconShared = {
   borderRadius: 48,
   width: 48,
   height: 48,
-  backgroundColor: Colors.black
+  backgroundColor: Colors.black,
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.gray12
+    backgroundColor: Colors.gray12,
   },
   chapter: StyleSheet.flatten([
     TextStyles.medium,
     {
+      ...TextStyles.bold,
       marginHorizontal: 11,
       marginTop: 40,
       marginBottom: 44,
       textAlign: "center",
-      fontWeight: "bold",
-      color: Colors.gray2C
-    }
+      color: Colors.gray2C,
+    },
   ]),
   botMessageEmoji: StyleSheet.flatten([
     TextStyles.body,
@@ -604,95 +604,95 @@ const styles = StyleSheet.create({
       marginBottom: 10,
       maxWidth: "80%",
       fontSize: 30,
-      lineHeight: 36
-    }
+      lineHeight: 36,
+    },
   ]),
   botMessageSolo: botMessageShared,
   botMessageFirst: {
     ...botMessageShared,
     borderTopLeftRadius: radiusLarge,
-    borderBottomLeftRadius: radiusSmall
+    borderBottomLeftRadius: radiusSmall,
   },
   botMessageMiddle: {
     ...botMessageShared,
     borderTopLeftRadius: radiusSmall,
-    borderBottomLeftRadius: radiusSmall
+    borderBottomLeftRadius: radiusSmall,
   },
   botMessageLast: {
     ...botMessageShared,
     borderTopLeftRadius: radiusSmall,
-    borderBottomLeftRadius: radiusLarge
+    borderBottomLeftRadius: radiusLarge,
   },
   botMessageText: TextStyles.body,
   botImage: {
     alignSelf: "flex-start",
     marginHorizontal: 11,
     marginBottom: 4,
-    width: 300
+    width: 300,
   },
   startContainer: {
     justifyContent: "space-between",
     flexDirection: "column",
-    flexGrow: 1
+    flexGrow: 1,
   },
   startImage: {
     marginHorizontal: 11,
     marginTop: 24,
     alignSelf: "center",
-    width: 300
+    width: 300,
   },
   startImageImage: {
-    borderRadius: 500
+    borderRadius: 500,
   },
   startTextContainer: {
     marginVertical: 21,
-    marginHorizontal: 51
+    marginHorizontal: 51,
   },
   startText: {
     ...TextStyles.description,
     fontSize: 11,
     lineHeight: 18,
-    color: "#979797"
+    color: "#979797",
   },
   botImageImage: {
-    borderRadius: 10
+    borderRadius: 10,
   },
   typingIndicatorContainer: {
     ...botMessageShared,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   dot: {
     height: 10,
     width: 10,
     borderRadius: 100,
     backgroundColor: "#B4B5B9",
-    marginHorizontal: 2
+    marginHorizontal: 2,
   },
   userMessageSolo: userMessageShared,
   userMessageSoloVerticalMargin: {
     ...userMessageShared,
     marginTop: 20,
-    marginBottom: 20 + userMessageShared.marginBottom
+    marginBottom: 20 + userMessageShared.marginBottom,
   },
   userMessageSoloTopMargin: {
     ...userMessageShared,
-    marginTop: 20
+    marginTop: 20,
   },
   userMessageSoloBottomMargin: {
     ...userMessageShared,
-    marginBottom: 20 + userMessageShared.marginBottom
+    marginBottom: 20 + userMessageShared.marginBottom,
   },
   userMessageText: StyleSheet.flatten([
     TextStyles.body,
-    { color: Colors.white }
+    { color: Colors.white },
   ]),
   promptContainer: {
     marginTop: 15,
-    backgroundColor: Colors.gray12
+    backgroundColor: Colors.gray12,
   },
   promptButton: {
     marginHorizontal: 11,
-    marginVertical: 5
+    marginVertical: 5,
   },
   dialogContainer: {
     position: "absolute",
@@ -701,7 +701,7 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: Colors.white,
     borderTopLeftRadius: 32,
-    borderTopRightRadius: 32
+    borderTopRightRadius: 32,
   },
   dialogIcon: {
     ...dialogIconShared,
@@ -710,22 +710,22 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
-    flex: 1
+    flex: 1,
   },
   dialogRecordIcon: {
     ...dialogIconShared,
     alignSelf: "flex-start",
     marginBottom: 20,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   dialogTitle: StyleSheet.flatten([
     TextStyles.description,
     {
       marginHorizontal: 11,
       textAlign: "center",
-      marginBottom: 4
-    }
+      marginBottom: 4,
+    },
   ]),
   dialogInstructions: StyleSheet.flatten([
     TextStyles.description,
@@ -733,33 +733,33 @@ const styles = StyleSheet.create({
       marginHorizontal: 11,
       marginBottom: 20,
       textAlign: "center",
-      color: Colors.gray4
-    }
+      color: Colors.gray4,
+    },
   ]),
   dialogMessage: StyleSheet.flatten([
     TextStyles.body,
     {
+      ...TextStyles.bold,
       marginHorizontal: 11,
       marginBottom: 20,
       textAlign: "center",
-      fontWeight: "bold"
-    }
+    },
   ]),
   dialogOptionButton: {
     marginHorizontal: 28,
-    marginVertical: 2
+    marginVertical: 2,
   },
   dialogSendButton: {
     marginHorizontal: 12,
     marginTop: 11,
     marginBottom: 5,
-    opacity: 0.75
+    opacity: 0.75,
   },
   dialogRecordMessage: StyleSheet.flatten([
     TextStyles.body,
     {
+      ...TextStyles.bold,
       marginTop: 10,
-      fontWeight: "bold"
-    }
-  ])
+    },
+  ]),
 });

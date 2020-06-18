@@ -2,31 +2,30 @@ import { StyleSheet } from "react-native";
 import Colors from "./Colors";
 
 const defaultFont = {
-  fontFamily: "Roboto"
+  fontFamily: "Roboto",
 };
 
 const defaultBoldFont = {
-  fontFamily: "Roboto-bold"
+  fontFamily: "Roboto-bold",
 };
 
 export default StyleSheet.create({
   body: {
     ...defaultFont,
     fontSize: 17,
-    lineHeight: 23
+    lineHeight: 23,
   },
   comingSoonText: {
-    ...defaultFont,
+    ...defaultBoldFont,
     fontSize: 13,
-    fontWeight: "bold"
   },
   defaultFontFamily: {
-    ...defaultFont
+    ...defaultFont,
   },
   description: {
     ...defaultFont,
     fontSize: 16,
-    lineHeight: 22.0
+    lineHeight: 22.0,
   },
   headerTitleLabel: {
     ...defaultFont,
@@ -36,7 +35,7 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: "300",
     lineHeight: 23.0,
-    textAlign: "center"
+    textAlign: "center",
   },
   medium: {
     ...defaultFont,
@@ -44,7 +43,7 @@ export default StyleSheet.create({
     fontSize: 16,
     fontStyle: "normal",
     fontWeight: "normal",
-    textAlign: "left"
+    textAlign: "left",
   },
   segmentControlLabel: {
     ...defaultFont,
@@ -53,14 +52,14 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     lineHeight: 23.0,
-    textAlign: "center"
+    textAlign: "center",
   },
   small: {
     ...defaultFont,
     fontSize: 14,
     fontStyle: "normal",
     fontWeight: "normal",
-    textAlign: "left"
+    textAlign: "left",
   },
   tabBarLabel: {
     ...defaultFont,
@@ -68,12 +67,12 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
     lineHeight: 23.0,
-    textAlign: "center"
+    textAlign: "center",
   },
   title: {
     ...defaultFont,
     fontSize: 22,
     fontWeight: "500",
-    letterSpacing: 0.11
-  }
+    letterSpacing: 0.11,
+  },
 });

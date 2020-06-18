@@ -5,7 +5,7 @@ const defaultFont = {
   fontFamily: "Roboto",
 };
 
-const defaultBoldFont = {
+const boldFont = {
   fontFamily: "Roboto-bold",
 };
 
@@ -16,9 +16,8 @@ export default StyleSheet.create({
     lineHeight: 23,
   },
   comingSoonText: {
-    ...defaultFont,
+    ...boldFont,
     fontSize: 13,
-    fontWeight: "bold",
   },
   defaultFontFamily: {
     ...defaultFont,

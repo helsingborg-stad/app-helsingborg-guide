@@ -76,7 +76,7 @@ export default StyleSheet.create({
     TextStyles.body,
     {
       fontSize: 24,
-      fontWeight: "bold",
+      ...TextStyles.bold,
       color: Colors.black,
     },
   ]),
@@ -141,7 +141,7 @@ export default StyleSheet.create({
     {
       color: Colors.black,
       fontSize: 13,
-      fontWeight: "bold",
+      ...TextStyles.bold,
       letterSpacing: 0.08,
       marginRight: TextMargin,
     },

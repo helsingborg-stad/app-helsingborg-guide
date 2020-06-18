@@ -5,7 +5,7 @@ const defaultFont = {
   fontFamily: "Tahoma",
 };
 
-const defaultBoldFont = {
+const boldFont = {
   fontFamily: "Tahoma-Bold",
 };
 
@@ -16,9 +16,8 @@ export default StyleSheet.create({
     lineHeight: 23,
   },
   comingSoonText: {
-    ...defaultFont,
+    ...boldFont,
     fontSize: 13,
-    fontWeight: "bold",
   },
   defaultFontFamily: {
     ...defaultFont,
@@ -82,5 +81,8 @@ export default StyleSheet.create({
     fontSize: 22,
     fontWeight: "500",
     letterSpacing: 0.11,
+  },
+  bold: {
+    ...boldFont,
   },
 });
