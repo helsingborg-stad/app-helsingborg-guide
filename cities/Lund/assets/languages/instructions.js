@@ -22,12 +22,6 @@ export default {
       },
       {
         content:
-          "To get the right information at the right place you'll need to activate bluetooth.\n\n Don't worry, it doesn't cost anything and won't use much power.",
-        thumbnail: BLUETOOTH_IMG,
-        background: SLIDE1_IMG,
-      },
-      {
-        content:
           "In some places you'll need to download the content to view the guide.\n\nThe easiest way to do this is through the city's own wifi.\n(The network Lund_Public)",
         thumbnail: DOWNLOAD_IMG,
         background: SLIDE2_IMG,
@@ -44,12 +38,6 @@ export default {
       },
       {
         content:
-          "För att få rätt information på rätt plats behöver du aktivera bluetooth på telefonen.\n\n Var lugn, det kostar inget och drar inte så mycket batteri.",
-        thumbnail: BLUETOOTH_IMG,
-        background: SLIDE1_IMG,
-      },
-      {
-        content:
           "På vissa platser behöver du ladda ner innehållet för att ta del av guiden.\n\nDet gör du lättast med stadens wifi.\n(nätverket Lund_Public)",
         thumbnail: DOWNLOAD_IMG,
         background: SLIDE2_IMG,
@@ -63,12 +51,6 @@ export default {
           "Machen Sie mit Sound, zusätzlicher Information und Hilfesuche noch mehr aus Ihrem Lund-Erlebnis. ",
         thumbnail: null,
         background: null,
-      },
-      {
-        content:
-          "Um die richtige Information am richtigen Ort zu bekommen, sollten Sie Bluetooth auf Ihrem Telefon aktivieren.\n\nKeine Sorge, es ist kostenlos und verbraucht nur wenig Batterie.",
-        thumbnail: BLUETOOTH_IMG,
-        background: SLIDE1_IMG,
       },
       {
         content:
