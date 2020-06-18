@@ -12,8 +12,8 @@ const numberedMarkerTextContainerShared = {
 
 const numberedMarkerTextShared = {
   ...TextStyles.body,
+  ...TextStyles.bold,
   fontSize: 18,
-  fontWeight: "500",
   textAlign: "center",
 };
 

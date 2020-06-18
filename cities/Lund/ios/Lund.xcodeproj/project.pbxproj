@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* LundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* LundTests.m */; };
-		056E016047CF40778DF4B031 /* Tahoma Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53736DFDDB674D8AA7B0D7A0 /* Tahoma Bold.ttf */; };
 		0763B2C48EF214737332AE52 /* libPods-Lund.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB369FC560C44D04DB11168C /* libPods-Lund.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -41,6 +40,7 @@
 		A5C293BE9BC141F79C675286 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76D19065CB8041A89E8F843B /* FontAwesome5_Regular.ttf */; };
 		A71600E1FAAE4C17BFC8E66C /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FEED10BCBBD400F826E8BC8 /* FontAwesome5_Solid.ttf */; };
 		ABF72CE75C454E6CAF67C617 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABD51CB8E59A464390D19842 /* AntDesign.ttf */; };
+		AF594A30249B56330063574D /* Tahoma-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF594A2F249B56330063574D /* Tahoma-Bold.ttf */; };
 		C7DDC7C027E84C5EB85635CD /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7F581E956974D2491A1F919 /* Feather.ttf */; };
 		D59FDB9DC2E54DA49C92FEFE /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E812F0C435184707982E3F38 /* FontAwesome5_Brands.ttf */; };
 		DB6714CD18FC49EB915B4EE4 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4384A1E54B646DA9C018882 /* SimpleLineIcons.ttf */; };
@@ -88,7 +88,6 @@
 		38EBDC5E567AFE2B03F193AC /* Pods-Lund-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lund-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Lund-tvOSTests/Pods-Lund-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		4920EBDDAE1B45CA8C356F0C /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		51C6291DEF5AC8D74F52DE42 /* Pods-LundTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LundTests.release.xcconfig"; path = "Target Support Files/Pods-LundTests/Pods-LundTests.release.xcconfig"; sourceTree = "<group>"; };
-		53736DFDDB674D8AA7B0D7A0 /* Tahoma Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Tahoma Bold.ttf"; path = "../assets/fonts/Tahoma Bold.ttf"; sourceTree = "<group>"; };
 		68D459BDE6624680979A0B6A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		6C408801289649DD8CACA8F3 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		6FEED10BCBBD400F826E8BC8 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
@@ -122,6 +121,7 @@
 		9CE8568A0636CB17ABF86496 /* libPods-Lund-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lund-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4384A1E54B646DA9C018882 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		ABD51CB8E59A464390D19842 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		AF594A2F249B56330063574D /* Tahoma-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Tahoma-Bold.ttf"; path = "../assets/fonts/Tahoma-Bold.ttf"; sourceTree = "<group>"; };
 		BEABD141631DEEABFC65BEF8 /* Pods-Lund-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lund-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Lund-tvOS/Pods-Lund-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		BEE15B353DA741DFA4565C67 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		CF55C14CD65D46F08DE1B29F /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -269,10 +269,10 @@
 		AF9DBDB5037A4F1D9C04A85A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				53736DFDDB674D8AA7B0D7A0 /* Tahoma Bold.ttf */,
 				0D4E7EF94D214EF3A026B92F /* Tahoma.ttf */,
 				ABD51CB8E59A464390D19842 /* AntDesign.ttf */,
 				1435514D631D4EC4A21E79EF /* Entypo.ttf */,
+				AF594A2F249B56330063574D /* Tahoma-Bold.ttf */,
 				BEE15B353DA741DFA4565C67 /* EvilIcons.ttf */,
 				F7F581E956974D2491A1F919 /* Feather.ttf */,
 				CF55C14CD65D46F08DE1B29F /* FontAwesome.ttf */,
@@ -453,9 +453,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				AF594A30249B56330063574D /* Tahoma-Bold.ttf in Resources */,
 				850716BB2397C80D00C97E4A /* InfoPlist.strings in Resources */,
 				857CF61E2395589E00FB5AFC /* GoogleService-Info.plist in Resources */,
-				056E016047CF40778DF4B031 /* Tahoma Bold.ttf in Resources */,
 				DDFDE99524114C2E84649296 /* Tahoma.ttf in Resources */,
 				ABF72CE75C454E6CAF67C617 /* AntDesign.ttf in Resources */,
 				4A8B39DB9C634F489525716E /* Entypo.ttf in Resources */,
