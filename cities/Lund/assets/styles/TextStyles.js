@@ -46,11 +46,10 @@ export default StyleSheet.create({
     textAlign: "left",
   },
   segmentControlLabel: {
-    ...defaultFont,
+    ...boldFont,
     alignSelf: "center",
     color: Colors.white,
     fontSize: 18,
-    fontWeight: "600",
     lineHeight: 23.0,
     textAlign: "center",
   },
@@ -69,17 +68,15 @@ export default StyleSheet.create({
     textAlign: "left",
   },
   tabBarLabel: {
-    ...defaultFont,
+    ...boldFont,
     color: Colors.white,
     fontSize: 16,
-    fontWeight: "500",
     lineHeight: 23.0,
     textAlign: "center",
   },
   title: {
-    ...defaultFont,
+    ...boldFont,
     fontSize: 22,
-    fontWeight: "500",
     letterSpacing: 0.11,
   },
   bold: {
