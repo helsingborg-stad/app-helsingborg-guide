@@ -14,7 +14,7 @@ import DownloadTasksManager from "@services/DownloadTasksManager";
 import {
   appStarted,
   appBecameActive,
-  appBecameInactive
+  appBecameInactive,
 } from "@actions/uiStateActions";
 import { setLanguage } from "@actions/navigationActions";
 
@@ -57,9 +57,9 @@ function alert() {
     [
       {
         text: LangService.strings.SETTINGS,
-        onPress: openInternetSettings
+        onPress: openInternetSettings,
       },
-      { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" }
+      { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
     ],
     { cancelable: false }
   );
@@ -77,9 +77,9 @@ export default class GuideApp extends Component {
   }
 
   componentDidMount() {
-    LocationService.getInstance()
-      .subscribeGeoLocation()
-      .catch(console.warn);
+    const locationService = LocationService.getInstance();
+    locationService.getGeoLocation().catch(console.warn);
+    locationService.subscribeGeoLocation().catch(console.warn);
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
   }

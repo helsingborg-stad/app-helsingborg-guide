@@ -222,14 +222,6 @@
       "$ref": "#/definitions/IMediaContent"
     }
   },
-  "required": [
-    "id",
-    "images",
-    "order",
-    "postStatus",
-    "searchableId",
-    "title",
-    "location"
-  ],
+  "required": ["id", "images", "order", "postStatus", "searchableId", "title"],
   "type": "object"
 }

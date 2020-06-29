@@ -24,7 +24,7 @@ type Props = {
   onGoToImage: (image: Images) => void,
   onGoToLink: (url: string, title?: string) => void,
   loadAudioFile: () => void,
-  onGoToVideo: (video?: MediaContent) => void
+  onGoToVideo: (video?: MediaContent) => void,
 };
 
 function displayID(searchableID: string) {
@@ -137,14 +137,16 @@ class ObjectView extends Component<Props> {
               onSwiperIndexChanged={this.props.onSwiperIndexChanged}
               onGoToImage={this.props.onGoToImage}
             />
-            <View style={styles.shareBtn}>
-              {SharingService.showShareButton(
-                this.props.contentObject.title,
-                this.props.contentObject.images[this.props.imageIndex],
-                this,
-                "share_object"
-              )}
-            </View>
+            {this.props.contentObject.images[this.props.imageIndex] && (
+              <View style={styles.shareBtn}>
+                {SharingService.showShareButton(
+                  this.props.contentObject.title,
+                  this.props.contentObject.images[this.props.imageIndex],
+                  this,
+                  "share_object"
+                )}
+              </View>
+            )}
           </View>
 
           <View style={styles.bodyContainer}>
