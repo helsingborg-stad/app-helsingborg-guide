@@ -28,11 +28,11 @@ const iconScale = 0.5;
 
 let origin;
 let isCreatingImage = false;
-const iosShare = {
-  title: "title",
-  message: "message",
-  subject: "subject",
-  url: "url",
+let iosShare = {
+  message: "",
+  subject: "",
+  title: "",
+  url: "",
 };
 
 const Background = require("@assets/images/black.png");
@@ -194,13 +194,15 @@ async function shareIOs(title, message, url, width, height, subject) {
           icon: { url: sharingIconUrl, width: iconWidth, height: iconHeight },
         });
 
-        iosShare.message = message;
-        iosShare.subject = subject;
-        iosShare.title = title;
-        iosShare.url = outputImage;
+        iosShare = {
+          message,
+          subject,
+          title,
+          url: outputImage,
+        };
 
         isCreatingImage = false;
-        await origin.forceUpdate();
+        origin.forceUpdate();
       });
     });
   }
