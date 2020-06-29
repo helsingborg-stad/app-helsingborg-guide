@@ -77,10 +77,9 @@ export default class GuideApp extends Component {
   }
 
   componentDidMount() {
-    LocationService.getInstance()
-      .getGeoLocation()
-      .subscribeGeoLocation()
-      .catch(console.warn);
+    const locationService = LocationService.getInstance();
+    locationService.getGeoLocation().catch(console.warn);
+    locationService.subscribeGeoLocation().catch(console.warn);
     LangService.loadStoredLanguage();
     this.startListeningToNetworkChanges();
   }
