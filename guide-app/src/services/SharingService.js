@@ -8,7 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
-  PermissionsAndroid
+  PermissionsAndroid,
 } from "react-native";
 import React from "react";
 import Share from "react-native-share";
@@ -28,11 +28,11 @@ const iconScale = 0.5;
 
 let origin;
 let isCreatingImage = false;
-const iosShare = {
-  title: "title",
-  message: "message",
-  subject: "subject",
-  url: "url"
+let iosShare = {
+  message: "",
+  subject: "",
+  title: "",
+  url: "",
 };
 
 const Background = require("@assets/images/black.png");
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   activityIndicator: {
     left: Dimensions.get("window").width / 2 - 12.5,
     position: "absolute",
-    top: Dimensions.get("window").height / 2 - 12.5
+    top: Dimensions.get("window").height / 2 - 12.5,
   },
   image: {
     height: Dimensions.get("window").height,
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
     opacity: 0.5,
     position: "absolute",
     top: 0,
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width,
   },
   imageHolder: {
     backgroundColor: "black",
     left: 0,
     position: "absolute",
     top: 0,
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width,
   },
   shareBoxOuter: {
     backgroundColor: Colors.white,
@@ -65,25 +65,25 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     borderWidth: 1,
     flexDirection: "row",
-    padding: 10
+    padding: 10,
   },
   shareIcon: {
     marginLeft: 5,
     marginRight: 10,
-    tintColor: Colors.themeSecondary
+    tintColor: Colors.themeSecondary,
   },
   shareText: {
     color: Colors.themeSecondary,
     fontSize: 16,
     fontWeight: "500",
-    marginRight: 5
-  }
+    marginRight: 5,
+  },
 });
 
 const SharedImageProperties = {
   markerScale: 1,
   scale: 1,
-  quality: 100
+  quality: 100,
 };
 
 const SharedTextProperties = { color: Colors.white, fontSize };
@@ -127,21 +127,21 @@ async function shareAndroid(title, message, url, width, height, subject) {
         title,
         source: { url: mainRes.path(), width, height },
         fade: { url: fadeRes.path(), width: fadeWidth, height: fadeHeight },
-        icon: { url: iconRes.path(), width: iconWidth, height: iconHeight }
+        icon: { url: iconRes.path(), width: iconWidth, height: iconHeight },
       });
 
       // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
       try {
         const granted = await PermissionsAndroid.check(
-          "android.permission.READ_EXTERNAL_STORAGE"
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
         );
 
         if (!granted) {
-          const response = await PermissionsAndroid.request(
-            "android.permission.READ_EXTERNAL_STORAGE"
+          const writeResponse = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
           );
 
-          if (!response) {
+          if (!writeResponse) {
             throw new Error("Could not request permissions");
           } // Oh. well. No share for you :(
         }
@@ -163,6 +163,7 @@ async function shareAndroid(title, message, url, width, height, subject) {
 
         const exist = await RNFetchBlob.fs.exists(finalPath);
         if (exist) {
+          console.log("4");
           // Only attempt to share the file if we successfully managed to move it.
           Share.open({ title, message, subject, url: finalPath });
         }
@@ -190,16 +191,18 @@ async function shareIOs(title, message, url, width, height, subject) {
           title,
           source: { url, width, height },
           fade: { url: sharingFadeUrl, width: fadeWidth, height: fadeHeight },
-          icon: { url: sharingIconUrl, width: iconWidth, height: iconHeight }
+          icon: { url: sharingIconUrl, width: iconWidth, height: iconHeight },
         });
 
-        iosShare.message = message;
-        iosShare.subject = subject;
-        iosShare.title = title;
-        iosShare.url = outputImage;
+        iosShare = {
+          message,
+          subject,
+          title,
+          url: outputImage,
+        };
 
         isCreatingImage = false;
-        await origin.forceUpdate();
+        origin.forceUpdate();
       });
     });
   }
@@ -211,7 +214,7 @@ async function watermark(watermarkProperties) {
     title,
     source: { url: sourceURI, width: sourceWidth, height: sourceHeight },
     fade: { url: fadeURI, height: fadeHeight },
-    icon: { url: iconURI, width: iconWidth, height: iconHeight }
+    icon: { url: iconURI, width: iconWidth, height: iconHeight },
   } = watermarkProperties;
 
   // Add the fade overlay
@@ -220,7 +223,7 @@ async function watermark(watermarkProperties) {
     markerSrc: getPlatformURI(fadeURI),
     X: 0,
     Y: parseInt(sourceHeight) - fadeHeight,
-    ...SharedImageProperties
+    ...SharedImageProperties,
   });
 
   // Add the title for the image
@@ -231,7 +234,7 @@ async function watermark(watermarkProperties) {
     Y: parseInt(sourceHeight) - fontSize * 2 - margin - lineDistance,
     ...TextStyles.defaultBoldFont,
     ...SharedTextProperties,
-    ...SharedImageProperties
+    ...SharedImageProperties,
   });
 
   // Add the subtitle (currently the App name)
@@ -242,7 +245,7 @@ async function watermark(watermarkProperties) {
     Y: parseInt(sourceHeight) - fontSize - margin,
     ...TextStyles.defaultFont,
     ...SharedTextProperties,
-    ...SharedImageProperties
+    ...SharedImageProperties,
   });
 
   // Add the icon
@@ -252,7 +255,7 @@ async function watermark(watermarkProperties) {
     X: parseInt(sourceWidth) - iconWidth * iconScale - margin,
     Y: parseInt(sourceHeight) - iconHeight * iconScale - margin,
     ...SharedImageProperties,
-    markerScale: iconScale
+    markerScale: iconScale,
   });
 }
 
@@ -329,5 +332,5 @@ function loadOverlay() {
 }
 
 export default {
-  showShareButton
+  showShareButton,
 };

@@ -4,38 +4,37 @@ import { StyleSheetUtils } from "@utils";
 
 export default StyleSheet.create({
   titleContainer: { flex: 1, padding: 15 },
-  title: StyleSheetUtils.flatten([
-    TextStyles.title,
-    {
-      color: Colors.black
-    }
-  ]),
+  title: {
+    ...TextStyles.title,
+    ...TextStyles.defaultFontFamily,
+    color: Colors.black,
+  },
   imageContainer: {
     width: "100%",
     height: "auto",
-    aspectRatio: 16 / 9
+    aspectRatio: 16 / 9,
   },
   description: StyleSheetUtils.flatten([
     TextStyles.description,
     {
-      color: Colors.black
-    }
+      color: Colors.black,
+    },
   ]),
   date: StyleSheetUtils.flatten([
     TextStyles.description,
     {
-      color: Colors.gray3
-    }
+      color: Colors.gray3,
+    },
   ]),
   forKidsText: StyleSheetUtils.flatten([
     TextStyles.description,
     {
       paddingHorizontal: 5,
-      color: Colors.gray2
-    }
+      color: Colors.gray2,
+    },
   ]),
   checkedContainer: {
     flex: 1,
-    flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
 });
