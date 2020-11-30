@@ -28,8 +28,6 @@ APP_BUNDLE_ID_ANDROID=$3
 TEMPLATE_DIRECTORY=$ROOT_DIRECTORY/template
 BUILD_DIRECTORY=$ROOT_DIRECTORY/cities
 APP_DIRECTORY=$BUILD_DIRECTORY/$APP_NAME
-ASSETS_DIRECTORY=$ROOT_DIRECTORY/assets/$APP_NAME
-DATA_DIRECTORY=$ROOT_DIRECTORY/data/$APP_NAME
 
 PLACEHOLDER_NAME=GuideApp
 PLACEHOLDER_NAME_LOWERCASE="$(echo $PLACEHOLDER_NAME | tr "[:upper:]" "[:lower:]")"
@@ -89,9 +87,12 @@ find $APP_DIRECTORY -depth -type f -exec sed -i "" -e "s/$PLACEHOLDER_NAME/$APP_
 # Do it twice for similar reasons to above
 find $APP_DIRECTORY -depth -type f -exec sed -i "" -e "s/$PLACEHOLDER_NAME/$APP_NAME/" {} +
 
-# Install all of our npm modules
+# Install all of our node modules
 cd $APP_DIRECTORY
-npm install
+yarn
+
+# Add assets to the build (e.g. react-native-vector-icons)
+npx react-native link
 
 # Install Pods and update the workspace
 cd $APP_DIRECTORY/ios

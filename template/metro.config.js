@@ -1,4 +1,3 @@
-a;
 /**
  * Metro configuration for React Native
  * https://github.com/facebook/react-native
@@ -19,7 +18,7 @@ const blacklistRE = new RegExp(
 
 module.exports = (async () => {
   const {
-    resolver: { assetExts }
+    resolver: { assetExts },
   } = await getDefaultConfig();
 
   return {
@@ -35,43 +34,11 @@ module.exports = (async () => {
         "glb",
         "bin",
         "arobject",
-        "gif"
+        "gif",
       ],
-      blacklistRE
+      blacklistRE,
     },
     projectRoot: path.resolve(__dirname),
-    watchFolders
-  };
-})();
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-const { getDefaultConfig } = require("metro-config");
-
-module.exports = (async () => {
-  const {
-    resolver: { assetExts }
-  } = await getDefaultConfig();
-
-  return {
-    resolver: {
-      assetExts: [
-        ...assetExts,
-        "obj",
-        "mtl",
-        "JPG",
-        "vrx",
-        "hdr",
-        "gltf",
-        "glb",
-        "bin",
-        "arobject",
-        "gif"
-      ]
-    }
+    watchFolders,
   };
 })();
