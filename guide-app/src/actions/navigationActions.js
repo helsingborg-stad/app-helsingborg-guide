@@ -11,7 +11,7 @@ export function setNavigationCategories(
 ): Action {
   return {
     type: "SET_NAVIGATION_CATEGORIES",
-    categories
+    categories,
   };
 }
 
@@ -34,7 +34,9 @@ export function fetchNavigation(langCode: string): ThunkAction {
     dispatch(fetchNavigationRequest());
 
     return getNavigation(langCode)
-      .then(guides => dispatch(fetchNavigationSuccess(guides)))
+      .then(guides => {
+        dispatch(fetchNavigationSuccess(guides));
+      })
       .catch(error => {
         dispatch(fetchNavigationFailure(error.message));
       });

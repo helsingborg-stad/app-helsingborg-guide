@@ -1,5 +1,6 @@
 import guideGroups from "./guideGroupReducer";
 import guides from "./guideReducer";
+import interactiveGuides from "./interactiveGuideReducer";
 import events from "./eventReducer";
 import navigation from "./navigationReducer";
 import audio from "./audioReducer";
@@ -17,6 +18,7 @@ const rootReducer = {
   events,
   guideGroups,
   guides,
+  interactiveGuides,
   navigation,
   audio,
   internet,
@@ -27,7 +29,7 @@ const rootReducer = {
   downloadedGuides,
   uiState,
   arState,
-  quiz
+  quiz,
 };
 
 export default rootReducer;

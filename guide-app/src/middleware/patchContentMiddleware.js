@@ -62,7 +62,8 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
       const {
         geolocation: { position },
         guideGroups,
-        guides
+        guides,
+        interactiveGuides,
       } = nextState;
       if (!position) {
         break;
@@ -74,7 +75,13 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
         guides.items,
         coords
       );
-      dispatch(setGuidesAndGuideGroups(updatedGG, updatedGuides));
+      dispatch(
+        setGuidesAndGuideGroups(
+          updatedGG,
+          updatedGuides,
+          interactiveGuides.items
+        )
+      );
       break;
     }
     default:

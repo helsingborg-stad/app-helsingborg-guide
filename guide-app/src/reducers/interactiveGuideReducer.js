@@ -1,18 +1,18 @@
 // @flow
 
-const initialState: GuideState = {
+const initialState: InteractiveGuideState = {
   isFetching: false,
   items: [],
 };
 
-export default function guideReducer(
-  state: GuideState = initialState,
+export default function interactiveGuideReducer(
+  state: InteractiveGuideState = initialState,
   action: Action
-): GuideState {
+): InteractiveGuideState {
   switch (action.type) {
-    case "FETCH_GUIDES_REQUEST":
+    case "FETCH_INTERACTIVE_GUIDES_REQUEST":
       return { ...state, isFetching: true };
-    case "FETCH_GUIDES_SUCCESS": {
+    case "FETCH_INTERACTIVE_GUIDES_SUCCESS": {
       const items = [...state.items];
       action.guides.forEach(g => {
         const index = items.findIndex(item => item.id === g.id);
@@ -26,10 +26,10 @@ export default function guideReducer(
       });
       return { ...state, items, isFetching: false };
     }
-    case "FETCH_GUIDES_FAILURE":
+    case "FETCH_INTERACTIVE_GUIDES_FAILURE":
       return { ...state, isFetching: false };
     case "SET_GUIDES_AND_GUIDEGROUPS":
-      return { ...state, items: action.guides };
+      return { ...state, items: action.interactiveGuides };
     default:
       return state;
   }

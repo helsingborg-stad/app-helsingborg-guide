@@ -85,6 +85,25 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
   return fetchedGuides;
 }
 
+async function getInteractiveGuides(
+  langCode: string,
+  ids: number[]
+): Promise<InteractiveGuide[]> {
+  if (ids.length === 0) {
+    return [];
+  }
+
+  const params = idsToParamString(ids);
+
+  const json = await fetchJSON("interactive_guide", langCode, params);
+  const fetchedGuides: InteractiveGuide[] = validateData(
+    json,
+    "interactiveGuide"
+  );
+
+  return fetchedGuides;
+}
+
 async function getGuidesForGuideGroup(
   langCode: string,
   guideGroupId: number
@@ -139,6 +158,7 @@ export default {
   getEvents,
   getGuideGroups,
   getGuides,
+  getInteractiveGuides,
   getGuidesForGuideGroup,
   getNavigation,
 };
