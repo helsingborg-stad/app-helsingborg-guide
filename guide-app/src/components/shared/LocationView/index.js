@@ -6,7 +6,7 @@ import {
   View,
   Text,
   ScrollView,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import styles from "./style";
 
@@ -23,11 +23,12 @@ import WebLinkView from "@shared-components/WebLinkView";
 type Props = {
   guideGroup: GuideGroup,
   guides: Guide[],
+  interactiveGuide?: InteractiveGuide,
   now: Date,
   geolocation?: ?GeolocationType,
   isFetchingGuides?: boolean,
   navigation: any,
-  onPressGuide(guide: Guide): void
+  onPressGuide(guide: Guide): void,
 };
 
 function getWebUrl(links: LinkAndService[]): ?string {
@@ -94,6 +95,7 @@ const LocationView = (props: Props) => {
   return (
     <View style={styles.viewContainer}>
       <ScrollView style={styles.scrollView}>
+        {props.interactiveGuide && <Text>{props.interactiveGuide.title}</Text>}
         <View style={styles.imageViewContainer}>
           <ImageBackground
             source={{ uri: props.guideGroup.images.large }}
@@ -154,7 +156,7 @@ const LocationView = (props: Props) => {
 LocationView.defaultProps = {
   geolocation: null,
   onPressGuide: () => {},
-  isFetchingGuides: false
+  isFetchingGuides: false,
 };
 
 export default LocationView;
