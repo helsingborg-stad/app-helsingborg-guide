@@ -53,6 +53,17 @@ class LocationScreen extends Component<Props> {
     }
   };
 
+  onPressInteractiveGuide = (interactiveGuide: InteractiveGuide) => {
+    const { navigation } = this.props;
+
+    AnalyticsUtils.logEvent("view_interactive_guide", {
+      name: interactiveGuide.title,
+    });
+    navigation.navigate("QuizScreen", {
+      quiz: interactiveGuide,
+    });
+  };
+
   render() {
     const {
       currentGuideGroup,
@@ -76,6 +87,7 @@ class LocationScreen extends Component<Props> {
           geolocation={geolocation}
           navigation={this.props.navigation}
           onPressGuide={this.onPressGuide}
+          onPressInteractiveGuide={this.onPressInteractiveGuide}
           isFetchingGuides={isFetchingGuides}
         />
       </>

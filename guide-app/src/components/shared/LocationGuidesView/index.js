@@ -8,22 +8,39 @@ import LangService from "@services/langService";
 
 type Props = {
   guides: Guide[],
-  onPressGuide(guide: Guide): void
+  interactiveGuide?: InteractiveGuide,
+  onPressGuide(guide: Guide): void,
+  onPressInteractiveGuide?: (interactiveGuide: InteractiveGuide) => void,
 };
 
 const LocationGuidesView = (props: Props) => {
-  const { guides, onPressGuide } = props;
+  const {
+    guides,
+    interactiveGuide,
+    onPressGuide,
+    onPressInteractiveGuide,
+  } = props;
   return (
     <View style={styles.guideListContainer}>
       <Text style={styles.guideListHeaderText}>
         {LangService.strings.MEDIAGUIDES}
       </Text>
+      {interactiveGuide && (
+        <TouchableOpacity
+          style={styles.guideContainer}
+          onPress={() => onPressInteractiveGuide(interactiveGuide)}
+        >
+          <ListItem
+            imageSource={{ uri: interactiveGuide.image }}
+            title={interactiveGuide.title}
+          />
+        </TouchableOpacity>
+      )}
       {guides.map(guide => {
         if (!guide.images) {
           return null;
         }
         const forKids = guide.childFriendly;
-        const hasQuiz = !!guide.quiz;
 
         return (
           <TouchableOpacity
@@ -38,8 +55,6 @@ const LocationGuidesView = (props: Props) => {
               startDate={guide.dateStart}
               endDate={guide.dateEnd}
               forKids={forKids}
-              hasQuiz={hasQuiz}
-            // id={guide.id}
             />
           </TouchableOpacity>
         );

@@ -29,6 +29,7 @@ type Props = {
   isFetchingGuides?: boolean,
   navigation: any,
   onPressGuide(guide: Guide): void,
+  onPressInteractiveGuide(interactiveGuide: InteractiveGuide): void,
 };
 
 function getWebUrl(links: LinkAndService[]): ?string {
@@ -92,10 +93,10 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
 const LocationView = (props: Props) => {
   const { isFetchingGuides } = props;
   const webUrl = getWebUrl(props.guideGroup.location.links);
+
   return (
     <View style={styles.viewContainer}>
       <ScrollView style={styles.scrollView}>
-        {props.interactiveGuide && <Text>{props.interactiveGuide.title}</Text>}
         <View style={styles.imageViewContainer}>
           <ImageBackground
             source={{ uri: props.guideGroup.images.large }}
@@ -130,7 +131,9 @@ const LocationView = (props: Props) => {
           ) : (
             <LocationGuidesView
               guides={props.guides}
+              interactiveGuide={props.interactiveGuide}
               onPressGuide={props.onPressGuide}
+              onPressInteractiveGuide={props.onPressInteractiveGuide}
             />
           )}
           <View style={styles.articleContainer}>

@@ -31,19 +31,3 @@ export function fetchInteractiveGuides(
       });
   };
 }
-
-export function fetchGuidesForGuideGroup(
-  langCode: string,
-  guideGroupId: number
-): ThunkAction {
-  return function fetchInteractiveGuidesDispatch(dispatch: Dispatch) {
-    dispatch(fetchInteractiveGuidesRequest());
-
-    return fetchUtils
-      .getGuidesForGuideGroup(langCode, guideGroupId)
-      .then(guides => dispatch(fetchInteractiveGuidesSuccess(guides)))
-      .catch(error => {
-        dispatch(fetchInteractiveGuidesFailure(error.message));
-      });
-  };
-}
