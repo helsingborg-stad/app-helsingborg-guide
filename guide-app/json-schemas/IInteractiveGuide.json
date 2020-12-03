@@ -1,31 +1,24 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "properties": {
-        "guideGroupId": {
-            "type": "number"
-        },
-        "id": {
-            "type": "number"
-        },
-        "image": {
-            "type": "string"
-        },
-        "steps": {
-            "items": {
-            },
-            "type": "array"
-        },
-        "title": {
-            "type": "string"
-        }
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "properties": {
+    "finish": {},
+    "guideGroupId": {
+      "type": "number"
     },
-    "required": [
-        "guideGroupId",
-        "id",
-        "image",
-        "steps",
-        "title"
-    ],
-    "type": "object"
+    "id": {
+      "type": "number"
+    },
+    "image": {
+      "type": "string"
+    },
+    "steps": {
+      "items": {},
+      "type": "array"
+    },
+    "title": {
+      "type": "string"
+    }
+  },
+  "required": ["finish", "guideGroupId", "id", "image", "steps", "title"],
+  "type": "object"
 }
-

@@ -1,57 +1,43 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "definitions": {
-        "INavigationItem": {
-            "properties": {
-                "id": {
-                    "type": "number"
-                },
-                "type": {
-                    "$ref": "#/definitions/NavigationItemType"
-                }
-            },
-            "required": [
-                "id",
-                "type"
-            ],
-            "type": "object"
-        },
-        "NavigationItemType": {
-            "enum": [
-                "guide",
-                "guidegroup",
-                "interactive_guide"
-            ],
-            "type": "string"
-        }
-    },
-    "properties": {
-        "description": {
-            "type": "string"
-        },
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "definitions": {
+    "INavigationItem": {
+      "properties": {
         "id": {
-            "type": "number"
+          "type": "number"
         },
-        "items": {
-            "items": {
-                "$ref": "#/definitions/INavigationItem"
-            },
-            "type": "array"
-        },
-        "name": {
-            "type": "string"
-        },
-        "slug": {
-            "type": "string"
+        "type": {
+          "$ref": "#/definitions/NavigationItemType"
         }
+      },
+      "required": ["id", "type"],
+      "type": "object"
     },
-    "required": [
-        "description",
-        "id",
-        "items",
-        "name",
-        "slug"
-    ],
-    "type": "object"
+    "NavigationItemType": {
+      "enum": ["guide", "guidegroup", "interactive_guide"],
+      "type": "string"
+    }
+  },
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/definitions/INavigationItem"
+      },
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    }
+  },
+  "required": ["description", "id", "items", "name", "slug"],
+  "type": "object"
 }
-

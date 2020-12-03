@@ -1,27 +1,19 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "properties": {
-        "icon": {
-            "type": [
-                "null",
-                "string"
-            ]
-        },
-        "id": {
-            "type": "number"
-        },
-        "name": {
-            "type": "string"
-        },
-        "slug": {
-            "type": "string"
-        }
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "properties": {
+    "icon": {
+      "type": ["null", "string"]
     },
-    "required": [
-        "id",
-        "name",
-        "slug"
-    ],
-    "type": "object"
+    "id": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    }
+  },
+  "required": ["id", "name", "slug"],
+  "type": "object"
 }
-

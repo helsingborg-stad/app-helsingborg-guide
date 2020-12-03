@@ -1,16 +1,16 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
   "properties": {
-    "distance": {
-      "type": "number"
-    },
-    "id": {
+    "locale": {
       "type": "string"
     },
-    "nid": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
       "type": "string"
     }
   },
-  "required": ["id", "nid"],
+  "required": ["locale", "name", "slug"],
   "type": "object"
 }

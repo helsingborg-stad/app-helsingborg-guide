@@ -1,17 +1,13 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "properties": {
-        "latitude": {
-            "type": "number"
-        },
-        "longitude": {
-            "type": "number"
-        }
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "properties": {
+    "latitude": {
+      "type": "number"
     },
-    "required": [
-        "latitude",
-        "longitude"
-    ],
-    "type": "object"
+    "longitude": {
+      "type": "number"
+    }
+  },
+  "required": ["latitude", "longitude"],
+  "type": "object"
 }
-

@@ -177,6 +177,7 @@ declare type InteractiveGuide = {
   image: string,
   guideGroupId: number,
   steps: any[],
+  finish: any,
 };
 
 declare type GuideType = "guide" | "trail";
