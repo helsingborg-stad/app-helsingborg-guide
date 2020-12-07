@@ -8,7 +8,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "prepare": "patch-package",
+    "prepare": "npx patch-package",
     "eslint": "eslint flow-typed index.js src --report-unused-disable-directives",
     "test": "jest",
     "test:watch": "jest --watchAll",

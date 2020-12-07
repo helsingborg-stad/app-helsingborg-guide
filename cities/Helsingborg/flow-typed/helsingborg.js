@@ -6,10 +6,10 @@ declare type Action =
   | { type: "APP_BECAME_ACTIVE" }
   | { type: "SHOW_BOTTOM_BAR", visible: boolean }
   | {
-    type: "SELECT_CURRENT_GUIDEGROUP",
-    guideGroup: GuideGroup,
-    guides: Guide[]
-  }
+      type: "SELECT_CURRENT_GUIDEGROUP",
+      guideGroup: GuideGroup,
+      guides: Guide[],
+    }
   | { type: "SELECT_CURRENT_CONTENTOBJECT", contentObject: ContentObject }
   | { type: "SELECT_CURRENT_GUIDE", guide: Guide }
   | { type: "SELECT_CURRENT_CONTENTOBJECT_IMAGE", swiperIndex: number }
@@ -19,10 +19,10 @@ declare type Action =
   | { type: "SET_DEVELOPER_MODE", enabled: boolean }
   | { type: "SET_NAVIGATION_CATEGORIES", categories: NavigationCategory[] }
   | {
-    type: "SET_GUIDES_AND_GUIDEGROUPS",
-    guideGroups: GuideGroup[],
-    guides: Guide[]
-  }
+      type: "SET_GUIDES_AND_GUIDEGROUPS",
+      guideGroups: GuideGroup[],
+      guides: Guide[],
+    }
   | { type: "FETCH_NAVIGATION_REQUEST" }
   | { type: "FETCH_NAVIGATION_SUCCESS", categories: NavigationCategory[] }
   | { type: "FETCH_NAVIGATION_FAILURE", error: Error }
@@ -58,7 +58,7 @@ declare type NavigationItem = {
   id: number,
   type: NavigationItemType,
   guide?: Guide,
-  guideGroup?: GuideGroup
+  guideGroup?: GuideGroup,
 };
 
 declare type NavigationCategory = {
@@ -66,7 +66,7 @@ declare type NavigationCategory = {
   description: string,
   name: string,
   slug: string,
-  items: NavigationItem[]
+  items: NavigationItem[],
 };
 
 declare type Coords = {
@@ -76,20 +76,20 @@ declare type Coords = {
   accuracy: number,
   heading: number,
   altitude: number,
-  altitudeAccuracy: number
+  altitudeAccuracy: number,
 };
 
 declare type Dispatch = (action: Action | ThunkAction) => any;
 
 declare type Store = {
   dispatch: Dispatch,
-  getState: GetState
+  getState: GetState,
 };
 
 /* in lack of a better name. Geolocation was taken */
 declare type GeolocationType = {
   timestamp: number,
-  coords: Coords
+  coords: Coords,
 };
 
 declare type GetState = () => RootState;
@@ -105,18 +105,18 @@ declare type MediaContent = {
   created: string,
   /** @format date-time */
   modified: string,
-  url: string
+  url: string,
 };
 
 declare type PositionLongLat = {
   longitude: number,
-  latitude: number
+  latitude: number,
 };
 
 declare type Beacon = {
   id: string,
   nid: string,
-  distance?: number
+  distance?: number,
 };
 
 declare type LinkType =
@@ -131,7 +131,7 @@ declare type LinkType =
 declare type Link = {
   url: string,
   title?: string,
-  type?: LinkType
+  type?: LinkType,
 };
 
 declare type ContentObject = {
@@ -146,7 +146,7 @@ declare type ContentObject = {
   video?: MediaContent,
   links?: Link[],
   beacon?: Beacon,
-  location?: Location
+  location?: Location,
 };
 
 declare type Guide = {
@@ -168,7 +168,16 @@ declare type Guide = {
   images: Images,
   contentObjects: ContentObject[],
   distance?: number,
-  location?: Location
+  location?: Location,
+};
+
+declare type InteractiveGuide = {
+  id: number,
+  title: string,
+  image: string,
+  guideGroupId: number,
+  steps: any[],
+  finish: any,
 };
 
 declare type GuideType = "guide" | "trail";
@@ -183,23 +192,23 @@ declare type GuideGroup = {
   location: Location,
   pointProperties: PointProperty[],
   guidesCount: number,
-  distance?: number
+  distance?: number,
 };
 
 declare type GuideGroupState = {
   isFetching: boolean,
-  items: GuideGroup[]
+  items: GuideGroup[],
 };
 
 declare type GuideState = {
   isFetching: boolean,
-  items: Guide[]
+  items: Guide[],
 };
 
 declare type Images = {
   thumbnail?: ?string,
   medium?: ?string,
-  large?: ?string
+  large?: ?string,
 };
 
 declare type ResizeMode = "cover" | "contain" | "stretch" | "repeat" | "center";
@@ -213,13 +222,13 @@ declare type Location = {
   longitude: number,
   openingHours: OpenHour[],
   openingHourExceptions: OpenHourException[],
-  links: LinkAndService[]
+  links: LinkAndService[],
 };
 
 declare type MapItem = {
   guide?: Guide,
   guideGroup?: GuideGroup,
-  contentObject?: ContentObject
+  contentObject?: ContentObject,
 };
 
 declare type OpenHour = {
@@ -227,19 +236,19 @@ declare type OpenHour = {
   closed: boolean,
   opening: string,
   closing: string,
-  dayNumber: number
+  dayNumber: number,
 };
 
 declare type OpenHourException = {
   date: string,
-  description: string
+  description: string,
 };
 
 declare type PointProperty = {
   id: number,
   slug: string,
   name: string,
-  icon?: string
+  icon?: string,
 };
 
 declare type AudioState = {
@@ -251,7 +260,7 @@ declare type AudioState = {
   isPlaying: boolean,
   duration: number,
   currentPosition: number,
-  isMovingSlider: boolean
+  isMovingSlider: boolean,
 };
 
 declare type PostStatus = "publish" | "draft";
@@ -260,7 +269,7 @@ declare type TaskStatus = "not_started" | "failed" | "pending" | "done";
 declare type DownloadTask = {
   guideId: number,
   url: string,
-  status: TaskStatus
+  status: TaskStatus,
 };
 
 declare type DownloadStatus = "stopped" | "pending" | "paused" | "done";
@@ -268,11 +277,11 @@ declare type OfflineGuide = {
   status: DownloadStatus,
   progress: number, // between 0 and 1
   downloadTasks: { [string]: DownloadTask },
-  guide: Guide
+  guide: Guide,
 };
 
 declare type DownloadedGuidesState = {
-  offlineGuides: { [number]: OfflineGuide }
+  offlineGuides: { [number]: OfflineGuide },
 };
 
 declare type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
@@ -287,22 +296,22 @@ declare type UIState = {
   currentCategory: ?number,
   developerMode: boolean,
   currentBottomBarTab: number,
-  showBottomBar: boolean
+  showBottomBar: boolean,
 };
 
 declare type NavigationState = {
   isFetching: boolean,
   navigationCategories: NavigationCategory[],
-  currentLanguage: string
+  currentLanguage: string,
 };
 
 declare type ARState = {
   angleDelta: number,
-  verticalAngle: number
+  verticalAngle: number,
 };
 
 declare type QuizState = {
-  latestQuestionId: string
+  latestQuestionId: string,
 };
 
 declare type RootState = {
@@ -311,11 +320,11 @@ declare type RootState = {
   guides: GuideState,
   geolocation: {
     position: GeolocationType,
-    bearing: number
+    bearing: number,
   },
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
   arState: ARState,
-  quizState: QuizState
+  quizState: QuizState,
 };

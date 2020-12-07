@@ -10,7 +10,7 @@ import HeaderBackButton from "@shared-components/HeaderBackButton";
 import SearchButton from "@src/components/header/SearchButton";
 import {
   selectCurrentContentObject,
-  showBottomBar
+  showBottomBar,
 } from "@actions/uiStateActions";
 import { releaseAudioFile } from "@actions/audioActions";
 
@@ -19,7 +19,7 @@ declare type Props = {
   navigation: any,
   dispatchSelectContentObject(contentObject: ContentObject): void,
   dispatchReleaseAudio(): void,
-  dispatchShowBottomBar(visible: boolean): void
+  dispatchShowBottomBar(visible: boolean): void,
 };
 
 class GuideScreen extends Component<Props> {
@@ -30,7 +30,7 @@ class GuideScreen extends Component<Props> {
       return {
         title,
         headerRight: <SearchButton navigation={navigation} />,
-        headerLeft: <HeaderBackButton navigation={navigation} />
+        headerLeft: <HeaderBackButton navigation={navigation} />,
       };
     }
     return {};
@@ -57,13 +57,7 @@ class GuideScreen extends Component<Props> {
     AnalyticsUtils.logEvent("view_object", { name: obj.title });
     this.props.navigation.navigate("ObjectScreen", {
       title: obj.title,
-      currentGuide: this.props.currentGuide
-    });
-  };
-
-  onPressQuiz = (quiz: Quiz) => {
-    this.props.navigation.navigate("QuizScreen", {
-      quiz
+      currentGuide: this.props.currentGuide,
     });
   };
 
@@ -73,11 +67,10 @@ class GuideScreen extends Component<Props> {
       <GuideView
         guide={currentGuide}
         onPressContentObject={this.onPressContentObject}
-        onPressQuiz={this.onPressQuiz}
       />
     ) : (
-        <View />
-      );
+      <View />
+    );
   }
 }
 
@@ -92,7 +85,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
       dispatch(selectCurrentContentObject(contentObject)),
     dispatchReleaseAudio: () => dispatch(releaseAudioFile()),
     dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible))
+      dispatch(showBottomBar(visible)),
   };
 }
 

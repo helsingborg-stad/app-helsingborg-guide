@@ -12,11 +12,12 @@ import { selectCurrentGuide, showBottomBar } from "@actions/uiStateActions";
 type Props = {
   currentGuideGroup: GuideGroup,
   currentGuides: Guide[],
+  currentInteractiveGuide?: InteractiveGuide,
   geolocation: GeolocationType,
   navigation: Object,
   isFetchingGuides: boolean,
   selectCurrentGuide(guide: Guide): void,
-  dispatchShowBottomBar(visible: boolean): void
+  dispatchShowBottomBar(visible: boolean): void,
 };
 
 class LocationScreen extends Component<Props> {
@@ -26,7 +27,7 @@ class LocationScreen extends Component<Props> {
       ...HeaderStyles.noElevation,
       title,
       headerRight: <View />,
-      headerLeft: <HeaderBackButton navigation={navigation} />
+      headerLeft: <HeaderBackButton navigation={navigation} />,
     };
   };
 
@@ -44,7 +45,7 @@ class LocationScreen extends Component<Props> {
       this.props.selectCurrentGuide(guide);
       navigation.navigate("TrailScreen", {
         guide,
-        title: guide.name
+        title: guide.name,
       });
     } else if (guide.guideType === "guide") {
       this.props.selectCurrentGuide(guide);
@@ -52,12 +53,24 @@ class LocationScreen extends Component<Props> {
     }
   };
 
+  onPressInteractiveGuide = (interactiveGuide: InteractiveGuide) => {
+    const { navigation } = this.props;
+
+    AnalyticsUtils.logEvent("view_interactive_guide", {
+      name: interactiveGuide.title,
+    });
+    navigation.navigate("QuizScreen", {
+      quiz: interactiveGuide,
+    });
+  };
+
   render() {
     const {
       currentGuideGroup,
       currentGuides,
+      currentInteractiveGuide,
       geolocation,
-      isFetchingGuides
+      isFetchingGuides,
     } = this.props;
     const now = new Date();
     return (
@@ -69,10 +82,12 @@ class LocationScreen extends Component<Props> {
         <LocationView
           guideGroup={currentGuideGroup}
           guides={currentGuides}
+          interactiveGuide={currentInteractiveGuide}
           now={now}
           geolocation={geolocation}
           navigation={this.props.navigation}
           onPressGuide={this.onPressGuide}
+          onPressInteractiveGuide={this.onPressInteractiveGuide}
           isFetchingGuides={isFetchingGuides}
         />
       </>
@@ -81,22 +96,31 @@ class LocationScreen extends Component<Props> {
 }
 
 function mapStateToProps(state: RootState) {
-  const { isFetching } = state.guides;
+  const { items: guideItems, isFetching: isFetchingGuides } = state.guides;
+  const {
+    items: interactiveGuideItems,
+    isFetching: isFetchingInteractiveGuides,
+  } = state.interactiveGuides;
   const { currentGuideGroup } = state.uiState;
   const { geolocation } = state;
 
   let currentGuides = [];
+  let currentInteractiveGuide = null;
   if (currentGuideGroup) {
-    currentGuides = state.guides.items.filter(
+    currentGuides = guideItems.filter(
       guide => guide.guideGroupId === currentGuideGroup.id
+    );
+    currentInteractiveGuide = interactiveGuideItems.find(
+      interactiveGuide => interactiveGuide.guideGroupId === currentGuideGroup.id
     );
   }
 
   return {
     currentGuideGroup,
     currentGuides,
+    currentInteractiveGuide,
     geolocation: geolocation?.position,
-    isFetchingGuides: isFetching
+    isFetchingGuides: isFetchingGuides || isFetchingInteractiveGuides,
   };
 }
 
@@ -104,8 +128,11 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectCurrentGuide: (guide: Guide) => dispatch(selectCurrentGuide(guide)),
     dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible))
+      dispatch(showBottomBar(visible)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LocationScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LocationScreen);

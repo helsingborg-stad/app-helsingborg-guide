@@ -1,192 +1,155 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "definitions": {
-        "ILink": {
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "type": {
-                    "enum": [
-                        "facebook",
-                        "instagram",
-                        "spotify",
-                        "twitter",
-                        "vimeo",
-                        "web",
-                        "youtube"
-                    ],
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "url"
-            ],
-            "type": "object"
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "definitions": {
+    "ILink": {
+      "properties": {
+        "title": {
+          "type": "string"
         },
-        "ILocation": {
-            "properties": {
-                "id": {
-                    "type": "number"
-                },
-                "latitude": {
-                    "type": "number"
-                },
-                "links": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "$ref": "#/definitions/ILink"
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "longitude": {
-                    "type": "number"
-                },
-                "openingHourExceptions": {
-                    "items": {
-                        "$ref": "#/definitions/IOpeningHourException"
-                    },
-                    "type": "array"
-                },
-                "openingHours": {
-                    "items": {
-                        "$ref": "#/definitions/IOpeningHours"
-                    },
-                    "type": "array"
-                },
-                "streetAddress": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                },
-                "title": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                }
-            },
-            "required": [
-                "id",
-                "latitude",
-                "longitude",
-                "streetAddress",
-                "title"
-            ],
-            "type": "object"
+        "type": {
+          "enum": [
+            "facebook",
+            "instagram",
+            "spotify",
+            "twitter",
+            "vimeo",
+            "web",
+            "youtube"
+          ],
+          "type": "string"
         },
-        "IOpeningHourException": {
-            "properties": {
-                "date": {
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "date",
-                "description"
-            ],
-            "type": "object"
-        },
-        "IOpeningHours": {
-            "properties": {
-                "closed": {
-                    "type": "boolean"
-                },
-                "closing": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                },
-                "dayNumber": {
-                    "enum": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7
-                    ],
-                    "type": "number"
-                },
-                "opening": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                },
-                "weekday": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "closed",
-                "dayNumber",
-                "opening",
-                "weekday"
-            ],
-            "type": "object"
+        "url": {
+          "type": "string"
         }
+      },
+      "required": ["url"],
+      "type": "object"
     },
-    "properties": {
-        "dateEnd": {
-            "description": "Enables basic storage and retrieval of dates and times.",
-            "format": "date-time",
-            "type": "string"
+    "ILocation": {
+      "properties": {
+        "id": {
+          "type": "number"
         },
-        "dateStart": {
-            "description": "Enables basic storage and retrieval of dates and times.",
-            "format": "date-time",
-            "type": "string"
+        "latitude": {
+          "type": "number"
+        },
+        "links": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/definitions/ILink"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "openingHourExceptions": {
+          "items": {
+            "$ref": "#/definitions/IOpeningHourException"
+          },
+          "type": "array"
+        },
+        "openingHours": {
+          "items": {
+            "$ref": "#/definitions/IOpeningHours"
+          },
+          "type": "array"
+        },
+        "streetAddress": {
+          "type": ["null", "string"]
+        },
+        "title": {
+          "type": ["null", "string"]
+        }
+      },
+      "required": ["id", "latitude", "longitude", "streetAddress", "title"],
+      "type": "object"
+    },
+    "IOpeningHourException": {
+      "properties": {
+        "date": {
+          "format": "date-time",
+          "type": "string"
         },
         "description": {
-            "type": "string"
-        },
-        "eventId": {
-            "type": "number"
-        },
-        "id": {
-            "type": "string"
-        },
-        "imageUrl": {
-            "type": "string"
-        },
-        "location": {
-            "$ref": "#/definitions/ILocation"
-        },
-        "name": {
-            "type": "string"
-        },
-        "slug": {
-            "type": "string"
+          "type": "string"
         }
+      },
+      "required": ["date", "description"],
+      "type": "object"
     },
-    "required": [
-        "dateEnd",
-        "dateStart",
-        "description",
-        "eventId",
-        "id",
-        "imageUrl",
-        "location",
-        "name",
-        "slug"
-    ],
-    "type": "object"
+    "IOpeningHours": {
+      "properties": {
+        "closed": {
+          "type": "boolean"
+        },
+        "closing": {
+          "type": ["null", "string"]
+        },
+        "dayNumber": {
+          "enum": [1, 2, 3, 4, 5, 6, 7],
+          "type": "number"
+        },
+        "opening": {
+          "type": ["null", "string"]
+        },
+        "weekday": {
+          "type": "string"
+        }
+      },
+      "required": ["closed", "dayNumber", "opening", "weekday"],
+      "type": "object"
+    }
+  },
+  "properties": {
+    "dateEnd": {
+      "description": "Enables basic storage and retrieval of dates and times.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "dateStart": {
+      "description": "Enables basic storage and retrieval of dates and times.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "eventId": {
+      "type": "number"
+    },
+    "id": {
+      "type": "string"
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "location": {
+      "$ref": "#/definitions/ILocation"
+    },
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "dateEnd",
+    "dateStart",
+    "description",
+    "eventId",
+    "id",
+    "imageUrl",
+    "location",
+    "name",
+    "slug"
+  ],
+  "type": "object"
 }
-

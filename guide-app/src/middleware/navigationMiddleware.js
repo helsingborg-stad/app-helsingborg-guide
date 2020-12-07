@@ -1,13 +1,14 @@
 // @flow
 import {
   setNavigationCategories,
-  fetchNavigation
+  fetchNavigation,
 } from "@actions/navigationActions";
 import { fetchGuides, fetchGuidesForGuideGroup } from "@actions/guideActions";
 import {
   fetchGuideGroups,
-  setGuidesAndGuideGroups
+  setGuidesAndGuideGroups,
 } from "@actions/guideGroupActions";
+import { fetchInteractiveGuides } from "@actions/interactiveGuideActions";
 
 /**
  * Responsible for linking the navigation categories with it's content (guide, guidegroups etc.).
@@ -18,7 +19,8 @@ import {
 function linkNavigationWithContent(
   categories: NavigationCategory[],
   guideGroups: GuideGroup[],
-  guides: Guide[]
+  guides: Guide[],
+  interactiveGuides: InteractiveGuide[]
 ): NavigationCategory[] {
   const sections: NavigationCategory[] = categories.map(cat => {
     const items: NavigationItem[] = [];
@@ -34,7 +36,7 @@ function linkNavigationWithContent(
         if (guide) {
           result = {
             ...item,
-            guide
+            guide,
           };
         }
       } else if (type === "guidegroup") {
@@ -42,7 +44,15 @@ function linkNavigationWithContent(
         if (guideGroup) {
           result = {
             ...item,
-            guideGroup
+            guideGroup,
+          };
+        }
+      } else if (type === "interactive_guide") {
+        const interactiveGuide = interactiveGuides.find(i => i.id === id);
+        if (interactiveGuide) {
+          result = {
+            ...item,
+            interactiveGuide,
           };
         }
       }
@@ -79,22 +89,26 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
       const { currentLanguage, navigationCategories } = navigation;
 
       // clear downloaded guides/guidegroups
-      dispatch(setGuidesAndGuideGroups([], []));
+      dispatch(setGuidesAndGuideGroups([], [], []));
 
       // batch fetch a range of guides/guidegroups per navigation section
       navigationCategories.forEach(cat => {
         const guides: number[] = [];
         const guideGroups: number[] = [];
+        const interactiveGuides: number[] = [];
         cat.items.forEach(navItem => {
           const { type, id } = navItem;
           if (type === "guide") {
             guides.push(id);
           } else if (type === "guidegroup") {
             guideGroups.push(id);
+          } else if (type === "interactive_guide") {
+            interactiveGuides.push(id);
           }
         });
         dispatch(fetchGuides(currentLanguage, guides));
         dispatch(fetchGuideGroups(currentLanguage, guideGroups));
+        dispatch(fetchInteractiveGuides(currentLanguage, interactiveGuides));
       });
       break;
     }
@@ -104,11 +118,13 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
       {
         const { items: guideGroups } = nextState.guideGroups;
         const { items: guides } = nextState.guides;
+        const { items: interactiveGuides } = nextState.interactiveGuides;
         const { navigationCategories: categories } = nextState.navigation;
         const renderableCategories = linkNavigationWithContent(
           categories,
           guideGroups,
-          guides
+          guides,
+          interactiveGuides
         );
         dispatch(setNavigationCategories(renderableCategories));
       }

@@ -4,9 +4,15 @@ import fetchUtils from "@utils/fetchUtils";
 
 export function setGuidesAndGuideGroups(
   guideGroups: GuideGroup[],
-  guides: Guide[]
+  guides: Guide[],
+  interactiveGuides: InteractiveGuide[]
 ): Action {
-  return { type: "SET_GUIDES_AND_GUIDEGROUPS", guideGroups, guides };
+  return {
+    type: "SET_GUIDES_AND_GUIDEGROUPS",
+    guideGroups,
+    guides,
+    interactiveGuides,
+  };
 }
 
 export function fetchGuideGroupsRequest(): Action {

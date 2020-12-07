@@ -78,7 +78,7 @@ function BotImageMessage({ item }: { item: QuizBotImageMessage }) {
     <ImageBackground
       style={[styles.botImage, { aspectRatio: item.aspectRatio }]}
       imageStyle={styles.botImageImage}
-      source={item.source}
+      source={item.url}
       resizeMode="contain"
     />
   );
@@ -161,12 +161,12 @@ function Dialog({
   const { alternatives } = item;
   let buttons;
   if (isPrompt || alternatives.length === 1) {
-    buttons = alternatives.map(alternative => (
+    buttons = alternatives.map((alternative, index) => (
       <Button
+        key={index}
         style={styles.promptButton}
         title={alternative.text}
         onPress={() => onAlternativeSelected(item, alternative)}
-        key={alternative.id}
       />
     ));
   } else {
@@ -238,17 +238,19 @@ const QuizStart = ({
   item: QuizItem,
   onQuizStartAction: () => void,
   isHistoryItem: boolean,
-}) => (
-  <View style={styles.startContainer}>
-    <View>
-      <StartImage item={item.image} />
-      <StartText item={item} />
+}) => {
+  return (
+    <View style={styles.startContainer}>
+      <View>
+        <StartImage item={item.image} />
+        <StartText item={item} />
+      </View>
+      {!isHistoryItem && (
+        <StartAction item={item} onQuizStartAction={onQuizStartAction} />
+      )}
     </View>
-    {!isHistoryItem && (
-      <StartAction item={item.action} onQuizStartAction={onQuizStartAction} />
-    )}
-  </View>
-);
+  );
+};
 
 const StartText = ({ item }: { item: QuizItem }) => (
   <View style={styles.startTextContainer}>
@@ -267,7 +269,7 @@ const StartAction = ({
     <View style={styles.promptContainer}>
       <Button
         style={styles.promptButton}
-        title={item.text}
+        title={item.title}
         onPress={() => {
           onQuizStartAction(item);
         }}
@@ -406,7 +408,7 @@ function renderFlatListItem(
         nextItem={nextItem}
       />
     );
-  } else if (item.type === "bot") {
+  } else if (item.type === "text_message") {
     return (
       <BotMessage
         key={item.id}
@@ -415,7 +417,7 @@ function renderFlatListItem(
         nextItem={nextItem}
       />
     );
-  } else if (item.type === "botimage") {
+  } else if (item.type === "image") {
     return <BotImageMessage key={item.id} item={item} />;
   } else if (item.type === "user") {
     return (
@@ -474,7 +476,7 @@ export default function QuizView({
   const [dialogHeight, setDialogHeight] = useState();
   const [promptHeight, setPromptHeight] = useState();
   const dialogItem = items[0]?.type === "dialog" ? items[0] : null;
-  const promptItem = items[0]?.type === "prompt" ? items[0] : null;
+  const promptItem = items[0]?.type === "button" ? items[0] : null;
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -482,6 +484,7 @@ export default function QuizView({
           ref={flatlistRef}
           inverted={items.length > 0} // This is a workaround for RN bug https://github.com/facebook/react-native/issues/21196
           data={items}
+          keyExtractor={(item, index) => `${item.type}${index}`}
           contentContainerStyle={{ flexGrow: 1 }}
           renderItem={({ item, index }) => {
             const prevItem = items[index - 1];

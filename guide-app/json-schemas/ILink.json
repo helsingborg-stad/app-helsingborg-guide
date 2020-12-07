@@ -1,28 +1,25 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "properties": {
-        "title": {
-            "type": "string"
-        },
-        "type": {
-            "enum": [
-                "facebook",
-                "instagram",
-                "spotify",
-                "twitter",
-                "vimeo",
-                "web",
-                "youtube"
-            ],
-            "type": "string"
-        },
-        "url": {
-            "type": "string"
-        }
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "properties": {
+    "title": {
+      "type": "string"
     },
-    "required": [
-        "url"
-    ],
-    "type": "object"
+    "type": {
+      "enum": [
+        "facebook",
+        "instagram",
+        "spotify",
+        "twitter",
+        "vimeo",
+        "web",
+        "youtube"
+      ],
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "required": ["url"],
+  "type": "object"
 }
-

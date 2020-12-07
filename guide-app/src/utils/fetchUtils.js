@@ -3,7 +3,6 @@
 import { API_BASE_URL, GROUP_ID } from "@data/endpoints";
 import { validate } from "./JSONValidator";
 import { DateUtils } from "@utils";
-import { getQuizForGuideId } from "@assets/data/QuizContent";
 
 async function fetchJSON(
   relativeUrl: string,
@@ -85,6 +84,25 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
   return fetchedGuides;
 }
 
+async function getInteractiveGuides(
+  langCode: string,
+  ids: number[]
+): Promise<InteractiveGuide[]> {
+  if (ids.length === 0) {
+    return [];
+  }
+
+  const params = idsToParamString(ids);
+
+  const json = await fetchJSON("interactive_guide", langCode, params);
+  const fetchedGuides: InteractiveGuide[] = validateData(
+    json,
+    "interactiveGuide"
+  );
+
+  return fetchedGuides;
+}
+
 async function getGuidesForGuideGroup(
   langCode: string,
   guideGroupId: number
@@ -93,19 +111,7 @@ async function getGuidesForGuideGroup(
   const json = await fetchJSON("guide", langCode, params);
   const fetchedGuides: Guide[] = validateData(json, "guide");
 
-  amendGuidesWithQuiz(langCode, fetchedGuides);
-
   return fetchedGuides;
-}
-
-// TODO this is a temporary solution until quiz support is added to the CMS
-function amendGuidesWithQuiz(langCode: string, guides: Guide[]) {
-  for (const guide of guides) {
-    const quiz = getQuizForGuideId(langCode, guide.id);
-    if (quiz) {
-      guide.quiz = quiz;
-    }
-  }
 }
 
 export async function getNavigation(
@@ -139,6 +145,7 @@ export default {
   getEvents,
   getGuideGroups,
   getGuides,
+  getInteractiveGuides,
   getGuidesForGuideGroup,
   getNavigation,
 };
