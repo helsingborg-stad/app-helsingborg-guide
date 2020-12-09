@@ -164,16 +164,16 @@ class QuizScreen extends Component<Props, State> {
       return;
     }
 
-    let delayToNextItem = 400;
+    let delayToNextItem = 1200;
     if (item.type === "bot") {
       const longMessageLength = 60;
       const textLengthFactor = Math.min(
         1.0,
         item.text.length / longMessageLength
       );
-      delayToNextItem = 700 + 800 * textLengthFactor;
+      delayToNextItem = 1000 + 1500 * textLengthFactor;
     } else if (item.type === "image") {
-      delayToNextItem = 600;
+      delayToNextItem = 1200;
     }
 
     this.setState(
