@@ -8,11 +8,12 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  ImageBackground,
+  Image,
 } from "react-native";
 import { Colors, TextStyles } from "@assets/styles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Share from "react-native-share";
+import { Dimensions } from "react-native";
 
 type Props = {
   navigation: Object,
@@ -82,7 +83,10 @@ class QuizResultScreen extends Component<Props, State> {
           backgroundColor={Colors.themeSecondary}
         />
         <SafeAreaView style={styles.container}>
-          <ScrollView style={styles.container}>
+          <ScrollView
+            style={{ flexGrow: 1, height: "100%" }}
+            contentContainerStyle={styles.contentContainer}
+          >
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{finish.header}</Text>
               <TouchableOpacity
@@ -99,18 +103,18 @@ class QuizResultScreen extends Component<Props, State> {
                 />
               </TouchableOpacity>
             </View>
-            <ImageBackground
-              style={styles.finishedImage}
-              imageStyle={styles.botImageImage}
-              source={{ uri: finish.images[0].url }}
-              resizeMode="contain"
-            />
-            <ImageBackground
-              style={styles.finishedImage}
-              imageStyle={styles.botImageImage}
-              source={{ uri: finish.images[1].url }}
-              resizeMode="contain"
-            />
+            <View style={styles.imagesContainer}>
+              <Image
+                style={styles.finishedImage}
+                source={{ uri: finish.images[0].url }}
+                resizeMode="contain"
+              />
+              <Image
+                style={styles.finishedImage}
+                source={{ uri: finish.images[1].url }}
+                resizeMode="contain"
+              />
+            </View>
             <View style={styles.bodyContainer}>
               <Text style={styles.bodyTitle}>{finish.title}</Text>
               <Text style={styles.bodyText}>{finish.body}</Text>
@@ -133,7 +137,13 @@ class QuizResultScreen extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: Dimensions.get("window").height,
     backgroundColor: Colors.themeSecondary,
+  },
+  contentContainer: {
+    flex: 1,
+    justifyContent: "space-between",
+    paddingBottom: 60,
   },
   titleContainer: {
     marginTop: 16,
@@ -141,6 +151,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 36,
+    width: "100%",
   },
   title: {
     ...TextStyles.title,
@@ -151,6 +162,7 @@ const styles = StyleSheet.create({
   button: {
     position: "absolute",
     backgroundColor: "white",
+    alignItems: "center",
     width: 36,
     height: 36,
     borderRadius: 36,
@@ -161,7 +173,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
     marginHorizontal: 38,
     backgroundColor: "white",
     textAlignVertical: "center",
@@ -178,24 +189,23 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   },
   shareIcon: {
-    alignSelf: "center",
     lineHeight: 48,
   },
   buttonIcon: {
-    alignSelf: "center",
     lineHeight: 37,
   },
-  finishedImage: {
+  imagesContainer: {
+    width: "50%",
     alignSelf: "center",
+  },
+  finishedImage: {
     marginHorizontal: 11,
     marginBottom: 4,
-    width: 220,
+    width: "100%",
     aspectRatio: 1,
   },
-  botImageImage: {
-    // borderRadius: 10
-  },
   bodyContainer: {
+    flexGrow: 1,
     marginTop: 22,
     justifyContent: "center",
     flexDirection: "column",
