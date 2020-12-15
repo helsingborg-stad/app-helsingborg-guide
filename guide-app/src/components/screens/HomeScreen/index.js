@@ -172,9 +172,11 @@ class HomeScreen extends Component<Props> {
 function mapStateToProps(state: RootState) {
   const {
     navigation,
+    guideGroups,
     uiState: { currentHomeTab },
   } = state;
-  const { isFetching, navigationCategories } = navigation;
+  const { navigationCategories } = navigation;
+  const { fetchingIds } = guideGroups;
 
   const categories = navigationCategories.map(cat => {
     const data = cat.items
@@ -188,6 +190,8 @@ function mapStateToProps(state: RootState) {
       };
     }
   });
+
+  const isFetching = fetchingIds.length > 0;
 
   const items =
     !isFetching && categories.length > 0

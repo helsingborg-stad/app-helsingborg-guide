@@ -2,7 +2,8 @@
 
 const initialState: GuideGroupState = {
   isFetching: false,
-  items: []
+  items: [],
+  fetchingIds: [],
 };
 
 export default function guideGroupReducer(
@@ -11,7 +12,11 @@ export default function guideGroupReducer(
 ): GuideGroupState {
   switch (action.type) {
     case "FETCH_GUIDEGROUPS_REQUEST":
-      return { ...state, isFetching: true };
+      return {
+        ...state,
+        isFetching: true,
+        fetchingIds: [...state.fetchingIds, ...action.ids],
+      };
     case "FETCH_GUIDEGROUPS_SUCCESS": {
       const items = [...state.items];
       action.guideGroups.forEach(g => {
@@ -24,12 +29,33 @@ export default function guideGroupReducer(
           items.push(g);
         }
       });
-      return { ...state, items, isFetching: false };
+
+      const remainingIds = state.fetchingIds.filter(
+        id => !action.ids.includes(id)
+      );
+
+      return {
+        ...state,
+        items,
+        isFetching: remainingIds.length > 0,
+        fetchingIds: remainingIds,
+      };
     }
     case "FETCH_GUIDEGROUPS_FAILURE":
-      return { ...state, isFetching: false };
+      const remainingIds = state.fetchingIds.filter(
+        id => !action.ids.includes(id)
+      );
+
+      return {
+        ...state,
+        isFetching: remainingIds.length > 0,
+        fetchingIds: remainingIds,
+      };
     case "SET_GUIDES_AND_GUIDEGROUPS":
-      return { ...state, items: action.guideGroups };
+      return {
+        ...state,
+        items: action.guideGroups,
+      };
     default:
       return state;
   }
