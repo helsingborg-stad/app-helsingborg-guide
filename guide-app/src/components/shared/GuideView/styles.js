@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: Colors.white,
   },
+  contentContainer: {
+    paddingBottom: 60,
+  },
   viewContainer: {
     flex: 1,
     justifyContent: "flex-end",
