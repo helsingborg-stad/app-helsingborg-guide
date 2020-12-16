@@ -13,7 +13,6 @@ import {
 import { Colors, TextStyles } from "@assets/styles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Share from "react-native-share";
-import { Dimensions } from "react-native";
 
 type Props = {
   navigation: Object,
@@ -83,10 +82,7 @@ class QuizResultScreen extends Component<Props, State> {
           backgroundColor={Colors.themeSecondary}
         />
         <SafeAreaView style={styles.container}>
-          <ScrollView
-            style={{ flexGrow: 1, height: "100%" }}
-            contentContainerStyle={styles.contentContainer}
-          >
+          <ScrollView contentContainerStyle={styles.contentContainer}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{finish.header}</Text>
               <TouchableOpacity
@@ -137,11 +133,9 @@ class QuizResultScreen extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: Dimensions.get("window").height,
     backgroundColor: Colors.themeSecondary,
   },
   contentContainer: {
-    flex: 1,
     justifyContent: "space-between",
     paddingBottom: 60,
   },
@@ -222,7 +216,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     color: "white",
     textAlign: "center",
-    flex: 1,
+    flexGrow: 1,
     fontSize: 16,
     lineHeight: 22,
     marginHorizontal: 42,
