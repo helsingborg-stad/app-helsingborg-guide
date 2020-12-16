@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginHorizontal: "4%",
   },
   optionalTexts: {
-    marginBottom: "4%",
+    marginBottom: 14,
   },
   guideTaglineText: {
     ...StyleSheet.flatten(TextStyles.medium),
