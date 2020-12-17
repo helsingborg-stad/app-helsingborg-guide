@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { ActivityIndicator, View } from "react-native";
 import PhotoView from "react-native-photo-view";
 import { connect } from "react-redux";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import { loadFromCache } from "@utils/DownloadMediaUtils";
 import styles from "./styles";
 
@@ -12,14 +13,20 @@ const MIN_SCALE = 0.95;
 
 type Props = {
   guideId: ?number,
-  url: ?string
+  url: ?string,
 };
 
 type State = {
-  imageSource?: ?any
+  imageSource?: ?any,
 };
 
 class ImageScreen extends Component<Props, State> {
+  static navigationOptions = ({ navigation }) => ({
+    headerLeft: <HeaderBackButton navigation={navigation} />,
+    headerRight: null,
+    headerStyle: styles.mainContainer,
+  });
+
   constructor(props: Props) {
     super(props);
 
@@ -28,11 +35,6 @@ class ImageScreen extends Component<Props, State> {
     const { guideId, url } = props;
     this.tryLoadFromCache(guideId, url);
   }
-
-  static navigationOptions = {
-    headerRight: null,
-    headerStyle: styles.mainContainer
-  };
 
   tryLoadFromCache = async (guideId: ?number, uri: ?string): Promise<any> => {
     if (!guideId || !uri) {
@@ -81,7 +83,7 @@ function mapStateToProps(state: RootState) {
 
   return {
     url: currentImage,
-    guideId: id
+    guideId: id,
   };
 }
 
