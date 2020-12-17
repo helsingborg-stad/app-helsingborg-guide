@@ -15,27 +15,30 @@ export function setGuidesAndGuideGroups(
   };
 }
 
-export function fetchGuideGroupsRequest(): Action {
-  return { type: "FETCH_GUIDEGROUPS_REQUEST" };
+export function fetchGuideGroupsRequest(ids: number[]): Action {
+  return { type: "FETCH_GUIDEGROUPS_REQUEST", ids };
 }
 
-export function fetchGuideGroupsSuccess(guideGroups: GuideGroup[]): Action {
-  return { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups };
+export function fetchGuideGroupsSuccess(
+  guideGroups: GuideGroup[],
+  ids
+): Action {
+  return { type: "FETCH_GUIDEGROUPS_SUCCESS", guideGroups, ids };
 }
 
-export function fetchGuideGroupsFailure(error: Error): Action {
-  return { type: "FETCH_GUIDEGROUPS_FAILURE", error };
+export function fetchGuideGroupsFailure(error: Error, ids: number[]): Action {
+  return { type: "FETCH_GUIDEGROUPS_FAILURE", error, ids };
 }
 
 export function fetchGuideGroups(langCode: string, ids: number[]): ThunkAction {
   return function fetchGuideGroupsDispatch(dispatch: Dispatch) {
-    dispatch(fetchGuideGroupsRequest());
+    dispatch(fetchGuideGroupsRequest(ids));
 
     return fetchUtils
       .getGuideGroups(langCode, ids)
-      .then(guideGroups => dispatch(fetchGuideGroupsSuccess(guideGroups)))
+      .then(guideGroups => dispatch(fetchGuideGroupsSuccess(guideGroups, ids)))
       .catch(error => {
-        dispatch(fetchGuideGroupsFailure(error.message));
+        dispatch(fetchGuideGroupsFailure(error.message, ids));
       });
   };
 }
