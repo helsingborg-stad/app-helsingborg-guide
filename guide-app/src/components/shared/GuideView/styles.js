@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: Colors.white,
   },
+  contentContainer: {
+    paddingBottom: 60,
+  },
   viewContainer: {
     flex: 1,
     justifyContent: "flex-end",
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
     marginHorizontal: "4%",
   },
   optionalTexts: {
-    marginBottom: "4%",
+    marginBottom: 14,
   },
   guideTaglineText: {
     ...StyleSheet.flatten(TextStyles.medium),

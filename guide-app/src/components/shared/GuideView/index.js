@@ -69,7 +69,10 @@ class GuideView extends Component<Props> {
           barStyle="light-content"
           backgroundColor={Colors.themeSecondary}
         />
-        <ScrollView style={styles.container}>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+        >
           <View>
             <ImageView
               source={{ uri: guide.images.large, sessionId: id }}
