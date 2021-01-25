@@ -11,7 +11,7 @@
     "guide-app"
   ],
   "scripts": {
-    "postinstall": "jetify"
+    "postinstall": "patch-package && jetify"
   },
   "dependencies": {
     "react-native": "*"
