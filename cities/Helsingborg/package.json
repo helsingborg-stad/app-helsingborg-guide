@@ -13,7 +13,7 @@
     "ios:device:release": "react-native run-ios --device --configuration Release",
     "ios:simulator:debug": "react-native run-ios --simulator=\"iPhone 11 Pro\" --configuration Debug",
     "ios:simulator:release": "react-native run-ios --simulator --configuration Release",
-    "postinstall": "(cd ../../ && yarn jetify)",
+    "postinstall": "(cd ../../ && yarn postinstall)",
     "react:link": "react-native link",
     "translate": "node ./scripts/translate.js"
   },
