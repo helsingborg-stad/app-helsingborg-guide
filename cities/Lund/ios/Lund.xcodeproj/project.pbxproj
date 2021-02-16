@@ -780,7 +780,7 @@
 			baseConfigurationReference = 91A83CE8DD0EB59D000710C1 /* Pods-Lund.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = NN86R6A8K8;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -789,6 +789,7 @@
 				);
 				INFOPLIST_FILE = Lund/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -805,7 +806,7 @@
 			baseConfigurationReference = 0B87EA3071701171259C0715 /* Pods-Lund.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = NN86R6A8K8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -813,6 +814,7 @@
 				);
 				INFOPLIST_FILE = Lund/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
