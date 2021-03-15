@@ -27,7 +27,6 @@
 		850806DD23955D080024B584 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850806DC23955D080024B584 /* CoreBluetooth.framework */; };
 		850806DF23955D0F0024B584 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850806DE23955D0F0024B584 /* CoreLocation.framework */; };
 		850806E123955D460024B584 /* EstimoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850806E023955D460024B584 /* EstimoteSDK.framework */; };
-		857CF61E2395589E00FB5AFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 857CF61D2395589E00FB5AFC /* GoogleService-Info.plist */; };
 		85825491A7A7FD65CCAB7388 /* libPods-Lund-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A30797745002A30772E2F7F /* libPods-Lund-tvOS.a */; };
 		858C701F239561AD003793D5 /* ESSTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 858C7016239561AC003793D5 /* ESSTimer.m */; };
 		858C7020239561AD003793D5 /* ESSBeaconScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 858C7017239561AC003793D5 /* ESSBeaconScanner.m */; };
@@ -100,7 +99,6 @@
 		850806DC23955D080024B584 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		850806DE23955D0F0024B584 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		850806E023955D460024B584 /* EstimoteSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EstimoteSDK.framework; path = Frameworks/EstimoteSDK.framework; sourceTree = "<group>"; };
-		857CF61D2395589E00FB5AFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		858C7013239561AC003793D5 /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationManager.h; path = Lund/NotificationManager.h; sourceTree = "<group>"; };
 		858C7014239561AC003793D5 /* ESSTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESSTimer.h; path = Lund/ESSTimer.h; sourceTree = "<group>"; };
 		858C7015239561AC003793D5 /* IosBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IosBeacon.h; path = Lund/IosBeacon.h; sourceTree = "<group>"; };
@@ -241,7 +239,6 @@
 				858C701C239561AD003793D5 /* IosBeacon.m */,
 				858C7013239561AC003793D5 /* NotificationManager.h */,
 				858C701D239561AD003793D5 /* NotificationManager.m */,
-				857CF61D2395589E00FB5AFC /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* Lund */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* LundTests */,
@@ -454,7 +451,6 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				AF594A30249B56330063574D /* Tahoma-Bold.ttf in Resources */,
 				850716BB2397C80D00C97E4A /* InfoPlist.strings in Resources */,
-				857CF61E2395589E00FB5AFC /* GoogleService-Info.plist in Resources */,
 				DDFDE99524114C2E84649296 /* Tahoma.ttf in Resources */,
 				ABF72CE75C454E6CAF67C617 /* AntDesign.ttf in Resources */,
 				4A8B39DB9C634F489525716E /* Entypo.ttf in Resources */,
@@ -769,7 +765,7 @@
 			baseConfigurationReference = 91A83CE8DD0EB59D000710C1 /* Pods-Lund.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = NN86R6A8K8;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -778,7 +774,7 @@
 				);
 				INFOPLIST_FILE = Lund/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -795,7 +791,7 @@
 			baseConfigurationReference = 0B87EA3071701171259C0715 /* Pods-Lund.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NN86R6A8K8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -803,7 +799,7 @@
 				);
 				INFOPLIST_FILE = Lund/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

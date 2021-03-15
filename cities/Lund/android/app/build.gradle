@@ -135,8 +135,8 @@ android {
         applicationId "com.lund"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
-        versionName "1.0"
+        versionCode 7
+        versionName "1.2"
     }
     splits {
         abi {
@@ -199,6 +199,12 @@ android {
     }
 }
 
+android {
+    dexOptions {
+       javaMaxHeapSize "4g"
+    }
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"
@@ -230,5 +236,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-apply plugin: 'com.google.gms.google-services'
 apply from: "../../../../node_modules/react-native-vector-icons/fonts.gradle"
