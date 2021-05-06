@@ -32,7 +32,7 @@
     "guide-app": "file:../../guide-app",
     "haversine": "^1.1.1",
     "html-entities": "^1.2.1",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "mercator-projection": "0.0.2",
     "prop-types": "15.7.2",
     "react": "16.12.0",
