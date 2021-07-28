@@ -13,7 +13,7 @@
     "ios:device:release": "react-native run-ios --device --configuration Release",
     "ios:simulator:debug": "react-native run-ios --simulator --configuration Debug",
     "ios:simulator:release": "react-native run-ios --simulator --configuration Release",
-    "postinstall": "(cd ../../ && yarn jetify)",
+    "postinstall": "(cd ../../ && yarn postinstall)",
     "react:link": "react-native link",
     "translate": "node ./scripts/translate.js"
   },
@@ -46,6 +46,8 @@
     "react-native-permissions": "^2.0.3",
     "react-native-photo-view": "https://github.com/alwx/react-native-photo-view.git",
     "react-native-remote-svg": "2.0.6",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-safe-area-view": "2.0.0",
     "react-native-share": "2.0.0",
     "react-native-svg": "9.13.3",
     "react-native-swiper": "^1.6.0-rc.3",

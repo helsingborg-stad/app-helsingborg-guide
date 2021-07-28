@@ -11,7 +11,7 @@
     "guide-app"
   ],
   "scripts": {
-    "postinstall": "jetify"
+    "postinstall": "patch-package && jetify"
   },
   "dependencies": {
     "react-native": "*"
@@ -43,5 +43,8 @@
     "patch-package": "6.2.0",
     "react-native-clean-project": "3.3.0",
     "react-test-renderer": "16.12.0"
+  },
+  "resolutions": {
+    "react-native-safe-area-view": "^2.0.0"
   }
 }

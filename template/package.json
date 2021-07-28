@@ -14,7 +14,7 @@
     "ios:device:release": "react-native run-ios --device --configuration Release",
     "ios:simulator:debug": "react-native run-ios --simulator --configuration Debug",
     "ios:simulator:release": "react-native run-ios --simulator --configuration Release",
-    "postinstall": "(cd ../../ && yarn jetify)",
+    "postinstall": "(cd ../../ && yarn postinstall)",
     "react:link": "react-native link",
     "translate": "node ./scripts/translate.js"
   },
@@ -54,7 +54,7 @@
     "react-native-version-number": "^0.3.6",
     "react-native-video": "5.0.2",
     "react-native-webview": "^7.5.1",
-    "react-navigation": "4.0.10",
+    "react-navigation": "4.4.3",
     "react-navigation-stack": "^1.10.3",
     "react-redux": "7.1.3",
     "redux": "4.0.4",

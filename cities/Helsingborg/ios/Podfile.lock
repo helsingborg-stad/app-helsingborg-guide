@@ -263,6 +263,8 @@ PODS:
     - React
   - react-native-photo-view (1.5.2):
     - React
+  - react-native-safe-area-context (3.1.9):
+    - React-Core
   - react-native-slider (2.0.5):
     - React
   - react-native-version-number (0.3.6):
@@ -358,6 +360,7 @@ DEPENDENCIES:
   - react-native-maps (from `../../../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../../../node_modules/@react-native-community/netinfo`)"
   - react-native-photo-view (from `../../../node_modules/react-native-photo-view`)
+  - react-native-safe-area-context (from `../../../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../../../node_modules/@react-native-community/slider`)"
   - react-native-version-number (from `../../../node_modules/react-native-version-number`)
   - react-native-video (from `../../../node_modules/react-native-video`)
@@ -446,6 +449,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/@react-native-community/netinfo"
   react-native-photo-view:
     :path: "../../../node_modules/react-native-photo-view"
+  react-native-safe-area-context:
+    :path: "../../../node_modules/react-native-safe-area-context"
   react-native-slider:
     :path: "../../../node_modules/@react-native-community/slider"
   react-native-version-number:
@@ -531,6 +536,7 @@ SPEC CHECKSUMS:
   react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
   react-native-netinfo: a59d8426a8484f739fe3a95dd6ad5af1435db05f
   react-native-photo-view: 63e9e61da873531f931008b545d8d10c5373ddf8
+  react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   react-native-slider: 39208600e44f885e2d2c0510b5c6435a0f62d087
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
   react-native-video: d01ed7ff1e38fa7dcc6c15c94cf505e661b7bfd0
@@ -558,4 +564,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: dc9f35b3b1f8fa67aa24bcd225b9d75a38a72b58
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

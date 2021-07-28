@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { PersistGate } from "redux-persist/integration/react";
 import { Alert, UIManager, Platform, Linking } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
@@ -123,15 +124,17 @@ export default class GuideApp extends Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <Nav
-            onAppStarted={() => store.dispatch(appStarted())}
-            onAppBecameActive={() => store.dispatch(appBecameActive())}
-            onAppBecameInactive={() => store.dispatch(appBecameInactive())}
-          />
-        </PersistGate>
-      </Provider>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <Nav
+              onAppStarted={() => store.dispatch(appStarted())}
+              onAppBecameActive={() => store.dispatch(appBecameActive())}
+              onAppBecameInactive={() => store.dispatch(appBecameInactive())}
+            />
+          </PersistGate>
+        </Provider>
+      </SafeAreaProvider>
     );
   }
 }
