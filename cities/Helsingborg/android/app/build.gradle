@@ -135,8 +135,9 @@ android {
         applicationId "com.guidehbg"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 15000177
-        versionName "1.8"
+        versionCode 15000178
+        versionName "1.9"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -196,6 +197,13 @@ android {
             }
 
         }
+    }
+}
+
+// Java was running out of memory?
+android {
+    dexOptions {
+       javaMaxHeapSize "3g"
     }
 }
 
