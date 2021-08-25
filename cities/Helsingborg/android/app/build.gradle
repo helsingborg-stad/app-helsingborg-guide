@@ -135,8 +135,8 @@ android {
         applicationId "com.guidehbg"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 15000178
-        versionName "1.9"
+        versionCode 15000179
+        versionName "1.91"
         multiDexEnabled true
     }
     splits {
