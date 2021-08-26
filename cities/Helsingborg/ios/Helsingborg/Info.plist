@@ -59,6 +59,8 @@
 	<string>Not being used</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Not being used</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Used to collect anonymous usage data</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Black.ttf</string>

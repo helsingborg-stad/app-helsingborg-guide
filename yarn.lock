@@ -6767,10 +6767,10 @@ react-native-maps@react-native-community/react-native-maps#d6f89bd:
   version "0.26.1"
   resolved "https://codeload.github.com/react-native-community/react-native-maps/tar.gz/d6f89bdddcbabd0710aa275c75b48eab64759f7a"
 
-react-native-permissions@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-2.0.3.tgz#b6da83e5e313e41ba5f70ff2c4567291766b0140"
-  integrity sha512-8pd+UhyphAiFGzBil5d5pDxRf/rH+20SzDNu9cFnCtoD2MbYTVH7GjXsxaZ2lPsmwrqYYbF8FBfwmncKf/G1+Q==
+react-native-permissions@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.0.5.tgz#94542a343abdac801fa0a4593ea2c751cb45c41f"
+  integrity sha512-hcvLtHhTyOTXC+CCv79d4Qtdnj6PGuY5Ms0fhW8V6Et1T/mPvzO6++Du4jwEv/oHZ62qMWKUDq0/Tsh63QHuyQ==
 
 "react-native-photo-view@https://github.com/alwx/react-native-photo-view.git":
   version "1.5.2"

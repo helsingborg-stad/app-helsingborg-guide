@@ -43,7 +43,7 @@
     "react-native-image-marker": "0.6.1",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-maps": "react-native-community/react-native-maps#d6f89bd",
-    "react-native-permissions": "^2.0.3",
+    "react-native-permissions": "^3.0.5",
     "react-native-photo-view": "https://github.com/alwx/react-native-photo-view.git",
     "react-native-remote-svg": "2.0.6",
     "react-native-safe-area-context": "^3.1.9",

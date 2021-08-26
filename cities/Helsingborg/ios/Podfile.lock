@@ -30,13 +30,13 @@ PODS:
     - FirebaseCoreDiagnosticsInterop (~> 1.0)
     - GoogleUtilities/Environment (~> 6.2)
     - GoogleUtilities/Logger (~> 6.2)
-  - FirebaseCoreDiagnostics (1.1.2):
-    - FirebaseCoreDiagnosticsInterop (~> 1.0)
-    - GoogleDataTransportCCTSupport (~> 1.0)
-    - GoogleUtilities/Environment (~> 6.2)
-    - GoogleUtilities/Logger (~> 6.2)
+  - FirebaseCoreDiagnostics (1.2.4):
+    - FirebaseCoreDiagnosticsInterop (~> 1.2)
+    - GoogleDataTransportCCTSupport (~> 3.0)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
     - nanopb (~> 0.3.901)
-  - FirebaseCoreDiagnosticsInterop (1.1.0)
+  - FirebaseCoreDiagnosticsInterop (1.2.0)
   - FirebaseInstanceID (4.2.7):
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
@@ -57,41 +57,43 @@ PODS:
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
-  - GoogleDataTransport (3.2.0)
-  - GoogleDataTransportCCTSupport (1.2.3):
-    - GoogleDataTransport (~> 3.2)
+  - GoogleDataTransport (6.2.1)
+  - GoogleDataTransportCCTSupport (3.0.0):
+    - GoogleDataTransport (~> 6.0)
     - nanopb (~> 0.3.901)
-  - GoogleUtilities/AppDelegateSwizzler (6.4.0):
+  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.4.0)
-  - GoogleUtilities/Logger (6.4.0):
+  - GoogleUtilities/Environment (6.7.2):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.7.2):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.4.0):
+  - GoogleUtilities/MethodSwizzler (6.7.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.4.0):
+  - GoogleUtilities/Network (6.7.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.4.0)"
-  - GoogleUtilities/Reachability (6.4.0):
+  - "GoogleUtilities/NSData+zlib (6.7.2)"
+  - GoogleUtilities/Reachability (6.7.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.4.0):
+  - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - Permission-BluetoothPeripheral (2.0.3):
+  - Permission-BluetoothPeripheral (3.0.5):
     - RNPermissions
-  - Permission-Camera (2.0.3):
+  - Permission-Camera (3.0.5):
     - RNPermissions
-  - Permission-LocationWhenInUse (2.0.3):
+  - Permission-LocationWhenInUse (3.0.5):
     - RNPermissions
-  - Permission-Notifications (2.0.3):
+  - Permission-Notifications (3.0.5):
     - RNPermissions
+  - PromisesObjC (1.2.12)
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
     - FBLazyVector (= 0.61.5)
@@ -326,8 +328,8 @@ PODS:
     - React
   - RNImageMarker (0.6.1):
     - React
-  - RNPermissions (2.0.3):
-    - React
+  - RNPermissions (3.0.5):
+    - React-Core
   - RNShare (2.0.0):
     - React
   - RNSVG (9.13.3):
@@ -341,10 +343,10 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - Permission-BluetoothPeripheral (from `../../../node_modules/react-native-permissions/ios/BluetoothPeripheral.podspec`)
-  - Permission-Camera (from `../../../node_modules/react-native-permissions/ios/Camera.podspec`)
-  - Permission-LocationWhenInUse (from `../../../node_modules/react-native-permissions/ios/LocationWhenInUse.podspec`)
-  - Permission-Notifications (from `../../../node_modules/react-native-permissions/ios/Notifications.podspec`)
+  - Permission-BluetoothPeripheral (from `../../../node_modules/react-native/../react-native-permissions/ios/BluetoothPeripheral`)
+  - Permission-Camera (from `../../../node_modules/react-native/../react-native-permissions/ios/Camera`)
+  - Permission-LocationWhenInUse (from `../../../node_modules/react-native/../react-native-permissions/ios/LocationWhenInUse`)
+  - Permission-Notifications (from `../../../node_modules/react-native/../react-native-permissions/ios/Notifications`)
   - RCTRequired (from `../../../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../../../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../../../node_modules/react-native/`)
@@ -401,6 +403,7 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - nanopb
+    - PromisesObjC
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -416,13 +419,13 @@ EXTERNAL SOURCES:
   glog:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/glog.podspec"
   Permission-BluetoothPeripheral:
-    :path: "../../../node_modules/react-native-permissions/ios/BluetoothPeripheral.podspec"
+    :path: "../../../node_modules/react-native/../react-native-permissions/ios/BluetoothPeripheral"
   Permission-Camera:
-    :path: "../../../node_modules/react-native-permissions/ios/Camera.podspec"
+    :path: "../../../node_modules/react-native/../react-native-permissions/ios/Camera"
   Permission-LocationWhenInUse:
-    :path: "../../../node_modules/react-native-permissions/ios/LocationWhenInUse.podspec"
+    :path: "../../../node_modules/react-native/../react-native-permissions/ios/LocationWhenInUse"
   Permission-Notifications:
-    :path: "../../../node_modules/react-native-permissions/ios/Notifications.podspec"
+    :path: "../../../node_modules/react-native/../react-native-permissions/ios/Notifications"
   RCTRequired:
     :path: "../../../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -509,20 +512,21 @@ SPEC CHECKSUMS:
   Firebase: 458d109512200d1aca2e1b9b6cf7d68a869a4a46
   FirebaseAnalytics: 45f36d9c429fc91d206283900ab75390cd05ee8a
   FirebaseCore: 307ea2508df730c5865334e41965bd9ea344b0e5
-  FirebaseCoreDiagnostics: 511f4f3ed7d440bb69127e8b97c2bc8befae639e
-  FirebaseCoreDiagnosticsInterop: e9b1b023157e3a2fc6418b5cb601e79b9af7b3a0
+  FirebaseCoreDiagnostics: b59c024493a409f8aecba02c99928d0d8431d159
+  FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseInstanceID: ebd2ea79ee38db0cb5f5167b17a0d387e1cc7b6e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   GoogleAppMeasurement: dfe55efa543e899d906309eaaac6ca26d249862f
-  GoogleDataTransport: 8e9b210c97d55fbff306cc5468ff91b9cb32dcf5
-  GoogleDataTransportCCTSupport: 202d7cdf9c4a7d81a2bb7f7e7e1ba6faa421b1f2
-  GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
+  GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
+  GoogleDataTransportCCTSupport: 0f39025e8cf51f168711bd3fb773938d7e62ddb5
+  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  Permission-BluetoothPeripheral: 9de32b160ea6c6341f9797b7342b2bd9a2cc4811
-  Permission-Camera: 731959b8ffb5757e1ee85893fb49c3aa021ef512
-  Permission-LocationWhenInUse: 5cb8e0df1463dfab567d2a3d2589ab557fda68cb
-  Permission-Notifications: c11ff327feb378a2e18ccffcb0af482973ed7482
+  Permission-BluetoothPeripheral: deb3e2052364da825f8516d200c40f066b5ff421
+  Permission-Camera: ac603073e4128e51e6ca3c39129778f05b4082fa
+  Permission-LocationWhenInUse: e1168a583654f1d2d34d3a18c4c6518ce409ad2a
+  Permission-Notifications: 16ccd862111103378a7bab9fb1c5c71addffc348
+  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
@@ -557,11 +561,11 @@ SPEC CHECKSUMS:
   RNFBApp: edeadb99669dd39f9d7f8f7f68d420fda4d8b7d8
   RNGestureHandler: 7add966bb5d90ee8cf38d4341f87814474357972
   RNImageMarker: 3d2ad96afe3db0965ecff23ca97d65b812d06b47
-  RNPermissions: 9e437a90de84a5402ff689d4da233730b81556c2
+  RNPermissions: 7043bacbf928eae25808275cfe73799b8f618911
   RNShare: 8b171d4b43c1d886917fdd303bf7a4b87167b05c
   RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: dc9f35b3b1f8fa67aa24bcd225b9d75a38a72b58
+PODFILE CHECKSUM: 904c9ae16cdce667d57f651eb13590cd6617326d
 
 COCOAPODS: 1.10.0
