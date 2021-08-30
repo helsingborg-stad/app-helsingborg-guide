@@ -1,14 +1,29 @@
-import firebase from "@react-native-firebase/app";
-import analytics from "@react-native-firebase/analytics";
-
-// const firebase = RNFirebase.app();
-
-firebase.app();
+import analytics, { firebase } from "@react-native-firebase/analytics";
+import { request, PERMISSIONS } from "react-native-permissions";
 
 export default {
+  requestPermission: async () => {
+    try {
+      return await request(PERMISSIONS.IOS.APP_TRACKING_TRANSPARENCY);
+    } catch (e) {
+      return false;
+    }
+  },
+
+  setAnalyticsEnabledStatus: async (enabled: Boolean) => {
+    try {
+      await firebase.analytics().setAnalyticsCollectionEnabled(enabled);
+    } catch (error) {
+      console.warn("Failed to enable analytics collection", error);
+    }
+  },
+
   setScreen: screenName => {
     if (!__DEV__ && screenName) {
-      analytics().setCurrentScreen(screenName);
+      analytics().logScreenView({
+        screen_name: screenName,
+        screen_class: screenName,
+      });
     }
   },
 
@@ -16,5 +31,5 @@ export default {
     if (!__DEV__) {
       analytics().logEvent(name, params);
     }
-  }
+  },
 };

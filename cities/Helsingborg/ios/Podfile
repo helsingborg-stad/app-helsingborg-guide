@@ -1,6 +1,9 @@
 platform :ios, '10.0'
 require_relative '../../../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+$FirebaseSDKVersion = '8.6.0'
+$RNFirebaseAnalyticsWithoutAdIdSupport=true
+
 target 'Helsingborg' do
   # Pods for Helsingborg
   rn_path = '../../../node_modules/react-native'
@@ -38,6 +41,7 @@ target 'Helsingborg' do
   #PERMISSIONS
   permissions_path = "#{rn_path}/../react-native-permissions/ios"
 
+  pod 'Permission-AppTrackingTransparency', :path => "#{permissions_path}/AppTrackingTransparency"
   pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral"
   # pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars.podspec"
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera"

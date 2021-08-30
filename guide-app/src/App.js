@@ -18,6 +18,7 @@ import {
   appBecameInactive,
 } from "@actions/uiStateActions";
 import { setLanguage } from "@actions/navigationActions";
+import TrackingPermission from "@shared-components/TrackingPermission";
 
 const { store, persistor } = configureStore();
 
@@ -127,6 +128,7 @@ export default class GuideApp extends Component {
       <SafeAreaProvider>
         <Provider store={store}>
           <PersistGate persistor={persistor}>
+            <TrackingPermission />
             <Nav
               onAppStarted={() => store.dispatch(appStarted())}
               onAppBecameActive={() => store.dispatch(appBecameActive())}
