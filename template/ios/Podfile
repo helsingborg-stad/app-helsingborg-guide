@@ -31,11 +31,6 @@ target 'GuideApp' do
   pod 'ReactCommon/turbomodule/core', :path => "#{rn_path}/ReactCommon"
   pod 'Yoga', :path => "#{rn_path}/ReactCommon/yoga"
 
-  # Manual linking should not be required, but can't get it to work without it.
-  # https://github.com/react-native-community/react-native-linear-gradient#linking-for-react-native--059-only
-  # https://github.com/react-native-community/react-native-linear-gradient/issues/434
-  pod 'BVLinearGradient', :path => '../../../node_modules/react-native-linear-gradient'
-
   pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"
   pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/glog.podspec"
   pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
@@ -45,7 +40,7 @@ target 'GuideApp' do
 
   pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral.podspec"
   # pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars.podspec"
-  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
   # pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts.podspec"
   # pod 'Permission-FaceID', :path => "#{permissions_path}/FaceID.podspec"
   # pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways.podspec"
@@ -65,6 +60,12 @@ target 'GuideApp' do
     # Pods for testing
   end
 
+  post_install do |installer|
+    ## Fix for XCode 12.5 beta
+    find_and_replace("../node_modules/react-native/React/CxxBridge/RCTCxxBridge.mm",
+    "_initializeModules:(NSArray<id<RCTBridgeModule>> *)modules", "_initializeModules:(NSArray<Class> *)modules")
+  end
+
   use_native_modules!
 end
 
@@ -76,4 +77,18 @@ target 'GuideApp-tvOS' do
     # Pods for testing
   end
 
+end
+
+
+def find_and_replace(dir, findstr, replacestr)
+  Dir[dir].each do |name|
+      text = File.read(name)
+      replace = text.gsub(findstr,replacestr)
+      if text != replace
+          puts "Fix: " + name
+          File.open(name, "w") { |file| file.puts replace }
+          STDOUT.flush
+      end
+  end
+  Dir[dir + '*/'].each(&method(:find_and_replace))
 end

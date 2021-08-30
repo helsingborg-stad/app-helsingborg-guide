@@ -135,8 +135,8 @@ android {
         applicationId "com.guidehbg"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 15000178
-        versionName "1.9"
+        versionCode 15000179
+        versionName "1.91"
         multiDexEnabled true
     }
     splits {
@@ -217,9 +217,6 @@ dependencies {
     // Required for react-native-navigation v5
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03"
-
-    // Beacons
-    implementation 'org.altbeacon:android-beacon-library:2.16.1'
 
     if (enableHermes) {
         def hermesPath = "../../../../node_modules/hermes-engine/android/";
