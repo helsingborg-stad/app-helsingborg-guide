@@ -29,14 +29,9 @@
 		850806DB23955D010024B584 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		850806DD23955D080024B584 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850806DC23955D080024B584 /* CoreBluetooth.framework */; };
 		850806DF23955D0F0024B584 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850806DE23955D0F0024B584 /* CoreLocation.framework */; };
-		850806E123955D460024B584 /* EstimoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850806E023955D460024B584 /* EstimoteSDK.framework */; };
 		857CF61E2395589E00FB5AFC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 857CF61D2395589E00FB5AFC /* GoogleService-Info.plist */; };
 		85825491A7A7FD65CCAB7388 /* libPods-Helsingborg-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A30797745002A30772E2F7F /* libPods-Helsingborg-tvOS.a */; };
-		858C701F239561AD003793D5 /* ESSTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 858C7016239561AC003793D5 /* ESSTimer.m */; };
-		858C7020239561AD003793D5 /* ESSBeaconScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 858C7017239561AC003793D5 /* ESSBeaconScanner.m */; };
 		858C7021239561AD003793D5 /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 858C7019239561AD003793D5 /* AudioManager.m */; };
-		858C7022239561AD003793D5 /* ESSEddystone.m in Sources */ = {isa = PBXBuildFile; fileRef = 858C701A239561AD003793D5 /* ESSEddystone.m */; };
-		858C7023239561AD003793D5 /* IosBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 858C701C239561AD003793D5 /* IosBeacon.m */; };
 		858C7024239561AD003793D5 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 858C701D239561AD003793D5 /* NotificationManager.m */; };
 		8685BA114B7142C5A53CCD2E /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DDE1B7FA4554EA997A9204D /* Roboto-MediumItalic.ttf */; };
 		933E72AEA13944168B47A93E /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C11828DE9F24214812A9D70 /* Roboto-LightItalic.ttf */; };
@@ -79,7 +74,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* HelsingborgTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelsingborgTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HelsingborgTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelsingborgTests.m; sourceTree = "<group>"; };
@@ -117,18 +111,9 @@
 		850716BF2397C86000C97E4A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		850806DC23955D080024B584 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		850806DE23955D0F0024B584 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		850806E023955D460024B584 /* EstimoteSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EstimoteSDK.framework; path = Frameworks/EstimoteSDK.framework; sourceTree = "<group>"; };
 		857CF61D2395589E00FB5AFC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		858C7013239561AC003793D5 /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationManager.h; path = Helsingborg/NotificationManager.h; sourceTree = "<group>"; };
-		858C7014239561AC003793D5 /* ESSTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESSTimer.h; path = Helsingborg/ESSTimer.h; sourceTree = "<group>"; };
-		858C7015239561AC003793D5 /* IosBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IosBeacon.h; path = Helsingborg/IosBeacon.h; sourceTree = "<group>"; };
-		858C7016239561AC003793D5 /* ESSTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESSTimer.m; path = Helsingborg/ESSTimer.m; sourceTree = "<group>"; };
-		858C7017239561AC003793D5 /* ESSBeaconScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESSBeaconScanner.m; path = Helsingborg/ESSBeaconScanner.m; sourceTree = "<group>"; };
-		858C7018239561AD003793D5 /* ESSEddystone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESSEddystone.h; path = Helsingborg/ESSEddystone.h; sourceTree = "<group>"; };
 		858C7019239561AD003793D5 /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioManager.m; path = Helsingborg/AudioManager.m; sourceTree = "<group>"; };
-		858C701A239561AD003793D5 /* ESSEddystone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESSEddystone.m; path = Helsingborg/ESSEddystone.m; sourceTree = "<group>"; };
-		858C701B239561AD003793D5 /* ESSBeaconScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESSBeaconScanner.h; path = Helsingborg/ESSBeaconScanner.h; sourceTree = "<group>"; };
-		858C701C239561AD003793D5 /* IosBeacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IosBeacon.m; path = Helsingborg/IosBeacon.m; sourceTree = "<group>"; };
 		858C701D239561AD003793D5 /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationManager.m; path = Helsingborg/NotificationManager.m; sourceTree = "<group>"; };
 		858C701E239561AD003793D5 /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioManager.h; path = Helsingborg/AudioManager.h; sourceTree = "<group>"; };
 		9031355635BEBCAF441F06AC /* Pods-Helsingborg-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Helsingborg-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Helsingborg-tvOSTests/Pods-Helsingborg-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -167,7 +152,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				850806DF23955D0F0024B584 /* CoreLocation.framework in Frameworks */,
-				850806E123955D460024B584 /* EstimoteSDK.framework in Frameworks */,
 				850806DB23955D010024B584 /* JavaScriptCore.framework in Frameworks */,
 				850806DD23955D080024B584 /* CoreBluetooth.framework in Frameworks */,
 				0763B2C48EF214737332AE52 /* libPods-Helsingborg.a in Frameworks */,
@@ -213,7 +197,6 @@
 		13B07FAE1A68108700A75B9A /* Helsingborg */ = {
 			isa = PBXGroup;
 			children = (
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -227,7 +210,6 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				850806E023955D460024B584 /* EstimoteSDK.framework */,
 				850806DE23955D0F0024B584 /* CoreLocation.framework */,
 				850806DC23955D080024B584 /* CoreBluetooth.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
@@ -286,14 +268,6 @@
 			children = (
 				858C701E239561AD003793D5 /* AudioManager.h */,
 				858C7019239561AD003793D5 /* AudioManager.m */,
-				858C701B239561AD003793D5 /* ESSBeaconScanner.h */,
-				858C7017239561AC003793D5 /* ESSBeaconScanner.m */,
-				858C7018239561AD003793D5 /* ESSEddystone.h */,
-				858C701A239561AD003793D5 /* ESSEddystone.m */,
-				858C7014239561AC003793D5 /* ESSTimer.h */,
-				858C7016239561AC003793D5 /* ESSTimer.m */,
-				858C7015239561AC003793D5 /* IosBeacon.h */,
-				858C701C239561AD003793D5 /* IosBeacon.m */,
 				858C7013239561AC003793D5 /* NotificationManager.h */,
 				858C701D239561AD003793D5 /* NotificationManager.m */,
 				857CF61D2395589E00FB5AFC /* GoogleService-Info.plist */,
@@ -716,14 +690,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				858C7023239561AD003793D5 /* IosBeacon.m in Sources */,
-				858C701F239561AD003793D5 /* ESSTimer.m in Sources */,
 				858C7024239561AD003793D5 /* NotificationManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				858C7020239561AD003793D5 /* ESSBeaconScanner.m in Sources */,
 				858C7021239561AD003793D5 /* AudioManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				858C7022239561AD003793D5 /* ESSEddystone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
