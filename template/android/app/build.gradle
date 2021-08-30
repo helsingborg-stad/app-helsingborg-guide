@@ -210,9 +210,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03"
 
-    // Beacons
-    implementation 'org.altbeacon:android-beacon-library:2.16.1'
-
     implementation project(':react-native-linear-gradient')
 
     if (enableHermes) {
