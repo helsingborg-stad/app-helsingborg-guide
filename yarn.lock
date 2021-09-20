@@ -6971,6 +6971,11 @@ react-native-maps@react-native-community/react-native-maps#d6f89bd:
   version "0.26.1"
   resolved "https://codeload.github.com/react-native-community/react-native-maps/tar.gz/d6f89bdddcbabd0710aa275c75b48eab64759f7a"
 
+react-native-permissions@^2.0.3:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-2.2.2.tgz#3d2a63f6b7d6be52fc86e30f77412a9566283028"
+  integrity sha512-ihf4shQDSX5Oo9ChQXb9kr13mmyyNem5MaEvOpr3dCjhBOBWyEMztXm9/uPK1Qg5PsNpaYLa1KpcPZDCw87LXg==
+
 react-native-permissions@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.0.5.tgz#94542a343abdac801fa0a4593ea2c751cb45c41f"
@@ -8194,9 +8199,9 @@ tmp@^0.0.33:
     os-tmpdir "~1.0.2"
 
 tmpl@1.0.x:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"
-  integrity sha1-I2QN17QtAEM5ERQIIOXPRA5SHdE=
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
+  integrity sha512-3f0uOEAQwIqGuWW2MVzYg8fV/QNnc/IpuJNG837rLuczAaLVHslWHZQj4IGiEl5Hs3kkbhwL9Ab7Hrsmuj+Smw==
 
 to-fast-properties@^1.0.3:
   version "1.0.3"
