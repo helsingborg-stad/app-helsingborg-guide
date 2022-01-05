@@ -16,6 +16,7 @@ module.exports = {
           "@services": "../../guide-app/src/services",
           "@shared-components": "../../guide-app/src/components/shared",
           "@src": "../../guide-app/src",
+          "@hooks": "../../guide-app/src/hooks",
           "@utils": "../../guide-app/src/utils",
         },
       },

@@ -10,6 +10,7 @@ module.exports = {
       "@services": "./src/services",
       "@shared-components": "./src/components/shared",
       "@src": "./src",
+      "@hooks": "./src/hooks",
       "@utils": "./src/utils",
     },
   },

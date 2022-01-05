@@ -17,7 +17,7 @@ import { eventCalendarURL } from "@data/urls";
 import LangService from "@services/langService";
 import { StyleSheetUtils } from "@utils";
 import { DateUtils } from "@utils";
-
+import useOpenLink from "@hooks/useOpenLink";
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 
 const styles = StyleSheet.create({
@@ -118,6 +118,7 @@ function CalendarEvent({ event, currentLanguage }: Props) {
     dateStart,
     dateEnd
   } = event;
+  const { openLink } = useOpenLink();
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
   const decodedLocationTitle = decode(location.title, {
     level: "xml",
@@ -133,47 +134,6 @@ function CalendarEvent({ event, currentLanguage }: Props) {
   const eventLinkDate = DateUtils.eventLinkDate(dateStart);
   const eventUrl = `${eventCalendarURL}/${slug}?date=${eventLinkDate}`;
 
-  const openLink = async (url) => {
-    try {
-      if (await InAppBrowser.isAvailable()) {
-        const result = await InAppBrowser.open(url, {
-          // iOS Properties
-          dismissButtonStyle: 'cancel',
-          preferredBarTintColor: '#701A5A',
-          preferredControlTintColor: 'white',
-          readerMode: false,
-          animated: true,
-          modalPresentationStyle: 'fullScreen',
-          modalTransitionStyle: 'coverVertical',
-          modalEnabled: true,
-          enableBarCollapsing: false,
-          // Android Properties
-          showTitle: true,
-          toolbarColor: '#701A5A',
-          secondaryToolbarColor: 'black',
-          navigationBarColor: 'black',
-          navigationBarDividerColor: 'white',
-          enableUrlBarHiding: true,
-          enableDefaultShare: true,
-          forceCloseOnRedirection: false,
-          // Specify full animation resource identifier(package:anim/name)
-          // or only resource name(in case of animation bundled with app).
-          animations: {
-            startEnter: 'slide_in_right',
-            startExit: 'slide_out_left',
-            endEnter: 'slide_in_left',
-            endExit: 'slide_out_right'
-          },
-          headers: {
-            'my-custom-header': 'my custom header value'
-          }
-        })
-      }
-      else Linking.openURL(url)
-    } catch (error) {
-      Alert.alert(error.message)
-    }
-  }
   return (
     <TouchableOpacity
       style={styles.item}
