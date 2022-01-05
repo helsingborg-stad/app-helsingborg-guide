@@ -133,7 +133,7 @@ class SettingsScreen extends Component<Props, State> {
     const title = LangService.strings.SETTINGS;
     return {
       title,
-      headerLeft: () => null,
+      headerLeft: null,
     };
   };
 

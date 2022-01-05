@@ -5,10 +5,10 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  ProgressBarAndroid,
-  ProgressViewIOS,
-  Dimensions
+  Dimensions,
 } from "react-native";
+import { ProgressView as ProgressViewIOS } from "@react-native-community/progress-view";
+import { ProgressBar as ProgressBarAndroid } from "@react-native-community/progress-bar-android";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IconTextTouchable from "@shared-components/IconTextTouchable";

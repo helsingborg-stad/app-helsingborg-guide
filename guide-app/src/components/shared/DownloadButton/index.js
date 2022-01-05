@@ -2,12 +2,12 @@
 import React, { Component } from "react";
 import {
   Platform,
-  ProgressViewIOS,
-  ProgressBarAndroid,
   Text,
   TouchableOpacity,
   View
 } from "react-native";
+import { ProgressView as ProgressViewIOS } from "@react-native-community/progress-view";
+import { ProgressBar as ProgressBarAndroid } from "@react-native-community/progress-bar-android";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import LangService from "@services/langService";

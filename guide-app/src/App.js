@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { PersistGate } from "redux-persist/integration/react";
-import { Alert, UIManager, Platform, Linking } from "react-native";
+import { Alert, UIManager, Platform, Linking, LogBox } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import Nav from "@src/Nav";
 import configureStore from "@src/store/configureStore";
@@ -71,7 +71,7 @@ function alert() {
 }
 
 
-export const GuideApp = () => {
+const GuideApp = () => {
 
   const [netInfo, setNetInfo] = useState();
 
@@ -101,6 +101,11 @@ export const GuideApp = () => {
   }, []);
 
   useEffect(() => {
+    LogBox.ignoreLogs([
+      'Warning: componentWillMount has been renamed, and is not recommended for use.',
+      'Warning: componentWillReceiveProps has been renamed, and is not recommended for use.',
+      'Warning: componentWillUpdate has been renamed, and is not recommended for use.',
+    ]);
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
@@ -126,7 +131,7 @@ export const GuideApp = () => {
   );
 };
 
-
+export default GuideApp;
 
 
 //

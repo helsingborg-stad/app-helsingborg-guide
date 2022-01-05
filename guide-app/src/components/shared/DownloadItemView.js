@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import {
   Platform,
-  ProgressViewIOS,
   View,
   Text,
   StyleSheet,
-  ProgressBarAndroid,
   TouchableOpacity,
 } from "react-native";
+import { ProgressView as ProgressViewIOS } from "@react-native-community/progress-view";
+import { ProgressBar as ProgressBarAndroid } from "@react-native-community/progress-bar-android";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ViewContainer from "@shared-components/view_container";
 import RoundedThumbnail from "@shared-components/thumbnail_rounded";
