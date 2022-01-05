@@ -230,10 +230,10 @@ class MapMarkerView extends Component<Props, State> {
     return (
       <View style={styles.container}>
         <MapView
-          ref={ref => {
+          ref={(ref) => {
             this.map = ref;
           }}
-          onRegionChangeComplete={e => {
+          onRegionChangeComplete={(e) => {
             this.longitudeDelta = e.longitudeDelta;
             this.latitudeDelta = e.latitudeDelta;
           }}

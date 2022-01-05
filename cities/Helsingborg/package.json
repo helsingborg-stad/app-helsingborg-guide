@@ -15,7 +15,9 @@
     "ios:simulator:release": "react-native run-ios --simulator --configuration Release",
     "postinstall": "(cd ../../ && yarn postinstall)",
     "react:link": "react-native link",
-    "translate": "node ./scripts/translate.js"
+    "translate": "node ./scripts/translate.js",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.14",
