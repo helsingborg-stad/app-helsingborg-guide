@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import { XmlEntities } from "html-entities";
+import { decode } from "html-entities";
 
 import { Colors, TextStyles } from "@assets/styles";
 import { eventCalendarURL } from "@data/urls";
@@ -117,9 +117,9 @@ function CalendarEvent({ event, currentLanguage }: Props) {
     dateEnd
   } = event;
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
-
-  const entities = new XmlEntities();
-  const decodedLocationTitle = entities.decode(location.title);
+  const decodedLocationTitle = decode(location.title, {
+    level: "xml",
+  });
   let hoursString;
   if (DateUtils.isFullDay(dateStart, dateEnd)) {
     hoursString = LangService.strings.CALENDAR_FULL_DAY;
