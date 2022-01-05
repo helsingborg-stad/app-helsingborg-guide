@@ -3,6 +3,7 @@
 import React from "react";
 import LinkTouchable from "./LinkTouchable";
 import { AnalyticsUtils } from "@utils";
+import useOpenLink from "@hooks/useOpenLink";
 
 function goToLink(url: string, title: string, navigation: Object) {
   const { navigate } = navigation;
@@ -16,11 +17,12 @@ type Props = {
 };
 
 export default function(props: Props) {
+  const { openLink } = useOpenLink();
   const webLink = (
     <LinkTouchable
       title={props.url.replace(/^https?:\/\//, "")}
       onPress={() => {
-        goToLink(props.url, props.url, props.navigation);
+        openLink(props.url);
       }}
     />
   );
