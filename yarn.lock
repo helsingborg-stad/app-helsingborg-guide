@@ -7583,7 +7583,7 @@ open@^7.4.2:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
 
-opencollective-postinstall@^2.0.1:
+opencollective-postinstall@^2.0.1, opencollective-postinstall@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
   integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
@@ -8149,6 +8149,14 @@ react-native-image-marker@0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/react-native-image-marker/-/react-native-image-marker-0.6.3.tgz#ecf30b9a302faa519de790bc19b1cffe40c17bef"
   integrity sha512-UE6xP4v1W1ZhdEOx+V4Fp4PQ6J2iijr2QK1YAnbJrqJk6GwrMYExViEHiFVYyfTAJQ1JE3AzkQLKPe1OJEHMqQ==
+
+react-native-inappbrowser-reborn@^3.6.3:
+  version "3.6.3"
+  resolved "https://registry.yarnpkg.com/react-native-inappbrowser-reborn/-/react-native-inappbrowser-reborn-3.6.3.tgz#12938733e5337a9f328973557da0cfd13085bfbd"
+  integrity sha512-fqF708GVZ/7zja0/GyJQfjDfKREOe1fxYq8RAKZo8/KK6SkFO9hBlYqC3PwLFPw29zzwBzR+6EpL3qo95igkLw==
+  dependencies:
+    invariant "^2.2.4"
+    opencollective-postinstall "^2.0.2"
 
 react-native-iphone-x-helper@^1.3.0:
   version "1.3.1"

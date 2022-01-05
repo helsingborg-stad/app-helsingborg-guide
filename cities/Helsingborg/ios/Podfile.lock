@@ -479,6 +479,8 @@ PODS:
     - React-Core
   - RNImageMarker (0.6.3):
     - React
+  - RNInAppBrowser (3.6.3):
+    - React-Core
   - RNPermissions (3.2.0):
     - React-Core
   - RNShare (7.3.2):
@@ -566,6 +568,7 @@ DEPENDENCIES:
   - "RNFBApp (from `../../../node_modules/@react-native-firebase/app`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageMarker (from `../../../node_modules/react-native-image-marker`)
+  - RNInAppBrowser (from `../../../node_modules/react-native-inappbrowser-reborn`)
   - RNPermissions (from `../../../node_modules/react-native-permissions`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
@@ -705,6 +708,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNImageMarker:
     :path: "../../../node_modules/react-native-image-marker"
+  RNInAppBrowser:
+    :path: "../../../node_modules/react-native-inappbrowser-reborn"
   RNPermissions:
     :path: "../../../node_modules/react-native-permissions"
   RNShare:
@@ -791,6 +796,7 @@ SPEC CHECKSUMS:
   RNFBApp: 4f490a1e02e41721c55b354019f39f2323d72f82
   RNGestureHandler: e5c7cab5f214503dcefd6b2b0cefb050e1f51c4a
   RNImageMarker: 76cd113306bcfad2f74f78d83d5accfd50b4434a
+  RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
   RNPermissions: f7ebe52db07c00901127966ca080b4ec6a6ceb0a
   RNShare: d76b8c9c6e6ffb38fc18f40b4338c9d867592ed3
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
