@@ -28,7 +28,7 @@ class QuizResultScreen extends Component<Props, State> {
   };
 
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   getErrorString = (error, defaultValue) => {

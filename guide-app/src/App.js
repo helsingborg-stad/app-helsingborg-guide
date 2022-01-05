@@ -101,10 +101,14 @@ const GuideApp = () => {
   }, []);
 
   useEffect(() => {
+    // TEMPORARY SOLUTION
     LogBox.ignoreLogs([
       'Warning: componentWillMount has been renamed, and is not recommended for use.',
       'Warning: componentWillReceiveProps has been renamed, and is not recommended for use.',
       'Warning: componentWillUpdate has been renamed, and is not recommended for use.',
+      'Remote debugger is in a background tab which may cause apps to perform slowly',
+      'Require cycle: ../../node_modules/rn-fetch-blob/index.js',
+      'Require cycle: ../../node_modules/react-native/Libraries/Network/fetch.js'
     ]);
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
