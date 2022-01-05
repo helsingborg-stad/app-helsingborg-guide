@@ -249,7 +249,7 @@ export default class MapThumbnailsView extends Component<Props, State> {
         <View style={[styles.mapViewContainer, mapFlexStyle]}>
           <MapView
             style={styles.map}
-            ref={ref => {
+            ref={(ref) => {
               this.map = ref;
             }}
             initialRegion={this.state.region}
