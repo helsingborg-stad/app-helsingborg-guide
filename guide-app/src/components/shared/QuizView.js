@@ -301,30 +301,36 @@ const TypingIndicator = () => {
           Animated.timing(firstAnim, {
             toValue: 0.5,
             duration: 500,
+            useNativeDriver: false,
           }),
           Animated.timing(firstAnim, {
             toValue: 1,
             duration: 250,
+            useNativeDriver: false,
           }),
         ]),
         Animated.sequence([
           Animated.timing(secondAnim, {
             toValue: 0.5,
             duration: 500,
+            useNativeDriver: false,
           }),
           Animated.timing(secondAnim, {
             toValue: 1,
             duration: 250,
+            useNativeDriver: false,
           }),
         ]),
         Animated.sequence([
           Animated.timing(thirdAnim, {
             toValue: 0.5,
             duration: 500,
+            useNativeDriver: false,
           }),
           Animated.timing(thirdAnim, {
             toValue: 1,
             duration: 250,
+            useNativeDriver: false,
           }),
         ]),
       ]),

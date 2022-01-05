@@ -35,8 +35,8 @@ class NotificationBar extends Component<Props, State> {
 
     if (visible !== previouslyVisible) {
       const animationProperties = visible
-        ? { toValue: 1, friction: 2 }
-        : { toValue: 0 };
+        ? { toValue: 1, friction: 2, useNativeDriver: false }
+        : { toValue: 0, useNativeDriver: false };
       Animated.timing(animValue, animationProperties).start();
       return { visible };
     }

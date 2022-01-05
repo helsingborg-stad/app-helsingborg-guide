@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Animated,
   Dimensions,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from "react-native";
 
 const MENU_WIDTH = Dimensions.get("window").width;
@@ -32,8 +32,8 @@ export default class OptionsView extends Component<Props, State> {
 
     if (visible !== previouslyVisible) {
       const animationProperties = visible
-        ? { toValue: 1, duration: 200 }
-        : { toValue: 0, duration: 200 };
+        ? { toValue: 1, duration: 200, useNativeDriver: false }
+        : { toValue: 0, duration: 200, useNativeDriver: false };
       Animated.timing(animValue, animationProperties).start();
       return { visible };
     }
@@ -52,7 +52,7 @@ export default class OptionsView extends Component<Props, State> {
 
   render() {
     const {
-      state: { animValue }
+      state: { animValue },
     } = this;
 
     // const translateAnim = animValue.interpolate({
@@ -62,13 +62,13 @@ export default class OptionsView extends Component<Props, State> {
 
     const zIndexAnim = animValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [-100, 10009]
+      outputRange: [-100, 10009],
     });
 
     const animatedStyle = {
       // transform:[{translateX:translateAnim} ]
       opacity: animValue,
-      zIndex: zIndexAnim
+      zIndex: zIndexAnim,
     };
 
     return (
@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     right: 0,
-    zIndex: 10000
+    zIndex: 10000,
   },
   mainContainer: {
-    flex: 1
+    flex: 1,
     // backgroundColor:'red',
-  }
+  },
 });

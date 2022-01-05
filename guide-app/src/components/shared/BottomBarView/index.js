@@ -49,10 +49,12 @@ class BottomBarView extends Component<Props, State> {
         Animated.timing(animViewContainer, {
           toValue: viewContainerHeight,
           duration: transitionDuration,
+          useNativeDriver: false,
         }).start();
         Animated.timing(animTabBottom, {
           toValue: buttonTabBottom,
           duration: transitionDuration,
+          useNativeDriver: false,
         }).start();
         return { showBottomBar };
       } else {

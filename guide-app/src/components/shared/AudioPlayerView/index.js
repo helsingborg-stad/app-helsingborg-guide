@@ -113,7 +113,8 @@ class AudioPlayerView extends Component<Props, State> {
   componentDidMount() {
     Animated.timing(this.state.animValue, {
       toValue: 1,
-      duration: 1000
+      duration: 1000,
+      useNativeDriver: false,
     }).start();
   }
 
