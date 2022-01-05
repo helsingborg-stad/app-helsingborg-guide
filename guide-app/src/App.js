@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { Provider } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { PersistGate } from "redux-persist/integration/react";
@@ -67,6 +67,47 @@ function alert() {
   );
 }
 
+export const GuideApp = () => {
+
+  useEffect(() =>  {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+    const locationService = LocationService.getInstance();
+    locationService.getGeoLocation().catch(console.warn);
+    locationService.subscribeGeoLocation().catch(console.warn);
+    LangService.loadStoredLanguage();
+    startListeningToNetworkChanges();
+  },[])
+
+
+  const startListeningToNetworkChanges = () =>  {
+    NetInfo.addEventListener(this.handleConnectivityChange);
+  }
+  const stopListeningToNetworkChanges = () => {
+    NetInfo.removeEventListener(this.handleConnectivityChange);
+  }
+
+
+
+  return (
+    <SafeAreaProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <TrackingPermission />
+          <Nav
+            onAppStarted={() => store.dispatch(appStarted())}
+            onAppBecameActive={() => store.dispatch(appBecameActive())}
+            onAppBecameInactive={() => store.dispatch(appBecameInactive())}
+          />
+        </PersistGate>
+      </Provider>
+    </SafeAreaProvider>
+  )
+}
+
+
+
 export default class GuideApp extends Component {
   constructor() {
     super();
@@ -88,38 +129,29 @@ export default class GuideApp extends Component {
 
   componentWillUnmount() {
     LocationService.getInstance().unsubscribeGeoLocation();
-
     this.stopListeningToNetworkChanges();
   }
 
   startListeningToNetworkChanges() {
-    NetInfo.isConnected.addEventListener(
-      "connectionChange",
-      this.handleConnectivityChange
-    );
+    NetInfo.addEventListener(this.handleConnectivityChange);
   }
 
   stopListeningToNetworkChanges() {
-    NetInfo.isConnected.removeEventListener(
-      "connectionChange",
-      this.handleConnectivityChange
-    );
+    NetInfo.removeEventListener(this.handleConnectivityChange);
   }
 
-  handleConnectivityChange(isConnected) {
-    if (!isConnected) {
+  handleConnectivityChange(state) {
+    if (!state.isConnected) {
       store.dispatch(internetChanged(false));
       this.noNetworkTimer = setTimeout(alert, 2500);
       return;
     }
-
     store.dispatch(internetChanged(true));
 
     if (this.noNetworkTimer) {
       clearTimeout(this.noNetworkTimer);
       this.noNetworkTimer = null;
     }
-
     init();
   }
 

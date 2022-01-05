@@ -136,7 +136,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 15000179
-        versionName "1.91"
+        versionName "1.92"
         multiDexEnabled true
     }
     splits {

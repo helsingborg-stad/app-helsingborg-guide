@@ -1,6 +1,10 @@
 // @flow
 
-import { API_BASE_URL, GROUP_ID } from "@data/endpoints";
+import {
+  API_BASE_URL,
+  DEPRECATED_API_BASE_URL,
+  GROUP_ID,
+} from "@data/endpoints";
 import { validate } from "./JSONValidator";
 import { DateUtils } from "@utils";
 
@@ -10,6 +14,11 @@ async function fetchJSON(
   params?: ?string
 ): Promise<any> {
   let url = `${API_BASE_URL}/${relativeUrl}/?lang=${langCode}`;
+
+  if (relativeUrl === "events") {
+    url = `${DEPRECATED_API_BASE_URL}/${relativeUrl}/?lang=${langCode}`;
+  }
+
   if (params) {
     url += params;
   }
@@ -65,7 +74,7 @@ async function getGuideGroups(
   }
 
   const params = idsToParamString(ids);
-  const json = await fetchJSON("guidegroup", langCode, params);
+  const json = await fetchJSON("guidegroups", langCode, params);
   const fetchedGuideGroups: GuideGroup[] = validateData(json, "guideGroup");
 
   return fetchedGuideGroups;
@@ -78,7 +87,7 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
 
   const params = idsToParamString(ids);
 
-  const json = await fetchJSON("guide", langCode, params);
+  const json = await fetchJSON("guides", langCode, params);
   const fetchedGuides: Guide[] = validateData(json, "guide");
 
   return fetchedGuides;
@@ -94,7 +103,7 @@ async function getInteractiveGuides(
 
   const params = idsToParamString(ids);
 
-  const json = await fetchJSON("interactive_guide", langCode, params);
+  const json = await fetchJSON("interactive_guides", langCode, params);
   const fetchedGuides: InteractiveGuide[] = validateData(
     json,
     "interactiveGuide"
@@ -108,7 +117,7 @@ async function getGuidesForGuideGroup(
   guideGroupId: number
 ): Promise<Guide[]> {
   const params = `&guideGroupId=${guideGroupId}`;
-  const json = await fetchJSON("guide", langCode, params);
+  const json = await fetchJSON("guides", langCode, params);
   const fetchedGuides: Guide[] = validateData(json, "guide");
 
   return fetchedGuides;
@@ -118,7 +127,7 @@ export async function getNavigation(
   langCode: string
 ): Promise<NavigationCategory[]> {
   const params = `&userGroupId=${GROUP_ID}`;
-  const json = await fetchJSON("navigation", langCode, params);
+  const json = await fetchJSON("navigations", langCode, params);
   const fetchedNavigation: NavigationCategory[] = validateData(
     json,
     "navigationCategory"

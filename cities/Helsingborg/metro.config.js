@@ -38,7 +38,19 @@ module.exports = (async () => {
       ],
       blacklistRE
     },
+    transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          // this defeats the RCTDeviceEventEmitter is not a registered callable module
+          inlineRequires: true,
+        },
+      }),
+    },
     projectRoot: path.resolve(__dirname),
     watchFolders
   };
 })();
+
+
+
+

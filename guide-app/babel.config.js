@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   presets: ["module:metro-react-native-babel-preset"],
   plugins: [
@@ -13,7 +15,7 @@ module.exports = {
           "@services": "./src/services",
           "@shared-components": "./src/components/shared",
           "@src": "./src",
-          "@utils": "./src/utils"
+          "@utils": "./src/utils",
         }
       }
     ]
