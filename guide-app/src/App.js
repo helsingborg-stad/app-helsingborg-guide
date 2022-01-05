@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { PersistGate } from "redux-persist/integration/react";
@@ -61,15 +61,46 @@ function alert() {
         text: LangService.strings.SETTINGS,
         onPress: openInternetSettings,
       },
-      { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" },
+      {
+        text: LangService.strings.CLOSE, onPress: () => {
+        }, style: "cancel",
+      },
     ],
-    { cancelable: false }
+    { cancelable: false },
   );
 }
 
+
 export const GuideApp = () => {
 
-  useEffect(() =>  {
+  const [netInfo, setNetInfo] = useState();
+
+  useEffect(() => {
+    NetInfo.fetch().then(state => {
+      let currentNetwork = state.isConnected;
+      setNetInfo(currentNetwork);
+    });
+
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setNetInfo(state.isConnected);
+      if (!state.isConnected) {
+        store.dispatch(internetChanged(false));
+        this.noNetworkTimer = setTimeout(alert, 2500);
+        return;
+      }
+      store.dispatch(internetChanged(true));
+
+      if (this.noNetworkTimer) {
+        clearTimeout(this.noNetworkTimer);
+        this.noNetworkTimer = null;
+      }
+      init();
+    });
+    return unsubscribe;
+
+  }, []);
+
+  useEffect(() => {
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
@@ -77,18 +108,7 @@ export const GuideApp = () => {
     locationService.getGeoLocation().catch(console.warn);
     locationService.subscribeGeoLocation().catch(console.warn);
     LangService.loadStoredLanguage();
-    startListeningToNetworkChanges();
-  },[])
-
-
-  const startListeningToNetworkChanges = () =>  {
-    NetInfo.addEventListener(this.handleConnectivityChange);
-  }
-  const stopListeningToNetworkChanges = () => {
-    NetInfo.removeEventListener(this.handleConnectivityChange);
-  }
-
-
+  }, []);
 
   return (
     <SafeAreaProvider>
@@ -103,72 +123,73 @@ export const GuideApp = () => {
         </PersistGate>
       </Provider>
     </SafeAreaProvider>
-  )
-}
+  );
+};
 
 
-
-export default class GuideApp extends Component {
-  constructor() {
-    super();
-
-    if (UIManager.setLayoutAnimationEnabledExperimental) {
-      UIManager.setLayoutAnimationEnabledExperimental(true);
-    }
-
-    this.handleConnectivityChange = this.handleConnectivityChange.bind(this);
-  }
-
-  componentDidMount() {
-    const locationService = LocationService.getInstance();
-    locationService.getGeoLocation().catch(console.warn);
-    locationService.subscribeGeoLocation().catch(console.warn);
-    LangService.loadStoredLanguage();
-    this.startListeningToNetworkChanges();
-  }
-
-  componentWillUnmount() {
-    LocationService.getInstance().unsubscribeGeoLocation();
-    this.stopListeningToNetworkChanges();
-  }
-
-  startListeningToNetworkChanges() {
-    NetInfo.addEventListener(this.handleConnectivityChange);
-  }
-
-  stopListeningToNetworkChanges() {
-    NetInfo.removeEventListener(this.handleConnectivityChange);
-  }
-
-  handleConnectivityChange(state) {
-    if (!state.isConnected) {
-      store.dispatch(internetChanged(false));
-      this.noNetworkTimer = setTimeout(alert, 2500);
-      return;
-    }
-    store.dispatch(internetChanged(true));
-
-    if (this.noNetworkTimer) {
-      clearTimeout(this.noNetworkTimer);
-      this.noNetworkTimer = null;
-    }
-    init();
-  }
-
-  render() {
-    return (
-      <SafeAreaProvider>
-        <Provider store={store}>
-          <PersistGate persistor={persistor}>
-            <TrackingPermission />
-            <Nav
-              onAppStarted={() => store.dispatch(appStarted())}
-              onAppBecameActive={() => store.dispatch(appBecameActive())}
-              onAppBecameInactive={() => store.dispatch(appBecameInactive())}
-            />
-          </PersistGate>
-        </Provider>
-      </SafeAreaProvider>
-    );
-  }
-}
+//
+//
+// export default class GuideApp extends Component {
+//   constructor() {
+//     super();
+//
+//     if (UIManager.setLayoutAnimationEnabledExperimental) {
+//       UIManager.setLayoutAnimationEnabledExperimental(true);
+//     }
+//
+//     this.handleConnectivityChange = this.handleConnectivityChange.bind(this);
+//   }
+//
+//   componentDidMount() {
+//     const locationService = LocationService.getInstance();
+//     locationService.getGeoLocation().catch(console.warn);
+//     locationService.subscribeGeoLocation().catch(console.warn);
+//     LangService.loadStoredLanguage();
+//     this.startListeningToNetworkChanges();
+//   }
+//
+//   componentWillUnmount() {
+//     LocationService.getInstance().unsubscribeGeoLocation();
+//     this.stopListeningToNetworkChanges();
+//   }
+//
+//   startListeningToNetworkChanges() {
+//     NetInfo.addEventListener(this.handleConnectivityChange);
+//   }
+//
+//   stopListeningToNetworkChanges() {
+//     NetInfo.removeEventListener(this.handleConnectivityChange);
+//   }
+//
+//   handleConnectivityChange(state) {
+//     if (!state.isConnected) {
+//       store.dispatch(internetChanged(false));
+//       this.noNetworkTimer = setTimeout(alert, 2500);
+//       return;
+//     }
+//     store.dispatch(internetChanged(true));
+//
+//     if (this.noNetworkTimer) {
+//       clearTimeout(this.noNetworkTimer);
+//       this.noNetworkTimer = null;
+//     }
+//     init();
+//   }
+//
+//   render() {
+//     return (
+//       <SafeAreaProvider>
+//         <Provider store={store}>
+//           <PersistGate persistor={persistor}>
+//             <TrackingPermission />
+//             <Nav
+//               onAppStarted={() => store.dispatch(appStarted())}
+//               onAppBecameActive={() => store.dispatch(appBecameActive())}
+//               onAppBecameInactive={() => store.dispatch(appBecameInactive())}
+//             />
+//           </PersistGate>
+//         </Provider>
+//       </SafeAreaProvider>
+//     );
+//   }
+// }
