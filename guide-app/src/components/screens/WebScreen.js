@@ -4,6 +4,7 @@ import WebView from "react-native-webview";
 import PropTypes from "prop-types";
 import { Colors } from "@assets/styles";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
+import { openLink } from "@hooks/useOpenLink";
 
 const styles = StyleSheet.create({
   header: {
@@ -37,7 +38,7 @@ export default class WebScreen extends Component {
         onNavigationStateChange={event => {
           if (event.url !== url) {
             this.webView.stopLoading();
-            Linking.openURL(event.url);
+            openLink(event.url);
           }
         }}
       />

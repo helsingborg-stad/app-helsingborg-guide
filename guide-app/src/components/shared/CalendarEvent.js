@@ -2,14 +2,11 @@
 import React from "react";
 import {
   Image,
-  Linking,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Alert
 } from "react-native";
-import { InAppBrowser } from "react-native-inappbrowser-reborn";
 import { decode } from "html-entities";
 
 import { Colors, TextStyles } from "@assets/styles";

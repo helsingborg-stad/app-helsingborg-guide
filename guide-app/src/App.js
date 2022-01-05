@@ -20,6 +20,7 @@ import {
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
 
+
 const { store, persistor } = configureStore();
 
 // TODO decouple these store reference hacks
@@ -27,6 +28,7 @@ LocationService.getInstance().store = store;
 DownloadTasksManager.store = store;
 
 function openInternetSettings() {
+
   if (Platform.OS === "android") {
     Opener.openWifiSetting();
   } else {
