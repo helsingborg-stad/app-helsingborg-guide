@@ -130,7 +130,7 @@ export default class Nav extends Component<Props> {
         {/* $FlowFixMe should be fixed in later flow versions */}
         <NavigatorWrapper
           onNavigationStateChange={Nav.onNavigationStateChange}
-          ref={navigatorRef => {
+          ref={(navigatorRef) => {
             NavigatorService.setContainer(navigatorRef);
           }}
         />

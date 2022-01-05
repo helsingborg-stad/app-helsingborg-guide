@@ -226,26 +226,26 @@ class MapMarkerView extends Component<Props, State> {
 
   render() {
     const { items, initialLocation } = this.props;
-
     return (
       <View style={styles.container}>
         <MapView
           ref={(ref) => {
             this.map = ref;
           }}
+          region={{
+            latitude: initialLocation && initialLocation.latitude,
+            longitude: initialLocation && initialLocation.longitude,
+            latitudeDelta: this.latitudeDelta,
+            longitudeDelta: this.longitudeDelta,
+          }}
+          onRegionChange={() => null}
           onRegionChangeComplete={(e) => {
             this.longitudeDelta = e.longitudeDelta;
             this.latitudeDelta = e.latitudeDelta;
           }}
           style={styles.map}
           showsUserLocation
-          onMapReady={this.onMapReady}
-          initialRegion={{
-            latitude: initialLocation && initialLocation.latitude,
-            longitude: initialLocation && initialLocation.longitude,
-            latitudeDelta: this.latitudeDelta,
-            longitudeDelta: this.longitudeDelta,
-          }}
+          onMapReady={() => this.onMapReady}
         >
           {this.renderMapMarkers(items)}
         </MapView>

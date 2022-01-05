@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, ListView, Dimensions } from "react-native";
-import MapView from "react-native-maps";
+// import MapView from "react-native-maps";
 import ViewContainer from "@shared-components/view_container";
 import NoInternetText from "@shared-components/noInternetText";
 import LocationService from "@services/locationService";
@@ -152,13 +152,14 @@ export default class MapThumbnailsView extends Component<Props, State> {
       const image =
         marker.itemId === activeItem ? markerImageActive : markerImageInActive;
       return (
-        <MapView.Marker
-          key={marker.itemId}
-          coordinate={marker.location}
-          image={image}
-          identifier={`${marker.itemId}`}
-          onPress={() => this._onMarkerPressed(marker)}
-        />
+        <></>
+        // <MapView.Marker
+        //   key={marker.itemId}
+        //   coordinate={marker.location}
+        //   image={image}
+        //   identifier={`${marker.itemId}`}
+        //   onPress={() => this._onMarkerPressed(marker)}
+        // />
       );
     });
   }
@@ -247,18 +248,18 @@ export default class MapThumbnailsView extends Component<Props, State> {
     return (
       <ViewContainer>
         <View style={[styles.mapViewContainer, mapFlexStyle]}>
-          <MapView
-            style={styles.map}
-            ref={(ref) => {
-              this.map = ref;
-            }}
-            initialRegion={this.state.region}
-            showsUserLocation
-            onRegionChange={this._onRegionChange}
-            onLongPress={() => this.sortGuidegroups()}
-          >
-            {this._showMarkers()}
-          </MapView>
+          {/*<MapView*/}
+          {/*  style={styles.map}*/}
+          {/*  ref={(ref) => {*/}
+          {/*    this.map = ref;*/}
+          {/*  }}*/}
+          {/*  initialRegion={this.state.region}*/}
+          {/*  showsUserLocation*/}
+          {/*  onRegionChange={this._onRegionChange}*/}
+          {/*  onLongPress={() => this.sortGuidegroups()}*/}
+          {/*>*/}
+          {/*  {this._showMarkers()}*/}
+          {/*</MapView>*/}
         </View>
 
         <View style={styles.listViewContainer}>
