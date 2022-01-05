@@ -35,8 +35,8 @@ class DownloadsScreen extends Component<Props> {
     const title = LangService.strings.OFFLINE_CONTENT;
     return {
       title,
-      headerRight: null,
-      headerLeft: <HeaderBackButton navigation={navigation} />
+      headerRight: () => null,
+      headerLeft: () => <HeaderBackButton navigation={navigation} />
     };
   };
 

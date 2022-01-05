@@ -32,8 +32,8 @@ class CategoryMapScreen extends Component<Props> {
     return {
       ...HeaderStyles.noElevation,
       title,
-      headerRight: <View />,
-      headerLeft: <HeaderBackButton navigation={navigation} />
+      headerRight: () => <View />,
+      headerLeft: () => <HeaderBackButton navigation={navigation} />
     };
   };
 

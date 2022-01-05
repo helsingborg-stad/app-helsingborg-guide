@@ -29,8 +29,8 @@ class GuideScreen extends Component<Props> {
       const { title } = params;
       return {
         title,
-        headerRight: <SearchButton navigation={navigation} />,
-        headerLeft: <HeaderBackButton navigation={navigation} />,
+        headerRight: () => <SearchButton navigation={navigation} />,
+        headerLeft: () => <HeaderBackButton navigation={navigation} />,
       };
     }
     return {};

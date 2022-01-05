@@ -35,10 +35,9 @@ class TrailScreen extends Component<Props, State> {
 
     return {
       title,
-      headerRight: (
-        <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />
-      ),
-      headerLeft: <HeaderBackButton navigation={navigation} />
+      headerRight: () => (
+        <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />),
+      headerLeft: () => <HeaderBackButton navigation={navigation} />
     };
   };
 
