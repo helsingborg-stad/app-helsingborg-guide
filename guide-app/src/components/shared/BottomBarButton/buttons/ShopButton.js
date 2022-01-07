@@ -21,7 +21,7 @@ const ShopButton = ({ selected }: Props) => {
       selected={selected}
       onPress={() => {
         // openLink(webShopUrl);
-        Linking(webShopUrl);
+        Linking.openURL(webShopUrl);
       }}
     />
   );

@@ -66,7 +66,7 @@ function displayLinks(
       title={item.title}
       onPress={() => {
         // openLink(item.url);
-        Linking(item.url);
+        Linking.openURL(item.url);
       }}
     />
   ));

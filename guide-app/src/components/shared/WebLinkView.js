@@ -4,6 +4,7 @@ import React from "react";
 import LinkTouchable from "./LinkTouchable";
 import { AnalyticsUtils } from "@utils";
 import useOpenLink from "@hooks/useOpenLink";
+import { Linking } from "react-native";
 
 function goToLink(url: string, title: string, navigation: Object) {
   const { navigate } = navigation;
@@ -22,7 +23,8 @@ export default function(props: Props) {
     <LinkTouchable
       title={props.url.replace(/^https?:\/\//, "")}
       onPress={() => {
-        openLink(props.url);
+        // openLink(props.url);
+        Linking.openURL(props.url);
       }}
     />
   );
