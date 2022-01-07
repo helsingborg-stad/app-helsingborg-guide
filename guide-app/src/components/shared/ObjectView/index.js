@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Linking } from "react-native";
 
 import styles from "./style";
 import { Colors } from "@assets/styles";
@@ -65,7 +65,8 @@ function displayLinks(
       key={item.url || index}
       title={item.title}
       onPress={() => {
-        openLink(item.url);
+        // openLink(item.url);
+        Linking(item.url);
       }}
     />
   ));

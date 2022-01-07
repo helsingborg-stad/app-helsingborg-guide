@@ -38,7 +38,8 @@ export default class WebScreen extends Component {
         onNavigationStateChange={event => {
           if (event.url !== url) {
             this.webView.stopLoading();
-            openLink(event.url);
+            Linking(event.url);
+            // openLink(event.url);
           }
         }}
       />
