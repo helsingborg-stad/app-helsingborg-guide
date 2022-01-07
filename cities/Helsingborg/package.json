@@ -16,7 +16,7 @@
     "postinstall": "(cd ../../ && yarn postinstall)",
     "react:link": "react-native link",
     "translate": "node ./scripts/translate.js",
-    "android": "react-native run-android",
+    "android": "react-native run-android --variant alphaDebug --appIdSuffix alpha",
     "ios": "react-native run-ios"
   },
   "dependencies": {
@@ -70,7 +70,5 @@
     "redux-thunk": "2.4.1",
     "rn-fetch-blob": "^0.12.0"
   },
-  "devDependencies": {
-    "haul": "^1.0.0-rc.15"
-  }
+  "devDependencies": {}
 }
