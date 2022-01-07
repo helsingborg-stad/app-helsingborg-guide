@@ -12,6 +12,7 @@ import ImageSwiper from "@shared-components/ImageSwiper";
 import LangService from "@services/langService";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
+import { openLink } from "@hooks/useOpenLink";
 
 type Props = {
   contentObject: ContentObject,
@@ -64,7 +65,7 @@ function displayLinks(
       key={item.url || index}
       title={item.title}
       onPress={() => {
-        onGoToLink(item.url, item.title);
+        openLink(item.url);
       }}
     />
   ));
