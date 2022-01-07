@@ -6,25 +6,22 @@
  */
 
 const { getDefaultConfig } = require("metro-config");
+const exclusionList = require("metro-config/src/defaults/exclusionList");
 const {
+  getMetroTools,
   getMetroAndroidAssetsResolutionFix,
 } = require("react-native-monorepo-tools");
 
 const path = require("path");
+const monorepoMetroTools = getMetroTools( {cwd: `${[path.resolve(__dirname, "../..")][0]}`});
 
 const androidAssetsResolutionFix = getMetroAndroidAssetsResolutionFix();
 
-// For workspaces use in package.json
-const watchFolders = [path.resolve(__dirname, "../..")];
-
-// Metro gets confused if it tries to use template/package.json
-const blacklistRE = new RegExp(
-  `^${watchFolders[0].replace("/", "\\/")}\\/template\\/.*$`
-);
+console.log("monorep", process.cwd(), `${[path.resolve(__dirname, "../..")][0]}`, monorepoMetroTools)
 
 module.exports = (async () => {
   const {
-    resolver: { assetExts }
+    resolver: { assetExts },
   } = await getDefaultConfig();
 
   return {
@@ -40,27 +37,28 @@ module.exports = (async () => {
         "glb",
         "bin",
         "arobject",
-        "gif"
+        "gif",
       ],
-      blacklistRE
+      blockList: [exclusionList(monorepoMetroTools.blockList), new RegExp(
+        `^${[path.resolve(__dirname, "../..")][0].replace("/", "\\/")}\\/template\\/.*$`,
+      )],
+      extraNodeModules: monorepoMetroTools.extraNodeModules,
     },
     transformer: {
       publicPath: androidAssetsResolutionFix.publicPath,
       getTransformOptions: async () => ({
         transform: {
-          // this defeats the RCTDeviceEventEmitter is not a registered callable module
           inlineRequires: true,
         },
       }),
     },
     server: {
-      // ...and to the server middleware.
       enhanceMiddleware: (middleware) => {
         return androidAssetsResolutionFix.applyMiddleware(middleware);
       },
     },
     projectRoot: path.resolve(__dirname),
-    watchFolders
+    watchFolders: monorepoMetroTools.watchFolders,
   };
 })();
 

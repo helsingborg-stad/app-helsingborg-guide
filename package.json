@@ -10,6 +10,12 @@
       "cities/*",
       "guide-app"
   ],
+  "nohoist": [
+    "**/react",
+    "**/react-dom",
+    "**/react-native",
+    "**/react-native/**"
+  ],
   "scripts": {
     "postinstall": "patch-package && jetify"
   },
