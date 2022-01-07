@@ -4536,7 +4536,7 @@ find-cache-dir@^2.0.0:
     make-dir "^2.0.0"
     pkg-dir "^3.0.0"
 
-find-root@^1.0.0:
+find-root@^1.0.0, find-root@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/find-root/-/find-root-1.1.0.tgz#abcfc8ba76f708c42a97b3d685b7e9450bfb9ce4"
   integrity sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng==
@@ -4832,7 +4832,7 @@ glob@7.1.6:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
+glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6, glob@^7.1.7:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.2.0.tgz#d15535af7732e02e948f4c41628bd910293f6023"
   integrity sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==
@@ -6711,7 +6711,7 @@ metro-cache@^0.56.4:
     mkdirp "^0.5.1"
     rimraf "^2.5.4"
 
-metro-config@0.66.2, metro-config@^0.66.1:
+metro-config@0.66.2, metro-config@^0.66.1, metro-config@^0.66.2:
   version "0.66.2"
   resolved "https://registry.yarnpkg.com/metro-config/-/metro-config-0.66.2.tgz#e365acdb66ad0cda0182b9c9910760a97ee4293b"
   integrity sha512-0C+PrKKIBNNzLZUKN/8ZDJS2U5FLMOTXDWbvBHIdqb6YXz8WplXR2+xlSlaSCCi5b+GR7cWFWUNeKA4GQS1/AQ==
@@ -8160,6 +8160,14 @@ react-native-maps@react-native-community/react-native-maps#d6f89bd:
   version "0.26.1"
   resolved "https://codeload.github.com/react-native-community/react-native-maps/tar.gz/d6f89bdddcbabd0710aa275c75b48eab64759f7a"
 
+react-native-monorepo-tools@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-monorepo-tools/-/react-native-monorepo-tools-1.1.4.tgz#ef4a400bd6d362dea3859b2a579104cd198dc5f6"
+  integrity sha512-V7/zLwsy9e4glfVI6AodEOibf8kL2cueDel2cpdecISk7WqnmbeXP0v+opLSl07QuxuwOdslCgc8zRbv4Dc1hQ==
+  dependencies:
+    find-root "^1.1.0"
+    glob "^7.1.7"
+
 react-native-permissions@3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.2.0.tgz#2199a49e96bac633016955d36142032d747d0d3e"
@@ -8186,10 +8194,17 @@ react-native-safe-area-context@^3.1.9, react-native-safe-area-context@^3.3.2:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz#9549a2ce580f2374edb05e49d661258d1b8bcaed"
   integrity sha512-yOwiiPJ1rk+/nfK13eafbpW6sKW0jOnsRem2C1LPJjM3tfTof6hlvV5eWHATye3XOpu2cJ7N+HdkUvUDGwFD2Q==
 
-react-native-safe-area-view@2.0.0, react-native-safe-area-view@^0.14.9, react-native-safe-area-view@^2.0.0:
+react-native-safe-area-view@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-2.0.0.tgz#98fc9bb1bf3cb8c97ba684efb7dd897765afff3b"
   integrity sha512-tGlGZwRoZpTQ0gEdSSRgbkeyyKC50ZsEv2H/LQKjXhc00IHffbU0BA5chSzTqNwDrs5MFXfTG1ooRQK+0FVTjw==
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+
+react-native-safe-area-view@^0.14.9:
+  version "0.14.9"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.14.9.tgz#90ee8383037010d9a5055a97cf97e4c1da1f0c3d"
+  integrity sha512-WII/ulhpVyL/qbYb7vydq7dJAfZRBcEhg4/UWt6F6nAKpLa3gAceMOxBxI914ppwSP/TdUsandFy6lkJQE0z4A==
   dependencies:
     hoist-non-react-statics "^2.3.1"
 

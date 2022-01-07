@@ -6,7 +6,13 @@
  */
 
 const { getDefaultConfig } = require("metro-config");
+const {
+  getMetroAndroidAssetsResolutionFix,
+} = require("react-native-monorepo-tools");
+
 const path = require("path");
+
+const androidAssetsResolutionFix = getMetroAndroidAssetsResolutionFix();
 
 // For workspaces use in package.json
 const watchFolders = [path.resolve(__dirname, "../..")];
@@ -39,12 +45,19 @@ module.exports = (async () => {
       blacklistRE
     },
     transformer: {
+      publicPath: androidAssetsResolutionFix.publicPath,
       getTransformOptions: async () => ({
         transform: {
           // this defeats the RCTDeviceEventEmitter is not a registered callable module
           inlineRequires: true,
         },
       }),
+    },
+    server: {
+      // ...and to the server middleware.
+      enhanceMiddleware: (middleware) => {
+        return androidAssetsResolutionFix.applyMiddleware(middleware);
+      },
     },
     projectRoot: path.resolve(__dirname),
     watchFolders
