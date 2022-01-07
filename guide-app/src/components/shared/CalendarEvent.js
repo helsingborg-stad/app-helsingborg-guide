@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Linking
 } from "react-native";
 import { decode } from "html-entities";
 
@@ -134,7 +135,10 @@ function CalendarEvent({ event, currentLanguage }: Props) {
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => openLink(eventUrl)}
+      onPress={() => {
+        Linking.openURL(eventUrl);
+        // openLink(eventUrl);
+      }}
     >
       <View style={styles.imageWrapper}>
         <Image style={styles.listItemImage} source={image} />
