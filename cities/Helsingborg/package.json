@@ -17,6 +17,7 @@
     "react:link": "react-native link",
     "translate": "node ./scripts/translate.js",
     "android": "react-native run-android --variant alphaDebug --appIdSuffix alpha",
+    "android:shake": "adb shell input keyevent 82",
     "ios": "react-native run-ios"
   },
   "dependencies": {

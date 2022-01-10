@@ -78,6 +78,7 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
   const showMapIcon = !!item.guide;
 
   const onPress = useCallback(() => {
+    console.log("the item", item)
     onPressItem(item);
   }, [item, onPressItem]);
 

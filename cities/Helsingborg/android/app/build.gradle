@@ -152,16 +152,16 @@ android {
             include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
     }
-    flavorDimensions 'env'
-    productFlavors {
-        alpha {
-            dimension 'env'
-            applicationIdSuffix '.alpha'
-        }
-        store {
-            dimension 'env'
-        }
-    }
+//     flavorDimensions 'env'
+//     productFlavors {
+//         alpha {
+//             dimension 'env'
+//             applicationIdSuffix '.alpha'
+//         }
+//         store {
+//             dimension 'env'
+//         }
+//     }
     signingConfigs {
         debug {
             storeFile file('debug.keystore')

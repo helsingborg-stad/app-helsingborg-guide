@@ -13,11 +13,11 @@ const {
 } = require("react-native-monorepo-tools");
 
 const path = require("path");
-const monorepoMetroTools = getMetroTools( {cwd: `${[path.resolve(__dirname, "../..")][0]}`});
+const monorepoMetroTools = getMetroTools({ cwd: `${[path.resolve(__dirname, "../..")][0]}` });
 
 const androidAssetsResolutionFix = getMetroAndroidAssetsResolutionFix();
 
-console.log("monorep", process.cwd(), `${[path.resolve(__dirname, "../..")][0]}`, monorepoMetroTools)
+console.log("monorep", process.cwd(), `${[path.resolve(__dirname, "../..")][0]}`, monorepoMetroTools);
 
 module.exports = (async () => {
   const {
