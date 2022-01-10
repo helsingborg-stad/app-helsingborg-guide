@@ -136,13 +136,14 @@ export default class MediaService {
     this.clearUpdateInterval();
 
     if (Platform.OS === "ios") {
-      MediaPlayer.release1();
+      // MediaPlayer.release();
     } else {
-      MediaPlayer.release();
+      // MediaPlayer.release();
     }
 
     MediaService.url = null;
     this.audio = null;
+
 
     NotificationService.closeNotification(MEDIA_NOTIFICATION_ID);
     this.unSubscribeOnError(MediaService.onErrorHandler);

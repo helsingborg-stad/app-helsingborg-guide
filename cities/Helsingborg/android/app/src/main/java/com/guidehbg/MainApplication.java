@@ -11,6 +11,11 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import com.guidehbg.AppPackages;
+import com.mediamodule.MediaControlPackage;
+import com.mediamodule.MediaPackage;
+import com.notificationmodule.NotificationPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
     private final ReactNativeHost mReactNativeHost =
@@ -26,6 +31,11 @@ public class MainApplication extends Application implements ReactApplication {
                     List<ReactPackage> packages = new PackageList(this).getPackages();
                     // Packages that cannot be autolinked yet can be added manually here, for example:
                     // packages.add(new MyReactNativePackage());
+
+                      packages.add(new MediaPackage());
+                      packages.add(new MediaControlPackage());
+                      packages.add(new NotificationPackage());
+                      packages.add(new AppPackages());
                     return packages;
                 }
 

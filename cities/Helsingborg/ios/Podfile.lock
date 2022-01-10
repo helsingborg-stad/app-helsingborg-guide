@@ -475,7 +475,7 @@ PODS:
   - RNFBApp (14.2.1):
     - Firebase/CoreOnly (= 8.10.0)
     - React-Core
-  - RNGestureHandler (2.1.0):
+  - RNGestureHandler (1.10.3):
     - React-Core
   - RNImageMarker (0.6.3):
     - React
@@ -483,6 +483,9 @@ PODS:
     - React-Core
   - RNPermissions (3.2.0):
     - React-Core
+  - RNScreens (3.10.1):
+    - React-Core
+    - React-RCTImage
   - RNShare (7.3.2):
     - React-Core
   - RNSVG (12.1.1):
@@ -566,10 +569,11 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../../../node_modules/@react-native-community/masked-view`)"
   - "RNFBAnalytics (from `../../../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../../../node_modules/@react-native-firebase/app`)"
-  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
   - RNImageMarker (from `../../../node_modules/react-native-image-marker`)
   - RNInAppBrowser (from `../../../node_modules/react-native-inappbrowser-reborn`)
   - RNPermissions (from `../../../node_modules/react-native-permissions`)
+  - RNScreens (from `../../../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
@@ -705,13 +709,15 @@ EXTERNAL SOURCES:
   RNFBApp:
     :path: "../../../node_modules/@react-native-firebase/app"
   RNGestureHandler:
-    :path: "../node_modules/react-native-gesture-handler"
+    :path: "../../../node_modules/react-native-gesture-handler"
   RNImageMarker:
     :path: "../../../node_modules/react-native-image-marker"
   RNInAppBrowser:
     :path: "../../../node_modules/react-native-inappbrowser-reborn"
   RNPermissions:
     :path: "../../../node_modules/react-native-permissions"
+  RNScreens:
+    :path: "../../../node_modules/react-native-screens"
   RNShare:
     :path: "../node_modules/react-native-share"
   RNSVG:
@@ -794,10 +800,11 @@ SPEC CHECKSUMS:
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNFBAnalytics: c2bc124906b6719c9d3e407f06f9222a15638edc
   RNFBApp: 4f490a1e02e41721c55b354019f39f2323d72f82
-  RNGestureHandler: e5c7cab5f214503dcefd6b2b0cefb050e1f51c4a
+  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageMarker: 76cd113306bcfad2f74f78d83d5accfd50b4434a
   RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
   RNPermissions: f7ebe52db07c00901127966ca080b4ec6a6ceb0a
+  RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
   RNShare: d76b8c9c6e6ffb38fc18f40b4338c9d867592ed3
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280

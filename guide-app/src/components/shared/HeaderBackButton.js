@@ -14,7 +14,7 @@ function HeaderBackButton({ navigation }: { navigation: Object }) {
       color={Colors.white}
       style={styles}
       onPress={() => {
-        navigation.goBack();
+        navigation && navigation.goBack();
       }}
     />
   );

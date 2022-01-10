@@ -31,6 +31,7 @@ export default class WebScreen extends Component {
     const { url } = this.props.navigation.state.params;
     return (
       <WebView
+        androidHardwareAccelerationDisabled
         ref={ref => {
           this.webView = ref;
         }}
