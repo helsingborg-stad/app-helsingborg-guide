@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ../../node_modules/react-native/local-cli/cli.js start",
+    "start": "node ../../node_modules/react-native/local-cli/cli.js start --reset-cache",
     "clean": "react-native-clean-project",
     "android:alpha:debug": "react-native run-android --variant alphaDebug --appIdSuffix alpha",
     "android:alpha:release": "react-native run-android --variant alphaRelease --appIdSuffix alpha",
@@ -20,7 +20,9 @@
     "android:shake": "adb shell input keyevent 82",
     "android:clean": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && cd .. && npx react-native run-android",
     "ios": "react-native run-ios",
-    "ios:clean": "cd ios && rm -rf Pods && pod cache clean --all && pod install && cd .. && npx react-native run-ios"
+    "ios:clean": "cd ios && xcodebuild clean && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install && cd .. && npx react-native run-ios",
+    "ios:clean:light": "cd ios && xcodebuild clean && cd .. && npx react-native run-ios",
+    "yarn:clean": "rm -rf node_modules && yarn cache clean --force && yarn install"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -78,6 +80,7 @@
     "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "react-native-monorepo-tools": "^1.1.4"
   }
 }

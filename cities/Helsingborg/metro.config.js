@@ -17,8 +17,6 @@ const monorepoMetroTools = getMetroTools({ cwd: `${[path.resolve(__dirname, "../
 
 const androidAssetsResolutionFix = getMetroAndroidAssetsResolutionFix();
 
-console.log("monorep", process.cwd(), `${[path.resolve(__dirname, "../..")][0]}`, monorepoMetroTools);
-
 module.exports = (async () => {
   const {
     resolver: { assetExts },

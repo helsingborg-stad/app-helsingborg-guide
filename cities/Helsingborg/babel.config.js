@@ -1,8 +1,12 @@
 const path = require("path");
 
-
 module.exports = {
   presets: ["module:metro-react-native-babel-preset"],
+  env: {
+    production: {
+      plugins: ["transform-remove-console"],
+    },
+  },
   plugins: [
     ["module:react-native-dotenv"],
     [
