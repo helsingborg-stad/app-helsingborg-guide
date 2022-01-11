@@ -18,8 +18,9 @@
     "translate": "node ./scripts/translate.js",
     "android": "react-native run-android",
     "android:shake": "adb shell input keyevent 82",
-    "android:clean": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && cd ..",
-    "ios": "react-native run-ios"
+    "android:clean": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && cd .. && npx react-native run-android",
+    "ios": "react-native run-ios",
+    "ios:clean": "cd ios && rm -rf Pods && pod cache clean --all && pod install && cd .. && npx react-native run-ios"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",

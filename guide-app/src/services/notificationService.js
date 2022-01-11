@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from "react-native";
+import { API_BASE_URL_DEV } from "@env";
 const Notifier = NativeModules.NotificationAndroid;
 const _DefaultExtNotification = {
   id: 200,
@@ -7,6 +8,7 @@ const _DefaultExtNotification = {
   big_content_title: "Some Important Things",
   ext_content: ["line 1", "line 2", "line 3", "line 4"]
 };
+
 
 console.log("Notifier", Notifier, NativeModules)
 

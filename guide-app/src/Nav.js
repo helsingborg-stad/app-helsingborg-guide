@@ -38,21 +38,22 @@ const GuideNavigator = createStackNavigator(
       navigationOptions: {
         backgroundColor: "#FFFFFF",
         header: () => null,
-        animationEnabled: false,
       },
     },
     TrailScreen: { screen: TrailScreen },
     LocationScreen: {
-      screen: LocationScreen, navigationOptions: {
-        animationEnabled: false,
+      screen: LocationScreen,
+      navigationOptions: {
+        animationEnabled: Platform.OS !== "android",
       },
     },
     ObjectScreen: { screen: ObjectScreen },
     QuizScreen: { screen: QuizScreen },
     QuizResultScreen: { screen: QuizResultScreen },
     GuideDetailsScreen: {
-      screen: GuideScreen, navigationOptions: {
-        animationEnabled: false,
+      screen: GuideScreen,
+      navigationOptions: {
+        animationEnabled: Platform.OS !== "android",
       },
     },
     WebScreen: { screen: WebScreen },

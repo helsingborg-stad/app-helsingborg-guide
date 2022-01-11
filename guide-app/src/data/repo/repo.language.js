@@ -1,4 +1,5 @@
-import { _LANGUAGE_API_URL } from "@data/endpoints";
+import { _LANGUAGE_API_URL } from "@env"
+
 
 module.exports = () => {
   function getAvailableLanguages() {

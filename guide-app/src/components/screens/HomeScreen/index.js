@@ -9,6 +9,7 @@ import {
   FlatList,
   StatusBar,
   Text,
+  ScrollView,
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
@@ -140,22 +141,36 @@ class HomeScreen extends Component<Props> {
           </View>
         ) : (
           <>
-            <FlatList
+            <ScrollView
               key={currentHomeTab}
               style={styles.container}
               contentContainerStyle={styles.contentContainer}
-              renderItem={({ item, index }) => {
-                return (
-                  <NavigationListItem
-                    index={index}
-                    item={item}
-                    onPressItem={this.onPressItem}
-                  />
-                );
-              }}
-              keyExtractor={item => item?.id.toString()}
-              data={items}
-            />
+            >
+              {items.map((item, index) => (
+                <NavigationListItem
+                  key={index}
+                  index={index}
+                  item={item}
+                  onPressItem={this.onPressItem}
+                />
+              ))}
+            </ScrollView>
+            {/*<FlatList*/}
+            {/*  key={currentHomeTab}*/}
+            {/*  style={styles.container}*/}
+            {/*  contentContainerStyle={styles.contentContainer}*/}
+            {/*  renderItem={({ item, index }) => {*/}
+            {/*    return (*/}
+            {/*      <NavigationListItem*/}
+            {/*        index={index}*/}
+            {/*        item={item}*/}
+            {/*        onPressItem={this.onPressItem}*/}
+            {/*      />*/}
+            {/*    );*/}
+            {/*  }}*/}
+            {/*  keyExtractor={item => item?.id.toString()}*/}
+            {/*  data={items}*/}
+            {/*/>*/}
             <TouchableOpacity
               style={styles.mapButton}
               onPress={() => navigation.navigate("CategoryMapScreen")}

@@ -1,9 +1,19 @@
-export const API_BASE_URL = __DEV__
-  ? "https://tw1rhbvccc.execute-api.eu-north-1.amazonaws.com/prod"
-  : "https://tw1rhbvccc.execute-api.eu-north-1.amazonaws.com/prod";
+import {
+  API_BASE_URL_DEV,
+  API_BASE_URL_PROD,
+  DEPRECATED_API_BASE_URL_DEV,
+  DEPRECATED_API_BASE_URL_PROD,
+  LANGUAGE_API_URL_DEV,
+  LANGUAGE_API_URL_PROD,
+  GROUP_ID_DEV,
+  GROUP_ID_PROD
+} from "@env";
 
-export const _LANGUAGE_API_URL = `https://tw1rhbvccc.execute-api.eu-north-1.amazonaws.com/prod/languages`;
 
-export const DEPRECATED_API_BASE_URL = "https://guide-api.helsingborg.se";
+export const API_BASE_URL = __DEV__ ? API_BASE_URL_DEV : API_BASE_URL_PROD
 
-export const GROUP_ID = __DEV__ ? 312 : 312;
+export const DEPRECATED_API_BASE_URL = __DEV__ ? DEPRECATED_API_BASE_URL_DEV : DEPRECATED_API_BASE_URL_PROD
+
+export const LANGUAGE_API_URL = __DEV__ ? LANGUAGE_API_URL_DEV : LANGUAGE_API_URL_PROD
+
+export const GROUP_ID = __DEV__ ? parseInt(GROUP_ID_DEV, 10) : parseInt(GROUP_ID_PROD, 10);

@@ -19,8 +19,8 @@ import {
 } from "@actions/uiStateActions";
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
-
 const { store, persistor } = configureStore();
+
 
 // TODO decouple these store reference hacks
 LocationService.getInstance().store = store;
