@@ -38,14 +38,23 @@ const GuideNavigator = createStackNavigator(
       navigationOptions: {
         backgroundColor: "#FFFFFF",
         header: () => null,
+        animationEnabled: false,
       },
     },
     TrailScreen: { screen: TrailScreen },
-    LocationScreen: { screen: LocationScreen },
+    LocationScreen: {
+      screen: LocationScreen, navigationOptions: {
+        animationEnabled: false,
+      },
+    },
     ObjectScreen: { screen: ObjectScreen },
     QuizScreen: { screen: QuizScreen },
     QuizResultScreen: { screen: QuizResultScreen },
-    GuideDetailsScreen: { screen: GuideScreen },
+    GuideDetailsScreen: {
+      screen: GuideScreen, navigationOptions: {
+        animationEnabled: false,
+      },
+    },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
     ImageScreen: { screen: ImageScreen },
@@ -55,7 +64,7 @@ const GuideNavigator = createStackNavigator(
     CategoryMapScreen: { screen: CategoryMapScreen },
     CalendarScreen: { screen: CalendarScreen },
   },
-  { defaultNavigationOptions: HeaderStyles.default }
+  { defaultNavigationOptions: HeaderStyles.default },
 );
 
 const RootNavigator = createStackNavigator(
@@ -69,7 +78,7 @@ const RootNavigator = createStackNavigator(
   {
     headerMode: "none",
     mode: "modal",
-  }
+  },
 );
 
 const NavigatorWrapper = createAppContainer(RootNavigator);

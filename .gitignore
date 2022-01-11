@@ -81,3 +81,6 @@ buck-out/
 # Firebase / Google services
 
 **/src/debug/google-services.json
+
+# Dot ENV
+*.env

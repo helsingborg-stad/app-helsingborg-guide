@@ -40,37 +40,33 @@ class GuideScreen extends Component<Props> {
     super(props);
 
     const { currentGuide } = props;
-    const title = currentGuide ? currentGuide.name : null;
-    props.navigation.setParams({ title });
-  }
 
-  componentWillUnmount() {
-    this.props.dispatchReleaseAudio();
-    const { navigation } = this.props;
-    if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
-      this.props.dispatchShowBottomBar(true);
-    }
-  }
+    console.log("current guide", currentGuide);
 
-  onPressContentObject = (obj: ContentObject) => {
-    this.props.dispatchSelectContentObject(obj);
-    AnalyticsUtils.logEvent("view_object", { name: obj.title });
-    this.props.navigation.navigate("ObjectScreen", {
-      title: obj.title,
-      currentGuide: this.props.currentGuide,
-    });
+    //   const title = currentGuide ? currentGuide.name : null;
+    //   props.navigation.setParams({ title });
+    // }
+    //
+    // componentWillUnmount() {
+    //   this.props.dispatchReleaseAudio();
+    //   const { navigation } = this.props;
+    //   if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
+    //     this.props.dispatchShowBottomBar(true);
+    //   }
+    // }
+    //
+    // onPressContentObject = (obj: ContentObject) => {
+    //   this.props.dispatchSelectContentObject(obj);
+    //   AnalyticsUtils.logEvent("view_object", { name: obj.title });
+    //   this.props.navigation.navigate("ObjectScreen", {
+    //     title: obj.title,
+    //     currentGuide: this.props.currentGuide,
+    //   });
+
   };
 
   render() {
-    const { currentGuide } = this.props;
-    return currentGuide ? (
-      <GuideView
-        guide={currentGuide}
-        onPressContentObject={this.onPressContentObject}
-      />
-    ) : (
-      <View />
-    );
+    return <></>;
   }
 }
 
@@ -89,7 +85,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GuideScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(GuideScreen);

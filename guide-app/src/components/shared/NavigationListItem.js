@@ -13,7 +13,7 @@ type Props = {
 
 function getDescription(item: NavigationItem) {
   const { type, guide } = item;
-  const guidesCount = GuideUtils.getGuidesCount(item);
+  const guidesCount = GuideUtils?.getGuidesCount(item);
   const plural = guidesCount > 1;
 
   let textString = "";
@@ -75,14 +75,14 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
   const { imageUrl, name } = getNameAndImage(item);
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
   const size = index < 2 ? "expanded" : "compact";
-  const showMapIcon = !!item.guide;
+  const showMapIcon = !!item?.guide;
 
   const onPress = useCallback(() => {
-    console.log("the item", item)
     onPressItem(item);
   }, [item, onPressItem]);
 
   return (
+    name ?
     <GuideCard
       size={size}
       image={image}
@@ -91,7 +91,7 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
       showMapIcon={showMapIcon}
       showChildFriendlyIcon={isChildFriendly(item)}
       onPress={onPress}
-    />
+    /> : null
   );
 };
 
