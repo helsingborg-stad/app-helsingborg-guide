@@ -100,7 +100,7 @@ export default class SplashScreen extends Component<Props, State> {
   }
 
   static navigationOptions = {
-    header: null
+    headerMode: 'none'
   };
 
   timer;

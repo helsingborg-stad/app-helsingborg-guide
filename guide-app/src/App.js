@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { PersistGate } from "redux-persist/integration/react";
-import { Alert, UIManager, Platform, Linking } from "react-native";
+import { Alert, UIManager, Platform, Linking, LogBox } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import Nav from "@src/Nav";
 import configureStore from "@src/store/configureStore";
@@ -19,8 +19,8 @@ import {
 } from "@actions/uiStateActions";
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
-
 const { store, persistor } = configureStore();
+
 
 // TODO decouple these store reference hacks
 LocationService.getInstance().store = store;
@@ -41,11 +41,11 @@ function init() {
       store.dispatch(setLanguage(LangService.code));
       loadContents(LangService.code);
     })
-    .catch(error => store.dispatch(errorHappened(error)));
+    .catch((error) => store.dispatch(errorHappened(error)));
 }
 
 function loadContents() {
-  NetInfo.isConnected.fetch().then(isConnected => {
+  NetInfo.isConnected.fetch().then((isConnected) => {
     if (isConnected) {
       LangService.getLanguages();
     }
@@ -62,26 +62,25 @@ function alert() {
         onPress: openInternetSettings,
       },
       {
-        text: LangService.strings.CLOSE, onPress: () => {
-        }, style: "cancel",
+        text: LangService.strings.CLOSE,
+        onPress: () => {},
+        style: "cancel",
       },
     ],
-    { cancelable: false },
+    { cancelable: false }
   );
 }
 
-
-export const GuideApp = () => {
-
+const GuideApp = () => {
   const [netInfo, setNetInfo] = useState();
 
   useEffect(() => {
-    NetInfo.fetch().then(state => {
+    NetInfo.fetch().then((state) => {
       let currentNetwork = state.isConnected;
       setNetInfo(currentNetwork);
     });
 
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
       setNetInfo(state.isConnected);
       if (!state.isConnected) {
         store.dispatch(internetChanged(false));
@@ -97,10 +96,24 @@ export const GuideApp = () => {
       init();
     });
     return unsubscribe;
-
   }, []);
 
   useEffect(() => {
+    // TEMPORARY SOLUTIONS
+    LogBox.ignoreLogs([
+      "Warning: componentWillMount has been renamed, and is not recommended for use.",
+      "Warning: componentWillReceiveProps has been renamed, and is not recommended for use.",
+      "Warning: componentWillUpdate has been renamed, and is not recommended for use.",
+      "Remote debugger is in a background tab which may cause apps to perform slowly",
+      "Require cycle: ../../node_modules/rn-fetch-blob/index.js",
+      "Require cycle: ../../node_modules/react-native/Libraries/Network/fetch.js",
+      "new NativeEventEmitter",
+      "new NativeEventEmitter() was called with a non-null argument",
+      "new NativeEventEmitter() was called with a non-null argument without the required removeListeners method.",
+      "new NativeEventEmitter() was called with a non-null argument without the required removeListeners method.",
+      "`new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.",
+      "`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.",
+    ]);
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
@@ -126,8 +139,7 @@ export const GuideApp = () => {
   );
 };
 
-
-
+export default GuideApp;
 
 //
 //

@@ -374,11 +374,15 @@ PODS:
     - glog
   - react-native-geolocation (2.0.2):
     - React
-  - react-native-maps (0.26.1):
-    - React
+  - react-native-maps (0.30.1):
+    - React-Core
   - react-native-netinfo (7.1.7):
     - React-Core
   - react-native-photo-view (1.5.3):
+    - React-Core
+  - react-native-progress-bar-android (1.0.4):
+    - React
+  - react-native-progress-view (1.3.1):
     - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
@@ -460,7 +464,7 @@ PODS:
     - React-perflogger (= 0.66.4)
   - rn-fetch-blob (0.12.0):
     - React-Core
-  - RNCAsyncStorage (1.15.14):
+  - RNCAsyncStorage (1.12.1):
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
@@ -471,12 +475,17 @@ PODS:
   - RNFBApp (14.2.1):
     - Firebase/CoreOnly (= 8.10.0)
     - React-Core
-  - RNGestureHandler (2.1.0):
+  - RNGestureHandler (1.10.3):
     - React-Core
   - RNImageMarker (0.6.3):
     - React
+  - RNInAppBrowser (3.6.3):
+    - React-Core
   - RNPermissions (3.2.0):
     - React-Core
+  - RNScreens (3.10.1):
+    - React-Core
+    - React-RCTImage
   - RNShare (7.3.2):
     - React-Core
   - RNSVG (12.1.1):
@@ -536,6 +545,8 @@ DEPENDENCIES:
   - react-native-maps (from `../../../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../../../node_modules/@react-native-community/netinfo`)"
   - react-native-photo-view (from `../../../node_modules/react-native-photo-view`)
+  - "react-native-progress-bar-android (from `../../../node_modules/@react-native-community/progress-bar-android`)"
+  - "react-native-progress-view (from `../../../node_modules/@react-native-community/progress-view`)"
   - react-native-safe-area-context (from `../../../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../../../node_modules/@react-native-community/slider`)"
   - react-native-version-number (from `../../../node_modules/react-native-version-number`)
@@ -554,13 +565,15 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../../../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
   - rn-fetch-blob (from `../../../node_modules/rn-fetch-blob`)
-  - "RNCAsyncStorage (from `../../../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCAsyncStorage (from `../../../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../../../node_modules/@react-native-community/masked-view`)"
   - "RNFBAnalytics (from `../../../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../../../node_modules/@react-native-firebase/app`)"
-  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
   - RNImageMarker (from `../../../node_modules/react-native-image-marker`)
+  - RNInAppBrowser (from `../../../node_modules/react-native-inappbrowser-reborn`)
   - RNPermissions (from `../../../node_modules/react-native-permissions`)
+  - RNScreens (from `../../../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
@@ -647,6 +660,10 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/@react-native-community/netinfo"
   react-native-photo-view:
     :path: "../../../node_modules/react-native-photo-view"
+  react-native-progress-bar-android:
+    :path: "../../../node_modules/@react-native-community/progress-bar-android"
+  react-native-progress-view:
+    :path: "../../../node_modules/@react-native-community/progress-view"
   react-native-safe-area-context:
     :path: "../../../node_modules/react-native-safe-area-context"
   react-native-slider:
@@ -684,7 +701,7 @@ EXTERNAL SOURCES:
   rn-fetch-blob:
     :path: "../../../node_modules/rn-fetch-blob"
   RNCAsyncStorage:
-    :path: "../../../node_modules/@react-native-async-storage/async-storage"
+    :path: "../../../node_modules/@react-native-community/async-storage"
   RNCMaskedView:
     :path: "../../../node_modules/@react-native-community/masked-view"
   RNFBAnalytics:
@@ -692,11 +709,15 @@ EXTERNAL SOURCES:
   RNFBApp:
     :path: "../../../node_modules/@react-native-firebase/app"
   RNGestureHandler:
-    :path: "../node_modules/react-native-gesture-handler"
+    :path: "../../../node_modules/react-native-gesture-handler"
   RNImageMarker:
     :path: "../../../node_modules/react-native-image-marker"
+  RNInAppBrowser:
+    :path: "../../../node_modules/react-native-inappbrowser-reborn"
   RNPermissions:
     :path: "../../../node_modules/react-native-permissions"
+  RNScreens:
+    :path: "../../../node_modules/react-native-screens"
   RNShare:
     :path: "../node_modules/react-native-share"
   RNSVG:
@@ -752,9 +773,11 @@ SPEC CHECKSUMS:
   React-jsinspector: d0374f7509d407d2264168b6d0fad0b54e300b85
   React-logger: 933f80c97c633ee8965d609876848148e3fef438
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
-  react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
+  react-native-maps: d752b0dd0e1951d815b1336332835aab6b4a836f
   react-native-netinfo: 27f287f2d191693f3b9d01a4273137fcf91c3b5d
   react-native-photo-view: ea0ec91bf5991a6843e740b1f47ab355171c996c
+  react-native-progress-bar-android: be43138ab7da30d51fc038bafa98e9ed594d0c40
+  react-native-progress-view: 9e6b6a5305a9115c2157ae3b8852081aba0aab7c
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-slider: 6e9b86e76cce4b9e35b3403193a6432ed07e0c81
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
@@ -773,13 +796,15 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
-  RNCAsyncStorage: ea6b5c280997b2b32a587793163b1f10e580c4f7
+  RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNFBAnalytics: c2bc124906b6719c9d3e407f06f9222a15638edc
   RNFBApp: 4f490a1e02e41721c55b354019f39f2323d72f82
-  RNGestureHandler: e5c7cab5f214503dcefd6b2b0cefb050e1f51c4a
+  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageMarker: 76cd113306bcfad2f74f78d83d5accfd50b4434a
+  RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
   RNPermissions: f7ebe52db07c00901127966ca080b4ec6a6ceb0a
+  RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
   RNShare: d76b8c9c6e6ffb38fc18f40b4338c9d867592ed3
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280

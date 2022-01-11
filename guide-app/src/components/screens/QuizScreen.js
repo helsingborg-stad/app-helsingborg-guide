@@ -33,8 +33,8 @@ class QuizScreen extends Component<Props, State> {
     return {
       ...HeaderStyles.noElevation,
       title: quiz.title,
-      headerRight: <View />,
-      headerLeft: <HeaderBackButton navigation={navigation} />,
+      headerRight: () => <View />,
+      headerLeft: () => <HeaderBackButton navigation={navigation} />,
     };
   };
 

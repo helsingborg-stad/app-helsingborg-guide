@@ -22,8 +22,8 @@ type State = {
 
 class ImageScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => ({
-    headerLeft: <HeaderBackButton navigation={navigation} />,
-    headerRight: null,
+    headerLeft: () => <HeaderBackButton navigation={navigation} />,
+    headerRight: () => null,
     headerStyle: styles.mainContainer,
   });
 

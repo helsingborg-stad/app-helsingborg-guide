@@ -9,6 +9,7 @@ import {
   FlatList,
   StatusBar,
   Text,
+  ScrollView,
 } from "react-native";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
@@ -52,7 +53,7 @@ class HomeScreen extends Component<Props> {
   static navigationOptions = () => {
     const title = LangService.strings.APP_NAME;
     return {
-      ...HeaderStyles.noElevation,
+      ...HeaderStyles?.noElevation,
       title,
     };
   };
@@ -62,42 +63,42 @@ class HomeScreen extends Component<Props> {
   }
 
   onPressItem = (item: NavigationItem): void => {
-    switch (item.type) {
+    switch (item?.type) {
       case "guide": {
         const { guide } = item;
         if (guide) {
           this.props.selectGuide(guide.id);
-          const type = guide.guideType;
+          const type = guide?.guideType;
           if (type === "guide") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("GuideDetailsScreen", {
+            this.props?.navigation.navigate("GuideDetailsScreen", {
               title: guide.name,
               bottomBarOnUnmount: true,
             });
             this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
-            this.props.navigation.navigate("TrailScreen", {
+            this.props?.navigation.navigate("TrailScreen", {
               title: guide.name,
               bottomBarOnUnmount: true,
             });
-            this.props.dispatchShowBottomBar(false);
+            this.props?.dispatchShowBottomBar(false);
           }
         }
         break;
       }
       case "guidegroup":
-        this.props.selectGuideGroup(item.id);
+        this?.props?.selectGuideGroup(item.id);
         if (item.guideGroup) {
-          const title = item.guideGroup.name;
+          const title = item?.guideGroup?.name;
           AnalyticsUtils.logEvent("view_location", {
-            name: item.guideGroup.slug,
+            name: item?.guideGroup?.slug,
           });
           this.props.navigation.navigate("LocationScreen", {
             title,
             bottomBarOnUnmount: true,
           });
-          this.props.dispatchShowBottomBar(false);
+          this?.props?.dispatchShowBottomBar(false);
         }
         break;
       default:
@@ -140,22 +141,36 @@ class HomeScreen extends Component<Props> {
           </View>
         ) : (
           <>
-            <FlatList
+            <ScrollView
               key={currentHomeTab}
               style={styles.container}
               contentContainerStyle={styles.contentContainer}
-              renderItem={({ item, index }) => {
-                return (
-                  <NavigationListItem
-                    index={index}
-                    item={item}
-                    onPressItem={this.onPressItem}
-                  />
-                );
-              }}
-              keyExtractor={item => item.id.toString()}
-              data={items}
-            />
+            >
+              {items.map((item, index) => (
+                <NavigationListItem
+                  key={index}
+                  index={index}
+                  item={item}
+                  onPressItem={this.onPressItem}
+                />
+              ))}
+            </ScrollView>
+            {/*<FlatList*/}
+            {/*  key={currentHomeTab}*/}
+            {/*  style={styles.container}*/}
+            {/*  contentContainerStyle={styles.contentContainer}*/}
+            {/*  renderItem={({ item, index }) => {*/}
+            {/*    return (*/}
+            {/*      <NavigationListItem*/}
+            {/*        index={index}*/}
+            {/*        item={item}*/}
+            {/*        onPressItem={this.onPressItem}*/}
+            {/*      />*/}
+            {/*    );*/}
+            {/*  }}*/}
+            {/*  keyExtractor={item => item?.id.toString()}*/}
+            {/*  data={items}*/}
+            {/*/>*/}
             <TouchableOpacity
               style={styles.mapButton}
               onPress={() => navigation.navigate("CategoryMapScreen")}

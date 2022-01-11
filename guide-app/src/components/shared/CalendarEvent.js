@@ -2,20 +2,20 @@
 import React from "react";
 import {
   Image,
-  Linking,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Linking
 } from "react-native";
-import { XmlEntities } from "html-entities";
+import { decode } from "html-entities";
 
 import { Colors, TextStyles } from "@assets/styles";
 import { eventCalendarURL } from "@data/urls";
 import LangService from "@services/langService";
 import { StyleSheetUtils } from "@utils";
 import { DateUtils } from "@utils";
-
+import useOpenLink from "@hooks/useOpenLink";
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 
 const styles = StyleSheet.create({
@@ -116,10 +116,11 @@ function CalendarEvent({ event, currentLanguage }: Props) {
     dateStart,
     dateEnd
   } = event;
+  const { openLink } = useOpenLink();
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
-
-  const entities = new XmlEntities();
-  const decodedLocationTitle = entities.decode(location.title);
+  const decodedLocationTitle = decode(location.title, {
+    level: "xml",
+  });
   let hoursString;
   if (DateUtils.isFullDay(dateStart, dateEnd)) {
     hoursString = LangService.strings.CALENDAR_FULL_DAY;
@@ -134,7 +135,10 @@ function CalendarEvent({ event, currentLanguage }: Props) {
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => Linking.openURL(eventUrl)}
+      onPress={() => {
+        Linking.openURL(eventUrl);
+        // openLink(eventUrl);
+      }}
     >
       <View style={styles.imageWrapper}>
         <Image style={styles.listItemImage} source={image} />

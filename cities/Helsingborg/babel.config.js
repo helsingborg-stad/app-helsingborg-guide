@@ -1,8 +1,10 @@
 const path = require("path");
 
+
 module.exports = {
   presets: ["module:metro-react-native-babel-preset"],
   plugins: [
+    ["module:react-native-dotenv"],
     [
       "module-resolver",
       {
@@ -16,6 +18,7 @@ module.exports = {
           "@services": "../../guide-app/src/services",
           "@shared-components": "../../guide-app/src/components/shared",
           "@src": "../../guide-app/src",
+          "@hooks": "../../guide-app/src/hooks",
           "@utils": "../../guide-app/src/utils",
         },
       },

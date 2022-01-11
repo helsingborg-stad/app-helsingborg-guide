@@ -18,8 +18,8 @@ export default class VideoScreen extends Component {
     const { title } = navigation.state.params;
     return {
       title,
-      headerLeft: <HeaderBackButton navigation={navigation} />,
-      headerRight: null,
+      headerLeft: () => <HeaderBackButton navigation={navigation} />,
+      headerRight: () => null,
       headerStyle: styles.mainContainer,
       tabBarVisible: false
     };

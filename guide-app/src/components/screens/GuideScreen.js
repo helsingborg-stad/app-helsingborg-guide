@@ -29,8 +29,8 @@ class GuideScreen extends Component<Props> {
       const { title } = params;
       return {
         title,
-        headerRight: <SearchButton navigation={navigation} />,
-        headerLeft: <HeaderBackButton navigation={navigation} />,
+        headerRight: () => <SearchButton navigation={navigation} />,
+        headerLeft: () => <HeaderBackButton navigation={navigation} />,
       };
     }
     return {};
@@ -40,25 +40,29 @@ class GuideScreen extends Component<Props> {
     super(props);
 
     const { currentGuide } = props;
-    const title = currentGuide ? currentGuide.name : null;
-    props.navigation.setParams({ title });
-  }
 
-  componentWillUnmount() {
-    this.props.dispatchReleaseAudio();
-    const { navigation } = this.props;
-    if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
-      this.props.dispatchShowBottomBar(true);
+    console.log("current guide", currentGuide);
+
+      const title = currentGuide ? currentGuide.name : null;
+      props.navigation.setParams({ title });
     }
-  }
 
-  onPressContentObject = (obj: ContentObject) => {
-    this.props.dispatchSelectContentObject(obj);
-    AnalyticsUtils.logEvent("view_object", { name: obj.title });
-    this.props.navigation.navigate("ObjectScreen", {
-      title: obj.title,
-      currentGuide: this.props.currentGuide,
-    });
+    componentWillUnmount() {
+      this.props.dispatchReleaseAudio();
+      const { navigation } = this.props;
+      if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
+        this.props.dispatchShowBottomBar(true);
+      }
+    }
+
+    onPressContentObject = (obj: ContentObject) => {
+      this.props.dispatchSelectContentObject(obj);
+      AnalyticsUtils.logEvent("view_object", { name: obj.title });
+      this.props.navigation.navigate("ObjectScreen", {
+        title: obj.title,
+        currentGuide: this.props.currentGuide,
+      });
+
   };
 
   render() {
@@ -89,7 +93,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GuideScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(GuideScreen);

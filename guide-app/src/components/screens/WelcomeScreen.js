@@ -97,7 +97,7 @@ export default class WelcomeScreen extends Component {
   }
 
   static navigationOptions = {
-    header: null
+    headerShown: false,
   };
 
   onIndexChanged = index => {

@@ -4,4 +4,5 @@ import FullScreenVideoScreen from "guide-app/src/components/screens/FullScreenVi
 import { name as AppName } from "./app.json";
 
 AppRegistry.registerComponent(AppName, () => Helsingborg);
+
 AppRegistry.registerComponent("VideoApp", () => FullScreenVideoScreen);

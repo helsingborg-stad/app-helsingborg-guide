@@ -56,7 +56,7 @@ class ObjectScreen extends Component<Props> {
     return {
       ...HeaderStyles.noElevation,
       title,
-      headerLeft: <HeaderBackButton navigation={navigation} />
+      headerLeft: () => <HeaderBackButton navigation={navigation} />
     };
   };
 

@@ -41,11 +41,21 @@ const GuideNavigator = createStackNavigator(
       },
     },
     TrailScreen: { screen: TrailScreen },
-    LocationScreen: { screen: LocationScreen },
+    LocationScreen: {
+      screen: LocationScreen,
+      navigationOptions: {
+        animationEnabled: Platform.OS !== "android",
+      },
+    },
     ObjectScreen: { screen: ObjectScreen },
     QuizScreen: { screen: QuizScreen },
     QuizResultScreen: { screen: QuizResultScreen },
-    GuideDetailsScreen: { screen: GuideScreen },
+    GuideDetailsScreen: {
+      screen: GuideScreen,
+      navigationOptions: {
+        animationEnabled: Platform.OS !== "android",
+      },
+    },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
     ImageScreen: { screen: ImageScreen },
@@ -55,7 +65,7 @@ const GuideNavigator = createStackNavigator(
     CategoryMapScreen: { screen: CategoryMapScreen },
     CalendarScreen: { screen: CalendarScreen },
   },
-  { defaultNavigationOptions: HeaderStyles.default }
+  { defaultNavigationOptions: HeaderStyles.default },
 );
 
 const RootNavigator = createStackNavigator(
@@ -69,7 +79,7 @@ const RootNavigator = createStackNavigator(
   {
     headerMode: "none",
     mode: "modal",
-  }
+  },
 );
 
 const NavigatorWrapper = createAppContainer(RootNavigator);
@@ -130,7 +140,7 @@ export default class Nav extends Component<Props> {
         {/* $FlowFixMe should be fixed in later flow versions */}
         <NavigatorWrapper
           onNavigationStateChange={Nav.onNavigationStateChange}
-          ref={navigatorRef => {
+          ref={(navigatorRef) => {
             NavigatorService.setContainer(navigatorRef);
           }}
         />
