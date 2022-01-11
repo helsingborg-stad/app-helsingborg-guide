@@ -18,6 +18,7 @@ import { DateUtils } from "@utils";
 import useOpenLink from "@hooks/useOpenLink";
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 
+console.log("EVENT URL", eventCalendarURL)
 const styles = StyleSheet.create({
   item: {
     marginBottom: 30,

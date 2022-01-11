@@ -25,7 +25,6 @@ async function fetchJSON(
     url += params;
   }
 
-  console.log("FULL", url += params)
 
   const response = await fetch(url);
   if (!response.ok) {
