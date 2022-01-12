@@ -103,6 +103,7 @@ class MapMarkerView extends Component<Props, State> {
     // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 999 over any other marker.
     // This is why the active marker ALWAYS should have a zIndex of 999 until this issue is fixed.
     const zIndex = active ? 999 : index;
+    console.log("is active", active, zIndex)
 
     return (
       <Marker
@@ -192,6 +193,7 @@ class MapMarkerView extends Component<Props, State> {
     if (items.length > 0 && !markersFocused) {
       this.focusMarkers(items);
       this.setState({ markersFocused: true });
+      this.panMapToIndex(0);
     }
   };
 
@@ -229,6 +231,9 @@ class MapMarkerView extends Component<Props, State> {
     return (
       <View style={styles.container}>
         <MapView
+          zoomEnabled={true}
+          minZoomLevel={12}
+          maxZoomLevel={20}
           ref={(ref) => {
             this.map = ref;
           }}
@@ -245,7 +250,7 @@ class MapMarkerView extends Component<Props, State> {
           }}
           style={styles.map}
           showsUserLocation
-          onMapReady={() => this.onMapReady}
+          onMapReady={() => this.onMapReady()}
         >
           {this.renderMapMarkers(items)}
         </MapView>
