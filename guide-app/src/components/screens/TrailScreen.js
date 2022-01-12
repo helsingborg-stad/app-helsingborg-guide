@@ -75,9 +75,11 @@ class TrailScreen extends Component<Props, State> {
   };
 
   render() {
+    const { array, index } = this.props.navigation.state.params;
     if (this.props.currentGuide.contentObjects.length <= 0) {
       return null;
     }
+
 
     return (
       <>
@@ -87,6 +89,8 @@ class TrailScreen extends Component<Props, State> {
         />
         <TrailView
           trail={this.props.currentGuide}
+          array={array}
+          index={index}
           showInfoOverlay={this.state.showInfoOverlay}
           onToggleInfoOverlay={this.toggleInfoOverlay}
           navigation={this.props.navigation}

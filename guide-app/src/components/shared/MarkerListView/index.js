@@ -154,7 +154,9 @@ class MarkerListView extends Component<Props, State> {
       navigation,
       selectGuideGroup,
       selectGuide,
-      dispatchSelectContentObject
+      dispatchSelectContentObject,
+      array,
+      index,
     } = this.props;
     const { navigate } = navigation;
     const { guide, guideGroup, contentObject } = listItem;
@@ -169,7 +171,6 @@ class MarkerListView extends Component<Props, State> {
       const { guideType } = guide;
       AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
       selectGuide(guide);
-
       switch (guideType) {
         case "trail":
           navigate("TrailScreen", { title: guide.name });
@@ -180,12 +181,13 @@ class MarkerListView extends Component<Props, State> {
           return;
       }
     }
-
     if (contentObject) {
       dispatchSelectContentObject(contentObject);
       AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
       navigate("ObjectScreen", {
-        title: contentObject.title
+        title: contentObject.title,
+        array: array,
+        index: index,
       });
     }
   };

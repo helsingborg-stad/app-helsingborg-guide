@@ -126,8 +126,12 @@ class ObjectScreen extends Component<Props> {
     const {
       currentContentObject,
       currentContentObjectImageIndex,
-      currentGuide
-    } = this.props;
+      currentGuide,
+      navigation,
+    } = this.props
+
+    const { selectObject, index, array } = this.props.navigation.state.params;
+
     if (!currentContentObject) {
       return null;
     }
@@ -148,6 +152,10 @@ class ObjectScreen extends Component<Props> {
           contentObject={currentContentObject}
           guideId={guideId}
           guideType={guideType}
+          array={array}
+          index={index}
+          selectObject={selectObject}
+          navigation={navigation}
           onSwiperIndexChanged={this.onSwiperIndexChanged}
           imageIndex={currentContentObjectImageIndex}
           audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}

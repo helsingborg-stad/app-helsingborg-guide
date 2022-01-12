@@ -40,6 +40,7 @@ class LocationScreen extends Component<Props> {
 
   onPressGuide = (guide: Guide) => {
     const { navigation } = this.props;
+    console.log("guide type", guide.guideType);
     AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
     if (guide.guideType === "trail") {
       this.props.selectCurrentGuide(guide);
@@ -55,7 +56,7 @@ class LocationScreen extends Component<Props> {
 
   onPressInteractiveGuide = (interactiveGuide: InteractiveGuide) => {
     const { navigation } = this.props;
-
+    console.log("interactive!");
     AnalyticsUtils.logEvent("view_interactive_guide", {
       name: interactiveGuide.title,
     });

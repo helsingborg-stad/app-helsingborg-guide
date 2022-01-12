@@ -120,14 +120,18 @@ export async function loadFromCache(
   sessionId: string,
   url: string
 ): Promise<any> {
-  console.log(`loadFromCache: ${sessionId}`);
+  // console.log(`loadFromCache: ${sessionId}`);
   let path = getFilePathInCache(sessionId, url);
   path = Platform.OS === "android" ? `file://${path}` : path;
   const fetchPromise = RNFetchBlob.fs.readFile(path, "base64");
 
-  fetchPromise
-    .then(() => console.log(`read cache HIT (${path})`))
-    .catch(() => console.log(`read cache MISS(${path})`));
+   fetchPromise
+    .then(() => null)
+    .catch(() => null)
+
+   // fetchPromise
+  //   .then(() => console.log(`read cache HIT (${path})`))
+  //   .catch(() => console.log(`read cache MISS(${path})`));
 
   return fetchPromise;
 }

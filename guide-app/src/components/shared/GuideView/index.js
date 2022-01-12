@@ -26,14 +26,14 @@ declare type Props = {
 const textMaxHeight = Dimensions.get("window").height * 0.2;
 
 class GuideView extends Component<Props> {
-  renderContentObject = (sessionId: number, obj: ContentObject) => {
+  renderContentObject = (sessionId: number, obj: ContentObject, index, array ) => {
     const { images } = obj;
     const uri = images.length > 0 ? images[0].medium : null;
     return (
       <View key={obj.id} style={styles.objectContainer}>
         <TouchableOpacity
           style={styles.objectButtonContainer}
-          onPress={() => this.props.onPressContentObject(obj)}
+          onPress={() => this.props.onPressContentObject(obj, index, array)}
         >
           <ImageView
             source={{ uri, sessionId }}
@@ -56,7 +56,12 @@ class GuideView extends Component<Props> {
     contentObjects: ContentObject[]
   ) => (
     <View style={styles.objectsContainer}>
-      {contentObjects.map(item => this.renderContentObject(sessionId, item))}
+      {contentObjects.map((item, index) => this.renderContentObject(
+        sessionId,
+        item,
+        index,
+        contentObjects
+        ))}
     </View>
   );
 

@@ -43,7 +43,7 @@ function renderMapInformationOverlay(
 }
 
 const TrailView = (props: Props) => {
-  const { trail, onToggleInfoOverlay, showInfoOverlay, navigation } = props;
+  const { trail, onToggleInfoOverlay, showInfoOverlay, navigation, array, index } = props;
   const mapItems: MapItem[] = trail.contentObjects.map(item => ({
     contentObject: item
   }));
@@ -53,6 +53,8 @@ const TrailView = (props: Props) => {
       <View style={styles.innerContainer}>
         <MarkerListView
           items={mapItems}
+          array={array}
+          index={index}
           showNumberedMapMarkers
           showDirections
           // NOTE: this disables checking for AR mode

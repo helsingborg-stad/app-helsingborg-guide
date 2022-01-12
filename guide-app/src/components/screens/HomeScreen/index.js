@@ -62,18 +62,21 @@ class HomeScreen extends Component<Props> {
     this.props.dispatchShowBottomBar(true);
   }
 
-  onPressItem = (item: NavigationItem): void => {
+  onPressItem = (item: NavigationItem, items, index): void => {
+    console.log("testing lol", item?.type, "items", items);
     switch (item?.type) {
       case "guide": {
         const { guide } = item;
         if (guide) {
           this.props.selectGuide(guide.id);
           const type = guide?.guideType;
+          console.log("testing type lol", type);
           if (type === "guide") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
             this.props?.navigation.navigate("GuideDetailsScreen", {
               title: guide.name,
               bottomBarOnUnmount: true,
+              array: items,
             });
             this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
@@ -81,6 +84,8 @@ class HomeScreen extends Component<Props> {
             this.props?.navigation.navigate("TrailScreen", {
               title: guide.name,
               bottomBarOnUnmount: true,
+              // array: items,
+              // index: index,
             });
             this.props?.dispatchShowBottomBar(false);
           }
@@ -97,6 +102,7 @@ class HomeScreen extends Component<Props> {
           this.props.navigation.navigate("LocationScreen", {
             title,
             bottomBarOnUnmount: true,
+            array: items,
           });
           this?.props?.dispatchShowBottomBar(false);
         }
@@ -151,7 +157,7 @@ class HomeScreen extends Component<Props> {
                   key={index}
                   index={index}
                   item={item}
-                  onPressItem={this.onPressItem}
+                  onPressItem={() => this.onPressItem(item, items, index)}
                 />
               ))}
             </ScrollView>

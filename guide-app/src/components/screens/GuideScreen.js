@@ -40,9 +40,6 @@ class GuideScreen extends Component<Props> {
     super(props);
 
     const { currentGuide } = props;
-
-    console.log("current guide", currentGuide);
-
       const title = currentGuide ? currentGuide.name : null;
       props.navigation.setParams({ title });
     }
@@ -55,14 +52,16 @@ class GuideScreen extends Component<Props> {
       }
     }
 
-    onPressContentObject = (obj: ContentObject) => {
+    onPressContentObject = (obj: ContentObject, index, array) => {
       this.props.dispatchSelectContentObject(obj);
       AnalyticsUtils.logEvent("view_object", { name: obj.title });
       this.props.navigation.navigate("ObjectScreen", {
         title: obj.title,
         currentGuide: this.props.currentGuide,
+        selectObject: this.props.dispatchSelectContentObject,
+        index: index,
+        array: array,
       });
-
   };
 
   render() {

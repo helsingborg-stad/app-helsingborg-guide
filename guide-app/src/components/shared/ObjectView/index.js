@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from "react";
+import React, { Component, useEffect, useRef } from "react";
 import { View, Text, ScrollView, Linking } from "react-native";
 
 import styles from "./style";
@@ -13,6 +13,7 @@ import LangService from "@services/langService";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
 import { openLink } from "@hooks/useOpenLink";
+import Icon from "react-native-vector-icons/Entypo";
 
 type Props = {
   contentObject: ContentObject,
@@ -40,7 +41,7 @@ function displayID(searchableID: string) {
 function displayTitle(
   title: string,
   searchableID: string,
-  guideType: ?GuideType
+  guideType: ?GuideType,
 ) {
   return (
     <View>
@@ -58,7 +59,7 @@ function displayText(description?: string) {
 
 function displayLinks(
   links: Link[],
-  onGoToLink: (url: string, title?: string) => void
+  onGoToLink: (url: string, title?: string) => void,
 ) {
   return links.map((item, index) => (
     <LinkTouchable
@@ -78,7 +79,7 @@ function displayButtonsBar(
   audioButtonDisabled: boolean,
   videoButtonDisabled: boolean,
   loadAudioFile: () => void,
-  onGoToVideo: (video?: MediaContent) => void
+  onGoToVideo: (video?: MediaContent) => void,
 ) {
   const audioBtnInvisible = !audio || !audio.url;
   const videoBtnInvisible = !video || !video.url;
@@ -123,29 +124,69 @@ function displayButtonsBar(
   );
 }
 
+const guideButtons = (props) => {
+  const { array, index, navigation, selectObject} = props;
+
+  return array?.length ? <View style={styles.navGuideWrapper}>
+    <Icon
+      name={"chevron-left"}
+      size={36}
+      color={Colors.themeExtra1}
+      style={{opacity: index > 0 ? 1 : 0.4}}
+      onPress={index > 0 ? () => {
+        selectObject && selectObject(array[index - 1]);
+        navigation.navigate("ObjectScreen", {
+          title: array[index - 1].title,
+          currentGuide: array[index - 1],
+          index: index - 1,
+          array: array,
+        })
+      } : null}
+    />
+    <Icon
+      name={"chevron-right"}
+      size={36}
+      color={Colors.themeExtra1}
+      style={{opacity: (index + 1) !== array.length ? 1 : 0.5}}
+      onPress={(index + 1) !== array.length ? () => {
+        selectObject && selectObject(array[index + 1]);
+        navigation.navigate("ObjectScreen", {
+          title: array[index + 1].title,
+          currentGuide: array[index + 1],
+          index: index + 1,
+          array: array,
+        })
+      } : null}
+    />
+  </View> : null
+};
+
 /*
  * Underlying sharingservice needs a reference to a Component instance
  */
-class ObjectView extends Component<Props> {
-  render() {
-    const { guideId } = this.props;
+const ObjectView = (props) => {
+
+    const { guideId } = props;
+
+
     return (
       <View style={styles.viewContainer}>
         <ScrollView style={styles.container}>
-          <View style={styles.imageContainer}>
+          <View
+            style={styles.imageContainer}>
             <ImageSwiper
               sessionId={guideId}
-              images={this.props.contentObject.images}
-              onSwiperIndexChanged={this.props.onSwiperIndexChanged}
-              onGoToImage={this.props.onGoToImage}
+              images={props.contentObject.images}
+              onSwiperIndexChanged={props.onSwiperIndexChanged}
+              onGoToImage={props.onGoToImage}
             />
-            {this.props.contentObject.images[this.props.imageIndex] && (
+            {props.contentObject.images[props.imageIndex] && (
               <View style={styles.shareBtn}>
                 {SharingService.showShareButton(
-                  this.props.contentObject.title,
-                  this.props.contentObject.images[this.props.imageIndex],
-                  this,
-                  "share_object"
+                  props.contentObject.title,
+                  props.contentObject.images[props.imageIndex],
+
+                  "share_object",
                 )}
               </View>
             )}
@@ -153,35 +194,37 @@ class ObjectView extends Component<Props> {
 
           <View style={styles.bodyContainer}>
             {displayTitle(
-              this.props.contentObject.title,
-              this.props.contentObject.searchableId,
-              this.props.guideType
+              props.contentObject.title,
+              props.contentObject.searchableId,
+              props.guideType,
             )}
             {displayButtonsBar(
-              this.props.contentObject.audio,
-              this.props.contentObject.video,
-              this.props.audioButtonDisabled,
-              this.props.videoButtonDisabled,
-              this.props.loadAudioFile,
-              this.props.onGoToVideo
+              props.contentObject.audio,
+              props.contentObject.video,
+              props.audioButtonDisabled,
+              props.videoButtonDisabled,
+              props.loadAudioFile,
+              props.onGoToVideo,
             )}
             <View style={styles.articleContainer}>
-              {this.props.contentObject.description
-                ? displayText(this.props.contentObject.description)
+              {props.contentObject.description
+                ? displayText(props.contentObject.description)
                 : null}
-              {this.props.contentObject.links
+              {props.contentObject.links
                 ? displayLinks(
-                    this.props.contentObject.links,
-                    this.props.onGoToLink
-                  )
+                  props.contentObject.links,
+                  props.onGoToLink,
+                )
                 : null}
+              <View style={styles.navGuideContainer}>
+                {guideButtons(props)}
+              </View>
             </View>
           </View>
         </ScrollView>
         <AudioPlayerView />
       </View>
     );
-  }
 }
 
 export default ObjectView;
