@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { AppState, StatusBar, Platform } from "react-native";
+import { AppState, StatusBar, Platform, View } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -25,6 +25,7 @@ import {
   WelcomeScreen,
   ARIntroductionScreen,
 } from "@src/components/screens";
+import SegmentControlPill from "@shared-components/SegmentControlPill";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -37,7 +38,10 @@ const GuideNavigator = createStackNavigator(
       screen: HomeScreen,
       navigationOptions: {
         backgroundColor: "#FFFFFF",
+        headerMode: 'screen',
+        headerTitle: 'Guide Helsingborg',
         header: () => null,
+
       },
     },
     TrailScreen: { screen: TrailScreen },
@@ -45,6 +49,7 @@ const GuideNavigator = createStackNavigator(
       screen: LocationScreen,
       navigationOptions: {
         animationEnabled: Platform.OS !== "android",
+        headerMode: 'screen',
       },
     },
     ObjectScreen: { screen: ObjectScreen },
@@ -54,6 +59,7 @@ const GuideNavigator = createStackNavigator(
       screen: GuideScreen,
       navigationOptions: {
         animationEnabled: Platform.OS !== "android",
+        headerMode: 'screen',
       },
     },
     WebScreen: { screen: WebScreen },

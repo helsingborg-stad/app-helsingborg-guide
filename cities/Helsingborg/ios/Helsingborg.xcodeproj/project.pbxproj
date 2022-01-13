@@ -820,7 +820,7 @@
 				);
 				INFOPLIST_FILE = Helsingborg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.10.0;
+				MARKETING_VERSION = 1.93;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -845,7 +845,7 @@
 				);
 				INFOPLIST_FILE = Helsingborg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.10.0;
+				MARKETING_VERSION = 1.93;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

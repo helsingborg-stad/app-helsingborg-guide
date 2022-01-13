@@ -824,7 +824,7 @@
 				);
 				INFOPLIST_FILE = Helsingborg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.91;
+				MARKETING_VERSION = 1.10.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

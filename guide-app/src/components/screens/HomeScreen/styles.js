@@ -3,6 +3,11 @@ import { Colors, TextStyles } from "@assets/styles";
 import { StyleSheetUtils } from "@utils";
 
 export default StyleSheet.create({
+
+  homeContainer: {
+    flex: 1
+  },
+
   viewContainer: {
     flex: 1,
     justifyContent: "flex-start",

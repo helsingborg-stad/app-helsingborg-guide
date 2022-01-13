@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "stretch",
-    backgroundColor: "white"
-  }
+    backgroundColor: "white",
+  },
 });
 
 type Props = {
@@ -18,13 +18,13 @@ type Props = {
 };
 
 const view_container = (props: Props) => (
-  <View
-    onMagicTap={props.onMagicTap}
-    accessible={props.accessible}
-    style={[styles.viewContainer, props.style]}
-  >
-    {props.children}
-  </View>
+    <View
+      onMagicTap={props.onMagicTap}
+      accessible={props.accessible}
+      style={[styles.viewContainer, props.style]}
+    >
+      {props.children}
+    </View>
 );
 
 export default view_container;

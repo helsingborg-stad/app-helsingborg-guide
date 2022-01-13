@@ -4,13 +4,13 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   View,
-  SafeAreaView,
   Image,
   FlatList,
   StatusBar,
   Text,
   ScrollView,
 } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { connect } from "react-redux";
 import LangService from "@services/langService";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -112,6 +112,8 @@ class HomeScreen extends Component<Props> {
     }
   };
 
+
+
   render() {
     const {
       currentHomeTab,
@@ -129,7 +131,7 @@ class HomeScreen extends Component<Props> {
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
-        <SafeAreaView>
+        <SafeAreaView edges={['right', 'top', 'left']} style={styles.homeContainer}>
           <View style={styles.topBarNavigation}>
             <SegmentControlPill
               initialSelectedIndex={currentHomeTab}
@@ -137,7 +139,6 @@ class HomeScreen extends Component<Props> {
               labels={navigationCategoryLabels}
             />
           </View>
-        </SafeAreaView>
 
         {!items || (items && items.length === 0) ? (
           <View style={styles.sectionNoContent}>
@@ -185,6 +186,7 @@ class HomeScreen extends Component<Props> {
             </TouchableOpacity>
           </>
         )}
+        </SafeAreaView>
       </>
     );
   }
