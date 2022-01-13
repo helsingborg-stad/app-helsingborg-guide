@@ -7,6 +7,7 @@
     "clean": "react-native-clean-project",
     "android:alpha:debug": "react-native run-android --variant alphaDebug --appIdSuffix alpha",
     "android:alpha:release": "react-native run-android --variant alphaRelease --appIdSuffix alpha",
+    "android:dev:debug" : "react-native run-android --variant devDebug",
     "android:store:debug": "react-native run-android --variant storeDebug",
     "android:store:release": "react-native run-android --variant storeRelease",
     "ios:device:debug": "react-native run-ios --device --configuration Debug",

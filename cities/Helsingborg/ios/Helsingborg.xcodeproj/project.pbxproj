@@ -22,7 +22,7 @@
 		4BCCF8A55C6B450E8790B78C /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 621E37F7AC9C497EBD9D3BB4 /* Ionicons.ttf */; };
 		505E930EDD7247E0BDF65622 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D31416C4A894589BC15BE1D /* EvilIcons.ttf */; };
 		6E5B62EBFFA04A85B121CF40 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD14000348804BEE9C391ED8 /* Roboto-Bold.ttf */; };
-		75F189B527906B2500BD5961 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75F189B427906B2500BD5961 /* GoogleService-Info.plist */; };
+		75F189B7279076B400BD5961 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75F189B6279076B400BD5961 /* GoogleService-Info.plist */; };
 		7E87287C303B4970BB539E11 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2934FDA036C549AAB1691E8D /* Feather.ttf */; };
 		850716BB2397C80D00C97E4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 850716BD2397C80D00C97E4A /* InfoPlist.strings */; };
 		850806DB23955D010024B584 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
@@ -99,7 +99,7 @@
 		6DC751C4367B470684D57B6A /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		758A26C3C6DC4B43BE420BA7 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		75F189B327906A6600BD5961 /* Helsingborg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Helsingborg.entitlements; path = Helsingborg/Helsingborg.entitlements; sourceTree = "<group>"; };
-		75F189B427906B2500BD5961 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		75F189B6279076B400BD5961 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7A2C639FAAF04C66B277ACFB /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		7D31416C4A894589BC15BE1D /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		7DDE1B7FA4554EA997A9204D /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../assets/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -258,7 +258,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				75F189B427906B2500BD5961 /* GoogleService-Info.plist */,
+				75F189B6279076B400BD5961 /* GoogleService-Info.plist */,
 				858C701E239561AD003793D5 /* AudioManager.h */,
 				858C7019239561AD003793D5 /* AudioManager.m */,
 				858C7013239561AC003793D5 /* NotificationManager.h */,
@@ -472,7 +472,7 @@
 				F3052DB3B8164E03BE332AB9 /* FontAwesome5_Solid.ttf in Resources */,
 				D291DCB75BB04248AC21E58B /* Fontisto.ttf in Resources */,
 				B19CE22A1D7D413CB2B4393E /* Foundation.ttf in Resources */,
-				75F189B527906B2500BD5961 /* GoogleService-Info.plist in Resources */,
+				75F189B7279076B400BD5961 /* GoogleService-Info.plist in Resources */,
 				4BCCF8A55C6B450E8790B78C /* Ionicons.ttf in Resources */,
 				A8E2F44719E64429830D32EC /* MaterialCommunityIcons.ttf in Resources */,
 				A64EE093223947C3ADD27978 /* MaterialIcons.ttf in Resources */,

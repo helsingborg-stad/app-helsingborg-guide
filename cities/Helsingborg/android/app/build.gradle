@@ -154,6 +154,12 @@ android {
     }
     flavorDimensions 'env'
     productFlavors {
+
+        dev {
+        applicationId "com.guidehbg"
+        dimension 'env'
+        }
+
         alpha {
             applicationIdSuffix '.alpha'
         }
