@@ -811,7 +811,7 @@
 			baseConfigurationReference = 8D111566EC947FB95F598E2B /* Pods-Helsingborg.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MHBEW6TVG2;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -837,7 +837,7 @@
 			baseConfigurationReference = 57F358EF255B2BD8C43AF8E6 /* Pods-Helsingborg.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = MHBEW6TVG2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

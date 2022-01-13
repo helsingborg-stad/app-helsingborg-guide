@@ -140,7 +140,7 @@ android {
         applicationId "com.guidehbg"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 15000180
+        versionCode 18145909
         versionName "1.93"
         multiDexEnabled true
     }
