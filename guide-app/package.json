@@ -25,6 +25,7 @@
     "@react-native-community/slider": "^4.1.12",
     "@react-native-firebase/analytics": "^14.2.1",
     "@react-native-firebase/app": "^14.2.1",
+    "@react-native-firebase/messaging": "^14.2.2",
     "@react-navigation/native": "5.9.8",
     "ajv": "8.8.2",
     "axios": "0.24.0",

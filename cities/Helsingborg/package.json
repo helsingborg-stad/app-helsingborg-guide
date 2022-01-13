@@ -23,6 +23,7 @@
     "android:build:aab": "cd android && KEYSTORE_PROPERTIES=upload.properties && ./gradlew bundleRelease && cd ..",
     "android:build:apk": "cd android && ./gradlew assembleStoreRelease && cd ..",
     "ios": "react-native run-ios",
+    "ios:pod:install": "cd ios && pod install && cd ..",
     "ios:clean": "cd ios && xcodebuild clean && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install && cd .. && npx react-native run-ios",
     "ios:clean:light": "cd ios && xcodebuild clean && cd .. && npx react-native run-ios",
     "yarn:clean": "rm -rf node_modules && yarn cache clean --force && yarn install"
@@ -38,6 +39,7 @@
     "@react-native-community/slider": "^4.1.12",
     "@react-native-firebase/analytics": "^14.2.1",
     "@react-native-firebase/app": "^14.2.2",
+    "@react-native-firebase/messaging": "^14.2.2",
     "@react-navigation/stack": "^5.x",
     "ajv": "8.8.2",
     "axios": "0.24.0",
