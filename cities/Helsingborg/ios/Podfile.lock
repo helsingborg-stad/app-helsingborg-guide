@@ -468,11 +468,13 @@ PODS:
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
+  - RNCPushNotificationIOS (1.10.1):
+    - React-Core
   - RNFBAnalytics (14.2.1):
     - Firebase/Analytics (= 8.10.0)
     - React-Core
     - RNFBApp
-  - RNFBApp (14.2.1):
+  - RNFBApp (14.2.2):
     - Firebase/CoreOnly (= 8.10.0)
     - React-Core
   - RNGestureHandler (1.10.3):
@@ -567,6 +569,7 @@ DEPENDENCIES:
   - rn-fetch-blob (from `../../../node_modules/rn-fetch-blob`)
   - "RNCAsyncStorage (from `../../../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../../../node_modules/@react-native-community/masked-view`)"
+  - "RNCPushNotificationIOS (from `../../../node_modules/@react-native-community/push-notification-ios`)"
   - "RNFBAnalytics (from `../../../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../../../node_modules/@react-native-firebase/app`)"
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
@@ -704,6 +707,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/@react-native-community/async-storage"
   RNCMaskedView:
     :path: "../../../node_modules/@react-native-community/masked-view"
+  RNCPushNotificationIOS:
+    :path: "../../../node_modules/@react-native-community/push-notification-ios"
   RNFBAnalytics:
     :path: "../../../node_modules/@react-native-firebase/analytics"
   RNFBApp:
@@ -798,8 +803,9 @@ SPEC CHECKSUMS:
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
+  RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
   RNFBAnalytics: c2bc124906b6719c9d3e407f06f9222a15638edc
-  RNFBApp: 4f490a1e02e41721c55b354019f39f2323d72f82
+  RNFBApp: 78d0446e8b28dc30616c134a9e4d8d4b01f9f966
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageMarker: 76cd113306bcfad2f74f78d83d5accfd50b4434a
   RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
