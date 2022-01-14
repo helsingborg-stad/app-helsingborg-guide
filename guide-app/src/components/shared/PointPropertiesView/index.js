@@ -1,13 +1,15 @@
 // @flow
 
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import SVGView from "@shared-components/SVGView";
 import styles from "./style";
 
 const pointPropertyPlaceholderImage = require("@assets/images/iconPointPropertyPlaceholder.png");
 
 function getPointProperties(pointProperties: PointProperty[]) {
+  console.log("le point props", pointProperties, pointPropertyPlaceholderImage)
+
   const pointPropertyView = (
     <View>
       <View style={styles.divider} />

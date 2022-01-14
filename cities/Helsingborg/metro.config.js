@@ -19,30 +19,20 @@ const androidAssetsResolutionFix = getMetroAndroidAssetsResolutionFix();
 
 module.exports = (async () => {
   const {
-    resolver: { assetExts },
+    resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();
 
   return {
     resolver: {
-      assetExts: [
-        ...assetExts,
-        "obj",
-        "mtl",
-        "JPG",
-        "vrx",
-        "hdr",
-        "gltf",
-        "glb",
-        "bin",
-        "arobject",
-        "gif",
-      ],
+      assetExts: assetExts.filter(ext => ext !== "svg"),
+      sourceExts: [...sourceExts, "svg"],
       blockList: [exclusionList(monorepoMetroTools.blockList), new RegExp(
         `^${[path.resolve(__dirname, "../..")][0].replace("/", "\\/")}\\/template\\/.*$`,
       )],
       extraNodeModules: monorepoMetroTools.extraNodeModules,
     },
     transformer: {
+      babelTransformerPath: require.resolve("react-native-svg-transformer"),
       publicPath: androidAssetsResolutionFix.publicPath,
       getTransformOptions: async () => ({
         transform: {

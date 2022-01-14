@@ -9,4 +9,4 @@
 
 # Add any project specific keep options here:
 -keep class com.mypackage.BuildConfig { *; } to android/app/proguard-rules.pro
-
+-keep public class com.horcrux.svg.** {*;}

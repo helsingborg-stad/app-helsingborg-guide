@@ -98,14 +98,14 @@ const LocationView = (props: Props) => {
     <View style={styles.viewContainer}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.imageViewContainer}>
-          <ImageBackground
+          {props?.guideGroup?.images?.large && <ImageBackground
             source={{ uri: props.guideGroup.images.large }}
             style={styles.imageBackground}
           >
             {!props.guideGroup.active
               ? displayComingSoon(LangService.strings.COMING_SOON)
               : null}
-          </ImageBackground>
+          </ImageBackground>}
         </View>
         <View style={styles.bodyContainer}>
           <View style={styles.titleContainer}>

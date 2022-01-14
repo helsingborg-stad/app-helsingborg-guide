@@ -63,14 +63,12 @@ class HomeScreen extends Component<Props> {
   }
 
   onPressItem = (item: NavigationItem, items, index): void => {
-    console.log("testing lol", item?.type, "items", items);
     switch (item?.type) {
       case "guide": {
         const { guide } = item;
         if (guide) {
           this.props.selectGuide(guide.id);
           const type = guide?.guideType;
-          console.log("testing type lol", type);
           if (type === "guide") {
             AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
             this.props?.navigation.navigate("GuideDetailsScreen", {
@@ -153,7 +151,7 @@ class HomeScreen extends Component<Props> {
               style={styles.container}
               contentContainerStyle={styles.contentContainer}
             >
-              {items.map((item, index) => (
+              {items.length && items.map((item, index) => (
                 <NavigationListItem
                   key={index}
                   index={index}
@@ -162,22 +160,6 @@ class HomeScreen extends Component<Props> {
                 />
               ))}
             </ScrollView>
-            {/*<FlatList*/}
-            {/*  key={currentHomeTab}*/}
-            {/*  style={styles.container}*/}
-            {/*  contentContainerStyle={styles.contentContainer}*/}
-            {/*  renderItem={({ item, index }) => {*/}
-            {/*    return (*/}
-            {/*      <NavigationListItem*/}
-            {/*        index={index}*/}
-            {/*        item={item}*/}
-            {/*        onPressItem={this.onPressItem}*/}
-            {/*      />*/}
-            {/*    );*/}
-            {/*  }}*/}
-            {/*  keyExtractor={item => item?.id.toString()}*/}
-            {/*  data={items}*/}
-            {/*/>*/}
             <TouchableOpacity
               style={styles.mapButton}
               onPress={() => navigation.navigate("CategoryMapScreen")}
