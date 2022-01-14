@@ -1,6 +1,6 @@
 apply plugin: "com.android.application"
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-
+// apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+apply from: "../../../../node_modules/react-native-config/android/dotenv.gradle"
 
 import com.android.build.OutputFile
 
@@ -161,13 +161,18 @@ android {
         dev {
         applicationId "com.guidehbg"
         dimension 'env'
+        resValue "string", "build_config_package", "com.guidehbg"
+
         }
 
         alpha {
             applicationIdSuffix '.alpha'
+            resValue "string", "build_config_package", "com.guidehbg"
+
         }
         store {
             dimension 'env'
+            resValue "string", "build_config_package", "com.guidehbg"
         }
     }
     signingConfigs {

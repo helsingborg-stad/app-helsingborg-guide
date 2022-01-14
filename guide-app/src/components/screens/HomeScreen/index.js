@@ -144,7 +144,6 @@ class HomeScreen extends Component<Props> {
           <View style={styles.sectionNoContent}>
             <Text style={styles.sectionNoContentText}>
               {LangService.strings.CONTENT_MISSING}
-              URL: {API_BASE_URL}
             </Text>
           </View>
         ) : (

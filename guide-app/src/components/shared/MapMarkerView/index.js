@@ -198,8 +198,10 @@ class MapMarkerView extends Component<Props, State> {
 
   onMarkerPressed = (marker: MapItem) => {
     const { items, onMapMarkerPressed } = this.props;
-    const index = items.findIndex(item => item === marker);
 
+    console.log("ITEMS", items, "onmappress", onMapMarkerPressed)
+    const index = items.findIndex(item => item === marker);
+  console.log("le index", index)
     if (onMapMarkerPressed) {
       onMapMarkerPressed(index);
     }
@@ -211,15 +213,19 @@ class MapMarkerView extends Component<Props, State> {
     const { items } = this.props;
     const marker = items[index];
     const { activeMarker } = this.props;
+    console.log("active marker", activeMarker)
+    console.log("marker", marker)
     if (marker !== activeMarker) {
       const location = MapItemUtils.getLocationFromItem(marker);
+      console.log("location", location)
+      console.log("delta", this.latitudeDelta, this.longitudeDelta)
       if (this.map && location) {
         this.map.animateToRegion({
           latitude: location.latitude,
           longitude: location.longitude,
           latitudeDelta: this.latitudeDelta,
           longitudeDelta: this.longitudeDelta,
-        });
+        })
       }
     }
   };
@@ -235,7 +241,7 @@ class MapMarkerView extends Component<Props, State> {
           ref={(ref) => {
             this.map = ref;
           }}
-          region={{
+          initialRegion={{
             latitude: initialLocation && initialLocation.latitude,
             longitude: initialLocation && initialLocation.longitude,
             latitudeDelta: this.latitudeDelta,

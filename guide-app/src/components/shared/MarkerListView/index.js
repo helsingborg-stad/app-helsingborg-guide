@@ -364,26 +364,27 @@ class MarkerListView extends Component<Props, State> {
   };
 
   renderHorizontalList = (items: Array<MapItem>) => (
-    <FlatList
-      contentInset={{ left: 20, top: 0, bottom: 0, right: 20 }}
-      contentContainerStyle={styles.listContainerStyle}
-      data={items}
-      horizontal
-      keyExtractor={MapItemUtils.getIdFromMapItem}
-      ref={ref => {
-        this.listRef = ref;
-      }}
-      renderItem={({ item, index }) =>
-        this.renderListItem(item, styles.listItem, index + 1)
-      }
-      style={styles.listStyle}
-      onMomentumScrollEnd={this.onListScroll}
-      snapToAlignment="center"
-      snapToInterval={ListItemWidth + HalfListMargin}
-      decelerationRate="fast"
-      scrollEventThrottle={300}
-      swipeEnabled
-    />
+    items.length > 0 ? <FlatList
+        contentInset={{ left: 20, top: 0, bottom: 0, right: 20 }}
+        contentContainerStyle={styles.listContainerStyle}
+        data={items}
+        horizontal
+        keyExtractor={MapItemUtils.getIdFromMapItem}
+        ref={(ref) => {
+          this.listRef = ref;
+        }}
+        renderItem={({ item, index }) =>
+          this.renderListItem(item, styles.listItem, index + 1)
+        }
+        style={styles.listStyle}
+        onMomentumScrollEnd={this.onListScroll}
+        snapToAlignment="center"
+        snapToInterval={ListItemWidth + HalfListMargin}
+        decelerationRate="fast"
+        scrollEventThrottle={300}
+        swipeEnabled
+        initialNumToRender={items.length}
+    /> : null
   );
 
   // iOS callback event when the list is changed
@@ -408,6 +409,8 @@ class MarkerListView extends Component<Props, State> {
     const { items } = this.props;
     this.setState({ recentlyTappedPin: true, activeMarker: items[index] });
 
+    console.log("index 2", index)
+    console.log("this", this.listRef)
     if (this.listRef) {
       const x = (ListItemWidth + DefaultMargin / 2) * index - 15;
       this.listRef.scrollToOffset({ offset: x });
