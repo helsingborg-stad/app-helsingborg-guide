@@ -48,7 +48,6 @@ const GuideNavigator = createStackNavigator(
     LocationScreen: {
       screen: LocationScreen,
       navigationOptions: {
-        animationEnabled: Platform.OS !== "android",
         headerMode: 'screen',
       },
     },
@@ -58,7 +57,6 @@ const GuideNavigator = createStackNavigator(
     GuideDetailsScreen: {
       screen: GuideScreen,
       navigationOptions: {
-        animationEnabled: Platform.OS !== "android",
         headerMode: 'screen',
       },
     },
