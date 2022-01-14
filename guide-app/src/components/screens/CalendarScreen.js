@@ -8,8 +8,8 @@ import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { addDays, subDays } from "date-fns";
 

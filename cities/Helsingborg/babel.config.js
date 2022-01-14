@@ -8,7 +8,6 @@ module.exports = {
     },
   },
   plugins: [
-    ["module:react-native-dotenv"],
     [
       "module-resolver",
       {

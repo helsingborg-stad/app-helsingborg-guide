@@ -1,4 +1,6 @@
 apply plugin: "com.android.application"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 
 import com.android.build.OutputFile
 
@@ -143,6 +145,7 @@ android {
         versionCode 18145909
         versionName "1.93"
         multiDexEnabled true
+        resValue "string", "build_config_package", "com.guidehbg"
     }
     splits {
         abi {

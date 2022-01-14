@@ -27,7 +27,7 @@ import { compareDistance } from "@utils/SortingUtils";
 import { AnalyticsUtils } from "@utils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import mapIcon from "@assets/images/mapIcon.png";
-
+import { API_BASE_URL } from "@data/endpoints";
 type Section = {
   title: string,
   data: NavigationItem[],
@@ -144,6 +144,7 @@ class HomeScreen extends Component<Props> {
           <View style={styles.sectionNoContent}>
             <Text style={styles.sectionNoContentText}>
               {LangService.strings.CONTENT_MISSING}
+              URL: {API_BASE_URL}
             </Text>
           </View>
         ) : (

@@ -1,18 +1,10 @@
-import {
-  EVENT_CALENDAR_URL_DEV,
-  EVENT_CALENDAR_URL_PROD,
-  SHARING_FADE_URL_DEV,
-  SHARING_FADE_URL_PROD,
-  SHARING_ICON_URL_DEV,
-  SHARING_ICON_URL_PROD,
-  WEB_SHOP_URL_DEV,
-  WEB_SHOP_URL_PROD
-} from '@env';
 
-export const eventCalendarURL = __DEV__ ? EVENT_CALENDAR_URL_DEV : EVENT_CALENDAR_URL_PROD
+import Config from "react-native-config";
 
-export const sharingFadeUrl = __DEV__ ? SHARING_FADE_URL_DEV : SHARING_FADE_URL_PROD
+export const eventCalendarURL = __DEV__ ? Config.EVENT_CALENDAR_URL_DEV : Config.EVENT_CALENDAR_URL_PROD
 
-export const sharingIconUrl = __DEV__ ? SHARING_ICON_URL_DEV : SHARING_ICON_URL_PROD
+export const sharingFadeUrl = __DEV__ ? Config.SHARING_FADE_URL_DEV : Config.SHARING_FADE_URL_PROD
 
-export const webShopUrl = __DEV__ ? WEB_SHOP_URL_DEV : WEB_SHOP_URL_PROD
+export const sharingIconUrl = __DEV__ ? Config.SHARING_ICON_URL_DEV : Config.SHARING_ICON_URL_PROD
+
+export const webShopUrl = __DEV__ ? Config.WEB_SHOP_URL_DEV : Config.WEB_SHOP_URL_PROD

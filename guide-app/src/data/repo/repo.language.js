@@ -1,4 +1,4 @@
-import { _LANGUAGE_API_URL } from "@env"
+import { _LANGUAGE_API_URL } from "@data/endpoints"
 
 
 module.exports = () => {
