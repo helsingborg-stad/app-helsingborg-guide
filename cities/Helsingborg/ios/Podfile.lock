@@ -503,6 +503,11 @@ PODS:
     - React
   - RNInAppBrowser (3.6.3):
     - React-Core
+  - RNNotifee (4.0.1):
+    - React-Core
+    - RNNotifee/NotifeeCore (= 4.0.1)
+  - RNNotifee/NotifeeCore (4.0.1):
+    - React-Core
   - RNPermissions (3.2.0):
     - React-Core
   - RNScreens (3.10.1):
@@ -597,6 +602,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
   - RNImageMarker (from `../../../node_modules/react-native-image-marker`)
   - RNInAppBrowser (from `../../../node_modules/react-native-inappbrowser-reborn`)
+  - "RNNotifee (from `../../../node_modules/@notifee/react-native`)"
   - RNPermissions (from `../../../node_modules/react-native-permissions`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
@@ -746,6 +752,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-image-marker"
   RNInAppBrowser:
     :path: "../../../node_modules/react-native-inappbrowser-reborn"
+  RNNotifee:
+    :path: "../../../node_modules/@notifee/react-native"
   RNPermissions:
     :path: "../../../node_modules/react-native-permissions"
   RNScreens:
@@ -839,6 +847,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageMarker: 76cd113306bcfad2f74f78d83d5accfd50b4434a
   RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
+  RNNotifee: ed6c0b5ffc0b021507fe196a1c4cfd1fe002410c
   RNPermissions: f7ebe52db07c00901127966ca080b4ec6a6ceb0a
   RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
   RNShare: d76b8c9c6e6ffb38fc18f40b4338c9d867592ed3
