@@ -24,6 +24,7 @@
     "ios:simulator:release": "react-native run-ios --simulator --configuration Release",
     "android": "react-native run-android --variant devDebug",
     "ios": "react-native run-ios",
+    "ios:release": "react-native run-ios --configuration Release",
     "ios:pod:install": "cd ios && pod install && cd ..",
     "ios:clean": "cd ios && xcodebuild clean && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install && cd .. && npx react-native run-ios",
     "ios:clean:light": "cd ios && xcodebuild clean && cd .. && npx react-native run-ios",
