@@ -19,6 +19,7 @@ import {
 } from "@actions/uiStateActions";
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
+import useNotifications from "@hooks/useNotifications"
 const { store, persistor } = configureStore();
 
 
@@ -73,6 +74,7 @@ function alert() {
 
 const GuideApp = () => {
   const [netInfo, setNetInfo] = useState();
+  const { subscribeToNotifications } = useNotifications();
 
   useEffect(() => {
     NetInfo.fetch().then((state) => {
@@ -89,7 +91,7 @@ const GuideApp = () => {
       }
       store.dispatch(internetChanged(true));
 
-      if (this.noNetworkTimer) {
+      if (this?.noNetworkTimer) {
         clearTimeout(this.noNetworkTimer);
         this.noNetworkTimer = null;
       }
@@ -114,6 +116,8 @@ const GuideApp = () => {
       "`new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.",
       "`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.",
     ]);
+    console.log("lol???")
+    subscribeToNotifications()
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }

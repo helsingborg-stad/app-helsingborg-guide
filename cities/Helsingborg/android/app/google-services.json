@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1091241145614:android:d7d7ffe7de73fb99",
+        "mobilesdk_app_id": "1:1091241145614:android:67f05e4bd45144a621d35f",
         "android_client_info": {
           "package_name": "com.guidehbg"
         }
@@ -21,19 +21,68 @@
       ],
       "api_key": [
         {
+          "current_key": "AIzaSyAEgPw1FBPHQOvqED5MA_BBpuLWcq8p16Q"
+        },
+        {
           "current_key": "AIzaSyDNRfKefojs7WtNTRY1EhvzXVDCs8Zn1G0"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091241145614-n8rmp3qvcq3t5rcmdmuq9a5uupmggo7a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1091241145614-flk52b3oe91r1lfocmim81e46p3hk1gk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.hbg.GuideHbg",
+                "app_store_id": "1235019647"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091241145614:android:6c64440d712a5ccd",
+        "android_client_info": {
+          "package_name": "com.guidehbg.alpha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091241145614-n8rmp3qvcq3t5rcmdmuq9a5uupmggo7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEgPw1FBPHQOvqED5MA_BBpuLWcq8p16Q"
         },
-        "ads_service": {
-          "status": 2
+        {
+          "current_key": "AIzaSyDNRfKefojs7WtNTRY1EhvzXVDCs8Zn1G0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091241145614-n8rmp3qvcq3t5rcmdmuq9a5uupmggo7a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1091241145614-flk52b3oe91r1lfocmim81e46p3hk1gk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.hbg.GuideHbg",
+                "app_store_id": "1235019647"
+              }
+            }
+          ]
         }
       }
     }

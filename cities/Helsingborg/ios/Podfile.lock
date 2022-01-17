@@ -480,7 +480,7 @@ PODS:
     - React-perflogger (= 0.66.4)
   - rn-fetch-blob (0.12.0):
     - React-Core
-  - RNCAsyncStorage (1.12.1):
+  - RNCAsyncStorage (1.15.15):
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
@@ -593,7 +593,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../../../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
   - rn-fetch-blob (from `../../../node_modules/rn-fetch-blob`)
-  - "RNCAsyncStorage (from `../../../node_modules/@react-native-community/async-storage`)"
+  - "RNCAsyncStorage (from `../../../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../../../node_modules/@react-native-community/masked-view`)"
   - "RNCPushNotificationIOS (from `../../../node_modules/@react-native-community/push-notification-ios`)"
   - "RNFBAnalytics (from `../../../node_modules/@react-native-firebase/analytics`)"
@@ -735,7 +735,7 @@ EXTERNAL SOURCES:
   rn-fetch-blob:
     :path: "../../../node_modules/rn-fetch-blob"
   RNCAsyncStorage:
-    :path: "../../../node_modules/@react-native-community/async-storage"
+    :path: "../../../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
     :path: "../../../node_modules/@react-native-community/masked-view"
   RNCPushNotificationIOS:
@@ -838,7 +838,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
-  RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
+  RNCAsyncStorage: 0bef6a21517c0254bd6bd59a3672963abfa0d18e
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
   RNFBAnalytics: c2bc124906b6719c9d3e407f06f9222a15638edc

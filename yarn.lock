@@ -1181,6 +1181,13 @@
   resolved "https://registry.yarnpkg.com/@notifee/react-native/-/react-native-4.0.1.tgz#342ee79695f5753f8f32b9de48f428f6354c102e"
   integrity sha512-vkRJnDMg7z21APm6RytD6ddHk4Og+zro/V0/Fk2a3Hvk1apDfSDXo1n4e3S+WPqsJEJSCXVGkRNWxam9Wq22sQ==
 
+"@react-native-async-storage/async-storage@^1.15.15":
+  version "1.15.15"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.15.15.tgz#33f930aaebc602199a3294a9b1eafff7b56df409"
+  integrity sha512-Ss2FqWP9HC5AhCyP6ydRERSwWb8QMTLknETB8cp2+tbEUhu7Q/S5+e0QIrF0D2Z/YZTUvQ2MP7uXzt9FLG9OYQ==
+  dependencies:
+    merge-options "^3.0.4"
+
 "@react-native-community/async-storage@^1.12.1", "@react-native-community/async-storage@^1.6.3":
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.12.1.tgz#25f821b4f6b13abe005ad67e47c6f1cee9f27b24"
@@ -5771,6 +5778,11 @@ is-obj@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
   integrity sha1-PkcprB9f3gJc19g6iW2rn09n2w8=
 
+is-plain-obj@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-2.1.0.tgz#45e42e37fccf1f40da8e5f76ee21515840c09287"
+  integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
+
 is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
@@ -7035,6 +7047,13 @@ mercator-projection@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/mercator-projection/-/mercator-projection-0.0.2.tgz#6195ec2d6e154d066020eef9626d7d79d5db0d3d"
   integrity sha1-YZXsLW4VTQZgIO75Ym19edXbDT0=
+
+merge-options@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/merge-options/-/merge-options-3.0.4.tgz#84709c2aa2a4b24c1981f66c179fe5565cc6dbb7"
+  integrity sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==
+  dependencies:
+    is-plain-obj "^2.1.0"
 
 merge-stream@^1.0.1:
   version "1.0.1"
@@ -8605,15 +8624,15 @@ react-native-monorepo-tools@^1.1.4:
     find-root "^1.1.0"
     glob "^7.1.7"
 
-react-native-permissions@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.2.0.tgz#2199a49e96bac633016955d36142032d747d0d3e"
-  integrity sha512-UPXxf2twjYL9vPI4HP2kT15AOTY489MhsNuyAgp+wJM2IRkkSVW6rO3k4WuSRL9ZmPhwkWb9bYjf8EEwRzZcXg==
-
 react-native-permissions@^2.0.3:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-2.2.2.tgz#3d2a63f6b7d6be52fc86e30f77412a9566283028"
   integrity sha512-ihf4shQDSX5Oo9ChQXb9kr13mmyyNem5MaEvOpr3dCjhBOBWyEMztXm9/uPK1Qg5PsNpaYLa1KpcPZDCw87LXg==
+
+react-native-permissions@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.2.0.tgz#2199a49e96bac633016955d36142032d747d0d3e"
+  integrity sha512-UPXxf2twjYL9vPI4HP2kT15AOTY489MhsNuyAgp+wJM2IRkkSVW6rO3k4WuSRL9ZmPhwkWb9bYjf8EEwRzZcXg==
 
 "react-native-photo-view@https://github.com/alwx/react-native-photo-view.git":
   version "1.5.3"
@@ -8636,10 +8655,17 @@ react-native-safe-area-context@^3.1.9, react-native-safe-area-context@^3.3.2:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz#9549a2ce580f2374edb05e49d661258d1b8bcaed"
   integrity sha512-yOwiiPJ1rk+/nfK13eafbpW6sKW0jOnsRem2C1LPJjM3tfTof6hlvV5eWHATye3XOpu2cJ7N+HdkUvUDGwFD2Q==
 
-react-native-safe-area-view@2.0.0, react-native-safe-area-view@^0.14.9, react-native-safe-area-view@^2.0.0:
+react-native-safe-area-view@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-2.0.0.tgz#98fc9bb1bf3cb8c97ba684efb7dd897765afff3b"
   integrity sha512-tGlGZwRoZpTQ0gEdSSRgbkeyyKC50ZsEv2H/LQKjXhc00IHffbU0BA5chSzTqNwDrs5MFXfTG1ooRQK+0FVTjw==
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+
+react-native-safe-area-view@^0.14.9:
+  version "0.14.9"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.14.9.tgz#90ee8383037010d9a5055a97cf97e4c1da1f0c3d"
+  integrity sha512-WII/ulhpVyL/qbYb7vydq7dJAfZRBcEhg4/UWt6F6nAKpLa3gAceMOxBxI914ppwSP/TdUsandFy6lkJQE0z4A==
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
