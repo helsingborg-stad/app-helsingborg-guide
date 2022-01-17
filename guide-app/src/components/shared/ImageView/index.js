@@ -20,8 +20,9 @@ export default class ImageView extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const { source } = props;
-    const { uri, sessionId } = source;
+    const source = props?.source;
+    const uri = source?.uri;
+    const sessionId = source?.sessionId;
 
     let imageSource = placeholderImage;
     if (uri) {
@@ -41,7 +42,6 @@ export default class ImageView extends Component<Props, State> {
         imageSource = { uri };
       }
     }
-
     this.state = { imageSource };
   }
 
