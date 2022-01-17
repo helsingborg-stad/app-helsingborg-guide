@@ -102,7 +102,7 @@ const LocationView = (props: Props) => {
             source={{ uri: props.guideGroup.images.large }}
             style={styles.imageBackground}
           >
-            {!props.guideGroup.active
+            {!props?.guideGroup?.active
               ? displayComingSoon(LangService.strings.COMING_SOON)
               : null}
           </ImageBackground>}
@@ -112,18 +112,18 @@ const LocationView = (props: Props) => {
             <Text style={styles.title}>{props.guideGroup.name}</Text>
             <View style={styles.openingHoursAndDistanceContainer}>
               <OpeningHoursView
-                openHours={props.guideGroup.location.openingHours}
+                openHours={props?.guideGroup?.location?.openingHours}
                 openHoursException={
-                  props.guideGroup.location.openingHourExceptions
+                  props?.guideGroup?.location?.openingHourExceptions
                 }
                 now={props.now}
               />
-              {props.geolocation
-                ? displayDistance(props.geolocation, props.guideGroup.location)
+              {props?.geolocation
+                ? displayDistance(props?.geolocation, props?.guideGroup?.location)
                 : null}
             </View>
             {props.geolocation
-              ? displayDirections(props.geolocation, props.guideGroup.location)
+              ? displayDirections(props?.geolocation, props?.guideGroup?.location)
               : null}
           </View>
           {isFetchingGuides ? (
@@ -139,16 +139,16 @@ const LocationView = (props: Props) => {
           <View style={styles.articleContainer}>
             <Text style={styles.articleHeaderText}>{`${
               LangService.strings.ABOUT
-            } ${props.guideGroup.name}`}</Text>
+            } ${props?.guideGroup?.name}`}</Text>
             <Text style={styles.articleDescriptionText}>
-              {props.guideGroup.description}
+              {props?.guideGroup?.description}
             </Text>
           </View>
           {webUrl ? (
             <WebLinkView url={webUrl} navigation={props.navigation} />
           ) : null}
           <PointPropertiesView
-            pointProperties={props.guideGroup.pointProperties}
+            pointProperties={props?.guideGroup?.pointProperties}
           />
         </View>
       </ScrollView>
