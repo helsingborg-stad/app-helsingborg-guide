@@ -19,6 +19,8 @@ import LocationGuidesView from "@shared-components/LocationGuidesView";
 
 import { UrlUtils, LocationUtils } from "@utils";
 import WebLinkView from "@shared-components/WebLinkView";
+const placeholderImage = require("@assets/images/no-image-featured-image.png");
+
 
 type Props = {
   guideGroup: GuideGroup,
@@ -98,14 +100,14 @@ const LocationView = (props: Props) => {
     <View style={styles.viewContainer}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.imageViewContainer}>
-          {props?.guideGroup?.images?.large && <ImageBackground
-            source={{ uri: props.guideGroup.images.large }}
+         <ImageBackground
+            source={props?.guideGroup?.images?.large ? { uri: props.guideGroup.images.large } : placeholderImage}
             style={styles.imageBackground}
           >
             {!props?.guideGroup?.active
               ? displayComingSoon(LangService.strings.COMING_SOON)
               : null}
-          </ImageBackground>}
+          </ImageBackground>
         </View>
         <View style={styles.bodyContainer}>
           <View style={styles.titleContainer}>
@@ -122,7 +124,7 @@ const LocationView = (props: Props) => {
                 ? displayDistance(props?.geolocation, props?.guideGroup?.location)
                 : null}
             </View>
-            {props.geolocation
+            {props?.geolocation
               ? displayDirections(props?.geolocation, props?.guideGroup?.location)
               : null}
           </View>
@@ -130,8 +132,8 @@ const LocationView = (props: Props) => {
             <ActivityIndicator />
           ) : (
             <LocationGuidesView
-              guides={props.guides}
-              interactiveGuide={props.interactiveGuide}
+              guides={props?.guides}
+              interactiveGuide={props?.interactiveGuide}
               onPressGuide={props.onPressGuide}
               onPressInteractiveGuide={props.onPressInteractiveGuide}
             />

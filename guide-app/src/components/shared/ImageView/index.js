@@ -30,7 +30,7 @@ export default class ImageView extends Component<Props, State> {
         loadFromCache(`${sessionId}`, uri)
           .then(data => {
             // cache hit, download image
-            this.setState({
+            data && this.setState({
               imageSource: { uri: `data:image/png;base64,${data}` }
             });
           })

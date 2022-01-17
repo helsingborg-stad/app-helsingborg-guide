@@ -52,11 +52,11 @@ function getNameAndImage(
   const { guide, guideGroup } = item;
   if (guide) {
     const { name, images } = guide;
-    return { imageUrl: images.large, name };
+    return { imageUrl: images?.large, name };
   }
   if (guideGroup) {
     const { name, images } = guideGroup;
-    return { name, imageUrl: images.large };
+    return { name, imageUrl: images?.large };
   }
   return {
     imageUrl: null,
@@ -66,7 +66,7 @@ function getNameAndImage(
 function isChildFriendly(item: NavigationItem): boolean {
   const { guide } = item;
   if (guide) {
-    return guide.childFriendly;
+    return guide?.childFriendly;
   }
   return false;
 }
@@ -82,16 +82,15 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
   }, [item, onPressItem]);
 
   return (
-    name ?
     <GuideCard
       size={size}
       image={image}
-      title={name}
+      title={name || ""}
       subTitle={getDescription(item)}
       showMapIcon={showMapIcon}
       showChildFriendlyIcon={isChildFriendly(item)}
       onPress={onPress}
-    /> : null
+    />
   );
 };
 
