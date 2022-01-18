@@ -74,7 +74,7 @@ function alert() {
 
 const GuideApp = () => {
   const [netInfo, setNetInfo] = useState();
-  const { subscribeToNotifications } = useNotifications();
+  const { displayNotification, subscribeToNotifications, onNotification } = useNotifications();
 
   useEffect(() => {
     NetInfo.fetch().then((state) => {
@@ -116,7 +116,8 @@ const GuideApp = () => {
       "`new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.",
       "`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.",
     ]);
-    console.log("lol???")
+    setTimeout(()  => displayNotification(), 5500)
+    onNotification()
     subscribeToNotifications()
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
