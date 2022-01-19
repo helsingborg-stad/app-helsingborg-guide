@@ -1,5 +1,5 @@
 import { requestNotifications } from "react-native-permissions";
-import { Alert } from "react-native";
+import { Alert, Clipboard } from "react-native";
 import notifee, { AndroidImportance } from "@notifee/react-native";
 import messaging from "@react-native-firebase/messaging";
 import useLocalStorage from "@hooks/useLocalStorage";
@@ -7,6 +7,8 @@ import useLocalStorage from "@hooks/useLocalStorage";
 const useNotifications = () => {
 
   const { getLocalStorage, setLocalStorage } = useLocalStorage();
+
+
 
   const displayNotification = async (data) => {
     console.log("data from firebase to notifee", data);
@@ -17,7 +19,7 @@ const useNotifications = () => {
     });
     await notifee.displayNotification({
       title: data?.notification?.title || "Title",
-      body: data?.notification?.body || "Title",
+      body: data?.notification?.body || "Body",
       android: {
         autoCancel: false,
         channelId,
@@ -35,7 +37,11 @@ const useNotifications = () => {
       if (enabled) {
         messaging().getToken().then(token => {
           console.log("token!", token);
-          Alert.alert("token!", token);
+          const copyAlertMessage = async () => {
+            Clipboard.setString(token)
+          }
+          Alert.alert('token', token, [ {text: 'Copy message', onPress: () => copyAlertMessage(), style: 'cancel'}, ], { cancelable: true});
+
           setLocalStorage("notification_token", token);
         }).catch(err => console.log("err token", err));
         messaging().onTokenRefresh(new_token => {
