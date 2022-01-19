@@ -1,4 +1,6 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.google.gms.google-services' // <- Add this line
+
 // apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply from: "../../../../node_modules/react-native-config/android/dotenv.gradle"
 
@@ -157,12 +159,10 @@ android {
     }
     flavorDimensions 'env'
     productFlavors {
-
         dev {
         applicationId "com.guidehbg"
         dimension 'env'
         resValue "string", "build_config_package", "com.guidehbg"
-
         }
 
         alpha {
@@ -271,5 +271,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-apply plugin: 'com.google.gms.google-services'
 apply from: "../../../../node_modules/react-native-vector-icons/fonts.gradle"

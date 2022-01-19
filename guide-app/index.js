@@ -1,6 +1,6 @@
 import { AppRegistry } from "react-native";
 import GuideApp from "./src/App";
-import useNotifications from '@hooks/useNotifications'
+import useNotifications from "@hooks/useNotifications"
 import FullScreenVideoScreen from "./src/components/screens/FullScreenVideoScreen";
 import { name as AppName } from "./app.json";
 
@@ -14,6 +14,6 @@ function HeadlessCheck({ isHeadless }) {
     return null;
   }
   return <GuideApp />;
-
+}
 AppRegistry.registerComponent(AppName, () => HeadlessCheck);
 AppRegistry.registerComponent("VideoApp", () => FullScreenVideoScreen);

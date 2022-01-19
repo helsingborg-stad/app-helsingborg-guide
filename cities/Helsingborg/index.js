@@ -6,7 +6,6 @@ import FullScreenVideoScreen from "guide-app/src/components/screens/FullScreenVi
 import { name as AppName } from "./app.json";
 
 const { setBackgroundNotificationHandler } = useNotifications()
-
   setBackgroundNotificationHandler()
 
 function HeadlessCheck({ isHeadless }) {

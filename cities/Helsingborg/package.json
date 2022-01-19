@@ -33,7 +33,6 @@
   "dependencies": {
     "@notifee/react-native": "^4.0.1",
     "@react-native-async-storage/async-storage": "^1.15.15",
-    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-community/netinfo": "^7.1.7",

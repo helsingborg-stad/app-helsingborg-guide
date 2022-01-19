@@ -1,5 +1,6 @@
 import { requestNotifications } from "react-native-permissions";
-import notifee from "@notifee/react-native";
+import { Alert } from "react-native";
+import notifee, { AndroidImportance } from "@notifee/react-native";
 import messaging from "@react-native-firebase/messaging";
 import useLocalStorage from "@hooks/useLocalStorage";
 
@@ -7,37 +8,36 @@ const useNotifications = () => {
 
   const { getLocalStorage, setLocalStorage } = useLocalStorage();
 
-
   const displayNotification = async (data) => {
-        console.log("data", data)
+    console.log("data from firebase to notifee", data);
     const channelId = await notifee.createChannel({
-      id: 'default',
-      name: 'Default Channel',
+      id: "high",
+      name: "High Priority",
+      importance: AndroidImportance.HIGH
     });
     await notifee.displayNotification({
-      title: 'Notification Title',
-      body: 'Main body content of the notification',
+      title: data?.notification?.title || "Title",
+      body: data?.notification?.body || "Title",
       android: {
+        autoCancel: false,
         channelId,
-        smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
+        smallIcon: "ic_launcher",
+        importance: AndroidImportance.HIGH,
       },
     });
-  }
+  };
 
-  const subscribeToNotifications = () => {
-    requestNotifications(["alert", "sound"]).then(({ status, settings }) => {
-      if (status === "granted") {
-        messaging()
-          .registerDeviceForRemoteMessages()
-          .then((granted) => {
-            if (granted) {
-              messaging().getToken().then(token => {
-                setLocalStorage("notification_token", token);
-              });
-            }
-          }).catch((err) => {
-          console.log("some error", err);
-        });
+  const subscribeToNotifications = async () => {
+    messaging().requestPermission().then(authStatus => {
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+      if (enabled) {
+        messaging().getToken().then(token => {
+          console.log("token!", token);
+          Alert.alert("token!", token);
+          setLocalStorage("notification_token", token);
+        }).catch(err => console.log("err token", err));
         messaging().onTokenRefresh(new_token => {
           setLocalStorage("notification_token", new_token);
         });
@@ -46,31 +46,32 @@ const useNotifications = () => {
   };
 
   const setBackgroundNotificationHandler = () => {
-    requestNotifications(["alert", "sound"]).then(({ status, settings }) => {
-      if (status === "granted") {
         messaging()
-          .setBackgroundMessageHandler(async data => {
-            console.log("data!", data)
-            alert("data", data)
-            displayNotification(data)
+          .setBackgroundMessageHandler(async remoteMessage => {
+            Alert.alert("A new background FCM message arrived!", JSON.stringify(remoteMessage));
+            displayNotification(data);
           });
-      }
+  };
+
+  const onNotification = async () => {
+    messaging().onMessage(async remoteMessage => {
+      console.log("function 2");
+      displayNotification(remoteMessage);
     });
   };
 
-  const onNotification = () => {
-    messaging().onMessage(data => {
-      console.log("data!", data)
-      alert("data", data)
-      displayNotification(data)
-    });
-  };
 
   const unsubscribeToNotifications = () => {
 
   };
 
-  return { displayNotification, setBackgroundNotificationHandler, subscribeToNotifications, onNotification, unsubscribeToNotifications };
+  return {
+    displayNotification,
+    setBackgroundNotificationHandler,
+    subscribeToNotifications,
+    onNotification,
+    unsubscribeToNotifications,
+  };
 
 };
 
