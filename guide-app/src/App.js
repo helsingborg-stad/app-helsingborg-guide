@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import firebase from '@react-native-firebase/app';
 import messaging from '@react-native-firebase/messaging';
 import { PersistGate } from "redux-persist/integration/react";
 import { Alert, UIManager, Platform, Linking, LogBox } from "react-native";
@@ -104,24 +103,7 @@ const GuideApp = () => {
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    messaging().onMessage(async (remoteMessage) => {
-      console.log("1")
-      Alert.alert('A new FCM message arrived 1!', JSON.stringify(remoteMessage));
-    })
-    messaging().onMessage().then(res => {
-      console.log("2")
-      Alert.alert('A new FCM message arrived 2!', JSON.stringify(res));
 
-    })
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      console.log("3")
-      console.log("new message!", remoteMessage)
-      Alert.alert('A new FCM message arrived 3!', JSON.stringify(remoteMessage));
-
-    });
-    return unsubscribe;
-  }, [])
 
   useEffect(() => {
     // TEMPORARY SOLUTIONS
@@ -139,7 +121,6 @@ const GuideApp = () => {
       "`new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.",
       "`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.",
     ]);
-
     subscribeToNotifications()
     onNotification()
     if (UIManager.setLayoutAnimationEnabledExperimental) {

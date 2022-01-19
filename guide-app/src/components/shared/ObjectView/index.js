@@ -217,7 +217,7 @@ const ObjectView = (props) => {
                 )
                 : null}
               <View style={styles.navGuideContainer}>
-                {guideButtons(props)}
+                {/*{guideButtons(props)}*/}
               </View>
             </View>
           </View>

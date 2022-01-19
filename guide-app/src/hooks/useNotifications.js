@@ -40,7 +40,7 @@ const useNotifications = () => {
           const copyAlertMessage = async () => {
             Clipboard.setString(token)
           }
-          Alert.alert('token', token, [ {text: 'Copy message', onPress: () => copyAlertMessage(), style: 'cancel'}, ], { cancelable: true});
+          // Alert.alert('token', token, [ {text: 'Copy message', onPress: () => copyAlertMessage(), style: 'cancel'}, ], { cancelable: true});
 
           setLocalStorage("notification_token", token);
         }).catch(err => console.log("err token", err));
@@ -54,7 +54,7 @@ const useNotifications = () => {
   const setBackgroundNotificationHandler = () => {
         messaging()
           .setBackgroundMessageHandler(async remoteMessage => {
-            Alert.alert("A new background FCM message arrived!", JSON.stringify(remoteMessage));
+            // Alert.alert("A new background FCM message arrived!", JSON.stringify(remoteMessage));
             displayNotification(data);
           });
   };
