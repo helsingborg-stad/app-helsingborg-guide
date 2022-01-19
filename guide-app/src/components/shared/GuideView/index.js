@@ -29,7 +29,6 @@ class GuideView extends Component<Props> {
   renderContentObject = (sessionId: number, obj: ContentObject, index, array ) => {
     const { images } = obj;
     const uri = images.length > 0 ? images[0].medium : null;
-    console.log("uri", uri)
     return (
       <View key={obj.id} style={styles.objectContainer}>
         <TouchableOpacity

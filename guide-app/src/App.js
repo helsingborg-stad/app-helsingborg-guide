@@ -141,7 +141,6 @@ const GuideApp = () => {
     ]);
 
     subscribeToNotifications()
-    setTimeout(()  => displayNotification(), 5500)
     onNotification()
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);

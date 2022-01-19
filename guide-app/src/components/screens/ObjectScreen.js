@@ -98,12 +98,14 @@ class ObjectScreen extends Component<Props> {
   };
 
   loadAudioFile = () => {
+
     const { currentContentObject } = this.props;
     if (!currentContentObject) {
       return;
     }
 
     const { audio, title } = currentContentObject;
+
 
     if (!audio || !audio.url) {
       return;
@@ -123,6 +125,7 @@ class ObjectScreen extends Component<Props> {
   };
 
   render() {
+    console.log(this.loadAudioFile, "audio file")
     const {
       currentContentObject,
       currentContentObjectImageIndex,

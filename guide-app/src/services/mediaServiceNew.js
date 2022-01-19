@@ -1,8 +1,9 @@
+import React from 'react';
 import {
   NativeModules,
   DeviceEventEmitter,
   NativeEventEmitter,
-  Platform
+  Platform,
 } from "react-native";
 import NotificationService from "./notificationService";
 import LangService from "./langService";
@@ -26,7 +27,7 @@ const RELEASED_AUDIO_OBJ = {
   isPrepared: false,
   isPlaying: true,
   duration: 0,
-  currentPosition: 0
+  currentPosition: 0,
 };
 
 const config = () => {
@@ -41,7 +42,7 @@ const config = () => {
 
 config();
 
-export default class MediaService {
+class MediaService extends React.Component {
   static url;
   audio;
   updateInterval;
@@ -50,7 +51,13 @@ export default class MediaService {
   onAudioLoadSuccessCallback;
   onAudioUpdateCallback;
 
-  constructor() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mediaPrepared: "",
+      mediaCompleted: "",
+      mediaError: "",
+    }
     this.audio = RELEASED_AUDIO_OBJ;
     this.onPreparedCallback = this.onPreparedCallback.bind(this);
     this.onCompletedCallback = this.onCompletedCallback.bind(this);
@@ -92,7 +99,7 @@ export default class MediaService {
     NotificationService.showMediaNotification(
       LangService.strings.PLAYING,
       audio.title,
-      MEDIA_NOTIFICATION_ID
+      MEDIA_NOTIFICATION_ID,
     );
     this.onError(MediaService.onErrorHandler);
     this.audio = Object.assign({}, RELEASED_AUDIO_OBJ, audio);
@@ -106,7 +113,7 @@ export default class MediaService {
       return MediaPlayer.init(
         MediaService.url,
         audio.title,
-        audio.description_plain
+        audio.description_plain,
       );
     }
     return MediaPlayer.init(MediaService.url);
@@ -131,13 +138,14 @@ export default class MediaService {
     this.clearUpdateInterval();
 
     if (Platform.OS === "ios") {
-      MediaPlayer.release1();
+      // MediaPlayer.release();
     } else {
-      MediaPlayer.release();
+      // MediaPlayer.release();
     }
 
     MediaService.url = null;
     this.audio = null;
+
 
     NotificationService.closeNotification(MEDIA_NOTIFICATION_ID);
     this.unSubscribeOnError(MediaService.onErrorHandler);
@@ -184,6 +192,8 @@ export default class MediaService {
 
   onPrepared(callback) {
     EventEmitter.addListener(MEDIA_PREPARED, callback);
+    const subscribe = EventEmitter.addListener(MEDIA_PREPARED, callback);
+    this.setState({ mediaPrepared: subscribe })
   }
 
   onPreparedCallback() {
@@ -205,6 +215,7 @@ export default class MediaService {
       this.updatePaused = true;
     }
   }
+
   resumeUpdatingState() {
     if (this.updatePaused) {
       this.updatePaused = false;
@@ -228,24 +239,42 @@ export default class MediaService {
   }
 
   unSubscribeOnPrepared(callback) {
-    EventEmitter.removeListener(MEDIA_PREPARED, callback);
+    console.log("MEDIA_PREPARED", this.state.mediaPrepared);
+    this.state.mediaPrepared && this.setState({ mediaPrepared: this.state.mediaPrepared.remove()})
+    // EventEmitter.removeListener(MEDIA_PREPARED, callback);
+
   }
 
   onError(callback) {
-    EventEmitter.addListener(MEDIA_ERROR, callback);
+    console.log("event", EventEmitter);
+    const subscribe = EventEmitter.addListener(MEDIA_ERROR, callback);
+    this.setState({ mediaError: subscribe })
+    // EventEmitter.addListener(MEDIA_ERROR, callback);
   }
+
   unSubscribeOnError(callback) {
-    EventEmitter.removeListener(MEDIA_ERROR, callback);
+    console.log("MEDIA_ERROR", this.state.mediaError);
+    this.state.mediaError && this.setState({ mediaError: this.state.mediaError.remove()})
+    // EventEmitter.removeListener(MEDIA_ERROR, callback);
   }
 
   onCompleted(callback) {
-    EventEmitter.addListener(MEDIA_COMPLETED, callback);
+    const subscribe = EventEmitter.addListener(MEDIA_COMPLETED, callback);
+    console.log("MEDIA_COMPLETED", subscribe);
+    this.setState({ mediaCompleted: subscribe })
+    // EventEmitter.addListener(MEDIA_COMPLETED, callback);
+
   }
+
   onCompletedCallback() {
     this.release();
   }
+
   unSubscribeOnCompleted(callback) {
-    EventEmitter.removeListener(MEDIA_COMPLETED, callback);
+    console.log("MEDIA_COMPLETED", this.state.mediaCompleted);
+    this.state.mediaCompleted && this.setState({ mediaCompleted: this.state.mediaCompleted.remove()})
+    // EventEmitter.removeListener(MEDIA_COMPLETED, callback);
+
   }
 
   onAudioInited = audio => {
@@ -266,7 +295,7 @@ export default class MediaService {
     guideID,
     onAudioInited,
     onAudioLoadSuccess,
-    onAudioUpdate
+    onAudioUpdate,
   ) => {
     this.onAudioInitedCallback = onAudioInited;
     this.onAudioLoadSuccessCallback = onAudioLoadSuccess;
@@ -284,8 +313,10 @@ export default class MediaService {
       avatar_url: audioState.avatar_url,
       hasAudio: true,
       isPlaying: true,
-      description_plain: ""
+      description_plain: "",
     };
     this.init(audioObject, guideID);
   };
 }
+
+export default MediaService;
