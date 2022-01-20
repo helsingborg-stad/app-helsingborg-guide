@@ -158,7 +158,7 @@ const guideButtons = (props) => {
         <View style={[styles.navGuideBarFilled,
           {
             transform: [
-              {translateX: -width + Math.round(((index + 1) / array.length) * width)}
+              {translateX: -width + Math.round(width * ((index + 1) / array.length))}
             ] }]} />
       </View>
     </View>
