@@ -110,11 +110,14 @@ export default StyleSheet.create({
     height: 29,
     backgroundColor: '#EAEAEA',
     borderRadius: 20,
+    overflow: 'hidden',
   },
 
   navGuideBarFilled: {
     height: '100%',
+    width: '100%',
     backgroundColor: '#711A5B',
     borderRadius: 20,
+    overflow: 'hidden',
   },
 });

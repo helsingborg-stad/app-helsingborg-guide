@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component, useEffect, useRef } from "react";
+import React, { Component, useEffect, useRef, useState } from "react";
 import {SafeAreaView, View, Text, ScrollView, Linking } from "react-native";
 
 import styles from "./style";
@@ -126,6 +126,13 @@ function displayButtonsBar(
 
 const guideButtons = (props) => {
   const { array, index, navigation, selectObject} = props;
+  const [width, setWidth ] = useState("");
+  const onLayout=(event)=> {
+    console.log("event", event.nativeEvent);
+    setWidth(event.nativeEvent.layout.width)
+  }
+
+  console.log("width", width)
   return array?.length ? <View style={styles.navGuideWrapper}>
     <Text style={styles.navGuideBarStep}>{`${(index + 1)} av ${array.length}`}</Text>
     <View style={styles.navGuide}>
@@ -145,8 +152,14 @@ const guideButtons = (props) => {
       } : null}
     />
     <View style={styles.navGuideBarWrapper}>
-      <View style={styles.navGuideBar}>
-        <View style={[styles.navGuideBarFilled, {width: `${index !== 0 ? Math.round(((index + 1) / array.length) * 100) : 0}%`}]} />
+      <View
+        onLayout={onLayout}
+        style={styles.navGuideBar}>
+        <View style={[styles.navGuideBarFilled,
+          {
+            transform: [
+              {translateX: -width + Math.round(((index + 1) / array.length) * width)}
+            ] }]} />
       </View>
     </View>
     <Icon
