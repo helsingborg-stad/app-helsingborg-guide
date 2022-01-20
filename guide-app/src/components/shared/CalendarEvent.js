@@ -104,10 +104,11 @@ const styles = StyleSheet.create({
 
 type Props = {
   event: Event,
-  currentLanguage: string
+  currentLanguage: string,
+  navigation: any
 };
 
-function CalendarEvent({ event, currentLanguage }: Props) {
+function CalendarEvent({ event, currentLanguage, navigation }: Props) {
   const {
     description,
     imageUrl,
@@ -132,12 +133,15 @@ function CalendarEvent({ event, currentLanguage }: Props) {
   }
   const eventLinkDate = DateUtils.eventLinkDate(dateStart);
   const eventUrl = `${eventCalendarURL}/${slug}?date=${eventLinkDate}`;
-
+  console.log("event ", {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle},)
   return (
     <TouchableOpacity
       style={styles.item}
       onPress={() => {
-        Linking.openURL(eventUrl);
+        navigation.navigate("CalendarDetailsScreen", {
+          event: {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle},
+        });
+        // Linking.openURL(eventUrl);
         // openLink(eventUrl);
       }}
     >

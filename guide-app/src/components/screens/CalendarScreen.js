@@ -131,7 +131,8 @@ class CalendarScreen extends Component<Props, State> {
       currentLanguage,
       noContent,
       showLoadingSpinner,
-      items
+      items,
+      navigation,
     } = this.props;
     const { chosenDate } = this.state;
 
@@ -172,6 +173,7 @@ class CalendarScreen extends Component<Props, State> {
                 key={event.id}
                 event={event}
                 currentLanguage={currentLanguage}
+                navigation={navigation}
               />
             ))}
           </View>

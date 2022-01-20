@@ -167,8 +167,7 @@ const guideButtons = (props) => {
 const ObjectView = (props) => {
 
     const { guideId } = props;
-
-
+    console.log("the props", props)
     return (
       <View style={styles.viewContainer}>
         <ScrollView style={styles.container}>

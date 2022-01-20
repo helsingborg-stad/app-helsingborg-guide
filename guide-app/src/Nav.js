@@ -25,6 +25,7 @@ import {
   WelcomeScreen,
   ARIntroductionScreen,
 } from "@src/components/screens";
+import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen"
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
@@ -68,6 +69,7 @@ const GuideNavigator = createStackNavigator(
     DebugScreen: { screen: DebugScreen },
     CategoryMapScreen: { screen: CategoryMapScreen },
     CalendarScreen: { screen: CalendarScreen },
+    CalendarDetailsScreen: { screen: CalendarDetailsScreen },
   },
   { defaultNavigationOptions: HeaderStyles.default },
 );
