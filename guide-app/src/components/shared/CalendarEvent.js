@@ -132,14 +132,15 @@ function CalendarEvent({ event, currentLanguage, navigation }: Props) {
     hoursString = `${startTime} - ${endTime}`;
   }
   const eventLinkDate = DateUtils.eventLinkDate(dateStart);
+  const eventLinkDay = DateUtils.eventLinkDay(dateStart);
   const eventUrl = `${eventCalendarURL}/${slug}?date=${eventLinkDate}`;
-  console.log("event ", {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle},)
+  console.log("event ", {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle, date: eventLinkDay},)
   return (
     <TouchableOpacity
       style={styles.item}
       onPress={() => {
         navigation.navigate("CalendarDetailsScreen", {
-          event: {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle},
+          event: {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle, date: eventLinkDay},
         });
         // Linking.openURL(eventUrl);
         // openLink(eventUrl);

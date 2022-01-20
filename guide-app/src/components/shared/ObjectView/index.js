@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, useEffect, useRef } from "react";
-import { View, Text, ScrollView, Linking } from "react-native";
+import {SafeAreaView, View, Text, ScrollView, Linking } from "react-native";
 
 import styles from "./style";
 import { Colors } from "@assets/styles";
@@ -126,8 +126,9 @@ function displayButtonsBar(
 
 const guideButtons = (props) => {
   const { array, index, navigation, selectObject} = props;
-
   return array?.length ? <View style={styles.navGuideWrapper}>
+    <Text style={styles.navGuideBarStep}>{`${(index + 1)} av ${array.length}`}</Text>
+    <View style={styles.navGuide}>
     <Icon
       name={"chevron-left"}
       size={36}
@@ -143,6 +144,11 @@ const guideButtons = (props) => {
         })
       } : null}
     />
+    <View style={styles.navGuideBarWrapper}>
+      <View style={styles.navGuideBar}>
+        <View style={[styles.navGuideBarFilled, {width: `${index !== 0 ? Math.round(((index + 1) / array.length) * 100) : 0}%`}]} />
+      </View>
+    </View>
     <Icon
       name={"chevron-right"}
       size={36}
@@ -158,6 +164,7 @@ const guideButtons = (props) => {
         })
       } : null}
     />
+    </View>
   </View> : null
 };
 
@@ -170,6 +177,7 @@ const ObjectView = (props) => {
     console.log("the props", props)
     return (
       <View style={styles.viewContainer}>
+      <SafeAreaView style={{flex: 1}}>
         <ScrollView style={styles.container}>
           <View
             style={styles.imageContainer}>
@@ -215,13 +223,16 @@ const ObjectView = (props) => {
                   props.onGoToLink,
                 )
                 : null}
-              <View style={styles.navGuideContainer}>
-                {/*{guideButtons(props)}*/}
-              </View>
             </View>
           </View>
         </ScrollView>
         <AudioPlayerView />
+      </SafeAreaView>
+      <SafeAreaView>
+        <View style={styles.navGuideContainer}>
+          {guideButtons(props)}
+        </View>
+        </SafeAreaView>
       </View>
     );
 }

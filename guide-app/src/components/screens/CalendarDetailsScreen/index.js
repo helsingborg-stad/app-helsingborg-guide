@@ -3,6 +3,7 @@ import { Linking, ScrollView, Text, View, Image, StatusBar } from "react-native"
 import SharingService from "@services/SharingService";
 import ImageSwiper from "@shared-components/ImageSwiper";
 import LinkTouchable from "@shared-components/LinkTouchable";
+import LangService from "@services/langService";
 import styles from "./styles";
 
 
@@ -13,10 +14,23 @@ const CalendarDetailsScreen = ({ navigation }) => {
 
   console.log("params", event)
 
+
   function displayLocation(location: string) {
     const loc = (
-      <View style={styles.idContainer}>
-        <Text style={styles.idText}>{location}</Text>
+      <View style={styles.location}>
+        <View style={styles.timeContainer}>
+          <View style={styles.timeTextContainer}>
+            <Text style={[styles.timeText, styles.timeTextTop]}>{LangService.strings.DATE}</Text>
+            <Text style={[styles.timeText, styles.timeTextBottom]}>{location}</Text>
+          </View>
+        </View>
+        <View style={styles.locationContainer}>
+          <View style={styles.locationTextContainer}>
+          <Text style={[styles.locationText, styles.locationTextTop]}>{LangService.strings.DATE}</Text>
+            <Text style={[styles.locationText, styles.locationTextBottom]}>{location}</Text>
+          </View>
+        </View>
+
       </View>
     );
     return loc;
@@ -24,12 +38,18 @@ const CalendarDetailsScreen = ({ navigation }) => {
   function displayTitle(
     name: string,
     location: string,
+    date: string,
+  )
 
-  ) {
+  {
     return (
-      <View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{name}</Text>
+      <View style={styles.title}>
+        <View style={styles.titleWrapper}>
+          <View style={styles.dateContainer}>
+            <Text style={styles.dateTextDay}>{date.split(" ")[0]}</Text>
+            <Text style={styles.dateTextMonth}>{date.split(" ")[1]}</Text>
+          </View>
+          <View style={styles.titleContainer}><Text style={styles.titleText}>{name}</Text></View>
         </View>
         {displayLocation(location)}
       </View>
@@ -77,6 +97,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
           {displayTitle(
             event?.name,
             event?.title,
+            event?.date,
           )}
           <View style={styles.articleContainer}>
             {event?.description

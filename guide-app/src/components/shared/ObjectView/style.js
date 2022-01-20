@@ -14,6 +14,8 @@ export default StyleSheet.create({
     // flex: 1,
     ...StyleSheet.absoluteFillObject,
     flexDirection: 'column',
+    overflow: 'hidden',
+
   },
   imageContainer: {
     flex: 1,
@@ -76,16 +78,43 @@ export default StyleSheet.create({
     zIndex: 50,
   },
   navGuideContainer: {
-    bottom: 0,
-    marginTop: 'auto',
     justifyContent: "flex-end",
-    marginBottom: 50
+    zIndex: 100,
+    backgroundColor: 'white',
+    marginTop: 20,
+
   },
   navGuideWrapper: {
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%",
+  },
+
+  navGuide: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "space-around",
     width: "100%",
+  },
+
+  navGuideBarWrapper: {
+    width: '60%',
+    flexDirection: 'column',
+  },
+  navGuideBarStep: {
+    textAlign: 'center',
+  },
+
+  navGuideBar: {
+    height: 29,
+    backgroundColor: '#EAEAEA',
+    borderRadius: 20,
+  },
+
+  navGuideBarFilled: {
+    height: '100%',
+    backgroundColor: '#711A5B',
+    borderRadius: 20,
   },
 });

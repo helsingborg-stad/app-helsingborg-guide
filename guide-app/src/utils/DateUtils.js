@@ -19,10 +19,15 @@ function eventLinkDate(date: string): string {
   return format(new Date(date), "yyyyMMddhhmmss");
 }
 
+function eventLinkDay(date: string): string {
+  return format(new Date(date), "dd MMM");
+}
+
 // https://date-fns.org/v2.9.0/docs/I18n
 function getHours(date: string, locale: string): string {
   return format(new Date(date), "kk:mm", { locale: locales[locale] });
 }
+
 
 function isFullDay(start: string, end: string): boolean {
   const startDate = new Date(start);
@@ -35,6 +40,7 @@ function isFullDay(start: string, end: string): boolean {
 
 export default {
   eventLinkDate,
+  eventLinkDay,
   getHours,
   isFullDay,
   longDate,
