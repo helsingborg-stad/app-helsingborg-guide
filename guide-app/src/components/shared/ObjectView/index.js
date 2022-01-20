@@ -127,6 +127,7 @@ function displayButtonsBar(
 const guideButtons = (props) => {
   const { array, index, navigation, selectObject} = props;
   const [width, setWidth ] = useState("");
+  
   const onLayout=(event)=> {
     console.log("event", event.nativeEvent);
     setWidth(event.nativeEvent.layout.width)
