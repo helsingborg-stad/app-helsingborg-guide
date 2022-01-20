@@ -9,7 +9,6 @@ const _DefaultExtNotification = {
 };
 
 
-
 export default {
   showSimple(title, content, id) {
     Notifier.showSimple(title, content, id);

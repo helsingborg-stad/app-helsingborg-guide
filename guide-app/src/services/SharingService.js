@@ -92,6 +92,7 @@ const getPlatformURI = path =>
   Platform.OS === "ios" ? path : `file://${path}`;
 
 function beginShare(title, message, url, width, height, subject, shareType) {
+
   AnalyticsUtils.logEvent(shareType, { name: title });
   // The sharing process is different on ios and android.
   if (Platform.OS === "android") {
@@ -182,9 +183,12 @@ async function shareIOs(title, message, url, width, height, subject) {
 
   // First we need to download the main image.
   const mainRes = await fetchService.fetch(url);
+  console.log("mainres", mainRes)
   if (mainRes) {
+    console.log("fade url", sharingFadeUrl, "sharing icon", sharingIconUrl)
     // Once we have all parts of the overlay, we need to get the size of the files.
     Image.getSize(sharingFadeUrl, async (fadeWidth, fadeHeight) => {
+
       Image.getSize(sharingIconUrl, async (iconWidth, iconHeight) => {
         // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
         const outputImage = await watermark({
@@ -271,6 +275,7 @@ function showShareButton(title, image, sender, shareType) {
   let imageWidth = 0;
   let imageHeight = 0;
 
+  console.log("image props", image, imageUrl )
   Image.getSize(imageUrl, (width, height) => {
     imageWidth = width;
     imageHeight = height;

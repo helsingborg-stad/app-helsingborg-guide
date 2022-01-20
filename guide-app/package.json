@@ -51,7 +51,6 @@
     "react-native-maps": "^0.30.1",
     "react-native-permissions": "3.2.0",
     "react-native-photo-view": "https://github.com/alwx/react-native-photo-view.git",
-    "react-native-push-notification": "^8.1.1",
     "react-native-reanimated": "^2.3.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-safe-area-view": "2.0.0",
@@ -90,6 +89,7 @@
     }
   },
   "dependencies": {
+    "@react-native-firebase/app": "^14.2.2",
     "react-native-config": "^1.4.5",
     "react-native-share": "^3.3.2"
   },

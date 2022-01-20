@@ -77,7 +77,7 @@ function alert() {
 
 const GuideApp = () => {
   const [netInfo, setNetInfo] = useState();
-  const { displayNotification, subscribeToNotifications, onNotification } = useNotifications();
+  const { subscribeToNotifications, onNotification } = useNotifications();
 
   useEffect(() => {
     NetInfo.fetch().then((state) => {

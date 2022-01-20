@@ -1,6 +1,7 @@
 import { requestNotifications } from "react-native-permissions";
 import { Alert, Clipboard } from "react-native";
 import notifee, { AndroidImportance } from "@notifee/react-native";
+import firebase from "@react-native-firebase/app"
 import messaging from "@react-native-firebase/messaging";
 import useLocalStorage from "@hooks/useLocalStorage";
 
