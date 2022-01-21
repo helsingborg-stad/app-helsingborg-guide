@@ -1,4 +1,6 @@
 PODS:
+  - BNFMatomo (0.1.1):
+    - React
   - boost (1.76.0)
   - BVLinearGradient (2.5.6):
     - React
@@ -520,6 +522,7 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
+  - BNFMatomo (from `../../../node_modules/react-native-matomo`)
   - boost (from `../../../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - BVLinearGradient (from `../../../node_modules/react-native-linear-gradient`)
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
@@ -635,6 +638,8 @@ SPEC REPOS:
     - YogaKit
 
 EXTERNAL SOURCES:
+  BNFMatomo:
+    :path: "../../../node_modules/react-native-matomo"
   boost:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/boost.podspec"
   BVLinearGradient:
@@ -761,6 +766,7 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  BNFMatomo: 713640a76fb63d5a485705a662c03db89fb15566
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99

@@ -32,8 +32,7 @@ import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
 import AnalyticsUtils from "@utils/AnalyticsUtils";
 import NavigatorService from "@services/navigationService";
-import { MATOMO_URL } from "@data/endpoints";
-import { initializeTracker } from "@utils/MatomoUtils";
+import { initializeTracker, trackScreen } from "@utils/MatomoUtils";
 
 const GuideNavigator = createStackNavigator(
   {
@@ -118,16 +117,16 @@ export default class Nav extends Component<Props> {
   static onNavigationStateChange(prevState: Object, currentState: Object) {
     const currentScreen = Nav.getCurrentRouteName(currentState);
     const prevScreen = Nav.getCurrentRouteName(prevState);
-
-    console.log("current screen", currentScreen);
     if (prevScreen !== currentScreen) {
-      AnalyticsUtils.setScreen(currentScreen);
+      console.log("current screen", currentScreen)
+      trackScreen(("/" + currentScreen), currentScreen)
+      // AnalyticsUtils.setScreen(currentScreen);
     }
   }
 
   componentDidMount = () => {
     this.props.onAppStarted();
-    // initializeTracker();
+    initializeTracker();
     AppState.addEventListener("change", this.onAppStateChange);
   };
 
