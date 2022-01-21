@@ -25,13 +25,15 @@ import {
   WelcomeScreen,
   ARIntroductionScreen,
 } from "@src/components/screens";
-import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen"
+import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
 import AnalyticsUtils from "@utils/AnalyticsUtils";
 import NavigatorService from "@services/navigationService";
+import { MATOMO_URL } from "@data/endpoints";
+import { initializeTracker } from "@utils/MatomoUtils";
 
 const GuideNavigator = createStackNavigator(
   {
@@ -39,8 +41,8 @@ const GuideNavigator = createStackNavigator(
       screen: HomeScreen,
       navigationOptions: {
         backgroundColor: "#FFFFFF",
-        headerMode: 'screen',
-        headerTitle: 'Guide Helsingborg',
+        headerMode: "screen",
+        headerTitle: "Guide Helsingborg",
         header: () => null,
 
       },
@@ -49,7 +51,7 @@ const GuideNavigator = createStackNavigator(
     LocationScreen: {
       screen: LocationScreen,
       navigationOptions: {
-        headerMode: 'screen',
+        headerMode: "screen",
       },
     },
     ObjectScreen: { screen: ObjectScreen },
@@ -58,7 +60,7 @@ const GuideNavigator = createStackNavigator(
     GuideDetailsScreen: {
       screen: GuideScreen,
       navigationOptions: {
-        headerMode: 'screen',
+        headerMode: "screen",
       },
     },
     WebScreen: { screen: WebScreen },
@@ -117,6 +119,7 @@ export default class Nav extends Component<Props> {
     const currentScreen = Nav.getCurrentRouteName(currentState);
     const prevScreen = Nav.getCurrentRouteName(prevState);
 
+    console.log("current screen", currentScreen);
     if (prevScreen !== currentScreen) {
       AnalyticsUtils.setScreen(currentScreen);
     }
@@ -124,6 +127,7 @@ export default class Nav extends Component<Props> {
 
   componentDidMount = () => {
     this.props.onAppStarted();
+    // initializeTracker();
     AppState.addEventListener("change", this.onAppStateChange);
   };
 

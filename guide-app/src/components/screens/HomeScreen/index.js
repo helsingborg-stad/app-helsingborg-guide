@@ -10,7 +10,7 @@ import {
   Text,
   ScrollView,
 } from "react-native";
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -121,6 +121,7 @@ class HomeScreen extends Component<Props> {
       selectCurrentTab,
       showLoadingSpinner,
     } = this.props;
+
 
     if (showLoadingSpinner) {
       return <ActivityIndicator style={styles.loadingSpinner} />;
