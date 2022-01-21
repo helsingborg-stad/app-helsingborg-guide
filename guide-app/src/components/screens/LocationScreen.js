@@ -8,6 +8,7 @@ import LocationView from "@shared-components/LocationView";
 import { AnalyticsUtils } from "@utils";
 import { Colors, HeaderStyles } from "@assets/styles";
 import { selectCurrentGuide, showBottomBar } from "@actions/uiStateActions";
+import { trackScreen } from "@utils/MatomoUtils";
 
 type Props = {
   currentGuideGroup: GuideGroup,
@@ -41,7 +42,9 @@ class LocationScreen extends Component<Props> {
   onPressGuide = (guide: Guide) => {
     const { navigation } = this.props;
     console.log("guide type", guide.guideType);
-    AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+    const slug = guide?.slug;
+    trackScreen("view_guide", slug)
+    // AnalyticsUtils.logEvent("view_guide", { name: slug });
     if (guide.guideType === "trail") {
       this.props.selectCurrentGuide(guide);
       navigation.navigate("TrailScreen", {
@@ -57,9 +60,10 @@ class LocationScreen extends Component<Props> {
   onPressInteractiveGuide = (interactiveGuide: InteractiveGuide) => {
     const { navigation } = this.props;
     console.log("interactive!");
-    AnalyticsUtils.logEvent("view_interactive_guide", {
-      name: interactiveGuide.title,
-    });
+    trackScreen("view_interactive_guide", interactiveGuide?.title || "")
+    // AnalyticsUtils.logEvent("view_interactive_guide", {
+    //   name: interactiveGuide.title,
+    // });
     navigation.navigate("QuizScreen", {
       quiz: interactiveGuide,
     });

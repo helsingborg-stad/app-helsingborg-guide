@@ -13,6 +13,8 @@ import {
 
 import { AnalyticsUtils } from "@utils";
 import { Colors, HeaderStyles } from "@assets/styles";
+import { trackScreen } from "@utils/MatomoUtils";
+
 
 type Props = {
   navigation: any,
@@ -63,14 +65,20 @@ class CategoryMapScreen extends Component<Props> {
         if (guide) {
           const { guideType } = guide;
           if (guideType === "guide") {
-            AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+            const slug = guide?.slug;
+            const title = guide?.name;
+            trackScreen("view_guide", slug || title);
+            // AnalyticsUtils.logEvent("view_guide", { name: slug });
             this.props.navigation.navigate("GuideDetailsScreen", {
-              title: guide.name
+              title: title
             });
           } else if (guideType === "trail") {
-            AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+            const slug = guide?.slug;
+            const title = guide?.name;
+            trackScreen("view_guide", slug || title);
+            // AnalyticsUtils.logEvent("view_guide", { name: slug });
             this.props.navigation.navigate("TrailScreen", {
-              title: guide.name
+              title: title
             });
           }
         }
@@ -79,10 +87,12 @@ class CategoryMapScreen extends Component<Props> {
       case "guidegroup":
         this.props.selectGuideGroup(item.id);
         if (item.guideGroup) {
-          const title = item.guideGroup.name;
-          AnalyticsUtils.logEvent("view_location", {
-            name: item.guideGroup.slug
-          });
+          const title = item?.guideGroup?.name;
+          const slug = item?.guideGroup?.slug;
+          trackScreen("view_location", slug || title);
+          // AnalyticsUtils.logEvent("view_location", {
+          //   name: slug
+          // });
           this.props.navigation.navigate("LocationScreen", { title });
         }
         break;

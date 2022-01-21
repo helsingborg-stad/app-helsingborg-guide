@@ -13,6 +13,8 @@ import {
   showBottomBar,
 } from "@actions/uiStateActions";
 import { releaseAudioFile } from "@actions/audioActions";
+import { trackScreen } from "@utils/MatomoUtils";
+
 
 declare type Props = {
   currentGuide: ?Guide,
@@ -54,7 +56,8 @@ class GuideScreen extends Component<Props> {
 
     onPressContentObject = (obj: ContentObject, index, array) => {
       this.props.dispatchSelectContentObject(obj);
-      AnalyticsUtils.logEvent("view_object", { name: obj.title });
+      trackScreen("view_object", obj?.title || "")
+      // AnalyticsUtils.logEvent("view_object", { name: obj.title });
       this.props.navigation.navigate("ObjectScreen", {
         title: obj.title,
         currentGuide: this.props.currentGuide,

@@ -10,7 +10,7 @@ import {
   Text,
   ScrollView,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { connect } from "react-redux";
 import LangService from "@services/langService";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -27,7 +27,7 @@ import { compareDistance } from "@utils/SortingUtils";
 import { AnalyticsUtils } from "@utils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import mapIcon from "@assets/images/mapIcon.png";
-import { API_BASE_URL } from "@data/endpoints";
+import { trackScreen } from "@utils/MatomoUtils";
 type Section = {
   title: string,
   data: NavigationItem[],
@@ -70,17 +70,23 @@ class HomeScreen extends Component<Props> {
           this.props.selectGuide(guide.id);
           const type = guide?.guideType;
           if (type === "guide") {
-            AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+            const slug = guide?.slug;
+            const title = guide?.name;
+            trackScreen("view_guide", slug || title);
+            // AnalyticsUtils.logEvent("view_guide", { name: slug });
             this.props?.navigation.navigate("GuideDetailsScreen", {
-              title: guide.name,
+              title: title,
               bottomBarOnUnmount: true,
               array: items,
             });
             this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
-            AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+            const slug = guide?.slug;
+            const title = guide?.name;
+            trackScreen("view_guide", slug || title);
+            // AnalyticsUtils.logEvent("view_guide", { name: slug });
             this.props?.navigation.navigate("TrailScreen", {
-              title: guide.name,
+              title: title,
               bottomBarOnUnmount: true,
               // array: items,
               // index: index,
@@ -94,9 +100,11 @@ class HomeScreen extends Component<Props> {
         this?.props?.selectGuideGroup(item.id);
         if (item.guideGroup) {
           const title = item?.guideGroup?.name;
-          AnalyticsUtils.logEvent("view_location", {
-            name: item?.guideGroup?.slug,
-          });
+          const slug = item?.guideGroup?.slug;
+          trackScreen("view_location", slug || title);
+          // AnalyticsUtils.logEvent("view_location", {
+          //   name: item?.guideGroup?.slug,
+          // });
           this.props.navigation.navigate("LocationScreen", {
             title,
             bottomBarOnUnmount: true,
@@ -121,7 +129,6 @@ class HomeScreen extends Component<Props> {
       selectCurrentTab,
       showLoadingSpinner,
     } = this.props;
-
 
     if (showLoadingSpinner) {
       return <ActivityIndicator style={styles.loadingSpinner} />;

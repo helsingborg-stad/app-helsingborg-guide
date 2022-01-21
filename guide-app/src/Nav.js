@@ -119,7 +119,7 @@ export default class Nav extends Component<Props> {
     const prevScreen = Nav.getCurrentRouteName(prevState);
     if (prevScreen !== currentScreen) {
       console.log("current screen", currentScreen)
-      trackScreen(("/" + currentScreen), currentScreen)
+      // trackScreen(("/" + currentScreen), currentScreen)
       // AnalyticsUtils.setScreen(currentScreen);
     }
   }

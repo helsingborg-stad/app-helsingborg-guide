@@ -17,7 +17,7 @@ const CalendarButton = ({ onPress, selected }: Props) => (
     selected={selected}
     onPress={() => {
       NavigatorService.reset("CalendarScreen");
-      AnalyticsUtils.logEvent("view_calendar");
+      // AnalyticsUtils.logEvent("view_calendar");
       onPress();
     }}
   />

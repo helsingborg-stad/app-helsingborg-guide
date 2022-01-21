@@ -28,6 +28,7 @@ import {
   selectCurrentGuide
 } from "@actions/uiStateActions";
 import { AR_INSTRUCTIONS_SHOWN } from "@src/lib/my_consts";
+import { trackScreen } from "@utils/MatomoUtils";
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 
 type Props = {
@@ -161,7 +162,7 @@ class MarkerListView extends Component<Props, State> {
     const { navigate } = navigation;
     const { guide, guideGroup, contentObject } = listItem;
     if (guideGroup) {
-      AnalyticsUtils.logEvent("view_location", { name: guideGroup.slug });
+      trackScreen("view_location", guideGroup?.slug);
       selectGuideGroup(guideGroup.id);
       navigate("LocationScreen", { title: guideGroup.name });
       return;
@@ -169,7 +170,8 @@ class MarkerListView extends Component<Props, State> {
 
     if (guide) {
       const { guideType } = guide;
-      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      trackScreen("view_guide", guide?.slug || "");
+      // AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
       selectGuide(guide);
       switch (guideType) {
         case "trail":
@@ -183,7 +185,8 @@ class MarkerListView extends Component<Props, State> {
     }
     if (contentObject) {
       dispatchSelectContentObject(contentObject);
-      AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
+      trackScreen("view_object", contentObject?.title  || "");
+      // AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
       navigate("ObjectScreen", {
         title: contentObject.title,
         array: array,

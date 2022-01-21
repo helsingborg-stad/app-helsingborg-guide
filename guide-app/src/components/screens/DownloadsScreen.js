@@ -13,6 +13,8 @@ import {
 } from "@actions/downloadGuidesActions";
 import { selectCurrentGuide, showBottomBar } from "@actions/uiStateActions";
 import { AnalyticsUtils } from "@utils";
+import { trackScreen } from "@utils/MatomoUtils";
+
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -47,16 +49,22 @@ class DownloadsScreen extends Component<Props> {
 
     if (guideType === "guide") {
       this.props.hideBottomBar();
-      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      const slug = guide?.slug;
+      const title = guide?.name;
+      trackScreen("view_guide", slug || title);
+      // AnalyticsUtils.logEvent("view_guide", { name: slug });
       this.props.navigation.navigate("GuideDetailsScreen", {
-        title: guide.name,
+        title: title,
         bottomBarOnUnmount: true
       });
     } else if (guideType === "trail") {
       this.props.hideBottomBar();
-      AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+      const slug = guide?.slug;
+      const title = guide?.name;
+      trackScreen("view_guide", slug || title);
+      // AnalyticsUtils.logEvent("view_guide", { name: slug });
       this.props.navigation.navigate("TrailScreen", {
-        title: guide.name,
+        title: title,
         bottomBarOnUnmount: true
       });
     }

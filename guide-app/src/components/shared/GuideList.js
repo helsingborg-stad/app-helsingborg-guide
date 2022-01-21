@@ -3,6 +3,7 @@ import { Dimensions, FlatList, StyleSheet } from "react-native";
 import { AnalyticsUtils } from "@utils";
 import ListCard from "./ListCard";
 import TimingService from "@services/timingService";
+import { trackScreen } from "@utils/MatomoUtils";
 
 const styles = StyleSheet.create({
   listContainer: {
@@ -42,22 +43,25 @@ export default ({
     // TODO fetch from the the new GuideGroup state
     dispatchSelectGuideGroup(location);
     const { navigate } = navigation;
-    AnalyticsUtils.logEvent("view_location", { name: location.slug });
+    trackScreen("view_location", location?.slug || "");
+    // AnalyticsUtils.logEvent("view_location", { name: location.slug });
     navigate("LocationScreen", { location });
   };
 
   const _navigateToTrail = trail => {
     const { navigate } = navigation;
-    const title = trail.guidegroup[0].name;
-    AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
+    const title = trail?.guidegroup[0]?.name;
+    trackScreen("view_guide", trail?.slug || title || "");
+    // AnalyticsUtils.logEvent("view_guide", { name: trail.slug });
     dispatchSelectCurrentGuide(trail);
     navigate("TrailScreen", { trail, title });
   };
 
   const _navigateToGuide = guide => {
     const { navigate } = navigation;
-    const title = guide.title.plain_text;
-    AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
+    const title = guide?.title?.plain_text;
+    trackScreen("view_guide", guide?.slug || title || "");
+    // AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
     dispatchSelectCurrentGuide(guide);
     navigate("GuideDetailsScreen", { id: guide.id, title });
   };

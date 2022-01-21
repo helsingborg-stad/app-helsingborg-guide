@@ -14,6 +14,8 @@ import {
   selectCurrentImage
 } from "@actions/uiStateActions";
 import { Colors, HeaderStyles } from "@assets/styles";
+import { trackEvent } from "@utils/MatomoUtils";
+
 
 type Props = {
   currentGuide: ?Guide,
@@ -72,6 +74,7 @@ class ObjectScreen extends Component<Props> {
 
   onGoToLink = (url: string, title?: string) => {
     const { navigate } = this.props.navigation;
+    trackEvent("open", "open_url", title, title, url);
     AnalyticsUtils.logEvent("open_url", { title });
     navigate("WebScreen", { url });
   };
@@ -90,6 +93,7 @@ class ObjectScreen extends Component<Props> {
 
     const { url, title } = video;
     if (title) {
+      trackEvent("play", "play_video", title, title, url);
       AnalyticsUtils.logEvent("play_video", { title });
     }
 
@@ -118,7 +122,8 @@ class ObjectScreen extends Component<Props> {
     audioState.url = audio.url;
 
     if (audioState.title) {
-      AnalyticsUtils.logEvent("play_audio", { name: audioState.title });
+      trackEvent("play", "play_audio", audioState?.title, audioState?.title, audioState?.url);
+      // AnalyticsUtils.logEvent("play_audio", { name: audioState.title });
     }
 
     this.props.dispatchInitAudioFile(audioState);
