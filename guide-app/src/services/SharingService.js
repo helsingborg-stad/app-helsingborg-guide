@@ -10,7 +10,7 @@ import {
   Platform,
   PermissionsAndroid,
 } from "react-native";
-import React from "react";
+import React, { useReducer } from "react";
 import Share from "react-native-share";
 import RNFetchBlob from "rn-fetch-blob";
 import ImageMarker from "react-native-image-marker";
@@ -104,14 +104,15 @@ function beginShare(title, message, url, width, height, subject, shareType) {
 
 async function shareAndroid(title, message, url, width, height, subject) {
   // Examples: https://github.com/JimmyDaddy/react-native-image-marker/blob/master/example/example/app.js
+  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
   function finish() {
     isCreatingImage = false;
-    origin.forceUpdate();
+    forceUpdate();
   }
 
   isCreatingImage = true;
-  origin.forceUpdate();
+  forceUpdate();
 
   // First we need to download the main image.
   const mainRes = await fetchService.fetch(url);
