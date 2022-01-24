@@ -85,7 +85,7 @@ export default StyleSheet.create({
     flex: 1,
     marginHorizontal: 34,
     paddingVertical: 15,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "flex-start",
     minHeight: 46,
@@ -96,38 +96,47 @@ export default StyleSheet.create({
 
   timeContainer: {
     flexDirection: "row",
-    textAlign: "right",
-    maxWidth: "50%",
-
+    marginTop: 10,
+    alignItems: "center"
   },
+
+  timeIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+  },
+
   timeTextContainer: {
     flexDirection: 'column',
-    textAlign: "right",
   },
 
   timeText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
-      fontSize: 16,
-      lineHeight: 25,
-      color:'black',
-      textAlign: "right",
-    },
+      fontSize: 12,
+      lineHeight: 21,
+      color:'black', },
   ]),
   timeTextTop: {
-
   },
   timeTextBottom: {
     color:'black',
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 14,
   },
 
   locationContainer: {
     flexDirection: "row",
-    textAlign: "left",
-    maxWidth: "50%",
+    alignItems: "center"
   },
+
+  locationIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+
+  },
+
   locationTextContainer:{
     flexDirection: 'column',
     textAlign: "left",
@@ -136,8 +145,8 @@ export default StyleSheet.create({
   locationText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
-      fontSize: 16,
-      lineHeight: 25,
+      fontSize: 12,
+      lineHeight: 20,
       color:'black',
       textAlign: "left",
     },
@@ -148,7 +157,7 @@ export default StyleSheet.create({
   locationTextBottom: {
     color:'black',
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 14,
   },
 
   articleContainer: {

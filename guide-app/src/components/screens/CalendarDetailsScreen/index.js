@@ -5,6 +5,8 @@ import ImageSwiper from "@shared-components/ImageSwiper";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import LangService from "@services/langService";
 import styles from "./styles";
+import MapIcon from "@assets/images/map_icon_black.png"
+import ClockIcon from "@assets/images/clock_icon_black.png"
 
 
 
@@ -19,12 +21,14 @@ const CalendarDetailsScreen = ({ navigation }) => {
     const loc = (
       <View style={styles.location}>
         <View style={styles.locationContainer}>
+          <Image source={MapIcon} style={styles.locationIcon} />
           <View style={styles.locationTextContainer}>
           <Text style={[styles.locationText, styles.locationTextTop]}>{LangService.strings.LOCATION}</Text>
-            <Text style={[styles.locationText, styles.locationTextBottom]}>{dateString + "\n" + hoursString}</Text>
+            <Text style={[styles.locationText, styles.locationTextBottom]}>{dateString + ", " + hoursString}</Text>
           </View>
         </View>
         <View style={styles.timeContainer}>
+          <Image source={ClockIcon} style={styles.timeIcon} />
           <View style={styles.timeTextContainer}>
             <Text style={[styles.timeText, styles.timeTextTop]}>{LangService.strings.DATE}</Text>
             <Text style={[styles.timeText, styles.timeTextBottom]}>{location}</Text>
