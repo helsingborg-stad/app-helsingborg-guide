@@ -33,12 +33,12 @@ function renderShareButton(
   if (trailInformation.title && trailInformation.image) {
     return (
       <View style={styles.shareContainer}>
-        {SharingService.showShareButton(
-          trailInformation.title,
-          trailInformation.image,
-          renderingComponent,
-          "share_guide"
-        )}
+        <SharingService
+          title={trailInformation.title}
+          image={trailInformation.image}
+          sender={renderingComponent}
+          shareType="share_guide"
+        />
       </View>
     );
   }

@@ -92,21 +92,19 @@ const SharedTextProperties = { color: Colors.white, fontSize };
 const getPlatformURI = path =>
   Platform.OS === "ios" ? path : `file://${path}`;
 
-function beginShare(title, message, url, width, height, subject, shareType) {
+function beginShare(title, message, url, width, height, subject, shareType, forceUpdate) {
 
   // AnalyticsUtils.logEvent(shareType, { name: title });
-    trackEvent("share", "share_guide", title, title, url )
   // The sharing process is different on ios and android.
   if (Platform.OS === "android") {
-    shareAndroid(title, message, url, width, height, subject);
+    shareAndroid(title, message, url, width, height, subject, forceUpdate);
   } else {
-    shareIOs(title, message, url, width, height, subject);
+    shareIOs(title, message, url, width, height, subject, forceUpdate);
   }
 }
 
-async function shareAndroid(title, message, url, width, height, subject) {
+async function shareAndroid(title, message, url, width, height, subject, forceUpdate) {
   // Examples: https://github.com/JimmyDaddy/react-native-image-marker/blob/master/example/example/app.js
-  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
   function finish() {
     isCreatingImage = false;
@@ -180,9 +178,9 @@ async function shareAndroid(title, message, url, width, height, subject) {
   });
 }
 
-async function shareIOs(title, message, url, width, height, subject) {
+async function shareIOs(title, message, url, width, height, subject, forceUpdate) {
   isCreatingImage = true;
-  origin.forceUpdate();
+  forceUpdate();
 
   // First we need to download the main image.
   const mainRes = await fetchService.fetch(url);
@@ -209,7 +207,8 @@ async function shareIOs(title, message, url, width, height, subject) {
         };
 
         isCreatingImage = false;
-        origin.forceUpdate();
+        forceUpdate();
+        // trackEvent("share", "share_guide", title, title, url)
       });
     });
   }
@@ -272,7 +271,24 @@ function modalClosed() {
   }
 }
 
-function showShareButton(title, image, sender, shareType) {
+function loadOverlay() {
+  return (
+    <View style={styles.imageHolder}>
+      <Image source={Background} style={styles.image} />
+      <ActivityIndicator
+        animating
+        color={Colors.themeExtra4}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    </View>
+  );
+}
+
+const ShowShareButton = (props) => {
+  const { title, image, sender, shareType } = props;
+  console.log("prups", props)
+  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   origin = sender;
   let imageUrl = image.large;
   let imageWidth = 0;
@@ -303,7 +319,8 @@ function showShareButton(title, image, sender, shareType) {
             imageWidth,
             imageHeight,
             title,
-            shareType
+            shareType,
+            forceUpdate
           );
         }}
       >
@@ -325,20 +342,5 @@ function showShareButton(title, image, sender, shareType) {
   );
 }
 
-function loadOverlay() {
-  return (
-    <View style={styles.imageHolder}>
-      <Image source={Background} style={styles.image} />
-      <ActivityIndicator
-        animating
-        color={Colors.themeExtra4}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    </View>
-  );
-}
+export default ShowShareButton;
 
-export default {
-  showShareButton,
-};

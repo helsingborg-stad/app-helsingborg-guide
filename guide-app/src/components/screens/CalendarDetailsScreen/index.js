@@ -84,11 +84,11 @@ const CalendarDetailsScreen = ({ navigation }) => {
          <Image source={event?.imageUrl} style={styles.eventImage} />
           {event?.imageUrl && (
             <View style={styles.shareBtn}>
-              {SharingService.showShareButton(
-                event.name,
-                {large: event.imageUrl.uri},
-                "share_object",
-              )}
+              <SharingService
+                title={event.name}
+                image={{large: event.imageUrl.uri}}
+                sender={this}
+                senderType ="share_object" />
             </View>
           )}
         </View>

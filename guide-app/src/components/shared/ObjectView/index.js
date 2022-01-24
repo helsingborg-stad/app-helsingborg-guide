@@ -206,12 +206,12 @@ const ObjectView = (props) => {
             />
             {props.contentObject.images[props.imageIndex] && (
               <View style={styles.shareBtn}>
-                {SharingService.showShareButton(
-                  props.contentObject.title,
-                  props.contentObject.images[props.imageIndex],
-
-                  "share_object",
-                )}
+                <SharingService
+                  title={props.contentObject.title}
+                  image={props.contentObject.images[props.imageIndex]}
+                  sender={this}
+                  shareType="share_object"
+                />
               </View>
             )}
           </View>
