@@ -97,6 +97,8 @@ export default StyleSheet.create({
   timeContainer: {
     flexDirection: "row",
     textAlign: "right",
+    maxWidth: "50%",
+
   },
   timeTextContainer: {
     flexDirection: 'column',
@@ -124,6 +126,7 @@ export default StyleSheet.create({
   locationContainer: {
     flexDirection: "row",
     textAlign: "left",
+    maxWidth: "50%",
   },
   locationTextContainer:{
     flexDirection: 'column',
