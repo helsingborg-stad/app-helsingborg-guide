@@ -40,11 +40,10 @@ export default StyleSheet.create({
   title: {},
 
   dateContainer: {
-    width: 60,
-    height: 60,
+    minWidth: 60,
+    minHeight: 60,
     backgroundColor: "#a84c98",
     marginTop: 15,
-    marginRight: 12,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -66,15 +65,17 @@ export default StyleSheet.create({
   },
   titleContainer: {
     marginTop: "auto",
-    flex: 1,
     justifyContent: "center",
-    height: 60,
+    minHeight: 60,
+    overflow: "visible",
+    marginLeft : 12,
+    flex: 1,
   },
 
   titleText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
-      fontSize: 24,
+      fontSize: 20,
       fontWeight: "700",
       lineHeight: 30,
       color: "#7b075e",
