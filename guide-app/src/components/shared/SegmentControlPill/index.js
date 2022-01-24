@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import styles from "./styles";
+import { trackScreen } from "../../../utils/MatomoUtils";
 
 type Props = {
   labels: [],
@@ -16,9 +17,9 @@ export const SegmentControlPill = ({
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
 
   const onPressSegment = useCallback(
-    index => () => {
+    (index, label) => () => {
       setSelectedIndex(index);
-
+      trackScreen("view_home", label);
       if (onSegmentIndexChange) {
         onSegmentIndexChange(index);
       }
@@ -35,7 +36,7 @@ export const SegmentControlPill = ({
               styles.pill,
               index === selectedIndex ? styles.pillActive : null,
             ]}
-            onPress={onPressSegment(index)}
+            onPress={onPressSegment(index, label)}
           >
             <Text
               style={[
