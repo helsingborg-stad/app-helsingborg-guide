@@ -47,7 +47,6 @@ const CalendarDetailsScreen = ({ navigation }) => {
   )
 
   {
-    console.log("date event", date)
 
     return (
       <View style={styles.title}>

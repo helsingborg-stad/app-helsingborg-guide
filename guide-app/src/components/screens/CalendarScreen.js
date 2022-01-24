@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: Colors.white,
     marginBottom: 100,
-    paddingHorizontal: 4
+    paddingHorizontal: 4,
   },
   loadingSpinner: {
-    flex: 1
+    flex: 1,
   },
   noContent: {
     backgroundColor: Colors.grayEA,
