@@ -5,6 +5,7 @@ import LinkTouchable from "./LinkTouchable";
 import { AnalyticsUtils } from "@utils";
 import useOpenLink from "@hooks/useOpenLink";
 import { Linking } from "react-native";
+import { trackEvent } from "@utils/MatomoUtils";
 
 function goToLink(url: string, title: string, navigation: Object) {
   const { navigate } = navigation;

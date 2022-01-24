@@ -122,7 +122,7 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
   const localFadeUrl = getPlatformURI(fadeRes.path());
   const localIconUrl = getPlatformURI(iconRes.path());
 
-  // Once we have all parts of the overlay, we need to get the size of the files.
+  // Once we hve all parts of the overlay, we need to get the size of the files.
   Image.getSize(localFadeUrl, async (fadeWidth, fadeHeight) => {
     Image.getSize(localIconUrl, async (iconWidth, iconHeight) => {
       const outputImage = await watermark({

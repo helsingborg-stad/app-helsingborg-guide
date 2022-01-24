@@ -8,7 +8,8 @@ const isDevice = async () => {
 };
 
 export const initializeTracker = async () => {
-  await isDevice() && Matomo.initTracker((MATOMO_URL.toString() + "matomo.php"), parseInt(MATOMO_SITE_ID, 10));
+  console.log("matomo", MATOMO_URL.toString() + "matomo.php", parseInt(MATOMO_SITE_ID, 10))
+  // await isDevice() && Matomo.initTracker((MATOMO_URL.toString() + "matomo.php"), parseInt(MATOMO_SITE_ID, 10));
 };
 
 export const trackScreen = async (path, title) => {
