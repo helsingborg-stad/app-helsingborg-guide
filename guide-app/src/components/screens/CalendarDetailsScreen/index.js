@@ -15,22 +15,21 @@ const CalendarDetailsScreen = ({ navigation }) => {
   console.log("params", event)
 
 
-  function displayLocation(location: string) {
+  function displayLocation(location: string, dateString: string, hoursString: string) {
     const loc = (
       <View style={styles.location}>
+        <View style={styles.locationContainer}>
+          <View style={styles.locationTextContainer}>
+          <Text style={[styles.locationText, styles.locationTextTop]}>{LangService.strings.LOCATION}</Text>
+            <Text style={[styles.locationText, styles.locationTextBottom]}>{dateString + "\n" + hoursString}</Text>
+          </View>
+        </View>
         <View style={styles.timeContainer}>
           <View style={styles.timeTextContainer}>
             <Text style={[styles.timeText, styles.timeTextTop]}>{LangService.strings.DATE}</Text>
             <Text style={[styles.timeText, styles.timeTextBottom]}>{location}</Text>
           </View>
         </View>
-        <View style={styles.locationContainer}>
-          <View style={styles.locationTextContainer}>
-          <Text style={[styles.locationText, styles.locationTextTop]}>{LangService.strings.DATE}</Text>
-            <Text style={[styles.locationText, styles.locationTextBottom]}>{location}</Text>
-          </View>
-        </View>
-
       </View>
     );
     return loc;
@@ -39,9 +38,13 @@ const CalendarDetailsScreen = ({ navigation }) => {
     name: string,
     location: string,
     date: string,
+    dateString: string,
+    hoursString: string,
   )
 
   {
+    console.log("date event", date)
+
     return (
       <View style={styles.title}>
         <View style={styles.titleWrapper}>
@@ -51,7 +54,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
           </View>
           <View style={styles.titleContainer}><Text style={styles.titleText}>{name}</Text></View>
         </View>
-        {displayLocation(location)}
+        {displayLocation(location, dateString, hoursString)}
       </View>
     );
   }
@@ -98,6 +101,8 @@ const CalendarDetailsScreen = ({ navigation }) => {
             event?.name,
             event?.title,
             event?.date,
+            event?.dateString,
+            event?.hoursString
           )}
           <View style={styles.articleContainer}>
             {event?.description

@@ -19,6 +19,10 @@ function eventLinkDate(date: string): string {
   return format(new Date(date), "yyyyMMddhhmmss");
 }
 
+function eventTime(date: string): string {
+  return format(new Date(date), "dd MMMM yyy");
+}
+
 function eventLinkDay(date: string): string {
   return format(new Date(date), "dd MMM");
 }
@@ -40,6 +44,7 @@ function isFullDay(start: string, end: string): boolean {
 
 export default {
   eventLinkDate,
+  eventTime,
   eventLinkDay,
   getHours,
   isFullDay,

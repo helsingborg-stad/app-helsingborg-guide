@@ -86,8 +86,8 @@ export default StyleSheet.create({
     marginHorizontal: 34,
     paddingVertical: 15,
     flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
     minHeight: 46,
     borderTopWidth: 2,
     borderBottomWidth: 2,
@@ -96,17 +96,20 @@ export default StyleSheet.create({
 
   timeContainer: {
     flexDirection: "row",
+    textAlign: "right",
   },
   timeTextContainer: {
     flexDirection: 'column',
+    textAlign: "right",
   },
 
   timeText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
       fontSize: 16,
-      lineHeight: 21,
-      color:'black'
+      lineHeight: 25,
+      color:'black',
+      textAlign: "right",
     },
   ]),
   timeTextTop: {
@@ -120,17 +123,20 @@ export default StyleSheet.create({
 
   locationContainer: {
     flexDirection: "row",
+    textAlign: "left",
   },
   locationTextContainer:{
     flexDirection: 'column',
+    textAlign: "left",
   },
 
   locationText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
       fontSize: 16,
-      lineHeight: 21,
-      color:'black'
+      lineHeight: 25,
+      color:'black',
+      textAlign: "left",
     },
   ]),
   locationTextTop: {
