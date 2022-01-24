@@ -20,6 +20,7 @@ import {
   showBottomBar,
   selectCurrentBottomBarTab,
 } from "@actions/uiStateActions";
+import { trackEvent } from "@utils/MatomoUtils";
 
 const defaultMargin = 20;
 const LOGO = require("@assets/images/logo.png");
@@ -171,7 +172,8 @@ class SettingsScreen extends Component<Props, State> {
   }
 
   setLanguageAndReload = code => {
-    AnalyticsUtils.logEvent("change_language", { language_code: code });
+    trackEvent("change", "change_language", code, code);
+    // AnalyticsUtils.logEvent("change_language", { language_code: code });
     this.setState({ selectedLanguageCode: code });
     LangService.setLanguage(code);
     this.props.setLanguage(code);
@@ -296,7 +298,7 @@ class SettingsScreen extends Component<Props, State> {
                 Linking.openURL(
                   `mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${
                     LangService.strings.CONTACT_MAIL_SUBJECT
-                  }`
+                  }`,
                 )
               }
               style={textStyles.contactEmailText}
@@ -335,7 +337,8 @@ function mapDispatchToProps(dispatch) {
     setLanguage: langCode => dispatch(setLanguage(langCode)),
   };
 }
+
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(SettingsScreen);

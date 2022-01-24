@@ -16,6 +16,7 @@ import LangService from "@services/langService";
 import { StyleSheetUtils } from "@utils";
 import { DateUtils } from "@utils";
 import useOpenLink from "@hooks/useOpenLink";
+import { trackScreen } from "../../utils/MatomoUtils";
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 
 console.log("EVENT URL", eventCalendarURL)
@@ -139,7 +140,8 @@ function CalendarEvent({ event, currentLanguage, navigation }: Props) {
     <TouchableOpacity
       style={styles.item}
       onPress={() => {
-        navigation.navigate("CalendarDetailsScreen", {
+        trackScreen("view_event", event?.name || event?.slug);
+          navigation.navigate("CalendarDetailsScreen", {
           event: {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle, date: eventLinkDay},
         });
         // Linking.openURL(eventUrl);

@@ -75,7 +75,7 @@ class ObjectScreen extends Component<Props> {
   onGoToLink = (url: string, title?: string) => {
     const { navigate } = this.props.navigation;
     trackEvent("open", "open_url", title, title, url);
-    AnalyticsUtils.logEvent("open_url", { title });
+    // AnalyticsUtils.logEvent("open_url", { title });
     navigate("WebScreen", { url });
   };
 
@@ -94,7 +94,7 @@ class ObjectScreen extends Component<Props> {
     const { url, title } = video;
     if (title) {
       trackEvent("play", "play_video", title, title, url);
-      AnalyticsUtils.logEvent("play_video", { title });
+      // AnalyticsUtils.logEvent("play_video", { title });
     }
 
     const { navigate } = this.props.navigation;

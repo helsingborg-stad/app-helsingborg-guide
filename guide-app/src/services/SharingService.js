@@ -20,6 +20,7 @@ import fetchService from "@services/FetchService";
 import { AnalyticsUtils } from "@utils";
 import TextStyles from "@assets/styles/TextStyles";
 import { sharingFadeUrl, sharingIconUrl } from "@data/urls";
+import { trackEvent } from "../utils/MatomoUtils";
 
 const fontSize = 40;
 const lineDistance = 5;
@@ -93,7 +94,8 @@ const getPlatformURI = path =>
 
 function beginShare(title, message, url, width, height, subject, shareType) {
 
-  AnalyticsUtils.logEvent(shareType, { name: title });
+  // AnalyticsUtils.logEvent(shareType, { name: title });
+    trackEvent("share", "share_guide", title, title, url )
   // The sharing process is different on ios and android.
   if (Platform.OS === "android") {
     shareAndroid(title, message, url, width, height, subject);

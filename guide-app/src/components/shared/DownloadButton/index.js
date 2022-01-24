@@ -109,6 +109,7 @@ export class DownloadButton extends Component<Props> {
             if (currentGuide) {
               if (status === "stopped") {
                 this.props.startDownload(currentGuide);
+                trackEvent("download", "download_guide", currentGuide.slug, currentGuide.slug)
                 AnalyticsUtils.logEvent("download_guide", {
                   name: currentGuide.slug
                 });
