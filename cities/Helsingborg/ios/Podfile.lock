@@ -1,6 +1,4 @@
 PODS:
-  - BNFMatomo (0.1.1):
-    - React
   - boost (1.76.0)
   - BVLinearGradient (2.5.6):
     - React
@@ -486,6 +484,8 @@ PODS:
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
+  - RNDeviceInfo (8.4.8):
+    - React-Core
   - RNFBAnalytics (14.2.1):
     - Firebase/Analytics (= 8.10.0)
     - React-Core
@@ -522,7 +522,6 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
-  - BNFMatomo (from `../../../node_modules/react-native-matomo`)
   - boost (from `../../../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - BVLinearGradient (from `../../../node_modules/react-native-linear-gradient`)
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
@@ -596,6 +595,7 @@ DEPENDENCIES:
   - rn-fetch-blob (from `../../../node_modules/rn-fetch-blob`)
   - "RNCAsyncStorage (from `../../../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../../../node_modules/@react-native-community/masked-view`)"
+  - RNDeviceInfo (from `../../../node_modules/react-native-device-info`)
   - "RNFBAnalytics (from `../../../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../../../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../../../node_modules/@react-native-firebase/messaging`)"
@@ -638,8 +638,6 @@ SPEC REPOS:
     - YogaKit
 
 EXTERNAL SOURCES:
-  BNFMatomo:
-    :path: "../../../node_modules/react-native-matomo"
   boost:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/boost.podspec"
   BVLinearGradient:
@@ -740,6 +738,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
     :path: "../../../node_modules/@react-native-community/masked-view"
+  RNDeviceInfo:
+    :path: "../../../node_modules/react-native-device-info"
   RNFBAnalytics:
     :path: "../../../node_modules/@react-native-firebase/analytics"
   RNFBApp:
@@ -766,7 +766,6 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  BNFMatomo: 713640a76fb63d5a485705a662c03db89fb15566
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
@@ -841,6 +840,7 @@ SPEC CHECKSUMS:
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCAsyncStorage: 0bef6a21517c0254bd6bd59a3672963abfa0d18e
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
+  RNDeviceInfo: 0400a6d0c94186d1120c3cbd97b23abc022187a9
   RNFBAnalytics: c2bc124906b6719c9d3e407f06f9222a15638edc
   RNFBApp: 78d0446e8b28dc30616c134a9e4d8d4b01f9f966
   RNFBMessaging: 79910a2eb2fa5955f38259367b14431bd78bef19
