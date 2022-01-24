@@ -7,6 +7,7 @@ import { Animated, View, Image, Dimensions, Platform } from "react-native";
 import styles from "./style";
 import { selectCurrentBottomBarTab } from "@actions/uiStateActions";
 import { Navigation } from "@config/ui";
+import { trackScreen } from "../../../utils/MatomoUtils";
 
 const barBackground = require("@assets/images/background-navigation.png");
 
@@ -85,7 +86,7 @@ class BottomBarView extends Component<Props, State> {
           <ButtonComponent
             key={id}
             selected={this.props.currentBottomBarTab === index}
-            onPress={() => this.props.selectBottomBarTab(index)}
+            onPress={() => this.props.selectBottomBarTab(index, id)}
           />
         ))}
       </View>
@@ -118,8 +119,10 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    selectBottomBarTab: (index: number) =>
-      dispatch(selectCurrentBottomBarTab(index)),
+    selectBottomBarTab: (index: number, id: any) => {
+      id && trackScreen("view_screen", id);
+      dispatch(selectCurrentBottomBarTab(index));
+    }
   };
 }
 
