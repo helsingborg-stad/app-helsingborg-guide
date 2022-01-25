@@ -125,32 +125,28 @@ function displayButtonsBar(
 }
 
 const guideButtons = (props) => {
-  const { array, index, prevIndex, navigation, selectObject} = props;
+  const { array, navigation, selectObject, order} = props;
   const [ width, setWidth ] = useState("");
 
   const onLayout=(event)=> {
-    console.log("event", event.nativeEvent);
     setWidth(event.nativeEvent.layout.width)
   }
 
-
-
-  return array?.length  ? <View style={styles.navGuideWrapper}>
-    <Text style={styles.navGuideBarStep}>{`${(index + 1)} av ${array.length}`}</Text>
+  return array?.length ? <View style={styles.navGuideWrapper}>
+    <Text style={styles.navGuideBarStep}>{`${(order + 1)} av ${array.length}`}</Text>
     <View style={styles.navGuide}>
     <Icon
       name={"chevron-left"}
       size={36}
       color={Colors.themeExtra1}
-      style={{opacity: index > 0 ? 1 : 0.4}}
-      onPress={index > 0 ? () => {
-        selectObject && selectObject(array[index - 1]);
+      style={{opacity: order > 0 ? 1 : 0.4}}
+      onPress={order > 0 ? () => {
+        selectObject && selectObject(array[order - 1]);
         navigation.navigate("ObjectScreen", {
-          title: array[index - 1].title,
-          currentGuide: array[index - 1],
-          index: index - 1,
+          title: array[order - 1].title,
+          currentGuide: array[order - 1],
           array: array,
-          prevIndex: index,
+          order: order - 1,
         })
       } : null}
     />
@@ -161,7 +157,7 @@ const guideButtons = (props) => {
         {width ? <View style={[styles.navGuideBarFilled,
           {
             transform: [
-              {translateX: -width + Math.round(width * ((index + 1) / array.length))}
+              {translateX: -width + Math.round(width * ((order + 1) / array.length))}
             ] }]} />  : null }
       </View>
     </View>
@@ -169,15 +165,14 @@ const guideButtons = (props) => {
       name={"chevron-right"}
       size={36}
       color={Colors.themeExtra1}
-      style={{opacity: (index + 1) !== array.length ? 1 : 0.5}}
-      onPress={(index + 1) !== array.length ? () => {
-        selectObject && selectObject(array[index + 1]);
+      style={{opacity: (order + 1) !== array.length ? 1 : 0.5}}
+      onPress={(order + 1) !== array.length ? () => {
+        selectObject && selectObject(array[order + 1]);
         navigation.navigate("ObjectScreen", {
-          title: array[index + 1].title,
-          currentGuide: array[index + 1],
-          index: index + 1,
+          title: array[order + 1].title,
+          currentGuide: array[order + 1],
+          order: order + 1,
           array: array,
-          prevIndex: index,
         })
       } : null}
     />

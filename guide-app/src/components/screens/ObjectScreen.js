@@ -138,7 +138,7 @@ class ObjectScreen extends Component<Props> {
       navigation,
     } = this.props
 
-    const { selectObject, index, array, prevIndex } = this.props.navigation.state.params;
+    const { selectObject, index, array, prevIndex, order } = this.props.navigation.state.params;
 
     console.log("prevIndex", prevIndex, "index", index)
     if (!currentContentObject) {
@@ -162,8 +162,7 @@ class ObjectScreen extends Component<Props> {
           guideId={guideId}
           guideType={guideType}
           array={array}
-          index={index}
-          prevIndex={prevIndex}
+          order={order}
           selectObject={selectObject}
           navigation={navigation}
           onSwiperIndexChanged={this.onSwiperIndexChanged}
