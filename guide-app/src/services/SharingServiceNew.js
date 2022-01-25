@@ -102,7 +102,6 @@ const getPlatformURI = path =>
 
 function beginShare(title, message, url, width, height, subject, shareType, forceUpdate) {
 
-  console.log("org message", message)
   // AnalyticsUtils.logEvent(shareType, { name: title });
   // The sharing process is different on ios and android.
   if (Platform.OS === "android") {
@@ -197,43 +196,23 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
     // Once we have all parts of the overlay, we need to get the size of the files.
 
     console.log("fadeURI", fadeImageURL);
-        // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
-        const outputImage = await watermark({
-          title,
-          source: { url, width, height },
-          fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
-          icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
-        });
-        console.log ("IOS_SHARE", "message", message, "subject", subject, "title", title, "image", outputImage)
+    // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
+    const outputImage = await watermark({
+      title,
+      source: { url, width, height },
+      fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
+      icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
+    });
 
-        iosShare = {
-          activityItemSources: [
-            {
-              // For using custom icon instead of default text icon at share preview when sharing with message.
-              placeholderItem: {
-                type: 'text',
-                content: title,
-              },
-              item: {
-                default: {
-                  type: 'text',
-                  content: `${message} ${url}`,
-                },
-              },
-              linkMetadata: {
-                title: message,
-                icon: outputImage,
-              },
-            },
-          ],
-          // message
-          // title,
-          // subject,
-          // url: outputImage,
-        };
+    iosShare = {
+      message,
+      subject,
+      title,
+      url: outputImage,
+    };
 
-        isCreatingImage = false;
-        forceUpdate();
+    isCreatingImage = false;
+    forceUpdate();
   }
 }
 
@@ -244,25 +223,27 @@ async function watermark(watermarkProperties) {
     title,
     source: { url: sourceURI, width: sourceWidth, height: sourceHeight },
     fade: { url: fadeURI, height: fadeHeight },
-    icon: { url: shareURI, width: iconWidth, height: iconHeight },
+    icon: { url: iconURI, width: iconWidth, height: iconHeight },
   } = watermarkProperties;
 
-  console.log("source url", sourceURI, "fade url?", fadeImageURL, "icon url", require("@assets/images/share_fade.png"))
+  console.log("source url", sourceURI, "fade url", fadeURI)
 
-  console.log("iconWidth", iconWidth, "iconHeight", iconHeight)
   // Add the fade overlay
   const resultA = await ImageMarker.markImage({
     src: sourceURI,
-    markerSrc: require("@assets/images/share_fade.png"),
+    markerSrc: fadeURI,
     X: 0,
     Y: parseInt(sourceHeight) - fadeHeight,
     ...SharedImageProperties,
   });
 
+  console.log("resulta", getPlatformURI(resultA), title, margin,
+    parseInt(sourceHeight) - fontSize * 2 - margin - lineDistance,
+    { ...TextStyles.defaultBoldFont,
+      ...SharedTextProperties,
+      ...SharedImageProperties,}
+  )
 
-  console.log("IMAGE 2 PROPS", {...TextStyles.defaultBoldFont,
-    ...SharedTextProperties,
-    ...SharedImageProperties})
   // Add the title for the image
   const resultB = await ImageMarker.markText({
     src: getPlatformURI(resultA),
@@ -272,7 +253,6 @@ async function watermark(watermarkProperties) {
     ...TextStyles.defaultBoldFont,
     ...SharedTextProperties,
     ...SharedImageProperties,
-    color: "#ffffff",
   });
 
   console.log("resultb", resultB)
@@ -295,7 +275,7 @@ async function watermark(watermarkProperties) {
   // Add the icon
   return await ImageMarker.markImage({
     src: resultC,
-    markerSrc: require("@assets/images/share_icon.png"),
+    markerSrc: iconURI,
     X: parseInt(sourceWidth) - iconWidth * iconScale - margin,
     Y: parseInt(sourceHeight) - iconHeight * iconScale - margin,
     ...SharedImageProperties,
@@ -352,7 +332,7 @@ const ShowShareButton = (props) => {
         onPress={() => {
           beginShare(
             title,
-            title,
+            "",
             imageUrl,
             imageWidth,
             imageHeight,

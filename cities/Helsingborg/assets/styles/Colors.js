@@ -1,7 +1,7 @@
 const colors = {
   //NAMED COLORS
-  white: "white",
-  black: "black",
+  white: "#FFFFFF",
+  black: "#000000",
   black26: "#262626",
   green: "green",
 
