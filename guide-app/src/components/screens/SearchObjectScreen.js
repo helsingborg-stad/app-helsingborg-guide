@@ -31,7 +31,9 @@ class SearchObjectScreen extends Component<Props> {
       trackScreen("view_guide_object", found?.title || "");
       navigate("ObjectScreen", {
         title: found.title,
-        currentGuide: this.props.currentGuide
+        currentGuide: this.props.currentGuide,
+        array: this.props.contentObjects,
+        order: found?.order,
       });
     } else {
       const { keyPad } = this;
