@@ -11,7 +11,7 @@ type Props = {
   onPress(): void,
 };
 
-const QRButton = ({ selected }: Props) => {
+const QRButton = ({ onPress, selected }: Props) => {
   const { openLink } = useOpenLink();
 
   return (
@@ -20,7 +20,8 @@ const QRButton = ({ selected }: Props) => {
       Icon={ShopIcon}
       selected={selected}
       onPress={() => {
-        NavigatorService.reset("ScanScreen")
+        NavigatorService.reset("ScanScreen"),
+          onPress();
       }}
     />
   );

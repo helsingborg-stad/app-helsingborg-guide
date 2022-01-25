@@ -186,6 +186,7 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
   isCreatingImage = true;
   forceUpdate();
 
+  console.log("title", title, "message", message, "url", url, "width", width, "height", height)
   // First we need to download the main image.
   const mainRes = await fetchService.fetch(url);
   console.log("mainres", mainRes)
@@ -217,6 +218,7 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
     });
   }
 }
+
 
 // Constructing the sharing image by layering the various elements on top one after another.
 async function watermark(watermarkProperties) {
