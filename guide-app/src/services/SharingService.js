@@ -112,66 +112,70 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
   }
 
   isCreatingImage = true;
-  forceUpdate();
+  // forceUpdate();
 
   // First we need to download the main image.
   const mainRes = await fetchService.fetch(url);
   const fadeRes = await fetchService.fetch(sharingFadeUrl); //TODO: Check if cached instead of re-downloading every time.
   const iconRes = await fetchService.fetch(sharingIconUrl); //TODO: Check if cached instead of re-downloading every time.
+
+  console.log("fadeurl", sharingFadeUrl, "iconurl", sharingIconUrl, url)
+
   // Setting up the paths of the local files.
   const localFadeUrl = getPlatformURI(fadeRes.path());
   const localIconUrl = getPlatformURI(iconRes.path());
 
   // Once we hve all parts of the overlay, we need to get the size of the files.
-  Image.getSize(localFadeUrl, async (fadeWidth, fadeHeight) => {
-    Image.getSize(localIconUrl, async (iconWidth, iconHeight) => {
+  Image.getSize(sharingFadeUrl, async (fadeWidth, fadeHeight) => {
+    Image.getSize(sharingIconUrl, async (iconWidth, iconHeight) => {
+
       const outputImage = await watermark({
         title,
-        source: { url: mainRes.path(), width, height },
-        fade: { url: fadeRes.path(), width: fadeWidth, height: fadeHeight },
-        icon: { url: iconRes.path(), width: iconWidth, height: iconHeight },
+        source: { url: url, width, height },
+        fade: { url: sharingFadeUrl, width: fadeWidth, height: fadeHeight },
+        icon: { url: sharingIconUrl, width: iconWidth, height: iconHeight },
       });
 
       // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
-      try {
-        const granted = await PermissionsAndroid.check(
-          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
-        );
-
-        if (!granted) {
-          const writeResponse = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
-          );
-
-          if (!writeResponse) {
-            throw new Error("Could not request permissions");
-          } // Oh. well. No share for you :(
-        }
-      } catch (e) {
-        // Unable to get permissions to share.
-        finish();
-        return;
-      }
-
-      try {
-        await RNFetchBlob.fs.cp(
-          outputImage,
-          `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
-        );
-
-        const finalPath = getPlatformURI(
-          `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
-        );
-
-        const exist = await RNFetchBlob.fs.exists(finalPath);
-        if (exist) {
-          console.log("4");
-          // Only attempt to share the file if we successfully managed to move it.
-          Share.open({ title, message, subject, url: finalPath });
-        }
-      } catch (e) {
-        // Could not share.
-      }
+      // try {
+      //   const granted = await PermissionsAndroid.check(
+      //     PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
+      //   );
+      //
+      //   if (!granted) {
+      //     const writeResponse = await PermissionsAndroid.request(
+      //       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
+      //     );
+      //
+      //     if (!writeResponse) {
+      //       throw new Error("Could not request permissions");
+      //     } // Oh. well. No share for you :(
+      //   }
+      // } catch (e) {
+      //   // Unable to get permissions to share.
+      //   finish();
+      //   return;
+      // }
+      //
+      // try {
+      //   await RNFetchBlob.fs.cp(
+      //     outputImage,
+      //     `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
+      //   );
+      //
+      //   const finalPath = getPlatformURI(
+      //     `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
+      //   );
+      //
+      //   const exist = await RNFetchBlob.fs.exists(finalPath);
+      //   if (exist) {
+      //     console.log("4");
+      //     // Only attempt to share the file if we successfully managed to move it.
+      //     Share.open({ title, message, subject, url: finalPath });
+      //   }
+      // } catch (e) {
+      //   // Could not share.
+      // }
 
       finish();
     });
@@ -223,17 +227,26 @@ async function watermark(watermarkProperties) {
     icon: { url: iconURI, width: iconWidth, height: iconHeight },
   } = watermarkProperties;
 
+  console.log("source url", sourceURI, "fade url", fadeURI)
+
   // Add the fade overlay
   const resultA = await ImageMarker.markImage({
-    src: getPlatformURI(sourceURI),
-    markerSrc: getPlatformURI(fadeURI),
+    src: sourceURI,
+    markerSrc: fadeURI,
     X: 0,
     Y: parseInt(sourceHeight) - fadeHeight,
     ...SharedImageProperties,
   });
 
+  console.log("resulta", getPlatformURI(resultA), title, margin,
+    parseInt(sourceHeight) - fontSize * 2 - margin - lineDistance,
+    { ...TextStyles.defaultBoldFont,
+    ...SharedTextProperties,
+    ...SharedImageProperties,}
+    )
+
   // Add the title for the image
-  const resultB = await ImageMarker.markText({
+  ImageMarker.markText({
     src: getPlatformURI(resultA),
     text: title,
     X: margin,
@@ -241,28 +254,36 @@ async function watermark(watermarkProperties) {
     ...TextStyles.defaultBoldFont,
     ...SharedTextProperties,
     ...SharedImageProperties,
-  });
+  }).then(res => {
+    console.log("res", res)
+  }).catch(err => {
+    console.log("error", err)
+  })
 
-  // Add the subtitle (currently the App name)
-  const resultC = await ImageMarker.markText({
-    src: getPlatformURI(resultB),
-    text: LangService.strings.SHARING_OVERLAY_TITLE,
-    X: margin,
-    Y: parseInt(sourceHeight) - fontSize - margin,
-    ...TextStyles.defaultFont,
-    ...SharedTextProperties,
-    ...SharedImageProperties,
-  });
 
-  // Add the icon
-  return await ImageMarker.markImage({
-    src: getPlatformURI(resultC),
-    markerSrc: getPlatformURI(iconURI),
-    X: parseInt(sourceWidth) - iconWidth * iconScale - margin,
-    Y: parseInt(sourceHeight) - iconHeight * iconScale - margin,
-    ...SharedImageProperties,
-    markerScale: iconScale,
-  });
+  // console.log("resultb", resultB)
+
+
+  // // Add the subtitle (currently the App name)
+  // const resultC = await ImageMarker.markText({
+  //   src: resultB,
+  //   text: LangService.strings.SHARING_OVERLAY_TITLE,
+  //   X: margin,
+  //   Y: parseInt(sourceHeight) - fontSize - margin,
+  //   ...TextStyles.defaultFont,
+  //   ...SharedTextProperties,
+  //   ...SharedImageProperties,
+  // });
+  //
+  // // Add the icon
+  // return await ImageMarker.markImage({
+  //   src: resultC,
+  //   markerSrc: iconURI,
+  //   X: parseInt(sourceWidth) - iconWidth * iconScale - margin,
+  //   Y: parseInt(sourceHeight) - iconHeight * iconScale - margin,
+  //   ...SharedImageProperties,
+  //   markerScale: iconScale,
+  // });
 }
 
 function modalClosed() {

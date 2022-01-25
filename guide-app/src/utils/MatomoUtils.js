@@ -8,26 +8,18 @@ const isDevice = async () => {
 };
 
 export const initializeTracker = async () => {
-  console.log("matomo", MATOMO_URL.toString() + "matomo.php", parseInt(MATOMO_SITE_ID, 10))
-  // await isDevice() && Matomo.initTracker((MATOMO_URL.toString() + "matomo.php"), parseInt(MATOMO_SITE_ID, 10));
+  await isDevice() && Matomo.initTracker((MATOMO_URL.toString() + "matomo.php"), parseInt(MATOMO_SITE_ID, 10));
 };
 
 export const trackScreen = async (path, title) => {
-  path = path ? path : "";
-  title = title ? title : "";
   await isDevice() && Matomo.trackScreen(path, title);
 };
-
 export const trackEvent = async (category, action, name, value, url) => {
-  name = name ? name : "";
-  value = value ? value : "";
-  url = url ? url : "";
+  console.log(category, action, name, value, url);
   await isDevice() && Matomo.trackEvent(category, action, name, value, url);
 };
 
 export const trackGoal = async (goalID, revenue) => {
-  goalID = goalID ? goalID : "";
-  revenue = revenue ? revenue : "";
   await isDevice() && Matomo.trackGoal(goalID, revenue);
 
 };

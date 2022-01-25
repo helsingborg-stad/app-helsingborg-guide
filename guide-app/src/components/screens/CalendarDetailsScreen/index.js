@@ -14,7 +14,6 @@ const CalendarDetailsScreen = ({ navigation }) => {
 
   const { event } = navigation.state.params;
 
-  console.log("params", event)
 
 
   function displayLocation(location: string, dateString: string, hoursString: string) {

@@ -44,6 +44,7 @@ type Props = {
   sections: Section[],
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
+
   selectCurrentCategory(section: NavigationCategory): void,
   selectCurrentTab(tabIndex: number): void,
   dispatchShowBottomBar(visible: boolean): void,
@@ -83,7 +84,7 @@ class HomeScreen extends Component<Props> {
           } else if (type === "trail") {
             const slug = guide?.slug;
             const title = guide?.name;
-            trackScreen("view_guide", slug || title);
+            trackScreen("view_trail ", slug || title);
             // AnalyticsUtils.logEvent("view_guide", { name: slug });
             this.props?.navigation.navigate("TrailScreen", {
               title: title,
@@ -135,6 +136,7 @@ class HomeScreen extends Component<Props> {
     }
 
     console.log("items", items)
+
 
     return (
       <>

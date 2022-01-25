@@ -29,7 +29,7 @@ class SearchObjectScreen extends Component<Props> {
     if (found) {
       this.props.selectCurrentContentObject(found);
       const { navigate } = this.props.navigation;
-      trackScreen("view_object", found?.title || "")
+      trackScreen("view_guide_object", found?.title || "")
       // AnalyticsUtils.logEvent("view_object", { name: found.title });
       navigate("ObjectScreen", {
         title: found.title,

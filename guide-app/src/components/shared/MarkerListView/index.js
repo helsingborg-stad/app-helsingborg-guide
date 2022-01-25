@@ -185,7 +185,7 @@ class MarkerListView extends Component<Props, State> {
     }
     if (contentObject) {
       dispatchSelectContentObject(contentObject);
-      trackScreen("view_object", contentObject?.title  || "");
+      trackScreen("view_trail_object", contentObject?.title  || "");
       // AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
       navigate("ObjectScreen", {
         title: contentObject.title,
