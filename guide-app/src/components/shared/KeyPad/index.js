@@ -51,7 +51,7 @@ export default class KeyPad extends Component<Props, State> {
 
   shake = () => {
     Animated.sequence([
-      Animated.spring(this.state.shakeValue, { toValue: 1, velocity: 30 }),
+      Animated.spring(this.state.shakeValue, { toValue: 1, velocity: 30, useNativeDriver: true }),
     ]).start();
   };
 

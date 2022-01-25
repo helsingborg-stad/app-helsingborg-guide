@@ -44,17 +44,17 @@ export default class OffscreenMarker extends Component<
     const newState = {};
 
     if (x !== previousX) {
-      Animated.spring(animatedX, { toValue: x }).start();
+      Animated.spring(animatedX, { toValue: x, useNativeDriver: true }).start();
       newState.x = x;
     }
 
     if (y !== previousY) {
-      Animated.spring(animatedY, { toValue: y }).start();
+      Animated.spring(animatedY, { toValue: y, useNativeDriver: true }).start();
       newState.y = y;
     }
 
     if (visible !== previouslyVisible) {
-      Animated.spring(opacity, { toValue: visible ? 1 : 0 }).start();
+      Animated.spring(opacity, { toValue: visible ? 1 : 0, useNativeDriver: true }).start();
       newState.visible = visible;
     }
 

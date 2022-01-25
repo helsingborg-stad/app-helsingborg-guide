@@ -40,16 +40,16 @@ export default class RadarView extends Component<Props, State> {
     if (this.timer) {
       clearInterval(this.timer);
     }
-    Animated.spring(this.state.scaleValue, { toValue: 0 }).start();
+    Animated.spring(this.state.scaleValue, { toValue: 0, useNativeDriver: true }).start();
   }
 
   timer;
 
   animate() {
     if (this.state.animatedIn) {
-      Animated.spring(this.state.animValue, { toValue: 1 }).start();
+      Animated.spring(this.state.animValue, { toValue: 1, useNativeDriver: true }).start();
     } else {
-      Animated.spring(this.state.animValue, { toValue: 0 }).start();
+      Animated.spring(this.state.animValue, { toValue: 0, useNativeDriver: true }).start();
     }
 
     this.setState({ animatedIn: !this.state.animatedIn });

@@ -30,8 +30,8 @@ export default class FloatingBtn extends Component<Props, State> {
 
     if (visible !== previouslyVisible) {
       const animationProperties = visible
-        ? { toValue: 1, friction: 2 }
-        : { toValue: 0 };
+        ? { toValue: 1, friction: 2, useNativeDriver: true }
+        : { toValue: 0, useNativeDriver: true };
       Animated.spring(animValue, animationProperties).start();
       return { visible };
     }

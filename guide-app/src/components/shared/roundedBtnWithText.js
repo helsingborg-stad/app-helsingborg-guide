@@ -87,10 +87,10 @@ export default class RoundedBtn extends Component<Props, State> {
   }
 
   onPressIn() {
-    Animated.spring(this.state.animValue, { toValue: 1.4 }).start();
+    Animated.spring(this.state.animValue, { toValue: 1.4, useNativeDriver: true}).start();
   }
   onPressOut() {
-    Animated.spring(this.state.animValue, { toValue: 1 }).start();
+    Animated.spring(this.state.animValue, { toValue: 1, useNativeDriver: true }).start();
   }
 
   render() {

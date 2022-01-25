@@ -35,7 +35,8 @@ export default class SegmentControl extends Component<Props, State> {
     const { onSegmentIndexChange, labels } = this.props;
 
     Animated.spring(this.selectedViewLeftInset, {
-      toValue: (index / labels.length) * this.containerWidth
+      toValue: (index / labels.length) * this.containerWidth,
+      useNativeDriver: true,
     }).start();
 
     this.setState({ selectedIndex: index });

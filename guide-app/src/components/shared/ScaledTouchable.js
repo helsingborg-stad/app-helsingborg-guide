@@ -27,10 +27,10 @@ export default class ScaledTouchableItem extends Component<Props, State> {
   }
 
   onPressIn() {
-    Animated.spring(this.state.animValue, { toValue: 1 }).start();
+    Animated.spring(this.state.animValue, { toValue: 1, useNativeDriver: true, }).start();
   }
   onPressOut() {
-    Animated.spring(this.state.animValue, { toValue: 0 }).start();
+    Animated.spring(this.state.animValue, { toValue: 0, useNativeDriver: true }).start();
   }
   render() {
     const scaleAnim = this.state.animValue.interpolate({

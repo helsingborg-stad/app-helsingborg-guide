@@ -21,8 +21,8 @@ export default class SlimNotificationBar extends Component<Props, State> {
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     const { visible } = nextProps;
     const animationProperties = visible
-      ? { toValue: 1, friction: 2 }
-      : { toValue: 0 };
+      ? { toValue: 1, friction: 2, useNativeDriver: true, }
+      : { toValue: 0, useNativeDriver: true };
     Animated.spring(prevState.animValue, animationProperties).start();
   }
 
