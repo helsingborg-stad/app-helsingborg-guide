@@ -45,7 +45,7 @@ class TrailScreen extends Component<Props, State> {
     super(props);
 
     this.state = {
-      showInfoOverlay: true
+      showInfoOverlay: false,
     };
   }
 
