@@ -129,7 +129,7 @@ type State = {
   debugStatus: any,
 };
 
-class SettingsScreen extends Component<Props, State> {
+class ScanScreen extends Component<Props, State> {
   static navigationOptions = () => {
     const title = LangService.strings.SETTINGS;
     return {
@@ -340,4 +340,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SettingsScreen);
+)(ScanScreen);

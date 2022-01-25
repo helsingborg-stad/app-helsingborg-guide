@@ -23,6 +23,7 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
+  ScanScreen,
   ARIntroductionScreen,
 } from "@src/components/screens";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
@@ -73,6 +74,7 @@ const GuideNavigator = createStackNavigator(
     },
     DownloadsScreen: { screen: DownloadsScreen },
     SettingsScreen: { screen: SettingsScreen },
+    ScanScreen: { screen: ScanScreen },
     DebugScreen: { screen: DebugScreen },
     CategoryMapScreen: { screen: CategoryMapScreen },
     CalendarScreen: { screen: CalendarScreen },
