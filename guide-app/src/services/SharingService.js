@@ -261,29 +261,29 @@ async function watermark(watermarkProperties) {
   })
 
 
-  // console.log("resultb", resultB)
+  console.log("resultb", resultB)
 
 
-  // // Add the subtitle (currently the App name)
-  // const resultC = await ImageMarker.markText({
-  //   src: resultB,
-  //   text: LangService.strings.SHARING_OVERLAY_TITLE,
-  //   X: margin,
-  //   Y: parseInt(sourceHeight) - fontSize - margin,
-  //   ...TextStyles.defaultFont,
-  //   ...SharedTextProperties,
-  //   ...SharedImageProperties,
-  // });
-  //
-  // // Add the icon
-  // return await ImageMarker.markImage({
-  //   src: resultC,
-  //   markerSrc: iconURI,
-  //   X: parseInt(sourceWidth) - iconWidth * iconScale - margin,
-  //   Y: parseInt(sourceHeight) - iconHeight * iconScale - margin,
-  //   ...SharedImageProperties,
-  //   markerScale: iconScale,
-  // });
+  // Add the subtitle (currently the App name)
+  const resultC = await ImageMarker.markText({
+    src: resultB,
+    text: LangService.strings.SHARING_OVERLAY_TITLE,
+    X: margin,
+    Y: parseInt(sourceHeight) - fontSize - margin,
+    ...TextStyles.defaultFont,
+    ...SharedTextProperties,
+    ...SharedImageProperties,
+  });
+
+  // Add the icon
+  return await ImageMarker.markImage({
+    src: resultC,
+    markerSrc: iconURI,
+    X: parseInt(sourceWidth) - iconWidth * iconScale - margin,
+    Y: parseInt(sourceHeight) - iconHeight * iconScale - margin,
+    ...SharedImageProperties,
+    markerScale: iconScale,
+  });
 }
 
 function modalClosed() {

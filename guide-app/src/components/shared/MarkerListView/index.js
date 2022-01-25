@@ -171,7 +171,6 @@ class MarkerListView extends Component<Props, State> {
     if (guide) {
       const { guideType } = guide;
       trackScreen("view_guide", guide?.slug || "");
-      // AnalyticsUtils.logEvent("view_guide", { name: guide.slug });
       selectGuide(guide);
       switch (guideType) {
         case "trail":

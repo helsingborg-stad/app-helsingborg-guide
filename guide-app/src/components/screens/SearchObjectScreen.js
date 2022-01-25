@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import KeyPad from "@shared-components/KeyPad";
 import { selectCurrentContentObject } from "@actions/uiStateActions";
-import { AnalyticsUtils } from "@utils";
 import { trackScreen } from "@utils/MatomoUtils";
 
 type Props = {
@@ -29,8 +28,7 @@ class SearchObjectScreen extends Component<Props> {
     if (found) {
       this.props.selectCurrentContentObject(found);
       const { navigate } = this.props.navigation;
-      trackScreen("view_guide_object", found?.title || "")
-      // AnalyticsUtils.logEvent("view_object", { name: found.title });
+      trackScreen("view_guide_object", found?.title || "");
       navigate("ObjectScreen", {
         title: found.title,
         currentGuide: this.props.currentGuide

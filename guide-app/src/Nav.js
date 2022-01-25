@@ -64,7 +64,13 @@ const GuideNavigator = createStackNavigator(
     },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
-    ImageScreen: { screen: ImageScreen },
+    ImageScreen: {
+      screen: ImageScreen,
+      navigationOptions: {
+        headerMode: "none",
+        title: '',
+      },
+    },
     DownloadsScreen: { screen: DownloadsScreen },
     SettingsScreen: { screen: SettingsScreen },
     DebugScreen: { screen: DebugScreen },
