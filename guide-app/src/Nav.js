@@ -23,10 +23,10 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
-  ScanScreen,
   ARIntroductionScreen,
 } from "@src/components/screens";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
+import ScanScreen from "@src/components/screens/ScanScreen";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
