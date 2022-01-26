@@ -10,7 +10,7 @@ import {
   Text,
   ScrollView,
 } from "react-native";
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -28,6 +28,7 @@ import { AnalyticsUtils } from "@utils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import mapIcon from "@assets/images/mapIcon.png";
 import { trackScreen } from "@utils/MatomoUtils";
+
 type Section = {
   title: string,
   data: NavigationItem[],
@@ -50,7 +51,8 @@ type Props = {
   dispatchShowBottomBar(visible: boolean): void,
 };
 
-class HomeScreen extends Component<Props> {
+class HomeScreen extends React.PureComponent<Props> {
+
   static navigationOptions = () => {
     const title = LangService.strings.APP_NAME;
     return {
@@ -59,8 +61,22 @@ class HomeScreen extends Component<Props> {
     };
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      list: [],
+    };
+  }
+
   componentDidMount() {
     this.props.dispatchShowBottomBar(true);
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps?.items?.length && (nextProps?.items !== this.state.list) && this.props.navigation.isFocused()) {
+      this.setState({list: nextProps.items})
+    }
   }
 
   onPressItem = (item: NavigationItem, items, index): void => {
@@ -120,7 +136,6 @@ class HomeScreen extends Component<Props> {
   };
 
 
-
   render() {
     const {
       currentHomeTab,
@@ -134,14 +149,14 @@ class HomeScreen extends Component<Props> {
     if (showLoadingSpinner) {
       return <ActivityIndicator style={styles.loadingSpinner} />;
     }
+    const list = this.state.list;
 
-    console.log("items", items)
-
+    console.log("next the list in render")
 
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
-        <SafeAreaView edges={['right', 'top', 'left']} style={styles.homeContainer}>
+        <SafeAreaView edges={["right", "top", "left"]} style={styles.homeContainer}>
           <View style={styles.topBarNavigation}>
             <SegmentControlPill
               initialSelectedIndex={currentHomeTab}
@@ -150,36 +165,36 @@ class HomeScreen extends Component<Props> {
             />
           </View>
 
-        {!items || (items && items.length === 0) ? (
-          <View style={styles.sectionNoContent}>
-            <Text style={styles.sectionNoContentText}>
-              {LangService.strings.CONTENT_MISSING}
-            </Text>
-          </View>
-        ) : (
-          <>
-            <ScrollView
-              key={currentHomeTab}
-              style={styles.container}
-              contentContainerStyle={styles.contentContainer}
-            >
-              {items.length && items.map((item, index) => (
-                <NavigationListItem
-                  key={index}
-                  index={index}
-                  item={item}
-                  onPressItem={() => this.onPressItem(item, items, index)}
-                />
-              ))}
-            </ScrollView>
-            <TouchableOpacity
-              style={styles.mapButton}
-              onPress={() => navigation.navigate("CategoryMapScreen")}
-            >
-              <Image style={styles.mapIcon} source={mapIcon} />
-            </TouchableOpacity>
-          </>
-        )}
+          {!list || (list && list.length === 0) ? (
+            <View style={styles.sectionNoContent}>
+              <Text style={styles.sectionNoContentText}>
+                {LangService.strings.CONTENT_MISSING}
+              </Text>
+            </View>
+          ) : (
+            <>
+              <ScrollView
+                key={currentHomeTab}
+                style={styles.container}
+                contentContainerStyle={styles.contentContainer}
+              >
+                {list.length && list.map((item, index) => (
+                  <NavigationListItem
+                    key={index}
+                    index={index}
+                    item={item}
+                    onPressItem={() => this.onPressItem(item, items, index)}
+                  />
+                ))}
+              </ScrollView>
+              <TouchableOpacity
+                style={styles.mapButton}
+                onPress={() => navigation.navigate("CategoryMapScreen")}
+              >
+                <Image style={styles.mapIcon} source={mapIcon} />
+              </TouchableOpacity>
+            </>
+          )}
         </SafeAreaView>
       </>
     );
@@ -242,5 +257,5 @@ function mapDispatchToProps(dispatch: Dispatch) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(HomeScreen);
