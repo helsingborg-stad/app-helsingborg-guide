@@ -26,6 +26,9 @@ export const SegmentControlPill = ({
     },
     [onSegmentIndexChange]
   );
+  useEffect(() => {
+    return setSelectedIndex(0);
+  },[])
 
   return (
     <View style={styles.container}>

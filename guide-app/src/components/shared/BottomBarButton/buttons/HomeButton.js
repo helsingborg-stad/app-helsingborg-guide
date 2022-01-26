@@ -15,7 +15,7 @@ const HomeButton = ({ onPress, selected }: Props) => (
     Icon={Home}
     selected={selected}
     onPress={() => {
-      NavigatorService.reset("HomeScreen");
+      !selected && NavigatorService.reset("HomeScreen");
       onPress();
     }}
   />

@@ -15,7 +15,7 @@ const SettingsButton = ({ onPress, selected }: Props) => (
     Icon={Settings}
     selected={selected}
     onPress={() => {
-      NavigatorService.reset("SettingsScreen");
+      !selected && NavigatorService.reset("SettingsScreen");
       onPress();
     }}
   />

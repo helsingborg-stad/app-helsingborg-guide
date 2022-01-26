@@ -33,7 +33,8 @@ const ImageCard = ({
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
-        <ImageView style={[styles.image, { height }]} source={image} />
+        {/*<ImageView style={[styles.image, { height }]} source={image} />*/}
+        <Image style={[styles.image, { height }]} source={image} />
         <LinearGradient
           colors={["#00000000", "#000000bb"]}
           style={styles.gradientContainer}

@@ -8,6 +8,7 @@ import internet from "./internetReducer";
 import error from "./errorReducer";
 import downloads from "./downloadReducer";
 import geolocation from "./geolocationReducer";
+import hasLocationStatus from "./hasLocationReducer";
 import downloadDataVersion from "./downloadDataVersionReducer";
 import uiState from "./uiStateReducer";
 import downloadedGuides from "./downloadedGuides";
@@ -25,6 +26,7 @@ const rootReducer = {
   error,
   downloads,
   geolocation,
+  hasLocationStatus,
   downloadDataVersion,
   downloadedGuides,
   uiState,

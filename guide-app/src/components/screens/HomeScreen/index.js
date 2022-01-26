@@ -66,6 +66,7 @@ class HomeScreen extends React.PureComponent<Props> {
 
     this.state = {
       list: [],
+      loaded: false,
     };
   }
 
@@ -74,8 +75,9 @@ class HomeScreen extends React.PureComponent<Props> {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if (nextProps?.items?.length && (nextProps?.items !== this.state.list) && this.props.navigation.isFocused()) {
-      this.setState({list: nextProps.items})
+    console.log("image", nextProps, "props", this.props)
+    if (nextProps?.items?.length && (nextProps?.items !== this.state.list) && this.props.navigation.isFocused() && (nextProps.hasLocationStatus || this.props.hasLocationStatus )) {
+      this.setState({list: nextProps.items, loaded: true})
     }
   }
 
@@ -150,6 +152,7 @@ class HomeScreen extends React.PureComponent<Props> {
       return <ActivityIndicator style={styles.loadingSpinner} />;
     }
     const list = this.state.list;
+    const loaded = this.state.loaded;
 
     console.log("next the list in render")
 
@@ -165,7 +168,14 @@ class HomeScreen extends React.PureComponent<Props> {
             />
           </View>
 
-          {!list || (list && list.length === 0) ? (
+          {
+            !loaded ? (
+                <View style={styles.sectionNoContent}>
+                  <ActivityIndicator style={{flex: 1, width: '100%'}} />
+                </View>
+              ) :
+
+            !list || (list && list.length === 0) ? (
             <View style={styles.sectionNoContent}>
               <Text style={styles.sectionNoContentText}>
                 {LangService.strings.CONTENT_MISSING}
@@ -206,6 +216,7 @@ function mapStateToProps(state: RootState) {
     navigation,
     guideGroups,
     uiState: { currentHomeTab },
+    hasLocationStatus,
   } = state;
   const { navigationCategories } = navigation;
   const { fetchingIds } = guideGroups;
@@ -230,6 +241,7 @@ function mapStateToProps(state: RootState) {
       ? categories[currentHomeTab]?.data
       : null;
 
+
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 
   return {
@@ -239,6 +251,7 @@ function mapStateToProps(state: RootState) {
     showLoadingSpinner: isFetching,
     navigationSections: navigationCategories,
     navigationCategoryLabels,
+    hasLocationStatus
   };
 }
 

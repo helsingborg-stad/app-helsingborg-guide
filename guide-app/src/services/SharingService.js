@@ -220,16 +220,15 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
                   content: `${message} ${url}`,
                 },
               },
+              subject: {
+                default: title
+              },
               linkMetadata: {
                 title: message,
                 icon: outputImage,
               },
             },
           ],
-          // message
-          // title,
-          // subject,
-          // url: outputImage,
         };
 
         isCreatingImage = false;

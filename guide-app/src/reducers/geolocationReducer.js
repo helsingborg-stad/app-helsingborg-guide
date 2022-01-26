@@ -7,7 +7,7 @@ export default function geolocationReducer(
 ) {
   switch (action.type) {
     case types.GEOLOCATION_UPDATE_SUCCESS:
-      return { ...state, position: action.position };
+      return { ...state, position: action.position};
     default:
       return state;
   }

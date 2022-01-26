@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { AppState, StatusBar, Platform, View } from "react-native";
+import { connect } from "react-redux";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -34,6 +35,7 @@ import { Colors, HeaderStyles } from "@assets/styles";
 import AnalyticsUtils from "@utils/AnalyticsUtils";
 import NavigatorService from "@services/navigationService";
 import { initializeTracker, trackScreen } from "@utils/MatomoUtils";
+
 
 const GuideNavigator = createStackNavigator(
   {
@@ -85,7 +87,7 @@ const GuideNavigator = createStackNavigator(
 
 const RootNavigator = createStackNavigator(
   {
-    SplashScreen: { screen: SplashScreen },
+    SplashScreen: { screen: SplashScreen,  },
     WelcomeScreen: { screen: WelcomeScreen },
     MainScreen: { screen: GuideNavigator },
     SearchObjectScreen: { screen: SearchObjectScreen },
@@ -109,7 +111,7 @@ type Props = {
   onAppBecameInactive(): void,
 };
 
-export default class Nav extends Component<Props> {
+class Nav extends Component<Props> {
   static getCurrentRouteName(navigationState: Object) {
     if (!navigationState) {
       return null;
@@ -146,6 +148,7 @@ export default class Nav extends Component<Props> {
   };
 
   render() {
+
     return (
       <ViewContainer>
         <StatusBar
@@ -165,3 +168,12 @@ export default class Nav extends Component<Props> {
     );
   }
 }
+
+function mapStateToProps(state: RootState) {
+  const { geolocation } = state;
+  return {
+    geolocation
+  };
+}
+
+export default connect(mapStateToProps)(Nav);

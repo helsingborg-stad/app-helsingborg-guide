@@ -15,6 +15,7 @@ import ColoredBar from "@shared-components/ColoredBar";
 import BackgroundImage from "@shared-components/BackgroundImage";
 import { Colors } from "@assets/styles";
 import LangService from "@services/langService";
+import { connect } from "react-redux";
 
 const LOGO = require("@assets/images/logo.png");
 const IMAGE = require("@assets/images/SplashscreenFinal.png");
@@ -77,7 +78,7 @@ type State = {
   barsVisible: any
 };
 
-export default class SplashScreen extends Component<Props, State> {
+class SplashScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -99,6 +100,12 @@ export default class SplashScreen extends Component<Props, State> {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+   if(nextProps.hasLocationStatus || this.props.hasLocationStatus) {
+     // this.skip(true)
+   }
+  }
+
   static navigationOptions = {
     headerMode: 'none'
   };
@@ -117,19 +124,24 @@ export default class SplashScreen extends Component<Props, State> {
     this.setState({ barsVisible: !this.state.barsVisible });
   }
 
-  skip() {
+
+
+  skip(hasLocation) {
+
     AsyncStorage.getItem(IS_WELCOMED).then(value => {
       let welcomed = false;
       if (value) {
         welcomed = JSON.parse(value);
       }
-
       const route = welcomed ? "MainScreen" : "WelcomeScreen";
-      const resetAction = StackActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: route })]
-      });
-      this.props.navigation.dispatch(resetAction);
+
+
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: route })]
+        });
+        this.props.navigation.dispatch(resetAction);
+
     });
   }
 
@@ -166,3 +178,12 @@ export default class SplashScreen extends Component<Props, State> {
     );
   }
 }
+
+function mapStateToProps(state: RootState) {
+  const { hasLocationStatus } = state;
+  console.log("action final state", state)
+  return {
+    hasLocationStatus
+  };
+}
+export default connect(mapStateToProps)(SplashScreen);

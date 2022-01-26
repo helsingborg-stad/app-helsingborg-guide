@@ -20,7 +20,7 @@ const QRButton = ({ onPress, selected }: Props) => {
       Icon={ShopIcon}
       selected={selected}
       onPress={() => {
-        NavigatorService.reset("ScanScreen"),
+        !selected && NavigatorService.navigate("ScanScreen");
           onPress();
       }}
     />

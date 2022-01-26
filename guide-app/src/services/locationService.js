@@ -35,6 +35,7 @@ const promptPermissions = () => {
 
 const requestPermissions = () =>
   request(LOCATION_PERMISSION, RATIONALE).then(response => {
+
     switch (response) {
       case RESULTS.GRANTED:
         return Promise.resolve(true);

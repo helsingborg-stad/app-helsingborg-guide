@@ -19,12 +19,15 @@ type State = {
 export default class ImageView extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
     const source = props?.source;
     const uri = source?.uri;
     const sessionId = source?.sessionId;
 
     let imageSource = placeholderImage;
+
+
+
+    console.log("imageview", uri, sessionId)
     if (uri) {
       if (sessionId) {
         loadFromCache(`${sessionId}`, uri)

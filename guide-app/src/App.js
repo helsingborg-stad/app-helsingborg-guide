@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import messaging from '@react-native-firebase/messaging';
 import { PersistGate } from "redux-persist/integration/react";
@@ -78,6 +78,9 @@ function alert() {
 const GuideApp = () => {
   const [netInfo, setNetInfo] = useState();
   const { subscribeToNotifications, onNotification } = useNotifications();
+  const state = useSelector(s => s);
+
+  console.log("location state", state);
 
   useEffect(() => {
     NetInfo.fetch().then((state) => {
