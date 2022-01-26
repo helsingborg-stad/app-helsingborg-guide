@@ -154,7 +154,6 @@ class HomeScreen extends React.PureComponent<Props> {
     const list = this.state.list;
     const loaded = this.state.loaded;
 
-    console.log("next the list in render")
 
     return (
       <>
@@ -169,13 +168,13 @@ class HomeScreen extends React.PureComponent<Props> {
           </View>
 
           {
-            !loaded ? (
-                <View style={styles.sectionNoContent}>
-                  <ActivityIndicator style={{flex: 1, width: '100%'}} />
-                </View>
-              ) :
+            // !loaded ? (
+            //     <View style={styles.sectionNoContent}>
+            //       <ActivityIndicator style={{flex: 1, width: '100%'}} />
+            //     </View>
+            //   ) :
 
-            !list || (list && list.length === 0) ? (
+            !items || (items && items.length === 0) ? (
             <View style={styles.sectionNoContent}>
               <Text style={styles.sectionNoContentText}>
                 {LangService.strings.CONTENT_MISSING}
@@ -188,7 +187,7 @@ class HomeScreen extends React.PureComponent<Props> {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
               >
-                {list.length && list.map((item, index) => (
+                {items.length && items.map((item, index) => (
                   <NavigationListItem
                     key={index}
                     index={index}
