@@ -34,6 +34,7 @@ class SearchObjectScreen extends Component<Props> {
         currentGuide: this.props.currentGuide,
         array: this.props.contentObjects,
         order: found?.order,
+        swipeable: true,
       });
     } else {
       const { keyPad } = this;

@@ -81,6 +81,11 @@ class HomeScreen extends React.PureComponent<Props> {
     }
   }
 
+
+  componentWillUnmount = () => {
+    this.props.selectCurrentTab(0);
+  }
+
   onPressItem = (item: NavigationItem, items, index): void => {
     switch (item?.type) {
       case "guide": {

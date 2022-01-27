@@ -137,7 +137,6 @@ const GuideApp = () => {
 
   return (
     <SafeAreaProvider>
-      <Provider store={store}>
         <PersistGate persistor={persistor}>
           <TrackingPermission />
           <Nav
@@ -146,7 +145,6 @@ const GuideApp = () => {
             onAppBecameInactive={() => store.dispatch(appBecameInactive())}
           />
         </PersistGate>
-      </Provider>
     </SafeAreaProvider>
   );
 };

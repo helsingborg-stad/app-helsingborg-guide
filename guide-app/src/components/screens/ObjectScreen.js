@@ -17,6 +17,7 @@ import { Colors, HeaderStyles } from "@assets/styles";
 import { trackEvent } from "@utils/MatomoUtils";
 
 
+
 type Props = {
   currentGuide: ?Guide,
   currentContentObject: ?ContentObject,
@@ -138,9 +139,11 @@ class ObjectScreen extends Component<Props> {
       navigation,
     } = this.props
 
-    const { selectObject, index, array, prevIndex, order } = this.props.navigation.state.params;
+    const { selectObject, index, array, prevIndex, order, swipeable } = this.props.navigation.state.params;
 
     console.log("prevIndex", prevIndex, "index", index)
+
+    console.log("objectparent props", swipeable)
     if (!currentContentObject) {
       return null;
     }
@@ -165,6 +168,7 @@ class ObjectScreen extends Component<Props> {
           order={order}
           selectObject={selectObject}
           navigation={navigation}
+          swipeable={swipeable}
           onSwiperIndexChanged={this.onSwiperIndexChanged}
           imageIndex={currentContentObjectImageIndex}
           audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}

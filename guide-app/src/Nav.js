@@ -56,7 +56,10 @@ const GuideNavigator = createStackNavigator(
         headerMode: "screen",
       },
     },
-    ObjectScreen: { screen: ObjectScreen },
+    ObjectScreen: { screen: ObjectScreen,
+      navigationOptions: {
+
+      } },
     QuizScreen: { screen: QuizScreen },
     QuizResultScreen: { screen: QuizResultScreen },
     GuideDetailsScreen: {

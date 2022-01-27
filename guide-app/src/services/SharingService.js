@@ -229,6 +229,9 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
               },
             },
           ],
+          url: outputImage,
+          title,
+
         };
 
         isCreatingImage = false;
