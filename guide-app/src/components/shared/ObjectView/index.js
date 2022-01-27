@@ -217,6 +217,7 @@ const ObjectView = (props) => {
     if (swiped) {
       if(swiped === "left") {
         if((order + 1) !== array.length) {
+          scrollable && scrollable(order + 1)
           selectObject && selectObject(array[order + 1]);
           navigation.navigate("ObjectScreen", {
             title: array[order + 1].title,
@@ -232,6 +233,7 @@ const ObjectView = (props) => {
       }
       if(swiped === "right") {
         if(order > 0) {
+          scrollable && scrollable(order + 1)
           selectObject && selectObject(array[order - 1]);
           navigation.navigate("ObjectScreen", {
             title: array[order - 1].title,
