@@ -6,7 +6,7 @@ import Colors from "@assets/styles/Colors";
 const styles = {
   opacity: 0.6
 };
-function HeaderBackButton({ navigation }: { navigation: Object }) {
+function HeaderBackButton({ navigation, onPress }: { navigation: Object, onPress: any }) {
   return (
     <Icon
       name={"chevron-left"}

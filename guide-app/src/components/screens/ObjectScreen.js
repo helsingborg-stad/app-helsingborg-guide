@@ -139,7 +139,7 @@ class ObjectScreen extends Component<Props> {
       navigation,
     } = this.props
 
-    const { selectObject, index, array, prevIndex, order, swipeable } = this.props.navigation.state.params;
+    const { selectObject, index, array, prevIndex, order, swipeable, scrollable} = this.props.navigation.state.params;
 
     console.log("prevIndex", prevIndex, "index", index)
 
@@ -169,6 +169,7 @@ class ObjectScreen extends Component<Props> {
           selectObject={selectObject}
           navigation={navigation}
           swipeable={swipeable}
+          scrollable={scrollable}
           onSwiperIndexChanged={this.onSwiperIndexChanged}
           imageIndex={currentContentObjectImageIndex}
           audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}

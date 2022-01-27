@@ -128,7 +128,7 @@ function displayButtonsBar(
 }
 
 const guideButtons = (props) => {
-  const { array, navigation, selectObject, order } = props;
+  const { array, navigation, selectObject, order, scrollable } = props;
   const [width, setWidth] = useState("");
 
   const onLayout = (event) => {
@@ -143,6 +143,7 @@ const guideButtons = (props) => {
         color={Colors.themeExtra1}
         style={{ opacity: order > 0 ? 1 : 0.4 }}
         onPress={order > 0 ? () => {
+          scrollable && scrollable(order - 1)
           selectObject && selectObject(array[order - 1]);
           navigation.navigate("ObjectScreen", {
             title: array[order - 1].title,
@@ -171,6 +172,7 @@ const guideButtons = (props) => {
         color={Colors.themeExtra1}
         style={{ opacity: (order + 1) !== array.length ? 1 : 0.5 }}
         onPress={(order + 1) !== array.length ? () => {
+          scrollable && scrollable(order + 1)
           selectObject && selectObject(array[order + 1]);
           navigation.navigate("ObjectScreen", {
             title: array[order + 1].title,
@@ -204,7 +206,7 @@ const onHorizontalSwipe = (evt, swiped, setSwiped) => {
  * Underlying sharingservice needs a reference to a Component instance
  */
 const ObjectView = (props) => {
-  const { guideId, swipeable, selectObject, navigation, array, order } = props;
+  const { guideId, swipeable, scrollable, selectObject, navigation, array, order } = props;
   const [swiped, setSwiped] = useState(false)
 
   useEffect(() => {
