@@ -27,7 +27,7 @@
     "ios:device": "react-native run-ios --device",
     "ios:release": "react-native run-ios --configuration Release",
     "ios:pod:install": "cd ios && pod install && cd ..",
-    "ios:clean": "cd ios && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install && cd .. &&",
+    "ios:clean": "cd ios && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install && cd .." ,
     "ios:clean:light": "cd ios && xcodebuild clean && cd .. && npx react-native run-ios",
     "yarn:clean": "rm -rf node_modules && yarn cache clean --force && yarn install"
   },
