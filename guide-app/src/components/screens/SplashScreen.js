@@ -78,7 +78,7 @@ type State = {
   barsVisible: any
 };
 
-class SplashScreen extends Component<Props, State> {
+export default class SplashScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -100,14 +100,8 @@ class SplashScreen extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-   if(nextProps.hasLocationStatus || this.props.hasLocationStatus) {
-     // this.skip(true)
-   }
-  }
-
   static navigationOptions = {
-    headerMode: 'none'
+    headerShown: false
   };
 
   timer;
@@ -124,24 +118,19 @@ class SplashScreen extends Component<Props, State> {
     this.setState({ barsVisible: !this.state.barsVisible });
   }
 
-
-
-  skip(hasLocation) {
-
+  skip() {
     AsyncStorage.getItem(IS_WELCOMED).then(value => {
       let welcomed = false;
       if (value) {
         welcomed = JSON.parse(value);
       }
+
       const route = welcomed ? "MainScreen" : "WelcomeScreen";
-
-
-        const resetAction = StackActions.reset({
-          index: 0,
-          actions: [NavigationActions.navigate({ routeName: route })]
-        });
-        this.props.navigation.dispatch(resetAction);
-
+      const resetAction = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: route })]
+      });
+      this.props.navigation.dispatch(resetAction);
     });
   }
 
@@ -179,11 +168,5 @@ class SplashScreen extends Component<Props, State> {
   }
 }
 
-function mapStateToProps(state: RootState) {
-  const { hasLocationStatus } = state;
-  console.log("action final state", state)
-  return {
-    hasLocationStatus
-  };
-}
-export default connect(mapStateToProps)(SplashScreen);
+
+

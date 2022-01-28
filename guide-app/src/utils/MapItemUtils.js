@@ -1,14 +1,14 @@
 // @flow
 
 function getIdFromMapItem(item: MapItem): string {
-  if (item.contentObject) {
-    return item.contentObject.id;
+  if (item?.contentObject) {
+    return item.contentObject?.id;
   }
-  if (item.guide) {
-    return `${item.guide.id}`;
+  if (item?.guide) {
+    return `${item.guide?.id}`;
   }
-  if (item.guideGroup) {
-    return `${item.guideGroup.id}`;
+  if (item?.guideGroup) {
+    return `${item.guideGroup?.id}`;
   }
 
   return "";
@@ -18,13 +18,13 @@ function getLocationFromItem(item: MapItem): ?Location {
   const { contentObject, guide, guideGroup } = item;
 
   if (guide) {
-    return guide.location;
+    return guide?.location;
   }
   if (guideGroup) {
-    return guideGroup.location;
+    return guideGroup?.location;
   }
   if (contentObject) {
-    return contentObject.location;
+    return contentObject?.location;
   }
 
   return null;
@@ -44,10 +44,10 @@ function getLocations(items: MapItem[]): Location[] {
 function getNumberOfGuides(item: MapItem): ?number {
   const { guide, guideGroup } = item;
   if (guide) {
-    return guide.contentObjects.length;
+    return guide?.contentObjects?.length;
   }
   if (guideGroup) {
-    return guideGroup.guidesCount;
+    return guideGroup?.guidesCount;
   }
 
   return 0;

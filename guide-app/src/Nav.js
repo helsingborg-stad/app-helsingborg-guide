@@ -172,11 +172,5 @@ class Nav extends Component<Props> {
   }
 }
 
-function mapStateToProps(state: RootState) {
-  const { geolocation } = state;
-  return {
-    geolocation
-  };
-}
 
-export default connect(mapStateToProps)(Nav);
+export default Nav;

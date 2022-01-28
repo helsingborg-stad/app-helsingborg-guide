@@ -5,10 +5,9 @@ import {
   TouchableOpacity,
   View,
   Image,
-  FlatList,
   StatusBar,
   Text,
-  ScrollView,
+  ScrollView
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
@@ -24,10 +23,10 @@ import {
 } from "@actions/uiStateActions";
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
-import { AnalyticsUtils } from "@utils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import mapIcon from "@assets/images/mapIcon.png";
 import { trackScreen } from "@utils/MatomoUtils";
+
 
 type Section = {
   title: string,
@@ -45,42 +44,23 @@ type Props = {
   sections: Section[],
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
-
   selectCurrentCategory(section: NavigationCategory): void,
   selectCurrentTab(tabIndex: number): void,
   dispatchShowBottomBar(visible: boolean): void,
 };
 
-class HomeScreen extends React.PureComponent<Props> {
-
+class HomeScreen extends Component<Props> {
   static navigationOptions = () => {
     const title = LangService.strings.APP_NAME;
     return {
-      ...HeaderStyles?.noElevation,
+      ...HeaderStyles.noElevation,
       title,
     };
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      list: [],
-      loaded: false,
-    };
-  }
-
   componentDidMount() {
     this.props.dispatchShowBottomBar(true);
   }
-
-  componentWillReceiveProps = (nextProps) => {
-    console.log("image", nextProps, "props", this.props)
-    if (nextProps?.items?.length && (nextProps?.items !== this.state.list) && this.props.navigation.isFocused() && (nextProps.hasLocationStatus || this.props.hasLocationStatus )) {
-      this.setState({list: nextProps.items, loaded: true})
-    }
-  }
-
 
   componentWillUnmount = () => {
     this.props.selectCurrentTab(0);
@@ -97,7 +77,6 @@ class HomeScreen extends React.PureComponent<Props> {
             const slug = guide?.slug;
             const title = guide?.name;
             trackScreen("view_guide", slug || title);
-            // AnalyticsUtils.logEvent("view_guide", { name: slug });
             this.props?.navigation.navigate("GuideDetailsScreen", {
               title: title,
               bottomBarOnUnmount: true,
@@ -108,7 +87,6 @@ class HomeScreen extends React.PureComponent<Props> {
             const slug = guide?.slug;
             const title = guide?.name;
             trackScreen("view_trail ", slug || title);
-            // AnalyticsUtils.logEvent("view_guide", { name: slug });
             this.props?.navigation.navigate("TrailScreen", {
               title: title,
               bottomBarOnUnmount: true,
@@ -126,9 +104,6 @@ class HomeScreen extends React.PureComponent<Props> {
           const title = item?.guideGroup?.name;
           const slug = item?.guideGroup?.slug;
           trackScreen("view_location", slug || title);
-          // AnalyticsUtils.logEvent("view_location", {
-          //   name: item?.guideGroup?.slug,
-          // });
           this.props.navigation.navigate("LocationScreen", {
             title,
             bottomBarOnUnmount: true,
@@ -156,9 +131,6 @@ class HomeScreen extends React.PureComponent<Props> {
     if (showLoadingSpinner) {
       return <ActivityIndicator style={styles.loadingSpinner} />;
     }
-    const list = this.state.list;
-    const loaded = this.state.loaded;
-
 
     return (
       <>
@@ -171,44 +143,36 @@ class HomeScreen extends React.PureComponent<Props> {
               labels={navigationCategoryLabels}
             />
           </View>
-
-          {
-            // !loaded ? (
-            //     <View style={styles.sectionNoContent}>
-            //       <ActivityIndicator style={{flex: 1, width: '100%'}} />
-            //     </View>
-            //   ) :
-
-            !items || (items && items.length === 0) ? (
-            <View style={styles.sectionNoContent}>
-              <Text style={styles.sectionNoContentText}>
-                {LangService.strings.CONTENT_MISSING}
-              </Text>
-            </View>
-          ) : (
-            <>
-              <ScrollView
-                key={currentHomeTab}
-                style={styles.container}
-                contentContainerStyle={styles.contentContainer}
-              >
-                {items.length && items.map((item, index) => (
-                  <NavigationListItem
-                    key={index}
-                    index={index}
-                    item={item}
-                    onPressItem={() => this.onPressItem(item, items, index)}
-                  />
-                ))}
-              </ScrollView>
-              <TouchableOpacity
-                style={styles.mapButton}
-                onPress={() => navigation.navigate("CategoryMapScreen")}
-              >
-                <Image style={styles.mapIcon} source={mapIcon} />
-              </TouchableOpacity>
-            </>
-          )}
+        {!items || (items && items.length === 0) ? (
+          <View style={styles.sectionNoContent}>
+            <Text style={styles.sectionNoContentText}>
+              {LangService.strings.CONTENT_MISSING}
+            </Text>
+          </View>
+        ) : (
+          <>
+            <ScrollView
+              key={currentHomeTab}
+              style={styles.container}
+              contentContainerStyle={styles.contentContainer}
+            >
+              {items.length && items.map((item, index) => (
+                <NavigationListItem
+                  key={index}
+                  index={index}
+                  item={item}
+                  onPressItem={() => this.onPressItem(item, items, index)}
+                />
+              ))}
+            </ScrollView>
+            <TouchableOpacity
+              style={styles.mapButton}
+              onPress={() => navigation.navigate("CategoryMapScreen")}
+            >
+              <Image style={styles.mapIcon} source={mapIcon} />
+            </TouchableOpacity>
+          </>
+        )}
         </SafeAreaView>
       </>
     );
@@ -220,7 +184,6 @@ function mapStateToProps(state: RootState) {
     navigation,
     guideGroups,
     uiState: { currentHomeTab },
-    hasLocationStatus,
   } = state;
   const { navigationCategories } = navigation;
   const { fetchingIds } = guideGroups;
@@ -245,7 +208,6 @@ function mapStateToProps(state: RootState) {
       ? categories[currentHomeTab]?.data
       : null;
 
-
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 
   return {
@@ -255,7 +217,6 @@ function mapStateToProps(state: RootState) {
     showLoadingSpinner: isFetching,
     navigationSections: navigationCategories,
     navigationCategoryLabels,
-    hasLocationStatus
   };
 }
 
