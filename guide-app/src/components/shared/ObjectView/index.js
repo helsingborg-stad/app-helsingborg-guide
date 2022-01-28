@@ -190,7 +190,6 @@ const guideButtons = (props) => {
 
 const onHorizontalSwipe = (evt, swiped, setSwiped) => {
   const { nativeEvent } = evt;
-  console.log("SWI")
     if (!swiped) {
       if (nativeEvent.velocityX > 0) {
         setSwiped('right');
@@ -233,7 +232,7 @@ const ObjectView = (props) => {
       }
       if(swiped === "right") {
         if(order > 0) {
-          scrollable && scrollable(order + 1)
+          scrollable && scrollable(order - 1)
           selectObject && selectObject(array[order - 1]);
           navigation.navigate("ObjectScreen", {
             title: array[order - 1].title,

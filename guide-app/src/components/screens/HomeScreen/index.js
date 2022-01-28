@@ -59,6 +59,7 @@ class HomeScreen extends Component<Props> {
   };
 
   componentDidMount() {
+
     this.props.dispatchShowBottomBar(true);
   }
 
@@ -100,7 +101,7 @@ class HomeScreen extends Component<Props> {
       }
       case "guidegroup":
         this?.props?.selectGuideGroup(item.id);
-        if (item.guideGroup) {
+        if (item?.guideGroup) {
           const title = item?.guideGroup?.name;
           const slug = item?.guideGroup?.slug;
           trackScreen("view_location", slug || title);
@@ -156,7 +157,7 @@ class HomeScreen extends Component<Props> {
               style={styles.container}
               contentContainerStyle={styles.contentContainer}
             >
-              {items.length && items.map((item, index) => (
+              {items?.length && items.map((item, index) => (
                 <NavigationListItem
                   key={index}
                   index={index}

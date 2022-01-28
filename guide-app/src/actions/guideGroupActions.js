@@ -32,12 +32,14 @@ export function fetchGuideGroupsFailure(error: Error, ids: number[]): Action {
 
 export function fetchGuideGroups(langCode: string, ids: number[]): ThunkAction {
   return function fetchGuideGroupsDispatch(dispatch: Dispatch) {
-    dispatch(fetchGuideGroupsRequest(ids));
-
+   dispatch(fetchGuideGroupsRequest(ids));
     return fetchUtils
       .getGuideGroups(langCode, ids)
-      .then(guideGroups => dispatch(fetchGuideGroupsSuccess(guideGroups, ids)))
+      .then((guideGroups) => {
+        dispatch(fetchGuideGroupsSuccess(guideGroups, ids))
+      })
       .catch(error => {
+        console.log("ids error", error)
         dispatch(fetchGuideGroupsFailure(error.message, ids));
       });
   };

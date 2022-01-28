@@ -6,7 +6,6 @@ const initialState: GuideGroupState = {
   fetchingIds: [],
 };
 
-
 export default function guideGroupReducer(
   state: GuideGroupState = initialState,
   action: Action

@@ -28,11 +28,9 @@ import {
 } from "@src/components/screens";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
 import ScanScreen from "@src/components/screens/ScanScreen";
-import SegmentControlPill from "@shared-components/SegmentControlPill";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
-import AnalyticsUtils from "@utils/AnalyticsUtils";
 import NavigatorService from "@services/navigationService";
 import { initializeTracker, trackScreen } from "@utils/MatomoUtils";
 
@@ -131,8 +129,7 @@ class Nav extends Component<Props> {
     const currentScreen = Nav.getCurrentRouteName(currentState);
     const prevScreen = Nav.getCurrentRouteName(prevState);
     if (prevScreen !== currentScreen) {
-      // trackScreen(("/" + currentScreen), currentScreen)
-      // AnalyticsUtils.setScreen(currentScreen);
+
     }
   }
 
