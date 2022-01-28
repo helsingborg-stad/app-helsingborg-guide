@@ -18,6 +18,7 @@
     "android:build:store:aab": "cd android && KEYSTORE_PROPERTIES=upload.properties && ./gradlew bundleStoreRelease && cd ..",
     "android:build:aab": "cd android && KEYSTORE_PROPERTIES=upload.properties && ./gradlew bundleRelease && cd ..",
     "android:build:apk": "cd android && ./gradlew assembleStoreRelease && cd ..",
+    "android:release": "react-native run-android --variant storeRelease",
     "ios:device:debug": "react-native run-ios --device --configuration Debug",
     "ios:device:release": "react-native run-ios --device --configuration Release",
     "ios:simulator:debug": "react-native run-ios --simulator=\"iPhone 11 Pro\" --configuration Debug",
