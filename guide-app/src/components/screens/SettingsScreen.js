@@ -171,7 +171,7 @@ class SettingsScreen extends Component<Props, State> {
   }
 
   setLanguageAndReload = code => {
-    trackEvent("change", "change_language", code, code);
+    trackEvent("change", "change_language", code);
     // AnalyticsUtils.logEvent("change_language", { language_code: code });
     this.setState({ selectedLanguageCode: code });
     LangService.setLanguage(code);

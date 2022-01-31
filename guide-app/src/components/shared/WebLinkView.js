@@ -25,7 +25,7 @@ export default function(props: Props) {
       title={props.url.replace(/^https?:\/\//, "")}
       onPress={() => {
         // openLink(props.url);
-        trackEvent("open", "open_url", props?.title, props?.title, props.url)
+        trackEvent("open", "open_url", props?.title)
         Linking.openURL(props.url);
       }}
     />

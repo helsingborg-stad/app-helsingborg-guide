@@ -7,6 +7,7 @@ import LangService from "@services/langService";
 import styles from "./styles";
 import MapIcon from "@assets/images/map_icon_black.png";
 import ClockIcon from "@assets/images/clock_icon_black.png";
+import { Colors } from "@assets/styles";
 
 
 const CalendarDetailsScreen = ({ navigation }) => {
@@ -74,12 +75,13 @@ const CalendarDetailsScreen = ({ navigation }) => {
     />;
   }
 
-  console.log("image???", event?.imageUrl?.uri);
 
   return (
     <View style={styles.viewContainer}>
-      <StatusBar barStyle="light-content" />
-
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={Colors.themeSecondary}
+      />
       <ScrollView style={styles.container}>
         <View
           style={styles.imageContainer}>

@@ -11,11 +11,10 @@ import fetchService from "@services/FetchService";
 import { initAudioFile, pauseAudio } from "@actions/audioActions";
 import {
   selectCurrentContentObjectImage,
-  selectCurrentImage
+  selectCurrentImage,
 } from "@actions/uiStateActions";
 import { Colors, HeaderStyles } from "@assets/styles";
 import { trackEvent } from "@utils/MatomoUtils";
-
 
 
 type Props = {
@@ -38,7 +37,7 @@ const defaultState: AudioState = {
   isPlaying: true,
   duration: 0,
   currentPosition: 0,
-  isMovingSlider: false
+  isMovingSlider: false,
 };
 
 function isMediaAvailable(media?: MediaContent): boolean {
@@ -60,7 +59,7 @@ class ObjectScreen extends Component<Props> {
       ...HeaderStyles.noElevation,
       title,
       headerLeft: () => <HeaderBackButton navigation={navigation} />,
-      headerRight: () => <View style={{width: 36}} />
+      headerRight: () => <View style={{ width: 36 }} />,
     };
   };
 
@@ -76,7 +75,7 @@ class ObjectScreen extends Component<Props> {
 
   onGoToLink = (url: string, title?: string) => {
     const { navigate } = this.props.navigation;
-    trackEvent("open", "open_url", title, title, url);
+    trackEvent("open", "open_url", title);
     // AnalyticsUtils.logEvent("open_url", { title });
     navigate("WebScreen", { url });
   };
@@ -95,7 +94,7 @@ class ObjectScreen extends Component<Props> {
 
     const { url, title } = video;
     if (title) {
-      trackEvent("play", "play_video", title, title, url);
+      trackEvent("play", "play_video", title);
       // AnalyticsUtils.logEvent("play_video", { title });
     }
 
@@ -124,7 +123,7 @@ class ObjectScreen extends Component<Props> {
     audioState.url = audio.url;
 
     if (audioState.title) {
-      trackEvent("play", "play_audio", audioState?.title, audioState?.title, audioState?.url);
+      // trackEvent("play", "play_audio", audioState?.title, audioState?.title, audioState?.url);
       // AnalyticsUtils.logEvent("play_audio", { name: audioState.title });
     }
 
@@ -132,19 +131,19 @@ class ObjectScreen extends Component<Props> {
   };
 
   render() {
-    console.log(this.loadAudioFile, "audio file")
+    console.log(this.loadAudioFile, "audio file");
     const {
       currentContentObject,
       currentContentObjectImageIndex,
       currentGuide,
       navigation,
-    } = this.props
+    } = this.props;
 
-    const { selectObject, index, array, prevIndex, order, swipeable, scrollable} = this.props.navigation.state.params;
+    const { selectObject, index, array, prevIndex, order, swipeable, scrollable } = this.props.navigation.state.params;
 
-    console.log("prevIndex", prevIndex, "index", index)
+    console.log("prevIndex", prevIndex, "index", index);
 
-    console.log("objectparent props", swipeable)
+    console.log("objectparent props", swipeable);
     if (!currentContentObject) {
       return null;
     }
@@ -189,13 +188,13 @@ function mapStateToProps(state: RootState) {
   const {
     currentGuide,
     currentContentObject,
-    currentContentObjectImageIndex
+    currentContentObjectImageIndex,
   } = state.uiState;
 
   return {
     currentGuide,
     currentContentObject,
-    currentContentObjectImageIndex
+    currentContentObjectImageIndex,
   };
 }
 
@@ -206,7 +205,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     dispatchInitAudioFile: (audio: AudioState) =>
       dispatch(initAudioFile(audio)),
     dispatchPauseAudio: () => dispatch(pauseAudio()),
-    selectCurrentImage: (url: ?string) => dispatch(selectCurrentImage(url))
+    selectCurrentImage: (url: ?string) => dispatch(selectCurrentImage(url)),
   };
 }
 
