@@ -1,7 +1,6 @@
 import React from "react";
 import { Linking, ScrollView, Text, View, Image, StatusBar } from "react-native";
 import SharingService from "@services/SharingService";
-import ImageSwiper from "@shared-components/ImageSwiper";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import LangService from "@services/langService";
 import styles from "./styles";

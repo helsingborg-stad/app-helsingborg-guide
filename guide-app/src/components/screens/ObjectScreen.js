@@ -64,6 +64,7 @@ class ObjectScreen extends Component<Props> {
   };
 
   onSwiperIndexChanged = (newIndex: number) => {
+    console.log("new index func", newIndex)
     this.props.selectCurrentContentObjectImage(newIndex);
   };
 

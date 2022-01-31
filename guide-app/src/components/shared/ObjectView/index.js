@@ -17,7 +17,6 @@ import Icon from "react-native-vector-icons/Entypo";
 import { PanGestureHandler, ScrollView } from "react-native-gesture-handler";
 
 
-
 type Props = {
   contentObject: ContentObject,
   guideId?: number,
@@ -143,7 +142,7 @@ const guideButtons = (props) => {
         color={Colors.themeExtra1}
         style={{ opacity: order > 0 ? 1 : 0.4 }}
         onPress={order > 0 ? () => {
-          scrollable && scrollable(order - 1)
+          scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
           navigation.navigate("ObjectScreen", {
             title: array[order - 1].title,
@@ -172,7 +171,7 @@ const guideButtons = (props) => {
         color={Colors.themeExtra1}
         style={{ opacity: (order + 1) !== array.length ? 1 : 0.5 }}
         onPress={(order + 1) !== array.length ? () => {
-          scrollable && scrollable(order + 1)
+          scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
           navigation.navigate("ObjectScreen", {
             title: array[order + 1].title,
@@ -190,36 +189,36 @@ const guideButtons = (props) => {
 
 const onHorizontalSwipe = (evt, swiped, setSwiped) => {
   const { nativeEvent } = evt;
-    if (!swiped) {
-      console.log("native", nativeEvent.velocityX)
-      if (nativeEvent.velocityX > 220) {
-        setSwiped('right');
-      }
-      if (nativeEvent.velocityX < -220) {
-        setSwiped('left');
-      }
-   }
+  if (!swiped) {
+    console.log("native", nativeEvent.velocityX);
+    if (nativeEvent.velocityX > 220) {
+      setSwiped("right");
+    }
+    if (nativeEvent.velocityX < -220) {
+      setSwiped("left");
+    }
+  }
 };
-
 
 
 /*
  * Underlying sharingservice needs a reference to a Component instance
  */
 const ObjectView = (props) => {
-  const { guideId, swipeable, scrollable, selectObject, navigation, array, order } = props;
-  const [swiped, setSwiped] = useState(false)
+  const { guideId, swipeable, scrollable, selectObject, navigation, array, order, onSwiperIndexChanged } = props;
+  const [swiped, setSwiped] = useState(false);
   const ref = React.createRef();
 
   useEffect(() => {
-    setTimeout(() => setSwiped(false), 180)
-  },[props])
+    setTimeout(() => setSwiped(false), 180);
+  }, [props]);
+
 
   useEffect(() => {
     if (swiped) {
-      if(swiped === "left") {
-        if((order + 1) !== array.length) {
-          scrollable && scrollable(order + 1)
+      if (swiped === "left") {
+        if ((order + 1) !== array.length) {
+          scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
           navigation.navigate("ObjectScreen", {
             title: array[order + 1].title,
@@ -228,14 +227,13 @@ const ObjectView = (props) => {
             array: array,
             swipeable: true,
           });
-        }
-        else {
-          setTimeout(() => setSwiped(false), 180)
+        } else {
+          setTimeout(() => setSwiped(false), 180);
         }
       }
-      if(swiped === "right") {
-        if(order > 0) {
-          scrollable && scrollable(order - 1)
+      if (swiped === "right") {
+        if (order > 0) {
+          scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
           navigation.navigate("ObjectScreen", {
             title: array[order - 1].title,
@@ -249,35 +247,35 @@ const ObjectView = (props) => {
         }
       }
     }
-  },[swiped])
+  }, [swiped]);
 
   return (
-    <PanGestureHandler
-      activeOffsetX={[-10, 10]}
-      onGestureEvent={(e) => swipeable ? onHorizontalSwipe(e, swiped, setSwiped) : null}>
-      <View style={styles.viewContainer}>
-        <SafeAreaView style={{ flex: 1 }}>
-          <ScrollView style={styles.container}>
-            <View
-              style={styles.imageContainer}>
-              <ImageSwiper
-                sessionId={guideId}
-                images={props.contentObject.images}
-                onSwiperIndexChanged={props.onSwiperIndexChanged}
-                onGoToImage={props.onGoToImage}
-              />
-              {props.contentObject.images[props.imageIndex] && (
-                <View style={styles.shareBtn}>
-                  <SharingService
-                    title={props.contentObject.title}
-                    image={props.contentObject.images[props.imageIndex]}
-                    sender={this}
-                    shareType="share_object"
-                  />
-                </View>
-              )}
-            </View>
+    <View style={styles.viewContainer}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView style={styles.container}>
+          <View
+            style={styles.imageContainer}>
+            <ImageSwiper
+              sessionId={guideId}
+              images={props.contentObject.images}
+              onSwiperIndexChanged={props.onSwiperIndexChanged}
+              onGoToImage={props.onGoToImage}
 
+            />
+            {props.contentObject.images[props.imageIndex] && (
+              <View style={styles.shareBtn}>
+                <SharingService
+                  title={props.contentObject.title}
+                  image={props.contentObject.images[props.imageIndex]}
+                  sender={this}
+                  shareType="share_object"
+                />
+              </View>
+            )}
+          </View>
+          <PanGestureHandler
+            activeOffsetX={[-10, 10]}
+            onGestureEvent={(e) => swipeable ? onHorizontalSwipe(e, swiped, setSwiped) : null}>
             <View style={styles.bodyContainer}>
               {displayTitle(
                 props.contentObject.title,
@@ -304,16 +302,16 @@ const ObjectView = (props) => {
                   : null}
               </View>
             </View>
-          </ScrollView>
-          <AudioPlayerView />
-        </SafeAreaView>
-        <SafeAreaView>
-          <View style={styles.navGuideContainer}>
-            {guideButtons(props)}
-          </View>
-        </SafeAreaView>
-      </View>
-    </PanGestureHandler>
+          </PanGestureHandler>
+        </ScrollView>
+        <AudioPlayerView />
+      </SafeAreaView>
+      <SafeAreaView>
+        <View style={styles.navGuideContainer}>
+          {guideButtons(props)}
+        </View>
+      </SafeAreaView>
+    </View>
     // <SwipeableObject {...newProps}>
     // </SwipeableObject>
   );
