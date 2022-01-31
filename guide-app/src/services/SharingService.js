@@ -187,7 +187,7 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
         if (OSVersion >= 10) {
           Alert.alert(
             "Additional access",
-            "Please allow full file access in app settings",
+            "Please allow full file access in app settings to share",
             [
               {
                 text: "Settings",
