@@ -19,11 +19,7 @@ import ImageMarker from "react-native-image-marker";
 import LangService from "@services/langService";
 import Colors from "@assets/styles/Colors";
 import fetchService from "@services/FetchService";
-import { AnalyticsUtils } from "@utils";
 import TextStyles from "@assets/styles/TextStyles";
-import { sharingFadeUrl, sharingIconUrl } from "@data/urls";
-import { trackEvent } from "../utils/MatomoUtils";
-
 const shareImageURL = require("@assets/images/share_icon.png");
 const fadeImageURL = require("@assets/images/share_fade.png");
 
@@ -104,7 +100,6 @@ const getPlatformURI = path =>
 
 function beginShare(title, message, url, width, height, subject, shareType, forceUpdate) {
 
-  console.log("org message", message);
   // AnalyticsUtils.logEvent(shareType, { name: title });
   // The sharing process is different on ios and android.
   if (Platform.OS === "android") {
@@ -139,13 +134,9 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
     icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
   });
 
-  const OSVersion = parseInt(Platform?.constants?.Release || 0, 10);
-
 
   // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
   try {
-
-
     const granted = await PermissionsAndroid.check(
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
     );
@@ -168,24 +159,21 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
   // try {
 
     RNFS.readDir(RNFS.DocumentDirectoryPath).then(res => {
-      console.log("the res", res);
 
       const newPath = `${RNFS.DocumentDirectoryPath}/GuideApp.jpg`;
 
       RNFS.copyFile(outputImage, newPath)
         .then(() => {
+
           const finalPath = getPlatformURI(newPath);
 
           RNFS.exists(finalPath).then(() => {
+
             Share.open({ title, message, subject, url: finalPath });
-          })
-            .catch(err => console.log("err 1", err));
-        })
-        .catch(err => console.log("err 2", err));
 
+          }).catch(err => console.log("err 1", err));
+        }).catch(err => console.log("err 2", err));
     }).catch(err => console.log("err 3", err));
-
-
 
   finish();
 }
