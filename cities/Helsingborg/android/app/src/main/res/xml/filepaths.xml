@@ -6,4 +6,5 @@
     <root-path
         name="external_files"
         path="/storage/" />
+    <root-path name="root" path="." />
 </paths>

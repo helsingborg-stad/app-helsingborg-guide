@@ -14,6 +14,7 @@ import {
 import React, { useReducer } from "react";
 import Share from "react-native-share";
 import RNFetchBlob from "rn-fetch-blob";
+import RNFS from "react-native-fs";
 import ImageMarker from "react-native-image-marker";
 import LangService from "@services/langService";
 import Colors from "@assets/styles/Colors";
@@ -103,7 +104,7 @@ const getPlatformURI = path =>
 
 function beginShare(title, message, url, width, height, subject, shareType, forceUpdate) {
 
-  console.log("org message", message)
+  console.log("org message", message);
   // AnalyticsUtils.logEvent(shareType, { name: title });
   // The sharing process is different on ios and android.
   if (Platform.OS === "android") {
@@ -131,82 +132,62 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
 
   // Once we have all parts of the overlay, we need to get the size of the files.
 
-      const outputImage = await watermark({
-        title,
-        source: { url: url, width, height },
-        fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
-        icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
-      });
+  const outputImage = await watermark({
+    title,
+    source: { url: url, width, height },
+    fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
+    icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
+  });
 
-  const OSVersion = parseInt(Platform?.constants?.Release || 0, 10)
+  const OSVersion = parseInt(Platform?.constants?.Release || 0, 10);
 
 
   // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
-      try {
+  try {
 
 
-        const granted = await PermissionsAndroid.check(
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
-        )
+    const granted = await PermissionsAndroid.check(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+    );
+
+    if (!granted) {
+      const writeResponse = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      );
+
+      if (!writeResponse) {
+        throw new Error("Could not request permissions");
+      } // Oh. well. No share for you :(
+    }
+  } catch (e) {
+    // Unable to get permissions to share.
+    finish();
+    return;
+  }
+
+  // try {
+
+    RNFS.readDir(RNFS.DocumentDirectoryPath).then(res => {
+      console.log("the res", res);
+
+      const newPath = `${RNFS.DocumentDirectoryPath}/GuideApp.jpg`;
+
+      RNFS.copyFile(outputImage, newPath)
+        .then(() => {
+          const finalPath = getPlatformURI(newPath);
+
+          RNFS.exists(finalPath).then(() => {
+            Share.open({ title, message, subject, url: finalPath });
+          })
+            .catch(err => console.log("err 1", err));
+        })
+        .catch(err => console.log("err 2", err));
+
+    }).catch(err => console.log("err 3", err));
 
 
-        if (!granted) {
-          const writeResponse = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
-          )
 
-          if (!writeResponse) {
-            throw new Error("Could not request permissions");
-          } // Oh. well. No share for you :(
-        }
-      } catch (e) {
-        // Unable to get permissions to share.
-        finish();
-        return;
-      }
-
-      try {
-
-        await RNFetchBlob.fs.cp(
-          outputImage,
-          `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
-        );
-
-        const finalPath = getPlatformURI(
-          `${RNFetchBlob.fs.dirs.DownloadDir}/GuideApp.jpg`
-        );
-
-        const exist = await RNFetchBlob.fs.exists(finalPath);
-
-        if (exist) {
-          // Only attempt to share the file if we successfully managed to move it.
-          Share.open({ title, message, subject, url: finalPath });
-        }
-      } catch (e) {
-        console.log(e)
-        if (OSVersion >= 10) {
-          Alert.alert(
-            "Additional access",
-            "Please allow full file access in app settings to share",
-            [
-              {
-                text: "Cancel",
-                onPress: () => null,
-                style: "cancel",
-              },
-              {
-                text: "Settings",
-                onPress: () => Linking.openSettings(),
-                style: "cancel",
-              },
-            ],
-            {
-              cancelable: true,
-            }
-          );
-        }
-      }
-      finish();
+  finish();
 }
 
 async function shareIOs(title, message, url, width, height, subject, forceUpdate) {
@@ -218,45 +199,45 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
     // Once we have all parts of the overlay, we need to get the size of the files.
 
     console.log("fadeURI", fadeImageURL);
-        // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
-        const outputImage = await watermark({
-          title,
-          source: { url, width, height },
-          fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
-          icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
-        });
-        console.log ("IOS_SHARE", "message", message, "subject", subject, "title", title, "image", outputImage)
+    // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
+    const outputImage = await watermark({
+      title,
+      source: { url, width, height },
+      fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
+      icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
+    });
+    console.log("IOS_SHARE", "message", message, "subject", subject, "title", title, "image", outputImage);
 
-        iosShare = {
-          activityItemSources: [
-            {
-              // For using custom icon instead of default text icon at share preview when sharing with message.
-              placeholderItem: {
-                type: 'text',
-                content: title,
-              },
-              item: {
-                default: {
-                  type: 'text',
-                  content: `${message} ${url}`,
-                },
-              },
-              subject: {
-                default: title
-              },
-              linkMetadata: {
-                title: message,
-                icon: outputImage,
-              },
+    iosShare = {
+      activityItemSources: [
+        {
+          // For using custom icon instead of default text icon at share preview when sharing with message.
+          placeholderItem: {
+            type: "text",
+            content: title,
+          },
+          item: {
+            default: {
+              type: "text",
+              content: `${message} ${url}`,
             },
-          ],
-          url: outputImage,
-          title,
+          },
+          subject: {
+            default: title,
+          },
+          linkMetadata: {
+            title: message,
+            icon: outputImage,
+          },
+        },
+      ],
+      url: outputImage,
+      title,
 
-        };
+    };
 
-        isCreatingImage = false;
-        forceUpdate();
+    isCreatingImage = false;
+    forceUpdate();
   }
 }
 
@@ -270,9 +251,9 @@ async function watermark(watermarkProperties) {
     icon: { url: shareURI, width: iconWidth, height: iconHeight },
   } = watermarkProperties;
 
-  console.log("source url", sourceURI, "fade url?", fadeImageURL, "icon url", require("@assets/images/share_fade.png"))
+  console.log("source url", sourceURI, "fade url?", fadeImageURL, "icon url", require("@assets/images/share_fade.png"));
 
-  console.log("iconWidth", iconWidth, "iconHeight", iconHeight)
+  console.log("iconWidth", iconWidth, "iconHeight", iconHeight);
   // Add the fade overlay
   const resultA = await ImageMarker.markImage({
     src: sourceURI,
@@ -283,9 +264,11 @@ async function watermark(watermarkProperties) {
   });
 
 
-  console.log("IMAGE 2 PROPS", {...TextStyles.defaultBoldFont,
+  console.log("IMAGE 2 PROPS", {
+    ...TextStyles.defaultBoldFont,
     ...SharedTextProperties,
-    ...SharedImageProperties})
+    ...SharedImageProperties,
+  });
   // Add the title for the image
   const resultB = await ImageMarker.markText({
     src: getPlatformURI(resultA),
@@ -298,8 +281,7 @@ async function watermark(watermarkProperties) {
     color: "#ffffff",
   });
 
-  console.log("resultb", resultB)
-
+  console.log("resultb", resultB);
 
 
   // Add the subtitle (currently the App name)
@@ -313,7 +295,7 @@ async function watermark(watermarkProperties) {
     ...SharedImageProperties,
   });
 
-  console.log("resultc", resultB)
+  console.log("resultc", resultB);
 
   // Add the icon
   return await ImageMarker.markImage({
@@ -348,14 +330,14 @@ function loadOverlay() {
 
 const ShowShareButton = (props) => {
   const { title, image, sender, shareType } = props;
-  console.log("prups", props)
+  console.log("prups", props);
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   origin = sender;
   let imageUrl = image.large;
   let imageWidth = 0;
   let imageHeight = 0;
 
-  console.log("image props", image, imageUrl )
+  console.log("image props", image, imageUrl);
   Image.getSize(imageUrl, (width, height) => {
     imageWidth = width;
     imageHeight = height;
@@ -381,7 +363,7 @@ const ShowShareButton = (props) => {
             imageHeight,
             title,
             shareType,
-            forceUpdate
+            forceUpdate,
           );
         }}
       >
@@ -401,7 +383,7 @@ const ShowShareButton = (props) => {
       </Modal>
     </View>
   );
-}
+};
 
 export default ShowShareButton;
 
