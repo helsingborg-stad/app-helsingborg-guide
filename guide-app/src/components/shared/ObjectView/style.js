@@ -8,13 +8,14 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "stretch",
     backgroundColor: Colors.white,
+    overflow: 'visible',
   },
 
   container: {
     // flex: 1,
     ...StyleSheet.absoluteFillObject,
     flexDirection: 'column',
-    overflow: 'hidden',
+    flex: 1,
 
   },
   imageContainer: {
@@ -30,6 +31,7 @@ export default StyleSheet.create({
   },
   scrollView: {
     paddingBottom: 70,
+    flex: 1,
   },
   titleContainer: {
     flex: 2,

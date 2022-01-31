@@ -14,7 +14,7 @@
     "android:store:debug": "react-native run-android --variant storeDebug",
     "android:store:release": "react-native run-android --variant storeRelease",
     "android:shake": "adb shell input keyevent 82",
-    "android:clean": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && cd .. && npx react-native run-android",
+    "android:clean": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && cd .. ",
     "android:build:store:aab": "cd android && KEYSTORE_PROPERTIES=upload.properties && ./gradlew bundleStoreRelease && cd ..",
     "android:build:aab": "cd android && KEYSTORE_PROPERTIES=upload.properties && ./gradlew bundleRelease && cd ..",
     "android:build:apk": "cd android && ./gradlew assembleStoreRelease && cd ..",
@@ -29,7 +29,7 @@
     "ios:release": "react-native run-ios --configuration Release",
     "ios:pod:install": "cd ios && pod install && cd ..",
     "ios:clean": "cd ios && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install && cd ..",
-    "ios:clean:light": "cd ios && xcodebuild clean && cd .. && npx react-native run-ios",
+    "ios:clean:light": "cd ios && xcodebuild clean && cd ..",
     "yarn:clean": "rm -rf node_modules && yarn cache clean --force && yarn install"
   },
   "dependencies": {
@@ -71,6 +71,7 @@
     "react-native-matomo": "oskarhertzman/react-native-matomo",
     "react-native-permissions": "^3.2.0",
     "react-native-photo-view": "https://github.com/alwx/react-native-photo-view.git",
+    "react-native-restart": "^0.0.23",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-safe-area-view": "2.0.0",
     "react-native-screens": "^3.10.1",

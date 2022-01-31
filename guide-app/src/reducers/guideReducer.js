@@ -24,7 +24,9 @@ export default function guideReducer(
           items.push(g);
         }
       });
-      return { ...state, items, isFetching: false };
+      console.log("LOCAITON", items)
+
+      return { ...state, items, isFetching: false, hasItems: items.length };
     }
     case "FETCH_GUIDES_FAILURE":
       return { ...state, isFetching: false };

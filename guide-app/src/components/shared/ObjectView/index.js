@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, useEffect, useRef, useState } from "react";
-import { SafeAreaView, View, Text, ScrollView, Linking, Animated } from "react-native";
+import { SafeAreaView, View, Text, Linking, Animated } from "react-native";
 
 import styles from "./style";
 import { Colors } from "@assets/styles";
@@ -14,7 +14,7 @@ import LangService from "@services/langService";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
 import Icon from "react-native-vector-icons/Entypo";
-import { PanGestureHandler } from "react-native-gesture-handler";
+import { PanGestureHandler, ScrollView } from "react-native-gesture-handler";
 
 
 
@@ -191,12 +191,14 @@ const guideButtons = (props) => {
 const onHorizontalSwipe = (evt, swiped, setSwiped) => {
   const { nativeEvent } = evt;
     if (!swiped) {
-      if (nativeEvent.velocityX > 0) {
+      console.log("native", nativeEvent.velocityX)
+      if (nativeEvent.velocityX > 220) {
         setSwiped('right');
-      } else {
+      }
+      if (nativeEvent.velocityX < -220) {
         setSwiped('left');
       }
-    }
+   }
 };
 
 
@@ -207,6 +209,7 @@ const onHorizontalSwipe = (evt, swiped, setSwiped) => {
 const ObjectView = (props) => {
   const { guideId, swipeable, scrollable, selectObject, navigation, array, order } = props;
   const [swiped, setSwiped] = useState(false)
+  const ref = React.createRef();
 
   useEffect(() => {
     setTimeout(() => setSwiped(false), 180)
@@ -250,6 +253,7 @@ const ObjectView = (props) => {
 
   return (
     <PanGestureHandler
+      activeOffsetX={[-10, 10]}
       onGestureEvent={(e) => swipeable ? onHorizontalSwipe(e, swiped, setSwiped) : null}>
       <View style={styles.viewContainer}>
         <SafeAreaView style={{ flex: 1 }}>
@@ -275,6 +279,8 @@ const ObjectView = (props) => {
             </View>
 
             <View style={styles.bodyContainer}>
+              {                console.log("props", props.contentObject.title)
+              }
               {displayTitle(
                 props.contentObject.title,
                 props.contentObject.searchableId,
