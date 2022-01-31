@@ -190,12 +190,12 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
             "Please allow full file access in app settings to share",
             [
               {
-                text: "Settings",
-                onPress: () => Linking.openSettings(),
+                text: "Cancel",
+                onPress: () => null,
                 style: "cancel",
               },
               {
-                text: "Cancel",
+                text: "Settings",
                 onPress: () => Linking.openSettings(),
                 style: "cancel",
               },

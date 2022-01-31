@@ -279,8 +279,6 @@ const ObjectView = (props) => {
             </View>
 
             <View style={styles.bodyContainer}>
-              {                console.log("props", props.contentObject.title)
-              }
               {displayTitle(
                 props.contentObject.title,
                 props.contentObject.searchableId,

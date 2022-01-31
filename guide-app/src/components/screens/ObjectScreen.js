@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, View } from "react-native";
 import { connect } from "react-redux";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import ObjectView from "@shared-components/ObjectView";
@@ -59,7 +59,8 @@ class ObjectScreen extends Component<Props> {
     return {
       ...HeaderStyles.noElevation,
       title,
-      headerLeft: () => <HeaderBackButton navigation={navigation} />
+      headerLeft: () => <HeaderBackButton navigation={navigation} />,
+      headerRight: () => <View style={{width: 36}} />
     };
   };
 

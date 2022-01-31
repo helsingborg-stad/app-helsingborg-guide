@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.themeSecondary,
     borderBottomWidth: 0,
     elevation: 0
+  },
+  middle: {
+    alignItems: "center",
+    textAlign: "center",
+    alignSelf: "center",
   }
 });
 
