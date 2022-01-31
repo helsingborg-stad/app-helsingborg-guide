@@ -32,7 +32,8 @@ const RELEASED_AUDIO_OBJ = {
 const config = () => {
   if (Platform.OS === "android") {
     MediaPlayer = NativeModules.MediaAndroid;
-    EventEmitter = DeviceEventEmitter;
+    EventEmitter = new NativeEventEmitter(MediaPlayer);
+    // EventEmitter = DeviceEventEmitter;
   } else if (Platform.OS === "ios") {
     MediaPlayer = NativeModules.AudioManager;
     EventEmitter = new NativeEventEmitter(MediaPlayer);

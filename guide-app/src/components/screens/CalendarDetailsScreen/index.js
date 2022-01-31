@@ -1,19 +1,17 @@
-import React from 'react';
+import React from "react";
 import { Linking, ScrollView, Text, View, Image, StatusBar } from "react-native";
 import SharingService from "@services/SharingService";
 import ImageSwiper from "@shared-components/ImageSwiper";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import LangService from "@services/langService";
 import styles from "./styles";
-import MapIcon from "@assets/images/map_icon_black.png"
-import ClockIcon from "@assets/images/clock_icon_black.png"
-
+import MapIcon from "@assets/images/map_icon_black.png";
+import ClockIcon from "@assets/images/clock_icon_black.png";
 
 
 const CalendarDetailsScreen = ({ navigation }) => {
 
   const { event } = navigation.state.params;
-
 
 
   function displayLocation(location: string, dateString: string, hoursString: string) {
@@ -22,7 +20,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
         <View style={styles.locationContainer}>
           <Image source={MapIcon} style={styles.locationIcon} />
           <View style={styles.locationTextContainer}>
-          <Text style={[styles.locationText, styles.locationTextTop]}>{LangService.strings.LOCATION}</Text>
+            <Text style={[styles.locationText, styles.locationTextTop]}>{LangService.strings.LOCATION}</Text>
             <Text style={[styles.locationText, styles.locationTextBottom]}>{dateString + ", " + hoursString}</Text>
           </View>
         </View>
@@ -37,15 +35,14 @@ const CalendarDetailsScreen = ({ navigation }) => {
     );
     return loc;
   }
+
   function displayTitle(
     name: string,
     location: string,
     date: string,
     dateString: string,
     hoursString: string,
-  )
-
-  {
+  ) {
 
     return (
       <View style={styles.title}>
@@ -70,14 +67,14 @@ const CalendarDetailsScreen = ({ navigation }) => {
     name: any,
   ) {
     return <LinkTouchable
-        title={name}
-        onPress={() => {
-          Linking.openURL(link);
-        }}
-      />
+      title={name}
+      onPress={() => {
+        Linking.openURL(link);
+      }}
+    />;
   }
 
-  console.log("image???", event?.imageUrl?.uri)
+  console.log("image???", event?.imageUrl?.uri);
 
   return (
     <View style={styles.viewContainer}>
@@ -86,14 +83,14 @@ const CalendarDetailsScreen = ({ navigation }) => {
       <ScrollView style={styles.container}>
         <View
           style={styles.imageContainer}>
-         <Image source={event?.imageUrl} style={styles.eventImage} />
+          <Image source={event?.imageUrl} style={styles.eventImage} />
           {event?.imageUrl && (
             <View style={styles.shareBtn}>
               <SharingService
                 title={event.name}
-                image={{large: event.imageUrl.uri}}
+                image={{ large: event.imageUrl.uri }}
                 sender={this}
-                senderType ="share_object" />
+                senderType="share_object" />
             </View>
           )}
         </View>
@@ -104,7 +101,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
             event?.title,
             event?.date,
             event?.dateString,
-            event?.hoursString
+            event?.hoursString,
           )}
           <View style={styles.articleContainer}>
             {event?.description
@@ -113,7 +110,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
             {event?.eventUrl
               ? displayLink(
                 event?.eventUrl,
-                event?.name
+                event?.name,
               )
               : null}
             <View style={styles.navGuideContainer}>
@@ -123,13 +120,13 @@ const CalendarDetailsScreen = ({ navigation }) => {
         </View>
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
-CalendarDetailsScreen['navigationOptions'] = screenProps => (
-  console.log("event??", screenProps),
+CalendarDetailsScreen["navigationOptions"] = screenProps => (
   {
-  title: screenProps?.navigation?.state?.params?.event?.name || "Event",
-})
+    title: screenProps?.navigation?.state?.params?.event?.name || "Event",
+    headerRight: () => <View style={{ width: 36 }} />,
+  });
 
 export default CalendarDetailsScreen;
