@@ -12,7 +12,6 @@ const useLocalStorage = () => {
   }
 
   const setLocalStorage = (key, data) => {
-    console.log("type???", typeof data)
       let storedData = typeof data === 'string' ? data : JSON.stringify(data)
       AsyncStorage.setItem(key, storedData).catch(err => {
        console.log("ASYNC_STORAGE_SET_ERROR", err)

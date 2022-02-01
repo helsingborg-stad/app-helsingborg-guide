@@ -87,7 +87,7 @@ const GuideApp = () => {
         this.noNetworkTimer = null;
       }
       if (state.isConnected) {
-        console("lang connected")
+
         LangService.loadStoredLanguage()
           .then(() => {
             store.dispatch(setLanguage(LangService.code));

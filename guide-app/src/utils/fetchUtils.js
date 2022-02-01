@@ -30,7 +30,6 @@ async function fetchJSON(
   if (!response.ok) {
     throw new Error(`Failed to fetch ${relativeUrl}`);
   }
-
   return response.json();
 }
 

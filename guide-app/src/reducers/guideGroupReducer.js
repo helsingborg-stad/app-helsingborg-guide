@@ -18,7 +18,7 @@ export default function guideGroupReducer(
         fetchingIds: [...state.fetchingIds, ...action.ids],
       };
     case "FETCH_GUIDEGROUPS_SUCCESS": {
-      const items = [...state.items];
+      const items = action.guideGroups;
       action.guideGroups.forEach(g => {
         const index = items.findIndex(item => item.id === g.id);
         if (index >= 0) {
