@@ -1,29 +1,20 @@
 import React, { Component } from "react";
 import {
   StyleSheet,
-  Text,
-  TouchableOpacity,
-  Image,
-  View,
-  Linking,
-  TouchableWithoutFeedback,
 } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
 import { Colors, TextStyles } from "@assets/styles";
-import { StyleSheetUtils, AnalyticsUtils } from "@utils";
-import { setLanguage } from "@actions/navigationActions";
+import { StyleSheetUtils } from "@utils";
 import {
-  setDeveloperMode,
   showBottomBar,
   selectCurrentBottomBarTab,
 } from "@actions/uiStateActions";
 import { trackEvent } from "@utils/MatomoUtils";
 
 const defaultMargin = 20;
-const LOGO = require("@assets/images/logo.png");
 
 const styles = StyleSheet.create({
   container: {
@@ -78,16 +69,6 @@ const textStyles = StyleSheet.create({
     },
   ]),
 });
-
-function loadContents(langCode) {
-  NetInfo.isConnected.fetch().then(isConnected => {
-    if (isConnected) {
-      LangService.storeLangCode(langCode);
-      LangService.getLanguages();
-    }
-  });
-}
-
 type Props = {
   developerMode: any,
 };
@@ -106,18 +87,6 @@ class ScanScreen extends Component<Props, State> {
       headerLeft: () => null,
     };
   };
-
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    const { languages } = prevState;
-
-    if (!languages || Object.keys(languages).length === 0) {
-      return {
-        selectedLanguageCode: LangService.code,
-        languages: LangService.languageObj,
-      };
-    }
-    return null;
-  }
 
   static propTypes = {
     navigation: PropTypes.object,

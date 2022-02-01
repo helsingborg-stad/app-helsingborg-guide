@@ -21,14 +21,14 @@ const CalendarDetailsScreen = ({ navigation }) => {
           <Image source={MapIcon} style={styles.locationIcon} />
           <View style={styles.locationTextContainer}>
             <Text style={[styles.locationText, styles.locationTextTop]}>{LangService.strings.LOCATION}</Text>
-            <Text style={[styles.locationText, styles.locationTextBottom]}>{dateString + ", " + hoursString}</Text>
+            <Text style={[styles.locationText, styles.locationTextBottom]}>{location}</Text>
           </View>
         </View>
         <View style={styles.timeContainer}>
           <Image source={ClockIcon} style={styles.timeIcon} />
           <View style={styles.timeTextContainer}>
             <Text style={[styles.timeText, styles.timeTextTop]}>{LangService.strings.DATE}</Text>
-            <Text style={[styles.timeText, styles.timeTextBottom]}>{location}</Text>
+            <Text style={[styles.timeText, styles.timeTextBottom]}>{dateString + ", " + hoursString}</Text>
           </View>
         </View>
       </View>
