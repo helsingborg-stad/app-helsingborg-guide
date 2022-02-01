@@ -177,15 +177,15 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - OpenSSL-Universal (1.1.180)
-  - Permission-AppTrackingTransparency (3.2.0):
+  - Permission-AppTrackingTransparency (2.2.2):
     - RNPermissions
-  - Permission-BluetoothPeripheral (3.2.0):
+  - Permission-BluetoothPeripheral (2.2.2):
     - RNPermissions
-  - Permission-Camera (3.2.0):
+  - Permission-Camera (2.2.2):
     - RNPermissions
-  - Permission-LocationWhenInUse (3.2.0):
+  - Permission-LocationWhenInUse (2.2.2):
     - RNPermissions
-  - Permission-Notifications (3.2.0):
+  - Permission-Notifications (2.2.2):
     - RNPermissions
   - PromisesObjC (2.0.0)
   - RCT-Folly (2021.06.28.00-v2):
@@ -556,11 +556,11 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.99.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.99.0)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - Permission-AppTrackingTransparency (from `../../../node_modules/react-native/../react-native-permissions/ios/AppTrackingTransparency`)
-  - Permission-BluetoothPeripheral (from `../../../node_modules/react-native/../react-native-permissions/ios/BluetoothPeripheral`)
-  - Permission-Camera (from `../../../node_modules/react-native/../react-native-permissions/ios/Camera`)
-  - Permission-LocationWhenInUse (from `../../../node_modules/react-native/../react-native-permissions/ios/LocationWhenInUse`)
-  - Permission-Notifications (from `../../../node_modules/react-native/../react-native-permissions/ios/Notifications`)
+  - Permission-AppTrackingTransparency (from `../../../node_modules/react-native/../react-native-permissions/ios/AppTrackingTransparency.podspec`)
+  - Permission-BluetoothPeripheral (from `../../../node_modules/react-native/../react-native-permissions/ios/BluetoothPeripheral.podspec`)
+  - Permission-Camera (from `../../../node_modules/react-native/../react-native-permissions/ios/Camera.podspec`)
+  - Permission-LocationWhenInUse (from `../../../node_modules/react-native/../react-native-permissions/ios/LocationWhenInUse.podspec`)
+  - Permission-Notifications (from `../../../node_modules/react-native/../react-native-permissions/ios/Notifications.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../../../node_modules/react-native/Libraries/TypeSafety`)
@@ -612,7 +612,7 @@ DEPENDENCIES:
   - RNImageMarker (from `../../../node_modules/react-native-image-marker`)
   - RNInAppBrowser (from `../../../node_modules/react-native-inappbrowser-reborn`)
   - "RNNotifee (from `../../../node_modules/@notifee/react-native`)"
-  - RNPermissions (from `../../../node_modules/react-native-permissions`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
@@ -662,15 +662,15 @@ EXTERNAL SOURCES:
   glog:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/glog.podspec"
   Permission-AppTrackingTransparency:
-    :path: "../../../node_modules/react-native/../react-native-permissions/ios/AppTrackingTransparency"
+    :path: "../../../node_modules/react-native/../react-native-permissions/ios/AppTrackingTransparency.podspec"
   Permission-BluetoothPeripheral:
-    :path: "../../../node_modules/react-native/../react-native-permissions/ios/BluetoothPeripheral"
+    :path: "../../../node_modules/react-native/../react-native-permissions/ios/BluetoothPeripheral.podspec"
   Permission-Camera:
-    :path: "../../../node_modules/react-native/../react-native-permissions/ios/Camera"
+    :path: "../../../node_modules/react-native/../react-native-permissions/ios/Camera.podspec"
   Permission-LocationWhenInUse:
-    :path: "../../../node_modules/react-native/../react-native-permissions/ios/LocationWhenInUse"
+    :path: "../../../node_modules/react-native/../react-native-permissions/ios/LocationWhenInUse.podspec"
   Permission-Notifications:
-    :path: "../../../node_modules/react-native/../react-native-permissions/ios/Notifications"
+    :path: "../../../node_modules/react-native/../react-native-permissions/ios/Notifications.podspec"
   RCT-Folly:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -770,7 +770,7 @@ EXTERNAL SOURCES:
   RNNotifee:
     :path: "../../../node_modules/@notifee/react-native"
   RNPermissions:
-    :path: "../../../node_modules/react-native-permissions"
+    :path: "../node_modules/react-native-permissions"
   RNScreens:
     :path: "../../../node_modules/react-native-screens"
   RNShare:
@@ -811,11 +811,11 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
-  Permission-AppTrackingTransparency: 95c9308dd40819fa9f6830751d0ef3ea11498723
-  Permission-BluetoothPeripheral: dd2663f81d622c9d153a2aacd7e3de0d59f7b4b6
-  Permission-Camera: 53efcbb755b0e8bdf253dbb27cc7559ccfce8480
-  Permission-LocationWhenInUse: 13de9a01e006cb53a6ac3c9f8d1ab6cc98318d9c
-  Permission-Notifications: bb420c3d28328df24de1b476b41ed8249ccf2537
+  Permission-AppTrackingTransparency: 178b09f5043bc9bdb880d2c6fedfd24888178b19
+  Permission-BluetoothPeripheral: 73e80c434beef6570ba7c322a6882a8d46c2c4d3
+  Permission-Camera: 5d2aaf95592660b6dcb5e8d1d90ed5d0156cad02
+  Permission-LocationWhenInUse: 871e81c06c1fc578353fce962d5d8e6efa697f1a
+  Permission-Notifications: 9c6b5cc4f0e6599e9fc3395b77cebddc48f1be41
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
   RCTRequired: 4bf86c70714490bca4bf2696148638284622644b
@@ -873,6 +873,6 @@ SPEC CHECKSUMS:
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 72be84ed833b5323c04a38736798cb1d4cbefc9c
+PODFILE CHECKSUM: 9fe51d1140f41da0081f7d71ffb44dbafe79f216
 
 COCOAPODS: 1.11.2
