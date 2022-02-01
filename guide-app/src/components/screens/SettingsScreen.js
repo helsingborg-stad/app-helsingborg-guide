@@ -21,6 +21,7 @@ import {
   selectCurrentBottomBarTab,
 } from "@actions/uiStateActions";
 import { trackEvent } from "@utils/MatomoUtils";
+import CalendarDetailsScreen from "./CalendarDetailsScreen";
 
 const defaultMargin = 20;
 const LOGO = require("@assets/images/logo.png");
@@ -110,15 +111,6 @@ const textStyles = StyleSheet.create({
   ]),
 });
 
-function loadContents(langCode) {
-  NetInfo.isConnected.fetch().then(isConnected => {
-    if (isConnected) {
-      LangService.storeLangCode(langCode);
-      LangService.getLanguages();
-    }
-  });
-}
-
 type Props = {
   developerMode: any,
 };
@@ -162,12 +154,36 @@ class SettingsScreen extends Component<Props, State> {
     super(props);
 
     this.updateDeveloperMode = this.updateDeveloperMode.bind(this);
-
+    this.loadContents = this.loadContents.bind(this);
+    this.netInfoListener = "";
     this.state = {
       selectedLanguageCode: LangService.code,
       languages: LangService.languageObj,
       debugStatus: 0,
+      connected: "",
     };
+  }
+
+
+
+  componentDidMount() {
+    this.netInfoListener = NetInfo.addEventListener((state) => {
+       this.setState({connected: state.isConnected})
+    })
+  }
+
+  componentWillUnmount() {
+    if (this.netInfoListener) {
+      return this.netInfoListener;
+    }
+  }
+
+  loadContents(langCode) {
+    console.log("lang state", this.state)
+      if (this.state.connected) {
+        LangService.storeLangCode(langCode);
+        LangService.getLanguages();
+      }
   }
 
   setLanguageAndReload = code => {
@@ -178,7 +194,7 @@ class SettingsScreen extends Component<Props, State> {
     this.props.setLanguage(code);
     // Set navigation params to force an update
     this.props.navigation.setParams();
-    loadContents(code);
+    this.loadContents(code);
   };
 
   navigateToWelcomeScreen = () => {
@@ -199,6 +215,7 @@ class SettingsScreen extends Component<Props, State> {
   };
 
   displayLanguageSegment() {
+    console.log("languages", languages)
     const { languages } = this.state;
     if (!languages || !Object.keys(languages).length) {
       return <View style={styles.emptySpace} />;

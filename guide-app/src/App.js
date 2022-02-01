@@ -38,24 +38,6 @@ function openInternetSettings() {
   }
 }
 
-function init() {
-  LangService.loadStoredLanguage()
-    .then(() => {
-      // Check the network and load the content.
-      store.dispatch(setLanguage(LangService.code));
-      loadContents(LangService.code);
-    })
-    .catch((error) => store.dispatch(errorHappened(error)));
-}
-
-function loadContents() {
-  NetInfo.isConnected.fetch().then((isConnected) => {
-    if (isConnected) {
-      LangService.getLanguages();
-    }
-  });
-}
-
 function alert() {
   Alert.alert(
     LangService.strings.NO_INTERNET_CONNECTION,
@@ -82,6 +64,10 @@ const GuideApp = () => {
 
   console.log("location state", state);
 
+  function init() {
+
+  }
+
   useEffect(() => {
     NetInfo.fetch().then((state) => {
       let currentNetwork = state.isConnected;
@@ -96,10 +82,18 @@ const GuideApp = () => {
         return;
       }
       store.dispatch(internetChanged(true));
-
       if (this?.noNetworkTimer) {
         clearTimeout(this.noNetworkTimer);
         this.noNetworkTimer = null;
+      }
+      if (state.isConnected) {
+        console("lang connected")
+        LangService.loadStoredLanguage()
+          .then(() => {
+            store.dispatch(setLanguage(LangService.code));
+            loadContents(LangService.code);
+          })
+          .catch((error) => store.dispatch(errorHappened(error)));
       }
       init();
     });
@@ -137,14 +131,14 @@ const GuideApp = () => {
 
   return (
     <SafeAreaProvider>
-        <PersistGate persistor={persistor}>
-          <TrackingPermission />
-          <Nav
-            onAppStarted={() => store.dispatch(appStarted())}
-            onAppBecameActive={() => store.dispatch(appBecameActive())}
-            onAppBecameInactive={() => store.dispatch(appBecameInactive())}
-          />
-        </PersistGate>
+      <PersistGate persistor={persistor}>
+        <TrackingPermission />
+        <Nav
+          onAppStarted={() => store.dispatch(appStarted())}
+          onAppBecameActive={() => store.dispatch(appBecameActive())}
+          onAppBecameInactive={() => store.dispatch(appBecameInactive())}
+        />
+      </PersistGate>
     </SafeAreaProvider>
   );
 };
