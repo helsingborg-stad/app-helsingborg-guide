@@ -72,6 +72,7 @@
     "react-native-matomo": "oskarhertzman/react-native-matomo",
     "react-native-permissions": "^3.2.0",
     "react-native-photo-view": "https://github.com/alwx/react-native-photo-view.git",
+    "react-native-qrcode-scanner": "^1.5.4",
     "react-native-restart": "^0.0.23",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-safe-area-view": "2.0.0",
