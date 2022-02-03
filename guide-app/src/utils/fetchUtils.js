@@ -76,7 +76,7 @@ async function getGuideGroups(
   }
 
   const params = idsToParamString(ids);
-  const json = await fetchJSON("guidegroups", langCode, params);
+  const json = await fetchJSON("guidegroups", langCode || 'sv', params);
   const fetchedGuideGroups: GuideGroup[] = validateData(json, "guideGroup");
 
   return fetchedGuideGroups;
@@ -89,7 +89,7 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
 
   const params = idsToParamString(ids);
 
-  const json = await fetchJSON("guides", langCode, params);
+  const json = await fetchJSON("guides", langCode || 'sv', params);
   const fetchedGuides: Guide[] = validateData(json, "guide");
 
   return fetchedGuides;
@@ -105,7 +105,7 @@ async function getInteractiveGuides(
 
   const params = idsToParamString(ids);
 
-  const json = await fetchJSON("interactive_guides", langCode, params);
+  const json = await fetchJSON("interactive_guides", langCode || 'sv', params);
   const fetchedGuides: InteractiveGuide[] = validateData(
     json,
     "interactiveGuide"
@@ -119,7 +119,7 @@ async function getGuidesForGuideGroup(
   guideGroupId: number
 ): Promise<Guide[]> {
   const params = `&guideGroupId=${guideGroupId}`;
-  const json = await fetchJSON("guides", langCode, params);
+  const json = await fetchJSON("guides", langCode || 'sv', params);
   const fetchedGuides: Guide[] = validateData(json, "guide");
 
   return fetchedGuides;
@@ -129,7 +129,7 @@ export async function getNavigation(
   langCode: string
 ): Promise<NavigationCategory[]> {
   const params = `&userGroupId=${GROUP_ID}`;
-  const json = await fetchJSON("navigations", langCode, params);
+  const json = await fetchJSON("navigations", langCode || 'sv', params);
   const fetchedNavigation: NavigationCategory[] = validateData(
     json,
     "navigationCategory"
@@ -146,7 +146,7 @@ export async function getEvents(
   const dateStartFmt = DateUtils.shortDate(dateStart);
   const dateEndFmt = DateUtils.shortDate(dateEnd);
   const params = `&userGroupId=${GROUP_ID}&dateStart=${dateStartFmt}&dateEnd=${dateEndFmt}`;
-  const json = await fetchJSON("events", langCode, params);
+  const json = await fetchJSON("events", langCode || 'sv', params);
   const fetchedEvents: Event[] = validateData(json, "event");
 
   return fetchedEvents;

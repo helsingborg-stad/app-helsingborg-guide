@@ -18,17 +18,18 @@ export default function guideGroupReducer(
         fetchingIds: [...state.fetchingIds, ...action.ids],
       };
     case "FETCH_GUIDEGROUPS_SUCCESS": {
-      const items = action.guideGroups;
-      action.guideGroups.forEach(g => {
-        const index = items.findIndex(item => item.id === g.id);
-        if (index >= 0) {
-          // replace
-          items[index] = g;
-        } else {
-          // push
-          items.push(g);
-        }
-      });
+      const items = action?.guideGroups?.length ? [...action.guideGroups] : [...state.items];
+
+      // action.guideGroups.forEach(g => {
+      //   const index = items.findIndex(item => item.id === g.id);
+      //   if (index >= 0) {
+      //     // replace
+      //     items[index] = g;
+      //   } else {
+      //     // push
+      //     items.push(g);
+      //   }
+      // });
 
       const remainingIds = state.fetchingIds.filter(
         id => !action.ids.includes(id)

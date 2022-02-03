@@ -13,17 +13,18 @@ export default function guideReducer(
     case "FETCH_GUIDES_REQUEST":
       return { ...state, isFetching: true };
     case "FETCH_GUIDES_SUCCESS": {
-      const items = [...state.items];
-      action.guides.forEach(g => {
-        const index = items.findIndex(item => item.id === g.id);
-        if (index >= 0) {
-          // replace
-          items[index] = g;
-        } else {
-          // push
-          items.push(g);
-        }
-      });
+      const items = action?.guides?.length ? [...action.guides] : [...state.items];
+
+      // action.guides.forEach(g => {
+      //   const index = items.findIndex(item => item.id === g.id);
+      //   if (index >= 0) {
+      //     // replace
+      //     items[index] = g;
+      //   } else {
+      //     // push
+      //     items.push(g);
+      //   }
+      // });
       console.log("LOCAITON", items)
 
       return { ...state, items, isFetching: false, hasItems: items.length };

@@ -148,7 +148,6 @@ class Nav extends Component<Props> {
   };
 
   render() {
-
     return (
       <ViewContainer>
         <StatusBar

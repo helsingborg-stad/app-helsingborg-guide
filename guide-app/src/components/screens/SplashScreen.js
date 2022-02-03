@@ -103,19 +103,29 @@ const SplashScreen = (props, state) => {
 
 
   useEffect(() => {
-     if(guideGroups?.items?.length) {
-       if (longTimer) {
-         clearInterval(longTimer);
-       }
-       timer = setTimeout(() => {
-         skip();
-       }, TIME_OUT)
-     } else {
-       longTimer = setTimeout(() => {
-         !guideGroups?.items?.length && RNRestart.Restart()
-       }, LONG_TIME_OUT)
-     }
-  },[navigation, guideGroups])
+      timer = setTimeout(() => {
+        skip();
+      }, TIME_OUT)
+  },[])
+
+  //
+  // useEffect(() => {
+  //   skip();
+  //    if(guideGroups?.items?.length) {
+  //      if (longTimer) {
+  //        clearInterval(longTimer);
+  //      }
+  //      timer = setTimeout(() => {
+  //        skip();
+  //      }, TIME_OUT)
+  //    } else {
+  //      longTimer = setTimeout(() => {
+  //        props.navigation.isFocused() && !guideGroups?.items?.length && RNRestart.Restart()
+  //      }, LONG_TIME_OUT)
+  //    }
+  // },[navigation, guideGroups])
+
+
 
 
   const fadeColors = () => {

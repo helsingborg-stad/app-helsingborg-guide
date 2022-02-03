@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -32,7 +32,7 @@ const ImageCard = ({
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+      <TouchableOpacity activeOpacity={1} style={styles.buttonContainer} onPress={onPress}>
         {/*<ImageView style={[styles.image, { height }]} source={image} />*/}
         <Image style={[styles.image, { height }]} source={image} />
         <LinearGradient

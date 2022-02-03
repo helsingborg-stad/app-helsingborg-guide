@@ -132,7 +132,7 @@ class HomeScreen extends Component<Props> {
     if (showLoadingSpinner) {
       return <ActivityIndicator style={styles.loadingSpinner} />;
     }
-
+console.log("render")
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
