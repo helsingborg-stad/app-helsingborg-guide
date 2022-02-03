@@ -3,6 +3,7 @@
 const initialState: GuideState = {
   isFetching: false,
   items: [],
+  groupItems: [],
 };
 
 export default function guideReducer(
@@ -14,7 +15,7 @@ export default function guideReducer(
       return { ...state, isFetching: true };
     case "FETCH_GUIDES_SUCCESS": {
       const items = action?.guides?.length ? [...action.guides] : [...state.items];
-
+      const { forGroups } = action;
       // action.guides.forEach(g => {
       //   const index = items.findIndex(item => item.id === g.id);
       //   if (index >= 0) {
@@ -25,9 +26,8 @@ export default function guideReducer(
       //     items.push(g);
       //   }
       // });
-      console.log("LOCAITON", items)
 
-      return { ...state, items, isFetching: false, hasItems: items.length };
+        return { ...state, ...(forGroups ? {groupItems: items} : {items: items}), isFetching: false, hasItems: items.length };
     }
     case "FETCH_GUIDES_FAILURE":
       return { ...state, isFetching: false };

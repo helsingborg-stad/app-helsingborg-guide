@@ -33,6 +33,7 @@ declare type Action =
   | { type: "FETCH_GUIDEGROUPS_FAILURE", error: Error }
   | { type: "FETCH_GUIDES_REQUEST" }
   | { type: "FETCH_GUIDES_SUCCESS", guides: Guide[] }
+  | { type: "FETCH_GUIDES_FOR_GROUP_SUCCESS", guides: Guide[] }
   | { type: "FETCH_GUIDES_FAILURE", error: Error }
   | { type: "FETCH_EVENTS_REQUEST" }
   | { type: "FETCH_EVENTS_SUCCESS", events: Event[] }
@@ -217,6 +218,11 @@ declare type GuideState = {
   items: Guide[]
 };
 
+declare type GuidesForGroupState = {
+  isFetching: boolean,
+  items: Guide[]
+};
+
 declare type EventState = {
   isFetching: boolean,
   items: Event[]
@@ -343,6 +349,7 @@ declare type RootState = {
   uiState: UIState,
   guideGroups: GuideGroupState,
   guides: GuideState,
+  guidesForGroup: GuidesForGroupState,
   events: EventState,
   geolocation: {
     position: GeolocationType,

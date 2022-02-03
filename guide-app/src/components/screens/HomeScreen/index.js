@@ -105,6 +105,7 @@ class HomeScreen extends Component<Props> {
           const title = item?.guideGroup?.name;
           const slug = item?.guideGroup?.slug;
           trackScreen("view_location", slug || title);
+
           this.props.navigation.navigate("LocationScreen", {
             title,
             bottomBarOnUnmount: true,

@@ -101,7 +101,7 @@ class LocationScreen extends Component<Props> {
 }
 
 function mapStateToProps(state: RootState) {
-  const { items: guideItems, isFetching: isFetchingGuides } = state.guides;
+  const { groupItems: guideItems, isFetching: isFetchingGuides } = state.guides;
   const {
     items: interactiveGuideItems,
     isFetching: isFetchingInteractiveGuides,
