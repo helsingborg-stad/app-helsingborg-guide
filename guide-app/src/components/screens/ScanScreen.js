@@ -5,11 +5,11 @@ import {
 } from "react-native";
 import QrScanner from "@shared-components/QRScanner";
 import LangService from "@services/langService";
-import { Colors, TextStyles } from "@assets/styles";
-import { StyleSheetUtils } from "@utils";
+import { Colors } from "@assets/styles";
 
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -18,7 +18,9 @@ const styles = StyleSheet.create({
 });
 
 
+
 const ScanScreen = () => {
+
 
   const onRead = (e) => {
     console.log("render state scanner", e )
@@ -26,7 +28,13 @@ const ScanScreen = () => {
 
     return (
       <View style={styles.container}>
-        <QrScanner onRead={(e) => onRead(e)} />
+        <QrScanner
+          onRead={(e) => onRead(e)}
+          initialTorchEnabled={false}
+          enableTorchButton={true}
+          reactivateOnScan={false}
+          enableFlipButton={true}
+        />
       </View>
     );
 }
