@@ -49,7 +49,7 @@ export default class LangService {
   }
 
   static getLanguages() {
-    console.log("lang get lang", Object.keys(LangService.languageObj))
+    console.log("render state get lang", Object.keys(LangService.languageObj))
     if (Object.keys(LangService.languageObj).length) {
       return Promise.resolve(LangService.languageObj);
     }

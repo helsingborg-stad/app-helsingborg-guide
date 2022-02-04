@@ -94,6 +94,7 @@ const GuideApp = () => {
             loadContents(LangService.code);
           })
           .catch((error) => store.dispatch(errorHappened(error)));
+        LangService.getLanguages()
       }
       init();
     });
@@ -126,7 +127,6 @@ const GuideApp = () => {
     const locationService = LocationService.getInstance();
     locationService.getGeoLocation().catch(console.warn);
     locationService.subscribeGeoLocation().catch(console.warn);
-    LangService.loadStoredLanguage();
   }, []);
 
   return (

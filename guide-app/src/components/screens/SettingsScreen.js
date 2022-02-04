@@ -179,7 +179,7 @@ class SettingsScreen extends Component<Props, State> {
   }
 
   loadContents(langCode) {
-    console.log("lang state", this.state)
+    console.log("render state lang state", this.state)
       if (this.state.connected) {
         LangService.storeLangCode(langCode);
         LangService.getLanguages();
@@ -215,7 +215,6 @@ class SettingsScreen extends Component<Props, State> {
   };
 
   displayLanguageSegment() {
-    console.log("languages", languages)
     const { languages } = this.state;
     if (!languages || !Object.keys(languages).length) {
       return <View style={styles.emptySpace} />;
