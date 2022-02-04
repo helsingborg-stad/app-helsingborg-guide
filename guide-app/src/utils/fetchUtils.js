@@ -8,13 +8,14 @@ import {
 import { validate } from "./JSONValidator";
 import { DateUtils } from "@utils";
 
-console.log("le url", API_BASE_URL, "url2", DEPRECATED_API_BASE_URL)
 async function fetchJSON(
   relativeUrl: string,
   langCode: string,
   params?: ?string
 ): Promise<any> {
   let url = `${API_BASE_URL}/${relativeUrl}/?lang=${langCode || "sv"}`;
+
+  console.log("render state the url :)", url);
 
   if (relativeUrl === "events") {
     url = `${DEPRECATED_API_BASE_URL}/${relativeUrl}/?lang=${langCode || "sv"}`;

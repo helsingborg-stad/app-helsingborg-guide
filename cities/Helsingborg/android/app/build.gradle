@@ -148,6 +148,8 @@ android {
         versionName "1.92"
         multiDexEnabled true
         resValue "string", "build_config_package", "com.guidehbg"
+        missingDimensionStrategy 'react-native-camera', 'general'
+
     }
     splits {
         abi {
