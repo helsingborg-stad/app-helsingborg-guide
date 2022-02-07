@@ -4,6 +4,7 @@ apply plugin: 'com.google.gms.google-services' // <- Add this line
 // apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply from: "../../../../node_modules/react-native-config/android/dotenv.gradle"
 
+
 import com.android.build.OutputFile
 
 /**

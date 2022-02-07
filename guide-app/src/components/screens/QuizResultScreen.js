@@ -13,6 +13,7 @@ import {
 import { Colors, TextStyles } from "@assets/styles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Share from "react-native-share";
+import LangService from "../../services/langService";
 
 type Props = {
   navigation: Object,
@@ -96,6 +97,7 @@ class QuizResultScreen extends Component<Props, State> {
                   style={styles.buttonIcon}
                   name={"close"}
                   size={16}
+                  width={16}
                   color={Colors.black}
                 />
               </TouchableOpacity>
@@ -116,14 +118,14 @@ class QuizResultScreen extends Component<Props, State> {
               <Text style={styles.bodyTitle}>{finish?.title}</Text>
               <Text style={styles.bodyText}>{finish?.body}</Text>
             </View>
-            <TouchableOpacity
+            {finish?.shareImage?.url && <TouchableOpacity
               style={styles.shareContainer}
               onPress={() => {
                 this.shareImage();
               }}
             >
-              <Text style={styles.shareText}>{finish?.shareTitle}</Text>
-            </TouchableOpacity>
+              <Text style={styles.shareText}>{finish?.shareTitle || LangService.strings.SHARE}</Text>
+            </TouchableOpacity>}
           </ScrollView>
         </SafeAreaView>
       </>
@@ -187,6 +189,7 @@ const styles = StyleSheet.create({
     lineHeight: 48,
   },
   buttonIcon: {
+
     lineHeight: 37,
   },
   imagesContainer: {
