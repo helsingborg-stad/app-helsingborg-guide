@@ -49,8 +49,8 @@ class QuizResultScreen extends Component<Props, State> {
     } = this.props.navigation.state.params;
 
     const shareOptions = {
-      title: finish.shareTitle,
-      url: finish.shareImage.url,
+      title: finish?.shareTitle,
+      url: finish?.shareImage?.url,
       failOnCancel: false,
     };
 
@@ -70,10 +70,11 @@ class QuizResultScreen extends Component<Props, State> {
   downloadImage = async () => {};
 
   render() {
-    console.log(this.props);
     const {
       quiz: { finish },
     } = this.props.navigation.state.params;
+
+    console.log("finnished!", finish);
 
     return (
       <>
@@ -84,7 +85,7 @@ class QuizResultScreen extends Component<Props, State> {
         <SafeAreaView style={styles.container}>
           <ScrollView contentContainerStyle={styles.contentContainer}>
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>{finish.header}</Text>
+              <Text style={styles.title}>{finish?.header}</Text>
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
@@ -102,18 +103,18 @@ class QuizResultScreen extends Component<Props, State> {
             <View style={styles.imagesContainer}>
               <Image
                 style={styles.finishedImage}
-                source={{ uri: finish.images[0].url }}
+                source={{ uri: finish?.images[0]?.url }}
                 resizeMode="contain"
               />
               <Image
                 style={styles.finishedImage}
-                source={{ uri: finish.images[1].url }}
+                source={{ uri: finish?.images[1]?.url }}
                 resizeMode="contain"
               />
             </View>
             <View style={styles.bodyContainer}>
-              <Text style={styles.bodyTitle}>{finish.title}</Text>
-              <Text style={styles.bodyText}>{finish.body}</Text>
+              <Text style={styles.bodyTitle}>{finish?.title}</Text>
+              <Text style={styles.bodyText}>{finish?.body}</Text>
             </View>
             <TouchableOpacity
               style={styles.shareContainer}
@@ -121,7 +122,7 @@ class QuizResultScreen extends Component<Props, State> {
                 this.shareImage();
               }}
             >
-              <Text style={styles.shareText}>{finish.shareTitle}</Text>
+              <Text style={styles.shareText}>{finish?.shareTitle}</Text>
             </TouchableOpacity>
           </ScrollView>
         </SafeAreaView>

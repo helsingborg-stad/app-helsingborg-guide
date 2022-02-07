@@ -49,13 +49,17 @@ function getDescription(item: NavigationItem) {
 function getNameAndImage(
   item: NavigationItem
 ): { imageUrl: ?string, name: ?string } {
-  const { guide, guideGroup } = item;
+  const { guide, guideGroup, interactiveGuide } = item;
   if (guide) {
     const { name, images } = guide;
     return { imageUrl: images?.large, name };
   }
   if (guideGroup) {
     const { name, images } = guideGroup;
+    return { name, imageUrl: images?.large };
+  }
+  if (interactiveGuide) {
+    const { name, images } = interactiveGuide;
     return { name, imageUrl: images?.large };
   }
   return {
@@ -72,6 +76,7 @@ function isChildFriendly(item: NavigationItem): boolean {
 }
 
 const NavigationListItem = ({ index, item, onPressItem }: Props) => {
+
   const { imageUrl, name } = getNameAndImage(item);
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
   const size = index < 2 ? "expanded" : "compact";

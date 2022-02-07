@@ -21,7 +21,6 @@ const useLocalStorage = () => {
   const getLocalStorage = (key) => {
    return AsyncStorage.getItem(key)
       .then((data) => {
-        console.log("parsed!", parseData(data))
         return parseData(data);
     }).catch(err => {
         console.log("ASYNC_STORAGE_GET_ERROR", err)

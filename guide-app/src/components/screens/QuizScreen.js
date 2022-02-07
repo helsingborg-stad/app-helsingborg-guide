@@ -158,6 +158,8 @@ class QuizScreen extends Component<Props, State> {
     this.upcomingItems.splice(0, 1);
     const nextItem = this.upcomingItems[0];
 
+    this.timeout = setTimeout(this.handleQuizFinished, 500);
+
     this.setState({ botIsTyping: false });
 
     if (!item) {
@@ -316,6 +318,7 @@ class QuizScreen extends Component<Props, State> {
 
     AnalyticsUtils.logEvent("quiz_end", { name: title });
 
+
     navigation.dispatch(
       StackActions.replace({
         routeName: "QuizResultScreen",
@@ -347,6 +350,7 @@ class QuizScreen extends Component<Props, State> {
   latestQuestionIndex: number;
 
   render() {
+    console.log("quiz item", this.state)
     return (
       <>
         <StatusBar

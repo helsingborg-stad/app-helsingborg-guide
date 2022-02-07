@@ -210,12 +210,8 @@ class MapMarkerView extends Component<Props, State> {
     const { items } = this.props;
     const marker = items[index];
     const { activeMarker } = this.props;
-    console.log("active marker", activeMarker)
-    console.log("marker", marker)
     if (marker !== activeMarker) {
       const location = MapItemUtils.getLocationFromItem(marker);
-      console.log("location", location)
-      console.log("delta", this.latitudeDelta, this.longitudeDelta)
       if (this.map && location) {
         this.map.animateToRegion({
           latitude: location.latitude,

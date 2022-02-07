@@ -416,8 +416,6 @@ class MarkerListView extends Component<Props, State> {
     const { items } = this.props;
     this.setState({ recentlyTappedPin: true, activeMarker: items[index] });
 
-    console.log("index 2", index)
-    console.log("this", this.listRef)
     if (this.listRef) {
       const x = (ListItemWidth + DefaultMargin / 2) * index - 15;
       this.listRef.scrollToOffset({ offset: x });

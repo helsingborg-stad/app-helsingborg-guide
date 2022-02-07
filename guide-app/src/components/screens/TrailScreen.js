@@ -81,6 +81,8 @@ class TrailScreen extends Component<Props, State> {
     }
 
 
+
+
     return (
       <>
         <StatusBar

@@ -80,10 +80,11 @@ class HomeScreen extends Component<Props> {
     this.props.selectCurrentTab(0);
   };
 
-  onPressItem = (item: NavigationItem, items, index): void => {
+  onPressItem = (item, items, index): void => {
     switch (item?.type) {
       case "guide": {
         const { guide } = item;
+        console.log("the guide", guide.images, guide.image)
         if (guide) {
           this.props.selectGuide(guide.id);
           const type = guide?.guideType;
@@ -112,13 +113,26 @@ class HomeScreen extends Component<Props> {
         }
         break;
       }
+
+      case "interactive_guide":
+        const { interactiveGuide } = item;
+        if (interactiveGuide) {
+          this.props.selectGuide(interactiveGuide.id);
+          this.props?.navigation.navigate("QuizScreen", {
+            quiz: interactiveGuide,
+            title: interactiveGuide.title,
+          });
+            this.props.dispatchShowBottomBar(false);
+
+        }
+        break;
+
       case "guidegroup":
         this?.props?.selectGuideGroup(item.id);
         if (item?.guideGroup) {
           const title = item?.guideGroup?.name;
           const slug = item?.guideGroup?.slug;
           trackScreen("view_location", slug || title);
-
           this.props.navigation.navigate("LocationScreen", {
             title,
             bottomBarOnUnmount: true,
@@ -146,6 +160,7 @@ class HomeScreen extends Component<Props> {
     if (showLoadingSpinner) {
       return <ActivityIndicator style={styles.loadingSpinner} />;
     }
+
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
@@ -204,9 +219,18 @@ function mapStateToProps(state: RootState) {
   const { fetchingIds } = guideGroups;
   let categories = "";
 
-  categories = navigationCategories.map(cat => {
+
+  categories = [...navigationCategories.map(cat => {
+
     const data = cat.items
-      .filter((item) => item.guide || item.guideGroup)
+      .map((item) => {
+        let copy = {...item};
+        if(copy.interactiveGuide) {
+          copy.interactiveGuide = {...copy.interactiveGuide, name: copy.interactiveGuide.title, images: {large: copy.interactiveGuide.image, thumbnail: copy.interactiveGuide.image}}
+        }
+        return copy;
+      })
+      .filter((item) => item.guide || item.guideGroup || item.interactiveGuide)
       .sort(compareDistance);
     if (data.length > 0) {
       return {
@@ -215,7 +239,8 @@ function mapStateToProps(state: RootState) {
         category: cat,
       };
     }
-  })
+  })]
+
 
   const isFetching = fetchingIds.length > 0;
 
@@ -223,6 +248,7 @@ function mapStateToProps(state: RootState) {
     !isFetching && categories.length > 0
       ? categories[currentHomeTab]?.data
       : null;
+
 
 
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);

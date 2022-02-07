@@ -5,6 +5,8 @@ import { View, Text, TouchableOpacity } from "react-native";
 import ListItem from "@shared-components/ListItem";
 import styles from "./style";
 import LangService from "@services/langService";
+
+
 const placeholderImage = require("@assets/images/no-image-featured-image.png");
 
 
@@ -16,6 +18,7 @@ type Props = {
 };
 
 
+
 const LocationGuidesView = (props: Props) => {
   const {
     guides,
@@ -23,6 +26,7 @@ const LocationGuidesView = (props: Props) => {
     onPressGuide,
     onPressInteractiveGuide,
   } = props;
+
   return (
     <View style={styles.guideListContainer}>
       <Text style={styles.guideListHeaderText}>

@@ -26,7 +26,6 @@ const useGuides = () => {
           }
         });
 
-
         if(!guides.items.length && _guides.length) {
           dispatch(fetchGuides((currentLanguage || "sv"), _guides))
         }

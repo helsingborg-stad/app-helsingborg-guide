@@ -59,9 +59,6 @@ class LocationScreen extends Component<Props> {
   onPressInteractiveGuide = (interactiveGuide: InteractiveGuide) => {
     const { navigation } = this.props;
     trackScreen("view_interactive_guide", interactiveGuide?.title || "")
-    // AnalyticsUtils.logEvent("view_interactive_guide", {
-    //   name: interactiveGuide.title,
-    // });
     navigation.navigate("QuizScreen", {
       quiz: interactiveGuide,
     });

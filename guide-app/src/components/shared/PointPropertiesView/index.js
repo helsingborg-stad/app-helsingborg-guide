@@ -8,7 +8,6 @@ import styles from "./style";
 const pointPropertyPlaceholderImage = require("@assets/images/iconPointPropertyPlaceholder.png");
 
 function getPointProperties(pointProperties: PointProperty[]) {
-  console.log("le point props", pointProperties, pointPropertyPlaceholderImage)
 
   const pointPropertyView = (
     <View>

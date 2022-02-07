@@ -20,7 +20,7 @@ function linkNavigationWithContent(
   categories: NavigationCategory[],
   guideGroups: GuideGroup[],
   guides: Guide[],
-  interactiveGuides: InteractiveGuide[]
+  interactiveGuides: InteractiveGuide[],
 ): NavigationCategory[] {
   const sections: NavigationCategory[] = categories.map(cat => {
     const items: NavigationItem[] = [];
@@ -67,7 +67,7 @@ function linkNavigationWithContent(
 }
 
 export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
-  action: Action
+  action: Action,
 ) => {
   const result = next(action);
   const nextState = getState();
@@ -89,6 +89,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
       const { currentLanguage, navigationCategories } = navigation;
 
       // clear downloaded guides/guidegroups
+
       // dispatch(setGuidesAndGuideGroups([], [], []));
 
       // batch fetch a range of guides/guidegroups per navigation section
@@ -106,29 +107,30 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
             interactiveGuides.push(id);
           }
         });
-        guides.length && dispatch(fetchGuides((currentLanguage || 'sv'), guides));
-        guideGroups.length && dispatch(fetchGuideGroups((currentLanguage || 'sv'), guideGroups));
-        interactiveGuides.length && dispatch(fetchInteractiveGuides((currentLanguage || 'sv'), interactiveGuides));
+        console.log("los interactive the guides!!!!", interactiveGuides);
+        guides.length && dispatch(fetchGuides((currentLanguage || "sv"), guides));
+        guideGroups.length && dispatch(fetchGuideGroups((currentLanguage || "sv"), guideGroups));
+        interactiveGuides.length && dispatch(fetchInteractiveGuides((currentLanguage || "sv"), interactiveGuides));
       });
       break;
     }
     case "FETCH_GUIDES_SUCCESS":
     case "FETCH_GUIDEGROUPS_SUCCESS":
-    case "SET_GUIDES_AND_GUIDEGROUPS":
-      {
-          const { items: guideGroups } = nextState.guideGroups;
-          const { items: guides } = nextState.guides;
-          const { items: interactiveGuides } = nextState.interactiveGuides;
-          const { navigationCategories: categories } = nextState.navigation;
-          const renderableCategories = linkNavigationWithContent(
-            categories,
-            guideGroups,
-            guides,
-            interactiveGuides
-          );
-          dispatch(setNavigationCategories(renderableCategories));
+    case "FETCH_INTERACTIVE_GUIDES_SUCCESS":
+    case "SET_GUIDES_AND_GUIDEGROUPS": {
+      const { items: guideGroups } = nextState.guideGroups;
+      const { items: guides } = nextState.guides;
+      const { items: interactiveGuides } = nextState.interactiveGuides;
+      const { navigationCategories: categories } = nextState.navigation;
+      const renderableCategories = linkNavigationWithContent(
+        categories,
+        guideGroups,
+        guides,
+        interactiveGuides,
+      );
+      dispatch(setNavigationCategories(renderableCategories));
 
-      }
+    }
       break;
     default:
       break;

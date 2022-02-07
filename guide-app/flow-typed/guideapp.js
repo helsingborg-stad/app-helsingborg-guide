@@ -61,7 +61,7 @@ declare type Action =
   | { type: "RESET_DIALOG_CHOICES" }
   | { type: "SELECT_DIALOG_CHOICE", dialogChoice: DialogChoice };
 
-declare type NavigationItemType = "guide" | "guidegroup";
+declare type NavigationItemType = "guide" | "guidegroup" | "interactive_guide";
 
 declare type NavigationItem = {
   id: number,

@@ -8,7 +8,6 @@ const isReleaseDevice = async () => {
 };
 
 export const initializeTracker = async () => {
-  console.log("matomo", MATOMO_URL.toString() + "matomo.php", MATOMO_SITE_ID)
   await isReleaseDevice() && Matomo.initTracker((MATOMO_URL.toString() + "matomo.php"), parseInt(MATOMO_SITE_ID, 10));
 };
 
@@ -16,7 +15,6 @@ export const trackScreen = async (path, title) => {
   await isReleaseDevice() && Matomo.trackScreen(path, title);
 };
 export const trackEvent = async (category, action, name, value, url) => {
-  console.log(category, action, name, value, url);
   await isReleaseDevice() && Matomo.trackEvent(category, action, name, value, url);
 };
 

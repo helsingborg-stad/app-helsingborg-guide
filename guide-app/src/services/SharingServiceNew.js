@@ -305,14 +305,12 @@ function loadOverlay() {
 
 const ShowShareButton = (props) => {
   const { title, image, sender, shareType } = props;
-  console.log("prups", props)
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   origin = sender;
   let imageUrl = image.large;
   let imageWidth = 0;
   let imageHeight = 0;
 
-  console.log("image props", image, imageUrl )
   Image.getSize(imageUrl, (width, height) => {
     imageWidth = width;
     imageHeight = height;
