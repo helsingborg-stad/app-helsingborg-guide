@@ -89,8 +89,9 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
       const { currentLanguage, navigationCategories } = navigation;
 
       // clear downloaded guides/guidegroups
-      dispatch(setGuidesAndGuideGroups([], [], []));
+      // dispatch(setGuidesAndGuideGroups([], [], []));
 
+      console.log("render state fetch categories??", navigationCategories)
       // batch fetch a range of guides/guidegroups per navigation section
       navigationCategories.forEach(cat => {
         const guides: number[] = [];
@@ -106,8 +107,9 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
             interactiveGuides.push(id);
           }
         });
-        dispatch(fetchGuides(currentLanguage, guides));
-        dispatch(fetchGuideGroups(currentLanguage, guideGroups));
+console.log("the length", guides, guideGroups)
+        guides.length && dispatch(fetchGuides((currentLanguage || 'sv'), guides));
+        guideGroups.length && dispatch(fetchGuideGroups((currentLanguage || 'sv'), guideGroups));
         dispatch(fetchInteractiveGuides(currentLanguage, interactiveGuides));
       });
       break;
@@ -116,17 +118,18 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
     case "FETCH_GUIDEGROUPS_SUCCESS":
     case "SET_GUIDES_AND_GUIDEGROUPS":
       {
-        const { items: guideGroups } = nextState.guideGroups;
-        const { items: guides } = nextState.guides;
-        const { items: interactiveGuides } = nextState.interactiveGuides;
-        const { navigationCategories: categories } = nextState.navigation;
-        const renderableCategories = linkNavigationWithContent(
-          categories,
-          guideGroups,
-          guides,
-          interactiveGuides
-        );
-        dispatch(setNavigationCategories(renderableCategories));
+          const { items: guideGroups } = nextState.guideGroups;
+          const { items: guides } = nextState.guides;
+          const { items: interactiveGuides } = nextState.interactiveGuides;
+          const { navigationCategories: categories } = nextState.navigation;
+          const renderableCategories = linkNavigationWithContent(
+            categories,
+            guideGroups,
+            guides,
+            interactiveGuides
+          );
+          dispatch(setNavigationCategories(renderableCategories));
+
       }
       break;
     default:

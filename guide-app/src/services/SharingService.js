@@ -26,7 +26,6 @@ const fadeImageURL = require("@assets/images/share_fade.png");
 const shareImage = Image.resolveAssetSource(shareImageURL);
 const fadeImage = Image.resolveAssetSource(fadeImageURL);
 
-console.log("shareIcon", shareImage, "fadeIcon", fadeImage);
 
 const fontSize = 40;
 const lineDistance = 5;

@@ -1,6 +1,6 @@
 export default {
   navigation: { isFetching: false, items: [], hasItems: false },
-  guideGroups: [],
+  guideGroups: false,
   guides: [],
   internet: { connected: false },
   error: {},

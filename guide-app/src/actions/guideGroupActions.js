@@ -34,9 +34,8 @@ export function fetchGuideGroups(langCode: string, ids: number[]): ThunkAction {
   return function fetchGuideGroupsDispatch(dispatch: Dispatch) {
    dispatch(fetchGuideGroupsRequest(ids));
     return fetchUtils
-      .getGuideGroups(langCode, ids)
+      .getGuideGroups((langCode || 'sv'), ids)
       .then((guideGroups) => {
-        console.log("lang guide groups from request", guideGroups)
         dispatch(fetchGuideGroupsSuccess(guideGroups, ids))
       })
       .catch(error => {

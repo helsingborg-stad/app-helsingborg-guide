@@ -12,9 +12,10 @@ export default function guideReducer(
 ): GuideState {
   switch (action.type) {
     case "FETCH_GUIDES_REQUEST":
-      return { ...state, isFetching: true };
+      return { ...state, isFetching: true, doneFetching: false };
     case "FETCH_GUIDES_SUCCESS": {
       const items = action?.guides?.length ? [...action.guides] : [...state.items];
+      console.log("got guides!", items.length)
       const { forGroups } = action;
       // action.guides.forEach(g => {
       //   const index = items.findIndex(item => item.id === g.id);
@@ -27,7 +28,7 @@ export default function guideReducer(
       //   }
       // });
 
-        return { ...state, ...(forGroups ? {groupItems: items} : {items: items}), isFetching: false, hasItems: items.length };
+        return { ...state, ...(forGroups ? {groupItems: items} : {items: items}), isFetching: false, hasItems: items.length, doneFetching: true };
     }
     case "FETCH_GUIDES_FAILURE":
       return { ...state, isFetching: false };

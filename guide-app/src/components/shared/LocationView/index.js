@@ -94,7 +94,7 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
 
 const LocationView = (props: Props) => {
   const { isFetchingGuides } = props;
-  const webUrl = getWebUrl(props.guideGroup.location.links);
+  const webUrl = props?.guideGroup?.location?.links ? getWebUrl(props.guideGroup.location.links): null
 
   return (
     <View style={styles.viewContainer}>
@@ -111,14 +111,14 @@ const LocationView = (props: Props) => {
         </View>
         <View style={styles.bodyContainer}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{props.guideGroup.name}</Text>
+            <Text style={styles.title}>{props?.guideGroup?.name}</Text>
             <View style={styles.openingHoursAndDistanceContainer}>
               <OpeningHoursView
                 openHours={props?.guideGroup?.location?.openingHours}
                 openHoursException={
                   props?.guideGroup?.location?.openingHourExceptions
                 }
-                now={props.now}
+                now={props?.now}
               />
               {props?.geolocation
                 ? displayDistance(props?.geolocation, props?.guideGroup?.location)

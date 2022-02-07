@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import LangService from "@services/langService";
 import { Colors, TextStyles } from "@assets/styles";
 import { StyleSheetUtils, AnalyticsUtils } from "@utils";
@@ -22,6 +22,9 @@ import {
 } from "@actions/uiStateActions";
 import { trackEvent } from "@utils/MatomoUtils";
 import CalendarDetailsScreen from "./CalendarDetailsScreen";
+import ScanScreen from "./ScanScreen";
+import useGuides from "../../hooks/useGuides";
+import { fetchNavigation } from "../../actions/navigationActions";
 
 const defaultMargin = 20;
 const LOGO = require("@assets/images/logo.png");
@@ -121,101 +124,71 @@ type State = {
   debugStatus: any,
 };
 
-class SettingsScreen extends Component<Props, State> {
-  static navigationOptions = () => {
-    const title = LangService.strings.SETTINGS;
-    return {
-      title,
-      headerLeft: () => null,
-    };
-  };
+const SettingsScreen = (props) => {
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    const { languages } = prevState;
+  let netInfoListener = "";
 
+  const { developerMode } = useSelector(s => s).uiState;
+  const dispatch = useDispatch();
+  const [selectedLanguageCode, setSelectedLanguageCode] = useState(LangService.code);
+  const [languages, setLanguages] = useState(LangService.languageObj);
+  const [debugStatus, setDebugStatus] = useState(0);
+  const [connected, setConnected] = useState("");
+  const { getGuides } = useGuides();
+
+
+
+  useEffect(() => {
     if (!languages || Object.keys(languages).length === 0) {
-      return {
-        selectedLanguageCode: LangService.code,
-        languages: LangService.languageObj,
-      };
+      setSelectedLanguageCode(LangService.code);
+      setLanguages(LangService.languageObj);
     }
-    return null;
-  }
+  }, [languages]);
 
-  static propTypes = {
-    navigation: PropTypes.object,
-    setLanguage: PropTypes.func.isRequired,
-    dispatchSetDeveloperMode: PropTypes.func.isRequired,
-    dispatchShowBottomBar: PropTypes.func.isRequired,
-    dispatchSelectBottomBarTab: PropTypes.func.isRequired,
-  };
-
-  constructor(props: Props) {
-    super(props);
-
-    this.updateDeveloperMode = this.updateDeveloperMode.bind(this);
-    this.loadContents = this.loadContents.bind(this);
-    this.netInfoListener = "";
-    this.state = {
-      selectedLanguageCode: LangService.code,
-      languages: LangService.languageObj,
-      debugStatus: 0,
-      connected: "",
-    };
-  }
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setConnected(state.isConnected);
+    });
+    return unsubscribe;
+  }, []);
 
 
-
-  componentDidMount() {
-    this.netInfoListener = NetInfo.addEventListener((state) => {
-       this.setState({connected: state.isConnected})
-    })
-  }
-
-  componentWillUnmount() {
-    if (this.netInfoListener) {
-      return this.netInfoListener;
+  const loadContents = (langCode) => {
+    if (connected) {
+      LangService.storeLangCode(langCode);
+      LangService.getLanguages();
     }
   }
 
-  loadContents(langCode) {
-    console.log("render state lang state", this.state)
-      if (this.state.connected) {
-        LangService.storeLangCode(langCode);
-        LangService.getLanguages();
-      }
-  }
-
-  setLanguageAndReload = code => {
+  const setLanguageAndReload = code => {
+    dispatch(fetchNavigation(code))
     trackEvent("change", "change_language", code);
-    // AnalyticsUtils.logEvent("change_language", { language_code: code });
-    this.setState({ selectedLanguageCode: code });
+    setSelectedLanguageCode(code);
     LangService.setLanguage(code);
-    this.props.setLanguage(code);
+    dispatch(setLanguage(code));
     // Set navigation params to force an update
-    this.props.navigation.setParams();
-    this.loadContents(code);
+    props.navigation.setParams();
+    loadContents(code);
   };
 
-  navigateToWelcomeScreen = () => {
-    const { navigate } = this.props.navigation;
-    this.props.dispatchShowBottomBar(false);
-    this.props.dispatchSelectBottomBarTab(0);
+  const navigateToWelcomeScreen = () => {
+    const { navigate } = props.navigation;
+    dispatch(showBottomBar(false))
+    dispatch(selectCurrentBottomBarTab(0))
     navigate("WelcomeScreen");
   };
 
-  navigateToDownloadsScreen = () => {
-    const { navigate } = this.props.navigation;
+  const navigateToDownloadsScreen = () => {
+    const { navigate } = props.navigation;
     navigate("DownloadsScreen");
   };
 
-  navigateToDebugScreen = () => {
-    const { navigate } = this.props.navigation;
+  const navigateToDebugScreen = () => {
+    const { navigate } = props.navigation;
     navigate("DebugScreen");
   };
 
-  displayLanguageSegment() {
-    const { languages } = this.state;
+  const displayLanguageSegment = () => {
     if (!languages || !Object.keys(languages).length) {
       return <View style={styles.emptySpace} />;
     }
@@ -227,7 +200,7 @@ class SettingsScreen extends Component<Props, State> {
         </Text>
         <View style={styles.languageContainer}>
           <View style={styles.languageChoicesContainer}>
-            {this.displayLanguages(languages)}
+            {displayLanguages(languages)}
           </View>
         </View>
         <View style={styles.divider} />
@@ -235,7 +208,7 @@ class SettingsScreen extends Component<Props, State> {
     );
   }
 
-  displayLanguages(languages) {
+  const displayLanguages = (languages) => {
     return languages.map(language => {
       const { name, slug } = language;
       const style = {
@@ -244,13 +217,13 @@ class SettingsScreen extends Component<Props, State> {
         textDecorationLine: "underline",
       };
       const selectedStyle =
-        this.state.selectedLanguageCode === slug ? style : null;
-      const btnDisabled = this.state.selectedLanguageCode === slug;
+        selectedLanguageCode === slug ? style : null;
+      const btnDisabled = selectedLanguageCode === slug;
 
       return (
         <TouchableOpacity
           key={name}
-          onPress={() => this.setLanguageAndReload(slug)}
+          onPress={() => setLanguageAndReload(slug)}
           disabled={btnDisabled}
           activeOpacity={0.7}
           style={styles.choiceContainer}
@@ -263,48 +236,48 @@ class SettingsScreen extends Component<Props, State> {
     });
   }
 
-  displayDeveloperMenuButton() {
+  const displayDeveloperMenuButton = () => {
     return (
       <View>
         <View style={styles.divider} />
-        <TouchableOpacity onPress={this.navigateToDebugScreen}>
+        <TouchableOpacity onPress={navigateToDebugScreen}>
           <Text style={textStyles.linkText}>Developer Info</Text>
         </TouchableOpacity>
       </View>
     );
   }
 
-  updateDeveloperMode() {
-    this.setState({ debugStatus: this.state.debugStatus + 1 });
-    if (this.state.debugStatus >= 10) {
-      this.setState({ debugStatus: 0 });
-      this.props.dispatchSetDeveloperMode(!this.props.developerMode);
+  const updateDeveloperMode = () => {
+    this.setState({ debugStatus: debugStatus + 1 });
+    if (debugStatus >= 10) {
+      setDebugStatus(0);
+      dispatch(setDeveloperMode(!developerMode))
     }
   }
 
-  render() {
+
     return (
       <View style={styles.container}>
-        {this.displayLanguageSegment()}
-        <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
+        {displayLanguageSegment()}
+        <TouchableOpacity onPress={navigateToWelcomeScreen}>
           <Text style={textStyles.linkText}>
             {LangService.strings.SEE} {LangService.strings.TUTORIAL}
           </Text>
         </TouchableOpacity>
         <View style={styles.divider} />
-        <TouchableOpacity onPress={this.navigateToDownloadsScreen}>
+        <TouchableOpacity onPress={navigateToDownloadsScreen}>
           <Text style={textStyles.linkText}>
             {LangService.strings.OFFLINE_CONTENT}
           </Text>
         </TouchableOpacity>
 
-        {this.props.developerMode ? this.displayDeveloperMenuButton() : null}
+        {developerMode ? displayDeveloperMenuButton() : null}
         <View style={styles.divider} />
         <View style={styles.contactUsContainer}>
-          <TouchableWithoutFeedback onPress={this.updateDeveloperMode}>
+          <TouchableWithoutFeedback onPress={updateDeveloperMode}>
             <Image
               source={LOGO}
-              style={this.props.developerMode ? styles.debugIcon : styles.icon}
+              style={developerMode ? styles.debugIcon : styles.icon}
             />
           </TouchableWithoutFeedback>
           <View style={styles.contactTextContainer}>
@@ -333,27 +306,252 @@ class SettingsScreen extends Component<Props, State> {
       </View>
     );
   }
-}
 
-// store config
-function mapStateToProps(state) {
-  const { developerMode } = state.uiState;
-  return {
-    developerMode,
-  };
-}
+  SettingsScreen["navigationOptions"] = () => (
+    {
+      title: LangService.strings.SETTINGS,
+      headerLeft: () => null,
+    });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchSetDeveloperMode: enabled => dispatch(setDeveloperMode(enabled)),
-    dispatchShowBottomBar: visible => dispatch(showBottomBar(visible)),
-    dispatchSelectBottomBarTab: index =>
-      dispatch(selectCurrentBottomBarTab(index)),
-    setLanguage: langCode => dispatch(setLanguage(langCode)),
-  };
-}
+export default SettingsScreen;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SettingsScreen);
+
+//   class SettingsScreen extends Component<Props, State> {
+//     static navigationOptions = () => {
+//       const title = LangService.strings.SETTINGS;
+//       return {
+//         title,
+//         headerLeft: () => null,
+//       };
+//     };
+//
+//
+//     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+//
+//       console.log("the prev state", prevState);
+//       const { languages } = prevState;
+//
+//       if (!languages || Object.keys(languages).length === 0) {
+//         return {
+//           selectedLanguageCode: LangService.code,
+//           languages: LangService.languageObj,
+//         };
+//       }
+//       return null;
+//     }
+//
+//     static propTypes = {
+//       navigation: PropTypes.object,
+//       setLanguage: PropTypes.func.isRequired,
+//       dispatchSetDeveloperMode: PropTypes.func.isRequired,
+//       dispatchShowBottomBar: PropTypes.func.isRequired,
+//       dispatchSelectBottomBarTab: PropTypes.func.isRequired,
+//     };
+//
+//     constructor(props: Props) {
+//       super(props);
+//
+//       this.updateDeveloperMode = this.updateDeveloperMode.bind(this);
+//       this.loadContents = this.loadContents.bind(this);
+//       this.netInfoListener = "";
+//       this.state = {
+//         selectedLanguageCode: LangService.code,
+//         languages: LangService.languageObj,
+//         debugStatus: 0,
+//         connected: "",
+//       };
+//     }
+//
+//
+//     componentDidMount() {
+//       this.netInfoListener = NetInfo.addEventListener((state) => {
+//         this.setState({ connected: state.isConnected });
+//       });
+//     }
+//
+//     componentWillUnmount() {
+//       if (this.netInfoListener) {
+//         return this.netInfoListener;
+//       }
+//     }
+//
+//     loadContents(langCode) {
+//       console.log("render state lang state", this.state);
+//       if (this.state.connected) {
+//         LangService.storeLangCode(langCode);
+//         LangService.getLanguages();
+//       }
+//     }
+//
+//     setLanguageAndReload = code => {
+//       trackEvent("change", "change_language", code);
+//       this.setState({ selectedLanguageCode: code });
+//       LangService.setLanguage(code);
+//       this.props.setLanguage(code);
+//       // Set navigation params to force an update
+//       this.props.navigation.setParams();
+//       this.loadContents(code);
+//
+//     };
+//
+//     navigateToWelcomeScreen = () => {
+//       const { navigate } = this.props.navigation;
+//       this.props.dispatchShowBottomBar(false);
+//       this.props.dispatchSelectBottomBarTab(0);
+//       navigate("WelcomeScreen");
+//     };
+//
+//     navigateToDownloadsScreen = () => {
+//       const { navigate } = this.props.navigation;
+//       navigate("DownloadsScreen");
+//     };
+//
+//     navigateToDebugScreen = () => {
+//       const { navigate } = this.props.navigation;
+//       navigate("DebugScreen");
+//     };
+//
+//     displayLanguageSegment() {
+//       const { languages } = this.state;
+//       if (!languages || !Object.keys(languages).length) {
+//         return <View style={styles.emptySpace} />;
+//       }
+//
+//       return (
+//         <View>
+//           <Text style={textStyles.titleText}>
+//             {LangService.strings.CHOOSE_LANGUAGE}
+//           </Text>
+//           <View style={styles.languageContainer}>
+//             <View style={styles.languageChoicesContainer}>
+//               {this.displayLanguages(languages)}
+//             </View>
+//           </View>
+//           <View style={styles.divider} />
+//         </View>
+//       );
+//     }
+//
+//     displayLanguages(languages) {
+//       return languages.map(language => {
+//         const { name, slug } = language;
+//         const style = {
+//           ...TextStyles.bold,
+//           color: Colors.themePrimary,
+//           textDecorationLine: "underline",
+//         };
+//         const selectedStyle =
+//           this.state.selectedLanguageCode === slug ? style : null;
+//         const btnDisabled = this.state.selectedLanguageCode === slug;
+//
+//         return (
+//           <TouchableOpacity
+//             key={name}
+//             onPress={() => this.setLanguageAndReload(slug)}
+//             disabled={btnDisabled}
+//             activeOpacity={0.7}
+//             style={styles.choiceContainer}
+//           >
+//             <Text style={[textStyles.languageText, selectedStyle]}>
+//               {name.split(" ")[0]}
+//             </Text>
+//           </TouchableOpacity>
+//         );
+//       });
+//     }
+//
+//     displayDeveloperMenuButton() {
+//       return (
+//         <View>
+//           <View style={styles.divider} />
+//           <TouchableOpacity onPress={this.navigateToDebugScreen}>
+//             <Text style={textStyles.linkText}>Developer Info</Text>
+//           </TouchableOpacity>
+//         </View>
+//       );
+//     }
+//
+//     updateDeveloperMode() {
+//       this.setState({ debugStatus: this.state.debugStatus + 1 });
+//       if (this.state.debugStatus >= 10) {
+//         this.setState({ debugStatus: 0 });
+//         this.props.dispatchSetDeveloperMode(!this.props.developerMode);
+//       }
+//     }
+//
+//     render() {
+//       return (
+//         <View style={styles.container}>
+//           {this.displayLanguageSegment()}
+//           <TouchableOpacity onPress={this.navigateToWelcomeScreen}>
+//             <Text style={textStyles.linkText}>
+//               {LangService.strings.SEE} {LangService.strings.TUTORIAL}
+//             </Text>
+//           </TouchableOpacity>
+//           <View style={styles.divider} />
+//           <TouchableOpacity onPress={this.navigateToDownloadsScreen}>
+//             <Text style={textStyles.linkText}>
+//               {LangService.strings.OFFLINE_CONTENT}
+//             </Text>
+//           </TouchableOpacity>
+//
+//           {this.props.developerMode ? this.displayDeveloperMenuButton() : null}
+//           <View style={styles.divider} />
+//           <View style={styles.contactUsContainer}>
+//             <TouchableWithoutFeedback onPress={this.updateDeveloperMode}>
+//               <Image
+//                 source={LOGO}
+//                 style={this.props.developerMode ? styles.debugIcon : styles.icon}
+//               />
+//             </TouchableWithoutFeedback>
+//             <View style={styles.contactTextContainer}>
+//               <Text
+//                 onPress={() =>
+//                   Linking.openURL(
+//                     `mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${
+//                       LangService.strings.CONTACT_MAIL_SUBJECT
+//                     }`,
+//                   )
+//                 }
+//                 style={textStyles.contactEmailText}
+//               >
+//                 {LangService.strings.CONTACT_MAIL_ADRESS}
+//               </Text>
+//               <Text
+//                 onPress={() =>
+//                   Linking.openURL(`tel:${LangService.strings.CONTACT_PHONE}`)
+//                 }
+//                 style={textStyles.contactPhoneText}
+//               >
+//                 {LangService.strings.CONTACT_PHONE_DISPLAY}
+//               </Text>
+//             </View>
+//           </View>
+//         </View>
+//       );
+//     }
+//   }
+//
+// // store config
+//   function mapStateToProps(state) {
+//     const { developerMode } = state.uiState;
+//     return {
+//       developerMode,
+//     };
+//   }
+//
+//   function mapDispatchToProps(dispatch) {
+//     return {
+//
+//       dispatchSetDeveloperMode: enabled => dispatch(setDeveloperMode(enabled)),
+//       dispatchShowBottomBar: visible => dispatch(showBottomBar(visible)),
+//       dispatchSelectBottomBarTab: index =>
+//         dispatch(selectCurrentBottomBarTab(index)),
+//       setLanguage: langCode => dispatch(setLanguage(langCode)),
+//     };
+//   }
+//
+//   export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps,
+//   )(SettingsScreen);

@@ -7,7 +7,7 @@ import {
   Image,
   LayoutAnimation,
 } from "react-native";
-import RNRestart from 'react-native-restart';
+import RNRestart from "react-native-restart";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackActions, NavigationActions } from "react-navigation";
 import ViewContainer from "@shared-components/view_container";
@@ -16,8 +16,13 @@ import ColoredBar from "@shared-components/ColoredBar";
 import BackgroundImage from "@shared-components/BackgroundImage";
 import { Colors } from "@assets/styles";
 import LangService from "@services/langService";
-import { connect, useSelector } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { compareDistance } from "@utils/SortingUtils";
+import { fetchNavigation } from "../../actions/navigationActions";
+import { fetchGuides } from "@actions/guideActions";
+import { fetchGuideGroups } from "@actions/guideGroupActions";
+import useGuides from "@hooks/useGuides";
+import { setLanguage } from "@actions/navigationActions";
 
 
 const LOGO = require("@assets/images/logo.png");
@@ -76,17 +81,28 @@ const styles = StyleSheet.create({
 });
 
 
-const SplashScreen = (props, state) => {
+const SplashScreen = (props) => {
   const [barsVisible, setBarsVisible] = useState(true);
-  const { navigation, guideGroups } = useSelector(s => s);
+  const { getGuides } = useGuides();
+  const state = useSelector(s => s);
+  const dispatch = useDispatch();
+  const { navigation, guideGroups, guides } = useSelector(s => s);
+  const { navigationCategories, currentLanguage } = navigation;
   let timer;
   let longTimer;
   let colorsTimer;
   const appName = LangService.strings.APP_NAME;
 
 
+  console.log("guides?? :9", guides.doneFetching)
+  console.log("guides groups :9", guideGroups.doneFetching)
 
   useEffect(() => {
+    dispatch(fetchNavigation(LangService.code || "sv"));
+    LangService.setLanguage(LangService.code);
+    dispatch(setLanguage(LangService.code));
+    props.navigation.setParams();
+    
     colorsTimer = setInterval(() => fadeColors(), 500);
     return () => {
       if (timer) {
@@ -98,15 +114,23 @@ const SplashScreen = (props, state) => {
       if (longTimer) {
         clearInterval(longTimer);
       }
-    }
-  },[])
+    };
+  }, []);
 
+
+  // useEffect(() => {
+  //   console.log(guides.items.length, guideGroups.items.length, LangService.code)
+  //   if((guides.items.length || guideGroups.items.length) && props.navigation.isFocused() ) {
+  //     timer = setTimeout(() => {
+  //       skip();
+  //     }, TIME_OUT)
+  //   }
+  // },[state])
 
   useEffect(() => {
-      timer = setTimeout(() => {
         skip();
-      }, TIME_OUT)
-  },[])
+  }, []);
+
 
   //
   // useEffect(() => {
@@ -126,12 +150,10 @@ const SplashScreen = (props, state) => {
   // },[navigation, guideGroups])
 
 
-
-
   const fadeColors = () => {
     LayoutAnimation.easeInEaseOut();
     setBarsVisible(!barsVisible);
-  }
+  };
 
   const skip = () => {
     AsyncStorage.getItem(IS_WELCOMED).then(value => {
@@ -146,40 +168,40 @@ const SplashScreen = (props, state) => {
       });
       props.navigation.dispatch(resetAction);
     });
-  }
+  };
 
-  const displayColorBar = () =>  {
+  const displayColorBar = () => {
     return (
       <View style={styles.colorBarStyle}>
         <ColoredBar visible={barsVisible} />
       </View>
     );
-  }
+  };
 
-    return (
-      <ViewContainer style={styles.splash}>
-        {displayColorBar()}
-        <View style={styles.wrapper}>
-          <View style={styles.mainContainer}>
-            <View style={styles.headerContainer}>
-              <Text style={styles.headerText}>
-                {appName ? appName.split(" ")[0] : ""}
-              </Text>
-              <Text style={styles.headerText}>
-                {appName ? appName.split(" ")[1] : ""}
-              </Text>
-            </View>
-            <View style={styles.logoContainer}>
-              <Image resizeMethod="scale" resizeMode="center" source={LOGO} />
-            </View>
+  return (
+    <ViewContainer style={styles.splash}>
+      {displayColorBar()}
+      <View style={styles.wrapper}>
+        <View style={styles.mainContainer}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>
+              {appName ? appName.split(" ")[0] : ""}
+            </Text>
+            <Text style={styles.headerText}>
+              {appName ? appName.split(" ")[1] : ""}
+            </Text>
+          </View>
+          <View style={styles.logoContainer}>
+            <Image resizeMethod="scale" resizeMode="center" source={LOGO} />
           </View>
         </View>
-        <BackgroundImage source={IMAGE} />
-      </ViewContainer>
-    );
-}
+      </View>
+      <BackgroundImage source={IMAGE} />
+    </ViewContainer>
+  );
+};
 
-SplashScreen['navigationOptions'] = screenProps => ({
+SplashScreen["navigationOptions"] = screenProps => ({
   headerShown: false,
 });
 

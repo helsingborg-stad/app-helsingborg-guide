@@ -12,7 +12,7 @@ import patchContentMiddleware from "@src/middleware/patchContentMiddleware";
 const config = {
   key: "GuideAppRoot",
   storage: AsyncStorage,
-  blacklist: ["error", "menu", "internet", "audio", "uiState", "quiz", "hasLocationStatus", "guides", "guideGroups"],
+  blacklist: ["error", "menu", "internet", "audio", "uiState", "quiz", "hasLocationStatus", "guides", "guideGroups", "navigation"],
   version: 1,
   debug: __DEV__
 };

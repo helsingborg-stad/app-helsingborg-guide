@@ -7,7 +7,7 @@ import {
   Image,
   StatusBar,
   Text,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
@@ -21,6 +21,10 @@ import {
   selectCurrentHomeTab,
   showBottomBar,
 } from "@actions/uiStateActions";
+import { fetchGuides } from "@actions/guideActions";
+import { fetchGuideGroups } from "@actions/guideGroupActions";
+import { fetchNavigation } from "@actions/navigationActions";
+
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
@@ -42,6 +46,15 @@ type Props = {
   items: NavigationItem[],
   navigationCategoryLabels: string[],
   sections: Section[],
+  currentLanguage: string,
+  guides: any,
+  guideGroups: any,
+
+  fetchNavigation(code: string): void,
+
+  fetchGuideGroups(currentLanguage: string, guideGroups: Array): void,
+
+  fetchGuides(currentLanguage: string, guides: Array): void,
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
   selectCurrentCategory(section: NavigationCategory): void,
@@ -59,13 +72,13 @@ class HomeScreen extends Component<Props> {
   };
 
   componentDidMount() {
-
+    // this.props.fetchNavigation(LangService.code || 'sv')
     this.props.dispatchShowBottomBar(true);
   }
 
   componentWillUnmount = () => {
     this.props.selectCurrentTab(0);
-  }
+  };
 
   onPressItem = (item: NavigationItem, items, index): void => {
     switch (item?.type) {
@@ -133,6 +146,7 @@ class HomeScreen extends Component<Props> {
     if (showLoadingSpinner) {
       return <ActivityIndicator style={styles.loadingSpinner} />;
     }
+    console.log("render items", items);
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
@@ -144,36 +158,36 @@ class HomeScreen extends Component<Props> {
               labels={navigationCategoryLabels}
             />
           </View>
-        {!items || (items && items.length === 0) ? (
-          <View style={styles.sectionNoContent}>
-            <Text style={styles.sectionNoContentText}>
-              {LangService.strings.CONTENT_MISSING}
-            </Text>
-          </View>
-        ) : (
-          <>
-            <ScrollView
-              key={currentHomeTab}
-              style={styles.container}
-              contentContainerStyle={styles.contentContainer}
-            >
-              {items?.length && items.map((item, index) => (
-                <NavigationListItem
-                  key={index}
-                  index={index}
-                  item={item}
-                  onPressItem={() => this.onPressItem(item, items, index)}
-                />
-              ))}
-            </ScrollView>
-            <TouchableOpacity
-              style={styles.mapButton}
-              onPress={() => navigation.navigate("CategoryMapScreen")}
-            >
-              <Image style={styles.mapIcon} source={mapIcon} />
-            </TouchableOpacity>
-          </>
-        )}
+          {!items || (items && items.length === 0) ? (
+            <View style={styles.sectionNoContent}>
+              <Text style={styles.sectionNoContentText}>
+                {LangService.strings.CONTENT_MISSING}
+              </Text>
+            </View>
+          ) : (
+            <>
+              <ScrollView
+                key={currentHomeTab}
+                style={styles.container}
+                contentContainerStyle={styles.contentContainer}
+              >
+                {items?.length && items.map((item, index) => (
+                  <NavigationListItem
+                    key={index}
+                    index={index}
+                    item={item}
+                    onPressItem={() => this.onPressItem(item, items, index)}
+                  />
+                ))}
+              </ScrollView>
+              <TouchableOpacity
+                style={styles.mapButton}
+                onPress={() => navigation.navigate("CategoryMapScreen")}
+              >
+                <Image style={styles.mapIcon} source={mapIcon} />
+              </TouchableOpacity>
+            </>
+          )}
         </SafeAreaView>
       </>
     );
@@ -184,14 +198,16 @@ function mapStateToProps(state: RootState) {
   const {
     navigation,
     guideGroups,
+    guides,
     uiState: { currentHomeTab },
   } = state;
-  const { navigationCategories } = navigation;
+  const { navigationCategories, currentLanguage } = navigation;
   const { fetchingIds } = guideGroups;
+  let categories = "";
 
-  const categories = navigationCategories.map(cat => {
+  categories = navigationCategories.map(cat => {
     const data = cat.items
-      .filter(item => item.guide || item.guideGroup)
+      .filter((item) => item.guide || item.guideGroup)
       .sort(compareDistance);
     if (data.length > 0) {
       return {
@@ -200,7 +216,7 @@ function mapStateToProps(state: RootState) {
         category: cat,
       };
     }
-  });
+  })
 
   const isFetching = fetchingIds.length > 0;
 
@@ -209,20 +225,26 @@ function mapStateToProps(state: RootState) {
       ? categories[currentHomeTab]?.data
       : null;
 
+
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 
   return {
     categories,
     currentHomeTab,
     items,
+    guideGroups,
+    guides,
     showLoadingSpinner: isFetching,
-    navigationSections: navigationCategories,
+    navigationCategories,
     navigationCategoryLabels,
+    currentLanguage,
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch) {
+function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
   return {
+    fetchGuideGroups: (currentLanguage: string, guideGroups: Array) => dispatch(fetchGuideGroups(currentLanguage, guideGroups)),
+    fetchGuides: (currentLanguage: string, guides: Array) => dispatch(fetchGuides(currentLanguage, guides)),
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
     selectCurrentCategory: (category: NavigationCategory) =>

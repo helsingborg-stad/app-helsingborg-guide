@@ -19,7 +19,6 @@ import useOpenLink from "@hooks/useOpenLink";
 import { trackScreen } from "../../utils/MatomoUtils";
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 
-console.log("EVENT URL", eventCalendarURL)
 const styles = StyleSheet.create({
   item: {
     marginBottom: 30,
@@ -135,9 +134,7 @@ function CalendarEvent({ event, currentLanguage, navigation }: Props) {
   const eventLinkDate = DateUtils.eventLinkDate(dateStart);
   const eventLinkDay = DateUtils.eventLinkDay(dateStart);
   const dateString = DateUtils.eventTime(dateStart);
-  console.log("date string", dateString)
   const eventUrl = `${eventCalendarURL}/${slug}?date=${eventLinkDate}`;
-  console.log("event ", {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle, date: eventLinkDay, dateString: dateString })
   return (
     <TouchableOpacity
       style={styles.item}

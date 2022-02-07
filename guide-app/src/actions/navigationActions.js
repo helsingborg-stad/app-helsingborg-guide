@@ -32,9 +32,9 @@ export function fetchNavigationFailure(error: Error): Action {
 export function fetchNavigation(langCode: string): ThunkAction {
   return function fetchNavigationDispatch(dispatch: Dispatch) {
     dispatch(fetchNavigationRequest());
-
     return getNavigation(langCode)
       .then(guides => {
+        console.log("the guides", guides)
         dispatch(fetchNavigationSuccess(guides));
       })
       .catch(error => {

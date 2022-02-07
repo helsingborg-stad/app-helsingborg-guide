@@ -13,10 +13,10 @@ function getDistanceBetweenCoordinates(
   secondLocation: PositionLongLat
 ): number {
   if (
-    firstLocation.latitude &&
-    firstLocation.longitude &&
-    secondLocation.latitude &&
-    secondLocation.longitude
+    firstLocation?.latitude &&
+    firstLocation?.longitude &&
+    secondLocation?.latitude &&
+    secondLocation?.longitude
   ) {
     return getDistance(firstLocation, secondLocation);
   }

@@ -16,9 +16,13 @@ export default function guideGroupReducer(
         ...state,
         isFetching: true,
         fetchingIds: [...state.fetchingIds, ...action.ids],
+        doneFetching: false,
       };
     case "FETCH_GUIDEGROUPS_SUCCESS": {
+      console.log("render state guidegroups", action?.guideGroups)
+
       const items = action?.guideGroups?.length ? [...action.guideGroups] : [...state.items];
+      console.log("got guide groups!", items.length)
 
       // action.guideGroups.forEach(g => {
       //   const index = items.findIndex(item => item.id === g.id);
@@ -40,6 +44,7 @@ export default function guideGroupReducer(
         items,
         isFetching: remainingIds.length > 0,
         fetchingIds: remainingIds,
+        doneFetching: true
       };
     }
     case "FETCH_GUIDEGROUPS_FAILURE":

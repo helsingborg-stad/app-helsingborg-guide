@@ -17,10 +17,9 @@ export function fetchGuidesFailure(error: Error): Action {
 export function fetchGuides(langCode: string, ids: number[]): ThunkAction {
   return function fetchGuidesDispatch(dispatch: Dispatch) {
     dispatch(fetchGuidesRequest());
-
     return fetchUtils
       .getGuides(langCode, ids)
-      .then(guides => dispatch(fetchGuidesSuccess(guides, false)))
+      .then(guides => dispatch(fetchGuidesSuccess(guides, false,)))
       .catch(error => {
         dispatch(fetchGuidesFailure(error.message));
       });

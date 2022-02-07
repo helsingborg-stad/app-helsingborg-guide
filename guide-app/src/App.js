@@ -21,6 +21,7 @@ import {
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
 import useNotifications from "@hooks/useNotifications"
+import { fetchNavigation } from "../../../../../guide-app/src/actions/navigationActions";
 
 const { store, persistor } = configureStore();
 
@@ -62,44 +63,38 @@ const GuideApp = () => {
   const { subscribeToNotifications, onNotification } = useNotifications();
   const state = useSelector(s => s);
 
-  console.log("location state", state);
 
   function init() {
 
   }
 
   useEffect(() => {
-    NetInfo.fetch().then((state) => {
-      let currentNetwork = state.isConnected;
-      setNetInfo(currentNetwork);
-    });
-
     const unsubscribe = NetInfo.addEventListener((state) => {
       setNetInfo(state.isConnected);
-      if (!state.isConnected) {
-        store.dispatch(internetChanged(false));
-        this.noNetworkTimer = setTimeout(alert, 2500);
-        return;
-      }
       store.dispatch(internetChanged(true));
       if (this?.noNetworkTimer) {
         clearTimeout(this.noNetworkTimer);
         this.noNetworkTimer = null;
       }
-      if (state.isConnected) {
-
-        LangService.loadStoredLanguage()
-          .then(() => {
-            store.dispatch(setLanguage(LangService.code));
-            loadContents(LangService.code);
-          })
-          .catch((error) => store.dispatch(errorHappened(error)));
-        LangService.getLanguages()
-      }
-      init();
     });
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    if (netInfo) {
+      LangService.loadStoredLanguage()
+        .then((res) => {
+          store.dispatch(setLanguage(LangService.code || 'sv'));
+        })
+        .catch((error) => store.dispatch(errorHappened(error)));
+      LangService.getLanguages()
+    }
+    else {
+      store.dispatch(internetChanged(false));
+      this.noNetworkTimer = setTimeout(alert, 2500);
+      return;
+    }
+  },[netInfo])
 
 
 
@@ -130,16 +125,17 @@ const GuideApp = () => {
   }, []);
 
   return (
-    <SafeAreaProvider>
-      <PersistGate persistor={persistor}>
-        <TrackingPermission />
-        <Nav
-          onAppStarted={() => store.dispatch(appStarted())}
-          onAppBecameActive={() => store.dispatch(appBecameActive())}
-          onAppBecameInactive={() => store.dispatch(appBecameInactive())}
-        />
-      </PersistGate>
-    </SafeAreaProvider>
+    netInfo ?
+      <SafeAreaProvider>
+        <PersistGate persistor={persistor}>
+          <TrackingPermission />
+          <Nav
+            onAppStarted={() => store.dispatch(appStarted())}
+            onAppBecameActive={() => store.dispatch(appBecameActive())}
+            onAppBecameInactive={() => store.dispatch(appBecameInactive())}
+          />
+        </PersistGate>
+      </SafeAreaProvider> : <></>
   );
 };
 
