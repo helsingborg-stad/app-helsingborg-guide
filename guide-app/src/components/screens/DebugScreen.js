@@ -9,7 +9,6 @@ type Props = {};
 class DebugScreen extends Component<Props> {
   constructor() {
     super();
-    console.log("constructor");
   }
 
   render() {

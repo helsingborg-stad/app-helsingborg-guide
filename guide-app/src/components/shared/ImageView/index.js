@@ -27,7 +27,6 @@ export default class ImageView extends Component<Props, State> {
 
 
 
-    console.log("imageview", uri, sessionId)
     if (uri) {
       if (sessionId) {
         loadFromCache(`${sessionId}`, uri)

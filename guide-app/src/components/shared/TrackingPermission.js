@@ -14,7 +14,6 @@ export default class TrackingPermission extends Component {
           }
         })
         .catch(error => {
-          console.log("Failed to request permission to track", error);
         });
     } else {
       // We default to enabling analytics on Android

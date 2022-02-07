@@ -64,7 +64,6 @@ class ObjectScreen extends Component<Props> {
   };
 
   onSwiperIndexChanged = (newIndex: number) => {
-    console.log("new index func", newIndex)
     this.props.selectCurrentContentObjectImage(newIndex);
   };
 
@@ -142,9 +141,6 @@ class ObjectScreen extends Component<Props> {
 
     const { selectObject, index, array, prevIndex, order, swipeable, scrollable } = this.props.navigation.state.params;
 
-    console.log("prevIndex", prevIndex, "index", index);
-
-    console.log("objectparent props", swipeable);
     if (!currentContentObject) {
       return null;
     }

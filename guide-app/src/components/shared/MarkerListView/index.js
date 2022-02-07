@@ -187,7 +187,6 @@ class MarkerListView extends Component<Props, State> {
       // AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
       let _items = [];
       items.map(item => _items.push(item?.contentObject))
-      console.log("trail contentObj", contentObject, _items)
 
       navigate("ObjectScreen", {
         title: contentObject.title,

@@ -34,7 +34,6 @@ export function fetchNavigation(langCode: string): ThunkAction {
     dispatch(fetchNavigationRequest());
     return getNavigation(langCode)
       .then(guides => {
-        console.log("the guides", guides)
         dispatch(fetchNavigationSuccess(guides));
       })
       .catch(error => {

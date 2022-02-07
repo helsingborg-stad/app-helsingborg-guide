@@ -19,10 +19,8 @@ export default function guideGroupReducer(
         doneFetching: false,
       };
     case "FETCH_GUIDEGROUPS_SUCCESS": {
-      console.log("render state guidegroups", action?.guideGroups)
 
       const items = action?.guideGroups?.length ? [...action.guideGroups] : [...state.items];
-      console.log("got guide groups!", items.length)
 
       // action.guideGroups.forEach(g => {
       //   const index = items.findIndex(item => item.id === g.id);

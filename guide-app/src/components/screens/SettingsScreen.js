@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,11 +9,10 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
-import PropTypes from "prop-types";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LangService from "@services/langService";
 import { Colors, TextStyles } from "@assets/styles";
-import { StyleSheetUtils, AnalyticsUtils } from "@utils";
+import { StyleSheetUtils } from "@utils";
 import { setLanguage } from "@actions/navigationActions";
 import {
   setDeveloperMode,
@@ -21,9 +20,6 @@ import {
   selectCurrentBottomBarTab,
 } from "@actions/uiStateActions";
 import { trackEvent } from "@utils/MatomoUtils";
-import CalendarDetailsScreen from "./CalendarDetailsScreen";
-import ScanScreen from "./ScanScreen";
-import useGuides from "../../hooks/useGuides";
 import { fetchNavigation } from "../../actions/navigationActions";
 
 const defaultMargin = 20;
@@ -126,7 +122,6 @@ type State = {
 
 const SettingsScreen = (props) => {
 
-  let netInfoListener = "";
 
   const { developerMode } = useSelector(s => s).uiState;
   const dispatch = useDispatch();
@@ -134,9 +129,6 @@ const SettingsScreen = (props) => {
   const [languages, setLanguages] = useState(LangService.languageObj);
   const [debugStatus, setDebugStatus] = useState(0);
   const [connected, setConnected] = useState("");
-  const { getGuides } = useGuides();
-
-
 
   useEffect(() => {
     if (!languages || Object.keys(languages).length === 0) {

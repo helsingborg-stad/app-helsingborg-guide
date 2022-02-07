@@ -57,7 +57,6 @@ class GuideScreen extends Component<Props> {
     onPressContentObject = (obj: ContentObject, index, array) => {
       this.props.dispatchSelectContentObject(obj);
       trackScreen("view_guide_object", obj?.title || "")
-      console.log("trail", array, obj)
       this.props.navigation.navigate("ObjectScreen", {
         title: obj.title,
         currentGuide: this.props.currentGuide,

@@ -91,7 +91,6 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
       // clear downloaded guides/guidegroups
       // dispatch(setGuidesAndGuideGroups([], [], []));
 
-      console.log("render state fetch categories??", navigationCategories)
       // batch fetch a range of guides/guidegroups per navigation section
       navigationCategories.forEach(cat => {
         const guides: number[] = [];
@@ -107,10 +106,9 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
             interactiveGuides.push(id);
           }
         });
-console.log("the length", guides, guideGroups)
         guides.length && dispatch(fetchGuides((currentLanguage || 'sv'), guides));
         guideGroups.length && dispatch(fetchGuideGroups((currentLanguage || 'sv'), guideGroups));
-        dispatch(fetchInteractiveGuides(currentLanguage, interactiveGuides));
+        interactiveGuides.length && dispatch(fetchInteractiveGuides((currentLanguage || 'sv'), interactiveGuides));
       });
       break;
     }

@@ -198,10 +198,7 @@ class MapMarkerView extends Component<Props, State> {
 
   onMarkerPressed = (marker: MapItem) => {
     const { items, onMapMarkerPressed } = this.props;
-
-    console.log("ITEMS", items, "onmappress", onMapMarkerPressed)
     const index = items.findIndex(item => item === marker);
-  console.log("le index", index)
     if (onMapMarkerPressed) {
       onMapMarkerPressed(index);
     }

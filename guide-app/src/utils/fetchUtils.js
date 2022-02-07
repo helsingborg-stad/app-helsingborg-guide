@@ -23,8 +23,6 @@ async function fetchJSON(
     url += params;
   }
 
-  console.log("the url", url)
-
 
   const response = await fetch(url);
   if (!response.ok) {

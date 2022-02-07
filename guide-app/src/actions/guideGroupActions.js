@@ -39,7 +39,6 @@ export function fetchGuideGroups(langCode: string, ids: number[]): ThunkAction {
         dispatch(fetchGuideGroupsSuccess(guideGroups, ids))
       })
       .catch(error => {
-        console.log("ids error", error)
         dispatch(fetchGuideGroupsFailure(error.message, ids));
       });
   };

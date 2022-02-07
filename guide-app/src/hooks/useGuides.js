@@ -26,7 +26,6 @@ const useGuides = () => {
           }
         });
 
-        console.log("guides", _guides, guides.items.length);
 
         if(!guides.items.length && _guides.length) {
           dispatch(fetchGuides((currentLanguage || "sv"), _guides))

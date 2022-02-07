@@ -185,7 +185,6 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
   if (mainRes) {
     // Once we have all parts of the overlay, we need to get the size of the files.
 
-    console.log("fadeURI", fadeImageURL);
     // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
     const outputImage = await watermark({
       title,
@@ -193,7 +192,6 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
       fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
       icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
     });
-    console.log("IOS_SHARE", "message", message, "subject", subject, "title", title, "image", outputImage);
 
     iosShare = {
       activityItemSources: [

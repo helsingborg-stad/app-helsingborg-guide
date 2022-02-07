@@ -83,26 +83,17 @@ const styles = StyleSheet.create({
 
 const SplashScreen = (props) => {
   const [barsVisible, setBarsVisible] = useState(true);
-  const { getGuides } = useGuides();
-  const state = useSelector(s => s);
   const dispatch = useDispatch();
-  const { navigation, guideGroups, guides } = useSelector(s => s);
-  const { navigationCategories, currentLanguage } = navigation;
   let timer;
   let longTimer;
   let colorsTimer;
   const appName = LangService.strings.APP_NAME;
 
-
-  console.log("guides?? :9", guides.doneFetching)
-  console.log("guides groups :9", guideGroups.doneFetching)
-
   useEffect(() => {
     dispatch(fetchNavigation(LangService.code || "sv"));
-    LangService.setLanguage(LangService.code);
-    dispatch(setLanguage(LangService.code));
+    LangService.setLanguage(LangService.code || "sv");
+    dispatch(setLanguage(LangService.code || "sv"));
     props.navigation.setParams();
-    
     colorsTimer = setInterval(() => fadeColors(), 500);
     return () => {
       if (timer) {
@@ -117,37 +108,11 @@ const SplashScreen = (props) => {
     };
   }, []);
 
-
-  // useEffect(() => {
-  //   console.log(guides.items.length, guideGroups.items.length, LangService.code)
-  //   if((guides.items.length || guideGroups.items.length) && props.navigation.isFocused() ) {
-  //     timer = setTimeout(() => {
-  //       skip();
-  //     }, TIME_OUT)
-  //   }
-  // },[state])
-
   useEffect(() => {
-        skip();
+    timer = setTimeout(() => {
+      skip();
+    }, TIME_OUT);
   }, []);
-
-
-  //
-  // useEffect(() => {
-  //   skip();
-  //    if(guideGroups?.items?.length) {
-  //      if (longTimer) {
-  //        clearInterval(longTimer);
-  //      }
-  //      timer = setTimeout(() => {
-  //        skip();
-  //      }, TIME_OUT)
-  //    } else {
-  //      longTimer = setTimeout(() => {
-  //        props.navigation.isFocused() && !guideGroups?.items?.length && RNRestart.Restart()
-  //      }, LONG_TIME_OUT)
-  //    }
-  // },[navigation, guideGroups])
 
 
   const fadeColors = () => {
