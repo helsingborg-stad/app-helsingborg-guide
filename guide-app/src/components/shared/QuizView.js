@@ -19,6 +19,9 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 
 const nonEmojiRegExp = /[a-zA-Z0-9.!?…]/;
 
+const placeholderImage = require("@assets/images/no-image-featured-image.png");
+
+
 function Chapter({ item }: { item: QuizChapter }) {
   return <Text style={styles.chapter}>{item.text}</Text>;
 }
@@ -239,6 +242,7 @@ const QuizStart = ({
   onQuizStartAction: () => void,
   isHistoryItem: boolean,
 }) => {
+  console.log("the item", item)
   return (
     <View style={styles.startContainer}>
       <View>
@@ -279,11 +283,13 @@ const StartAction = ({
 };
 
 function StartImage({ item }): { item: QuizBotImageMessage } {
+  console.log("the item", item.url)
+  let image = { uri: item?.url || item?.source || placeholderImage }
   return (
     <ImageBackground
       style={[styles.startImage, { aspectRatio: item.aspectRatio }]}
       imageStyle={styles.startImageImage}
-      source={item.source}
+      source={image}
       resizeMode="contain"
     />
   );
