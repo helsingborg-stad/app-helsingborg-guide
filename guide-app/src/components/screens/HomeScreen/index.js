@@ -83,7 +83,6 @@ class HomeScreen extends Component<Props> {
     switch (item?.type) {
       case "guide": {
         const { guide } = item;
-        console.log("the guide", guide.images, guide.image)
         if (guide) {
           this.props.selectGuide(guide.id);
           const type = guide?.guideType;
@@ -220,14 +219,13 @@ function mapStateToProps(state: RootState) {
   const { fetchingIds } = guideGroups;
   let categories = "";
 
-
   categories = [...navigationCategories.map(cat => {
 
     const data = cat.items
       .map((item) => {
         let copy = {...item};
-        if(copy.interactiveGuide) {
-          copy.interactiveGuide = {...copy.interactiveGuide, name: copy.interactiveGuide.title, images: {large: copy.interactiveGuide.image, thumbnail: copy.interactiveGuide.image}}
+        if(copy?.interactiveGuide) {
+          copy.interactiveGuide = {...copy.interactiveGuide, name: copy.interactiveGuide?.title, images: {large: copy.interactiveGuide?.image, thumbnail: copy.interactiveGuide?.image}}
         }
         return copy;
       })
@@ -242,15 +240,12 @@ function mapStateToProps(state: RootState) {
     }
   })]
 
-
   const isFetching = fetchingIds.length > 0;
 
   const items =
     !isFetching && categories.length > 0
       ? categories[currentHomeTab]?.data
       : null;
-
-
 
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 

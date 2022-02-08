@@ -60,7 +60,6 @@ const useNotifications = () => {
 
   const onNotification = async () => {
     __DEV__ && messaging().onMessage(async remoteMessage => {
-      console.log("function 2");
       displayNotification(remoteMessage);
     });
   };

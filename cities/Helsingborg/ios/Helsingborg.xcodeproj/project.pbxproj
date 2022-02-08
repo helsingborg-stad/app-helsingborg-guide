@@ -814,7 +814,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Helsingborg/Helsingborg.entitlements;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MHBEW6TVG2;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -823,7 +823,7 @@
 				);
 				INFOPLIST_FILE = Helsingborg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.92;
+				MARKETING_VERSION = 1.93;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -841,7 +841,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Helsingborg/Helsingborg.entitlements;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = MHBEW6TVG2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -849,7 +849,7 @@
 				);
 				INFOPLIST_FILE = Helsingborg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.92;
+				MARKETING_VERSION = 1.93;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

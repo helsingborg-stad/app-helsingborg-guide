@@ -151,7 +151,6 @@ class ObjectScreen extends Component<Props> {
       ({ guideType } = currentGuide);
     }
 
-    console.log("pan to index", panToIndex)
 
     return (
       <>

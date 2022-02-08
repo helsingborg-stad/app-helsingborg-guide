@@ -12,6 +12,9 @@ import {
   selectDialogChoiceAction,
   resetDialogChoicesAction,
 } from "@actions/quizActions";
+import {
+showBottomBar,
+} from "@actions/uiStateActions";
 
 type Props = {
   navigation: Object,
@@ -20,6 +23,8 @@ type Props = {
   setLatestQuestionId: string => void,
   selectDialogChoice: DialogChoice => void,
   resetDialogChoices: () => void,
+  dispatchShowBottomBar(visible: boolean): void,
+
 };
 
 type State = {
@@ -34,7 +39,7 @@ class QuizScreen extends Component<Props, State> {
       ...HeaderStyles.noElevation,
       title: quiz.title,
       headerRight: () => <View />,
-      headerLeft: () => <HeaderBackButton navigation={navigation} />,
+      headerLeft: () => <HeaderBackButton navigation={navigation} onPress={() => null} displayBottomBar={true} />,
     };
   };
 
@@ -384,6 +389,8 @@ function mapDispatchToProps(dispatch: Dispatch) {
     resetDialogChoices: () => dispatch(resetDialogChoicesAction()),
     selectDialogChoice: (dialogChoice: DialogChoice) =>
       dispatch(selectDialogChoiceAction(dialogChoice)),
+    dispatchShowBottomBar: (visible: boolean) =>
+      dispatch(showBottomBar(visible)),
   };
 }
 

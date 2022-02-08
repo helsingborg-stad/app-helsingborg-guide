@@ -10,13 +10,18 @@ import {
   ScrollView,
   Image,
 } from "react-native";
+import { connect } from "react-redux";
 import { Colors, TextStyles } from "@assets/styles";
+import {
+  showBottomBar,
+} from "@actions/uiStateActions";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Share from "react-native-share";
 import LangService from "../../services/langService";
 
 type Props = {
   navigation: Object,
+  dispatchShowBottomBar(visible: boolean): void,
 };
 
 type State = {
@@ -31,6 +36,12 @@ class QuizResultScreen extends Component<Props, State> {
   static navigationOptions = {
     headerShown: false,
   };
+
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
 
   getErrorString = (error, defaultValue) => {
     let e = defaultValue || "Something went wrong. Please try again";
@@ -69,14 +80,14 @@ class QuizResultScreen extends Component<Props, State> {
     }
   };
 
-  downloadImage = async () => {};
+  downloadImage = async () => {
+  };
 
   render() {
     const {
       quiz: { finish },
     } = this.props.navigation.state.params;
 
-    console.log("finnished!", finish, this.state.shareResult);
 
     return (
       <>
@@ -91,6 +102,7 @@ class QuizResultScreen extends Component<Props, State> {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
+                  this.props.dispatchShowBottomBar(true);
                   this.props.navigation.goBack();
                 }}
               >
@@ -231,4 +243,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default QuizResultScreen;
+
+function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
+  return {
+    dispatchShowBottomBar: (visible: boolean) =>
+      dispatch(showBottomBar(visible)),
+  };
+}
+
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(QuizResultScreen);

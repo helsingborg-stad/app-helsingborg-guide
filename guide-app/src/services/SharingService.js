@@ -246,11 +246,6 @@ async function watermark(watermarkProperties) {
   });
 
 
-  console.log("IMAGE 2 PROPS", {
-    ...TextStyles.defaultBoldFont,
-    ...SharedTextProperties,
-    ...SharedImageProperties,
-  });
   // Add the title for the image
   const resultB = await ImageMarker.markText({
     src: getPlatformURI(resultA),
