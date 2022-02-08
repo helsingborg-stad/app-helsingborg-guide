@@ -12,15 +12,17 @@ type Props = {
 };
 
 function getDescription(item: NavigationItem) {
-  const { type, guide } = item;
+  const { type, guide, interactiveGuide } = item;
   const guidesCount = GuideUtils?.getGuidesCount(item);
   const plural = guidesCount > 1;
 
   let textString = "";
 
-  if (guidesCount === 0) {
+
+  if ((type === "guidegroup" || type === "guide") && guidesCount === 0) {
     return "";
   }
+
 
   if (type === "guidegroup") {
     const mediaGuideString: string = plural
@@ -28,7 +30,7 @@ function getDescription(item: NavigationItem) {
       : LangService.strings.MEDIAGUIDE;
     textString = `${guidesCount} ${mediaGuideString.toUpperCase()}`;
   } else if (type === "guide" && guide) {
-    if (guide.guideType === "trail") {
+    if (guide?.guideType === "trail") {
       const locationString: string = plural
         ? LangService.strings.LOCATIONS
         : LangService.strings.LOCATION;
@@ -36,10 +38,17 @@ function getDescription(item: NavigationItem) {
         LangService.strings.WITH
       } ${guidesCount} ${locationString}`;
       textString = textString.toUpperCase();
-    } else if (guide.guideType === "guide") {
+    } else if (guide?.guideType === "guide") {
       textString = `${LangService.strings.MEDIAGUIDE} ${
         LangService.strings.WITH
       } ${guidesCount} ${LangService.strings.OBJECT}`;
+    }
+  } else if (type === "interactive_guide") {
+    if(!!interactiveGuide?.steps) {
+      textString = `${LangService.strings.MEDIAGUIDE_INTERACTIVE} 
+${LangService.strings.WITH} ${interactiveGuide?.steps?.length - 1} ${LangService.strings.OBJECT}`.toUpperCase();
+    } else {
+      textString = `${LangService.strings.MEDIAGUIDE_INTERACTIVE}`.toUpperCase()
     }
   }
 
@@ -47,7 +56,7 @@ function getDescription(item: NavigationItem) {
 }
 
 function getNameAndImage(
-  item: NavigationItem
+  item: NavigationItem,
 ): { imageUrl: ?string, name: ?string } {
   const { guide, guideGroup, interactiveGuide } = item;
   if (guide) {
@@ -64,9 +73,10 @@ function getNameAndImage(
   }
   return {
     imageUrl: null,
-    name: null
+    name: null,
   };
 }
+
 function isChildFriendly(item: NavigationItem): boolean {
   const { guide } = item;
   if (guide) {

@@ -158,7 +158,8 @@ class QuizScreen extends Component<Props, State> {
     this.upcomingItems.splice(0, 1);
     const nextItem = this.upcomingItems[0];
 
-    this.timeout = setTimeout(this.handleQuizFinished, 500);
+    // for debugging result screen
+    // this.timeout = setTimeout(this.handleQuizFinished, 500);
 
     this.setState({ botIsTyping: false });
 
@@ -350,7 +351,6 @@ class QuizScreen extends Component<Props, State> {
   latestQuestionIndex: number;
 
   render() {
-    console.log("quiz item", this.state)
     return (
       <>
         <StatusBar

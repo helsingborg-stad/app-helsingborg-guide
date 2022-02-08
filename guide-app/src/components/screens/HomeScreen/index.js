@@ -72,7 +72,6 @@ class HomeScreen extends Component<Props> {
   };
 
   componentDidMount() {
-    // this.props.fetchNavigation(LangService.code || 'sv')
     this.props.dispatchShowBottomBar(true);
   }
 
@@ -160,6 +159,8 @@ class HomeScreen extends Component<Props> {
     if (showLoadingSpinner) {
       return <ActivityIndicator style={styles.loadingSpinner} />;
     }
+
+
 
     return (
       <>
