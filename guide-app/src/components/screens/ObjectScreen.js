@@ -139,7 +139,7 @@ class ObjectScreen extends Component<Props> {
       navigation,
     } = this.props;
 
-    const { selectObject, index, array, prevIndex, order, swipeable, scrollable } = this.props.navigation.state.params;
+    const { selectObject, index, array, prevIndex, order, swipeable, scrollable, panToIndex } = this.props.navigation.state.params;
 
     if (!currentContentObject) {
       return null;
@@ -150,6 +150,8 @@ class ObjectScreen extends Component<Props> {
       guideId = currentGuide.id;
       ({ guideType } = currentGuide);
     }
+
+    console.log("pan to index", panToIndex)
 
     return (
       <>
@@ -167,6 +169,7 @@ class ObjectScreen extends Component<Props> {
           navigation={navigation}
           swipeable={swipeable}
           scrollable={scrollable}
+          panToIndex={panToIndex}
           onSwiperIndexChanged={this.onSwiperIndexChanged}
           imageIndex={currentContentObjectImageIndex}
           audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}

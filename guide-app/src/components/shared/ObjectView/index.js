@@ -127,7 +127,7 @@ function displayButtonsBar(
 }
 
 const guideButtons = (props) => {
-  const { array, navigation, selectObject, order, scrollable } = props;
+  const { array, navigation, selectObject, order, scrollable, panToIndex } = props;
   const [width, setWidth] = useState("");
 
   const onLayout = (event) => {
@@ -144,6 +144,7 @@ const guideButtons = (props) => {
         onPress={order > 0 ? () => {
           scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
+          panToIndex && panToIndex(order - 1);
           navigation.navigate("ObjectScreen", {
             title: array[order - 1].title,
             currentGuide: array[order - 1],
@@ -173,6 +174,7 @@ const guideButtons = (props) => {
         onPress={(order + 1) !== array.length ? () => {
           scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
+          panToIndex && panToIndex(order + 1);
           navigation.navigate("ObjectScreen", {
             title: array[order + 1].title,
             currentGuide: array[order + 1],
@@ -205,7 +207,7 @@ const onHorizontalSwipe = (evt, swiped, setSwiped) => {
  * Underlying sharingservice needs a reference to a Component instance
  */
 const ObjectView = (props) => {
-  const { guideId, swipeable, scrollable, selectObject, navigation, array, order, onSwiperIndexChanged } = props;
+  const { guideId, swipeable, scrollable, panToIndex, selectObject, navigation, array, order, onSwiperIndexChanged } = props;
   const [swiped, setSwiped] = useState(false);
   const ref = React.createRef();
 
@@ -220,6 +222,7 @@ const ObjectView = (props) => {
         if ((order + 1) !== array.length) {
           scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
+          panToIndex && panToIndex(order + 1);
           navigation.navigate("ObjectScreen", {
             title: array[order + 1].title,
             currentGuide: array[order + 1],
@@ -235,6 +238,7 @@ const ObjectView = (props) => {
         if (order > 0) {
           scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
+          panToIndex && panToIndex(order - 1);
           navigation.navigate("ObjectScreen", {
             title: array[order - 1].title,
             currentGuide: array[order - 1],

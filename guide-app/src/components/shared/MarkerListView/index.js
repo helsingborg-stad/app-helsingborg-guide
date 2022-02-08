@@ -187,7 +187,6 @@ class MarkerListView extends Component<Props, State> {
       // AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
       let _items = [];
       items.map(item => _items.push(item?.contentObject))
-
       navigate("ObjectScreen", {
         title: contentObject.title,
         array: _items,
@@ -195,6 +194,7 @@ class MarkerListView extends Component<Props, State> {
         order: contentObject.order,
         swipeable: true,
         scrollable: this.scrollToIndex,
+        panToIndex: this.mapMarkerViewRef.panMapToIndex,
       });
     }
   };
@@ -404,7 +404,7 @@ class MarkerListView extends Component<Props, State> {
 
     if (!isEqual(activeMarker !== items[index])) {
       this.setState({ activeMarker: items[index] });
-      AnalyticsUtils.logEvent("scroll_object_list");
+      // AnalyticsUtils.logEvent("scroll_object_list");
     }
 
     if (!recentlyTappedPin && this.mapMarkerViewRef) {
