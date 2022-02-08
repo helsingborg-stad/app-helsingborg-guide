@@ -55,6 +55,7 @@ class QuizResultScreen extends Component<Props, State> {
       failOnCancel: false,
     };
 
+
     try {
       const ShareResponse = await Share.open(shareOptions);
       this.setState({
@@ -75,7 +76,7 @@ class QuizResultScreen extends Component<Props, State> {
       quiz: { finish },
     } = this.props.navigation.state.params;
 
-    console.log("finnished!", finish);
+    console.log("finnished!", finish, this.state.shareResult);
 
     return (
       <>
@@ -174,16 +175,19 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     textAlignVertical: "center",
     borderRadius: 54,
-    height: 54,
+    minHeight: 54,
   },
   shareButton: {
     backgroundColor: "white",
     width: 54,
-    height: 54,
+    minHeight: 54,
     borderRadius: 54,
   },
   shareText: {
     textAlignVertical: "center",
+    textAlign: "center",
+    padding: 10,
+    alignSelf: "center",
   },
   shareIcon: {
     lineHeight: 48,

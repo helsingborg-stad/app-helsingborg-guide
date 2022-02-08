@@ -158,7 +158,7 @@ class QuizScreen extends Component<Props, State> {
     this.upcomingItems.splice(0, 1);
     const nextItem = this.upcomingItems[0];
 
-    // for debugging result screen
+    // enable for debugging result screen
     // this.timeout = setTimeout(this.handleQuizFinished, 500);
 
     this.setState({ botIsTyping: false });
