@@ -283,13 +283,12 @@ const StartAction = ({
 };
 
 function StartImage({ item }): { item: QuizBotImageMessage } {
-  console.log("the item", item.url)
-  let image = { uri: item?.url || item?.source || placeholderImage }
+  let image = { uri: item?.url || item?.source}
   return (
     <ImageBackground
       style={[styles.startImage, { aspectRatio: item.aspectRatio }]}
       imageStyle={styles.startImageImage}
-      source={image}
+      source={image.uri ? image : placeholderImage}
       resizeMode="contain"
     />
   );
