@@ -1,6 +1,9 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { Colors, TextStyles } from "@assets/styles";
 import { StyleSheetUtils } from "@utils";
+
+const { width, height } = Dimensions.get("window");
+
 
 export default StyleSheet.create({
   viewContainer: {
@@ -12,11 +15,9 @@ export default StyleSheet.create({
   },
 
   container: {
-    // flex: 1,
     ...StyleSheet.absoluteFillObject,
     flexDirection: 'column',
     flex: 1,
-
   },
   imageContainer: {
     flex: 1,
@@ -25,9 +26,9 @@ export default StyleSheet.create({
     aspectRatio: 16 / 9,
   },
   bodyContainer: {
+    minHeight: '100%',
     flex: 1,
     alignItems: "stretch",
-
   },
   scrollView: {
     paddingBottom: 70,
