@@ -17,6 +17,7 @@ import { StyleSheetUtils } from "@utils";
 import { DateUtils } from "@utils";
 import useOpenLink from "@hooks/useOpenLink";
 import { trackScreen } from "../../utils/MatomoUtils";
+import Touchable from "@shared-components/Touchable";
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 
 const styles = StyleSheet.create({
@@ -136,7 +137,7 @@ function CalendarEvent({ event, currentLanguage, navigation }: Props) {
   const dateString = DateUtils.eventTime(dateStart);
   const eventUrl = `${eventCalendarURL}/${slug}?date=${eventLinkDate}`;
   return (
-    <TouchableOpacity
+    <Touchable
       style={styles.item}
       onPress={() => {
         trackScreen("view_event", event?.name || event?.slug);
@@ -168,7 +169,7 @@ function CalendarEvent({ event, currentLanguage, navigation }: Props) {
           </Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </Touchable>
   );
 }
 

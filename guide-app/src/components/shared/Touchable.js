@@ -1,48 +1,34 @@
-/**
- * Created by msaeed on 2017-02-04.
- */
-import React, { Component } from "react";
-import { StyleSheet, TouchableWithoutFeedback, Animated } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, TouchableOpacity } from "react-native";
 
-type Props = {
-  onPress: any,
-  style: any,
-  children: Array
-};
 
-export default class TouchableItem extends Component<Props> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      animValue: new Animated.Value(1)
-    };
+const Touchable = (props) => {
 
-    this.onPressIn = this.onPressIn.bind(this);
-    this.onPressOut = this.onPressOut.bind(this);
-  }
+  const { children, onPress } = props;
 
-  onPressIn() {
-    Animated.spring(this.state.animValue, { toValue: 1.5, useNativeDriver: true }).start();
-  }
-  onPressOut() {
-    Animated.spring(this.state.animValue, { toValue: 1, useNativeDriver: true }).start();
-  }
-  render() {
-    const style = { transform: [{ scale: this.state.animValue }] };
-    return (
-      <TouchableWithoutFeedback
-        onPress={this.props.onPress}
-        onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}
+  const [pressed, setPressed] = useState(false);
+
+  useEffect(() => {
+    return setPressed(false);
+  }, []);
+
+  return (
+      <TouchableOpacity
+        {...props}
+        activeOpacity={1}
+        onPress={() => {
+          setPressed(true);
+          setTimeout(() => {
+            setPressed(false);
+            onPress();
+          }, 100);
+        }}
       >
-        <Animated.View style={[style, styles.mainContainer, this.props.style]}>
-          {this.props.children}
-        </Animated.View>
-      </TouchableWithoutFeedback>
-    );
-  }
-}
+        <View style={{opacity: pressed ? 0.8 : 1}}>
+        {children}
+        </View>
+      </TouchableOpacity>
 
-const styles = StyleSheet.create({
-  mainContainer: {}
-});
+  );
+};
+export default Touchable;

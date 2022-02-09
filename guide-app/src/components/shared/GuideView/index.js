@@ -15,8 +15,10 @@ import styles from "./styles";
 import ImageView from "@shared-components/ImageView";
 import DateView from "@shared-components/DateView";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
+import Touchable from "@shared-components/Touchable";
 import DownloadButtonContainer from "@shared-components/DownloadButton";
 import SharingService from "@services/SharingService";
+
 
 declare type Props = {
   guide: Guide,
@@ -31,7 +33,7 @@ class GuideView extends Component<Props> {
     const uri = images.length > 0 ? images[0].medium : null;
     return (
       <View key={obj.id} style={styles.objectContainer}>
-        <TouchableOpacity
+        <Touchable
           style={styles.objectButtonContainer}
           onPress={() => this.props.onPressContentObject(obj, index, array)}
         >
@@ -46,7 +48,7 @@ class GuideView extends Component<Props> {
           <Text style={styles.contentTitleText} numberOfLines={2}>
             {obj.title}
           </Text>
-        </TouchableOpacity>
+        </Touchable>
       </View>
     );
   };

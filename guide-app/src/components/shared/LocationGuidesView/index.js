@@ -3,6 +3,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import ListItem from "@shared-components/ListItem";
+import Touchable from "@shared-components/Touchable";
 import styles from "./style";
 import LangService from "@services/langService";
 
@@ -33,7 +34,7 @@ const LocationGuidesView = (props: Props) => {
         {LangService.strings.MEDIAGUIDES}
       </Text>
       {interactiveGuide && (
-        <TouchableOpacity
+        <Touchable
           style={styles.guideContainer}
           onPress={() => onPressInteractiveGuide(interactiveGuide)}
         >
@@ -41,13 +42,13 @@ const LocationGuidesView = (props: Props) => {
             imageSource={{ uri: interactiveGuide.image }}
             title={interactiveGuide.title}
           />
-        </TouchableOpacity>
+        </Touchable>
       )}
       {guides.map(guide => {
 
         const forKids = guide.childFriendly;
         return (
-          <TouchableOpacity
+          <Touchable
             key={guide.id}
             style={styles.guideContainer}
             onPress={() => onPressGuide(guide)}
@@ -60,7 +61,7 @@ const LocationGuidesView = (props: Props) => {
               endDate={guide.dateEnd}
               forKids={forKids}
             />
-          </TouchableOpacity>
+          </Touchable>
         );
       })}
     </View>

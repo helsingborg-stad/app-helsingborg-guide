@@ -10,6 +10,8 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
 import ImageView from "@shared-components/ImageView";
+import Touchable from "@shared-components/Touchable";
+
 
 type Props = {
   size?: "expanded" | "compact",
@@ -32,7 +34,8 @@ const ImageCard = ({
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={1} style={styles.buttonContainer} onPress={onPress}>
+      <Touchable
+        style={styles.buttonContainer} onPress={onPress}>
         {/*<ImageView style={[styles.image, { height }]} source={image} />*/}
         <Image style={[styles.image, { height }]} source={image} />
         <LinearGradient
@@ -57,7 +60,7 @@ const ImageCard = ({
             </View>
           </View>
         </LinearGradient>
-      </TouchableOpacity>
+      </Touchable>
     </View>
   );
 };
