@@ -220,7 +220,7 @@ function mapStateToProps(state: RootState) {
   let categories = "";
 
   categories = [...navigationCategories.map(cat => {
-
+    console.log("the data", cat.items)
     const data = cat.items
       .map((item) => {
         let copy = {...item};
@@ -249,6 +249,7 @@ function mapStateToProps(state: RootState) {
 
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 
+
   return {
     categories,
     currentHomeTab,
@@ -261,6 +262,7 @@ function mapStateToProps(state: RootState) {
     currentLanguage,
   };
 }
+
 
 function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
   return {

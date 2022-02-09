@@ -18,7 +18,6 @@ function getDescription(item: NavigationItem) {
 
   let textString = "";
 
-
   if ((type === "guidegroup" || type === "guide") && guidesCount === 0) {
     return "";
   }
@@ -44,7 +43,7 @@ function getDescription(item: NavigationItem) {
       } ${guidesCount} ${LangService.strings.OBJECT}`;
     }
   } else if (type === "interactive_guide") {
-    if(!!interactiveGuide?.steps) {
+    if(!!interactiveGuide?.steps?.length) {
       textString = `${LangService.strings.MEDIAGUIDE_INTERACTIVE} 
 ${LangService.strings.WITH} ${interactiveGuide?.steps?.length - 1} ${LangService.strings.OBJECT}`.toUpperCase();
     } else {

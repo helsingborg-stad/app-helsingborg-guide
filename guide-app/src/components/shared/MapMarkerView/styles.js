@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Colors, TextStyles } from "@assets/styles";
 
 const numberedMarkerTextContainerShared = {
@@ -17,12 +17,18 @@ const numberedMarkerTextShared = {
   textAlign: "center",
 };
 
+const { width, height } = Dimensions.get("window");
+
 export default StyleSheet.create({
   container: {
+    width: width,
+    height: height,
     backgroundColor: Colors.white,
     flex: 1,
   },
   map: {
+    width: width,
+    height: height,
     flex: 1,
   },
   numberedMarkerOuterContainer: {
