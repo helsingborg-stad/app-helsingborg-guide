@@ -103,6 +103,8 @@ export default class DownloadItemView extends Component<Props> {
     const isCompleted = this.props.progress >= 1;
     const color = isCompleted ? Colors.green : Colors.themeControl;
 
+    console.log("is completed???", isCompleted)
+
     const resumeIcon = (
       <Icon name="reload" color={Colors.themeControl} size={25} />
     );
@@ -126,7 +128,8 @@ export default class DownloadItemView extends Component<Props> {
           <View style={styles.progressBarContainer}>
             <View style={styles.progressTextContainer}>
               <Text style={styles.progressText}>
-                {`${LangService.strings.DOWNLOADING} ${percentage}%`}{" "}
+                {isCompleted ? LangService.strings.DOWNLOADED :
+                  `${LangService.strings.DOWNLOADING} ${percentage}%`}{" "}
               </Text>
             </View>
             <View style={styles.barContainer}>

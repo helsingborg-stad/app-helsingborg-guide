@@ -21,7 +21,6 @@ import {
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
 import useNotifications from "@hooks/useNotifications"
-import { fetchNavigation } from "../../../../../guide-app/src/actions/navigationActions";
 
 const { store, persistor } = configureStore();
 
@@ -91,7 +90,7 @@ const GuideApp = () => {
     }
     else {
       store.dispatch(internetChanged(false));
-      this.noNetworkTimer = setTimeout(alert, 2500);
+      // this.noNetworkTimer = setTimeout(alert, 2500);
       return;
     }
   },[netInfo])
@@ -125,7 +124,6 @@ const GuideApp = () => {
   }, []);
 
   return (
-    netInfo ?
       <SafeAreaProvider>
         <PersistGate persistor={persistor}>
           <TrackingPermission />
@@ -135,7 +133,7 @@ const GuideApp = () => {
             onAppBecameInactive={() => store.dispatch(appBecameInactive())}
           />
         </PersistGate>
-      </SafeAreaProvider> : <></>
+      </SafeAreaProvider>
   );
 };
 

@@ -220,7 +220,6 @@ function mapStateToProps(state: RootState) {
   let categories = "";
 
   categories = [...navigationCategories.map(cat => {
-    console.log("the data", cat.items)
     const data = cat.items
       .map((item) => {
         let copy = {...item};
