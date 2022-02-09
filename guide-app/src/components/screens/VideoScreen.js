@@ -20,7 +20,6 @@ export default class VideoScreen extends Component {
       title,
       headerLeft: () => <HeaderBackButton navigation={navigation} />,
       headerRight: () => <View style={{ width: 36 }} />,
-
       headerStyle: styles.mainContainer,
       tabBarVisible: false
     };
