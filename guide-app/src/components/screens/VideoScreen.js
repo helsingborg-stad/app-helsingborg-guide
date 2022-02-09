@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView, View } from "react-native";
 import PropTypes from "prop-types";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import ViewContainer from "@shared-components/view_container";
@@ -19,7 +19,8 @@ export default class VideoScreen extends Component {
     return {
       title,
       headerLeft: () => <HeaderBackButton navigation={navigation} />,
-      headerRight: () => null,
+      headerRight: () => <View style={{ width: 36 }} />,
+
       headerStyle: styles.mainContainer,
       tabBarVisible: false
     };

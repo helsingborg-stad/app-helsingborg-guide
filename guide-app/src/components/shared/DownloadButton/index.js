@@ -20,7 +20,6 @@ import {
   cancelDownloadGuide,
   resumeDownloadGuide
 } from "@actions/downloadGuidesActions";
-import AnalyticsUtils from "@utils/AnalyticsUtils";
 import { trackEvent } from "@utils/MatomoUtils";
 
 type Props = {

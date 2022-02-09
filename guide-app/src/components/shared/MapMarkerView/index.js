@@ -230,7 +230,7 @@ class MapMarkerView extends Component<Props, State> {
         <MapView
           zoomEnabled={true}
           minZoomLevel={10}
-          maxZoomLevel={16.5}
+          maxZoomLevel={17}
           ref={(ref) => {
             this.map = ref;
           }}

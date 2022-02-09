@@ -131,10 +131,10 @@ export default function reducer(
     }
     case "CANCEL_DOWNLOAD_GUIDE": {
       const { guide } = action;
-      const offlineGuide: OfflineGuide = state.offlineGuides[guide.id];
+      const offlineGuide: OfflineGuide = state?.offlineGuides[guide?.id];
       if (offlineGuide) {
         const offlineGuides = { ...state.offlineGuides };
-        delete offlineGuides[guide.id];
+        delete offlineGuides[guide?.id];
         return { ...state, offlineGuides };
       }
       return state;

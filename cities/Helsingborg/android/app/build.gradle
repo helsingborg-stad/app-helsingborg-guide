@@ -86,8 +86,11 @@ project.ext.react = [
     cliPath: "../../node_modules/react-native/cli.js"
       // clean and rebuild if changing
 ]
-
 apply from: "../../../../node_modules/react-native/react.gradle"
+
+project.ext.vectoricons = [
+    iconFontsDir: "../../../../node_modules/react-native-vector-icons/Fonts"
+]
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -274,4 +277,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-apply from: "../../../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: file("../../../../node_modules/react-native-vector-icons/fonts.gradle");
+
+// apply from: "../../../../node_modules/react-native-vector-icons/fonts.gradle"
