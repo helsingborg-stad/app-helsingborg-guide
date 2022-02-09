@@ -116,6 +116,7 @@ export default class DownloadItemView extends Component<Props> {
     const percentage = parseInt(this.props.progress * 100);
     return (
       <ViewContainer style={styles.wrapper}>
+        <TouchableOpacity onPress={this.props.onPressItem}>
         <View style={styles.header}>
           <Text style={styles.headerText}>{this.props.title}</Text>
         </View>
@@ -157,6 +158,7 @@ export default class DownloadItemView extends Component<Props> {
             </TouchableOpacity>
           </View>
         </View>
+        </TouchableOpacity>
       </ViewContainer>
     );
   }
