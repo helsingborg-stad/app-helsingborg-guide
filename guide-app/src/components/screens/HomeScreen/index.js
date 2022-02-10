@@ -28,6 +28,7 @@ import { fetchNavigation } from "@actions/navigationActions";
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
+import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
 import { trackScreen } from "@utils/MatomoUtils";
 

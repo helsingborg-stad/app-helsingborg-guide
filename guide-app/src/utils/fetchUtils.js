@@ -18,7 +18,6 @@ async function fetchJSON(
   if (relativeUrl === "events") {
     url = `${DEPRECATED_API_BASE_URL}/${relativeUrl}/?lang=${langCode}`;
   }
-
   if (params) {
     url += params;
   }
