@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import { View, StatusBar } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LocationView from "@shared-components/LocationView";
-import { AnalyticsUtils } from "@utils";
 import { Colors, HeaderStyles } from "@assets/styles";
 import { selectCurrentGuide, showBottomBar } from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
+
 
 type Props = {
   currentGuideGroup: GuideGroup,

@@ -9,6 +9,9 @@ import {
   setGuidesAndGuideGroups,
 } from "@actions/guideGroupActions";
 import { fetchInteractiveGuides } from "@actions/interactiveGuideActions";
+import {
+showBottomBar,
+} from "@actions/uiStateActions";
 
 /**
  * Responsible for linking the navigation categories with it's content (guide, guidegroups etc.).
@@ -107,6 +110,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
             interactiveGuides.push(id);
           }
         });
+        dispatch(showBottomBar(true)),
         guides.length && dispatch(fetchGuides((currentLanguage || "sv"), guides));
         guideGroups.length && dispatch(fetchGuideGroups((currentLanguage || "sv"), guideGroups));
         interactiveGuides.length && dispatch(fetchInteractiveGuides((currentLanguage || "sv"), interactiveGuides));

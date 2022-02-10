@@ -8,10 +8,14 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./style";
+
+import { fetchGuidesForGuideGroup } from "@actions/guideActions";
 
 import DistanceView from "@shared-components/DistanceViewNew";
 import IconTextTouchable from "@shared-components/IconTextTouchable";
+import Scrollable from "@shared-components/Scrollable";
 import LangService from "@services/langService";
 import OpeningHoursView from "@shared-components/OpeningHoursView";
 import PointPropertiesView from "@shared-components/PointPropertiesView";
@@ -93,12 +97,18 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
 }
 
 const LocationView = (props: Props) => {
+  const { currentLanguage } = useSelector(s => s).navigation
+  const dispatch = useDispatch();
   const { isFetchingGuides } = props;
   const webUrl = props?.guideGroup?.location?.links ? getWebUrl(props.guideGroup.location.links): null
 
   return (
     <View style={styles.viewContainer}>
-      <ScrollView style={styles.scrollView}>
+      <Scrollable
+        style={styles.scrollView}
+        refreshControl={true}
+        refreshAction={() => dispatch(fetchGuidesForGuideGroup(currentLanguage, props.guideGroup?.id))}
+      >
         <View style={styles.imageViewContainer}>
          <ImageBackground
             source={props?.guideGroup?.images?.large ? { uri: props.guideGroup.images.large } : placeholderImage}
@@ -153,7 +163,7 @@ const LocationView = (props: Props) => {
             pointProperties={props?.guideGroup?.pointProperties}
           />
         </View>
-      </ScrollView>
+      </Scrollable>
     </View>
   );
 };

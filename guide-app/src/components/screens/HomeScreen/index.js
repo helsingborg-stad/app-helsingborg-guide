@@ -21,8 +21,6 @@ import {
   selectCurrentHomeTab,
   showBottomBar,
 } from "@actions/uiStateActions";
-import { fetchGuides } from "@actions/guideActions";
-import { fetchGuideGroups } from "@actions/guideGroupActions";
 import { fetchNavigation } from "@actions/navigationActions";
 
 import NavigationListItem from "@shared-components/NavigationListItem";
@@ -154,6 +152,8 @@ class HomeScreen extends Component<Props> {
       navigationCategoryLabels,
       selectCurrentTab,
       showLoadingSpinner,
+      fetchNavigationItems,
+      currentLanguage,
     } = this.props;
 
     if (showLoadingSpinner) {
@@ -181,10 +181,12 @@ class HomeScreen extends Component<Props> {
             </View>
           ) : (
             <>
-              <ScrollView
+              <Scrollable
                 key={currentHomeTab}
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
+                refreshControl={true}
+                refreshAction={() => fetchNavigationItems(currentLanguage)}
               >
                 {items?.length && items.map((item, index) => (
                   <NavigationListItem
@@ -194,7 +196,7 @@ class HomeScreen extends Component<Props> {
                     onPressItem={() => this.onPressItem(item, items, index)}
                   />
                 ))}
-              </ScrollView>
+              </Scrollable>
               <TouchableOpacity
                 style={styles.mapButton}
                 onPress={() => navigation.navigate("CategoryMapScreen")}
@@ -266,8 +268,7 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
   return {
-    fetchGuideGroups: (currentLanguage: string, guideGroups: Array) => dispatch(fetchGuideGroups(currentLanguage, guideGroups)),
-    fetchGuides: (currentLanguage: string, guides: Array) => dispatch(fetchGuides(currentLanguage, guides)),
+    fetchNavigationItems: (code: string) => dispatch(fetchNavigation(code)),
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
     selectCurrentCategory: (category: NavigationCategory) =>

@@ -15,6 +15,7 @@ import { addDays, subDays } from "date-fns";
 
 import CalendarEvent from "@shared-components/CalendarEvent";
 import CalendarDatePicker from "@shared-components/CalendarDatePicker";
+import Scrollable from "@shared-components/Scrollable";
 import LangService from "@services/langService";
 import { Colors, TextStyles } from "@assets/styles";
 import { showBottomBar } from "@actions/uiStateActions";
@@ -129,6 +130,7 @@ class CalendarScreen extends Component<Props, State> {
   render() {
     const {
       currentLanguage,
+      getEvents,
       noContent,
       showLoadingSpinner,
       items,
@@ -166,7 +168,10 @@ class CalendarScreen extends Component<Props, State> {
     return (
       <Layout>
         {datePicker}
-        <ScrollView>
+        <Scrollable
+          refreshControl={true}
+          refreshAction={() => getEvents(currentLanguage, chosenDate, chosenDate)}
+        >
           <View style={styles.container}>
             {items.map(event => (
               <CalendarEvent
@@ -177,7 +182,7 @@ class CalendarScreen extends Component<Props, State> {
               />
             ))}
           </View>
-        </ScrollView>
+        </Scrollable>
       </Layout>
     );
   }
