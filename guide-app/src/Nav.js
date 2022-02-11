@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { AppState, StatusBar, Platform, View } from "react-native";
+import { OrientationLocker, PORTRAIT } from "react-native-orientation-locker";
 import { connect } from "react-redux";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";

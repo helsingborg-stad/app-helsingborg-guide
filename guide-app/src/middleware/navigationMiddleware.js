@@ -10,7 +10,8 @@ import {
 } from "@actions/guideGroupActions";
 import { fetchInteractiveGuides } from "@actions/interactiveGuideActions";
 import {
-showBottomBar,
+  selectCurrentHomeTab,
+  showBottomBar,
 } from "@actions/uiStateActions";
 
 /**
@@ -89,6 +90,8 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
     }
     case "FETCH_NAVIGATION_SUCCESS": {
       const { navigation } = nextState;
+      const { homeTab } = action;
+      console.log("the action", homeTab);
       const { currentLanguage, navigationCategories } = navigation;
 
       // clear downloaded guides/guidegroups
@@ -110,10 +113,10 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
             interactiveGuides.push(id);
           }
         });
-        dispatch(showBottomBar(true)),
         guides.length && dispatch(fetchGuides((currentLanguage || "sv"), guides));
         guideGroups.length && dispatch(fetchGuideGroups((currentLanguage || "sv"), guideGroups));
         interactiveGuides.length && dispatch(fetchInteractiveGuides((currentLanguage || "sv"), interactiveGuides));
+
       });
       break;
     }
@@ -121,6 +124,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
     case "FETCH_GUIDEGROUPS_SUCCESS":
     case "FETCH_INTERACTIVE_GUIDES_SUCCESS":
     case "SET_GUIDES_AND_GUIDEGROUPS": {
+      const { homeTab } = action;
       const { items: guideGroups } = nextState.guideGroups;
       const { items: guides } = nextState.guides;
       const { items: interactiveGuides } = nextState.interactiveGuides;
@@ -132,6 +136,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
         interactiveGuides,
       );
       dispatch(setNavigationCategories(renderableCategories));
+      homeTab && dispatch(selectCurrentHomeTab(homeTab))
 
     }
       break;

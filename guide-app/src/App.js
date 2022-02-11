@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Provider, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import messaging from '@react-native-firebase/messaging';
+import { OrientationLocker, PORTRAIT } from "react-native-orientation-locker";
 import { PersistGate } from "redux-persist/integration/react";
 import { Alert, UIManager, Platform, Linking, LogBox } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
@@ -20,10 +20,9 @@ import {
 } from "@actions/uiStateActions";
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
-import useNotifications from "@hooks/useNotifications"
+import useNotifications from "@hooks/useNotifications";
 
 const { store, persistor } = configureStore();
-
 
 
 // TODO decouple these store reference hacks
@@ -49,11 +48,12 @@ function alert() {
       },
       {
         text: LangService.strings.CLOSE,
-        onPress: () => {},
+        onPress: () => {
+        },
         style: "cancel",
       },
     ],
-    { cancelable: false }
+    { cancelable: false },
   );
 }
 
@@ -83,18 +83,16 @@ const GuideApp = () => {
     if (netInfo) {
       LangService.loadStoredLanguage()
         .then((res) => {
-          store.dispatch(setLanguage(LangService.code || 'sv'));
+          store.dispatch(setLanguage(LangService.code || "sv"));
         })
         .catch((error) => store.dispatch(errorHappened(error)));
-      LangService.getLanguages()
-    }
-    else {
+      LangService.getLanguages();
+    } else {
       store.dispatch(internetChanged(false));
       // this.noNetworkTimer = setTimeout(alert, 2500);
       return;
     }
-  },[netInfo])
-
+  }, [netInfo]);
 
 
   useEffect(() => {
@@ -113,8 +111,8 @@ const GuideApp = () => {
       "`new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.",
       "`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.",
     ]);
-    subscribeToNotifications()
-    onNotification()
+    subscribeToNotifications();
+    onNotification();
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
@@ -124,6 +122,7 @@ const GuideApp = () => {
   }, []);
 
   return (
+    <OrientationLocker orientation={PORTRAIT}>
       <SafeAreaProvider>
         <PersistGate persistor={persistor}>
           <TrackingPermission />
@@ -134,6 +133,7 @@ const GuideApp = () => {
           />
         </PersistGate>
       </SafeAreaProvider>
+    </OrientationLocker>
   );
 };
 

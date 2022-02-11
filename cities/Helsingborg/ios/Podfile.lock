@@ -404,6 +404,8 @@ PODS:
     - React-Core
   - react-native-netinfo (7.1.7):
     - React-Core
+  - react-native-orientation-locker (1.4.0):
+    - React-Core
   - react-native-photo-view (1.5.3):
     - React-Core
   - react-native-progress-bar-android (1.0.4):
@@ -588,6 +590,7 @@ DEPENDENCIES:
   - "react-native-geolocation (from `../../../node_modules/@react-native-community/geolocation`)"
   - react-native-maps (from `../../../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../../../node_modules/@react-native-community/netinfo`)"
+  - react-native-orientation-locker (from `../../../node_modules/react-native-orientation-locker`)
   - react-native-photo-view (from `../../../node_modules/react-native-photo-view`)
   - "react-native-progress-bar-android (from `../../../node_modules/@react-native-community/progress-bar-android`)"
   - "react-native-progress-view (from `../../../node_modules/@react-native-community/progress-view`)"
@@ -714,6 +717,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-maps"
   react-native-netinfo:
     :path: "../../../node_modules/@react-native-community/netinfo"
+  react-native-orientation-locker:
+    :path: "../../../node_modules/react-native-orientation-locker"
   react-native-photo-view:
     :path: "../../../node_modules/react-native-photo-view"
   react-native-progress-bar-android:
@@ -845,6 +850,7 @@ SPEC CHECKSUMS:
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-maps: d752b0dd0e1951d815b1336332835aab6b4a836f
   react-native-netinfo: 27f287f2d191693f3b9d01a4273137fcf91c3b5d
+  react-native-orientation-locker: 2da91e5391971dace445495821c899c111dcad7a
   react-native-photo-view: ea0ec91bf5991a6843e740b1f47ab355171c996c
   react-native-progress-bar-android: be43138ab7da30d51fc038bafa98e9ed594d0c40
   react-native-progress-view: 9e6b6a5305a9115c2157ae3b8852081aba0aab7c

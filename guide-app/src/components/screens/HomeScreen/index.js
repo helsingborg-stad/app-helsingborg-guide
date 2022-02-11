@@ -29,6 +29,7 @@ import SegmentControlPill from "@shared-components/SegmentControlPill";
 import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
 import { trackScreen } from "@utils/MatomoUtils";
+import Orientation, { OrientationLocker, PORTRAIT } from "react-native-orientation-locker";
 
 
 type Section = {
@@ -71,6 +72,7 @@ class HomeScreen extends Component<Props> {
   };
 
   componentDidMount() {
+    Orientation.lockToLandscape();
     this.props.dispatchShowBottomBar(true);
   }
 
@@ -166,6 +168,7 @@ class HomeScreen extends Component<Props> {
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
         <SafeAreaView edges={["right", "top", "left"]} style={styles.homeContainer}>
+          {/*<OrientationLocker orientation={PORTRAIT}>*/}
           <View style={styles.topBarNavigation}>
             <SegmentControlPill
               initialSelectedIndex={currentHomeTab}
@@ -186,7 +189,10 @@ class HomeScreen extends Component<Props> {
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}
                 refreshControl={true}
-                refreshAction={() => fetchNavigationItems(currentLanguage)}
+                refreshAction={() => {
+                  fetchNavigationItems(currentLanguage, currentHomeTab);
+                  this.props.dispatchShowBottomBar(true);
+                }}
               >
                 {items?.length && items.map((item, index) => (
                   <NavigationListItem
@@ -205,6 +211,7 @@ class HomeScreen extends Component<Props> {
               </TouchableOpacity>
             </>
           )}
+          {/*</OrientationLocker>*/}
         </SafeAreaView>
       </>
     );
@@ -268,7 +275,7 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
   return {
-    fetchNavigationItems: (code: string) => dispatch(fetchNavigation(code)),
+    fetchNavigationItems: (code: string, homeTab: number) => dispatch(fetchNavigation(code, homeTab)),
     selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
     selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
     selectCurrentCategory: (category: NavigationCategory) =>

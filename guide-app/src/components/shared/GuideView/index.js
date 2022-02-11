@@ -9,7 +9,10 @@ import {
   Dimensions,
   StatusBar,
 } from "react-native";
+import { connect } from "react-redux";
+import { fetchNavigation } from "@actions/navigationActions";
 import ExpandableView from "@shared-components/ExpandableView";
+import Scrollable from "@shared-components/Scrollable";
 import { Colors, TextStyles } from "@assets/styles";
 import styles from "./styles";
 import ImageView from "@shared-components/ImageView";
@@ -18,6 +21,7 @@ import AudioPlayerView from "@shared-components/AudioPlayerView";
 import Touchable from "@shared-components/Touchable";
 import DownloadButtonContainer from "@shared-components/DownloadButton";
 import SharingService from "@services/SharingService";
+
 
 
 declare type Props = {
@@ -68,7 +72,7 @@ class GuideView extends Component<Props> {
   );
 
   render() {
-    const { guide } = this.props;
+    const { guide, fetchNavigationItems, currentLanguage } = this.props;
     const { id } = guide;
     return (
       <View style={styles.viewContainer}>
@@ -76,9 +80,11 @@ class GuideView extends Component<Props> {
           barStyle="light-content"
           backgroundColor={Colors.themeSecondary}
         />
-        <ScrollView
+        <Scrollable
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
+          refreshControl={true}
+          refreshAction={() => fetchNavigationItems(currentLanguage)}
         >
           <View>
             <ImageView
@@ -112,11 +118,28 @@ class GuideView extends Component<Props> {
             ) : null}
           </View>
           {this.renderContentObjects(id, guide.contentObjects)}
-        </ScrollView>
+        </Scrollable>
         <AudioPlayerView />
       </View>
     );
   }
 }
 
-export default GuideView;
+function mapStateToProps(state: RootState) {
+  const { navigation } = state;
+  const { currentLanguage } = navigation;
+
+  return {
+    currentLanguage
+  }
+}
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    fetchNavigationItems: (code: string) => dispatch(fetchNavigation(code)),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GuideView)

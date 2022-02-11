@@ -20,21 +20,22 @@ export function fetchNavigationRequest(): Action {
 }
 
 export function fetchNavigationSuccess(
-  categories: NavigationCategory[]
+  categories: NavigationCategory[],
+  homeTab
 ): Action {
-  return { type: "FETCH_NAVIGATION_SUCCESS", categories };
+  return { type: "FETCH_NAVIGATION_SUCCESS", categories, homeTab };
 }
 
 export function fetchNavigationFailure(error: Error): Action {
   return { type: "FETCH_NAVIGATION_FAILURE", error };
 }
 
-export function fetchNavigation(langCode: string): ThunkAction {
+export function fetchNavigation(langCode: string, homeTab: number): ThunkAction {
   return function fetchNavigationDispatch(dispatch: Dispatch) {
     dispatch(fetchNavigationRequest());
     return getNavigation(langCode)
       .then(guides => {
-        dispatch(fetchNavigationSuccess(guides));
+        dispatch(fetchNavigationSuccess(guides, homeTab));
       })
       .catch(error => {
         dispatch(fetchNavigationFailure(error.message));
