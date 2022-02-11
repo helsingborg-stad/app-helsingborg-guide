@@ -7,6 +7,8 @@
 
 #import "AppDelegate.h"
 #import "RNFBMessagingModule.h"
+#import "Orientation.h"
+
 
 
 #import <React/RCTBridge.h>
@@ -46,6 +48,10 @@ static void InitializeFlipper(UIApplication *application) {
  #ifdef FB_SONARKIT_ENABLED
     InitializeFlipper(application);
   #endif
+
+  +- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  +  return [Orientation getOrientation];
+  +}
 
   NSDictionary *appProperties = [RNFBMessagingModule addCustomPropsToUserProps:nil withLaunchOptions:launchOptions];
 
