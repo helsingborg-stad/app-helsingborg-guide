@@ -1,10 +1,12 @@
 import { AppRegistry } from "react-native";
+import Orientation from "react-native-orientation-locker";
 import GuideApp from "./src/App";
 import useNotifications from "@hooks/useNotifications"
 import FullScreenVideoScreen from "./src/components/screens/FullScreenVideoScreen";
 import configureStore from "@src/store/configureStore";
 import { name as AppName } from "./app.json";
 import { Provider } from "react-redux";
+
 
 const { store } = configureStore();
 

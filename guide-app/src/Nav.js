@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from "react";
 import { AppState, StatusBar, Platform, View } from "react-native";
-import { OrientationLocker, PORTRAIT } from "react-native-orientation-locker";
-import { connect } from "react-redux";
+import Orientation from "react-native-orientation-locker";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+
 
 import {
   CalendarScreen,
@@ -34,6 +34,7 @@ import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
 import NavigatorService from "@services/navigationService";
 import { initializeTracker, trackScreen } from "@utils/MatomoUtils";
+
 
 
 const GuideNavigator = createStackNavigator(
@@ -135,6 +136,7 @@ class Nav extends Component<Props> {
   }
 
   componentDidMount = () => {
+    Orientation.lockToPortrait();
     this.props.onAppStarted();
     initializeTracker();
     AppState.addEventListener("change", this.onAppStateChange);

@@ -8,6 +8,7 @@ import {
   View,
   NativeModules
 } from "react-native";
+import Orientation from "react-native-orientation-locker";
 import Slider from "@react-native-community/slider";
 import PropTypes from "prop-types";
 import Video from "react-native-video";
@@ -89,6 +90,14 @@ export default class VideoPlayer extends Component {
       isPlaying: playOnLoad,
       loading: playOnLoad
     };
+  }
+
+  componentDidMount() {
+    Orientation.unlockAllOrientations();
+  }
+
+  componentWillUnmount() {
+    Orientation.lockToPortrait();
   }
 
   displaySpinner() {

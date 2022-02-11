@@ -1,5 +1,6 @@
 import React from "react";
 import { AppRegistry } from "react-native";
+import Orientation from "react-native-orientation-locker";
 import Helsingborg from "guide-app/src/App";
 import useNotifications from "@hooks/useNotifications";
 import FullScreenVideoScreen from "guide-app/src/components/screens/FullScreenVideoScreen";
@@ -8,6 +9,8 @@ import configureStore from "@src/store/configureStore";
 import { Provider } from "react-redux";
 
 const { store } = configureStore();
+
+Orientation.lockToPortrait();
 
 const { setBackgroundNotificationHandler } = useNotifications();
 setBackgroundNotificationHandler();

@@ -49,9 +49,7 @@ static void InitializeFlipper(UIApplication *application) {
     InitializeFlipper(application);
   #endif
 
-  +- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-  +  return [Orientation getOrientation];
-  +}
+
 
   NSDictionary *appProperties = [RNFBMessagingModule addCustomPropsToUserProps:nil withLaunchOptions:launchOptions];
 
@@ -59,6 +57,7 @@ static void InitializeFlipper(UIApplication *application) {
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"Helsingborg"
                                             initialProperties:appProperties];
+
 
 
 
@@ -112,6 +111,10 @@ static void InitializeFlipper(UIApplication *application) {
 //   [RNCPushNotificationIOS didReceiveNotificationResponse:response];
 // }
 //
+
+ - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    return [Orientation getOrientation];
+  }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {

@@ -7,7 +7,6 @@ import {
   Image,
   StatusBar,
   Text,
-  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
@@ -29,7 +28,7 @@ import SegmentControlPill from "@shared-components/SegmentControlPill";
 import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
 import { trackScreen } from "@utils/MatomoUtils";
-import Orientation, { OrientationLocker, PORTRAIT } from "react-native-orientation-locker";
+import Orientation from "react-native-orientation-locker";
 
 
 type Section = {
@@ -72,13 +71,11 @@ class HomeScreen extends Component<Props> {
   };
 
   componentDidMount() {
-    Orientation.lockToLandscape();
-
+    Orientation.lockToPortrait();
     this.props.dispatchShowBottomBar(true);
   }
 
   componentDidUpdate() {
-    Orientation.lockToLandscape();
 
   }
 
@@ -174,7 +171,6 @@ class HomeScreen extends Component<Props> {
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
         <SafeAreaView edges={["right", "top", "left"]} style={styles.homeContainer}>
-          {/*<OrientationLocker orientation={PORTRAIT}>*/}
           <View style={styles.topBarNavigation}>
             <SegmentControlPill
               initialSelectedIndex={currentHomeTab}
@@ -217,7 +213,6 @@ class HomeScreen extends Component<Props> {
               </TouchableOpacity>
             </>
           )}
-          {/*</OrientationLocker>*/}
         </SafeAreaView>
       </>
     );
