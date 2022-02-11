@@ -73,7 +73,13 @@ class HomeScreen extends Component<Props> {
 
   componentDidMount() {
     Orientation.lockToLandscape();
+
     this.props.dispatchShowBottomBar(true);
+  }
+
+  componentDidUpdate() {
+    Orientation.lockToLandscape();
+
   }
 
   componentWillUnmount = () => {
