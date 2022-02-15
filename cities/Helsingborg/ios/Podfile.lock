@@ -626,7 +626,7 @@ DEPENDENCIES:
   - "RNNotifee (from `../../../node_modules/@notifee/react-native`)"
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
-  - RNShare (from `../node_modules/react-native-share`)
+  - RNShare (from `../../../node_modules/react-native-share`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
 
@@ -790,7 +790,7 @@ EXTERNAL SOURCES:
   RNScreens:
     :path: "../../../node_modules/react-native-screens"
   RNShare:
-    :path: "../node_modules/react-native-share"
+    :path: "../../../node_modules/react-native-share"
   RNSVG:
     :path: "../../../node_modules/react-native-svg"
   Yoga:
