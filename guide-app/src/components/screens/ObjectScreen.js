@@ -54,11 +54,12 @@ function isMediaAvailable(media?: MediaContent): boolean {
 
 class ObjectScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params;
+    const { title, path } = navigation.state.params;
+
     return {
       ...HeaderStyles.noElevation,
       title,
-      headerLeft: () => <HeaderBackButton navigation={navigation} />,
+      headerLeft: () => <HeaderBackButton navigation={navigation} path={path}   />,
       headerRight: () => <View style={{ width: 36 }} />,
     };
   };
@@ -111,7 +112,6 @@ class ObjectScreen extends Component<Props> {
 
     const { audio, title } = currentContentObject;
 
-
     if (!audio || !audio.url) {
       return;
     }
@@ -131,7 +131,6 @@ class ObjectScreen extends Component<Props> {
   };
 
   render() {
-    console.log(this.loadAudioFile, "audio file");
     const {
       currentContentObject,
       currentContentObjectImageIndex,
@@ -139,7 +138,7 @@ class ObjectScreen extends Component<Props> {
       navigation,
     } = this.props;
 
-    const { selectObject, index, array, prevIndex, order, swipeable, scrollable, panToIndex } = this.props.navigation.state.params;
+    const { selectObject, index, array, prevIndex, order, swipeable, scrollable, panToIndex, path } = this.props.navigation.state.params;
 
     if (!currentContentObject) {
       return null;
@@ -162,6 +161,7 @@ class ObjectScreen extends Component<Props> {
           contentObject={currentContentObject}
           guideId={guideId}
           guideType={guideType}
+          path={path}
           array={array}
           order={order}
           selectObject={selectObject}

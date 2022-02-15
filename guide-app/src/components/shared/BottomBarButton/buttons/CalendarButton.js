@@ -3,7 +3,6 @@ import BottomBarButton from "@shared-components/BottomBarButton";
 import Calendar from "@shared-components/svg/calendar";
 import LangService from "@services/langService";
 import NavigatorService from "@services/navigationService";
-import { AnalyticsUtils } from "@utils";
 
 type Props = {
   selected: boolean,
@@ -17,7 +16,6 @@ const CalendarButton = ({ onPress, selected }: Props) => (
     selected={selected}
     onPress={() => {
       !selected && NavigatorService.reset("CalendarScreen");
-      // AnalyticsUtils.logEvent("view_calendar");
       onPress();
     }}
   />

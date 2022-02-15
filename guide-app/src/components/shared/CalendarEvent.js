@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Image,
   StyleSheet,
@@ -106,10 +106,11 @@ const styles = StyleSheet.create({
 type Props = {
   event: Event,
   currentLanguage: string,
-  navigation: any
+  navigation: any,
+  path: string,
 };
 
-function CalendarEvent({ event, currentLanguage, navigation }: Props) {
+function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
   const {
     description,
     imageUrl,
@@ -136,13 +137,16 @@ function CalendarEvent({ event, currentLanguage, navigation }: Props) {
   const eventLinkDay = DateUtils.eventLinkDay(dateStart);
   const dateString = DateUtils.eventTime(dateStart);
   const eventUrl = `${eventCalendarURL}/${slug}?date=${eventLinkDate}`;
+  const newPath = `${path}/${slug || decodedLocationTitle}`;
+
   return (
     <Touchable
       style={styles.item}
       onPress={() => {
-        trackScreen("view_event", event?.name || event?.slug);
+        trackScreen(newPath, newPath);
           navigation.navigate("CalendarDetailsScreen", {
           event: {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle, date: eventLinkDay, dateString: dateString},
+            path: newPath,
         });
         // Linking.openURL(eventUrl);
         // openLink(eventUrl);

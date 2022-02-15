@@ -129,7 +129,7 @@ const SplashScreen = (props) => {
       const route = welcomed ? "MainScreen" : "WelcomeScreen";
       const resetAction = StackActions.reset({
         index: 0,
-        actions: [NavigationActions.navigate({ routeName: route })],
+        actions: [NavigationActions.navigate({ routeName: route, params: {title: "home" }})],
       });
       props.navigation.dispatch(resetAction);
     });

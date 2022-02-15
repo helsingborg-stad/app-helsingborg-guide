@@ -7,6 +7,7 @@ export default StyleSheet.create({
   container: {
     alignItems: "center",
     // backgroundColor: Colors.offWhite4,
+    // backgroundColor: Colors.white,
     backgroundColor: "#76768012",
     borderRadius: 70,
     flexGrow: 1,

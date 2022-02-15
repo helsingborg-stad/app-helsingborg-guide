@@ -6,12 +6,21 @@ import Colors from "@assets/styles/Colors";
 import {
   showBottomBar,
 } from "@actions/uiStateActions";
+import { trackScreen } from "@utils/MatomoUtils";
+
 
 const styles = {
   opacity: 0.6
 };
-function HeaderBackButton({ navigation, onPress, displayBottomBar }: { navigation: Object, onPress: any, displayBottomBar: Boolean }) {
+function HeaderBackButton({ navigation, onPress, path, displayBottomBar }: { navigation: Object, onPress: any, displayBottomBar: Boolean }) {
  const dispatch = useDispatch();
+
+
+  const updatePath = () => {
+    let split = path.split("/")
+    let newPath = split.slice(0, split.length - 1).join("/");
+    trackScreen(newPath, newPath);
+  }
 
   return (
     <Icon
@@ -22,7 +31,9 @@ function HeaderBackButton({ navigation, onPress, displayBottomBar }: { navigatio
       onPress={() => {
         !!onPress && onPress();
         !!displayBottomBar && dispatch(showBottomBar(true));
+        !!path && updatePath()
         navigation && navigation.goBack();
+
       }}
     />
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { Linking, ScrollView, Text, View, Image, StatusBar } from "react-native";
 import SharingService from "@services/SharingService";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import LangService from "@services/langService";
 import styles from "./styles";
@@ -74,7 +75,6 @@ const CalendarDetailsScreen = ({ navigation }) => {
     />;
   }
 
-
   return (
     <View style={styles.viewContainer}>
       <StatusBar
@@ -128,6 +128,9 @@ CalendarDetailsScreen["navigationOptions"] = screenProps => (
   {
     title: screenProps?.navigation?.state?.params?.event?.name || "Event",
     headerRight: () => <View style={{ width: 36 }} />,
+    headerLeft: () => <HeaderBackButton
+      navigation={screenProps.navigation}
+      path={screenProps?.navigation?.state?.params?.path} />,
   });
 
 export default CalendarDetailsScreen;

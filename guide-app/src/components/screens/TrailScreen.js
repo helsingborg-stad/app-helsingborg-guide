@@ -26,10 +26,12 @@ type State = {
 class TrailScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
     let title = null;
+    let path = null;
     let toggleInfoOverlay = () => {};
     const { params = {} } = navigation.state;
     if (params) {
       ({ title } = params);
+      ({ path } = params);
       ({ toggleInfoOverlay } = params);
     }
 
@@ -37,7 +39,7 @@ class TrailScreen extends Component<Props, State> {
       title,
       headerRight: () => (
         <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />),
-      headerLeft: () => <HeaderBackButton navigation={navigation} />
+      headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
     };
   };
 
@@ -75,11 +77,12 @@ class TrailScreen extends Component<Props, State> {
   };
 
   render() {
-    const { array, index } = this.props.navigation.state.params;
+    const { array, index, path } = this.props.navigation.state.params;
     if (this.props.currentGuide.contentObjects.length <= 0) {
       return null;
     }
 
+    console.log("props", array, index, path)
 
 
 
@@ -93,6 +96,7 @@ class TrailScreen extends Component<Props, State> {
           trail={this.props.currentGuide}
           array={array}
           index={index}
+          path={path}
           showInfoOverlay={this.state.showInfoOverlay}
           onToggleInfoOverlay={this.toggleInfoOverlay}
           navigation={this.props.navigation}

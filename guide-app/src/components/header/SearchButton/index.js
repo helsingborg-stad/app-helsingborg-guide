@@ -6,17 +6,20 @@ import styles from "./styles";
 const searchIcon = require("@assets/images/search-id.png");
 
 type Props = {
-  navigation: any
+  navigation: any,
+  path: any,
 };
 
-function onPress(navigation: any) {
+function onPress(navigation: any, path: any) {
   const { navigate } = navigation;
-  navigate("SearchObjectScreen");
+  navigate("SearchObjectScreen", {
+    path: path
+  });
 }
 
 const SearchButton = (props: Props) => (
   <TouchableOpacity
-    onPress={() => onPress(props.navigation)}
+    onPress={() => onPress(props.navigation, props.path)}
     style={styles.container}
   >
     <Image style={styles.image} source={searchIcon} />

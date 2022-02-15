@@ -28,11 +28,11 @@ class GuideScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
     if (params) {
-      const { title } = params;
+      const { title, path } = params;
       return {
         title,
-        headerRight: () => <SearchButton navigation={navigation} />,
-        headerLeft: () => <HeaderBackButton navigation={navigation} />,
+        headerRight: () => <SearchButton navigation={navigation} path={path} />,
+        headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
       };
     }
     return {};
@@ -55,8 +55,11 @@ class GuideScreen extends Component<Props> {
     }
 
     onPressContentObject = (obj: ContentObject, index, array) => {
+      const { navigation } = this.props;
+      const prevPath = navigation.state.params.path
+      const newPath = `${prevPath}/${obj?.title}`
       this.props.dispatchSelectContentObject(obj);
-      trackScreen("view_guide_object", obj?.title || "")
+      trackScreen(newPath, newPath)
       this.props.navigation.navigate("ObjectScreen", {
         title: obj.title,
         currentGuide: this.props.currentGuide,
@@ -64,6 +67,7 @@ class GuideScreen extends Component<Props> {
         array: array,
         order: obj?.order,
         swipeable: true,
+        path: newPath
       });
   };
 

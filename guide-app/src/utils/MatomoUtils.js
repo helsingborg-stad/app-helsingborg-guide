@@ -12,6 +12,7 @@ export const initializeTracker = async () => {
 };
 
 export const trackScreen = async (path, title) => {
+  console.log("__MATOTO TRACKING__", path)
   await isReleaseDevice() && Matomo.trackScreen(path, title);
 };
 export const trackEvent = async (category, action, name, value, url) => {
@@ -20,5 +21,5 @@ export const trackEvent = async (category, action, name, value, url) => {
 
 export const trackGoal = async (goalID, revenue) => {
   await isReleaseDevice() && Matomo.trackGoal(goalID, revenue);
-
 };
+

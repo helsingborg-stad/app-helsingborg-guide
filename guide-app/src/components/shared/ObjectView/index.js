@@ -1,11 +1,12 @@
 // @flow
 
-import React, { Component, useEffect, useRef, useState } from "react";
-import { SafeAreaView, View, Text, Linking, Animated } from "react-native";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, View, Text, Linking,  } from "react-native";
+import Icon from "react-native-vector-icons/Entypo";
+import { PanGestureHandler, ScrollView } from "react-native-gesture-handler";
 
 import styles from "./style";
 import { Colors } from "@assets/styles";
-import NavigatorService from "@services/navigationService";
 import SharingService from "@services/SharingService";
 import ButtonsBar from "@shared-components/btn_bar";
 import ButtonsBarItem from "@shared-components/btn_bar_item";
@@ -13,8 +14,8 @@ import ImageSwiper from "@shared-components/ImageSwiper";
 import LangService from "@services/langService";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
-import Icon from "react-native-vector-icons/Entypo";
-import { PanGestureHandler, ScrollView } from "react-native-gesture-handler";
+import { trackScreen } from "@utils/MatomoUtils";
+
 
 
 type Props = {
@@ -127,8 +128,10 @@ function displayButtonsBar(
 }
 
 const guideButtons = (props) => {
-  const { array, navigation, selectObject, order, scrollable, panToIndex } = props;
+  const { array, navigation, selectObject, order, scrollable, panToIndex, path } = props;
   const [width, setWidth] = useState("");
+  const split = path.split("/");
+
 
   const onLayout = (event) => {
     setWidth(event.nativeEvent.layout.width);
@@ -142,6 +145,8 @@ const guideButtons = (props) => {
         color={Colors.themeExtra1}
         style={{ opacity: order > 0 ? 1 : 0.4 }}
         onPress={order > 0 ? () => {
+          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order - 1].title}`;
+          trackScreen(newPath, newPath)
           scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
           panToIndex && panToIndex(order - 1);
@@ -151,6 +156,7 @@ const guideButtons = (props) => {
             array: array,
             order: order - 1,
             swipeable: true,
+            path: newPath
           });
         } : null}
       />
@@ -172,6 +178,8 @@ const guideButtons = (props) => {
         color={Colors.themeExtra1}
         style={{ opacity: (order + 1) !== array.length ? 1 : 0.5 }}
         onPress={(order + 1) !== array.length ? () => {
+          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order + 1].title}`;
+          trackScreen(newPath, newPath)
           scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
           panToIndex && panToIndex(order + 1);
@@ -181,6 +189,7 @@ const guideButtons = (props) => {
             order: order + 1,
             array: array,
             swipeable: true,
+            path: newPath
           });
         } : null}
       />
@@ -192,7 +201,6 @@ const guideButtons = (props) => {
 const onHorizontalSwipe = (evt, swiped, setSwiped) => {
   const { nativeEvent } = evt;
   if (!swiped) {
-    console.log("native", nativeEvent.velocityX);
     if (nativeEvent.velocityX > 220) {
       setSwiped("right");
     }
@@ -207,7 +215,7 @@ const onHorizontalSwipe = (evt, swiped, setSwiped) => {
  * Underlying sharingservice needs a reference to a Component instance
  */
 const ObjectView = (props) => {
-  const { guideId, swipeable, scrollable, panToIndex, selectObject, navigation, array, order, onSwiperIndexChanged } = props;
+  const { guideId, swipeable, scrollable, panToIndex, selectObject, navigation, array, order, onSwiperIndexChanged, path } = props;
   const [swiped, setSwiped] = useState(false);
   const ref = React.createRef();
 
@@ -217,9 +225,13 @@ const ObjectView = (props) => {
 
 
   useEffect(() => {
+    const split = path.split("/");
+
     if (swiped) {
       if (swiped === "left") {
         if ((order + 1) !== array.length) {
+          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order + 1].title}`;
+          trackScreen(newPath, newPath)
           scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
           panToIndex && panToIndex(order + 1);
@@ -236,6 +248,8 @@ const ObjectView = (props) => {
       }
       if (swiped === "right") {
         if (order > 0) {
+          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order + 1].title}`;
+          trackScreen(newPath, newPath)
           scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
           panToIndex && panToIndex(order - 1);

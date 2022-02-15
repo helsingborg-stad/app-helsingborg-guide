@@ -19,7 +19,7 @@ import {
   showBottomBar,
   selectCurrentBottomBarTab,
 } from "@actions/uiStateActions";
-import { trackEvent } from "@utils/MatomoUtils";
+import { trackEvent, trackScreen } from "@utils/MatomoUtils";
 import { fetchNavigation } from "../../actions/navigationActions";
 
 const defaultMargin = 20;
@@ -138,6 +138,7 @@ const SettingsScreen = (props) => {
   }, [languages]);
 
   useEffect(() => {
+    trackScreen("/settings", "/settings")
     const unsubscribe = NetInfo.addEventListener((state) => {
       setConnected(state.isConnected);
     });

@@ -23,12 +23,12 @@ type Props = {
 
 class LocationScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params;
+    const { title, path } = navigation.state.params;
     return {
       ...HeaderStyles.noElevation,
       title,
       headerRight: () => <View />,
-      headerLeft: () => <HeaderBackButton navigation={navigation} />,
+      headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
     };
   };
 
@@ -42,17 +42,24 @@ class LocationScreen extends Component<Props> {
   onPressGuide = (guide: Guide) => {
     const { navigation } = this.props;
     const slug = guide?.slug;
-    trackScreen("view_guide", slug)
+    const title = guide?.name;
+    const prevPath = navigation.state.params.path
+    const newPath = `${prevPath}/${slug || title}`
+    trackScreen(newPath, newPath)
     // AnalyticsUtils.logEvent("view_guide", { name: slug });
     if (guide.guideType === "trail") {
       this.props.selectCurrentGuide(guide);
       navigation.navigate("TrailScreen", {
         guide,
-        title: guide.name,
+        title: title,
+        path: newPath
       });
     } else if (guide.guideType === "guide") {
       this.props.selectCurrentGuide(guide);
-      navigation.navigate("GuideDetailsScreen", { title: guide.name });
+      navigation.navigate("GuideDetailsScreen", {
+        title: guide.name,
+        path: newPath
+      });
     }
   };
 

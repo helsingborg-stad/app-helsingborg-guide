@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { OrientationLocker, PORTRAIT } from "react-native-orientation-locker";
 import { PersistGate } from "redux-persist/integration/react";
 import { Alert, UIManager, Platform, Linking, LogBox } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
@@ -122,7 +121,6 @@ const GuideApp = () => {
   }, []);
 
   return (
-    <OrientationLocker orientation={PORTRAIT}>
       <SafeAreaProvider>
         <PersistGate persistor={persistor}>
           <TrackingPermission />
@@ -133,7 +131,6 @@ const GuideApp = () => {
           />
         </PersistGate>
       </SafeAreaProvider>
-    </OrientationLocker>
   );
 };
 

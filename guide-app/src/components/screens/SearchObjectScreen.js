@@ -27,14 +27,17 @@ class SearchObjectScreen extends Component<Props> {
     );
     if (found) {
       this.props.selectCurrentContentObject(found);
-      const { navigate } = this.props.navigation;
-      trackScreen("view_guide_object", found?.title || "");
-      navigate("ObjectScreen", {
+      const { navigation } = this.props;
+      const prevPath = navigation?.state?.params?.path;
+      const newPath = `${prevPath}/${found?.title}`;
+      trackScreen(newPath, newPath);
+      navigation.navigate("ObjectScreen", {
         title: found.title,
         currentGuide: this.props.currentGuide,
         array: this.props.contentObjects,
         order: found?.order,
         swipeable: true,
+        path: newPath,
       });
     } else {
       const { keyPad } = this;

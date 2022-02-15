@@ -3,12 +3,15 @@ import React, { Component } from "react";
 import {
   ActivityIndicator,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
   Image,
   StatusBar,
   Text,
+  Keyboard,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Orientation from "react-native-orientation-locker";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -22,13 +25,13 @@ import {
 } from "@actions/uiStateActions";
 import { fetchNavigation } from "@actions/navigationActions";
 
+import HomeFilter from "@shared-components/HomeFilter/HomeFilter";
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
 import { trackScreen } from "@utils/MatomoUtils";
-import Orientation from "react-native-orientation-locker";
 
 
 type Section = {
@@ -80,10 +83,12 @@ class HomeScreen extends Component<Props> {
   }
 
   componentWillUnmount = () => {
+    Keyboard.dismiss();
     this.props.selectCurrentTab(0);
   };
 
   onPressItem = (item, items, index): void => {
+    console.log("item type", item?.type)
     switch (item?.type) {
       case "guide": {
         const { guide } = item;
@@ -93,20 +98,24 @@ class HomeScreen extends Component<Props> {
           if (type === "guide") {
             const slug = guide?.slug;
             const title = guide?.name;
-            trackScreen("view_guide", slug || title);
+            const path = `/tours/${slug || title}`;
+            trackScreen(path, path);
             this.props?.navigation.navigate("GuideDetailsScreen", {
               title: title,
               bottomBarOnUnmount: true,
               array: items,
+              path: path,
             });
             this.props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
             const slug = guide?.slug;
             const title = guide?.name;
-            trackScreen("view_trail ", slug || title);
+            const path = `/tours/${slug || title}`;
+            trackScreen(path, path);
             this.props?.navigation.navigate("TrailScreen", {
               title: title,
               bottomBarOnUnmount: true,
+              path: path,
               // array: items,
               // index: index,
             });
@@ -120,11 +129,14 @@ class HomeScreen extends Component<Props> {
         const { interactiveGuide } = item;
         if (interactiveGuide) {
           this.props.selectGuide(interactiveGuide.id);
+          const title = interactiveGuide?.title
+          const path = `/tours/${title}`;
+          trackScreen(path, path);
           this.props?.navigation.navigate("QuizScreen", {
             quiz: interactiveGuide,
-            title: interactiveGuide.title,
+            title: title,
           });
-            this.props.dispatchShowBottomBar(false);
+          this.props.dispatchShowBottomBar(false);
 
         }
         break;
@@ -134,11 +146,13 @@ class HomeScreen extends Component<Props> {
         if (item?.guideGroup) {
           const title = item?.guideGroup?.name;
           const slug = item?.guideGroup?.slug;
-          trackScreen("view_location", slug || title);
+          const path = `/places/${slug || title}`;
+          trackScreen(path, path);
           this.props.navigation.navigate("LocationScreen", {
             title,
             bottomBarOnUnmount: true,
             array: items,
+            path: path,
           });
           this?.props?.dispatchShowBottomBar(false);
         }
@@ -166,53 +180,57 @@ class HomeScreen extends Component<Props> {
     }
 
 
-
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
         <SafeAreaView edges={["right", "top", "left"]} style={styles.homeContainer}>
-          <View style={styles.topBarNavigation}>
-            <SegmentControlPill
-              initialSelectedIndex={currentHomeTab}
-              onSegmentIndexChange={selectCurrentTab}
-              labels={navigationCategoryLabels}
-            />
-          </View>
-          {!items || (items && items.length === 0) ? (
-            <View style={styles.sectionNoContent}>
-              <Text style={styles.sectionNoContentText}>
-                {LangService.strings.CONTENT_MISSING}
-              </Text>
-            </View>
-          ) : (
+          <TouchableOpacity activeOpacity={1} style={{ flex: 1 }} onPress={Keyboard.dismiss}>
             <>
-              <Scrollable
-                key={currentHomeTab}
-                style={styles.container}
-                contentContainerStyle={styles.contentContainer}
-                refreshControl={true}
-                refreshAction={() => {
-                  fetchNavigationItems(currentLanguage, currentHomeTab);
-                  this.props.dispatchShowBottomBar(true);
-                }}
-              >
-                {items?.length && items.map((item, index) => (
-                  <NavigationListItem
-                    key={index}
-                    index={index}
-                    item={item}
-                    onPressItem={() => this.onPressItem(item, items, index)}
-                  />
-                ))}
-              </Scrollable>
-              <TouchableOpacity
-                style={styles.mapButton}
-                onPress={() => navigation.navigate("CategoryMapScreen")}
-              >
-                <Image style={styles.mapIcon} source={mapIcon} />
-              </TouchableOpacity>
+              <View style={styles.topBarNavigation}>
+                <SegmentControlPill
+                  initialSelectedIndex={currentHomeTab}
+                  onSegmentIndexChange={selectCurrentTab}
+                  labels={navigationCategoryLabels}
+                />
+              </View>
+              <HomeFilter />
+              {!items || (items && items.length === 0) ? (
+                <View style={styles.sectionNoContent}>
+                  <Text style={styles.sectionNoContentText}>
+                    {LangService.strings.CONTENT_MISSING}
+                  </Text>
+                </View>
+              ) : (
+                <>
+                  <Scrollable
+                    key={currentHomeTab}
+                    style={styles.container}
+                    contentContainerStyle={styles.contentContainer}
+                    refreshControl={true}
+                    refreshAction={() => {
+                      fetchNavigationItems(currentLanguage, currentHomeTab);
+                      this.props.dispatchShowBottomBar(true);
+                    }}
+                  >
+                    {items?.length && items.map((item, index) => (
+                      <NavigationListItem
+                        key={index}
+                        index={index}
+                        item={item}
+                        onPressItem={() => this.onPressItem(item, items, index)}
+                      />
+                    ))}
+                  </Scrollable>
+                  <TouchableOpacity
+                    style={styles.mapButton}
+                    onPress={() => navigation.navigate("CategoryMapScreen")}
+                  >
+                    <Image style={styles.mapIcon} source={mapIcon} />
+                  </TouchableOpacity>
+                </>
+              )}
             </>
-          )}
+          </TouchableOpacity>
         </SafeAreaView>
       </>
     );
@@ -233,9 +251,13 @@ function mapStateToProps(state: RootState) {
   categories = [...navigationCategories.map(cat => {
     const data = cat.items
       .map((item) => {
-        let copy = {...item};
-        if(copy?.interactiveGuide) {
-          copy.interactiveGuide = {...copy.interactiveGuide, name: copy.interactiveGuide?.title, images: {large: copy.interactiveGuide?.image, thumbnail: copy.interactiveGuide?.image}}
+        let copy = { ...item };
+        if (copy?.interactiveGuide) {
+          copy.interactiveGuide = {
+            ...copy.interactiveGuide,
+            name: copy.interactiveGuide?.title,
+            images: { large: copy.interactiveGuide?.image, thumbnail: copy.interactiveGuide?.image },
+          };
         }
         return copy;
       })
@@ -248,7 +270,7 @@ function mapStateToProps(state: RootState) {
         category: cat,
       };
     }
-  })]
+  })];
 
   const isFetching = fetchingIds.length > 0;
 

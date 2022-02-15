@@ -120,7 +120,6 @@ function mapStateToProps(state: RootState) {
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectBottomBarTab: (index: number, id: any) => {
-      id && trackScreen("view_screen", id);
       dispatch(selectCurrentBottomBarTab(index));
     }
   };

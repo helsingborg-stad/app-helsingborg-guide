@@ -21,6 +21,7 @@ import { Colors, TextStyles } from "@assets/styles";
 import { showBottomBar } from "@actions/uiStateActions";
 import { fetchEvents } from "@actions/eventActions";
 import { StyleSheetUtils } from "@utils";
+import { trackScreen } from "@utils/MatomoUtils";
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
@@ -105,6 +106,7 @@ class CalendarScreen extends Component<Props, State> {
   }
 
   componentDidMount() {
+    trackScreen("/calendar", "/calendar")
     const { currentLanguage, dispatchShowBottomBar, getEvents } = this.props;
     const { chosenDate } = this.state;
     dispatchShowBottomBar(true);
@@ -179,6 +181,7 @@ class CalendarScreen extends Component<Props, State> {
                 event={event}
                 currentLanguage={currentLanguage}
                 navigation={navigation}
+                path={"/calendar"}
               />
             ))}
           </View>

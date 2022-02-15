@@ -91,7 +91,6 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
     case "FETCH_NAVIGATION_SUCCESS": {
       const { navigation } = nextState;
       const { homeTab } = action;
-      console.log("the action", homeTab);
       const { currentLanguage, navigationCategories } = navigation;
 
       // clear downloaded guides/guidegroups

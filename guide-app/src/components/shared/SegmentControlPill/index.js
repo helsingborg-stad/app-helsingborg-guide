@@ -19,7 +19,8 @@ export const SegmentControlPill = ({
   const onPressSegment = useCallback(
     (index, label) => () => {
       setSelectedIndex(index);
-      trackScreen("view_home", label);
+      const path = `/${index ? "tours" : "places"}`
+      trackScreen(path, path);
       if (onSegmentIndexChange) {
         onSegmentIndexChange(index);
       }
@@ -27,6 +28,7 @@ export const SegmentControlPill = ({
     [onSegmentIndexChange]
   );
   useEffect(() => {
+    trackScreen(`/places`, `/places`);
     return setSelectedIndex(0);
   },[])
 

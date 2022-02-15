@@ -68,7 +68,6 @@ class CategoryMapScreen extends Component<Props> {
             const slug = guide?.slug;
             const title = guide?.name;
             trackScreen("view_guide", slug || title);
-            // AnalyticsUtils.logEvent("view_guide", { name: slug });
             this.props.navigation.navigate("GuideDetailsScreen", {
               title: title
             });
@@ -76,7 +75,6 @@ class CategoryMapScreen extends Component<Props> {
             const slug = guide?.slug;
             const title = guide?.name;
             trackScreen("view_guide", slug || title);
-            // AnalyticsUtils.logEvent("view_guide", { name: slug });
             this.props.navigation.navigate("TrailScreen", {
               title: title
             });

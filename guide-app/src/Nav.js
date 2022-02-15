@@ -42,11 +42,10 @@ const GuideNavigator = createStackNavigator(
     HomeScreen: {
       screen: HomeScreen,
       navigationOptions: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "red",
         headerMode: "screen",
         headerTitle: "Guide Helsingborg",
         header: () => null,
-
       },
     },
     TrailScreen: { screen: TrailScreen },
@@ -91,8 +90,8 @@ const GuideNavigator = createStackNavigator(
 const RootNavigator = createStackNavigator(
   {
     SplashScreen: { screen: SplashScreen,  },
-    WelcomeScreen: { screen: WelcomeScreen },
-    MainScreen: { screen: GuideNavigator },
+    WelcomeScreen: { screen: WelcomeScreen, },
+    MainScreen: { screen: GuideNavigator, },
     SearchObjectScreen: { screen: SearchObjectScreen },
     ARIntroductionScreen: { screen: ARIntroductionScreen },
   },
@@ -124,7 +123,7 @@ class Nav extends Component<Props> {
     if (route.routes) {
       return Nav.getCurrentRouteName(route);
     }
-    return route.routeName;
+    return route;
   }
 
   static onNavigationStateChange(prevState: Object, currentState: Object) {
