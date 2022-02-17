@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { AppState, StatusBar, Platform, View } from "react-native";
+import { AppState, StatusBar, Platform, View, Linking } from "react-native";
 import Orientation from "react-native-orientation-locker";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -29,16 +29,21 @@ import {
 } from "@src/components/screens";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
 import ScanScreen from "@src/components/screens/ScanScreen";
+import LoadingScreen from "@src/components/screens/LoadingScreen";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
 import NavigatorService from "@services/navigationService";
 import { initializeTracker, trackScreen } from "@utils/MatomoUtils";
 
-
+const prefix = "guidehbg://";
 
 const GuideNavigator = createStackNavigator(
   {
+    // LoadingScreen: {
+    //   screen: LoadingScreen,
+    //   path: 'guide/:screen'
+    // },
     HomeScreen: {
       screen: HomeScreen,
       navigationOptions: {
@@ -48,6 +53,7 @@ const GuideNavigator = createStackNavigator(
         header: () => null,
       },
     },
+
     TrailScreen: { screen: TrailScreen },
     LocationScreen: {
       screen: LocationScreen,
@@ -66,6 +72,7 @@ const GuideNavigator = createStackNavigator(
       navigationOptions: {
         headerMode: "screen",
       },
+      path: 'guide/:id'
     },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
@@ -89,11 +96,11 @@ const GuideNavigator = createStackNavigator(
 
 const RootNavigator = createStackNavigator(
   {
-    SplashScreen: { screen: SplashScreen,  },
-    WelcomeScreen: { screen: WelcomeScreen, },
-    MainScreen: { screen: GuideNavigator, },
-    SearchObjectScreen: { screen: SearchObjectScreen },
-    ARIntroductionScreen: { screen: ARIntroductionScreen },
+    SplashScreen: { screen: SplashScreen, },
+    WelcomeScreen: { screen: WelcomeScreen, path: '' },
+    MainScreen: { screen: GuideNavigator, path: '' },
+    SearchObjectScreen: { screen: SearchObjectScreen, path: '' },
+    ARIntroductionScreen: { screen: ARIntroductionScreen, path: '' },
   },
   {
     headerMode: "none",
@@ -130,7 +137,7 @@ class Nav extends Component<Props> {
     const currentScreen = Nav.getCurrentRouteName(currentState);
     const prevScreen = Nav.getCurrentRouteName(prevState);
     if (prevScreen !== currentScreen) {
-
+      console.log("__NAV__", currentScreen.routeName)
     }
   }
 
@@ -163,6 +170,7 @@ class Nav extends Component<Props> {
           ref={(navigatorRef) => {
             NavigatorService.setContainer(navigatorRef);
           }}
+          uriPrefix={prefix}
         />
         <BottomBarView />
       </ViewContainer>

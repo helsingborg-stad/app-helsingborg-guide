@@ -82,7 +82,6 @@ class TrailScreen extends Component<Props, State> {
       return null;
     }
 
-    console.log("props", array, index, path)
 
 
 

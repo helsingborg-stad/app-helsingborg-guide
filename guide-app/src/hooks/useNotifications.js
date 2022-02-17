@@ -36,7 +36,6 @@ const useNotifications = () => {
         authStatus === messaging.AuthorizationStatus.PROVISIONAL;
       if (enabled) {
         messaging().getToken().then(token => {
-          console.log("token!", token);
           const copyAlertMessage = async () => {
             Clipboard.setString(token)
           }

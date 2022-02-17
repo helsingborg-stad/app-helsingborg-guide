@@ -131,6 +131,7 @@ const SettingsScreen = (props) => {
   const [connected, setConnected] = useState("");
 
   useEffect(() => {
+    console.log("the lang service", LangService.code, LangService.languageObj)
     if (!languages || Object.keys(languages).length === 0) {
       setSelectedLanguageCode(LangService.code);
       setLanguages(LangService.languageObj);
@@ -138,6 +139,9 @@ const SettingsScreen = (props) => {
   }, [languages]);
 
   useEffect(() => {
+    LangService.getLanguages();
+    props.navigation.setParams();
+
     trackScreen("/settings", "/settings")
     const unsubscribe = NetInfo.addEventListener((state) => {
       setConnected(state.isConnected);

@@ -78,17 +78,12 @@ class HomeScreen extends Component<Props> {
     this.props.dispatchShowBottomBar(true);
   }
 
-  componentDidUpdate() {
-
-  }
-
   componentWillUnmount = () => {
     Keyboard.dismiss();
     this.props.selectCurrentTab(0);
   };
 
   onPressItem = (item, items, index): void => {
-    console.log("item type", item?.type)
     switch (item?.type) {
       case "guide": {
         const { guide } = item;

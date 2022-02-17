@@ -23,6 +23,7 @@ import { fetchGuides } from "@actions/guideActions";
 import { fetchGuideGroups } from "@actions/guideGroupActions";
 import useGuides from "@hooks/useGuides";
 import { setLanguage } from "@actions/navigationActions";
+import { showBottomBar } from "@actions/uiStateActions";
 
 
 const LOGO = require("@assets/images/logo.png");
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
 
 
 const SplashScreen = (props) => {
+  const { navigation } = props;
   const [barsVisible, setBarsVisible] = useState(true);
   const dispatch = useDispatch();
   let timer;
@@ -93,7 +95,7 @@ const SplashScreen = (props) => {
     dispatch(fetchNavigation(LangService.code || "sv"));
     LangService.setLanguage(LangService.code || "sv");
     dispatch(setLanguage(LangService.code || "sv"));
-    props.navigation.setParams();
+    navigation.setParams();
     colorsTimer = setInterval(() => fadeColors(), 500);
     return () => {
       if (timer) {
@@ -112,6 +114,11 @@ const SplashScreen = (props) => {
     timer = setTimeout(() => {
       skip();
     }, TIME_OUT);
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    }
   }, []);
 
 
@@ -121,18 +128,21 @@ const SplashScreen = (props) => {
   };
 
   const skip = () => {
-    AsyncStorage.getItem(IS_WELCOMED).then(value => {
-      let welcomed = false;
-      if (value) {
-        welcomed = JSON.parse(value);
-      }
-      const route = welcomed ? "MainScreen" : "WelcomeScreen";
-      const resetAction = StackActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: route, params: {title: "home" }})],
+    if (navigation.isFocused()) {
+      AsyncStorage.getItem(IS_WELCOMED).then(value => {
+        let welcomed = false;
+        if (value) {
+          welcomed = JSON.parse(value);
+        }
+        const route = welcomed ? "MainScreen" : "WelcomeScreen";
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: route, params: { title: "home" } })],
+        });
+        navigation.dispatch(resetAction);
       });
-      props.navigation.dispatch(resetAction);
-    });
+    }
+    dispatch(showBottomBar(true));
   };
 
   const displayColorBar = () => {
