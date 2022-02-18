@@ -20,7 +20,9 @@ function getDescription(item: NavigationItem) {
 
   let textString = "";
 
-  if (((type === "guide") && guidesCount === 0) || type === "guidegroup") {
+  // Disable guidegroup for now until correct guideCount is shown.
+
+  if ((type === "guide" && guidesCount === 0) || type === "guidegroup") {
     return "";
   }
 
