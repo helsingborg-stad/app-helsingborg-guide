@@ -202,6 +202,7 @@ class HomeScreen extends Component<Props> {
                     contentContainerStyle={styles.contentContainer}
                     refreshControl={true}
                     refreshAction={() => {
+                      this.props.selectCurrentTab(0);
                       fetchNavigationItems(currentLanguage, currentHomeTab);
                       this.props.dispatchShowBottomBar(true);
                     }}

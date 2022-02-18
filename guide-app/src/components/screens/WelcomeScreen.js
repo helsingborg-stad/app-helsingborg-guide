@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Swiper from "react-native-swiper";
 import { StackActions, NavigationActions } from "react-navigation";
@@ -10,6 +11,7 @@ import NormalInstructionSlide from "@shared-components/NormalInstructionSlide";
 import { IS_WELCOMED } from "@src/lib/my_consts";
 import LangService from "@services/langService";
 import ColoredBar from "@shared-components/ColoredBar";
+import { showBottomBar } from "@actions/uiStateActions";
 import { Colors, TextStyles } from "@assets/styles";
 import { StyleSheetUtils } from "@utils";
 
@@ -17,10 +19,10 @@ const IMAGE1 = require("@assets/images/firstInstructionImage.png");
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1
+    flex: 1,
   },
   swiper: {
-    backgroundColor: Colors.themeSecondary
+    backgroundColor: Colors.themeSecondary,
   },
   dot: {
     backgroundColor: Colors.white,
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
     height: 9,
     marginVertical: 6,
     marginHorizontal: 10,
-    width: 9
+    width: 9,
   },
   activeDot: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -38,10 +40,10 @@ const styles = StyleSheet.create({
     height: 14,
     marginVertical: 7,
     marginHorizontal: 10,
-    width: 14
+    width: 14,
   },
   pagination: {
-    top: 300
+    top: 300,
   },
   btnContainer: {
     alignItems: "center",
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 100,
     justifyContent: "center",
-    position: "absolute"
+    position: "absolute",
   },
   btnText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -63,19 +65,19 @@ const styles = StyleSheet.create({
       lineHeight: 23,
       textAlign: "center",
       textAlignVertical: "center",
-      includeFontPadding: false
-    }
+      includeFontPadding: false,
+    },
   ]),
   colorBar: {
     left: 0,
     position: "absolute",
     top: 0,
     bottom: 0,
-    width: 20
-  }
+    width: 20,
+  },
 });
 
-export default class WelcomeScreen extends Component {
+class WelcomeScreen extends Component {
   static displayColorBar() {
     return (
       <View style={styles.colorBar}>
@@ -85,20 +87,24 @@ export default class WelcomeScreen extends Component {
   }
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       index: 0,
-      total: LangService.instructions.steps.length
+      total: LangService.instructions.steps.length,
     };
   }
 
   static navigationOptions = {
     headerShown: false,
   };
+
+  componentDidMount() {
+    this.props.dispatchShowBottomBar(false);
+  }
 
   onIndexChanged = index => {
     this.setState({ index });
@@ -131,7 +137,7 @@ export default class WelcomeScreen extends Component {
     AsyncStorage.setItem(IS_WELCOMED, JSON.stringify(true));
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: "MainScreen" })]
+      actions: [NavigationActions.navigate({ routeName: "MainScreen" })],
     });
     this.props.navigation.dispatch(resetAction);
   }
@@ -173,3 +179,15 @@ export default class WelcomeScreen extends Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchShowBottomBar: (visible: boolean) =>
+      dispatch(showBottomBar(visible)),
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(WelcomeScreen);
