@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import {
   ActivityIndicator,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
   Image,
   StatusBar,
@@ -25,7 +24,7 @@ import {
 } from "@actions/uiStateActions";
 import { fetchNavigation } from "@actions/navigationActions";
 
-import HomeFilter from "@shared-components/HomeFilter/HomeFilter";
+// import HomeFilter from "@shared-components/HomeFilter/HomeFilter";
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
@@ -188,7 +187,7 @@ class HomeScreen extends Component<Props> {
                   labels={navigationCategoryLabels}
                 />
               </View>
-              <HomeFilter />
+              {/*<HomeFilter />*/}
               {!items || (items && items.length === 0) ? (
                 <View style={styles.sectionNoContent}>
                   <Text style={styles.sectionNoContentText}>

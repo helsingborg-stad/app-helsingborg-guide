@@ -32,6 +32,10 @@ class LocationScreen extends Component<Props> {
     };
   };
 
+  componentDidMount() {
+
+  }
+
   componentWillUnmount() {
     const { navigation } = this.props;
     if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {

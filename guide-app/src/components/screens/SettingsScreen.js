@@ -110,15 +110,7 @@ const textStyles = StyleSheet.create({
   ]),
 });
 
-type Props = {
-  developerMode: any,
-};
 
-type State = {
-  selectedLanguageCode: any,
-  languages: any,
-  debugStatus: any,
-};
 
 const SettingsScreen = (props) => {
 

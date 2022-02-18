@@ -40,10 +40,6 @@ const prefix = "guidehbg://";
 
 const GuideNavigator = createStackNavigator(
   {
-    // LoadingScreen: {
-    //   screen: LoadingScreen,
-    //   path: 'guide/:screen'
-    // },
     HomeScreen: {
       screen: HomeScreen,
       navigationOptions: {
@@ -54,9 +50,14 @@ const GuideNavigator = createStackNavigator(
       },
     },
 
+    LoadingScreen: {
+      screen: LoadingScreen,
+    },
+
     TrailScreen: { screen: TrailScreen },
     LocationScreen: {
       screen: LocationScreen,
+      path: 'location/:location_id/:guide_id?/:object_id?',
       navigationOptions: {
         headerMode: "screen",
       },
@@ -72,7 +73,6 @@ const GuideNavigator = createStackNavigator(
       navigationOptions: {
         headerMode: "screen",
       },
-      path: 'guide/:id'
     },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
