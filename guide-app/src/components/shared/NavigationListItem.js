@@ -12,16 +12,17 @@ type Props = {
 };
 
 function getDescription(item: NavigationItem) {
+
+
   const { type, guide, interactiveGuide } = item;
   const guidesCount = GuideUtils?.getGuidesCount(item);
   const plural = guidesCount > 1;
 
   let textString = "";
 
-  if ((type === "guidegroup" || type === "guide") && guidesCount === 0) {
+  if (((type === "guide") && guidesCount === 0) || type === "guidegroup") {
     return "";
   }
-
 
   if (type === "guidegroup") {
     const mediaGuideString: string = plural
