@@ -30,9 +30,8 @@ import { compareDistance } from "@utils/SortingUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
-import { linkingHome } from "@utils/DeepLinkingUtils";
+import useDeepLinking from "@hooks/useDeepLinking";
 import { trackScreen } from "@utils/MatomoUtils";
-import ScanScreen from "../ScanScreen";
 
 
 type Section = {
@@ -50,6 +49,7 @@ type Props = {
   navigationCategoryLabels: string[],
   sections: Section[],
   currentLanguage: string,
+  fetchNavigationItems: any,
   guides: any,
   guideGroups: any,
 
@@ -66,8 +66,10 @@ type Props = {
 };
 
 const HomeScreen = (props: Props) => {
-
   const { params } = props.navigation?.state;
+  const { linkingHome } = useDeepLinking();
+
+  const type = params?.type;
 
   const {
     currentHomeTab,
@@ -92,13 +94,13 @@ const HomeScreen = (props: Props) => {
 
 
   useEffect(() => {
-    if (params?.type) {
-      const { type } = params;
+    if (type) {
+         linkingHome(params, props);
     }
   }, [params]);
 
 
-  const onPressItem = (item, items, index): void => {
+  const onPressItem = (item, items): void => {
     switch (item?.type) {
       case "guide": {
         const { guide } = item;
@@ -153,6 +155,7 @@ const HomeScreen = (props: Props) => {
 
       case "guidegroup":
         props?.selectGuideGroup(item.id);
+        console.log("item id", item.id)
         if (item?.guideGroup) {
           const title = item?.guideGroup?.name;
           const slug = item?.guideGroup?.slug;
@@ -161,7 +164,6 @@ const HomeScreen = (props: Props) => {
           props.navigation.navigate("LocationScreen", {
             title,
             bottomBarOnUnmount: true,
-            array: items,
             path: path,
           });
           props?.dispatchShowBottomBar(false);
@@ -246,8 +248,6 @@ function mapStateToProps(state: RootState) {
   const { fetchingIds } = guideGroups;
   let categories = "";
 
-  console.log("nav cate", navigationCategories);
-
   categories = [...navigationCategories.map(cat => {
     const data = cat.items
       .map((item) => {
@@ -307,7 +307,6 @@ function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
       dispatch(selectCurrentHomeTab(tabIndex)),
     dispatchShowBottomBar: (visible: boolean) =>
       dispatch(showBottomBar(visible)),
-
   };
 }
 

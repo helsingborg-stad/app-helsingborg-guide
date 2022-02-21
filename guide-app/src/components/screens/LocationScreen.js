@@ -1,8 +1,8 @@
 // @flow
 
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { View, StatusBar } from "react-native";
+import { ActivityIndicator, View, StatusBar } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LocationView from "@shared-components/LocationView";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -21,90 +21,96 @@ type Props = {
   dispatchShowBottomBar(visible: boolean): void,
 };
 
-class LocationScreen extends Component<Props> {
-  static navigationOptions = ({ navigation }) => {
-    const { title, path } = navigation.state.params;
-    return {
-      ...HeaderStyles.noElevation,
-      title,
-      headerRight: () => <View />,
-      headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
-    };
-  };
+const LocationScreen = (props: Props) => {
+  const {
+    currentGuideGroup,
+    currentGuides,
+    currentInteractiveGuide,
+    geolocation,
+    isFetchingGuides,
+    navigation,
+  } = props;
 
-  componentDidMount() {
+  const { redirect } = navigation?.state?.params;
+  const [redirected, setRedirected] = useState(false)
 
-  }
-
-  componentWillUnmount() {
-    const { navigation } = this.props;
-    if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
-      this.props.dispatchShowBottomBar(true);
+  useEffect(() => {
+    return () => {
+      if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
+        props.dispatchShowBottomBar(true);
+        setRedirected(false);
+      }
     }
-  }
+  },[])
 
-  onPressGuide = (guide: Guide) => {
-    const { navigation } = this.props;
+
+  useEffect(() => {
+    if (redirect?.length && redirect[0]) {
+      const currentGuide = currentGuides.find(guide => guide.id.toString() === redirect[0].toString());
+      if (currentGuide && !redirected) {
+        setRedirected(true);
+        onPressGuide(currentGuide);
+      }
+    }
+  },[redirect, currentGuides])
+
+
+
+  const onPressGuide = (guide: Guide) => {
     const slug = guide?.slug;
     const title = guide?.name;
-    const prevPath = navigation.state.params.path
-    const newPath = `${prevPath}/${slug || title}`
-    trackScreen(newPath, newPath)
-    // AnalyticsUtils.logEvent("view_guide", { name: slug });
+    const prevPath = navigation.state.params.path;
+    const newPath = `${prevPath}/${slug || title}`;
+    trackScreen(newPath, newPath);
     if (guide.guideType === "trail") {
-      this.props.selectCurrentGuide(guide);
+      props.selectCurrentGuide(guide);
       navigation.navigate("TrailScreen", {
         guide,
         title: title,
-        path: newPath
+        path: newPath,
       });
     } else if (guide.guideType === "guide") {
-      this.props.selectCurrentGuide(guide);
+      console.log("the guide", guide?.id);
+      props.selectCurrentGuide(guide);
       navigation.navigate("GuideDetailsScreen", {
         title: guide.name,
-        path: newPath
+        path: newPath,
+        ...(redirect?.length === 2 && redirect[1] && {redirect: redirect[1]})
       });
     }
   };
 
-  onPressInteractiveGuide = (interactiveGuide: InteractiveGuide) => {
-    const { navigation } = this.props;
-    trackScreen("view_interactive_guide", interactiveGuide?.title || "")
+  const onPressInteractiveGuide = (interactiveGuide: InteractiveGuide) => {
+    trackScreen("view_interactive_guide", interactiveGuide?.title || "");
     navigation.navigate("QuizScreen", {
       quiz: interactiveGuide,
     });
   };
 
-  render() {
-    const {
-      currentGuideGroup,
-      currentGuides,
-      currentInteractiveGuide,
-      geolocation,
-      isFetchingGuides,
-    } = this.props;
     const now = new Date();
+
     return (
       <>
         <StatusBar
           barStyle="light-content"
           backgroundColor={Colors.themeSecondary}
         />
-        <LocationView
-          guideGroup={currentGuideGroup}
-          guides={currentGuides}
-          interactiveGuide={currentInteractiveGuide}
-          now={now}
-          geolocation={geolocation}
-          navigation={this.props.navigation}
-          onPressGuide={this.onPressGuide}
-          onPressInteractiveGuide={this.onPressInteractiveGuide}
-          isFetchingGuides={isFetchingGuides}
-        />
+        {!redirect?.length ?
+          <LocationView
+            guideGroup={currentGuideGroup}
+            guides={currentGuides}
+            interactiveGuide={currentInteractiveGuide}
+            now={now}
+            geolocation={geolocation}
+            navigation={navigation}
+            onPressGuide={onPressGuide}
+            onPressInteractiveGuide={onPressInteractiveGuide}
+            isFetchingGuides={isFetchingGuides}
+          />
+        : <ActivityIndicator style={{flex: 1}} />}
       </>
     );
-  }
-}
+};
 
 function mapStateToProps(state: RootState) {
   const { groupItems: guideItems, isFetching: isFetchingGuides } = state.guides;
@@ -119,10 +125,10 @@ function mapStateToProps(state: RootState) {
   let currentInteractiveGuide = null;
   if (currentGuideGroup) {
     currentGuides = guideItems.filter(
-      guide => guide.guideGroupId === currentGuideGroup.id
+      guide => guide.guideGroupId === currentGuideGroup.id,
     );
     currentInteractiveGuide = interactiveGuideItems.find(
-      interactiveGuide => interactiveGuide.guideGroupId === currentGuideGroup.id
+      interactiveGuide => interactiveGuide.guideGroupId === currentGuideGroup.id,
     );
   }
 
@@ -143,7 +149,19 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
+
+LocationScreen["navigationOptions"] = ({ navigation }) => {
+  const { title, path } = navigation.state.params;
+  return {
+    ...HeaderStyles.noElevation,
+    title,
+    headerRight: () => <View />,
+    headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
+  };
+};
+
+
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LocationScreen);

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { View } from "react-native";
 import { connect } from "react-redux";
 
@@ -19,56 +19,59 @@ import { trackScreen } from "@utils/MatomoUtils";
 declare type Props = {
   currentGuide: ?Guide,
   navigation: any,
+  contentObjects: [],
   dispatchSelectContentObject(contentObject: ContentObject): void,
   dispatchReleaseAudio(): void,
   dispatchShowBottomBar(visible: boolean): void,
 };
 
-class GuideScreen extends Component<Props> {
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-    if (params) {
-      const { title, path } = params;
-      return {
-        title,
-        headerRight: () => <SearchButton navigation={navigation} path={path} />,
-        headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
-      };
-    }
-    return {};
-  };
+const GuideScreen = (props) => {
 
-  constructor(props: Props) {
-    super(props);
+  const { currentGuide, navigation } = props;
+  const { contentObjects } = currentGuide;
+  const { params } = navigation.state;
+  const { redirect } = params;
 
-    const { currentGuide } = props;
+    useEffect(() => {
       const title = currentGuide ? currentGuide.name : null;
       props.navigation.setParams({ title });
-    }
 
-    componentDidUpdate(prevProps: Props, prevState: State, prevContext: *): * {
-    console.log(this.props.navigation.state.params)
-    }
+      return () => {
+        props.dispatchReleaseAudio();
+        if (params && params.bottomBarOnUnmount) {
+          props.dispatchShowBottomBar(true);
+        }
+      }
+    },[])
 
 
-  componentWillUnmount() {
-      this.props.dispatchReleaseAudio();
-      const { navigation } = this.props;
-      if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
-        this.props.dispatchShowBottomBar(true);
+  useEffect(() => {
+    if (redirect) {
+      let index = -1;
+      let object = contentObjects.find((contentObj, i) =>  {
+          if(contentObj.id === redirect) {
+            index = i;
+          }
+        return contentObj.id === redirect
+      })
+      if (object && index !== -1) {
+        onPressContentObject(object, index, contentObjects)
       }
     }
+  },[redirect])
 
-    onPressContentObject = (obj: ContentObject, index, array) => {
-      const { navigation } = this.props;
+
+
+    const onPressContentObject = (obj: ContentObject, index, array) => {
       const prevPath = navigation.state.params.path
       const newPath = `${prevPath}/${obj?.title}`
-      this.props.dispatchSelectContentObject(obj);
+      console.log("CONTENT OBJECT", obj?.id)
+      props.dispatchSelectContentObject(obj);
       trackScreen(newPath, newPath)
-      this.props.navigation.navigate("ObjectScreen", {
+        navigation.navigate("ObjectScreen", {
         title: obj.title,
-        currentGuide: this.props.currentGuide,
-        selectObject: this.props.dispatchSelectContentObject,
+        currentGuide: props.currentGuide,
+        selectObject: props.dispatchSelectContentObject,
         array: array,
         order: obj?.order,
         swipeable: true,
@@ -76,17 +79,14 @@ class GuideScreen extends Component<Props> {
       });
   };
 
-  render() {
-    const { currentGuide } = this.props;
     return currentGuide ? (
       <GuideView
         guide={currentGuide}
-        onPressContentObject={this.onPressContentObject}
+        onPressContentObject={onPressContentObject}
       />
     ) : (
       <View />
     );
-  }
 }
 
 function mapStateToProps(state: RootState) {
@@ -103,5 +103,19 @@ function mapDispatchToProps(dispatch: Dispatch) {
       dispatch(showBottomBar(visible)),
   };
 }
+
+
+GuideScreen["navigationOptions"] = ({ navigation }) => {
+  const { params } = navigation.state;
+  if (params) {
+    const { title, path } = params;
+    return {
+      title,
+      headerRight: () => <SearchButton navigation={navigation} path={path} />,
+      headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
+    };
+  }
+  return {};
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(GuideScreen);
