@@ -74,7 +74,7 @@ const useDeepLinking = () => {
                 title: title,
                 bottomBarOnUnmount: true,
                 path: path,
-                ...(id_2 && { redirect: [id_2, id_3] }),
+                ...(id_2 && { redirect: id_2 }),
               });
             }
           }

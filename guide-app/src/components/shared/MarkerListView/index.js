@@ -79,6 +79,15 @@ class MarkerListView extends Component<Props, State> {
     this.scrollToIndex(0);
   }
 
+  componentDidUpdate(prevProps: Props, prevState: State): * {
+    const { redirect } = this.props.navigation?.state?.params;
+    console.log("the redirect", redirect)
+
+    if (redirect !== prevProps.navigation?.state?.params?.redirect) {
+        console.log("the redirect", redirect)
+    }
+  }
+
   listRef: ?FlatList<MapItem>;
 
   mapMarkerViewRef: ?MapMarkerView;
@@ -184,12 +193,12 @@ class MarkerListView extends Component<Props, State> {
     }
     if (contentObject) {
       dispatchSelectContentObject(contentObject);
-      // AnalyticsUtils.logEvent("view_object", { name: contentObject.title });
       let _items = [];
       items.map(item => _items.push(item?.contentObject))
       const newPath = `${path}/${contentObject?.title}`
       trackScreen(newPath, newPath);
 
+      console.log("OBJECT ID", contentObject?.id)
 
       navigate("ObjectScreen", {
         title: contentObject?.title,

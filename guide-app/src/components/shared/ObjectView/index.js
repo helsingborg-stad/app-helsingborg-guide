@@ -248,7 +248,7 @@ const ObjectView = (props) => {
       }
       if (swiped === "right") {
         if (order > 0) {
-          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order + 1].title}`;
+          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order - 1].title}`;
           trackScreen(newPath, newPath)
           scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);

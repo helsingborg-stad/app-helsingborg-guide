@@ -9,7 +9,9 @@ import AudioPlayerView from "@shared-components/AudioPlayerView";
 import DownloadButtonContainer from "@shared-components/DownloadButton";
 
 type Props = {
+  items: any,
   trail: Guide,
+  onListItemPressed: any,
   showInfoOverlay: boolean,
   onToggleInfoOverlay: () => void,
   navigation: Object
@@ -43,26 +45,24 @@ function renderMapInformationOverlay(
 }
 
 const TrailView = (props: Props) => {
-  const { trail, onToggleInfoOverlay, showInfoOverlay, navigation, array, index, path } = props;
-  const mapItems: MapItem[] = trail.contentObjects.map(item => ({
-    contentObject: item
-  }));
+  const { items, trail, onListItemPressed, onToggleInfoOverlay, showInfoOverlay, navigation, path, redirect } = props;
+
 
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <MarkerListView
-          items={mapItems}
-          array={array}
-          index={index}
+          items={items}
           path={path}
           showNumberedMapMarkers
           showDirections
+          onListItemPressed={onListItemPressed}
           // NOTE: this disables checking for AR mode
           // supportedNavigationModes={NavigationModeUtils.navigationModesForGuide(
           //   trail
           // )}
           navigation={navigation}
+          redirect={redirect}
         />
         {showInfoOverlay
           ? renderMapInformationOverlay(trail, onToggleInfoOverlay)
