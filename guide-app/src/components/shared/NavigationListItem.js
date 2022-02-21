@@ -98,6 +98,7 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
     onPressItem(item);
   }, [item, onPressItem]);
 
+
   return (
     <GuideCard
       size={size}

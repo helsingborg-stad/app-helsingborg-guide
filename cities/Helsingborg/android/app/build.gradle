@@ -148,8 +148,8 @@ android {
         applicationId "com.guidehbg"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 18145916
-        versionName "1.93"
+        versionCode 18145918
+        versionName "1.94"
         multiDexEnabled true
         resValue "string", "build_config_package", "com.guidehbg"
         missingDimensionStrategy 'react-native-camera', 'general'

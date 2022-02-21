@@ -42,6 +42,7 @@ const GuideNavigator = createStackNavigator(
   {
     HomeScreen: {
       screen: HomeScreen,
+      path: 'home/:type?/:id_1?/:id_2?/:id_3?',
       navigationOptions: {
         backgroundColor: "red",
         headerMode: "screen",
@@ -57,7 +58,6 @@ const GuideNavigator = createStackNavigator(
     TrailScreen: { screen: TrailScreen },
     LocationScreen: {
       screen: LocationScreen,
-      path: 'location/:location_id/:guide_id?/:object_id?',
       navigationOptions: {
         headerMode: "screen",
       },

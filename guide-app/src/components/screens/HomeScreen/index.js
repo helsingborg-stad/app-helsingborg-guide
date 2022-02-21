@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   TouchableOpacity,
@@ -30,7 +30,9 @@ import { compareDistance } from "@utils/SortingUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
+import { linkingHome } from "@utils/DeepLinkingUtils";
 import { trackScreen } from "@utils/MatomoUtils";
+import ScanScreen from "../ScanScreen";
 
 
 type Section = {
@@ -63,57 +65,71 @@ type Props = {
   dispatchShowBottomBar(visible: boolean): void,
 };
 
-class HomeScreen extends Component<Props> {
-  static navigationOptions = () => {
-    const title = LangService.strings.APP_NAME;
-    return {
-      ...HeaderStyles.noElevation,
-      title,
-    };
-  };
+const HomeScreen = (props: Props) => {
 
-  componentDidMount() {
+  const { params } = props.navigation?.state;
+
+  const {
+    currentHomeTab,
+    items,
+    navigation,
+    navigationCategoryLabels,
+    selectCurrentTab,
+    showLoadingSpinner,
+    fetchNavigationItems,
+    currentLanguage,
+  } = props;
+
+
+  useEffect(() => {
     Orientation.lockToPortrait();
-    this.props.dispatchShowBottomBar(true);
-  }
+    props.dispatchShowBottomBar(true);
+    return () => {
+      Keyboard.dismiss();
+      props.selectCurrentTab(0);
+    };
+  }, []);
 
-  componentWillUnmount = () => {
-    Keyboard.dismiss();
-    this.props.selectCurrentTab(0);
-  };
 
-  onPressItem = (item, items, index): void => {
+  useEffect(() => {
+    if (params?.type) {
+      const { type } = params;
+    }
+  }, [params]);
+
+
+  const onPressItem = (item, items, index): void => {
     switch (item?.type) {
       case "guide": {
         const { guide } = item;
         if (guide) {
-          this.props.selectGuide(guide.id);
+          props.selectGuide(guide.id);
           const type = guide?.guideType;
           if (type === "guide") {
             const slug = guide?.slug;
             const title = guide?.name;
             const path = `/tours/${slug || title}`;
             trackScreen(path, path);
-            this.props?.navigation.navigate("GuideDetailsScreen", {
+            props?.navigation.navigate("GuideDetailsScreen", {
               title: title,
               bottomBarOnUnmount: true,
               array: items,
               path: path,
             });
-            this.props.dispatchShowBottomBar(false);
+            props.dispatchShowBottomBar(false);
           } else if (type === "trail") {
             const slug = guide?.slug;
             const title = guide?.name;
             const path = `/tours/${slug || title}`;
             trackScreen(path, path);
-            this.props?.navigation.navigate("TrailScreen", {
+            props?.navigation.navigate("TrailScreen", {
               title: title,
               bottomBarOnUnmount: true,
               path: path,
               // array: items,
               // index: index,
             });
-            this.props?.dispatchShowBottomBar(false);
+            props?.dispatchShowBottomBar(false);
           }
         }
         break;
@@ -122,33 +138,33 @@ class HomeScreen extends Component<Props> {
       case "interactive_guide":
         const { interactiveGuide } = item;
         if (interactiveGuide) {
-          this.props.selectGuide(interactiveGuide.id);
-          const title = interactiveGuide?.title
+          props.selectGuide(interactiveGuide.id);
+          const title = interactiveGuide?.title;
           const path = `/tours/${title}`;
           trackScreen(path, path);
-          this.props?.navigation.navigate("QuizScreen", {
+          props?.navigation.navigate("QuizScreen", {
             quiz: interactiveGuide,
             title: title,
           });
-          this.props.dispatchShowBottomBar(false);
+          props.dispatchShowBottomBar(false);
 
         }
         break;
 
       case "guidegroup":
-        this?.props?.selectGuideGroup(item.id);
+        props?.selectGuideGroup(item.id);
         if (item?.guideGroup) {
           const title = item?.guideGroup?.name;
           const slug = item?.guideGroup?.slug;
           const path = `/places/${slug || title}`;
           trackScreen(path, path);
-          this.props.navigation.navigate("LocationScreen", {
+          props.navigation.navigate("LocationScreen", {
             title,
             bottomBarOnUnmount: true,
             array: items,
             path: path,
           });
-          this?.props?.dispatchShowBottomBar(false);
+          props?.dispatchShowBottomBar(false);
         }
         break;
       default:
@@ -157,80 +173,67 @@ class HomeScreen extends Component<Props> {
   };
 
 
-  render() {
-    const {
-      currentHomeTab,
-      items,
-      navigation,
-      navigationCategoryLabels,
-      selectCurrentTab,
-      showLoadingSpinner,
-      fetchNavigationItems,
-      currentLanguage,
-    } = this.props;
-
-    if (showLoadingSpinner) {
-      return <ActivityIndicator style={styles.loadingSpinner} />;
-    }
-
-
-    return (
-      <>
-        <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
-        <SafeAreaView edges={["right", "top", "left"]} style={styles.homeContainer}>
-          <TouchableOpacity activeOpacity={1} style={{ flex: 1 }} onPress={Keyboard.dismiss}>
-            <>
-              <View style={styles.topBarNavigation}>
-                <SegmentControlPill
-                  initialSelectedIndex={currentHomeTab}
-                  onSegmentIndexChange={selectCurrentTab}
-                  labels={navigationCategoryLabels}
-                />
-              </View>
-              {/*<HomeFilter />*/}
-              {!items || (items && items.length === 0) ? (
-                <View style={styles.sectionNoContent}>
-                  <Text style={styles.sectionNoContentText}>
-                    {LangService.strings.CONTENT_MISSING}
-                  </Text>
-                </View>
-              ) : (
-                <>
-                  <Scrollable
-                    key={currentHomeTab}
-                    style={styles.container}
-                    contentContainerStyle={styles.contentContainer}
-                    refreshControl={true}
-                    refreshAction={() => {
-                      this.props.selectCurrentTab(0);
-                      fetchNavigationItems(currentLanguage, currentHomeTab);
-                      this.props.dispatchShowBottomBar(true);
-                    }}
-                  >
-                    {items?.length && items.map((item, index) => (
-                      <NavigationListItem
-                        key={index}
-                        index={index}
-                        item={item}
-                        onPressItem={() => this.onPressItem(item, items, index)}
-                      />
-                    ))}
-                  </Scrollable>
-                  <TouchableOpacity
-                    style={styles.mapButton}
-                    onPress={() => navigation.navigate("CategoryMapScreen")}
-                  >
-                    <Image style={styles.mapIcon} source={mapIcon} />
-                  </TouchableOpacity>
-                </>
-              )}
-            </>
-          </TouchableOpacity>
-        </SafeAreaView>
-      </>
-    );
+  if (showLoadingSpinner) {
+    return <ActivityIndicator style={styles.loadingSpinner} />;
   }
-}
+
+
+  return (
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
+      <SafeAreaView edges={["right", "top", "left"]} style={styles.homeContainer}>
+        <TouchableOpacity activeOpacity={1} style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+          <>
+            <View style={styles.topBarNavigation}>
+              <SegmentControlPill
+                initialSelectedIndex={currentHomeTab}
+                onSegmentIndexChange={selectCurrentTab}
+                labels={navigationCategoryLabels}
+              />
+            </View>
+            {/*<HomeFilter />*/}
+            {!items || (items && items.length === 0) ? (
+              <View style={styles.sectionNoContent}>
+                <Text style={styles.sectionNoContentText}>
+                  {LangService.strings.CONTENT_MISSING}
+                </Text>
+              </View>
+            ) : (
+              <>
+                <Scrollable
+                  key={currentHomeTab}
+                  style={styles.container}
+                  contentContainerStyle={styles.contentContainer}
+                  refreshControl={true}
+                  refreshAction={() => {
+                    props.selectCurrentTab(0);
+                    fetchNavigationItems(currentLanguage, currentHomeTab);
+                    props.dispatchShowBottomBar(true);
+                  }}
+                >
+                  {items?.length && items.map((item, index) => (
+                    <NavigationListItem
+                      key={index}
+                      index={index}
+                      item={item}
+                      onPressItem={() => onPressItem(item, items, index)}
+                    />
+                  ))}
+                </Scrollable>
+                <TouchableOpacity
+                  style={styles.mapButton}
+                  onPress={() => navigation.navigate("CategoryMapScreen")}
+                >
+                  <Image style={styles.mapIcon} source={mapIcon} />
+                </TouchableOpacity>
+              </>
+            )}
+          </>
+        </TouchableOpacity>
+      </SafeAreaView>
+    </>
+  );
+};
 
 function mapStateToProps(state: RootState) {
   const {
@@ -242,6 +245,8 @@ function mapStateToProps(state: RootState) {
   const { navigationCategories, currentLanguage } = navigation;
   const { fetchingIds } = guideGroups;
   let categories = "";
+
+  console.log("nav cate", navigationCategories);
 
   categories = [...navigationCategories.map(cat => {
     const data = cat.items
@@ -302,8 +307,16 @@ function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
       dispatch(selectCurrentHomeTab(tabIndex)),
     dispatchShowBottomBar: (visible: boolean) =>
       dispatch(showBottomBar(visible)),
+
   };
 }
+
+
+HomeScreen["navigationOptions"] = () => (
+  {
+    title: LangService.strings.APP_NAME,
+    ...HeaderStyles.noElevation,
+  });
 
 export default connect(
   mapStateToProps,
