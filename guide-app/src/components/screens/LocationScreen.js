@@ -30,8 +30,7 @@ const LocationScreen = (props: Props) => {
     isFetchingGuides,
     navigation,
   } = props;
-
-  const { redirect } = navigation?.state?.params;
+  const [redirect, setRedirect] = useState(navigation?.state?.params?.redirect)
   const [redirected, setRedirected] = useState(false)
 
   useEffect(() => {
@@ -62,6 +61,7 @@ const LocationScreen = (props: Props) => {
     const prevPath = navigation.state.params.path;
     const newPath = `${prevPath}/${slug || title}`;
     trackScreen(newPath, newPath);
+    redirect && setRedirect(false)
     if (guide.guideType === "trail") {
       props.selectCurrentGuide(guide);
       navigation.navigate("TrailScreen", {

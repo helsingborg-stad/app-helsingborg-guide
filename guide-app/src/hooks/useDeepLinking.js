@@ -21,24 +21,26 @@ const useDeepLinking = () => {
     console.log("the params in hook", params);
     const { type, id_1, id_2, id_3 } = params;
     if (id_1) {
-      switch (type) {
+      let item;
+      navigationCategories.map(category => {
+        let temp;
+        temp = category.items.find(group => group.id.toString() === id_1.toString());
+        if (temp) {
+          item = temp;
+        }
+      });
+
+      dispatch(selectCurrentBottomBarTab(0));
+      dispatch(showBottomBar(false));
+
+      switch (item.type) {
         case "guidegroup":
-          let item;
-          navigationCategories.map(category => {
-            let temp;
-            temp = category.items.find(group => group.id.toString() === id_1.toString());
-            if (temp) {
-              item = temp;
-            }
-          });
-          console.log("the ids", params);
           if (item?.guideGroup && item?.id) {
             item?.id && (await dispatch(selectCurrentGuideGroup(item.id)));
             const title = item?.guideGroup?.name;
             const slug = item?.guideGroup?.slug;
             const path = `/places/${slug || title}`;
             trackScreen(path, path);
-            dispatch(selectCurrentBottomBarTab(0));
             props.navigation.navigate("LocationScreen", {
               title,
               bottomBarOnUnmount: true,
@@ -48,11 +50,50 @@ const useDeepLinking = () => {
           }
           return;
         case "guide":
+          const { guide } = item;
+          if (guide) {
+            dispatch(selectCurrentGuideByID(guide.id))
+            const type = guide?.guideType;
+            if (type === "guide") {
+              const slug = guide?.slug;
+              const title = guide?.name;
+              const path = `/tours/${slug || title}`;
+              trackScreen(path, path);
+              props?.navigation.navigate("GuideDetailsScreen", {
+                title: title,
+                bottomBarOnUnmount: true,
+                path: path,
+                ...(id_2 && { redirect: id_2 }),
+              });
+            } else if (type === "trail") {
+              const slug = guide?.slug;
+              const title = guide?.name;
+              const path = `/tours/${slug || title}`;
+              trackScreen(path, path);
+              props?.navigation.navigate("TrailScreen", {
+                title: title,
+                bottomBarOnUnmount: true,
+                path: path,
+                ...(id_2 && { redirect: [id_2, id_3] }),
+              });
+            }
+          }
           return;
         case "interactive_guide":
-          return;
-        case "trail":
-          return;
+          const { interactiveGuide } = item;
+          if (interactiveGuide) {
+            props.selectGuide(interactiveGuide.id);
+            const title = interactiveGuide?.title;
+            const path = `/tours/${title}`;
+            trackScreen(path, path);
+            props?.navigation.navigate("QuizScreen", {
+              quiz: interactiveGuide,
+              title: title,
+            });
+            props.dispatchShowBottomBar(false);
+
+          }
+          break;
         default:
           return;
       }

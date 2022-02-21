@@ -105,6 +105,7 @@ const HomeScreen = (props: Props) => {
       case "guide": {
         const { guide } = item;
         if (guide) {
+          console.log("guide id", guide.id)
           props.selectGuide(guide.id);
           const type = guide?.guideType;
           if (type === "guide") {
@@ -115,7 +116,6 @@ const HomeScreen = (props: Props) => {
             props?.navigation.navigate("GuideDetailsScreen", {
               title: title,
               bottomBarOnUnmount: true,
-              array: items,
               path: path,
             });
             props.dispatchShowBottomBar(false);
@@ -128,8 +128,6 @@ const HomeScreen = (props: Props) => {
               title: title,
               bottomBarOnUnmount: true,
               path: path,
-              // array: items,
-              // index: index,
             });
             props?.dispatchShowBottomBar(false);
           }

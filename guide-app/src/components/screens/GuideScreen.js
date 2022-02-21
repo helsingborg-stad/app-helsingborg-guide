@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component, useEffect } from "react";
-import { View } from "react-native";
+import React, { Component, useEffect, useState } from "react";
+import { ActivityIndicator, View } from "react-native";
 import { connect } from "react-redux";
 
 import GuideView from "@shared-components/GuideView";
@@ -30,64 +30,68 @@ const GuideScreen = (props) => {
   const { currentGuide, navigation } = props;
   const { contentObjects } = currentGuide;
   const { params } = navigation.state;
-  const { redirect } = params;
+  const [redirect, setRedirect] = useState(params?.redirect)
 
-    useEffect(() => {
-      const title = currentGuide ? currentGuide.name : null;
-      props.navigation.setParams({ title });
-
-      return () => {
-        props.dispatchReleaseAudio();
-        if (params && params.bottomBarOnUnmount) {
-          props.dispatchShowBottomBar(true);
-        }
+  useEffect(() => {
+    const title = currentGuide ? currentGuide.name : null;
+    props.navigation.setParams({ title });
+    return () => {
+      redirect && setRedirect(false)
+      props.dispatchReleaseAudio();
+      if (params && params.bottomBarOnUnmount) {
+        props.dispatchShowBottomBar(true);
       }
-    },[])
+    };
+  }, []);
 
 
   useEffect(() => {
     if (redirect) {
       let index = -1;
-      let object = contentObjects.find((contentObj, i) =>  {
-          if(contentObj.id === redirect) {
-            index = i;
-          }
-        return contentObj.id === redirect
-      })
+      let object = contentObjects.find((contentObj, i) => {
+        if (contentObj.id === redirect) {
+          index = i;
+        }
+        return contentObj.id === redirect;
+      });
       if (object && index !== -1) {
-        onPressContentObject(object, index, contentObjects)
+        onPressContentObject(object, index, contentObjects);
+      }
+      else {
+        setRedirect(false)
       }
     }
-  },[redirect])
+  }, [redirect]);
 
 
-
-    const onPressContentObject = (obj: ContentObject, index, array) => {
-      const prevPath = navigation.state.params.path
-      const newPath = `${prevPath}/${obj?.title}`
-      console.log("CONTENT OBJECT", obj?.id)
-      props.dispatchSelectContentObject(obj);
-      trackScreen(newPath, newPath)
-        navigation.navigate("ObjectScreen", {
-        title: obj.title,
-        currentGuide: props.currentGuide,
-        selectObject: props.dispatchSelectContentObject,
-        array: array,
-        order: obj?.order,
-        swipeable: true,
-        path: newPath
-      });
+  const onPressContentObject = (obj: ContentObject, index, array) => {
+    const prevPath = navigation.state.params.path;
+    const newPath = `${prevPath}/${obj?.title}`;
+    console.log("CONTENT OBJECT", obj?.id);
+    props.dispatchSelectContentObject(obj);
+    trackScreen(newPath, newPath);
+    redirect && setRedirect(false)
+    navigation.navigate("ObjectScreen", {
+      title: obj.title,
+      currentGuide: props.currentGuide,
+      selectObject: props.dispatchSelectContentObject,
+      array: array,
+      order: obj?.order,
+      swipeable: true,
+      path: newPath,
+    });
   };
 
-    return currentGuide ? (
+  return !(!!redirect) ?
+    currentGuide ? (
       <GuideView
         guide={currentGuide}
         onPressContentObject={onPressContentObject}
       />
     ) : (
       <View />
-    );
-}
+    ) : <ActivityIndicator style={{flex: 1}} />;
+};
 
 function mapStateToProps(state: RootState) {
   const { currentGuide } = state.uiState;

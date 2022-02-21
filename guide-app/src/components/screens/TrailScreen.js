@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { StatusBar } from "react-native";
 import { connect } from "react-redux";
 
@@ -23,67 +23,36 @@ type State = {
   showInfoOverlay: boolean
 };
 
-class TrailScreen extends Component<Props, State> {
-  static navigationOptions = ({ navigation }) => {
-    let title = null;
-    let path = null;
-    let toggleInfoOverlay = () => {};
-    const { params = {} } = navigation.state;
-    if (params) {
-      ({ title } = params);
-      ({ path } = params);
-      ({ toggleInfoOverlay } = params);
-    }
+const TrailScreen = (props) => {
+  const { navigation, dispatchReleaseAudio, dispatchShowBottomBar, currentGuide } = props;
+  const { array, index, path } = navigation?.state?.params;
 
-    return {
-      title,
-      headerRight: () => (
-        <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />),
-      headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
-    };
-  };
+  const [showInfoOverlay, setShowInfoOverlay] = useState();
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showInfoOverlay: false,
-    };
-  }
-
-  componentDidMount() {
-    this.props.navigation.setParams({
+  useEffect(() => {
+    navigation.setParams({
       toggleInfoOverlay: this.toggleInfoOverlay
     });
-  }
-
-  componentWillUnmount() {
-    this.props.dispatchReleaseAudio();
-    const { navigation } = this.props;
-    if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
-      this.props.dispatchShowBottomBar(true);
+    return () => {
+      dispatchReleaseAudio();
+      if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
+       dispatchShowBottomBar(true);
+      }
     }
-  }
+  },[])
 
-  toggleInfoOverlay = () => {
-    const { showInfoOverlay } = this.state;
 
+  const toggleInfoOverlay = () => {
     AnalyticsUtils.logEvent(
       showInfoOverlay ? "close_info_overlay" : "open_info_overlay",
-      { name: this.props.currentGuide.slug }
+      { name: currentGuide.slug }
     );
-
-    this.setState({ showInfoOverlay: !showInfoOverlay });
+    setShowInfoOverlay(!showInfoOverlay);
   };
 
-  render() {
-    const { array, index, path } = this.props.navigation.state.params;
-    if (this.props.currentGuide.contentObjects.length <= 0) {
+    if (currentGuide.contentObjects.length <= 0) {
       return null;
     }
-
-
-
 
     return (
       <>
@@ -92,17 +61,16 @@ class TrailScreen extends Component<Props, State> {
           backgroundColor={Colors.themeSecondary}
         />
         <TrailView
-          trail={this.props.currentGuide}
+          trail={currentGuide}
           array={array}
           index={index}
           path={path}
-          showInfoOverlay={this.state.showInfoOverlay}
-          onToggleInfoOverlay={this.toggleInfoOverlay}
-          navigation={this.props.navigation}
+          showInfoOverlay={showInfoOverlay}
+          onToggleInfoOverlay={toggleInfoOverlay}
+          navigation={navigation}
         />
       </>
     );
-  }
 }
 
 function mapStateToProps(state: RootState) {
@@ -117,5 +85,24 @@ function mapDispatchToProps(dispatch: Dispatch) {
       dispatch(showBottomBar(visible))
   };
 }
+
+TrailScreen["navigationOptions"] = ({ navigation }) => {
+  let title = null;
+  let path = null;
+  let toggleInfoOverlay = () => {};
+  const { params = {} } = navigation.state;
+  if (params) {
+    ({ title } = params);
+    ({ path } = params);
+    ({ toggleInfoOverlay } = params);
+  }
+
+  return {
+    title,
+    headerRight: () => (
+      <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />),
+    headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);
