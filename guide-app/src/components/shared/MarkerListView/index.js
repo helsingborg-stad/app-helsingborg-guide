@@ -86,6 +86,9 @@ const MarkerListView = (props: Props) => {
             mapMarkerViewRef?.panMapToIndex(index);
             onListItemPressed(currentItem);
         }
+        else {
+          setTimeout(() => scrollToIndex(0), 100)
+        }
       }
   }, [redirect, listRef, mapMarkerViewRef]);
 
