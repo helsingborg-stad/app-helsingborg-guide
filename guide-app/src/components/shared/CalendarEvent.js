@@ -120,7 +120,6 @@ function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
     dateStart,
     dateEnd
   } = event;
-  const { openLink } = useOpenLink();
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
   const decodedLocationTitle = decode(location.title, {
     level: "xml",
@@ -148,8 +147,6 @@ function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
           event: {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle, date: eventLinkDay, dateString: dateString},
             path: newPath,
         });
-        // Linking.openURL(eventUrl);
-        // openLink(eventUrl);
       }}
     >
       <View style={styles.imageWrapper}>

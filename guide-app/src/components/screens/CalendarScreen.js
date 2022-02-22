@@ -20,6 +20,7 @@ import { showBottomBar } from "@actions/uiStateActions";
 import { fetchEvents } from "@actions/eventActions";
 import { StyleSheetUtils } from "@utils";
 import { trackScreen } from "@utils/MatomoUtils";
+import useDeepLinking from "@hooks/useDeepLinking";
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
@@ -102,6 +103,11 @@ const CalendarScreen = (props: Props, state: State) => {
     navigation,
   } = props;
 
+  const { params } = navigation?.state;
+
+  const { linkingCalendar } = useDeepLinking();
+
+
   const [chosenDate, setChosenDate] = useState(new Date())
 
   useEffect(() => {
@@ -109,6 +115,12 @@ const CalendarScreen = (props: Props, state: State) => {
     dispatchShowBottomBar(true);
     getEvents(currentLanguage, chosenDate, chosenDate);
   },[])
+
+  useEffect(() => {
+      if(params?.id) {
+        linkingCalendar(params)
+      }
+  },[params])
 
 
 
