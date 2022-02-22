@@ -29,7 +29,6 @@ import {
 } from "@src/components/screens";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
 import ScanScreen from "@src/components/screens/ScanScreen";
-import LoadingScreen from "@src/components/screens/LoadingScreen";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -51,8 +50,9 @@ const GuideNavigator = createStackNavigator(
       },
     },
 
-    LoadingScreen: {
-      screen: LoadingScreen,
+    CalendarScreen: {
+      screen: CalendarScreen,
+      path: 'calendar/:id'
     },
 
     TrailScreen: { screen: TrailScreen },
@@ -88,7 +88,6 @@ const GuideNavigator = createStackNavigator(
     ScanScreen: { screen: ScanScreen },
     DebugScreen: { screen: DebugScreen },
     CategoryMapScreen: { screen: CategoryMapScreen },
-    CalendarScreen: { screen: CalendarScreen },
     CalendarDetailsScreen: { screen: CalendarDetailsScreen },
   },
   { defaultNavigationOptions: HeaderStyles.default },

@@ -1,9 +1,7 @@
 // @flow
-import * as React from "react";
-import { Component } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ActivityIndicator,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -93,59 +91,46 @@ type State = {
   chosenDate: Date
 };
 
-class CalendarScreen extends Component<Props, State> {
-  static navigationOptions = () => {
-    return { headerShown: false };
-  };
+const CalendarScreen = (props: Props, state: State) => {
+  const {
+    currentLanguage,
+    dispatchShowBottomBar,
+    getEvents,
+    noContent,
+    showLoadingSpinner,
+    items,
+    navigation,
+  } = props;
 
-  constructor(props: Props) {
-    super(props);
+  const [chosenDate, setChosenDate] = useState(new Date())
 
-    const chosenDate = new Date();
-    this.state = { chosenDate };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     trackScreen("/calendar", "/calendar")
-    const { currentLanguage, dispatchShowBottomBar, getEvents } = this.props;
-    const { chosenDate } = this.state;
     dispatchShowBottomBar(true);
     getEvents(currentLanguage, chosenDate, chosenDate);
-  }
+  },[])
 
-  getNextDate = () => {
-    const { currentLanguage, getEvents } = this.props;
-    const { chosenDate } = this.state;
+
+
+  const getNextDate = () => {
     const nextDate = addDays(chosenDate, 1);
     getEvents(currentLanguage, nextDate, nextDate);
-    this.setState({ chosenDate: nextDate });
+    setChosenDate(nextDate)
   };
 
-  getPrevDate = () => {
-    const { currentLanguage, getEvents } = this.props;
-    const { chosenDate } = this.state;
+  const getPrevDate = () => {
     const prevDate = subDays(chosenDate, 1);
     getEvents(currentLanguage, prevDate, prevDate);
-    this.setState({ chosenDate: prevDate });
+    setChosenDate(prevDate);
   };
 
-  render() {
-    const {
-      currentLanguage,
-      getEvents,
-      noContent,
-      showLoadingSpinner,
-      items,
-      navigation,
-    } = this.props;
-    const { chosenDate } = this.state;
 
     const datePicker = (
       <CalendarDatePicker
         chosenDate={chosenDate}
         currentLanguage={currentLanguage}
-        getNextDate={() => this.getNextDate()}
-        getPrevDate={() => this.getPrevDate()}
+        getNextDate={() => getNextDate()}
+        getPrevDate={() => getPrevDate()}
       />
     );
 
@@ -188,7 +173,6 @@ class CalendarScreen extends Component<Props, State> {
         </Scrollable>
       </Layout>
     );
-  }
 }
 
 function mapStateToProps(state: RootState) {
@@ -213,6 +197,12 @@ function mapDispatchToProps(dispatch: Dispatch) {
     dispatchShowBottomBar: (visible: boolean) =>
       dispatch(showBottomBar(visible))
   };
+}
+
+CalendarScreen["navigationOptions"] = ({ navigation }) => {
+  return {
+    headerShown: false
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarScreen);
