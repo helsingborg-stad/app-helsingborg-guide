@@ -21,6 +21,7 @@ import Colors from "@assets/styles/Colors";
 import fetchService from "@services/FetchService";
 import TextStyles from "@assets/styles/TextStyles";
 import { useSelector } from "react-redux";
+
 const shareImageURL = require("@assets/images/share_icon.png");
 const fadeImageURL = require("@assets/images/share_fade.png");
 
@@ -158,22 +159,22 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
 
   // try {
 
-    RNFS.readDir(RNFS.DocumentDirectoryPath).then(res => {
+  RNFS.readDir(RNFS.DocumentDirectoryPath).then(res => {
 
-      const newPath = `${RNFS.DocumentDirectoryPath}/GuideApp.jpg`;
+    const newPath = `${RNFS.DocumentDirectoryPath}/GuideApp.jpg`;
 
-      RNFS.copyFile(outputImage, newPath)
-        .then(() => {
+    RNFS.copyFile(outputImage, newPath)
+      .then(() => {
 
-          const finalPath = getPlatformURI(newPath);
+        const finalPath = getPlatformURI(newPath);
 
-          RNFS.exists(finalPath).then(() => {
+        RNFS.exists(finalPath).then(() => {
 
-            Share.open({ title, message, subject, url: finalPath });
+          Share.open({ title, message, subject, url: finalPath });
 
-          }).catch(err => console.log("err 1", err));
-        }).catch(err => console.log("err 2", err));
-    }).catch(err => console.log("err 3", err));
+        }).catch(err => console.log("err 1", err));
+      }).catch(err => console.log("err 2", err));
+  }).catch(err => console.log("err 3", err));
 
   finish();
 }
@@ -195,7 +196,11 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
       icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
     });
 
-    console.log("title", title, "currentSharingLink", currentSharingLink)
+    console.log("title", title, "currentSharingLink", currentSharingLink);
+
+    let sharingText = title;
+    sharingText = sharingText.concat(` ${currentSharingLink}`);
+
 
     iosShare = {
       activityItemSources: [
@@ -208,7 +213,7 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
           item: {
             default: {
               type: "text",
-              content: `${outputImage} ${currentSharingLink}`,
+              content: `${sharingText}`,
             },
           },
 
@@ -221,7 +226,9 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
           },
         },
       ],
-      title: currentSharingLink,
+
+      // title: currentSharingLink,
+      // message: sharingText,
     };
 
     isCreatingImage = false;
@@ -310,9 +317,9 @@ function loadOverlay() {
 
 const ShowShareButton = (props) => {
   const { title, image, sender, shareType } = props;
-  const { currentSharingLink } = useSelector(s => s.uiState)
+  const { currentSharingLink } = useSelector(s => s.uiState);
 
-  console.log("CURRENT SHARING LINK", currentSharingLink)
+  console.log("CURRENT SHARING LINK", currentSharingLink);
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   origin = sender;
   let imageUrl = image.large;
