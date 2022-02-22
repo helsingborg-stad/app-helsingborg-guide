@@ -31,6 +31,7 @@ import SegmentControlPill from "@shared-components/SegmentControlPill";
 import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
 import useDeepLinking from "@hooks/useDeepLinking";
+import useGuides from "@hooks/useGuides";
 import { trackScreen } from "@utils/MatomoUtils";
 
 
@@ -68,6 +69,7 @@ type Props = {
 const HomeScreen = (props: Props) => {
   const { params } = props.navigation?.state;
   const { linkingHome } = useDeepLinking();
+  const { linkToGuide } = useGuides();
 
   const type = params?.type;
 
@@ -100,78 +102,9 @@ const HomeScreen = (props: Props) => {
   }, [params]);
 
 
-  const onPressItem = (item, items): void => {
-    switch (item?.type) {
-      case "guide": {
-        const { guide } = item;
-        if (guide) {
-          console.log("guide id", guide.id)
-          props.selectGuide(guide.id);
-          const type = guide?.guideType;
-          if (type === "guide") {
-            const slug = guide?.slug;
-            const title = guide?.name;
-            const path = `/tours/${slug || title}`;
-            trackScreen(path, path);
-            props?.navigation.navigate("GuideDetailsScreen", {
-              title: title,
-              bottomBarOnUnmount: true,
-              path: path,
-            });
-            props.dispatchShowBottomBar(false);
-          } else if (type === "trail") {
-            const slug = guide?.slug;
-            const title = guide?.name;
-            const path = `/tours/${slug || title}`;
-            trackScreen(path, path);
-            props?.navigation.navigate("TrailScreen", {
-              title: title,
-              bottomBarOnUnmount: true,
-              path: path,
-            });
-            props?.dispatchShowBottomBar(false);
-          }
-        }
-        break;
-      }
-
-      case "interactive_guide":
-        const { interactiveGuide } = item;
-        if (interactiveGuide) {
-          props.selectGuide(interactiveGuide.id);
-          const title = interactiveGuide?.title;
-          const path = `/tours/${title}`;
-          trackScreen(path, path);
-          props?.navigation.navigate("QuizScreen", {
-            quiz: interactiveGuide,
-            title: title,
-          });
-          props.dispatchShowBottomBar(false);
-
-        }
-        break;
-
-      case "guidegroup":
-        props?.selectGuideGroup(item.id);
-        console.log("item id", item.id)
-        if (item?.guideGroup) {
-          const title = item?.guideGroup?.name;
-          const slug = item?.guideGroup?.slug;
-          const path = `/places/${slug || title}`;
-          trackScreen(path, path);
-          props.navigation.navigate("LocationScreen", {
-            title,
-            bottomBarOnUnmount: true,
-            path: path,
-          });
-          props?.dispatchShowBottomBar(false);
-        }
-        break;
-      default:
-        break;
-    }
+  const onPressItem = (item): void => {
+   linkToGuide(item);
   };
-
 
   if (showLoadingSpinner) {
     return <ActivityIndicator style={styles.loadingSpinner} />;

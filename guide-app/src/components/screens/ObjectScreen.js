@@ -54,12 +54,19 @@ function isMediaAvailable(media?: MediaContent): boolean {
 
 class ObjectScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
-    const { title, path } = navigation.state.params;
-
+    const { title, path, redirect, array, order, scrollable, panToIndex } = navigation.state.params;
     return {
       ...HeaderStyles.noElevation,
       title,
-      headerLeft: () => <HeaderBackButton navigation={navigation} path={path}   />,
+      headerLeft: () => <HeaderBackButton
+        navigation={navigation}
+        path={path} onPress={() => {
+        if (scrollable && panToIndex && redirect === array[order].id) {
+          scrollable(order);
+          panToIndex(order);
+        }
+      }}
+      />,
       headerRight: () => <View style={{ width: 36 }} />,
     };
   };
@@ -138,7 +145,18 @@ class ObjectScreen extends Component<Props> {
       navigation,
     } = this.props;
 
-    const { selectObject, index, array, prevIndex, order, swipeable, scrollable, panToIndex, path } = this.props.navigation.state.params;
+    const {
+      selectObject,
+      index,
+      array,
+      prevIndex,
+      order,
+      swipeable,
+      scrollable,
+      panToIndex,
+      path,
+      redirect,
+    } = this.props.navigation.state.params;
 
     if (!currentContentObject) {
       return null;
@@ -149,6 +167,9 @@ class ObjectScreen extends Component<Props> {
       guideId = currentGuide.id;
       ({ guideType } = currentGuide);
     }
+
+
+    console.log("__REDIRECT__", redirect, array[order].id);
 
 
     return (

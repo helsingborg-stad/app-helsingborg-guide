@@ -214,7 +214,7 @@ const onHorizontalSwipe = (evt, swiped, setSwiped) => {
 /*
  * Underlying sharingservice needs a reference to a Component instance
  */
-const ObjectView = (props) => {
+const ObjectView = (props: Props) => {
   const { guideId, swipeable, scrollable, panToIndex, selectObject, navigation, array, order, onSwiperIndexChanged, path } = props;
   const [swiped, setSwiped] = useState(false);
   const ref = React.createRef();

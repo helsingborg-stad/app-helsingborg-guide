@@ -29,7 +29,7 @@ type Props = {
 
 const TrailScreen = (props: Props) => {
   const { navigation, dispatchReleaseAudio, dispatchShowBottomBar, currentGuide } = props;
-  const { array, index, path, redirect } = navigation?.state?.params;
+  const { path, redirect } = navigation?.state?.params;
   const [showInfoOverlay, setShowInfoOverlay] = useState();
 
   useEffect(() => {
@@ -63,6 +63,8 @@ const TrailScreen = (props: Props) => {
   const mapItems: MapItem[] = currentGuide.contentObjects.map(item => ({
     contentObject: item,
   }));
+
+  console.log("the redirect", redirect)
 
   return (
     <>
