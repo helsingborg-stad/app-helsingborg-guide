@@ -1,24 +1,24 @@
 // @flow
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
   Image,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
-  Linking
 } from "react-native";
 import { decode } from "html-entities";
 
 import { Colors, TextStyles } from "@assets/styles";
 import { eventCalendarURL } from "@data/urls";
 import LangService from "@services/langService";
-import { StyleSheetUtils } from "@utils";
-import { DateUtils } from "@utils";
-import useOpenLink from "@hooks/useOpenLink";
-import { trackScreen } from "../../utils/MatomoUtils";
+import { StyleSheetUtils, DateUtils } from "@utils";
+import { selectCurrentSharingLink } from "@actions/uiStateActions";
+import { trackScreen } from "@utils/MatomoUtils";
 import Touchable from "@shared-components/Touchable";
 const defaultImage = require("@assets/images/no-image-featured-image.png");
+import { DEEP_LINKING_URL } from "@data/endpoints"
+
 
 const styles = StyleSheet.create({
   item: {
@@ -118,8 +118,10 @@ function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
     name,
     slug,
     dateStart,
-    dateEnd
+    dateEnd,
+    id
   } = event;
+  const dispatch = useDispatch();
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
   const decodedLocationTitle = decode(location.title, {
     level: "xml",
@@ -137,11 +139,13 @@ function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
   const dateString = DateUtils.eventTime(dateStart);
   const eventUrl = `${eventCalendarURL}/${slug}?date=${eventLinkDate}`;
   const newPath = `${path}/${slug || decodedLocationTitle}`;
+  let sharePath = DEEP_LINKING_URL + `calendar/${id}/`;
 
   return (
     <Touchable
       style={styles.item}
       onPress={() => {
+        dispatch(selectCurrentSharingLink(sharePath));
         trackScreen(newPath, newPath);
           navigation.navigate("CalendarDetailsScreen", {
           event: {...event, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle, date: eventLinkDay, dateString: dateString},

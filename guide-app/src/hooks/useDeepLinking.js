@@ -3,12 +3,14 @@ import { decode } from "html-entities";
 import {
   showBottomBar,
   selectCurrentBottomBarTab,
+  selectCurrentSharingLink,
 } from "@actions/uiStateActions";
 import { eventCalendarURL } from "@data/urls";
 import useGuides from "@hooks/useGuides"
 import LangService from "@services/langService";
 import Navigation from "@services/navigationService";
 import { DateUtils } from "@utils";
+import { DEEP_LINKING_URL } from "@data/endpoints"
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 
 
@@ -42,13 +44,12 @@ const useDeepLinking = () => {
     let foundEvent = items.find(event => event.id === id);
     if (foundEvent) {
       const {
-        description,
         imageUrl,
         location,
-        name,
         slug,
         dateStart,
-        dateEnd
+        dateEnd,
+        id
       } = foundEvent;
 
       const image = imageUrl ? { uri: imageUrl } : defaultImage;
@@ -69,16 +70,17 @@ const useDeepLinking = () => {
       const eventUrl = `${eventCalendarURL}/${slug}?date=${eventLinkDate}`;
       const newPath = `$/calendar/${slug || decodedLocationTitle}`;
 
+      let sharePath = DEEP_LINKING_URL + `calendar/${id}/`;
+
+      dispatch(selectCurrentSharingLink(sharePath));
+
       Navigation.navigate("CalendarDetailsScreen", {
         event: {...foundEvent, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle, date: eventLinkDay, dateString: dateString},
         path: newPath,
       });
     }
-
-
-
   }
-  return { linkingHome, linkingCalendar};
+  return { linkingHome, linkingCalendar };
 };
 
 export default useDeepLinking;
