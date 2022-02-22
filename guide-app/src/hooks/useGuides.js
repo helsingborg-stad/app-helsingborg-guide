@@ -6,8 +6,10 @@ import {
   selectCurrentGuideByID,
   selectCurrentGuideGroup,
   showBottomBar,
+  selectCurrentSharingLink
 } from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
+import { DEEP_LINKING_URL } from "@data/endpoints"
 
 const useGuides = () => {
   const dispatch = useDispatch();
@@ -15,11 +17,13 @@ const useGuides = () => {
   const { navigationCategories, currentLanguage } = navigation;
 
   const linkToGuide = (item, params) => {
+    let sharePath = DEEP_LINKING_URL + `home/${item?.type}/`;
 
     switch (item?.type) {
-
       case "guidegroup":
         dispatch(selectCurrentGuideGroup(item.id));
+        sharePath += `${item.id}`
+        dispatch(selectCurrentSharingLink(sharePath))
         if (item?.guideGroup) {
           const title = item?.guideGroup?.name;
           const slug = item?.guideGroup?.slug;
@@ -38,7 +42,8 @@ const useGuides = () => {
       case "guide": {
         const { guide } = item;
         if (guide) {
-          console.log("guide id", guide.id)
+          sharePath += `${guide.id}`
+          dispatch(selectCurrentSharingLink(sharePath))
           dispatch(selectCurrentGuideByID(guide.id))
           const type = guide?.guideType;
           if (type === "guide") {
@@ -50,7 +55,9 @@ const useGuides = () => {
               title: title,
               bottomBarOnUnmount: true,
               path: path,
-              ...(params?.id_2 && { redirect: params?.id_2 }),
+              ...(params?.id_2 && { redirect: [params?.id_1, params?.id_2]}),
+              sharePath: sharePath
+
             });
             dispatch(showBottomBar(false));
           } else if (type === "trail") {
@@ -63,6 +70,7 @@ const useGuides = () => {
               bottomBarOnUnmount: true,
               path: path,
               ...(params?.id_2 && { redirect: params?.id_2 }),
+              sharePath: sharePath
             });
             dispatch(showBottomBar(false));
           }
@@ -73,6 +81,8 @@ const useGuides = () => {
       case "interactive_guide":
         const { interactiveGuide } = item;
         if (interactiveGuide) {
+          sharePath += `${interactiveGuide.id}`
+          dispatch(selectCurrentSharingLink(sharePath))
           dispatch(selectCurrentGuideByID(interactiveGuide.id))
           const title = interactiveGuide?.title;
           const path = `/tours/${title}`;
@@ -80,6 +90,7 @@ const useGuides = () => {
           Navigation.navigate("QuizScreen", {
             quiz: interactiveGuide,
             title: title,
+            sharePath: sharePath
           });
           dispatch(showBottomBar(false));
         }

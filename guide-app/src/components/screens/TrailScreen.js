@@ -113,7 +113,6 @@ TrailScreen["navigationOptions"] = ({ navigation }) => {
     ({ toggleInfoOverlay } = params);
   }
 
-  console.log("sum info", params);
 
   return {
     title,

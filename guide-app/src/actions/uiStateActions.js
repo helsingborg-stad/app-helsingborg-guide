@@ -77,3 +77,7 @@ export function selectCurrentBottomBarTab(tabIndex: number): Action {
 export function selectCurrentHomeTab(tabIndex: number): Action {
   return { type: "SELECT_CURRENT_HOME_TAB", tabIndex };
 }
+
+export function selectCurrentSharingLink(link: string): Action {
+  return { type: "SELECT_CURRENT_SHARING_LINK", link };
+}

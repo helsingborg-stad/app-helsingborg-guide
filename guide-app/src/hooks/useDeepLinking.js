@@ -22,7 +22,6 @@ const useDeepLinking = () => {
           item = temp;
         }
       });
-
       dispatch(selectCurrentBottomBarTab(0));
       dispatch(showBottomBar(false));
       linkToGuide(item, params);

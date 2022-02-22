@@ -20,6 +20,7 @@ import LangService from "@services/langService";
 import Colors from "@assets/styles/Colors";
 import fetchService from "@services/FetchService";
 import TextStyles from "@assets/styles/TextStyles";
+import { useSelector } from "react-redux";
 const shareImageURL = require("@assets/images/share_icon.png");
 const fadeImageURL = require("@assets/images/share_fade.png");
 
@@ -97,19 +98,19 @@ const SharedTextProperties = { color: Colors.white, fontSize };
 const getPlatformURI = path =>
   Platform.OS === "ios" ? path : `file://${path}`;
 
-function beginShare(title, message, url, width, height, subject, shareType, forceUpdate) {
+function beginShare(title, message, url, width, height, subject, shareType, forceUpdate, currentSharingLink) {
 
   // AnalyticsUtils.logEvent(shareType, { name: title });
   // The sharing process is different on ios and android.
   if (Platform.OS === "android") {
-    shareAndroid(title, message, url, width, height, subject, forceUpdate);
+    shareAndroid(title, message, url, width, height, subject, forceUpdate, currentSharingLink);
   } else {
-    shareIOs(title, message, url, width, height, subject, forceUpdate);
+    shareIOs(title, message, url, width, height, subject, forceUpdate, currentSharingLink);
   }
 }
 
 
-async function shareAndroid(title, message, url, width, height, subject, forceUpdate) {
+async function shareAndroid(title, message, url, width, height, subject, forceUpdate, currentSharingLink) {
   // Examples: https://github.com/JimmyDaddy/react-native-image-marker/blob/master/example/example/app.js
 
   function finish() {
@@ -177,7 +178,8 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
   finish();
 }
 
-async function shareIOs(title, message, url, width, height, subject, forceUpdate) {
+async function shareIOs(title, message, url, width, height, subject, forceUpdate, currentSharingLink) {
+
   isCreatingImage = true;
   forceUpdate();
   // First we need to download the main image.
@@ -193,6 +195,8 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
       icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
     });
 
+    console.log("title", title, "currentSharingLink", currentSharingLink)
+
     iosShare = {
       activityItemSources: [
         {
@@ -204,9 +208,10 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
           item: {
             default: {
               type: "text",
-              content: `${message} ${url}`,
+              content: `${outputImage} ${currentSharingLink}`,
             },
           },
+
           subject: {
             default: title,
           },
@@ -216,9 +221,7 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
           },
         },
       ],
-      url: outputImage,
-      title,
-
+      title: currentSharingLink,
     };
 
     isCreatingImage = false;
@@ -307,6 +310,9 @@ function loadOverlay() {
 
 const ShowShareButton = (props) => {
   const { title, image, sender, shareType } = props;
+  const { currentSharingLink } = useSelector(s => s.uiState)
+
+  console.log("CURRENT SHARING LINK", currentSharingLink)
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   origin = sender;
   let imageUrl = image.large;
@@ -339,6 +345,7 @@ const ShowShareButton = (props) => {
             title,
             shareType,
             forceUpdate,
+            currentSharingLink,
           );
         }}
       >

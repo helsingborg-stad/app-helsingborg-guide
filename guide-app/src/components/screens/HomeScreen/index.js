@@ -32,7 +32,7 @@ import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
 import useDeepLinking from "@hooks/useDeepLinking";
 import useGuides from "@hooks/useGuides";
-import { trackScreen } from "@utils/MatomoUtils";
+
 
 
 type Section = {

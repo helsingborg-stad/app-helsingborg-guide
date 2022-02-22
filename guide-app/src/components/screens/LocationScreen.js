@@ -1,12 +1,12 @@
 // @flow
 
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ActivityIndicator, View, StatusBar } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LocationView from "@shared-components/LocationView";
 import { Colors, HeaderStyles } from "@assets/styles";
-import { selectCurrentGuide, showBottomBar } from "@actions/uiStateActions";
+import { selectCurrentGuide, showBottomBar, selectCurrentSharingLink } from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
 
 
@@ -14,11 +14,13 @@ type Props = {
   currentGuideGroup: GuideGroup,
   currentGuides: Guide[],
   currentInteractiveGuide?: InteractiveGuide,
+  currentSharingLink: string,
   geolocation: GeolocationType,
   navigation: Object,
   isFetchingGuides: boolean,
   selectCurrentGuide(guide: Guide): void,
   dispatchShowBottomBar(visible: boolean): void,
+  dispatchCurrentSharingLink(link: string): void,
 };
 
 const LocationScreen = (props: Props) => {
@@ -29,9 +31,12 @@ const LocationScreen = (props: Props) => {
     geolocation,
     isFetchingGuides,
     navigation,
+    currentSharingLink,
+    dispatchCurrentSharingLink,
   } = props;
   const [redirect, setRedirect] = useState(navigation?.state?.params?.redirect)
   const [redirected, setRedirected] = useState(false)
+
 
   useEffect(() => {
     return () => {
@@ -60,6 +65,8 @@ const LocationScreen = (props: Props) => {
     const title = guide?.name;
     const prevPath = navigation.state.params.path;
     const newPath = `${prevPath}/${slug || title}`;
+    const sharingLink = currentSharingLink + `/${guide?.id}`
+    dispatchCurrentSharingLink(sharingLink)
     trackScreen(newPath, newPath);
     redirect && setRedirect(false)
     if (guide.guideType === "trail") {
@@ -75,12 +82,14 @@ const LocationScreen = (props: Props) => {
       navigation.navigate("GuideDetailsScreen", {
         title: guide.name,
         path: newPath,
-        ...(redirect?.length === 2 && redirect[1] && {redirect: redirect[1]})
+        ...(redirect?.length && {redirect: redirect})
       });
     }
   };
 
   const onPressInteractiveGuide = (interactiveGuide: InteractiveGuide) => {
+    const sharingLink = currentSharingLink + `/${interactiveGuide?.id}`
+    dispatchCurrentSharingLink(sharingLink)
     trackScreen("view_interactive_guide", interactiveGuide?.title || "");
     navigation.navigate("QuizScreen", {
       quiz: interactiveGuide,
@@ -118,8 +127,9 @@ function mapStateToProps(state: RootState) {
     items: interactiveGuideItems,
     isFetching: isFetchingInteractiveGuides,
   } = state.interactiveGuides;
-  const { currentGuideGroup } = state.uiState;
+  const { currentGuideGroup, currentSharingLink } = state.uiState;
   const { geolocation } = state;
+
 
   let currentGuides = [];
   let currentInteractiveGuide = null;
@@ -136,6 +146,7 @@ function mapStateToProps(state: RootState) {
     currentGuideGroup,
     currentGuides,
     currentInteractiveGuide,
+    currentSharingLink,
     geolocation: geolocation?.position,
     isFetchingGuides: isFetchingGuides || isFetchingInteractiveGuides,
   };
@@ -146,6 +157,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectCurrentGuide: (guide: Guide) => dispatch(selectCurrentGuide(guide)),
     dispatchShowBottomBar: (visible: boolean) =>
       dispatch(showBottomBar(visible)),
+    dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link)),
   };
 }
 

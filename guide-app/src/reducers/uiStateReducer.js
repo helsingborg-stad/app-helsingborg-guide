@@ -11,7 +11,8 @@ const defaultState: UIState = {
   currentBottomBarTab: 0,
   currentHomeTab: 0,
   developerMode: false,
-  showBottomBar: false
+  showBottomBar: false,
+  currentSharingLink: null,
 };
 
 export default function uiStateReducer(
@@ -47,6 +48,8 @@ export default function uiStateReducer(
       return { ...state, currentHomeTab: action.tabIndex };
     case "SHOW_BOTTOM_BAR":
       return { ...state, showBottomBar: action.visible };
+    case "SELECT_CURRENT_SHARING_LINK":
+      return { ...state, currentSharingLink: action.link };
     default:
       return state;
   }
