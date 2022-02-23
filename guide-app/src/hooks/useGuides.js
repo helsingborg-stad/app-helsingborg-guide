@@ -17,8 +17,10 @@ const useGuides = () => {
   const { navigationCategories, currentLanguage } = navigation;
 
   const linkToGuide = (item, params) => {
-    let sharePath = DEEP_LINKING_URL + `home/${item?.type}/`;
+    let sharePath = DEEP_LINKING_URL + `home/`;
 
+    console.log("sharepath looooool", sharePath
+    )
     switch (item?.type) {
       case "guidegroup":
         dispatch(selectCurrentGuideGroup(item.id));

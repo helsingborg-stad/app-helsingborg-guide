@@ -71,7 +71,7 @@ const HomeScreen = (props: Props) => {
   const { linkingHome } = useDeepLinking();
   const { linkToGuide } = useGuides();
 
-  const type = params?.type;
+  const id_1 = params?.id_1;
 
   const {
     currentHomeTab,
@@ -96,7 +96,7 @@ const HomeScreen = (props: Props) => {
 
 
   useEffect(() => {
-    if (type) {
+    if (id_1) {
          linkingHome(params, props);
     }
   }, [params]);
@@ -109,7 +109,6 @@ const HomeScreen = (props: Props) => {
   if (showLoadingSpinner) {
     return <ActivityIndicator style={styles.loadingSpinner} />;
   }
-
 
   return (
     <>

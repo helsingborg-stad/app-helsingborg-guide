@@ -41,7 +41,7 @@ const GuideNavigator = createStackNavigator(
   {
     HomeScreen: {
       screen: HomeScreen,
-      path: 'home/:type?/:id_1?/:id_2?/:id_3?',
+      path: 'home/:id_1?/:id_2?/:id_3?',
       navigationOptions: {
         backgroundColor: "red",
         headerMode: "screen",
@@ -49,6 +49,7 @@ const GuideNavigator = createStackNavigator(
         header: () => null,
       },
     },
+
 
     CalendarScreen: {
       screen: CalendarScreen,
