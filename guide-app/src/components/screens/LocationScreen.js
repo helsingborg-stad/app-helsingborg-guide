@@ -75,6 +75,7 @@ const LocationScreen = (props: Props) => {
         guide,
         title: title,
         path: newPath,
+        ...(redirect?.length === 2 && {redirect: redirect[1]})
       });
     } else if (guide.guideType === "guide") {
       console.log("the guide", guide?.id);

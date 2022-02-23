@@ -75,6 +75,7 @@ const MarkerListView = (props: Props) => {
 
 
   useEffect(() => {
+    console.log("the redirect", redirect)
       if (redirect && listRef.current && mapMarkerViewRef) {
         let index = -1;
         const currentItem = items.find((item, i) => {
