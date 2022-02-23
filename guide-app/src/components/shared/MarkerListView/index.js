@@ -25,8 +25,10 @@ import {
   selectCurrentContentObject,
   selectCurrentGuideGroup,
   selectCurrentGuide,
+  selectCurrentSharingLink,
 } from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
+
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 
 type Props = {
@@ -57,6 +59,7 @@ const MarkerListView = (props: Props) => {
   const [activeMarker, setActiveMarker] = useState("");
   const [showHorizontalList, setShowHorizontalList] = useState(true);
   const listRef = useRef();
+
 
   let mapMarkerViewRef = MapMarkerView;
 
@@ -169,10 +172,15 @@ const MarkerListView = (props: Props) => {
       dispatchSelectContentObject,
       items,
       path,
+      currentSharingLink,
+      dispatchCurrentSharingLink
     } = props;
     const { navigate } = navigation;
     const { guide, guideGroup, contentObject } = listItem;
+    let sharingLink = currentSharingLink;
     if (guideGroup) {
+      sharingLink += `/${guideGroup?.id}`;
+      dispatchCurrentSharingLink(sharingLink)
       trackScreen("view_location", guideGroup?.slug);
       selectGuideGroup(guideGroup.id);
       navigate("LocationScreen", { title: guideGroup.name });
@@ -181,6 +189,8 @@ const MarkerListView = (props: Props) => {
 
     if (guide) {
       const { guideType } = guide;
+      sharingLink += `/${guide?.id}`;
+      dispatchCurrentSharingLink(sharingLink)
       trackScreen("view_guide", guide?.slug || "");
       selectGuide(guide);
       switch (guideType) {
@@ -199,9 +209,8 @@ const MarkerListView = (props: Props) => {
       items.map(item => _items.push(item?.contentObject));
       const newPath = `${path}/${contentObject?.title}`;
       trackScreen(newPath, newPath);
-
-      console.log("OBJECT ID", contentObject?.id);
-
+      sharingLink += `/${contentObject?.id}`;
+      dispatchCurrentSharingLink(sharingLink)
       navigate("ObjectScreen", {
         title: contentObject?.title,
         array: _items,
@@ -499,9 +508,11 @@ const MarkerListView = (props: Props) => {
 };
 
 function mapStateToProps(state: RootState) {
-  const { geolocation } = state;
+  const { geolocation, uiState } = state;
+  const { currentSharingLink } = uiState;
   return {
     userLocation: geolocation?.position,
+    currentSharingLink,
   };
 }
 
@@ -511,6 +522,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
       dispatch(selectCurrentContentObject(contentObject)),
     selectGuideGroup: id => dispatch(selectCurrentGuideGroup(id)),
     selectGuide: guide => dispatch(selectCurrentGuide(guide)),
+    dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link)),
   };
 }
 

@@ -16,7 +16,6 @@ import {
   showBottomBar,
 } from "@actions/uiStateActions";
 import { Colors } from "@assets/styles";
-import { trackScreen } from "@utils/MatomoUtils";
 
 
 type Props = {
