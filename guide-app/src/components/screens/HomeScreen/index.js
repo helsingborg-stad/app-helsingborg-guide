@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   ActivityIndicator,
   TouchableOpacity,
@@ -82,7 +82,14 @@ const HomeScreen = (props: Props) => {
     showLoadingSpinner,
     fetchNavigationItems,
     currentLanguage,
+    dispatchShowBottomBar
   } = props;
+
+  useEffect(() => {
+    if (navigation.isFocused()) {
+      dispatchShowBottomBar(true);
+    }
+  }, [navigation.isFocused()]);
 
 
   useEffect(() => {

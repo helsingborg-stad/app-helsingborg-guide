@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import QRCodeScanner from "react-native-qrcode-scanner";
 import { RNCamera } from "react-native-camera";
 import { Colors } from "@assets/styles";
-
+import Torch from "@shared-components/svg/torch";
+import Flip from "@shared-components/svg/flip";
 
 const styles = StyleSheet.create({
 
@@ -42,53 +43,57 @@ const styles = StyleSheet.create({
 
   bottomItem: {
     flex: 1,
+    minWidth: 30,
+    minHeight: 30,
+    padding: 15,
     alignContent: 'center',
     alignItems: "center",
   },
 
-  bottomText: {
-    color: Colors.white,
-  },
-
 });
 
-const QRScanner = ({ onRead, initialTorchEnabled, enableTorchButton, enableFlipButton, reactivateOnScan }) => {
+const QRScanner = ({ _ref, onRead, initialTorchEnabled, enableTorchButton, enableFlipButton, backgroundColor, iconColor }) => {
 
   const [enableTorch, setEnableTorch] = useState(!!(initialTorchEnabled))
   const [cameraMode, setCameraMode] = useState('back')
 
   useEffect(() => {
-    return () => setEnableTorch(false);
+    return () => {
+      setEnableTorch(false);
+      _ref?.current?.reactivate();
+    }
   },[])
 
   return (
     <View style={styles.container}>
       <QRCodeScanner
+        {...(_ref && {ref:  _ref})}
         cameraStyle={styles.camera}
         cameraType={cameraMode}
-        onRead={(e) => onRead(e)}
+        onRead={(e) => {
+          onRead(e);
+        }}
         flashMode={enableTorch ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.off}
         topContent={
-          <View style={styles.scannerTopContent}>
+          <View style={[styles.scannerTopContent,  {...(backgroundColor && {backgroundColor: backgroundColor})}]}>
           </View>
         }
         bottomContent={
-          <View style={styles.scannerBottomContent}>
+          <View style={[styles.scannerBottomContent, {...(backgroundColor && {backgroundColor: backgroundColor})} ]}>
             {enableTorchButton &&
             <TouchableOpacity
               onPress={() => setEnableTorch(!enableTorch)}
               style={styles.bottomItem}>
-              <Text style={styles.bottomText}>Torch here</Text>
+            <Torch color={iconColor} />
             </TouchableOpacity>}
             {enableFlipButton &&
               <TouchableOpacity
                 onPress={() => setCameraMode(cameraMode === "back" ? "front" : "back")}
                 style={styles.bottomItem}>
-                <Text style={styles.bottomText}>Flip here</Text>
+              <Flip color={iconColor} />
               </TouchableOpacity>}
           </View>
         }
-        reactivate={!!(reactivateOnScan)}
       />
     </View>
   );

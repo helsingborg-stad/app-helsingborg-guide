@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,7 +7,6 @@ import {
   Image,
   LayoutAnimation,
 } from "react-native";
-import RNRestart from "react-native-restart";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackActions, NavigationActions } from "react-navigation";
 import ViewContainer from "@shared-components/view_container";
@@ -16,14 +15,9 @@ import ColoredBar from "@shared-components/ColoredBar";
 import BackgroundImage from "@shared-components/BackgroundImage";
 import { Colors } from "@assets/styles";
 import LangService from "@services/langService";
-import { connect, useSelector, useDispatch } from "react-redux";
-import { compareDistance } from "@utils/SortingUtils";
+import { useDispatch } from "react-redux";
 import { fetchNavigation } from "../../actions/navigationActions";
-import { fetchGuides } from "@actions/guideActions";
-import { fetchGuideGroups } from "@actions/guideGroupActions";
-import useGuides from "@hooks/useGuides";
 import { setLanguage } from "@actions/navigationActions";
-import { showBottomBar } from "@actions/uiStateActions";
 
 
 const LOGO = require("@assets/images/logo.png");
@@ -32,8 +26,6 @@ const IMAGE = require("@assets/images/SplashscreenFinal.png");
 const FULL_HEIGHT = Dimensions.get("window").height;
 
 const TIME_OUT = 1000;
-const LONG_TIME_OUT = 7000;
-
 
 const styles = StyleSheet.create({
   splash: {
@@ -142,7 +134,6 @@ const SplashScreen = (props) => {
         navigation.dispatch(resetAction);
       });
     }
-    dispatch(showBottomBar(true));
   };
 
   const displayColorBar = () => {
