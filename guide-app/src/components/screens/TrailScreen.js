@@ -29,13 +29,17 @@ type Props = {
 const TrailScreen = (props: Props) => {
   const { navigation, dispatchReleaseAudio, dispatchShowBottomBar, currentGuide } = props;
   const { path, redirect } = navigation?.state?.params;
-  const [showInfoOverlay, setShowInfoOverlay] = useState();
+  const [showInfoOverlay, setShowInfoOverlay] = useState(false);
 
   useEffect(() => {
-    navigation.setParams({
-      toggleInfoOverlay: toggleInfoOverlay,
-    });
+    if (navigation.isFocused()) {
+      navigation.setParams({
+        toggleInfoOverlay: toggleInfoOverlay,
+      })
+    }
+  }, [navigation.isFocused()]);
 
+  useEffect(() => {
     return () => {
       dispatchReleaseAudio();
       if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
@@ -47,10 +51,6 @@ const TrailScreen = (props: Props) => {
 
 
   const toggleInfoOverlay = () => {
-    AnalyticsUtils.logEvent(
-      showInfoOverlay ? "close_info_overlay" : "open_info_overlay",
-      { name: currentGuide.slug },
-    );
     setShowInfoOverlay(!showInfoOverlay);
   };
 
@@ -72,6 +72,7 @@ const TrailScreen = (props: Props) => {
         backgroundColor={Colors.themeSecondary}
       />
       <TrailView
+        trail={currentGuide}
         items={mapItems}
         path={path}
         showInfoOverlay={showInfoOverlay}
@@ -111,7 +112,6 @@ TrailScreen["navigationOptions"] = ({ navigation }) => {
     ({ path } = params);
     ({ toggleInfoOverlay } = params);
   }
-
 
   return {
     title,

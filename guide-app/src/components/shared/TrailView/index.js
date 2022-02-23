@@ -25,6 +25,7 @@ function renderMapInformationOverlay(
   trail: Guide,
   onToggleInfoOverlay: () => void
 ) {
+  console.log("le trail", trail)
   if (!trail) {
     return null;
   }
@@ -46,8 +47,7 @@ function renderMapInformationOverlay(
 
 const TrailView = (props: Props) => {
   const { items, trail, onListItemPressed, onToggleInfoOverlay, showInfoOverlay, navigation, path, redirect } = props;
-
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
