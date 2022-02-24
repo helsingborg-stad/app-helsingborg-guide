@@ -1500,9 +1500,9 @@
   integrity sha512-CiuLZ2orueBiWHYxfaJF57jQY6HY2Q3z5pdAE4MKH8EqIImr/jgDJrJ/UxOVZHK1Ng9P+XlGIKfVIcuWZ6guuA==
 
 "@react-native-firebase/analytics@^14.2.1":
-  version "14.2.1"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-14.2.1.tgz#4bad3ec18b0335131b7fe739ae0cf3ebd6aa6b5b"
-  integrity sha512-yY4l0Bi9POKkzOpdobRO7FilCyIXAlr2FYWse95BswGQ6ddmX2/txq/aaSEp5TN/AWZGuJiyhPMHsHZdqC41XA==
+  version "14.5.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-14.5.0.tgz#ee11d712a49886f114c0ddf6334df91accdbcc6b"
+  integrity sha512-0Qq2m5uuG3VkgOohe/LEuJLfH2EBiZCcU12kZ426+kAi1CZaqB4JjkTteKJZ2hp3VGxCE1X60gdX4p9cya3vlg==
 
 "@react-native-firebase/analytics@^6.1.0":
   version "6.7.2"
@@ -1531,6 +1531,11 @@
     "@react-native-firebase/app-types" "6.7.1"
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
+
+"@react-native-firebase/dynamic-links@^14.2.2":
+  version "14.5.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-14.5.0.tgz#a5173796651c080cca52f210c983ff9fa4df3326"
+  integrity sha512-+BqkVDcijnbug/zTQbm3+nlIkr6vLI1Bk+NF2NFCMsp71RR2TCdLAhumrIMpGsJPXMzMDBdrd1BfjTkW9XUV9Q==
 
 "@react-native-firebase/messaging@^14.2.2":
   version "14.2.2"

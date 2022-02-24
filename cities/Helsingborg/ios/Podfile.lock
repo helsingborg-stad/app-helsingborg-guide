@@ -21,6 +21,9 @@ PODS:
     - FirebaseAnalytics (~> 8.10.0)
   - Firebase/CoreOnly (8.10.0):
     - FirebaseCore (= 8.10.0)
+  - Firebase/DynamicLinks (8.10.0):
+    - Firebase/CoreOnly
+    - FirebaseDynamicLinks (~> 8.10.0)
   - Firebase/Messaging (8.10.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 8.10.0)
@@ -51,6 +54,8 @@ PODS:
     - GoogleUtilities/Environment (~> 7.6)
     - GoogleUtilities/Logger (~> 7.6)
     - nanopb (~> 2.30908.0)
+  - FirebaseDynamicLinks (8.10.0):
+    - FirebaseCore (~> 8.0)
   - FirebaseInstallations (8.10.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/Environment (~> 7.6)
@@ -500,13 +505,18 @@ PODS:
     - React
   - RNDeviceInfo (8.4.8):
     - React-Core
-  - RNFBAnalytics (14.2.1):
+  - RNFBAnalytics (14.5.0):
     - Firebase/Analytics (= 8.10.0)
     - React-Core
     - RNFBApp
   - RNFBApp (14.2.2):
     - Firebase/CoreOnly (= 8.10.0)
     - React-Core
+  - RNFBDynamicLinks (14.5.0):
+    - Firebase/DynamicLinks (= 8.10.0)
+    - GoogleUtilities/AppDelegateSwizzler
+    - React-Core
+    - RNFBApp
   - RNFBMessaging (14.2.2):
     - Firebase/Messaging (= 8.10.0)
     - React-Core
@@ -618,6 +628,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../../../node_modules/react-native-device-info`)
   - "RNFBAnalytics (from `../../../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../../../node_modules/@react-native-firebase/app`)"
+  - "RNFBDynamicLinks (from `../../../node_modules/@react-native-firebase/dynamic-links`)"
   - "RNFBMessaging (from `../../../node_modules/@react-native-firebase/messaging`)"
   - RNFS (from `../../../node_modules/react-native-fs`)
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
@@ -637,6 +648,7 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseDynamicLinks
     - FirebaseInstallations
     - FirebaseMessaging
     - Flipper
@@ -773,6 +785,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/@react-native-firebase/analytics"
   RNFBApp:
     :path: "../../../node_modules/@react-native-firebase/app"
+  RNFBDynamicLinks:
+    :path: "../../../node_modules/@react-native-firebase/dynamic-links"
   RNFBMessaging:
     :path: "../../../node_modules/@react-native-firebase/messaging"
   RNFS:
@@ -808,6 +822,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 319c9b3b1bdd400d60e2f415dff0c5f6959e6760
   FirebaseCore: 04186597c095da37d90ff9fd3e53bc61a1ff2440
   FirebaseCoreDiagnostics: 56fb7216d87e0e6ec2feddefa9d8a392fe8b2c18
+  FirebaseDynamicLinks: bb6ac718f763ec43560f0e2bb6b655a798b277af
   FirebaseInstallations: 830327b45345ffc859eaa9c17bcd5ae893fd5425
   FirebaseMessaging: b0aeba17332ee1ee610662b4d1e02a86db82f08f
   Flipper: 30e8eeeed6abdc98edaf32af0cda2f198be4b733
@@ -876,8 +891,9 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 0bef6a21517c0254bd6bd59a3672963abfa0d18e
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDeviceInfo: 0400a6d0c94186d1120c3cbd97b23abc022187a9
-  RNFBAnalytics: c2bc124906b6719c9d3e407f06f9222a15638edc
+  RNFBAnalytics: a2f52e4ceb7ba829781a89fb08d79f010b0651f7
   RNFBApp: 78d0446e8b28dc30616c134a9e4d8d4b01f9f966
+  RNFBDynamicLinks: 9fefca92a8c3ef0640b906db8bfe552e7fda8dbe
   RNFBMessaging: 79910a2eb2fa5955f38259367b14431bd78bef19
   RNFS: 3ab21fa6c56d65566d1fb26c2228e2b6132e5e32
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
