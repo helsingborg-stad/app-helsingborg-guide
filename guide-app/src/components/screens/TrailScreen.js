@@ -4,7 +4,6 @@ import React, { Component, useState, useEffect } from "react";
 import { StatusBar } from "react-native";
 import { connect } from "react-redux";
 
-import { AnalyticsUtils } from "@utils";
 import InfoOverlayToggleView from "@shared-components/InfoOverlayToggleView";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import TrailView from "@shared-components/TrailView";

@@ -170,7 +170,13 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
 
         RNFS.exists(finalPath).then(() => {
 
-          Share.open({ title, message, subject, url: finalPath });
+          let sharingText = title;
+
+          sharingText = sharingText.concat(` ${currentSharingLink}`);
+
+          console.log("sharingText: " + sharingText, "message" + message, "subject", subject, "finalPath", finalPath);
+
+          Share.open({ title, message: sharingText, subject });
 
         }).catch(err => console.log("err 1", err));
       }).catch(err => console.log("err 2", err));

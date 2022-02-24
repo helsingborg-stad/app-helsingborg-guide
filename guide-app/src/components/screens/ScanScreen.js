@@ -33,7 +33,7 @@ const ScanScreen = (props) => {
 
   const onRead = (e) => {
     const { data } = e;
-      if (data) {
+      if (data?.split(":")[0] === "guidehbg") {
         Alert.alert(
           LangService.strings.OPEN_LINK,
           data,
@@ -50,12 +50,12 @@ const ScanScreen = (props) => {
                 Linking.openURL(data)
                   .catch(err => {
                   Alert.alert(
-                    "Error opening URL",
+                    LangService.strings.INVALID_URL,
                     err?.message,
                     [
                       {
                         text: LangService.strings.CLOSE,
-                        onPress: () => console.log("Cancel Pressed"),
+                        onPress: () =>  setTimeout(() => scannerRef?.current?.reactivate(), 300),
                         style: "cancel"
                       },
                     ]
@@ -68,6 +68,19 @@ const ScanScreen = (props) => {
             },
           ]
         )
+      }
+      else {
+        Alert.alert(
+          LangService.strings.INVALID_URL,
+          LangService.strings.INVALID_URL_MESSAGE,
+          [
+            {
+              text: LangService.strings.CLOSE,
+              onPress: () =>  setTimeout(() => scannerRef?.current?.reactivate(), 300),
+              style: "cancel"
+            },
+          ]
+        );
       }
   };
 
