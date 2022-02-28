@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { PersistGate } from "redux-persist/integration/react";
 import { Alert, UIManager, Platform, Linking, LogBox } from "react-native";
+import { Host } from "react-native-portalize";
 import NetInfo from "@react-native-community/netinfo";
 import Nav from "@src/Nav";
 import configureStore from "@src/store/configureStore";
@@ -122,6 +123,7 @@ const GuideApp = () => {
 
   return (
       <SafeAreaProvider>
+        <Host>
         <PersistGate persistor={persistor}>
           <TrackingPermission />
           <Nav
@@ -130,6 +132,7 @@ const GuideApp = () => {
             onAppBecameInactive={() => store.dispatch(appBecameInactive())}
           />
         </PersistGate>
+        </Host>
       </SafeAreaProvider>
   );
 };

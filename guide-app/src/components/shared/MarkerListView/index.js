@@ -50,7 +50,7 @@ const HalfListMargin = DefaultMargin * 0.5;
 const MarkerListView = (props: Props) => {
   const { supportedNavigationModes, navigation, items, userLocation } = props;
   const { params } = navigation.state;
-  const { redirect } = params;
+  const redirect = params?.redirect;
 
   const [selectedNavigationMode, setSelectedNavigationMode] = useState(supportedNavigationModes
     ? supportedNavigationModes[supportedNavigationModes.length - 1]

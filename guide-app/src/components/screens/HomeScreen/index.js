@@ -7,6 +7,7 @@ import {
   Image,
   StatusBar,
   Text,
+  ScrollView,
   Keyboard,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -24,7 +25,7 @@ import {
 } from "@actions/uiStateActions";
 import { fetchNavigation } from "@actions/navigationActions";
 
-// import HomeFilter from "@shared-components/HomeFilter/HomeFilter";
+import HomeFilter from "@shared-components/HomeFilter/HomeFilter";
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
@@ -130,7 +131,6 @@ const HomeScreen = (props: Props) => {
                 labels={navigationCategoryLabels}
               />
             </View>
-            {/*<HomeFilter />*/}
             {!items || (items && items.length === 0) ? (
               <View style={styles.sectionNoContent}>
                 <Text style={styles.sectionNoContentText}>
@@ -139,6 +139,7 @@ const HomeScreen = (props: Props) => {
               </View>
             ) : (
               <>
+                <HomeFilter />
                 <Scrollable
                   key={currentHomeTab}
                   style={styles.container}

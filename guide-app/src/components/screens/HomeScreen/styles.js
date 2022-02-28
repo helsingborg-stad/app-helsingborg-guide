@@ -5,18 +5,18 @@ import { StyleSheetUtils } from "@utils";
 export default StyleSheet.create({
 
   homeContainer: {
-    flex: 1
+    height: '100%',
   },
 
   viewContainer: {
-    flex: 1,
+    height: '100%',
     justifyContent: "flex-start",
     alignItems: "stretch",
     backgroundColor: Colors.white,
   },
   container: {
     backgroundColor: Colors.white,
-    flex: 1,
+    height: '100%',
   },
   contentContainer: {
     paddingHorizontal: 16,

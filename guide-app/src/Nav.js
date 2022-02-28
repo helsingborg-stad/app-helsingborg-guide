@@ -43,7 +43,6 @@ const GuideNavigator = createStackNavigator(
       screen: HomeScreen,
       path: 'home/:id_1?/:id_2?/:id_3?',
       navigationOptions: {
-        backgroundColor: "red",
         headerMode: "screen",
         headerTitle: "Guide Helsingborg",
         header: () => null,
