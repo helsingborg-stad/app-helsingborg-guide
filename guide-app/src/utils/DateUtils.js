@@ -42,6 +42,17 @@ function isFullDay(start: string, end: string): boolean {
   );
 }
 
+function prevDate(date) {
+  let copy = new Date(date.valueOf());
+  return new Date(copy.setDate(copy.getDate() - 1));
+}
+
+function nextDate(date) {
+  let copy = new Date(date.valueOf());
+  return new Date(copy.setDate(copy.getDate() + 1));
+}
+
+
 export default {
   eventLinkDate,
   eventTime,
@@ -49,5 +60,7 @@ export default {
   getHours,
   isFullDay,
   longDate,
-  shortDate
+  shortDate,
+  prevDate,
+  nextDate,
 };

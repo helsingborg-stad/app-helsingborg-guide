@@ -17,46 +17,48 @@ const HomeFilter = (props) => {
   const onValueChange = (e) => setDistance(e);
 
   return (
-    <View
-      onLayout={(event) => {
-        setDimensions(event.nativeEvent.layout);
-      }}
-      style={styles.filter}>
-      <View style={styles.search}>
-        <View style={styles.searchTop}>
-          <Text style={styles.searchTopLeft}>{LangService.strings.FILTER_TITLE}</Text>
-          <TouchableOpacity
-            onPress={() => setShowFilter(true)}
-          >
-            <Text style={styles.searchTopRight}>{LangService.strings.FILTER}</Text>
-          </TouchableOpacity>
+    <>
+      <View
+        onLayout={(event) => {
+          setDimensions(event.nativeEvent.layout);
+        }}
+        style={styles.filter}>
+        <View style={styles.search}>
+          <View style={styles.searchTop}>
+            <Text style={styles.searchTopLeft}>{LangService.strings.FILTER_TITLE}</Text>
+            <TouchableOpacity
+              onPress={() => setShowFilter(true)}
+            >
+              <Text style={styles.searchTopRight}>{LangService.strings.FILTER}</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.searchBottom}>
+            <TextInput
+              size={"standard"}
+              isSearch={true}
+              placeholder={LangService.strings.SEARCH_MAIN}
+              placeholderTextColor={"#858585"}
+              expandable={true}
+              autoFocus={false}
+              modalDimensions={dimensions}
+            />
+          </View>
         </View>
-        <View style={styles.searchBottom}>
-          <TextInput
-            size={"standard"}
-            isSearch={true}
-            placeholder={LangService.strings.SEARCH_MAIN}
-            placeholderTextColor={"#858585"}
-            expandable={true}
-            autoFocus={false}
-            modalDimensions={dimensions}
+        <View style={styles.distance}>
+          <Text style={styles.distanceText}>{LangService.strings.DISTANCE}</Text>
+          <DraggableSilder
+            values={[distance]}
+            min={0}
+            max={7}
+            initialValue={distance}
+            onValueChange={onValueChange}
+            enableLabel={true}
+            selectedSliderColor={"#A71580"}
+            unSelectedSliderColor={"#E7E7E7"}
+            sliderHeight={4.2}
+            snapped={true}
           />
         </View>
-      </View>
-      <View style={styles.distance}>
-        <Text style={styles.distanceText}>{LangService.strings.DISTANCE}</Text>
-        <DraggableSilder
-          values={[distance]}
-          min={0}
-          max={7}
-          initialValue={distance}
-          onValueChange={onValueChange}
-          enableLabel={true}
-          selectedSliderColor={"#A71580"}
-          unSelectedSliderColor={"#E7E7E7"}
-          sliderHeight={4.2}
-          snapped={true}
-        />
       </View>
       <FilterModal
         isModalVisible={showFilter}
@@ -65,7 +67,7 @@ const HomeFilter = (props) => {
         backdropColor={"white"}
         backdropOpacity={1}
       />
-    </View>
+    </>
   );
 };
 

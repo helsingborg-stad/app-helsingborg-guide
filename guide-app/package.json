@@ -57,6 +57,7 @@
     "react-native-matomo": "oskarhertzman/react-native-matomo",
     "react-native-modal": "^13.0.0",
     "react-native-orientation-locker": "^1.4.0",
+    "react-native-paper": "^4.11.2",
     "react-native-permissions": "^3.2.0",
     "react-native-photo-view": "https://github.com/alwx/react-native-photo-view.git",
     "react-native-qrcode-scanner": "^1.5.4",

@@ -119,6 +119,8 @@ const SplashScreen = (props) => {
     setBarsVisible(!barsVisible);
   };
 
+
+
   const skip = () => {
     if (navigation.isFocused()) {
       AsyncStorage.getItem(IS_WELCOMED).then(value => {

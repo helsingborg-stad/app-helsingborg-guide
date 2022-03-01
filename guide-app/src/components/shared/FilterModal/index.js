@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import Modal from "react-native-modal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
 import Accordion from "@shared-components/Accordion";
+import Calendar from "@shared-components/Calendar";
 import LangService from "@services/langService";
 import Details from "./Details";
 import Time from "./Time";
 import ExpandIcon from "@assets/images/expand_icon_open.svg";
 import styles from "./style";
-
 
 
 const options = {
@@ -75,17 +75,17 @@ const FilterModal = (props) => {
 
   const renderSectionTitle = () => {
     <View>
-      <Text>lol</Text>
+      <Text></Text>
     </View>;
   };
 
   const renderHeader = (section, index) => {
     const { title } = section;
-    console.log("section", section, activeSections)
+    console.log("section", section, activeSections);
     return (
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionHeaderText}>{title}</Text>
-        <ExpandIcon style={{transform: [ { rotateX: activeSections.includes(index) ? "0deg" : "180deg"}]}} />
+        <ExpandIcon style={{ transform: [{ rotateX: activeSections.includes(index) ? "0deg" : "180deg" }] }} />
       </View>
     );
   };
@@ -93,13 +93,13 @@ const FilterModal = (props) => {
   const renderContent = (section) => {
     const { id } = section;
     const content = () => {
-     switch (id) {
+      switch (id) {
         case "details":
           return <Details />;
         case "time":
-          return <Time />;
+          return <Time renderCalendar={activeSections.includes(1)} />;
       }
-    }
+    };
     return (
       <View>
         {content()}
@@ -110,11 +110,11 @@ const FilterModal = (props) => {
   const renderFooter = (section, index) => {
     return (
       index + 1 !== sections.length ? <View style={styles.seperator} /> : null
-    )
-  }
+    );
+  };
 
   return (
-    <View style={styles.container}>
+    <View style={isModalVisible && styles.container}>
       <Modal
         isVisible={isModalVisible}
         coverScreen={coverScreen}
@@ -140,32 +140,38 @@ const FilterModal = (props) => {
                 <Text style={styles.resetText}>Återställ</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.filterButtons}>
-              <View style={styles.buttonsTop}>
-                {options.top.map((item, index) => (
-                  filterButton(item, index)
-                ))}
-              </View>
-              <View style={styles.seperator} />
-              <View style={styles.buttonsMain}>
-                {options.main.map((item, index) => (
-                  filterButton(item, index)
-                ))}
-              </View>
-              <View style={styles.seperator} />
-            </View>
-            <View style={styles.filterDetails}>
-              <Accordion
-                sections={sections}
-                activeSections={activeSections}
-                onChange={(active) => setActiveSections(active)}
-                renderSectionTitle={renderSectionTitle}
-                renderHeader={(e, index) => renderHeader(e, index)}
-                renderContent={(e) => renderContent(e)}
-                renderFooter={(e, index) => renderFooter(e, index)}
-                underlayColor={"transparent"}
-              />
-            </View>
+            <ScrollView
+              style={styles.scroll}
+              contentContainerStyle={styles.scrollcontainer}>
+              <>
+                <View style={styles.filterButtons}>
+                  <View style={styles.buttonsTop}>
+                    {options.top.map((item, index) => (
+                      filterButton(item, index)
+                    ))}
+                  </View>
+                  <View style={styles.seperator} />
+                  <View style={styles.buttonsMain}>
+                    {options.main.map((item, index) => (
+                      filterButton(item, index)
+                    ))}
+                  </View>
+                  <View style={styles.seperator} />
+                </View>
+                <View style={styles.filterDetails}>
+                  <Accordion
+                    sections={sections}
+                    activeSections={activeSections}
+                    onChange={(active) => setActiveSections(active)}
+                    renderSectionTitle={renderSectionTitle}
+                    renderHeader={(e, index) => renderHeader(e, index)}
+                    renderContent={(e) => renderContent(e)}
+                    renderFooter={(e, index) => renderFooter(e, index)}
+                    underlayColor={"transparent"}
+                  />
+                </View>
+              </>
+            </ScrollView>
           </View>
         </SafeAreaView>
       </Modal>

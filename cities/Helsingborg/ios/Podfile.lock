@@ -501,6 +501,8 @@ PODS:
     - React-Core
   - RNCAsyncStorage (1.15.15):
     - React-Core
+  - RNCCheckbox (0.5.11):
+    - React-Core
   - RNCMaskedView (0.1.11):
     - React
   - RNDeviceInfo (8.4.8):
@@ -624,6 +626,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
   - rn-fetch-blob (from `../../../node_modules/rn-fetch-blob`)
   - "RNCAsyncStorage (from `../../../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCCheckbox (from `../../../node_modules/@react-native-community/checkbox`)"
   - "RNCMaskedView (from `../../../node_modules/@react-native-community/masked-view`)"
   - RNDeviceInfo (from `../../../node_modules/react-native-device-info`)
   - "RNFBAnalytics (from `../../../node_modules/@react-native-firebase/analytics`)"
@@ -777,6 +780,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/rn-fetch-blob"
   RNCAsyncStorage:
     :path: "../../../node_modules/@react-native-async-storage/async-storage"
+  RNCCheckbox:
+    :path: "../../../node_modules/@react-native-community/checkbox"
   RNCMaskedView:
     :path: "../../../node_modules/@react-native-community/masked-view"
   RNDeviceInfo:
@@ -889,6 +894,7 @@ SPEC CHECKSUMS:
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCAsyncStorage: 0bef6a21517c0254bd6bd59a3672963abfa0d18e
+  RNCCheckbox: ebf3ecc7a766d8a28d4b0504ea6084757bb59bc5
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDeviceInfo: 0400a6d0c94186d1120c3cbd97b23abc022187a9
   RNFBAnalytics: a2f52e4ceb7ba829781a89fb08d79f010b0651f7

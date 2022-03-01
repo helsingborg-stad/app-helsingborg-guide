@@ -6,11 +6,28 @@ const fullHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    width: fullWidth,
-    height: fullHeight,
+    minWidth: fullWidth,
+    maxWidth: fullWidth,
     alignSelf: "center",
     paddingVertical: 10,
     overflow: "visible",
+  },
+
+  scroll: {
+    margin: 0,
+    padding: 0,
+    minWidth: fullWidth,
+    maxWidth: fullWidth,
+  },
+
+  scrollcontainer: {
+    margin: 0,
+    padding: 0,
+    minWidth: fullWidth,
+    maxWidth: fullWidth,
+    alignContent: "center",
+    alignItems: "center",
+
   },
 
   safearea: {
@@ -23,6 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    paddingBottom: 10,
   },
 
   close: {
@@ -124,11 +142,77 @@ const styles = StyleSheet.create({
 
   details: {
     paddingHorizontal: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  detailsLeft: {
+
+  },
+
+  detailsRight: {
+
+  },
+
+  switch: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+
+  switchText: {
+    fontSize: 16,
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    color: "#262626",
+    paddingLeft: 9,
+  },
+
+  bold: {
+    fontWeight: "600",
   },
 
   time: {
     paddingHorizontal: 20,
   },
+
+  intervals: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  intervalItem: {
+    flexDirection: "column",
+    alignItems: "center",
+    maxWidth: (fullWidth / 3) - 25,
+    minWidth: (fullWidth / 3) - 25,
+  },
+
+  intervalTextContainer:  {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  timePrefix: {
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    fontSize: 16,
+    color: "#262626",
+
+  },
+
+  timeDate: {
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    fontSize: 16,
+    color: "#262626",
+  },
+
+
+  calendar: {
+  marginTop: 40,
+  }
 
 });
 
