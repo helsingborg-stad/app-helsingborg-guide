@@ -4,7 +4,7 @@ import Modal from "react-native-modal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
 import Accordion from "@shared-components/Accordion";
-import Calendar from "@shared-components/Calendar";
+import Dropdown from "@shared-components/Dropdown";
 import LangService from "@services/langService";
 import Details from "./Details";
 import Time from "./Time";
@@ -22,6 +22,8 @@ const options = {
     "EXHIBITIONS",
     "SIGHTSEEINGS",
     "PADEL_TRACKS",
+  ],
+  additional: [
     "PLAYGROUNDS",
     "BATHING_AREAS",
     "THEATER",
@@ -30,6 +32,7 @@ const options = {
     "GROCERIES",
   ],
 };
+
 
 const sections = [
   {
@@ -46,7 +49,7 @@ const sections = [
 
 
 const FilterModal = (props) => {
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState({ main: [], additional: [] });
   const [activeSections, setActiveSections] = useState([]);
 
   const {
@@ -57,19 +60,28 @@ const FilterModal = (props) => {
     backdropOpacity,
   } = props;
 
-  const setFilters = (item) => {
-    const copy = [...selected];
-    !copy.includes(item) ? copy.push(item) : copy.splice(copy.indexOf(item), 1);
+  const setActivities = (item, type) => {
+    console.log("the item", item, type)
+    const copy = { ...selected };
+    switch (type) {
+      case "main":
+        !copy.main.includes(item) ? copy.main.push(item) : copy.main.splice(copy.main.indexOf(item), 1);
+      case "additional":
+        !copy.additional.includes(item) ? copy.additional.push(item) : copy.additional.splice(copy.additional.indexOf(item), 1);
+      default:
+        null;
+    }
+    console.log("testing if this runs", copy);
     setSelected(copy);
   };
 
   const filterButton = (item, index) => (
     <TouchableOpacity
       key={index}
-      onPress={() => setFilters(item)}
-      style={[styles.filterButton, { marginLeft: index % 2 !== 0 ? 20 : 0 }, selected.includes(item) && styles.selected]}>
+      onPress={() => setActivities(item, "main")}
+      style={[styles.filterButton, { marginLeft: index % 2 !== 0 ? 20 : 0 }, selected.main.includes(item) && styles.selected]}>
       <Text
-        style={[styles.filterButtonText, selected.includes(item) && styles.selectedText]}>{LangService.strings[item]}</Text>
+        style={[styles.filterButtonText, selected.main.includes(item) && styles.selectedText]}>{LangService.strings[item]}</Text>
     </TouchableOpacity>
   );
 
@@ -145,16 +157,19 @@ const FilterModal = (props) => {
               contentContainerStyle={styles.scrollcontainer}>
               <>
                 <View style={styles.filterButtons}>
-                  <View style={styles.buttonsTop}>
-                    {options.top.map((item, index) => (
-                      filterButton(item, index)
-                    ))}
-                  </View>
-                  <View style={styles.seperator} />
+                  <Text style={styles.buttonsTitle}>Mest populära aktiviteter</Text>
                   <View style={styles.buttonsMain}>
                     {options.main.map((item, index) => (
                       filterButton(item, index)
                     ))}
+                  </View>
+                  <View style={styles.filterDropdown}>
+                    <Dropdown
+                      textMode={"translate"}
+                      options={options.additional}
+                      selected={selected.additional}
+                      onPress={(item) => setActivities(item, "additional")}
+                    />
                   </View>
                   <View style={styles.seperator} />
                 </View>

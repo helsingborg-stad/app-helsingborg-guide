@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
 
+
   },
 
   safearea: {
@@ -72,7 +73,9 @@ const styles = StyleSheet.create({
   },
 
   filterButtons: {
-    marginTop: 24,
+    marginTop: 20,
+    paddingHorizontal: 20,
+    alignItems: "center",
   },
 
   filterButton: {
@@ -102,14 +105,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: "row",
     flexWrap: "wrap",
-    alignItems: "center",
+  },
+
+  buttonsTitle: {
+    fontFamily: "Roboto",
+    fontWeight: "500",
+    fontSize: 18,
+    paddingLeft: 20,
+    textAlign: "left",
+    alignSelf: "flex-start",
   },
 
   buttonsMain: {
     marginTop: 20,
-    paddingHorizontal: 20,
     flexDirection: "row",
     flexWrap: "wrap",
+  },
+
+
+  filterDropdown: {
+    alignSelf: "flex-start",
+    marginLeft: 20,
+    marginTop: 20,
   },
 
   seperator: {
