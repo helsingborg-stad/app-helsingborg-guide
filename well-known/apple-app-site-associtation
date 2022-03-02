@@ -2,7 +2,7 @@
   "applinks": {
       "details": [
            {
-             "appID": "org.hbg.GuideHbg",
+             "appID": "MHBEW6TVG2.org.hbg.GuideHbg",
              "paths": [
               "*"
              ]
@@ -10,6 +10,6 @@
        ]
    },
    "webcredentials": {
-      "apps": [ "org.hbg.GuideHbg" ]
+      "apps": [ "MHBEW6TVG2.org.hbg.GuideHbg" ]
    },
 }
