@@ -1,0 +1,15 @@
+{
+  "applinks": {
+      "details": [
+           {
+             "appID": "org.hbg.GuideHbg",
+             "paths": [
+              "*"
+             ]
+           }
+       ]
+   },
+   "webcredentials": {
+      "apps": [ "org.hbg.GuideHbg" ]
+   },
+}
