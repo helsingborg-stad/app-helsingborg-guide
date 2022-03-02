@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
   },
 
   select: {
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: "space-between",
     width: 177,
     height: 27,
     backgroundColor: "#F0F0F0",
@@ -24,15 +25,25 @@ const styles = StyleSheet.create({
     borderColor: "#D4D4D4",
     borderRadius: 5,
     overflow: 'visible',
+    alignItems: "center",
+    alignContent: "center",
 
+  },
 
+  placeholder: {
+    paddingLeft: 10,
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    fontSize: 12,
+    color: "#2C2C2C",
+    opacity: 0.8,
   },
 
   clickable: {},
 
   arrow: {
-    alignSelf: "flex-end",
     paddingRight: 10,
+    justifySelf: "center",
   },
 
   options: {
@@ -65,9 +76,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "400",
     color: "#262626",
+    maxWidth: "70%",
   },
 
-
+  bold: {
+    fontWeight: "600",
+  },
 
 });
 

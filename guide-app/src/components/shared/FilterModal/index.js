@@ -8,7 +8,7 @@ import Dropdown from "@shared-components/Dropdown";
 import LangService from "@services/langService";
 import Details from "./Details";
 import Time from "./Time";
-import ExpandIcon from "@assets/images/expand_icon_open.svg";
+import ArrowUp from "@assets/images/arrow_up";
 import styles from "./style";
 
 
@@ -37,19 +37,19 @@ const options = {
 const sections = [
   {
     id: "details",
-    title: "Detaljerad Information",
+    title: "DETAILED_INFORMATION",
     content: "lol",
   },
   {
     id: "time",
-    title: "Tid och Datum",
+    title: "TIME_AND_DATE",
     content: "lol",
   },
 ];
 
 
 const FilterModal = (props) => {
-  const [selected, setSelected] = useState({ main: [], additional: [] });
+  const [selected, setSelected] = useState({ main: [], additional: [], dates: [], details: [] });
   const [activeSections, setActiveSections] = useState([]);
 
   const {
@@ -71,7 +71,6 @@ const FilterModal = (props) => {
       default:
         null;
     }
-    console.log("testing if this runs", copy);
     setSelected(copy);
   };
 
@@ -96,8 +95,8 @@ const FilterModal = (props) => {
     console.log("section", section, activeSections);
     return (
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionHeaderText}>{title}</Text>
-        <ExpandIcon style={{ transform: [{ rotateX: activeSections.includes(index) ? "0deg" : "180deg" }] }} />
+        <Text style={styles.sectionHeaderText}>{LangService.strings[title]}</Text>
+        <ArrowUp style={{ transform: [{ rotateX: activeSections.includes(index) ? "0deg" : "180deg" }] }} />
       </View>
     );
   };
@@ -107,9 +106,9 @@ const FilterModal = (props) => {
     const content = () => {
       switch (id) {
         case "details":
-          return <Details />;
+          return <Details selected={selected} setSelected={setSelected} />;
         case "time":
-          return <Time renderCalendar={activeSections.includes(1)} />;
+          return <Time selected={selected} setSelected={setSelected} renderCalendar={activeSections.includes(1)} />;
       }
     };
     return (
@@ -124,6 +123,11 @@ const FilterModal = (props) => {
       index + 1 !== sections.length ? <View style={styles.seperator} /> : null
     );
   };
+
+  const resetSettings = () => {
+    setSelected({ main: [], additional: [], dates: [], details: [] });
+    setActiveSections([]);
+  }
 
   return (
     <View style={isModalVisible && styles.container}>
@@ -145,11 +149,12 @@ const FilterModal = (props) => {
                   size={24}
                 />
               </TouchableOpacity>
-              <Text style={styles.filterSettings}>Filterinställningar</Text>
+              <Text style={styles.filterSettings}>{LangService.strings.FILTER_SETTINGS}</Text>
               <TouchableOpacity
                 style={styles.reset}
+                onPress={resetSettings}
               >
-                <Text style={styles.resetText}>Återställ</Text>
+                <Text style={styles.resetText}>{LangService.strings.RESET}</Text>
               </TouchableOpacity>
             </View>
             <ScrollView
@@ -157,7 +162,7 @@ const FilterModal = (props) => {
               contentContainerStyle={styles.scrollcontainer}>
               <>
                 <View style={styles.filterButtons}>
-                  <Text style={styles.buttonsTitle}>Mest populära aktiviteter</Text>
+                  <Text style={styles.buttonsTitle}>{LangService.strings.MOST_POPULAR_ACTIVITIES}</Text>
                   <View style={styles.buttonsMain}>
                     {options.main.map((item, index) => (
                       filterButton(item, index)
@@ -168,6 +173,7 @@ const FilterModal = (props) => {
                       textMode={"translate"}
                       options={options.additional}
                       selected={selected.additional}
+                      placeholder={LangService.strings.SEARCH_ALL_ACTIVITES}
                       onPress={(item) => setActivities(item, "additional")}
                     />
                   </View>

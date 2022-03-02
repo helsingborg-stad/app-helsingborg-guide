@@ -6,10 +6,10 @@ import styles from "./style";
 
 const options = {
   left: [
-    "FOR_CHILDREN",
+    "CHILDREN_FRIENDLY",
     "ACCESSIBLE",
     "ANIMALS_ALLOWED",
-    "FOR_ADULTS",
+    "ADULT_ONLY",
     "PARKING",
   ],
   right: [
@@ -19,20 +19,21 @@ const options = {
 };
 
 
-const Details = () => {
+const Details = (props) => {
 
-  const [selected, setSelected] = useState([]);
+  const { selected, setSelected } = props
+
 
   const onValueChange = (option) => {
-    const copy = [...selected];
-    !copy.includes(option) ? copy.push(option) : copy.splice(copy.indexOf(option), 1);
+    const copy = {...selected};
+    !copy.details.includes(option) ? copy.details.push(option) : copy.details.splice(copy.indexOf(option), 1);
     setSelected(copy);
   };
 
   const renderSwitch = (option, index) => (
     <View key={index} style={styles.switch}>
       <Switch
-        value={selected.includes(option)}
+        value={selected.details.includes(option)}
         onValueChange={() => onValueChange(option, index)}
         circleSize={24}
         barHeight={24}
@@ -56,7 +57,7 @@ const Details = () => {
         switchWidthMultiplier={2} // multiplied by the `circleSize` prop to calculate total width of the Switch
         switchBorderRadius={24} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
       />
-      <Text style={[styles.switchText, selected.includes(option) && styles.bold]}>{LangService.strings[option]}</Text>
+      <Text style={[styles.switchText, selected.details.includes(option) && styles.bold]}>{LangService.strings[option]}</Text>
     </View>
   );
 

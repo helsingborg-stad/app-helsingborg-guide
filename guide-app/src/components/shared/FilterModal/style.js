@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontWeight: "500",
     color: "#2C2C2C",
-    paddingRight: 5,
+    paddingRight: 8,
   },
 
   details: {

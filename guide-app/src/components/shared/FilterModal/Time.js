@@ -3,20 +3,20 @@ import { View, Text } from "react-native";
 import { Checkbox } from "react-native-paper";
 import { CalendarProps } from "react-native-calendars"
 import Calendar from "@shared-components/Calendar";
-import Dateutils from "@utils/DateUtils";
 import styles from "./style";
+import LangService from "@services/langService";
 
 const options = [
   {
-    title: "Morgon",
+    title: "MORNING",
     date: "08:00  - 12:00",
   },
   {
-    title: "Eftermiddag",
+    title: "AFTERNOON",
     date: "12:00  - 18:00",
   },
   {
-    title: "Kväll",
+    title: "EVENING",
     date: "18:00  - 24:00",
   },
 ];
@@ -24,13 +24,12 @@ const options = [
 const INITIAL_DATE = "2022-03-20"
 
 const Time = (props) => {
-  const { renderCalendar } = props;
-  const [selected, setSelected] = useState([]);
+  const { renderCalendar, selected, setSelected } = props;
   const [markedDates, setMarkedDates] = useState({});
 
   const onValueChange = (option) => {
-    const copy = [...selected];
-    !copy.includes(option) ? copy.push(option) : copy.splice(copy.indexOf(option), 1);
+    const copy = {...selected};
+    !copy.dates.includes(option) ? copy.dates.push(option) : copy.dates.splice(copy.dates.indexOf(option), 1);
     setSelected(copy);
   };
 
@@ -61,18 +60,20 @@ const Time = (props) => {
     <View style={styles.time}>
       <View style={styles.intervals}>
       {options.map((option, index) => (
-        <View style={styles.intervalItem}>
+        <View
+          key={index}
+          style={styles.intervalItem}>
           <Checkbox.Android
             key={index}
-            status={selected.includes(option) ? "checked" : "unchecked"}
+            status={selected.dates.includes(option) ? "checked" : "unchecked"}
             onPress={() => onValueChange(option)}
             uncheckedColor={"grey"}
             color={"#A40082"}
             mode={"android"}
           />
           <View style={styles.intervalTextContainer}>
-            <Text style={[styles.timePrefix, selected.includes(option) && styles.bold]}>{option.title}</Text>
-            <Text style={[styles.timeDate, selected.includes(option) && styles.bold]}>{option.date}</Text>
+            <Text style={[styles.timePrefix, selected.dates.includes(option) && styles.bold]}>{LangService.strings[option.title]}</Text>
+            <Text style={[styles.timeDate, selected.dates.includes(option) && styles.bold]}>{option.date}</Text>
           </View>
         </View>
       ))}
