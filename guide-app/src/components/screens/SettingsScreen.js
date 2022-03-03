@@ -8,6 +8,7 @@ import {
   Linking,
   TouchableWithoutFeedback,
 } from "react-native";
+import DeviceInfo from "react-native-device-info";
 import NetInfo from "@react-native-community/netinfo";
 import { useDispatch, useSelector } from "react-redux";
 import LangService from "@services/langService";
@@ -54,6 +55,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
+  versionContainer: {
+    marginHorizontal: defaultMargin,
+  },
+
+
   divider: {
     margin: defaultMargin,
     height: 1,
@@ -108,6 +115,11 @@ const textStyles = StyleSheet.create({
       textAlign: "center",
     },
   ]),
+  versionText: {
+    fontSize: 12,
+    color: Colors.black,
+  },
+
 });
 
 
@@ -259,9 +271,11 @@ const SettingsScreen = (props) => {
             {LangService.strings.OFFLINE_CONTENT}
           </Text>
         </TouchableOpacity>
-
         {developerMode ? displayDeveloperMenuButton() : null}
         <View style={styles.divider} />
+        <View style={styles.versionContainer}>
+          <Text style={textStyles.versionText}>Version {DeviceInfo.getVersion()}</Text>
+        </View>
         <View style={styles.contactUsContainer}>
           <TouchableWithoutFeedback onPress={updateDeveloperMode}>
             <Image
