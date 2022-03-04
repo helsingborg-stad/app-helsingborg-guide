@@ -140,11 +140,14 @@ export async function getNavigation(
 export async function getEvents(
   langCode: string,
   dateStart: Date,
-  dateEnd: Date
+  dateEnd: Date,
+  perPage: any,
+  page: any,
 ): Promise<Event[]> {
+  console.log("per page", perPage, "page", page)
   const dateStartFmt = DateUtils.shortDate(dateStart);
   const dateEndFmt = DateUtils.shortDate(dateEnd);
-  const params = `&userGroupId=${GROUP_ID}&dateStart=${dateStartFmt}&dateEnd=${dateEndFmt}`;
+  const params = `&userGroupId=${GROUP_ID}&dateStart=${dateStartFmt}&dateEnd=${dateEndFmt}&perPage=${perPage}&page=${page}`;
   const json = await fetchJSON("events", langCode || 'sv', params);
   const fetchedEvents: Event[] = validateData(json, "event");
 

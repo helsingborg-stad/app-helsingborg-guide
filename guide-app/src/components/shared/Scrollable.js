@@ -7,7 +7,7 @@ const wait = (timeout) => {
 };
 
 const Scrollable = (props) => {
-  const { children, style, contentContainerStyle, refreshControl, refreshAction } = props;
+  const { children, style, contentContainerStyle, refreshControl, refreshAction, onScroll } = props;
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -37,6 +37,7 @@ const Scrollable = (props) => {
     <ScrollView
       style={style}
       contentContainerStyle={contentContainerStyle}
+      onScroll={(e) => onScroll && onScroll(e)}
       {...(refreshControl ? {
         refreshControl:
           <RefreshControl

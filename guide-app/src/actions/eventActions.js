@@ -17,13 +17,15 @@ export function fetchEventsFailure(error: Error): Action {
 export function fetchEvents(
   langCode: string,
   dateStart: Date,
-  dateEnd: Date
+  dateEnd: Date,
+  perPage: any,
+  page: any,
 ): ThunkAction {
   return function fetchEventsDispatch(dispatch: Dispatch) {
     dispatch(fetchEventsRequest());
 
     return fetchUtils
-      .getEvents(langCode, dateStart, dateEnd)
+      .getEvents(langCode, dateStart, dateEnd, perPage, page)
       .then(events => dispatch(fetchEventsSuccess(events)))
       .catch(error => {
         dispatch(fetchEventsFailure(error.message));

@@ -111,6 +111,7 @@ type Props = {
 };
 
 function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
+
   const {
     description,
     imageUrl,
@@ -121,9 +122,11 @@ function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
     dateEnd,
     id
   } = event;
+
+
   const dispatch = useDispatch();
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
-  const decodedLocationTitle = decode(location.title, {
+  const decodedLocationTitle = decode(location?.title, {
     level: "xml",
   });
   let hoursString;

@@ -18,10 +18,9 @@ const options = {
   ],
 };
 
-
 const Details = (props) => {
 
-  const { selected, setSelected } = props
+  const { selected, setSelected } = props;
 
 
   const onValueChange = (option) => {

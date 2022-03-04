@@ -8,6 +8,7 @@ import styles from "./styles";
 import MapIcon from "@assets/images/map_icon_black.png";
 import ClockIcon from "@assets/images/clock_icon_black.png";
 import { Colors } from "@assets/styles";
+import Icon from "react-native-vector-icons/Entypo";
 
 
 const CalendarDetailsScreen = ({ navigation }) => {
