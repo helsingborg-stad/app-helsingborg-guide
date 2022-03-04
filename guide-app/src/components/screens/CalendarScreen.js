@@ -10,7 +10,7 @@ import {
 import {SafeAreaView} from "react-native-safe-area-context";
 import {connect} from "react-redux";
 import {addDays, subDays} from "date-fns";
-import { throttle } from "lodash/function";
+import {throttle} from "lodash/function";
 
 import CalendarEvent from "@shared-components/CalendarEvent";
 import CalendarDatePicker from "@shared-components/CalendarDatePicker";
@@ -18,7 +18,7 @@ import Scrollable from "@shared-components/Scrollable";
 import LangService from "@services/langService";
 import {Colors, TextStyles} from "@assets/styles";
 import {showBottomBar} from "@actions/uiStateActions";
-import {fetchEvents} from "@actions/eventActions";
+import {fetchEvents, fetchEventsReset} from "@actions/eventActions";
 import {StyleSheetUtils} from "@utils";
 import {trackScreen} from "@utils/MatomoUtils";
 import useDeepLinking from "@hooks/useDeepLinking";
@@ -111,7 +111,7 @@ type Props = {
     noContent: boolean,
     currentLanguage: string,
     dispatchShowBottomBar(visible: boolean): void,
-    getEvents(currentLanguage: string, dateStart: Date, dateEnd: Date): void
+    getEvents(currentLanguage: string, dateStart: Date, dateEnd: Date, perPage: any, page: any): void
 };
 
 type State = {
@@ -123,6 +123,7 @@ const CalendarScreen = (props: Props, state: State) => {
         currentLanguage,
         dispatchShowBottomBar,
         getEvents,
+        resetEvents,
         showLoadingSpinner,
         items,
         navigation,
@@ -145,7 +146,24 @@ const CalendarScreen = (props: Props, state: State) => {
         dispatchShowBottomBar(true);
         console.log("current page", currentPage)
         getEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, currentPage);
+        return () => {
+            resetEvents();
+            setEvents([])
+            setEndOfContent(false)
+            setCurrentPage(1)
+            setChosenDate(new Date());
+        }
     }, [])
+
+    useEffect(() => {
+        if (!navigation.isFocused()) {
+            resetEvents();
+            setEvents([])
+            setEndOfContent(false)
+            setCurrentPage(1)
+            setChosenDate(new Date());
+        }
+    }, [navigation.isFocused()]);
 
     useEffect(() => {
         if (params?.id) {
@@ -155,6 +173,7 @@ const CalendarScreen = (props: Props, state: State) => {
 
     const loadMoreContent = () => {
         throttle(() => {
+            console.log("LOAD MORE CONTENT")
             const nextPage = currentPage + 1;
             console.log(chosenDate, nextPage)
             getEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, nextPage);
@@ -163,13 +182,14 @@ const CalendarScreen = (props: Props, state: State) => {
     }
 
     useEffect(() => {
+        let copy = [...events];
         if (items.length) {
-            let copy = [...events];
-            items.map(item => !copy.includes(item) && copy.push(item))
-            setEvents(copy)
-        }
-        else if (events.length) {
-          setEndOfContent(true)
+            if (items !== copy) {
+                items.map(item => !copy.includes(item) && copy.push(item))
+                setEvents(copy)
+            }
+        } else if (events.length) {
+            setEndOfContent(true)
         }
     }, [items]);
 
@@ -179,7 +199,7 @@ const CalendarScreen = (props: Props, state: State) => {
         setEvents([])
         setEndOfContent(false)
         setCurrentPage(1)
-        getEvents(currentLanguage, nextDate, nextDate);
+        getEvents(currentLanguage, nextDate, nextDate, ITEMS_PER_PAGE, 1);
         setChosenDate(nextDate)
     };
 
@@ -188,7 +208,7 @@ const CalendarScreen = (props: Props, state: State) => {
         setEvents([])
         setEndOfContent(false)
         setCurrentPage(1)
-        getEvents(currentLanguage, prevDate, prevDate);
+        getEvents(currentLanguage, prevDate, prevDate, ITEMS_PER_PAGE, 1);
         setChosenDate(prevDate);
     };
 
@@ -228,7 +248,6 @@ const CalendarScreen = (props: Props, state: State) => {
             contentSize.height - paddingToBottom;
     }
 
-console.log("events", events.length)
 
     return (
         <Layout>
@@ -237,7 +256,7 @@ console.log("events", events.length)
                 refreshControl={true}
                 onScroll={({nativeEvent}) => {
                     if (isCloseToBottom(nativeEvent) && !endOfContent) {
-                       loadMoreContent()
+                        loadMoreContent()
                     }
                 }}
                 // refreshAction={() => getEvents(currentLanguage, chosenDate, chosenDate, events.length, 1)}
@@ -253,7 +272,7 @@ console.log("events", events.length)
                                 path={"/calendar"}
                             /> : null
                     )) : null}
-                    {isFetching && events.length && <ActivityIndicator style={{width: '100%', paddingBottom: 30}} />}
+                    {isFetching && events.length && <ActivityIndicator style={{width: '100%', paddingBottom: 30}}/>}
                 </View>
             </Scrollable>
         </Layout>
@@ -278,6 +297,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     return {
         getEvents: (currentLanguage: string, dateStart: Date, dateEnd: Date, perPage: any, page: any) =>
             dispatch(fetchEvents(currentLanguage, dateStart, dateEnd, perPage, page)),
+        resetEvents: () => dispatch(fetchEventsReset()),
         dispatchShowBottomBar: (visible: boolean) =>
             dispatch(showBottomBar(visible))
     };

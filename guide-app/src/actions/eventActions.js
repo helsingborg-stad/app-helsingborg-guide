@@ -14,6 +14,10 @@ export function fetchEventsFailure(error: Error): Action {
   return { type: "FETCH_EVENTS_FAILURE", error };
 }
 
+export function fetchEventsReset(): Action {
+  return { type: "FETCH_EVENTS_RESET"}
+}
+
 export function fetchEvents(
   langCode: string,
   dateStart: Date,
