@@ -8,7 +8,7 @@ import styles from "./style";
 import LangService from "@services/langService";
 import { Portal } from "react-native-portalize";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import ArrowUp from "@assets/images/arrow_up";
+import ArrowDown from "@assets/images/arrow_down";
 
 const HomeSettings = (props) => {
 
@@ -40,12 +40,13 @@ const HomeSettings = (props) => {
   }, [open]);
 
   useEffect(() => {
-    console.log("rövhål", navigation.isFocused())
-      setShowButton(navigation.isFocused());
-  },[navigation.isFocused()])
+    setShowButton(navigation.isFocused());
+  }, [navigation.isFocused()]);
 
 
-
+  useEffect(() => {
+    return () => setShowButton(false);
+  }, []);
 
   return (
     <>
@@ -60,7 +61,7 @@ const HomeSettings = (props) => {
           visibility: settingsHeight ? "visible" : "hidden",
           opacity: settingsHeight ? 1 : 0
         }]}>
-        <View>
+        <View style={styles.wrapper}>
           <View style={styles.search}>
             <View style={styles.searchTop}>
               <Text style={styles.searchTopLeft}>{LangService.strings.FILTER_TITLE}</Text>
@@ -93,19 +94,27 @@ const HomeSettings = (props) => {
               enableLabel={true}
               selectedSliderColor={"#A71580"}
               unSelectedSliderColor={"#E7E7E7"}
-              sliderHeight={4.2}
+              sliderHeight={4}
               snapped={true}
             />
+            <View style={styles.distanceValues}>
+              <Text style={styles.distanceValue}>0 km</Text>
+              <Text style={styles.distanceValue}>7 km</Text>
+            </View>
           </View>
           {showButton && <Portal>
-            <Animated.View style={{top: settingsHeight ? height : undefined,}}>
+            <Animated.View style={{ top: settingsHeight ? height : undefined }}>
               <TouchableOpacity
                 onPress={toggleOpen}
-                style={[styles.toggleSettings, { transform: [{rotateX: settingsHeight ? "0deg" : "180deg"}], top: ((segmentLayout || 0) + (insets?.top || 0)) - 15 }]}>
-                <ArrowUp style={{transform: [{rotateX: open ? "0deg" : "180deg"}]}} />
+                style={[styles.toggleSettings, {
+                  transform: [{ rotateX: open ? "180deg" : "0deg" }],
+                  top: ((segmentLayout || 0) + (insets?.top || 0)) - 15
+                }]}>
+                <ArrowDown />
               </TouchableOpacity>
             </Animated.View>
-          </Portal>}
+          </Portal>
+          }
         </View>
       </Animated.View>
       <FilterModal

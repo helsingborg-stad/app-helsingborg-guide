@@ -136,9 +136,6 @@ const HomeScreen = (props: Props) => {
     return <ActivityIndicator style={styles.loadingSpinner} />;
   }
 
-  console.log("showSettings", showSettings, backdropOpacity)
-
-
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />

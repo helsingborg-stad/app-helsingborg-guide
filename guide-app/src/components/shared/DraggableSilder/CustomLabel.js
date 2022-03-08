@@ -80,7 +80,6 @@ export default function CustomLabel(props) {
 const styles = StyleSheet.create({
   parentView: {
     position: 'relative',
-    backgroundColor: 'green',
   },
   sliderLabel: {
     position: 'absolute',

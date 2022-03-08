@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
 
+  wrapper: {
+    position: "relative",
+  },
+
   search: {
 
   },
@@ -52,7 +56,20 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontFamily: "Roboto",
     color: "#292929",
-    paddingBottom: 8,
+    paddingBottom: 6,
+  },
+
+  distanceValues: {
+    flexDirection: "row",
+    width: '100%',
+    justifyContent: "space-between",
+
+  },
+
+  distanceValue: {
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    fontSize: 16,
   },
 
   toggleSettings: {
