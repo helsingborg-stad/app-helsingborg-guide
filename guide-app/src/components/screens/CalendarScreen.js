@@ -243,7 +243,7 @@ const CalendarScreen = (props: Props, state: State) => {
 
     const isCloseToBottom = (e) => {
         const {layoutMeasurement, contentOffset, contentSize} = e;
-        const paddingToBottom = 800;
+        const paddingToBottom = 900;
         return layoutMeasurement.height + contentOffset.y >=
             contentSize.height - paddingToBottom;
     }

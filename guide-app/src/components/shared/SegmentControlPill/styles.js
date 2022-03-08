@@ -15,6 +15,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 16,
     padding: 2,
+    zIndex: 3,
   },
   pillContainer: {
     flexGrow: 1,

@@ -1,11 +1,17 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
-  filter: {
-    backgroundColor: 'white',
-    width: '100%',
+
+  settings: {
+    position: "absolute",
+    flex: 1,
+    backgroundColor: '#F0F0F0',
+    maxWidth: Dimensions.get("window").width,
     paddingHorizontal: 16,
+    overflow: "hidden",
+    zIndex: 1,
   },
+
   search: {
 
   },
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
   },
 
   distance: {
-
+  marginBottom: 28,
   },
 
   distanceText: {
@@ -47,9 +53,31 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     color: "#292929",
     paddingBottom: 8,
+  },
 
+  toggleSettings: {
+    position: "absolute",
+    minWidth: 30,
+    height: 30,
+    borderRadius: 30,
+    backgroundColor: "#F0F0F0",
+    paddingHorizontal: 5,
+    flexDirection: "row",
+    alignContent: "center",
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#3f3f3f",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 
-  }
+    elevation: 5,
+  },
+
 
 })
 

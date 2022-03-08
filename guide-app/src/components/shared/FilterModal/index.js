@@ -101,14 +101,14 @@ const FilterModal = (props) => {
     );
   };
 
-  const renderContent = (section) => {
+  const renderContent = (section, index) => {
     const { id } = section;
     const content = () => {
       switch (id) {
         case "details":
-          return <Details selected={selected} setSelected={setSelected} />;
+          return <Details key={index} selected={selected} setSelected={setSelected} />;
         case "time":
-          return <Time selected={selected} setSelected={setSelected} renderCalendar={activeSections.includes(1)} />;
+          return <Time key={index} selected={selected} setSelected={setSelected} renderCalendar={activeSections.includes(1)} />;
       }
     };
     return (
@@ -186,7 +186,7 @@ const FilterModal = (props) => {
                     onChange={(active) => setActiveSections(active)}
                     renderSectionTitle={renderSectionTitle}
                     renderHeader={(e, index) => renderHeader(e, index)}
-                    renderContent={(e) => renderContent(e)}
+                    renderContent={(e, index) => renderContent(e, index)}
                     renderFooter={(e, index) => renderFooter(e, index)}
                     underlayColor={"transparent"}
                   />

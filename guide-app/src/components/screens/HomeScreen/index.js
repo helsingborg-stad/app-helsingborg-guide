@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   TouchableOpacity,
@@ -9,8 +9,10 @@ import {
   Text,
   ScrollView,
   Keyboard,
+  Animated
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import Modal from "react-native-modal";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import Orientation from "react-native-orientation-locker";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
@@ -21,11 +23,11 @@ import {
   selectCurrentGuideGroup,
   selectCurrentCategory,
   selectCurrentHomeTab,
-  showBottomBar,
+  showBottomBar
 } from "@actions/uiStateActions";
 import { fetchNavigation } from "@actions/navigationActions";
 
-import HomeFilter from "@shared-components/HomeFilter/HomeFilter";
+import HomeSettings from "@shared-components/HomeSettings";
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
@@ -33,7 +35,6 @@ import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
 import useDeepLinking from "@hooks/useDeepLinking";
 import useGuides from "@hooks/useGuides";
-
 
 
 type Section = {
@@ -56,9 +57,7 @@ type Props = {
   guideGroups: any,
 
   fetchNavigation(code: string): void,
-
   fetchGuideGroups(currentLanguage: string, guideGroups: Array): void,
-
   fetchGuides(currentLanguage: string, guides: Array): void,
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
@@ -71,6 +70,11 @@ const HomeScreen = (props: Props) => {
   const { params } = props.navigation?.state;
   const { linkingHome } = useDeepLinking();
   const { linkToGuide } = useGuides();
+  const [segmentLayout, setSegmentLayout] = useState(0);
+  const [showSettings, setShowSettings] = useState(false);
+  const [settingsHeight, setSettingsHeight] = useState(false);
+  const insets = useSafeAreaInsets();
+  const [backdropOpacity] = useState(new Animated.Value(0));
 
   const id_1 = params?.id_1;
 
@@ -105,26 +109,47 @@ const HomeScreen = (props: Props) => {
 
   useEffect(() => {
     if (id_1) {
-         linkingHome(params, props);
+      linkingHome(params, props);
     }
   }, [params]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      Animated.timing(backdropOpacity, {
+        toValue: showSettings ? 1 : 0,
+        duration: showSettings ? 150 : 0,
+        useNativeDriver: true,
+      }).start();
+    }, showSettings ? 250 : 0)
+  },[showSettings])
 
   const onPressItem = (item): void => {
-   linkToGuide(item);
+    linkToGuide(item);
+  };
+
+  const toggleSettings = () => {
+    console.log("running?")
+    setShowSettings(!showSettings);
   };
 
   if (showLoadingSpinner) {
     return <ActivityIndicator style={styles.loadingSpinner} />;
   }
 
+  console.log("showSettings", showSettings, backdropOpacity)
+
+
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
-      <SafeAreaView edges={["right", "top", "left"]} style={styles.homeContainer}>
+      <SafeAreaView edges={["right", "top", "left"]} style={[styles.homeContainer]}>
         <TouchableOpacity activeOpacity={1} style={{ flex: 1 }} onPress={Keyboard.dismiss}>
           <>
-            <View style={styles.topBarNavigation}>
+            <View
+              onLayout={(event) => {
+                setSegmentLayout(event.nativeEvent.layout?.height);
+              }}
+              style={styles.topBarNavigation}>
               <SegmentControlPill
                 initialSelectedIndex={currentHomeTab}
                 onSegmentIndexChange={selectCurrentTab}
@@ -139,7 +164,9 @@ const HomeScreen = (props: Props) => {
               </View>
             ) : (
               <>
-                <HomeFilter />
+                {segmentLayout ?
+                  <HomeSettings open={showSettings} setOpen={toggleSettings} settingsHeight={settingsHeight}
+                                setSettingsHeight={setSettingsHeight} segmentLayout={segmentLayout} navigation={navigation} /> : null}
                 <Scrollable
                   key={currentHomeTab}
                   style={styles.container}
@@ -170,6 +197,13 @@ const HomeScreen = (props: Props) => {
             )}
           </>
         </TouchableOpacity>
+        <Animated.View
+          style={[styles.backDrop, {
+            top: ((settingsHeight || 0) + (segmentLayout || 0) + (insets?.top || 0)),
+            backgroundColor: `rgba(0,0,0,0.5)`,
+            opacity: backdropOpacity,
+            display: showSettings ? "flex" : "none",
+          }]} />
       </SafeAreaView>
     </>
   );
@@ -180,7 +214,7 @@ function mapStateToProps(state: RootState) {
     navigation,
     guideGroups,
     guides,
-    uiState: { currentHomeTab },
+    uiState: { currentHomeTab }
   } = state;
   const { navigationCategories, currentLanguage } = navigation;
   const { fetchingIds } = guideGroups;
@@ -194,7 +228,7 @@ function mapStateToProps(state: RootState) {
           copy.interactiveGuide = {
             ...copy.interactiveGuide,
             name: copy.interactiveGuide?.title,
-            images: { large: copy.interactiveGuide?.image, thumbnail: copy.interactiveGuide?.image },
+            images: { large: copy.interactiveGuide?.image, thumbnail: copy.interactiveGuide?.image }
           };
         }
         return copy;
@@ -205,7 +239,7 @@ function mapStateToProps(state: RootState) {
       return {
         title: cat.name,
         data,
-        category: cat,
+        category: cat
       };
     }
   })];
@@ -229,7 +263,7 @@ function mapStateToProps(state: RootState) {
     showLoadingSpinner: isFetching,
     navigationCategories,
     navigationCategoryLabels,
-    currentLanguage,
+    currentLanguage
   };
 }
 
@@ -244,7 +278,7 @@ function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
     selectCurrentTab: (tabIndex: number) =>
       dispatch(selectCurrentHomeTab(tabIndex)),
     dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible)),
+      dispatch(showBottomBar(visible))
   };
 }
 
@@ -252,10 +286,10 @@ function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
 HomeScreen["navigationOptions"] = () => (
   {
     title: LangService.strings.APP_NAME,
-    ...HeaderStyles.noElevation,
+    ...HeaderStyles.noElevation
   });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(HomeScreen);
