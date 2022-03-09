@@ -9,7 +9,8 @@ import {
   Text,
   ScrollView,
   Keyboard,
-  Animated
+  Animated,
+  TouchableWithoutFeedback,
 } from "react-native";
 import Modal from "react-native-modal";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
@@ -200,7 +201,11 @@ const HomeScreen = (props: Props) => {
             backgroundColor: `rgba(0,0,0,0.5)`,
             opacity: backdropOpacity,
             display: showSettings ? "flex" : "none",
-          }]} />
+          }]}><TouchableOpacity
+          onPress={Keyboard.dismiss}
+          activeOpacity={1}
+          style={styles.backDropDismiss} />
+        </Animated.View>
       </SafeAreaView>
     </>
   );

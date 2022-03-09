@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { AppState, StatusBar, Platform, View, Linking } from "react-native";
 import Orientation from "react-native-orientation-locker";
 import { createAppContainer } from "react-navigation";
@@ -119,43 +119,22 @@ type Props = {
   onAppBecameInactive(): void,
 };
 
-class Nav extends Component<Props> {
-  static getCurrentRouteName(navigationState: Object) {
-    if (!navigationState) {
-      return null;
-    }
-    const route = navigationState.routes[navigationState.index];
-    // dive into nested navigators
-    if (route.routes) {
-      return Nav.getCurrentRouteName(route);
-    }
-    return route;
-  }
+const Nav = (props: Props) => {
 
-  static onNavigationStateChange(prevState: Object, currentState: Object) {
-    const currentScreen = Nav.getCurrentRouteName(currentState);
-    const prevScreen = Nav.getCurrentRouteName(prevState);
-    if (prevScreen !== currentScreen) {
-      console.log("__NAV__", currentScreen.routeName)
-    }
-  }
+useEffect(() => {
+  Orientation.lockToPortrait();
+  props.onAppStarted();
+  initializeTracker();
+  AppState.addEventListener("change", onAppStateChange);
+},[])
 
-  componentDidMount = () => {
-    Orientation.lockToPortrait();
-    this.props.onAppStarted();
-    initializeTracker();
-    AppState.addEventListener("change", this.onAppStateChange);
-  };
-
-  onAppStateChange = (nextAppState: AppStateStatus) => {
+  const onAppStateChange = (nextAppState: AppStateStatus) => {
     if (nextAppState === "active") {
-      this.props.onAppBecameActive();
+      props.onAppBecameActive();
     } else if (nextAppState === "inactive") {
-      this.props.onAppBecameInactive();
+      props.onAppBecameInactive();
     }
   };
-
-  render() {
     return (
       <ViewContainer>
         <StatusBar
@@ -174,7 +153,29 @@ class Nav extends Component<Props> {
         <BottomBarView />
       </ViewContainer>
     );
+}
+
+
+
+Nav["onNavigationStateChange"] = (prevState: Object, currentState: Object) => {
+  const currentScreen = Nav.getCurrentRouteName(currentState);
+  const prevScreen = Nav.getCurrentRouteName(prevState);
+  if (prevScreen !== currentScreen) {
+    console.log("__NAV__", currentScreen.routeName)
   }
+}
+
+
+Nav["getCurrentRouteName"] = (navigationState: Object) => {
+  if (!navigationState) {
+    return null;
+  }
+  const route = navigationState.routes[navigationState.index];
+  // dive into nested navigators
+  if (route.routes) {
+    return Nav.getCurrentRouteName(route);
+  }
+  return route;
 }
 
 

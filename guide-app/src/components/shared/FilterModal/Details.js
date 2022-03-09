@@ -25,7 +25,7 @@ const Details = (props) => {
 
   const onValueChange = (option) => {
     const copy = {...selected};
-    !copy.details.includes(option) ? copy.details.push(option) : copy.details.splice(copy.indexOf(option), 1);
+    !copy.details.includes(option) ? copy.details.push(option) : copy.details.splice(copy.details.indexOf(option), 1);
     setSelected(copy);
   };
 

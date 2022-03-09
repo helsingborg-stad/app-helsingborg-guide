@@ -147,4 +147,9 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
 
+  backDropDismiss: {
+    flex: 1,
+
+  }
+
 });

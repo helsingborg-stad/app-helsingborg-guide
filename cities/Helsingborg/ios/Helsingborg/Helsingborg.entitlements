@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:https://helsingborg-guide-aasa.herokuapp.com</string>
+		<string>applinks:links-test.helsingborg.io</string>
 	</array>
 </dict>
 </plist>
