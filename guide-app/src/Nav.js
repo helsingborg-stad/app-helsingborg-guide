@@ -122,12 +122,12 @@ type Props = {
   onAppBecameInactive(): void,
 };
 
+
 const Nav = (props: Props) => {
 
   const { onAppStarted, onAppBecameActive, onAppBecameInactive } = props;
-
+  const [homeLoaded, setHomeLoaded] = useState(false);
   const { url } = useInitialURL();
-
 
   useEffect(() => {
     Orientation.lockToPortrait();
@@ -136,10 +136,9 @@ const Nav = (props: Props) => {
     AppState.addEventListener("change", onAppStateChange);
   }, []);
 
-  console.log("UNI", UNIVERSAL_LINKING_URL)
 
   useEffect(() => {
-    if (url) {
+    if (url && homeLoaded) {
       if (url?.includes(UNIVERSAL_LINKING_URL)) {
         let type = url?.split("/").includes("guide") ? "guide" : "group";
         let path = url?.split(url?.includes("guide") ? "guide" : "group")[1];
@@ -147,7 +146,16 @@ const Nav = (props: Props) => {
         Linking.openURL(finalUrl);
       }
     }
-  }, [url]);
+  }, [url, homeLoaded]);
+
+
+  const onNavigationStateChange = (prevState: Object, currentState: Object) => {
+    const currentScreen = Nav.getCurrentRouteName(currentState);
+    const prevScreen = Nav.getCurrentRouteName(prevState);
+    if (prevScreen !== currentScreen) {
+      !homeLoaded && currentScreen.routeName === "HomeScreen" && setHomeLoaded(true);
+    }
+  };
 
   const onAppStateChange = (nextAppState: AppStateStatus) => {
     if (nextAppState === "active") {
@@ -165,7 +173,7 @@ const Nav = (props: Props) => {
       />
       {/* $FlowFixMe should be fixed in later flow versions */}
       <NavigatorWrapper
-        onNavigationStateChange={Nav.onNavigationStateChange}
+        onNavigationStateChange={onNavigationStateChange}
         ref={(navigatorRef) => {
           NavigatorService.setContainer(navigatorRef);
         }}
@@ -174,15 +182,6 @@ const Nav = (props: Props) => {
       <BottomBarView />
     </ViewContainer>
   );
-};
-
-
-Nav["onNavigationStateChange"] = (prevState: Object, currentState: Object) => {
-  const currentScreen = Nav.getCurrentRouteName(currentState);
-  const prevScreen = Nav.getCurrentRouteName(prevState);
-  if (prevScreen !== currentScreen) {
-    console.log("__NAV__", currentScreen.routeName);
-  }
 };
 
 

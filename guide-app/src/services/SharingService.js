@@ -21,6 +21,7 @@ import Colors from "@assets/styles/Colors";
 import fetchService from "@services/FetchService";
 import TextStyles from "@assets/styles/TextStyles";
 import { useSelector } from "react-redux";
+import { UNIVERSAL_LINKING_URL, DEEP_LINKING_URL } from "@data/endpoints";
 
 const shareImageURL = require("@assets/images/share_icon.png");
 const fadeImageURL = require("@assets/images/share_fade.png");
@@ -170,11 +171,9 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
 
         RNFS.exists(finalPath).then(() => {
 
+          let sharingLink = UNIVERSAL_LINKING_URL + (currentSharingLink.split(DEEP_LINKING_URL + "home")[1] || currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1])
           let sharingText = title;
-
-          sharingText = sharingText.concat(` ${currentSharingLink}`);
-
-          console.log("sharingText: " + sharingText, "message" + message, "subject", subject, "finalPath", finalPath);
+              sharingText = sharingText.concat(` ${sharingLink}`);
 
           Share.open({ title, message: sharingText, subject });
 
@@ -202,11 +201,9 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
       icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
     });
 
-    console.log("title", title, "currentSharingLink", currentSharingLink);
-
+    let sharingLink = UNIVERSAL_LINKING_URL + (currentSharingLink.split(DEEP_LINKING_URL + "home")[1] || currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1])
     let sharingText = title;
-    sharingText = sharingText.concat(` ${currentSharingLink}`);
-
+    sharingText = sharingText.concat(` ${sharingLink}`);
 
     iosShare = {
       activityItemSources: [
@@ -324,8 +321,6 @@ function loadOverlay() {
 const ShowShareButton = (props) => {
   const { title, image, sender, shareType } = props;
   const { currentSharingLink } = useSelector(s => s.uiState);
-
-  console.log("CURRENT SHARING LINK", currentSharingLink);
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   origin = sender;
   let imageUrl = image.large;

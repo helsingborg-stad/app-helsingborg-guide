@@ -19,12 +19,10 @@ const useGuides = () => {
   const linkToGuide = (item, params) => {
     let sharePath = DEEP_LINKING_URL + `home/`;
 
-    console.log("sharepath looooool", sharePath
-    )
     switch (item?.type) {
       case "guidegroup":
         dispatch(selectCurrentGuideGroup(item.id));
-        sharePath += `${item.id}`
+        sharePath += `group/${item.id}`
         dispatch(selectCurrentSharingLink(sharePath))
         if (item?.guideGroup) {
           const title = item?.guideGroup?.name;
@@ -44,7 +42,7 @@ const useGuides = () => {
       case "guide": {
         const { guide } = item;
         if (guide) {
-          sharePath += `${guide.id}`
+          sharePath += `guide/${guide.id}`
           dispatch(selectCurrentSharingLink(sharePath))
           dispatch(selectCurrentGuideByID(guide.id))
           const type = guide?.guideType;
@@ -83,7 +81,7 @@ const useGuides = () => {
       case "interactive_guide":
         const { interactiveGuide } = item;
         if (interactiveGuide) {
-          sharePath += `${interactiveGuide.id}`
+          sharePath += `guide/${interactiveGuide.id}`
           dispatch(selectCurrentSharingLink(sharePath))
           dispatch(selectCurrentGuideByID(interactiveGuide.id))
           const title = interactiveGuide?.title;

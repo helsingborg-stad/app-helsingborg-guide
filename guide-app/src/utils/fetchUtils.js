@@ -23,11 +23,6 @@ async function fetchJSON(
   }
 
 
-  console.log("API_BASE_URL", API_BASE_URL)
-  console.log("the url", url)
-
-
-
 
   const response = await fetch(url);
   if (!response.ok) {

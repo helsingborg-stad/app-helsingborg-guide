@@ -8,7 +8,7 @@ const useInitialURL = () => {
   const [url, setUrl] = useState("");
 
   const getForegroundURL = (foregroundURL) => {
-        setUrl(foregroundURL.url || url);
+    setUrl(foregroundURL.url || url);
   }
 
 
@@ -16,15 +16,16 @@ const useInitialURL = () => {
     Linking.addEventListener("url", getForegroundURL);
     const getBackgroundURL = async () => {
       const initialUrl = await Linking.getInitialURL();
+      console.log("__INITIAL__", initialUrl);
         setUrl(initialUrl);
     };
     getBackgroundURL();
   });
 
   useEffect(() => {
-    throttle(() => {
-        url && setUrl("");
-    },2000)
+    // throttle(() => {
+    //     url && setUrl("");
+    // },2000)
   },[url])
 
   return { url };
