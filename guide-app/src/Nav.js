@@ -4,6 +4,7 @@ import { AppState, StatusBar, Platform, View, Linking, Alert } from "react-nativ
 import Orientation from "react-native-orientation-locker";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import { UNIVERSAL_LINKING_URL } from "@data/endpoints";
 
 
 import {
@@ -135,10 +136,11 @@ const Nav = (props: Props) => {
     AppState.addEventListener("change", onAppStateChange);
   }, []);
 
+  console.log("UNI", UNIVERSAL_LINKING_URL)
+
   useEffect(() => {
-    console.log("url?", url?.split("/"))
     if (url) {
-      if ((url?.split("/").includes("guide") || url?.split("/").includes("guide"))) {
+      if (url?.includes(UNIVERSAL_LINKING_URL)) {
         let type = url?.split("/").includes("guide") ? "guide" : "group";
         let path = url?.split(url?.includes("guide") ? "guide" : "group")[1];
         let finalUrl = prefix + "home/" + type + path;
