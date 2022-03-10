@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { Linking } from "react-native";
+import { throttle } from "lodash/function";
 
 const useMount = func => useEffect(() => func(), []);
 
 const useInitialURL = () => {
-  const [url, setUrl] = useState(null);
-  const [processing, setProcessing] = useState(true);
+  const [url, setUrl] = useState("");
+
+  const getForegroundURL = (foregroundURL) => {
+        setUrl(foregroundURL.url || url);
+  }
+
 
   useMount(() => {
-    const getUrlAsync = async () => {
-      // Get the deep link used to open the app
+    Linking.addEventListener("url", getForegroundURL);
+    const getBackgroundURL = async () => {
       const initialUrl = await Linking.getInitialURL();
-
-      // The setTimeout is just for testing purpose
-      setTimeout(() => {
         setUrl(initialUrl);
-        setProcessing(false);
-      }, 1000);
     };
-
-    getUrlAsync();
+    getBackgroundURL();
   });
 
-  return { url, processing };
+  useEffect(() => {
+    throttle(() => {
+        url && setUrl("");
+    },2000)
+  },[url])
+
+  return { url };
 };
 
 export default useInitialURL;

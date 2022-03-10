@@ -31,7 +31,6 @@ export default function eventReducer(
 
             const items = [...action.events];
 
-
             return {...state, items, isFetching: false};
         }
         case "FETCH_EVENTS_FAILURE":

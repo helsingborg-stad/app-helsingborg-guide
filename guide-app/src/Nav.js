@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, useEffect, useState } from "react";
-import { AppState, StatusBar, Platform, View, Linking } from "react-native";
+import { AppState, StatusBar, Platform, View, Linking, Alert } from "react-native";
 import Orientation from "react-native-orientation-locker";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -25,15 +25,17 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
-  ARIntroductionScreen,
+  ARIntroductionScreen
 } from "@src/components/screens";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
 import ScanScreen from "@src/components/screens/ScanScreen";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
+import useInitialURL from "@hooks/useUniversalLinks";
 import NavigatorService from "@services/navigationService";
-import { initializeTracker, trackScreen } from "@utils/MatomoUtils";
+import { initializeTracker } from "@utils/MatomoUtils";
+import { useSelector } from "react-redux";
 
 const prefix = "guidehbg://";
 
@@ -41,38 +43,38 @@ const GuideNavigator = createStackNavigator(
   {
     HomeScreen: {
       screen: HomeScreen,
-      path: 'home/:id_1?/:id_2?/:id_3?',
+      path: "home/:type?/:id_1?/:id_2?/:id_3?",
       navigationOptions: {
         headerMode: "screen",
         headerTitle: "Guide Helsingborg",
-        header: () => null,
-      },
+        header: () => null
+      }
     },
 
 
     CalendarScreen: {
       screen: CalendarScreen,
-      path: 'calendar/:id'
+      path: "calendar/:id"
     },
 
     TrailScreen: { screen: TrailScreen },
     LocationScreen: {
       screen: LocationScreen,
       navigationOptions: {
-        headerMode: "screen",
-      },
+        headerMode: "screen"
+      }
     },
-    ObjectScreen: { screen: ObjectScreen,
-      navigationOptions: {
-
-      } },
+    ObjectScreen: {
+      screen: ObjectScreen,
+      navigationOptions: {}
+    },
     QuizScreen: { screen: QuizScreen },
     QuizResultScreen: { screen: QuizResultScreen },
     GuideDetailsScreen: {
       screen: GuideScreen,
       navigationOptions: {
-        headerMode: "screen",
-      },
+        headerMode: "screen"
+      }
     },
     WebScreen: { screen: WebScreen },
     VideoScreen: { screen: VideoScreen },
@@ -80,31 +82,31 @@ const GuideNavigator = createStackNavigator(
       screen: ImageScreen,
       navigationOptions: {
         headerMode: "none",
-        title: '',
-      },
+        title: ""
+      }
     },
     DownloadsScreen: { screen: DownloadsScreen },
     SettingsScreen: { screen: SettingsScreen },
     ScanScreen: { screen: ScanScreen },
     DebugScreen: { screen: DebugScreen },
     CategoryMapScreen: { screen: CategoryMapScreen },
-    CalendarDetailsScreen: { screen: CalendarDetailsScreen },
+    CalendarDetailsScreen: { screen: CalendarDetailsScreen }
   },
-  { defaultNavigationOptions: HeaderStyles.default },
+  { defaultNavigationOptions: HeaderStyles.default }
 );
 
 const RootNavigator = createStackNavigator(
   {
-    SplashScreen: { screen: SplashScreen, },
-    WelcomeScreen: { screen: WelcomeScreen, path: '' },
-    MainScreen: { screen: GuideNavigator, path: '' },
-    SearchObjectScreen: { screen: SearchObjectScreen, path: '' },
-    ARIntroductionScreen: { screen: ARIntroductionScreen, path: '' },
+    SplashScreen: { screen: SplashScreen },
+    WelcomeScreen: { screen: WelcomeScreen, path: "" },
+    MainScreen: { screen: GuideNavigator, path: "" },
+    SearchObjectScreen: { screen: SearchObjectScreen, path: "" },
+    ARIntroductionScreen: { screen: ARIntroductionScreen, path: "" }
   },
   {
     headerMode: "none",
-    mode: "modal",
-  },
+    mode: "modal"
+  }
 );
 
 const NavigatorWrapper = createAppContainer(RootNavigator);
@@ -121,49 +123,65 @@ type Props = {
 
 const Nav = (props: Props) => {
 
-useEffect(() => {
-  Orientation.lockToPortrait();
-  props.onAppStarted();
-  initializeTracker();
-  AppState.addEventListener("change", onAppStateChange);
-},[])
+  const { onAppStarted, onAppBecameActive, onAppBecameInactive } = props;
+
+  const { url } = useInitialURL();
+
+
+  useEffect(() => {
+    Orientation.lockToPortrait();
+    onAppStarted();
+    initializeTracker();
+    AppState.addEventListener("change", onAppStateChange);
+  }, []);
+
+  useEffect(() => {
+    console.log("url?", url?.split("/"))
+    if (url) {
+      if ((url?.split("/").includes("guide") || url?.split("/").includes("guide"))) {
+        let type = url?.split("/").includes("guide") ? "guide" : "group";
+        let path = url?.split(url?.includes("guide") ? "guide" : "group")[1];
+        let finalUrl = prefix + "home/" + type + path;
+        Linking.openURL(finalUrl);
+      }
+    }
+  }, [url]);
 
   const onAppStateChange = (nextAppState: AppStateStatus) => {
     if (nextAppState === "active") {
-      props.onAppBecameActive();
+      onAppBecameActive();
     } else if (nextAppState === "inactive") {
-      props.onAppBecameInactive();
+      onAppBecameInactive();
     }
   };
-    return (
-      <ViewContainer>
-        <StatusBar
-          translucent={ios}
-          barStyle="light-content"
-          backgroundColor={Colors.themeSecondary}
-        />
-        {/* $FlowFixMe should be fixed in later flow versions */}
-        <NavigatorWrapper
-          onNavigationStateChange={Nav.onNavigationStateChange}
-          ref={(navigatorRef) => {
-            NavigatorService.setContainer(navigatorRef);
-          }}
-          uriPrefix={prefix}
-        />
-        <BottomBarView />
-      </ViewContainer>
-    );
-}
-
+  return (
+    <ViewContainer>
+      <StatusBar
+        translucent={ios}
+        barStyle="light-content"
+        backgroundColor={Colors.themeSecondary}
+      />
+      {/* $FlowFixMe should be fixed in later flow versions */}
+      <NavigatorWrapper
+        onNavigationStateChange={Nav.onNavigationStateChange}
+        ref={(navigatorRef) => {
+          NavigatorService.setContainer(navigatorRef);
+        }}
+        uriPrefix={prefix}
+      />
+      <BottomBarView />
+    </ViewContainer>
+  );
+};
 
 
 Nav["onNavigationStateChange"] = (prevState: Object, currentState: Object) => {
   const currentScreen = Nav.getCurrentRouteName(currentState);
   const prevScreen = Nav.getCurrentRouteName(prevState);
   if (prevScreen !== currentScreen) {
-    console.log("__NAV__", currentScreen.routeName)
+    console.log("__NAV__", currentScreen.routeName);
   }
-}
+};
 
 
 Nav["getCurrentRouteName"] = (navigationState: Object) => {
@@ -176,7 +194,7 @@ Nav["getCurrentRouteName"] = (navigationState: Object) => {
     return Nav.getCurrentRouteName(route);
   }
   return route;
-}
+};
 
 
 export default Nav;

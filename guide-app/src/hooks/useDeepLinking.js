@@ -3,14 +3,15 @@ import { decode } from "html-entities";
 import {
   showBottomBar,
   selectCurrentBottomBarTab,
-  selectCurrentSharingLink,
+  selectCurrentSharingLink
 } from "@actions/uiStateActions";
 import { eventCalendarURL } from "@data/urls";
-import useGuides from "@hooks/useGuides"
+import useGuides from "@hooks/useGuides";
 import LangService from "@services/langService";
 import Navigation from "@services/navigationService";
 import { DateUtils } from "@utils";
-import { DEEP_LINKING_URL } from "@data/endpoints"
+import { DEEP_LINKING_URL } from "@data/endpoints";
+
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 
 
@@ -21,16 +22,15 @@ const useDeepLinking = () => {
   const { linkToGuide } = useGuides();
 
   const linkingHome = async (params) => {
-    const { id_1 } = params;
+    const { type, id_1 } = params;
     if (id_1) {
       let item;
-      navigationCategories.map(category => {
-        let temp;
-        temp = category.items.find(group => group.id.toString() === id_1.toString());
-        if (temp) {
-          item = temp;
-        }
-      });
+      let category = navigationCategories[type === "group" ? 0 : 1];
+      let temp;
+      temp = category.items.find(group => group.id.toString() === id_1.toString());
+      if (temp) {
+        item = temp;
+      }
       dispatch(selectCurrentBottomBarTab(0));
       dispatch(showBottomBar(false));
       linkToGuide(item, params);
@@ -49,12 +49,12 @@ const useDeepLinking = () => {
         slug,
         dateStart,
         dateEnd,
-        id
+        id,
       } = foundEvent;
 
       const image = imageUrl ? { uri: imageUrl } : defaultImage;
       const decodedLocationTitle = decode(location.title, {
-        level: "xml",
+        level: "xml"
       });
       let hoursString;
       if (DateUtils.isFullDay(dateStart, dateEnd)) {
@@ -75,11 +75,19 @@ const useDeepLinking = () => {
       dispatch(selectCurrentSharingLink(sharePath));
 
       Navigation.navigate("CalendarDetailsScreen", {
-        event: {...foundEvent, eventUrl: eventUrl, hoursString: hoursString, imageUrl: image, title: decodedLocationTitle, date: eventLinkDay, dateString: dateString},
-        path: newPath,
+        event: {
+          ...foundEvent,
+          eventUrl: eventUrl,
+          hoursString: hoursString,
+          imageUrl: image,
+          title: decodedLocationTitle,
+          date: eventLinkDay,
+          dateString: dateString
+        },
+        path: newPath
       });
     }
-  }
+  };
   return { linkingHome, linkingCalendar };
 };
 
