@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Linking, ScrollView, Text, View, Image, StatusBar } from "react-native";
 import SharingService from "@services/SharingService";
+import Accordion from "@shared-components/Accordion";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import LangService from "@services/langService";
@@ -8,12 +9,23 @@ import styles from "./styles";
 import MapIcon from "@assets/images/map_icon_black.png";
 import ClockIcon from "@assets/images/clock_icon_black.png";
 import { Colors } from "@assets/styles";
-import Icon from "react-native-vector-icons/Entypo";
+import ArrowUp from "@assets/images/arrow_up";
 
 
 const CalendarDetailsScreen = ({ navigation }) => {
 
   const { event } = navigation.state.params;
+
+  const [activeSections, setActiveSections] = useState([]);
+  const [sections, setSections] = useState([]);
+
+
+  useEffect(() => {
+    let arr = [];
+    event?.location && arr.push({ id: "location", title: "LOCATION", content: "" });
+    event?.organizers?.length && arr.push({ id: "organizers", title: "ORGANIZERS", content: "" });
+    setSections(arr);
+  }, []);
 
 
   function displayLocation(location: string, dateString: string, hoursString: string) {
@@ -43,7 +55,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
     location: string,
     date: string,
     dateString: string,
-    hoursString: string,
+    hoursString: string
   ) {
 
     return (
@@ -66,7 +78,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
 
   function displayLink(
     link: any,
-    name: any,
+    name: any
   ) {
     return <LinkTouchable
       title={name}
@@ -74,6 +86,69 @@ const CalendarDetailsScreen = ({ navigation }) => {
         Linking.openURL(link);
       }}
     />;
+  }
+
+  const renderSectionTitle = () => {
+    return (
+      <View>
+        <Text></Text>
+      </View>
+    );
+  };
+
+
+  function renderHeader(section, index) {
+    const { title } = section;
+    console.log("section", section, activeSections);
+    return (
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionHeaderText}>{LangService.strings[title]}</Text>
+        <ArrowUp style={{ transform: [{ rotateX: activeSections.includes(index) ? "0deg" : "180deg" }] }} />
+      </View>
+    );
+  }
+
+  function renderContent(section, index) {
+    console.log("render", event?.organizers)
+    const { id } = section;
+    const content = () => {
+      switch (id) {
+        case "organizers":
+          return <View style={styles.organizersContent}>
+            {event?.organizers.map((organizer, index) => (
+              <View
+                key={index}
+                style={styles.organizer}
+              >
+                {organizer.organizer ? <Text style={styles.organizerName}>{organizer.organizer}</Text> : null}
+                {organizer.organizerPhone ? <Text style={styles.organizerPhone}>{organizer.organizerPhone}</Text> : null}
+                {organizer.organizerMail ? <Text style={styles.organizerMail}>{organizer.organizerMail}</Text> : null}
+                {organizer.organizerLink ? <Text style={styles.organizerLink}>{organizer.organizerLink}</Text> : null}
+              </View>
+            ))}
+          </View>;
+        case "location":
+          const { location } = event;
+          return <View style={styles.locationContent}>
+            {location?.title ? <Text style={styles.locationTitle}>{location.title}</Text> : null}
+            {location?.streetAddress && location?.streetAddress !== location?.title ? <Text style={styles.locationStreetAddress}>{location.streetAddress}</Text> : null}
+            {location?.city ? <Text style={styles.locationCity}>{location.city}</Text> : null}
+            {location?.postalCode ? <Text style={styles.locationPostal}>{location?.postalCode}</Text> : null}
+          </View>
+      }
+    };
+    return (
+      <View style={styles.sectionContent}>
+        {content()}
+      </View>
+    );
+  }
+
+  function renderFooter(section, index) {
+    return (
+      index + 1 !== sections.length ? <View style={styles.seperator} /> : null
+    );
+
   }
 
   return (
@@ -103,7 +178,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
             event?.title,
             event?.date,
             event?.dateString,
-            event?.hoursString,
+            event?.hoursString
           )}
           <View style={styles.articleContainer}>
             {event?.description
@@ -112,12 +187,22 @@ const CalendarDetailsScreen = ({ navigation }) => {
             {event?.eventUrl
               ? displayLink(
                 event?.eventUrl,
-                event?.name,
+                event?.name
               )
               : null}
-            <View style={styles.navGuideContainer}>
-              {/*{guideButtons(props)}*/}
-            </View>
+          </View>
+
+          <View style={styles.infoContainer}>
+            <Accordion
+              sections={sections}
+              activeSections={activeSections}
+              onChange={(active) => setActiveSections(active)}
+              renderSectionTitle={renderSectionTitle}
+              renderHeader={(e, index) => renderHeader(e, index)}
+              renderContent={(e, index) => renderContent(e, index)}
+              renderFooter={(e, index) => renderFooter(e, index)}
+              underlayColor={"transparent"}
+            />
           </View>
         </View>
       </ScrollView>
@@ -131,7 +216,7 @@ CalendarDetailsScreen["navigationOptions"] = screenProps => (
     headerRight: () => <View style={{ width: 36 }} />,
     headerLeft: () => <HeaderBackButton
       navigation={screenProps.navigation}
-      path={screenProps?.navigation?.state?.params?.path} />,
+      path={screenProps?.navigation?.state?.params?.path} />
   });
 
 export default CalendarDetailsScreen;

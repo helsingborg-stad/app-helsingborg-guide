@@ -27,8 +27,9 @@ const styles = StyleSheet.create({
     maxWidth: fullWidth,
     alignContent: "center",
     alignItems: "center",
+  },
 
-
+  touchable: {
   },
 
   safearea: {

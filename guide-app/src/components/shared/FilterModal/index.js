@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Keyboard, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -11,6 +11,8 @@ import Time from "./Time";
 import ArrowUp from "@assets/images/arrow_up";
 import styles from "./style";
 
+const fullWidth = Dimensions.get("window").width;
+const fullHeight = Dimensions.get("window").height;
 
 const options = {
   top: [
@@ -38,12 +40,12 @@ const sections = [
   {
     id: "details",
     title: "DETAILED_INFORMATION",
-    content: "lol",
+    content: "",
   },
   {
     id: "time",
     title: "TIME_AND_DATE",
-    content: "lol",
+    content: "",
   },
 ];
 
@@ -51,6 +53,7 @@ const sections = [
 const FilterModal = (props) => {
   const [selected, setSelected] = useState({ main: [], additional: [], dates: [], details: [] });
   const [activeSections, setActiveSections] = useState([]);
+  const [openDropdown, setOpenDropdown] = useState(false);
 
   const {
     isModalVisible,
@@ -130,7 +133,8 @@ const FilterModal = (props) => {
   }
 
   return (
-    <View style={isModalVisible && styles.container}>
+    <View
+      style={isModalVisible && styles.container}>
       <Modal
         isVisible={isModalVisible}
         coverScreen={coverScreen}
@@ -138,7 +142,13 @@ const FilterModal = (props) => {
         {...(backdropOpacity && { backdropOpacity: backdropOpacity })}
       >
         <SafeAreaView style={styles.safearea}>
-          <View style={styles.container}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => {
+              Keyboard.dismiss();
+              setOpenDropdown(false);
+            }}
+            style={styles.container}>
             <View style={styles.top}>
               <TouchableOpacity
                 style={styles.close}
@@ -175,6 +185,8 @@ const FilterModal = (props) => {
                       selected={selected.additional}
                       placeholder={LangService.strings.SEARCH_ALL_ACTIVITES}
                       onPress={(item) => setActivities(item, "additional")}
+                      open={openDropdown}
+                      setOpen={setOpenDropdown}
                     />
                   </View>
                   <View style={styles.seperator} />
@@ -193,7 +205,7 @@ const FilterModal = (props) => {
                 </View>
               </>
             </ScrollView>
-          </View>
+          </TouchableOpacity>
         </SafeAreaView>
       </Modal>
     </View>

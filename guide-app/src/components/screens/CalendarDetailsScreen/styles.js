@@ -166,13 +166,36 @@ export default StyleSheet.create({
     display: "flex",
     paddingHorizontal: 34,
     paddingVertical: 10,
-
   },
   article: {
     fontSize: 14,
     lineHeight: 20,
     flex: 1,
   },
+
+  infoContainer: {
+
+  },
+
+  sectionHeader: {
+    flexDirection: "row",
+    paddingHorizontal: 34,
+    marginVertical: 15,
+    alignItems: "center",
+  },
+
+  sectionHeaderText: {
+    fontSize: 18,
+    fontFamily: "Roboto",
+    fontWeight: "500",
+    color: "#2C2C2C",
+    paddingRight: 8,
+  },
+
+  sectionContent: {
+    paddingHorizontal: 34,
+  },
+
   shareBtn: {
     position: "absolute",
     bottom: 25,
@@ -192,4 +215,41 @@ export default StyleSheet.create({
     justifyContent: "space-around",
     width: "100%",
   },
+
+  locationTitle: {
+    fontWeight: "700",
+    paddingVertical: 5,
+  },
+
+  locationStreetAddress: {
+    paddingVertical: 5,
+  },
+
+  locationCity: {
+    paddingVertical: 5,
+  },
+
+  locationPostal: {
+    paddingVertical: 5,
+  },
+
+  organizerName: {
+    fontWeight: "700",
+    paddingVertical: 5,
+  },
+
+  organizerPhone: {
+    paddingVertical: 5,
+
+  },
+
+  organizerMail: {
+    paddingVertical: 5,
+
+  },
+
+  organizerLink: {
+    paddingVertical: 5,
+  },
+
 });

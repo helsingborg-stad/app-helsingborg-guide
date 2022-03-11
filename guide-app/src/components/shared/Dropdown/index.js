@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableWithoutFeedback, ScrollView } from "react-native";
+import { View, Text, TouchableWithoutFeedback, TouchableOpacity, ScrollView } from "react-native";
 import { Checkbox } from "react-native-paper";
 import ArrowUp from "@assets/images/arrow_up";
 import ArrowDown from "@assets/images/arrow_down";
@@ -15,16 +15,17 @@ const Dropdown = (props) => {
     onPress,
     textMode,
     placeholder,
+    open,
+    setOpen,
   } = props;
 
-  const [open, setOpen] = useState(false);
 
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{LangService.strings.SEARCH_ALL_ACTIVITES}</Text>
       <TouchableWithoutFeedback
-        onPress={() => setOpen(!open)}
+        onPress={() => setOpen ? setOpen(!open) : null}
       >
         <View style={styles.select}>
           <Text style={styles.placeholder}>{placeholder || ""}</Text>
@@ -37,9 +38,11 @@ const Dropdown = (props) => {
       {open && <View style={styles.options}>
         <ScrollView style={styles.scroll}>
         {options.map((option, index) => (
-          <View
+          <TouchableOpacity
+            activeOpacity={1}
             key={index}
             style={styles.item}
+            onPress={() => onPress(option)}
           >
             <Checkbox.Android
               key={index}
@@ -51,7 +54,7 @@ const Dropdown = (props) => {
             <Text style={[styles.itemText, selected.includes(option) && styles.bold]}>
               {textMode === "translate" ? LangService.strings[option] : option }
             </Text>
-          </View>
+          </TouchableOpacity>
         ))}
         </ScrollView>
       </View>
