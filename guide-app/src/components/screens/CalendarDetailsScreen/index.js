@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Linking, ScrollView, Text, View, Image, StatusBar } from "react-native";
+import { Linking, ScrollView, Text, View, Image, StatusBar, TouchableOpacity } from "react-native";
 import SharingService from "@services/SharingService";
 import Accordion from "@shared-components/Accordion";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
@@ -22,6 +22,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
 
   useEffect(() => {
     let arr = [];
+    event?.eventLink && arr.push({id: "information", title: "INFORMATION", content: ""})
     event?.location && arr.push({ id: "location", title: "LOCATION", content: "" });
     event?.organizers?.length && arr.push({ id: "organizers", title: "ORGANIZERS", content: "" });
     setSections(arr);
@@ -121,9 +122,9 @@ const CalendarDetailsScreen = ({ navigation }) => {
                 style={styles.organizer}
               >
                 {organizer.organizer ? <Text style={styles.organizerName}>{organizer.organizer}</Text> : null}
-                {organizer.organizerPhone ? <Text style={styles.organizerPhone}>{organizer.organizerPhone}</Text> : null}
-                {organizer.organizerMail ? <Text style={styles.organizerMail}>{organizer.organizerMail}</Text> : null}
-                {organizer.organizerLink ? <Text style={styles.organizerLink}>{organizer.organizerLink}</Text> : null}
+                {organizer.organizerPhone ? <TouchableOpacity onPress={() => Linking.openURL(`tel:${organizer.organizerPhone}`)}><Text style={styles.organizerPhone}>{organizer.organizerPhone}</Text></TouchableOpacity> : null}
+                {organizer.organizerMail ? <TouchableOpacity onPress={() => Linking.openURL(`mailto:${organizer.organizerMail}`)}><Text style={styles.organizerMail}>{organizer.organizerMail}</Text></TouchableOpacity> : null}
+                {organizer.organizerLink ? <TouchableOpacity onPress={() => Linking.openURL(organizer.organizerLink)}><Text style={styles.organizerLink}>{organizer.organizerLink}</Text></TouchableOpacity> : null}
               </View>
             ))}
           </View>;
@@ -135,6 +136,16 @@ const CalendarDetailsScreen = ({ navigation }) => {
             {location?.city ? <Text style={styles.locationCity}>{location.city}</Text> : null}
             {location?.postalCode ? <Text style={styles.locationPostal}>{location?.postalCode}</Text> : null}
           </View>
+
+        case "information":
+          const { eventLink, bookingLink } = event;
+          return <View style={styles.information}>
+            {eventLink ? <TouchableOpacity onPress={() => Linking.openURL(eventLink)}><Text style={styles.locationTitle}>{eventLink}</Text></TouchableOpacity> : null}
+            {bookingLink && eventLink !== bookingLink ? <TouchableOpacity onPress={() => Linking.openURL(bookingLink)}><Text style={styles.locationTitle}>{bookingLink}</Text></TouchableOpacity> : null}
+          </View>
+
+        default:
+          return;
       }
     };
     return (

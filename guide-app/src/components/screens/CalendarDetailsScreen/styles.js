@@ -174,7 +174,7 @@ export default StyleSheet.create({
   },
 
   infoContainer: {
-
+    marginBottom: 50,
   },
 
   sectionHeader: {
@@ -240,16 +240,18 @@ export default StyleSheet.create({
 
   organizerPhone: {
     paddingVertical: 5,
+    textDecorationLine: "underline",
 
   },
 
   organizerMail: {
     paddingVertical: 5,
-
+    textDecorationLine: "underline",
   },
 
   organizerLink: {
     paddingVertical: 5,
+    textDecorationLine: "underline",
   },
 
 });
