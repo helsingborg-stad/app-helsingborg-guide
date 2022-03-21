@@ -8,7 +8,7 @@ import LocationView from "@shared-components/LocationView";
 import { Colors, HeaderStyles } from "@assets/styles";
 import { selectCurrentGuide, showBottomBar, selectCurrentSharingLink } from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
-
+import useDeepLinking from "@hooks/useDeepLinking";
 
 type Props = {
   currentGuideGroup: GuideGroup,
@@ -36,7 +36,7 @@ const LocationScreen = (props: Props) => {
   } = props;
   const [redirect, setRedirect] = useState(navigation?.state?.params?.redirect)
   const [redirected, setRedirected] = useState(false)
-
+  const { clearLinking }  = useDeepLinking()
 
   useEffect(() => {
     return () => {
@@ -47,6 +47,12 @@ const LocationScreen = (props: Props) => {
     }
   },[])
 
+  useEffect(() => {
+    if(!navigation.isFocused()) {
+      clearLinking(navigation);
+    }
+  },[navigation.isFocused()])
+
 
   useEffect(() => {
     if (redirect?.length && redirect[0]) {
@@ -54,6 +60,10 @@ const LocationScreen = (props: Props) => {
       if (currentGuide && !redirected) {
         setRedirected(true);
         onPressGuide(currentGuide);
+      }
+      else {
+        clearLinking(navigation, ["redirect"]);
+        navigation.navigate("NotFound", {});
       }
     }
   },[redirect, currentGuides])

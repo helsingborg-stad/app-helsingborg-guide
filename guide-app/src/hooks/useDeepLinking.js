@@ -88,7 +88,13 @@ const useDeepLinking = () => {
       });
     }
   };
-  return { linkingHome, linkingCalendar };
+
+  const clearLinking = (navigation, params) => {
+      const objParams = params ? Object.fromEntries(params.map(key => [key, null])) : {}
+
+    navigation.setParams({id_1: null, id_2: null, id_3: null, ...objParams});
+  }
+  return { linkingHome, linkingCalendar, clearLinking };
 };
 
 export default useDeepLinking;

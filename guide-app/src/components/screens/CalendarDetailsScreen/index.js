@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Linking, ScrollView, Text, View, Image, StatusBar, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 import SharingService from "@services/SharingService";
 import Accordion from "@shared-components/Accordion";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
@@ -10,7 +11,6 @@ import MapIcon from "@assets/images/map_icon_black.png";
 import ClockIcon from "@assets/images/clock_icon_black.png";
 import { Colors } from "@assets/styles";
 import ArrowUp from "@assets/images/arrow_up";
-
 
 const CalendarDetailsScreen = ({ navigation }) => {
 
@@ -23,6 +23,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
   useEffect(() => {
     let arr = [];
     event?.eventLink && arr.push({id: "information", title: "INFORMATION", content: ""})
+    event?.bookingLink && arr.push({id: "booking", title: "BOOKING", content: ""})
     event?.location && arr.push({ id: "location", title: "LOCATION", content: "" });
     event?.organizers?.length && arr.push({ id: "organizers", title: "ORGANIZERS", content: "" });
     setSections(arr);
@@ -122,9 +123,9 @@ const CalendarDetailsScreen = ({ navigation }) => {
                 style={styles.organizer}
               >
                 {organizer.organizer ? <Text style={styles.organizerName}>{organizer.organizer}</Text> : null}
-                {organizer.organizerPhone ? <TouchableOpacity onPress={() => Linking.openURL(`tel:${organizer.organizerPhone}`)}><Text style={styles.organizerPhone}>{organizer.organizerPhone}</Text></TouchableOpacity> : null}
-                {organizer.organizerMail ? <TouchableOpacity onPress={() => Linking.openURL(`mailto:${organizer.organizerMail}`)}><Text style={styles.organizerMail}>{organizer.organizerMail}</Text></TouchableOpacity> : null}
-                {organizer.organizerLink ? <TouchableOpacity onPress={() => Linking.openURL(organizer.organizerLink)}><Text style={styles.organizerLink}>{organizer.organizerLink}</Text></TouchableOpacity> : null}
+                {organizer.organizerPhone ? <TouchableOpacity style={styles.organizerItem} onPress={() => Linking.openURL(`tel:${organizer.organizerPhone}`)}><Icon name={"call-sharp"} /><Text style={styles.organizerPhone}>{organizer.organizerPhone}</Text></TouchableOpacity> : null}
+                {organizer.organizerEmail ? <TouchableOpacity style={styles.organizerItem} onPress={() => Linking.openURL(`mailto:${organizer.organizerEmail}`)}><Icon name={"mail"} /><Text style={styles.organizerEmail}>{organizer.organizerEmail}</Text></TouchableOpacity> : null}
+                {organizer.organizerLink ? <TouchableOpacity  style={styles.organizerItem} onPress={() => Linking.openURL(organizer.organizerLink)}><Icon name={"link"} /><Text style={styles.organizerLink}>{organizer.organizerLink}</Text></TouchableOpacity> : null}
               </View>
             ))}
           </View>;
@@ -138,10 +139,15 @@ const CalendarDetailsScreen = ({ navigation }) => {
           </View>
 
         case "information":
-          const { eventLink, bookingLink } = event;
+          const { eventLink } = event;
           return <View style={styles.information}>
-            {eventLink ? <TouchableOpacity onPress={() => Linking.openURL(eventLink)}><Text style={styles.locationTitle}>{eventLink}</Text></TouchableOpacity> : null}
-            {bookingLink && eventLink !== bookingLink ? <TouchableOpacity onPress={() => Linking.openURL(bookingLink)}><Text style={styles.locationTitle}>{bookingLink}</Text></TouchableOpacity> : null}
+            {eventLink ? <TouchableOpacity style={styles.informationItem} onPress={() => Linking.openURL(eventLink)}><Icon name={"link"} /><Text style={styles.informationLink}>{eventLink}</Text></TouchableOpacity> : null}
+          </View>
+
+        case "booking":
+          const { bookingLink } = event;
+          return <View style={styles.booking}>
+            {bookingLink ? <TouchableOpacity style={styles.informationItem} onPress={() => Linking.openURL(bookingLink)}><Icon name={"link"} /><Text style={styles.informationLink}>{bookingLink}</Text></TouchableOpacity> : null}
           </View>
 
         default:
@@ -195,14 +201,7 @@ const CalendarDetailsScreen = ({ navigation }) => {
             {event?.description
               ? displayText(event.description)
               : null}
-            {event?.eventUrl
-              ? displayLink(
-                event?.eventUrl,
-                event?.name
-              )
-              : null}
           </View>
-
           <View style={styles.infoContainer}>
             <Accordion
               sections={sections}

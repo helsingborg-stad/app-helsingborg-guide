@@ -30,6 +30,7 @@ import {
 } from "@src/components/screens";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
 import ScanScreen from "@src/components/screens/ScanScreen";
+import NotFound from "@src/components/screens/NotFound";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -51,7 +52,6 @@ const GuideNavigator = createStackNavigator(
         header: () => null
       }
     },
-
 
     CalendarScreen: {
       screen: CalendarScreen,
@@ -91,7 +91,8 @@ const GuideNavigator = createStackNavigator(
     ScanScreen: { screen: ScanScreen },
     DebugScreen: { screen: DebugScreen },
     CategoryMapScreen: { screen: CategoryMapScreen },
-    CalendarDetailsScreen: { screen: CalendarDetailsScreen }
+    CalendarDetailsScreen: { screen: CalendarDetailsScreen },
+    NotFound: { screen: NotFound },
   },
   { defaultNavigationOptions: HeaderStyles.default }
 );
@@ -102,7 +103,7 @@ const RootNavigator = createStackNavigator(
     WelcomeScreen: { screen: WelcomeScreen, path: "" },
     MainScreen: { screen: GuideNavigator, path: "" },
     SearchObjectScreen: { screen: SearchObjectScreen, path: "" },
-    ARIntroductionScreen: { screen: ARIntroductionScreen, path: "" }
+    ARIntroductionScreen: { screen: ARIntroductionScreen, path: "" },
   },
   {
     headerMode: "none",

@@ -15,6 +15,7 @@ import {
 } from "@actions/uiStateActions";
 import { releaseAudioFile } from "@actions/audioActions";
 import { trackScreen } from "@utils/MatomoUtils";
+import useDeepLinking from "@hooks/useDeepLinking";
 
 
 declare type Props = {
@@ -32,6 +33,7 @@ const GuideScreen = (props) => {
   const { currentGuide, navigation, currentSharingLink, dispatchCurrentSharingLink } = props;
   const { contentObjects } = currentGuide;
   const { params } = navigation.state;
+  const { clearLinking } = useDeepLinking()
   const [redirect, setRedirect] = useState( params?.redirect?.length ? params?.redirect?.length === 2 ? params?.redirect[1] : params?.redirect[0] : false)
 
 
@@ -47,9 +49,16 @@ const GuideScreen = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if(!navigation.isFocused()) {
+      clearLinking(navigation);
+    }
+  },[navigation.isFocused()])
+
 
   useEffect(() => {
     if (redirect) {
+      console.log("THE RE", redirect)
       let index = -1;
       let object = contentObjects.find((contentObj, i) => {
         if (contentObj.id === redirect) {

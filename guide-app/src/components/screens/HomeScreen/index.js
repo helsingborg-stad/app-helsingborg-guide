@@ -69,7 +69,7 @@ type Props = {
 
 const HomeScreen = (props: Props) => {
   const { params } = props.navigation?.state;
-  const { linkingHome } = useDeepLinking();
+  const { linkingHome, clearLinking } = useDeepLinking();
   const { linkToGuide } = useGuides();
   const [segmentLayout, setSegmentLayout] = useState(0);
   const [showSettings, setShowSettings] = useState(false);
@@ -94,6 +94,9 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     if (navigation.isFocused()) {
       dispatchShowBottomBar(true);
+    }
+    else {
+      clearLinking(navigation);
     }
   }, [navigation.isFocused()]);
 
@@ -133,7 +136,7 @@ const HomeScreen = (props: Props) => {
     setShowSettings(!showSettings);
   };
 
-  if (showLoadingSpinner) {
+  if (showLoadingSpinner || id_1) {
     return <ActivityIndicator style={styles.loadingSpinner} />;
   }
 
