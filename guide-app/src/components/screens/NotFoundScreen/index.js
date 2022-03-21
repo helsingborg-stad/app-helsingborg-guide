@@ -9,7 +9,6 @@ import ArrowRight from "@assets/images/arrow_right_2";
 import styles from "./style";
 import { useSelector } from "react-redux";
 
-
 const NotFoundScreen = (props) => {
   const { navigation } = props;
   const { openedLink } = useSelector(s => s.uiState)
