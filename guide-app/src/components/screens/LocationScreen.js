@@ -63,7 +63,7 @@ const LocationScreen = (props: Props) => {
       }
       else {
         clearLinking(navigation, ["redirect"]);
-        navigation.navigate("NotFound", {});
+        navigation.navigate("NotFoundScreen", {link: redirect[0]});
       }
     }
   },[redirect, currentGuides])

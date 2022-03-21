@@ -81,3 +81,7 @@ export function selectCurrentHomeTab(tabIndex: number): Action {
 export function selectCurrentSharingLink(link: string): Action {
   return { type: "SELECT_CURRENT_SHARING_LINK", link };
 }
+
+export function selectOpenedLink(link: string): Action {
+  return { type: "SELECT_OPENED_LINK", link };
+}

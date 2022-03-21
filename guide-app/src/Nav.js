@@ -1,6 +1,7 @@
 // @flow
 import React, { Component, useEffect, useState } from "react";
 import { AppState, StatusBar, Platform, View, Linking, Alert } from "react-native";
+import { useDispatch } from "react-redux";
 import Orientation from "react-native-orientation-locker";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -28,9 +29,10 @@ import {
   WelcomeScreen,
   ARIntroductionScreen
 } from "@src/components/screens";
+import { selectOpenedLink } from "@actions/uiStateActions";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
 import ScanScreen from "@src/components/screens/ScanScreen";
-import NotFound from "@src/components/screens/NotFound";
+import NotFoundScreen from "@src/components/screens/NotFoundScreen";
 import ViewContainer from "@shared-components/view_container";
 import BottomBarView from "@shared-components/BottomBarView";
 import { Colors, HeaderStyles } from "@assets/styles";
@@ -92,7 +94,13 @@ const GuideNavigator = createStackNavigator(
     DebugScreen: { screen: DebugScreen },
     CategoryMapScreen: { screen: CategoryMapScreen },
     CalendarDetailsScreen: { screen: CalendarDetailsScreen },
-    NotFound: { screen: NotFound },
+    NotFoundScreen: {
+      screen: NotFoundScreen,
+      navigationOptions: {
+        headerTitle: "Not Found",
+        headerMode: "none",
+        header: () => null,
+      }},
   },
   { defaultNavigationOptions: HeaderStyles.default }
 );
@@ -127,6 +135,7 @@ type Props = {
 const Nav = (props: Props) => {
 
   const { onAppStarted, onAppBecameActive, onAppBecameInactive } = props;
+  const dispatch = useDispatch();
   const [homeLoaded, setHomeLoaded] = useState(false);
   const { url } = useInitialURL();
 
@@ -144,6 +153,7 @@ const Nav = (props: Props) => {
         let type = url?.split("/").includes("guide") ? "guide" : "group";
         let path = url?.split(url?.includes("guide") ? "guide" : "group")[1];
         let finalUrl = prefix + "home/" + type + path;
+        dispatch(selectOpenedLink(url))
         Linking.openURL(finalUrl);
       }
     }

@@ -50,6 +50,8 @@ export default function uiStateReducer(
       return { ...state, showBottomBar: action.visible };
     case "SELECT_CURRENT_SHARING_LINK":
       return { ...state, currentSharingLink: action.link };
+    case "SELECT_OPENED_LINK":
+      return { ...state, openedLink: action.link };
     default:
       return state;
   }
