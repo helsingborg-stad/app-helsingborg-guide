@@ -172,6 +172,23 @@ export default StyleSheet.create({
     flex: 1,
   },
 
+  bookingButton: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+    height: 35,
+    marginLeft: 34,
+    backgroundColor: "#a84c98",
+    borderRadius: 6,
+
+  },
+
+  bookingButtonText: {
+    color: Colors.white,
+    fontWeight: "bold",
+  },
+
   infoContainer: {
     marginBottom: 50,
   },
