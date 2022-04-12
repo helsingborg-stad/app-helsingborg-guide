@@ -23,15 +23,28 @@ type Props = {
 };
 
 const ImageCard = ({
-  image,
-  onPress,
-  title = null,
-  subTitle = null,
-  size = "compact",
-  icons = []
-}: Props) => {
+                     image,
+                     onPress,
+                     title = null,
+                     subTitle = null,
+                     size = "compact",
+                     icons = []
+                   }: Props) => {
   const height = size === "compact" ? 191 : 280;
 
+  const displayIcon = (icon) => {
+    switch (icon) {
+      case 13:
+        return "map";
+      case 14:
+        return "children";
+      default:
+        return;
+    }
+  };
+
+
+  console.log("THE ICONS", icons, displayIcon(icons[0]));
   return (
     <View style={styles.container}>
       <Touchable
@@ -40,27 +53,25 @@ const ImageCard = ({
         <Image style={[styles.image, { height }]} source={image} />
         <LinearGradient
           colors={["#00000000", "#000000bb"]}
-          style={styles.gradientContainer}
-        >
+          style={styles.gradientContainer}>
           <View style={styles.contentContainer}>
             <View style={styles.textContainer}>
               <Text style={styles.titleLabel}>{title}</Text>
               <Text style={styles.distance}>150m</Text>
             </View>
-            <View style={styles.iconContainer}>
-              {icons.map((icon, key) => (
-                <Image key={key} source={icon} style={styles.icon} />
-              ))}
-            </View>
           </View>
         </LinearGradient>
       </Touchable>
+        {icons.map((icon, key) => (
+          <Image key={key} source={icon} style={[styles.icon, styles[displayIcon(icon)]]} />
+        ))}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    position: "relative",
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -70,14 +81,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     backgroundColor: Colors.white,
-
     elevation: 5,
     marginBottom: 16
   },
   buttonContainer: {
     borderRadius: 10,
     overflow: "hidden",
-    position: "relative",
+    position: "relative"
   },
   image: {
     flex: 1,
@@ -97,46 +107,55 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-end",
+    alignItems: "flex-end"
   },
   textContainer: {
-    position: 'relative',
+    position: "relative",
     flexShrink: 1,
-    width: '100%',
+    width: "100%",
     height: 70,
-    backgroundColor: 'white',
-    justifyContent: "center",
+    backgroundColor: "white",
+    justifyContent: "center"
   },
-  iconContainer: {
-    flexShrink: 0,
-    flexDirection: "row",
-  },
+
   icon: {
     width: 32,
     height: 32,
-    marginLeft: 8,
   },
+
+  children: {
+    position: "absolute",
+    top: 0,
+    marginTop: 15,
+    marginLeft: 15,
+  },
+
+  map: {
+    position: "absolute",
+    bottom: 55,
+    right: 20,
+  },
+
   titleLabel: {
     fontSize: 20,
-    fontFamily: 'Roboto',
-    fontWeight: '500',
+    fontFamily: "Roboto",
+    fontWeight: "500",
     paddingLeft: 20,
     paddingBottom: 20,
-    color: 'rgba(41, 41, 41, 1)',
+    color: "rgba(41, 41, 41, 1)"
   },
   distance: {
-    fontFamily: 'Roboto',
-    fontWeight: '400',
+    fontFamily: "Roboto",
+    fontWeight: "400",
     letterSpacing: 0.91,
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     bottom: 0,
     padding: 15,
     fontSize: 16,
-    color: 'rgba(41, 41, 41, 1)',
+    color: "rgba(41, 41, 41, 1)"
   },
-  subTitleLabel: {
-  },
+  subTitleLabel: {},
   descriptionLabel: {},
   mapIcon: {
     width: 32,
