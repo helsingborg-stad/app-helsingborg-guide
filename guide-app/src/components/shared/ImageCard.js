@@ -107,13 +107,13 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
   },
   textContainer: {
     position: "relative",
     flexShrink: 1,
     width: "100%",
-    height: 70,
+    height: 80,
     backgroundColor: "white",
     justifyContent: "center"
   },
@@ -128,12 +128,30 @@ const styles = StyleSheet.create({
     top: 0,
     marginTop: 15,
     marginLeft: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    overflow: "visible",
   },
 
   map: {
     position: "absolute",
-    bottom: 55,
+    bottom: 65,
     right: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    overflow: "visible",
   },
 
   titleLabel: {
@@ -141,7 +159,8 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontWeight: "500",
     paddingLeft: 20,
-    paddingBottom: 20,
+    paddingBottom: 30,
+    paddingRight: 70,
     color: "rgba(41, 41, 41, 1)"
   },
   distance: {
