@@ -19,7 +19,7 @@ type Props = {
   title: string,
   subTitle?: string,
   icons?: ImageSourcePropType[],
-  onPress: () => void
+  onPress: () => void,
 };
 
 const ImageCard = ({
@@ -30,7 +30,7 @@ const ImageCard = ({
   size = "compact",
   icons = []
 }: Props) => {
-  const height = size === "compact" ? 253 : 360;
+  const height = size === "compact" ? 191 : 280;
 
   return (
     <View style={styles.container}>
@@ -45,14 +45,8 @@ const ImageCard = ({
           <View style={styles.contentContainer}>
             <View style={styles.textContainer}>
               <Text style={styles.titleLabel}>{title}</Text>
-
-              {subTitle !== null && (
-                <Text style={[styles.text, styles.subTitleLabel]}>
-                  {subTitle}
-                </Text>
-              )}
+              <Text style={styles.distance}>150m</Text>
             </View>
-
             <View style={styles.iconContainer}>
               {icons.map((icon, key) => (
                 <Image key={key} source={icon} style={styles.icon} />
@@ -83,7 +77,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     borderRadius: 10,
     overflow: "hidden",
-    position: "relative"
+    position: "relative",
   },
   image: {
     flex: 1,
@@ -104,28 +98,44 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
-    margin: 16
   },
   textContainer: {
-    marginRight: 16,
-    flexShrink: 1
+    position: 'relative',
+    flexShrink: 1,
+    width: '100%',
+    height: 70,
+    backgroundColor: 'white',
+    justifyContent: "center",
   },
   iconContainer: {
     flexShrink: 0,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   icon: {
     width: 32,
     height: 32,
-    marginLeft: 8
+    marginLeft: 8,
   },
-  titleLabel: { color: Colors.white, fontSize: 22, lineHeight: 26.5 },
+  titleLabel: {
+    fontSize: 20,
+    fontFamily: 'Roboto',
+    fontWeight: '500',
+    paddingLeft: 20,
+    paddingBottom: 20,
+    color: 'rgba(41, 41, 41, 1)',
+  },
+  distance: {
+    fontFamily: 'Roboto',
+    fontWeight: '400',
+    letterSpacing: 0.91,
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    padding: 15,
+    fontSize: 16,
+    color: 'rgba(41, 41, 41, 1)',
+  },
   subTitleLabel: {
-    color: Colors.gray9,
-    fontSize: 13,
-    lineHeight: 13,
-    letterSpacing: 1,
-    marginTop: 6
   },
   descriptionLabel: {},
   mapIcon: {
