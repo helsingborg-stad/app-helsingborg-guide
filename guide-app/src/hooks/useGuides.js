@@ -9,11 +9,11 @@ import {
   selectCurrentSharingLink
 } from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
-import { DEEP_LINKING_URL } from "@data/endpoints"
+import { DEEP_LINKING_URL } from "@data/endpoints";
 
 const useGuides = () => {
   const dispatch = useDispatch();
-  const { navigation, guideGroups, guides } = useSelector(s => s );
+  const { navigation, guideGroups, guides } = useSelector(s => s);
   const { navigationCategories, currentLanguage } = navigation;
 
   const linkToGuide = (item, params) => {
@@ -22,8 +22,8 @@ const useGuides = () => {
     switch (item?.type) {
       case "guidegroup":
         dispatch(selectCurrentGuideGroup(item.id));
-        sharePath += `group/${item.id}`
-        dispatch(selectCurrentSharingLink(sharePath))
+        sharePath += `group/${item.id}`;
+        dispatch(selectCurrentSharingLink(sharePath));
         if (item?.guideGroup) {
           const title = item?.guideGroup?.name;
           const slug = item?.guideGroup?.slug;
@@ -33,7 +33,7 @@ const useGuides = () => {
             title,
             bottomBarOnUnmount: true,
             path: path,
-            ...(params?.id_2 && { redirect: [params?.id_2, params?.id_3] }),
+            ...(params?.id_2 && { redirect: [params?.id_2, params?.id_3] })
           });
           dispatch(showBottomBar(false));
         }
@@ -42,9 +42,9 @@ const useGuides = () => {
       case "guide": {
         const { guide } = item;
         if (guide) {
-          sharePath += `guide/${guide.id}`
-          dispatch(selectCurrentSharingLink(sharePath))
-          dispatch(selectCurrentGuideByID(guide.id))
+          sharePath += `guide/${guide.id}`;
+          dispatch(selectCurrentSharingLink(sharePath));
+          dispatch(selectCurrentGuideByID(guide.id));
           const type = guide?.guideType;
           if (type === "guide") {
             const slug = guide?.slug;
@@ -55,7 +55,7 @@ const useGuides = () => {
               title: title,
               bottomBarOnUnmount: true,
               path: path,
-              ...(params?.id_2 && { redirect: [params?.id_1, params?.id_2]}),
+              ...(params?.id_2 && { redirect: [params?.id_1, params?.id_2] }),
               sharePath: sharePath
 
             });
@@ -81,9 +81,9 @@ const useGuides = () => {
       case "interactive_guide":
         const { interactiveGuide } = item;
         if (interactiveGuide) {
-          sharePath += `guide/${interactiveGuide.id}`
-          dispatch(selectCurrentSharingLink(sharePath))
-          dispatch(selectCurrentGuideByID(interactiveGuide.id))
+          sharePath += `guide/${interactiveGuide.id}`;
+          dispatch(selectCurrentSharingLink(sharePath));
+          dispatch(selectCurrentGuideByID(interactiveGuide.id));
           const title = interactiveGuide?.title;
           const path = `/tours/${title}`;
           trackScreen(path, path);
@@ -99,10 +99,7 @@ const useGuides = () => {
       default:
         break;
     }
-  }
-
-
-
+  };
 
   const getGuides = () => {
     if (navigationCategories.length) {
@@ -121,18 +118,18 @@ const useGuides = () => {
           }
         });
 
-        if(!guides.items.length && _guides.length) {
-          dispatch(fetchGuides((currentLanguage || "sv"), _guides))
+        if (!guides.items.length && _guides.length) {
+          dispatch(fetchGuides((currentLanguage || "sv"), _guides));
         }
-        if(!guideGroups.items.length && _guideGroups.length) {
-          dispatch(fetchGuideGroups((currentLanguage || "sv"), _guideGroups))
+        if (!guideGroups.items.length && _guideGroups.length) {
+          dispatch(fetchGuideGroups((currentLanguage || "sv"), _guideGroups));
         }
-      })
+      });
     }
-  }
+  };
 
-  return { linkToGuide, getGuides }
+  return { linkToGuide, getGuides };
 
-}
+};
 
 export default useGuides;

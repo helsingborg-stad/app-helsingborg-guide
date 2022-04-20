@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, StatusBar, Linking } from "react-native";
 import Config from "react-native-config";
 import { HeaderStyles } from "@assets/styles";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LangService from "@services/langService";
-import Icon from "react-native-vector-icons/Ionicons";
 import ArrowRight from "@assets/images/arrow_right_2";
 import styles from "./style";
 import { useSelector } from "react-redux";
@@ -48,7 +47,8 @@ const NotFoundScreen = (props) => {
 };
 
 NotFoundScreen["navigationOptions"] = ({ navigation }) => {
-  const { title, path } = navigation.state.params;
+  const title = navigation?.state?.params?.title || "";
+  const path = navigation?.state?.params?.path || "";
   return {
     ...HeaderStyles.noElevation,
     title,

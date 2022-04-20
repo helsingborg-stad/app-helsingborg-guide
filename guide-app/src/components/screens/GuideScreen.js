@@ -58,7 +58,6 @@ const GuideScreen = (props) => {
 
   useEffect(() => {
     if (redirect) {
-      console.log("THE RE", redirect)
       let index = -1;
       let object = contentObjects.find((contentObj, i) => {
         if (contentObj.id === redirect) {
@@ -71,6 +70,7 @@ const GuideScreen = (props) => {
       }
       else {
         setRedirect(false)
+        navigation.navigate("NotFoundScreen");
       }
     }
   }, [redirect]);

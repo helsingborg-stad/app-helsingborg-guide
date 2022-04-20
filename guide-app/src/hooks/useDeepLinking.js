@@ -31,6 +31,9 @@ const useDeepLinking = () => {
       if (temp) {
         item = temp;
       }
+      else {
+        Navigation.navigate("NotFoundScreen");
+      }
       dispatch(selectCurrentBottomBarTab(0));
       dispatch(showBottomBar(false));
       linkToGuide(item, params);

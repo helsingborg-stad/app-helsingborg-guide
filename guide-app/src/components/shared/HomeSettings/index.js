@@ -65,11 +65,11 @@ const HomeSettings = (props) => {
           <View style={styles.search}>
             <View style={styles.searchTop}>
               <Text style={styles.searchTopLeft}>{LangService.strings.FILTER_TITLE}</Text>
-              <TouchableOpacity
-                onPress={() => setShowFilter(true)}
-              >
-                <Text style={styles.searchTopRight}>{LangService.strings.FILTER}</Text>
-              </TouchableOpacity>
+              {/*<TouchableOpacity*/}
+              {/*  onPress={() => setShowFilter(true)}*/}
+              {/*>*/}
+              {/*  <Text style={styles.searchTopRight}>{LangService.strings.FILTER}</Text>*/}
+              {/*</TouchableOpacity>*/}
             </View>
             <View style={[styles.searchBottom]}>
               <TextInput
