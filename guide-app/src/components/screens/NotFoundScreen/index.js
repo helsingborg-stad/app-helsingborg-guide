@@ -7,18 +7,19 @@ import LangService from "@services/langService";
 import ArrowRight from "@assets/images/arrow_right_2";
 import styles from "./style";
 import { useSelector } from "react-redux";
+import CityBackground from "@assets/images/city.svg";
 
 const NotFoundScreen = (props) => {
   const { navigation } = props;
-  const { openedLink } = useSelector(s => s.uiState)
+  const { openedLink } = useSelector(s => s.uiState);
   const support = Config.SUPPORT_LINK;
 
   const toSupport = () => {
     Linking.openURL(`mailto:${support}?subject=${
       LangService.strings.CONTACT_MAIL_SUBJECT}
       &body=There was a problem opening this link in the app:
-     ${openedLink}`)
-  }
+     ${openedLink}`);
+  };
 
   return (
     <>
@@ -37,8 +38,10 @@ const NotFoundScreen = (props) => {
               style={styles.notFoundBack}>
               <ArrowRight />
               <Text style={styles.notFoundBackText}>{LangService.strings.GO_BACK}</Text>
-
             </TouchableOpacity>
+          </View>
+          <View style={styles.city}>
+            <CityBackground />
           </View>
         </View>
       </View>

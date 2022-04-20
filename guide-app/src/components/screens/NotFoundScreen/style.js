@@ -111,6 +111,14 @@ const style = StyleSheet.create({
     paddingLeft: 5,
   },
 
+  city: {
+    position: 'absolute',
+    bottom: 0,
+    flex: 1,
+    width: '100%',
+    maxWidth: '100%',
+  }
+
 });
 
 export default style;
