@@ -258,6 +258,7 @@ function mapStateToProps(state: RootState) {
 
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 
+  console.log("Navigation category labels", navigationCategories)
 
   return {
     categories,

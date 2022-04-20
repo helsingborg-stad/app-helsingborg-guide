@@ -10,31 +10,50 @@ const ICON_SIZE = 20;
 
 const styles = StyleSheet.create({
   item: {
-    flex: 1,
     flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingRight: 30,
+    marginLeft: 'auto',
+  },
+
+  mainContainer: {
+    marginTop: 40,
+    marginBottom: 20,
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: 46,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    borderColor: Colors.listBackgroundColor
   },
-  mainContainer: {
-    maxWidth: 120,
-    flexDirection: "row",
+  iconContainer: {
+    backgroundColor: Colors.themeSecondary,
+    padding: 10,
+    borderRadius: 20,
+    flex: 0,
+    alignItems: "center",
     justifyContent: "center",
-    alignItems: "center"
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
-  iconContainer: { flex: 0, alignItems: "center" },
-  icon: {},
-  titleContainer: { flex: 0, alignItems: "center", paddingLeft: 8 },
+  icon: {
+  },
+  titleContainer: {
+    marginTop: 5,
+    flex: 0,
+    alignItems: "center",
+  },
   title: {
-    color: Colors.themePrimary,
+    color: Colors.black,
     fontWeight: "500",
     fontSize: 16,
-    lineHeight: 22.0
+    lineHeight: 22.0,
+    textAlign: "center",
   },
   disabledText: {
     color: Colors.gray8

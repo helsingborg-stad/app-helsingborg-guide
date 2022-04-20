@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
-import ImageView from "@shared-components/ImageView";
 import Touchable from "@shared-components/Touchable";
 
 
@@ -30,7 +29,7 @@ const ImageCard = ({
                      size = "compact",
                      icons = []
                    }: Props) => {
-  const height = size === "compact" ? 191 : 280;
+  const height = size === "compact" ? 191 : 258;
 
   const displayIcon = (icon) => {
     switch (icon) {
@@ -44,27 +43,25 @@ const ImageCard = ({
   };
 
 
-  console.log("THE ICONS", icons, displayIcon(icons[0]));
   return (
     <View style={styles.container}>
       <Touchable
         style={styles.buttonContainer} onPress={onPress}>
-        {/*<ImageView style={[styles.image, { height }]} source={image} />*/}
         <Image style={[styles.image, { height }]} source={image} />
         <LinearGradient
           colors={["#00000000", "#000000bb"]}
           style={styles.gradientContainer}>
-          <View style={styles.contentContainer}>
-            <View style={styles.textContainer}>
-              <Text style={styles.titleLabel}>{title}</Text>
-              <Text style={styles.distance}>150m</Text>
-            </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.titleLabel}>{title}</Text>
+            <Text style={styles.distance}>150m</Text>
           </View>
         </LinearGradient>
       </Touchable>
-        {icons.map((icon, key) => (
-          <Image key={key} source={icon} style={[styles.icon, styles[displayIcon(icon)]]} />
-        ))}
+      {icons.map((icon, key) => (
+        <View style={styles[displayIcon(icon)]}>
+          <Image key={key} source={icon} style={styles.icon} />
+        </View>
+      ))}
     </View>
   );
 };
@@ -103,45 +100,42 @@ const styles = StyleSheet.create({
     right: 0,
     paddingTop: 100
   },
-  contentContainer: {
-    flexGrow: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-  },
+  contentContainer: {},
   textContainer: {
     position: "relative",
     flexShrink: 1,
     width: "100%",
-    height: 80,
+    height: 77,
     backgroundColor: "white",
-    justifyContent: "center"
+    justifyContent: "flex-start",
+    paddingTop: 10
   },
 
   icon: {
     width: 32,
-    height: 32,
+    height: 32
   },
 
   children: {
     position: "absolute",
     top: 0,
-    marginTop: 15,
-    marginLeft: 15,
+    marginTop: 20,
+    marginLeft: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2
     },
+    padding: 0,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    overflow: "visible",
+    overflow: "visible"
   },
 
   map: {
     position: "absolute",
-    bottom: 65,
+    bottom: 60,
     right: 20,
     shadowColor: "#000",
     shadowOffset: {
@@ -151,7 +145,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    overflow: "visible",
+    overflow: "visible"
   },
 
   titleLabel: {
@@ -159,7 +153,6 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontWeight: "500",
     paddingLeft: 20,
-    paddingBottom: 30,
     paddingRight: 70,
     color: "rgba(41, 41, 41, 1)"
   },

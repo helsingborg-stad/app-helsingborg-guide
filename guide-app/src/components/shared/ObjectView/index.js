@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Text, Linking,  } from "react-native";
+import { SafeAreaView, View, Text, Linking } from "react-native";
 import Icon from "react-native-vector-icons/Entypo";
 import { PanGestureHandler, ScrollView } from "react-native-gesture-handler";
 
@@ -15,7 +15,6 @@ import LangService from "@services/langService";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
 import { trackScreen } from "@utils/MatomoUtils";
-
 
 
 type Props = {
@@ -44,10 +43,10 @@ function displayID(searchableID: string) {
 function displayTitle(
   title: string,
   searchableID: string,
-  guideType: ?GuideType,
+  guideType: ?GuideType
 ) {
   return (
-    <View>
+    <View style={styles.titleWrapper}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
       </View>
@@ -62,7 +61,7 @@ function displayText(description?: string) {
 
 function displayLinks(
   links: Link[],
-  onGoToLink: (url: string, title?: string) => void,
+  onGoToLink: (url: string, title?: string) => void
 ) {
   return links.map((item, index) => (
     <LinkTouchable
@@ -82,7 +81,7 @@ function displayButtonsBar(
   audioButtonDisabled: boolean,
   videoButtonDisabled: boolean,
   loadAudioFile: () => void,
-  onGoToVideo: (video?: MediaContent) => void,
+  onGoToVideo: (video?: MediaContent) => void
 ) {
   const audioBtnInvisible = !audio || !audio.url;
   const videoBtnInvisible = !video || !video.url;
@@ -98,7 +97,7 @@ function displayButtonsBar(
         loadAudioFile();
       }}
       name="headphones"
-      color={Colors.themeSecondary}
+      color={Colors.white}
       size={18}
       text={LangService.strings.LISTEN}
       view="row"
@@ -112,7 +111,7 @@ function displayButtonsBar(
         onGoToVideo(video);
       }}
       name="play-box-outline"
-      color={Colors.themeSecondary}
+      color={Colors.white}
       size={18}
       text={LangService.strings.VIDEO}
       view="row"
@@ -146,7 +145,7 @@ const guideButtons = (props) => {
         style={{ opacity: order > 0 ? 1 : 0.4 }}
         onPress={order > 0 ? () => {
           let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order - 1].title}`;
-          trackScreen(newPath, newPath)
+          trackScreen(newPath, newPath);
           scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
           panToIndex && panToIndex(order - 1);
@@ -167,8 +166,8 @@ const guideButtons = (props) => {
           {width ? <View style={[styles.navGuideBarFilled,
             {
               transform: [
-                { translateX: -width + Math.round(width * ((order + 1) / array.length)) },
-              ],
+                { translateX: -width + Math.round(width * ((order + 1) / array.length)) }
+              ]
             }]} /> : null}
         </View>
       </View>
@@ -179,7 +178,7 @@ const guideButtons = (props) => {
         style={{ opacity: (order + 1) !== array.length ? 1 : 0.5 }}
         onPress={(order + 1) !== array.length ? () => {
           let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order + 1].title}`;
-          trackScreen(newPath, newPath)
+          trackScreen(newPath, newPath);
           scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
           panToIndex && panToIndex(order + 1);
@@ -215,7 +214,18 @@ const onHorizontalSwipe = (evt, swiped, setSwiped) => {
  * Underlying sharingservice needs a reference to a Component instance
  */
 const ObjectView = (props: Props) => {
-  const { guideId, swipeable, scrollable, panToIndex, selectObject, navigation, array, order, onSwiperIndexChanged, path } = props;
+  const {
+    guideId,
+    swipeable,
+    scrollable,
+    panToIndex,
+    selectObject,
+    navigation,
+    array,
+    order,
+    onSwiperIndexChanged,
+    path
+  } = props;
   const [swiped, setSwiped] = useState(false);
   const ref = React.createRef();
 
@@ -231,7 +241,7 @@ const ObjectView = (props: Props) => {
       if (swiped === "left") {
         if ((order + 1) !== array.length) {
           let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order + 1].title}`;
-          trackScreen(newPath, newPath)
+          trackScreen(newPath, newPath);
           scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
           panToIndex && panToIndex(order + 1);
@@ -240,7 +250,7 @@ const ObjectView = (props: Props) => {
             currentGuide: array[order + 1],
             order: order + 1,
             array: array,
-            swipeable: true,
+            swipeable: true
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -249,7 +259,7 @@ const ObjectView = (props: Props) => {
       if (swiped === "right") {
         if (order > 0) {
           let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order - 1].title}`;
-          trackScreen(newPath, newPath)
+          trackScreen(newPath, newPath);
           scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
           panToIndex && panToIndex(order - 1);
@@ -258,7 +268,7 @@ const ObjectView = (props: Props) => {
             currentGuide: array[order - 1],
             array: array,
             order: order - 1,
-            swipeable: true,
+            swipeable: true
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -295,19 +305,21 @@ const ObjectView = (props: Props) => {
             activeOffsetX={[-10, 10]}
             onGestureEvent={(e) => swipeable ? onHorizontalSwipe(e, swiped, setSwiped) : null}>
             <View style={styles.bodyContainer}>
-              {displayTitle(
-                props.contentObject.title,
-                props.contentObject.searchableId,
-                props.guideType,
-              )}
-              {displayButtonsBar(
-                props.contentObject.audio,
-                props.contentObject.video,
-                props.audioButtonDisabled,
-                props.videoButtonDisabled,
-                props.loadAudioFile,
-                props.onGoToVideo,
-              )}
+              <View style={styles.infoContainer}>
+                {displayTitle(
+                  props.contentObject.title,
+                  props.contentObject.searchableId,
+                  props.guideType
+                )}
+                {displayButtonsBar(
+                  props.contentObject.audio,
+                  props.contentObject.video,
+                  props.audioButtonDisabled,
+                  props.videoButtonDisabled,
+                  props.loadAudioFile,
+                  props.onGoToVideo
+                )}
+              </View>
               <View style={styles.articleContainer}>
                 {props.contentObject.description
                   ? displayText(props.contentObject.description)
@@ -315,7 +327,7 @@ const ObjectView = (props: Props) => {
                 {props.contentObject.links
                   ? displayLinks(
                     props.contentObject.links,
-                    props.onGoToLink,
+                    props.onGoToLink
                   )
                   : null}
               </View>

@@ -16,11 +16,12 @@ export default class ButtonsBar extends Component<Props> {
 
 const styles = StyleSheet.create({
   bar: {
+    flex: 1,
     minHeight: 60,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     // padding:10,
-    backgroundColor: "white"
+    backgroundColor: "white",
   }
 });

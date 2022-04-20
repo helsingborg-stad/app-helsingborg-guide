@@ -9,86 +9,91 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "stretch",
     backgroundColor: Colors.white,
-    overflow: 'visible',
+    overflow: "visible"
   },
 
   container: {
     ...StyleSheet.absoluteFillObject,
-    flexDirection: 'column',
-    flex: 1,
+    flexDirection: "column",
+    flex: 1
   },
   imageContainer: {
     flex: 1,
     width: "100%",
     height: "auto",
-    aspectRatio: 16 / 9,
+    aspectRatio: 16 / 9
   },
   bodyContainer: {
-    minHeight: '100%',
+    minHeight: "100%",
     flex: 1,
-    alignItems: "stretch",
+    alignItems: "stretch"
   },
   scrollView: {
     paddingBottom: 70,
-    flex: 1,
+    flex: 1
   },
-  titleContainer: {
+  infoContainer: {
+    flexDirection: "row"
+  },
+
+  titleWrapper: {
     flex: 2,
-    paddingHorizontal: 34,
-    paddingTop: 12,
-    paddingBottom: 4,
   },
+
+  titleContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 12,
+  },
+
   title: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
-      fontSize: 24,
-      fontWeight: "300",
-      lineHeight: 30,
-    },
+      fontSize: 20,
+      fontWeight: "400",
+      lineHeight: 25
+    }
   ]),
   idContainer: {
-    flex: 1,
-    paddingHorizontal: 34,
-    paddingBottom: 4,
+    paddingHorizontal: 20,
   },
   idText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
     {
       fontSize: 16,
-      fontWeight: "400",
-      lineHeight: 21,
-      color: Colors.gray3,
-    },
+      fontWeight: "500",
+      lineHeight: 22,
+      color: Colors.themeSecondary
+    }
   ]),
   articleContainer: {
     flex: 4,
     display: "flex",
-    paddingHorizontal: 34,
+    paddingHorizontal: 20,
     paddingVertical: 10,
-
+    backgroundColor: 'rgba(248, 248, 248, 1)',
   },
   article: {
     fontSize: 14,
     lineHeight: 20,
-    flex: 1,
+    flex: 1
   },
   shareBtn: {
     position: "absolute",
     bottom: 25,
     right: 25,
-    zIndex: 50,
+    zIndex: 50
   },
   navGuideContainer: {
     justifyContent: "flex-end",
     zIndex: 100,
-    backgroundColor: 'white',
-    marginTop: 20,
+    backgroundColor: "white",
+    marginTop: 20
 
   },
   navGuideWrapper: {
     flexDirection: "column",
     alignItems: "center",
-    width: "100%",
+    width: "100%"
   },
 
   navGuide: {
@@ -96,29 +101,29 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    width: "100%",
+    width: "100%"
   },
 
   navGuideBarWrapper: {
-    width: '60%',
-    flexDirection: 'column',
+    width: "60%",
+    flexDirection: "column"
   },
   navGuideBarStep: {
-    textAlign: 'center',
+    textAlign: "center"
   },
 
   navGuideBar: {
     height: 29,
-    backgroundColor: '#EAEAEA',
+    backgroundColor: "#EAEAEA",
     borderRadius: 20,
-    overflow: 'hidden',
+    overflow: "hidden"
   },
 
   navGuideBarFilled: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#711A5B',
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#711A5B",
     borderRadius: 20,
-    overflow: 'hidden',
-  },
+    overflow: "hidden"
+  }
 });
