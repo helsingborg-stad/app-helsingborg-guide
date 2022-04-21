@@ -5,12 +5,12 @@ import { HeaderStyles } from "@assets/styles";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LangService from "@services/langService";
 import ArrowRight from "@assets/images/arrow_right_2";
+import CityBackground from "@assets/images/city.svg";
+import NavigatorService from "@services/navigationService";
 import styles from "./style";
 import { useSelector } from "react-redux";
-import CityBackground from "@assets/images/city.svg";
 
-const NotFoundScreen = (props) => {
-  const { navigation } = props;
+const NotFoundScreen = () => {
   const { openedLink } = useSelector(s => s.uiState);
   const support = Config.SUPPORT_LINK;
 
@@ -34,7 +34,7 @@ const NotFoundScreen = (props) => {
             <Text style={styles.notFoundContact}>{LangService.strings.NOT_FOUND_CONTACT}</Text>
             <TouchableOpacity onPress={toSupport}><Text style={styles.notFoundMail}>kontaktcenter@helsingborg.se</Text></TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate("HomeScreen")}
+              onPress={() => NavigatorService.reset("HomeScreen")}
               style={styles.notFoundBack}>
               <ArrowRight />
               <Text style={styles.notFoundBackText}>{LangService.strings.GO_BACK}</Text>

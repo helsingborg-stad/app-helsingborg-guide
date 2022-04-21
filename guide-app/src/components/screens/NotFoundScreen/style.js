@@ -75,7 +75,6 @@ const style = StyleSheet.create({
     fontFamily: "Roboto",
     color: Colors.white,
     textAlign: "center",
-
   },
 
   notFoundMail: {

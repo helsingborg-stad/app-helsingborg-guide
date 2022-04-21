@@ -3,7 +3,7 @@
 import {
   API_BASE_URL,
   DEPRECATED_API_BASE_URL,
-  GROUP_ID,
+  GROUP_ID
 } from "@data/endpoints";
 import { validate } from "./JSONValidator";
 import { DateUtils } from "@utils";
@@ -21,7 +21,8 @@ async function fetchJSON(
   if (params) {
     url += params;
   }
-  
+
+
   console.log("__API_URL__", url);
 
   const response = await fetch(url);
@@ -49,6 +50,7 @@ function validateData(data: any, scheme: string): any[] {
 
   return validatedData;
 }
+
 function idsToParamString(ids: number[]): ?string {
   if (ids.length === 0) {
     return null;
@@ -74,7 +76,7 @@ async function getGuideGroups(
   }
 
   const params = idsToParamString(ids);
-  const json = await fetchJSON("guidegroups", langCode || 'sv', params);
+  const json = await fetchJSON("guidegroups", langCode || "sv", params);
   const fetchedGuideGroups: GuideGroup[] = validateData(json, "guideGroup");
 
   return fetchedGuideGroups;
@@ -87,7 +89,7 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
 
   const params = idsToParamString(ids);
 
-  const json = await fetchJSON("guides", langCode || 'sv', params);
+  const json = await fetchJSON("guides", langCode || "sv", params);
   const fetchedGuides: Guide[] = validateData(json, "guide");
 
   return fetchedGuides;
@@ -103,7 +105,7 @@ async function getInteractiveGuides(
 
   const params = idsToParamString(ids);
 
-  const json = await fetchJSON("interactive_guides", langCode || 'sv', params);
+  const json = await fetchJSON("interactive_guides", langCode || "sv", params);
   const fetchedGuides: InteractiveGuide[] = validateData(
     json,
     "interactiveGuide"
@@ -117,7 +119,7 @@ async function getGuidesForGuideGroup(
   guideGroupId: number
 ): Promise<Guide[]> {
   const params = `&guideGroupId=${guideGroupId}`;
-  const json = await fetchJSON("guides", langCode || 'sv', params);
+  const json = await fetchJSON("guides", langCode || "sv", params);
   const fetchedGuides: Guide[] = validateData(json, "guide");
 
   return fetchedGuides;
@@ -127,7 +129,7 @@ export async function getNavigation(
   langCode: string
 ): Promise<NavigationCategory[]> {
   const params = `&userGroupId=${GROUP_ID}`;
-  const json = await fetchJSON("navigations", langCode || 'sv', params);
+  const json = await fetchJSON("navigations", langCode || "sv", params);
   const fetchedNavigation: NavigationCategory[] = validateData(
     json,
     "navigationCategory"
@@ -141,13 +143,13 @@ export async function getEvents(
   dateStart: Date,
   dateEnd: Date,
   perPage: any,
-  page: any,
+  page: any
 ): Promise<Event[]> {
-  console.log("per page", perPage, "page", page)
+  console.log("per page", perPage, "page", page);
   const dateStartFmt = DateUtils.shortDate(dateStart);
   const dateEndFmt = DateUtils.shortDate(dateEnd);
   const params = `&userGroupId=${GROUP_ID}&dateStart=${dateStartFmt}&dateEnd=${dateEndFmt}&perPage=${perPage}&page=${page}`;
-  const json = await fetchJSON("events", langCode || 'sv', params);
+  const json = await fetchJSON("events", langCode || "sv", params);
   const fetchedEvents: Event[] = validateData(json, "event");
 
   return fetchedEvents;
@@ -159,5 +161,5 @@ export default {
   getGuides,
   getInteractiveGuides,
   getGuidesForGuideGroup,
-  getNavigation,
+  getNavigation
 };

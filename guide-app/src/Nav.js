@@ -1,6 +1,6 @@
 // @flow
-import React, { Component, useEffect, useState } from "react";
-import { AppState, StatusBar, Platform, View, Linking, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
+import { AppState, StatusBar, Platform, Linking } from "react-native";
 import { useDispatch } from "react-redux";
 import Orientation from "react-native-orientation-locker";
 import { createAppContainer } from "react-navigation";
