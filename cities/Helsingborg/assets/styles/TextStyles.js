@@ -27,6 +27,13 @@ export default StyleSheet.create({
     fontSize: 16,
     lineHeight: 22.0,
   },
+  descriptionSpaced: {
+    ...defaultFont,
+    fontSize: 12,
+    fontWeight: "500",
+    letterSpacing: 0.91,
+    lineHeight: 18,
+  },
   headerTitleLabel: {
     ...defaultFont,
     alignSelf: "center",

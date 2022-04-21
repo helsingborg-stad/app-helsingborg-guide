@@ -18,5 +18,10 @@ export default StyleSheet.create({
     width: "100%",
     height: 30,
     bottom: 0
-  }
+  },
+  collapse: {
+    marginVertical: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 });

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import styles from "./styles";
 import LangService from "@services/langService";
+import ArrowUp from "@assets/images/arrow_up.svg";
 
 const alphaGradient = require("@assets/images/gradient.png");
 
@@ -72,7 +73,9 @@ class ExpandableView extends Component<Props, State> {
             <Text style={styles.readMoreText}>
               {LangService.strings.READ_MORE}
             </Text>
-          ) : null}
+          ) : overflow ? <View style={styles.collapse}>
+            <ArrowUp />
+          </View> : null}
         </TouchableOpacity>
       </View>
     );

@@ -4,8 +4,8 @@ import { Colors, TextStyles } from "@assets/styles";
 
 export default StyleSheet.create({
   container: {
-    borderBottomWidth: 2,
-    borderColor: Colors.listBackgroundColor
+    // borderBottomWidth: 2,
+    // borderColor: Colors.listBackgroundColor
   },
   doneContainer: {
     flexDirection: "row",

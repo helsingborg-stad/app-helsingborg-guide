@@ -13,16 +13,15 @@ import { Colors } from "@assets/styles";
 
 function forKidsView() {
   return (
-    <View style={styles.checkedContainer}>
-      <Icon name="face" size={20} color={Colors.gray2} />
-      <Text style={styles.forKidsText}>{LangService.strings.FOR_CHILDREN}</Text>
+    <View style={styles.forKidsContainer}>
+      <Icon name="face" size={25} color={Colors.themeSecondary} />
     </View>
   );
 }
 
 function hasQuizView() {
   return (
-    <View style={styles.checkedContainer}>
+    <View style={styles.quizContainer}>
       <CommunityIcon name={"chat-processing"} size={20} color={Colors.gray2} />
       <Text style={styles.forKidsText}>{LangService.strings.HAS_QUIZ}</Text>
     </View>
@@ -52,7 +51,8 @@ type Props = {
 };
 
 const ListItem = (props: Props) => (
-  <View>
+  <View style={styles.itemContainer}>
+    {props.forKids ? forKidsView() : null}
     <View>{displayImage(props.imageSource)}</View>
     <View>
       <View style={styles.titleContainer}>
@@ -63,7 +63,6 @@ const ListItem = (props: Props) => (
           {props.description}
         </Text>
         <DateView startDate={props.startDate} endDate={props.endDate} />
-        {props.forKids ? forKidsView() : null}
         {props.hasQuiz ? hasQuizView() : null}
       </View>
     </View>

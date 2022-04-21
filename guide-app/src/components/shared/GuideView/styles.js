@@ -32,21 +32,30 @@ const styles = StyleSheet.create({
     height: "auto",
   },
   objectButtonContainer: {
-    padding: "4%",
+    padding: "6%",
+  },
+  objectImageWrapper: {
+    overflow: "hidden",
+    height: 130,
+    borderRadius: 8,
   },
   objectImage: {
     aspectRatio: 1,
     width: "100%",
     height: "auto",
+    marginTop: -20,
   },
   textContainer: {
-    marginHorizontal: "4%",
+    backgroundColor: 'rgba(248, 248, 248, 1)',
+    zIndex: 2,
+    paddingHorizontal: "4%",
+    paddingVertical: "4%",
   },
   optionalTexts: {
     marginBottom: 14,
   },
   guideTaglineText: {
-    ...StyleSheet.flatten(TextStyles.medium),
+    ...StyleSheet.flatten(TextStyles.medium)
   },
   title: {
     ...StyleSheet.flatten(TextStyles.title),
@@ -59,25 +68,26 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   contentTitleText: {
-    ...StyleSheet.flatten(TextStyles.medium),
+    marginTop: 6,
+    ...StyleSheet.flatten(TextStyles.medium)
   },
   shareBtn: {
     position: "absolute",
     bottom: 25,
     right: 25,
-    zIndex: 50,
+    zIndex: 50
   },
   quizContainer: {
     flexDirection: "row",
     flex: 1,
-    marginHorizontal: 8,
+    marginHorizontal: 8
   },
   buttonIcon: {
-    alignSelf: "center",
+    alignSelf: "center"
   },
   quizText: {
-    color: Colors.themeSecondary,
-  },
+    color: Colors.themeSecondary
+  }
 });
 
 export default styles;

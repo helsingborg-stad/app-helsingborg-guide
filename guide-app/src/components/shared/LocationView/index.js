@@ -6,7 +6,7 @@ import {
   View,
   Text,
   ScrollView,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./style";
@@ -23,6 +23,7 @@ import LocationGuidesView from "@shared-components/LocationGuidesView";
 
 import { UrlUtils, LocationUtils } from "@utils";
 import WebLinkView from "@shared-components/WebLinkView";
+
 const placeholderImage = require("@assets/images/no-image-featured-image.png");
 
 
@@ -97,10 +98,10 @@ function displayDirections(geolocation: GeolocationType, location: Location) {
 }
 
 const LocationView = (props: Props) => {
-  const { currentLanguage } = useSelector(s => s).navigation
+  const { currentLanguage } = useSelector(s => s).navigation;
   const dispatch = useDispatch();
   const { isFetchingGuides } = props;
-  const webUrl = props?.guideGroup?.location?.links ? getWebUrl(props.guideGroup.location.links): null
+  const webUrl = props?.guideGroup?.location?.links ? getWebUrl(props.guideGroup.location.links) : null;
 
   return (
     <View style={styles.viewContainer}>
@@ -110,7 +111,7 @@ const LocationView = (props: Props) => {
         refreshAction={() => dispatch(fetchGuidesForGuideGroup(currentLanguage, props.guideGroup?.id))}
       >
         <View style={styles.imageViewContainer}>
-         <ImageBackground
+          <ImageBackground
             source={props?.guideGroup?.images?.large ? { uri: props.guideGroup.images.large } : placeholderImage}
             style={styles.imageBackground}
           >
@@ -156,12 +157,14 @@ const LocationView = (props: Props) => {
               {props?.guideGroup?.description}
             </Text>
           </View>
-          {webUrl ? (
-            <WebLinkView url={webUrl} navigation={props.navigation} />
-          ) : null}
-          <PointPropertiesView
-            pointProperties={props?.guideGroup?.pointProperties}
-          />
+          <View style={styles.infoContainer}>
+            {webUrl ? (
+              <WebLinkView url={webUrl} navigation={props.navigation} />
+            ) : null}
+            <PointPropertiesView
+              pointProperties={props?.guideGroup?.pointProperties}
+            />
+          </View>
         </View>
       </Scrollable>
     </View>
@@ -170,8 +173,9 @@ const LocationView = (props: Props) => {
 
 LocationView.defaultProps = {
   geolocation: null,
-  onPressGuide: () => {},
-  isFetchingGuides: false,
+  onPressGuide: () => {
+  },
+  isFetchingGuides: false
 };
 
 export default LocationView;

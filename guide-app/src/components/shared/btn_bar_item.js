@@ -10,10 +10,7 @@ const ICON_SIZE = 20;
 
 const styles = StyleSheet.create({
   item: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    paddingRight: 30,
+    marginRight: 40,
     marginLeft: 'auto',
   },
 
@@ -26,20 +23,20 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     backgroundColor: Colors.themeSecondary,
-    padding: 10,
+    padding: 6,
     borderRadius: 20,
     flex: 0,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+    //
+    // elevation: 5,
   },
   icon: {
   },
@@ -50,7 +47,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: Colors.black,
-    fontWeight: "500",
+    fontWeight: "400",
     fontSize: 16,
     lineHeight: 22.0,
     textAlign: "center",

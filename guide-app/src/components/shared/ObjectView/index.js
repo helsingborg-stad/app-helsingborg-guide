@@ -50,7 +50,7 @@ function displayTitle(
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
       </View>
-      {guideType === "guide" ? displayID(searchableID) : null}
+      {/*{guideType === "guide" ? displayID(searchableID) : null}*/}
     </View>
   );
 }
@@ -75,7 +75,7 @@ function displayLinks(
   ));
 }
 
-function displayButtonsBar(
+function displayButtons(
   audio?: MediaContent,
   video?: MediaContent,
   audioButtonDisabled: boolean,
@@ -96,7 +96,7 @@ function displayButtonsBar(
       onPress={() => {
         loadAudioFile();
       }}
-      name="headphones"
+      name="play"
       color={Colors.white}
       size={18}
       text={LangService.strings.LISTEN}
@@ -120,7 +120,7 @@ function displayButtonsBar(
 
   return (
     <ButtonsBar>
-      {audioBarItem}
+      {!videoBarItem && audioBarItem}
       {videoBarItem}
     </ButtonsBar>
   );
@@ -311,7 +311,7 @@ const ObjectView = (props: Props) => {
                   props.contentObject.searchableId,
                   props.guideType
                 )}
-                {displayButtonsBar(
+                {displayButtons(
                   props.contentObject.audio,
                   props.contentObject.video,
                   props.audioButtonDisabled,

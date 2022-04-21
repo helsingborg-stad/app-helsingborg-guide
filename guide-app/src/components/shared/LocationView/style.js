@@ -37,14 +37,15 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     backgroundColor: Colors.white,
-    paddingHorizontal: 20
   },
   titleContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "flex-start",
     paddingTop: 12,
-    paddingBottom: 4
+    paddingBottom: 4,
+    paddingHorizontal: 20
+
   },
   title: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -67,9 +68,12 @@ export default StyleSheet.create({
     }
   ]),
   articleContainer: {
+    width: '100%',
     flex: 4,
     paddingTop: 10,
-    paddingBottom: 5
+    paddingBottom: 5,
+    backgroundColor: 'rgba(248, 248, 248, 1)',
+    paddingHorizontal: 20
   },
   articleDescriptionText: StyleSheetUtils.flatten([
     TextStyles.description,
@@ -85,5 +89,9 @@ export default StyleSheet.create({
       paddingBottom: 10,
       color: Colors.black
     }
-  ])
+  ]),
+  infoContainer: {
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+  },
 });

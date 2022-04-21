@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
-  StatusBar,
+  StatusBar
 } from "react-native";
 import { connect } from "react-redux";
 import { fetchNavigation } from "@actions/navigationActions";
@@ -23,7 +23,6 @@ import DownloadButtonContainer from "@shared-components/DownloadButton";
 import SharingService from "@services/SharingService";
 
 
-
 declare type Props = {
   guide: Guide,
   onPressContentObject(obj: ContentObject): void,
@@ -32,7 +31,7 @@ declare type Props = {
 const textMaxHeight = Dimensions.get("window").height * 0.2;
 
 class GuideView extends Component<Props> {
-  renderContentObject = (sessionId: number, obj: ContentObject, index, array ) => {
+  renderContentObject = (sessionId: number, obj: ContentObject, index, array) => {
     const { images } = obj;
     const uri = images.length > 0 ? images[0].medium : null;
     return (
@@ -41,14 +40,16 @@ class GuideView extends Component<Props> {
           style={styles.objectButtonContainer}
           onPress={() => this.props.onPressContentObject(obj, index, array)}
         >
-          <ImageView
-            source={{ uri, sessionId }}
-            style={styles.objectImage}
-            resizeMode="cover"
-          />
-          <Text style={styles.contentIdText} numberOfLines={1}>
-            #{obj.searchableId}
-          </Text>
+          <View style={styles.objectImageWrapper}>
+            <ImageView
+              source={{ uri, sessionId }}
+              style={styles.objectImage}
+              resizeMode="cover"
+            />
+          </View>
+          {/*<Text style={styles.contentIdText} numberOfLines={1}>*/}
+          {/*  #{obj.searchableId}*/}
+          {/*</Text>*/}
           <Text style={styles.contentTitleText} numberOfLines={2}>
             {obj.title}
           </Text>
@@ -67,7 +68,7 @@ class GuideView extends Component<Props> {
         item,
         index,
         contentObjects
-        ))}
+      ))}
     </View>
   );
 
@@ -131,15 +132,16 @@ function mapStateToProps(state: RootState) {
 
   return {
     currentLanguage
-  }
+  };
 }
+
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    fetchNavigationItems: (code: string) => dispatch(fetchNavigation(code)),
-  }
+    fetchNavigationItems: (code: string) => dispatch(fetchNavigation(code))
+  };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
-)(GuideView)
+  mapDispatchToProps
+)(GuideView);

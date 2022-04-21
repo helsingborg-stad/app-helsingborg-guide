@@ -5,71 +5,79 @@ const styles = StyleSheet.create({
   settings: {
     position: "absolute",
     flex: 1,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: "#F0F0F0",
     maxWidth: Dimensions.get("window").width,
     paddingHorizontal: 16,
     overflow: "hidden",
-    zIndex: 1,
+    zIndex: 1
   },
 
   wrapper: {
-    position: "relative",
+    position: "relative"
   },
 
-  search: {
-
-  },
+  search: {},
 
   searchTop: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 24,
-    marginBottom: 8,
+    marginBottom: 8
   },
 
   searchTopLeft: {
     fontSize: 18,
-    fontWeight: '500',
-    fontFamily: 'Roboto',
-    color: "#292929",
+    fontWeight: "500",
+    fontFamily: "Roboto",
+    color: "#292929"
   },
 
   searchTopRight: {
     fontSize: 16,
-    fontWeight: '400',
-    fontFamily: 'Roboto',
+    fontWeight: "400",
+    fontFamily: "Roboto",
     color: "#292929",
-    opacity: 0.8,
+    opacity: 0.8
+  },
+
+  forChildren: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 20
+  },
+
+  forChildrenText: {
+    paddingLeft: 6
   },
 
   searchBottom: {
-    marginBottom: 24,
+    marginBottom: 24
   },
 
   distance: {
-  marginBottom: 28,
+    marginBottom: 28
   },
 
   distanceText: {
-    fontSize: 18,
-    fontWeight: "500",
+    fontSize: 16,
+    fontWeight: "400",
     fontFamily: "Roboto",
     color: "#292929",
-    paddingBottom: 6,
+    paddingBottom: 6
   },
 
   distanceValues: {
     flexDirection: "row",
-    width: '100%',
-    justifyContent: "space-between",
+    width: "100%",
+    justifyContent: "space-between"
 
   },
 
   distanceValue: {
     fontFamily: "Roboto",
     fontWeight: "400",
-    fontSize: 16,
+    fontSize: 16
   },
 
   toggleSettings: {
@@ -87,15 +95,15 @@ const styles = StyleSheet.create({
     shadowColor: "#3f3f3f",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
 
-    elevation: 5,
-  },
+    elevation: 5
+  }
 
 
-})
+});
 
 export default styles;
