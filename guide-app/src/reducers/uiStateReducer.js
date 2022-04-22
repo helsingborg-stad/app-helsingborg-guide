@@ -13,6 +13,7 @@ const defaultState: UIState = {
   developerMode: false,
   showBottomBar: false,
   currentSharingLink: null,
+  searchFilter: null,
 };
 
 export default function uiStateReducer(
@@ -52,6 +53,11 @@ export default function uiStateReducer(
       return { ...state, currentSharingLink: action.link };
     case "SELECT_OPENED_LINK":
       return { ...state, openedLink: action.link };
+    case "SET_SEARCH_FILTER":
+      let searchFilter = {...state.searchFilter, ...action.searchFilter}
+      return { ...state, searchFilter: searchFilter}
+    case "CLEAR_SEARCH_FILTER":
+      return { ...state, searchFilter: null}
     default:
       return state;
   }

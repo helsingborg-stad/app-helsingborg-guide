@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { Switch } from "react-native-switch";
 import Modal from "react-native-modal";
+import { throttle, debounce } from "lodash/function";
 import TextInput from "@shared-components/TextInput/TextInput";
 import DraggableSilder from "@shared-components/DraggableSilder";
 import FilterModal from "@shared-components/FilterModal";
@@ -10,19 +12,33 @@ import LangService from "@services/langService";
 import { Portal } from "react-native-portalize";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ArrowDown from "@assets/images/arrow_down";
+import { setSearchFilter } from "@actions/uiStateActions";
 
 const HomeSettings = (props) => {
 
   const { navigation, segmentLayout, open, setOpen, settingsHeight, setSettingsHeight } = props;
 
+  const dispatch = useDispatch();
   const [distance, setDistance] = useState(3);
   const [showFilter, setShowFilter] = useState(false);
   const [height] = useState(new Animated.Value(0));
   const insets = useSafeAreaInsets();
   const [showButton, setShowButton] = useState(false);
+  const { searchFilter } = useSelector(s => s.uiState)
+  const [searchText, setSearchText] = useState(searchFilter?.text || "")
 
-  const onValueChange = (e) => setDistance(e);
+  const onDistanceChange = (e) => {
+    setDistance(e);
+    dispatch(setSearchFilter({ distance: e[0] }));
+  };
 
+  const onTextChange = debounce((e) => {
+      dispatch(setSearchFilter({ text: e.length >= 3 ? e : "" }));
+  }, 1000);
+
+  const onSwitchChange = (e) => {
+    dispatch(setSearchFilter({ forChildren: e }));
+  };
 
   const initialLoad = (layout) => {
     setSettingsHeight(layout?.height);
@@ -31,6 +47,7 @@ const HomeSettings = (props) => {
   const toggleOpen = () => {
     setOpen(!open);
   };
+
 
   useEffect(() => {
     Animated.timing(height, {
@@ -48,6 +65,9 @@ const HomeSettings = (props) => {
   useEffect(() => {
     return () => setShowButton(false);
   }, []);
+
+
+  console.log("CHECK PROPS", searchFilter)
 
   return (
     <>
@@ -74,6 +94,11 @@ const HomeSettings = (props) => {
             </View>
             <View style={[styles.searchBottom]}>
               <TextInput
+                value={searchText}
+                onChangeText={(e) => {
+                  onTextChange(e);
+                  setSearchText(e);
+                }}
                 size={"standard"}
                 isSearch={true}
                 placeholder={LangService.strings.SEARCH_MAIN}
@@ -84,8 +109,8 @@ const HomeSettings = (props) => {
               />
               <View style={styles.forChildren}>
                 <Switch
-                  value={true}
-                  onValueChange={() => null}
+                  value={searchFilter?.forChildren || false}
+                  onValueChange={onSwitchChange}
                   circleSize={24}
                   barHeight={24}
                   circleBorderWidth={2}
@@ -119,7 +144,7 @@ const HomeSettings = (props) => {
               min={0}
               max={7}
               initialValue={distance}
-              onValueChange={onValueChange}
+              onValueChange={onDistanceChange}
               enableLabel={true}
               selectedSliderColor={"#A71580"}
               unSelectedSliderColor={"#E7E7E7"}

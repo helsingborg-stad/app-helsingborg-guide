@@ -12,14 +12,16 @@ type Props = {
   onPress: Function,
   iconName?: MaterialIconsGlyphs,
   text: string,
-  Icon?: any
+  Icon?: any,
+  textStyle: any,
 };
 
 const textMargin = 13;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems: "center",
   },
   text: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -36,7 +38,8 @@ export default function IconTextTouchable({
   onPress,
   Icon,
   iconName,
-  text
+  text,
+  textStyle
 }: Props) {
   const directions = (
     <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -44,7 +47,7 @@ export default function IconTextTouchable({
       {!Icon && (
         <MaterialIcons name={iconName} size={24} color={Colors.themePrimary} />
       )}
-      <Text style={styles.text}>{text}</Text>
+      <Text style={[styles.text, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
 

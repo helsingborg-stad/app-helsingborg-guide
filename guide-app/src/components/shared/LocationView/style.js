@@ -94,4 +94,7 @@ export default StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 20,
   },
+  directionsText: {
+    paddingLeft: 5,
+  },
 });

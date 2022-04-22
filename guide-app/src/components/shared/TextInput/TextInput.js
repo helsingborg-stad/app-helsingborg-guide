@@ -87,7 +87,7 @@ const _TextInput = (props) => {
             style={[styles.textInput, style]}
             onChangeText={(e) => {
               expandable && toggleModal(e)
-              onChangeText && onChangeText() ;
+              onChangeText && onChangeText(e);
             }}
             value={value}
             placeholder={placeholder || ""}

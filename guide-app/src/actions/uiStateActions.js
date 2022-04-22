@@ -21,7 +21,7 @@ export function selectCurrentGuideGroup(id: number): ThunkAction {
       {},
       getState().guideGroups.items.find(item => item.id === id)
     );
-    const guides: Guide[] = getState().guides.items.filter(
+    const guides: Guide[] = getState().guides.items.searchFilter(
       guide => guide.guideGroupId === id
     );
     const action: Action = {
@@ -84,4 +84,12 @@ export function selectCurrentSharingLink(link: string): Action {
 
 export function selectOpenedLink(link: string): Action {
   return { type: "SELECT_OPENED_LINK", link };
+}
+
+export function setSearchFilter(searchFilter: any): Action {
+  return { type: "SET_SEARCH_FILTER", searchFilter };
+}
+
+export function clearSearchFilter(): Action {
+  return { type: "CLEAR_SEARCH_FILTER" };
 }

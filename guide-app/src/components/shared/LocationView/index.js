@@ -24,6 +24,7 @@ import LocationGuidesView from "@shared-components/LocationGuidesView";
 import { UrlUtils, LocationUtils } from "@utils";
 import WebLinkView from "@shared-components/WebLinkView";
 
+import Directions from "@assets/images/directions";
 const placeholderImage = require("@assets/images/no-image-featured-image.png");
 
 
@@ -88,8 +89,9 @@ function openGoogleMapApp(
 function displayDirections(geolocation: GeolocationType, location: Location) {
   return (
     <IconTextTouchable
-      iconName="directions"
+      Icon={<Directions />}
       text={LangService.strings.DIRECTIONS}
+      textStyle={styles.directionsText}
       onPress={() => {
         openGoogleMapApp(geolocation, location.latitude, location.longitude);
       }}
