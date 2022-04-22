@@ -12,7 +12,8 @@ type Props = {
   description?: string,
   showMapIcon?: boolean,
   showChildFriendlyIcon?: boolean,
-  onPress: () => void
+  onPress: () => void,
+  distance?: any,
 };
 
 const GuideCard = ({
@@ -22,7 +23,9 @@ const GuideCard = ({
   subTitle = null,
   size = "compact",
   showMapIcon = false,
-  showChildFriendlyIcon = false
+  showChildFriendlyIcon = false,
+  geolocation,
+  itemLocation,
 }: Props) => {
   const icons = [];
 
@@ -42,6 +45,8 @@ const GuideCard = ({
       subTitle={subTitle}
       size={size}
       icons={icons}
+      geolocation={geolocation}
+      itemLocation={itemLocation}
     />
   );
 };

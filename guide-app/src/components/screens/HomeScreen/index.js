@@ -273,7 +273,7 @@ function mapStateToProps(state: RootState) {
     items = items.filter(item => {
       let name = item?.guideGroup?.name || item.guide?.name || item.interactiveGuide?.name;
       if (text) {
-        console.log(name.toUpperCase().indexOf(text.toUpperCase()))
+        console.log(name.toUpperCase().indexOf(text.toUpperCase()));
         return text.length >= 3 ? name.toUpperCase().indexOf(text.toUpperCase()) !== -1 : true;
       } else {
         return true;
@@ -281,11 +281,7 @@ function mapStateToProps(state: RootState) {
     });
   }
 
-  console.log("THE ITEMS", items.length);
-
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
-
-  console.log("Navigation category labels", navigationCategories);
 
   return {
     categories,
@@ -299,7 +295,6 @@ function mapStateToProps(state: RootState) {
     currentLanguage
   };
 }
-
 
 function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
   return {

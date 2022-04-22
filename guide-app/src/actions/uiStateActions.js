@@ -21,7 +21,7 @@ export function selectCurrentGuideGroup(id: number): ThunkAction {
       {},
       getState().guideGroups.items.find(item => item.id === id)
     );
-    const guides: Guide[] = getState().guides.items.searchFilter(
+    const guides: Guide[] = getState().guides.items.filter(
       guide => guide.guideGroupId === id
     );
     const action: Action = {
@@ -93,3 +93,4 @@ export function setSearchFilter(searchFilter: any): Action {
 export function clearSearchFilter(): Action {
   return { type: "CLEAR_SEARCH_FILTER" };
 }
+

@@ -1,9 +1,10 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import LangService from "@services/langService";
 import { GuideUtils } from "@utils";
 import GuideCard from "@shared-components/GuideCard";
 import defaultImage from "@assets/images/no-image-featured-image.png";
+import { useSelector } from "react-redux";
 
 type Props = {
   index: number,
@@ -22,35 +23,34 @@ function getDescription(item: NavigationItem) {
 
   // Disable guidegroup for now until correct guideCount is shown.
 
-  if ((type === "guide" && guidesCount === 0) || type === "guidegroup") {
+  if ((type === "guide" && guidesCount === 0)) {
     return "";
   }
 
+
   if (type === "guidegroup") {
     const mediaGuideString: string = plural
-      ? LangService.strings.MEDIAGUIDES
-      : LangService.strings.MEDIAGUIDE;
+      ? LangService.strings.ACTIVITIES
+      : LangService.strings.ACTIVITY;
     textString = `${guidesCount} ${mediaGuideString.toUpperCase()}`;
   } else if (type === "guide" && guide) {
     if (guide?.guideType === "trail") {
       const locationString: string = plural
-        ? LangService.strings.LOCATIONS
-        : LangService.strings.LOCATION;
-      textString = `${LangService.strings.TOUR} ${
-        LangService.strings.WITH
-      } ${guidesCount} ${locationString}`;
+        ? LangService.strings.ACTIVITIES
+        : LangService.strings.ACTIVITY;
+      textString = `${guidesCount} ${locationString}`;
       textString = textString.toUpperCase();
     } else if (guide?.guideType === "guide") {
-      textString = `${LangService.strings.MEDIAGUIDE} ${
-        LangService.strings.WITH
-      } ${guidesCount} ${LangService.strings.OBJECT}`;
+      textString = `${guidesCount} ${LangService.strings.ACTIVITIES}`;
+      textString = textString.toUpperCase();
     }
   } else if (type === "interactive_guide") {
     if(!!interactiveGuide?.steps?.length) {
-      textString = `${LangService.strings.MEDIAGUIDE_INTERACTIVE} 
-${LangService.strings.WITH} ${interactiveGuide?.steps?.length - 1} ${LangService.strings.OBJECT}`.toUpperCase();
+      textString = `${interactiveGuide?.steps?.length -1} ${LangService.strings.ACTIVITIES}`.toUpperCase();
+//       textString = `${LangService.strings.MEDIAGUIDE_INTERACTIVE}
+// ${LangService.strings.WITH} ${interactiveGuide?.steps?.length - 1} ${LangService.strings.OBJECT}`.toUpperCase();
     } else {
-      textString = `${LangService.strings.MEDIAGUIDE_INTERACTIVE}`.toUpperCase()
+      // textString = `${LangService.strings.MEDIAGUIDE_INTERACTIVE}`.toUpperCase()
     }
   }
 
@@ -93,15 +93,21 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
   const size = index < 2 ? "expanded" : "compact";
   const showMapIcon = !!item?.guide;
+  const { geolocation } = useSelector(s => s);
+  const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
 
   const onPress = useCallback(() => {
     onPressItem(item);
   }, [item, onPressItem]);
 
 
+
+
   return (
     <GuideCard
       size={size}
+      geolocation={geolocation}
+      itemLocation={itemLocation}
       image={image}
       title={name || ""}
       subTitle={getDescription(item)}

@@ -16,7 +16,6 @@ export default StyleSheet.create({
     flex: 1,
     paddingVertical: 20,
     paddingHorizontal: 20
-
   },
   guideContainer: {
     backgroundColor: Colors.white,

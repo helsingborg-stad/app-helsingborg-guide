@@ -13,6 +13,7 @@ export default ({ distance, style, useFromHereText }: Props) => {
   const suffix = useKm ? "km" : "m";
   const renderedDistance = useKm ? Math.round(distance / 1000) : distance;
   const fromHereText = useFromHereText ? LangService.strings.FROM_HERE : "";
+  console.log("renderdistance", renderedDistance)
   return (
     <Text style={style}>
       {renderedDistance} {suffix} {fromHereText}

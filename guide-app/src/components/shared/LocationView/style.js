@@ -70,7 +70,7 @@ export default StyleSheet.create({
   articleContainer: {
     width: '100%',
     flex: 4,
-    paddingTop: 10,
+    paddingTop: 20,
     paddingBottom: 5,
     backgroundColor: 'rgba(248, 248, 248, 1)',
     paddingHorizontal: 20
@@ -85,9 +85,9 @@ export default StyleSheet.create({
     TextStyles.defaultFontFamily,
     {
       fontSize: 20,
-      lineHeight: 21,
       paddingBottom: 10,
-      color: Colors.black
+      color: Colors.black,
+      fontWeight: "600",
     }
   ]),
   infoContainer: {

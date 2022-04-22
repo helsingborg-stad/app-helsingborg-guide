@@ -10,7 +10,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
 import Touchable from "@shared-components/Touchable";
-
+import DistanceView from "@shared-components/DistanceViewNew";
 
 type Props = {
   size?: "expanded" | "compact",
@@ -27,7 +27,9 @@ const ImageCard = ({
                      title = null,
                      subTitle = null,
                      size = "compact",
-                     icons = []
+                     icons = [],
+                     geolocation,
+                     itemLocation
                    }: Props) => {
   const height = size === "compact" ? 191 : 258;
 
@@ -42,6 +44,16 @@ const ImageCard = ({
     }
   };
 
+  function displayDistance(currentLocation: GeolocationType, location: Location) {
+    return (
+      <DistanceView
+        textStyle={styles.distance}
+        currentLocation={currentLocation}
+        location={location}
+      />
+    );
+  }
+
 
   return (
     <View style={styles.container}>
@@ -52,8 +64,17 @@ const ImageCard = ({
           colors={["#00000000", "#000000bb"]}
           style={styles.gradientContainer}>
           <View style={styles.textContainer}>
-            <Text style={styles.titleLabel}>{title}</Text>
-            <Text style={styles.distance}>150m</Text>
+            <Text numberOfLines={1} style={styles.titleLabel}>{title}</Text>
+            {subTitle !== null && (
+              <Text style={[styles.text, styles.subTitleLabel]}>
+                {subTitle}
+              </Text>
+            )}
+            {itemLocation && geolocation && (
+              <View style={styles.distanceContainer}>
+                {displayDistance(geolocation, itemLocation)}
+              </View>
+            )}
           </View>
         </LinearGradient>
       </Touchable>
@@ -105,7 +126,7 @@ const styles = StyleSheet.create({
     position: "relative",
     flexShrink: 1,
     width: "100%",
-    height: 77,
+    height: 85,
     backgroundColor: "white",
     justifyContent: "flex-start",
     paddingTop: 10
@@ -135,7 +156,7 @@ const styles = StyleSheet.create({
 
   map: {
     position: "absolute",
-    bottom: 60,
+    bottom: 70,
     right: 20,
     shadowColor: "#000",
     shadowOffset: {
@@ -162,12 +183,20 @@ const styles = StyleSheet.create({
     letterSpacing: 0.91,
     position: "absolute",
     right: 0,
-    bottom: 0,
+    bottom: -40,
     padding: 15,
     fontSize: 16,
     color: "rgba(41, 41, 41, 1)"
   },
-  subTitleLabel: {},
+  subTitleLabel: {
+    paddingLeft: 20,
+    fontFamily: "Roboto",
+    fontWeight: "500",
+    letterSpacing: 0.91,
+    color: Colors.gray3,
+    paddingTop: 5,
+    fontSize: 12
+  },
   descriptionLabel: {},
   mapIcon: {
     width: 32,

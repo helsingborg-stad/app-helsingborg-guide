@@ -17,7 +17,7 @@ export default function(props: Props) {
     return null;
   }
 
-  const { coords } = props.currentLocation;
+  const coords = props.currentLocation?.coords || props.currentLocation?.position?.coords;
   const distance = LocationUtils.getDistanceBetweenCoordinates(
     coords,
     props.location
@@ -32,6 +32,7 @@ export default function(props: Props) {
   const fromHereText = props.useFromHereText
     ? LangService.strings.FROM_HERE
     : "";
+  console.log("renderedDistance", renderedDistance);
   return (
     <Text style={props.textStyle}>
       {renderedDistance} {suffix} {fromHereText}

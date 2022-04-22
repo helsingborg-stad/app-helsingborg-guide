@@ -32,11 +32,11 @@ const LocationScreen = (props: Props) => {
     isFetchingGuides,
     navigation,
     currentSharingLink,
-    dispatchCurrentSharingLink,
+    dispatchCurrentSharingLink
   } = props;
-  const [redirect, setRedirect] = useState(navigation?.state?.params?.redirect)
-  const [redirected, setRedirected] = useState(false)
-  const { clearLinking }  = useDeepLinking()
+  const [redirect, setRedirect] = useState(navigation?.state?.params?.redirect);
+  const [redirected, setRedirected] = useState(false);
+  const { clearLinking } = useDeepLinking();
 
   useEffect(() => {
     return () => {
@@ -44,14 +44,14 @@ const LocationScreen = (props: Props) => {
         props.dispatchShowBottomBar(true);
         setRedirected(false);
       }
-    }
-  },[])
+    };
+  }, []);
 
   useEffect(() => {
-    if(!navigation.isFocused()) {
+    if (!navigation.isFocused()) {
       clearLinking(navigation);
     }
-  },[navigation.isFocused()])
+  }, [navigation.isFocused()]);
 
 
   useEffect(() => {
@@ -60,14 +60,12 @@ const LocationScreen = (props: Props) => {
       if (currentGuide && !redirected) {
         setRedirected(true);
         onPressGuide(currentGuide);
-      }
-      else {
+      } else {
         clearLinking(navigation, ["redirect"]);
-        navigation.navigate("NotFoundScreen", {link: redirect[0]});
+        navigation.navigate("NotFoundScreen", { link: redirect[0] });
       }
     }
-  },[redirect, currentGuides])
-
+  }, [redirect, currentGuides]);
 
 
   const onPressGuide = (guide: Guide) => {
@@ -75,17 +73,17 @@ const LocationScreen = (props: Props) => {
     const title = guide?.name;
     const prevPath = navigation.state.params.path;
     const newPath = `${prevPath}/${slug || title}`;
-    const sharingLink = currentSharingLink + `/${guide?.id}`
-    dispatchCurrentSharingLink(sharingLink)
+    const sharingLink = currentSharingLink + `/${guide?.id}`;
+    dispatchCurrentSharingLink(sharingLink);
     trackScreen(newPath, newPath);
-    redirect && setRedirect(false)
+    redirect && setRedirect(false);
     if (guide.guideType === "trail") {
       props.selectCurrentGuide(guide);
       navigation.navigate("TrailScreen", {
         guide,
         title: title,
         path: newPath,
-        ...(redirect?.length === 2 && {redirect: redirect[1]})
+        ...(redirect?.length === 2 && { redirect: redirect[1] })
       });
     } else if (guide.guideType === "guide") {
       console.log("the guide", guide?.id);
@@ -93,50 +91,51 @@ const LocationScreen = (props: Props) => {
       navigation.navigate("GuideDetailsScreen", {
         title: guide.name,
         path: newPath,
-        ...(redirect?.length && {redirect: redirect})
+        ...(redirect?.length && { redirect: redirect })
       });
     }
   };
 
   const onPressInteractiveGuide = (interactiveGuide: InteractiveGuide) => {
-    const sharingLink = currentSharingLink + `/${interactiveGuide?.id}`
-    dispatchCurrentSharingLink(sharingLink)
+    const sharingLink = currentSharingLink + `/${interactiveGuide?.id}`;
+    dispatchCurrentSharingLink(sharingLink);
     trackScreen("view_interactive_guide", interactiveGuide?.title || "");
     navigation.navigate("QuizScreen", {
-      quiz: interactiveGuide,
+      quiz: interactiveGuide
     });
   };
 
-    const now = new Date();
+  const now = new Date();
 
-    return (
-      <>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={Colors.themeSecondary}
+
+  return (
+    <>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={Colors.themeSecondary}
+      />
+      {!redirect?.length ?
+        <LocationView
+          guideGroup={currentGuideGroup}
+          guides={currentGuides}
+          interactiveGuide={currentInteractiveGuide}
+          now={now}
+          geolocation={geolocation}
+          navigation={navigation}
+          onPressGuide={onPressGuide}
+          onPressInteractiveGuide={onPressInteractiveGuide}
+          isFetchingGuides={isFetchingGuides}
         />
-        {!redirect?.length ?
-          <LocationView
-            guideGroup={currentGuideGroup}
-            guides={currentGuides}
-            interactiveGuide={currentInteractiveGuide}
-            now={now}
-            geolocation={geolocation}
-            navigation={navigation}
-            onPressGuide={onPressGuide}
-            onPressInteractiveGuide={onPressInteractiveGuide}
-            isFetchingGuides={isFetchingGuides}
-          />
-        : <ActivityIndicator style={{flex: 1}} />}
-      </>
-    );
+        : <ActivityIndicator style={{ flex: 1 }} />}
+    </>
+  );
 };
 
 function mapStateToProps(state: RootState) {
   const { groupItems: guideItems, isFetching: isFetchingGuides } = state.guides;
   const {
     items: interactiveGuideItems,
-    isFetching: isFetchingInteractiveGuides,
+    isFetching: isFetchingInteractiveGuides
   } = state.interactiveGuides;
   const { currentGuideGroup, currentSharingLink } = state.uiState;
   const { geolocation } = state;
@@ -146,10 +145,10 @@ function mapStateToProps(state: RootState) {
   let currentInteractiveGuide = null;
   if (currentGuideGroup) {
     currentGuides = guideItems.filter(
-      guide => guide.guideGroupId === currentGuideGroup.id,
+      guide => guide.guideGroupId === currentGuideGroup.id
     );
     currentInteractiveGuide = interactiveGuideItems.find(
-      interactiveGuide => interactiveGuide.guideGroupId === currentGuideGroup.id,
+      interactiveGuide => interactiveGuide.guideGroupId === currentGuideGroup.id
     );
   }
 
@@ -159,7 +158,7 @@ function mapStateToProps(state: RootState) {
     currentInteractiveGuide,
     currentSharingLink,
     geolocation: geolocation?.position,
-    isFetchingGuides: isFetchingGuides || isFetchingInteractiveGuides,
+    isFetchingGuides: isFetchingGuides || isFetchingInteractiveGuides
   };
 }
 
@@ -168,7 +167,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectCurrentGuide: (guide: Guide) => dispatch(selectCurrentGuide(guide)),
     dispatchShowBottomBar: (visible: boolean) =>
       dispatch(showBottomBar(visible)),
-    dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link)),
+    dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link))
   };
 }
 
@@ -179,12 +178,12 @@ LocationScreen["navigationOptions"] = ({ navigation }) => {
     ...HeaderStyles.noElevation,
     title,
     headerRight: () => <View />,
-    headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
+    headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
   };
 };
 
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(LocationScreen);

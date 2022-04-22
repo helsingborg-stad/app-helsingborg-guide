@@ -63,6 +63,7 @@ class MarkerScene extends Component<Props, State> {
         userLocation.coords,
         contentLocation
       );
+
       const relativePosition = LocationUtils.getLocationRelativePosition(
         userLocation,
         contentLocation,
@@ -77,7 +78,7 @@ class MarkerScene extends Component<Props, State> {
         active,
         arrived,
         distance,
-        position
+        position,
       };
     });
 
@@ -99,6 +100,7 @@ class MarkerScene extends Component<Props, State> {
       },
       bearing
     } = props;
+
 
     const markers = items.map(item => {
       const {
