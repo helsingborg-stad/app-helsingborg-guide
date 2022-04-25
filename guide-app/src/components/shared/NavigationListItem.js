@@ -105,6 +105,7 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
 
   return (
     <GuideCard
+      key={index}
       size={size}
       geolocation={geolocation}
       itemLocation={itemLocation}

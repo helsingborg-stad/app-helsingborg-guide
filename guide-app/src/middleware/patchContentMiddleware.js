@@ -46,7 +46,6 @@ function updateDistanceForGuides(
     }
     return { ...g };
   });
-
   return updated;
 }
 

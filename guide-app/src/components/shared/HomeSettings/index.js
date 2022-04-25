@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { Switch } from "react-native-switch";
-import Modal from "react-native-modal";
 import { throttle, debounce } from "lodash/function";
 import TextInput from "@shared-components/TextInput/TextInput";
 import DraggableSilder from "@shared-components/DraggableSilder";
@@ -26,6 +24,8 @@ const HomeSettings = (props) => {
   const [showButton, setShowButton] = useState(false);
   const { searchFilter } = useSelector(s => s.uiState)
   const [searchText, setSearchText] = useState(searchFilter?.text || "")
+  const minKm = 0;
+  const maxKm = 10;
 
   const onDistanceChange = (e) => {
     setDistance(e);
@@ -137,8 +137,8 @@ const HomeSettings = (props) => {
             <Text style={styles.distanceText}>{LangService.strings.DISTANCE}</Text>
             <DraggableSilder
               values={[distance]}
-              min={0}
-              max={7}
+              min={minKm}
+              max={maxKm}
               initialValue={distance}
               onValueChange={onDistanceChange}
               enableLabel={true}
@@ -148,8 +148,8 @@ const HomeSettings = (props) => {
               snapped={true}
             />
             <View style={styles.distanceValues}>
-              <Text style={styles.distanceValue}>0 km</Text>
-              <Text style={styles.distanceValue}>7 km</Text>
+              <Text style={styles.distanceValue}>{minKm} km</Text>
+              <Text style={styles.distanceValue}>{maxKm} km</Text>
             </View>
           </View>
           {showButton && <Portal>

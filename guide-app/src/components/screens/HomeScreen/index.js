@@ -18,6 +18,7 @@ import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import Orientation from "react-native-orientation-locker";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
+
 import { Colors, HeaderStyles } from "@assets/styles";
 import styles from "./styles";
 import {
@@ -33,6 +34,7 @@ import { fetchNavigation } from "@actions/navigationActions";
 import HomeSettings from "@shared-components/HomeSettings";
 import NavigationListItem from "@shared-components/NavigationListItem";
 import { compareDistance } from "@utils/SortingUtils";
+import LocationUtils from "@utils/LocationUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
@@ -230,11 +232,11 @@ function mapStateToProps(state: RootState) {
     navigation,
     guideGroups,
     guides,
-    uiState: { currentHomeTab, searchFilter }
+    uiState: { currentHomeTab, searchFilter },
+    geolocation
   } = state;
   const { navigationCategories, currentLanguage } = navigation;
   const { fetchingIds } = guideGroups;
-  const distance = searchFilter?.distance;
   const text = searchFilter?.text;
   let categories = "";
 
@@ -273,12 +275,38 @@ function mapStateToProps(state: RootState) {
     items = items.filter(item => {
       let name = item?.guideGroup?.name || item.guide?.name || item.interactiveGuide?.name;
       if (text) {
-        console.log(name.toUpperCase().indexOf(text.toUpperCase()));
         return text.length >= 3 ? name.toUpperCase().indexOf(text.toUpperCase()) !== -1 : true;
       } else {
         return true;
       }
     });
+  }
+
+  const coords = geolocation?.coords || geolocation?.position?.coords;
+
+  if (items?.length && coords) {
+    const itemsWithLocation = [];
+    const itemsWithoutLocation = [];
+
+    items.forEach(item => {
+      let location = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location
+      location ? itemsWithLocation.push(item) : itemsWithoutLocation.push(item);
+    });
+
+    itemsWithLocation.sort((a, b) => {
+      const aLoc = a?.guideGroup?.location || a?.guide?.location || a?.interactiveGuide?.location;
+      const bLoc = b?.guideGroup?.location || b?.guide?.location || b?.interactiveGuide?.location;
+      const distanceA = LocationUtils.getDistanceBetweenCoordinates(
+        coords,
+        aLoc
+      );
+      const distanceB = LocationUtils.getDistanceBetweenCoordinates(
+        coords,
+        bLoc
+      );
+      return distanceA > distanceB ? 1 : -1;
+    });
+    items = itemsWithLocation.concat(itemsWithoutLocation);
   }
 
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
@@ -292,7 +320,7 @@ function mapStateToProps(state: RootState) {
     showLoadingSpinner: isFetching,
     navigationCategories,
     navigationCategoryLabels,
-    currentLanguage
+    currentLanguage,
   };
 }
 

@@ -19,6 +19,8 @@ type Props = {
   subTitle?: string,
   icons?: ImageSourcePropType[],
   onPress: () => void,
+  geolocation: string,
+  itemLocation: string,
 };
 
 const ImageCard = ({
