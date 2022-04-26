@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { throttle, debounce } from "lodash/function";
+import { debounce } from "lodash/function";
 import TextInput from "@shared-components/TextInput/TextInput";
 import DraggableSilder from "@shared-components/DraggableSilder";
 import FilterModal from "@shared-components/FilterModal";
@@ -181,4 +181,4 @@ const HomeSettings = (props) => {
 };
 
 
-export default HomeSettings;
+export default memo(HomeSettings)

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { memo } from "react";
 import {
   StyleSheet,
   View,
-  TouchableOpacity,
   Text,
   Image,
   ImageSourcePropType
@@ -21,6 +20,7 @@ type Props = {
   onPress: () => void,
   geolocation: string,
   itemLocation: string,
+  index: any,
 };
 
 const ImageCard = ({
@@ -31,7 +31,8 @@ const ImageCard = ({
                      size = "compact",
                      icons = [],
                      geolocation,
-                     itemLocation
+                     itemLocation,
+                     index,
                    }: Props) => {
   const height = size === "compact" ? 191 : 258;
 
@@ -56,9 +57,11 @@ const ImageCard = ({
     );
   }
 
+  console.log("index in image card", index)
 
   return (
     <View
+      key={index}
       style={styles.container}>
       <Touchable
         style={styles.buttonContainer} onPress={onPress}>
@@ -81,9 +84,11 @@ const ImageCard = ({
           </View>
         </LinearGradient>
       </Touchable>
-      {icons.map((icon, key) => (
-        <View style={styles[displayIcon(icon)]}>
-          <Image key={key} source={icon} style={styles.icon} />
+      {icons.map((icon, i) => (
+        <View
+          key={i}
+          style={styles[displayIcon(icon)]}>
+          <Image key={i} source={icon} style={styles.icon} />
         </View>
       ))}
     </View>
@@ -207,4 +212,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ImageCard;
+export default memo(ImageCard);

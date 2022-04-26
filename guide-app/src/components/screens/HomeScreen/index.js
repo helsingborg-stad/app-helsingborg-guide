@@ -151,8 +151,6 @@ const HomeScreen = (props: Props) => {
   if (showLoadingSpinner || id_1) {
     return <ActivityIndicator style={styles.loadingSpinner} />;
   }
-
-  console.log("SEGMENT LAYOUT", showSettings);
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
@@ -197,8 +195,8 @@ const HomeScreen = (props: Props) => {
                   >
                     {items?.length && items.map((item, index) => (
                       <NavigationListItem
-                        key={index}
-                        index={index}
+                        key={item.id}
+                        index={item.id}
                         item={item}
                         onPressItem={() => onPressItem(item, items, index)}
                       />
@@ -289,7 +287,7 @@ function mapStateToProps(state: RootState) {
       let searchCriteria = true;
       let distanceCriteria = true;
       if (searchText) {
-        searchCriteria = searchText.length >= 3 ? name.toUpperCase().indexOf(text.toUpperCase()) !== -1 : true;
+        searchCriteria = searchText.length >= 3 ? name.toUpperCase().indexOf(searchText.toUpperCase()) !== -1 : true;
       }
       if (distance) {
         const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;

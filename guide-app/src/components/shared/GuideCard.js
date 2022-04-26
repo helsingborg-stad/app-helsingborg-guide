@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import ImageCard from "./ImageCard";
 
 import IconMapMarker from "@assets/images/mapPinIcon.png";
@@ -41,6 +41,8 @@ const GuideCard = ({
     icons.push(IconMapMarker);
   }
 
+  console.log("le index", index)
+
   return (
     <ImageCard
       key={index}
@@ -57,4 +59,4 @@ const GuideCard = ({
   );
 };
 
-export default GuideCard;
+export default memo(GuideCard)

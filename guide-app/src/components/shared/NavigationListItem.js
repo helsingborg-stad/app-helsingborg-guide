@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useCallback, memo } from "react";
 import LangService from "@services/langService";
 import { GuideUtils } from "@utils";
 import GuideCard from "@shared-components/GuideCard";
@@ -120,4 +120,4 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
   );
 };
 
-export default NavigationListItem;
+export default memo(NavigationListItem)

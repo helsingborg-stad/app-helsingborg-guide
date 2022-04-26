@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, memo } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import styles from "./styles";
 import { trackScreen } from "../../../utils/MatomoUtils";
@@ -58,4 +58,4 @@ export const SegmentControlPill = ({
   );
 };
 
-export default SegmentControlPill;
+export default memo(SegmentControlPill);
