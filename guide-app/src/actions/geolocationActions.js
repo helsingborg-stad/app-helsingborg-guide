@@ -1,7 +1,4 @@
 import * as types from "./actionTypes";
 
-export default {
-  geolocationUpdated(position) {
-    return { type: types.GEOLOCATION_UPDATE_SUCCESS, position };
-  }
-};
+export const geolocationUpdated = (position) => ({ type: types.GEOLOCATION_UPDATE_SUCCESS, position });
+export const geolocationError = () => ({ type: types.GEOLOCATION_UPDATE_ERROR });

@@ -32,7 +32,6 @@ export default function(props: Props) {
   const fromHereText = props.useFromHereText
     ? LangService.strings.FROM_HERE
     : "";
-  console.log("renderedDistance", renderedDistance);
   return (
     <Text style={props.textStyle}>
       {renderedDistance} {suffix} {fromHereText}

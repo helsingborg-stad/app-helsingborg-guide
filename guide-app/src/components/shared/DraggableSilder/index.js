@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { ScrollView, View, Dimensions, Text } from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import CustomLabel from "./CustomLabel";
@@ -6,7 +6,7 @@ import styles from "./style";
 
 
 const DraggableSilder = (props) => {
-  const { values, min, max, onValueChange, selectedSliderColor, unSelectedSliderColor, sliderHeight, snapped} = props;
+  const { values, min, max, onValueChange, selectedSliderColor, unSelectedSliderColor, sliderHeight, snapped, step} = props;
   const [label, setLabel] = useState(false);
   const setEnableLabel = () => setLabel(true);
   const setDisableLabel = () => setLabel(false);
@@ -20,6 +20,8 @@ const DraggableSilder = (props) => {
         values={values}
         min={min}
         max={max}
+        {...(step && { step })}
+        allowOverlap={true}
         onValuesChange={onValueChange}
         enableLabel={!!(label)}
         snapped={!!(snapped)}
@@ -52,4 +54,4 @@ const DraggableSilder = (props) => {
 
 };
 
-export default DraggableSilder;
+export default memo(DraggableSilder);

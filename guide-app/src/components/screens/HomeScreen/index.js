@@ -40,6 +40,8 @@ import Scrollable from "@shared-components/Scrollable";
 import mapIcon from "@assets/images/mapIcon.png";
 import useDeepLinking from "@hooks/useDeepLinking";
 import useGuides from "@hooks/useGuides";
+import LocationService from "@services/locationService";
+import geolocationReducer from "../../../reducers/geolocationReducer";
 
 
 type Section = {
@@ -82,9 +84,10 @@ const HomeScreen = (props: Props) => {
   const insets = useSafeAreaInsets();
   const [backdropOpacity] = useState(new Animated.Value(0));
   const { searchFilter } = useSelector(s => s.uiState);
-  const id_1 = params?.id_1;
+  const { geolocation } = useSelector(s => s.uiState);
 
-  console.log("UI", searchFilter);
+  const id_1 = params?.id_1;
+  const locationService = LocationService.getInstance();
   const {
     currentHomeTab,
     items,
@@ -106,6 +109,9 @@ const HomeScreen = (props: Props) => {
     }
   }, [navigation.isFocused()]);
 
+  useEffect(() => {
+    console.log("geo updated", geolocation)
+  },[geolocation])
 
   useEffect(() => {
     Orientation.lockToPortrait();
@@ -183,6 +189,7 @@ const HomeScreen = (props: Props) => {
                     contentContainerStyle={styles.contentContainer}
                     refreshControl={true}
                     refreshAction={() => {
+                      locationService.getGeoLocation().catch(console.warn);
                       props.selectCurrentTab(0);
                       fetchNavigationItems(currentLanguage, currentHomeTab);
                       props.dispatchShowBottomBar(true);
@@ -233,12 +240,15 @@ function mapStateToProps(state: RootState) {
     guideGroups,
     guides,
     uiState: { currentHomeTab, searchFilter },
-    geolocation
+    geolocation,
   } = state;
   const { navigationCategories, currentLanguage } = navigation;
   const { fetchingIds } = guideGroups;
-  const text = searchFilter?.text;
+  const { distance, text: searchText } = searchFilter;
   let categories = "";
+  let distanceMetres = distance * 1000;
+
+  console.log("GEOLOCATION", geolocation);
 
   categories = [...navigationCategories.map(cat => {
     const data = cat.items
@@ -271,43 +281,52 @@ function mapStateToProps(state: RootState) {
       ? categories[currentHomeTab]?.data
       : null;
 
-  if (searchFilter) {
-    items = items.filter(item => {
-      let name = item?.guideGroup?.name || item.guide?.name || item.interactiveGuide?.name;
-      if (text) {
-        return text.length >= 3 ? name.toUpperCase().indexOf(text.toUpperCase()) !== -1 : true;
-      } else {
-        return true;
-      }
-    });
-  }
-
   const coords = geolocation?.coords || geolocation?.position?.coords;
 
-  if (items?.length && coords) {
-    const itemsWithLocation = [];
-    const itemsWithoutLocation = [];
-
-    items.forEach(item => {
-      let location = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location
-      location ? itemsWithLocation.push(item) : itemsWithoutLocation.push(item);
+  if (items?.length) {
+    items = items.filter(item => {
+      let name = item?.guideGroup?.name || item.guide?.name || item.interactiveGuide?.name;
+      let searchCriteria = true;
+      let distanceCriteria = true;
+      if (searchText) {
+        searchCriteria = searchText.length >= 3 ? name.toUpperCase().indexOf(text.toUpperCase()) !== -1 : true;
+      }
+      if (distance) {
+        const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
+        const itemDistance = LocationUtils.getDistanceBetweenCoordinates(
+          coords,
+          itemLocation
+        );
+        distanceCriteria = distanceMetres < 3000 ? itemDistance <= distanceMetres : true;
+      }
+      return searchCriteria && distanceCriteria;
     });
+    if (coords) {
+      const itemsWithLocation = [];
+      const itemsWithoutLocation = [];
 
-    itemsWithLocation.sort((a, b) => {
-      const aLoc = a?.guideGroup?.location || a?.guide?.location || a?.interactiveGuide?.location;
-      const bLoc = b?.guideGroup?.location || b?.guide?.location || b?.interactiveGuide?.location;
-      const distanceA = LocationUtils.getDistanceBetweenCoordinates(
-        coords,
-        aLoc
-      );
-      const distanceB = LocationUtils.getDistanceBetweenCoordinates(
-        coords,
-        bLoc
-      );
-      return distanceA > distanceB ? 1 : -1;
-    });
-    items = itemsWithLocation.concat(itemsWithoutLocation);
+      items.forEach(item => {
+        let location = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
+        location ? itemsWithLocation.push(item) : itemsWithoutLocation.push(item);
+      });
+
+      itemsWithLocation.sort((a, b) => {
+        const aLoc = a?.guideGroup?.location || a?.guide?.location || a?.interactiveGuide?.location;
+        const bLoc = b?.guideGroup?.location || b?.guide?.location || b?.interactiveGuide?.location;
+        const distanceA = LocationUtils.getDistanceBetweenCoordinates(
+          coords,
+          aLoc
+        );
+        const distanceB = LocationUtils.getDistanceBetweenCoordinates(
+          coords,
+          bLoc
+        );
+        return distanceA > distanceB ? 1 : -1;
+      });
+      items = itemsWithLocation.concat(itemsWithoutLocation);
+    }
   }
+
 
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 
@@ -320,7 +339,7 @@ function mapStateToProps(state: RootState) {
     showLoadingSpinner: isFetching,
     navigationCategories,
     navigationCategoryLabels,
-    currentLanguage,
+    currentLanguage
   };
 }
 

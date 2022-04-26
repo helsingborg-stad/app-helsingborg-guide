@@ -14,6 +14,9 @@ type Props = {
   showChildFriendlyIcon?: boolean,
   onPress: () => void,
   distance?: any,
+  geolocation: string,
+  itemLocation: string,
+  index: any,
 };
 
 const GuideCard = ({
@@ -26,6 +29,7 @@ const GuideCard = ({
   showChildFriendlyIcon = false,
   geolocation,
   itemLocation,
+  index,
 }: Props) => {
   const icons = [];
 
@@ -39,6 +43,8 @@ const GuideCard = ({
 
   return (
     <ImageCard
+      key={index}
+      index={index}
       image={image}
       onPress={onPress}
       title={title}

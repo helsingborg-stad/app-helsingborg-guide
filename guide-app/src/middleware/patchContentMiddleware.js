@@ -58,12 +58,15 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
   switch (action.type) {
     case "GEOLOCATION_UPDATE_SUCCESS": {
       // updating guide groups distances
+
       const {
         geolocation: { position },
         guideGroups,
         guides,
         interactiveGuides,
       } = nextState;
+
+
       if (!position) {
         break;
       }

@@ -15,6 +15,7 @@ function LabelBase(props) {
   const scaleValue = React.useRef(new Animated.Value(0.1)); // Behaves oddly if set to 0
   const cachedPressed = React.useRef(pressed);
 
+  console.log("value", value);
   React.useEffect(() => {
     Animated.timing(scaleValue.current, {
       toValue: pressed ? 1 : 0.1,

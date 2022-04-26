@@ -8,4 +8,5 @@ export default {
   downloadDataVersion: 0,
   position: null,
   hasLocationStatus: false,
+  geolocation: null,
 };

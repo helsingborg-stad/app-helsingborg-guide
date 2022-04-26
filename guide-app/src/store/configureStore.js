@@ -10,9 +10,9 @@ import navigationMiddleware from "@src/middleware/navigationMiddleware";
 import patchContentMiddleware from "@src/middleware/patchContentMiddleware";
 
 const config = {
-  key: "GuideAppRoot",
+  key: "app",
   storage: AsyncStorage,
-  blacklist: ["error", "menu", "internet", "audio", "uiState", "quiz", "hasLocationStatus", "events" ],
+  blacklist: ["error", "menu", "internet", "audio", "uiState", "quiz", "hasLocationStatus", "events", ],
   version: 1,
   debug: __DEV__
 };

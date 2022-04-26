@@ -24,8 +24,9 @@ const HomeSettings = (props) => {
   const [showButton, setShowButton] = useState(false);
   const { searchFilter } = useSelector(s => s.uiState)
   const [searchText, setSearchText] = useState(searchFilter?.text || "")
-  const minKm = 0;
-  const maxKm = 10;
+  const minKm = 0.1;
+  const maxKm = 3;
+  const step = 0.4;
 
   const onDistanceChange = (e) => {
     setDistance(e);
@@ -139,6 +140,7 @@ const HomeSettings = (props) => {
               values={[distance]}
               min={minKm}
               max={maxKm}
+              step={step}
               initialValue={distance}
               onValueChange={onDistanceChange}
               enableLabel={true}
@@ -149,7 +151,7 @@ const HomeSettings = (props) => {
             />
             <View style={styles.distanceValues}>
               <Text style={styles.distanceValue}>{minKm} km</Text>
-              <Text style={styles.distanceValue}>{maxKm} km</Text>
+              <Text style={styles.distanceValue}> {"> " + maxKm} km</Text>
             </View>
           </View>
           {showButton && <Portal>

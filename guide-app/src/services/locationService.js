@@ -2,7 +2,7 @@ import { Alert, Platform } from "react-native";
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions";
 import Geolocation from "@react-native-community/geolocation";
 import LangService from "./langService";
-import GeoLocationActions from "@actions/geolocationActions";
+import { geolocationUpdated, geolocationError } from "@actions/geolocationActions";
 import { SettingsUtils } from "@utils";
 
 const DISTANCE_UPDATE_THRESHOLD = 1; // distance to move to trigger callback (in meters)
@@ -80,21 +80,24 @@ export default class LocationService {
     return instance;
   }
 
-  upatePosition = () =>
+  updatePosition = () =>
     new Promise((resolve, reject) =>
       getLocation().then(
         position => {
-          this.store.dispatch(GeoLocationActions.geolocationUpdated(position));
+          console.log("position success", position);
+          this.store.dispatch(geolocationUpdated(position));
           return resolve(position);
         },
         error => {
+          console.log("LOCCCC ERRORRRR", error);
+          this.store.dispatch(geolocationError());
           checkPermissions();
           reject(error);
         }
       )
     );
 
-  getGeoLocation = () => checkPermissions().then(this.upatePosition);
+  getGeoLocation = () => this.updatePosition();
 
   subscribeGeoLocation = () =>
     checkPermissions().then(
@@ -103,7 +106,7 @@ export default class LocationService {
           this.watcher = Geolocation.watchPosition(
             position => {
               this.store.dispatch(
-                GeoLocationActions.geolocationUpdated(position)
+                geolocationUpdated(position)
               );
               return resolve(position);
             },

@@ -58,7 +58,8 @@ const ImageCard = ({
 
 
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}>
       <Touchable
         style={styles.buttonContainer} onPress={onPress}>
         <Image style={[styles.image, { height }]} source={image} />

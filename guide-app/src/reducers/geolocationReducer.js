@@ -6,9 +6,12 @@ export default function geolocationReducer(
   action
 ) {
   switch (action.type) {
-    case types.GEOLOCATION_UPDATE_SUCCESS:
-      return { ...state, position: action.position};
-    default:
+    case "GEOLOCATION_UPDATE_SUCCESS":
+      console.log("GEOLOCATION_UPDATE_SUCCESS", action.position);
+      return { ...state, position: action.position };
+    case "GEOLOCATION_UPDATE_ERROR":
+      return { ...state, position: null};
+      default:
       return state;
   }
 }

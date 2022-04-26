@@ -16,7 +16,7 @@ import DownloadTasksManager from "@services/DownloadTasksManager";
 import {
   appStarted,
   appBecameActive,
-  appBecameInactive,
+  appBecameInactive
 } from "@actions/uiStateActions";
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
@@ -44,16 +44,16 @@ function alert() {
     [
       {
         text: LangService.strings.SETTINGS,
-        onPress: openInternetSettings,
+        onPress: openInternetSettings
       },
       {
         text: LangService.strings.CLOSE,
         onPress: () => {
         },
-        style: "cancel",
-      },
+        style: "cancel"
+      }
     ],
-    { cancelable: false },
+    { cancelable: false }
   );
 }
 
@@ -109,7 +109,7 @@ const GuideApp = () => {
       "new NativeEventEmitter() was called with a non-null argument without the required removeListeners method.",
       "new NativeEventEmitter() was called with a non-null argument without the required removeListeners method.",
       "`new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.",
-      "`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.",
+      "`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method."
     ]);
     subscribeToNotifications();
     onNotification();
@@ -122,8 +122,8 @@ const GuideApp = () => {
   }, []);
 
   return (
-      <SafeAreaProvider>
-        <Host>
+    <SafeAreaProvider>
+      <Host>
         <PersistGate persistor={persistor}>
           <TrackingPermission />
           <Nav
@@ -132,8 +132,8 @@ const GuideApp = () => {
             onAppBecameInactive={() => store.dispatch(appBecameInactive())}
           />
         </PersistGate>
-        </Host>
-      </SafeAreaProvider>
+      </Host>
+    </SafeAreaProvider>
   );
 };
 
