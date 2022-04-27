@@ -85,27 +85,6 @@ const CalendarDetailsScreen = ({ navigation }) => {
     </TouchableOpacity>;
   }
 
-  function displayLink(
-    link: any,
-    name: any
-  ) {
-    return <LinkTouchable
-      title={name}
-      onPress={() => {
-        Linking.openURL(link);
-      }}
-    />;
-  }
-
-  const renderSectionTitle = () => {
-    return (
-      <View>
-        <Text></Text>
-      </View>
-    );
-  };
-
-
   function renderHeader(section, index) {
     const { title } = section;
     console.log("section", section, activeSections);
@@ -118,7 +97,6 @@ const CalendarDetailsScreen = ({ navigation }) => {
   }
 
   function renderContent(section, index) {
-    console.log("render", event?.organizers);
     const { id } = section;
     const content = () => {
       switch (id) {
@@ -223,13 +201,12 @@ const CalendarDetailsScreen = ({ navigation }) => {
               ? displayText(event.description)
               : null}
           </View>
-          {displayBookingButton(event?.bookingLink)}
+          {event?.bookingLink && displayBookingButton(event?.bookingLink)}
           <View style={styles.infoContainer}>
             <Accordion
               sections={sections}
               activeSections={activeSections}
               onChange={(active) => setActiveSections(active)}
-              renderSectionTitle={renderSectionTitle}
               renderHeader={(e, index) => renderHeader(e, index)}
               renderContent={(e, index) => renderContent(e, index)}
               renderFooter={(e, index) => renderFooter(e, index)}

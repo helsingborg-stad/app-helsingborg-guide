@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { memo } from "react";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -75,4 +75,4 @@ ListItem.defaultProps = {
   description: ""
 };
 
-export default ListItem;
+export default memo(ListItem)

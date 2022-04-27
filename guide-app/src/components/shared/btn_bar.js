@@ -1,14 +1,14 @@
 /**
  * Created by msaeed on 2017-02-04.
  */
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 
 type Props = {
   children: Array
 };
 
-export default class ButtonsBar extends Component<Props> {
+export default class ButtonsBar extends PureComponent<Props> {
   render() {
     return <View style={styles.bar}>{this.props.children}</View>;
   }

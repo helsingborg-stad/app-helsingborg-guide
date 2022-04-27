@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { View, Text, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { MapItemUtils } from "@utils";
@@ -25,7 +25,7 @@ type State = {
   markersFocused: boolean,
 };
 
-class MapMarkerView extends Component<Props, State> {
+class MapMarkerView extends PureComponent<Props, State> {
   static defaultProps = {
     showNumberedMapMarkers: true,
     onMapMarkerPressed: null,

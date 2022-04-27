@@ -2,10 +2,6 @@ import React, { memo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import LabelBase from "./LabelBase";
 
-
-
-const width = 15;
-
 const CustomLabel = (props) => {
   const {
     leftDiff,

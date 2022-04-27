@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { View } from "react-native";
 
 const ExpandablePanel = () => {
@@ -10,4 +10,4 @@ const ExpandablePanel = () => {
   )
 }
 
-export default ExpandablePanel;
+export default memo(ExpandablePanel)

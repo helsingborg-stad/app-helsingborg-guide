@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component, useState, useEffect } from "react";
+import React, { memo, Component, useState, useEffect } from "react";
 import { StatusBar } from "react-native";
 import { connect } from "react-redux";
 

@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import {
   View,
   FlatList,
@@ -43,9 +43,7 @@ type Props = {
   dispatchSelectContentObject(obj: ContentObject): void
 };
 
-
 const HalfListMargin = DefaultMargin * 0.5;
-
 
 const MarkerListView = (props: Props) => {
   const { supportedNavigationModes, navigation, items, userLocation } = props;
@@ -75,7 +73,6 @@ const MarkerListView = (props: Props) => {
 
 
   useEffect(() => {
-    console.log("the redirect", redirect)
       if (redirect && listRef.current && mapMarkerViewRef) {
         let index = -1;
         const currentItem = items.find((item, i) => {
@@ -532,5 +529,4 @@ MarkerListView.defaultProps = {
   supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map],
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(MarkerListView);
+export default memo(connect(mapStateToProps, mapDispatchToProps)(MarkerListView));

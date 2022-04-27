@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { memo } from "react";
 import { TouchableWithoutFeedback, View } from "react-native";
 import { NavigationModeUtils } from "@utils";
 import styles from "./style";
@@ -73,4 +73,4 @@ const TrailView = (props: Props) => {
   );
 };
 
-export default TrailView;
+export default memo(TrailView);

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Image } from "react-native";
 import { loadFromCache } from "@utils/DownloadMediaUtils";
 
@@ -16,7 +16,7 @@ type State = {
   imageSource: any
 };
 
-export default class ImageView extends Component<Props, State> {
+export default class ImageView extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     const source = props?.source;

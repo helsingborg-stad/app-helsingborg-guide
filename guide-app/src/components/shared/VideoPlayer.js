@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   ActivityIndicator,
   Platform,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class VideoPlayer extends Component {
+export default class VideoPlayer extends PureComponent {
   static propTypes = {
     filePath: PropTypes.string.isRequired,
     isAndroidFullscreen: PropTypes.bool,

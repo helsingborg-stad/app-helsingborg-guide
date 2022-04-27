@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component, useEffect, useState } from "react";
+import React, { memo, Component, useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { connect } from "react-redux";
 
@@ -129,7 +129,7 @@ GuideScreen["navigationOptions"] = ({ navigation }) => {
     const { title, path } = params;
     return {
       title,
-      headerRight: () => <SearchButton navigation={navigation} path={path} />,
+      headerRight: () => null,
       headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
     };
   }

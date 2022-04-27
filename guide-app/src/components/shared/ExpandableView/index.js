@@ -1,5 +1,5 @@
 // @flow
-import React, { type Node, Component } from "react";
+import React, { type Node, PureComponent } from "react";
 import {
   Image,
   Text,
@@ -24,7 +24,7 @@ type State = {
   overflow: boolean
 };
 
-class ExpandableView extends Component<Props, State> {
+  class ExpandableView extends PureComponent<Props, State> {
   static defaultProps = {
     style: null,
     children: null
@@ -82,4 +82,4 @@ class ExpandableView extends Component<Props, State> {
   }
 }
 
-export default ExpandableView;
+export default ExpandableView

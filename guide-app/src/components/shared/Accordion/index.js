@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import _Accordion from "react-native-collapsible/Accordion";
 
 const Accordion = (props) => {
@@ -32,4 +32,4 @@ return (
 )
 }
 
-export default Accordion;
+export default memo(Accordion)

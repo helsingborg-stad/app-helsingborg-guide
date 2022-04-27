@@ -246,8 +246,6 @@ function mapStateToProps(state: RootState) {
   let categories = "";
   let distanceMetres = distance * 1000;
 
-  console.log("GEOLOCATION", geolocation);
-
   categories = [...navigationCategories.map(cat => {
     const data = cat.items
       .map((item) => {

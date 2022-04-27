@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import { Colors } from "@assets/styles";
 import styles from "./style";
@@ -26,4 +26,4 @@ const BottomBarButton = ({ label, Icon, onPress, selected }: Props) => {
   );
 };
 
-export default BottomBarButton;
+export default memo(BottomBarButton);

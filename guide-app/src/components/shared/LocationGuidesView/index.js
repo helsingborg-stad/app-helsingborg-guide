@@ -28,7 +28,6 @@ const LocationGuidesView = (props: Props) => {
     onPressInteractiveGuide,
   } = props;
 
-  console.log("GUIDES", guides)
   return (
     <View style={styles.guideListContainer}>
       <Text style={styles.guideListHeaderText}>

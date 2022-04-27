@@ -1,7 +1,7 @@
 /**
  * Created by msaeed on 2017-02-04.
  */
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Colors } from "@assets/styles";
@@ -69,7 +69,7 @@ type Props = {
   text: any
 };
 
-export default class ButtonsBarItem extends Component<Props> {
+export default class ButtonsBarItem extends PureComponent<Props> {
   render() {
     const _styles = [styles.item];
     const _iconStyles = [styles.icon];

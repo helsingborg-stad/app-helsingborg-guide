@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { StyleSheet, SafeAreaView, View } from "react-native";
 import PropTypes from "prop-types";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   mainContainer: { backgroundColor: "black" }
 });
 
-export default class VideoScreen extends Component {
+export default class VideoScreen extends PureComponent {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
     return {

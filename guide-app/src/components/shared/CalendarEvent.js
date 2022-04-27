@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   Image,
@@ -18,7 +18,6 @@ import { trackScreen } from "@utils/MatomoUtils";
 import Touchable from "@shared-components/Touchable";
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 import { DEEP_LINKING_URL } from "@data/endpoints"
-
 
 const styles = StyleSheet.create({
   item: {
@@ -110,7 +109,7 @@ type Props = {
   path: string,
 };
 
-function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
+const CalendarEvent = ({ event, currentLanguage, navigation, path }: Props) => {
 
   const {
     description,
@@ -122,7 +121,6 @@ function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
     dateEnd,
     id
   } = event;
-
 
   const dispatch = useDispatch();
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
@@ -181,4 +179,4 @@ function CalendarEvent({ event, currentLanguage, navigation, path }: Props) {
   );
 }
 
-export default CalendarEvent;
+export default memo(CalendarEvent)

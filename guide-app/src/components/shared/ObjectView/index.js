@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, Linking } from "react-native";
-import Icon from "react-native-vector-icons/Entypo";
 import { PanGestureHandler, ScrollView } from "react-native-gesture-handler";
 
+import ObjectButtons from "./ObjectButtons";
 import styles from "./style";
 import { Colors } from "@assets/styles";
 import SharingService from "@services/SharingService";
@@ -15,7 +15,6 @@ import LangService from "@services/langService";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
 import { trackScreen } from "@utils/MatomoUtils";
-
 
 type Props = {
   contentObject: ContentObject,
@@ -68,7 +67,6 @@ function displayLinks(
       key={item.url || index}
       title={item.title}
       onPress={() => {
-        // openLink(item.url);
         Linking.openURL(item.url);
       }}
     />
@@ -126,77 +124,6 @@ function displayButtons(
   );
 }
 
-const guideButtons = (props) => {
-  const { array, navigation, selectObject, order, scrollable, panToIndex, path } = props;
-  const [width, setWidth] = useState("");
-  const split = path.split("/");
-
-
-  const onLayout = (event) => {
-    setWidth(event.nativeEvent.layout.width);
-  };
-  return array?.length ? <View style={styles.navGuideWrapper}>
-    <Text style={styles.navGuideBarStep}>{`${(order + 1)} av ${array.length}`}</Text>
-    <View style={styles.navGuide}>
-      <Icon
-        name={"chevron-left"}
-        size={36}
-        color={Colors.themeExtra1}
-        style={{ opacity: order > 0 ? 1 : 0.4 }}
-        onPress={order > 0 ? () => {
-          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order - 1].title}`;
-          trackScreen(newPath, newPath);
-          scrollable && scrollable(order - 1);
-          selectObject && selectObject(array[order - 1]);
-          panToIndex && panToIndex(order - 1);
-          navigation.navigate("ObjectScreen", {
-            title: array[order - 1].title,
-            currentGuide: array[order - 1],
-            array: array,
-            order: order - 1,
-            swipeable: true,
-            path: newPath
-          });
-        } : null}
-      />
-      <View style={styles.navGuideBarWrapper}>
-        <View
-          onLayout={onLayout}
-          style={styles.navGuideBar}>
-          {width ? <View style={[styles.navGuideBarFilled,
-            {
-              transform: [
-                { translateX: -width + Math.round(width * ((order + 1) / array.length)) }
-              ]
-            }]} /> : null}
-        </View>
-      </View>
-      <Icon
-        name={"chevron-right"}
-        size={36}
-        color={Colors.themeExtra1}
-        style={{ opacity: (order + 1) !== array.length ? 1 : 0.5 }}
-        onPress={(order + 1) !== array.length ? () => {
-          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order + 1].title}`;
-          trackScreen(newPath, newPath);
-          scrollable && scrollable(order + 1);
-          selectObject && selectObject(array[order + 1]);
-          panToIndex && panToIndex(order + 1);
-          navigation.navigate("ObjectScreen", {
-            title: array[order + 1].title,
-            currentGuide: array[order + 1],
-            order: order + 1,
-            array: array,
-            swipeable: true,
-            path: newPath
-          });
-        } : null}
-      />
-    </View>
-  </View> : null;
-};
-
-
 const onHorizontalSwipe = (evt, swiped, setSwiped) => {
   const { nativeEvent } = evt;
   if (!swiped) {
@@ -208,7 +135,6 @@ const onHorizontalSwipe = (evt, swiped, setSwiped) => {
     }
   }
 };
-
 
 /*
  * Underlying sharingservice needs a reference to a Component instance
@@ -223,24 +149,23 @@ const ObjectView = (props: Props) => {
     navigation,
     array,
     order,
-    onSwiperIndexChanged,
-    path
+    path,
   } = props;
   const [swiped, setSwiped] = useState(false);
-  const ref = React.createRef();
 
   useEffect(() => {
     setTimeout(() => setSwiped(false), 180);
   }, [props]);
-
 
   useEffect(() => {
     const split = path.split("/");
 
     if (swiped) {
       if (swiped === "left") {
-        if ((order + 1) !== array.length) {
-          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order + 1].title}`;
+        if (order + 1 !== array.length) {
+          let newPath =
+            split.slice(0, split.length - 1).join("/") +
+            `/${array[order + 1].title}`;
           trackScreen(newPath, newPath);
           scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
@@ -250,7 +175,7 @@ const ObjectView = (props: Props) => {
             currentGuide: array[order + 1],
             order: order + 1,
             array: array,
-            swipeable: true
+            swipeable: true,
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -258,7 +183,9 @@ const ObjectView = (props: Props) => {
       }
       if (swiped === "right") {
         if (order > 0) {
-          let newPath = split.slice(0, split.length - 1).join("/") + `/${array[order - 1].title}`;
+          let newPath =
+            split.slice(0, split.length - 1).join("/") +
+            `/${array[order - 1].title}`;
           trackScreen(newPath, newPath);
           scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
@@ -268,7 +195,7 @@ const ObjectView = (props: Props) => {
             currentGuide: array[order - 1],
             array: array,
             order: order - 1,
-            swipeable: true
+            swipeable: true,
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -281,14 +208,12 @@ const ObjectView = (props: Props) => {
     <View style={styles.viewContainer}>
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView style={styles.container}>
-          <View
-            style={styles.imageContainer}>
+          <View style={styles.imageContainer}>
             <ImageSwiper
               sessionId={guideId}
               images={props.contentObject.images}
               onSwiperIndexChanged={props.onSwiperIndexChanged}
               onGoToImage={props.onGoToImage}
-
             />
             {props.contentObject.images[props.imageIndex] && (
               <View style={styles.shareBtn}>
@@ -303,7 +228,10 @@ const ObjectView = (props: Props) => {
           </View>
           <PanGestureHandler
             activeOffsetX={[-10, 10]}
-            onGestureEvent={(e) => swipeable ? onHorizontalSwipe(e, swiped, setSwiped) : null}>
+            onGestureEvent={(e) =>
+              swipeable ? onHorizontalSwipe(e, swiped, setSwiped) : null
+            }
+          >
             <View style={styles.bodyContainer}>
               <View style={styles.infoContainer}>
                 {displayTitle(
@@ -325,10 +253,7 @@ const ObjectView = (props: Props) => {
                   ? displayText(props.contentObject.description)
                   : null}
                 {props.contentObject.links
-                  ? displayLinks(
-                    props.contentObject.links,
-                    props.onGoToLink
-                  )
+                  ? displayLinks(props.contentObject.links, props.onGoToLink)
                   : null}
               </View>
             </View>
@@ -338,7 +263,7 @@ const ObjectView = (props: Props) => {
       </SafeAreaView>
       <SafeAreaView>
         <View style={styles.navGuideContainer}>
-          {guideButtons(props)}
+          <ObjectButtons {...props} />
         </View>
       </SafeAreaView>
     </View>

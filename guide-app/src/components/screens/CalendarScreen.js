@@ -1,5 +1,5 @@
 // @flow
-import React, {useState, useEffect} from "react";
+import React, { memo, useState, useEffect} from "react";
 import {
     ActivityIndicator,
     StatusBar,
@@ -262,10 +262,10 @@ const CalendarScreen = (props: Props, state: State) => {
                 // refreshAction={() => getEvents(currentLanguage, chosenDate, chosenDate, events.length, 1)}
             >
                 <View style={styles.container}>
-                    {events.length ? events.map(event => (
+                    {events.length ? events.map((event, index) => (
                         event ?
                             <CalendarEvent
-                                key={Math.random()}
+                                key={index}
                                 event={event}
                                 currentLanguage={currentLanguage}
                                 navigation={navigation}
@@ -309,4 +309,4 @@ CalendarScreen["navigationOptions"] = ({navigation}) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CalendarScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarScreen)
