@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { memo } from "react";
+import { View, StyleSheet } from "react-native";
 import LabelBase from "./LabelBase";
 
 const CustomLabel = (props) => {
@@ -11,6 +11,8 @@ const CustomLabel = (props) => {
     twoMarkerLeftPosition,
     oneMarkerPressed,
     twoMarkerPressed,
+    min,
+    max
   } = props;
 
   return (
@@ -20,25 +22,29 @@ const CustomLabel = (props) => {
         value={oneMarkerValue}
         leftDiff={leftDiff}
         pressed={oneMarkerPressed}
+        min={min}
+        max={max}
       />
       <LabelBase
         position={twoMarkerLeftPosition}
         value={twoMarkerValue}
         leftDiff={leftDiff}
         pressed={twoMarkerPressed}
+        min={min}
+        max={max}
       />
     </View>
   );
-}
+};
 
 CustomLabel.defaultProps = {
-  leftDiff: 0,
+  leftDiff: 0
 };
 
 const styles = StyleSheet.create({
   parentView: {
-    position: 'relative',
-  },
+    position: "relative"
+  }
 });
 
 export default memo(CustomLabel);

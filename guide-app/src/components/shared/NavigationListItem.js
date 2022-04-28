@@ -95,18 +95,19 @@ const NavigationListItem = ({ index, item, onPressItem }: Props) => {
   const showMapIcon = !!item?.guide;
   const { geolocation } = useSelector(s => s);
   const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
-
+  const id = item?.guideGroup?.id || item?.guide?.id || item?.interactiveGuide?.id;
+  const type = item?.type;
   const onPress = useCallback(() => {
     onPressItem(item);
   }, [item, onPressItem]);
 
 
-
-
   return (
     <GuideCard
+      id={id}
       key={index}
       index={index}
+      type={type}
       size={size}
       geolocation={geolocation}
       itemLocation={itemLocation}

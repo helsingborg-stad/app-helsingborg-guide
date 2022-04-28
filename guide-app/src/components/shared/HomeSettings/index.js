@@ -17,7 +17,7 @@ const HomeSettings = (props) => {
   const { navigation, segmentLayout, open, setOpen, settingsHeight, setSettingsHeight } = props;
 
   const dispatch = useDispatch();
-  const [distance, setDistance] = useState(3);
+  const [distance, setDistance] = useState([3]);
   const [showFilter, setShowFilter] = useState(false);
   const [height] = useState(new Animated.Value(0));
   const insets = useSafeAreaInsets();
@@ -26,12 +26,12 @@ const HomeSettings = (props) => {
   const [searchText, setSearchText] = useState(searchFilter?.text || "")
   const minKm = 0.1;
   const maxKm = 3;
-  const step = 0.4;
+  const step = 0.1;
 
-  const onDistanceChange = (e) => {
-    setDistance(e);
-    dispatch(setSearchFilter({ distance: e[0] }));
-  };
+  const onDistanceChange = debounce((e) => {
+      setDistance(e);
+      dispatch(setSearchFilter({ distance: e[0] }));
+  }, 800)
 
   const onTextChange = debounce((e) => {
       dispatch(setSearchFilter({ text: e.length >= 3 ? e : "" }));
@@ -137,7 +137,7 @@ const HomeSettings = (props) => {
           <View style={styles.distance}>
             <Text style={styles.distanceText}>{LangService.strings.DISTANCE}</Text>
             <DraggableSilder
-              values={[distance]}
+              values={distance}
               min={minKm}
               max={maxKm}
               step={step}

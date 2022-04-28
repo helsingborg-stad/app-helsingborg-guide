@@ -14,6 +14,7 @@ const defaultState: UIState = {
   showBottomBar: false,
   currentSharingLink: null,
   searchFilter: { distance: '', text: '', forChildren: '' },
+  allGuides: [],
 };
 
 export default function uiStateReducer(
@@ -21,6 +22,8 @@ export default function uiStateReducer(
   action: Action
 ): UIState {
   switch (action.type) {
+    case "FETCH_ALL_GUIDES_FOR_ALL_GROUPS":
+      return { ...state, allGuides: action.allGuides };
     case "SELECT_CURRENT_GUIDEGROUP":
       return {
         ...state,

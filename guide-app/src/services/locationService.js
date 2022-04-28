@@ -26,7 +26,10 @@ const promptPermissions = () => {
         text: LangService.strings.SETTINGS,
         onPress: () => SettingsUtils.openSettings()
       },
-      { text: LangService.strings.CLOSE, onPress: () => {}, style: "cancel" }
+      {
+        text: LangService.strings.CLOSE, onPress: () => {
+        }, style: "cancel"
+      }
     ],
     { cancelable: false }
   );
@@ -69,8 +72,9 @@ const getLocation = () =>
 let instance = null;
 
 export default class LocationService {
-  watcher;
 
+  timeout = false;
+  watcher;
   store;
 
   static getInstance() {
@@ -84,12 +88,10 @@ export default class LocationService {
     new Promise((resolve, reject) =>
       getLocation().then(
         position => {
-          console.log("position success", position);
           this.store.dispatch(geolocationUpdated(position));
           return resolve(position);
         },
         error => {
-          console.log("LOCCCC ERRORRRR", error);
           this.store.dispatch(geolocationError());
           checkPermissions();
           reject(error);
@@ -105,9 +107,15 @@ export default class LocationService {
         new Promise((resolve, reject) => {
           this.watcher = Geolocation.watchPosition(
             position => {
-              this.store.dispatch(
-                geolocationUpdated(position)
-              );
+              if (!this.timeout) {
+                this.timeout = true;
+                this.store.dispatch(geolocationUpdated(position));
+              }
+              else {
+                setTimeout(() => {
+                  this.timeout = false;
+                }, 15000);
+              }
               return resolve(position);
             },
             reject,

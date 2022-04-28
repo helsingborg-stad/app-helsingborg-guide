@@ -27,7 +27,8 @@ import {
   selectCurrentCategory,
   selectCurrentHomeTab,
   showBottomBar,
-  clearSearchFilter
+  clearSearchFilter,
+  fetchAllGuidesForAllGroups
 } from "@actions/uiStateActions";
 import { fetchNavigation } from "@actions/navigationActions";
 
@@ -41,7 +42,6 @@ import mapIcon from "@assets/images/mapIcon.png";
 import useDeepLinking from "@hooks/useDeepLinking";
 import useGuides from "@hooks/useGuides";
 import LocationService from "@services/locationService";
-import geolocationReducer from "../../../reducers/geolocationReducer";
 
 
 type Section = {
@@ -98,8 +98,13 @@ const HomeScreen = (props: Props) => {
     fetchNavigationItems,
     currentLanguage,
     dispatchShowBottomBar,
-    dispatchClearSearchFilter
+    dispatchClearSearchFilter,
+    dispatchFetchAllGuidesforAllGroups,
   } = props;
+
+  useEffect(() => {
+    dispatchFetchAllGuidesforAllGroups();
+  },[])
 
   useEffect(() => {
     if (navigation.isFocused()) {
@@ -108,10 +113,6 @@ const HomeScreen = (props: Props) => {
       clearLinking(navigation);
     }
   }, [navigation.isFocused()]);
-
-  useEffect(() => {
-    console.log("geo updated", geolocation)
-  },[geolocation])
 
   useEffect(() => {
     Orientation.lockToPortrait();
@@ -151,6 +152,8 @@ const HomeScreen = (props: Props) => {
   if (showLoadingSpinner || id_1) {
     return <ActivityIndicator style={styles.loadingSpinner} />;
   }
+
+
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
@@ -238,7 +241,7 @@ function mapStateToProps(state: RootState) {
     guideGroups,
     guides,
     uiState: { currentHomeTab, searchFilter },
-    geolocation,
+    geolocation
   } = state;
   const { navigationCategories, currentLanguage } = navigation;
   const { fetchingIds } = guideGroups;
@@ -351,7 +354,9 @@ function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
     dispatchShowBottomBar: (visible: boolean) =>
       dispatch(showBottomBar(visible)),
     dispatchClearSearchFilter: () =>
-      dispatch(clearSearchFilter())
+      dispatch(clearSearchFilter()),
+    dispatchFetchAllGuidesforAllGroups: () =>
+      dispatch(fetchAllGuidesForAllGroups()),
   };
 }
 

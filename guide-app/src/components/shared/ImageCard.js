@@ -6,10 +6,13 @@ import {
   Image,
   ImageSourcePropType
 } from "react-native";
+import { useSelector } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
 import Touchable from "@shared-components/Touchable";
 import DistanceView from "@shared-components/DistanceViewNew";
+import ImageView from "@shared-components/ImageView";
+import LangService from "@services/langService";
 
 type Props = {
   size?: "expanded" | "compact",
@@ -21,9 +24,11 @@ type Props = {
   geolocation: string,
   itemLocation: string,
   index: any,
+  type: string,
 };
 
 const ImageCard = ({
+                     id,
                      image,
                      onPress,
                      title = null,
@@ -33,8 +38,22 @@ const ImageCard = ({
                      geolocation,
                      itemLocation,
                      index,
+                     type
                    }: Props) => {
   const height = size === "compact" ? 191 : 258;
+
+  const { all } = useSelector(s => s.guides);
+
+  const displayActivities = () => {
+    switch (type) {
+      case "guidegroup":
+        const groupAmount = all?.guideGroups?.find(item => item.parentID === id);
+        return groupAmount ? (groupAmount.guideAmount + " " + LangService.strings.ACTIVITIES).toUpperCase() : "";
+      case "guide":
+        const guideAmount = all?.guides?.find(item => item.parentID === id);
+        return guideAmount ? (guideAmount.guideAmount + " " + LangService.strings.ACTIVITIES).toUpperCase() : "";
+    }
+  };
 
   const displayIcon = (icon) => {
     switch (icon) {
@@ -57,25 +76,21 @@ const ImageCard = ({
     );
   }
 
-  console.log("index in image card", index)
-
   return (
     <View
       key={index}
       style={styles.container}>
       <Touchable
         style={styles.buttonContainer} onPress={onPress}>
-        <Image style={[styles.image, { height }]} source={image} />
+        <ImageView style={[styles.image, { height }]} source={{ uri: image?.uri }} />
         <LinearGradient
           colors={["#00000000", "#000000bb"]}
           style={styles.gradientContainer}>
           <View style={styles.textContainer}>
             <Text numberOfLines={1} style={styles.titleLabel}>{title}</Text>
-            {subTitle !== null && (
-              <Text style={[styles.text, styles.subTitleLabel]}>
-                {subTitle}
-              </Text>
-            )}
+            <Text style={[styles.text, styles.subTitleLabel]}>
+              {displayActivities()}
+            </Text>
             {itemLocation && geolocation && (
               <View style={styles.distanceContainer}>
                 {displayDistance(geolocation, itemLocation)}

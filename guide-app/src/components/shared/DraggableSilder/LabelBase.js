@@ -3,10 +3,10 @@ import { Animated, StyleSheet, Text, View } from "react-native";
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
-const width = 15;
+const width = 30;
 
 const LabelBase = (props) => {
-  const { position, value, pressed } = props;
+  const { position, value, pressed, min, max } = props;
   const scaleValue = React.useRef(new Animated.Value(0.1)); // Behaves oddly if set to 0
   const cachedPressed = React.useRef(pressed);
 
@@ -37,7 +37,7 @@ const LabelBase = (props) => {
         ]}
       >
         <View style={styles.pointer} />
-        <Text style={styles.sliderLabelText}>{value}</Text>
+        <Text style={styles.sliderLabelText}>{value < min ? min : value > max ? `> ${max}` : value.toFixed(1)}</Text>
       </AnimatedView>
     )
   );
@@ -47,7 +47,7 @@ const LabelBase = (props) => {
 const styles = StyleSheet.create({
   sliderLabel: {
     position: "absolute",
-    top: -3,
+    top: -6,
     justifyContent: "center",
     bottom: "100%",
     width: width,

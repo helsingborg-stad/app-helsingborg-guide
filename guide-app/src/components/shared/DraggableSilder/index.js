@@ -1,5 +1,6 @@
 import React, { useState, memo } from "react";
-import { ScrollView, View, Dimensions, Text } from "react-native";
+import { debounce } from "lodash";
+import { View, Dimensions } from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import CustomLabel from "./CustomLabel";
 import styles from "./style";
@@ -10,6 +11,9 @@ const DraggableSilder = (props) => {
   const [label, setLabel] = useState(false);
   const setEnableLabel = () => setLabel(true);
   const setDisableLabel = () => setLabel(false);
+
+
+  console.log("VALUES", values);
 
   return (
     <View style={styles.container}>
@@ -45,7 +49,7 @@ const DraggableSilder = (props) => {
         }}
         customLabel={(e) => {
           return (
-            <CustomLabel {...e} />
+            <CustomLabel {...e} min={min} max={max} />
           )
         }}
       />
@@ -54,4 +58,4 @@ const DraggableSilder = (props) => {
 
 };
 
-export default memo(DraggableSilder);
+export default DraggableSilder

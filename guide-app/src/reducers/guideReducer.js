@@ -4,6 +4,7 @@ const initialState: GuideState = {
   isFetching: false,
   items: [],
   groupItems: [],
+  all: [],
 };
 
 export default function guideReducer(
@@ -11,6 +12,10 @@ export default function guideReducer(
   action: Action
 ): GuideState {
   switch (action.type) {
+    case "FETCH_ALL_GUIDES_FOR_ALL_GROUPS_REQUEST":
+      return { ...state };
+    case "FETCH_ALL_GUIDES_FOR_ALL_GROUPS_SUCCESS":
+      return { ...state, all: action.all };
     case "FETCH_GUIDES_REQUEST":
       return { ...state, isFetching: true, doneFetching: false };
     case "FETCH_GUIDES_SUCCESS": {

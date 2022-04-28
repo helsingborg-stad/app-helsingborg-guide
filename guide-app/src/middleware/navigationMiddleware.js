@@ -1,12 +1,12 @@
 // @flow
 import {
   setNavigationCategories,
-  fetchNavigation,
+  fetchNavigation
 } from "@actions/navigationActions";
-import { fetchGuides, fetchGuidesForGuideGroup } from "@actions/guideActions";
+import { fetchGuides, fetchGuidesForGuideGroup, fetchAllGuidesForAllGroups } from "@actions/guideActions";
 import {
   fetchGuideGroups,
-  setGuidesAndGuideGroups,
+  setGuidesAndGuideGroups
 } from "@actions/guideGroupActions";
 import { fetchInteractiveGuides } from "@actions/interactiveGuideActions";
 import {
@@ -24,7 +24,7 @@ function linkNavigationWithContent(
   categories: NavigationCategory[],
   guideGroups: GuideGroup[],
   guides: Guide[],
-  interactiveGuides: InteractiveGuide[],
+  interactiveGuides: InteractiveGuide[]
 ): NavigationCategory[] {
   const sections: NavigationCategory[] = categories.map(cat => {
     const items: NavigationItem[] = [];
@@ -40,7 +40,7 @@ function linkNavigationWithContent(
         if (guide) {
           result = {
             ...item,
-            guide,
+            guide
           };
         }
       } else if (type === "guidegroup") {
@@ -48,7 +48,7 @@ function linkNavigationWithContent(
         if (guideGroup) {
           result = {
             ...item,
-            guideGroup,
+            guideGroup
           };
         }
       } else if (type === "interactive_guide") {
@@ -56,7 +56,7 @@ function linkNavigationWithContent(
         if (interactiveGuide) {
           result = {
             ...item,
-            interactiveGuide,
+            interactiveGuide
           };
         }
       }
@@ -71,7 +71,7 @@ function linkNavigationWithContent(
 }
 
 export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
-  action: Action,
+  action: Action
 ) => {
   const result = next(action);
   const nextState = getState();
@@ -80,6 +80,17 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
     case "SET_LANGUAGE": {
       const { currentLanguage } = nextState.navigation;
       dispatch(fetchNavigation(currentLanguage));
+      break;
+    }
+
+    case "FETCH_ALL_GUIDES_FOR_ALL_GROUPS": {
+      console.log("DO I RUN?? 2")
+      const { currentLanguage } = nextState.navigation;
+      let ids = { guides: [], guideGroups: [], interactiveGuides: [] };
+      getState().guides.items.map(item => ids.guides.push(item.id));
+      getState().guideGroups.items.map(item => ids.guideGroups.push({id: item.id, type: "guideGroup"}));
+      getState().interactiveGuides.items.map(item => ids.interactiveGuides.push({id: item.id, type: "interactiveGuide"}));
+      dispatch(fetchAllGuidesForAllGroups(currentLanguage, ids))
       break;
     }
     case "SELECT_CURRENT_GUIDEGROUP": {
@@ -132,10 +143,10 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
         categories,
         guideGroups,
         guides,
-        interactiveGuides,
+        interactiveGuides
       );
       dispatch(setNavigationCategories(renderableCategories));
-      homeTab && dispatch(selectCurrentHomeTab(homeTab))
+      homeTab && dispatch(selectCurrentHomeTab(homeTab));
 
     }
       break;

@@ -17,20 +17,23 @@ type Props = {
   geolocation: string,
   itemLocation: string,
   index: any,
+  type: string,
 };
 
 const GuideCard = ({
-  image,
-  onPress,
-  title = null,
-  subTitle = null,
-  size = "compact",
-  showMapIcon = false,
-  showChildFriendlyIcon = false,
-  geolocation,
-  itemLocation,
-  index,
-}: Props) => {
+                     id,
+                     image,
+                     onPress,
+                     title = null,
+                     subTitle = null,
+                     size = "compact",
+                     showMapIcon = false,
+                     showChildFriendlyIcon = false,
+                     geolocation,
+                     itemLocation,
+                     index,
+                     type
+                   }: Props) => {
   const icons = [];
 
   if (showChildFriendlyIcon) {
@@ -41,12 +44,12 @@ const GuideCard = ({
     icons.push(IconMapMarker);
   }
 
-  console.log("le index", index)
-
   return (
     <ImageCard
+      id={id}
       key={index}
       index={index}
+      type={type}
       image={image}
       onPress={onPress}
       title={title}
@@ -59,4 +62,4 @@ const GuideCard = ({
   );
 };
 
-export default memo(GuideCard)
+export default memo(GuideCard);

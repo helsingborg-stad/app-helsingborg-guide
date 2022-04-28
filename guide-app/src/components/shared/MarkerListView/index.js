@@ -524,7 +524,6 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-
 MarkerListView.defaultProps = {
   supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map],
 };

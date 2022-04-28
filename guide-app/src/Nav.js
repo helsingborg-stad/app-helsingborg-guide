@@ -40,6 +40,7 @@ import useInitialURL from "@hooks/useUniversalLinks";
 import NavigatorService from "@services/navigationService";
 import { initializeTracker } from "@utils/MatomoUtils";
 import { useSelector } from "react-redux";
+import { fetchAllGuidesforAllGroups } from "./actions/uiStateActions";
 
 const prefix = "guidehbg://";
 

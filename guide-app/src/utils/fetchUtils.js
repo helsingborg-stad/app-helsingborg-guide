@@ -86,7 +86,6 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
   if (ids.length === 0) {
     return [];
   }
-
   const params = idsToParamString(ids);
 
   const json = await fetchJSON("guides", langCode || "sv", params);

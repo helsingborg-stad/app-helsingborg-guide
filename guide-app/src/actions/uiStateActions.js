@@ -15,6 +15,11 @@ export function appBecameInactive(): Action {
   return { type: "APP_BECAME_INACTIVE" };
 }
 
+export function fetchAllGuidesForAllGroups(): Action {
+  console.log("DO I RUN?? 1")
+  return { type: "FETCH_ALL_GUIDES_FOR_ALL_GROUPS" };
+}
+
 export function selectCurrentGuideGroup(id: number): ThunkAction {
   return (dispatch: Dispatch, getState: GetState) => {
     const guideGroup: GuideGroup = Object.assign(

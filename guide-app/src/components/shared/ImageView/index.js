@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { Image } from "react-native";
-import { loadFromCache } from "@utils/DownloadMediaUtils";
+import { loadFromCache, startDownload } from "@utils/DownloadMediaUtils";
 
 const placeholderImage = require("@assets/images/no-image-featured-image.png");
 
@@ -25,7 +25,7 @@ export default class ImageView extends PureComponent<Props, State> {
 
     let imageSource = placeholderImage;
 
-
+    console.log("uri", uri, "sessionId", sessionId);
 
     if (uri) {
       if (sessionId) {
@@ -36,7 +36,8 @@ export default class ImageView extends PureComponent<Props, State> {
               imageSource: { uri: `data:image/png;base64,${data}` }
             });
           })
-          .catch(() => {
+          .catch((err) => {
+            startDownload(sessionId)
             // cache miss, download image
             this.setState({ imageSource: { uri } });
           });
