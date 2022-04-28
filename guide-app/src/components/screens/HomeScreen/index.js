@@ -216,20 +216,20 @@ const HomeScreen = (props: Props) => {
             </>
           </>
         </TouchableOpacity>
-        <Animated.View
-          style={[styles.backDrop, {
-            top: ((settingsHeight || 0) + (segmentLayout || 0) + (insets?.top || 0)),
-            backgroundColor: `rgba(0, 0, 0, 0.5)`,
-            opacity: backdropOpacity,
-            display: showSettings ? "flex" : "none"
-          }]}><TouchableOpacity
-          onPress={() => {
-            Keyboard.dismiss();
-            setShowSettings(false);
-          }}
-          activeOpacity={1}
-          style={styles.backDropDismiss} />
-        </Animated.View>
+        {/*<Animated.View*/}
+        {/*  style={[styles.backDrop, {*/}
+        {/*    top: ((settingsHeight || 0) + (segmentLayout || 0) + (insets?.top || 0)),*/}
+        {/*    backgroundColor: `rgba(0, 0, 0, 0.5)`,*/}
+        {/*    opacity: backdropOpacity,*/}
+        {/*    display: showSettings ? "flex" : "none"*/}
+        {/*  }]}><TouchableOpacity*/}
+        {/*  onPress={() => {*/}
+        {/*    Keyboard.dismiss();*/}
+        {/*    setShowSettings(false);*/}
+        {/*  }}*/}
+        {/*  activeOpacity={1}*/}
+        {/*  style={styles.backDropDismiss} />*/}
+        {/*</Animated.View>*/}
       </SafeAreaView>
     </>
   );

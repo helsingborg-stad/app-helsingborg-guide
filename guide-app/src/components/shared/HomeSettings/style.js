@@ -1,19 +1,32 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { Colors } from "@assets/styles";
 
 const styles = StyleSheet.create({
 
   settings: {
-    position: "absolute",
-    flex: 1,
+    position: "relative",
     backgroundColor: "#F0F0F0",
     maxWidth: Dimensions.get("window").width,
     paddingHorizontal: 16,
     overflow: "hidden",
-    zIndex: 1
+    zIndex: 1,
+  },
+
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    overflow: "visible",
+
   },
 
   wrapper: {
-    position: "relative"
+    position: "relative",
   },
 
   search: {},
@@ -22,7 +35,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 24,
     marginBottom: 8
   },
 
@@ -56,7 +68,7 @@ const styles = StyleSheet.create({
   },
 
   distance: {
-    marginBottom: 28
+    marginBottom: 20,
   },
 
   distanceText: {
@@ -99,7 +111,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5
   }
 

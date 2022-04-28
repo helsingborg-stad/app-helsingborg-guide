@@ -19,7 +19,7 @@ export default StyleSheet.create({
   },
   container: {
     backgroundColor: Colors.white,
-    height: "100%"
+    height: "100%",
   },
   contentContainer: {
     paddingHorizontal: 16,

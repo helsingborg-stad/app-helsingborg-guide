@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from "react";
-import { View, Text, TouchableOpacity, Animated } from "react-native";
+import { View, Text, TouchableOpacity, Animated, Keyboard } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash/function";
 import TextInput from "@shared-components/TextInput/TextInput";
@@ -19,6 +19,7 @@ const HomeSettings = (props) => {
   const dispatch = useDispatch();
   const [distance, setDistance] = useState([3]);
   const [showFilter, setShowFilter] = useState(false);
+  const [displayShadow, setDisplayShadow] = useState(false);
   const [height] = useState(new Animated.Value(0));
   const insets = useSafeAreaInsets();
   const [showButton, setShowButton] = useState(false);
@@ -34,8 +35,9 @@ const HomeSettings = (props) => {
   }, 800)
 
   const onTextChange = debounce((e) => {
+    console.log("THE E", e)
       dispatch(setSearchFilter({ text: e.length >= 3 ? e : "" }));
-  }, 1000);
+  }, 800);
 
   const onSwitchChange = (e) => {
     dispatch(setSearchFilter({ forChildren: e }));
@@ -47,6 +49,7 @@ const HomeSettings = (props) => {
 
   const toggleOpen = () => {
     setOpen(!open);
+    open && Keyboard.dismiss();
   };
 
 
@@ -56,6 +59,7 @@ const HomeSettings = (props) => {
       duration: 250,
       useNativeDriver: false
     }).start();
+    open ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false)
   }, [open]);
 
   useEffect(() => {
@@ -73,12 +77,10 @@ const HomeSettings = (props) => {
           !settingsHeight && event?.nativeEvent?.layout?.height && initialLoad(event?.nativeEvent?.layout);
         }}
         style={[styles.settings, {
-          marginTop: segmentLayout || 0,
-          zIndex: 1,
           height: settingsHeight ? height : undefined,
           visibility: settingsHeight ? "visible" : "hidden",
-          opacity: settingsHeight ? 1 : 0
-        }]}>
+          opacity: settingsHeight ? 1 : 0,
+        }, displayShadow && styles.shadow]}>
         <View style={styles.wrapper}>
           <View style={styles.search}>
             <View style={styles.searchTop}>

@@ -25,7 +25,6 @@ const _TextInput = (props) => {
     isSearch,
     iconColor,
     autoFocus,
-    expandable,
     flex
   } = props;
 
@@ -49,7 +48,7 @@ const _TextInput = (props) => {
   return (
     <>
       <View
-        style={[((expandable && isKeyBoardOpen) ? styles.wrapperFocused : styles.wrapper), { ...(flex && { flex: 1 }) }]}>
+        style={[styles.wrapper, { ...(flex && { flex: 1 }) }]}>
         <View style={styles.container}>
           <Animated.View
             style={[styles.inputContainer, {
@@ -70,7 +69,7 @@ const _TextInput = (props) => {
               {...(defaultValue ? { defaultValue: defaultValue } : {})}
               {...(placeholderTextColor ? { placeholderTextColor: placeholderTextColor } : {})}
               onFocus={() => {
-                if (isSearch && expandable) {
+                if (isSearch) {
                   inputRef?.current?.focus();
                 }
               }}
@@ -79,6 +78,7 @@ const _TextInput = (props) => {
             <TouchableOpacity
               onPress={() => isKeyBoardOpen ? (() => {
                 Keyboard.dismiss();
+                onChangeText("");
                 inputRef?.current?.clear();
               })() : inputRef?.current?.focus()}
             >
