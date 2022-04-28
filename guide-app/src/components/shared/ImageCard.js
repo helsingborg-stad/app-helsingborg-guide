@@ -48,10 +48,10 @@ const ImageCard = ({
     switch (type) {
       case "guidegroup":
         const groupAmount = all?.guideGroups?.find(item => item.parentID === id);
-        return groupAmount ? (groupAmount.guideAmount + " " + LangService.strings.ACTIVITIES).toUpperCase() : "";
+        return groupAmount ? (groupAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
       case "guide":
         const guideAmount = all?.guides?.find(item => item.parentID === id);
-        return guideAmount ? (guideAmount.guideAmount + " " + LangService.strings.ACTIVITIES).toUpperCase() : "";
+        return guideAmount ? (guideAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
     }
   };
 
