@@ -53,7 +53,6 @@ const GuideApp = () => {
     }
   }, [netInfo]);
 
-
   useEffect(() => {
     ignoreNonImportant();
     subscribeToNotifications();

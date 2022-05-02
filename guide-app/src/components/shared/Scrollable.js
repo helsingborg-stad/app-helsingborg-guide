@@ -19,31 +19,31 @@ const Scrollable = (props) => {
   // Throtteling to prevent spamming
 
   useEffect(() => {
+    let isMounted = true;
+    console.log("IS MOUNTED", isMounted, refreshing, !!refreshAction)
     if (refreshing && !!refreshAction) {
       throttle(() => {
-        refreshAction()
+        isMounted && refreshAction();
       }, 2000)();
     }
+    return () => {
+      setRefreshing(false);
+      isMounted = false;
+    };
   }, [refreshing]);
-
-  // Cleanup on unmount
-
-  useEffect(() => {
-    return setRefreshing(false);
-  }, []);
-
 
   return (
     <ScrollView
       style={style}
       contentContainerStyle={contentContainerStyle}
+      scrollEventThrottle={0}
       onScroll={(e) => onScroll && onScroll(e)}
       {...(refreshControl ? {
         refreshControl:
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-          />,
+          />
       } : {})}
     >
       {children}

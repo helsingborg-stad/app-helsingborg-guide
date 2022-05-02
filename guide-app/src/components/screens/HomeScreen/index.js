@@ -8,7 +8,7 @@ import {
   StatusBar,
   Text,
   Keyboard,
-  Animated,
+  Animated
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Orientation from "react-native-orientation-locker";
@@ -92,12 +92,12 @@ const HomeScreen = (props: Props) => {
     currentLanguage,
     dispatchShowBottomBar,
     dispatchClearSearchFilter,
-    dispatchFetchAllGuidesforAllGroups,
+    dispatchFetchAllGuidesforAllGroups
   } = props;
 
   useEffect(() => {
     dispatchFetchAllGuidesforAllGroups();
-  },[])
+  }, []);
 
   useEffect(() => {
     if (navigation.isFocused()) {
@@ -235,7 +235,7 @@ function mapStateToProps(state: RootState) {
     guides,
     uiState: { currentHomeTab, searchFilter },
     geolocation,
-    position,
+    position
   } = state;
   const { navigationCategories, currentLanguage } = navigation;
   const { fetchingIds } = guideGroups;
@@ -275,10 +275,7 @@ function mapStateToProps(state: RootState) {
       ? categories[currentHomeTab]?.data
       : null;
 
-
   const coords = geolocation?.coords || geolocation?.position?.coords || position?.coords;
-
-  console.log("COORDS", coords)
 
   if (items?.length) {
     items = items.filter(item => {
@@ -354,7 +351,7 @@ function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
     dispatchClearSearchFilter: () =>
       dispatch(clearSearchFilter()),
     dispatchFetchAllGuidesforAllGroups: () =>
-      dispatch(fetchAllGuidesForAllGroups()),
+      dispatch(fetchAllGuidesForAllGroups())
   };
 }
 
