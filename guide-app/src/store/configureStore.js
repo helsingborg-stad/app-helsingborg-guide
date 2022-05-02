@@ -14,10 +14,20 @@ import patchContentMiddleware from "@src/middleware/patchContentMiddleware";
 const config = {
   key: "root",
   storage: AsyncStorage,
-  blacklist: ["error", "menu", "internet", "audio", "uiState", "quiz", "hasLocationStatus", "events", "geolocation"],
+  blacklist: [
+    "error",
+    "menu",
+    "internet",
+    "audio",
+    "uiState",
+    "quiz",
+    "hasLocationStatus",
+    "events",
+    "geolocation",
+  ],
   version: 1,
   debug: __DEV__,
-  stateReconciler: autoMergeLevel2
+  stateReconciler: autoMergeLevel2,
 };
 
 // "guides", "guideGroups", "navigation"
@@ -29,7 +39,7 @@ const middlewares = [
   offlineDataMiddleware,
   audioMiddleware,
   navigationMiddleware,
-  thunk
+  thunk,
 ];
 
 if (__DEV__) {
@@ -43,7 +53,7 @@ const store = configureStore({
   reducer: reducer,
   middleware: middlewares,
   enhancers: [composeEnhancers],
-  devTools: __DEV__
+  devTools: __DEV__,
 });
 
 export default store;
