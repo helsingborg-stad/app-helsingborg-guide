@@ -88,6 +88,7 @@ export default class LocationService {
     new Promise((resolve, reject) =>
       getLocation().then(
         position => {
+          console.log("POSITION refresh", position)
           this.store.dispatch(geolocationUpdated(position));
           return resolve(position);
         },
@@ -109,6 +110,7 @@ export default class LocationService {
             position => {
               if (!this.timeout) {
                 this.timeout = true;
+                console.log("POSITION", position)
                 this.store.dispatch(geolocationUpdated(position));
               }
               else {

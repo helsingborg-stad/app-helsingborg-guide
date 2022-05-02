@@ -35,7 +35,6 @@ const HomeSettings = (props) => {
   }, 800)
 
   const onTextChange = debounce((e) => {
-    console.log("THE E", e)
       dispatch(setSearchFilter({ text: e.length >= 3 ? e : "" }));
   }, 800);
 
@@ -51,7 +50,6 @@ const HomeSettings = (props) => {
     setOpen(!open);
     open && Keyboard.dismiss();
   };
-
 
   useEffect(() => {
     Animated.timing(height, {

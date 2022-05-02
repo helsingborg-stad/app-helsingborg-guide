@@ -209,6 +209,7 @@ declare type GuideGroup = {
   distance?: number
 };
 
+
 declare type GuideGroupState = {
   isFetching: boolean,
   items: GuideGroup[]
@@ -352,15 +353,16 @@ declare type RootState = {
   guides: GuideState,
   guidesForGroup: GuidesForGroupState,
   events: EventState,
-  geolocation: {
-    position: GeolocationType,
-    bearing: number
-  },
+  geolocation: GeoLocationState,
   audio: AudioState,
   downloadedGuides: DownloadedGuidesState,
   navigation: NavigationState,
   arState: ARState,
-  quiz: QuizState
+  quiz: QuizState,
+};
+
+declare type GeoLocationState = {
+  position: null,
 };
 
 declare type Quiz = {

@@ -6,7 +6,7 @@ import { Alert, UIManager, Platform, Linking, LogBox } from "react-native";
 import { Host } from "react-native-portalize";
 import NetInfo from "@react-native-community/netinfo";
 import Nav from "@src/Nav";
-import configureStore from "@src/store/configureStore";
+import store from "@src/store/configureStore";
 import internetChanged from "@actions/internetActions";
 import LangService from "@services/langService";
 import Opener from "@services/SettingsService";
@@ -22,7 +22,6 @@ import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
 import useNotifications from "@hooks/useNotifications";
 
-const { store, persistor } = configureStore();
 
 
 // TODO decouple these store reference hacks
@@ -124,14 +123,12 @@ const GuideApp = () => {
   return (
     <SafeAreaProvider>
       <Host>
-        <PersistGate persistor={persistor}>
           <TrackingPermission />
           <Nav
             onAppStarted={() => store.dispatch(appStarted())}
             onAppBecameActive={() => store.dispatch(appBecameActive())}
             onAppBecameInactive={() => store.dispatch(appBecameInactive())}
           />
-        </PersistGate>
       </Host>
     </SafeAreaProvider>
   );

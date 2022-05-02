@@ -14,8 +14,9 @@ import uiState from "./uiStateReducer";
 import downloadedGuides from "./downloadedGuides";
 import arState from "./arReducer";
 import quiz from "./quizReducer";
+import { combineReducers } from "redux";
 
-const rootReducer = {
+const rootReducer = combineReducers({
   events,
   guideGroups,
   guides,
@@ -32,6 +33,6 @@ const rootReducer = {
   uiState,
   arState,
   quiz,
-};
+});
 
 export default rootReducer;

@@ -1,18 +1,21 @@
 import React from "react";
 import { AppRegistry } from "react-native";
+import { persistStore } from 'redux-persist'
 import Orientation from "react-native-orientation-locker";
 import Helsingborg from "guide-app/src/App";
 import useNotifications from "@hooks/useNotifications";
 import FullScreenVideoScreen from "guide-app/src/components/screens/FullScreenVideoScreen";
 import { name as AppName } from "./app.json";
-import configureStore from "@src/store/configureStore";
+import store from "@src/store/configureStore";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
-const { store } = configureStore();
+let persistor = persistStore(store)
 
 Orientation.lockToPortrait();
 
 const { setBackgroundNotificationHandler } = useNotifications();
+
 setBackgroundNotificationHandler();
 
 function HeadlessCheck({ isHeadless }) {
@@ -21,7 +24,9 @@ function HeadlessCheck({ isHeadless }) {
     return null;
   }
   return <Provider store={store}>
-    <Helsingborg />
+    <PersistGate loading={null} persistor={persistor}>
+      <Helsingborg />
+    </PersistGate>
   </Provider>;
 }
 

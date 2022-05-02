@@ -84,7 +84,7 @@ const HomeScreen = (props: Props) => {
   const insets = useSafeAreaInsets();
   const [backdropOpacity] = useState(new Animated.Value(0));
   const { searchFilter } = useSelector(s => s.uiState);
-  const { geolocation } = useSelector(s => s.uiState);
+  const state = useSelector(s => s);
 
   const id_1 = params?.id_1;
   const locationService = LocationService.getInstance();
@@ -105,6 +105,10 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     dispatchFetchAllGuidesforAllGroups();
   },[])
+
+  useEffect(() => {
+    console.log("GEO", state.geolocation)
+  },[state])
 
   useEffect(() => {
     if (navigation.isFocused()) {
@@ -241,13 +245,15 @@ function mapStateToProps(state: RootState) {
     guideGroups,
     guides,
     uiState: { currentHomeTab, searchFilter },
-    geolocation
+    geolocation,
+    position,
   } = state;
   const { navigationCategories, currentLanguage } = navigation;
   const { fetchingIds } = guideGroups;
   const { distance, text: searchText } = searchFilter;
   let categories = "";
   let distanceMetres = distance * 1000;
+
 
   categories = [...navigationCategories.map(cat => {
     const data = cat.items
@@ -280,7 +286,10 @@ function mapStateToProps(state: RootState) {
       ? categories[currentHomeTab]?.data
       : null;
 
-  const coords = geolocation?.coords || geolocation?.position?.coords;
+
+  const coords = geolocation?.coords || geolocation?.position?.coords || position?.coords;
+
+  console.log("COORDS", coords)
 
   if (items?.length) {
     items = items.filter(item => {

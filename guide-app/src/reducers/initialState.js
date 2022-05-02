@@ -6,7 +6,5 @@ export default {
   error: {},
   downloads: [],
   downloadDataVersion: 0,
-  position: null,
   hasLocationStatus: false,
-  geolocation: null,
 };
