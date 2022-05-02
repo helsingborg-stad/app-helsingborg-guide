@@ -7,14 +7,10 @@ import {
   Image,
   StatusBar,
   Text,
-  ScrollView,
   Keyboard,
   Animated,
-  TouchableWithoutFeedback
 } from "react-native";
-import { useSelector } from "react-redux";
-import Modal from "react-native-modal";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Orientation from "react-native-orientation-locker";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
@@ -81,10 +77,7 @@ const HomeScreen = (props: Props) => {
   const [segmentLayout, setSegmentLayout] = useState(0);
   const [showSettings, setShowSettings] = useState(false);
   const [settingsHeight, setSettingsHeight] = useState(false);
-  const insets = useSafeAreaInsets();
   const [backdropOpacity] = useState(new Animated.Value(0));
-  const { searchFilter } = useSelector(s => s.uiState);
-  const state = useSelector(s => s);
 
   const id_1 = params?.id_1;
   const locationService = LocationService.getInstance();
@@ -105,10 +98,6 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     dispatchFetchAllGuidesforAllGroups();
   },[])
-
-  useEffect(() => {
-    console.log("GEO", state.geolocation)
-  },[state])
 
   useEffect(() => {
     if (navigation.isFocused()) {

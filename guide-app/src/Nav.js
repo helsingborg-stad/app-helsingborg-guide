@@ -7,7 +7,6 @@ import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { UNIVERSAL_LINKING_URL } from "@data/endpoints";
 
-
 import {
   CalendarScreen,
   DebugScreen,
@@ -39,8 +38,6 @@ import { Colors, HeaderStyles } from "@assets/styles";
 import useInitialURL from "@hooks/useUniversalLinks";
 import NavigatorService from "@services/navigationService";
 import { initializeTracker } from "@utils/MatomoUtils";
-import { useSelector } from "react-redux";
-import { fetchAllGuidesforAllGroups } from "./actions/uiStateActions";
 
 const prefix = "guidehbg://";
 
@@ -132,7 +129,6 @@ type Props = {
   onAppBecameInactive(): void,
 };
 
-
 const Nav = (props: Props) => {
 
   const { onAppStarted, onAppBecameActive, onAppBecameInactive } = props;
@@ -147,7 +143,6 @@ const Nav = (props: Props) => {
     AppState.addEventListener("change", onAppStateChange);
   }, []);
 
-
   useEffect(() => {
     if (url && homeLoaded) {
       if (url?.includes(UNIVERSAL_LINKING_URL)) {
@@ -159,7 +154,6 @@ const Nav = (props: Props) => {
       }
     }
   }, [url, homeLoaded]);
-
 
   const onNavigationStateChange = (prevState: Object, currentState: Object) => {
     const currentScreen = Nav.getCurrentRouteName(currentState);
