@@ -25,6 +25,18 @@ export default StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 100
   },
+
+  title: StyleSheetUtils.flatten([
+    TextStyles.defaultFontFamily,
+    {
+      fontSize: 22,
+      marginTop: 25,
+      marginBottom: 10,
+      fontWeight: '400',
+      color: "rgba(41, 41, 41, 1)"
+    },
+  ]),
+
   barButtonItem: {
     flexDirection: "row",
     alignItems: "center",

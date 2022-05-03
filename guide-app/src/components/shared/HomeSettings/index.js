@@ -135,7 +135,7 @@ const HomeSettings = (props) => {
             </View>
           </View>
           <View style={styles.distance}>
-            <Text style={styles.distanceText}>{LangService.strings.DISTANCE}</Text>
+            <Text style={styles.distanceText}>{LangService.strings.DISTANCE + " " + LangService.strings.FROM_YOU}</Text>
             <DraggableSilder
               values={distance}
               min={minKm}
@@ -151,7 +151,7 @@ const HomeSettings = (props) => {
             />
             <View style={styles.distanceValues}>
               <Text style={styles.distanceValue}>{minKm} km</Text>
-              <Text style={styles.distanceValue}> {"> " + maxKm} km</Text>
+              <Text style={styles.distanceValue}> {LangService.strings.MORE_THAN + " " + maxKm} km</Text>
             </View>
           </View>
           {showButton && <Portal>

@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState, memo } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import styles from "./styles";
 import { trackScreen } from "../../../utils/MatomoUtils";
+import NavigatorService from "@services/navigationService";
+import LangService from "@services/langService";
 
 type Props = {
   labels: [],
@@ -10,16 +12,16 @@ type Props = {
 };
 
 export const SegmentControlPill = ({
-  initialSelectedIndex = 0,
-  onSegmentIndexChange,
-  labels,
-}: Props) => {
+                                     initialSelectedIndex = 0,
+                                     onSegmentIndexChange,
+                                     labels
+                                   }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
 
   const onPressSegment = useCallback(
     (index, label) => () => {
       setSelectedIndex(index);
-      const path = `/${index ? "tours" : "places"}`
+      const path = `/${index ? "experiences" : "map"}`;
       trackScreen(path, path);
       if (onSegmentIndexChange) {
         onSegmentIndexChange(index);
@@ -30,7 +32,7 @@ export const SegmentControlPill = ({
   useEffect(() => {
     trackScreen(`/places`, `/places`);
     return setSelectedIndex(0);
-  },[])
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -39,17 +41,17 @@ export const SegmentControlPill = ({
           <TouchableOpacity
             style={[
               styles.pill,
-              index === selectedIndex ? styles.pillActive : null,
+              index === selectedIndex ? styles.pillActive : null
             ]}
             onPress={onPressSegment(index, label)}
           >
             <Text
               style={[
                 styles.label,
-                index === selectedIndex ? styles.labelActive : null,
+                index === selectedIndex ? styles.labelActive : null
               ]}
             >
-              {label}
+              {label === "map" ? LangService.strings.MAP : label}
             </Text>
           </TouchableOpacity>
         </View>

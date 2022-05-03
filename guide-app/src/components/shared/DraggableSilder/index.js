@@ -13,8 +13,6 @@ const DraggableSilder = (props) => {
   const setDisableLabel = () => setLabel(false);
 
 
-  console.log("VALUES", values);
-
   return (
     <View style={styles.container}>
       <MultiSlider

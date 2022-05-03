@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
   },
 
   forChildrenText: {
-    paddingLeft: 6
+    paddingLeft: 6,
   },
 
   searchBottom: {
-    marginBottom: 24
+    marginBottom: 24,
   },
 
   distance: {
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
   distanceValues: {
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-between"
-
+    justifyContent: "space-between",
+    marginTop: -10,
   },
 
   distanceValue: {

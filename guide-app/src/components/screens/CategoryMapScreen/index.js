@@ -1,20 +1,14 @@
 // @flow
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { StatusBar, View } from "react-native";
+import { View } from "react-native";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
-import MarkerListView from "@shared-components/MarkerListView";
 import {
-  selectCurrentGuideByID,
-  selectCurrentGuideGroup,
-  selectCurrentCategory,
   showBottomBar
 } from "@actions/uiStateActions";
 
-import { AnalyticsUtils } from "@utils";
-import { Colors, HeaderStyles } from "@assets/styles";
-import { trackScreen } from "@utils/MatomoUtils";
-
+import { HeaderStyles } from "@assets/styles";
+import Map from "@shared-components/Map";
 
 type Props = {
   navigation: any,
@@ -41,7 +35,6 @@ class CategoryMapScreen extends Component<Props> {
 
   constructor(props: Props) {
     super(props);
-
     const { currentCategory } = props;
     if (currentCategory) {
       const { name: title } = currentCategory;
@@ -57,78 +50,13 @@ class CategoryMapScreen extends Component<Props> {
     this.props.dispatchShowBottomBar(true);
   }
 
-  onPressItem = (item: NavigationItem): void => {
-    switch (item.type) {
-      case "guide": {
-        this.props.selectGuide(item.id);
-        const { guide } = item;
-        if (guide) {
-          const { guideType } = guide;
-          if (guideType === "guide") {
-            const slug = guide?.slug;
-            const title = guide?.name;
-            trackScreen("view_guide", slug || title);
-            this.props.navigation.navigate("GuideDetailsScreen", {
-              title: title
-            });
-          } else if (guideType === "trail") {
-            const slug = guide?.slug;
-            const title = guide?.name;
-            trackScreen("view_guide", slug || title);
-            this.props.navigation.navigate("TrailScreen", {
-              title: title
-            });
-          }
-        }
-        break;
-      }
-      case "guidegroup":
-        this.props.selectGuideGroup(item.id);
-        if (item.guideGroup) {
-          const title = item?.guideGroup?.name;
-          const slug = item?.guideGroup?.slug;
-          trackScreen("view_location", slug || title);
-          // AnalyticsUtils.logEvent("view_location", {
-          //   name: slug
-          // });
-          this.props.navigation.navigate("LocationScreen", { title });
-        }
-        break;
-      default:
-    }
-  };
-
   render() {
-    const { currentCategory, navigation } = this.props;
-    if (!currentCategory) {
-      return null;
-    }
-
-    const { items } = currentCategory;
-
-    const mapItems: MapItem[] = [];
-    items.forEach(navItem => {
-      const { guide, guideGroup } = navItem;
-      if (guideGroup) {
-        mapItems.push({ guideGroup: navItem.guideGroup });
-      }
-      if (guide) {
-        mapItems.push({ guide });
-      }
-    });
+    const { navigation } = this.props;
 
     return (
-      <>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={Colors.themeSecondary}
-        />
-        <MarkerListView
-          items={mapItems}
-          navigation={navigation}
-          showListButton={false}
-        />
-      </>
+      <Map
+        navigation={navigation}
+      />
     );
   }
 }
@@ -145,10 +73,6 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    selectGuide: (id: number) => dispatch(selectCurrentGuideByID(id)),
-    selectGuideGroup: (id: number) => dispatch(selectCurrentGuideGroup(id)),
-    selectCurrentCategory: (category: NavigationCategory) =>
-      dispatch(selectCurrentCategory(category.id)),
     dispatchShowBottomBar: (visible: boolean) =>
       dispatch(showBottomBar(visible))
   };

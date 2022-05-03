@@ -1,5 +1,5 @@
 // @flow
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   FlatList,
@@ -47,7 +47,7 @@ const HalfListMargin = DefaultMargin * 0.5;
 
 const MarkerListView = (props: Props) => {
   const { supportedNavigationModes, navigation, items, userLocation } = props;
-  const { params } = navigation.state;
+  const params = navigation?.state?.params;
   const redirect = params?.redirect;
 
   const [selectedNavigationMode, setSelectedNavigationMode] = useState(supportedNavigationModes
@@ -58,18 +58,17 @@ const MarkerListView = (props: Props) => {
   const [showHorizontalList, setShowHorizontalList] = useState(true);
   const listRef = useRef();
 
-
   let mapMarkerViewRef = MapMarkerView;
-
 
   useEffect(() => {
     (async () => {
       if (listRef.current && !(!!redirect)) {
         setActiveMarker(items[0]);
-        setTimeout(() => scrollToIndex(0), 100)
+        setTimeout(() => scrollToIndex(0), 500);
+        setTimeout(() => mapMarkerViewRef?.panMapToIndex(0, 500));
       }
     })();
-  }, [listRef]);
+  }, [listRef, mapMarkerViewRef]);
 
 
   useEffect(() => {
@@ -436,7 +435,7 @@ const MarkerListView = (props: Props) => {
     setRecentlyTappedPin(true);
     setActiveMarker(items[index]);
     console.log("listRef", !!listRef.current);
-    if (listRef.current) {
+    if (listRef?.current) {
       const x = (ListItemWidth + DefaultMargin / 2) * index - 15;
       listRef.current.scrollToOffset({ offset: x });
     }
@@ -451,18 +450,9 @@ const MarkerListView = (props: Props) => {
 
     if (supportedNavigationModes) {
       const _selectedNavigationMode = supportedNavigationModes[index];
-
-      if (_selectedNavigationMode === NavigationModeUtils.NavigationModes.AR) {
-        AnalyticsUtils.logEvent("tap_ar_tab_button");
-      } else if (
-        _selectedNavigationMode === NavigationModeUtils.NavigationModes.Map
-      ) {
-        AnalyticsUtils.logEvent("tap_map_tab_button");
-      }
       setSelectedNavigationMode(_selectedNavigationMode);
     }
   };
-
 
   const initialLocation = getInitialLocation();
 
@@ -528,4 +518,4 @@ MarkerListView.defaultProps = {
   supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map],
 };
 
-export default memo(connect(mapStateToProps, mapDispatchToProps)(MarkerListView));
+export default connect(mapStateToProps, mapDispatchToProps)(MarkerListView)

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 // @flow
 import React, { useEffect, useState } from "react";
 import {
@@ -38,7 +39,7 @@ import mapIcon from "@assets/images/mapIcon.png";
 import useDeepLinking from "@hooks/useDeepLinking";
 import useGuides from "@hooks/useGuides";
 import LocationService from "@services/locationService";
-
+import Map from "@shared-components/Map";
 
 type Section = {
   title: string,
@@ -146,7 +147,7 @@ const HomeScreen = (props: Props) => {
     return <ActivityIndicator style={styles.loadingSpinner} />;
   }
 
-
+  console.log("currentHomeTab", typeof currentHomeTab, currentHomeTab);
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
@@ -161,10 +162,10 @@ const HomeScreen = (props: Props) => {
               <SegmentControlPill
                 initialSelectedIndex={currentHomeTab}
                 onSegmentIndexChange={selectCurrentTab}
-                labels={navigationCategoryLabels}
+                labels={[...navigationCategoryLabels, "map"]}
               />
             </View>
-            <>
+            {currentHomeTab === 0 ? <>
               {segmentLayout ?
                 <HomeSettings open={showSettings} setOpen={toggleSettings} settingsHeight={settingsHeight}
                               setSettingsHeight={setSettingsHeight} segmentLayout={segmentLayout}
@@ -189,6 +190,7 @@ const HomeScreen = (props: Props) => {
                       props.dispatchShowBottomBar(true);
                     }}
                   >
+                    <Text style={styles.title}>{LangService.strings.EXPERIENCES}</Text>
                     {items?.length && items.map((item, index) => (
                       <NavigationListItem
                         key={item.id}
@@ -206,7 +208,7 @@ const HomeScreen = (props: Props) => {
                   </TouchableOpacity>
                 </>
               )}
-            </>
+            </> : <Map navigation={navigation} barStyle={"dark-content"} />}
           </>
         </TouchableOpacity>
         {/*<Animated.View*/}

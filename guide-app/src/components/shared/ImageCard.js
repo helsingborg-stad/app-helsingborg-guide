@@ -149,10 +149,9 @@ const styles = StyleSheet.create({
     position: "relative",
     flexShrink: 1,
     width: "100%",
-    height: 85,
+    height: 77,
     backgroundColor: "white",
-    justifyContent: "flex-start",
-    paddingTop: 10
+    justifyContent: "center"
   },
 
   icon: {
@@ -206,10 +205,10 @@ const styles = StyleSheet.create({
     letterSpacing: 0.91,
     position: "absolute",
     right: 0,
-    bottom: -40,
+    bottom: -25,
     padding: 15,
     fontSize: 16,
-    color: "rgba(41, 41, 41, 1)"
+    color: "rgba(41, 41, 41, 1)",
   },
   subTitleLabel: {
     paddingLeft: 20,
@@ -217,8 +216,8 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     letterSpacing: 0.91,
     color: Colors.gray3,
-    paddingTop: 5,
-    fontSize: 12
+    paddingTop: 6,
+    fontSize: 11,
   },
   descriptionLabel: {},
   mapIcon: {
