@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, Linking } from "react-native";
-import { PanGestureHandler, ScrollView } from "react-native-gesture-handler";
+import { PanGestureHandler, ScrollView, State } from "react-native-gesture-handler";
 
 import ObjectButtons from "./ObjectButtons";
 import styles from "./style";
@@ -124,15 +124,24 @@ function displayButtons(
   );
 }
 
-const onHorizontalSwipe = (evt, swiped, setSwiped) => {
+const onHorizontalSwipe = (evt, swiped, setSwiped, disableSwipe, setDisableSwipe) => {
   const { nativeEvent } = evt;
-  if (!swiped) {
+  if (!swiped && !disableSwipe) {
     if (nativeEvent.velocityX > 220) {
       setSwiped("right");
+      setDisableSwipe(true);
     }
     if (nativeEvent.velocityX < -220) {
       setSwiped("left");
+      setDisableSwipe(true);
     }
+  }
+};
+
+const onHandlerStateChange = (evt, setDisableSwipe) => {
+  const { nativeEvent } = evt;
+  if (nativeEvent.state === State.END) {
+    setDisableSwipe(false)
   }
 };
 
@@ -152,6 +161,14 @@ const ObjectView = (props: Props) => {
     path,
   } = props;
   const [swiped, setSwiped] = useState(false);
+  const [disableSwipe, setDisableSwipe] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      setSwiped(false);
+      setDisableSwipe(false);
+    }
+  },[])
 
   useEffect(() => {
     setTimeout(() => setSwiped(false), 180);
@@ -175,7 +192,7 @@ const ObjectView = (props: Props) => {
             currentGuide: array[order + 1],
             order: order + 1,
             array: array,
-            swipeable: true,
+            swipeable: true
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -195,7 +212,7 @@ const ObjectView = (props: Props) => {
             currentGuide: array[order - 1],
             array: array,
             order: order - 1,
-            swipeable: true,
+            swipeable: true
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -204,6 +221,7 @@ const ObjectView = (props: Props) => {
     }
   }, [swiped]);
 
+  console.log("STATE", State);
   return (
     <View style={styles.viewContainer}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -229,8 +247,9 @@ const ObjectView = (props: Props) => {
           <PanGestureHandler
             activeOffsetX={[-10, 10]}
             onGestureEvent={(e) =>
-              swipeable ? onHorizontalSwipe(e, swiped, setSwiped) : null
+              swipeable ? onHorizontalSwipe(e, swiped, setSwiped, disableSwipe, setDisableSwipe) : null
             }
+            onHandlerStateChange={(e) => onHandlerStateChange(e, setDisableSwipe)}
           >
             <View style={styles.bodyContainer}>
               <View style={styles.infoContainer}>

@@ -52,7 +52,7 @@ export function fetchAllGuidesForAllGroups(langCode: string, ids: []): ThunkActi
     };
     all.guideGroups = await Promise.all(_groups);
     all.guides = await _guides();
-    if (all.guideGroups.length && all.guides.length) {
+    if (all.guideGroups.length || all.guides.length) {
       dispatch(fetchAllGuidesForAllGroupsSuccess(all))
     }
   };
