@@ -82,7 +82,7 @@ const _TextInput = (props) => {
                 inputRef?.current?.clear();
               })() : inputRef?.current?.focus()}
             >
-              <Icon name={isKeyBoardOpen ? "close" : "search"} size={22} color={iconColor || "#9D9D9D"} />
+              <Icon name={isKeyBoardOpen ? "close" : "search"} size={28} color={iconColor || "#383838"} />
             </TouchableOpacity>
             }
           </Animated.View>

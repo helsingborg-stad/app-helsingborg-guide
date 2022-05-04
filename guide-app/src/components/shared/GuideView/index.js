@@ -28,7 +28,7 @@ declare type Props = {
   onPressContentObject(obj: ContentObject): void,
 };
 
-const textMaxHeight = Dimensions.get("window").height * 0.2;
+const textMaxHeight = Dimensions.get("window").height * 0.15;
 
 class GuideView extends Component<Props> {
   renderContentObject = (sessionId: number, obj: ContentObject, index, array) => {

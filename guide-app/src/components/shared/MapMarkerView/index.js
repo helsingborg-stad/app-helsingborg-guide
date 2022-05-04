@@ -225,6 +225,7 @@ class MapMarkerView extends PureComponent<Props, State> {
 
   render() {
     const { items, initialLocation } = this.props;
+    console.log(this.latitudeDelta, this.longitudeDelta)
     return (
       <View style={styles.container}>
         <MapView

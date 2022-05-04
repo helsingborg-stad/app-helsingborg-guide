@@ -16,6 +16,7 @@ export default StyleSheet.create({
     marginHorizontal: 16,
     padding: 2,
     zIndex: 3,
+    marginBottom: 20,
   },
   pillContainer: {
     flexGrow: 1,

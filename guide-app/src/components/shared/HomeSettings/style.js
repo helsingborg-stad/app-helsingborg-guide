@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
 
   settings: {
     position: "relative",
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "#F8F8F8",
     maxWidth: Dimensions.get("window").width,
     paddingHorizontal: 16,
     overflow: "hidden",
@@ -15,17 +15,17 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    overflow: "visible",
+    overflow: "visible"
 
   },
 
   wrapper: {
-    position: "relative",
+    position: "relative"
   },
 
   search: {},
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 
   searchTopLeft: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: "500",
     fontFamily: "Roboto",
     color: "#292929"
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontFamily: "Roboto",
     color: "#292929",
-    opacity: 0.8
+    opacity: 0.8,
   },
 
   forChildren: {
@@ -59,30 +59,29 @@ const styles = StyleSheet.create({
   },
 
   forChildrenText: {
-    paddingLeft: 6,
+    paddingLeft: 6
   },
 
   searchBottom: {
-    marginBottom: 24,
+    marginBottom: 24
   },
 
   distance: {
-    marginBottom: 20,
+    marginBottom: 20
   },
 
   distanceText: {
-    fontSize: 16,
-    fontWeight: "400",
+    fontSize: 20,
+    fontWeight: "500",
     fontFamily: "Roboto",
     color: "#292929",
-    paddingBottom: 6
   },
 
   distanceValues: {
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
-    marginTop: -10,
+    marginTop: -10
   },
 
   distanceValue: {
@@ -94,10 +93,10 @@ const styles = StyleSheet.create({
   toggleSettings: {
     position: "absolute",
     minWidth: 30,
-    height: 30,
-    borderRadius: 30,
-    backgroundColor: "#F0F0F0",
-    paddingHorizontal: 5,
+    height: 35,
+    borderRadius: 15,
+    backgroundColor: "#F8F8F8",
+    paddingHorizontal: 20,
     flexDirection: "row",
     alignContent: "center",
     alignSelf: "center",
@@ -106,13 +105,20 @@ const styles = StyleSheet.create({
     shadowColor: "#3f3f3f",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
-  }
+    elevation: 5,
+  },
 
+  toggleSettingsText: {
+    fontSize: 16,
+    fontWeight: "400",
+    fontFamily: "Roboto",
+    paddingLeft: 5,
+    letterSpacing: 0.91,
+  },
 
 });
 

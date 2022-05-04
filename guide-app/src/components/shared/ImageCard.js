@@ -28,7 +28,7 @@ type Props = {
 };
 
 const ImageCard = ({
-                     id,
+  id,
                      image,
                      onPress,
                      title = null,
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     bottom: -25,
     padding: 15,
     fontSize: 16,
-    color: "rgba(41, 41, 41, 1)",
+    color: "rgba(41, 41, 41, 1)"
   },
   subTitleLabel: {
     paddingLeft: 20,
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.91,
     color: Colors.gray3,
     paddingTop: 6,
-    fontSize: 11,
+    fontSize: 11
   },
   descriptionLabel: {},
   mapIcon: {

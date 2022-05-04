@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo } from "react";
 import { View, Text, TouchableOpacity, Animated, Keyboard } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash/function";
 import TextInput from "@shared-components/TextInput/TextInput";
@@ -23,19 +24,19 @@ const HomeSettings = (props) => {
   const [height] = useState(new Animated.Value(0));
   const insets = useSafeAreaInsets();
   const [showButton, setShowButton] = useState(false);
-  const { searchFilter } = useSelector(s => s.uiState)
-  const [searchText, setSearchText] = useState(searchFilter?.text || "")
+  const { searchFilter } = useSelector(s => s.uiState);
+  const [searchText, setSearchText] = useState(searchFilter?.text || "");
   const minKm = 0.1;
   const maxKm = 3;
   const step = 0.1;
 
   const onDistanceChange = debounce((e) => {
-      setDistance(e);
-      dispatch(setSearchFilter({ distance: e[0] }));
-  }, 800)
+    setDistance(e);
+    dispatch(setSearchFilter({ distance: e[0] }));
+  }, 800);
 
   const onTextChange = debounce((e) => {
-      dispatch(setSearchFilter({ text: e.length >= 3 ? e : "" }));
+    dispatch(setSearchFilter({ text: e.length >= 3 ? e : "" }));
   }, 800);
 
   const onSwitchChange = (e) => {
@@ -57,7 +58,7 @@ const HomeSettings = (props) => {
       duration: 250,
       useNativeDriver: false
     }).start();
-    open ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false)
+    open ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false);
   }, [open]);
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const HomeSettings = (props) => {
         style={[styles.settings, {
           height: settingsHeight ? height : undefined,
           visibility: settingsHeight ? "visible" : "hidden",
-          opacity: settingsHeight ? 1 : 0,
+          opacity: settingsHeight ? 1 : 0
         }, displayShadow && styles.shadow]}>
         <View style={styles.wrapper}>
           <View style={styles.search}>
@@ -150,7 +151,7 @@ const HomeSettings = (props) => {
               snapped={true}
             />
             <View style={styles.distanceValues}>
-              <Text style={styles.distanceValue}>{minKm} km</Text>
+              <Text style={styles.distanceValue}>0 km</Text>
               <Text style={styles.distanceValue}> {LangService.strings.MORE_THAN + " " + maxKm} km</Text>
             </View>
           </View>
@@ -159,10 +160,15 @@ const HomeSettings = (props) => {
               <TouchableOpacity
                 onPress={toggleOpen}
                 style={[styles.toggleSettings, {
-                  transform: [{ rotateX: open ? "180deg" : "0deg" }],
-                  top: ((segmentLayout || 0) + (insets?.top || 0)) - 15
+                  top: ((segmentLayout || 0) + (insets?.top || 0)) - 18
                 }]}>
-                <ArrowDown />
+                <View
+                  style={{ transform: [{ rotateX: open ? "180deg" : "0deg" }] }}
+                >
+                  <ArrowDown />
+                </View>
+                {/*<Icon name="sliders" size={20} />*/}
+                <Text style={styles.toggleSettingsText}>Filter</Text>
               </TouchableOpacity>
             </Animated.View>
           </Portal>
@@ -181,4 +187,4 @@ const HomeSettings = (props) => {
 };
 
 
-export default memo(HomeSettings)
+export default memo(HomeSettings);

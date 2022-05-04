@@ -200,15 +200,17 @@ const HomeScreen = (props: Props) => {
                       />
                     ))}
                   </Scrollable>
-                  <TouchableOpacity
-                    style={styles.mapButton}
-                    onPress={() => navigation.navigate("CategoryMapScreen")}
-                  >
-                    <Image style={styles.mapIcon} source={mapIcon} />
-                  </TouchableOpacity>
+                  {/*<TouchableOpacity*/}
+                  {/*  style={styles.mapButton}*/}
+                  {/*  onPress={() => navigation.navigate("CategoryMapScreen")}*/}
+                  {/*>*/}
+                  {/*  <Image style={styles.mapIcon} source={mapIcon} />*/}
+                  {/*</TouchableOpacity>*/}
                 </>
               )}
-            </> : <Map navigation={navigation} barStyle={"dark-content"} />}
+            </> : <Map
+              navigation={navigation}
+              barStyle={"dark-content"} />}
           </>
         </TouchableOpacity>
         {/*<Animated.View*/}

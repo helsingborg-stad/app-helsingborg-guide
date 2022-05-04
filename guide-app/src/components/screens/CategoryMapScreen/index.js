@@ -9,6 +9,7 @@ import {
 
 import { HeaderStyles } from "@assets/styles";
 import Map from "@shared-components/Map";
+import NavigatorService from "@services/navigationService";
 
 type Props = {
   navigation: any,
@@ -52,7 +53,6 @@ class CategoryMapScreen extends Component<Props> {
 
   render() {
     const { navigation } = this.props;
-
     return (
       <Map
         navigation={navigation}

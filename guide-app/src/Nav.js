@@ -49,7 +49,7 @@ const GuideNavigator = createStackNavigator(
       navigationOptions: {
         headerMode: "screen",
         headerTitle: "Guide Helsingborg",
-        header: () => null
+        header: () => null,
       }
     },
 

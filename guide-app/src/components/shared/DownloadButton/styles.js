@@ -23,9 +23,9 @@ export default StyleSheet.create({
     }
   ]),
   textContainer: {
-    paddingTop: "4%",
-    paddingHorizontal: "4%",
-    paddingBottom: "2%",
+    paddingTop: 20,
+    paddingHorizontal: "5%",
+    paddingBottom: 20,
     alignItems: "center"
   },
   cancelResumeContainer: {
@@ -39,7 +39,7 @@ export default StyleSheet.create({
     TextStyles.defaultFontFamily,
     {
       fontSize: 16,
-      fontWeight: "500",
+      fontWeight: "400",
       color: Colors.themePrimary
     }
   ]),

@@ -8,7 +8,7 @@ export default StyleSheet.create({
     height: "100%",
     overflow: "hidden",
     zIndex: 5,
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "#FCFCFC",
   },
 
   viewContainer: {
@@ -18,7 +18,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.white
   },
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: "#FCFCFC",
     height: "100%",
   },
   contentContainer: {
@@ -32,7 +32,7 @@ export default StyleSheet.create({
       fontSize: 22,
       marginTop: 25,
       marginBottom: 10,
-      fontWeight: '400',
+      fontWeight: '500',
       color: "rgba(41, 41, 41, 1)"
     },
   ]),
@@ -117,13 +117,13 @@ export default StyleSheet.create({
   },
   topBarNavigation: {
     zIndex: 3,
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "#F8F8F8",
     ...Platform.select({
       android: {
         paddingTop: 16
       }
     }),
-    paddingBottom: 16
+    paddingBottom: 16,
   },
   mapButton: {
     position: "absolute",

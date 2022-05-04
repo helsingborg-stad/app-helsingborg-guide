@@ -63,7 +63,7 @@ const MarkerListView = (props: Props) => {
   useEffect(() => {
     (async () => {
       if (listRef.current && !(!!redirect)) {
-        setActiveMarker(items[0]);
+        setTimeout(() => setActiveMarker(items[0], 500));
         setTimeout(() => scrollToIndex(0), 500);
         setTimeout(() => mapMarkerViewRef?.panMapToIndex(0, 500));
       }
@@ -91,7 +91,6 @@ const MarkerListView = (props: Props) => {
         }
       }
   }, [redirect, listRef, mapMarkerViewRef]);
-
 
 
   const getMapItemProps = (
@@ -170,7 +169,7 @@ const MarkerListView = (props: Props) => {
       items,
       path,
       currentSharingLink,
-      dispatchCurrentSharingLink
+      dispatchCurrentSharingLink,
     } = props;
     const { navigate } = navigation;
     const { guide, guideGroup, contentObject } = listItem;
@@ -434,7 +433,6 @@ const MarkerListView = (props: Props) => {
   const scrollToIndex = index => {
     setRecentlyTappedPin(true);
     setActiveMarker(items[index]);
-    console.log("listRef", !!listRef.current);
     if (listRef?.current) {
       const x = (ListItemWidth + DefaultMargin / 2) * index - 15;
       listRef.current.scrollToOffset({ offset: x });
@@ -482,7 +480,6 @@ const MarkerListView = (props: Props) => {
             AnalyticsUtils.logEvent("tap_map_pin");
             scrollToIndex(index);
           }}
-          onMap
           activeMarker={activeMarker}
           initialLocation={initialLocation}
         />

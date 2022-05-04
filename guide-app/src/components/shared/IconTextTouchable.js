@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     TextStyles.body,
     {
       fontSize: 16,
-      fontWeight: "500",
+      fontWeight: "400",
       marginRight: textMargin,
-      color: Colors.themePrimary
+      color: Colors.black
     }
   ])
 });
