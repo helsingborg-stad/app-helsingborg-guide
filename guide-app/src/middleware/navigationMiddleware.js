@@ -60,7 +60,6 @@ function linkNavigationWithContent(
           };
         }
       }
-
       items.push(result);
     });
 
@@ -73,6 +72,8 @@ function linkNavigationWithContent(
 export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
   action: Action
 ) => {
+
+  console.log("action type", action.type)
   const result = next(action);
   const nextState = getState();
 
@@ -84,7 +85,6 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
     }
 
     case "FETCH_ALL_GUIDES_FOR_ALL_GROUPS": {
-      console.log("DO I RUN?? 2")
       const { currentLanguage } = nextState.navigation;
       let ids = { guides: [], guideGroups: [], interactiveGuides: [] };
       getState().guides.items.map(item => ids.guides.push(item.id));

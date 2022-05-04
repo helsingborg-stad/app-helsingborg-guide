@@ -47,7 +47,6 @@ const ImageCard = ({
   const displayActivities = () => {
     switch (type) {
       case "guidegroup":
-        console.log("PARENT_ID", all)
         const groupAmount = all?.guideGroups?.find(item => item.parentID === id);
         return groupAmount ? (groupAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
       case "guide":

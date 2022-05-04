@@ -4,6 +4,7 @@ import { View, Text, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { MapItemUtils } from "@utils";
 import styles from "./styles";
+import LocationUtils from "@utils/LocationUtils";
 
 const locationMarkerActive = require("@assets/images/map/marker-location-active.png");
 const locationMarkerInactive = require("@assets/images/map/marker-location.png");
@@ -28,14 +29,14 @@ type State = {
 class MapMarkerView extends PureComponent<Props, State> {
   static defaultProps = {
     showNumberedMapMarkers: true,
-    onMapMarkerPressed: null,
+    onMapMarkerPressed: null
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      markersFocused: false,
+      markersFocused: false
     };
   }
 
@@ -55,11 +56,11 @@ class MapMarkerView extends PureComponent<Props, State> {
       top: padding,
       right: padding,
       bottom: padding,
-      left: padding,
+      left: padding
     };
     const options = {
       edgePadding,
-      animated: false,
+      animated: false
     };
     const locations: Location[] = MapItemUtils.getLocations(markers);
     if (this.map) {
@@ -217,20 +218,24 @@ class MapMarkerView extends PureComponent<Props, State> {
           latitude: location.latitude,
           longitude: location.longitude,
           latitudeDelta: this.latitudeDelta,
-          longitudeDelta: this.longitudeDelta,
-        })
+          longitudeDelta: this.longitudeDelta
+        });
       }
     }
   };
 
   render() {
     const { items, initialLocation } = this.props;
-    console.log(this.latitudeDelta, this.longitudeDelta)
+    const coords = LocationUtils.getRegionForCoordinates([
+      { latitude: initialLocation.latitude, longitude: initialLocation.longitude },
+      { latitude: 0, longitude: 0 }
+    ]);
+
     return (
       <View style={styles.container}>
         <MapView
           zoomEnabled={true}
-          minZoomLevel={10}
+          minZoomLevel={11}
           maxZoomLevel={17}
           ref={(ref) => {
             this.map = ref;
@@ -238,8 +243,8 @@ class MapMarkerView extends PureComponent<Props, State> {
           initialRegion={{
             latitude: initialLocation && initialLocation.latitude,
             longitude: initialLocation && initialLocation.longitude,
-            latitudeDelta: this.latitudeDelta,
-            longitudeDelta: this.longitudeDelta,
+            latitudeDelta: coords.latitudeDelta,
+            longitudeDelta: coords.longitudeDelta,
           }}
           onRegionChange={() => null}
           onRegionChangeComplete={(e) => {

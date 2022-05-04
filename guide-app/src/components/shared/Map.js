@@ -1,5 +1,5 @@
 // @flow
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import { connect, useSelector } from "react-redux";
 import MarkerListView from "@shared-components/MarkerListView";
@@ -13,13 +13,18 @@ type Props = {
 const Map = (props: Props) => {
   const { navigation, currentCategory, barStyle } = props;
 
-  console.log("props", props);
 
   if (!currentCategory) {
     return null;
   }
 
   const { items } = currentCategory;
+
+  const [testing, setTesting] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setTesting(true), 200);
+  },[])
 
   const mapItems: MapItem[] = [];
   items.forEach(navItem => {
@@ -32,7 +37,6 @@ const Map = (props: Props) => {
     }
   });
 
-
   console.log("navigation", navigation?.state);
 
   return (
@@ -41,11 +45,11 @@ const Map = (props: Props) => {
         barStyle={barStyle || "light-content"}
         backgroundColor={Colors.themeSecondary}
       />
-      <MarkerListView
+      {testing && <MarkerListView
         items={mapItems}
         navigation={navigation}
         showListButton={false}
-      />
+      />}
     </>
   );
 };

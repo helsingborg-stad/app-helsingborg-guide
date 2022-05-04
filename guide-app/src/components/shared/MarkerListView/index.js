@@ -62,10 +62,12 @@ const MarkerListView = (props: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (listRef.current && !(!!redirect)) {
-        setTimeout(() => setActiveMarker(items[0], 500));
-        setTimeout(() => scrollToIndex(0), 500);
-        setTimeout(() => mapMarkerViewRef?.panMapToIndex(0, 500));
+      if (!(!!redirect)) {
+        setTimeout(() => {
+          setActiveMarker(items[0])
+          scrollToIndex(0);
+          mapMarkerViewRef?.panMapToIndex(0);
+        }, 200)
       }
     })();
   }, [listRef, mapMarkerViewRef]);
@@ -453,6 +455,7 @@ const MarkerListView = (props: Props) => {
   };
 
   const initialLocation = getInitialLocation();
+
 
   return (
     <View style={styles.container}>

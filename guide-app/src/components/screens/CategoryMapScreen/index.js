@@ -9,7 +9,6 @@ import {
 
 import { HeaderStyles } from "@assets/styles";
 import Map from "@shared-components/Map";
-import NavigatorService from "@services/navigationService";
 
 type Props = {
   navigation: any,

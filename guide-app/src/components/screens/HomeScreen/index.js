@@ -138,8 +138,11 @@ const HomeScreen = (props: Props) => {
     linkToGuide(item);
   };
 
+  useEffect(() => {
+    currentHomeTab && props.dispatchShowBottomBar(false);
+  }, [currentHomeTab]);
+
   const toggleSettings = () => {
-    console.log("running?");
     setShowSettings(!showSettings);
   };
 
@@ -147,7 +150,6 @@ const HomeScreen = (props: Props) => {
     return <ActivityIndicator style={styles.loadingSpinner} />;
   }
 
-  console.log("currentHomeTab", typeof currentHomeTab, currentHomeTab);
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
@@ -200,12 +202,6 @@ const HomeScreen = (props: Props) => {
                       />
                     ))}
                   </Scrollable>
-                  {/*<TouchableOpacity*/}
-                  {/*  style={styles.mapButton}*/}
-                  {/*  onPress={() => navigation.navigate("CategoryMapScreen")}*/}
-                  {/*>*/}
-                  {/*  <Image style={styles.mapIcon} source={mapIcon} />*/}
-                  {/*</TouchableOpacity>*/}
                 </>
               )}
             </> : <Map
@@ -213,20 +209,6 @@ const HomeScreen = (props: Props) => {
               barStyle={"dark-content"} />}
           </>
         </TouchableOpacity>
-        {/*<Animated.View*/}
-        {/*  style={[styles.backDrop, {*/}
-        {/*    top: ((settingsHeight || 0) + (segmentLayout || 0) + (insets?.top || 0)),*/}
-        {/*    backgroundColor: `rgba(0, 0, 0, 0.5)`,*/}
-        {/*    opacity: backdropOpacity,*/}
-        {/*    display: showSettings ? "flex" : "none"*/}
-        {/*  }]}><TouchableOpacity*/}
-        {/*  onPress={() => {*/}
-        {/*    Keyboard.dismiss();*/}
-        {/*    setShowSettings(false);*/}
-        {/*  }}*/}
-        {/*  activeOpacity={1}*/}
-        {/*  style={styles.backDropDismiss} />*/}
-        {/*</Animated.View>*/}
       </SafeAreaView>
     </>
   );
@@ -324,7 +306,6 @@ function mapStateToProps(state: RootState) {
       items = itemsWithLocation.concat(itemsWithoutLocation);
     }
   }
-
 
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 
