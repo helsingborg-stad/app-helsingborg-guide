@@ -58,6 +58,7 @@ const MarkerListView = (props: Props) => {
   const [showHorizontalList, setShowHorizontalList] = useState(true);
   const listRef = useRef();
 
+
   let mapMarkerViewRef = MapMarkerView;
 
   useEffect(() => {
@@ -273,7 +274,8 @@ const MarkerListView = (props: Props) => {
   };
 
   const displayGuideNumber = (item: MapItem) => {
-    const numberOfGuides = MapItemUtils.getNumberOfGuides(item);
+    const { all } = props;
+    const numberOfGuides = MapItemUtils.getNumberOfGuides(item, all);
     if (!numberOfGuides) {
       return null;
     }
@@ -496,11 +498,14 @@ const MarkerListView = (props: Props) => {
 };
 
 function mapStateToProps(state: RootState) {
-  const { geolocation, uiState } = state;
+  const { geolocation, uiState, guides } = state;
   const { currentSharingLink } = uiState;
+  const { all } = guides;
+
   return {
     userLocation: geolocation?.position,
     currentSharingLink,
+    all,
   };
 }
 

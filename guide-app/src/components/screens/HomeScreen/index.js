@@ -229,7 +229,6 @@ function mapStateToProps(state: RootState) {
   let categories = "";
   let distanceMetres = distance * 1000;
 
-
   categories = [...navigationCategories.map(cat => {
     const data = cat.items
       .map((item) => {

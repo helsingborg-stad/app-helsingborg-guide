@@ -26,11 +26,12 @@ export function fetchAllGuidesForAllGroups(langCode: string, ids: []): ThunkActi
   return async function fetchAllGuidesForAllGroupsDispatch(dispatch: Dispatch) {
     let all = { guideGroups: [], guides: [], interactiveGuides: [] };
     dispatch(fetchAllGuidesForAllGroupsRequest());
+
     const _groups = ids.guideGroups.map(async (item) => {
       return await fetchUtils
         .getGuidesForGuideGroup(langCode, item.id)
         .then(guides => {
-          return { guideAmount: guides.length, parentID: item.id };
+          return { guideAmount: guides.length, parentID: item.id, items: guides };
         })
         .catch(error => {
           console.log("error", error);
@@ -43,7 +44,7 @@ export function fetchAllGuidesForAllGroups(langCode: string, ids: []): ThunkActi
         .getGuides(langCode, ids.guides)
         .then(guides => {
           let arr = [];
-          guides.map(guide => arr.push({guideAmount: guide.contentObjects.length, parentID: guide.id }))
+          guides.map(guide => arr.push({guideAmount: guide.contentObjects.length, parentID: guide.id, items: guide.contentObjects  }))
           return arr;
         })
         .catch(error => {

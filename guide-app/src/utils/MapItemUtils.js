@@ -41,13 +41,19 @@ function getLocations(items: MapItem[]): Location[] {
   return locs;
 }
 
-function getNumberOfGuides(item: MapItem): ?number {
+function getNumberOfGuides(item: MapItem, all: []): ?number {
+
   const { guide, guideGroup } = item;
   if (guide) {
     return guide?.contentObjects?.length;
   }
   if (guideGroup) {
-    return guideGroup?.guidesCount;
+    if (all) {
+      return all?.guideGroups?.find(item => item.parentID === guideGroup.id).guideAmount;
+    }
+    else {
+      return guideGroup?.guidesCount;
+    }
   }
 
   return 0;
