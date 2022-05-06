@@ -17,8 +17,9 @@ import { trackScreen } from "@utils/MatomoUtils";
 import {
   selectCurrentGuide,
   selectCurrentSharingLink,
-  setShowFilterButton,
 } from "@actions/uiStateActions";
+import { DEEP_LINKING_URL } from "@data/endpoints";
+
 
 type Props = {
   size?: "expanded" | "compact",
@@ -51,7 +52,6 @@ const ImageCard = ({
   const height = size === "compact" ? 191 : 258;
 
   const { all } = useSelector(s => s.guides);
-  const { currentSharingLink } = useSelector(s => s.uiState);
   const dispatch = useDispatch();
   const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
   const id = item?.guideGroup?.id || item?.guide?.id || item?.interactiveGuide?.id;
@@ -96,7 +96,8 @@ const ImageCard = ({
     const childTitle = child?.name;
     const childType = child?.guideType;
     const newPath = `/places/${slug}/${childSlug || childTitle}`;
-    const sharingLink = currentSharingLink + `/${child?.id}`;
+    let sharingLink = DEEP_LINKING_URL + `home/group/${item.id}/${child.id}`;
+    console.log("SHARING LINK", sharingLink);
     dispatch(selectCurrentSharingLink(sharingLink));
     trackScreen(newPath, newPath);
     if (childType === "trail") {
@@ -118,7 +119,8 @@ const ImageCard = ({
   return (
     <View
       key={index}
-      style={styles.container}>
+      style={styles.container}
+    >
       <Touchable
         style={styles.buttonContainer} onPress={onPress}>
         <ImageView style={[styles.image, { height }]} source={{ uri: image?.uri }} />

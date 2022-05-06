@@ -16,7 +16,6 @@ export function appBecameInactive(): Action {
 }
 
 export function fetchAllGuidesForAllGroups(): Action {
-  console.log("DO I RUN?? 1")
   return { type: "FETCH_ALL_GUIDES_FOR_ALL_GROUPS" };
 }
 

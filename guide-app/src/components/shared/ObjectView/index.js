@@ -221,7 +221,6 @@ const ObjectView = (props: Props) => {
     }
   }, [swiped]);
 
-  console.log("STATE", State);
   return (
     <View style={styles.viewContainer}>
       <SafeAreaView style={{ flex: 1 }}>

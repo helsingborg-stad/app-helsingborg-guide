@@ -70,6 +70,7 @@ const GuideScreen = (props) => {
       }
       else {
         setRedirect(false)
+        console.log("not found guide")
         navigation.navigate("NotFoundScreen");
       }
     }

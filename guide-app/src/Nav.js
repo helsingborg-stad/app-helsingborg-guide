@@ -50,7 +50,7 @@ const GuideNavigator = createStackNavigator(
       navigationOptions: {
         headerMode: "screen",
         headerTitle: "Guide Helsingborg",
-        header: () => null,
+        header: () => null
       }
     },
 
@@ -98,8 +98,9 @@ const GuideNavigator = createStackNavigator(
       navigationOptions: {
         headerTitle: "Not Found",
         headerMode: "none",
-        header: () => null,
-      }},
+        header: () => null
+      }
+    }
   },
   { defaultNavigationOptions: HeaderStyles.default }
 );
@@ -110,7 +111,7 @@ const RootNavigator = createStackNavigator(
     WelcomeScreen: { screen: WelcomeScreen, path: "" },
     MainScreen: { screen: GuideNavigator, path: "" },
     SearchObjectScreen: { screen: SearchObjectScreen, path: "" },
-    ARIntroductionScreen: { screen: ARIntroductionScreen, path: "" },
+    ARIntroductionScreen: { screen: ARIntroductionScreen, path: "" }
   },
   {
     headerMode: "none",
@@ -148,10 +149,9 @@ const Nav = (props: Props) => {
   useEffect(() => {
     if (url && homeLoaded) {
       if (url?.includes(UNIVERSAL_LINKING_URL)) {
-        let type = url?.split("/").includes("guide") ? "guide" : "group";
-        let path = url?.split(url?.includes("guide") ? "guide" : "group")[1];
-        let finalUrl = prefix + "home/" + type + path;
-        dispatch(selectOpenedLink(url))
+        let params = url.split(UNIVERSAL_LINKING_URL)[1];
+        let finalUrl = prefix + "home" + params;
+        dispatch(selectOpenedLink(url));
         Linking.openURL(finalUrl);
       }
     }
@@ -161,11 +161,10 @@ const Nav = (props: Props) => {
     const currentScreen = Nav.getCurrentRouteName(currentState);
     const prevScreen = Nav.getCurrentRouteName(prevState);
     if (prevScreen !== currentScreen) {
-      if(currentScreen.routeName === "HomeScreen") {
-          !showFilterButton && dispatch(setShowFilterButton(true))
+      if (currentScreen.routeName === "HomeScreen") {
+        !showFilterButton && dispatch(setShowFilterButton(true));
         !homeLoaded && setHomeLoaded(true);
-      }
-      else {
+      } else {
         showFilterButton && dispatch(setShowFilterButton(false));
       }
     }

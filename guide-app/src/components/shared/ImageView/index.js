@@ -25,7 +25,6 @@ export default class ImageView extends PureComponent<Props, State> {
 
     let imageSource = placeholderImage;
 
-    console.log("uri", uri, "sessionId", sessionId);
 
     if (uri) {
       if (sessionId) {
@@ -38,7 +37,7 @@ export default class ImageView extends PureComponent<Props, State> {
           })
           .catch((err) => {
 
-            startDownload(sessionId)
+            startDownload(sessionId);
             // cache miss, download image
             this.setState({ imageSource: { uri } });
           });

@@ -32,6 +32,7 @@ const useDeepLinking = () => {
         item = temp;
       }
       else {
+        console.log("NOT FOUND USE")
         Navigation.navigate("NotFoundScreen");
       }
       dispatch(selectCurrentBottomBarTab(0));

@@ -72,8 +72,6 @@ function linkNavigationWithContent(
 export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
   action: Action
 ) => {
-
-  console.log("action type", action.type)
   const result = next(action);
   const nextState = getState();
 

@@ -13,6 +13,7 @@ import useDeepLinking from "@hooks/useDeepLinking";
 type Props = {
   currentGuideGroup: GuideGroup,
   currentGuides: Guide[],
+  guideItems: [],
   currentInteractiveGuide?: InteractiveGuide,
   currentSharingLink: string,
   geolocation: GeolocationType,
@@ -27,6 +28,7 @@ const LocationScreen = (props: Props) => {
   const {
     currentGuideGroup,
     currentGuides,
+    guideItems,
     currentInteractiveGuide,
     geolocation,
     isFetchingGuides,
@@ -55,17 +57,21 @@ const LocationScreen = (props: Props) => {
 
 
   useEffect(() => {
-    if (redirect?.length && redirect[0]) {
+    if (redirect?.length && redirect[0] && currentGuides.length) {
       const currentGuide = currentGuides.find(guide => guide.id.toString() === redirect[0].toString());
+      console.log("CURRENT__GUIDE", !redirected, !!currentGuide, redirect[0])
+
       if (currentGuide && !redirected) {
         setRedirected(true);
         onPressGuide(currentGuide);
-      } else {
+      }
+
+    if(!currentGuide) {
         clearLinking(navigation, ["redirect"]);
-        navigation.navigate("NotFoundScreen", { link: redirect[0] });
+        !(!!currentGuide) && navigation.navigate("NotFoundScreen", { link: redirect[0] });
       }
     }
-  }, [redirect, currentGuides]);
+  }, [redirect, currentGuides, guideItems]);
 
 
   const onPressGuide = (guide: Guide) => {
@@ -156,6 +162,7 @@ function mapStateToProps(state: RootState) {
   return {
     currentGuideGroup,
     currentGuides,
+    guideItems,
     currentInteractiveGuide,
     currentSharingLink,
     geolocation: geolocation?.position,
