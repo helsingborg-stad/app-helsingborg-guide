@@ -99,4 +99,10 @@ export function clearSearchFilter(): Action {
   return { type: "CLEAR_SEARCH_FILTER" };
 }
 
+export function setShowFilterButton(showFilterButton: boolean): Action {
+  return { type: "SET_SHOW_FILTER_BUTTON", showFilterButton };
+}
+
+
+
 

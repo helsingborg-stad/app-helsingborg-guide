@@ -27,7 +27,6 @@ function getDescription(item: NavigationItem) {
     return "";
   }
 
-
   if (type === "guidegroup") {
     const mediaGuideString: string = plural
       ? LangService.strings.ACTIVITIES
@@ -53,7 +52,6 @@ function getDescription(item: NavigationItem) {
       // textString = `${LangService.strings.MEDIAGUIDE_INTERACTIVE}`.toUpperCase()
     }
   }
-
   return textString;
 }
 
@@ -87,36 +85,31 @@ function isChildFriendly(item: NavigationItem): boolean {
   return false;
 }
 
-const NavigationListItem = ({ index, item, onPressItem }: Props) => {
+const NavigationListItem = ({ index, item, onPressItem, navigation }: Props) => {
 
   const { imageUrl, name } = getNameAndImage(item);
   const image = imageUrl ? { uri: imageUrl } : defaultImage;
   const size = index < 2 ? "expanded" : "compact";
   const showMapIcon = !!item?.guide;
   const { geolocation } = useSelector(s => s);
-  const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
-  const id = item?.guideGroup?.id || item?.guide?.id || item?.interactiveGuide?.id;
-  const type = item?.type;
   const onPress = useCallback(() => {
     onPressItem(item);
   }, [item, onPressItem]);
 
-
   return (
     <GuideCard
-      id={id}
       key={index}
       index={index}
-      type={type}
+      item={item}
       size={size}
       geolocation={geolocation}
-      itemLocation={itemLocation}
       image={image}
       title={name || ""}
       subTitle={getDescription(item)}
       showMapIcon={showMapIcon}
       showChildFriendlyIcon={isChildFriendly(item)}
       onPress={onPress}
+      navigation={navigation}
     />
   );
 };

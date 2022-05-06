@@ -4,7 +4,7 @@ const initialState: GuideState = {
   isFetching: false,
   items: [],
   groupItems: [],
-  all: [],
+  all: { guides: [], guideGroups: [] },
 };
 
 export default function guideReducer(

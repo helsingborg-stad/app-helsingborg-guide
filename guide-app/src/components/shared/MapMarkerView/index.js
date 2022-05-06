@@ -227,7 +227,7 @@ class MapMarkerView extends PureComponent<Props, State> {
   render() {
     const { items, initialLocation } = this.props;
     const coords = LocationUtils.getRegionForCoordinates([
-      { latitude: initialLocation.latitude, longitude: initialLocation.longitude },
+      { latitude: initialLocation?.latitude || 0, longitude: initialLocation?.longitude || 0 },
       { latitude: 0, longitude: 0 }
     ]);
 

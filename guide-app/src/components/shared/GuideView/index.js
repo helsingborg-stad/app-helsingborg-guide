@@ -31,6 +31,7 @@ declare type Props = {
 const textMaxHeight = Dimensions.get("window").height * 0.15;
 
 class GuideView extends Component<Props> {
+
   renderContentObject = (sessionId: number, obj: ContentObject, index, array) => {
     const { images } = obj;
     const uri = images.length > 0 ? images[0].medium : null;
@@ -42,7 +43,7 @@ class GuideView extends Component<Props> {
         >
           <View style={styles.objectImageWrapper}>
             <ImageView
-              source={{ uri, sessionId }}
+              source={{ uri }}
               style={styles.objectImage}
               resizeMode="cover"
             />
@@ -89,7 +90,7 @@ class GuideView extends Component<Props> {
         >
           <View>
             <ImageView
-              source={{ uri: guide.images.large, sessionId: id }}
+              source={{ uri: guide.images.large }}
               style={styles.image}
             />
             <View style={styles.shareBtn}>

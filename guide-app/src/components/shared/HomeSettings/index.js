@@ -23,8 +23,7 @@ const HomeSettings = (props) => {
   const [displayShadow, setDisplayShadow] = useState(false);
   const [height] = useState(new Animated.Value(0));
   const insets = useSafeAreaInsets();
-  const [showButton, setShowButton] = useState(false);
-  const { searchFilter } = useSelector(s => s.uiState);
+  const { searchFilter, showFilterButton } = useSelector(s => s.uiState);
   const [searchText, setSearchText] = useState(searchFilter?.text || "");
   const minKm = 0.1;
   const maxKm = 3;
@@ -60,14 +59,6 @@ const HomeSettings = (props) => {
     }).start();
     open ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false);
   }, [open]);
-
-  useEffect(() => {
-    setShowButton(navigation.isFocused());
-  }, [navigation.isFocused()]);
-
-  useEffect(() => {
-    return () => setShowButton(false);
-  }, []);
 
   return (
     <>
@@ -155,7 +146,7 @@ const HomeSettings = (props) => {
               <Text style={styles.distanceValue}> {LangService.strings.MORE_THAN + " " + maxKm} km</Text>
             </View>
           </View>
-          {showButton && <Portal>
+          {showFilterButton && <Portal>
             <Animated.View style={{ top: settingsHeight ? height : undefined }}>
               <TouchableOpacity
                 onPress={toggleOpen}

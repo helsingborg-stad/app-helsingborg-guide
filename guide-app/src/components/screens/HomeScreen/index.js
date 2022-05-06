@@ -139,7 +139,7 @@ const HomeScreen = (props: Props) => {
   };
 
   useEffect(() => {
-    currentHomeTab && props.dispatchShowBottomBar(false);
+    props.dispatchShowBottomBar(!(currentHomeTab));
   }, [currentHomeTab]);
 
   const toggleSettings = () => {
@@ -198,6 +198,7 @@ const HomeScreen = (props: Props) => {
                         key={item.id}
                         index={item.id}
                         item={item}
+                        navigation={navigation}
                         onPressItem={() => onPressItem(item, items, index)}
                       />
                     ))}
@@ -226,6 +227,7 @@ function mapStateToProps(state: RootState) {
   const { navigationCategories, currentLanguage } = navigation;
   const { fetchingIds } = guideGroups;
   const { distance, text: searchText } = searchFilter;
+  const { all } = guides;
   let categories = "";
   let distanceMetres = distance * 1000;
 
@@ -263,32 +265,52 @@ function mapStateToProps(state: RootState) {
   const coords = geolocation?.coords || geolocation?.position?.coords || position?.coords;
 
   if (items?.length) {
+    items.map(o => o.children = []);
+    let original = items;
+
+    // FILTER SEARCH
     items = items.filter(item => {
       let name = item?.guideGroup?.name || item.guide?.name || item.interactiveGuide?.name;
       let searchCriteria = true;
-      let distanceCriteria = true;
       if (searchText) {
-        searchCriteria = searchText.length >= 3 ? name.toUpperCase().indexOf(searchText.toUpperCase()) !== -1 : true;
+        searchCriteria = searchText.trim().length >= 3 ? name.toUpperCase().trim().indexOf(searchText.toUpperCase().trim()) !== -1 : true;
       }
-      if (distance) {
+      return searchCriteria;
+    });
+
+    //FILTER CHILDREN
+    let allItems = all.guideGroups.concat(all.guides);
+    allItems.filter(item => {
+      item.items.map(subItem => {
+        let searchCriteria = searchText.trim().length >= 3 ? subItem.name.toUpperCase().trim().indexOf(searchText.toUpperCase().trim()) !== -1 : false;
+        if (searchCriteria) {
+          let parent = original.find(parentItem => parentItem.id === item.parentID);
+          !items.includes(parent) && items.push(parent);
+          items[items.indexOf(parent)].children.push(subItem);
+        }
+      });
+    });
+
+    //FILTER DISTANCE
+    if (distance) {
+    items = items.filter(item => {
         const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
         const itemDistance = LocationUtils.getDistanceBetweenCoordinates(
           coords,
           itemLocation
         );
-        distanceCriteria = distanceMetres < 3000 ? itemDistance <= distanceMetres : true;
-      }
-      return searchCriteria && distanceCriteria;
+        return distanceMetres < 3000 ? itemDistance <= distanceMetres : true;
     });
+  }
+
+    //SORT BY LOCATION
     if (coords) {
       const itemsWithLocation = [];
       const itemsWithoutLocation = [];
-
       items.forEach(item => {
         let location = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
         location ? itemsWithLocation.push(item) : itemsWithoutLocation.push(item);
       });
-
       itemsWithLocation.sort((a, b) => {
         const aLoc = a?.guideGroup?.location || a?.guide?.location || a?.interactiveGuide?.location;
         const bLoc = b?.guideGroup?.location || b?.guide?.location || b?.interactiveGuide?.location;

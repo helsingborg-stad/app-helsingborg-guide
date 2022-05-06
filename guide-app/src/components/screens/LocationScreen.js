@@ -73,6 +73,7 @@ const LocationScreen = (props: Props) => {
     const title = guide?.name;
     const prevPath = navigation.state.params.path;
     const newPath = `${prevPath}/${slug || title}`;
+    console.log("NEW PATH??", newPath)
     const sharingLink = currentSharingLink + `/${guide?.id}`;
     dispatchCurrentSharingLink(sharingLink);
     trackScreen(newPath, newPath);

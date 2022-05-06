@@ -4,7 +4,7 @@ import { View, TouchableOpacity } from "react-native";
 
 const Touchable = (props) => {
 
-  const { children, onPress } = props;
+  const { children, onPress, wrapperStyle } = props;
 
   const [pressed, setPressed] = useState(false);
 
@@ -24,7 +24,7 @@ const Touchable = (props) => {
           }, 100);
         }}
       >
-        <View style={{opacity: pressed ? 0.8 : 1}}>
+        <View style={[{opacity: pressed ? 0.8 : 1}, wrapperStyle]}>
         {children}
         </View>
       </TouchableOpacity>

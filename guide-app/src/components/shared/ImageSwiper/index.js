@@ -31,7 +31,7 @@ function getImageSwiper(
       <TouchableWithoutFeedback onPress={() => onGoToImage(image)}>
         <View>
           <ImageView
-            source={{ uri: image.large, sessionId }}
+            source={{ uri: image.large }}
             style={styles.image}
             resizeMode="cover"
           />

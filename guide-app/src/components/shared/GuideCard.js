@@ -9,6 +9,7 @@ type Props = {
   image: string,
   title: string,
   subTitle?: string,
+  slug?: string,
   description?: string,
   showMapIcon?: boolean,
   showChildFriendlyIcon?: boolean,
@@ -18,21 +19,27 @@ type Props = {
   itemLocation: string,
   index: any,
   type: string,
+  children: [],
+  item: any,
 };
 
 const GuideCard = ({
                      id,
                      image,
                      onPress,
+                     item,
                      title = null,
                      subTitle = null,
+                     slug,
                      size = "compact",
                      showMapIcon = false,
                      showChildFriendlyIcon = false,
                      geolocation,
                      itemLocation,
                      index,
-                     type
+                     type,
+                     children,
+                     navigation,
                    }: Props) => {
   const icons = [];
 
@@ -49,15 +56,19 @@ const GuideCard = ({
       id={id}
       key={index}
       index={index}
+      item={item}
       type={type}
       image={image}
       onPress={onPress}
       title={title}
       subTitle={subTitle}
+      slug={slug}
       size={size}
       icons={icons}
       geolocation={geolocation}
       itemLocation={itemLocation}
+      children={children}
+      navigation={navigation}
     />
   );
 };

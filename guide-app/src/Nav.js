@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect, useState } from "react";
 import { AppState, StatusBar, Platform, Linking } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Orientation from "react-native-orientation-locker";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -38,6 +38,7 @@ import { Colors, HeaderStyles } from "@assets/styles";
 import useInitialURL from "@hooks/useUniversalLinks";
 import NavigatorService from "@services/navigationService";
 import { initializeTracker } from "@utils/MatomoUtils";
+import { setShowFilterButton } from "@actions/uiStateActions";
 
 const prefix = "guidehbg://";
 
@@ -133,6 +134,7 @@ const Nav = (props: Props) => {
 
   const { onAppStarted, onAppBecameActive, onAppBecameInactive } = props;
   const dispatch = useDispatch();
+  const { showFilterButton } = useSelector(s => s.uiState);
   const [homeLoaded, setHomeLoaded] = useState(false);
   const { url } = useInitialURL();
 
@@ -159,7 +161,13 @@ const Nav = (props: Props) => {
     const currentScreen = Nav.getCurrentRouteName(currentState);
     const prevScreen = Nav.getCurrentRouteName(prevState);
     if (prevScreen !== currentScreen) {
-      !homeLoaded && currentScreen.routeName === "HomeScreen" && setHomeLoaded(true);
+      if(currentScreen.routeName === "HomeScreen") {
+          !showFilterButton && dispatch(setShowFilterButton(true))
+        !homeLoaded && setHomeLoaded(true);
+      }
+      else {
+        showFilterButton && dispatch(setShowFilterButton(false));
+      }
     }
   };
 

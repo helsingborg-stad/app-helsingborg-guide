@@ -15,6 +15,7 @@ const defaultState: UIState = {
   currentSharingLink: null,
   searchFilter: { distance: '', text: '', forChildren: '' },
   allGuides: [],
+  showFilterButton: false,
 };
 
 export default function uiStateReducer(
@@ -59,6 +60,8 @@ export default function uiStateReducer(
     case "SET_SEARCH_FILTER":
       let searchFilter = { ...state.searchFilter, ...action.searchFilter };
       return { ...state, searchFilter: searchFilter };
+    case "SET_SHOW_FILTER_BUTTON":
+      return { ...state, showFilterButton: action.showFilterButton };
     default:
       return state;
   }

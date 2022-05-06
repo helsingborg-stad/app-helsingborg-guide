@@ -6,43 +6,58 @@ import {
   Image,
   ImageSourcePropType
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors, TextStyles } from "@assets/styles";
 import Touchable from "@shared-components/Touchable";
 import DistanceView from "@shared-components/DistanceViewNew";
 import ImageView from "@shared-components/ImageView";
 import LangService from "@services/langService";
+import { trackScreen } from "@utils/MatomoUtils";
+import {
+  selectCurrentGuide,
+  selectCurrentSharingLink,
+  setShowFilterButton,
+} from "@actions/uiStateActions";
 
 type Props = {
   size?: "expanded" | "compact",
   image: string,
   title: string,
   subTitle?: string,
+  slug?: string,
   icons?: ImageSourcePropType[],
   onPress: () => void,
   geolocation: string,
   itemLocation: string,
   index: any,
   type: string,
+  children: [],
+  item: any,
+  navigation: any,
 };
 
 const ImageCard = ({
-  id,
                      image,
                      onPress,
                      title = null,
-                     subTitle = null,
+                     item,
                      size = "compact",
                      icons = [],
                      geolocation,
-                     itemLocation,
                      index,
-                     type
+                     navigation
                    }: Props) => {
   const height = size === "compact" ? 191 : 258;
 
   const { all } = useSelector(s => s.guides);
+  const { currentSharingLink } = useSelector(s => s.uiState);
+  const dispatch = useDispatch();
+  const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
+  const id = item?.guideGroup?.id || item?.guide?.id || item?.interactiveGuide?.id;
+  const slug = item?.guideGroup?.slug || item?.guide?.slug || item?.interactiveGuide?.slug;
+  const type = item?.type;
+  const children = item.children;
 
   const displayActivities = () => {
     switch (type) {
@@ -76,6 +91,30 @@ const ImageCard = ({
     );
   }
 
+  const navigateToChildren = (child) => {
+    const childSlug = child?.slug;
+    const childTitle = child?.name;
+    const childType = child?.guideType;
+    const newPath = `/places/${slug}/${childSlug || childTitle}`;
+    const sharingLink = currentSharingLink + `/${child?.id}`;
+    dispatch(selectCurrentSharingLink(sharingLink));
+    trackScreen(newPath, newPath);
+    if (childType === "trail") {
+      dispatch(selectCurrentGuide(child));
+      navigation.navigate("TrailScreen", {
+        child,
+        title: childTitle,
+        path: newPath
+      });
+    } else if (childType === "guide") {
+      dispatch(selectCurrentGuide(child));
+      navigation.navigate("GuideDetailsScreen", {
+        title: childTitle,
+        path: newPath,
+      });
+    }
+  };
+
   return (
     <View
       key={index}
@@ -106,6 +145,18 @@ const ImageCard = ({
           <Image key={i} source={icon} style={styles.icon} />
         </View>
       ))}
+      <View style={styles.childrenContainer}>
+        {children.map((child, index) => (
+          <Touchable
+            onPress={() => navigateToChildren(child)}
+            key={index}
+            wrapperStyle={styles.child}
+          >
+            <ImageView style={styles.childImage} source={{ uri: child.images.medium }} />
+            <Text style={styles.childText}>{child.name}</Text>
+          </Touchable>
+        ))}
+      </View>
     </View>
   );
 };
@@ -223,7 +274,30 @@ const styles = StyleSheet.create({
   mapIcon: {
     width: 32,
     height: 32
+  },
+
+  childrenContainer: {},
+
+  child: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderTopColor: "rgba(209, 209, 209, 1)"
+  },
+
+  childImage: {
+    width: 60,
+    height: 45,
+    borderRadius: 6
+  },
+  childText: {
+    paddingLeft: 10,
+    fontSize: 16,
+    color: "rgba(41, 41, 41, 1)"
   }
+
 });
 
 export default memo(ImageCard);

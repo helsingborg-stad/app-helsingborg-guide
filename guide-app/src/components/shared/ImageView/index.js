@@ -37,6 +37,7 @@ export default class ImageView extends PureComponent<Props, State> {
             });
           })
           .catch((err) => {
+
             startDownload(sessionId)
             // cache miss, download image
             this.setState({ imageSource: { uri } });
