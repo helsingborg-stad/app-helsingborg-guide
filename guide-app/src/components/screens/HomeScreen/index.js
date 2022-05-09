@@ -262,46 +262,53 @@ function mapStateToProps(state: RootState) {
       ? categories[currentHomeTab]?.data
       : null;
 
+
   const coords = geolocation?.coords || geolocation?.position?.coords || position?.coords;
 
   if (items?.length) {
-    items.map(o => o.children = []);
+    items = items.map(v => ({ ...v, children: [] }));
     let original = items;
 
     // FILTER SEARCH
-    items = items.filter(item => {
-      let name = item?.guideGroup?.name || item.guide?.name || item.interactiveGuide?.name;
-      let searchCriteria = true;
-      if (searchText) {
-        searchCriteria = searchText.trim().length >= 3 ? name.toUpperCase().trim().indexOf(searchText.toUpperCase().trim()) !== -1 : true;
-      }
-      return searchCriteria;
-    });
-
-    //FILTER CHILDREN
-    let allItems = all.guideGroups.concat(all.guides);
-    allItems.filter(item => {
-      item.items.map(subItem => {
-        let searchCriteria = searchText.trim().length >= 3 ? subItem.name.toUpperCase().trim().indexOf(searchText.toUpperCase().trim()) !== -1 : false;
-        if (searchCriteria) {
-          let parent = original.find(parentItem => parentItem.id === item.parentID);
-          !items.includes(parent) && items.push(parent);
-          items[items.indexOf(parent)].children.push(subItem);
+    if (searchText.trim().length >= 3) {
+      items = items.filter(item => {
+        let name = item?.guideGroup?.name || item.guide?.name || item.interactiveGuide?.name || "";
+        let searchCriteria = true;
+        if (searchText) {
+          searchCriteria = name.toUpperCase().trim().indexOf(searchText.toUpperCase().trim()) !== -1;
         }
+        return searchCriteria;
       });
-    });
+    }
+
+    //FILTER CHILDREN OF GROUPS
+    let allGroups = all.guideGroups;
+    if (allGroups.length && searchText.trim().length >= 3) {
+      allGroups.filter(item => {
+        item.items.map(subItem => {
+          if (subItem?.name) {
+            let searchCriteria = searchText?.trim().length >= 3 ? subItem?.name?.toUpperCase()?.trim()?.indexOf(searchText?.toUpperCase()?.trim()) !== -1 : false;
+            if (searchCriteria) {
+              let parent = original.find(parentItem => parentItem.id === item.parentID);
+              !items.includes(parent) && items.push(parent);
+              items[items.indexOf(parent)].children.push(subItem);
+            }
+          }
+        });
+      });
+    }
 
     //FILTER DISTANCE
     if (distance) {
-    items = items.filter(item => {
+      items = items.filter(item => {
         const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
         const itemDistance = LocationUtils.getDistanceBetweenCoordinates(
           coords,
           itemLocation
         );
         return distanceMetres < 3000 ? itemDistance <= distanceMetres : true;
-    });
-  }
+      });
+    }
 
     //SORT BY LOCATION
     if (coords) {
@@ -327,6 +334,7 @@ function mapStateToProps(state: RootState) {
       items = itemsWithLocation.concat(itemsWithoutLocation);
     }
   }
+
 
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 

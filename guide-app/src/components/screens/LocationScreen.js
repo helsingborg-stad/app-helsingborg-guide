@@ -59,16 +59,15 @@ const LocationScreen = (props: Props) => {
   useEffect(() => {
     if (redirect?.length && redirect[0] && currentGuides.length) {
       const currentGuide = currentGuides.find(guide => guide.id.toString() === redirect[0].toString());
-      console.log("CURRENT__GUIDE", !redirected, !!currentGuide, redirect[0])
 
       if (currentGuide && !redirected) {
         setRedirected(true);
         onPressGuide(currentGuide);
       }
 
-    if(!currentGuide) {
+      if (!currentGuide) {
         clearLinking(navigation, ["redirect"]);
-        !(!!currentGuide) && navigation.navigate("NotFoundScreen", { link: redirect[0] });
+        !currentGuide && navigation.navigate("NotFoundScreen", { link: redirect[0] });
       }
     }
   }, [redirect, currentGuides, guideItems]);
@@ -79,7 +78,6 @@ const LocationScreen = (props: Props) => {
     const title = guide?.name;
     const prevPath = navigation.state.params.path;
     const newPath = `${prevPath}/${slug || title}`;
-    console.log("NEW PATH??", newPath)
     const sharingLink = currentSharingLink + `/${guide?.id}`;
     dispatchCurrentSharingLink(sharingLink);
     trackScreen(newPath, newPath);
@@ -93,7 +91,6 @@ const LocationScreen = (props: Props) => {
         ...(redirect?.length === 2 && { redirect: redirect[1] })
       });
     } else if (guide.guideType === "guide") {
-      console.log("the guide", guide?.id);
       props.selectCurrentGuide(guide);
       navigation.navigate("GuideDetailsScreen", {
         title: guide.name,
@@ -113,7 +110,6 @@ const LocationScreen = (props: Props) => {
   };
 
   const now = new Date();
-
 
   return (
     <>

@@ -148,7 +148,7 @@ const ImageCard = ({
         </View>
       ))}
       <View style={styles.childrenContainer}>
-        {children.map((child, index) => (
+        {children?.length ? children.map((child, index) => (
           <Touchable
             onPress={() => navigateToChildren(child)}
             key={index}
@@ -157,7 +157,7 @@ const ImageCard = ({
             <ImageView style={styles.childImage} source={{ uri: child.images.medium }} />
             <Text style={styles.childText}>{child.name}</Text>
           </Touchable>
-        ))}
+        )) : null}
       </View>
     </View>
   );

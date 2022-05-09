@@ -48,7 +48,6 @@ const TrailScreen = (props: Props) => {
   }, []);
 
 
-
   const toggleInfoOverlay = () => {
     setShowInfoOverlay(!showInfoOverlay);
   };
@@ -61,8 +60,6 @@ const TrailScreen = (props: Props) => {
   const mapItems: MapItem[] = currentGuide.contentObjects.map(item => ({
     contentObject: item,
   }));
-
-  console.log("the redirect", redirect)
 
   return (
     <>

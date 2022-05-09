@@ -149,10 +149,13 @@ const Nav = (props: Props) => {
   useEffect(() => {
     if (url && homeLoaded) {
       if (url?.includes(UNIVERSAL_LINKING_URL)) {
-        let params = url.split(UNIVERSAL_LINKING_URL)[1];
-        let finalUrl = prefix + "home" + params;
-        dispatch(selectOpenedLink(url));
-        Linking.openURL(finalUrl);
+        let params = url.split(UNIVERSAL_LINKING_URL + "/?link=")[1] || url.split(UNIVERSAL_LINKING_URL + "?link=")[1];
+          if (params) {
+            let finalUrl = prefix + "home/" + params;
+            console.log("finalURL", finalUrl)
+            dispatch(selectOpenedLink(url));
+            Linking.openURL(finalUrl);
+          }
       }
     }
   }, [url, homeLoaded]);
