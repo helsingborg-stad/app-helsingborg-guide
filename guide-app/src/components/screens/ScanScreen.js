@@ -8,6 +8,10 @@ import {
 import QrScanner from "@shared-components/QRScanner";
 import LangService from "@services/langService";
 import { Colors } from "@assets/styles";
+import { UNIVERSAL_LINKING_URL } from "@data/endpoints";
+
+
+const prefix = "guidehbg://";
 
 
 const styles = StyleSheet.create({
@@ -33,7 +37,22 @@ const ScanScreen = (props) => {
 
   const onRead = (e) => {
     const { data } = e;
-      if (data?.split(":")[0] === "guidehbg") {
+    let url;
+
+    // INTERNAL URL
+    if (data?.split(":")[0] === "guidehbg") {
+      url = data;
+    }
+
+    // UNIVERSAL URL
+    else if (data?.includes(UNIVERSAL_LINKING_URL)) {
+      let params = data?.split(UNIVERSAL_LINKING_URL + "/?page=")[1] || data?.split(UNIVERSAL_LINKING_URL + "?link=")[1];
+          if (params) {
+            url = prefix + "home/" + params;
+          }
+    }
+
+      if (url) {
         Alert.alert(
           LangService.strings.OPEN_LINK,
           data,
@@ -47,7 +66,7 @@ const ScanScreen = (props) => {
               text: LangService.strings.OPEN,
               style: "default",
               onPress: () => {
-                Linking.openURL(data)
+                Linking.openURL(url)
                   .catch(err => {
                   Alert.alert(
                     LangService.strings.INVALID_URL,

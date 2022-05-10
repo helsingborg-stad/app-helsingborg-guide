@@ -171,7 +171,7 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
 
         RNFS.exists(finalPath).then(() => {
 
-          let sharingLink = UNIVERSAL_LINKING_URL + "/?link=" + ((currentSharingLink.split(DEEP_LINKING_URL + "home")[1] || currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1])).substring(1)
+          let sharingLink = UNIVERSAL_LINKING_URL + "/?page=" + ((currentSharingLink.split(DEEP_LINKING_URL + "home")[1] || currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1])).substring(1)
           let sharingText = title;
               sharingText = sharingText.concat(` ${sharingLink}`);
 
@@ -201,7 +201,7 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
       icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
     });
 
-    let sharingLink = UNIVERSAL_LINKING_URL + "/?link=" + ((currentSharingLink.split(DEEP_LINKING_URL + "home")[1] || currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1])).substring(1)
+    let sharingLink = UNIVERSAL_LINKING_URL + "/?page=" + ((currentSharingLink.split(DEEP_LINKING_URL + "home")[1] || currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1])).substring(1)
     let sharingText = title;
     sharingText = sharingText.concat(` ${sharingLink}`);
 

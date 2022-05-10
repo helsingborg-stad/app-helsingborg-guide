@@ -30,8 +30,6 @@ const config = {
   stateReconciler: autoMergeLevel2,
 };
 
-// "guides", "guideGroups", "navigation"
-
 const reducer = persistReducer(config, reducers);
 
 const middlewares = [

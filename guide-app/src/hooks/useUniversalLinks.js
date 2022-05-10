@@ -8,7 +8,7 @@ const useInitialURL = () => {
   const [url, setUrl] = useState("");
 
   const getForegroundURL = (foregroundURL) => {
-    setUrl(foregroundURL.url || url);
+    setUrl((foregroundURL.url || url).replace(/\#.*$/, ""));
   }
 
 
@@ -16,7 +16,7 @@ const useInitialURL = () => {
     Linking.addEventListener("url", getForegroundURL);
     const getBackgroundURL = async () => {
       const initialUrl = await Linking.getInitialURL();
-        setUrl(initialUrl);
+        setUrl(initialUrl.replace(/\#.*$/, ""));
     };
     getBackgroundURL();
   });

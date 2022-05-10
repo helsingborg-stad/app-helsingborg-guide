@@ -115,8 +115,8 @@ const RootNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
-    mode: "modal"
-  }
+    mode: "modal",
+  },
 );
 
 const NavigatorWrapper = createAppContainer(RootNavigator);
@@ -149,10 +149,11 @@ const Nav = (props: Props) => {
   useEffect(() => {
     if (url && homeLoaded) {
       if (url?.includes(UNIVERSAL_LINKING_URL)) {
-        let params = url.split(UNIVERSAL_LINKING_URL + "/?link=")[1] || url.split(UNIVERSAL_LINKING_URL + "?link=")[1];
+        console.log("URL lol", url)
+
+        let params = url.split(UNIVERSAL_LINKING_URL + "/?page=")[1] || url.split(UNIVERSAL_LINKING_URL + "?page=")[1];
           if (params) {
             let finalUrl = prefix + "home/" + params;
-            console.log("finalURL", finalUrl)
             dispatch(selectOpenedLink(url));
             Linking.openURL(finalUrl);
           }
