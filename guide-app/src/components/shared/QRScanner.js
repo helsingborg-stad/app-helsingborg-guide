@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import QRCodeScanner from "react-native-qrcode-scanner";
 import { RNCamera } from "react-native-camera";
-import { Colors } from "@assets/styles";
-import Torch from "@shared-components/svg/torch";
-import Flip from "@shared-components/svg/flip";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const styles = StyleSheet.create({
 
@@ -21,12 +19,18 @@ const styles = StyleSheet.create({
     padding: 0,
   },
 
+  cameraTall: {
+    flex: 14,
+    height: "100%",
+    margin: 0,
+    padding: 0,
+  },
+
   scannerTopContent: {
     width: "100%",
     padding: 0,
     margin: 0,
     flex: 1,
-    backgroundColor: "black",
   },
 
   scannerBottomContent: {
@@ -34,7 +38,6 @@ const styles = StyleSheet.create({
     padding: 0,
     margin: 0,
     flex: 1,
-    backgroundColor: "black",
     flexDirection: "row",
     justifyContent: "space-around",
     alignContent: "center",
@@ -50,12 +53,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
+  torch: {
+    position: "absolute",
+    bottom: 40,
+    width: '100%',
+    alignItems: "center",
+  },
+
 });
 
-const QRScanner = ({ _ref, onRead, initialTorchEnabled, enableTorchButton, enableFlipButton, backgroundColor, iconColor }) => {
+const QRScanner = ({ _ref, onRead, initialTorchEnabled, enableTorchButton, backgroundColor, iconColor, hideTop, hideBottom}) => {
 
   const [enableTorch, setEnableTorch] = useState(!!(initialTorchEnabled))
-  const [cameraMode, setCameraMode] = useState('back')
 
   useEffect(() => {
     return () => {
@@ -68,8 +77,8 @@ const QRScanner = ({ _ref, onRead, initialTorchEnabled, enableTorchButton, enabl
     <View style={styles.container}>
       <QRCodeScanner
         {...(_ref && {ref:  _ref})}
-        cameraStyle={styles.camera}
-        cameraType={cameraMode}
+        cameraStyle={(hideTop || hideBottom) ? styles.cameraTall : styles.camera}
+        cameraType={"back"}
         onRead={(e) => {
           onRead(e);
         }}
@@ -78,23 +87,25 @@ const QRScanner = ({ _ref, onRead, initialTorchEnabled, enableTorchButton, enabl
           <View style={[styles.scannerTopContent,  {...(backgroundColor && {backgroundColor: backgroundColor})}]}>
           </View>
         }
+        {...(hideTop && { topViewStyle: { display: "none" } })}
+        {...(hideBottom && { bottomViewStyle: { display: "none" } })}
         bottomContent={
           <View style={[styles.scannerBottomContent, {...(backgroundColor && {backgroundColor: backgroundColor})} ]}>
             {enableTorchButton &&
             <TouchableOpacity
               onPress={() => setEnableTorch(!enableTorch)}
               style={styles.bottomItem}>
-            <Torch color={iconColor} />
+            <Icon name={"flash"} size={30} color={iconColor} />
             </TouchableOpacity>}
-            {enableFlipButton &&
-              <TouchableOpacity
-                onPress={() => setCameraMode(cameraMode === "back" ? "front" : "back")}
-                style={styles.bottomItem}>
-              <Flip color={iconColor} />
-              </TouchableOpacity>}
           </View>
         }
       />
+      <TouchableOpacity
+        onPress={() => setEnableTorch(!enableTorch)}
+        style={styles.torch}
+      >
+        <Icon name={"flash"} size={30} color={iconColor} />
+      </TouchableOpacity>
     </View>
   );
 };

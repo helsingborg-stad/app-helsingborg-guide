@@ -6,7 +6,7 @@ import {
   Image,
   View,
   Linking,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback, StatusBar
 } from "react-native";
 import DeviceInfo from "react-native-device-info";
 import NetInfo from "@react-native-community/netinfo";
@@ -18,7 +18,7 @@ import { setLanguage } from "@actions/navigationActions";
 import {
   setDeveloperMode,
   showBottomBar,
-  selectCurrentBottomBarTab,
+  selectCurrentBottomBarTab
 } from "@actions/uiStateActions";
 import { trackEvent, trackScreen } from "@utils/MatomoUtils";
 import { fetchNavigation } from "../../actions/navigationActions";
@@ -29,46 +29,46 @@ const LOGO = require("@assets/images/logo.png");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.white
   },
   languageContainer: {
-    alignItems: "flex-start",
+    alignItems: "flex-start"
   },
   languageChoicesContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal: defaultMargin,
+    marginHorizontal: defaultMargin
   },
   choiceContainer: {
-    flex: 1,
+    flex: 1
   },
   icon: {
     tintColor: Colors.black,
-    margin: defaultMargin,
+    margin: defaultMargin
   },
   debugIcon: {
     tintColor: Colors.themePrimary,
-    margin: defaultMargin,
+    margin: defaultMargin
   },
   contactUsContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
 
   versionContainer: {
-    marginHorizontal: defaultMargin,
+    marginHorizontal: defaultMargin
   },
 
 
   divider: {
     margin: defaultMargin,
     height: 1,
-    backgroundColor: Colors.gray6,
+    backgroundColor: Colors.gray6
   },
   emptySpace: {
-    margin: defaultMargin * 0.5,
-  },
+    margin: defaultMargin * 0.5
+  }
 });
 
 const textStyles = StyleSheet.create({
@@ -81,30 +81,30 @@ const textStyles = StyleSheet.create({
       color: Colors.black,
       marginHorizontal: defaultMargin,
       marginTop: defaultMargin,
-      marginBottom: 10,
-    },
+      marginBottom: 10
+    }
   ]),
   languageText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       fontSize: 18,
-      color: Colors.black,
-    },
+      color: Colors.black
+    }
   ]),
   linkText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       fontSize: 18,
       color: Colors.black,
-      marginHorizontal: defaultMargin,
-    },
+      marginHorizontal: defaultMargin
+    }
   ]),
   contactEmailText: StyleSheetUtils.flatten([
     TextStyles.body,
     {
       color: Colors.black,
-      textAlign: "center",
-    },
+      textAlign: "center"
+    }
   ]),
   contactPhoneText: StyleSheetUtils.flatten([
     TextStyles.body,
@@ -112,16 +112,15 @@ const textStyles = StyleSheet.create({
       marginTop: 10,
       lineHeight: 23,
       color: Colors.black,
-      textAlign: "center",
-    },
+      textAlign: "center"
+    }
   ]),
   versionText: {
     fontSize: 12,
-    color: Colors.black,
-  },
+    color: Colors.black
+  }
 
 });
-
 
 
 const SettingsScreen = (props) => {
@@ -135,7 +134,7 @@ const SettingsScreen = (props) => {
   const [connected, setConnected] = useState("");
 
   useEffect(() => {
-    console.log("the lang service", LangService.code, LangService.languageObj)
+    console.log("the lang service", LangService.code, LangService.languageObj);
     if (!languages || Object.keys(languages).length === 0) {
       setSelectedLanguageCode(LangService.code);
       setLanguages(LangService.languageObj);
@@ -146,7 +145,7 @@ const SettingsScreen = (props) => {
     LangService.getLanguages();
     props.navigation.setParams();
 
-    trackScreen("/settings", "/settings")
+    trackScreen("/settings", "/settings");
     const unsubscribe = NetInfo.addEventListener((state) => {
       setConnected(state.isConnected);
     });
@@ -159,10 +158,10 @@ const SettingsScreen = (props) => {
       LangService.storeLangCode(langCode);
       LangService.getLanguages();
     }
-  }
+  };
 
   const setLanguageAndReload = code => {
-    dispatch(fetchNavigation(code))
+    dispatch(fetchNavigation(code));
     trackEvent("change", "change_language", code);
     setSelectedLanguageCode(code);
     LangService.setLanguage(code);
@@ -174,8 +173,8 @@ const SettingsScreen = (props) => {
 
   const navigateToWelcomeScreen = () => {
     const { navigate } = props.navigation;
-    dispatch(showBottomBar(false))
-    dispatch(selectCurrentBottomBarTab(0))
+    dispatch(showBottomBar(false));
+    dispatch(selectCurrentBottomBarTab(0));
     navigate("WelcomeScreen");
   };
 
@@ -207,7 +206,7 @@ const SettingsScreen = (props) => {
         <View style={styles.divider} />
       </View>
     );
-  }
+  };
 
   const displayLanguages = (languages) => {
     return languages.map(language => {
@@ -215,7 +214,7 @@ const SettingsScreen = (props) => {
       const style = {
         ...TextStyles.bold,
         color: Colors.themePrimary,
-        textDecorationLine: "underline",
+        textDecorationLine: "underline"
       };
       const selectedStyle =
         selectedLanguageCode === slug ? style : null;
@@ -235,7 +234,7 @@ const SettingsScreen = (props) => {
         </TouchableOpacity>
       );
     });
-  }
+  };
 
   const displayDeveloperMenuButton = () => {
     return (
@@ -246,18 +245,20 @@ const SettingsScreen = (props) => {
         </TouchableOpacity>
       </View>
     );
-  }
+  };
 
   const updateDeveloperMode = () => {
     this.setState({ debugStatus: debugStatus + 1 });
     if (debugStatus >= 10) {
       setDebugStatus(0);
-      dispatch(setDeveloperMode(!developerMode))
+      dispatch(setDeveloperMode(!developerMode));
     }
-  }
+  };
 
 
-    return (
+  return (
+    <>
+      <StatusBar barStyle="light-content" backgroundColor={Colors.themeSecondary} />
       <View style={styles.container}>
         {displayLanguageSegment()}
         <TouchableOpacity onPress={navigateToWelcomeScreen}>
@@ -289,7 +290,7 @@ const SettingsScreen = (props) => {
                 Linking.openURL(
                   `mailto:${LangService.strings.CONTACT_MAIL_ADRESS}?subject=${
                     LangService.strings.CONTACT_MAIL_SUBJECT
-                  }`,
+                  }`
                 )
               }
               style={textStyles.contactEmailText}
@@ -307,13 +308,14 @@ const SettingsScreen = (props) => {
           </View>
         </View>
       </View>
-    );
-  }
+    </>
+  );
+};
 
-  SettingsScreen["navigationOptions"] = () => (
-    {
-      title: LangService.strings.SETTINGS,
-      headerLeft: () => null,
-    });
+SettingsScreen["navigationOptions"] = () => (
+  {
+    title: LangService.strings.SETTINGS,
+    headerLeft: () => null
+  });
 
 export default SettingsScreen;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from "react";
-import { View, Text, TouchableOpacity, Animated, Keyboard } from "react-native";
+import { View, Text, TouchableOpacity, Animated, Keyboard, Platform } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash/function";
@@ -70,7 +70,7 @@ const HomeSettings = (props) => {
           height: settingsHeight ? height : undefined,
           visibility: settingsHeight ? "visible" : "hidden",
           opacity: settingsHeight ? 1 : 0
-        }, displayShadow && styles.shadow]}>
+        }, displayShadow && Platform.OS === "ios" && styles.shadow]}>
         <View style={styles.wrapper}>
           <View style={styles.search}>
             <View style={styles.searchTop}>
