@@ -37,16 +37,17 @@ const ScanScreen = (props) => {
 
   const onRead = (e) => {
     const { data } = e;
+    let parsed = data.replace(/\#.*$/, "");
     let url;
 
     // INTERNAL URL
     if (data?.split(":")[0] === "guidehbg") {
-      url = data;
+      url = parsed;
     }
 
     // UNIVERSAL URL
     else if (data?.includes(UNIVERSAL_LINKING_URL)) {
-      let params = data?.split(UNIVERSAL_LINKING_URL + "/?page=")[1] || data?.split(UNIVERSAL_LINKING_URL + "?link=")[1];
+      let params = parsed?.split(UNIVERSAL_LINKING_URL + "/?page=")[1] || parsed?.split(UNIVERSAL_LINKING_URL + "?link=")[1];
           if (params) {
             url = prefix + "home/" + params;
           }
