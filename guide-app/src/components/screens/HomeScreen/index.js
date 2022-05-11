@@ -262,7 +262,6 @@ function mapStateToProps(state: RootState) {
       ? categories[currentHomeTab]?.data
       : null;
 
-
   const coords = geolocation?.coords || geolocation?.position?.coords || position?.coords;
 
   if (items?.length) {
