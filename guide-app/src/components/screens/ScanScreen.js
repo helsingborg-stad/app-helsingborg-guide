@@ -1,15 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   View,
   Linking,
-  Alert, StatusBar
+  Alert, StatusBar, TouchableWithoutFeedback
 } from "react-native";
+import InfoOverlayToggleView from "@shared-components/InfoOverlayToggleView";
 import QrScanner from "@shared-components/QRScanner";
 import LangService from "@services/langService";
 import { Colors } from "@assets/styles";
 import { UNIVERSAL_LINKING_URL } from "@data/endpoints";
+import InformationOverlay from "@shared-components/InformationOverlay/InformationOverlay";
+import QRScan from "@assets/images/qr_scan.svg";
 
+type Props = {
+  navigation: Object
+};
 
 const prefix = "guidehbg://";
 
@@ -24,15 +30,41 @@ const styles = StyleSheet.create({
 });
 
 
-const ScanScreen = (props) => {
+const ScanScreen = (props: Props) => {
   const { navigation } = props;
   const scannerRef = useRef();
+  const [showInfoOverlay, setShowInfoOverlay] = useState(false);
+
 
   useEffect(() => {
     if (navigation.isFocused()) {
+      navigation.setParams({
+        toggleInfoOverlay: toggleInfoOverlay
+      });
       scannerRef?.current?.reactivate();
     }
   }, [navigation.isFocused()]);
+
+
+  const toggleInfoOverlay = () => {
+    setShowInfoOverlay(!showInfoOverlay);
+  };
+
+
+  function renderInformationOverlay() {
+    return (
+      <TouchableWithoutFeedback onPress={toggleInfoOverlay}>
+        <InformationOverlay
+          information={{
+            title: "Skanna QR Koder",
+            description: "Här kan du skanna QR koder som är placerade runtomkring i Helsingborg. Håll kameran stilla över QR koden, så öppnas rätt upplevelse i appen!",
+            image: <QRScan width={80} />,
+          }}
+          onPressFunction={toggleInfoOverlay}
+        />
+      </TouchableWithoutFeedback>
+    );
+  }
 
 
   const onRead = (e) => {
@@ -103,6 +135,8 @@ const ScanScreen = (props) => {
     }
   };
 
+  console.log("showInfoOverlay", showInfoOverlay)
+
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor={Colors.themeSecondary} />
@@ -120,16 +154,30 @@ const ScanScreen = (props) => {
           hideTop={true}
           hideBottom={true}
         />
+        {showInfoOverlay
+          ? renderInformationOverlay()
+          : null}
       </View>
     </>
   );
 };
 
-ScanScreen["navigationOptions"] = () => (
-  {
+ScanScreen["navigationOptions"] = ({ navigation }) => {
+
+  let toggleInfoOverlay = () => null
+
+  const { params = {} } = navigation.state;
+  if (params) {
+    ({ toggleInfoOverlay } = params);
+  }
+
+  return {
     title: LangService.strings.SCAN,
-    headerLeft: () => null
-  });
+    headerLeft: () => <View style={{ width: 36 }} />,
+    headerRight: () => (
+      <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />)
+  };
+};
 
 export default ScanScreen;
 

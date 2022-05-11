@@ -1,7 +1,6 @@
 // @flow
 import React, { memo } from "react";
 import { TouchableWithoutFeedback, View } from "react-native";
-import { NavigationModeUtils } from "@utils";
 import styles from "./style";
 import MarkerListView from "@shared-components/MarkerListView";
 import MapInformationOverlay from "@shared-components/MapInformationOverlay/MapInformationOverlay";
@@ -25,11 +24,9 @@ function renderMapInformationOverlay(
   trail: Guide,
   onToggleInfoOverlay: () => void
 ) {
-  console.log("le trail", trail)
   if (!trail) {
     return null;
   }
-
   return (
     <TouchableWithoutFeedback onPress={onToggleInfoOverlay}>
       <MapInformationOverlay

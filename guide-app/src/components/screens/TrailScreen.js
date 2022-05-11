@@ -65,7 +65,7 @@ const TrailScreen = (props: Props) => {
     <>
       <StatusBar
         barStyle="light-content"
-        backgroundColor={Colors.themeSecondary}
+        backgroundColor={Colors.white}
       />
       <TrailView
         trail={currentGuide}
