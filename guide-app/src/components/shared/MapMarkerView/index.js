@@ -225,11 +225,17 @@ class MapMarkerView extends PureComponent<Props, State> {
   };
 
   render() {
-    const { items, initialLocation } = this.props;
+    const { items, initialLocation, userLocation } = this.props;
+    const userCoords = userLocation?.coords || userLocation?.position?.coords || userLocation?.coords;
+    const userLatitude = userCoords?.latitude;
+    const userLongitude = userCoords?.longitude;
+
     const coords = LocationUtils.getRegionForCoordinates([
-      { latitude: initialLocation?.latitude || 0, longitude: initialLocation?.longitude || 0 },
+      { latitude: initialLocation?.latitude || userLatitude || 0, longitude: initialLocation?.longitude || userLongitude || 0 },
       { latitude: 0, longitude: 0 }
     ]);
+
+    console.log("coords", coords);
 
     return (
       <View style={styles.container}>
@@ -241,8 +247,8 @@ class MapMarkerView extends PureComponent<Props, State> {
             this.map = ref;
           }}
           initialRegion={{
-            latitude: initialLocation && initialLocation.latitude,
-            longitude: initialLocation && initialLocation.longitude,
+            latitude: initialLocation?.latitude || userLatitude || 0 ,
+            longitude: initialLocation?.longitude || userLongitude || 0,
             latitudeDelta: coords.latitudeDelta,
             longitudeDelta: coords.longitudeDelta,
           }}
@@ -261,6 +267,7 @@ class MapMarkerView extends PureComponent<Props, State> {
     );
   }
 }
+
 
 export default MapMarkerView;
 

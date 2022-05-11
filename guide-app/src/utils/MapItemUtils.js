@@ -48,8 +48,8 @@ function getNumberOfGuides(item: MapItem, all: []): ?number {
     return guide?.contentObjects?.length;
   }
   if (guideGroup) {
-    if (all) {
-      return all?.guideGroups?.find(item => item.parentID === guideGroup.id).guideAmount;
+    if (all?.guideGroups) {
+      return all?.guideGroups?.find(item => item.parentID === guideGroup.id)?.guideAmount || null;
     }
     else {
       return guideGroup?.guidesCount;

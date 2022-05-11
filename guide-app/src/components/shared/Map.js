@@ -39,6 +39,8 @@ const Map = (props: Props) => {
 
   console.log("navigation", navigation?.state);
 
+  console.log("mapItems", items );
+
   return (
     <>
       <StatusBar

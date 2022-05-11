@@ -458,6 +458,7 @@ const MarkerListView = (props: Props) => {
 
   const initialLocation = getInitialLocation();
 
+  console.log("initialLocation", initialLocation)
 
   return (
     <View style={styles.container}>

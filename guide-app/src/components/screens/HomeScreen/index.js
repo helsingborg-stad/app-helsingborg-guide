@@ -96,6 +96,8 @@ const HomeScreen = (props: Props) => {
     dispatchFetchAllGuidesforAllGroups
   } = props;
 
+  const labels = [...navigationCategoryLabels, "map"];
+
   useEffect(() => {
     dispatchFetchAllGuidesforAllGroups();
   }, []);
@@ -164,10 +166,10 @@ const HomeScreen = (props: Props) => {
               <SegmentControlPill
                 initialSelectedIndex={currentHomeTab}
                 onSegmentIndexChange={selectCurrentTab}
-                labels={[...navigationCategoryLabels, "map"]}
+                labels={labels}
               />
             </View>
-            {currentHomeTab === 0 ? <>
+            {currentHomeTab !== (labels.length - 1) ? <>
               {segmentLayout ?
                 <HomeSettings open={showSettings} setOpen={toggleSettings} settingsHeight={settingsHeight}
                               setSettingsHeight={setSettingsHeight} segmentLayout={segmentLayout}
@@ -282,18 +284,22 @@ function mapStateToProps(state: RootState) {
 
     //FILTER CHILDREN OF GROUPS
     let allGroups = all.guideGroups;
-    if (allGroups.length && searchText.trim().length >= 3) {
+    if (allGroups?.length && searchText.trim().length >= 3) {
       allGroups.filter(item => {
-        item.items.map(subItem => {
-          if (subItem?.name) {
-            let searchCriteria = searchText?.trim().length >= 3 ? subItem?.name?.toUpperCase()?.trim()?.indexOf(searchText?.toUpperCase()?.trim()) !== -1 : false;
-            if (searchCriteria) {
-              let parent = original.find(parentItem => parentItem.id === item.parentID);
-              !items.includes(parent) && items.push(parent);
-              items[items.indexOf(parent)].children.push(subItem);
+        if (item?.items) {
+          item.items.map(subItem => {
+            if (subItem?.name) {
+              let searchCriteria = searchText?.trim().length >= 3 ? subItem?.name?.toUpperCase()?.trim()?.indexOf(searchText?.toUpperCase()?.trim()) !== -1 : false;
+              if (searchCriteria) {
+                let parent = original.find(parentItem => parentItem.id === item.parentID);
+                !items.includes(parent) && items.push(parent);
+                if(typeof items.indexOf(parent) === "number") {
+                  items[items.indexOf(parent)].children.push(subItem);
+                }
+              }
             }
-          }
-        });
+          });
+        }
       });
     }
 
