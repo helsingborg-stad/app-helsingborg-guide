@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.91,
     position: "absolute",
     right: 0,
-    bottom: -25,
+    bottom: -17,
     padding: 15,
     fontSize: 16,
     color: "rgba(41, 41, 41, 1)"
