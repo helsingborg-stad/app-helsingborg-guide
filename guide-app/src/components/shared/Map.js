@@ -39,13 +39,14 @@ const Map = (props: Props) => {
   return (
     <>
       <StatusBar
-        barStyle={barStyle || "light-content"}
-        backgroundColor={Colors.themeSecondary}
+        barStyle={"dark-content"}
+        backgroundColor={Colors.white}
       />
       {testing && <MarkerListView
         items={mapItems}
         navigation={navigation}
         showListButton={false}
+        keepStatusBar={true}
       />}
     </>
   );

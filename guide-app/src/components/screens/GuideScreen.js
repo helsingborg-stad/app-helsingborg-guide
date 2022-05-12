@@ -128,9 +128,10 @@ GuideScreen["navigationOptions"] = ({ navigation }) => {
   const { params } = navigation.state;
   if (params) {
     const { title, path } = params;
+    console.log("title", title)
     return {
       title,
-      headerRight: () => null,
+      headerRight: () => <View style={{width: 36}} />,
       headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
     };
   }

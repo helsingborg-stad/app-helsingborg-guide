@@ -5,7 +5,8 @@ import TextStyles from "./TextStyles";
 const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: Colors.themeSecondary,
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
+    alignItems: "center",
   },
   noElevation: {
     backgroundColor: Colors.themeSecondary,

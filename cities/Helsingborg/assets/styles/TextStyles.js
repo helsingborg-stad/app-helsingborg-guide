@@ -38,10 +38,9 @@ export default StyleSheet.create({
     ...defaultFont,
     alignSelf: "center",
     color: Colors.white,
-    flex: 1, // added this to center title on android //BP
     fontSize: 18,
     fontWeight: "300",
-    lineHeight: 23.0,
+    lineHeight: 18,
     textAlign: "center",
   },
   medium: {

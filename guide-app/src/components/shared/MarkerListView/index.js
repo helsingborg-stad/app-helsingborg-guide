@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   PixelRatio,
   Image,
-  Text,
+  Text, StatusBar
 } from "react-native";
 import { connect } from "react-redux";
 import { isEqual } from "lodash";
+import { Colors } from "@assets/styles";
 import IconTextTouchable from "@shared-components/IconTextTouchable";
 import SegmentControl from "@shared-components/SegmentControl";
 import MapMarkerView from "@shared-components/MapMarkerView";
@@ -19,13 +20,13 @@ import {
   UrlUtils,
   AnalyticsUtils,
   MapItemUtils,
-  NavigationModeUtils,
+  NavigationModeUtils
 } from "@utils";
 import {
   selectCurrentContentObject,
   selectCurrentGuideGroup,
   selectCurrentGuide,
-  selectCurrentSharingLink,
+  selectCurrentSharingLink
 } from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
 
@@ -46,7 +47,7 @@ type Props = {
 const HalfListMargin = DefaultMargin * 0.5;
 
 const MarkerListView = (props: Props) => {
-  const { supportedNavigationModes, navigation, items, userLocation } = props;
+  const { supportedNavigationModes, navigation, items, userLocation, keepStatusBar } = props;
   const params = navigation?.state?.params;
   const redirect = params?.redirect;
 
@@ -65,39 +66,38 @@ const MarkerListView = (props: Props) => {
     (async () => {
       if (!(!!redirect)) {
         setTimeout(() => {
-          setActiveMarker(items[0])
+          setActiveMarker(items[0]);
           scrollToIndex(0);
           mapMarkerViewRef?.panMapToIndex(0);
-        }, 200)
+        }, 200);
       }
     })();
   }, [listRef, mapMarkerViewRef]);
 
 
   useEffect(() => {
-      if (redirect && listRef.current && mapMarkerViewRef) {
-        let index = -1;
-        const currentItem = items.find((item, i) => {
-          let result = (item?.contentObject.id?.toString() === redirect.toString() || item?.id?.toString() === redirect.toString());
-          if (result) {
-            index = i;
-          }
-          return result;
-        });
-        if (currentItem && index !== -1) {
-            scrollToIndex(index);
-            mapMarkerViewRef?.panMapToIndex(index);
-            onListItemPressed(currentItem);
+    if (redirect && listRef.current && mapMarkerViewRef) {
+      let index = -1;
+      const currentItem = items.find((item, i) => {
+        let result = (item?.contentObject.id?.toString() === redirect.toString() || item?.id?.toString() === redirect.toString());
+        if (result) {
+          index = i;
         }
-        else {
-          setTimeout(() => scrollToIndex(0), 100)
-        }
+        return result;
+      });
+      if (currentItem && index !== -1) {
+        scrollToIndex(index);
+        mapMarkerViewRef?.panMapToIndex(index);
+        onListItemPressed(currentItem);
+      } else {
+        setTimeout(() => scrollToIndex(0), 100);
       }
+    }
   }, [redirect, listRef, mapMarkerViewRef]);
 
 
   const getMapItemProps = (
-    item: MapItem,
+    item: MapItem
   ): {
     title: ?string,
     streetAddress: ?string,
@@ -117,7 +117,7 @@ const MarkerListView = (props: Props) => {
       return {
         title,
         streetAddress,
-        thumbnailUrl,
+        thumbnailUrl
       };
     }
 
@@ -130,7 +130,7 @@ const MarkerListView = (props: Props) => {
       return {
         title,
         streetAddress,
-        thumbnailUrl,
+        thumbnailUrl
       };
     }
 
@@ -143,7 +143,7 @@ const MarkerListView = (props: Props) => {
       return {
         title,
         streetAddress,
-        thumbnailUrl,
+        thumbnailUrl
       };
     }
 
@@ -153,7 +153,7 @@ const MarkerListView = (props: Props) => {
   const getItemLayout = (data: any, index: number) => ({
     length: ListItemWidth + DefaultMargin,
     offset: (ListItemWidth + HalfListMargin) * index,
-    index,
+    index
   });
 
   const getInitialLocation = () => {
@@ -172,14 +172,14 @@ const MarkerListView = (props: Props) => {
       items,
       path,
       currentSharingLink,
-      dispatchCurrentSharingLink,
+      dispatchCurrentSharingLink
     } = props;
     const { navigate } = navigation;
     const { guide, guideGroup, contentObject } = listItem;
     let sharingLink = currentSharingLink;
     if (guideGroup) {
       sharingLink += `/${guideGroup?.id}`;
-      dispatchCurrentSharingLink(sharingLink)
+      dispatchCurrentSharingLink(sharingLink);
       trackScreen("view_location", guideGroup?.slug);
       selectGuideGroup(guideGroup.id);
       navigate("LocationScreen", { title: guideGroup.name });
@@ -189,7 +189,7 @@ const MarkerListView = (props: Props) => {
     if (guide) {
       const { guideType } = guide;
       sharingLink += `/${guide?.id}`;
-      dispatchCurrentSharingLink(sharingLink)
+      dispatchCurrentSharingLink(sharingLink);
       trackScreen("view_guide", guide?.slug || "");
       selectGuide(guide);
       switch (guideType) {
@@ -209,7 +209,7 @@ const MarkerListView = (props: Props) => {
       const newPath = `${path}/${contentObject?.title}`;
       trackScreen(newPath, newPath);
       sharingLink += `/${contentObject?.id}`;
-      dispatchCurrentSharingLink(sharingLink)
+      dispatchCurrentSharingLink(sharingLink);
       navigate("ObjectScreen", {
         title: contentObject?.title,
         array: _items,
@@ -219,7 +219,7 @@ const MarkerListView = (props: Props) => {
         scrollable: scrollToIndex,
         panToIndex: mapMarkerViewRef.panMapToIndex,
         path: newPath,
-        ...(redirect && {redirect: redirect}),
+        ...(redirect && { redirect: redirect })
       });
     }
   };
@@ -235,14 +235,14 @@ const MarkerListView = (props: Props) => {
     const directionsUrl = LocationUtils.directionsUrl(
       latitude,
       longitude,
-      userLocation,
+      userLocation
     );
     UrlUtils.openUrlIfValid(
       directionsUrl,
       LangService.strings.OPEN_IN_MAPS,
       "",
       LangService.strings.CANCEL,
-      LangService.strings.OPEN,
+      LangService.strings.OPEN
     );
   };
 
@@ -254,7 +254,7 @@ const MarkerListView = (props: Props) => {
     if (userLocation) {
       hasArrived = LocationUtils.hasArrivedAtDestination(
         userLocation,
-        MapItemUtils.getLocationFromItem(item),
+        MapItemUtils.getLocationFromItem(item)
       );
     }
 
@@ -332,7 +332,7 @@ const MarkerListView = (props: Props) => {
 
     const { coords } = userLocation;
     const distance = Math.round(
-      LocationUtils.getTravelDistance(coords, location),
+      LocationUtils.getTravelDistance(coords, location)
     );
     const time = Math.round(LocationUtils.getTravelTime(distance));
 
@@ -458,43 +458,49 @@ const MarkerListView = (props: Props) => {
 
   const initialLocation = getInitialLocation();
 
-  console.log("initialLocation", initialLocation)
+  console.log("initialLocation", initialLocation);
 
   return (
-    <View style={styles.container}>
-      {supportedNavigationModes && supportedNavigationModes.length > 1 && (
-        <SegmentControl
-          style={styles.segmentControl}
-          labels={supportedNavigationModes.map(
-            mode => `${LangService.strings[mode]}`,
-          )}
-          onSegmentIndexChange={onNavigationModeChange}
-          initalSelectedIndex={supportedNavigationModes.indexOf(
-            selectedNavigationMode,
-          )}
-        />
-      )}
-      {selectedNavigationMode === NavigationModeUtils.NavigationModes.Map && (
-        <MapMarkerView
-          items={items}
-          ref={ref => {
-            mapMarkerViewRef = ref;
-          }}
-          userLocation={userLocation}
-          showNumberedMapMarkers
-          onMapMarkerPressed={index => {
-            AnalyticsUtils.logEvent("tap_map_pin");
-            scrollToIndex(index);
-          }}
-          activeMarker={activeMarker}
-          initialLocation={initialLocation}
-        />
-      )}
+    <>
+      {!keepStatusBar && <StatusBar
+        barStyle={"light-content"}
+        backgroundColor={Colors.themeSecondary}
+      />}
+      <View style={styles.container}>
+        {supportedNavigationModes && supportedNavigationModes.length > 1 && (
+          <SegmentControl
+            style={styles.segmentControl}
+            labels={supportedNavigationModes.map(
+              mode => `${LangService.strings[mode]}`
+            )}
+            onSegmentIndexChange={onNavigationModeChange}
+            initalSelectedIndex={supportedNavigationModes.indexOf(
+              selectedNavigationMode
+            )}
+          />
+        )}
+        {selectedNavigationMode === NavigationModeUtils.NavigationModes.Map && (
+          <MapMarkerView
+            items={items}
+            ref={ref => {
+              mapMarkerViewRef = ref;
+            }}
+            userLocation={userLocation}
+            showNumberedMapMarkers
+            onMapMarkerPressed={index => {
+              AnalyticsUtils.logEvent("tap_map_pin");
+              scrollToIndex(index);
+            }}
+            activeMarker={activeMarker}
+            initialLocation={initialLocation}
+          />
+        )}
 
-      {!showHorizontalList ||
-      selectedNavigationMode === NavigationModeUtils.NavigationModes.AR ||
-      renderHorizontalList(items)}
-    </View>
+        {!showHorizontalList ||
+        selectedNavigationMode === NavigationModeUtils.NavigationModes.AR ||
+        renderHorizontalList(items)}
+      </View>
+    </>
   );
 };
 
@@ -506,7 +512,7 @@ function mapStateToProps(state: RootState) {
   return {
     userLocation: geolocation?.position,
     currentSharingLink,
-    all,
+    all
   };
 }
 
@@ -516,12 +522,12 @@ function mapDispatchToProps(dispatch: Dispatch) {
       dispatch(selectCurrentContentObject(contentObject)),
     selectGuideGroup: id => dispatch(selectCurrentGuideGroup(id)),
     selectGuide: guide => dispatch(selectCurrentGuide(guide)),
-    dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link)),
+    dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link))
   };
 }
 
 MarkerListView.defaultProps = {
-  supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map],
+  supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map]
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarkerListView)
+export default connect(mapStateToProps, mapDispatchToProps)(MarkerListView);
