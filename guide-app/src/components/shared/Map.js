@@ -11,20 +11,19 @@ type Props = {
 };
 
 const Map = (props: Props) => {
-  const { navigation, currentCategory, barStyle } = props;
+  const { navigation, currentCategory, barStyle, items } = props;
 
 
   if (!currentCategory) {
     return null;
   }
 
-  const { items } = currentCategory;
 
-  const [testing, setTesting] = useState(false)
+  const [testing, setTesting] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setTesting(true), 200);
-  },[])
+  }, []);
 
   const mapItems: MapItem[] = [];
   items.forEach(navItem => {
@@ -36,10 +35,6 @@ const Map = (props: Props) => {
       mapItems.push({ guide });
     }
   });
-
-  console.log("navigation", navigation?.state);
-
-  console.log("mapItems", items );
 
   return (
     <>
@@ -60,10 +55,18 @@ const Map = (props: Props) => {
 function mapStateToProps(state: RootState) {
   const { uiState, navigation } = state;
   const { currentHomeTab: categoryIndex } = uiState;
-  const category = navigation.navigationCategories[0]
+  const category = navigation.navigationCategories[0];
+  let items = [];
+
+  navigation.navigationCategories.map(category => {
+    category.items.map(item => {
+      items.push(item);
+    })
+  })
 
   return {
-    currentCategory: category
+    currentCategory: category,
+    items,
   };
 }
 
@@ -78,4 +81,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Map)
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
