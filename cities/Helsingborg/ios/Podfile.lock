@@ -405,7 +405,7 @@ PODS:
     - React-Core
   - react-native-geolocation (2.0.2):
     - React
-  - react-native-maps (0.30.1):
+  - react-native-maps (0.31.1):
     - React-Core
   - react-native-netinfo (7.1.7):
     - React-Core
@@ -499,7 +499,7 @@ PODS:
     - React-perflogger (= 0.66.4)
   - rn-fetch-blob (0.12.0):
     - React-Core
-  - RNCAsyncStorage (1.15.15):
+  - RNCAsyncStorage (1.17.3):
     - React-Core
   - RNCCheckbox (0.5.11):
     - React-Core
@@ -868,7 +868,7 @@ SPEC CHECKSUMS:
   react-native-camera: 3eae183c1d111103963f3dd913b65d01aef8110f
   react-native-config: 6502b1879f97ed5ac570a029961fc35ea606cd14
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
-  react-native-maps: d752b0dd0e1951d815b1336332835aab6b4a836f
+  react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
   react-native-netinfo: 27f287f2d191693f3b9d01a4273137fcf91c3b5d
   react-native-orientation-locker: 2da91e5391971dace445495821c899c111dcad7a
   react-native-photo-view: ea0ec91bf5991a6843e740b1f47ab355171c996c
@@ -893,7 +893,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
-  RNCAsyncStorage: 0bef6a21517c0254bd6bd59a3672963abfa0d18e
+  RNCAsyncStorage: 005c0e2f09575360f142d0d1f1f15e4ec575b1af
   RNCCheckbox: ebf3ecc7a766d8a28d4b0504ea6084757bb59bc5
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDeviceInfo: 0400a6d0c94186d1120c3cbd97b23abc022187a9
