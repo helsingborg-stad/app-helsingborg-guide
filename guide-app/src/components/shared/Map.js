@@ -59,14 +59,16 @@ function mapStateToProps(state: RootState) {
   let items = [];
 
   navigation.navigationCategories.map(category => {
-    category.items.map(item => {
-      items.push(item);
-    })
-  })
+    if (category?.items) {
+      category.items.map(item => {
+        item && items.push(item);
+      });
+    }
+  });
 
   return {
     currentCategory: category,
-    items,
+    items
   };
 }
 

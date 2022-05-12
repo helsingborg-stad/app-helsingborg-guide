@@ -21,6 +21,7 @@ type Props = {
   onMapMarkerPressed?: ?(index: number) => void,
   activeMarker: MapItem,
   initialLocation?: Location,
+  userLocation: any,
 };
 type State = {
   markersFocused: boolean,
@@ -229,18 +230,14 @@ class MapMarkerView extends PureComponent<Props, State> {
     const userCoords = userLocation?.coords || userLocation?.position?.coords || userLocation?.coords;
     const userLatitude = userCoords?.latitude;
     const userLongitude = userCoords?.longitude;
-
-    const coords = LocationUtils.getRegionForCoordinates([
-      { latitude: initialLocation?.latitude || userLatitude || 1, longitude: initialLocation?.longitude || userLongitude || 1 },
-      { latitude: 0, longitude: 0 }
-    ]);
-
-    console.log("coords", coords);
-
     const latitude = initialLocation?.latitude || userLatitude || 1;
     const longitude = initialLocation?.longitude || userLongitude || 1;
 
-    console.log("coords", coords);
+    const coords = LocationUtils.getRegionForCoordinates([
+      { latitude: latitude, longitude: longitude },
+      { latitude: 0, longitude: 0 },
+    ]);
+
 
     return (
       <View style={styles.container}>
