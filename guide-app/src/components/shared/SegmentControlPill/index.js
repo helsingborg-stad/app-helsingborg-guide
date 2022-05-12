@@ -46,6 +46,7 @@ export const SegmentControlPill = ({
             onPress={onPressSegment(index, label)}
           >
             <Text
+              numberOfLines={1}
               style={[
                 styles.label,
                 index === selectedIndex ? styles.labelActive : null

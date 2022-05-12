@@ -51,13 +51,15 @@ const ScanScreen = (props: Props) => {
   };
 
 
+
   function renderInformationOverlay() {
     return (
       <TouchableWithoutFeedback onPress={toggleInfoOverlay}>
         <InformationOverlay
           information={{
-            title: "Skanna QR Koder",
-            description: "Här kan du skanna QR koder som är placerade runtomkring i Helsingborg. Håll kameran stilla över QR koden, så öppnas rätt upplevelse i appen!",
+            title: LangService.strings.SCAN_QR_CODES,
+            description: LangService.strings.SCAN_QR_CODES_DESCRIPTION,
+            additional: LangService.strings.SCAN_QR_CODES_REMINDER,
             image: <QRScan width={80} />,
           }}
           onPressFunction={toggleInfoOverlay}

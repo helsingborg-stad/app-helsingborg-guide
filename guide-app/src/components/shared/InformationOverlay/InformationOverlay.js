@@ -9,7 +9,8 @@ const closeIcon = require("@assets/images/ic_close.png");
 type Information = {
   title: ?string,
   description: ?string,
-  image: ?Images
+  image: ?Images,
+  additional: ?string,
 };
 
 type Props = {
@@ -36,6 +37,7 @@ function renderScrollableContent(
     <View style={style}>
       {renderTitle(information)}
       <Text style={styles.descriptionText}>{information.description}</Text>
+      <Text style={styles.descriptionText}>{information.additional}</Text>
       {information?.image ? <View style={styles.image}>
         {information.image}
       </View> : null}

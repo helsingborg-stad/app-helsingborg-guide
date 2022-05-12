@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     bottom: -17,
     padding: 15,
     fontSize: 16,
-    color: "rgba(41, 41, 41, 1)"
+    color: "rgba(41, 41, 41, 1)",
   },
   subTitleLabel: {
     paddingLeft: 20,

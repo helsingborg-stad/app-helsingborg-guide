@@ -141,7 +141,7 @@ const HomeScreen = (props: Props) => {
   };
 
   useEffect(() => {
-    props.dispatchShowBottomBar(!(currentHomeTab));
+    props.dispatchShowBottomBar(currentHomeTab !== (labels.length - 1));
   }, [currentHomeTab]);
 
   const toggleSettings = () => {
