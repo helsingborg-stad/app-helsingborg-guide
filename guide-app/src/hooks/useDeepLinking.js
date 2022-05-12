@@ -27,12 +27,18 @@ const useDeepLinking = () => {
       let item;
       let category = navigationCategories[type === "group" ? 0 : 1];
       let temp;
-      temp = category.items.find(group => group.id.toString() === id_1.toString());
-      if (temp) {
+      navigationCategories.map(category => {
+        console.log("category", category.items.length)
+        let idMatch = category.items.find(group => group.id.toString() === id_1.toString());
+        console.log("idMatch", idMatch)
+        if (idMatch) {
+          temp = idMatch;
+        }
+      })
+      if (temp?.guide || temp?.guidegroup || temp?.guideGroup || temp?.interactiveGuide) {
         item = temp;
       }
       else {
-        console.log("NOT FOUND USE")
         Navigation.navigate("NotFoundScreen");
       }
       dispatch(selectCurrentBottomBarTab(0));

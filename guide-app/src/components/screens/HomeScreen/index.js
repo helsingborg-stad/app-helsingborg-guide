@@ -123,8 +123,11 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     if (id_1) {
       linkingHome(params, props);
+      if (navigation.isFocused()) {
+        // setTimeout(() => navigation.navigate("NotFoundScreen"), 3000)
+      }
     }
-  }, [params]);
+  }, [params, navigation]);
 
   useEffect(() => {
     setTimeout(() => {

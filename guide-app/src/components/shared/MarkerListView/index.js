@@ -460,6 +460,7 @@ const MarkerListView = (props: Props) => {
 
   console.log("initialLocation", initialLocation);
 
+
   return (
     <>
       {!keepStatusBar && <StatusBar
