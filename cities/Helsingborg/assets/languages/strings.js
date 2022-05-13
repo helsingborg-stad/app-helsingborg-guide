@@ -296,7 +296,7 @@ export default {
     RANDOMIZE: "Randomize",
     SCAN: "Scan",
     SCAN_QR_CODES: "Scan QR Codes",
-    SCAN_QR_CODES_DESCRIPTION: "Here you can scan QR codes that are placed allover Helsingborg. Hold your camera over the QR code to open the right experience in the app!",
+    SCAN_QR_CODES_DESCRIPTION: "Here you can scan QR codes that are placed throughout Helsingborg. Aim your camera at the proper QR code to open the content in the app!",
     SCAN_QR_CODES_REMINDER: "When scanning, remember to have the same languague set in the app that corresponds to the guide's language. You can change language in settings.",
     SEARCH_AROUND: "Loading new content",
     SEARCH_MAIN: "Search for sights, places...",

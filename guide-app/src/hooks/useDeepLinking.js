@@ -25,12 +25,9 @@ const useDeepLinking = () => {
     const { type, id_1 } = params;
     if (id_1) {
       let item;
-      let category = navigationCategories[type === "group" ? 0 : 1];
       let temp;
       navigationCategories.map(category => {
-        console.log("category", category.items.length)
         let idMatch = category.items.find(group => group.id.toString() === id_1.toString());
-        console.log("idMatch", idMatch)
         if (idMatch) {
           temp = idMatch;
         }

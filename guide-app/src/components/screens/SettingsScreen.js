@@ -275,7 +275,9 @@ const SettingsScreen = (props) => {
         {developerMode ? displayDeveloperMenuButton() : null}
         <View style={styles.divider} />
         <View style={styles.versionContainer}>
-          <Text style={textStyles.versionText}>Version {DeviceInfo.getVersion()}</Text>
+          <Text style={textStyles.versionText}>
+            version {DeviceInfo.getVersion()}
+          </Text>
         </View>
         <View style={styles.contactUsContainer}>
           <TouchableWithoutFeedback onPress={updateDeveloperMode}>

@@ -19,10 +19,10 @@ const Map = (props: Props) => {
   }
 
 
-  const [testing, setTesting] = useState(false);
+  const [delay, setDelay] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setTesting(true), 200);
+    setTimeout(() => setDelay(true), 200);
   }, []);
 
   const mapItems: MapItem[] = [];
@@ -42,7 +42,7 @@ const Map = (props: Props) => {
         barStyle={"dark-content"}
         backgroundColor={Colors.white}
       />
-      {testing && <MarkerListView
+      {delay && <MarkerListView
         items={mapItems}
         navigation={navigation}
         showListButton={false}

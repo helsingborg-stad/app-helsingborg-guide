@@ -460,13 +460,13 @@ const MarkerListView = (props: Props) => {
 
   console.log("initialLocation", initialLocation);
 
-
   return (
     <>
       {!keepStatusBar && <StatusBar
         barStyle={"light-content"}
         backgroundColor={Colors.themeSecondary}
       />}
+      {navigation.isFocused() ?
       <View style={styles.container}>
         {supportedNavigationModes && supportedNavigationModes.length > 1 && (
           <SegmentControl
@@ -500,7 +500,7 @@ const MarkerListView = (props: Props) => {
         {!showHorizontalList ||
         selectedNavigationMode === NavigationModeUtils.NavigationModes.AR ||
         renderHorizontalList(items)}
-      </View>
+      </View> : <></>}
     </>
   );
 };
@@ -513,7 +513,7 @@ function mapStateToProps(state: RootState) {
   return {
     userLocation: geolocation?.position,
     currentSharingLink,
-    all
+    all,
   };
 }
 

@@ -4,6 +4,7 @@ import styles from "./styles";
 import { trackScreen } from "../../../utils/MatomoUtils";
 import NavigatorService from "@services/navigationService";
 import LangService from "@services/langService";
+import { useSelector } from "react-redux";
 
 type Props = {
   labels: [],
@@ -17,6 +18,7 @@ export const SegmentControlPill = ({
                                      labels
                                    }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
+  const { currentHomeTab } = useSelector(s => s.uiState);
 
   const onPressSegment = useCallback(
     (index, label) => () => {
@@ -33,6 +35,10 @@ export const SegmentControlPill = ({
     trackScreen(`/places`, `/places`);
     return setSelectedIndex(0);
   }, []);
+
+  useEffect(() => {
+    setSelectedIndex(currentHomeTab);
+  },[currentHomeTab])
 
   return (
     <View style={styles.container}>
