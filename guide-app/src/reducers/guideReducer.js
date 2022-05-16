@@ -32,6 +32,7 @@ export default function guideReducer(
       //   }
       // });
 
+
         return { ...state, ...(forGroups ? {groupItems: items} : {items: items}), isFetching: false, hasItems: items.length, doneFetching: true };
     }
     case "FETCH_GUIDES_FAILURE":

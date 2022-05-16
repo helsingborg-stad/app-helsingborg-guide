@@ -494,6 +494,7 @@ const MarkerListView = (props: Props) => {
             }}
             activeMarker={activeMarker}
             initialLocation={initialLocation}
+            navigation={navigation}
           />
         )}
 

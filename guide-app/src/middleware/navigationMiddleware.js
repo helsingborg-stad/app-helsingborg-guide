@@ -124,7 +124,6 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
         guides.length && dispatch(fetchGuides((currentLanguage || "sv"), guides));
         guideGroups.length && dispatch(fetchGuideGroups((currentLanguage || "sv"), guideGroups));
         interactiveGuides.length && dispatch(fetchInteractiveGuides((currentLanguage || "sv"), interactiveGuides));
-
       });
       break;
     }

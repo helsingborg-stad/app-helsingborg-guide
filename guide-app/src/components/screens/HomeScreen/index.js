@@ -99,11 +99,11 @@ const HomeScreen = (props: Props) => {
   const labels = [...navigationCategoryLabels, "map"];
 
   useEffect(() => {
-    dispatchFetchAllGuidesforAllGroups();
+    // dispatchFetchAllGuidesforAllGroups();
   }, []);
 
   useEffect(() => {
-    if (navigation.isFocused()) {
+    if (navigation.isFocused() && currentHomeTab !== (labels.length - 1)) {
       dispatchShowBottomBar(true);
     } else {
       clearLinking(navigation);
@@ -236,6 +236,8 @@ function mapStateToProps(state: RootState) {
   let categories = "";
   let distanceMetres = distance * 1000;
 
+  console.log("nav cat", navigationCategories)
+
   categories = [...navigationCategories.map(cat => {
     const data = cat.items
       .map((item) => {
@@ -249,7 +251,9 @@ function mapStateToProps(state: RootState) {
         }
         return copy;
       })
-      .filter((item) => item.guide || item.guideGroup || item.interactiveGuide)
+      .filter((item) => {
+        return item.guide || item.guideGroup || item.interactiveGuide
+      })
       .sort(compareDistance);
     if (data.length > 0) {
       return {
@@ -259,6 +263,8 @@ function mapStateToProps(state: RootState) {
       };
     }
   })];
+
+  // console.log("categories", categories)
 
   const isFetching = fetchingIds.length > 0;
 

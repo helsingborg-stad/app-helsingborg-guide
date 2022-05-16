@@ -226,46 +226,58 @@ class MapMarkerView extends PureComponent<Props, State> {
   };
 
   render() {
-    const { items, initialLocation, userLocation } = this.props;
+    const { items, userLocation, navigation } = this.props;
     const userCoords = userLocation?.coords || userLocation?.position?.coords || userLocation?.coords;
     const userLatitude = userCoords?.latitude;
+    let initialLocation;
     const userLongitude = userCoords?.longitude;
-    const latitude = initialLocation?.latitude || userLatitude || 1;
-    const longitude = initialLocation?.longitude || userLongitude || 1;
+    const cityLatitude = 56.04673;
+    const cityLongitude = 12.69437;
+    let fallbackLatitude;
+    let fallbackLongitude;
+    // CHECK IF USER IS CURRENTLY IN HELSINGBORG
+    if (userLatitude && userLongitude && userLatitude < 56.10673 && userLatitude > 56.00673 && userLongitude < 12.79437 && userLongitude > 12.65437) {
+      fallbackLatitude = userLatitude;
+      fallbackLongitude = userLongitude;
+    } else {
+      fallbackLatitude = cityLatitude;
+      fallbackLongitude = cityLongitude;
+    }
+    const latitude = initialLocation?.latitude || fallbackLatitude;
+    const longitude = initialLocation?.longitude || fallbackLongitude;
 
     const coords = LocationUtils.getRegionForCoordinates([
       { latitude: latitude, longitude: longitude },
-      { latitude: 0, longitude: 0 },
+      { latitude: 0, longitude: 0 }
     ]);
-
 
     return (
       <View style={styles.container}>
-        {latitude && longitude ?
-        <MapView
-          zoomEnabled={true}
-          minZoomLevel={11}
-          maxZoomLevel={17}
-          ref={(ref) => {
-            this.map = ref;
-          }}
-          initialRegion={{
-            latitude: latitude,
-            longitude: longitude,
-            latitudeDelta: coords.latitudeDelta,
-            longitudeDelta: coords.longitudeDelta,
-          }}
-          onRegionChange={() => null}
-          onRegionChangeComplete={(e) => {
-            this.longitudeDelta = e.longitudeDelta;
-            this.latitudeDelta = e.latitudeDelta;
-          }}
-          style={styles.map}
-          showsUserLocation
-          onMapReady={() => this.onMapReady()}
-        >
-          {this.renderMapMarkers(items)}
-        </MapView> : null}
+        {navigation.isFocused() && latitude && longitude ?
+          <MapView
+            zoomEnabled={true}
+            minZoomLevel={11}
+            maxZoomLevel={17}
+            ref={(ref) => {
+              this.map = ref;
+            }}
+            initialRegion={{
+              latitude: latitude,
+              longitude: longitude,
+              latitudeDelta: coords.latitudeDelta,
+              longitudeDelta: coords.longitudeDelta
+            }}
+            onRegionChange={() => null}
+            onRegionChangeComplete={(e) => {
+              this.longitudeDelta = e.longitudeDelta;
+              this.latitudeDelta = e.latitudeDelta;
+            }}
+            style={styles.map}
+            showsUserLocation
+            onMapReady={() => this.onMapReady()}
+          >
+            {this.renderMapMarkers(items)}
+          </MapView> : null}
       </View>
     );
   }

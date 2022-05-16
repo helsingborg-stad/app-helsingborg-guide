@@ -11,7 +11,8 @@ import { DateUtils } from "@utils";
 async function fetchJSON(
   relativeUrl: string,
   langCode: string,
-  params?: ?string
+  params?: ?string,
+  test,
 ): Promise<any> {
   let url = `${API_BASE_URL}/${relativeUrl}/?lang=${langCode}`;
 
@@ -22,8 +23,7 @@ async function fetchJSON(
     url += params;
   }
 
-
-  // console.log("__API_URL__", url);
+  test && console.log("___URL___", url)
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -47,7 +47,6 @@ function validateData(data: any, scheme: string): any[] {
       );
     }
   });
-
   return validatedData;
 }
 
@@ -86,10 +85,17 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
   if (ids.length === 0) {
     return [];
   }
+
   const params = idsToParamString(ids);
 
-  const json = await fetchJSON("guides", langCode || "sv", params);
+  console.log("ids length", ids, "params", params)
+
+
+  const json = await fetchJSON("guides", (langCode || "sv"), params, "guide");
+  console.log("JSON", json)
   const fetchedGuides: Guide[] = validateData(json, "guide");
+
+  console.log("__FETCH__", fetchedGuides)
 
   return fetchedGuides;
 }
