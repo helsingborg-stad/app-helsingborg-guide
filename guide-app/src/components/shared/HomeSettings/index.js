@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash/function";
 import TextInput from "@shared-components/TextInput/TextInput";
 import DraggableSilder from "@shared-components/DraggableSilder";
-import FilterModal from "@shared-components/FilterModal";
+// import FilterModal from "@shared-components/FilterModal";
 import styles from "./style";
 import LangService from "@services/langService";
 import { Portal } from "react-native-portalize";
@@ -13,13 +13,15 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ArrowDown from "@assets/images/arrow_down";
 import { setSearchFilter } from "@actions/uiStateActions";
 
+//TODO ADD REDUX TO SAVE OPEN STATE TO ONLY OPEN INITIALY ON LOAD.
+
 const HomeSettings = (props) => {
 
-  const { navigation, segmentLayout, open, setOpen, settingsHeight, setSettingsHeight } = props;
+  const { segmentLayout, open, setOpen } = props;
 
   const dispatch = useDispatch();
   const [distance, setDistance] = useState([3]);
-  const [showFilter, setShowFilter] = useState(false);
+  const [settingsHeight, setSettingsHeight] = useState(false);
   const [displayShadow, setDisplayShadow] = useState(false);
   const [height] = useState(new Animated.Value(0));
   const insets = useSafeAreaInsets();
@@ -52,13 +54,19 @@ const HomeSettings = (props) => {
   };
 
   useEffect(() => {
-    Animated.timing(height, {
-      toValue: open ? settingsHeight : 0,
-      duration: 250,
-      useNativeDriver: false
-    }).start();
-    open ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false);
-  }, [open]);
+    if (settingsHeight) {
+      Animated.timing(height, {
+        toValue: open ? settingsHeight : 0,
+        duration: 250,
+        useNativeDriver: false
+      }).start();
+      open ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false);
+    }
+  }, [open, settingsHeight]);
+
+  useEffect(() => {
+    settingsHeight && setOpen(true);
+  },[settingsHeight])
 
   return (
     <>
@@ -159,20 +167,20 @@ const HomeSettings = (props) => {
                   <ArrowDown />
                 </View>
                 {/*<Icon name="sliders" size={20} />*/}
-                <Text style={styles.toggleSettingsText}>Filter</Text>
+                <Text style={styles.toggleSettingsText}>{LangService.strings.SEARCH}</Text>
               </TouchableOpacity>
             </Animated.View>
           </Portal>
           }
         </View>
       </Animated.View>
-      <FilterModal
-        isModalVisible={showFilter}
-        setModalVisible={setShowFilter}
-        coverScreen={true}
-        backdropColor={"white"}
-        backdropOpacity={1}
-      />
+      {/*<FilterModal*/}
+      {/*  isModalVisible={showFilter}*/}
+      {/*  setModalVisible={setShowFilter}*/}
+      {/*  coverScreen={true}*/}
+      {/*  backdropColor={"white"}*/}
+      {/*  backdropOpacity={1}*/}
+      {/*/>*/}
     </>
   );
 };

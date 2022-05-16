@@ -77,7 +77,6 @@ const HomeScreen = (props: Props) => {
   const { linkToGuide } = useGuides();
   const [segmentLayout, setSegmentLayout] = useState(0);
   const [showSettings, setShowSettings] = useState(false);
-  const [settingsHeight, setSettingsHeight] = useState(false);
   const [backdropOpacity] = useState(new Animated.Value(0));
 
   const id_1 = params?.id_1;
@@ -101,7 +100,6 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     dispatchFetchAllGuidesforAllGroups();
   }, []);
-
 
 
   useEffect(() => {
@@ -176,8 +174,8 @@ const HomeScreen = (props: Props) => {
             </View>
             {currentHomeTab !== (labels.length - 1) ? <>
               {segmentLayout ?
-                <HomeSettings open={showSettings} setOpen={toggleSettings} settingsHeight={settingsHeight}
-                              setSettingsHeight={setSettingsHeight} segmentLayout={segmentLayout}
+                <HomeSettings open={showSettings} setOpen={toggleSettings}
+                              segmentLayout={segmentLayout}
                               navigation={navigation} /> : null}
               {!items || (items && items?.length === 0) ? (
                 <View style={styles.sectionNoContent}>
@@ -253,7 +251,7 @@ function mapStateToProps(state: RootState) {
         return copy;
       })
       .filter((item) => {
-        return item.guide || item.guideGroup || item.interactiveGuide
+        return item.guide || item.guideGroup || item.interactiveGuide;
       })
       .sort(compareDistance);
     if (data.length > 0) {
@@ -303,7 +301,7 @@ function mapStateToProps(state: RootState) {
               if (searchCriteria) {
                 let parent = original.find(parentItem => parentItem.id === item.parentID);
                 !items.includes(parent) && items.push(parent);
-                if(typeof items.indexOf(parent) === "number") {
+                if (typeof items.indexOf(parent) === "number") {
                   items[items.indexOf(parent)].children.push(subItem);
                 }
               }

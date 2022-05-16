@@ -69,13 +69,17 @@ const ImageCard = ({
         return guideAmount ? (guideAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
       case "interactive_guide":
         const interactiveAmount = all?.interactiveGuides?.find(item => item.parentID === id);
-        console.log("interactive", interactiveAmount)
         return interactiveAmount ? (interactiveAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
     }
   };
 
   const displayIcon = (icon) => {
+    console.log("icon", icon)
     switch (icon) {
+      case 11:
+        return "map";
+      case 12:
+        return "children";
       case 13:
         return "map";
       case 14:
@@ -101,7 +105,6 @@ const ImageCard = ({
     const childType = child?.guideType;
     const newPath = `/places/${slug}/${childSlug || childTitle}`;
     let sharingLink = DEEP_LINKING_URL + `home/group/${item.id}/${child.id}`;
-    console.log("SHARING LINK", sharingLink);
     dispatch(selectCurrentSharingLink(sharingLink));
     trackScreen(newPath, newPath);
     if (childType === "trail") {
@@ -235,7 +238,7 @@ const styles = StyleSheet.create({
 
   map: {
     position: "absolute",
-    bottom: 70,
+    bottom: 61,
     right: 20,
     shadowColor: "#000",
     shadowOffset: {
