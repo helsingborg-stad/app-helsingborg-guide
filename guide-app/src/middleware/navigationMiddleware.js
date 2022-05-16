@@ -11,7 +11,7 @@ import {
 import { fetchInteractiveGuides } from "@actions/interactiveGuideActions";
 import {
   selectCurrentHomeTab,
-  showBottomBar,
+  showBottomBar
 } from "@actions/uiStateActions";
 
 /**
@@ -85,9 +85,9 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
       const { currentLanguage } = nextState.navigation;
       let ids = { guides: [], guideGroups: [], interactiveGuides: [] };
       getState().guides.items.map(item => ids.guides.push(item.id));
-      getState().guideGroups.items.map(item => ids.guideGroups.push({id: item.id, type: "guideGroup"}));
-      getState().interactiveGuides.items.map(item => ids.interactiveGuides.push({id: item.id, type: "interactiveGuide"}));
-      dispatch(fetchAllGuidesForAllGroups(currentLanguage, ids))
+      getState().guideGroups.items.map(item => ids.guideGroups.push({ id: item.id, type: "guideGroup" }));
+      getState().interactiveGuides.items.map(item => ids.interactiveGuides.push(item.id));
+      dispatch(fetchAllGuidesForAllGroups(currentLanguage, ids));
       break;
     }
     case "SELECT_CURRENT_GUIDEGROUP": {
@@ -123,7 +123,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
         });
         guides.length && dispatch(fetchGuides((currentLanguage || "sv"), guides));
         guideGroups.length && dispatch(fetchGuideGroups((currentLanguage || "sv"), guideGroups));
-        interactiveGuides.length && dispatch(fetchInteractiveGuides((currentLanguage || "sv"), interactiveGuides));
+        interactiveGuides.length && dispatch(c((currentLanguage || "sv"), interactiveGuides));
       });
       break;
     }

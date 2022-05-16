@@ -67,6 +67,10 @@ const ImageCard = ({
       case "guide":
         const guideAmount = all?.guides?.find(item => item.parentID === id);
         return guideAmount ? (guideAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
+      case "interactive_guide":
+        const interactiveAmount = all?.interactiveGuides?.find(item => item.parentID === id);
+        console.log("interactive", interactiveAmount)
+        return interactiveAmount ? (interactiveAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
     }
   };
 

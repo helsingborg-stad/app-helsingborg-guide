@@ -1,6 +1,7 @@
 // @flow
 
 import fetchUtils from "@utils/fetchUtils";
+import { fetchInteractiveGuidesFailure } from "./interactiveGuideActions";
 
 export function fetchAllGuidesForAllGroupsRequest(): Action {
   return { type: "FETCH_ALL_GUIDES_FOR_ALL_GROUPS_REQUEST" };
@@ -27,8 +28,6 @@ export function fetchAllGuidesForAllGroups(langCode: string, ids: []): ThunkActi
     let all = { guideGroups: [], guides: [], interactiveGuides: [] };
     dispatch(fetchAllGuidesForAllGroupsRequest());
 
-    console.log("do i run lol")
-
     const _groups = ids.guideGroups.map(async (item) => {
       return await fetchUtils
         .getGuidesForGuideGroup(langCode, item.id)
@@ -36,8 +35,8 @@ export function fetchAllGuidesForAllGroups(langCode: string, ids: []): ThunkActi
           return { guideAmount: guides.length, parentID: item.id, items: guides };
         })
         .catch(error => {
-          console.log("error", error);
           dispatch(fetchGuidesFailure(error.message));
+          return [];
         });
     });
 
@@ -46,23 +45,41 @@ export function fetchAllGuidesForAllGroups(langCode: string, ids: []): ThunkActi
         .getGuides(langCode, ids.guides)
         .then(guides => {
           let arr = [];
-          guides.map(guide => arr.push({guideAmount: guide.contentObjects.length, parentID: guide.id, items: guide.contentObjects  }))
+          guides.map(guide => arr.push({
+            guideAmount: guide?.contentObjects?.length,
+            parentID: guide?.id,
+            items: guide?.contentObjects
+          }));
           return arr;
         })
         .catch(error => {
           dispatch(fetchGuidesFailure(error.message));
+          return [];
+        });
+    };
+
+    const _interactiveGuides = async () => {
+      return fetchUtils
+        .getInteractiveGuides(langCode, ids.interactiveGuides)
+        .then(guides => {
+          let arr = [];
+          guides.map(guide => arr.push({
+            guideAmount: guide?.steps?.length ,
+            parentID: guide?.id
+          }));
+          return arr;
+        })
+        .catch(error => {
+          dispatch(fetchInteractiveGuidesFailure(error.message));
+          return [];
         });
     };
 
 
     all.guideGroups = await Promise.all(_groups);
     all.guides = await _guides();
-
-    console.log("all", all);
-
-    if (all.guideGroups.length || all.guides.length) {
-      dispatch(fetchAllGuidesForAllGroupsSuccess(all))
-    }
+    all.interactiveGuides = await _interactiveGuides();
+    dispatch(fetchAllGuidesForAllGroupsSuccess(all));
   };
 }
 
@@ -73,7 +90,7 @@ export function fetchGuides(langCode: string, ids: number[]): ThunkAction {
     return fetchUtils
       .getGuides(langCode, ids)
       .then(guides => {
-        dispatch(fetchGuidesSuccess(guides, false))
+        dispatch(fetchGuidesSuccess(guides, false));
       })
       .catch(error => {
         dispatch(fetchGuidesFailure(error.message));
