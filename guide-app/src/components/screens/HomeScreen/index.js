@@ -99,8 +99,10 @@ const HomeScreen = (props: Props) => {
   const labels = [...navigationCategoryLabels, "map"];
 
   useEffect(() => {
-    // dispatchFetchAllGuidesforAllGroups();
+    dispatchFetchAllGuidesforAllGroups();
   }, []);
+
+
 
   useEffect(() => {
     if (navigation.isFocused() && currentHomeTab !== (labels.length - 1)) {
@@ -236,7 +238,6 @@ function mapStateToProps(state: RootState) {
   let categories = "";
   let distanceMetres = distance * 1000;
 
-  console.log("nav cat", navigationCategories)
 
   categories = [...navigationCategories.map(cat => {
     const data = cat.items

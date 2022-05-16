@@ -23,8 +23,6 @@ async function fetchJSON(
     url += params;
   }
 
-  test && console.log("___URL___", url)
-
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch ${relativeUrl}`);
@@ -88,14 +86,8 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
 
   const params = idsToParamString(ids);
 
-  console.log("ids length", ids, "params", params)
-
-
   const json = await fetchJSON("guides", (langCode || "sv"), params, "guide");
-  console.log("JSON", json)
   const fetchedGuides: Guide[] = validateData(json, "guide");
-
-  console.log("__FETCH__", fetchedGuides)
 
   return fetchedGuides;
 }

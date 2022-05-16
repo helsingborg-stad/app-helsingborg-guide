@@ -11,12 +11,10 @@ export function fetchAllGuidesForAllGroupsSuccess(all: []): Action {
 }
 
 export function fetchGuidesRequest(): Action {
-  console.log("guides req")
   return { type: "FETCH_GUIDES_REQUEST" };
 }
 
 export function fetchGuidesSuccess(guides: Guide[], forGroups: Boolean): Action {
-  console.log("guidesss", guides)
   return { type: "FETCH_GUIDES_SUCCESS", guides, forGroups };
 }
 
@@ -28,6 +26,8 @@ export function fetchAllGuidesForAllGroups(langCode: string, ids: []): ThunkActi
   return async function fetchAllGuidesForAllGroupsDispatch(dispatch: Dispatch) {
     let all = { guideGroups: [], guides: [], interactiveGuides: [] };
     dispatch(fetchAllGuidesForAllGroupsRequest());
+
+    console.log("do i run lol")
 
     const _groups = ids.guideGroups.map(async (item) => {
       return await fetchUtils
@@ -53,8 +53,12 @@ export function fetchAllGuidesForAllGroups(langCode: string, ids: []): ThunkActi
           dispatch(fetchGuidesFailure(error.message));
         });
     };
+
+
     all.guideGroups = await Promise.all(_groups);
     all.guides = await _guides();
+
+    console.log("all", all);
 
     if (all.guideGroups.length || all.guides.length) {
       dispatch(fetchAllGuidesForAllGroupsSuccess(all))
@@ -66,11 +70,9 @@ export function fetchAllGuidesForAllGroups(langCode: string, ids: []): ThunkActi
 export function fetchGuides(langCode: string, ids: number[]): ThunkAction {
   return function fetchGuidesDispatch(dispatch: Dispatch) {
     dispatch(fetchGuidesRequest());
-    console.log("testing this run=?")
     return fetchUtils
       .getGuides(langCode, ids)
       .then(guides => {
-        console.log("success guides", guides)
         dispatch(fetchGuidesSuccess(guides, false))
       })
       .catch(error => {

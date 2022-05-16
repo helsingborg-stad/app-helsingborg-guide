@@ -62,7 +62,6 @@ function linkNavigationWithContent(
       }
       items.push(result);
     });
-
     return { ...cat, items };
   });
 
@@ -107,6 +106,7 @@ export default ({ dispatch, getState }: Store) => (next: Dispatch) => (
       // dispatch(setGuidesAndGuideGroups([], [], []));
 
       // batch fetch a range of guides/guidegroups per navigation section
+
       navigationCategories.forEach(cat => {
         const guides: number[] = [];
         const guideGroups: number[] = [];
