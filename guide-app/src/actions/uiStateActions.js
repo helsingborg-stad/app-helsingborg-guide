@@ -102,6 +102,14 @@ export function setShowFilterButton(showFilterButton: boolean): Action {
   return { type: "SET_SHOW_FILTER_BUTTON", showFilterButton };
 }
 
+export function setShowHomeSettings(showHomeSettings: boolean): Action {
+  return { type: "SET_SHOW_HOME_SETTINGS", showHomeSettings };
+}
+
+export function setSettingsHeight(settingsHeight: boolean): Action {
+  return { type: "SET_SETTINGS_HEIGHT", settingsHeight };
+}
+
 
 
 

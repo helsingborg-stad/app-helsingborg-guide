@@ -16,6 +16,8 @@ const defaultState: UIState = {
   searchFilter: { distance: '', text: '', forChildren: '' },
   allGuides: [],
   showFilterButton: false,
+  showHomeSettings: false,
+  settingsHeight: false,
 };
 
 export default function uiStateReducer(
@@ -63,6 +65,10 @@ export default function uiStateReducer(
       return { ...state, searchFilter: searchFilter };
     case "SET_SHOW_FILTER_BUTTON":
       return { ...state, showFilterButton: action.showFilterButton };
+    case "SET_SHOW_HOME_SETTINGS":
+      return { ...state, showHomeSettings: action.showHomeSettings };
+    case "SET_SETTINGS_HEIGHT":
+      return { ...state, settingsHeight: action.settingsHeight };
     default:
       return state;
   }

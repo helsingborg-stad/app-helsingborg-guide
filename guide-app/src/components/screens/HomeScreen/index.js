@@ -76,8 +76,6 @@ const HomeScreen = (props: Props) => {
   const { linkingHome, clearLinking } = useDeepLinking();
   const { linkToGuide } = useGuides();
   const [segmentLayout, setSegmentLayout] = useState(0);
-  const [showSettings, setShowSettings] = useState(false);
-  const [backdropOpacity] = useState(new Animated.Value(0));
 
   const id_1 = params?.id_1;
   const locationService = LocationService.getInstance();
@@ -129,15 +127,6 @@ const HomeScreen = (props: Props) => {
     }
   }, [params, navigation]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      Animated.timing(backdropOpacity, {
-        toValue: showSettings ? 1 : 0,
-        duration: showSettings ? 150 : 0,
-        useNativeDriver: true
-      }).start();
-    }, showSettings ? 250 : 0);
-  }, [showSettings]);
 
   const onPressItem = (item): void => {
     linkToGuide(item);
@@ -147,9 +136,6 @@ const HomeScreen = (props: Props) => {
     props.dispatchShowBottomBar(currentHomeTab !== (labels.length - 1));
   }, [currentHomeTab]);
 
-  const toggleSettings = () => {
-    setShowSettings(!showSettings);
-  };
 
   if (showLoadingSpinner || id_1) {
     return <ActivityIndicator style={styles.loadingSpinner} />;
@@ -174,9 +160,7 @@ const HomeScreen = (props: Props) => {
             </View>
             {currentHomeTab !== (labels.length - 1) ? <>
               {segmentLayout ?
-                <HomeSettings open={showSettings} setOpen={toggleSettings}
-                              segmentLayout={segmentLayout}
-                              navigation={navigation} /> : null}
+                <HomeSettings segmentLayout={segmentLayout} navigation={navigation} /> : null}
               {!items || (items && items?.length === 0) ? (
                 <View style={styles.sectionNoContent}>
                   <Text style={styles.sectionNoContentText}>

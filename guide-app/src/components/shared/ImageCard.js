@@ -74,7 +74,6 @@ const ImageCard = ({
   };
 
   const displayIcon = (icon) => {
-    console.log("icon", icon)
     switch (icon) {
       case 11:
         return "map";

@@ -1,31 +1,27 @@
 import React, { useState, useEffect, memo } from "react";
-import { View, Text, TouchableOpacity, Animated, Keyboard, Platform } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { View, Text, TouchableOpacity, Animated, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash/function";
 import TextInput from "@shared-components/TextInput/TextInput";
 import DraggableSilder from "@shared-components/DraggableSilder";
-// import FilterModal from "@shared-components/FilterModal";
 import styles from "./style";
 import LangService from "@services/langService";
 import { Portal } from "react-native-portalize";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ArrowDown from "@assets/images/arrow_down";
-import { setSearchFilter } from "@actions/uiStateActions";
-
-//TODO ADD REDUX TO SAVE OPEN STATE TO ONLY OPEN INITIALY ON LOAD.
+import { setSearchFilter, setShowHomeSettings, setSettingsHeight } from "@actions/uiStateActions";
 
 const HomeSettings = (props) => {
 
-  const { segmentLayout, open, setOpen } = props;
+  const { segmentLayout, navigation } = props;
 
   const dispatch = useDispatch();
   const [distance, setDistance] = useState([3]);
-  const [settingsHeight, setSettingsHeight] = useState(false);
   const [displayShadow, setDisplayShadow] = useState(false);
   const [height] = useState(new Animated.Value(0));
+  const [backdropOpacity] = useState(new Animated.Value(0));
   const insets = useSafeAreaInsets();
-  const { searchFilter, showFilterButton } = useSelector(s => s.uiState);
+  const { searchFilter, showFilterButton, showHomeSettings, settingsHeight } = useSelector(s => s.uiState);
   const [searchText, setSearchText] = useState(searchFilter?.text || "");
   const minKm = 0.1;
   const maxKm = 3;
@@ -40,39 +36,41 @@ const HomeSettings = (props) => {
     dispatch(setSearchFilter({ text: e.length >= 3 ? e : "" }));
   }, 800);
 
-  const onSwitchChange = (e) => {
-    dispatch(setSearchFilter({ forChildren: e }));
-  };
-
   const initialLoad = (layout) => {
-    setSettingsHeight(layout?.height);
+    dispatch(setSettingsHeight(layout?.height));
+    dispatch(setShowHomeSettings(true));
   };
 
   const toggleOpen = () => {
-    setOpen(!open);
-    open && Keyboard.dismiss();
+    dispatch(setShowHomeSettings(!showHomeSettings));
   };
 
   useEffect(() => {
     if (settingsHeight) {
       Animated.timing(height, {
-        toValue: open ? settingsHeight : 0,
+        toValue: showHomeSettings ? settingsHeight : 0,
         duration: 250,
         useNativeDriver: false
       }).start();
-      open ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false);
+      setTimeout(() => {
+        Animated.timing(backdropOpacity, {
+          toValue: showHomeSettings ? 1 : 0,
+          duration: showHomeSettings ? 150 : 0,
+          useNativeDriver: true
+        }).start();
+      }, showHomeSettings ? 250 : 0);
+      showHomeSettings ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false);
     }
-  }, [open, settingsHeight]);
+  },[settingsHeight, showHomeSettings])
 
-  useEffect(() => {
-    settingsHeight && setOpen(true);
-  },[settingsHeight])
 
   return (
     <>
       <Animated.View
         onLayout={(event) => {
-          !settingsHeight && event?.nativeEvent?.layout?.height && initialLoad(event?.nativeEvent?.layout);
+          if(!settingsHeight && event?.nativeEvent?.layout?.height) {
+            initialLoad(event?.nativeEvent?.layout)
+          }
         }}
         style={[styles.settings, {
           height: settingsHeight ? height : undefined,
@@ -83,11 +81,6 @@ const HomeSettings = (props) => {
           <View style={styles.search}>
             <View style={styles.searchTop}>
               <Text style={styles.searchTopLeft}>{LangService.strings.FILTER_TITLE}</Text>
-              {/*<TouchableOpacity*/}
-              {/*  onPress={() => setShowFilter(true)}*/}
-              {/*>*/}
-              {/*  <Text style={styles.searchTopRight}>{LangService.strings.FILTER}</Text>*/}
-              {/*</TouchableOpacity>*/}
             </View>
             <View style={[styles.searchBottom]}>
               <TextInput
@@ -104,34 +97,6 @@ const HomeSettings = (props) => {
                 autoFocus={false}
                 modalDimensions={settingsHeight}
               />
-              {/*<View style={styles.forChildren}>*/}
-              {/*  <Switch*/}
-              {/*    value={searchFilter?.forChildren || false}*/}
-              {/*    s={onSwitchChange}*/}
-              {/*    circleSize={24}*/}
-              {/*    barHeight={24}*/}
-              {/*    circleBorderWidth={2}*/}
-              {/*    circleBorderActiveColor={"#A40082"}*/}
-              {/*    circleBorderInactiveColor={"#ececec"}*/}
-              {/*    backgroundActive={"#A40082"}*/}
-              {/*    backgroundInactive={"#ececec"}*/}
-              {/*    circleActiveColor={"#FFFFFF"}*/}
-              {/*    circleInActiveColor={"#FFFFFF"}*/}
-              {/*    changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete*/}
-              {/*    innerCircleStyle={{*/}
-              {/*      alignItems: "center",*/}
-              {/*      justifyContent: "center"*/}
-              {/*    }} // style for inner animated circle for what you (may) be rendering inside the circle*/}
-              {/*    outerCircleStyle={{}} // style for outer animated circle*/}
-              {/*    renderActiveText={false}*/}
-              {/*    renderInActiveText={false}*/}
-              {/*    switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider*/}
-              {/*    switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider*/}
-              {/*    switchWidthMultiplier={2} // multiplied by the `circleSize` prop to calculate total width of the Switch*/}
-              {/*    switchBorderRadius={24} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.*/}
-              {/*  />*/}
-              {/*  <Text style={styles.forChildrenText}>{LangService.strings.FOR_CHILDREN}</Text>*/}
-              {/*</View>*/}
             </View>
           </View>
           <View style={styles.distance}>
@@ -162,11 +127,10 @@ const HomeSettings = (props) => {
                   top: ((segmentLayout || 0) + (insets?.top || 0)) - 18
                 }]}>
                 <View
-                  style={{ transform: [{ rotateX: open ? "180deg" : "0deg" }] }}
+                  style={{ transform: [{ rotateX: showHomeSettings ? "180deg" : "0deg" }] }}
                 >
                   <ArrowDown />
                 </View>
-                {/*<Icon name="sliders" size={20} />*/}
                 <Text style={styles.toggleSettingsText}>{LangService.strings.SEARCH}</Text>
               </TouchableOpacity>
             </Animated.View>
@@ -174,13 +138,6 @@ const HomeSettings = (props) => {
           }
         </View>
       </Animated.View>
-      {/*<FilterModal*/}
-      {/*  isModalVisible={showFilter}*/}
-      {/*  setModalVisible={setShowFilter}*/}
-      {/*  coverScreen={true}*/}
-      {/*  backdropColor={"white"}*/}
-      {/*  backdropOpacity={1}*/}
-      {/*/>*/}
     </>
   );
 };
