@@ -22,6 +22,9 @@ type Props = {
   activeMarker: MapItem,
   initialLocation?: Location,
   userLocation: any,
+  setActiveMarker: () => void,
+  scrollToIndex: () => void,
+  navigation: Object,
 };
 type State = {
   markersFocused: boolean,
@@ -57,7 +60,7 @@ class MapMarkerView extends PureComponent<Props, State> {
       top: padding,
       right: padding,
       bottom: padding,
-      left: padding
+      left: padding,
     };
     const options = {
       edgePadding,
@@ -189,9 +192,11 @@ class MapMarkerView extends PureComponent<Props, State> {
   }
 
   onMapReady = () => {
-    const { items } = this.props;
+    const { items, setActiveMarker, scrollToIndex } = this.props;
     const { markersFocused } = this.state;
     if (items.length > 0 && !markersFocused) {
+      setActiveMarker(items[0]);
+      scrollToIndex(0);
       this.focusMarkers(items);
       this.setState({ markersFocused: true });
       this.panMapToIndex(0);
@@ -273,7 +278,7 @@ class MapMarkerView extends PureComponent<Props, State> {
               this.latitudeDelta = e.latitudeDelta;
             }}
             style={styles.map}
-            showsUserLocation
+            showsUserLocation={true}
             onMapReady={() => this.onMapReady()}
           >
             {this.renderMapMarkers(items)}

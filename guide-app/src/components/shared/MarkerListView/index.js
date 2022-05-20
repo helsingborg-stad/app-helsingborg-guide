@@ -59,21 +59,7 @@ const MarkerListView = (props: Props) => {
   const [showHorizontalList, setShowHorizontalList] = useState(true);
   const listRef = useRef();
 
-
   let mapMarkerViewRef = MapMarkerView;
-
-  useEffect(() => {
-    (async () => {
-      if (!(!!redirect)) {
-        setTimeout(() => {
-          setActiveMarker(items[0]);
-          scrollToIndex(0);
-          mapMarkerViewRef?.panMapToIndex(0);
-        }, 200);
-      }
-    })();
-  }, [listRef, mapMarkerViewRef]);
-
 
   useEffect(() => {
     if (redirect && listRef.current && mapMarkerViewRef) {
@@ -458,8 +444,6 @@ const MarkerListView = (props: Props) => {
 
   const initialLocation = getInitialLocation();
 
-  console.log("initialLocation", initialLocation);
-
   return (
     <>
       {!keepStatusBar && <StatusBar
@@ -467,41 +451,42 @@ const MarkerListView = (props: Props) => {
         backgroundColor={Colors.themeSecondary}
       />}
       {navigation.isFocused() ?
-      <View style={styles.container}>
-        {supportedNavigationModes && supportedNavigationModes.length > 1 && (
-          <SegmentControl
-            style={styles.segmentControl}
-            labels={supportedNavigationModes.map(
-              mode => `${LangService.strings[mode]}`
-            )}
-            onSegmentIndexChange={onNavigationModeChange}
-            initalSelectedIndex={supportedNavigationModes.indexOf(
-              selectedNavigationMode
-            )}
-          />
-        )}
-        {selectedNavigationMode === NavigationModeUtils.NavigationModes.Map && (
-          <MapMarkerView
-            items={items}
-            ref={ref => {
-              mapMarkerViewRef = ref;
-            }}
-            userLocation={userLocation}
-            showNumberedMapMarkers
-            onMapMarkerPressed={index => {
-              AnalyticsUtils.logEvent("tap_map_pin");
-              scrollToIndex(index);
-            }}
-            activeMarker={activeMarker}
-            initialLocation={initialLocation}
-            navigation={navigation}
-          />
-        )}
+        <View style={styles.container}>
+          {supportedNavigationModes && supportedNavigationModes.length > 1 && (
+            <SegmentControl
+              style={styles.segmentControl}
+              labels={supportedNavigationModes.map(
+                mode => `${LangService.strings[mode]}`
+              )}
+              onSegmentIndexChange={onNavigationModeChange}
+              initalSelectedIndex={supportedNavigationModes.indexOf(
+                selectedNavigationMode
+              )}
+            />
+          )}
+          {selectedNavigationMode === NavigationModeUtils.NavigationModes.Map && (
+            <MapMarkerView
+              items={items}
+              ref={ref => {
+                mapMarkerViewRef = ref;
+              }}
+              userLocation={userLocation}
+              showNumberedMapMarkers
+              onMapMarkerPressed={index => {
+                scrollToIndex(index);
+              }}
+              activeMarker={activeMarker}
+              initialLocation={initialLocation}
+              navigation={navigation}
+              setActiveMarker={setActiveMarker}
+              scrollToIndex={scrollToIndex}
+            />
+          )}
 
-        {!showHorizontalList ||
-        selectedNavigationMode === NavigationModeUtils.NavigationModes.AR ||
-        renderHorizontalList(items)}
-      </View> : <></>}
+          {!showHorizontalList ||
+          selectedNavigationMode === NavigationModeUtils.NavigationModes.AR ||
+          renderHorizontalList(items)}
+        </View> : <></>}
     </>
   );
 };
@@ -514,7 +499,7 @@ function mapStateToProps(state: RootState) {
   return {
     userLocation: geolocation?.position,
     currentSharingLink,
-    all,
+    all
   };
 }
 

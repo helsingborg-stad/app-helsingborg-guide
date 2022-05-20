@@ -30,15 +30,6 @@ type Props = {
   onGoToVideo: (video?: MediaContent) => void,
 };
 
-function displayID(searchableID: string) {
-  const idText = (
-    <View style={styles.idContainer}>
-      <Text style={styles.idText}>{`ID #${searchableID}`}</Text>
-    </View>
-  );
-  return idText;
-}
-
 function displayTitle(
   title: string,
   searchableID: string,
@@ -49,7 +40,6 @@ function displayTitle(
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
       </View>
-      {/*{guideType === "guide" ? displayID(searchableID) : null}*/}
     </View>
   );
 }
@@ -176,7 +166,6 @@ const ObjectView = (props: Props) => {
 
   useEffect(() => {
     const split = path.split("/");
-
     if (swiped) {
       if (swiped === "left") {
         if (order + 1 !== array.length) {
@@ -268,7 +257,7 @@ const ObjectView = (props: Props) => {
               </View>
               <View style={styles.articleContainer}>
                 {props.contentObject.description
-                  ? displayText(props.contentObject.description)
+                  ? displayText(props.contentObject.description, order)
                   : null}
                 {props.contentObject.links
                   ? displayLinks(props.contentObject.links, props.onGoToLink)

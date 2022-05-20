@@ -160,7 +160,7 @@ const HomeScreen = (props: Props) => {
             </View>
             {currentHomeTab !== (labels.length - 1) ? <>
               {segmentLayout ?
-                <HomeSettings segmentLayout={segmentLayout} navigation={navigation} /> : null}
+                <HomeSettings segmentLayout={segmentLayout} /> : null}
               {!items || (items && items?.length === 0) ? (
                 <View style={styles.sectionNoContent}>
                   <Text style={styles.sectionNoContentText}>

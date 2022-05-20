@@ -27,17 +27,20 @@ const styles = StyleSheet.create({
     zIndex: 999,
     borderWidth: 1,
     borderColor: "rgba(209, 209, 209, 1)",
-    borderRadius: 8
+    borderRadius: 8,
   },
 
   textInput: {
     flex: 1,
     fontSize: 16,
+    color: "#292929",
   },
+
   textInputCancelButton: {
     justifyContent: "center",
     marginRight: 0
   },
+
   textInputCancel: {
     alignItems: "flex-start",
     justifyContent: "center",

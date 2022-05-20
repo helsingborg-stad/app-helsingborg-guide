@@ -13,7 +13,7 @@ import { setSearchFilter, setShowHomeSettings, setSettingsHeight } from "@action
 
 const HomeSettings = (props) => {
 
-  const { segmentLayout, navigation } = props;
+  const { segmentLayout } = props;
 
   const dispatch = useDispatch();
   const [distance, setDistance] = useState([3]);
@@ -61,15 +61,15 @@ const HomeSettings = (props) => {
       }, showHomeSettings ? 250 : 0);
       showHomeSettings ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false);
     }
-  },[settingsHeight, showHomeSettings])
+  }, [settingsHeight, showHomeSettings]);
 
 
   return (
     <>
       <Animated.View
         onLayout={(event) => {
-          if(!settingsHeight && event?.nativeEvent?.layout?.height) {
-            initialLoad(event?.nativeEvent?.layout)
+          if (!settingsHeight && event?.nativeEvent?.layout?.height) {
+            initialLoad(event?.nativeEvent?.layout);
           }
         }}
         style={[styles.settings, {

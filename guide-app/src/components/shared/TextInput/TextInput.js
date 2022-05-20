@@ -25,7 +25,7 @@ const _TextInput = (props) => {
     isSearch,
     iconColor,
     autoFocus,
-    flex
+    flex,
   } = props;
 
   const isKeyBoardOpen = useKeyboard();
@@ -46,7 +46,6 @@ const _TextInput = (props) => {
   };
 
   return (
-    <>
       <View
         style={[styles.wrapper, { ...(flex && { flex: 1 }) }]}>
         <View style={styles.container}>
@@ -54,7 +53,7 @@ const _TextInput = (props) => {
             style={[styles.inputContainer, {
               width: fullWidth ? "100%" : width,
               height: height(),
-              marginRight: inputMargin
+              marginRight: inputMargin,
             }]}>
             <TextInput
               ref={inputRef}
@@ -88,7 +87,6 @@ const _TextInput = (props) => {
           </Animated.View>
         </View>
       </View>
-    </>
   );
 };
 

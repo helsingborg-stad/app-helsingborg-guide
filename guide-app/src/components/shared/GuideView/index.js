@@ -22,12 +22,10 @@ import Touchable from "@shared-components/Touchable";
 import DownloadButtonContainer from "@shared-components/DownloadButton";
 import SharingService from "@services/SharingService";
 
-
 declare type Props = {
   guide: Guide,
   onPressContentObject(obj: ContentObject): void,
 };
-
 const textMaxHeight = Dimensions.get("window").height * 0.15;
 
 class GuideView extends Component<Props> {
@@ -48,9 +46,6 @@ class GuideView extends Component<Props> {
               resizeMode="cover"
             />
           </View>
-          {/*<Text style={styles.contentIdText} numberOfLines={1}>*/}
-          {/*  #{obj.searchableId}*/}
-          {/*</Text>*/}
           <Text style={styles.contentTitleText} numberOfLines={2}>
             {obj.title}
           </Text>
