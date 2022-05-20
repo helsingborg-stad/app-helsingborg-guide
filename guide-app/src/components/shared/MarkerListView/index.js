@@ -159,10 +159,9 @@ const MarkerListView = (props: Props) => {
     let sharingLink = currentSharingLink;
     const currentScreen = navigation.state.routeName;
     if (guideGroup) {
-      if(currentScreen === "HomeScreen") {
+      if (currentScreen === "HomeScreen") {
         sharingLink = `guidehbg://home/group/${guideGroup?.id}`;
-      }
-      else {
+      } else {
         sharingLink += `/${guideGroup?.id}`;
       }
       dispatchCurrentSharingLink(sharingLink);
@@ -173,10 +172,9 @@ const MarkerListView = (props: Props) => {
     }
     if (guide) {
       const { guideType } = guide;
-      if(currentScreen === "HomeScreen") {
+      if (currentScreen === "HomeScreen") {
         sharingLink = `guidehbg://home/guide/${guide?.id}`;
-      }
-      else {
+      } else {
         sharingLink += `/${guide?.id}`;
       }
       dispatchCurrentSharingLink(sharingLink);
@@ -279,25 +277,16 @@ const MarkerListView = (props: Props) => {
     const mediaGuideString = plural
       ? LangService.strings.MEDIAGUIDES
       : LangService.strings.MEDIAGUIDE;
-    const isAccessibility = PixelRatio.getFontScale() > 1;
 
     const { guide, guideGroup } = item;
     if (guideGroup) {
-      textString = `${numberOfGuides} ${mediaGuideString.toLowerCase()}`;
+      textString = `${numberOfGuides} ${LangService.strings.EXPERIENCES.toLowerCase()}`;
     } else if (guide) {
       const { guideType } = guide;
       if (guideType === "trail") {
-        if (isAccessibility) {
-          textString = `${numberOfGuides} ${locationString}`;
-        } else {
-          textString = `${LangService.strings.TOUR} ${LangService.strings.WITH} ${numberOfGuides} ${locationString}`;
-        }
+        textString = `${numberOfGuides} ${LangService.strings.EXPERIENCES.toLowerCase()}`;
       } else if (guideType === "guide") {
-        if (isAccessibility) {
-          textString = `${numberOfGuides} ${LangService.strings.OBJECT}`;
-        } else {
-          textString = `${LangService.strings.MEDIAGUIDE} ${LangService.strings.WITH} ${numberOfGuides} ${LangService.strings.OBJECT}`;
-        }
+        textString = `${numberOfGuides} ${LangService.strings.EXPERIENCES.toLowerCase()}`;
       }
     }
 

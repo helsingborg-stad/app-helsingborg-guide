@@ -100,8 +100,6 @@ export default StyleSheet.create({
     {
       color: Colors.white,
       fontSize: 12,
-      letterSpacing: -2.0,
-      left: ios ? -1 : 0,
       flex: 1,
       fontWeight: "500",
       textAlign: "center",
@@ -144,7 +142,7 @@ export default StyleSheet.create({
       ...TextStyles.bold,
       letterSpacing: 0.08,
       marginRight: 10,
-      maxWidth: '86%',
+      maxWidth: "86%",
     },
   ]),
   listItemTitleContainer: {
