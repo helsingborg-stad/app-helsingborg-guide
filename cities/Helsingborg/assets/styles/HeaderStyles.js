@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: Colors.themeSecondary,
     borderBottomWidth: 0,
-    alignItems: "center",
   },
   noElevation: {
     backgroundColor: Colors.themeSecondary,
@@ -14,7 +13,6 @@ const styles = StyleSheet.create({
     elevation: 0
   },
   middle: {
-    alignItems: "center",
     textAlign: "center",
     alignSelf: "center",
   }

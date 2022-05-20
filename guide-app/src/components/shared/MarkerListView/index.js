@@ -136,12 +136,6 @@ const MarkerListView = (props: Props) => {
     return { title: null, streetAddress, thumbnailUrl };
   };
 
-  const getItemLayout = (data: any, index: number) => ({
-    length: ListItemWidth + DefaultMargin,
-    offset: (ListItemWidth + HalfListMargin) * index,
-    index
-  });
-
   const getInitialLocation = () => {
     const location = items
       .map(item => MapItemUtils.getLocationFromItem(item))
@@ -163,28 +157,38 @@ const MarkerListView = (props: Props) => {
     const { navigate } = navigation;
     const { guide, guideGroup, contentObject } = listItem;
     let sharingLink = currentSharingLink;
+    const currentScreen = navigation.state.routeName;
     if (guideGroup) {
-      sharingLink += `/${guideGroup?.id}`;
+      if(currentScreen === "HomeScreen") {
+        sharingLink = `guidehbg://home/group/${guideGroup?.id}`;
+      }
+      else {
+        sharingLink += `/${guideGroup?.id}`;
+      }
       dispatchCurrentSharingLink(sharingLink);
       trackScreen("view_location", guideGroup?.slug);
       selectGuideGroup(guideGroup.id);
-      navigate("LocationScreen", { title: guideGroup.name });
+      navigate("LocationScreen", { title: guideGroup.name, path: sharingLink });
       return;
     }
-
     if (guide) {
       const { guideType } = guide;
-      sharingLink += `/${guide?.id}`;
+      if(currentScreen === "HomeScreen") {
+        sharingLink = `guidehbg://home/guide/${guide?.id}`;
+      }
+      else {
+        sharingLink += `/${guide?.id}`;
+      }
       dispatchCurrentSharingLink(sharingLink);
       trackScreen("view_guide", guide?.slug || "");
       selectGuide(guide);
       switch (guideType) {
         case "trail":
-          navigate("TrailScreen", { title: guide.name });
+          navigate("TrailScreen", { title: guide.name, path: sharingLink });
           return;
         case "guide":
         default:
-          navigate("GuideDetailsScreen", { title: guide.name });
+          navigate("GuideDetailsScreen", { title: guide.name, path: sharingLink });
           return;
       }
     }

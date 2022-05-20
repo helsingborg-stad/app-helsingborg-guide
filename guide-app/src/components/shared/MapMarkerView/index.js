@@ -280,6 +280,7 @@ class MapMarkerView extends PureComponent<Props, State> {
             style={styles.map}
             showsUserLocation={true}
             onMapReady={() => this.onMapReady()}
+            loadingEnabled={true}
           >
             {this.renderMapMarkers(items)}
           </MapView> : null}
