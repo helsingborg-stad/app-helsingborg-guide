@@ -59,7 +59,6 @@ const LocationScreen = (props: Props) => {
   useEffect(() => {
     if (redirect?.length && redirect[0] && currentGuides.length) {
       const currentGuide = currentGuides.find(guide => guide.id.toString() === redirect[0].toString());
-
       if (currentGuide && !redirected) {
         setRedirected(true);
         onPressGuide(currentGuide);

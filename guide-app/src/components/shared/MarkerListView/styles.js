@@ -143,7 +143,8 @@ export default StyleSheet.create({
       fontSize: 13,
       ...TextStyles.bold,
       letterSpacing: 0.08,
-      marginRight: TextMargin,
+      marginRight: 10,
+      maxWidth: '86%',
     },
   ]),
   listItemTitleContainer: {
