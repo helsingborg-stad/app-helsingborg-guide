@@ -40,7 +40,8 @@ class MapMarkerView extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      markersFocused: false
+      markersFocused: false,
+      filteredMarkers: []
     };
   }
 
@@ -49,6 +50,52 @@ class MapMarkerView extends PureComponent<Props, State> {
   latitudeDelta = 0;
 
   map: ?MapView;
+
+  componentDidMount() {
+    let filtered = this.filterMarkers(this.props.items);
+    this.setState({ filteredMarkers: filtered });
+  }
+
+
+  filterMarkers = (markers: MapItem[]) => {
+    if (!this.state.filteredMarkers.length) {
+      const result = markers.map(x => {
+        const objX =
+          x?.guide ||
+          x?.guideGroup ||
+          x?.interactiveGuide;
+        const locationX = objX?.location;
+        const nameX = objX?.name;
+        if (locationX && nameX) {
+          const latitudeX = locationX.latitude;
+          const longitudeX = locationX.longitude;
+          markers.map(y => {
+            const objY =
+              y?.guide ||
+              y?.guideGroup ||
+              y?.interactiveGuide;
+            const locationY = objY?.location;
+            const nameY = objY?.name;
+            if (locationY && nameY) {
+              const latitudeY = locationY.latitude;
+              const longitudeY = locationY.longitude;
+              let samecordinates = (longitudeX === longitudeY && latitudeX === latitudeY);
+              if (samecordinates && nameX !== nameY) {
+                if (x?.duplicates) {
+                  x.duplicates = x.duplicates + 1;
+                } else {
+                  x.duplicates = 1;
+                }
+              }
+            }
+            return y;
+          });
+        }
+        return x;
+      });
+      return result;
+    } else return this.state.filteredMarkers;
+  };
 
   focusMarkers(markers: MapItem[]) {
     if (!markers) {
@@ -60,7 +107,7 @@ class MapMarkerView extends PureComponent<Props, State> {
       top: padding,
       right: padding,
       bottom: padding,
-      left: padding,
+      left: padding
     };
     const options = {
       edgePadding,
@@ -71,6 +118,7 @@ class MapMarkerView extends PureComponent<Props, State> {
       this.map.fitToCoordinates(locations, options);
     }
   }
+
 
   markerImageForTrailObject(trailObject: MapItem, active: boolean) {
     const { showNumberedMapMarkers } = this.props;
@@ -98,6 +146,9 @@ class MapMarkerView extends PureComponent<Props, State> {
     if (!location) {
       return null;
     }
+
+    const { duplicates } = mapItem;
+
 
     const { activeMarker } = this.props;
     const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
@@ -147,6 +198,10 @@ class MapMarkerView extends PureComponent<Props, State> {
               </Text>
             </View>
           </View>
+          {duplicates && <View style={active ? styles.numberedMarkerDuplicatesActive : styles.numberedMarkerDuplicates}>
+            <Text style={styles.numberedMarkerDuplicatesText}>+{duplicates}</Text>
+          </View>
+          }
         </View>
       </Marker>
     );
@@ -181,9 +236,10 @@ class MapMarkerView extends PureComponent<Props, State> {
     );
   };
 
-  renderMapMarkers(items: Array<MapItem>): Array<any> {
+  renderMapMarkers(items) {
     const { showNumberedMapMarkers } = this.props;
-    return items.map((item, index) => {
+    const { filteredMarkers } = this.state;
+    return filteredMarkers.map((item, index) => {
       if (showNumberedMapMarkers) {
         return this.numberedMapViewMarker(item, index + 1);
       }
@@ -204,8 +260,10 @@ class MapMarkerView extends PureComponent<Props, State> {
   };
 
   onMarkerPressed = (marker: MapItem) => {
-    const { items, onMapMarkerPressed } = this.props;
-    const index = items.findIndex(item => item === marker);
+    const { onMapMarkerPressed } = this.props;
+    const { filteredMarkers } = this.state;
+    const index = filteredMarkers.findIndex(item => item === marker);
+    console.log("the index", index)
     if (onMapMarkerPressed) {
       onMapMarkerPressed(index);
     }
@@ -283,6 +341,8 @@ class MapMarkerView extends PureComponent<Props, State> {
             loadingEnabled={true}
           >
             {this.renderMapMarkers(items)}
+
+            {/*{this.state.filteredMarkers.length ? this.renderMapMarkers() : null}*/}
           </MapView> : null}
       </View>
     );

@@ -23,7 +23,7 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
-    marginBottom: 60,
+    marginBottom: 25,
   },
   notFoundBubble: {
     alignItems: "center",
@@ -44,7 +44,7 @@ const style = StyleSheet.create({
   },
 
   notFoundBottom: {
-    flex: 1.7,
+    flex: 1.3,
     justifyContent: "flex-start",
     alignItems: "center",
   },
@@ -66,6 +66,7 @@ const style = StyleSheet.create({
     fontFamily: "Roboto",
     color: Colors.white,
     textAlign: "center",
+    marginBottom: 20,
   },
 
   notFoundContact: {

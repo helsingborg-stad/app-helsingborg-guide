@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StatusBar, Linking } from "react-native";
 import Config from "react-native-config";
 import { HeaderStyles } from "@assets/styles";
@@ -8,9 +8,12 @@ import ArrowRight from "@assets/images/arrow_right_2";
 import CityBackground from "@assets/images/city.svg";
 import NavigatorService from "@services/navigationService";
 import styles from "./style";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { showBottomBar } from "../../../actions/uiStateActions";
 
-const NotFoundScreen = () => {
+const NotFoundScreen = (props) => {
+  const { navigation } = props;
+  const dispatch = useDispatch();
   const { openedLink } = useSelector(s => s.uiState);
   const support = Config.SUPPORT_LINK;
 
@@ -20,6 +23,9 @@ const NotFoundScreen = () => {
       &body=There was a problem opening this link in the app:
      ${openedLink}`);
   };
+  useEffect(() => {
+    navigation.isFocused() && dispatch(showBottomBar(false))
+  },[navigation.isFocused()])
 
   return (
     <>
@@ -29,6 +35,7 @@ const NotFoundScreen = () => {
           <View style={styles.notFoundTop}>
             <Text style={styles.notFoundTitle}>{LangService.strings.NOT_FOUND_TITLE}</Text>
             <Text style={styles.notFoundDescription}>{LangService.strings.NOT_FOUND_DESCRIPTION}</Text>
+            <Text style={styles.notFoundDescription}>{LangService.strings.SCAN_QR_CODES_REMINDER}</Text>
           </View>
           <View style={styles.notFoundBottom}>
             <Text style={styles.notFoundContact}>{LangService.strings.NOT_FOUND_CONTACT}</Text>

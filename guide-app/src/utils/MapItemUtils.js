@@ -15,16 +15,15 @@ function getIdFromMapItem(item: MapItem): string {
 }
 
 function getLocationFromItem(item: MapItem): ?Location {
-  const { contentObject, guide, guideGroup } = item;
 
-  if (guide) {
-    return guide?.location;
+  if (item?.guide) {
+    return item?.guide?.location;
   }
-  if (guideGroup) {
-    return guideGroup?.location;
+  if (item?.guideGroup) {
+    return item?.guideGroup?.location;
   }
-  if (contentObject) {
-    return contentObject?.location;
+  if (item?.contentObject) {
+    return item?.contentObject?.location;
   }
 
   return null;

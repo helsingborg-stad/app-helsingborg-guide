@@ -33,16 +33,17 @@ export default StyleSheet.create({
     flex: 1
   },
   infoContainer: {
-    flexDirection: "row"
+    flexDirection: "row",
+    paddingVertical: 20,
   },
 
   titleWrapper: {
     flex: 2,
+    justifyContent: "center",
   },
 
   titleContainer: {
     paddingHorizontal: 20,
-    paddingTop: 12,
   },
 
   title: StyleSheetUtils.flatten([
@@ -87,13 +88,14 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     zIndex: 100,
     backgroundColor: "white",
-    marginTop: 20
-
+    marginTop: 20,
   },
+
   navGuideWrapper: {
     flexDirection: "column",
     alignItems: "center",
-    width: "100%"
+    width: "100%",
+
   },
 
   navGuide: {

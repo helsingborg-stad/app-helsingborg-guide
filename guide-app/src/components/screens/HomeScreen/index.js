@@ -53,6 +53,7 @@ type Props = {
   currentHomeTab: number,
   showLoadingSpinner: boolean,
   items: NavigationItem[],
+  navigationCategories: Array,
   navigationCategoryLabels: string[],
   sections: Section[],
   currentLanguage: string,
@@ -83,6 +84,7 @@ const HomeScreen = (props: Props) => {
     currentHomeTab,
     items,
     navigation,
+    navigationCategories,
     navigationCategoryLabels,
     selectCurrentTab,
     showLoadingSpinner,
@@ -90,7 +92,8 @@ const HomeScreen = (props: Props) => {
     currentLanguage,
     dispatchShowBottomBar,
     dispatchClearSearchFilter,
-    dispatchFetchAllGuidesforAllGroups
+    dispatchFetchAllGuidesforAllGroups,
+    isFetching,
   } = props;
 
   const labels = [...navigationCategoryLabels, "map"];
@@ -119,14 +122,10 @@ const HomeScreen = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    if (id_1) {
+    if (id_1 && navigationCategories.length && !isFetching) {
       linkingHome(params, props);
-      if (navigation.isFocused()) {
-        // setTimeout(() => navigation.navigate("NotFoundScreen"), 3000)
-      }
     }
-  }, [params, navigation]);
-
+  }, [params, navigationCategories, isFetching]);
 
   const onPressItem = (item): void => {
     linkToGuide(item);
@@ -344,7 +343,8 @@ function mapStateToProps(state: RootState) {
     showLoadingSpinner: isFetching,
     navigationCategories,
     navigationCategoryLabels,
-    currentLanguage
+    currentLanguage,
+    isFetching,
   };
 }
 

@@ -36,11 +36,11 @@ const listItemShared = {
 
 const listImageNumberViewShared = {
   alignItems: "center",
-  borderRadius: 11,
+  borderRadius: 26,
   flexDirection: "row",
-  height: 22,
+  height: 26,
   justifyContent: "center",
-  width: 22,
+  width: 26,
 };
 
 export default StyleSheet.create({

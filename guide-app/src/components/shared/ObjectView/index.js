@@ -181,7 +181,7 @@ const ObjectView = (props: Props) => {
             currentGuide: array[order + 1],
             order: order + 1,
             array: array,
-            swipeable: true
+            swipeable: true,
           });
         } else {
           setTimeout(() => setSwiped(false), 180);

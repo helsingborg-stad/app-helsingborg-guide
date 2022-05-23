@@ -18,7 +18,6 @@ import LangService from "@services/langService";
 import {
   LocationUtils,
   UrlUtils,
-  AnalyticsUtils,
   MapItemUtils,
   NavigationModeUtils
 } from "@utils";

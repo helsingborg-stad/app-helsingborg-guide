@@ -62,4 +62,35 @@ export default StyleSheet.create({
     ...numberedMarkerTextShared,
     color: Colors.black,
   },
+
+  numberedMarkerDuplicatesActive: {
+    position: "absolute",
+    backgroundColor: "#9A1573",
+    borderRadius: 24,
+    width: 24,
+    height: 24,
+    alignItems: "center",
+    justifyContent: "center",
+    right: -8,
+    bottom: 12,
+    zIndex: 2,
+  },
+
+  numberedMarkerDuplicates: {
+    position: "absolute",
+    backgroundColor: "#9A1573",
+    borderRadius: 24,
+    width: 24,
+    height: 24,
+    alignItems: "center",
+    justifyContent: "center",
+    right: -12,
+    bottom: 12,
+    zIndex: 2,
+  },
+  numberedMarkerDuplicatesText: {
+    color: "white",
+    fontSize: 10,
+  },
+
 });

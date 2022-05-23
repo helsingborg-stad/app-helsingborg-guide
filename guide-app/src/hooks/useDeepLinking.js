@@ -22,8 +22,9 @@ const useDeepLinking = () => {
   const { linkToGuide } = useGuides();
 
   const linkingHome = async (params) => {
-    const { type, id_1 } = params;
+    const { id_1 } = params;
     if (id_1) {
+      console.log("id_1: " + id_1, navigationCategories);
       let item;
       let temp;
       navigationCategories.map(category => {
@@ -31,11 +32,11 @@ const useDeepLinking = () => {
         if (idMatch) {
           temp = idMatch;
         }
-      })
+      });
+
       if (temp?.guide || temp?.guidegroup || temp?.guideGroup || temp?.interactiveGuide) {
         item = temp;
-      }
-      else {
+      } else {
         Navigation.navigate("NotFoundScreen");
       }
       dispatch(selectCurrentBottomBarTab(0));
@@ -56,7 +57,7 @@ const useDeepLinking = () => {
         slug,
         dateStart,
         dateEnd,
-        id,
+        id
       } = foundEvent;
 
       const image = imageUrl ? { uri: imageUrl } : defaultImage;
@@ -97,10 +98,10 @@ const useDeepLinking = () => {
   };
 
   const clearLinking = (navigation, params) => {
-      const objParams = params ? Object.fromEntries(params.map(key => [key, null])) : {}
+    const objParams = params ? Object.fromEntries(params.map(key => [key, null])) : {};
 
-    navigation.setParams({id_1: null, id_2: null, id_3: null, ...objParams});
-  }
+    navigation.setParams({ id_1: null, id_2: null, id_3: null, ...objParams });
+  };
   return { linkingHome, linkingCalendar, clearLinking };
 };
 
