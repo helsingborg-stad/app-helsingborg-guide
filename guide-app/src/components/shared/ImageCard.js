@@ -64,12 +64,12 @@ const ImageCard = ({
       case "guidegroup":
         const groupAmount = all?.guideGroups?.find(item => item.parentID === id);
         return groupAmount ? (groupAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
-      case "guide":
-        const guideAmount = all?.guides?.find(item => item.parentID === id);
-        return guideAmount ? (guideAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
-      case "interactive_guide":
-        const interactiveAmount = all?.interactiveGuides?.find(item => item.parentID === id);
-        return interactiveAmount ? (interactiveAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
+      // case "guide":
+      //   const guideAmount = all?.guides?.find(item => item.parentID === id);
+      //   return guideAmount ? (guideAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
+      // case "interactive_guide":
+      //   const interactiveAmount = all?.interactiveGuides?.find(item => item.parentID === id);
+      //   return interactiveAmount ? (interactiveAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
     }
   };
 

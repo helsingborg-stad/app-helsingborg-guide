@@ -72,12 +72,13 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: 'rgba(248, 248, 248, 1)',
+    overflow: "visible",
   },
   article: {
     fontSize: 14,
     lineHeight: 20,
-    flex: 1
   },
+
   shareBtn: {
     position: "absolute",
     bottom: 25,

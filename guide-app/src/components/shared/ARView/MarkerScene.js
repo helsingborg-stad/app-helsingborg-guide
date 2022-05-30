@@ -64,6 +64,7 @@ class MarkerScene extends Component<Props, State> {
         contentLocation
       );
 
+
       const relativePosition = LocationUtils.getLocationRelativePosition(
         userLocation,
         contentLocation,

@@ -85,6 +85,7 @@ const GuideScreen = (props) => {
       props.dispatchSelectContentObject(obj);
     trackScreen(newPath, newPath);
     redirect && setRedirect(false)
+    console.log("the object", obj.links);
     navigation.navigate("ObjectScreen", {
       title: obj.title,
       currentGuide: props.currentGuide,

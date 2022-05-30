@@ -71,8 +71,9 @@ function getLocationRelativePosition(
   targetLocation: Object,
   bearing: number = 0
 ) {
-  const distance =
-    haversine(userLocation.coords, targetLocation, { unit: "meter" }) || 0;
+  const distance = 1;
+  // const distance =
+  //   haversine(userLocation.coords, targetLocation, { unit: "meter" }) || 0;
   const bearingOffset = ios ? 0 : bearing;
   const angle =
     angleBetweenCoords(userLocation.coords, targetLocation) -
@@ -90,6 +91,7 @@ function getTravelDistance(
   toLocation: { latitude: number, longitude: number },
   unit: string = "meter"
 ) {
+  console.log("fromLocation: " + fromLocation, "toLocation", toLocation);
   return haversine(fromLocation, toLocation, { unit }) || 0;
 }
 

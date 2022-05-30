@@ -237,13 +237,16 @@ const MarkerListView = (props: Props) => {
     const numberString = `${index}`;
     const { userLocation } = props;
     let hasArrived = false;
+    let location = MapItemUtils.getLocationFromItem(item);
 
-    if (userLocation) {
+    if (userLocation && location) {
       hasArrived = LocationUtils.hasArrivedAtDestination(
         userLocation,
-        MapItemUtils.getLocationFromItem(item)
-      );
-    }
+        location
+      )}
+      else {
+        hasArrived = false;
+      }
 
     const numberView = (
       <View

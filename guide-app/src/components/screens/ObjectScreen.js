@@ -56,6 +56,7 @@ class ObjectScreen extends Component<Props> {
   static navigationOptions = ({ navigation }) => {
     const { title, path, redirect, array, order, scrollable, panToIndex } = navigation.state.params;
 
+
     return {
       ...HeaderStyles.noElevation,
       title,

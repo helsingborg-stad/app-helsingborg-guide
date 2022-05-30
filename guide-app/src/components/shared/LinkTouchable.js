@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
       fontWeight: "500",
       marginRight: textMargin,
       marginLeft: 7,
-      color: Colors.themePrimary
+      color: Colors.themePrimary,
     }
   ])
 });

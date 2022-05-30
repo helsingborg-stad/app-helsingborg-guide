@@ -8,6 +8,7 @@ const numberedMarkerTextContainerShared = {
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
+  overflow: "visible",
 };
 
 const numberedMarkerTextShared = {
@@ -15,6 +16,7 @@ const numberedMarkerTextShared = {
   ...TextStyles.bold,
   fontSize: 18,
   textAlign: "center",
+  overflow: "visible",
 };
 
 const { width, height } = Dimensions.get("window");
@@ -33,10 +35,12 @@ export default StyleSheet.create({
   },
   numberedMarkerOuterContainer: {
     height: 57,
+    overflow: "visible",
   },
   numberedMarkerContainer: {
     width: 33,
     height: 50,
+    overflow: "visible",
   },
   numberedMarkerContainerActive: {
     width: 42,
@@ -71,9 +75,10 @@ export default StyleSheet.create({
     height: 24,
     alignItems: "center",
     justifyContent: "center",
-    right: -8,
-    bottom: 12,
+    right: 3,
+    bottom: 7,
     zIndex: 2,
+    overflow: "visible",
   },
 
   numberedMarkerDuplicates: {
@@ -84,9 +89,10 @@ export default StyleSheet.create({
     height: 24,
     alignItems: "center",
     justifyContent: "center",
-    right: -12,
-    bottom: 12,
+    right: 0,
+    bottom: 7,
     zIndex: 2,
+    overflow: "visible",
   },
   numberedMarkerDuplicatesText: {
     color: "white",

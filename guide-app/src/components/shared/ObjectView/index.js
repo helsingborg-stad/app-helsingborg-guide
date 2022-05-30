@@ -50,7 +50,7 @@ function displayText(description?: string) {
 
 function displayLinks(
   links: Link[],
-  onGoToLink: (url: string, title?: string) => void
+  onGoToLink: (url: string, title?: string) => void,
 ) {
   return links.map((item, index) => (
     <LinkTouchable
@@ -209,6 +209,8 @@ const ObjectView = (props: Props) => {
       }
     }
   }, [swiped]);
+
+  console.log("links", props.contentObject.links)
 
   return (
     <View style={styles.viewContainer}>

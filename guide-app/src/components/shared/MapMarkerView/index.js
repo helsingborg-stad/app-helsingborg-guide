@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Platform } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { MapItemUtils } from "@utils";
 import styles from "./styles";
@@ -59,6 +59,9 @@ class MapMarkerView extends PureComponent<Props, State> {
 
   filterMarkers = (markers: MapItem[]) => {
     if (!this.state.filteredMarkers.length) {
+      // if (Platform.OS === "android") {
+      //   return markers;
+      // }
       const result = markers.map(x => {
         const objX =
           x?.guide ||
@@ -338,7 +341,7 @@ class MapMarkerView extends PureComponent<Props, State> {
             style={styles.map}
             showsUserLocation={true}
             onMapReady={() => this.onMapReady()}
-            loadingEnabled={true}
+            loadingEnabled={Platform.OS === "ios"}
           >
             {this.renderMapMarkers(items)}
 
