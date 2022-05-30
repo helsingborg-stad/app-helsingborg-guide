@@ -253,7 +253,8 @@ class MapMarkerView extends PureComponent<Props, State> {
   onMapReady = () => {
     const { items, setActiveMarker, scrollToIndex } = this.props;
     const { markersFocused } = this.state;
-    if (items.length > 0 && !markersFocused) {
+
+    if (items.length > 0 && items[0]?.contentObject?.location && !markersFocused) {
       setActiveMarker(items[0]);
       scrollToIndex(0);
       this.focusMarkers(items);
@@ -316,13 +317,14 @@ class MapMarkerView extends PureComponent<Props, State> {
       { latitude: latitude, longitude: longitude },
       { latitude: 0, longitude: 0 }
     ]);
+    
 
     return (
       <View style={styles.container}>
         {navigation.isFocused() && latitude && longitude ?
           <MapView
             zoomEnabled={true}
-            minZoomLevel={11}
+            minZoomLevel={10}
             maxZoomLevel={17}
             ref={(ref) => {
               this.map = ref;
@@ -331,7 +333,7 @@ class MapMarkerView extends PureComponent<Props, State> {
               latitude: latitude,
               longitude: longitude,
               latitudeDelta: coords.latitudeDelta,
-              longitudeDelta: coords.longitudeDelta
+              longitudeDelta: coords.longitudeDelta,
             }}
             onRegionChange={() => null}
             onRegionChangeComplete={(e) => {

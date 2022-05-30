@@ -91,7 +91,6 @@ function getTravelDistance(
   toLocation: { latitude: number, longitude: number },
   unit: string = "meter"
 ) {
-  console.log("fromLocation: " + fromLocation, "toLocation", toLocation);
   return haversine(fromLocation, toLocation, { unit }) || 0;
 }
 
@@ -130,8 +129,6 @@ function getRegionForCoordinates(points) {
   const midY = (minY + maxY) / 2;
   const deltaX = (maxX - minX);
   const deltaY = (maxY - minY);
-
-  console.log(minX, maxX, minY, maxY)
 
   return {
     latitude: midX,
