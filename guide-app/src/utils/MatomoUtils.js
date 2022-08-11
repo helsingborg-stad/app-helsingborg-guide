@@ -4,6 +4,7 @@ import { MATOMO_URL, MATOMO_SITE_ID } from "@data/endpoints";
 
 const isReleaseDevice = async () => {
   let emulator = await DeviceInfo.isEmulator();
+  // return !!(!emulator && !(__DEV__));
   return !!(!emulator && !(__DEV__));
 };
 

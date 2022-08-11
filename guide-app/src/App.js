@@ -29,7 +29,7 @@ const GuideApp = () => {
   const { subscribeToNotifications, onNotification } = useNotifications();
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
+    const unsubscribe = NetInfo.addEventListener(state => {
       setNetInfo(state.isConnected);
       store.dispatch(internetChanged(true));
       if (this?.noNetworkTimer) {

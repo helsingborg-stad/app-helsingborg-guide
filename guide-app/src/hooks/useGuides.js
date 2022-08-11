@@ -56,7 +56,7 @@ const useGuides = () => {
               bottomBarOnUnmount: true,
               path: path,
               ...(params?.id_2 && { redirect: [params?.id_1, params?.id_2] }),
-              sharePath: sharePath
+              sharePath: sharePath,
 
             });
             dispatch(showBottomBar(false));

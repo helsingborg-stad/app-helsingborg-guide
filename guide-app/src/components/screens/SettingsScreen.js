@@ -146,7 +146,7 @@ const SettingsScreen = (props) => {
     props.navigation.setParams();
 
     trackScreen("/settings", "/settings");
-    const unsubscribe = NetInfo.addEventListener((state) => {
+    const unsubscribe = NetInfo.addEventListener(state => {
       setConnected(state.isConnected);
     });
     return unsubscribe;
