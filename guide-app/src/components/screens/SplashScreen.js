@@ -5,10 +5,11 @@ import {
   StyleSheet,
   Dimensions,
   Image,
-  LayoutAnimation,
+  LayoutAnimation
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackActions, NavigationActions } from "react-navigation";
+import { CommonActions } from "@react-navigation/native";
 import ViewContainer from "@shared-components/view_container";
 import { IS_WELCOMED } from "@src/lib/my_consts";
 import ColoredBar from "@shared-components/ColoredBar";
@@ -29,21 +30,21 @@ const TIME_OUT = 1000;
 
 const styles = StyleSheet.create({
   splash: {
-    backgroundColor: Colors.themeSecondary,
+    backgroundColor: Colors.themeSecondary
   },
   wrapper: {
     flex: 1,
-    zIndex: 10,
+    zIndex: 10
   },
   mainContainer: {
     flex: 10,
-    alignItems: "center",
+    alignItems: "center"
   },
   headerContainer: {
     height: Dimensions.get("window").height * 0.35,
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 20,
+    paddingVertical: 20
   },
 
   headerText: {
@@ -51,17 +52,17 @@ const styles = StyleSheet.create({
     fontSize: 38,
     fontWeight: "300",
     lineHeight: 36,
-    minHeight: 50,
+    minHeight: 50
   },
   logoContainer: {
     flex: 1,
     justifyContent: "flex-end",
     paddingVertical: 22,
-    zIndex: 10,
+    zIndex: 10
   },
   logo: {
     width: 62,
-    height: 66,
+    height: 66
   },
   colorBarStyle: {
     position: "absolute",
@@ -69,12 +70,15 @@ const styles = StyleSheet.create({
     height: FULL_HEIGHT,
     width: 20,
     top: 0,
-    left: 0,
-  },
+    left: 0
+  }
 });
 
+type Props = {
+  navigation: Object,
+}
 
-const SplashScreen = (props) => {
+const SplashScreen = (props: Props) => {
   const { navigation } = props;
   const [barsVisible, setBarsVisible] = useState(true);
   const dispatch = useDispatch();
@@ -110,7 +114,7 @@ const SplashScreen = (props) => {
       if (timer) {
         clearTimeout(timer);
       }
-    }
+    };
   }, []);
 
 
@@ -118,7 +122,6 @@ const SplashScreen = (props) => {
     LayoutAnimation.easeInEaseOut();
     setBarsVisible(!barsVisible);
   };
-
 
 
   const skip = () => {
@@ -129,16 +132,15 @@ const SplashScreen = (props) => {
           welcomed = JSON.parse(value);
         }
         const route = welcomed ? "MainScreen" : "WelcomeScreen";
-        const resetAction = StackActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({
-              routeName: route,
-              params: { title: "home" },
-            }),
-          ],
-        });
-        navigation.dispatch(resetAction);
+
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              { name: route, params: { title: "home" } }
+            ]
+          })
+        );
       });
     }
   };
@@ -174,8 +176,8 @@ const SplashScreen = (props) => {
   );
 };
 
-SplashScreen["navigationOptions"] = screenProps => ({
-  headerShown: false,
+SplashScreen["navigationOptions"] = () => ({
+  headerShown: false
 });
 
 export default SplashScreen;

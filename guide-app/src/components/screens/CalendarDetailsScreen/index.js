@@ -12,9 +12,13 @@ import ClockIcon from "@assets/images/clock_icon_black.png";
 import { Colors } from "@assets/styles";
 import ArrowUp from "@assets/images/arrow_up";
 
-const CalendarDetailsScreen = ({ navigation }) => {
+type Props = {
+  route: Object,
+}
 
-  const { event } = navigation.state.params;
+const CalendarDetailsScreen = (props: Props) => {
+  const { route } = props;
+  const { event } = route.params || {};
 
   const [activeSections, setActiveSections] = useState([]);
   const [sections, setSections] = useState([]);
@@ -219,13 +223,13 @@ const CalendarDetailsScreen = ({ navigation }) => {
   );
 };
 
-CalendarDetailsScreen["navigationOptions"] = screenProps => (
+CalendarDetailsScreen["navigationOptions"] = ({ navigation, route }) => (
   {
-    title: screenProps?.navigation?.state?.params?.event?.name || "Event",
+    title: route.params?.event?.name || "Event",
     headerRight: () => <View style={{ width: 36 }} />,
     headerLeft: () => <HeaderBackButton
-      navigation={screenProps.navigation}
-      path={screenProps?.navigation?.state?.params?.path} />
+      navigation={navigation}
+      path={route?.params?.path} />
   });
 
 export default CalendarDetailsScreen;

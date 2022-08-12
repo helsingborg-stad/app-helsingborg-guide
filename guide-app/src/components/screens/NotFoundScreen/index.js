@@ -11,7 +11,11 @@ import styles from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { showBottomBar } from "../../../actions/uiStateActions";
 
-const NotFoundScreen = (props) => {
+type Props = {
+  navigation: Object,
+}
+
+const NotFoundScreen = (props: Props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
   const { openedLink } = useSelector(s => s.uiState);
@@ -24,8 +28,8 @@ const NotFoundScreen = (props) => {
      ${openedLink}`);
   };
   useEffect(() => {
-    navigation.isFocused() && dispatch(showBottomBar(false))
-  },[navigation.isFocused()])
+    navigation.isFocused() && dispatch(showBottomBar(false));
+  }, [navigation.isFocused()]);
 
   return (
     <>
@@ -56,9 +60,9 @@ const NotFoundScreen = (props) => {
   );
 };
 
-NotFoundScreen["navigationOptions"] = ({ navigation }) => {
-  const title = navigation?.state?.params?.title || "";
-  const path = navigation?.state?.params?.path || "";
+NotFoundScreen["navigationOptions"] = ({ navigation, route }) => {
+  const title = route?.params?.title || "";
+  const path = route?.params?.path || "";
   return {
     ...HeaderStyles.noElevation,
     title,

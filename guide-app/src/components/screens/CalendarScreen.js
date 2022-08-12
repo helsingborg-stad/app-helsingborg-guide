@@ -106,6 +106,7 @@ function NoContent() {
 
 type Props = {
   navigation: any,
+  route: any,
   items: Event[],
   showLoadingSpinner: boolean,
   noContent: boolean,
@@ -129,10 +130,11 @@ const CalendarScreen = (props: Props, state: State) => {
     showLoadingSpinner,
     items,
     navigation,
+    route,
     isFetching
   } = props;
 
-  const { params } = navigation?.state;
+  const { params } = route || {};
   const { linkingCalendar } = useDeepLinking();
 
   const [chosenDate, setChosenDate] = useState(new Date());

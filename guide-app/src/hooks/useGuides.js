@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import Navigation from "@services/navigationService";
+import * as Navigation from "@utils/NavigationUtils";
 import { fetchGuides } from "@actions/guideActions";
 import { fetchGuideGroups } from "@actions/guideGroupActions";
 import {
@@ -56,7 +56,7 @@ const useGuides = () => {
               bottomBarOnUnmount: true,
               path: path,
               ...(params?.id_2 && { redirect: [params?.id_1, params?.id_2] }),
-              sharePath: sharePath,
+              sharePath: sharePath
 
             });
             dispatch(showBottomBar(false));

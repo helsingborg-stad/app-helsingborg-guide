@@ -21,6 +21,7 @@ import useDeepLinking from "@hooks/useDeepLinking";
 declare type Props = {
   currentGuide: ?Guide,
   navigation: any,
+  route: any,
   contentObjects: [],
   dispatchSelectContentObject(contentObject: ContentObject): void,
   dispatchReleaseAudio(): void,
@@ -28,11 +29,11 @@ declare type Props = {
   dispatchCurrentSharingLink(link: string): void,
 };
 
-const GuideScreen = (props) => {
+const GuideScreen = (props: Props) => {
 
-  const { currentGuide, navigation, currentSharingLink, dispatchCurrentSharingLink } = props;
+  const { currentGuide, navigation, route, currentSharingLink, dispatchCurrentSharingLink } = props;
   const { contentObjects } = currentGuide;
-  const { params } = navigation.state;
+  const { params } = route;
   const { clearLinking } = useDeepLinking()
   const [redirect, setRedirect] = useState( params?.redirect?.length ? params?.redirect?.length === 2 ? params?.redirect[1] : params?.redirect[0] : false)
 
@@ -78,7 +79,7 @@ const GuideScreen = (props) => {
 
 
   const onPressContentObject = (obj: ContentObject, index, array) => {
-    const prevPath = navigation.state.params.path;
+    const prevPath = params.path;
     const newPath = `${prevPath}/${obj?.title}`;
     const sharingLink = currentSharingLink + `/${obj?.id}`;
     dispatchCurrentSharingLink(sharingLink)
@@ -125,8 +126,8 @@ function mapDispatchToProps(dispatch: Dispatch) {
 }
 
 
-GuideScreen["navigationOptions"] = ({ navigation }) => {
-  const { params } = navigation.state;
+GuideScreen["navigationOptions"] = ({ navigation, route }) => {
+  const { params } = route;
   if (params) {
     const { title, path } = params;
     console.log("title", title)

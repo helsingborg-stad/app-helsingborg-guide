@@ -22,6 +22,7 @@ type Props = {
   currentContentObject: ?ContentObject,
   currentContentObjectImageIndex: number,
   navigation: Object,
+  route: Object,
   selectCurrentContentObjectImage(newIndex: number): void,
   selectCurrentImage(url: ?string): void,
   dispatchInitAudioFile(audio: AudioState): void,
@@ -53,9 +54,8 @@ function isMediaAvailable(media?: MediaContent): boolean {
 }
 
 class ObjectScreen extends Component<Props> {
-  static navigationOptions = ({ navigation }) => {
-    const { title, path, redirect, array, order, scrollable, panToIndex } = navigation.state.params;
-
+  static navigationOptions = ({ navigation, route }) => {
+    const { title, path, redirect, array, order, scrollable, panToIndex } = route.params;
 
     return {
       ...HeaderStyles.noElevation,
@@ -145,6 +145,7 @@ class ObjectScreen extends Component<Props> {
       currentContentObjectImageIndex,
       currentGuide,
       navigation,
+      route,
     } = this.props;
 
     const {
@@ -158,7 +159,7 @@ class ObjectScreen extends Component<Props> {
       panToIndex,
       path,
       redirect,
-    } = this.props.navigation.state.params;
+    } = route.params;
 
     if (!currentContentObject) {
       return null;

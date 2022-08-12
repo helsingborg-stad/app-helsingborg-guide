@@ -19,9 +19,9 @@ type Props = {
 };
 
 class CategoryMapScreen extends Component<Props> {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({ navigation, route }) => {
     let title = null;
-    const { params } = navigation.state;
+    const { params } = route || {};
     if (params) {
       ({ title } = params);
     }

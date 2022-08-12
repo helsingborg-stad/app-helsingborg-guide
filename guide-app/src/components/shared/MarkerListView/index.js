@@ -33,6 +33,7 @@ import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
 
 type Props = {
   navigation: any,
+  route: any,
   items: MapItem[],
   showNumberedMapMarkers: boolean,
   showDirections: boolean,
@@ -46,8 +47,8 @@ type Props = {
 const HalfListMargin = DefaultMargin * 0.5;
 
 const MarkerListView = (props: Props) => {
-  const { supportedNavigationModes, navigation, items, userLocation, keepStatusBar } = props;
-  const params = navigation?.state?.params;
+  const { supportedNavigationModes, navigation, route, items, userLocation, keepStatusBar } = props;
+  const params = route?.params;
   const redirect = params?.redirect;
 
   const [selectedNavigationMode, setSelectedNavigationMode] = useState(supportedNavigationModes
@@ -145,6 +146,7 @@ const MarkerListView = (props: Props) => {
   const onListItemPressed = (listItem: MapItem) => {
     const {
       navigation,
+      route,
       selectGuideGroup,
       selectGuide,
       dispatchSelectContentObject,
@@ -156,7 +158,8 @@ const MarkerListView = (props: Props) => {
     const { navigate } = navigation;
     const { guide, guideGroup, contentObject } = listItem;
     let sharingLink = currentSharingLink;
-    const currentScreen = navigation.state.routeName;
+    const currentScreen = route.name;
+    console.log("CURRENT SCREEN IN MARKER LIST", currentScreen)
     if (guideGroup) {
       if (currentScreen === "HomeScreen") {
         sharingLink = `guidehbg://home/group/${guideGroup?.id}`;

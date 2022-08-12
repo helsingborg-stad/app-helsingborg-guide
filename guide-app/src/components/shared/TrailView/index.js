@@ -43,7 +43,7 @@ function renderMapInformationOverlay(
 }
 
 const TrailView = (props: Props) => {
-  const { items, trail, onListItemPressed, onToggleInfoOverlay, showInfoOverlay, navigation, path, redirect } = props;
+  const { items, trail, onListItemPressed, onToggleInfoOverlay, showInfoOverlay, navigation, route, path, redirect } = props;
 
   return (
     <View style={styles.container}>
@@ -59,6 +59,7 @@ const TrailView = (props: Props) => {
           //   trail
           // )}
           navigation={navigation}
+          route={route}
           redirect={redirect}
         />
         {showInfoOverlay

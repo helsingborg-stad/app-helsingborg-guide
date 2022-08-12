@@ -18,6 +18,7 @@ showBottomBar,
 
 type Props = {
   navigation: Object,
+  route: Object,
   latestQuestionId: string,
   selectedDialogChoiceIds: [string],
   setLatestQuestionId: string => void,
@@ -33,8 +34,8 @@ type State = {
 };
 
 class QuizScreen extends Component<Props, State> {
-  static navigationOptions = ({ navigation }) => {
-    const { quiz } = navigation.state.params;
+  static navigationOptions = ({ navigation, route }) => {
+    const { quiz } = route.params;
     return {
       ...HeaderStyles.noElevation,
       title: quiz.title,
@@ -118,7 +119,7 @@ class QuizScreen extends Component<Props, State> {
   constructor(props) {
     super(props);
 
-    const { quiz } = props.navigation.state.params;
+    const { quiz } = props.route.params;
     this.quiz = quiz;
     const quizItems = [...quiz.steps];
 
@@ -151,8 +152,8 @@ class QuizScreen extends Component<Props, State> {
   }
 
   componentWillUnmount() {
-    // const { navigation } = this.props;
-    // if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
+    // const { navigation, route } = this.props;
+    // if (route.params && route.params.bottomBarOnUnmount) {
     //   this.props.dispatchShowBottomBar(true);
     // }
     clearTimeout(this.timeout);
@@ -316,7 +317,7 @@ class QuizScreen extends Component<Props, State> {
   };
 
   handleQuizFinished = () => {
-    const { navigation } = this.props;
+    const { navigation, route } = this.props;
     const { title } = this.quiz;
 
     this.props.setLatestQuestionId("");
@@ -329,7 +330,7 @@ class QuizScreen extends Component<Props, State> {
       StackActions.replace({
         routeName: "QuizResultScreen",
         params: {
-          title: navigation.state.params.title,
+          title: route.params.title,
           quiz: this.quiz,
         },
       })

@@ -21,6 +21,7 @@ import LangService from "../../services/langService";
 
 type Props = {
   navigation: Object,
+  route: Object,
   dispatchShowBottomBar(visible: boolean): void,
 };
 
@@ -58,7 +59,7 @@ class QuizResultScreen extends Component<Props, State> {
   shareImage = async () => {
     const {
       quiz: { finish },
-    } = this.props.navigation.state.params;
+    } = this.props.route.params;
 
     const shareOptions = {
       title: finish?.shareTitle,
@@ -86,7 +87,7 @@ class QuizResultScreen extends Component<Props, State> {
   render() {
     const {
       quiz: { finish },
-    } = this.props.navigation.state.params;
+    } = this.props.route.params;
 
 
     return (

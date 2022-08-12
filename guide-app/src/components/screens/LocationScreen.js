@@ -18,6 +18,7 @@ type Props = {
   currentSharingLink: string,
   geolocation: GeolocationType,
   navigation: Object,
+  route: Object,
   isFetchingGuides: boolean,
   selectCurrentGuide(guide: Guide): void,
   dispatchShowBottomBar(visible: boolean): void,
@@ -33,16 +34,18 @@ const LocationScreen = (props: Props) => {
     geolocation,
     isFetchingGuides,
     navigation,
+    route,
     currentSharingLink,
     dispatchCurrentSharingLink
   } = props;
-  const [redirect, setRedirect] = useState(navigation?.state?.params?.redirect);
+  const params = route?.params;
+  const [redirect, setRedirect] = useState(params?.redirect);
   const [redirected, setRedirected] = useState(false);
   const { clearLinking } = useDeepLinking();
 
   useEffect(() => {
     return () => {
-      if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
+      if (params && params?.bottomBarOnUnmount) {
         props.dispatchShowBottomBar(true);
         setRedirected(false);
       }
@@ -75,7 +78,7 @@ const LocationScreen = (props: Props) => {
   const onPressGuide = (guide: Guide) => {
     const slug = guide?.slug;
     const title = guide?.name;
-    const prevPath = navigation.state.params.path;
+    const prevPath = route.params.path;
     const newPath = `${prevPath}/${slug || title}`;
     const sharingLink = currentSharingLink + `/${guide?.id}`;
     dispatchCurrentSharingLink(sharingLink);
@@ -175,8 +178,8 @@ function mapDispatchToProps(dispatch: Dispatch) {
 }
 
 
-LocationScreen["navigationOptions"] = ({ navigation }) => {
-  const { title, path } = navigation.state.params;
+LocationScreen["navigationOptions"] = ({ navigation, route }) => {
+  const { title, path } = route.params;
   return {
     ...HeaderStyles.noElevation,
     title,

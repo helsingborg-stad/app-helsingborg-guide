@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white
   }
-
 });
 
 
@@ -34,7 +33,6 @@ const ScanScreen = (props: Props) => {
   const { navigation } = props;
   const scannerRef = useRef();
   const [showInfoOverlay, setShowInfoOverlay] = useState(false);
-
 
   useEffect(() => {
     if (navigation.isFocused()) {
@@ -164,11 +162,11 @@ const ScanScreen = (props: Props) => {
   );
 };
 
-ScanScreen["navigationOptions"] = ({ navigation }) => {
+ScanScreen["navigationOptions"] = ({ route }) => {
 
   let toggleInfoOverlay = () => null
 
-  const { params = {} } = navigation.state;
+  const { params = {} } = route;
   if (params) {
     ({ toggleInfoOverlay } = params);
   }

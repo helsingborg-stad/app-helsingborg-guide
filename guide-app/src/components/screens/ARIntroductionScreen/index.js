@@ -15,10 +15,11 @@ import styles from "./styles";
 const numberedMarkerActive = require("@assets/images/PinArrived_2D.png");
 
 type Props = {
-  navigation: Object
+  navigation: Object,
+  route: Object,
 };
 
-export default ({ navigation }: Props) => (
+export default ({ navigation, route }: Props) => (
   <View style={styles.outerContainer}>
     <StatusBar barStyle="dark-content" />
     <ScrollView contentContainerStyle={styles.outerContainer}>
@@ -37,7 +38,7 @@ export default ({ navigation }: Props) => (
           onPress={() => {
             AnalyticsUtils.logEvent("tap_start_ar_button");
             navigation.pop();
-            navigation.state.params.onRequestClose();
+            route.params.onRequestClose();
           }}
         >
           <Text style={styles.startButtonText}>

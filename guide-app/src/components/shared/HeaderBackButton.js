@@ -14,13 +14,22 @@ const styles = {
   opacity: 0.6
 };
 
-function HeaderBackButton({
-                            navigation,
-                            onPress,
-                            path,
-                            displayBottomBar,
-                            setTab
-                          }: { navigation: Object, onPress: any, displayBottomBar: Boolean }) {
+type Props = {
+  navigation: Object,
+  onPress: any,
+  path: any,
+  displayBottomBar: Boolean,
+  setTab: any,
+}
+
+function HeaderBackButton(props: Props) {
+  const {
+    navigation,
+    onPress,
+    path,
+    displayBottomBar,
+    setTab
+  } = props;
   const dispatch = useDispatch();
   const { currentSharingLink } = useSelector(s => s.uiState);
 

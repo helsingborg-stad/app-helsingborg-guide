@@ -8,6 +8,7 @@ import { trackScreen } from "@utils/MatomoUtils";
 
 type Props = {
   navigation: any,
+  route: any,
   contentObjects: ContentObject[],
   currentGuide: Guide,
   selectCurrentContentObject(contentObject: ContentObject): void
@@ -27,8 +28,8 @@ class SearchObjectScreen extends Component<Props> {
     );
     if (found) {
       this.props.selectCurrentContentObject(found);
-      const { navigation } = this.props;
-      const prevPath = navigation?.state?.params?.path;
+      const { navigation, route } = this.props;
+      const prevPath = route.params?.path;
       const newPath = `${prevPath}/${found?.title}`;
       trackScreen(newPath, newPath);
       navigation.navigate("ObjectScreen", {

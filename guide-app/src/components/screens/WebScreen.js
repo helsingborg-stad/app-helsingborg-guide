@@ -4,7 +4,6 @@ import WebView from "react-native-webview";
 import PropTypes from "prop-types";
 import { Colors } from "@assets/styles";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
-import { openLink } from "@hooks/useOpenLink";
 
 const styles = StyleSheet.create({
   header: {
@@ -13,22 +12,23 @@ const styles = StyleSheet.create({
 });
 
 export default class WebScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params;
+  static navigationOptions = ({ navigation, route }) => {
+    const { title } = route.params || {};
     return {
       title,
       headerLeft: () => <HeaderBackButton navigation={navigation} />,
       headerRight: () => null,
-      headerStyle: styles.header
+      headerStyle: styles.header,
     };
   };
 
   static propTypes = {
-    navigation: PropTypes.object
+    navigation: PropTypes.object,
+    route: PropTypes.object,
   };
 
   render() {
-    const { url } = this.props.navigation.state.params;
+    const { url } = this.props.route.params || {};
     return (
       <WebView
         androidHardwareAccelerationDisabled
@@ -40,7 +40,6 @@ export default class WebScreen extends Component {
           if (event.url !== url) {
             this.webView.stopLoading();
             Linking.openURL(event.url);
-            // openLink(event.url);
           }
         }}
       />

@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
 });
 
 export default class VideoScreen extends PureComponent {
-  static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params;
+  static navigationOptions = ({ navigation, route }) => {
+    const { title } = route.params || {};
     return {
       title,
       headerLeft: () => <HeaderBackButton navigation={navigation} />,
@@ -26,7 +26,8 @@ export default class VideoScreen extends PureComponent {
   };
 
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    route: PropTypes.object,
   };
 
   constructor(props) {
@@ -35,7 +36,7 @@ export default class VideoScreen extends PureComponent {
   }
 
   async componentDidMount() {
-    const { videoUrl, guideID } = this.props.navigation.state.params;
+    const { videoUrl, guideID } = this.props.route.params || {};
     const uri = await this.tryLoadFromCache(guideID, videoUrl);
 
     console.log(`video URL: ${uri}`);

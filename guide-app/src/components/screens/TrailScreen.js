@@ -12,7 +12,7 @@ import {
   selectCurrentContentObject,
   selectCurrentGuideGroup,
   selectCurrentGuide,
-  showBottomBar,
+  showBottomBar
 } from "@actions/uiStateActions";
 import { Colors } from "@assets/styles";
 
@@ -20,28 +20,29 @@ import { Colors } from "@assets/styles";
 type Props = {
   currentGuide: Guide,
   navigation: Object,
+  route: Object,
   dispatchReleaseAudio(): void,
   dispatchShowBottomBar(visible: boolean): void
 };
 
 
 const TrailScreen = (props: Props) => {
-  const { navigation, dispatchReleaseAudio, dispatchShowBottomBar, currentGuide } = props;
-  const { path, redirect } = navigation?.state?.params;
+  const { navigation, route, dispatchReleaseAudio, dispatchShowBottomBar, currentGuide } = props;
+  const { path, redirect } = route?.params || {};
   const [showInfoOverlay, setShowInfoOverlay] = useState(false);
 
   useEffect(() => {
     if (navigation.isFocused()) {
       navigation.setParams({
         toggleInfoOverlay: toggleInfoOverlay,
-      })
+      });
     }
   }, [navigation.isFocused()]);
 
   useEffect(() => {
     return () => {
       dispatchReleaseAudio();
-      if (navigation.state.params && navigation.state.params.bottomBarOnUnmount) {
+      if (route?.params && route.params?.bottomBarOnUnmount) {
         dispatchShowBottomBar(true);
       }
     };
@@ -58,7 +59,7 @@ const TrailScreen = (props: Props) => {
   }
 
   const mapItems: MapItem[] = currentGuide.contentObjects.map(item => ({
-    contentObject: item,
+    contentObject: item
   }));
 
   return (
@@ -74,6 +75,7 @@ const TrailScreen = (props: Props) => {
         showInfoOverlay={showInfoOverlay}
         onToggleInfoOverlay={toggleInfoOverlay}
         navigation={navigation}
+        route={route}
         redirect={redirect}
       />
     </>
@@ -93,7 +95,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     dispatchSelectContentObject: contentObject =>
       dispatch(selectCurrentContentObject(contentObject)),
     selectGuideGroup: id => dispatch(selectCurrentGuideGroup(id)),
-    selectGuide: guide => dispatch(selectCurrentGuide(guide)),
+    selectGuide: guide => dispatch(selectCurrentGuide(guide))
   };
 }
 
@@ -113,7 +115,7 @@ TrailScreen["navigationOptions"] = ({ navigation }) => {
     title,
     headerRight: () => (
       <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />),
-    headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
+    headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
   };
 };
 

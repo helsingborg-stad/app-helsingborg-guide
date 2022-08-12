@@ -15,6 +15,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Orientation from "react-native-orientation-locker";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
+import { useHeaderHeight } from '@react-navigation/elements';
+
 
 import { Colors, HeaderStyles } from "@assets/styles";
 import styles from "./styles";
@@ -73,11 +75,12 @@ type Props = {
 };
 
 const HomeScreen = (props: Props) => {
-  const { params } = props.navigation?.state;
+  const params = props.route?.params;
   const { linkingHome, clearLinking } = useDeepLinking();
   const { linkToGuide } = useGuides();
   const [segmentLayout, setSegmentLayout] = useState(0);
-
+  const headerHeight = useHeaderHeight();
+  console.log("le header height", headerHeight)
   const id_1 = params?.id_1;
   const locationService = LocationService.getInstance();
   const {
@@ -93,7 +96,7 @@ const HomeScreen = (props: Props) => {
     dispatchShowBottomBar,
     dispatchClearSearchFilter,
     dispatchFetchAllGuidesforAllGroups,
-    isFetching,
+    isFetching
   } = props;
 
   const labels = [...navigationCategoryLabels, "map"];
@@ -344,7 +347,7 @@ function mapStateToProps(state: RootState) {
     navigationCategories,
     navigationCategoryLabels,
     currentLanguage,
-    isFetching,
+    isFetching
   };
 }
 
