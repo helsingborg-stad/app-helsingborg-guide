@@ -4,8 +4,7 @@ import { AppState, StatusBar, Platform, Linking } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Orientation from "react-native-orientation-locker";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createNativeStackNavigator } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { navigationRef } from "@utils/NavigationUtils";
 import { UNIVERSAL_LINKING_URL } from "@data/endpoints";
 
@@ -41,7 +40,7 @@ import useInitialURL from "@hooks/useUniversalLinks";
 import { initializeTracker } from "@utils/MatomoUtils";
 import { setShowFilterButton } from "@actions/uiStateActions";
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const prefix = "guidehbg://";
 

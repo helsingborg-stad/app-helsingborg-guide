@@ -2,7 +2,7 @@ import React from "react";
 import BottomBarButton from "@shared-components/BottomBarButton";
 import Calendar from "@shared-components/svg/calendar";
 import LangService from "@services/langService";
-import NavigatorService from "@services/navigationService";
+import * as navigation from "@utils/NavigationUtils";
 
 type Props = {
   selected: boolean,
@@ -15,7 +15,11 @@ const CalendarButton = ({ onPress, selected }: Props) => (
     Icon={Calendar}
     selected={selected}
     onPress={() => {
-      !selected && NavigatorService.reset("CalendarScreen");
+      !selected &&
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "CalendarScreen" }],
+        });
       onPress();
     }}
   />

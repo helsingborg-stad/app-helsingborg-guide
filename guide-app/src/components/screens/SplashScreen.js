@@ -8,7 +8,6 @@ import {
   LayoutAnimation
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StackActions, NavigationActions } from "react-navigation";
 import { CommonActions } from "@react-navigation/native";
 import ViewContainer from "@shared-components/view_container";
 import { IS_WELCOMED } from "@src/lib/my_consts";

@@ -1,5 +1,5 @@
 // @flow
-import { StackActions } from "react-navigation";
+import { StackActions } from "@react-navigation/native";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FlatList, StatusBar, View } from "react-native";
@@ -10,10 +10,10 @@ import { AnalyticsUtils } from "@utils";
 import {
   setLatestQuestionIdAction,
   selectDialogChoiceAction,
-  resetDialogChoicesAction,
+  resetDialogChoicesAction
 } from "@actions/quizActions";
 import {
-showBottomBar,
+  showBottomBar
 } from "@actions/uiStateActions";
 
 type Props = {
@@ -40,7 +40,7 @@ class QuizScreen extends Component<Props, State> {
       ...HeaderStyles.noElevation,
       title: quiz.title,
       headerRight: () => <View />,
-      headerLeft: () => <HeaderBackButton navigation={navigation} onPress={() => null} displayBottomBar={true} />,
+      headerLeft: () => <HeaderBackButton navigation={navigation} onPress={() => null} displayBottomBar={true} />
     };
   };
 
@@ -78,7 +78,7 @@ class QuizScreen extends Component<Props, State> {
             followUp => ({
               id: followUp.id,
               type: "bot",
-              text: followUp.text,
+              text: followUp.text
             })
           );
 
@@ -91,8 +91,8 @@ class QuizScreen extends Component<Props, State> {
                 type: "dialogrecord",
                 icon: quizItem.icon,
                 title: quizItem.title,
-                message: quizItem.message,
-              },
+                message: quizItem.message
+              }
             ];
           }
 
@@ -101,9 +101,9 @@ class QuizScreen extends Component<Props, State> {
             {
               id: `${quizItem.id}-resp-${index}`,
               type: "user",
-              text: selectedAlternative.text,
+              text: selectedAlternative.text
             },
-            ...followUps,
+            ...followUps
           ];
         });
       }
@@ -141,7 +141,7 @@ class QuizScreen extends Component<Props, State> {
           ? quizItems.slice(0, this.latestQuestionIndex)
           : [],
         props.selectedDialogChoiceIds
-      ),
+      )
     };
   }
 
@@ -202,13 +202,13 @@ class QuizScreen extends Component<Props, State> {
           if (item.type === "chapter") {
             AnalyticsUtils.logEvent("quiz_chapter_reached", {
               name: this.quiz.title,
-              id: item.id,
+              id: item.id
             });
           }
 
           this.setState({
             botIsTyping:
-              nextItem.type === "text_message" || nextItem.type === "image",
+              nextItem.type === "text_message" || nextItem.type === "image"
           });
           this.timeout = setTimeout(this.displayNextItem, delayToNextItem);
         } else if (item.type === "start") {
@@ -230,7 +230,7 @@ class QuizScreen extends Component<Props, State> {
     const followUps = (alternative.followups || []).map(followUp => ({
       id: followUp.id,
       type: "bot",
-      text: followUp.text,
+      text: followUp.text
     }));
 
     // if the user selected an incorrect answer, create a new prompt item without the incorrect alternative
@@ -239,7 +239,7 @@ class QuizScreen extends Component<Props, State> {
       const newPromptItem = {
         ...item,
         key: `${item.id}`,
-        alternatives: item.alternatives.filter(x => x.id !== alternative.id),
+        alternatives: item.alternatives.filter(x => x.id !== alternative.id)
       };
       newPromptItems.push(newPromptItem);
     }
@@ -249,12 +249,12 @@ class QuizScreen extends Component<Props, State> {
       { id: `${alternative.id}-resp`, type: "user", text: alternative.text },
       ...followUps,
       ...newPromptItems,
-      ...this.upcomingItems,
+      ...this.upcomingItems
     ];
 
     this.props.selectDialogChoice({
       questionId: item.id,
-      alternativeId: alternative.id,
+      alternativeId: alternative.id
     });
 
     // remove the original prompt item display next item
@@ -274,7 +274,7 @@ class QuizScreen extends Component<Props, State> {
         type: "dialogrecord",
         icon: item.icon,
         title: item.title,
-        message: item.message,
+        message: item.message
       });
     }
 
@@ -282,7 +282,7 @@ class QuizScreen extends Component<Props, State> {
     const followUps = (alternative.followups || []).map(followUp => ({
       id: followUp.id,
       type: "bot",
-      text: followUp.text,
+      text: followUp.text
     }));
 
     // if the user selected an incorrect answer, create a new dialog item without the incorrect alternative
@@ -292,7 +292,7 @@ class QuizScreen extends Component<Props, State> {
         ...item,
         key: `${item.id}`,
         alternatives: item.alternatives.filter(x => x.id !== alternative.id),
-        skipRecord: true,
+        skipRecord: true
       });
     }
 
@@ -302,12 +302,12 @@ class QuizScreen extends Component<Props, State> {
       { id: `${alternative.id}-resp`, type: "user", text: alternative.text },
       ...followUps,
       ...newDialogItems,
-      ...this.upcomingItems,
+      ...this.upcomingItems
     ];
 
     this.props.selectDialogChoice({
       questionId: item.id,
-      alternativeId: alternative.id,
+      alternativeId: alternative.id
     });
 
     // remove the original dialog item display next item
@@ -324,15 +324,10 @@ class QuizScreen extends Component<Props, State> {
     this.props.resetDialogChoices();
 
     AnalyticsUtils.logEvent("quiz_end", { name: title });
-
-
     navigation.dispatch(
-      StackActions.replace({
-        routeName: "QuizResultScreen",
-        params: {
-          title: route.params.title,
-          quiz: this.quiz,
-        },
+      StackActions.replace('QuizResultScreen', {
+        title: route.params.title,
+        quiz: this.quiz,
       })
     );
   };
@@ -380,9 +375,10 @@ class QuizScreen extends Component<Props, State> {
 function mapStateToProps(state: RootState) {
   return {
     latestQuestionId: state.quiz.latestQuestionId,
-    selectedDialogChoiceIds: state.quiz.selectedDialogChoiceIds,
+    selectedDialogChoiceIds: state.quiz.selectedDialogChoiceIds
   };
 }
+
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
     setLatestQuestionId: (latestQuestionId: string) =>
@@ -391,7 +387,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectDialogChoice: (dialogChoice: DialogChoice) =>
       dispatch(selectDialogChoiceAction(dialogChoice)),
     dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible)),
+      dispatch(showBottomBar(visible))
   };
 }
 

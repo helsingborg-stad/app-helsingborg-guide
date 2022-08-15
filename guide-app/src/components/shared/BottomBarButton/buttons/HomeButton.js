@@ -2,7 +2,7 @@ import React from "react";
 import BottomBarButton from "@shared-components/BottomBarButton";
 import Home from "@shared-components/svg/home";
 import LangService from "@services/langService";
-import NavigatorService from "@services/navigationService";
+import * as navigation from "@utils/NavigationUtils";
 
 type Props = {
   selected: boolean,
@@ -15,7 +15,11 @@ const HomeButton = ({ onPress, selected }: Props) => (
     Icon={Home}
     selected={selected}
     onPress={() => {
-      !selected && NavigatorService.reset("HomeScreen");
+      !selected &&
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "HomeScreen" }],
+        });
       onPress();
     }}
   />

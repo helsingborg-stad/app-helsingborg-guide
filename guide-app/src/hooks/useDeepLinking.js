@@ -8,8 +8,8 @@ import {
 import { eventCalendarURL } from "@data/urls";
 import useGuides from "@hooks/useGuides";
 import LangService from "@services/langService";
-import Navigation from "@services/navigationService";
 import { DateUtils } from "@utils";
+import * as Navigation from "@utils/NavigationUtils";
 import { DEEP_LINKING_URL } from "@data/endpoints";
 
 const defaultImage = require("@assets/images/no-image-featured-image.png");

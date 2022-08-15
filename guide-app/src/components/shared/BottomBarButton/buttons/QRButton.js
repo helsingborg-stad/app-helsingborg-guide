@@ -3,8 +3,7 @@ import BottomBarButton from "@shared-components/BottomBarButton";
 import QRIcon from "@shared-components/svg/qr";
 import LangService from "@services/langService";
 import useOpenLink from "@hooks/useOpenLink";
-import NavigatorService from "@services/navigationService";
-
+import * as navigation from "@utils/NavigationUtils";
 
 type Props = {
   selected: boolean,
@@ -21,7 +20,7 @@ const QRButton = ({ onPress, selected }: Props) => {
       Icon={QRIcon}
       selected={selected}
       onPress={() => {
-        !selected && NavigatorService.navigate("ScanScreen");
+        !selected && navigation.navigate("ScanScreen");
           onPress();
       }}
     />

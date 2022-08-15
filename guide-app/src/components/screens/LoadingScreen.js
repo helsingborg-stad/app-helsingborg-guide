@@ -8,7 +8,6 @@ import {
   LayoutAnimation,
   ActivityIndicator,
 } from "react-native";
-import { StackActions, NavigationActions } from "react-navigation";
 import ViewContainer from "@shared-components/view_container";
 import { Colors } from "@assets/styles";
 import LangService from "@services/langService";
