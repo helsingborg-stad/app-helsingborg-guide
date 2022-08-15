@@ -28,6 +28,14 @@ type Props = {
   onGoToLink: (url: string, title?: string) => void,
   loadAudioFile: () => void,
   onGoToVideo: (video?: MediaContent) => void,
+  swipeable?: Boolean,
+  scrollable?: Boolean,
+  panToIndex?: number,
+  selectObject: any,
+  navigation: Object,
+  array?: Array,
+  order?: number,
+  path?: string,
 };
 
 function displayTitle(
@@ -50,7 +58,7 @@ function displayText(description?: string) {
 
 function displayLinks(
   links: Link[],
-  onGoToLink: (url: string, title?: string) => void,
+  onGoToLink: (url: string, title?: string) => void
 ) {
   return links.map((item, index) => (
     <LinkTouchable
@@ -131,7 +139,7 @@ const onHorizontalSwipe = (evt, swiped, setSwiped, disableSwipe, setDisableSwipe
 const onHandlerStateChange = (evt, setDisableSwipe) => {
   const { nativeEvent } = evt;
   if (nativeEvent.state === State.END) {
-    setDisableSwipe(false)
+    setDisableSwipe(false);
   }
 };
 
@@ -148,8 +156,10 @@ const ObjectView = (props: Props) => {
     navigation,
     array,
     order,
-    path,
+    path
   } = props;
+
+  console.log("THE PATH", path);
   const [swiped, setSwiped] = useState(false);
   const [disableSwipe, setDisableSwipe] = useState(false);
 
@@ -157,8 +167,8 @@ const ObjectView = (props: Props) => {
     return () => {
       setSwiped(false);
       setDisableSwipe(false);
-    }
-  },[])
+    };
+  }, []);
 
   useEffect(() => {
     setTimeout(() => setSwiped(false), 180);
@@ -176,12 +186,17 @@ const ObjectView = (props: Props) => {
           scrollable && scrollable(order + 1);
           selectObject && selectObject(array[order + 1]);
           panToIndex && panToIndex(order + 1);
-          navigation.navigate("ObjectScreen", {
-            title: array[order + 1].title,
-            currentGuide: array[order + 1],
-            order: order + 1,
-            array: array,
-            swipeable: true,
+          navigation.navigate({
+            name: "ObjectScreen",
+            params: {
+              title: array[order + 1].title,
+              currentGuide: array[order + 1],
+              order: order + 1,
+              array: array,
+              swipeable: true,
+              path: newPath,
+            },
+            merge: true
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -196,12 +211,17 @@ const ObjectView = (props: Props) => {
           scrollable && scrollable(order - 1);
           selectObject && selectObject(array[order - 1]);
           panToIndex && panToIndex(order - 1);
-          navigation.navigate("ObjectScreen", {
-            title: array[order - 1].title,
-            currentGuide: array[order - 1],
-            array: array,
-            order: order - 1,
-            swipeable: true
+          navigation.navigate({
+            name: "ObjectScreen",
+            params: {
+              title: array[order - 1].title,
+              currentGuide: array[order - 1],
+              order: order - 1,
+              array: array,
+              swipeable: true,
+              path: newPath,
+            },
+            merge: true
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -210,7 +230,6 @@ const ObjectView = (props: Props) => {
     }
   }, [swiped]);
 
-  console.log("links", props.contentObject.links)
 
   return (
     <View style={styles.viewContainer}>

@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { AppRegistry } from "react-native";
 import GuideApp from "./src/App";
 import useNotifications from "@hooks/useNotifications";

@@ -7,7 +7,8 @@ import { Animated, View, Image, Dimensions, Platform } from "react-native";
 import styles from "./style";
 import { selectCurrentBottomBarTab } from "@actions/uiStateActions";
 import { Navigation } from "@config/ui";
-import { trackScreen } from "../../../utils/MatomoUtils";
+import { setShowFilterButton } from "@actions/uiStateActions";
+
 
 const barBackground = require("@assets/images/background-navigation.png");
 
@@ -16,7 +17,6 @@ const barBackground = require("@assets/images/background-navigation.png");
 const isIphoneX = () => {
   const d = Dimensions.get("window");
   const { height, width } = d;
-
   return Platform.OS === "ios" && (height >= 812 || width >= 812);
 };
 
@@ -28,6 +28,7 @@ type Props = {
   currentBottomBarTab: number,
   showBottomBar: boolean,
   selectBottomBarTab(id: number): void,
+  dispatchSetShowFilterButton(boolean: Boolean): void,
 };
 
 type State = {
@@ -42,7 +43,7 @@ class BottomBarView extends Component<Props, State> {
     const {
       animViewContainer,
       animTabBottom,
-      showBottomBar: previouslyShowingBottomBar,
+      showBottomBar: previouslyShowingBottomBar
     } = prevState;
 
     if (showBottomBar !== previouslyShowingBottomBar) {
@@ -50,19 +51,19 @@ class BottomBarView extends Component<Props, State> {
         Animated.timing(animViewContainer, {
           toValue: viewContainerHeight,
           duration: transitionDuration,
-          useNativeDriver: false,
+          useNativeDriver: false
         }).start();
         Animated.timing(animTabBottom, {
           toValue: buttonTabBottom,
           duration: transitionDuration,
-          useNativeDriver: false,
+          useNativeDriver: false
         }).start();
         return { showBottomBar };
       } else {
         return {
           showBottomBar,
           animViewContainer: new Animated.Value(0),
-          animTabBottom: new Animated.Value(0),
+          animTabBottom: new Animated.Value(0)
         };
       }
     }
@@ -75,7 +76,7 @@ class BottomBarView extends Component<Props, State> {
     this.state = {
       animViewContainer: new Animated.Value(0),
       animTabBottom: new Animated.Value(0),
-      showBottomBar: props.showBottomBar,
+      showBottomBar: props.showBottomBar
     };
   }
 
@@ -86,7 +87,10 @@ class BottomBarView extends Component<Props, State> {
           <ButtonComponent
             key={id}
             selected={this.props.currentBottomBarTab === index}
-            onPress={() => this.props.selectBottomBarTab(index, id)}
+            onPress={() => {
+              this.props.selectBottomBarTab(index, id),
+                this.props.dispatchSetShowFilterButton(id === "home");
+            }}
           />
         ))}
       </View>
@@ -113,7 +117,7 @@ function mapStateToProps(state: RootState) {
   const { currentBottomBarTab, showBottomBar } = state.uiState;
   return {
     currentBottomBarTab,
-    showBottomBar,
+    showBottomBar
   };
 }
 
@@ -121,6 +125,9 @@ function mapDispatchToProps(dispatch: Dispatch) {
   return {
     selectBottomBarTab: (index: number, id: any) => {
       dispatch(selectCurrentBottomBarTab(index));
+    },
+    dispatchSetShowFilterButton: (boolean) => {
+      dispatch(setShowFilterButton(boolean));
     }
   };
 }

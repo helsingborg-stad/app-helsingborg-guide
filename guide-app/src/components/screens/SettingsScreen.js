@@ -122,9 +122,13 @@ const textStyles = StyleSheet.create({
 
 });
 
+type Props = {
+  navigation: any,
+}
 
-const SettingsScreen = (props) => {
+const SettingsScreen = (props: Props) => {
 
+  const { navigation } = props;
   const { developerMode } = useSelector(s => s).uiState;
   const dispatch = useDispatch();
   const [selectedLanguageCode, setSelectedLanguageCode] = useState(LangService.code);
@@ -141,12 +145,16 @@ const SettingsScreen = (props) => {
 
   useEffect(() => {
     LangService.getLanguages();
-    props.navigation.setParams();
+    navigation.setParams();
+    navigation.setOptions({
+      title: LangService.strings.SETTINGS,
+      headerLeft: () => null
+    });
     trackScreen("/settings", "/settings");
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
       setConnected(state.isConnected);
     });
-    return unsubscribe;
+    return () => unsubscribe;
   }, []);
 
 
@@ -163,25 +171,27 @@ const SettingsScreen = (props) => {
     setSelectedLanguageCode(code);
     LangService.setLanguage(code);
     dispatch(setLanguage(code));
+    navigation.setOptions({ title: LangService.strings.SETTINGS });
     // Set navigation params to force an update
-    props.navigation.setParams();
+    navigation.setParams();
+
     loadContents(code);
   };
 
   const navigateToWelcomeScreen = () => {
-    const { navigate } = props.navigation;
+    const { navigate } = navigation;
     dispatch(showBottomBar(false));
     dispatch(selectCurrentBottomBarTab(0));
     navigate("WelcomeScreen");
   };
 
   const navigateToDownloadsScreen = () => {
-    const { navigate } = props.navigation;
+    const { navigate } = navigation;
     navigate("DownloadsScreen");
   };
 
   const navigateToDebugScreen = () => {
-    const { navigate } = props.navigation;
+    const { navigate } = navigation;
     navigate("DebugScreen");
   };
 
@@ -310,11 +320,5 @@ const SettingsScreen = (props) => {
     </>
   );
 };
-
-SettingsScreen["navigationOptions"] = () => (
-  {
-    title: LangService.strings.SETTINGS,
-    headerLeft: () => null
-  });
 
 export default SettingsScreen;

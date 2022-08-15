@@ -22,19 +22,21 @@ type Props = {
   navigation: Object,
   route: Object,
   dispatchReleaseAudio(): void,
-  dispatchShowBottomBar(visible: boolean): void
+  dispatchShowBottomBar(visible: boolean): void,
 };
 
 
 const TrailScreen = (props: Props) => {
   const { navigation, route, dispatchReleaseAudio, dispatchShowBottomBar, currentGuide } = props;
-  const { path, redirect } = route?.params || {};
+  const { path, redirect, title } = route?.params || {};
   const [showInfoOverlay, setShowInfoOverlay] = useState(false);
 
   useEffect(() => {
     if (navigation.isFocused()) {
-      navigation.setParams({
-        toggleInfoOverlay: toggleInfoOverlay,
+      navigation.setOptions({
+        title,
+        headerRight: () => <InfoOverlayToggleView onToggleInfoOverlay={onToggleInfoOverlay} />,
+        headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
       });
     }
   }, [navigation.isFocused()]);
@@ -49,7 +51,7 @@ const TrailScreen = (props: Props) => {
   }, []);
 
 
-  const toggleInfoOverlay = () => {
+  const onToggleInfoOverlay = () => {
     setShowInfoOverlay(!showInfoOverlay);
   };
 
@@ -73,7 +75,7 @@ const TrailScreen = (props: Props) => {
         items={mapItems}
         path={path}
         showInfoOverlay={showInfoOverlay}
-        onToggleInfoOverlay={toggleInfoOverlay}
+        onToggleInfoOverlay={onToggleInfoOverlay}
         navigation={navigation}
         route={route}
         redirect={redirect}
@@ -98,25 +100,5 @@ function mapDispatchToProps(dispatch: Dispatch) {
     selectGuide: guide => dispatch(selectCurrentGuide(guide))
   };
 }
-
-TrailScreen["navigationOptions"] = ({ navigation }) => {
-  let title = null;
-  let path = null;
-  let toggleInfoOverlay = () => {
-  };
-  const { params = {} } = navigation.state;
-  if (params) {
-    ({ title } = params);
-    ({ path } = params);
-    ({ toggleInfoOverlay } = params);
-  }
-
-  return {
-    title,
-    headerRight: () => (
-      <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />),
-    headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
-  };
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);

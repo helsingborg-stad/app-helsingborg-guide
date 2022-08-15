@@ -130,7 +130,7 @@ const SplashScreen = (props: Props) => {
         if (value) {
           welcomed = JSON.parse(value);
         }
-        const route = welcomed ? "MainScreen" : "WelcomeScreen";
+        const route = welcomed ? "HomeScreen" : "WelcomeScreen";
 
         navigation.dispatch(
           CommonActions.reset({
@@ -174,10 +174,6 @@ const SplashScreen = (props: Props) => {
     </ViewContainer>
   );
 };
-
-SplashScreen["navigationOptions"] = () => ({
-  headerShown: false
-});
 
 export default SplashScreen;
 

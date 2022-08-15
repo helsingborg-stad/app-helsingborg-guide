@@ -11,7 +11,12 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ArrowDown from "@assets/images/arrow_down";
 import { setSearchFilter, setShowHomeSettings, setSettingsHeight } from "@actions/uiStateActions";
 
-const HomeSettings = (props) => {
+
+type Props = {
+  segmentLayout: any,
+}
+
+const HomeSettings = (props: Props) => {
 
   const { segmentLayout } = props;
 

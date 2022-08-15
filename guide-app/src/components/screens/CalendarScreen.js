@@ -117,11 +117,7 @@ type Props = {
   isFetching: boolean,
 };
 
-type State = {
-  chosenDate: Date
-};
-
-const CalendarScreen = (props: Props, state: State) => {
+const CalendarScreen = (props: Props) => {
   const {
     currentLanguage,
     dispatchShowBottomBar,
@@ -131,7 +127,7 @@ const CalendarScreen = (props: Props, state: State) => {
     items,
     navigation,
     route,
-    isFetching
+    isFetching,
   } = props;
 
   const { params } = route || {};
@@ -148,7 +144,6 @@ const CalendarScreen = (props: Props, state: State) => {
   useEffect(() => {
     trackScreen("/calendar", "/calendar");
     dispatchShowBottomBar(true);
-    console.log("current page", currentPage);
     getEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, currentPage);
     return () => {
       resetEvents();
@@ -310,11 +305,5 @@ function mapDispatchToProps(dispatch: Dispatch) {
       dispatch(showBottomBar(visible))
   };
 }
-
-CalendarScreen["navigationOptions"] = ({ navigation }) => {
-  return {
-    headerShown: false
-  };
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarScreen);

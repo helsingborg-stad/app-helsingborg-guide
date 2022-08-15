@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Swiper from "react-native-swiper";
-import { PropTypes } from "prop-types";
 import ViewContainer from "@shared-components/view_container";
 import FirstInstructionSlide from "@shared-components/FirstInstructionSlide";
 import NormalInstructionSlide from "@shared-components/NormalInstructionSlide";
@@ -77,46 +76,34 @@ const styles = StyleSheet.create({
   }
 });
 
-class WelcomeScreen extends Component {
-  static displayColorBar() {
+const WelcomeScreen = () => {
+  const dispatch = useDispatch();
+  const [index, setIndex] = useState(0);
+  const total = LangService.instructions.steps.length;
+
+  const displayColorBar = () => {
     return (
       <View style={styles.colorBar}>
         <ColoredBar visible />
       </View>
     );
-  }
-
-  static propTypes = {
-    navigation: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      index: 0,
-      total: LangService.instructions.steps.length
-    };
-  }
+  useEffect(() => {
+    dispatch(showBottomBar(false));
+  }, []);
 
-  static navigationOptions = {
-    headerShown: false
+  const onIndexChanged = (i) => {
+    setIndex(i);
   };
 
-  componentDidMount() {
-    this.props.dispatchShowBottomBar(false);
-  }
-
-  onIndexChanged = index => {
-    this.setState({ index });
-  };
-
-  displaySlides() {
+  const displaySlides = () => {
     const instructions = LangService.instructions.steps;
-    return instructions.map((item, index) => {
-      if (index === 0) {
+    return instructions.map((item, i) => {
+      if (i === 0) {
         return (
           <FirstInstructionSlide
-            key={index}
+            key={i}
             content={item.content}
             backgroundImageSource={IMAGE1}
           />
@@ -124,71 +111,58 @@ class WelcomeScreen extends Component {
       }
       return (
         <NormalInstructionSlide
-          key={index}
+          key={i}
           content={item.content}
           thumbnailSource={item.thumbnail}
           backgroundImageSource={item.background}
         />
       );
     });
-  }
+  };
 
-  skipPress() {
+  const skipPress = () => {
     AsyncStorage.setItem(IS_WELCOMED, JSON.stringify(true));
     navigation.reset({
       index: 0,
       routes: [
-        { name: "MainScreen" }
+        { name: "HomeScreen" }
       ]
     });
-  }
+  };
 
-  displaySkipBtn() {
+  const displaySkipBtn = () => {
     return (
       <View style={styles.btnContainer}>
-        <TouchableOpacity onPress={() => this.skipPress()}>
+        <TouchableOpacity onPress={() => skipPress()}>
           <Text style={styles.btnText}>
-            {this.state.index === this.state.total - 1
+            {index === total - 1
               ? LangService.strings.LETS_GO
               : LangService.strings.JUMP_OVER}
           </Text>
         </TouchableOpacity>
       </View>
     );
-  }
-
-  render() {
-    const dot = <View style={styles.dot} />;
-    const activeDot = <View style={styles.activeDot} />;
-
-    return (
-      <ViewContainer style={[styles.wrapper]}>
-        <Swiper
-          style={styles.swiper}
-          onIndexChanged={this.onIndexChanged}
-          loop={false}
-          dot={dot}
-          paginationStyle={styles.pagination}
-          activeDot={activeDot}
-          showsButtons={false}
-        >
-          {this.displaySlides()}
-        </Swiper>
-        {this.displaySkipBtn()}
-        {WelcomeScreen.displayColorBar()}
-      </ViewContainer>
-    );
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible))
   };
-}
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(WelcomeScreen);
+  const dot = <View style={styles.dot} />;
+  const activeDot = <View style={styles.activeDot} />;
+  return (
+    <ViewContainer style={[styles.wrapper]}>
+      <Swiper
+        style={styles.swiper}
+        onIndexChanged={onIndexChanged}
+        loop={false}
+        dot={dot}
+        paginationStyle={styles.pagination}
+        activeDot={activeDot}
+        showsButtons={false}
+      >
+        {displaySlides()}
+      </Swiper>
+      {displaySkipBtn()}
+      {displayColorBar()}
+    </ViewContainer>
+  );
+};
+
+export default WelcomeScreen;

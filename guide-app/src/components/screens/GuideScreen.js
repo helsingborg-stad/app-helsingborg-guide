@@ -1,17 +1,14 @@
 // @flow
 
-import React, { memo, Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { connect } from "react-redux";
-
 import GuideView from "@shared-components/GuideView";
-import { AnalyticsUtils } from "@utils";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
-import SearchButton from "@src/components/header/SearchButton";
 import {
   selectCurrentContentObject,
   showBottomBar,
-  selectCurrentSharingLink,
+  selectCurrentSharingLink
 } from "@actions/uiStateActions";
 import { releaseAudioFile } from "@actions/audioActions";
 import { trackScreen } from "@utils/MatomoUtils";
@@ -34,15 +31,13 @@ const GuideScreen = (props: Props) => {
   const { currentGuide, navigation, route, currentSharingLink, dispatchCurrentSharingLink } = props;
   const { contentObjects } = currentGuide;
   const { params } = route;
-  const { clearLinking } = useDeepLinking()
-  const [redirect, setRedirect] = useState( params?.redirect?.length ? params?.redirect?.length === 2 ? params?.redirect[1] : params?.redirect[0] : false)
+  const { clearLinking } = useDeepLinking();
+  const [redirect, setRedirect] = useState(params?.redirect?.length ? params?.redirect?.length === 2 ? params?.redirect[1] : params?.redirect[0] : false);
 
 
   useEffect(() => {
-    const title = currentGuide ? currentGuide.name : null;
-    props.navigation.setParams({ title });
     return () => {
-      redirect && setRedirect(false)
+      redirect && setRedirect(false);
       props.dispatchReleaseAudio();
       if (params && params.bottomBarOnUnmount) {
         props.dispatchShowBottomBar(true);
@@ -51,10 +46,22 @@ const GuideScreen = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    if(!navigation.isFocused()) {
+    if (params) {
+      const { path } = params || {};
+      const title = currentGuide ? currentGuide.name : null;
+      navigation.setOptions({
+        title,
+        headerRight: () => <View style={{ width: 36 }} />,
+        headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
+      });
+    }
+  }, [params]);
+
+  useEffect(() => {
+    if (!navigation.isFocused()) {
       clearLinking(navigation);
     }
-  },[navigation.isFocused()])
+  }, [navigation.isFocused()]);
 
 
   useEffect(() => {
@@ -68,10 +75,9 @@ const GuideScreen = (props: Props) => {
       });
       if (object && index !== -1) {
         onPressContentObject(object, index, contentObjects);
-      }
-      else {
-        setRedirect(false)
-        console.log("not found guide")
+      } else {
+        setRedirect(false);
+        console.log("not found guide");
         navigation.navigate("NotFoundScreen");
       }
     }
@@ -82,10 +88,10 @@ const GuideScreen = (props: Props) => {
     const prevPath = params.path;
     const newPath = `${prevPath}/${obj?.title}`;
     const sharingLink = currentSharingLink + `/${obj?.id}`;
-    dispatchCurrentSharingLink(sharingLink)
-      props.dispatchSelectContentObject(obj);
+    dispatchCurrentSharingLink(sharingLink);
+    props.dispatchSelectContentObject(obj);
     trackScreen(newPath, newPath);
-    redirect && setRedirect(false)
+    redirect && setRedirect(false);
     console.log("the object", obj.links);
     navigation.navigate("ObjectScreen", {
       title: obj.title,
@@ -106,7 +112,7 @@ const GuideScreen = (props: Props) => {
       />
     ) : (
       <View />
-    ) : <ActivityIndicator style={{flex: 1}} />;
+    ) : <ActivityIndicator style={{ flex: 1 }} />;
 };
 
 function mapStateToProps(state: RootState) {
@@ -121,23 +127,8 @@ function mapDispatchToProps(dispatch: Dispatch) {
     dispatchReleaseAudio: () => dispatch(releaseAudioFile()),
     dispatchShowBottomBar: (visible: boolean) =>
       dispatch(showBottomBar(visible)),
-    dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link)),
+    dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link))
   };
 }
-
-
-GuideScreen["navigationOptions"] = ({ navigation, route }) => {
-  const { params } = route;
-  if (params) {
-    const { title, path } = params;
-    console.log("title", title)
-    return {
-      title,
-      headerRight: () => <View style={{width: 36}} />,
-      headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
-    };
-  }
-  return {};
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(GuideScreen);

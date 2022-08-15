@@ -159,7 +159,7 @@ const MarkerListView = (props: Props) => {
     const { guide, guideGroup, contentObject } = listItem;
     let sharingLink = currentSharingLink;
     const currentScreen = route.name;
-    console.log("CURRENT SCREEN IN MARKER LIST", currentScreen)
+    console.log("CURRENT SCREEN IN MARKER LIST", currentScreen);
     if (guideGroup) {
       if (currentScreen === "HomeScreen") {
         sharingLink = `guidehbg://home/group/${guideGroup?.id}`;
@@ -209,6 +209,7 @@ const MarkerListView = (props: Props) => {
         scrollable: scrollToIndex,
         panToIndex: mapMarkerViewRef.panMapToIndex,
         path: newPath,
+        merge: true,
         ...(redirect && { redirect: redirect })
       });
     }
@@ -246,10 +247,10 @@ const MarkerListView = (props: Props) => {
       hasArrived = LocationUtils.hasArrivedAtDestination(
         userLocation,
         location
-      )}
-      else {
-        hasArrived = false;
-      }
+      );
+    } else {
+      hasArrived = false;
+    }
 
     const numberView = (
       <View

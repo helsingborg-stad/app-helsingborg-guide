@@ -102,9 +102,12 @@ const HomeScreen = (props: Props) => {
   const labels = [...navigationCategoryLabels, "map"];
 
   useEffect(() => {
+    navigation.setOptions({
+      title: LangService.strings.APP_NAME,
+      ...HeaderStyles.noElevation,
+    })
     dispatchFetchAllGuidesforAllGroups();
   }, []);
-
 
   useEffect(() => {
     if (navigation.isFocused() && currentHomeTab !== (labels.length - 1)) {
@@ -368,13 +371,6 @@ function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
       dispatch(fetchAllGuidesForAllGroups())
   };
 }
-
-
-HomeScreen["navigationOptions"] = () => (
-  {
-    title: LangService.strings.APP_NAME,
-    ...HeaderStyles.noElevation
-  });
 
 export default connect(
   mapStateToProps,

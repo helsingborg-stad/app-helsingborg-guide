@@ -1,10 +1,11 @@
 // @flow
 import React, { useEffect, useState, useRef } from "react";
-import { AppState, StatusBar, Platform, Linking } from "react-native";
+import { AppState, StatusBar, Platform, Linking, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Orientation from "react-native-orientation-locker";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HeaderBackButton from "@shared-components/HeaderBackButton";
 import { navigationRef } from "@utils/NavigationUtils";
 import { UNIVERSAL_LINKING_URL } from "@data/endpoints";
 
@@ -27,7 +28,7 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
-  ARIntroductionScreen,
+  ARIntroductionScreen
 } from "@src/components/screens";
 import { selectOpenedLink } from "@actions/uiStateActions";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
@@ -39,6 +40,7 @@ import { Colors, HeaderStyles } from "@assets/styles";
 import useInitialURL from "@hooks/useUniversalLinks";
 import { initializeTracker } from "@utils/MatomoUtils";
 import { setShowFilterButton } from "@actions/uiStateActions";
+import LangService from "./services/langService";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,7 +51,6 @@ const config = {
     HomeScreen: "home/:type?/:id_1?/:id_2?/:id_3?",
     CalendarScreen: "calendar/:id",
     WelcomeScreen: "",
-    MainScreen: "",
     SearchObjectScreen: "",
     ARIntroductionScreen: ""
   }
@@ -62,23 +63,46 @@ const linking = {
 
 const RootStack = () => (
   <Stack.Navigator screenOptions={{
-    ...HeaderStyles.default,
+    ...HeaderStyles.default
   }}>
+    <Stack.Screen name={"SplashScreen"} component={SplashScreen}
+                  options={{ headerShown: false, header: () => null }} />
     <Stack.Screen
       name={"HomeScreen"}
       component={HomeScreen}
       options={{
-        header: () => null,
+        header: () => null
       }}
     />
-    <Stack.Screen name={"CalendarScreen"} component={CalendarScreen} />
+    <Stack.Screen name={"CalendarScreen"} component={CalendarScreen} options={{ header: () => null }} />
     <Stack.Screen name={"TrailScreen"} component={TrailScreen} />
     <Stack.Screen
       name={"LocationScreen"}
       component={LocationScreen}
 
     />
-    <Stack.Screen name={"ObjectScreen"} component={ObjectScreen} />
+    <Stack.Screen name={"ObjectScreen"} component={ObjectScreen}
+                  options={({ navigation, route }) => {
+                    const { title, path, scrollable, panToIndex, redirect, array, order } = route.params || {};
+                    return ({
+                      ...HeaderStyles.noElevation,
+                      title: title,
+                      headerLeft: () => (
+                        <HeaderBackButton
+                          navigation={navigation}
+                          path={path}
+                          onPress={() => {
+                            if (scrollable && panToIndex && redirect === array[order].id) {
+                              scrollable(order);
+                              panToIndex(order);
+                            }
+                          }}
+                        />
+                      ),
+                      headerRight: () => <View style={{ width: 36 }} />
+                    });
+                  }}
+    />
     <Stack.Screen name={"QuizScreen"} component={QuizScreen} />
     <Stack.Screen name={"QuizResultScreen"} component={QuizResultScreen} />
     <Stack.Screen
@@ -100,7 +124,8 @@ const RootStack = () => (
       })}
     />
     <Stack.Screen name={"DownloadsScreen"} component={DownloadsScreen} />
-    <Stack.Screen name={"SettingsScreen"} component={SettingsScreen} />
+    <Stack.Screen name={"SettingsScreen"} component={SettingsScreen}
+                  options={{ title: LangService.strings.SETTINGS }} />
     <Stack.Screen name={"ScanScreen"} component={ScanScreen} />
     <Stack.Screen name={"DebugScreen"} component={DebugScreen} />
     <Stack.Screen name={"CategoryMapScreen"} component={CategoryMapScreen} />
@@ -118,8 +143,8 @@ const RootStack = () => (
         header: () => null
       })}
     />
-    <Stack.Screen name={"SplashScreen"} component={SplashScreen} />
-    <Stack.Screen name={"WelcomeScreen"} component={WelcomeScreen} />
+    <Stack.Screen name={"WelcomeScreen"} component={WelcomeScreen}
+                  options={{ headerShown: false, header: () => null }} />
     <Stack.Screen name={"SearchObjectScreen"} component={SearchObjectScreen} />
     <Stack.Screen name={"ARIntroductionScreen"} component={ARIntroductionScreen} />
   </Stack.Navigator>
@@ -169,18 +194,17 @@ const Nav = (props: Props) => {
     }
   }, [url, homeLoaded]);
 
-  const onNavigationStateChange = () => {
+  const onNavigationStateChange = async () => {
     const previousRouteName = routeNameRef.current;
     const currentRouteName = navigationRef.getCurrentRoute().name;
-    if (previousRouteName !== currentRouteName) {
-      console.log("CURRENT SCREEN", currentRouteName);
-      if (currentRouteName === "HomeScreen") {
-        !showFilterButton && dispatch(setShowFilterButton(true));
-        !homeLoaded && setHomeLoaded(true);
-      } else {
-        showFilterButton && dispatch(setShowFilterButton(false));
-      }
+    console.log("CURRENT SCREEN", currentRouteName);
+    if (currentRouteName === "HomeScreen") {
+      !showFilterButton && dispatch(setShowFilterButton(true));
+      !homeLoaded && setHomeLoaded(true);
+    } else {
+      showFilterButton && dispatch(setShowFilterButton(false));
     }
+
   };
 
   const onAppStateChange = (nextAppState: AppStateStatus) => {

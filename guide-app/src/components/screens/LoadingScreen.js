@@ -6,7 +6,7 @@ import {
   Dimensions,
   Image,
   LayoutAnimation,
-  ActivityIndicator,
+  ActivityIndicator
 } from "react-native";
 import ViewContainer from "@shared-components/view_container";
 import { Colors } from "@assets/styles";
@@ -19,39 +19,32 @@ const LONG_TIME_OUT = 7000;
 
 const styles = StyleSheet.create({
   splash: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.white
   },
   wrapper: {
     flex: 1,
-    zIndex: 10,
+    zIndex: 10
   },
   loadingSpinner: {
     height: "100%",
-    width: "100%",
-  },
+    width: "100%"
+  }
 });
 
 
 const LoadingScreen = (props) => {
   const { navigation } = useSelector(s => s);
   const { params } = props?.navigation?.state;
-  const dispatch = useDispatch();
-
-  const appName = LangService.strings.APP_NAME;
 
   useEffect(() => {
-
-    console.log("params", params)
-
+    navigation.setOptions({
+      headerShown: false,
+    });
   }, [params]);
-
-
-
 
 
   return (
     <ViewContainer style={styles.splash}>
-
       <View style={styles.wrapper}>
         <ActivityIndicator style={styles.loadingSpinner} />
       </View>
@@ -59,9 +52,6 @@ const LoadingScreen = (props) => {
   );
 };
 
-LoadingScreen["navigationOptions"] = screenProps => ({
-  headerShown: false,
-});
 
 export default LoadingScreen;
 

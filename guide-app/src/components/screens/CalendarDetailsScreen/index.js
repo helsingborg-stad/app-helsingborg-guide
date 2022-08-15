@@ -13,11 +13,12 @@ import { Colors } from "@assets/styles";
 import ArrowUp from "@assets/images/arrow_up";
 
 type Props = {
+  navigation: Object,
   route: Object,
 }
 
 const CalendarDetailsScreen = (props: Props) => {
-  const { route } = props;
+  const { navigation, route } = props;
   const { event } = route.params || {};
 
   const [activeSections, setActiveSections] = useState([]);
@@ -25,6 +26,14 @@ const CalendarDetailsScreen = (props: Props) => {
 
 
   useEffect(() => {
+    navigation.setOptions({
+      title: event?.name || "Event",
+      headerLeft: () => <HeaderBackButton
+        navigation={navigation}
+        path={route?.params?.path} />,
+      headerRight: () => <View style={{ width: 36 }} />
+    });
+
     let arr = [];
     event?.eventLink && arr.push({ id: "information", title: "INFORMATION", content: "" });
     event?.location && arr.push({ id: "location", title: "LOCATION", content: "" });
@@ -122,8 +131,8 @@ const CalendarDetailsScreen = (props: Props) => {
                   style={styles.organizerEmail}>{organizer.organizerEmail}</Text></TouchableOpacity> : null}
                 {organizer.organizerLink ? <TouchableOpacity style={styles.organizerItem}
                                                              onPress={() => Linking.openURL(organizer.organizerLink)}>
-                <Text
-                  style={styles.organizerLink}>{organizer.organizerLink}</Text></TouchableOpacity> : null}
+                  <Text
+                    style={styles.organizerLink}>{organizer.organizerLink}</Text></TouchableOpacity> : null}
               </View>
             ))}
           </View>;
@@ -222,14 +231,5 @@ const CalendarDetailsScreen = (props: Props) => {
     </View>
   );
 };
-
-CalendarDetailsScreen["navigationOptions"] = ({ navigation, route }) => (
-  {
-    title: route.params?.event?.name || "Event",
-    headerRight: () => <View style={{ width: 36 }} />,
-    headerLeft: () => <HeaderBackButton
-      navigation={navigation}
-      path={route?.params?.path} />
-  });
 
 export default CalendarDetailsScreen;

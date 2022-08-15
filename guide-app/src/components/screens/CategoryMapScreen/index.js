@@ -19,6 +19,7 @@ type Props = {
 };
 
 class CategoryMapScreen extends Component<Props> {
+
   static navigationOptions = ({ navigation, route }) => {
     let title = null;
     const { params } = route || {};
@@ -66,7 +67,7 @@ function mapStateToProps(state: RootState) {
   const category = navigation.navigationCategories[categoryIndex];
 
   return {
-    currentCategory: category
+    currentCategory: category,
   };
 }
 

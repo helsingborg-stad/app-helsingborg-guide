@@ -19,15 +19,12 @@ type Props = {
 
 const prefix = "guidehbg://";
 
-
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: Colors.white
   }
 });
-
 
 const ScanScreen = (props: Props) => {
   const { navigation } = props;
@@ -36,23 +33,22 @@ const ScanScreen = (props: Props) => {
 
   useEffect(() => {
     if (navigation.isFocused()) {
-      navigation.setParams({
-        toggleInfoOverlay: toggleInfoOverlay
+      navigation.setOptions({
+        title: LangService.strings.SCAN,
+        headerLeft: () => <View style={{ width: 36 }} />,
+        headerRight: () => <InfoOverlayToggleView onToggleInfoOverlay={onToggleInfoOverlay} />
       });
       scannerRef?.current?.reactivate();
     }
   }, [navigation.isFocused()]);
 
-
-  const toggleInfoOverlay = () => {
+  const onToggleInfoOverlay = () => {
     setShowInfoOverlay(!showInfoOverlay);
   };
 
-
-
   function renderInformationOverlay() {
     return (
-      <TouchableWithoutFeedback onPress={toggleInfoOverlay}>
+      <TouchableWithoutFeedback onPress={onToggleInfoOverlay}>
         <InformationOverlay
           information={{
             title: LangService.strings.SCAN_QR_CODES,
@@ -60,7 +56,7 @@ const ScanScreen = (props: Props) => {
             additional: LangService.strings.SCAN_QR_CODES_REMINDER,
             image: <QRScan width={80} />,
           }}
-          onPressFunction={toggleInfoOverlay}
+          onPressFunction={onToggleInfoOverlay}
         />
       </TouchableWithoutFeedback>
     );
@@ -135,7 +131,7 @@ const ScanScreen = (props: Props) => {
     }
   };
 
-  console.log("showInfoOverlay", showInfoOverlay)
+  console.log("showInfoOverlay", showInfoOverlay);
 
   return (
     <>
@@ -160,23 +156,6 @@ const ScanScreen = (props: Props) => {
       </View>
     </>
   );
-};
-
-ScanScreen["navigationOptions"] = ({ route }) => {
-
-  let toggleInfoOverlay = () => null
-
-  const { params = {} } = route;
-  if (params) {
-    ({ toggleInfoOverlay } = params);
-  }
-
-  return {
-    title: LangService.strings.SCAN,
-    headerLeft: () => <View style={{ width: 36 }} />,
-    headerRight: () => (
-      <InfoOverlayToggleView onToggleInfoOverlay={toggleInfoOverlay} />)
-  };
 };
 
 export default ScanScreen;

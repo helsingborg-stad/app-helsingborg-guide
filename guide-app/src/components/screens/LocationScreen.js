@@ -44,6 +44,12 @@ const LocationScreen = (props: Props) => {
   const { clearLinking } = useDeepLinking();
 
   useEffect(() => {
+    navigation.setOptions({
+      title: params.title || "",
+      headerRight: () => <View />,
+      headerLeft: () => <HeaderBackButton navigation={navigation} path={params.path} />
+    });
+
     return () => {
       if (params && params?.bottomBarOnUnmount) {
         props.dispatchShowBottomBar(true);
@@ -176,17 +182,6 @@ function mapDispatchToProps(dispatch: Dispatch) {
     dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link))
   };
 }
-
-
-LocationScreen["navigationOptions"] = ({ navigation, route }) => {
-  const { title, path } = route.params;
-  return {
-    ...HeaderStyles.noElevation,
-    title,
-    headerRight: () => <View />,
-    headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
-  };
-};
 
 
 export default connect(
