@@ -17,7 +17,8 @@
     "**/react-native/**"
   ],
   "scripts": {
-    "postinstall": "patch-package && jetify"
+    "postinstall": "patch-package && jetify",
+    "yarn:clean": "rm -rf node_modules && yarn cache clean --force && yarn install"
   },
   "dependencies": {
     "react-native": "*"
