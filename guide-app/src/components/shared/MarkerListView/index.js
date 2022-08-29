@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 import { isEqual } from "lodash";
 import { Colors } from "@assets/styles";
+import { useRoute } from "@react-navigation/native";
 import IconTextTouchable from "@shared-components/IconTextTouchable";
 import SegmentControl from "@shared-components/SegmentControl";
 import MapMarkerView from "@shared-components/MapMarkerView";
@@ -19,14 +20,13 @@ import {
   LocationUtils,
   UrlUtils,
   MapItemUtils,
-  NavigationModeUtils
+  NavigationModeUtils,
 } from "@utils";
 import {
   selectCurrentContentObject,
   selectCurrentGuideGroup,
   selectCurrentGuide,
-  selectCurrentSharingLink
-} from "@actions/uiStateActions";
+  selectCurrentSharingLink} from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
 
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
@@ -41,7 +41,12 @@ type Props = {
   supportedNavigationModes?: Array<string>,
   selectGuide(guide: Guide): void,
   selectGuideGroup(id: number): void,
-  dispatchSelectContentObject(obj: ContentObject): void
+  dispatchSelectContentObject(obj: ContentObject): void,
+  path: String,
+  keepStatusBar: Boolean,
+  currentSharingLink: String,
+  dispatchCurrentSharingLink: any,
+  all: any,
 };
 
 const HalfListMargin = DefaultMargin * 0.5;
@@ -50,6 +55,7 @@ const MarkerListView = (props: Props) => {
   const { supportedNavigationModes, navigation, route, items, userLocation, keepStatusBar } = props;
   const params = route?.params;
   const redirect = params?.redirect;
+  const _route = useRoute();
 
   const [selectedNavigationMode, setSelectedNavigationMode] = useState(supportedNavigationModes
     ? supportedNavigationModes[supportedNavigationModes.length - 1]
@@ -87,7 +93,7 @@ const MarkerListView = (props: Props) => {
   ): {
     title: ?string,
     streetAddress: ?string,
-    thumbnailUrl: ?string
+    thumbnailUrl: ?string,
   } => {
     const { contentObject, guide, guideGroup } = item;
     let streetAddress = null;
@@ -145,12 +151,9 @@ const MarkerListView = (props: Props) => {
 
   const onListItemPressed = (listItem: MapItem) => {
     const {
-      navigation,
-      route,
       selectGuideGroup,
       selectGuide,
       dispatchSelectContentObject,
-      items,
       path,
       currentSharingLink,
       dispatchCurrentSharingLink
@@ -158,7 +161,7 @@ const MarkerListView = (props: Props) => {
     const { navigate } = navigation;
     const { guide, guideGroup, contentObject } = listItem;
     let sharingLink = currentSharingLink;
-    const currentScreen = route.name;
+    const currentScreen = _route.name;
     console.log("CURRENT SCREEN IN MARKER LIST", currentScreen);
     if (guideGroup) {
       if (currentScreen === "HomeScreen") {
@@ -221,7 +224,6 @@ const MarkerListView = (props: Props) => {
       return;
     }
 
-    const { userLocation } = props;
     const { latitude, longitude } = location;
     const directionsUrl = LocationUtils.directionsUrl(
       latitude,
@@ -239,7 +241,6 @@ const MarkerListView = (props: Props) => {
 
   const displayNumberView = (item: MapItem, index: number) => {
     const numberString = `${index}`;
-    const { userLocation } = props;
     let hasArrived = false;
     let location = MapItemUtils.getLocationFromItem(item);
 
@@ -309,7 +310,6 @@ const MarkerListView = (props: Props) => {
 
   const renderEstimates = (item: MapItem) => {
     const location = MapItemUtils.getLocationFromItem(item);
-    const { userLocation } = props;
 
     if (!location || !userLocation) {
       return null;
