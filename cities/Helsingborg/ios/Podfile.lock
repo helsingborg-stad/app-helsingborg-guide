@@ -423,7 +423,7 @@ PODS:
     - React-Core
   - react-native-geolocation (2.1.0):
     - React-Core
-  - react-native-maps (1.3.0):
+  - react-native-maps (1.3.1):
     - React-Core
   - react-native-netinfo (7.1.12):
     - React-Core
@@ -565,7 +565,7 @@ PODS:
     - React-RCTImage
   - RNShare (7.9.0):
     - React-Core
-  - RNSVG (13.0.0):
+  - RNSVG (13.1.0):
     - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -895,7 +895,7 @@ SPEC CHECKSUMS:
   react-native-camera: 3eae183c1d111103963f3dd913b65d01aef8110f
   react-native-config: 7cd105e71d903104e8919261480858940a6b9c0e
   react-native-geolocation: 69f4fd37650b8e7fee91816d395e62dd16f5ab8d
-  react-native-maps: ca4946228cb514d8f2bca95e0482753b4edde100
+  react-native-maps: f4067ffa5044ade5bf98d6dde15014318a537c2f
   react-native-netinfo: c023b7c36ff34e3b607d1446002b5b39089a860b
   react-native-orientation-locker: 851f6510d8046ea2f14aa169b1e01fcd309a94ba
   react-native-photo-view: ea0ec91bf5991a6843e740b1f47ab355171c996c
@@ -936,7 +936,7 @@ SPEC CHECKSUMS:
   RNPermissions: dcdb7b99796bbeda6975a6e79ad519c41b251b1c
   RNScreens: 0df01424e9e0ed7827200d6ed1087ddd06c493f9
   RNShare: be91a5c149585affb02c25b351bd07ba927c7006
-  RNSVG: 42a0c731b11179ebbd27a3eeeafa7201ebb476ff
+  RNSVG: 1153e8eeb34c788841016c517dba9f57f20b762f
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

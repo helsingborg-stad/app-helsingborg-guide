@@ -9,8 +9,6 @@ const useNotifications = () => {
 
   const { getLocalStorage, setLocalStorage } = useLocalStorage();
 
-
-
   const displayNotification = async (data) => {
     const channelId = await notifee.createChannel({
       id: "high",

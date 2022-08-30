@@ -141,7 +141,7 @@ const RootStack = () => (
     <Stack.Screen
       name={"GuideDetailsScreen"}
       component={GuideScreen}
-      options={({ navigation, route}) => {
+      options={({ navigation, route }) => {
         const { path, title } = route?.params || {};
         return {
           headerMode: "screen",
@@ -158,13 +158,25 @@ const RootStack = () => (
     <Stack.Screen
       name={"ImageScreen"}
       component={ImageScreen}
-      options={() => ({
+      options={{
         headerMode: "none",
         headerTitle: "",
         title: "",
-      })}
+      }}
     />
-    <Stack.Screen name={"DownloadsScreen"} component={DownloadsScreen} />
+    <Stack.Screen
+      name={"DownloadsScreen"}
+      component={DownloadsScreen}
+      options={({ navigation, route }) => {
+        const { path } = route?.params || {};
+        return {
+          title: LangService.strings.DOWNLOADS,
+          headerLeft: () => (
+            <HeaderBackButton navigation={navigation} path={path} />
+          ),
+        };
+      }}
+    />
     <Stack.Screen
       name={"SettingsScreen"}
       component={SettingsScreen}
@@ -176,12 +188,10 @@ const RootStack = () => (
     <Stack.Screen
       name={"ScanScreen"}
       component={ScanScreen}
-      options={() => {
-        return {
-          title: LangService.strings.SCAN,
-          headerLeft: () => <HeaderFiller />,
-          headerRight: () => <HeaderFiller />,
-        };
+      options={{
+        title: LangService.strings.SCAN,
+        headerLeft: () => <HeaderFiller />,
+        headerRight: () => <HeaderFiller />,
       }}
     />
     <Stack.Screen name={"DebugScreen"} component={DebugScreen} />
@@ -203,12 +213,12 @@ const RootStack = () => (
     <Stack.Screen
       name={"NotFoundScreen"}
       component={NotFoundScreen}
-      options={() => ({
+      options={{
         headerMode: "none",
         headerTitle: "Not Found",
         title: "Not Found",
         header: () => null,
-      })}
+      }}
     />
     <Stack.Screen
       name={"WelcomeScreen"}
@@ -251,8 +261,6 @@ const Nav = (props: Props) => {
   useEffect(() => {
     if (url && homeLoaded) {
       if (url?.includes(UNIVERSAL_LINKING_URL)) {
-        console.log("URL lol", url);
-
         let params =
           url.split(UNIVERSAL_LINKING_URL + "/?page=")[1] ||
           url.split(UNIVERSAL_LINKING_URL + "?page=")[1];

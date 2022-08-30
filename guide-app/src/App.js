@@ -29,6 +29,16 @@ const GuideApp = () => {
   const { subscribeToNotifications, onNotification } = useNotifications();
 
   useEffect(() => {
+    ignoreNonImportant();
+    subscribeToNotifications();
+    onNotification();
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+    const locationService = LocationService.getInstance();
+    locationService.getGeoLocation().catch(console.warn);
+    locationService.subscribeGeoLocation().catch(console.warn);
+
     const unsubscribe = NetInfo.addEventListener((state) => {
       setNetInfo(state.isConnected);
       store.dispatch(internetChanged(true));
@@ -52,18 +62,6 @@ const GuideApp = () => {
       store.dispatch(internetChanged(false));
     }
   }, [netInfo]);
-
-  useEffect(() => {
-    ignoreNonImportant();
-    subscribeToNotifications();
-    onNotification();
-    if (UIManager.setLayoutAnimationEnabledExperimental) {
-      UIManager.setLayoutAnimationEnabledExperimental(true);
-    }
-    const locationService = LocationService.getInstance();
-    locationService.getGeoLocation().catch(console.warn);
-    locationService.subscribeGeoLocation().catch(console.warn);
-  }, []);
 
   return (
     <SafeAreaProvider>

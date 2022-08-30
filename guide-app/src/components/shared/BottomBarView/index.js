@@ -1,6 +1,5 @@
 // @flow
 import React, { memo, useState, useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { Animated, View, Image, Dimensions, Platform } from "react-native";
 import styles from "./style";
@@ -24,9 +23,11 @@ const transitionDuration: number = 300;
 
 const BottomBarView = () => {
   const dispatch = useDispatch();
-  const { currentBottomBarTab, showBottomBar } = useSelector(s => s.uiState);
-  const { currentLanguage } = useSelector(s => s.navigation);
-  const [animViewContainer, setAnimViewContainer] = useState(new Animated.Value(0));
+  const { currentBottomBarTab, showBottomBar } = useSelector((s) => s.uiState);
+  const { currentLanguage } = useSelector((s) => s.navigation);
+  const [animViewContainer, setAnimViewContainer] = useState(
+    new Animated.Value(0)
+  );
   const [animTabBottom, setAnimTabBottom] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -38,12 +39,12 @@ const BottomBarView = () => {
       Animated.timing(animViewContainer, {
         toValue: viewContainerHeight,
         duration: transitionDuration,
-        useNativeDriver: false
+        useNativeDriver: false,
       }).start();
       Animated.timing(animTabBottom, {
         toValue: buttonTabBottom,
         duration: transitionDuration,
-        useNativeDriver: false
+        useNativeDriver: false,
       }).start();
     } else {
       setAnimViewContainer(new Animated.Value(0));
@@ -68,15 +69,14 @@ const BottomBarView = () => {
     );
   };
 
-  return (
-    showBottomBar ?
-      <Animated.View
-        style={[styles.viewContainer, { height: animViewContainer }]}
-      >
-        <Image style={styles.imageBackground} source={barBackground} />
-        {displayIcons()}
-      </Animated.View> : null
-  );
+  return showBottomBar ? (
+    <Animated.View
+      style={[styles.viewContainer, { height: animViewContainer }]}
+    >
+      <Image style={styles.imageBackground} source={barBackground} />
+      {displayIcons()}
+    </Animated.View>
+  ) : null;
 };
 
 export default memo(BottomBarView);
