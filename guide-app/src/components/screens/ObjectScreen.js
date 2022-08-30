@@ -1,18 +1,17 @@
 // @flow
 
-import React, { useEffect } from "react";
-import { StatusBar, View } from "react-native";
+import React from "react";
+import { StatusBar } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import HeaderBackButton from "@shared-components/HeaderBackButton";
 import ObjectView from "@shared-components/ObjectView";
 import LangService from "@services/langService";
 import fetchService from "@services/FetchService";
 import { initAudioFile, pauseAudio } from "@actions/audioActions";
 import {
   selectCurrentContentObjectImage,
-  selectCurrentImage
+  selectCurrentImage,
 } from "@actions/uiStateActions";
-import { Colors, HeaderStyles } from "@assets/styles";
+import { Colors } from "@assets/styles";
 import { trackEvent } from "@utils/MatomoUtils";
 
 type Props = {
@@ -36,7 +35,7 @@ const defaultState: AudioState = {
   isPlaying: true,
   duration: 0,
   currentPosition: 0,
-  isMovingSlider: false
+  isMovingSlider: false,
 };
 
 function isMediaAvailable(media?: MediaContent): boolean {
@@ -64,7 +63,8 @@ const ObjectScreen = (props: Props) => {
     disableShare,
   } = route.params;
   const dispatch = useDispatch();
-  const { currentGuide, currentContentObject, currentContentObjectImageIndex } = useSelector((s) => s.uiState);
+  const { currentGuide, currentContentObject, currentContentObjectImageIndex } =
+    useSelector((s) => s.uiState);
 
   const onSwiperIndexChanged = (newIndex: number) => {
     dispatch(selectCurrentContentObjectImage(newIndex));
@@ -94,7 +94,6 @@ const ObjectScreen = (props: Props) => {
   };
 
   const loadAudioFile = () => {
-
     if (!currentContentObject) {
       return;
     }

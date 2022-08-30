@@ -2,7 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, Linking } from "react-native";
-import { PanGestureHandler, ScrollView, State } from "react-native-gesture-handler";
+import {
+  PanGestureHandler,
+  ScrollView,
+  State,
+} from "react-native-gesture-handler";
 
 import ObjectButtons from "./ObjectButtons";
 import styles from "./style";
@@ -38,11 +42,7 @@ type Props = {
   disableShare?: Boolean,
 };
 
-function displayTitle(
-  title: string,
-  searchableID: string,
-  guideType: ?GuideType
-) {
+function displayTitle(title: string) {
   return (
     <View style={styles.titleWrapper}>
       <View style={styles.titleContainer}>
@@ -56,9 +56,7 @@ function displayText(description?: string) {
   return <Text style={styles.article}>{description}</Text>;
 }
 
-function displayLinks(
-  links: Link[],
-) {
+function displayLinks(links: Link[]) {
   return links.map((item, index) => (
     <LinkTouchable
       key={item.url || index}
@@ -121,7 +119,13 @@ function displayButtons(
   );
 }
 
-const onHorizontalSwipe = (evt, swiped, setSwiped, disableSwipe, setDisableSwipe) => {
+const onHorizontalSwipe = (
+  evt,
+  swiped,
+  setSwiped,
+  disableSwipe,
+  setDisableSwipe
+) => {
   const { nativeEvent } = evt;
   if (!swiped && !disableSwipe) {
     if (nativeEvent.velocityX > 220) {
@@ -196,7 +200,7 @@ const ObjectView = (props: Props) => {
               swipeable: true,
               path: newPath,
             },
-            merge: true
+            merge: true,
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -221,7 +225,7 @@ const ObjectView = (props: Props) => {
               swipeable: true,
               path: newPath,
             },
-            merge: true
+            merge: true,
           });
         } else {
           setTimeout(() => setSwiped(false), 180);
@@ -229,7 +233,6 @@ const ObjectView = (props: Props) => {
       }
     }
   }, [swiped]);
-
 
   return (
     <View style={styles.viewContainer}>
@@ -244,21 +247,33 @@ const ObjectView = (props: Props) => {
             />
             {props.contentObject.images[props.imageIndex] && (
               <View style={styles.shareBtn}>
-                {!disableShare && <SharingService
-                  title={props.contentObject.title}
-                  image={props.contentObject.images[props.imageIndex]}
-                  sender={this}
-                  shareType="share_object"
-                />}
+                {!disableShare && (
+                  <SharingService
+                    title={props.contentObject.title}
+                    image={props.contentObject.images[props.imageIndex]}
+                    sender={this}
+                    shareType="share_object"
+                  />
+                )}
               </View>
             )}
           </View>
           <PanGestureHandler
             activeOffsetX={[-10, 10]}
             onGestureEvent={(e) =>
-              swipeable ? onHorizontalSwipe(e, swiped, setSwiped, disableSwipe, setDisableSwipe) : null
+              swipeable
+                ? onHorizontalSwipe(
+                    e,
+                    swiped,
+                    setSwiped,
+                    disableSwipe,
+                    setDisableSwipe
+                  )
+                : null
             }
-            onHandlerStateChange={(e) => onHandlerStateChange(e, setDisableSwipe)}
+            onHandlerStateChange={(e) =>
+              onHandlerStateChange(e, setDisableSwipe)
+            }
           >
             <View style={styles.bodyContainer}>
               <View style={styles.infoContainer}>

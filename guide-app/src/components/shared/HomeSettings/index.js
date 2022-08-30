@@ -9,15 +9,18 @@ import LangService from "@services/langService";
 import { Portal } from "react-native-portalize";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ArrowDown from "@assets/images/arrow_down";
-import { setSearchFilter, setShowHomeSettings, setSettingsHeight } from "@actions/uiStateActions";
-
+import {
+  setSearchFilter,
+  setShowHomeSettings,
+  setSettingsHeight,
+} from "@actions/uiStateActions";
+import { setShowFilterButton } from "../../../actions/uiStateActions";
 
 type Props = {
   segmentLayout: any,
-}
+};
 
 const HomeSettings = (props: Props) => {
-
   const { segmentLayout } = props;
 
   const dispatch = useDispatch();
@@ -26,7 +29,8 @@ const HomeSettings = (props: Props) => {
   const [height] = useState(new Animated.Value(0));
   const [backdropOpacity] = useState(new Animated.Value(0));
   const insets = useSafeAreaInsets();
-  const { searchFilter, showFilterButton, showHomeSettings, settingsHeight } = useSelector(s => s.uiState);
+  const { searchFilter, showFilterButton, showHomeSettings, settingsHeight } =
+    useSelector((s) => s.uiState);
   const [searchText, setSearchText] = useState(searchFilter?.text || "");
   const minKm = 0.1;
   const maxKm = 3;
@@ -55,18 +59,27 @@ const HomeSettings = (props: Props) => {
       Animated.timing(height, {
         toValue: showHomeSettings ? settingsHeight : 0,
         duration: 250,
-        useNativeDriver: false
+        useNativeDriver: false,
       }).start();
-      setTimeout(() => {
-        Animated.timing(backdropOpacity, {
-          toValue: showHomeSettings ? 1 : 0,
-          duration: showHomeSettings ? 150 : 0,
-          useNativeDriver: true
-        }).start();
-      }, showHomeSettings ? 250 : 0);
-      showHomeSettings ? setTimeout(() => setDisplayShadow(true), 250) : setDisplayShadow(false);
+      setTimeout(
+        () => {
+          Animated.timing(backdropOpacity, {
+            toValue: showHomeSettings ? 1 : 0,
+            duration: showHomeSettings ? 150 : 0,
+            useNativeDriver: true,
+          }).start();
+        },
+        showHomeSettings ? 250 : 0
+      );
+      showHomeSettings
+        ? setTimeout(() => setDisplayShadow(true), 250)
+        : setDisplayShadow(false);
     }
   }, [settingsHeight, showHomeSettings]);
+
+  useEffect(() => {
+    return () => dispatch(setShowFilterButton(true));
+  }, []);
 
 
   return (
@@ -77,15 +90,22 @@ const HomeSettings = (props: Props) => {
             initialLoad(event?.nativeEvent?.layout);
           }
         }}
-        style={[styles.settings, {
-          height: settingsHeight ? height : undefined,
-          visibility: settingsHeight ? "visible" : "hidden",
-          opacity: settingsHeight ? 1 : 0
-        }, displayShadow && Platform.OS === "ios" && styles.shadow]}>
+        style={[
+          styles.settings,
+          {
+            height: settingsHeight ? height : undefined,
+            visibility: settingsHeight ? "visible" : "hidden",
+            opacity: settingsHeight ? 1 : 0,
+          },
+          displayShadow && Platform.OS === "ios" && styles.shadow,
+        ]}
+      >
         <View style={styles.wrapper}>
           <View style={styles.search}>
             <View style={styles.searchTop}>
-              <Text style={styles.searchTopLeft}>{LangService.strings.FILTER_TITLE}</Text>
+              <Text style={styles.searchTopLeft}>
+                {LangService.strings.FILTER_TITLE}
+              </Text>
             </View>
             <View style={[styles.searchBottom]}>
               <TextInput
@@ -105,7 +125,11 @@ const HomeSettings = (props: Props) => {
             </View>
           </View>
           <View style={styles.distance}>
-            <Text style={styles.distanceText}>{LangService.strings.DISTANCE + " " + LangService.strings.FROM_YOU}</Text>
+            <Text style={styles.distanceText}>
+              {LangService.strings.DISTANCE +
+                " " +
+                LangService.strings.FROM_YOU}
+            </Text>
             <DraggableSilder
               values={distance}
               min={minKm}
@@ -121,31 +145,47 @@ const HomeSettings = (props: Props) => {
             />
             <View style={styles.distanceValues}>
               <Text style={styles.distanceValue}>0 km</Text>
-              <Text style={styles.distanceValue}> {LangService.strings.MORE_THAN + " " + maxKm} km</Text>
+              <Text style={styles.distanceValue}>
+                {" "}
+                {LangService.strings.MORE_THAN + " " + maxKm} km
+              </Text>
             </View>
           </View>
-          {showFilterButton && <Portal>
-            <Animated.View style={{ top: settingsHeight ? height : undefined }}>
-              <TouchableOpacity
-                onPress={toggleOpen}
-                style={[styles.toggleSettings, {
-                  top: ((segmentLayout || 0) + (insets?.top || 0)) - 18
-                }]}>
-                <View
-                  style={{ transform: [{ rotateX: showHomeSettings ? "180deg" : "0deg" }] }}
+
+          <Portal>
+            {showFilterButton && (
+              <Animated.View
+                style={{ top: settingsHeight ? height : undefined }}
+              >
+                <TouchableOpacity
+                  onPress={toggleOpen}
+                  style={[
+                    styles.toggleSettings,
+                    {
+                      top: (segmentLayout || 0) + (insets?.top || 0) - 18,
+                    },
+                  ]}
                 >
-                  <ArrowDown />
-                </View>
-                <Text style={styles.toggleSettingsText}>{LangService.strings.SEARCH}</Text>
-              </TouchableOpacity>
-            </Animated.View>
+                  <View
+                    style={{
+                      transform: [
+                        { rotateX: showHomeSettings ? "180deg" : "0deg" },
+                      ],
+                    }}
+                  >
+                    <ArrowDown />
+                  </View>
+                  <Text style={styles.toggleSettingsText}>
+                    {LangService.strings.SEARCH}
+                  </Text>
+                </TouchableOpacity>
+              </Animated.View>
+            )}
           </Portal>
-          }
         </View>
       </Animated.View>
     </>
   );
 };
-
 
 export default memo(HomeSettings);

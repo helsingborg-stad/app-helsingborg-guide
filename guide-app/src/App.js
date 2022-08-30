@@ -13,7 +13,7 @@ import DownloadTasksManager from "@services/DownloadTasksManager";
 import {
   appStarted,
   appBecameActive,
-  appBecameInactive
+  appBecameInactive,
 } from "@actions/uiStateActions";
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";

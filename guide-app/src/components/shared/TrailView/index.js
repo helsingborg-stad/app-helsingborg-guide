@@ -27,7 +27,7 @@ function renderDownloadButton() {
 function renderMapInformationOverlay(
   trail: Guide,
   onToggleInfoOverlay: () => void,
-  disableShare: Boolean,
+  disableShare: Boolean
 ) {
   if (!trail) {
     return null;
@@ -80,7 +80,11 @@ const TrailView = (props: Props) => {
           redirect={redirect}
         />
         {showInfoOverlay
-          ? renderMapInformationOverlay(trail, onToggleInfoOverlay, disableShare)
+          ? renderMapInformationOverlay(
+              trail,
+              onToggleInfoOverlay,
+              disableShare
+            )
           : null}
         <AudioPlayerView />
       </View>

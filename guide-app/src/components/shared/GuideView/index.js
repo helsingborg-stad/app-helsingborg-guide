@@ -2,9 +2,7 @@
 
 import React, { Component } from "react";
 import {
-  ScrollView,
   Text,
-  TouchableOpacity,
   View,
   Dimensions,
   StatusBar,
