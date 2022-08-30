@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect, useState, useRef } from "react";
-import { AppState, StatusBar, Platform, Linking, View } from "react-native";
+import { AppState, StatusBar, Platform, Linking } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Orientation from "react-native-orientation-locker";
 import { NavigationContainer } from "@react-navigation/native";
@@ -29,7 +29,7 @@ import {
   VideoScreen,
   WebScreen,
   WelcomeScreen,
-  ARIntroductionScreen
+  ARIntroductionScreen,
 } from "@src/components/screens";
 import { selectOpenedLink } from "@actions/uiStateActions";
 import CalendarDetailsScreen from "@src/components/screens/CalendarDetailsScreen";
@@ -50,88 +50,107 @@ const prefix = "guidehbg://";
 const config = {
   screens: {
     HomeScreen: "home/:type?/:id_1?/:id_2?/:id_3?",
-    CalendarScreen: "calendar/:id"
-  }
+    CalendarScreen: "calendar/:id",
+  },
 };
 
 const linking = {
   prefixes: ["guidehbg://"],
-  config
+  config,
 };
 
 const RootStack = () => (
-  <Stack.Navigator screenOptions={{
-    ...HeaderStyles.default
-  }}>
-    <Stack.Screen name={"SplashScreen"} component={SplashScreen}
-                  options={{ headerShown: false, header: () => null }} />
+  <Stack.Navigator
+    screenOptions={{
+      ...HeaderStyles.default,
+    }}
+  >
+    <Stack.Screen
+      name={"SplashScreen"}
+      component={SplashScreen}
+      options={{ headerShown: false, header: () => null }}
+    />
     <Stack.Screen
       name={"HomeScreen"}
       component={HomeScreen}
       options={{
         header: () => null,
-        ...HeaderStyles.noElevation
+        ...HeaderStyles.noElevation,
       }}
     />
-    <Stack.Screen name={"CalendarScreen"} component={CalendarScreen} options={{ header: () => null }} />
+    <Stack.Screen
+      name={"CalendarScreen"}
+      component={CalendarScreen}
+      options={{ header: () => null }}
+    />
     <Stack.Screen
       name={"TrailScreen"}
       component={TrailScreen}
       options={({ navigation, route }) => {
         const { title, path } = route?.params || {};
-        return ({
+        return {
           title,
-          headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
-        });
-      }} />
+          headerLeft: () => (
+            <HeaderBackButton navigation={navigation} path={path} />
+          ),
+        };
+      }}
+    />
     <Stack.Screen
       name={"LocationScreen"}
       component={LocationScreen}
       options={({ navigation, route }) => {
         const { title, path } = route.params || {};
-        return ({
+        return {
           title: title || LangService.strings.LOCATION,
           headerRight: () => <HeaderFiller />,
-          headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
-        });
+          headerLeft: () => (
+            <HeaderBackButton navigation={navigation} path={path} />
+          ),
+        };
       }}
     />
 
-    <Stack.Screen name={"ObjectScreen"} component={ObjectScreen}
-                  options={({ navigation, route }) => {
-                    const { title, path, scrollable, panToIndex, redirect, array, order } = route.params || {};
-                    return ({
-                      ...HeaderStyles.noElevation,
-                      title: title,
-                      headerLeft: () => (
-                        <HeaderBackButton
-                          navigation={navigation}
-                          path={path}
-                          onPress={() => {
-                            if (scrollable && panToIndex && redirect === array[order].id) {
-                              scrollable(order);
-                              panToIndex(order);
-                            }
-                          }}
-                        />
-                      ),
-                      headerRight: () => <HeaderFiller />
-                    });
-                  }}
+    <Stack.Screen
+      name={"ObjectScreen"}
+      component={ObjectScreen}
+      options={({ navigation, route }) => {
+        const { title, path, scrollable, panToIndex, redirect, array, order } =
+          route.params || {};
+        return {
+          ...HeaderStyles.noElevation,
+          title: title,
+          headerLeft: () => (
+            <HeaderBackButton
+              navigation={navigation}
+              path={path}
+              onPress={() => {
+                if (scrollable && panToIndex && redirect === array[order].id) {
+                  scrollable(order);
+                  panToIndex(order);
+                }
+              }}
+            />
+          ),
+          headerRight: () => <HeaderFiller />,
+        };
+      }}
     />
     <Stack.Screen name={"QuizScreen"} component={QuizScreen} />
     <Stack.Screen name={"QuizResultScreen"} component={QuizResultScreen} />
     <Stack.Screen
       name={"GuideDetailsScreen"}
       component={GuideScreen}
-      options={({ navigation, route, props }) => {
+      options={({ navigation, route}) => {
         const { path, title } = route?.params || {};
-        return ({
+        return {
           headerMode: "screen",
           title,
           headerRight: () => <HeaderFiller />,
-          headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
-        });
+          headerLeft: () => (
+            <HeaderBackButton navigation={navigation} path={path} />
+          ),
+        };
       }}
     />
     <Stack.Screen name={"WebScreen"} component={WebScreen} />
@@ -142,7 +161,7 @@ const RootStack = () => (
       options={() => ({
         headerMode: "none",
         headerTitle: "",
-        title: ""
+        title: "",
       })}
     />
     <Stack.Screen name={"DownloadsScreen"} component={DownloadsScreen} />
@@ -151,17 +170,18 @@ const RootStack = () => (
       component={SettingsScreen}
       options={{
         title: LangService.strings.SETTINGS,
-        headerLeft: () => null
-      }} />
+        headerLeft: () => null,
+      }}
+    />
     <Stack.Screen
       name={"ScanScreen"}
       component={ScanScreen}
       options={() => {
-        return ({
+        return {
           title: LangService.strings.SCAN,
           headerLeft: () => <HeaderFiller />,
-          headerRight: () => <HeaderFiller />
-        });
+          headerRight: () => <HeaderFiller />,
+        };
       }}
     />
     <Stack.Screen name={"DebugScreen"} component={DebugScreen} />
@@ -171,11 +191,13 @@ const RootStack = () => (
       component={CalendarDetailsScreen}
       options={({ navigation, route }) => {
         const { event, path } = route.params || {};
-        return ({
+        return {
           title: event?.name || "Event",
-          headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
-          headerRight: () => <HeaderFiller />
-        });
+          headerLeft: () => (
+            <HeaderBackButton navigation={navigation} path={path} />
+          ),
+          headerRight: () => <HeaderFiller />,
+        };
       }}
     />
     <Stack.Screen
@@ -185,16 +207,21 @@ const RootStack = () => (
         headerMode: "none",
         headerTitle: "Not Found",
         title: "Not Found",
-        header: () => null
+        header: () => null,
       })}
     />
-    <Stack.Screen name={"WelcomeScreen"} component={WelcomeScreen}
-                  options={{ headerShown: false, header: () => null }} />
+    <Stack.Screen
+      name={"WelcomeScreen"}
+      component={WelcomeScreen}
+      options={{ headerShown: false, header: () => null }}
+    />
     <Stack.Screen name={"SearchObjectScreen"} component={SearchObjectScreen} />
-    <Stack.Screen name={"ARIntroductionScreen"} component={ARIntroductionScreen} />
+    <Stack.Screen
+      name={"ARIntroductionScreen"}
+      component={ARIntroductionScreen}
+    />
   </Stack.Navigator>
 );
-
 
 const ios = Platform.OS === "ios";
 
@@ -213,7 +240,6 @@ const Nav = (props: Props) => {
   const [homeLoaded, setHomeLoaded] = useState(false);
   const { url } = useInitialURL();
   const routeNameRef = useRef();
-
 
   useEffect(() => {
     Orientation.lockToPortrait();
@@ -240,7 +266,6 @@ const Nav = (props: Props) => {
   }, [url, homeLoaded]);
 
   const onNavigationStateChange = async () => {
-    const previousRouteName = routeNameRef.current;
     const currentRouteName = navigationRef.getCurrentRoute().name;
     console.log("CURRENT SCREEN", currentRouteName);
     if (currentRouteName === "HomeScreen") {
@@ -249,7 +274,6 @@ const Nav = (props: Props) => {
     } else {
       showFilterButton && dispatch(setShowFilterButton(false));
     }
-
   };
 
   const onAppStateChange = (nextAppState: AppStateStatus) => {

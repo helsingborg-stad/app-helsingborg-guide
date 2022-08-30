@@ -145,7 +145,6 @@ const SettingsScreen = (props: Props) => {
 
   useEffect(() => {
     LangService.getLanguages();
-    navigation.setParams();
     trackScreen("/settings", "/settings");
     const unsubscribe = NetInfo.addEventListener((state) => {
       setConnected(state.isConnected);
@@ -168,8 +167,6 @@ const SettingsScreen = (props: Props) => {
     LangService.setLanguage(code);
     dispatch(setLanguage(code));
     navigation.setOptions({ title: LangService.strings.SETTINGS });
-    // Set navigation params to force an update
-    navigation.setParams();
     loadContents(code);
   };
 

@@ -5,20 +5,15 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   View,
-  Image,
   StatusBar,
   Text,
   Keyboard,
-  Animated
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Orientation from "react-native-orientation-locker";
 import { connect } from "react-redux";
 import LangService from "@services/langService";
-import { useHeaderHeight } from '@react-navigation/elements';
-
-
-import { Colors, HeaderStyles } from "@assets/styles";
+import { Colors } from "@assets/styles";
 import styles from "./styles";
 import {
   selectCurrentGuideByID,
@@ -37,7 +32,6 @@ import { compareDistance } from "@utils/SortingUtils";
 import LocationUtils from "@utils/LocationUtils";
 import SegmentControlPill from "@shared-components/SegmentControlPill";
 import Scrollable from "@shared-components/Scrollable";
-import mapIcon from "@assets/images/mapIcon.png";
 import useDeepLinking from "@hooks/useDeepLinking";
 import useGuides from "@hooks/useGuides";
 import LocationService from "@services/locationService";
@@ -52,6 +46,7 @@ type Section = {
 
 type Props = {
   navigation: any,
+  route: any,
   currentHomeTab: number,
   showLoadingSpinner: boolean,
   items: NavigationItem[],
@@ -62,7 +57,6 @@ type Props = {
   fetchNavigationItems: any,
   guides: any,
   guideGroups: any,
-
   fetchNavigation(code: string): void,
   fetchGuideGroups(currentLanguage: string, guideGroups: Array): void,
   fetchGuides(currentLanguage: string, guides: Array): void,
@@ -72,6 +66,9 @@ type Props = {
   selectCurrentTab(tabIndex: number): void,
   dispatchShowBottomBar(visible: boolean): void,
   clearSearchFilter(): void,
+  dispatchClearSearchFilter(): void,
+  dispatchFetchAllGuidesforAllGroups(): void,
+  isFetching: Boolean,
 };
 
 const HomeScreen = (props: Props) => {
@@ -79,8 +76,6 @@ const HomeScreen = (props: Props) => {
   const { linkingHome, clearLinking } = useDeepLinking();
   const { linkToGuide } = useGuides();
   const [segmentLayout, setSegmentLayout] = useState(0);
-  const headerHeight = useHeaderHeight();
-  console.log("le header height", headerHeight)
   const id_1 = params?.id_1;
   const locationService = LocationService.getInstance();
   const {
@@ -332,7 +327,6 @@ function mapStateToProps(state: RootState) {
       items = itemsWithLocation.concat(itemsWithoutLocation);
     }
   }
-
 
   const navigationCategoryLabels = navigationCategories.map(({ name }) => name);
 

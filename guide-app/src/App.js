@@ -13,7 +13,7 @@ import DownloadTasksManager from "@services/DownloadTasksManager";
 import {
   appStarted,
   appBecameActive,
-  appBecameInactive,
+  appBecameInactive
 } from "@actions/uiStateActions";
 import { setLanguage } from "@actions/navigationActions";
 import TrackingPermission from "@shared-components/TrackingPermission";
@@ -29,7 +29,7 @@ const GuideApp = () => {
   const { subscribeToNotifications, onNotification } = useNotifications();
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
       setNetInfo(state.isConnected);
       store.dispatch(internetChanged(true));
       if (this?.noNetworkTimer) {
@@ -68,12 +68,12 @@ const GuideApp = () => {
   return (
     <SafeAreaProvider>
       <Host>
-          <TrackingPermission />
-          <Nav
-            onAppStarted={() => store.dispatch(appStarted())}
-            onAppBecameActive={() => store.dispatch(appBecameActive())}
-            onAppBecameInactive={() => store.dispatch(appBecameInactive())}
-          />
+        <TrackingPermission />
+        <Nav
+          onAppStarted={() => store.dispatch(appStarted())}
+          onAppBecameActive={() => store.dispatch(appBecameActive())}
+          onAppBecameInactive={() => store.dispatch(appBecameInactive())}
+        />
       </Host>
     </SafeAreaProvider>
   );
