@@ -5,6 +5,7 @@ import IconMapMarker from "@assets/images/mapPinIcon.png";
 import IconChildFriendly from "@assets/images/kids-large.png";
 
 type Props = {
+  id: any,
   size?: "expanded" | "compact",
   image: string,
   title: string,
@@ -21,26 +22,27 @@ type Props = {
   type: string,
   children: [],
   item: any,
+  navigation: any,
 };
 
 const GuideCard = ({
-                     id,
-                     image,
-                     onPress,
-                     item,
-                     title = null,
-                     subTitle = null,
-                     slug,
-                     size = "compact",
-                     showMapIcon = false,
-                     showChildFriendlyIcon = false,
-                     geolocation,
-                     itemLocation,
-                     index,
-                     type,
-                     children,
-                     navigation,
-                   }: Props) => {
+  id,
+  image,
+  onPress,
+  item,
+  title = null,
+  subTitle = null,
+  slug,
+  size = "compact",
+  showMapIcon = false,
+  showChildFriendlyIcon = false,
+  geolocation,
+  itemLocation,
+  index,
+  type,
+  children,
+  navigation,
+}: Props) => {
   const icons = [];
 
   if (showChildFriendlyIcon) {

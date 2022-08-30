@@ -47,7 +47,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   progressTextContainer: { flex: 1 },
-  progressText: { fontSize: 12, lineHeight: 14 },
+  progressText: {
+    fontSize: 12,
+    lineHeight: 14,
+    paddingBottom: 4,
+  },
   barContainer: {
     flex: 1,
   },
@@ -103,8 +107,6 @@ export default class DownloadItemView extends Component<Props> {
     const isCompleted = this.props.progress >= 1;
     const color = isCompleted ? Colors.green : Colors.themeControl;
 
-    console.log("is completed???", isCompleted)
-
     const resumeIcon = (
       <Icon name="reload" color={Colors.themeControl} size={25} />
     );
@@ -117,47 +119,48 @@ export default class DownloadItemView extends Component<Props> {
     return (
       <ViewContainer style={styles.wrapper}>
         <TouchableOpacity onPress={this.props.onPressItem}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>{this.props.title}</Text>
-        </View>
-        <View style={styles.mainContainer}>
-          <View style={styles.avatarContainer}>
-            <TouchableOpacity onPress={this.props.onPressItem}>
-              <RoundedThumbnail imageSource={{ uri: this.props.thumbnail }} />
-            </TouchableOpacity>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>{this.props.title}</Text>
           </View>
-          <View style={styles.progressBarContainer}>
-            <View style={styles.progressTextContainer}>
-              <Text style={styles.progressText}>
-                {isCompleted ? LangService.strings.DOWNLOADED :
-                  `${LangService.strings.DOWNLOADING} ${percentage}%`}{" "}
-              </Text>
+          <View style={styles.mainContainer}>
+            <View style={styles.avatarContainer}>
+              <TouchableOpacity onPress={this.props.onPressItem}>
+                <RoundedThumbnail imageSource={{ uri: this.props.thumbnail }} />
+              </TouchableOpacity>
             </View>
-            <View style={styles.barContainer}>
-              {this.renderProgressBar(color)}
+            <View style={styles.progressBarContainer}>
+              <View style={styles.progressTextContainer}>
+                <Text style={styles.progressText}>
+                  {isCompleted
+                    ? LangService.strings.DOWNLOADED
+                    : `${LangService.strings.DOWNLOADING} ${percentage}%`}{" "}
+                </Text>
+              </View>
+              <View style={styles.barContainer}>
+                {this.renderProgressBar(color)}
+              </View>
+            </View>
+            <View style={styles.btnContainer}>
+              <TouchableOpacity
+                style={styles.touchContainer}
+                onPress={
+                  this.props.isPaused
+                    ? this.props.onResumePress
+                    : this.props.onPausePress
+                }
+              >
+                {icon}
+              </TouchableOpacity>
+            </View>
+            <View style={styles.btnContainer}>
+              <TouchableOpacity
+                style={styles.touchContainer}
+                onPress={this.props.onClearPress}
+              >
+                <Icon name="delete" size={25} color={Colors.themeControl} />
+              </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.btnContainer}>
-            <TouchableOpacity
-              style={styles.touchContainer}
-              onPress={
-                this.props.isPaused
-                  ? this.props.onResumePress
-                  : this.props.onPausePress
-              }
-            >
-              {icon}
-            </TouchableOpacity>
-          </View>
-          <View style={styles.btnContainer}>
-            <TouchableOpacity
-              style={styles.touchContainer}
-              onPress={this.props.onClearPress}
-            >
-              <Icon name="delete" size={25} color={Colors.themeControl} />
-            </TouchableOpacity>
-          </View>
-        </View>
         </TouchableOpacity>
       </ViewContainer>
     );

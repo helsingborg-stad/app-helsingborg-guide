@@ -4,7 +4,7 @@ import {
   View,
   Text,
   Image,
-  ImageSourcePropType
+  ImageSourcePropType,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
@@ -19,7 +19,6 @@ import {
   selectCurrentSharingLink,
 } from "@actions/uiStateActions";
 import { DEEP_LINKING_URL } from "@data/endpoints";
-
 
 type Props = {
   size?: "expanded" | "compact",
@@ -39,31 +38,44 @@ type Props = {
 };
 
 const ImageCard = ({
-                     image,
-                     onPress,
-                     title = null,
-                     item,
-                     size = "compact",
-                     icons = [],
-                     geolocation,
-                     index,
-                     navigation
-                   }: Props) => {
+  image,
+  onPress,
+  title = null,
+  item,
+  size = "compact",
+  icons = [],
+  geolocation,
+  index,
+  navigation,
+}: Props) => {
   const height = size === "compact" ? 191 : 258;
 
-  const { all } = useSelector(s => s.guides);
+  const { all } = useSelector((s) => s.guides);
   const dispatch = useDispatch();
-  const itemLocation = item?.guideGroup?.location || item?.guide?.location || item?.interactiveGuide?.location;
-  const id = item?.guideGroup?.id || item?.guide?.id || item?.interactiveGuide?.id;
-  const slug = item?.guideGroup?.slug || item?.guide?.slug || item?.interactiveGuide?.slug;
+  const itemLocation =
+    item?.guideGroup?.location ||
+    item?.guide?.location ||
+    item?.interactiveGuide?.location;
+  const id =
+    item?.guideGroup?.id || item?.guide?.id || item?.interactiveGuide?.id;
+  const slug =
+    item?.guideGroup?.slug || item?.guide?.slug || item?.interactiveGuide?.slug;
   const type = item?.type;
   const children = item.children;
 
   const displayActivities = () => {
     switch (type) {
       case "guidegroup":
-        const groupAmount = all?.guideGroups?.find(item => item.parentID === id);
-        return groupAmount ? (groupAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
+        const groupAmount = all?.guideGroups?.find(
+          (item) => item.parentID === id
+        );
+        return groupAmount
+          ? (
+              groupAmount.guideAmount +
+              " " +
+              LangService.strings.EXPERIENCES
+            ).toUpperCase()
+          : "";
       // case "guide":
       //   const guideAmount = all?.guides?.find(item => item.parentID === id);
       //   return guideAmount ? (guideAmount.guideAmount + " " + LangService.strings.EXPERIENCES).toUpperCase() : "";
@@ -74,7 +86,10 @@ const ImageCard = ({
   };
 
   const displayIcon = (icon) => {
+
     switch (icon) {
+      case 10:
+        return "children";
       case 11:
         return "map";
       case 12:
@@ -88,7 +103,10 @@ const ImageCard = ({
     }
   };
 
-  function displayDistance(currentLocation: GeolocationType, location: Location) {
+  function displayDistance(
+    currentLocation: GeolocationType,
+    location: Location
+  ) {
     return (
       <DistanceView
         textStyle={styles.distance}
@@ -111,7 +129,7 @@ const ImageCard = ({
       navigation.navigate("TrailScreen", {
         child,
         title: childTitle,
-        path: newPath
+        path: newPath,
       });
     } else if (childType === "guide") {
       dispatch(selectCurrentGuide(child));
@@ -123,18 +141,20 @@ const ImageCard = ({
   };
 
   return (
-    <View
-      key={index}
-      style={styles.container}
-    >
-      <Touchable
-        style={styles.buttonContainer} onPress={onPress}>
-        <ImageView style={[styles.image, { height }]} source={{ uri: image?.uri }} />
+    <View key={index} style={styles.container}>
+      <Touchable style={styles.buttonContainer} onPress={onPress}>
+        <ImageView
+          style={[styles.image, { height }]}
+          source={{ uri: image?.uri }}
+        />
         <LinearGradient
           colors={["#00000000", "#000000bb"]}
-          style={styles.gradientContainer}>
+          style={styles.gradientContainer}
+        >
           <View style={styles.textContainer}>
-            <Text numberOfLines={1} style={styles.titleLabel}>{title}</Text>
+            <Text numberOfLines={1} style={styles.titleLabel}>
+              {title}
+            </Text>
             <Text style={[styles.text, styles.subTitleLabel]}>
               {displayActivities()}
             </Text>
@@ -147,23 +167,26 @@ const ImageCard = ({
         </LinearGradient>
       </Touchable>
       {icons.map((icon, i) => (
-        <View
-          key={i}
-          style={styles[displayIcon(icon)]}>
+        <View key={i} style={styles[displayIcon(icon)]}>
           <Image key={i} source={icon} style={styles.icon} />
         </View>
       ))}
       <View style={styles.childrenContainer}>
-        {children?.length ? children.map((child, index) => (
-          <Touchable
-            onPress={() => navigateToChildren(child)}
-            key={index}
-            wrapperStyle={styles.child}
-          >
-            <ImageView style={styles.childImage} source={{ uri: child.images.medium }} />
-            <Text style={styles.childText}>{child.name}</Text>
-          </Touchable>
-        )) : null}
+        {children?.length
+          ? children.map((child, index) => (
+              <Touchable
+                onPress={() => navigateToChildren(child)}
+                key={index}
+                wrapperStyle={styles.child}
+              >
+                <ImageView
+                  style={styles.childImage}
+                  source={{ uri: child.images.medium }}
+                />
+                <Text style={styles.childText}>{child.name}</Text>
+              </Touchable>
+            ))
+          : null}
       </View>
     </View>
   );
@@ -176,32 +199,32 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     backgroundColor: Colors.white,
     elevation: 5,
-    marginBottom: 16
+    marginBottom: 16,
   },
   buttonContainer: {
     borderRadius: 10,
     overflow: "hidden",
-    position: "relative"
+    position: "relative",
   },
   image: {
     flex: 1,
-    width: "100%"
+    width: "100%",
   },
   text: {
-    ...TextStyles.defaultFontFamily
+    ...TextStyles.defaultFontFamily,
   },
   gradientContainer: {
     bottom: 0,
     position: "absolute",
     left: 0,
     right: 0,
-    paddingTop: 100
+    paddingTop: 100,
   },
   contentContainer: {},
   textContainer: {
@@ -210,15 +233,15 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 77,
     backgroundColor: "white",
-    justifyContent: "center"
+    justifyContent: "center",
   },
 
   icon: {
     width: 32,
-    height: 32
+    height: 32,
   },
 
-  children: {
+  map: {
     position: "absolute",
     top: 0,
     marginTop: 20,
@@ -226,28 +249,28 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     padding: 0,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    overflow: "visible"
+    overflow: "visible",
   },
 
-  map: {
+  children: {
     position: "absolute",
     bottom: 61,
     right: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    overflow: "visible"
+    overflow: "visible",
   },
 
   titleLabel: {
@@ -256,7 +279,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     paddingLeft: 20,
     paddingRight: 70,
-    color: "rgba(41, 41, 41, 1)"
+    color: "rgba(41, 41, 41, 1)",
   },
   distance: {
     fontFamily: "Roboto",
@@ -276,12 +299,12 @@ const styles = StyleSheet.create({
     letterSpacing: 0.91,
     color: Colors.gray3,
     paddingTop: 6,
-    fontSize: 11
+    fontSize: 11,
   },
   descriptionLabel: {},
   mapIcon: {
     width: 32,
-    height: 32
+    height: 32,
   },
 
   childrenContainer: {},
@@ -292,20 +315,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderTopWidth: 1,
-    borderTopColor: "rgba(209, 209, 209, 1)"
+    borderTopColor: "rgba(209, 209, 209, 1)",
   },
 
   childImage: {
     width: 60,
     height: 45,
-    borderRadius: 6
+    borderRadius: 6,
   },
   childText: {
     paddingLeft: 10,
     fontSize: 16,
-    color: "rgba(41, 41, 41, 1)"
-  }
-
+    color: "rgba(41, 41, 41, 1)",
+    flex: 1,
+    flexWrap: "wrap",
+  },
 });
 
 export default memo(ImageCard);

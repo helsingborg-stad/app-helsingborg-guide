@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import DownloadItemView from "@shared-components/DownloadItemView";
-import DownloadItemView2 from "@shared-components/DownloadItemView2";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
 import LangService from "@services/langService";
 import { Colors } from "@assets/styles";
@@ -13,9 +12,7 @@ import {
   resumeDownloadGuide,
 } from "@actions/downloadGuidesActions";
 import { selectCurrentGuide, showBottomBar } from "@actions/uiStateActions";
-import { AnalyticsUtils } from "@utils";
 import { trackScreen } from "@utils/MatomoUtils";
-
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -30,7 +27,7 @@ type Props = {
   pauseDownload(guide: Guide): void,
   resumeDownload(guide: Guide): void,
   selectGuide(guide: Guide): void,
-  navigation: any
+  navigation: any,
 };
 
 class DownloadsScreen extends Component<Props> {
@@ -40,7 +37,6 @@ class DownloadsScreen extends Component<Props> {
       headerLeft: () => <HeaderBackButton navigation={navigation} />,
       title,
       headerRight: () => <View style={{ width: 36 }} />,
-
     };
   };
 
@@ -73,7 +69,7 @@ class DownloadsScreen extends Component<Props> {
   };
 
   renderItem = ({ item }) => {
-    console.log("the downloaded item", item.progress)
+    console.log("the downloaded item", item.progress);
     return (
       <DownloadItemView
         title={item.guide.name}
@@ -92,7 +88,7 @@ class DownloadsScreen extends Component<Props> {
     return (
       <FlatList
         style={styles.mainContainer}
-        keyExtractor={item => `${item.guide.id}`}
+        keyExtractor={(item) => `${item.guide.id}`}
         data={this.props.downloads}
         renderItem={this.renderItem}
       />
@@ -112,7 +108,7 @@ function mapDispatchToProps(dispatch) {
     cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
     pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
     resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
-    selectGuide: guide => dispatch(selectCurrentGuide(guide)),
+    selectGuide: (guide) => dispatch(selectCurrentGuide(guide)),
     hideBottomBar: () => dispatch(showBottomBar(false)),
   };
 }
