@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect, useState, useRef } from "react";
-import { AppState, StatusBar, Platform, Linking } from "react-native";
+import { AppState, StatusBar, Platform, Linking, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Orientation from "react-native-orientation-locker";
 import { NavigationContainer } from "@react-navigation/native";
@@ -22,12 +22,10 @@ import {
   ObjectScreen,
   QuizScreen,
   QuizResultScreen,
-  SearchObjectScreen,
   SettingsScreen,
   SplashScreen,
   TrailScreen,
   VideoScreen,
-  WebScreen,
   WelcomeScreen,
   ARIntroductionScreen,
 } from "@src/components/screens";
@@ -42,6 +40,7 @@ import useInitialURL from "@hooks/useUniversalLinks";
 import { initializeTracker } from "@utils/MatomoUtils";
 import { setShowFilterButton } from "@actions/uiStateActions";
 import LangService from "./services/langService";
+import { backgroundColor } from "react-native-calendars/src/style";
 
 const Stack = createNativeStackNavigator();
 
@@ -136,8 +135,33 @@ const RootStack = () => (
         };
       }}
     />
-    <Stack.Screen name={"QuizScreen"} component={QuizScreen} />
-    <Stack.Screen name={"QuizResultScreen"} component={QuizResultScreen} />
+    <Stack.Screen
+      name={"QuizScreen"}
+      component={QuizScreen}
+      options={({ navigation, route }) => {
+        const { quiz } = route.params || {};
+        return {
+          ...HeaderStyles.noElevation,
+          title: quiz.title,
+          headerRight: () => <HeaderFiller />,
+          headerLeft: () => (
+            <HeaderBackButton
+              navigation={navigation}
+              onPress={() => null}
+              displayBottomBar={true}
+            />
+          ),
+        };
+      }}
+    />
+    <Stack.Screen
+      name={"QuizResultScreen"}
+      component={QuizResultScreen}
+      options={{
+        headerShown: false,
+        header: () => null,
+      }}
+    />
     <Stack.Screen
       name={"GuideDetailsScreen"}
       component={GuideScreen}
@@ -153,15 +177,31 @@ const RootStack = () => (
         };
       }}
     />
-    <Stack.Screen name={"WebScreen"} component={WebScreen} />
-    <Stack.Screen name={"VideoScreen"} component={VideoScreen} />
+    <Stack.Screen
+      name={"VideoScreen"}
+      component={VideoScreen}
+      options={({ navigation, route }) => {
+        const { title } = route.params || {};
+        return {
+          title,
+          headerLeft: () => <HeaderBackButton navigation={navigation} />,
+          headerRight: () => <View style={{ width: 36 }} />,
+          headerStyle: { backgroundColor: "black" },
+          tabBarVisible: false,
+        };
+      }}
+    />
     <Stack.Screen
       name={"ImageScreen"}
       component={ImageScreen}
-      options={{
-        headerMode: "none",
-        headerTitle: "",
-        title: "",
+      options={({ navigation }) => {
+        return {
+          headerMode: "none",
+          title: "",
+          headerLeft: () => <HeaderBackButton navigation={navigation} />,
+          headerRight: () => null,
+          headerStyle: { backgroundColor: "black" },
+        };
       }}
     />
     <Stack.Screen
@@ -174,6 +214,7 @@ const RootStack = () => (
           headerLeft: () => (
             <HeaderBackButton navigation={navigation} path={path} />
           ),
+          headerRight: () => <HeaderFiller />,
         };
       }}
     />
@@ -195,7 +236,18 @@ const RootStack = () => (
       }}
     />
     <Stack.Screen name={"DebugScreen"} component={DebugScreen} />
-    <Stack.Screen name={"CategoryMapScreen"} component={CategoryMapScreen} />
+    <Stack.Screen
+      name={"CategoryMapScreen"}
+      component={CategoryMapScreen}
+      options={({ navigation, route }) => {
+        const { title } = route?.params || {};
+        return {
+          title,
+          headerRight: () => <View />,
+          headerLeft: () => <HeaderBackButton navigation={navigation} />,
+        };
+      }}
+    />
     <Stack.Screen
       name={"CalendarDetailsScreen"}
       component={CalendarDetailsScreen}
@@ -225,7 +277,6 @@ const RootStack = () => (
       component={WelcomeScreen}
       options={{ headerShown: false, header: () => null }}
     />
-    <Stack.Screen name={"SearchObjectScreen"} component={SearchObjectScreen} />
     <Stack.Screen
       name={"ARIntroductionScreen"}
       component={ARIntroductionScreen}

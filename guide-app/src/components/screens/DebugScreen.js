@@ -1,17 +1,12 @@
 // @flow
-
-import React, { Component } from "react";
+import React from "react";
 import VersionNumber from "react-native-version-number";
 import DebugView from "../shared/DebugView";
 
 type Props = {};
 
-class DebugScreen extends Component<Props> {
-  constructor() {
-    super();
-  }
+const DebugScreen = (props: Props) => {
 
-  render() {
     return (
       <DebugView
         appVersion={VersionNumber.appVersion}
@@ -19,7 +14,6 @@ class DebugScreen extends Component<Props> {
         bundleIdentifier={VersionNumber.bundleIdentifier}
       />
     );
-  }
 }
 
 export default DebugScreen;

@@ -44,7 +44,6 @@ const LocationScreen = (props: Props) => {
   const { clearLinking } = useDeepLinking();
 
   useEffect(() => {
-
     return () => {
       if (params && params?.bottomBarOnUnmount) {
         props.dispatchShowBottomBar(true);

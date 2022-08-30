@@ -1,10 +1,8 @@
 // @flow
-import React, { Component } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-import { connect } from "react-redux";
+import React from "react";
+import { FlatList, StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import DownloadItemView from "@shared-components/DownloadItemView";
-import HeaderBackButton from "@shared-components/HeaderBackButton";
-import LangService from "@services/langService";
 import { Colors } from "@assets/styles";
 import {
   cancelDownloadGuide,
@@ -28,89 +26,63 @@ type Props = {
   resumeDownload(guide: Guide): void,
   selectGuide(guide: Guide): void,
   navigation: any,
+  item: Object,
 };
 
-class DownloadsScreen extends Component<Props> {
-  static navigationOptions = ({ navigation }) => {
-    const title = LangService.strings.OFFLINE_CONTENT;
-    return {
-      headerLeft: () => <HeaderBackButton navigation={navigation} />,
-      title,
-      headerRight: () => <View style={{ width: 36 }} />,
-    };
-  };
+const DownloadsScreen = (props: Props) => {
+  const { navigation } = props;
+  const dispatch = useDispatch();
+  const { offlineGuides } = useSelector((s) => s.downloadedGuides);
+  const downloads = Object.values(offlineGuides);
 
-  navigateToGuide = (offlineGuide: OfflineGuide): void => {
+  const navigateToGuide = (offlineGuide: OfflineGuide): void => {
     const { guide } = offlineGuide;
     const { guideType } = guide;
-    this.props.selectGuide(guide);
+    dispatch(selectCurrentGuide(guide));
 
     if (guideType === "guide") {
-      this.props.hideBottomBar();
+      dispatch(showBottomBar(false));
       const slug = guide?.slug;
       const title = guide?.name;
       trackScreen("view_guide", slug || title);
-      // AnalyticsUtils.logEvent("view_guide", { name: slug });
-      this.props.navigation.navigate("GuideDetailsScreen", {
+      navigation.navigate("GuideDetailsScreen", {
         title: title,
         bottomBarOnUnmount: true,
       });
     } else if (guideType === "trail") {
-      this.props.hideBottomBar();
+      dispatch(showBottomBar(false));
       const slug = guide?.slug;
       const title = guide?.name;
       trackScreen("view_guide", slug || title);
-      // AnalyticsUtils.logEvent("view_guide", { name: slug });
-      this.props.navigation.navigate("TrailScreen", {
+      navigation.navigate("TrailScreen", {
         title: title,
         bottomBarOnUnmount: true,
       });
     }
   };
 
-  renderItem = ({ item }) => {
-    console.log("the downloaded item", item.progress);
+  const renderItem = ({ item }) => {
     return (
       <DownloadItemView
         title={item.guide.name}
         thumbnail={item.guide.images.thumbnail}
         progress={item.progress}
         isPaused={item.status === "paused"}
-        onPausePress={() => this.props.pauseDownload(item.guide)}
-        onResumePress={() => this.props.resumeDownload(item.guide)}
-        onClearPress={() => this.props.cancelDownload(item.guide)}
-        onPressItem={() => this.navigateToGuide(item)}
+        onPausePress={() => dispatch(pauseDownloadGuide(item.guide))}
+        onResumePress={() => dispatch(resumeDownloadGuide(item.guide))}
+        onClearPress={() => dispatch(cancelDownloadGuide(item.guide))}
+        onPressItem={() => navigateToGuide(item)}
       />
     );
   };
 
-  render() {
-    return (
-      <FlatList
-        style={styles.mainContainer}
-        keyExtractor={(item) => `${item.guide.id}`}
-        data={this.props.downloads}
-        renderItem={this.renderItem}
-      />
-    );
-  }
-}
-
-function mapStateToProps(state: RootState) {
-  const { offlineGuides } = state.downloadedGuides;
-  return {
-    downloads: Object.values(offlineGuides),
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
-    pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
-    resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide)),
-    selectGuide: (guide) => dispatch(selectCurrentGuide(guide)),
-    hideBottomBar: () => dispatch(showBottomBar(false)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DownloadsScreen);
+  return (
+    <FlatList
+      style={styles.mainContainer}
+      keyExtractor={(item) => `${item.guide.id}`}
+      data={downloads}
+      renderItem={renderItem}
+    />
+  );
+};
+export default DownloadsScreen;

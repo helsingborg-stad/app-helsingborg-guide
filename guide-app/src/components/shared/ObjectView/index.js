@@ -25,7 +25,6 @@ type Props = {
   audioButtonDisabled: boolean,
   videoButtonDisabled: boolean,
   onGoToImage: (image: Images) => void,
-  onGoToLink: (url: string, title?: string) => void,
   loadAudioFile: () => void,
   onGoToVideo: (video?: MediaContent) => void,
   swipeable?: Boolean,
@@ -58,7 +57,6 @@ function displayText(description?: string) {
 
 function displayLinks(
   links: Link[],
-  onGoToLink: (url: string, title?: string) => void
 ) {
   return links.map((item, index) => (
     <LinkTouchable
@@ -281,7 +279,7 @@ const ObjectView = (props: Props) => {
                   ? displayText(props.contentObject.description, order)
                   : null}
                 {props.contentObject.links
-                  ? displayLinks(props.contentObject.links, props.onGoToLink)
+                  ? displayLinks(props.contentObject.links)
                   : null}
               </View>
             </View>

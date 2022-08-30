@@ -76,11 +76,6 @@ const ObjectScreen = (props: Props) => {
     navigation.navigate("ImageScreen", { image });
   };
 
-  const onGoToLink = (url: string, linkTitle?: string) => {
-    trackEvent("open", "open_url", linkTitle);
-    navigation.navigate("WebScreen", { url });
-  };
-
   const onGoToVideo = (video?: MediaContent) => {
     if (!video) {
       return;
@@ -129,15 +124,6 @@ const ObjectScreen = (props: Props) => {
     ({ guideType } = currentGuide);
   }
 
-  console.log("OBJECT PARAMS",  title,
-    path,
-    redirect,
-    order,
-    swipeable,
-    scrollable,
-    panToIndex,
-    selectObject)
-
   return currentContentObject ? (
     <>
       <StatusBar
@@ -161,7 +147,6 @@ const ObjectScreen = (props: Props) => {
         audioButtonDisabled={!isMediaAvailable(currentContentObject.audio)}
         videoButtonDisabled={!isMediaAvailable(currentContentObject.video)}
         onGoToImage={onGoToImage}
-        onGoToLink={onGoToLink}
         loadAudioFile={loadAudioFile}
         onGoToVideo={onGoToVideo}
       />

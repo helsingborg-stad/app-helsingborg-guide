@@ -34,16 +34,6 @@ type State = {
 };
 
 class QuizScreen extends Component<Props, State> {
-  static navigationOptions = ({ navigation, route }) => {
-    const { quiz } = route.params;
-    return {
-      ...HeaderStyles.noElevation,
-      title: quiz.title,
-      headerRight: () => <View />,
-      headerLeft: () => <HeaderBackButton navigation={navigation} onPress={() => null} displayBottomBar={true} />
-    };
-  };
-
   static buildHistory = (
     history: QuizItem[],
     selectedChoices: DialogChoice[]

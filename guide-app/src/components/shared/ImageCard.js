@@ -66,8 +66,7 @@ const ImageCard = ({
   const displayActivities = () => {
     switch (type) {
       case "guidegroup":
-        const groupAmount = all?.guideGroups?.find(
-          (item) => item.parentID === id
+        const groupAmount = all?.guideGroups?.find((_item) => _item.parentID === id
         );
         return groupAmount
           ? (

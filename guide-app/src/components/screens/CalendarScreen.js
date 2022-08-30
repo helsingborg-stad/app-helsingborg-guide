@@ -1,11 +1,11 @@
 // @flow
-import React, { memo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ActivityIndicator,
   StatusBar,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
@@ -32,16 +32,16 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: Colors.white,
     marginBottom: 100,
-    paddingHorizontal: 4
+    paddingHorizontal: 4,
   },
   loadingSpinner: {
-    flex: 1
+    flex: 1,
   },
   noContent: {
     backgroundColor: Colors.grayEA,
     justifyContent: "center",
     alignItems: "center",
-    opacity: 0.6
+    opacity: 0.6,
   },
   noContentText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
       fontSize: 19,
       lineHeight: 22,
       textAlign: "center",
-      width: "50%"
-    }
+      width: "50%",
+    },
   ]),
 
   navigationWrapper: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     paddingVertical: 5,
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
 
   navigation: {
@@ -68,21 +68,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    width: "100%"
+    width: "100%",
   },
 
   navigationBarWrapper: {
-    flexDirection: "column"
+    flexDirection: "column",
   },
 
   navigationBarStep: {
-    textAlign: "center"
-  }
-
+    textAlign: "center",
+  },
 });
 
 type LayoutProps = {
-  children?: React.Node
+  children?: React.Node,
 };
 
 function Layout({ children }: LayoutProps) {
@@ -112,7 +111,13 @@ type Props = {
   noContent: boolean,
   currentLanguage: string,
   dispatchShowBottomBar(visible: boolean): void,
-  getEvents(currentLanguage: string, dateStart: Date, dateEnd: Date, perPage: any, page: any): void,
+  getEvents(
+    currentLanguage: string,
+    dateStart: Date,
+    dateEnd: Date,
+    perPage: any,
+    page: any
+  ): void,
   resetEvents: any,
   isFetching: boolean,
 };
@@ -144,7 +149,13 @@ const CalendarScreen = (props: Props) => {
   useEffect(() => {
     trackScreen("/calendar", "/calendar");
     dispatchShowBottomBar(true);
-    getEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, currentPage);
+    getEvents(
+      currentLanguage,
+      chosenDate,
+      chosenDate,
+      ITEMS_PER_PAGE,
+      currentPage
+    );
     return () => {
       resetEvents();
       setEvents([]);
@@ -173,7 +184,13 @@ const CalendarScreen = (props: Props) => {
   const loadMoreContent = () => {
     throttle(() => {
       const nextPage = currentPage + 1;
-      getEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, nextPage);
+      getEvents(
+        currentLanguage,
+        chosenDate,
+        chosenDate,
+        ITEMS_PER_PAGE,
+        nextPage
+      );
       setCurrentPage(nextPage);
     }, 2500)();
   };
@@ -182,14 +199,13 @@ const CalendarScreen = (props: Props) => {
     let copy = [...events];
     if (items.length) {
       if (items !== copy) {
-        items.map(item => !copy.includes(item) && copy.push(item));
+        items.map((item) => !copy.includes(item) && copy.push(item));
         setEvents(copy);
       }
     } else if (events.length) {
       setEndOfContent(true);
     }
   }, [items]);
-
 
   const getNextDate = () => {
     const nextDate = addDays(chosenDate, 1);
@@ -208,7 +224,6 @@ const CalendarScreen = (props: Props) => {
     getEvents(currentLanguage, prevDate, prevDate, ITEMS_PER_PAGE, 1);
     setChosenDate(prevDate);
   };
-
 
   const datePicker = (
     <CalendarDatePicker
@@ -240,8 +255,10 @@ const CalendarScreen = (props: Props) => {
   const isCloseToBottom = (e) => {
     const { layoutMeasurement, contentOffset, contentSize } = e;
     const paddingToBottom = 900;
-    return layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom;
+    return (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    );
   };
 
   const onRefresh = () => {
@@ -249,8 +266,8 @@ const CalendarScreen = (props: Props) => {
     setEvents([]);
     setEndOfContent(false);
     setCurrentPage(1);
-    getEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, 1)
-  }
+    getEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, 1);
+  };
 
   return (
     <Layout>
@@ -265,17 +282,22 @@ const CalendarScreen = (props: Props) => {
         }}
       >
         <View style={styles.container}>
-          {events.length ? events.map((event, index) => (
-            event ?
-              <CalendarEvent
-                key={index}
-                event={event}
-                currentLanguage={currentLanguage}
-                navigation={navigation}
-                path={"/calendar"}
-              /> : null
-          )) : null}
-          {isFetching && events.length && <ActivityIndicator style={{ width: "100%", paddingBottom: 30 }} />}
+          {events.length
+            ? events.map((event, index) =>
+                event ? (
+                  <CalendarEvent
+                    key={index}
+                    event={event}
+                    currentLanguage={currentLanguage}
+                    navigation={navigation}
+                    path={"/calendar"}
+                  />
+                ) : null
+              )
+            : null}
+          {isFetching && events.length && (
+            <ActivityIndicator style={{ width: "100%", paddingBottom: 30 }} />
+          )}
         </View>
       </Scrollable>
     </Layout>
@@ -287,22 +309,27 @@ function mapStateToProps(state: RootState) {
   const { currentLanguage } = navigation;
   const { isFetching, items } = events;
 
-
   return {
     isFetching,
     showLoadingSpinner: isFetching,
     currentLanguage,
-    items
+    items,
   };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
-    getEvents: (currentLanguage: string, dateStart: Date, dateEnd: Date, perPage: any, page: any) =>
+    getEvents: (
+      currentLanguage: string,
+      dateStart: Date,
+      dateEnd: Date,
+      perPage: any,
+      page: any
+    ) =>
       dispatch(fetchEvents(currentLanguage, dateStart, dateEnd, perPage, page)),
     resetEvents: () => dispatch(fetchEventsReset()),
     dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible))
+      dispatch(showBottomBar(visible)),
   };
 }
 

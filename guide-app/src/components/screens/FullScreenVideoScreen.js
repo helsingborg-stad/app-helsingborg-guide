@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { NativeModules } from "react-native";
 import VideoPlayer from "@shared-components/VideoPlayer";
 
@@ -6,42 +6,34 @@ const { FullScreenVideoModule } = NativeModules;
 
 const flexStyle = { flex: 1 };
 
-export default class FullScreenVideoScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      url: null,
-      paused: null,
-      currentTime: null
-    };
-  }
+const FullScreenVideoScreen = () => {
+  const [url, setUrl] = useState(null);
+  const [paused, setPaused] = useState(null);
+  const [currentTime, setCurrentTime] = useState(null);
 
-  componentDidMount() {
-    this.getParameters();
-  }
+  useEffect(() => {
+    getParameters().then(() => null);
+  }, []);
 
-  async getParameters() {
+  const getParameters = async () => {
     const parameters = await FullScreenVideoModule.getVideoParameters();
-    this.setState({
-      url: parameters.url,
-      paused: parameters.paused,
-      currentTime: parameters.currentTime
-    });
-  }
+    setUrl(parameters.url);
+    setPaused(parameters.paused);
+    setCurrentTime(parameters.currentTime);
+  };
 
-  render() {
-    const { url, paused, currentTime } = this.state;
-    return (
-      url && (
-        <VideoPlayer
-          containerStyle={flexStyle}
-          style={flexStyle}
-          isAndroidFullscreen
-          playOnLoad={!paused}
-          initialCurrentTime={currentTime}
-          filePath={url}
-        />
-      )
-    );
-  }
-}
+  return (
+    url && (
+      <VideoPlayer
+        containerStyle={flexStyle}
+        style={flexStyle}
+        isAndroidFullscreen
+        playOnLoad={!paused}
+        initialCurrentTime={currentTime}
+        filePath={url}
+      />
+    )
+  );
+};
+
+export default FullScreenVideoScreen;

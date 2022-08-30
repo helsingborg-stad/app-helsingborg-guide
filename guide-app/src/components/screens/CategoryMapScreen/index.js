@@ -1,13 +1,7 @@
 // @flow
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { View } from "react-native";
-import HeaderBackButton from "@shared-components/HeaderBackButton";
-import {
-  showBottomBar
-} from "@actions/uiStateActions";
-
-import { HeaderStyles } from "@assets/styles";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showBottomBar } from "@actions/uiStateActions";
 import Map from "@shared-components/Map";
 
 type Props = {
@@ -15,67 +9,23 @@ type Props = {
   currentCategory: ?NavigationCategory,
   selectGuide(id: number): void,
   selectGuideGroup(id: number): void,
-  dispatchShowBottomBar(visible: boolean): void
+  dispatchShowBottomBar(visible: boolean): void,
 };
 
-class CategoryMapScreen extends Component<Props> {
+const CategoryMapScreen = (props: Props) => {
+  const { navigation } = props;
+  const { navigation: nav } = useSelector((s) => s.uiState);
+  const { currentHomeTab: categoryIndex } = useSelector((s) => s.uiState);
+  const currentCategory = nav.navigationCategories[categoryIndex];
+  const dispatch = useDispatch();
+  const { name: title } = currentCategory || {};
 
-  static navigationOptions = ({ navigation, route }) => {
-    let title = null;
-    const { params } = route || {};
-    if (params) {
-      ({ title } = params);
-    }
-    return {
-      ...HeaderStyles.noElevation,
-      title,
-      headerRight: () => <View />,
-      headerLeft: () => <HeaderBackButton navigation={navigation} />
-    };
-  };
+  useEffect(() => {
+    navigation.setParams({ title });
+    dispatch(showBottomBar(false));
+    return () => dispatch(showBottomBar(true));
+  }, []);
 
-  constructor(props: Props) {
-    super(props);
-    const { currentCategory } = props;
-    if (currentCategory) {
-      const { name: title } = currentCategory;
-      props.navigation.setParams({ title });
-    }
-  }
-
-  componentDidMount() {
-    this.props.dispatchShowBottomBar(false);
-  }
-
-  componentWillUnmount() {
-    this.props.dispatchShowBottomBar(true);
-  }
-
-  render() {
-    const { navigation } = this.props;
-    return (
-      <Map
-        navigation={navigation}
-      />
-    );
-  }
-}
-
-function mapStateToProps(state: RootState) {
-  const { uiState, navigation } = state;
-  const { currentHomeTab: categoryIndex } = uiState;
-  const category = navigation.navigationCategories[categoryIndex];
-
-  return {
-    currentCategory: category,
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible))
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryMapScreen);
+  return <Map navigation={navigation} />;
+};
+export default CategoryMapScreen;

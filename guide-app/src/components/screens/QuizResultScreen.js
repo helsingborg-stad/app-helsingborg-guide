@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,11 +10,9 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Colors, TextStyles } from "@assets/styles";
-import {
-  showBottomBar,
-} from "@actions/uiStateActions";
+import { showBottomBar } from "@actions/uiStateActions";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Share from "react-native-share";
 import LangService from "../../services/langService";
@@ -22,29 +20,18 @@ import LangService from "../../services/langService";
 type Props = {
   navigation: Object,
   route: Object,
-  dispatchShowBottomBar(visible: boolean): void,
 };
 
-type State = {
-  shareResult: ?string,
-};
+const QuizResultScreen = (props: Props) => {
+  const { navigation, route } = props;
+  const {
+    quiz: { finish },
+  } = route.params;
+  const dispatch = useDispatch();
 
-class QuizResultScreen extends Component<Props, State> {
-  state = {
-    shareResult: null,
-  };
+  const [shareResult, setShareResult] = useState(null);
 
-  static navigationOptions = {
-    headerShown: false,
-  };
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  getErrorString = (error, defaultValue) => {
+  const getErrorString = (error, defaultValue) => {
     let e = defaultValue || "Something went wrong. Please try again";
     if (typeof error === "string") {
       e = error;
@@ -56,96 +43,82 @@ class QuizResultScreen extends Component<Props, State> {
     return e;
   };
 
-  shareImage = async () => {
-    const {
-      quiz: { finish },
-    } = this.props.route.params;
-
+  const shareImage = async () => {
     const shareOptions = {
       title: finish?.shareTitle,
       url: finish?.shareImage?.url,
       failOnCancel: false,
     };
 
-
     try {
       const ShareResponse = await Share.open(shareOptions);
-      this.setState({
-        shareResult: JSON.stringify(ShareResponse, null, 2),
-      });
+      setShareResult(JSON.stringify(ShareResponse, null, 2));
     } catch (error) {
-      console.log("Error =>", error);
-      this.setState({
-        shareResult: "error: ".concat(this.getErrorString(error)),
-      });
+      setShareResult("error: ".concat(getErrorString(error)));
     }
   };
 
-  downloadImage = async () => {
-  };
+  const downloadImage = async () => {};
 
-  render() {
-    const {
-      quiz: { finish },
-    } = this.props.route.params;
-
-
-    return (
-      <>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={Colors.themeSecondary}
-        />
-        <SafeAreaView style={styles.container}>
-          <ScrollView contentContainerStyle={styles.contentContainer}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>{finish?.header}</Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => {
-                  this.props.dispatchShowBottomBar(true);
-                  this.props.navigation.goBack();
-                }}
-              >
-                <Icon
-                  style={styles.buttonIcon}
-                  name={"close"}
-                  size={16}
-                  width={16}
-                  color={Colors.black}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.imagesContainer}>
-              <Image
-                style={styles.finishedImage}
-                source={{ uri: finish?.images[0]?.url }}
-                resizeMode="contain"
-              />
-              <Image
-                style={styles.finishedImage}
-                source={{ uri: finish?.images[1]?.url }}
-                resizeMode="contain"
-              />
-            </View>
-            <View style={styles.bodyContainer}>
-              <Text style={styles.bodyTitle}>{finish?.title}</Text>
-              <Text style={styles.bodyText}>{finish?.body}</Text>
-            </View>
-            {finish?.shareImage?.url && <TouchableOpacity
-              style={styles.shareContainer}
+  return (
+    <>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={Colors.themeSecondary}
+      />
+      <SafeAreaView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{finish?.header}</Text>
+            <TouchableOpacity
+              style={styles.button}
               onPress={() => {
-                this.shareImage();
+                dispatch(showBottomBar(true));
+                navigation.goBack();
               }}
             >
-              <Text style={styles.shareText}>{finish?.shareTitle || LangService.strings.SHARE}</Text>
-            </TouchableOpacity>}
-          </ScrollView>
-        </SafeAreaView>
-      </>
-    );
-  }
-}
+              <Icon
+                style={styles.buttonIcon}
+                name={"close"}
+                size={16}
+                width={16}
+                color={Colors.black}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.imagesContainer}>
+            <Image
+              style={styles.finishedImage}
+              source={{ uri: finish?.images[0]?.url }}
+              resizeMode="contain"
+            />
+            <Image
+              style={styles.finishedImage}
+              source={{ uri: finish?.images[1]?.url }}
+              resizeMode="contain"
+            />
+          </View>
+          <View style={styles.bodyContainer}>
+            <Text style={styles.bodyTitle}>{finish?.title}</Text>
+            <Text style={styles.bodyText}>{finish?.body}</Text>
+          </View>
+          {finish?.shareImage?.url && (
+            <TouchableOpacity
+              style={styles.shareContainer}
+              onPress={() => {
+                shareImage().then(() => null);
+              }}
+            >
+              <Text style={styles.shareText}>
+                {finish?.shareTitle || LangService.strings.SHARE}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </ScrollView>
+      </SafeAreaView>
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -206,7 +179,6 @@ const styles = StyleSheet.create({
     lineHeight: 48,
   },
   buttonIcon: {
-
     lineHeight: 37,
   },
   imagesContainer: {
@@ -245,15 +217,5 @@ const styles = StyleSheet.create({
 });
 
 
-function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
-  return {
-    dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible)),
-  };
-}
 
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(QuizResultScreen);
+export default QuizResultScreen;

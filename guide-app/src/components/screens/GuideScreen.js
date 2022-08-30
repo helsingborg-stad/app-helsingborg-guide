@@ -2,45 +2,44 @@
 
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import GuideView from "@shared-components/GuideView";
-import HeaderBackButton from "@shared-components/HeaderBackButton";
 import {
   selectCurrentContentObject,
   showBottomBar,
-  selectCurrentSharingLink
+  selectCurrentSharingLink,
 } from "@actions/uiStateActions";
 import { releaseAudioFile } from "@actions/audioActions";
 import { trackScreen } from "@utils/MatomoUtils";
 import useDeepLinking from "@hooks/useDeepLinking";
 
-
 declare type Props = {
-  currentGuide: ?Guide,
   navigation: any,
   route: any,
-  contentObjects: [],
-  dispatchSelectContentObject(contentObject: ContentObject): void,
-  dispatchReleaseAudio(): void,
-  dispatchShowBottomBar(visible: boolean): void,
-  dispatchCurrentSharingLink(link: string): void,
 };
 
 const GuideScreen = (props: Props) => {
-
-  const { currentGuide, navigation, route, currentSharingLink, dispatchCurrentSharingLink } = props;
+  const { navigation, route } = props;
+  const dispatch = useDispatch();
+  const { currentGuide, currentSharingLink } = useSelector((s) => s.uiState);
   const { contentObjects } = currentGuide;
   const { params } = route;
   const { clearLinking } = useDeepLinking();
-  const [redirect, setRedirect] = useState(params?.redirect?.length ? params?.redirect?.length === 2 ? params?.redirect[1] : params?.redirect[0] : false);
 
+  const [redirect, setRedirect] = useState(
+    params?.redirect?.length
+      ? params?.redirect?.length === 2
+        ? params?.redirect[1]
+        : params?.redirect[0]
+      : false
+  );
 
   useEffect(() => {
     return () => {
       redirect && setRedirect(false);
-      props.dispatchReleaseAudio();
+      dispatch(releaseAudioFile());
       if (params && params.bottomBarOnUnmount) {
-        props.dispatchShowBottomBar(true);
+        dispatch(showBottomBar(true));
       }
     };
   }, []);
@@ -50,7 +49,6 @@ const GuideScreen = (props: Props) => {
       clearLinking(navigation);
     }
   }, [navigation.isFocused()]);
-
 
   useEffect(() => {
     if (redirect) {
@@ -71,20 +69,18 @@ const GuideScreen = (props: Props) => {
     }
   }, [redirect]);
 
-
   const onPressContentObject = (obj: ContentObject, index, array) => {
     const prevPath = params.path;
     const newPath = `${prevPath}/${obj?.title}`;
     const sharingLink = currentSharingLink + `/${obj?.id}`;
-    dispatchCurrentSharingLink(sharingLink);
-    props.dispatchSelectContentObject(obj);
+    dispatch(selectCurrentSharingLink(sharingLink));
+    dispatch(selectCurrentContentObject(obj));
     trackScreen(newPath, newPath);
     redirect && setRedirect(false);
-    console.log("the object", obj.links);
     navigation.navigate("ObjectScreen", {
       title: obj.title,
       currentGuide: props.currentGuide,
-      selectObject: props.dispatchSelectContentObject,
+      selectObject: (object) => dispatch(selectCurrentContentObject(object)),
       array: array,
       order: obj?.order,
       swipeable: true,
@@ -92,7 +88,7 @@ const GuideScreen = (props: Props) => {
     });
   };
 
-  return !(!!redirect) ?
+  return !redirect ? (
     currentGuide ? (
       <GuideView
         guide={currentGuide}
@@ -100,23 +96,10 @@ const GuideScreen = (props: Props) => {
       />
     ) : (
       <View />
-    ) : <ActivityIndicator style={{ flex: 1 }} />;
+    )
+  ) : (
+    <ActivityIndicator style={{ flex: 1 }} />
+  );
 };
 
-function mapStateToProps(state: RootState) {
-  const { currentGuide, currentSharingLink } = state.uiState;
-  return { currentGuide, currentSharingLink };
-}
-
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    dispatchSelectContentObject: (contentObject: ContentObject) =>
-      dispatch(selectCurrentContentObject(contentObject)),
-    dispatchReleaseAudio: () => dispatch(releaseAudioFile()),
-    dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible)),
-    dispatchCurrentSharingLink: (link: string) => dispatch(selectCurrentSharingLink(link))
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GuideScreen);
+export default GuideScreen;

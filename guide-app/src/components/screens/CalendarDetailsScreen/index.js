@@ -18,7 +18,7 @@ type Props = {
 }
 
 const CalendarDetailsScreen = (props: Props) => {
-  const { navigation, route } = props;
+  const { route } = props;
   const { event } = route.params || {};
 
   const [activeSections, setActiveSections] = useState([]);

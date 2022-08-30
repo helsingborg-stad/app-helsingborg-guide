@@ -1,72 +1,60 @@
 // @flow
 
-import React, { memo, Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "react-native";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import InfoOverlayToggleView from "@shared-components/InfoOverlayToggleView";
-import HeaderBackButton from "@shared-components/HeaderBackButton";
 import TrailView from "@shared-components/TrailView";
 import { releaseAudioFile } from "@actions/audioActions";
-import {
-  selectCurrentContentObject,
-  selectCurrentGuideGroup,
-  selectCurrentGuide,
-  showBottomBar
-} from "@actions/uiStateActions";
+import { showBottomBar } from "@actions/uiStateActions";
 import { Colors } from "@assets/styles";
 
-
 type Props = {
-  currentGuide: Guide,
   navigation: Object,
   route: Object,
-  dispatchReleaseAudio(): void,
-  dispatchShowBottomBar(visible: boolean): void,
 };
 
-
 const TrailScreen = (props: Props) => {
-  const { navigation, route, dispatchReleaseAudio, dispatchShowBottomBar, currentGuide } = props;
-  const { path, redirect, title } = route?.params || {};
+  const { navigation, route } = props;
+  const { currentGuide } = useSelector((s) => s.uiState);
+  const { path, redirect } = route?.params || {};
+  const dispatch = useDispatch();
   const [showInfoOverlay, setShowInfoOverlay] = useState(false);
 
   useEffect(() => {
     if (navigation.isFocused()) {
       navigation.setOptions({
-        headerRight: () => <InfoOverlayToggleView onToggleInfoOverlay={onToggleInfoOverlay} />,      });
+        headerRight: () => (
+          <InfoOverlayToggleView onToggleInfoOverlay={onToggleInfoOverlay} />
+        ),});
     }
   }, [navigation.isFocused()]);
 
   useEffect(() => {
     return () => {
-      dispatchReleaseAudio();
+      dispatch(releaseAudioFile());
       if (route?.params && route.params?.bottomBarOnUnmount) {
-        dispatchShowBottomBar(true);
+        dispatch(showBottomBar(true));
       }
     };
   }, []);
-
 
   const onToggleInfoOverlay = () => {
     setShowInfoOverlay(!showInfoOverlay);
   };
 
-
   if (currentGuide.contentObjects.length <= 0) {
     return null;
   }
 
-  const mapItems: MapItem[] = currentGuide.contentObjects.map(item => ({
-    contentObject: item
+  const mapItems: MapItem[] = currentGuide.contentObjects.map((item) => ({
+    contentObject: item,
   }));
 
   return (
     <>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={Colors.white}
-      />
+      <StatusBar barStyle="light-content" backgroundColor={Colors.white} />
       <TrailView
         trail={currentGuide}
         items={mapItems}
@@ -81,21 +69,4 @@ const TrailScreen = (props: Props) => {
   );
 };
 
-function mapStateToProps(state: RootState) {
-  const { currentGuide } = state.uiState;
-  return { currentGuide };
-}
-
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    dispatchReleaseAudio: () => dispatch(releaseAudioFile()),
-    dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible)),
-    dispatchSelectContentObject: contentObject =>
-      dispatch(selectCurrentContentObject(contentObject)),
-    selectGuideGroup: id => dispatch(selectCurrentGuideGroup(id)),
-    selectGuide: guide => dispatch(selectCurrentGuide(guide))
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TrailScreen);
+export default TrailScreen;
