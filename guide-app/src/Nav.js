@@ -40,7 +40,6 @@ import useInitialURL from "@hooks/useUniversalLinks";
 import { initializeTracker } from "@utils/MatomoUtils";
 import { setShowFilterButton } from "@actions/uiStateActions";
 import LangService from "./services/langService";
-import { backgroundColor } from "react-native-calendars/src/style";
 
 const Stack = createNativeStackNavigator();
 

@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 import ViewContainer from "@shared-components/view_container";
 import VideoPlayer from "@shared-components/VideoPlayer";
@@ -60,4 +60,4 @@ const VideoScreen = (props) => {
   return displayVideo();
 };
 
-export default memo(VideoScreen);
+export default VideoScreen

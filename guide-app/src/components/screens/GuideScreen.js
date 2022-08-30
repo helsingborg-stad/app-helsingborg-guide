@@ -63,7 +63,6 @@ const GuideScreen = (props: Props) => {
         onPressContentObject(object, index, contentObjects);
       } else {
         setRedirect(false);
-        console.log("not found guide");
         navigation.navigate("NotFoundScreen");
       }
     }
@@ -85,6 +84,7 @@ const GuideScreen = (props: Props) => {
       order: obj?.order,
       swipeable: true,
       path: newPath,
+      disableShare: params?.disableShare,
     });
   };
 
@@ -93,6 +93,7 @@ const GuideScreen = (props: Props) => {
       <GuideView
         guide={currentGuide}
         onPressContentObject={onPressContentObject}
+        disableShare={params.disableShare}
       />
     ) : (
       <View />

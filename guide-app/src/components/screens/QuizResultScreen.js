@@ -10,7 +10,7 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Colors, TextStyles } from "@assets/styles";
 import { showBottomBar } from "@actions/uiStateActions";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -57,8 +57,6 @@ const QuizResultScreen = (props: Props) => {
       setShareResult("error: ".concat(getErrorString(error)));
     }
   };
-
-  const downloadImage = async () => {};
 
   return (
     <>

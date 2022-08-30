@@ -13,7 +13,11 @@ type Props = {
   onListItemPressed: any,
   showInfoOverlay: boolean,
   onToggleInfoOverlay: () => void,
-  navigation: Object
+  navigation: Object,
+  route: string,
+  path: string,
+  redirect: any,
+  disableShare: Boolean,
 };
 
 function renderDownloadButton() {
@@ -22,7 +26,8 @@ function renderDownloadButton() {
 
 function renderMapInformationOverlay(
   trail: Guide,
-  onToggleInfoOverlay: () => void
+  onToggleInfoOverlay: () => void,
+  disableShare: Boolean,
 ) {
   if (!trail) {
     return null;
@@ -33,17 +38,29 @@ function renderMapInformationOverlay(
         trailInformation={{
           title: trail.name,
           description: trail.description,
-          image: trail.images
+          image: trail.images,
         }}
         onPressFunction={onToggleInfoOverlay}
         downloadComponent={renderDownloadButton}
+        disableShare={disableShare}
       />
     </TouchableWithoutFeedback>
   );
 }
 
 const TrailView = (props: Props) => {
-  const { items, trail, onListItemPressed, onToggleInfoOverlay, showInfoOverlay, navigation, route, path, redirect } = props;
+  const {
+    items,
+    trail,
+    onListItemPressed,
+    onToggleInfoOverlay,
+    showInfoOverlay,
+    navigation,
+    route,
+    path,
+    redirect,
+    disableShare,
+  } = props;
 
   return (
     <View style={styles.container}>
@@ -63,7 +80,7 @@ const TrailView = (props: Props) => {
           redirect={redirect}
         />
         {showInfoOverlay
-          ? renderMapInformationOverlay(trail, onToggleInfoOverlay)
+          ? renderMapInformationOverlay(trail, onToggleInfoOverlay, disableShare)
           : null}
         <AudioPlayerView />
       </View>

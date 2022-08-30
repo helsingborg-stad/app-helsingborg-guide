@@ -35,6 +35,7 @@ type Props = {
   array?: Array,
   order?: number,
   path?: string,
+  disableShare?: Boolean,
 };
 
 function displayTitle(
@@ -154,7 +155,8 @@ const ObjectView = (props: Props) => {
     navigation,
     array,
     order,
-    path
+    path,
+    disableShare,
   } = props;
 
   console.log("THE PATH", path);
@@ -242,12 +244,12 @@ const ObjectView = (props: Props) => {
             />
             {props.contentObject.images[props.imageIndex] && (
               <View style={styles.shareBtn}>
-                <SharingService
+                {!disableShare && <SharingService
                   title={props.contentObject.title}
                   image={props.contentObject.images[props.imageIndex]}
                   sender={this}
                   shareType="share_object"
-                />
+                />}
               </View>
             )}
           </View>

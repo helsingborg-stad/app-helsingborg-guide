@@ -18,7 +18,7 @@ type Props = {
 const TrailScreen = (props: Props) => {
   const { navigation, route } = props;
   const { currentGuide } = useSelector((s) => s.uiState);
-  const { path, redirect } = route?.params || {};
+  const { path, redirect, disableShare } = route?.params || {};
   const dispatch = useDispatch();
   const [showInfoOverlay, setShowInfoOverlay] = useState(false);
 
@@ -64,6 +64,7 @@ const TrailScreen = (props: Props) => {
         navigation={navigation}
         route={route}
         redirect={redirect}
+        disableShare={disableShare}
       />
     </>
   );

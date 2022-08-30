@@ -16,7 +16,8 @@ type TrailInformation = {
 type Props = {
   trailInformation: TrailInformation,
   onPressFunction: () => void,
-  downloadComponent: () => Node
+  downloadComponent: () => Node,
+  disableShare: Boolean,
 };
 
 function renderTitle(trailInformation: TrailInformation) {
@@ -28,9 +29,10 @@ function renderTitle(trailInformation: TrailInformation) {
 
 function renderShareButton(
   trailInformation: TrailInformation,
-  renderingComponent: Component<*>
+  renderingComponent: Component<*>,
+  disableShare: Boolean
 ) {
-  if (trailInformation.title && trailInformation.image) {
+  if ((trailInformation.title && trailInformation.image, !disableShare)) {
     return (
       <View style={styles.shareContainer}>
         <SharingService
@@ -47,7 +49,8 @@ function renderShareButton(
 
 function renderScrollableContent(
   trailInformation: TrailInformation,
-  renderingComponent: Component<*>
+  renderingComponent: Component<*>,
+  disableShare: Boolean,
 ) {
   const style = trailInformation.title
     ? styles.scrollView
@@ -57,7 +60,7 @@ function renderScrollableContent(
     <ScrollView style={style}>
       {renderTitle(trailInformation)}
       <Text style={styles.descriptionText}>{trailInformation.description}</Text>
-      {renderShareButton(trailInformation, renderingComponent)}
+      {renderShareButton(trailInformation, renderingComponent, disableShare)}
     </ScrollView>
   );
 }
@@ -66,7 +69,7 @@ class MapInformationOverlay extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        {renderScrollableContent(this.props.trailInformation, this)}
+        {renderScrollableContent(this.props.trailInformation, this, this.props?.disableShare)}
         <TouchableOpacity
           onPress={this.props.onPressFunction}
           style={styles.closeButtonContainer}

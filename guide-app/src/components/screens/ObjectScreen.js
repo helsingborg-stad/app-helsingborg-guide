@@ -54,15 +54,14 @@ function isMediaAvailable(media?: MediaContent): boolean {
 const ObjectScreen = (props: Props) => {
   const { navigation, route } = props;
   const {
-    title,
     path,
-    redirect,
     array,
     order,
     swipeable,
     scrollable,
     panToIndex,
-    selectObject
+    selectObject,
+    disableShare,
   } = route.params;
   const dispatch = useDispatch();
   const { currentGuide, currentContentObject, currentContentObjectImageIndex } = useSelector((s) => s.uiState);
@@ -149,6 +148,7 @@ const ObjectScreen = (props: Props) => {
         onGoToImage={onGoToImage}
         loadAudioFile={loadAudioFile}
         onGoToVideo={onGoToVideo}
+        disableShare={disableShare}
       />
     </>
   ) : null;

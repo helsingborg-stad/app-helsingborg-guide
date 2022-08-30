@@ -48,6 +48,7 @@ const DownloadsScreen = (props: Props) => {
       navigation.navigate("GuideDetailsScreen", {
         title: title,
         bottomBarOnUnmount: true,
+        disableShare: true,
       });
     } else if (guideType === "trail") {
       dispatch(showBottomBar(false));
@@ -57,6 +58,7 @@ const DownloadsScreen = (props: Props) => {
       navigation.navigate("TrailScreen", {
         title: title,
         bottomBarOnUnmount: true,
+        disableShare: true,
       });
     }
   };

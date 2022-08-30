@@ -91,9 +91,9 @@ class QuizScreen extends Component<Props, State> {
             {
               id: `${quizItem.id}-resp-${index}`,
               type: "user",
-              text: selectedAlternative.text
+              text: selectedAlternative.text,
             },
-            ...followUps
+            ...followUps,
           ];
         });
       }
