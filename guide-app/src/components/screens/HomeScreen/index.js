@@ -102,10 +102,6 @@ const HomeScreen = (props: Props) => {
   const labels = [...navigationCategoryLabels, "map"];
 
   useEffect(() => {
-    navigation.setOptions({
-      title: LangService.strings.APP_NAME,
-      ...HeaderStyles.noElevation,
-    })
     dispatchFetchAllGuidesforAllGroups();
   }, []);
 

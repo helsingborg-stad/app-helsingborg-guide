@@ -44,11 +44,6 @@ const LocationScreen = (props: Props) => {
   const { clearLinking } = useDeepLinking();
 
   useEffect(() => {
-    navigation.setOptions({
-      title: params.title || "",
-      headerRight: () => <View />,
-      headerLeft: () => <HeaderBackButton navigation={navigation} path={params.path} />
-    });
 
     return () => {
       if (params && params?.bottomBarOnUnmount) {

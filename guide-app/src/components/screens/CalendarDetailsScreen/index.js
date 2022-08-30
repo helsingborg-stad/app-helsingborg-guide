@@ -26,14 +26,6 @@ const CalendarDetailsScreen = (props: Props) => {
 
 
   useEffect(() => {
-    navigation.setOptions({
-      title: event?.name || "Event",
-      headerLeft: () => <HeaderBackButton
-        navigation={navigation}
-        path={route?.params?.path} />,
-      headerRight: () => <View style={{ width: 36 }} />
-    });
-
     let arr = [];
     event?.eventLink && arr.push({ id: "information", title: "INFORMATION", content: "" });
     event?.location && arr.push({ id: "location", title: "LOCATION", content: "" });

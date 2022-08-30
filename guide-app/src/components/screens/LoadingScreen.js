@@ -1,27 +1,16 @@
-import React, { useState, useEffect, Component } from "react";
+import React from "react";
 import {
   View,
-  Text,
   StyleSheet,
-  Dimensions,
-  Image,
-  LayoutAnimation,
   ActivityIndicator
 } from "react-native";
 import ViewContainer from "@shared-components/view_container";
 import { Colors } from "@assets/styles";
-import LangService from "@services/langService";
-import { useSelector, useDispatch } from "react-redux";
-
-const TIME_OUT = 1000;
-const LONG_TIME_OUT = 7000;
-
 
 const styles = StyleSheet.create({
   splash: {
     backgroundColor: Colors.white
-  },
-  wrapper: {
+  },  wrapper: {
     flex: 1,
     zIndex: 10
   },
@@ -32,16 +21,7 @@ const styles = StyleSheet.create({
 });
 
 
-const LoadingScreen = (props) => {
-  const { navigation } = useSelector(s => s);
-  const { params } = props?.navigation?.state;
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, [params]);
-
+const LoadingScreen = () => {
 
   return (
     <ViewContainer style={styles.splash}>

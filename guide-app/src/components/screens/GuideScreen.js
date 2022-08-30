@@ -46,18 +46,6 @@ const GuideScreen = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    if (params) {
-      const { path } = params || {};
-      const title = currentGuide ? currentGuide.name : null;
-      navigation.setOptions({
-        title,
-        headerRight: () => <View style={{ width: 36 }} />,
-        headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
-      });
-    }
-  }, [params]);
-
-  useEffect(() => {
     if (!navigation.isFocused()) {
       clearLinking(navigation);
     }

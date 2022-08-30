@@ -34,8 +34,6 @@ const ScanScreen = (props: Props) => {
   useEffect(() => {
     if (navigation.isFocused()) {
       navigation.setOptions({
-        title: LangService.strings.SCAN,
-        headerLeft: () => <View style={{ width: 36 }} />,
         headerRight: () => <InfoOverlayToggleView onToggleInfoOverlay={onToggleInfoOverlay} />
       });
       scannerRef?.current?.reactivate();

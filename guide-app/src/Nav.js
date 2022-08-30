@@ -6,6 +6,7 @@ import Orientation from "react-native-orientation-locker";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HeaderBackButton from "@shared-components/HeaderBackButton";
+import HeaderFiller from "@shared-components/HeaderFiller";
 import { navigationRef } from "@utils/NavigationUtils";
 import { UNIVERSAL_LINKING_URL } from "@data/endpoints";
 
@@ -49,10 +50,7 @@ const prefix = "guidehbg://";
 const config = {
   screens: {
     HomeScreen: "home/:type?/:id_1?/:id_2?/:id_3?",
-    CalendarScreen: "calendar/:id",
-    WelcomeScreen: "",
-    SearchObjectScreen: "",
-    ARIntroductionScreen: ""
+    CalendarScreen: "calendar/:id"
   }
 };
 
@@ -71,16 +69,34 @@ const RootStack = () => (
       name={"HomeScreen"}
       component={HomeScreen}
       options={{
-        header: () => null
+        header: () => null,
+        ...HeaderStyles.noElevation
       }}
     />
     <Stack.Screen name={"CalendarScreen"} component={CalendarScreen} options={{ header: () => null }} />
-    <Stack.Screen name={"TrailScreen"} component={TrailScreen} />
+    <Stack.Screen
+      name={"TrailScreen"}
+      component={TrailScreen}
+      options={({ navigation, route }) => {
+        const { title, path } = route?.params || {};
+        return ({
+          title,
+          headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
+        });
+      }} />
     <Stack.Screen
       name={"LocationScreen"}
       component={LocationScreen}
-
+      options={({ navigation, route }) => {
+        const { title, path } = route.params || {};
+        return ({
+          title: title || LangService.strings.LOCATION,
+          headerRight: () => <HeaderFiller />,
+          headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
+        });
+      }}
     />
+
     <Stack.Screen name={"ObjectScreen"} component={ObjectScreen}
                   options={({ navigation, route }) => {
                     const { title, path, scrollable, panToIndex, redirect, array, order } = route.params || {};
@@ -99,7 +115,7 @@ const RootStack = () => (
                           }}
                         />
                       ),
-                      headerRight: () => <View style={{ width: 36 }} />
+                      headerRight: () => <HeaderFiller />
                     });
                   }}
     />
@@ -108,9 +124,15 @@ const RootStack = () => (
     <Stack.Screen
       name={"GuideDetailsScreen"}
       component={GuideScreen}
-      options={() => ({
-        headerMode: "screen"
-      })}
+      options={({ navigation, route, props }) => {
+        const { path, title } = route?.params || {};
+        return ({
+          headerMode: "screen",
+          title,
+          headerRight: () => <HeaderFiller />,
+          headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
+        });
+      }}
     />
     <Stack.Screen name={"WebScreen"} component={WebScreen} />
     <Stack.Screen name={"VideoScreen"} component={VideoScreen} />
@@ -124,14 +146,37 @@ const RootStack = () => (
       })}
     />
     <Stack.Screen name={"DownloadsScreen"} component={DownloadsScreen} />
-    <Stack.Screen name={"SettingsScreen"} component={SettingsScreen}
-                  options={{ title: LangService.strings.SETTINGS }} />
-    <Stack.Screen name={"ScanScreen"} component={ScanScreen} />
+    <Stack.Screen
+      name={"SettingsScreen"}
+      component={SettingsScreen}
+      options={{
+        title: LangService.strings.SETTINGS,
+        headerLeft: () => null
+      }} />
+    <Stack.Screen
+      name={"ScanScreen"}
+      component={ScanScreen}
+      options={() => {
+        return ({
+          title: LangService.strings.SCAN,
+          headerLeft: () => <HeaderFiller />,
+          headerRight: () => <HeaderFiller />
+        });
+      }}
+    />
     <Stack.Screen name={"DebugScreen"} component={DebugScreen} />
     <Stack.Screen name={"CategoryMapScreen"} component={CategoryMapScreen} />
     <Stack.Screen
       name={"CalendarDetailsScreen"}
       component={CalendarDetailsScreen}
+      options={({ navigation, route }) => {
+        const { event, path } = route.params || {};
+        return ({
+          title: event?.name || "Event",
+          headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />,
+          headerRight: () => <HeaderFiller />
+        });
+      }}
     />
     <Stack.Screen
       name={"NotFoundScreen"}

@@ -34,10 +34,7 @@ const TrailScreen = (props: Props) => {
   useEffect(() => {
     if (navigation.isFocused()) {
       navigation.setOptions({
-        title,
-        headerRight: () => <InfoOverlayToggleView onToggleInfoOverlay={onToggleInfoOverlay} />,
-        headerLeft: () => <HeaderBackButton navigation={navigation} path={path} />
-      });
+        headerRight: () => <InfoOverlayToggleView onToggleInfoOverlay={onToggleInfoOverlay} />,      });
     }
   }, [navigation.isFocused()]);
 
