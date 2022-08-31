@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
 
   wrapper: {
-    position: "relative"
+    position: "relative",
   },
 
   search: {},
@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 8
+    marginBottom: 8,
   },
 
   searchTopLeft: {
     fontSize: 22,
     fontWeight: "500",
     fontFamily: "Roboto",
-    color: "#292929"
+    color: "#292929",
   },
 
   searchTopRight: {
@@ -54,19 +54,19 @@ const styles = StyleSheet.create({
   forChildren: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 20
+    marginTop: 20,
   },
 
   forChildrenText: {
-    paddingLeft: 6
+    paddingLeft: 6,
   },
 
   searchBottom: {
-    marginBottom: 24
+    marginBottom: 24,
   },
 
   distance: {
-    marginBottom: 20
+    marginBottom: 20,
   },
 
   distanceText: {
@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
-    marginTop: -10
+    marginTop: -10,
   },
 
   distanceValue: {
     fontFamily: "Roboto",
     fontWeight: "400",
-    fontSize: 16
+    fontSize: 16,
   },
 
   toggleSettings: {
@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     letterSpacing: 0.91,
   },
-
 });
 
 export default styles;

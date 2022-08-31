@@ -29,7 +29,7 @@
     "ios:release": "react-native run-ios --configuration Release",
     "ios:pod:install": "cd ios && pod install && cd ..",
     "ios:clean": "cd ios && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install && cd ..",
-    "ios:clean:build": "cd ios && xcodebuild clean && cd ..",
+    "ios:clean:build": "cd ios && xcodebuild clean && rm -rf ~/Library/Developer/Xcode/DerivedData/* && cd ..",
     "yarn:clean": "rm -rf node_modules && yarn cache clean --force && yarn install"
   },
   "dependencies": {

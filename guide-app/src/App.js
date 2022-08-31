@@ -39,15 +39,10 @@ const GuideApp = () => {
     locationService.getGeoLocation().catch(console.warn);
     locationService.subscribeGeoLocation().catch(console.warn);
 
-    const unsubscribe = NetInfo.addEventListener((state) => {
+    return NetInfo.addEventListener((state) => {
       setNetInfo(state.isConnected);
       store.dispatch(internetChanged(true));
-      if (this?.noNetworkTimer) {
-        clearTimeout(this.noNetworkTimer);
-        this.noNetworkTimer = null;
-      }
     });
-    return unsubscribe;
   }, []);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 // @flow
-import React, { Component } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import { FlatList, StatusBar } from "react-native";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StackActions } from "@react-navigation/native";
 import { Colors } from "@assets/styles";
 import QuizView from "@shared-components/QuizView";
@@ -11,149 +11,127 @@ import {
   selectDialogChoiceAction,
   resetDialogChoicesAction,
 } from "@actions/quizActions";
-import { showBottomBar } from "@actions/uiStateActions";
 
 type Props = {
   navigation: Object,
   route: Object,
-  latestQuestionId: string,
-  selectedDialogChoiceIds: [string],
-  setLatestQuestionId: (string) => void,
-  selectDialogChoice: (DialogChoice) => void,
-  resetDialogChoices: () => void,
-  dispatchShowBottomBar(visible: boolean): void,
 };
 
-type State = {
-  items: QuizItem[],
-  botIsTyping: boolean,
-};
+const buildHistory = (
+  history: QuizItem[],
+  selectedChoices: DialogChoice[]
+): QuizItem[] => {
+  const builtHistory = history.flatMap((quizItem) => {
+    if (quizItem.type === "button" || quizItem.type === "dialog") {
+      const filteredChoices = selectedChoices.filter(
+        (choice) => choice.questionId === quizItem.id
+      );
+      const uniqueAnswers = filteredChoices.reduce((acc, current) => {
+        const x = acc.find(
+          (item) => item.alternativeId === current.alternativeId
+        );
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
 
-class QuizScreen extends Component<Props, State> {
-  static buildHistory = (
-    history: QuizItem[],
-    selectedChoices: DialogChoice[]
-  ): QuizItem[] => {
-    const builtHistory = history.flatMap((quizItem) => {
-      if (quizItem.type === "button" || quizItem.type === "dialog") {
-        const filteredChoices = selectedChoices.filter(
-          (choice) => choice.questionId === quizItem.id
+      return uniqueAnswers.flatMap((choice, index) => {
+        const selectedAlternative = quizItem.alternatives.find(
+          (alt) => alt.id === choice.alternativeId
         );
 
-        const uniqueAnswers = filteredChoices.reduce((acc, current) => {
-          const x = acc.find(
-            (item) => item.alternativeId === current.alternativeId
-          );
-          if (!x) {
-            return acc.concat([current]);
-          } else {
-            return acc;
-          }
-        }, []);
+        if (!selectedAlternative) {
+          return [];
+        }
 
-        return uniqueAnswers.flatMap((choice, index) => {
-          const selectedAlternative = quizItem.alternatives.find(
-            (alt) => alt.id === choice.alternativeId
-          );
+        const followUps = (selectedAlternative.followups || []).map(
+          (followUp) => ({
+            id: followUp.id,
+            type: "bot",
+            text: followUp.text,
+          })
+        );
 
-          if (!selectedAlternative) {
-            return [];
-          }
-
-          const followUps = (selectedAlternative.followups || []).map(
-            (followUp) => ({
-              id: followUp.id,
-              type: "bot",
-              text: followUp.text,
-            })
-          );
-
-          let records = [];
-          // Only show the dialog record for the first choice (when interactive skipRecord is used)
-          if (quizItem.type === "dialog" && index === 0) {
-            records = [
-              {
-                id: `${quizItem.id}-record`,
-                type: "dialogrecord",
-                icon: quizItem.icon,
-                title: quizItem.title,
-                message: quizItem.message,
-              },
-            ];
-          }
-
-          return [
-            ...records,
+        let records = [];
+        // Only show the dialog record for the first choice (when interactive skipRecord is used)
+        if (quizItem.type === "dialog" && index === 0) {
+          records = [
             {
-              id: `${quizItem.id}-resp-${index}`,
-              type: "user",
-              text: selectedAlternative.text,
+              id: `${quizItem.id}-record`,
+              type: "dialogrecord",
+              icon: quizItem.icon,
+              title: quizItem.title,
+              message: quizItem.message,
             },
-            ...followUps,
           ];
-        });
-      }
+        }
 
-      return quizItem;
-    });
-
-    builtHistory.reverse();
-
-    return builtHistory;
-  };
-
-  constructor(props) {
-    super(props);
-
-    const { quiz } = props.route.params;
-    this.quiz = quiz;
-    const quizItems = [...quiz.steps];
-
-    this.startItem = quizItems.find((item) => item.type === "start");
-
-    this.latestQuestionIndex = quizItems.findIndex(
-      (element) => element.id === props.latestQuestionId
-    );
-
-    this.upcomingItems =
-      this.latestQuestionIndex > 0
-        ? quizItems.slice(this.latestQuestionIndex)
-        : [...quizItems];
-
-    this.state = {
-      botIsTyping: false,
-      items: QuizScreen.buildHistory(
-        this.latestQuestionIndex > 0
-          ? quizItems.slice(0, this.latestQuestionIndex)
-          : [],
-        props.selectedDialogChoiceIds
-      ),
-    };
-  }
-
-  componentDidMount() {
-    if (this.latestQuestionIndex >= 0) {
-      this.displayNextItem();
+        return [
+          ...records,
+          {
+            id: `${quizItem.id}-resp-${index}`,
+            type: "user",
+            text: selectedAlternative.text,
+          },
+          ...followUps,
+        ];
+      });
     }
-  }
+    return quizItem;
+  });
 
-  componentWillUnmount() {
-    // const { navigation, route } = this.props;
-    // if (route.params && route.params.bottomBarOnUnmount) {
-    //   this.props.dispatchShowBottomBar(true);
-    // }
-    clearTimeout(this.timeout);
-  }
+  builtHistory.reverse();
+  return builtHistory;
+};
 
-  displayNextItem = () => {
-    const item = this.upcomingItems[0];
-    this.upcomingItems.splice(0, 1);
-    const nextItem = this.upcomingItems[0];
+const QuizScreen = (props: Props) => {
+  const { navigation, route } = props || {};
+  const { params } = route || {};
+  const { quiz } = params || {};
+  const dispatch = useDispatch();
+  const { latestQuestionId, selectedDialogChoiceIds } =
+    useSelector((s) => s.quiz) || {};
+
+  const quizItems = [...quiz.steps];
+  const startItem = quizItems.find((item) => item.type === "start");
+  const latestQuestionIndex = quizItems.findIndex(
+    (element) => element.id === latestQuestionId
+  );
+  let upcomingItems =
+    latestQuestionIndex > 0
+      ? quizItems.slice(latestQuestionIndex)
+      : [...quizItems];
+
+  let timeout = null;
+
+  const [botIsTyping, setBotIsTyping] = useState(false);
+  const [items, setItems] = useState(
+    buildHistory(
+      latestQuestionIndex > 0 ? quizItems.slice(0, latestQuestionIndex) : [],
+      selectedDialogChoiceIds
+    )
+  );
+
+  const flatlistRef = createRef<FlatList>();
+
+  useEffect(() => {
+    if (latestQuestionIndex) {
+      displayNextItem();
+    }
+    return () => timeout && clearTimeout(timeout);
+  }, []);
+
+  const displayNextItem = () => {
+    const item = upcomingItems[0];
+    upcomingItems.splice(0, 1);
+    const nextItem = upcomingItems[0];
 
     // enable for debugging result screen
     // this.timeout = setTimeout(this.handleQuizFinished, 500);
 
-    this.setState({ botIsTyping: false });
+    setBotIsTyping(false);
 
     if (!item) {
       return;
@@ -171,44 +149,38 @@ class QuizScreen extends Component<Props, State> {
       delayToNextItem = 1200;
     }
 
-    this.setState(
-      ({ items }) => {
-        return { items: [item, ...items] };
-      },
-      () => {
-        this.scrollToBottom();
-        if (
-          nextItem &&
-          (item.type === "chapter" ||
-            item.type === "text_message" ||
-            item.type === "image" ||
-            item.type === "user" ||
-            item.type === "dialogrecord")
-        ) {
-          if (item.type === "chapter") {
-            AnalyticsUtils.logEvent("quiz_chapter_reached", {
-              name: this.quiz.title,
-              id: item.id,
-            });
-          }
+    setItems((prevItems) => [...prevItems, item]);
 
-          this.setState({
-            botIsTyping:
-              nextItem.type === "text_message" || nextItem.type === "image",
-          });
-          this.timeout = setTimeout(this.displayNextItem, delayToNextItem);
-        } else if (item.type === "start") {
-          this.displayNextItem();
-        } else if (!nextItem && item.type !== "button") {
-          this.timeout = setTimeout(this.handleQuizFinished, 500);
-        } else {
-          this.props.setLatestQuestionId(this.state.items[0].id);
-        }
+    scrollToBottom();
+
+    if (
+      nextItem &&
+      (item.type === "chapter" ||
+        item.type === "text_message" ||
+        item.type === "image" ||
+        item.type === "user" ||
+        item.type === "dialogrecord")
+    ) {
+      if (item.type === "chapter") {
+        AnalyticsUtils.logEvent("quiz_chapter_reached", {
+          name: quiz.title,
+          id: item.id,
+        });
       }
-    );
+      setBotIsTyping(
+        nextItem.type === "text_message" || nextItem.type === "image"
+      );
+      timeout = setTimeout(displayNextItem, delayToNextItem);
+    } else if (item.type === "start") {
+      displayNextItem();
+    } else if (!nextItem && item.type !== "button") {
+      timeout = setTimeout(handleQuizFinished, 500);
+    } else {
+      dispatch(setLatestQuestionIdAction(items[0].id));
+    }
   };
 
-  handlePromptAlternativeSelected = (
+  const handlePromptAlternativeSelected = (
     item: QuizPrompt,
     alternative: QuizPromptAlternative
   ) => {
@@ -231,25 +203,27 @@ class QuizScreen extends Component<Props, State> {
     }
 
     // add all new upcoming items
-    this.upcomingItems = [
+    upcomingItems = [
       { id: `${alternative.id}-resp`, type: "user", text: alternative.text },
       ...followUps,
       ...newPromptItems,
-      ...this.upcomingItems,
+      ...upcomingItems,
     ];
 
-    this.props.selectDialogChoice({
-      questionId: item.id,
-      alternativeId: alternative.id,
-    });
+    dispatch(
+      selectDialogChoiceAction({
+        questionId: item.id,
+        alternativeId: alternative.id,
+      })
+    );
 
     // remove the original prompt item display next item
-    this.setState(({ items }) => {
-      return { items: items.slice(1) };
-    }, this.displayNextItem);
+    let newItems = items.slice(1);
+    setItems(newItems);
+    displayNextItem();
   };
 
-  handleDialogAlternativeSelected = (
+  const handleDialogAlternativeSelected = (
     item: QuizDialog,
     alternative: QuizDialogAlternative
   ) => {
@@ -283,98 +257,63 @@ class QuizScreen extends Component<Props, State> {
     }
 
     // add all new upcoming items
-    this.upcomingItems = [
+    upcomingItems = [
       ...records,
       { id: `${alternative.id}-resp`, type: "user", text: alternative.text },
       ...followUps,
       ...newDialogItems,
-      ...this.upcomingItems,
+      ...upcomingItems,
     ];
-
-    this.props.selectDialogChoice({
-      questionId: item.id,
-      alternativeId: alternative.id,
-    });
+    dispatch(
+      selectDialogChoiceAction({
+        questionId: item.id,
+        alternativeId: alternative.id,
+      })
+    );
 
     // remove the original dialog item display next item
-    this.setState(({ items }) => {
-      return { items: items.slice(1) };
-    }, this.displayNextItem);
+    let newItems = items.slice(1);
+    setItems(newItems);
+    displayNextItem();
   };
 
-  handleQuizFinished = () => {
-    const { navigation, route } = this.props;
-    const { title } = this.quiz;
-
-    this.props.setLatestQuestionId("");
-    this.props.resetDialogChoices();
-
-    AnalyticsUtils.logEvent("quiz_end", { name: title });
+  const handleQuizFinished = () => {
+    dispatch(setLatestQuestionIdAction(""));
+    dispatch(resetDialogChoicesAction());
     navigation.dispatch(
       StackActions.replace("QuizResultScreen", {
         title: route.params.title,
-        quiz: this.quiz,
+        quiz: quiz,
       })
     );
   };
 
-  handleQuizStartAction = () => {
-    const { title } = this.quiz;
-    AnalyticsUtils.logEvent("quiz_start", { name: title });
-
-    this.displayNextItem();
+  const handleQuizStartAction = () => {
+    displayNextItem();
   };
 
-  scrollToBottom() {
-    const flatlist = this.flatlistRef.current;
+  const scrollToBottom = () => {
+    const flatlist = flatlistRef.current;
     flatlist?.scrollToOffset({ offset: 0 });
-  }
-
-  timeout: TimeoutID;
-  upcomingItems: QuizItem[];
-  startItem: QuizItem;
-  flatlistRef = React.createRef<FlatList>();
-  quiz: Quiz;
-  latestQuestionIndex: number;
-
-  render() {
-    return (
-      <>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={Colors.themeSecondary}
-        />
-        <QuizView
-          flatlistRef={this.flatlistRef}
-          items={this.state.items}
-          startItem={this.startItem}
-          botIsTyping={this.state.botIsTyping}
-          onPromptAlternativeSelected={this.handlePromptAlternativeSelected}
-          onDialogAlternativeSelected={this.handleDialogAlternativeSelected}
-          onQuizStartAction={this.handleQuizStartAction}
-        />
-      </>
-    );
-  }
-}
-
-function mapStateToProps(state: RootState) {
-  return {
-    latestQuestionId: state.quiz.latestQuestionId,
-    selectedDialogChoiceIds: state.quiz.selectedDialogChoiceIds,
   };
-}
 
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    setLatestQuestionId: (latestQuestionId: string) =>
-      dispatch(setLatestQuestionIdAction(latestQuestionId)),
-    resetDialogChoices: () => dispatch(resetDialogChoicesAction()),
-    selectDialogChoice: (dialogChoice: DialogChoice) =>
-      dispatch(selectDialogChoiceAction(dialogChoice)),
-    dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible)),
-  };
-}
+  return (
+    <>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={Colors.themeSecondary}
+      />
+      <QuizView
+        flatlistRef={flatlistRef}
+        items={items}
+        startItem={startItem}
+        botIsTyping={botIsTyping}
+        onPromptAlternativeSelected={handlePromptAlternativeSelected}
+        onDialogAlternativeSelected={handleDialogAlternativeSelected}
+        onQuizStartAction={handleQuizStartAction}
+      />
+    </>
+  );
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuizScreen);
+export default QuizScreen;
