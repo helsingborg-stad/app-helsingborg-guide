@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler'
 import React from "react";
-import { AppRegistry } from "react-native";
+import { AppRegistry, View } from "react-native";
 import { persistStore } from 'redux-persist'
 import Orientation from "react-native-orientation-locker";
-import Helsingborg from "guide-app/src/App";
+// import Helsingborg from "guide-app/src/App";
 import useNotifications from "@hooks/useNotifications";
 import FullScreenVideoScreen from "guide-app/src/components/screens/FullScreenVideoScreen";
 import { name as AppName } from "./app.json";
@@ -26,7 +26,8 @@ function HeadlessCheck({ isHeadless }) {
   }
   return <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <Helsingborg />
+      {/*<Helsingborg />*/}
+      <View> </View>
     </PersistGate>
   </Provider>;
 }
