@@ -257,14 +257,15 @@ function mapStateToProps(state: RootState) {
     }),
   ];
 
-  // console.log("categories", categories)
-
   const isFetching = fetchingIds.length > 0;
 
   let items =
     !isFetching && categories.length > 0
       ? categories[currentHomeTab]?.data
       : null;
+
+  // items.map((item) => console.log("le key", item?.guide?.contentObjects[0].title || {}))
+  // console.log("ITEMS BEFORE ANYTHING", items.length);
 
   const coords =
     geolocation?.coords || geolocation?.position?.coords || position?.coords;
@@ -389,7 +390,7 @@ function mapStateToProps(state: RootState) {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch, state: RootState) {
+function mapDispatchToProps(dispatch: Dispatch) {
   return {
     fetchNavigationItems: (code: string, homeTab: number) =>
       dispatch(fetchNavigation(code, homeTab)),

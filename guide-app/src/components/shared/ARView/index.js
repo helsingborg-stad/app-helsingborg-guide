@@ -21,7 +21,7 @@ const ARState = {
   TRANSIENT: "AR_TRANSIENT",
   SUPPORTED: "AR_SUPPORTED",
   UNKNOWN: "AR_UNKNOWN",
-  UNSUPPORTED: "AR_UNSUPPORTED"
+  UNSUPPORTED: "AR_UNSUPPORTED",
 };
 
 type Props = {
@@ -30,11 +30,11 @@ type Props = {
   activeMarker: MapItem,
   onArMarkerPressed: ?(index: number) => void,
   arSupported: boolean,
-  onCameraPermissionDenied: ?() => void
+  onCameraPermissionDenied: ?() => void,
 };
 
 type State = {
-  cameraPermission: ?boolean
+  cameraPermission: ?boolean,
 };
 
 export default class ARView extends Component<Props, State> {
@@ -71,8 +71,8 @@ export default class ARView extends Component<Props, State> {
         userLocation,
         activeMarker,
         onArMarkerPressed,
-        arSupported
-      }
+        arSupported,
+      },
     } = this;
 
     if (cameraPermission !== null) {
@@ -86,7 +86,7 @@ export default class ARView extends Component<Props, State> {
                   items,
                   userLocation,
                   activeMarker,
-                  onArMarkerPressed
+                  onArMarkerPressed,
                 }}
                 autofocus
                 apiKey="B896B483-78EB-42A3-926B-581DD5151EE8"
@@ -104,7 +104,7 @@ export default class ARView extends Component<Props, State> {
             <View
               style={[
                 styles.unsupportedContainer,
-                { paddingTop: SegmentControlHeight + 10 }
+                { paddingTop: SegmentControlHeight + 10 },
               ]}
             >
               <InstructionIllustration

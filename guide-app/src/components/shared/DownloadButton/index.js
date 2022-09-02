@@ -1,14 +1,9 @@
 // @flow
-import React, { Component } from "react";
-import {
-  Platform,
-  Text,
-  TouchableOpacity,
-  View
-} from "react-native";
+import React from "react";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { ProgressView as ProgressViewIOS } from "@react-native-community/progress-view";
 import { ProgressBar as ProgressBarAndroid } from "@react-native-community/progress-bar-android";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import LangService from "@services/langService";
 import IconTextTouchable from "@shared-components/IconTextTouchable";
@@ -18,19 +13,12 @@ import {
   startDownloadGuide,
   pauseDownloadGuide,
   cancelDownloadGuide,
-  resumeDownloadGuide
+  resumeDownloadGuide,
 } from "@actions/downloadGuidesActions";
 import { trackEvent } from "@utils/MatomoUtils";
 
 type Props = {
   style?: any,
-  progress: number,
-  currentGuide?: ?Guide,
-  status: DownloadStatus,
-  startDownload(guide: Guide): void,
-  pauseDownload(guide: Guide): void,
-  cancelDownload(guide: Guide): void,
-  resumeDownload(guide: Guide): void
 };
 
 function renderProgressbar(progress: number) {
@@ -56,19 +44,28 @@ function renderProgressbar(progress: number) {
   );
 }
 
-export class DownloadButton extends Component<Props> {
-  static defaultProps = {
-    style: {}
-  };
+const DownloadButton = (props: Props) => {
+  const { style } = props;
+  const { currentGuide } = useSelector((s) => s.uiState);
+  const { offlineGuides } = useSelector((s) => s.downloadedGuides);
+  const dispatch = useDispatch();
 
-  renderPaused = () => {
-    const { currentGuide } = this.props;
+  let progress = 0;
+  let status: DownloadStatus = "stopped";
+  if (currentGuide) {
+    const offlineGuide = offlineGuides[currentGuide.id];
+    if (offlineGuide) {
+      ({ progress, status } = offlineGuide);
+    }
+  }
+
+  const renderPaused = () => {
     return (
       <View style={styles.cancelResumeContainer}>
         <TouchableOpacity
           onPress={() => {
             if (currentGuide) {
-              this.props.cancelDownload(currentGuide);
+              dispatch(cancelDownloadGuide(currentGuide));
             }
           }}
         >
@@ -79,7 +76,7 @@ export class DownloadButton extends Component<Props> {
         <TouchableOpacity
           onPress={() => {
             if (currentGuide) {
-              this.props.resumeDownload(currentGuide);
+              dispatch(resumeDownloadGuide(currentGuide));
             }
           }}
         >
@@ -91,15 +88,12 @@ export class DownloadButton extends Component<Props> {
     );
   };
 
-  renderDefault = () => {
-    const { progress, currentGuide, status } = this.props;
+  const renderDefault = () => {
     const percentage = Math.min(parseInt(progress * 100), 100);
     const buttonText =
       status === "stopped"
         ? LangService.strings.DOWNLOAD
-        : `${LangService.strings.DOWNLOADING} ${percentage}% ${
-            LangService.strings.DOWNLOADING_PAUSE
-          }`;
+        : `${LangService.strings.DOWNLOADING} ${percentage}% ${LangService.strings.DOWNLOADING_PAUSE}`;
     return (
       <View style={styles.textContainer}>
         <IconTextTouchable
@@ -108,13 +102,10 @@ export class DownloadButton extends Component<Props> {
           onPress={() => {
             if (currentGuide) {
               if (status === "stopped") {
-                this.props.startDownload(currentGuide);
-                trackEvent("download", "download_guide", currentGuide.slug)
-                // AnalyticsUtils.logEvent("download_guide", {
-                //   name: currentGuide.slug
-                // });
+                dispatch(startDownloadGuide(currentGuide));
+                trackEvent("download", "download_guide", currentGuide.slug);
               } else if (status === "pending") {
-                this.props.pauseDownload(currentGuide);
+                dispatch(pauseDownloadGuide(currentGuide));
               }
             }
           }}
@@ -123,57 +114,21 @@ export class DownloadButton extends Component<Props> {
     );
   };
 
-  renderDone = () => (
+  const renderDone = () => (
     <View style={styles.doneContainer}>
       <Icon name="check" size={16} color="green" />
       <Text style={styles.doneText}>{LangService.strings.DOWNLOADED}</Text>
     </View>
   );
 
-  render() {
-    const { style, status, progress } = this.props;
-    return (
-      <View style={[styles.container, style]}>
-        {status === "paused" ? this.renderPaused() : null}
-        {status === "pending" || status === "stopped"
-          ? this.renderDefault()
-          : null}
-        {status === "done" ? this.renderDone() : null}
-        {status !== "done" ? renderProgressbar(progress) : null}
-      </View>
-    );
-  }
-}
+  return (
+    <View style={[styles.container, style]}>
+      {status === "paused" ? renderPaused() : null}
+      {status === "pending" || status === "stopped" ? renderDefault() : null}
+      {status === "done" ? renderDone() : null}
+      {status !== "done" ? renderProgressbar(progress) : null}
+    </View>
+  );
+};
 
-function mapStateToProps(state: RootState) {
-  const { currentGuide } = state.uiState;
-
-  let progress = 0;
-  let status: DownloadStatus = "stopped";
-  if (currentGuide) {
-    const { offlineGuides } = state.downloadedGuides;
-    const offlineGuide = offlineGuides[currentGuide.id];
-    if (offlineGuide) {
-      ({ progress, status } = offlineGuide);
-    }
-  }
-  return {
-    currentGuide,
-    progress,
-    status
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    startDownload: (guide: Guide) => dispatch(startDownloadGuide(guide)),
-    pauseDownload: (guide: Guide) => dispatch(pauseDownloadGuide(guide)),
-    cancelDownload: (guide: Guide) => dispatch(cancelDownloadGuide(guide)),
-    resumeDownload: (guide: Guide) => dispatch(resumeDownloadGuide(guide))
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DownloadButton);
+export default DownloadButton;

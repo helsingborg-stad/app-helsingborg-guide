@@ -85,33 +85,37 @@ const QuizResultScreen = (props: Props) => {
             </TouchableOpacity>
           </View>
           <View style={styles.imagesContainer}>
+            {finish?.images[0]?.url &&
             <Image
               style={styles.finishedImage}
               source={{ uri: finish?.images[0]?.url }}
               resizeMode="contain"
             />
+            }
+            {finish?.images[1]?.url &&
             <Image
               style={styles.finishedImage}
               source={{ uri: finish?.images[1]?.url }}
               resizeMode="contain"
             />
+            }
           </View>
           <View style={styles.bodyContainer}>
             <Text style={styles.bodyTitle}>{finish?.title}</Text>
             <Text style={styles.bodyText}>{finish?.body}</Text>
           </View>
-          {finish?.shareImage?.url && (
-            <TouchableOpacity
-              style={styles.shareContainer}
-              onPress={() => {
-                shareImage().then(() => null);
-              }}
-            >
-              <Text style={styles.shareText}>
-                {finish?.shareTitle || LangService.strings.SHARE}
-              </Text>
-            </TouchableOpacity>
-          )}
+          {/*{finish?.shareImage?.url && (*/}
+          {/*  <TouchableOpacity*/}
+          {/*    style={styles.shareContainer}*/}
+          {/*    onPress={() => {*/}
+          {/*      shareImage().then(() => null);*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    <Text style={styles.shareText}>*/}
+          {/*      {finish?.shareTitle || LangService.strings.SHARE}*/}
+          {/*    </Text>*/}
+          {/*  </TouchableOpacity>*/}
+          {/*)}*/}
         </ScrollView>
       </SafeAreaView>
     </>
@@ -124,8 +128,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.themeSecondary,
   },
   contentContainer: {
-    justifyContent: "space-between",
-    paddingBottom: 60,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+
   },
   titleContainer: {
     marginTop: 16,
@@ -160,6 +166,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     borderRadius: 54,
     minHeight: 54,
+
   },
   shareButton: {
     backgroundColor: "white",
@@ -180,16 +187,19 @@ const styles = StyleSheet.create({
     lineHeight: 37,
   },
   imagesContainer: {
+    flex: 1,
     width: "50%",
     alignSelf: "center",
+    justifyContent: "center",
   },
   finishedImage: {
-    marginHorizontal: 11,
+
     marginBottom: 4,
     width: "100%",
     aspectRatio: 1,
   },
   bodyContainer: {
+    flex: 1,
     flexGrow: 1,
     marginTop: 22,
     justifyContent: "center",

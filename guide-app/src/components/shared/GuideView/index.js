@@ -1,8 +1,8 @@
 // @flow
 
-import React, { Component } from "react";
+import React from "react";
 import { Text, View, Dimensions, StatusBar } from "react-native";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchNavigation } from "@actions/navigationActions";
 import ExpandableView from "@shared-components/ExpandableView";
 import Scrollable from "@shared-components/Scrollable";
@@ -26,7 +26,6 @@ const GuideView = (props: Props) => {
   const { id } = guide;
   const dispatch = useDispatch();
   const { currentLanguage } = useSelector((s) => s.navigation);
-
 
   const renderContentObject = (
     sessionId: number,
@@ -120,19 +119,4 @@ const GuideView = (props: Props) => {
   );
 };
 
-function mapStateToProps(state: RootState) {
-  const { navigation } = state;
-  const { currentLanguage } = navigation;
-
-  return {
-    currentLanguage,
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    fetchNavigationItems: (code: string) => dispatch(fetchNavigation(code)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GuideView);
+export default GuideView;
