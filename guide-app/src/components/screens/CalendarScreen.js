@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addDays, subDays } from "date-fns";
 import { throttle } from "lodash/function";
 
@@ -106,38 +106,16 @@ function NoContent() {
 type Props = {
   navigation: any,
   route: any,
-  items: Event[],
-  showLoadingSpinner: boolean,
-  noContent: boolean,
-  currentLanguage: string,
-  dispatchShowBottomBar(visible: boolean): void,
-  getEvents(
-    currentLanguage: string,
-    dateStart: Date,
-    dateEnd: Date,
-    perPage: any,
-    page: any
-  ): void,
-  resetEvents: any,
-  isFetching: boolean,
 };
 
 const CalendarScreen = (props: Props) => {
-  const {
-    currentLanguage,
-    dispatchShowBottomBar,
-    getEvents,
-    resetEvents,
-    showLoadingSpinner,
-    items,
-    navigation,
-    route,
-    isFetching,
-  } = props;
+  const { navigation, route } = props;
 
   const { params } = route || {};
   const { linkingCalendar } = useDeepLinking();
-
+  const dispatch = useDispatch();
+  const { currentLanguage } = useSelector((s) => s.navigation) || {};
+  const { isFetching, items } = useSelector((s) => s.events) || {};
   const [chosenDate, setChosenDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -148,16 +126,18 @@ const CalendarScreen = (props: Props) => {
 
   useEffect(() => {
     trackScreen("/calendar", "/calendar");
-    dispatchShowBottomBar(true);
-    getEvents(
-      currentLanguage,
-      chosenDate,
-      chosenDate,
-      ITEMS_PER_PAGE,
-      currentPage
-    );
+    dispatch(showBottomBar(true)),
+      dispatch(
+        fetchEvents(
+          currentLanguage,
+          chosenDate,
+          chosenDate,
+          ITEMS_PER_PAGE,
+          currentPage
+        )
+      );
     return () => {
-      resetEvents();
+      dispatch(fetchEventsReset());
       setEvents([]);
       setEndOfContent(false);
       setCurrentPage(1);
@@ -167,7 +147,7 @@ const CalendarScreen = (props: Props) => {
 
   useEffect(() => {
     if (!navigation.isFocused()) {
-      resetEvents();
+      dispatch(fetchEventsReset());
       setEvents([]);
       setEndOfContent(false);
       setCurrentPage(1);
@@ -184,12 +164,14 @@ const CalendarScreen = (props: Props) => {
   const loadMoreContent = () => {
     throttle(() => {
       const nextPage = currentPage + 1;
-      getEvents(
-        currentLanguage,
-        chosenDate,
-        chosenDate,
-        ITEMS_PER_PAGE,
-        nextPage
+      dispatch(
+        fetchEvents(
+          currentLanguage,
+          chosenDate,
+          chosenDate,
+          ITEMS_PER_PAGE,
+          nextPage
+        )
       );
       setCurrentPage(nextPage);
     }, 2500)();
@@ -212,7 +194,9 @@ const CalendarScreen = (props: Props) => {
     setEvents([]);
     setEndOfContent(false);
     setCurrentPage(1);
-    getEvents(currentLanguage, nextDate, nextDate, ITEMS_PER_PAGE, 1);
+    dispatch(
+      fetchEvents(currentLanguage, nextDate, nextDate, ITEMS_PER_PAGE, 1)
+    );
     setChosenDate(nextDate);
   };
 
@@ -221,7 +205,9 @@ const CalendarScreen = (props: Props) => {
     setEvents([]);
     setEndOfContent(false);
     setCurrentPage(1);
-    getEvents(currentLanguage, prevDate, prevDate, ITEMS_PER_PAGE, 1);
+    dispatch(
+      fetchEvents(currentLanguage, prevDate, prevDate, ITEMS_PER_PAGE, 1)
+    );
     setChosenDate(prevDate);
   };
 
@@ -234,7 +220,7 @@ const CalendarScreen = (props: Props) => {
     />
   );
 
-  if (showLoadingSpinner && !events.length) {
+  if (isFetching && !events.length) {
     return (
       <Layout>
         {datePicker}
@@ -262,11 +248,13 @@ const CalendarScreen = (props: Props) => {
   };
 
   const onRefresh = () => {
-    resetEvents();
+    dispatch(fetchEventsReset());
     setEvents([]);
     setEndOfContent(false);
     setCurrentPage(1);
-    getEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, 1);
+    dispatch(
+      fetchEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, 1)
+    );
   };
 
   return (
@@ -304,33 +292,4 @@ const CalendarScreen = (props: Props) => {
   );
 };
 
-function mapStateToProps(state: RootState) {
-  const { navigation, events } = state;
-  const { currentLanguage } = navigation;
-  const { isFetching, items } = events;
-
-  return {
-    isFetching,
-    showLoadingSpinner: isFetching,
-    currentLanguage,
-    items,
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    getEvents: (
-      currentLanguage: string,
-      dateStart: Date,
-      dateEnd: Date,
-      perPage: any,
-      page: any
-    ) =>
-      dispatch(fetchEvents(currentLanguage, dateStart, dateEnd, perPage, page)),
-    resetEvents: () => dispatch(fetchEventsReset()),
-    dispatchShowBottomBar: (visible: boolean) =>
-      dispatch(showBottomBar(visible)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CalendarScreen);
+export default CalendarScreen;

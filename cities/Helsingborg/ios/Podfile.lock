@@ -443,7 +443,7 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
-  - react-native-slider (4.1.12):
+  - react-native-slider (4.3.1):
     - React-Core
   - react-native-version-number (0.3.6):
     - React
@@ -903,7 +903,7 @@ SPEC CHECKSUMS:
   react-native-progress-view: 4d3bbe6a099ba027b1fedb1548c2c87f74249b70
   react-native-restart: 45c8dca02491980f2958595333cbccd6877cb57e
   react-native-safe-area-context: b456e1c40ec86f5593d58b275bd0e9603169daca
-  react-native-slider: 6e9b86e76cce4b9e35b3403193a6432ed07e0c81
+  react-native-slider: d3ae4270cf8a8cc45a69912db0cc42b151560d5a
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
   react-native-video: a4c2635d0802f983594b7057e1bce8f442f0ad28
   react-native-webview: e771bc375f789ebfa02a26939a57dbc6fa897336

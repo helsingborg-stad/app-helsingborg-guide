@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import Slider from "@react-native-community/slider";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -35,7 +35,7 @@ type Props = {
 };
 
 type State = {
-  animValue: Animated.Value
+  animValue: Animated.Value,
 };
 
 function displayControlButton(isPlaying: boolean, dispatchToggle: any): any {
