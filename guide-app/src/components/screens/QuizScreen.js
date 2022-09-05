@@ -11,7 +11,6 @@ import {
   selectDialogChoiceAction,
   resetDialogChoicesAction
 } from "@actions/quizActions";
-import { showBottomBar } from "@actions/uiStateActions";
 
 type Props = {
   navigation: Object,
