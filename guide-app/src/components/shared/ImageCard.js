@@ -66,7 +66,8 @@ const ImageCard = ({
   const displayActivities = () => {
     switch (type) {
       case "guidegroup":
-        const groupAmount = all?.guideGroups?.find((_item) => _item.parentID === id
+        const groupAmount = all?.guideGroups?.find(
+          (_item) => _item.parentID === id
         );
         return groupAmount
           ? (
@@ -85,12 +86,13 @@ const ImageCard = ({
   };
 
   const displayIcon = (icon) => {
-
     switch (icon) {
-      case 10:
-        return "children";
-      case 11:
+      case 9:
         return "map";
+      case 10:
+        return __DEV__ ? "map" : "children";
+      case 11:
+        return __DEV__ ? "children" : "map";
       case 12:
         return "children";
       case 13:
