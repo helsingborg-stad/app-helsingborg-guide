@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { ActivityIndicator, View, StatusBar } from "react-native";
-import HeaderBackButton from "@shared-components/HeaderBackButton";
+import { ActivityIndicator, StatusBar } from "react-native";
 import LocationView from "@shared-components/LocationView";
-import { Colors, HeaderStyles } from "@assets/styles";
+import { Colors } from "@assets/styles";
 import { selectCurrentGuide, showBottomBar, selectCurrentSharingLink } from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
 import useDeepLinking from "@hooks/useDeepLinking";

@@ -5,10 +5,8 @@ import {
   Platform,
   View,
 } from "react-native";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useSelector } from "react-redux";
 import fetchService from "@services/FetchService";
-import * as internetActions from "@actions/internetActions";
 import Colors from "@assets/styles/Colors";
 
 const placeholderImage = require("@assets/images/no-image-featured-image.png");
@@ -24,13 +22,12 @@ type Props = {
   children: Array,
 };
 
-
 const OImage = (props: Props) => {
   const { guideID, spinner, style, resizeMethod, resizeMode, children } = props;
   const [source, setSource] = useState(props.source || null);
   const [loading, setLoading] = useState(false);
-  const [internet] = useState(props.internet);
   const [previousInternet, setPreviousInternet] = useState(null);
+  const internet = useSelector((s) => s.internet);
 
   const updateSource = async () => {
     if (internet.connected !== previousInternet?.connected) {
@@ -133,14 +130,4 @@ const OImage = (props: Props) => {
   return displayImage();
 };
 
-function mapStateToProps(state) {
-  return {
-    internet: state.internet,
-  };
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    internetActions: bindActionCreators(internetActions, dispatch),
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(OImage);
+export default OImage;

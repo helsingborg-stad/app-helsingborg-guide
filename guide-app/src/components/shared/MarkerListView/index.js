@@ -9,7 +9,7 @@ import {
   Text,
   StatusBar,
 } from "react-native";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { isEqual } from "lodash";
 import { Colors } from "@assets/styles";
 import { useRoute } from "@react-navigation/native";
@@ -40,9 +40,6 @@ type Props = {
   showDirections: boolean,
   userLocation: ?GeolocationType,
   supportedNavigationModes?: Array<string>,
-  selectGuide(guide: Guide): void,
-  selectGuideGroup(id: number): void,
-  dispatchSelectContentObject(obj: ContentObject): void,
   path: String,
   keepStatusBar: Boolean,
   currentSharingLink: String,
@@ -53,15 +50,8 @@ type Props = {
 const HalfListMargin = DefaultMargin * 0.5;
 
 const MarkerListView = (props: Props) => {
-  const {
-    supportedNavigationModes,
-    navigation,
-    route,
-    items,
-    userLocation,
-    keepStatusBar,
-    all,
-  } = props;
+  const { supportedNavigationModes, navigation, route, items, keepStatusBar } =
+    props;
   const params = route?.params;
   const redirect = params?.redirect;
   const _route = useRoute();
@@ -78,6 +68,10 @@ const MarkerListView = (props: Props) => {
   const map = useRef(null);
   const [longitudeDelta, setLongitudeDelta] = useState(0);
   let [latitudeDelta, setLatitudeDelta] = useState(0);
+  const dispatch = useDispatch();
+  const userLocation = useSelector((s) => s.geolocation?.position) || {};
+  const { currentSharingLink } = useSelector((s) => s.uiState) || {};
+  const { all } = useSelector((s) => s.guides) || {};
 
   useEffect(() => {
     if (redirect && listRef.current && map.current) {
@@ -178,14 +172,7 @@ const MarkerListView = (props: Props) => {
   };
 
   const onListItemPressed = (listItem: MapItem) => {
-    const {
-      selectGuideGroup,
-      selectGuide,
-      dispatchSelectContentObject,
-      path,
-      currentSharingLink,
-      dispatchCurrentSharingLink,
-    } = props;
+    const { path } = props;
     const { navigate } = navigation;
     const { guide, guideGroup, contentObject } = listItem;
     let sharingLink = currentSharingLink;
@@ -197,9 +184,9 @@ const MarkerListView = (props: Props) => {
       } else {
         sharingLink += `/${guideGroup?.id}`;
       }
-      dispatchCurrentSharingLink(sharingLink);
-      trackScreen("view_location", guideGroup?.slug);
-      selectGuideGroup(guideGroup.id);
+      dispatch(selectCurrentSharingLink(sharingLink)),
+        trackScreen("view_location", guideGroup?.slug);
+      dispatch(selectCurrentGuideGroup(guideGroup.id));
       navigate("LocationScreen", { title: guideGroup.name, path: sharingLink });
       return;
     }
@@ -210,9 +197,9 @@ const MarkerListView = (props: Props) => {
       } else {
         sharingLink += `/${guide?.id}`;
       }
-      dispatchCurrentSharingLink(sharingLink);
-      trackScreen("view_guide", guide?.slug || "");
-      selectGuide(guide);
+      dispatch(selectCurrentSharingLink(sharingLink)),
+        trackScreen("view_guide", guide?.slug || "");
+      dispatch(selectCurrentGuide(guide));
       switch (guideType) {
         case "trail":
           navigate("TrailScreen", { title: guide.name, path: sharingLink });
@@ -227,17 +214,17 @@ const MarkerListView = (props: Props) => {
       }
     }
     if (contentObject) {
-      dispatchSelectContentObject(contentObject);
+      dispatch(selectCurrentContentObject(contentObject));
       let _items = [];
       items.map((item) => _items.push(item?.contentObject));
       const newPath = `${path}/${contentObject?.title}`;
       trackScreen(newPath, newPath);
       sharingLink += `/${contentObject?.id}`;
-      dispatchCurrentSharingLink(sharingLink);
+      dispatch(selectCurrentSharingLink(sharingLink));
       navigate("ObjectScreen", {
         title: contentObject?.title,
         array: _items,
-        selectObject: dispatchSelectContentObject,
+        selectObject: (obj) => dispatch(selectCurrentContentObject(obj)),
         order: contentObject.order,
         swipeable: true,
         scrollable: scrollToIndex,
@@ -522,31 +509,8 @@ const MarkerListView = (props: Props) => {
   );
 };
 
-function mapStateToProps(state: RootState) {
-  const { geolocation, uiState, guides } = state;
-  const { currentSharingLink } = uiState;
-  const { all } = guides;
-
-  return {
-    userLocation: geolocation?.position,
-    currentSharingLink,
-    all,
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    dispatchSelectContentObject: (contentObject) =>
-      dispatch(selectCurrentContentObject(contentObject)),
-    selectGuideGroup: (id) => dispatch(selectCurrentGuideGroup(id)),
-    selectGuide: (guide) => dispatch(selectCurrentGuide(guide)),
-    dispatchCurrentSharingLink: (link: string) =>
-      dispatch(selectCurrentSharingLink(link)),
-  };
-}
-
 MarkerListView.defaultProps = {
   supportedNavigationModes: [NavigationModeUtils.NavigationModes.Map],
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarkerListView);
+export default MarkerListView;

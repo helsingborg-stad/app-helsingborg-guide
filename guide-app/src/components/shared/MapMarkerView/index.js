@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, Platform } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { MapItemUtils } from "@utils";

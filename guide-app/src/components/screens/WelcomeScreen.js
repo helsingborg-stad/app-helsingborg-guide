@@ -18,10 +18,10 @@ const IMAGE1 = require("@assets/images/firstInstructionImage.png");
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1
+    flex: 1,
   },
   swiper: {
-    backgroundColor: Colors.themeSecondary
+    backgroundColor: Colors.themeSecondary,
   },
   dot: {
     backgroundColor: Colors.white,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     height: 9,
     marginVertical: 6,
     marginHorizontal: 10,
-    width: 9
+    width: 9,
   },
   activeDot: {
     backgroundColor: "rgba(0, 0, 0, 0.0)",
@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     height: 14,
     marginVertical: 7,
     marginHorizontal: 10,
-    width: 14
+    width: 14,
   },
   pagination: {
-    top: 300
+    top: 300,
   },
   btnContainer: {
     alignItems: "center",
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 100,
     justifyContent: "center",
-    position: "absolute"
+    position: "absolute",
   },
   btnText: StyleSheetUtils.flatten([
     TextStyles.defaultFontFamily,
@@ -64,16 +64,16 @@ const styles = StyleSheet.create({
       lineHeight: 23,
       textAlign: "center",
       textAlignVertical: "center",
-      includeFontPadding: false
-    }
+      includeFontPadding: false,
+    },
   ]),
   colorBar: {
     left: 0,
     position: "absolute",
     top: 0,
     bottom: 0,
-    width: 20
-  }
+    width: 20,
+  },
 });
 
 const WelcomeScreen = () => {
@@ -124,9 +124,7 @@ const WelcomeScreen = () => {
     AsyncStorage.setItem(IS_WELCOMED, JSON.stringify(true));
     navigation.reset({
       index: 0,
-      routes: [
-        { name: "HomeScreen" }
-      ]
+      routes: [{ name: "HomeScreen" }],
     });
   };
 
@@ -146,6 +144,7 @@ const WelcomeScreen = () => {
 
   const dot = <View style={styles.dot} />;
   const activeDot = <View style={styles.activeDot} />;
+
   return (
     <ViewContainer style={[styles.wrapper]}>
       <Swiper
