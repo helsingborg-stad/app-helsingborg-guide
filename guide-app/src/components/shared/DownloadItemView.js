@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Platform,
   View,
@@ -76,93 +76,83 @@ type Props = {
   onClearPress: any,
 };
 
-export default class DownloadItemView extends Component<Props> {
-  constructor(props: Props) {
-    super(props);
+const DownloadItemView = (props: Props) => {
+  const isCompleted = props.progress >= 1;
+  const color = isCompleted ? Colors.green : Colors.themeControl;
 
-    this.renderProgressBar = this.renderProgressBar.bind(this);
-  }
-
-  renderProgressBar(color) {
+  const renderProgressBar = (_color) => {
     if (Platform.OS === "ios") {
       return (
         <ProgressViewIOS
-          progressTintColor={color}
+          progressTintColor={_color}
           style={styles.progressView}
-          progress={this.props.progress}
+          progress={props.progress}
         />
       );
     }
     return (
       <ProgressBarAndroid
-        color={color}
+        color={_color}
         indeterminate={false}
         styleAttr="Horizontal"
-        progress={this.props.progress}
+        progress={props.progress}
       />
     );
-  }
+  };
 
-  render() {
-    const isCompleted = this.props.progress >= 1;
-    const color = isCompleted ? Colors.green : Colors.themeControl;
+  const resumeIcon = (
+    <Icon name="reload" color={Colors.themeControl} size={25} />
+  );
+  const pauseIcon = <Icon name="stop" color={Colors.themeControl} size={25} />;
 
-    const resumeIcon = (
-      <Icon name="reload" color={Colors.themeControl} size={25} />
-    );
-    const pauseIcon = (
-      <Icon name="stop" color={Colors.themeControl} size={25} />
-    );
-    let icon = this.props.isPaused ? resumeIcon : pauseIcon;
-    icon = isCompleted ? null : icon;
-    const percentage = parseInt(this.props.progress * 100);
-    return (
-      <ViewContainer style={styles.wrapper}>
-        <TouchableOpacity onPress={this.props.onPressItem}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>{this.props.title}</Text>
+  let icon = props.isPaused ? resumeIcon : pauseIcon;
+  icon = isCompleted ? null : icon;
+
+  const percentage = parseInt(props.progress * 100);
+  return (
+    <ViewContainer style={styles.wrapper}>
+      <TouchableOpacity onPress={props.onPressItem}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>{props.title}</Text>
+        </View>
+        <View style={styles.mainContainer}>
+          <View style={styles.avatarContainer}>
+            <TouchableOpacity onPress={props.onPressItem}>
+              <RoundedThumbnail imageSource={{ uri: props.thumbnail }} />
+            </TouchableOpacity>
           </View>
-          <View style={styles.mainContainer}>
-            <View style={styles.avatarContainer}>
-              <TouchableOpacity onPress={this.props.onPressItem}>
-                <RoundedThumbnail imageSource={{ uri: this.props.thumbnail }} />
-              </TouchableOpacity>
+          <View style={styles.progressBarContainer}>
+            <View style={styles.progressTextContainer}>
+              <Text style={styles.progressText}>
+                {isCompleted
+                  ? LangService.strings.DOWNLOADED
+                  : `${LangService.strings.DOWNLOADING} ${percentage}%`}{" "}
+              </Text>
             </View>
-            <View style={styles.progressBarContainer}>
-              <View style={styles.progressTextContainer}>
-                <Text style={styles.progressText}>
-                  {isCompleted
-                    ? LangService.strings.DOWNLOADED
-                    : `${LangService.strings.DOWNLOADING} ${percentage}%`}{" "}
-                </Text>
-              </View>
-              <View style={styles.barContainer}>
-                {this.renderProgressBar(color)}
-              </View>
-            </View>
-            <View style={styles.btnContainer}>
-              <TouchableOpacity
-                style={styles.touchContainer}
-                onPress={
-                  this.props.isPaused
-                    ? this.props.onResumePress
-                    : this.props.onPausePress
-                }
-              >
-                {icon}
-              </TouchableOpacity>
-            </View>
-            <View style={styles.btnContainer}>
-              <TouchableOpacity
-                style={styles.touchContainer}
-                onPress={this.props.onClearPress}
-              >
-                <Icon name="delete" size={25} color={Colors.themeControl} />
-              </TouchableOpacity>
-            </View>
+            <View style={styles.barContainer}>{renderProgressBar(color)}</View>
           </View>
-        </TouchableOpacity>
-      </ViewContainer>
-    );
-  }
-}
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={styles.touchContainer}
+              onPress={
+                props.isPaused ? props.onResumePress : props.onPausePress
+              }
+            >
+              {icon}
+            </TouchableOpacity>
+          </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={styles.touchContainer}
+              onPress={props.onClearPress}
+            >
+              <Icon name="delete" size={25} color={Colors.themeControl} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </ViewContainer>
+  );
+};
+
+export default DownloadItemView;

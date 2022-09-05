@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component, type Node } from "react";
-import { ScrollView, Text, Image, TouchableOpacity, View } from "react-native";
+import React, { type Node } from "react";
+import { Text, Image, TouchableOpacity, View } from "react-native";
 import styles from "./style";
 
 const closeIcon = require("@assets/images/ic_close.png");
@@ -26,9 +26,7 @@ function renderTitle(information: Information) {
   return null;
 }
 
-function renderScrollableContent(
-  information: Information
-) {
+function renderScrollableContent(information: Information) {
   const style = information.title
     ? styles.scrollView
     : styles.scrollViewNoTitle;
@@ -38,27 +36,25 @@ function renderScrollableContent(
       {renderTitle(information)}
       <Text style={styles.descriptionText}>{information.description}</Text>
       <Text style={styles.descriptionText}>{information.additional}</Text>
-      {information?.image ? <View style={styles.image}>
-        {information.image}
-      </View> : null}
+      {information?.image ? (
+        <View style={styles.image}>{information.image}</View>
+      ) : null}
     </View>
   );
 }
 
-class InformationOverlay extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        {renderScrollableContent(this.props.information, this)}
-        <TouchableOpacity
-          onPress={this.props.onPressFunction}
-          style={styles.closeButtonContainer}
-        >
-          <Image style={styles.closeButton} source={closeIcon} />
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
+const InformationOverlay = (props: Props) => {
+  return (
+    <View style={styles.container}>
+      {renderScrollableContent(props.information)}
+      <TouchableOpacity
+        onPress={props.onPressFunction}
+        style={styles.closeButtonContainer}
+      >
+        <Image style={styles.closeButton} source={closeIcon} />
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 export default InformationOverlay;

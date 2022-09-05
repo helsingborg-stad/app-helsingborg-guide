@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   View,
   Image,
   StyleSheet,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
-import PropTypes from "prop-types";
 
 const FULL_WIDTH = Dimensions.get("window").width;
 const FULL_HEIGHT = Dimensions.get("window").height;
@@ -19,85 +18,71 @@ const styles = StyleSheet.create({
     left: 0,
     zIndex: 0,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   image: {
     alignItems: "center",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
   },
   spinner: {
     flex: 3,
     padding: 10,
     alignItems: "center",
-    justifyContent: "flex-start"
-  }
+    justifyContent: "flex-start",
+  },
 });
 
-export default class BackgroundImage extends Component {
-  static propTypes = {
-    source: PropTypes.number.isRequired,
-    style: PropTypes.object,
-    blurRadius: PropTypes.number
+type Props = {
+  source: any,
+  blurRadius: ?number,
+  style: ?Object,
+};
+
+const BackgroundImage = (props: Props) => {
+  const { source, blurRadius, style } = props;
+
+  const [loading, setLoading] = useState(false);
+
+  const onLoadStart = () => {
+    setLoading(true);
   };
 
-  static defaultProps = {
-    style: {},
-    blurRadius: 0
+  const onLoadEnd = () => {
+    setLoading(false);
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: false
-    };
-
-    this.onLoadStart = this.onLoadStart.bind(this);
-    this.onLoadEnd = this.onLoadEnd.bind(this);
-  }
-
-  onLoadStart() {
-    this.setState({ loading: true });
-  }
-  onLoadEnd() {
-    this.setState({ loading: false });
-  }
-
-  displaySpinner() {
-    if (this.state.loading) {
+  const displaySpinner = () => {
+    if (loading) {
       return <ActivityIndicator style={[styles.spinner]} />;
     }
     return null;
-  }
+  };
 
-  displayImage() {
-    const { source } = this.props;
-
+  const displayImage = () => {
     const imageSize = {
       width: FULL_WIDTH,
-      height: FULL_HEIGHT
+      height: FULL_HEIGHT,
     };
+
     return (
       <View>
         <Image
           style={[styles.image, imageSize]}
           source={source}
-          blurRadius={this.props.blurRadius}
-          onLoadStart={this.onLoadStart}
-          onLoadEnd={this.onLoadEnd}
+          blurRadius={blurRadius || 0}
+          onLoadStart={onLoadStart}
+          onLoadEnd={onLoadEnd}
           resizeMethod="scale"
           resizeMode="cover"
         />
-        {this.displaySpinner()}
+        {displaySpinner()}
       </View>
     );
-  }
+  };
 
-  render() {
-    return (
-      <View style={[styles.imageContainer, this.props.style]}>
-        {this.displayImage()}
-      </View>
-    );
-  }
-}
+  return (
+    <View style={[styles.imageContainer, style || {}]}>{displayImage()}</View>
+  );
+};
+
+export default BackgroundImage;

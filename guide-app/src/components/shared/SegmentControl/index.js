@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { View, TouchableOpacity, Text, Animated } from "react-native";
 import styles from "./styles";
 
@@ -7,53 +7,35 @@ type Props = {
   labels: Array<string>,
   initalSelectedIndex?: number,
   onSegmentIndexChange?: ?(index: number) => void,
-  style: any
-};
-type State = {
-  selectedIndex: number
+  style: any,
 };
 
-export default class SegmentControl extends Component<Props, State> {
-  static defaultProps = {
-    initalSelectedIndex: 0,
-    onSegmentIndexChange: null
-  };
+const SegmentControl = (props: Props) => {
+  const { onSegmentIndexChange, labels, style, initalSelectedIndex } =
+    props || {};
+  const [selectedIndex, setSelectedIndex] = useState(
+    props.initalSelectedIndex || 0
+  );
+  let containerWidth = 0;
+  let selectedViewLeftInset = new Animated.Value(0);
 
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      selectedIndex: props.initalSelectedIndex || 0
-    };
-  }
-
-  containerWidth = 0;
-
-  selectedViewLeftInset = new Animated.Value(0);
-
-  onPressSegmentIndex = (index: number) => {
-    const { onSegmentIndexChange, labels } = this.props;
-
-    Animated.spring(this.selectedViewLeftInset, {
-      toValue: (index / labels.length) * this.containerWidth,
+  const onPressSegmentIndex = (index: number) => {
+    Animated.spring(selectedViewLeftInset, {
+      toValue: (index / labels.length) * containerWidth,
       useNativeDriver: true,
     }).start();
-
-    this.setState({ selectedIndex: index });
-
+    setSelectedIndex(index);
     if (onSegmentIndexChange) {
       onSegmentIndexChange(index);
     }
   };
 
-  renderSegmentItem = (label: string, index: number) => {
-    const { selectedIndex } = this.state;
-
+  const renderSegmentItem = (label: string, index: number) => {
     return (
       <TouchableOpacity
         style={styles.segmentItem}
         key={label}
-        onPress={() => this.onPressSegmentIndex(index)}
+        onPress={() => onPressSegmentIndex(index)}
       >
         <Text
           style={
@@ -68,29 +50,28 @@ export default class SegmentControl extends Component<Props, State> {
     );
   };
 
-  render() {
-    const { labels, style, initalSelectedIndex } = this.props;
-    const width = (1 / labels.length) * 100;
-    const selectionViewStyle = {
-      width: `${width}%`,
-      left: this.selectedViewLeftInset
-    };
+  const width = (1 / labels.length) * 100;
+  const selectionViewStyle = {
+    width: `${width}%`,
+    left: selectedViewLeftInset,
+  };
 
-    return (
-      <View
-        style={[styles.container, style]}
-        onLayout={e => {
-          if (this.containerWidth === 0) {
-            this.containerWidth = e.nativeEvent.layout.width;
-            this.selectedViewLeftInset = new Animated.Value(
-              ((initalSelectedIndex || 0) / labels.length) * this.containerWidth
-            );
-          }
-        }}
-      >
-        {labels.map(this.renderSegmentItem)}
-        <Animated.View style={[styles.selectionView, selectionViewStyle]} />
-      </View>
-    );
-  }
-}
+  return (
+    <View
+      style={[styles.container, style]}
+      onLayout={(e) => {
+        if (containerWidth === 0) {
+          containerWidth = e.nativeEvent.layout.width;
+          selectedViewLeftInset = new Animated.Value(
+            ((initalSelectedIndex || 0) / labels.length) * containerWidth
+          );
+        }
+      }}
+    >
+      {labels.map(renderSegmentItem)}
+      <Animated.View style={[styles.selectionView, selectionViewStyle]} />
+    </View>
+  );
+};
+
+export default SegmentControl;

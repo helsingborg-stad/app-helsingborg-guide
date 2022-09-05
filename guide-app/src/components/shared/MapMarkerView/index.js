@@ -1,5 +1,5 @@
 // @flow
-import React, { PureComponent } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Image, Platform } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { MapItemUtils } from "@utils";
@@ -24,62 +24,58 @@ type Props = {
   userLocation: any,
   setActiveMarker: () => void,
   scrollToIndex: () => void,
+  panMapToIndex: () => void,
   navigation: Object,
+  map: any,
+  longitudeDelta: any,
+  latitudeDelta: any,
+  setLongitudeDelta: any,
+  setLatitudeDelta: any,
 };
-type State = {
-  markersFocused: boolean,
-};
 
-class MapMarkerView extends PureComponent<Props, State> {
-  static defaultProps = {
-    showNumberedMapMarkers: true,
-    onMapMarkerPressed: null
-  };
+const MapMarkerView = (props: Props) => {
+  const {
+    items,
+    setActiveMarker,
+    activeMarker,
+    scrollToIndex,
+    panMapToIndex,
+    onMapMarkerPressed,
+    userLocation,
+    navigation,
+    map,
+    setLongitudeDelta,
+    setLatitudeDelta,
+  } = props;
+  let showNumberedMapMarkers = props.hasOwnProperty("showNumberedMapMarkers")
+    ? props.showNumberedMapMarkers
+    : true;
+  const [markersFocused, setMarkersFocused] = useState(false);
+  const [filteredMarkers, setFilteredMarkers] = useState([]);
 
-  constructor(props: Props) {
-    super(props);
+  useEffect(() => {
+    let filtered = filterMarkers(items);
+    setFilteredMarkers(filtered);
+  }, []);
 
-    this.state = {
-      markersFocused: false,
-      filteredMarkers: []
-    };
-  }
-
-  longitudeDelta = 0;
-
-  latitudeDelta = 0;
-
-  map: ?MapView;
-
-  componentDidMount() {
-    let filtered = this.filterMarkers(this.props.items);
-    this.setState({ filteredMarkers: filtered });
-  }
-
-
-  filterMarkers = (markers: MapItem[]) => {
-    if (!this.state.filteredMarkers.length) {
-      const result = markers.map(x => {
-        const objX =
-          x?.guide ||
-          x?.guideGroup ||
-          x?.interactiveGuide;
+  const filterMarkers = (markers: MapItem[]) => {
+    if (!filteredMarkers.length) {
+      const result = markers.map((x) => {
+        const objX = x?.guide || x?.guideGroup || x?.interactiveGuide;
         const locationX = objX?.location;
         const nameX = objX?.name;
         if (locationX && nameX) {
           const latitudeX = locationX.latitude;
           const longitudeX = locationX.longitude;
-          markers.map(y => {
-            const objY =
-              y?.guide ||
-              y?.guideGroup ||
-              y?.interactiveGuide;
+          markers.map((y) => {
+            const objY = y?.guide || y?.guideGroup || y?.interactiveGuide;
             const locationY = objY?.location;
             const nameY = objY?.name;
             if (locationY && nameY) {
               const latitudeY = locationY.latitude;
               const longitudeY = locationY.longitude;
-              let samecordinates = (longitudeX === longitudeY && latitudeX === latitudeY);
+              let samecordinates =
+                longitudeX === longitudeY && latitudeX === latitudeY;
               if (samecordinates && nameX !== nameY) {
                 if (x?.duplicates) {
                   x.duplicates = x.duplicates + 1;
@@ -94,34 +90,31 @@ class MapMarkerView extends PureComponent<Props, State> {
         return x;
       });
       return result;
-    } else return this.state.filteredMarkers;
+    } else return filteredMarkers;
   };
 
-  focusMarkers(markers: MapItem[]) {
+  const focusMarkers = (markers: MapItem[]) => {
     if (!markers) {
       return;
     }
-
     const padding = 50;
     const edgePadding = {
       top: padding,
       right: padding,
       bottom: padding,
-      left: padding
+      left: padding,
     };
     const options = {
       edgePadding,
-      animated: false
+      animated: false,
     };
     const locations: Location[] = MapItemUtils.getLocations(markers);
-    if (this.map) {
-      this.map.fitToCoordinates(locations, options);
+    if (map.current) {
+      map.current.fitToCoordinates(locations, options);
     }
-  }
+  };
 
-
-  markerImageForTrailObject(trailObject: MapItem, active: boolean) {
-    const { showNumberedMapMarkers } = this.props;
+  const markerImageForTrailObject = (trailObject: MapItem, active: boolean) => {
     const { guide } = trailObject;
     let image;
     if (showNumberedMapMarkers) {
@@ -137,22 +130,18 @@ class MapMarkerView extends PureComponent<Props, State> {
       image = active ? locationMarkerActive : locationMarkerInactive;
     }
     return image;
-  }
+  };
 
-  numberedMapViewMarker = (mapItem: MapItem, index: number) => {
+  const numberedMapViewMarker = (mapItem: MapItem, index: number) => {
     const id = MapItemUtils.getIdFromMapItem(mapItem);
     const location: ?Location = MapItemUtils.getLocationFromItem(mapItem);
     // TODO: something better, like a default marker telling there's a location missing?
     if (!location) {
       return null;
     }
-
     const { duplicates } = mapItem;
-
-
-    const { activeMarker } = this.props;
     const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
-    const markerImage = this.markerImageForTrailObject(mapItem, active);
+    const markerImage = markerImageForTrailObject(mapItem, active);
     const numberString: string = `${index}`;
     // Warning: zIndex is bugged on iOS 11!
     // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
@@ -165,7 +154,7 @@ class MapMarkerView extends PureComponent<Props, State> {
         key={id}
         coordinate={location}
         identifier={id}
-        onPress={!active ? () => this.onMarkerPressed(mapItem) : null}
+        onPress={!active ? () => onMarkerPressed(mapItem) : null}
         anchor={{ x: 0.5, y: 1 }}
         centerOffset={{ x: 0.5, y: 1 }}
         zIndex={zIndex}
@@ -198,16 +187,25 @@ class MapMarkerView extends PureComponent<Props, State> {
               </Text>
             </View>
           </View>
-          {duplicates && <View style={active ? styles.numberedMarkerDuplicatesActive : styles.numberedMarkerDuplicates}>
-            <Text style={styles.numberedMarkerDuplicatesText}>+{duplicates}</Text>
-          </View>
-          }
+          {duplicates && (
+            <View
+              style={
+                active
+                  ? styles.numberedMarkerDuplicatesActive
+                  : styles.numberedMarkerDuplicates
+              }
+            >
+              <Text style={styles.numberedMarkerDuplicatesText}>
+                +{duplicates}
+              </Text>
+            </View>
+          )}
         </View>
       </Marker>
     );
   };
 
-  defaultMapViewMarker = (mapItem: MapItem, index: number) => {
+  const defaultMapViewMarker = (mapItem: MapItem, index: number) => {
     const id = MapItemUtils.getIdFromMapItem(mapItem);
     const location: ?Location = MapItemUtils.getLocationFromItem(mapItem);
 
@@ -216,9 +214,8 @@ class MapMarkerView extends PureComponent<Props, State> {
       return null;
     }
 
-    const { activeMarker } = this.props;
     const active = MapItemUtils.getIdFromMapItem(activeMarker) === id;
-    const markerImage = this.markerImageForTrailObject(mapItem, active);
+    const markerImage = markerImageForTrailObject(mapItem, active);
     // Warning: zIndex is bugged on iOS 11!
     // Bug causes map markers to ignore zIndex when zIndex is changed by any means other than actually tapping the marker. (i.e. when changing by swiping the list)
     // AIRMapMarker has been edited to prioritize any marker with an zIndex of exactly 999 over any other marker.
@@ -230,126 +227,111 @@ class MapMarkerView extends PureComponent<Props, State> {
         coordinate={location}
         identifier={id}
         image={markerImage}
-        onPress={!active ? () => this.onMarkerPressed(mapItem) : null}
+        onPress={!active ? () => onMarkerPressed(mapItem) : null}
         zIndex={zIndex}
       />
     );
   };
 
-  renderMapMarkers(items) {
-    const { showNumberedMapMarkers } = this.props;
-    const { filteredMarkers } = this.state;
+  const renderMapMarkers = () => {
     return filteredMarkers.map((item, index) => {
       if (showNumberedMapMarkers) {
-        return this.numberedMapViewMarker(item, index + 1);
+        return numberedMapViewMarker(item, index + 1);
       }
-      return this.defaultMapViewMarker(item, index + 1);
+      return defaultMapViewMarker(item, index + 1);
     });
-  }
+  };
 
-  onMapReady = () => {
-    const { items, setActiveMarker, scrollToIndex } = this.props;
-    const { markersFocused } = this.state;
-    const location = items[0]?.contentObject?.location || items[0]?.guide?.location || items[0]?.interactiveGuide?.location;
-    console.log("location", location);
+  const onMapReady = () => {
+    const location =
+      items[0]?.contentObject?.location ||
+      items[0]?.guide?.location ||
+      items[0]?.interactiveGuide?.location;
     if (items.length > 0 && location && !markersFocused) {
       setActiveMarker(items[0]);
       scrollToIndex(0);
-      this.focusMarkers(items);
-      this.setState({ markersFocused: true });
-      this.panMapToIndex(0);
+      focusMarkers(items);
+      setMarkersFocused(true);
+      panMapToIndex(0);
     }
   };
 
-  onMarkerPressed = (marker: MapItem) => {
-    const { onMapMarkerPressed } = this.props;
-    const { filteredMarkers } = this.state;
-    const index = filteredMarkers.findIndex(item => item === marker);
-    console.log("the index", index);
+  const onMarkerPressed = (marker: MapItem) => {
+    const index = filteredMarkers.findIndex((item) => item === marker);
     if (onMapMarkerPressed) {
       onMapMarkerPressed(index);
     }
-    this.panMapToIndex(index);
+    panMapToIndex(index);
   };
 
-  panMapToIndex = (index: number) => {
-    const { items } = this.props;
-    const marker = items[index];
-    const { activeMarker } = this.props;
-    if (marker !== activeMarker) {
-      const location = MapItemUtils.getLocationFromItem(marker);
-      if (this.map && location) {
-        this.map.animateToRegion({
-          latitude: location.latitude,
-          longitude: location.longitude,
-          latitudeDelta: this.latitudeDelta,
-          longitudeDelta: this.longitudeDelta
-        });
-      }
-    }
-  };
+  const userCoords =
+    userLocation?.coords ||
+    userLocation?.position?.coords ||
+    userLocation?.coords;
+  const userLatitude = userCoords?.latitude;
+  let initialLocation;
+  const userLongitude = userCoords?.longitude;
+  const cityLatitude = 56.04673;
+  const cityLongitude = 12.69437;
+  let fallbackLatitude;
+  let fallbackLongitude;
 
-  render() {
-    const { items, userLocation, navigation } = this.props;
-    const userCoords = userLocation?.coords || userLocation?.position?.coords || userLocation?.coords;
-    const userLatitude = userCoords?.latitude;
-    let initialLocation;
-    const userLongitude = userCoords?.longitude;
-    const cityLatitude = 56.04673;
-    const cityLongitude = 12.69437;
-    let fallbackLatitude;
-    let fallbackLongitude;
-    // CHECK IF USER IS CURRENTLY IN HELSINGBORG
-    if (userLatitude && userLongitude && userLatitude < 56.10673 && userLatitude > 56.00673 && userLongitude < 12.79437 && userLongitude > 12.65437) {
-      fallbackLatitude = userLatitude;
-      fallbackLongitude = userLongitude;
-    } else {
-      fallbackLatitude = cityLatitude;
-      fallbackLongitude = cityLongitude;
-    }
-    const latitude = initialLocation?.latitude || fallbackLatitude;
-    const longitude = initialLocation?.longitude || fallbackLongitude;
-
-    const coords = LocationUtils.getRegionForCoordinates([
-      { latitude: latitude, longitude: longitude },
-      { latitude: Platform.OS === "ios" ? 0 : latitude, longitude: Platform.OS === "ios" ? 0 : longitude }
-    ])
-
-    return (
-      <View style={styles.container}>
-        {navigation.isFocused() && latitude && longitude ?
-          <MapView
-            zoomEnabled={true}
-            minZoomLevel={11}
-            maxZoomLevel={17}
-            ref={(ref) => {
-              this.map = ref;
-            }}
-            initialRegion={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: coords.latitudeDelta,
-              longitudeDelta: coords.longitudeDelta
-            }}
-            onRegionChange={() => null}
-            onRegionChangeComplete={(e) => {
-              this.longitudeDelta = e.longitudeDelta;
-              this.latitudeDelta = e.latitudeDelta;
-            }}
-            style={styles.map}
-            showsUserLocation={true}
-            onMapReady={() => this.onMapReady()}
-            loadingEnabled={Platform.OS === "ios"}
-          >
-            {this.renderMapMarkers(items)}
-
-            {/*{this.state.filteredMarkers.length ? this.renderMapMarkers() : null}*/}
-          </MapView> : null}
-      </View>
-    );
+  // CHECK IF USER IS CURRENTLY IN HELSINGBORG
+  if (
+    userLatitude &&
+    userLongitude &&
+    userLatitude < 56.10673 &&
+    userLatitude > 56.00673 &&
+    userLongitude < 12.79437 &&
+    userLongitude > 12.65437
+  ) {
+    fallbackLatitude = userLatitude;
+    fallbackLongitude = userLongitude;
+  } else {
+    fallbackLatitude = cityLatitude;
+    fallbackLongitude = cityLongitude;
   }
-}
+  const latitude = initialLocation?.latitude || fallbackLatitude;
+  const longitude = initialLocation?.longitude || fallbackLongitude;
 
+  const coords = LocationUtils.getRegionForCoordinates([
+    { latitude: latitude, longitude: longitude },
+    {
+      latitude: Platform.OS === "ios" ? 0 : latitude,
+      longitude: Platform.OS === "ios" ? 0 : longitude,
+    },
+  ]);
+
+  return (
+    <View style={styles.container}>
+      {navigation.isFocused() && latitude && longitude ? (
+        <MapView
+          zoomEnabled={true}
+          minZoomLevel={11}
+          maxZoomLevel={17}
+          ref={map}
+          initialRegion={{
+            latitude: latitude,
+            longitude: longitude,
+            latitudeDelta: coords.latitudeDelta,
+            longitudeDelta: coords.longitudeDelta,
+          }}
+          onRegionChange={() => null}
+          onRegionChangeComplete={(e) => {
+            setLongitudeDelta(e.longitudeDelta);
+            setLatitudeDelta(e.latitudeDelta);
+          }}
+          style={styles.map}
+          showsUserLocation={true}
+          onMapReady={() => onMapReady()}
+          loadingEnabled={Platform.OS === "ios"}
+        >
+          {renderMapMarkers(items)}
+          {/*{this.state.filteredMarkers.length ? this.renderMapMarkers() : null}*/}
+        </MapView>
+      ) : null}
+    </View>
+  );
+};
 
 export default MapMarkerView;
-

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { memo, useState } from "react";
 import { View, StyleSheet, Dimensions, ActivityIndicator } from "react-native";
 import OImage from "./image";
 
@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
   imageContainer: {},
   image: {
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
-  spinner: { flex: 1, width: 100, height: 100 }
+  spinner: { flex: 1, width: 100, height: 100 },
 });
 
 type Props = {
@@ -19,46 +19,37 @@ type Props = {
   width: any,
   height: any,
   blur: any,
-  children: Array
+  children: Array,
 };
 
-export default class ImageView extends Component<Props> {
-  constructor(props) {
-    super(props);
+const ImageView = (props: Props) => {
+  const { source, guideID, width, height, blur, children } = props;
+  const [loading, setLoading] = useState(false);
 
-    this.state = {
-      loading: false
-    };
+  const onLoadStart = () => {
+    setLoading(true);
+  };
+  const onLoadEnd = () => {
+    setLoading(false);
+  };
 
-    this.onLoadStart = this.onLoadStart.bind(this);
-    this.onLoadEnd = this.onLoadEnd.bind(this);
-  }
-
-  onLoadStart() {
-    this.setState({ loading: true });
-  }
-  onLoadEnd() {
-    this.setState({ loading: false });
-  }
-
-  _getOptWidth(width) {
+  const _getOptWidth = (width) => {
     return width * (Dimensions.get("window").width / width);
-  }
+  };
 
-  _getOptHeight(height) {
+  const _getOptHeight = (height) => {
     return height * (Dimensions.get("window").height / height);
-  }
+  };
 
-  displaySpinner() {
-    if (this.state.loading) {
+  const displaySpinner = () => {
+    if (loading) {
       return <ActivityIndicator style={[styles.spinner]} />;
     }
-  }
+  };
 
-  displayImage() {
+  const displayImage = () => {
     // If no source image is defined, use placeholder image
-    let uri = this.props.source;
-    const { guideID } = this.props;
+    let uri = source;
     if (!uri || !uri.uri) {
       uri = require("@assets/images/no-image-featured-image.png");
     }
@@ -68,36 +59,35 @@ export default class ImageView extends Component<Props> {
     let displayHeight = (displayWidth / 16) * 9;
 
     // If height and/or width is defined, use that instead
-    if (this.props.width) {
-      displayWidth = this._getOptWidth(this.props.width);
+    if (width) {
+      displayWidth = _getOptWidth(width);
     }
-    if (this.props.height) {
-      displayHeight = this._getOptHeight(this.props.height);
+    if (height) {
+      displayHeight = _getOptHeight(height);
     }
 
     const displayStyle = {
       width: displayWidth,
       height: displayHeight,
       maxHeight: MAX_IMAGE_HEIGHT,
-      zIndex: 1000
+      zIndex: 1000,
     };
 
     return (
       <OImage
         style={[displayStyle, styles.image]}
         source={uri}
-        blurRadius={this.props.blur}
-        onLoadStart={this.onLoadStart}
-        onLoadEnd={this.onLoadEnd}
+        blurRadius={blur}
+        onLoadStart={onLoadStart}
+        onLoadEnd={onLoadEnd}
         guideID={guideID}
       >
-        {this.displaySpinner()}
-        {this.props.children}
+        {displaySpinner()}
+        {children}
       </OImage>
     );
-  }
+  };
+  return <View style={styles.imageContainer}>{displayImage()}</View>;
+};
 
-  render() {
-    return <View style={styles.imageContainer}>{this.displayImage()}</View>;
-  }
-}
+export default memo(ImageView);

@@ -1,11 +1,11 @@
 // @flow
-import React, { type Node, PureComponent } from "react";
+import React, { type Node, memo, useState } from "react";
 import {
   Image,
   Text,
   TouchableWithoutFeedback,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import styles from "./styles";
 import LangService from "@services/langService";
@@ -16,70 +16,55 @@ const alphaGradient = require("@assets/images/gradient.png");
 type Props = {
   style?: any,
   children?: Node,
-  maxHeight: number
+  maxHeight: number,
 };
 
-type State = {
-  expanded: boolean,
-  overflow: boolean
-};
+const ExpandableView = (props: Props) => {
+  const { maxHeight, style, children } = props;
+  const [expanded, setExpanded] = useState(false);
+  const [overflow, setOverflow] = useState(false);
+  const showCollapsed = overflow && !expanded;
+  const extraStyles = showCollapsed ? [styles.collapsed, { maxHeight }] : [];
 
-  class ExpandableView extends PureComponent<Props, State> {
-  static defaultProps = {
-    style: null,
-    children: null
+  const onPress = () => {
+    setExpanded(!expanded);
   };
 
-  state = {
-    expanded: false,
-    overflow: false
-  };
-
-  onPress = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  };
-
-  render() {
-    const { expanded, overflow } = this.state;
-    const { maxHeight } = this.props;
-    const showCollapsed = overflow && !expanded;
-    const extraStyles = showCollapsed ? [styles.collapsed, { maxHeight }] : [];
-    return (
-      <View style={this.props.style}>
-        <TouchableWithoutFeedback
-          onPress={this.onPress}
-          onLayout={({ nativeEvent }) => {
-            const { height } = nativeEvent.layout;
-            if (height > maxHeight) {
-              this.setState({ overflow: true });
-            }
-          }}
-        >
-          <View style={[...extraStyles]}>
-            {this.props.children}
-            {showCollapsed ? (
-              <Image
-                source={alphaGradient}
-                resizeMode="stretch"
-                style={styles.alphaGradient}
-              />
-            ) : null}
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableOpacity onPress={this.onPress}>
+  return (
+    <View style={style || {}}>
+      <TouchableWithoutFeedback
+        onPress={onPress}
+        onLayout={({ nativeEvent }) => {
+          const { height } = nativeEvent.layout;
+          if (height > maxHeight) {
+            setOverflow(true);
+          }
+        }}
+      >
+        <View style={[...extraStyles]}>
+          {children || null}
           {showCollapsed ? (
-            <Text style={styles.readMoreText}>
-              {LangService.strings.READ_MORE}
-            </Text>
-          ) : overflow ? <View style={styles.collapse}>
+            <Image
+              source={alphaGradient}
+              resizeMode="stretch"
+              style={styles.alphaGradient}
+            />
+          ) : null}
+        </View>
+      </TouchableWithoutFeedback>
+      <TouchableOpacity onPress={onPress}>
+        {showCollapsed ? (
+          <Text style={styles.readMoreText}>
+            {LangService.strings.READ_MORE}
+          </Text>
+        ) : overflow ? (
+          <View style={styles.collapse}>
             <ArrowUp />
-          </View> : null}
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
+          </View>
+        ) : null}
+      </TouchableOpacity>
+    </View>
+  );
+};
 
-export default ExpandableView
+export default memo(ExpandableView);

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ImageBackground,
   ActivityIndicator,
   Platform,
-  View
+  View,
 } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -21,19 +21,20 @@ type Props = {
   style: any,
   resizeMethod: any,
   resizeMode: any,
-  children: Array
+  children: Array,
 };
 
-type State = {
-  internet: any
-};
 
-class OImage extends Component<Props, State> {
-  static async getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    const { internet, source, guideID } = nextProps;
-    const { internet: previousInternet } = prevState;
+const OImage = (props: Props) => {
+  const { guideID, spinner, style, resizeMethod, resizeMode, children } = props;
+  const [source, setSource] = useState(props.source || null);
+  const [loading, setLoading] = useState(false);
+  const [internet] = useState(props.internet);
+  const [previousInternet, setPreviousInternet] = useState(null);
 
-    if (internet.connected !== previousInternet.connected) {
+  const updateSource = async () => {
+    if (internet.connected !== previousInternet?.connected) {
+      setPreviousInternet(internet);
       if (internet.connected) {
         return { internet, source };
       } else {
@@ -41,54 +42,42 @@ class OImage extends Component<Props, State> {
         if (source && source.uri && typeof source.uri === "string") {
           const path = source.uri;
           const fullPath = fetchService.getFullPath(path, guideID);
-
           try {
             const exist = await fetchService.isExist(path, guideID);
             return exist
-              ? { source: { uri: `file://${fullPath}` } }
-              : { source: { uri: path } };
+              ? setSource({ uri: `file://${fullPath}` })
+              : setSource({ uri: path });
           } catch (error) {
             console.warn("error in OImage:isExist", error);
           }
         } else {
-          return { source: placeholderImage };
+          setSource(placeholderImage);
         }
       }
     }
+  };
 
-    return null;
-  }
+  useEffect(() => {
+    updateSource().then(() => null);
+  }, [internet, source]);
 
-  constructor(props) {
-    super(props);
+  const onLoadStart = () => {
+    setLoading(true);
+  };
+  const onLoadEnd = () => {
+    setLoading(false);
+  };
 
-    this.state = {
-      loading: false,
-      source: null,
-      internet: this.props.internet
-    };
-
-    this.onLoadStart = this.onLoadStart.bind(this);
-    this.onLoadEnd = this.onLoadEnd.bind(this);
-  }
-
-  onLoadStart() {
-    this.setState({ loading: true });
-  }
-  onLoadEnd() {
-    this.setState({ loading: false });
-  }
-
-  displaySpinner(width, height) {
+  const displaySpinner = (width, height) => {
     let hasSpinner = true;
-    if (typeof this.props.spinner === "boolean") {
-      hasSpinner = this.props.spinner;
+    if (typeof spinner === "boolean") {
+      hasSpinner = spinner;
     }
-    if (this.state.loading && hasSpinner) {
+    if (loading && hasSpinner) {
       const indicatorStyle = {
         position: "absolute",
         left: width / 2 - 10,
-        top: height / 2 - 10
+        top: height / 2 - 10,
       };
 
       return (
@@ -98,22 +87,19 @@ class OImage extends Component<Props, State> {
       );
     }
     return null;
-  }
+  };
 
-  loadFile(fullPath) {
+  const loadFile = (fullPath) => {
     if (Platform.OS === "ios") {
-      fetchService.readFile(fullPath).then(data => {
-        this.setState({ source: { uri: `data:image/png;base64,${data}` } });
+      fetchService.readFile(fullPath).then((data) => {
+        setSource({ uri: `data:image/png;base64,${data}` });
       });
     } else if (Platform.OS === "android") {
-      this.setState({ source: { uri: `file://${fullPath}` } });
+      setSource({ uri: `file://${fullPath}` });
     }
-  }
+  };
 
-  displayImage() {
-    const { source } = this.state;
-    const { style } = this.props;
-
+  const displayImage = () => {
     let width = 0;
     let height = 0;
 
@@ -133,33 +119,28 @@ class OImage extends Component<Props, State> {
       <ImageBackground
         style={style}
         source={source}
-        onLoadStart={this.onLoadStart}
-        onLoadEnd={this.onLoadEnd}
-        resizeMethod={this.props.resizeMethod}
-        resizeMode={this.props.resizeMode}
+        onLoadStart={onLoadStart}
+        onLoadEnd={onLoadEnd}
+        resizeMethod={resizeMethod}
+        resizeMode={resizeMode}
       >
-        {this.displaySpinner(width, height)}
-        {this.props.children}
+        {displaySpinner(width, height)}
+        {children}
       </ImageBackground>
     );
-  }
+  };
 
-  render() {
-    return this.displayImage();
-  }
-}
+  return displayImage();
+};
 
 function mapStateToProps(state) {
   return {
-    internet: state.internet
+    internet: state.internet,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    internetActions: bindActionCreators(internetActions, dispatch)
+    internetActions: bindActionCreators(internetActions, dispatch),
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OImage);
+export default connect(mapStateToProps, mapDispatchToProps)(OImage);

@@ -1,5 +1,4 @@
 // @flow
-
 import React, { Component, type Node } from "react";
 import { ScrollView, Text, Image, TouchableOpacity, View } from "react-native";
 import styles from "./style";
@@ -10,7 +9,7 @@ const closeIcon = require("@assets/images/ic_close.png");
 type TrailInformation = {
   title: ?string,
   description: ?string,
-  image: ?Images
+  image: ?Images,
 };
 
 type Props = {
@@ -50,7 +49,7 @@ function renderShareButton(
 function renderScrollableContent(
   trailInformation: TrailInformation,
   renderingComponent: Component<*>,
-  disableShare: Boolean,
+  disableShare: Boolean
 ) {
   const style = trailInformation.title
     ? styles.scrollView
@@ -65,21 +64,23 @@ function renderScrollableContent(
   );
 }
 
-class MapInformationOverlay extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        {renderScrollableContent(this.props.trailInformation, this, this.props?.disableShare)}
-        <TouchableOpacity
-          onPress={this.props.onPressFunction}
-          style={styles.closeButtonContainer}
-        >
-          <Image style={styles.closeButton} source={closeIcon} />
-        </TouchableOpacity>
-        {this.props.downloadComponent ? this.props.downloadComponent() : null}
-      </View>
-    );
-  }
-}
+const MapInformationOverlay = (props: Props) => {
+  return (
+    <View style={styles.container}>
+      {renderScrollableContent(
+        props.trailInformation,
+        MapInformationOverlay,
+        props?.disableShare
+      )}
+      <TouchableOpacity
+        onPress={props.onPressFunction}
+        style={styles.closeButtonContainer}
+      >
+        <Image style={styles.closeButton} source={closeIcon} />
+      </TouchableOpacity>
+      {props.downloadComponent ? props.downloadComponent() : null}
+    </View>
+  );
+};
 
 export default MapInformationOverlay;
