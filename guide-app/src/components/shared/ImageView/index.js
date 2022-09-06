@@ -4,8 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { loadFromCache, startDownload } from "@utils/DownloadMediaUtils";
 
-const placeholderImage = require("@assets/images/no-image-featured-image.png");
-
 type Props = {
   source: { uri?: ?string, sessionId?: number },
   style?: Object,
@@ -17,7 +15,7 @@ const ImageView = (props: Props) => {
   const source = props?.source;
   const uri = source?.uri;
   const sessionId = source?.sessionId;
-  const [imageSource, setImageSource] = useState(placeholderImage);
+  const [imageSource, setImageSource] = useState(null);
 
   useEffect(() => {
     if (uri) {
@@ -36,7 +34,7 @@ const ImageView = (props: Props) => {
         setImageSource({ uri });
       }
     }
-  },[])
+  }, []);
 
   return <Image source={imageSource} style={style} resizeMode={resizeMode} />;
 };
