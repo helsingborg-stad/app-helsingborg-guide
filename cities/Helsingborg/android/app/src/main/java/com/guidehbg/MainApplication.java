@@ -16,6 +16,7 @@ import com.mediamodule.MediaControlPackage;
 import com.mediamodule.MediaPackage;
 import com.notificationmodule.NotificationPackage;
 import org.wonday.orientation.OrientationActivityLifecycle;
+import com.viromedia.bridge.ReactViroPackage;
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -33,11 +34,12 @@ public class MainApplication extends Application implements ReactApplication {
                     List<ReactPackage> packages = new PackageList(this).getPackages();
                     // Packages that cannot be autolinked yet can be added manually here, for example:
                     // packages.add(new MyReactNativePackage());
-
-                      packages.add(new MediaPackage());
-                      packages.add(new MediaControlPackage());
-                      packages.add(new NotificationPackage());
-                      packages.add(new AppPackages());
+                    // You can replace the string AR with one of the following depending on your needs: GVR, OVR_MOBILE, AR.
+                    packages.add(new ReactViroPackage(ReactViroPackage.ViroPlatform.valueOf("AR")));
+                    packages.add(new MediaPackage());
+                    packages.add(new MediaControlPackage());
+                    packages.add(new NotificationPackage());
+                    packages.add(new AppPackages());
                     return packages;
                 }
 

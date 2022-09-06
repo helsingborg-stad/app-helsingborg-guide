@@ -37,6 +37,9 @@ target 'Helsingborg' do
     :hermes_enabled => false
   )
 
+  pod 'ViroReact', :path => '../../../node_modules/@viro-community/react-viro/ios/'
+  pod 'ViroKit', :path => '../../../node_modules/@viro-community/react-viro/ios/dist/ViroRenderer/'
+
   target 'HelsingborgTests' do
     inherit! :complete
     # Pods for testing

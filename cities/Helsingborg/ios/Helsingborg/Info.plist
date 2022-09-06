@@ -61,7 +61,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>Not being used</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera is used for AR</string>
+	<string>Camera is used for AR and QR scanning</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used to fetch nearby content and show user location on map.</string>
 	<key>NSMicrophoneUsageDescription</key>
