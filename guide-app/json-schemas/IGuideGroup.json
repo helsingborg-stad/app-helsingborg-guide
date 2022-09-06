@@ -171,7 +171,6 @@
   "required": [
     "active",
     "description",
-    "guidesCount",
     "id",
     "images",
     "location",
