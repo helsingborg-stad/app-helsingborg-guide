@@ -120,7 +120,9 @@ const CalendarScreen = (props: Props) => {
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [endOfContent, setEndOfContent] = useState(false);
-  const noContent = !isFetching && events.length === 0;
+  const [noEvents, setNoEvents] = useState(false);
+  const noContent = !isFetching && noEvents;
+  const [initiallyRendered, setInitiallyRendered] = useState(false);
 
   const ITEMS_PER_PAGE = 8;
 
@@ -142,18 +144,9 @@ const CalendarScreen = (props: Props) => {
       setEndOfContent(false);
       setCurrentPage(1);
       setChosenDate(new Date());
+      setInitiallyRendered(false);
     };
   }, []);
-
-  useEffect(() => {
-    if (!navigation.isFocused()) {
-      dispatch(fetchEventsReset());
-      setEvents([]);
-      setEndOfContent(false);
-      setCurrentPage(1);
-      setChosenDate(new Date());
-    }
-  }, [navigation.isFocused()]);
 
   useEffect(() => {
     if (params?.id) {
@@ -179,20 +172,35 @@ const CalendarScreen = (props: Props) => {
 
   useEffect(() => {
     let copy = [...events];
+    !initiallyRendered && setInitiallyRendered(true);
     if (items.length) {
       if (items !== copy) {
-        items.map((item) => !copy.includes(item) && copy.push(item));
+        setNoEvents(false);
+        items.map(
+          (item) =>
+            !copy.some(
+              (event) =>
+                event.id === item.id ||
+                (event.name === item.name &&
+                  event.dateStart === item.dateStart &&
+                  event.dateEnd === item.dateEnd &&
+                  item.location?.title === event.location?.title)
+            ) && copy.push(item)
+        );
         setEvents(copy);
       }
     } else if (events.length) {
       setEndOfContent(true);
+    } else {
+      initiallyRendered && setNoEvents(true);
     }
   }, [items]);
 
   const getNextDate = () => {
     const nextDate = addDays(chosenDate, 1);
     setEvents([]);
-    setEndOfContent(false);
+    endOfContent && setEndOfContent(false);
+    noEvents && setNoEvents(false);
     setCurrentPage(1);
     dispatch(
       fetchEvents(currentLanguage, nextDate, nextDate, ITEMS_PER_PAGE, 1)
@@ -203,7 +211,8 @@ const CalendarScreen = (props: Props) => {
   const getPrevDate = () => {
     const prevDate = subDays(chosenDate, 1);
     setEvents([]);
-    setEndOfContent(false);
+    endOfContent && setEndOfContent(false);
+    noEvents && setNoEvents(false);
     setCurrentPage(1);
     dispatch(
       fetchEvents(currentLanguage, prevDate, prevDate, ITEMS_PER_PAGE, 1)
@@ -229,15 +238,6 @@ const CalendarScreen = (props: Props) => {
     );
   }
 
-  if (noContent) {
-    return (
-      <Layout>
-        {datePicker}
-        <NoContent />
-      </Layout>
-    );
-  }
-
   const isCloseToBottom = (e) => {
     const { layoutMeasurement, contentOffset, contentSize } = e;
     const paddingToBottom = 900;
@@ -256,6 +256,15 @@ const CalendarScreen = (props: Props) => {
       fetchEvents(currentLanguage, chosenDate, chosenDate, ITEMS_PER_PAGE, 1)
     );
   };
+
+  if (noContent) {
+    return (
+      <Layout>
+        {datePicker}
+        <NoContent />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
