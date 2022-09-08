@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import { AppRegistry } from "react-native";
+import { AppRegistry, View } from "react-native";
 import GuideApp from "./src/App";
 import useNotifications from "@hooks/useNotifications";
 import FullScreenVideoScreen from "./src/components/screens/FullScreenVideoScreen";
@@ -10,20 +10,21 @@ import { PersistGate } from "redux-persist/integration/react";
 
 const { store, persistor } = configureStore();
 
-const { setBackgroundNotificationHandler } = useNotifications();
-
-setBackgroundNotificationHandler();
-
 function HeadlessCheck({ isHeadless }) {
+  // const { setBackgroundNotificationHandler } = useNotifications();
+  // setBackgroundNotificationHandler();
+
   if (isHeadless) {
     // App has been launched in the background by iOS, ignore
     return null;
   }
-  return <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <GuideApp />
-    </PersistGate>
-  </Provider>;
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <GuideApp />
+      </PersistGate>
+    </Provider>
+  );
 }
 
 AppRegistry.registerComponent(AppName, () => HeadlessCheck);

@@ -52,7 +52,7 @@
     "@react-navigation/native-stack": "^6.8.0",
     "@react-navigation/stack": "^6.2.3",
     "@reduxjs/toolkit": "^1.8.5",
-    "@viro-community/react-viro": "^2.23.0",
+    "@viro-community/react-viro": "2.22.0",
     "ajv": "^8.11.0",
     "axios": "0.27.2",
     "date-fns": "^2.29.2",

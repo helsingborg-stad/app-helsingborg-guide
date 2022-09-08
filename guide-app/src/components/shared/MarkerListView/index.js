@@ -27,7 +27,8 @@ import {
   selectCurrentContentObject,
   selectCurrentGuideGroup,
   selectCurrentGuide,
-  selectCurrentSharingLink,} from "@actions/uiStateActions";
+  selectCurrentSharingLink,
+} from "@actions/uiStateActions";
 import { trackScreen } from "@utils/MatomoUtils";
 
 import styles, { ListItemWidth, DefaultMargin, ScreenHeight } from "./styles";
@@ -436,9 +437,10 @@ const MarkerListView = (props: Props) => {
       listRef.current.scrollToOffset({ offset: x });
     }
     // Setting a timeout to prevent map from "jumping" while panning
-    setTimeout(() => {
-      setRecentlyTappedPin(false);
-    }, 1000);
+    navigation.isFocused() &&
+      setTimeout(() => {
+        setRecentlyTappedPin(false);
+      }, 1000);
   };
 
   const onNavigationModeChange = (index: number) => {

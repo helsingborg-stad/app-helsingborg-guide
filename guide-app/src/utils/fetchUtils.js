@@ -3,7 +3,7 @@
 import {
   API_BASE_URL,
   DEPRECATED_API_BASE_URL,
-  GROUP_ID
+  GROUP_ID,
 } from "@data/endpoints";
 import { validate } from "./JSONValidator";
 import { DateUtils } from "@utils";
@@ -11,8 +11,7 @@ import { DateUtils } from "@utils";
 async function fetchJSON(
   relativeUrl: string,
   langCode: string,
-  params?: ?string,
-  test,
+  params?: ?string
 ): Promise<any> {
   let url = `${API_BASE_URL}/${relativeUrl}/?lang=${langCode}`;
 
@@ -86,7 +85,7 @@ async function getGuides(langCode: string, ids: number[]): Promise<Guide[]> {
 
   const params = idsToParamString(ids);
 
-  const json = await fetchJSON("guides", (langCode || "sv"), params, "guide");
+  const json = await fetchJSON("guides", langCode || "sv", params, "guide");
   const fetchedGuides: Guide[] = validateData(json, "guide");
 
   return fetchedGuides;
@@ -158,5 +157,5 @@ export default {
   getGuides,
   getInteractiveGuides,
   getGuidesForGuideGroup,
-  getNavigation
+  getNavigation,
 };

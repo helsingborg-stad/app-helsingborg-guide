@@ -567,8 +567,7 @@ PODS:
     - React-Core
   - RNSVG (13.1.0):
     - React-Core
-  - ViroKit (1.0):
-    - React
+  - ViroKit_static_lib (1.0)
   - ViroReact (1.0):
     - React
   - Yoga (1.14.0)
@@ -671,7 +670,7 @@ DEPENDENCIES:
   - RNScreens (from `../../../node_modules/react-native-screens`)
   - RNShare (from `../../../node_modules/react-native-share`)
   - RNSVG (from `../../../node_modules/react-native-svg`)
-  - "ViroKit (from `../../../node_modules/@viro-community/react-viro/ios/dist/ViroRenderer/`)"
+  - "ViroKit_static_lib (from `../../../node_modules/@viro-community/react-viro/ios/dist/ViroRenderer/static_lib`)"
   - "ViroReact (from `../../../node_modules/@viro-community/react-viro/ios/`)"
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
 
@@ -844,8 +843,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-share"
   RNSVG:
     :path: "../../../node_modules/react-native-svg"
-  ViroKit:
-    :path: "../../../node_modules/@viro-community/react-viro/ios/dist/ViroRenderer/"
+  ViroKit_static_lib:
+    :path: "../../../node_modules/@viro-community/react-viro/ios/dist/ViroRenderer/static_lib"
   ViroReact:
     :path: "../../../node_modules/@viro-community/react-viro/ios/"
   Yoga:
@@ -947,11 +946,11 @@ SPEC CHECKSUMS:
   RNScreens: 0df01424e9e0ed7827200d6ed1087ddd06c493f9
   RNShare: be91a5c149585affb02c25b351bd07ba927c7006
   RNSVG: 1153e8eeb34c788841016c517dba9f57f20b762f
-  ViroKit: 700d3d4ca086368d06224de1cbbc19781aea2094
+  ViroKit_static_lib: 757b887d543c671838296e5ad32f75598067dcba
   ViroReact: f4980e6b04918c4340637f9cbaae22a6bb7ea440
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 9deda5c727b187730bc462047bbcb9d1d9c1a7ae
+PODFILE CHECKSUM: 8b6c0867b87f119157baa1e533caae8c5b0dd02d
 
 COCOAPODS: 1.11.3

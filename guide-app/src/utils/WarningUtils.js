@@ -1,5 +1,6 @@
 import { LogBox } from "react-native";
 
+//WARNINGS CAUSED BY PACKAGES, REMOVE LINE/S IF A FUTURE UPDATE RESOLVES ONE OF THESE.
 export const ignoreNonImportant = () => {
   LogBox.ignoreLogs([
     "Warning: componentWillMount has been renamed, and is not recommended for use.",
@@ -13,6 +14,6 @@ export const ignoreNonImportant = () => {
     "new NativeEventEmitter() was called with a non-null argument without the required removeListeners method.",
     "new NativeEventEmitter() was called with a non-null argument without the required removeListeners method.",
     "`new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.",
-    "`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method."
+    "`new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.",
   ]);
-}
+};
