@@ -163,7 +163,6 @@ const ObjectView = (props: Props) => {
     disableShare,
   } = props;
 
-  console.log("THE PATH", path);
   const [swiped, setSwiped] = useState(false);
   const [disableSwipe, setDisableSwipe] = useState(false);
 

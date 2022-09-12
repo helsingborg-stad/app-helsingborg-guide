@@ -18,10 +18,11 @@ import { setShowFilterButton } from "../../../actions/uiStateActions";
 
 type Props = {
   segmentLayout: any,
+  navigation: any,
 };
 
 const HomeSettings = (props: Props) => {
-  const { segmentLayout } = props;
+  const { segmentLayout, navigation } = props;
 
   const dispatch = useDispatch();
   const [distance, setDistance] = useState([3]);
@@ -55,32 +56,36 @@ const HomeSettings = (props: Props) => {
   };
 
   useEffect(() => {
-    if (settingsHeight) {
-      Animated.timing(height, {
-        toValue: showHomeSettings ? settingsHeight : 0,
-        duration: 250,
-        useNativeDriver: false,
-      }).start();
-      setTimeout(
-        () => {
-          Animated.timing(backdropOpacity, {
-            toValue: showHomeSettings ? 1 : 0,
-            duration: showHomeSettings ? 150 : 0,
-            useNativeDriver: true,
-          }).start();
-        },
-        showHomeSettings ? 250 : 0
-      );
-      showHomeSettings
-        ? setTimeout(() => setDisplayShadow(true), 250)
-        : setDisplayShadow(false);
+    if (navigation.isFocused()) {
+      if (settingsHeight) {
+        Animated.timing(height, {
+          toValue: showHomeSettings ? settingsHeight : 0,
+          duration: 250,
+          useNativeDriver: false,
+        }).start();
+        setTimeout(
+          () => {
+            Animated.timing(backdropOpacity, {
+              toValue: showHomeSettings ? 1 : 0,
+              duration: showHomeSettings ? 150 : 0,
+              useNativeDriver: true,
+            }).start();
+          },
+          showHomeSettings ? 250 : 0
+        );
+        showHomeSettings
+          ? setTimeout(
+              () => navigation.isFocused() && setDisplayShadow(true),
+              250
+            )
+          : setDisplayShadow(false);
+      }
     }
   }, [settingsHeight, showHomeSettings]);
 
   useEffect(() => {
     return () => dispatch(setShowFilterButton(true));
   }, []);
-
 
   return (
     <>

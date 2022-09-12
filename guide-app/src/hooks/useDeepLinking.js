@@ -3,7 +3,7 @@ import { decode } from "html-entities";
 import {
   showBottomBar,
   selectCurrentBottomBarTab,
-  selectCurrentSharingLink
+  selectCurrentSharingLink,
 } from "@actions/uiStateActions";
 import { eventCalendarURL } from "@data/urls";
 import useGuides from "@hooks/useGuides";
@@ -14,27 +14,32 @@ import { DEEP_LINKING_URL } from "@data/endpoints";
 
 const defaultImage = require("@assets/images/no-image-featured-image.png");
 
-
 const useDeepLinking = () => {
   const dispatch = useDispatch();
-  const { navigation, events } = useSelector(s => s);
+  const { navigation, events } = useSelector((s) => s);
   const { navigationCategories, currentLanguage } = navigation;
   const { linkToGuide } = useGuides();
 
   const linkingHome = async (params) => {
     const { id_1 } = params;
     if (id_1) {
-      console.log("id_1: " + id_1, navigationCategories);
       let item;
       let temp;
-      navigationCategories.map(category => {
-        let idMatch = category.items.find(group => group.id.toString() === id_1.toString());
+      navigationCategories.map((category) => {
+        let idMatch = category.items.find(
+          (group) => group.id.toString() === id_1.toString()
+        );
         if (idMatch) {
           temp = idMatch;
         }
       });
 
-      if (temp?.guide || temp?.guidegroup || temp?.guideGroup || temp?.interactiveGuide) {
+      if (
+        temp?.guide ||
+        temp?.guidegroup ||
+        temp?.guideGroup ||
+        temp?.interactiveGuide
+      ) {
         item = temp;
       } else {
         Navigation.navigate("NotFoundScreen");
@@ -49,20 +54,13 @@ const useDeepLinking = () => {
     const { items } = events;
     const { id } = params;
     dispatch(selectCurrentBottomBarTab(1));
-    let foundEvent = items.find(event => event.id === id);
+    let foundEvent = items.find((event) => event.id === id);
     if (foundEvent) {
-      const {
-        imageUrl,
-        location,
-        slug,
-        dateStart,
-        dateEnd,
-        id
-      } = foundEvent;
+      const { imageUrl, location, slug, dateStart, dateEnd, id } = foundEvent;
 
       const image = imageUrl ? { uri: imageUrl } : defaultImage;
       const decodedLocationTitle = decode(location.title, {
-        level: "xml"
+        level: "xml",
       });
       let hoursString;
       if (DateUtils.isFullDay(dateStart, dateEnd)) {
@@ -90,15 +88,17 @@ const useDeepLinking = () => {
           imageUrl: image,
           title: decodedLocationTitle,
           date: eventLinkDay,
-          dateString: dateString
+          dateString: dateString,
         },
-        path: newPath
+        path: newPath,
       });
     }
   };
 
   const clearLinking = (navigation, params) => {
-    const objParams = params ? Object.fromEntries(params.map(key => [key, null])) : {};
+    const objParams = params
+      ? Object.fromEntries(params.map((key) => [key, null]))
+      : {};
 
     navigation.setParams({ id_1: null, id_2: null, id_3: null, ...objParams });
   };

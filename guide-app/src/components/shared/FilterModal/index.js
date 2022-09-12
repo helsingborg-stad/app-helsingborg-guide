@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Keyboard, Dimensions } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Keyboard,
+} from "react-native";
 import Modal from "react-native-modal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -11,20 +17,9 @@ import Time from "./Time";
 import ArrowUp from "@assets/images/arrow_up";
 import styles from "./style";
 
-const fullWidth = Dimensions.get("window").width;
-const fullHeight = Dimensions.get("window").height;
-
 const options = {
-  top: [
-    "TOPLIST",
-    "RANDOMIZE",
-  ],
-  main: [
-    "SHOPPING",
-    "EXHIBITIONS",
-    "SIGHTSEEINGS",
-    "PADEL_TRACKS",
-  ],
+  top: ["TOPLIST", "RANDOMIZE"],
+  main: ["SHOPPING", "EXHIBITIONS", "SIGHTSEEINGS", "PADEL_TRACKS"],
   additional: [
     "PLAYGROUNDS",
     "BATHING_AREAS",
@@ -34,7 +29,6 @@ const options = {
     "GROCERIES",
   ],
 };
-
 
 const sections = [
   {
@@ -49,9 +43,13 @@ const sections = [
   },
 ];
 
-
 const FilterModal = (props) => {
-  const [selected, setSelected] = useState({ main: [], additional: [], dates: [], details: [] });
+  const [selected, setSelected] = useState({
+    main: [],
+    additional: [],
+    dates: [],
+    details: [],
+  });
   const [activeSections, setActiveSections] = useState([]);
   const [openDropdown, setOpenDropdown] = useState(false);
 
@@ -64,13 +62,16 @@ const FilterModal = (props) => {
   } = props;
 
   const setActivities = (item, type) => {
-    console.log("the item", item, type)
     const copy = { ...selected };
     switch (type) {
       case "main":
-        !copy.main.includes(item) ? copy.main.push(item) : copy.main.splice(copy.main.indexOf(item), 1);
+        !copy.main.includes(item)
+          ? copy.main.push(item)
+          : copy.main.splice(copy.main.indexOf(item), 1);
       case "additional":
-        !copy.additional.includes(item) ? copy.additional.push(item) : copy.additional.splice(copy.additional.indexOf(item), 1);
+        !copy.additional.includes(item)
+          ? copy.additional.push(item)
+          : copy.additional.splice(copy.additional.indexOf(item), 1);
       default:
         null;
     }
@@ -81,25 +82,43 @@ const FilterModal = (props) => {
     <TouchableOpacity
       key={index}
       onPress={() => setActivities(item, "main")}
-      style={[styles.filterButton, { marginLeft: index % 2 !== 0 ? 20 : 0 }, selected.main.includes(item) && styles.selected]}>
+      style={[
+        styles.filterButton,
+        { marginLeft: index % 2 !== 0 ? 20 : 0 },
+        selected.main.includes(item) && styles.selected,
+      ]}
+    >
       <Text
-        style={[styles.filterButtonText, selected.main.includes(item) && styles.selectedText]}>{LangService.strings[item]}</Text>
+        style={[
+          styles.filterButtonText,
+          selected.main.includes(item) && styles.selectedText,
+        ]}
+      >
+        {LangService.strings[item]}
+      </Text>
     </TouchableOpacity>
   );
 
   const renderSectionTitle = () => {
     <View>
-      <Text></Text>
+      <Text />
     </View>;
   };
 
   const renderHeader = (section, index) => {
     const { title } = section;
-    console.log("section", section, activeSections);
     return (
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionHeaderText}>{LangService.strings[title]}</Text>
-        <ArrowUp style={{ transform: [{ rotateX: activeSections.includes(index) ? "0deg" : "180deg" }] }} />
+        <Text style={styles.sectionHeaderText}>
+          {LangService.strings[title]}
+        </Text>
+        <ArrowUp
+          style={{
+            transform: [
+              { rotateX: activeSections.includes(index) ? "0deg" : "180deg" },
+            ],
+          }}
+        />
       </View>
     );
   };
@@ -109,32 +128,40 @@ const FilterModal = (props) => {
     const content = () => {
       switch (id) {
         case "details":
-          return <Details key={index} selected={selected} setSelected={setSelected} />;
+          return (
+            <Details
+              key={index}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          );
         case "time":
-          return <Time key={index} selected={selected} setSelected={setSelected} renderCalendar={activeSections.includes(1)} />;
+          return (
+            <Time
+              key={index}
+              selected={selected}
+              setSelected={setSelected}
+              renderCalendar={activeSections.includes(1)}
+            />
+          );
       }
     };
-    return (
-      <View>
-        {content()}
-      </View>
-    );
+    return <View>{content()}</View>;
   };
 
   const renderFooter = (section, index) => {
-    return (
-      index + 1 !== sections.length ? <View style={styles.seperator} /> : null
-    );
+    return index + 1 !== sections.length ? (
+      <View style={styles.seperator} />
+    ) : null;
   };
 
   const resetSettings = () => {
     setSelected({ main: [], additional: [], dates: [], details: [] });
     setActiveSections([]);
-  }
+  };
 
   return (
-    <View
-      style={isModalVisible && styles.container}>
+    <View style={isModalVisible && styles.container}>
       <Modal
         isVisible={isModalVisible}
         coverScreen={coverScreen}
@@ -148,35 +175,37 @@ const FilterModal = (props) => {
               Keyboard.dismiss();
               setOpenDropdown(false);
             }}
-            style={styles.container}>
+            style={styles.container}
+          >
             <View style={styles.top}>
               <TouchableOpacity
                 style={styles.close}
                 onPress={() => setModalVisible(false)}
               >
-                <Icon
-                  name={"close-circle"}
-                  size={24}
-                />
+                <Icon name={"close-circle"} size={24} />
               </TouchableOpacity>
-              <Text style={styles.filterSettings}>{LangService.strings.FILTER_SETTINGS}</Text>
-              <TouchableOpacity
-                style={styles.reset}
-                onPress={resetSettings}
-              >
-                <Text style={styles.resetText}>{LangService.strings.RESET}</Text>
+              <Text style={styles.filterSettings}>
+                {LangService.strings.FILTER_SETTINGS}
+              </Text>
+              <TouchableOpacity style={styles.reset} onPress={resetSettings}>
+                <Text style={styles.resetText}>
+                  {LangService.strings.RESET}
+                </Text>
               </TouchableOpacity>
             </View>
             <ScrollView
               style={styles.scroll}
-              contentContainerStyle={styles.scrollcontainer}>
+              contentContainerStyle={styles.scrollcontainer}
+            >
               <>
                 <View style={styles.filterButtons}>
-                  <Text style={styles.buttonsTitle}>{LangService.strings.MOST_POPULAR_ACTIVITIES}</Text>
+                  <Text style={styles.buttonsTitle}>
+                    {LangService.strings.MOST_POPULAR_ACTIVITIES}
+                  </Text>
                   <View style={styles.buttonsMain}>
-                    {options.main.map((item, index) => (
+                    {options.main.map((item, index) =>
                       filterButton(item, index)
-                    ))}
+                    )}
                   </View>
                   <View style={styles.filterDropdown}>
                     <Dropdown

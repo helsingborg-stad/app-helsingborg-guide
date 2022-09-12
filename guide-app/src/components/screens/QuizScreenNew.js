@@ -151,36 +151,37 @@ const QuizScreen = (props: Props) => {
       delayToNextItem = 1200;
     }
 
-    console.log("items length", items.length, item);
-    setItems(prevItems => [...(_newItems ? _newItems : prevItems), item], (newItems) => {
-      scrollToBottom();
-      console.log("items length after", newItems.length);
-      if (
-        nextItem &&
-        (item.type === "chapter" ||
-          item.type === "text_message" ||
-          item.type === "image" ||
-          item.type === "user" ||
-          item.type === "dialogrecord")
-      ) {
-        if (item.type === "chapter") {
-          AnalyticsUtils.logEvent("quiz_chapter_reached", {
-            name: quiz.title,
-            id: item.id,
-          });
+    setItems(
+      (prevItems) => [...(_newItems ? _newItems : prevItems), item],
+      (newItems) => {
+        scrollToBottom();
+        if (
+          nextItem &&
+          (item.type === "chapter" ||
+            item.type === "text_message" ||
+            item.type === "image" ||
+            item.type === "user" ||
+            item.type === "dialogrecord")
+        ) {
+          if (item.type === "chapter") {
+            AnalyticsUtils.logEvent("quiz_chapter_reached", {
+              name: quiz.title,
+              id: item.id,
+            });
+          }
+          setBotIsTyping(
+            nextItem.type === "text_message" || nextItem.type === "image"
+          );
+          timeout = setTimeout(displayNextItem, delayToNextItem);
+        } else if (item.type === "start") {
+          displayNextItem();
+        } else if (!nextItem && item.type !== "button") {
+          timeout = setTimeout(handleQuizFinished, 500);
+        } else {
+          dispatch(setLatestQuestionIdAction(newItems[0].id));
         }
-        setBotIsTyping(
-          nextItem.type === "text_message" || nextItem.type === "image"
-        );
-        timeout = setTimeout(displayNextItem, delayToNextItem);
-      } else if (item.type === "start") {
-        displayNextItem();
-      } else if (!nextItem && item.type !== "button") {
-        timeout = setTimeout(handleQuizFinished, 500);
-      } else {
-        dispatch(setLatestQuestionIdAction(newItems[0].id));
       }
-    })
+    );
   };
 
   const handlePromptAlternativeSelected = (
@@ -218,7 +219,7 @@ const QuizScreen = (props: Props) => {
         questionId: item.id,
         alternativeId: alternative.id,
       })
-    )
+    );
 
     // remove the original prompt item display next item
     let newItems = items.slice(1);
@@ -277,9 +278,12 @@ const QuizScreen = (props: Props) => {
 
     // remove the original dialog item display next item
     let newItems = items.slice(1);
-    setItems(() => [...newItems], (_newItems) => {
-      displayNextItem(_newItems);
-    })
+    setItems(
+      () => [...newItems],
+      (_newItems) => {
+        displayNextItem(_newItems);
+      }
+    );
   };
 
   const handleQuizFinished = () => {
@@ -301,7 +305,6 @@ const QuizScreen = (props: Props) => {
     const flatlist = flatlistRef.current;
     flatlist?.scrollToOffset({ offset: 0 });
   };
-
 
   return (
     <>

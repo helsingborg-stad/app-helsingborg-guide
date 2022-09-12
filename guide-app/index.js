@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
-import { AppRegistry, View } from "react-native";
+import { AppRegistry } from "react-native";
 import GuideApp from "./src/App";
-import useNotifications from "@hooks/useNotifications";
+// import useNotifications from "@hooks/useNotifications";
 import FullScreenVideoScreen from "./src/components/screens/FullScreenVideoScreen";
 import configureStore from "@src/store/configureStore";
 import { name as AppName } from "./app.json";

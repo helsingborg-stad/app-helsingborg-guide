@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   Platform,
   Linking,
-  PermissionsAndroid, Alert,
+  PermissionsAndroid,
+  Alert,
 } from "react-native";
 import React, { useReducer } from "react";
 import Share from "react-native-share";
@@ -28,7 +29,6 @@ const fadeImageURL = require("@assets/images/share_fade.png");
 
 const shareImage = Image.resolveAssetSource(shareImageURL);
 const fadeImage = Image.resolveAssetSource(fadeImageURL);
-
 
 const fontSize = 40;
 const lineDistance = 5;
@@ -97,22 +97,57 @@ const SharedImageProperties = {
 
 const SharedTextProperties = { color: Colors.white, fontSize };
 
-const getPlatformURI = path =>
+const getPlatformURI = (path) =>
   Platform.OS === "ios" ? path : `file://${path}`;
 
-function beginShare(title, message, url, width, height, subject, shareType, forceUpdate, currentSharingLink) {
-
+function beginShare(
+  title,
+  message,
+  url,
+  width,
+  height,
+  subject,
+  shareType,
+  forceUpdate,
+  currentSharingLink
+) {
   // AnalyticsUtils.logEvent(shareType, { name: title });
   // The sharing process is different on ios and android.
   if (Platform.OS === "android") {
-    shareAndroid(title, message, url, width, height, subject, forceUpdate, currentSharingLink);
+    shareAndroid(
+      title,
+      message,
+      url,
+      width,
+      height,
+      subject,
+      forceUpdate,
+      currentSharingLink
+    );
   } else {
-    shareIOs(title, message, url, width, height, subject, forceUpdate, currentSharingLink);
+    shareIOs(
+      title,
+      message,
+      url,
+      width,
+      height,
+      subject,
+      forceUpdate,
+      currentSharingLink
+    );
   }
 }
 
-
-async function shareAndroid(title, message, url, width, height, subject, forceUpdate, currentSharingLink) {
+async function shareAndroid(
+  title,
+  message,
+  url,
+  width,
+  height,
+  subject,
+  forceUpdate,
+  currentSharingLink
+) {
   // Examples: https://github.com/JimmyDaddy/react-native-image-marker/blob/master/example/example/app.js
 
   function finish() {
@@ -132,20 +167,27 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
   const outputImage = await watermark({
     title,
     source: { url: url, width, height },
-    fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
-    icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
+    fade: {
+      url: fadeImageURL,
+      width: fadeImage.width,
+      height: fadeImage.height,
+    },
+    icon: {
+      url: shareImageURL,
+      width: shareImage.width,
+      height: shareImage.height,
+    },
   });
-
 
   // To be able to share an image on Android, the file needs to exist outside of the app cache. To move it, we need permission.
   try {
     const granted = await PermissionsAndroid.check(
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
     );
 
     if (!granted) {
       const writeResponse = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
       );
 
       if (!writeResponse) {
@@ -160,32 +202,46 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
 
   // try {
 
-  RNFS.readDir(RNFS.DocumentDirectoryPath).then(res => {
+  RNFS.readDir(RNFS.DocumentDirectoryPath)
+    .then((res) => {
+      const newPath = `${RNFS.DocumentDirectoryPath}/GuideApp.jpg`;
 
-    const newPath = `${RNFS.DocumentDirectoryPath}/GuideApp.jpg`;
+      RNFS.copyFile(outputImage, newPath)
+        .then(() => {
+          const finalPath = getPlatformURI(newPath);
 
-    RNFS.copyFile(outputImage, newPath)
-      .then(() => {
-
-        const finalPath = getPlatformURI(newPath);
-
-        RNFS.exists(finalPath).then(() => {
-
-          let sharingLink = UNIVERSAL_LINKING_URL + "/?page=" + ((currentSharingLink.split(DEEP_LINKING_URL + "home")[1] || currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1])).substring(1)
-          let sharingText = title;
+          RNFS.exists(finalPath)
+            .then(() => {
+              let sharingLink =
+                UNIVERSAL_LINKING_URL +
+                "/?page=" +
+                (
+                  currentSharingLink.split(DEEP_LINKING_URL + "home")[1] ||
+                  currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1]
+                ).substring(1);
+              let sharingText = title;
               sharingText = sharingText.concat(` ${sharingLink}`);
 
               Share.open({ title, message: sharingText, subject });
-
-        }).catch(err => console.log("err 1", err));
-      }).catch(err => console.log("err 2", err));
-  }).catch(err => console.log("err 3", err));
-
+            })
+            .catch(() => null);
+        })
+        .catch(() => null);
+    })
+    .catch(() => null);
   finish();
 }
 
-async function shareIOs(title, message, url, width, height, subject, forceUpdate, currentSharingLink) {
-
+async function shareIOs(
+  title,
+  message,
+  url,
+  width,
+  height,
+  subject,
+  forceUpdate,
+  currentSharingLink
+) {
   isCreatingImage = true;
   forceUpdate();
   // First we need to download the main image.
@@ -197,14 +253,27 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
     const outputImage = await watermark({
       title,
       source: { url, width, height },
-      fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
-      icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
+      fade: {
+        url: fadeImageURL,
+        width: fadeImage.width,
+        height: fadeImage.height,
+      },
+      icon: {
+        url: shareImageURL,
+        width: shareImage.width,
+        height: shareImage.height,
+      },
     });
 
-    let sharingLink = UNIVERSAL_LINKING_URL + "/?page=" + ((currentSharingLink.split(DEEP_LINKING_URL + "home")[1] || currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1])).substring(1)
+    let sharingLink =
+      UNIVERSAL_LINKING_URL +
+      "/?page=" +
+      (
+        currentSharingLink.split(DEEP_LINKING_URL + "home")[1] ||
+        currentSharingLink.split(DEEP_LINKING_URL + "calendar")[1]
+      ).substring(1);
     let sharingText = title;
     sharingText = sharingText.concat(` ${sharingLink}`);
-
 
     iosShare = {
       activityItemSources: [
@@ -240,7 +309,6 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
   }
 }
 
-
 // Constructing the sharing image by layering the various elements on top one after another.
 async function watermark(watermarkProperties) {
   const {
@@ -259,7 +327,6 @@ async function watermark(watermarkProperties) {
     ...SharedImageProperties,
   });
 
-
   // Add the title for the image
   const resultB = await ImageMarker.markText({
     src: getPlatformURI(resultA),
@@ -272,9 +339,6 @@ async function watermark(watermarkProperties) {
     color: "#ffffff",
   });
 
-  console.log("resultb", resultB);
-
-
   // Add the subtitle (currently the App name)
   const resultC = await ImageMarker.markText({
     src: getPlatformURI(resultB),
@@ -285,8 +349,6 @@ async function watermark(watermarkProperties) {
     ...SharedTextProperties,
     ...SharedImageProperties,
   });
-
-  console.log("resultc", resultB);
 
   // Add the icon
   return await ImageMarker.markImage({
@@ -321,7 +383,7 @@ function loadOverlay() {
 
 const ShowShareButton = (props) => {
   const { title, image, sender, shareType } = props;
-  const { currentSharingLink } = useSelector(s => s.uiState);
+  const { currentSharingLink } = useSelector((s) => s.uiState);
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   origin = sender;
   let imageUrl = image.large;
@@ -354,7 +416,7 @@ const ShowShareButton = (props) => {
             title,
             shareType,
             forceUpdate,
-            currentSharingLink,
+            currentSharingLink
           );
         }}
       >
@@ -377,4 +439,3 @@ const ShowShareButton = (props) => {
 };
 
 export default ShowShareButton;
-

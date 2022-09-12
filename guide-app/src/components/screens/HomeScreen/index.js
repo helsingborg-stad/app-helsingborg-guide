@@ -161,7 +161,10 @@ const HomeScreen = (props: Props) => {
             {currentHomeTab !== labels.length - 1 ? (
               <>
                 {segmentLayout ? (
-                  <HomeSettings segmentLayout={segmentLayout} />
+                  <HomeSettings
+                    segmentLayout={segmentLayout}
+                    navigation={navigation}
+                  />
                 ) : null}
                 {!items || (items && items?.length === 0) ? (
                   <View style={styles.sectionNoContent}>
@@ -263,9 +266,6 @@ function mapStateToProps(state: RootState) {
     !isFetching && categories.length > 0
       ? categories[currentHomeTab]?.data
       : null;
-
-  // items.map((item) => console.log("le key", item?.guide?.contentObjects[0].title || {}))
-  // console.log("ITEMS BEFORE ANYTHING", items.length);
 
   const coords =
     geolocation?.coords || geolocation?.position?.coords || position?.coords;

@@ -13,12 +13,10 @@ class DownloadTasksManager {
   loadExistingTasks(downloads) {
     // debugger;
     this.tasks = [];
-    // console.log('downloads',downloads);
     if (!downloads.length) {
       return;
     }
-    // console.log('loop and create and start the existing tasks');
-    _.forEach(downloads, item => {
+    _.forEach(downloads, (item) => {
       const task = this.createTask(item, true);
       if (task && !task.isCanceled) {
         this.startTask(task.id);
@@ -31,7 +29,7 @@ class DownloadTasksManager {
       return;
     }
 
-    _.forEach(downloads, item => {
+    _.forEach(downloads, (item) => {
       const task = this.getTaskById(item.id);
       if (task) {
         this.cancelTask(task.id);
@@ -56,7 +54,7 @@ class DownloadTasksManager {
   }
 
   getTaskById(id) {
-    return this.tasks.find(item => item.id === id);
+    return this.tasks.find((item) => item.id === id);
   }
   isExist(id) {
     return !!this.getTaskById(id);
@@ -66,7 +64,6 @@ class DownloadTasksManager {
     if (this.isExist(data.id)) {
       return false;
     }
-    // console.log('download:Creating a new task', data.id);
 
     const task = new DownloadTask(data, this.store);
     this.tasks.push(task);

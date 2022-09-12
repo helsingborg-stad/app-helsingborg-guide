@@ -2,7 +2,7 @@ import {
   NativeModules,
   DeviceEventEmitter,
   NativeEventEmitter,
-  Platform
+  Platform,
 } from "react-native";
 import NotificationService from "./notificationService";
 import LangService from "./langService";
@@ -26,7 +26,7 @@ const RELEASED_AUDIO_OBJ = {
   isPrepared: false,
   isPlaying: true,
   duration: 0,
-  currentPosition: 0
+  currentPosition: 0,
 };
 
 const config = () => {
@@ -92,7 +92,6 @@ export default class MediaService {
 
     await this.tryLoadFromCache(guideID, audio.url);
 
-    console.log("Audio URI: ", MediaService.url);
     NotificationService.showMediaNotification(
       LangService.strings.PLAYING,
       audio.title,
@@ -156,15 +155,15 @@ export default class MediaService {
 
     const meta = {};
     return this.isPlaying()
-      .then(isPlaying => {
+      .then((isPlaying) => {
         meta.isPlaying = isPlaying;
         return this.getDuration();
       })
-      .then(duration => {
+      .then((duration) => {
         meta.duration = duration;
         return this.getCurrentPosition();
       })
-      .then(position => {
+      .then((position) => {
         meta.currentPosition = position;
         return Promise.resolve(meta);
       });
@@ -217,7 +216,7 @@ export default class MediaService {
   }
 
   updateAudioState() {
-    this.getMeta().then(meta => {
+    this.getMeta().then((meta) => {
       if (!this.updatePaused && this.audio) {
         this.audio.currentPosition = meta.currentPosition;
         this.audio.duration = meta.duration;
@@ -254,11 +253,12 @@ export default class MediaService {
     this.release();
   }
   unSubscribeOnCompleted(callback) {
-    this.mediaCompleted && EventEmitter.removeListener(MEDIA_COMPLETED, callback);
+    this.mediaCompleted &&
+      EventEmitter.removeListener(MEDIA_COMPLETED, callback);
     this.mediaCompleted = false;
   }
 
-  onAudioInited = audio => {
+  onAudioInited = (audio) => {
     this.onAudioInitedCallback(audio);
   };
 
@@ -266,7 +266,7 @@ export default class MediaService {
     this.onAudioLoadSuccessCallback();
   };
 
-  onUpdateAudioState = audio => {
+  onUpdateAudioState = (audio) => {
     this.onAudioUpdateCallback(audio);
   };
 
@@ -294,7 +294,7 @@ export default class MediaService {
       avatar_url: audioState.avatar_url,
       hasAudio: true,
       isPlaying: true,
-      description_plain: ""
+      description_plain: "",
     };
     this.init(audioObject, guideID);
   };

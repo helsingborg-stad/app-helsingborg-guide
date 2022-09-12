@@ -52,7 +52,7 @@ export async function cancelPendingTasks(sessionId: string): Promise<any> {
   const tasks: PendingTask[] = Object.values(sessionTasks);
 
   // collect all the cancel promises
-  const promises = tasks.map(t => t.cancel());
+  const promises = tasks.map((t) => t.cancel());
 
   // waiting for all promises to resolve
   return Promise.all(promises);
@@ -65,13 +65,12 @@ export async function startDownload(
   const config = {
     fileCache: true,
     path: `${basePath}/${sessionId}/${url}`,
-    session: sessionId
+    session: sessionId,
   };
 
   const fetchPromise = RNFetchBlob.config(config).fetch("GET", url);
   fetchPromise
-    .then(res => {
-      console.log("Successfully downloaded to: ", res.path());
+    .then(() => {
       removePendingTask(sessionId, url);
     })
     .catch(() => removePendingTask(sessionId, url));
@@ -82,7 +81,7 @@ export async function startDownload(
 export async function remove(sessionId: number, url: string): Promise<any> {
   const config = {
     fileCache: true,
-    path: `${basePath}/${sessionId}/${url}`
+    path: `${basePath}/${sessionId}/${url}`,
   };
 
   try {
@@ -120,19 +119,10 @@ export async function loadFromCache(
   sessionId: string,
   url: string
 ): Promise<any> {
-  // console.log(`loadFromCache: ${sessionId}`);
   let path = getFilePathInCache(sessionId, url);
   path = Platform.OS === "android" ? `file://${path}` : path;
   const fetchPromise = RNFetchBlob.fs.readFile(path, "base64");
-
-   fetchPromise
-    .then(() => null)
-    .catch(() => null)
-
-   // fetchPromise
-  //   .then(() => console.log(`read cache HIT (${path})`))
-  //   .catch(() => console.log(`read cache MISS(${path})`));
-
+  fetchPromise.then(() => null).catch(() => null);
   return fetchPromise;
 }
 
@@ -144,7 +134,6 @@ export async function isFileInCache(
   path = Platform.OS === "android" ? `file://${path}` : path;
   try {
     const exists = await RNFetchBlob.fs.exists(path);
-    console.log(`cache exist ${exists} (${path})`);
     return exists;
   } catch (error) {
     console.log(`cache exist error  ${error}`);
@@ -157,5 +146,5 @@ export default {
   cancelPendingTasks,
   startDownload,
   remove,
-  removeMultiple
+  removeMultiple,
 };

@@ -178,7 +178,6 @@ const MarkerListView = (props: Props) => {
     const { guide, guideGroup, contentObject } = listItem;
     let sharingLink = currentSharingLink;
     const currentScreen = _route.name;
-    console.log("CURRENT SCREEN IN MARKER LIST", currentScreen);
     if (guideGroup) {
       if (currentScreen === "HomeScreen") {
         sharingLink = `guidehbg://home/group/${guideGroup?.id}`;

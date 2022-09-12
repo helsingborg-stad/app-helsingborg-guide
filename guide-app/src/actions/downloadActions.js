@@ -5,7 +5,6 @@ export function createTaskSuccess(taskMeta) {
 }
 
 export function cancelTaskSuccess(taskMeta) {
-  // console.log('CANCEL_DOWNLOAD_TASK_SUCCESS');
   return { type: types.CANCEL_DOWNLOAD_TASK_SUCCESS, taskMeta };
 }
 

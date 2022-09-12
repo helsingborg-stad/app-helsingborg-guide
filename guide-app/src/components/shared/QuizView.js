@@ -21,7 +21,6 @@ const nonEmojiRegExp = /[a-zA-Z0-9.!?…]/;
 
 const placeholderImage = require("@assets/images/no-image-featured-image.png");
 
-
 function Chapter({ item }: { item: QuizChapter }) {
   return <Text style={styles.chapter}>{item.text}</Text>;
 }
@@ -200,7 +199,7 @@ function Dialog({
   return (
     <SafeAreaView
       style={[styles.dialogContainer, isPrompt ? styles.promptContainer : {}]}
-      onLayout={event => onHeightChanged(event.nativeEvent.layout.height)}
+      onLayout={(event) => onHeightChanged(event.nativeEvent.layout.height)}
     >
       {!isPrompt && (
         <>
@@ -242,7 +241,6 @@ const QuizStart = ({
   onQuizStartAction: () => void,
   isHistoryItem: boolean,
 }) => {
-  console.log("the item", item)
   return (
     <View style={styles.startContainer}>
       <View>
@@ -283,7 +281,7 @@ const StartAction = ({
 };
 
 function StartImage({ item }): { item: QuizBotImageMessage } {
-  let image = { uri: item?.url || item?.source}
+  let image = { uri: item?.url || item?.source };
   return (
     <ImageBackground
       style={[styles.startImage, { aspectRatio: item.aspectRatio }]}

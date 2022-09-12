@@ -6,11 +6,11 @@ import {
   ViroDirectionalLight,
   Viro3DObject,
   ViroAnimations,
-  ViroMaterials
+  ViroMaterials,
 } from "react-viro";
 
 type Props = {
-  markerPosition: Array<number>
+  markerPosition: Array<number>,
 };
 
 // $FlowFixMe for some reason flow can't find this file.
@@ -32,23 +32,23 @@ export default class extends Component<Props> {
     ViroAnimations.registerAnimations({
       [ANIMATION_CIRCLE]: {
         properties: { rotateY: "+=360" },
-        duration: FLIGHT_DURATION
-      }
+        duration: FLIGHT_DURATION,
+      },
     });
   }
 
   render() {
     const {
       props: {
-        markerPosition: [x, , z]
-      }
+        markerPosition: [x, , z],
+      },
     } = this;
     const characterPosition = [x, 0, z];
     const flightAnimation = {
       name: ANIMATION_CIRCLE,
       run: true,
       loop: true,
-      interruptible: true
+      interruptible: true,
     };
 
     return (
@@ -71,7 +71,7 @@ export default class extends Component<Props> {
               seagullTexture,
               hatTexture,
               seagullNormal,
-              seagullSpecular
+              seagullSpecular,
             ]}
             animation={{ name: "CINEMA_4D_Main", run: true, loop: true }}
           />
@@ -81,8 +81,6 @@ export default class extends Component<Props> {
   }
 }
 
-console.log({ seagullNormal, seagullSpecular });
-
 try {
   ViroMaterials.createMaterials({
     [CHARACTER_MATERIAL]: {
@@ -90,9 +88,7 @@ try {
       diffuseColor: "#FFFFFF",
       lightingModel: "PBR",
       normalTexture: seagullNormal,
-      specularTexture: seagullSpecular
-    }
+      specularTexture: seagullSpecular,
+    },
   });
-} catch (e) {
-  console.log("AR Failed", e);
-}
+} catch (e) {}

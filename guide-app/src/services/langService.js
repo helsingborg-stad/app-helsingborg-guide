@@ -35,13 +35,13 @@ export default class LangService {
     LangService.setLanguage(DEFAULT_CODE); // we need to read the app name for the splash screen
 
     return AsyncStorage.getItem(LANGUAGE)
-      .then(value => {
+      .then((value) => {
         if (value) {
           LangService.setLanguage(JSON.parse(value));
         }
         return Promise.resolve(true);
       })
-      .catch(error => console.log("error", error));
+      .catch(() => {});
   }
 
   static getDefaultCode() {
@@ -54,18 +54,21 @@ export default class LangService {
     }
 
     const instance = dc();
-    return instance.language.getAvailableLanguages().then(languageObj => {
-      if (languageObj) {
-        LangService.languageObj = languageObj;
-        return Promise.resolve(languageObj);
-      }
-      return null;
-    }).catch(err => console.log("lang err", err))
+    return instance.language
+      .getAvailableLanguages()
+      .then((languageObj) => {
+        if (languageObj) {
+          LangService.languageObj = languageObj;
+          return Promise.resolve(languageObj);
+        }
+        return null;
+      })
+      .catch((err) => console.log("lang err", err));
   }
 
   static getString(key, langCode) {
     const keys = Object.keys(LangService.languageObj);
-    if (keys.find(item => item === langCode)) {
+    if (keys.find((item) => item === langCode)) {
       return strings[langCode][key];
     }
     return null;

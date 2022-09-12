@@ -141,7 +141,6 @@ export async function getEvents(
   perPage: any,
   page: any
 ): Promise<Event[]> {
-  console.log("per page", perPage, "page", page);
   const dateStartFmt = DateUtils.shortDate(dateStart);
   const dateEndFmt = DateUtils.shortDate(dateEnd);
   const params = `&userGroupId=${GROUP_ID}&dateStart=${dateStartFmt}&dateEnd=${dateEndFmt}&perPage=${perPage}&page=${page}`;

@@ -6,7 +6,7 @@ import {
   ViroText,
   ViroConstants,
   ViroNode,
-  ViroCamera
+  ViroCamera,
 } from "react-viro";
 import { LocationUtils, MapItemUtils, MathUtils } from "@utils";
 import AnimatedCharacter from "./AnimatedCharacter";
@@ -19,14 +19,14 @@ type Props = {
   dispatchCameraUpdateAngles(ARState): void,
   bearing: number,
   position: GeolocationType,
-  sceneNavigator: Object
+  sceneNavigator: Object,
 };
 type State = {
   isInitialized: boolean,
   markers: Array<any>,
   currentVerticalAngle: number,
   currentHorizontalAngleDelta: number,
-  selectedMarker: ?any
+  selectedMarker: ?any,
 };
 
 const ANGLE_THRESHOLD = 10;
@@ -39,17 +39,17 @@ class MarkerScene extends Component<Props, State> {
   static getDerivedStateFromProps(props: Props, state: State) {
     const {
       arSceneNavigator: {
-        viroAppProps: { activeMarker }
+        viroAppProps: { activeMarker },
       },
       bearing,
-      position: userLocation
+      position: userLocation,
     } = props;
 
     const { markers } = state;
 
-    const newMarkers = markers.map(marker => {
+    const newMarkers = markers.map((marker) => {
       const {
-        contentObject: { location: contentLocation }
+        contentObject: { location: contentLocation },
       } = marker;
 
       const id = MapItemUtils.getIdFromMapItem(marker);
@@ -63,7 +63,6 @@ class MarkerScene extends Component<Props, State> {
         userLocation.coords,
         contentLocation
       );
-
 
       const relativePosition = LocationUtils.getLocationRelativePosition(
         userLocation,
@@ -84,7 +83,7 @@ class MarkerScene extends Component<Props, State> {
     });
 
     const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
-    const selectedMarker = markers.find(marker => {
+    const selectedMarker = markers.find((marker) => {
       const markerId = MapItemUtils.getIdFromMapItem(marker);
       return markerId === selectedMarkerId;
     });
@@ -97,15 +96,14 @@ class MarkerScene extends Component<Props, State> {
 
     const {
       arSceneNavigator: {
-        viroAppProps: { items, userLocation, activeMarker, onArMarkerPressed }
+        viroAppProps: { items, userLocation, activeMarker, onArMarkerPressed },
       },
-      bearing
+      bearing,
     } = props;
 
-
-    const markers = items.map(item => {
+    const markers = items.map((item) => {
       const {
-        contentObject: { location: contentLocation }
+        contentObject: { location: contentLocation },
       } = item;
 
       const id = MapItemUtils.getIdFromMapItem(item);
@@ -136,12 +134,12 @@ class MarkerScene extends Component<Props, State> {
         arrived,
         distance,
         position,
-        onPress: onArMarkerPressed
+        onPress: onArMarkerPressed,
       };
     });
 
     const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
-    const selectedMarker = markers.find(marker => {
+    const selectedMarker = markers.find((marker) => {
       const markerId = MapItemUtils.getIdFromMapItem(marker);
       return markerId === selectedMarkerId;
     });
@@ -151,7 +149,7 @@ class MarkerScene extends Component<Props, State> {
       currentVerticalAngle: 0,
       currentHorizontalAngleDelta: 0,
       markers,
-      selectedMarker
+      selectedMarker,
     };
   }
 
@@ -160,16 +158,13 @@ class MarkerScene extends Component<Props, State> {
   onInitialized = (tracking: ViroConstants) => {
     switch (tracking) {
       case ViroConstants.TRACKING_NORMAL:
-        console.log("Tracking initialised");
         this.setState({ isInitialized: true });
         break;
       case ViroConstants.TRACKING_LIMITED:
-        console.log("Tracking Limited");
         this.setState({ isInitialized: false });
         break;
       case ViroConstants.TRACKING_NONE:
       default:
-        console.log("Tracking uninitialised");
         this.setState({ isInitialized: false });
         break;
     }
@@ -182,26 +177,24 @@ class MarkerScene extends Component<Props, State> {
     }
     this.currentCameraUpdate = 0;
 
-    const {
-      position: cameraPosition,
-      forward: cameraForward
-    } = cameraTransform;
+    const { position: cameraPosition, forward: cameraForward } =
+      cameraTransform;
     const {
       props: {
         arSceneNavigator: {
-          viroAppProps: { activeMarker }
+          viroAppProps: { activeMarker },
         },
-        dispatchCameraUpdateAngles
+        dispatchCameraUpdateAngles,
       },
       state: {
         markers,
         selectedMarker,
         currentVerticalAngle,
-        currentHorizontalAngleDelta
-      }
+        currentHorizontalAngleDelta,
+      },
     } = this;
 
-    const active = markers.find(marker => {
+    const active = markers.find((marker) => {
       const markerId = MapItemUtils.getIdFromMapItem(marker);
       const selectedMarkerId = MapItemUtils.getIdFromMapItem(activeMarker);
       return markerId === selectedMarkerId;
@@ -209,7 +202,7 @@ class MarkerScene extends Component<Props, State> {
 
     if (active) {
       const {
-        position: [positionX, positionY, positionZ]
+        position: [positionX, positionY, positionZ],
       } = active;
       const [cameraX, cameraY, cameraZ] = cameraPosition;
       const [forwardX, forwardY, forwardZ] = cameraForward;
@@ -252,7 +245,7 @@ class MarkerScene extends Component<Props, State> {
       ) {
         this.setState({
           currentHorizontalAngleDelta: angleDelta,
-          currentVerticalAngle: verticalAngle
+          currentVerticalAngle: verticalAngle,
         });
         dispatchCameraUpdateAngles({ verticalAngle, angleDelta });
       }
@@ -266,7 +259,7 @@ class MarkerScene extends Component<Props, State> {
   render() {
     const {
       state: { isInitialized, markers, selectedMarker },
-      onInitialized
+      onInitialized,
     } = this;
 
     return (
@@ -282,7 +275,7 @@ class MarkerScene extends Component<Props, State> {
             {selectedMarker && (
               <AnimatedCharacter markerPosition={selectedMarker.position} />
             )}
-            {markers.map(marker => (
+            {markers.map((marker) => (
               <Marker {...marker} />
             ))}
           </ViroNode>
@@ -294,17 +287,14 @@ class MarkerScene extends Component<Props, State> {
 
 const mapState = (state: RootState, ownProps: ?Props) => {
   const {
-    geolocation: { bearing, position }
+    geolocation: { bearing, position },
   } = state;
   return { bearing, position, ...ownProps };
 };
 
 const mapDispatch = (dispatch: Dispatch) => ({
   dispatchCameraUpdateAngles: (cameraTransform: Object) =>
-    dispatch(updateCameraAngles(cameraTransform))
+    dispatch(updateCameraAngles(cameraTransform)),
 });
 
-export default connect(
-  mapState,
-  mapDispatch
-)(MarkerScene);
+export default connect(mapState, mapDispatch)(MarkerScene);

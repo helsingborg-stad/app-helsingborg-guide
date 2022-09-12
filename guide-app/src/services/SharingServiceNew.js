@@ -28,8 +28,6 @@ const fadeImageURL = require("@assets/images/share_fade.png");
 const shareImage = Image.resolveAssetSource(shareImageURL);
 const fadeImage = Image.resolveAssetSource(fadeImageURL);
 
-console.log("shareIcon", shareImage, "fadeIcon", fadeImage);
-
 const fontSize = 40;
 const lineDistance = 5;
 const margin = 40;
@@ -97,11 +95,19 @@ const SharedImageProperties = {
 
 const SharedTextProperties = { color: Colors.white, fontSize };
 
-const getPlatformURI = path =>
+const getPlatformURI = (path) =>
   Platform.OS === "ios" ? path : `file://${path}`;
 
-function beginShare(title, message, url, width, height, subject, shareType, forceUpdate) {
-
+function beginShare(
+  title,
+  message,
+  url,
+  width,
+  height,
+  subject,
+  shareType,
+  forceUpdate
+) {
   // AnalyticsUtils.logEvent(shareType, { name: title });
   // The sharing process is different on ios and android.
   if (Platform.OS === "android") {
@@ -111,8 +117,15 @@ function beginShare(title, message, url, width, height, subject, shareType, forc
   }
 }
 
-
-async function shareAndroid(title, message, url, width, height, subject, forceUpdate) {
+async function shareAndroid(
+  title,
+  message,
+  url,
+  width,
+  height,
+  subject,
+  forceUpdate
+) {
   // Examples: https://github.com/JimmyDaddy/react-native-image-marker/blob/master/example/example/app.js
 
   function finish() {
@@ -174,7 +187,6 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
 
         const exist = await RNFetchBlob.fs.exists(finalPath);
         if (exist) {
-          console.log("4");
           // Only attempt to share the file if we successfully managed to move it.
           Share.open({ title, message, subject, url: finalPath });
         }
@@ -187,7 +199,15 @@ async function shareAndroid(title, message, url, width, height, subject, forceUp
   });
 }
 
-async function shareIOs(title, message, url, width, height, subject, forceUpdate) {
+async function shareIOs(
+  title,
+  message,
+  url,
+  width,
+  height,
+  subject,
+  forceUpdate
+) {
   isCreatingImage = true;
   forceUpdate();
   // First we need to download the main image.
@@ -195,13 +215,20 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
   if (mainRes) {
     // Once we have all parts of the overlay, we need to get the size of the files.
 
-    console.log("fadeURI", fadeImageURL);
     // Ios dismisses the share menu when an update is forced, hence why we're just setting the vars here.
     const outputImage = await watermark({
       title,
       source: { url, width, height },
-      fade: { url: fadeImageURL, width: fadeImage.width, height: fadeImage.height },
-      icon: { url: shareImageURL, width: shareImage.width, height: shareImage.height },
+      fade: {
+        url: fadeImageURL,
+        width: fadeImage.width,
+        height: fadeImage.height,
+      },
+      icon: {
+        url: shareImageURL,
+        width: shareImage.width,
+        height: shareImage.height,
+      },
     });
 
     iosShare = {
@@ -216,7 +243,6 @@ async function shareIOs(title, message, url, width, height, subject, forceUpdate
   }
 }
 
-
 // Constructing the sharing image by layering the various elements on top one after another.
 async function watermark(watermarkProperties) {
   const {
@@ -226,8 +252,6 @@ async function watermark(watermarkProperties) {
     icon: { url: iconURI, width: iconWidth, height: iconHeight },
   } = watermarkProperties;
 
-  console.log("source url", sourceURI, "fade url", fadeURI)
-
   // Add the fade overlay
   const resultA = await ImageMarker.markImage({
     src: sourceURI,
@@ -236,13 +260,6 @@ async function watermark(watermarkProperties) {
     Y: parseInt(sourceHeight) - fadeHeight,
     ...SharedImageProperties,
   });
-
-  console.log("resulta", getPlatformURI(resultA), title, margin,
-    parseInt(sourceHeight) - fontSize * 2 - margin - lineDistance,
-    { ...TextStyles.defaultBoldFont,
-      ...SharedTextProperties,
-      ...SharedImageProperties,}
-  )
 
   // Add the title for the image
   const resultB = await ImageMarker.markText({
@@ -255,10 +272,6 @@ async function watermark(watermarkProperties) {
     ...SharedImageProperties,
   });
 
-  console.log("resultb", resultB)
-
-
-
   // Add the subtitle (currently the App name)
   const resultC = await ImageMarker.markText({
     src: resultB,
@@ -269,8 +282,6 @@ async function watermark(watermarkProperties) {
     ...SharedTextProperties,
     ...SharedImageProperties,
   });
-
-  console.log("resultc", resultB)
 
   // Add the icon
   return await ImageMarker.markImage({
@@ -356,7 +367,6 @@ const ShowShareButton = (props) => {
       </Modal>
     </View>
   );
-}
+};
 
 export default ShowShareButton;
-
