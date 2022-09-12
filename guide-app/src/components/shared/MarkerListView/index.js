@@ -224,7 +224,6 @@ const MarkerListView = (props: Props) => {
       navigate("ObjectScreen", {
         title: contentObject?.title,
         array: _items,
-        selectObject: (obj) => dispatch(selectCurrentContentObject(obj)),
         order: contentObject.order,
         swipeable: true,
         scrollable: scrollToIndex,

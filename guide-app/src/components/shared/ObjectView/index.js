@@ -10,6 +10,7 @@ import {
 
 import ObjectButtons from "./ObjectButtons";
 import styles from "./style";
+import { selectCurrentContentObject } from "@actions/uiStateActions";
 import { Colors } from "@assets/styles";
 import SharingService from "@services/SharingService";
 import ButtonsBar from "@shared-components/btn_bar";
@@ -19,6 +20,7 @@ import LangService from "@services/langService";
 import LinkTouchable from "@shared-components/LinkTouchable";
 import AudioPlayerView from "@shared-components/AudioPlayerView";
 import { trackScreen } from "@utils/MatomoUtils";
+import { useDispatch } from "react-redux";
 
 type Props = {
   contentObject: ContentObject,
@@ -34,7 +36,6 @@ type Props = {
   swipeable?: Boolean,
   scrollable?: Boolean,
   panToIndex?: number,
-  selectObject: any,
   navigation: Object,
   array?: Array,
   order?: number,
@@ -155,7 +156,6 @@ const ObjectView = (props: Props) => {
     swipeable,
     scrollable,
     panToIndex,
-    selectObject,
     navigation,
     array,
     order,
@@ -165,6 +165,7 @@ const ObjectView = (props: Props) => {
 
   const [swiped, setSwiped] = useState(false);
   const [disableSwipe, setDisableSwipe] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     return () => {
@@ -187,7 +188,7 @@ const ObjectView = (props: Props) => {
             `/${array[order + 1].title}`;
           trackScreen(newPath, newPath);
           scrollable && scrollable(order + 1);
-          selectObject && selectObject(array[order + 1]);
+          dispatch(selectCurrentContentObject(array[order + 1]));
           panToIndex && panToIndex(order + 1);
           navigation.navigate({
             name: "ObjectScreen",
@@ -212,7 +213,7 @@ const ObjectView = (props: Props) => {
             `/${array[order - 1].title}`;
           trackScreen(newPath, newPath);
           scrollable && scrollable(order - 1);
-          selectObject && selectObject(array[order - 1]);
+          dispatch(selectCurrentContentObject(array[order - 1]));
           panToIndex && panToIndex(order - 1);
           navigation.navigate({
             name: "ObjectScreen",

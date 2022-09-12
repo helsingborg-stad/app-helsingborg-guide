@@ -79,7 +79,6 @@ const GuideScreen = (props: Props) => {
     navigation.navigate("ObjectScreen", {
       title: obj.title,
       currentGuide: props.currentGuide,
-      selectObject: (object) => dispatch(selectCurrentContentObject(object)),
       array: array,
       order: obj?.order,
       swipeable: true,

@@ -59,7 +59,6 @@ const ObjectScreen = (props: Props) => {
     swipeable,
     scrollable,
     panToIndex,
-    selectObject,
     disableShare,
   } = route.params;
   const dispatch = useDispatch();
@@ -87,9 +86,7 @@ const ObjectScreen = (props: Props) => {
     const { url, title } = video;
     if (title) {
       trackEvent("play", "play_video", title);
-      // AnalyticsUtils.logEvent("play_video", { title });
     }
-
     navigation.navigate("VideoScreen", { videoUrl: url, title, guideID });
   };
 
@@ -110,7 +107,6 @@ const ObjectScreen = (props: Props) => {
 
     if (audioState.title) {
       // trackEvent("play", "play_audio", audioState?.title, audioState?.title, audioState?.url);
-      // AnalyticsUtils.logEvent("play_audio", { name: audioState.title });
     }
     dispatch(initAudioFile(audioState));
   };
@@ -135,7 +131,6 @@ const ObjectScreen = (props: Props) => {
         path={path}
         array={array}
         order={order}
-        selectObject={selectObject}
         navigation={navigation}
         swipeable={swipeable}
         scrollable={scrollable}
